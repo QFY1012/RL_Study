@@ -62,7 +62,7 @@ function Section({ title, description, layout = "side", className, children }: {
   const stack = layout === "stack"
   return (
     <section ref={ref} data-slot="section" className={cn("grid grid-cols-12 content-start items-start gap-x-6", stack && "gap-y-6")}>
-      <div data-slot="section-header" className={cn(stack ? "col-span-12" : "col-span-3", "flex flex-col")}>
+      <div data-slot="section-header" className={cn(stack ? "col-span-12" : "col-span-3", "flex flex-col gap-2")}>
         <h2 className="text-xl leading-6 font-medium">{title}</h2>
         {description && <p className="text-sm leading-6 text-muted-foreground">{description}</p>}
       </div>
