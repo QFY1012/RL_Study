@@ -187,6 +187,12 @@ try {
   await half.goto(url)
   await half.waitForFunction(() => window.__READY__ === true, null, { timeout: 30000 })
   await half.screenshot({ path: path.join(ws, "thumb.png"), clip, fullPage: true })
+  // For people: SHOOT_OVERLAY=1 also writes grid.png, the page with the grid check drawn on it.
+  if (process.env.SHOOT_OVERLAY === "1") {
+    const { gridOffenders } = await import("./grid-check.mjs")
+    await page.evaluate(gridOffenders, true)
+    await page.screenshot({ path: path.join(ws, "grid.png"), clip, fullPage: true })
+  }
 } finally {
   await browser.close()
   server.close()
