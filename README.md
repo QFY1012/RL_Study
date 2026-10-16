@@ -12,13 +12,16 @@
 
 ## 材料不在仓库里
 
-数据、生成的页面、截图、traces、runs、标注和分析报告放在 Google Drive 的 `rl-materials.tar.gz`(约 490 MB,13968 个文件)。解压到仓库根目录,路径就和脚本里写的一致:
+数据、生成的页面、截图、traces、runs、标注和分析报告放在 Google Drive「我的云端硬盘」根目录的 `QFY1012.github.io-claude-beautiful-faraday-cypsxn.zip`(780 MB)。它是 `QFY1012.github.io` 的 `claude/beautiful-faraday-cypsxn` 分支的完整快照,`experiments/` 下就是这个仓库的三个目录加上材料。把材料补回仓库(已有的代码文件不覆盖):
 
 ```bash
-tar -xzf rl-materials.tar.gz -C <仓库根目录>
+unzip QFY1012.github.io-claude-beautiful-faraday-cypsxn.zip
+rsync -a --ignore-existing QFY1012.github.io-claude-beautiful-faraday-cypsxn/experiments/ <仓库根目录>/
 ```
 
-压缩包里的内容:
+补回后路径就和脚本里写的一致。
+
+材料包括:
 
 | 路径 | 文件数 |
 |---|---|
@@ -32,4 +35,4 @@ tar -xzf rl-materials.tar.gz -C <仓库根目录>
 | `ui-rl/labels` 的 `pairs` `key` `human`、`ui-rl/reports` | 8 |
 | `ui-rl/gen` 里的 2 张 png、一个 pyc 缓存 | 3 |
 
-所有 `.png`、`.jsonl`、`.svg`、`.log` 都在压缩包里,不进仓库。
+所有 `.png`、`.jsonl`、`.svg`、`.log` 都只在 zip 里,不进仓库。
