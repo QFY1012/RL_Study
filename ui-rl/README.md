@@ -77,24 +77,27 @@
 `scripts/rollout.mjs` 的 20 分钟上限保留,只当兜底。
 
 
-### 组件库整理(`gen/next/`,等试点跑完再换进 `gen/app`)
+### 网格组件库(2026-10-16 起是 `gen/app` 的唯一组件库)
+
+所有组件和生成的报告都必须用网格:每一块的左右边落在 12 列的栏线上,每一节从场线开始。原来放在 `gen/next/` 的网格版组件、`design.md`、`components.md` 已经换进 `gen/app` 和 `gen/`,旧的 `render.tsx` 删掉;`shoot.mjs` 每次都跑网格检查,不在栏线上的块记为「网格」问题,和其他程序检查一样是硬约束。试点(`runs/pilot`)是用旧组件库跑的,和之后的结果不能直接比。下面两小节是这套组件库的来历。
+
+#### 组件库整理
 
 原来 `app/src/components/report/` 是 ui-loop 一路改过来的两层:`index.tsx` 里的 `Stat`、`DataTable`、`List`、`KV`、图表、`Text` 只是一行转发,真正的实现都在 706 行的 `render.tsx` 的一个大 switch 里,还夹着用不到的老代码(另一套 page/section 框架、card、alert、badges)。生成 Agent 想查一个组件怎么画,得先发现这层转发,再去大文件里找分支。
 
 `gen/next/report/` 按 shadcn 的写法重写:一个组件一个文件(`stat.tsx`、`data-table.tsx`、`list.tsx`、`kv.tsx`、`chart.tsx`、`progress-list.tsx`、`text.tsx`、`figure.tsx`、`layout.tsx`),`index.tsx` 只做导出。组件名、属性、类名一字不改;去掉了用不到的分支和只用来追踪 spec 的 `data-type` 属性。`List` 里写明了 `meta` 在各模式下显示在哪。
 
-核对:`gen/next/check-same.sh gen/next/check-pages.txt`(在 `experiments/` 下运行)。选的 21 页覆盖现有 263 个不同页面里用到的全部 108 种组件和属性写法,外加试点第 1 步的 6 版;新旧两套各渲染一次,检查结果、整页截图、缩略图、每张切块全部逐字节相同。
+核对(当时在 `gen/next/` 做,脚本已随替换删掉,见 git 历史):选的 21 页覆盖现有 263 个不同页面里用到的全部 108 种组件和属性写法,外加试点第 1 步的 6 版;新旧两套各渲染一次,检查结果、整页截图、缩略图、每张切块全部逐字节相同。
 
-训练正在用 `gen/app`,中途换掉等于换了生成环境(Agent 读到的源码不一样),所以试点跑完再换。换的时候 `components.md` 一起补上:各组件源码在哪个文件、`List` 的 `meta` 在各模式下显示在哪。
 
-#### 网格内放开(也在 `gen/next/`,一起换进去)
+#### 网格内放开
 
 原则:网格里怎么填都可以,但每一块的左右边都要落在 12 列的栏线上。
 
 - 组件:所有内容组件和 `Figure` 多了 `start`(从第几列开始)和 `rowSpan`(竖着跨几行),`Block` 多了 `start`、`rowSpan`;所有组件还都有 `rowStart`(从第几行开始,`fields` 网格里一行是一场)(竖着跨几行统一叫 `rowSpan`,最多 12;`Block` 的旧写法 `rows` 还能用,说明里只写 `rowSpan`);`Section` 多了 `layout="stack"`(标题在上、内容占满 12 列);`Grid` 不写 `cols` 时按自己有几列宽来分(`side` 节里 9、`stack` 节里 12、写了 `span` 就是 `span`),所以里面的东西天然落在栏线上。不写新 props 的旧页面渲染结果不变(21 页逐字节核对过,`SHOOT_GRID=0`)。
 - 检查:`gen/scripts/grid-check.mjs`,`shoot.mjs` 在组件库带 `grid.ts` 时调用,量每一块的左右边,不在栏线上就报「网格」问题。拿第 1 遍观察的 16 版页面试:带清单的 3 版为了「四项一行」在 9 列宽里写了 `Grid cols={12}`,4 个指标全不在栏线上;g0 有 2 版两列的 `List` 不在栏线上。ia5 都没看出来。
 - 场(纵向):`Section` 渲染后把高度补到整数个场(一场 144px,场间距 24px,场线相隔 168px),节与节之间本来就空一个场(192px),所以每一节都从场线开始;节里面不限。网格检查也量每一节的上边在不在场线上。代价是每节底部多出不到一场的空白(f15 那页总高从 5304px 变成 5832px)。这一条会改变所有页面的渲染,不再和旧组件库逐字节一致。
-- 规范和组件说明的草稿:`gen/next/design.md`(在 `design-b2b9.md` 基础上加 A6 网格,B 改成默认排法,C2 加 `stack`,C4 改成自由组合;B9 的 2 条改用单列,因为 9 列分不成两半)、`gen/next/components.md`。
+- 规范和组件说明:`gen/design.md`(在 `design-b2b9.md` 基础上加 A6 网格,B 改成默认排法,C2 加 `stack`,C4 改成自由组合;B9 的 2 条改用单列,因为 9 列分不成两半)、`gen/components.md`。手工全部对齐的示例在 `gen/examples/f15-grid/`;它的 `baseline.diff`(让表格、列表等的行也落在 24px 基线上)没有并进组件库。
 
 ## 框选标注(2026-10-16)
 
