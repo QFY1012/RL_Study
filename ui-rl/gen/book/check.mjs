@@ -2,7 +2,7 @@
 // 在 grid-check.mjs(左右边落在栏线上、每节从场线开始)之外再量三件事:
 //   行高    页面上每段字的行高是 24 的倍数;
 //   行      每一行字的行框上边落在 24px 的行线上(从页头上边算起);
-//   图      截图和图表的上边落在场线上,高度是整数个场(一场 144px,场间距 24px,场线相隔 168px)。
+//   图      截图和图表的上边落在行线上(接着上面的内容,和标签、说明同在一个场里),高度是整数行。
 // 不量:图表里面的字(那是图的一部分)、跟着大号字落在同一条基线上的小字(数字后的单位)、标签徽章、
 // 填满所在块的图表(它占的是块的场)。
 //
@@ -57,20 +57,19 @@ export function bookOffenders(draw = false) {
     marks.push([b.left, b.top, b.width, b.height, "off", out.length])
   }
 
-  // 图:截图的图框、不是填满所在块的图表。
-  for (const el of main.querySelectorAll("[data-slot=figure-image], [data-slot=custom-chart][data-field-snap]")) {
+  // 图:截图的图框、不是填满所在块的图表。一个场里可以放几样东西,图从哪条行线开始都行。
+  for (const el of main.querySelectorAll("[data-slot=figure-image], [data-slot=custom-chart][data-picture]")) {
     const r = el.getBoundingClientRect()
     if (!r.width || !r.height) continue
-    const dTop = near(r.top - top, PITCH), dH = near(r.height + LINE, PITCH)
-    const n = Math.round((r.height + LINE) / PITCH)
-    if (Math.abs(dTop) <= 1 && Math.abs(dH) <= 1 && n >= 1) {
+    const dTop = near(r.top - top, LINE), dH = near(r.height, LINE)
+    if (Math.abs(dTop) <= 1 && Math.abs(dH) <= 1) {
       marks.push([r.left, r.top, r.width, r.height, "ok"])
       continue
     }
     const where = []
-    if (Math.abs(dTop) > 1) where.push(`上边离最近的场线 ${Math.round(dTop)}px`)
-    if (Math.abs(dH) > 1 || n < 1) where.push(`高 ${Math.round(r.height)}px,不是整数个场(1 场 144、2 场 312、3 场 480)`)
-    out.push(`${label(el)}没有占整场:${where.join(",")}`)
+    if (Math.abs(dTop) > 1) where.push(`上边离最近的行线 ${Math.round(dTop)}px`)
+    if (Math.abs(dH) > 1) where.push(`高 ${Math.round(r.height)}px,不是整数行`)
+    out.push(`${label(el)}没有落在行上:${where.join(",")}`)
     marks.push([r.left, r.top, r.width, r.height, "off", out.length])
   }
 

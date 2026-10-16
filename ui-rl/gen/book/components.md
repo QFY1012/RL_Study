@@ -1,6 +1,6 @@
 # 组件库(书网格版)
 
-按《平面设计中的网格系统》排的组件:正文 14px、24px 一行,组件里每一行字都落在 24px 的行线上,截图和图表占整数个场、从场线开始。所以页面代码不用、也不该再写任何纵向的间距和行高。
+按《平面设计中的网格系统》排的组件:正文 14px、24px 一行,组件里每一行字都落在 24px 的行线上,截图和图表高度是整数个场,接着上面的内容从下一条行线开始(一个场里可以放标签、图、说明好几样)。所以页面代码不用、也不该再写任何纵向的间距和行高。
 
 页面代码只从这里 import:
 
@@ -32,8 +32,8 @@ import { Page, Section, Group, Grid, Block, Text, Stat, DataTable, TrendChart, B
 | `Text` | children(字符串) | 一段文字,默认 14px |
 | `Stat` | `value`, `label?`, `unit?`, `size?: "lg" \| "xl"`, `captionBelow?`, `quiet?`, `note?`, `delta?`, `direction?: "up" \| "down"` | 一个数字。默认 30px,`lg` 48px 细体;不论大小,数字都排在 48px(两行)的一行里,标签和注释各占一行,所以一排数字的上边对齐、都在行线上。`captionBelow` 把 `label` 放在数字下面。`note` 是一行 12px 注释;`direction: "down"` 且没有 `delta` 时注释为红色 |
 | `DataTable` | `columns`, `rows`, `caption?` | 表格。`columns` 每项:`key`, `label`, `align?: "right"`, `span?`(占几列网格,写了就按网格定列宽;一行的 `span` 加起来 9 正好铺满内容列), `bar?`(数字后接计数条:1px 墨线画在一条 1px 基线上,基线与量程等宽、与表格行线同宽同色,条长是该值与同列最大值的比。条用墨色、行线用浅灰,所以条的末端一眼可辨,不会被误读成一条说不出作用的行线), `tone?: string[]`(这些值标红**并加粗**(正文 400 → 600)——红色在灰度打印里比黑字还浅,色弱读者也看不出红,所以状态必须有一个颜色之外的通道,字重就是它), `levels?: string[]`(一列有序的等级,从低到高排。最高一级标红并加粗,次一级加粗,再往下用注释灰:三级都与正文有区别,读者能把严重度排出顺序,而不是只有「高」有颜色、中低两级和正文没有视觉区别), `muteWhen?: {key, equals}`(行灰显), `interval?: {low, high, domain: [min, max]}`(画区间图)。`caption` 是表格**下方**一行灰色小字注释(如口径、阈值说明),左对齐,与表格左边缘齐平;不是表名,表名用外面 `Group` 的 `title` |
-| `TrendChart` | `data`, `xKey`, `series: {key, label}[]`, `height?`, `band?: {low, high}`, `zero?`, `yTicks?`, `xInterval?`, `pointLabels?: "last"`, `lastLabel?` | 折线图。`height` 写占几个场:`1`(144px)、`2`(312px,默认)、`3`(480px);或 `"fill"` 填满所在块。图从下一条场线开始,上方的空行由组件留出,不要自己补 |
-| `BarChart` | `data`, `xKey`, `series`, `layout?: "horizontal"`, `height?` | 柱状图,高度和起点同 `TrendChart`(横向细条一条一行,整张图补到整数个场);`horizontal` 是横向细条。多个系列用一条从黑到浅灰的墨阶:第一个系列最重,依次变浅,图例也按这个顺序排。图表是结论下面的证据,不是页面的主角,所以不另起一套彩色(彩色会把图变成全页最重的一块,还会和只表示判定的红色混在一起) |
+| `TrendChart` | `data`, `xKey`, `series: {key, label}[]`, `height?`, `band?: {low, high}`, `zero?`, `yTicks?`, `xInterval?`, `pointLabels?: "last"`, `lastLabel?` | 折线图。`height` 写占几个场:`1`(144px)、`2`(312px,默认)、`3`(480px);或 `"fill"` 填满所在块。图接着上面的内容排,不要自己补间距 |
+| `BarChart` | `data`, `xKey`, `series`, `layout?: "horizontal"`, `height?` | 柱状图,高度同 `TrendChart`(横向细条一条一行,整张图补到整数个场);`horizontal` 是横向细条。多个系列用一条从黑到浅灰的墨阶:第一个系列最重,依次变浅,图例也按这个顺序排。图表是结论下面的证据,不是页面的主角,所以不另起一套彩色(彩色会把图变成全页最重的一块,还会和只表示判定的红色混在一起) |
 | `ProgressList` | `items: {label, value, max?, display?}[]`, `compact?` | 进度条列表;`compact` 每行依次是名称、条、数值。条是 1px 墨线画在一条 1px 基线上:基线与量程(0 到 `max`)等宽、与页面其它细线同宽同色,条长是计数与满值之比,所以同一列表里的数值差异由长度给出,而不是靠颜色,也不会比页面其它细线粗。`max` 不给时取列表里的最大值,所以小计数(6、9、2)也铺满各自的比例,不会都缩成等长的发丝细线;数值用和页面其它数字一致的等宽数字 |
 | `List` | `items: {title?, description?, meta?}[]`, `numbered?`, `ordered?`, `columns?`, `divided?`, `metaTone?: "destructive"` | 列表。`numbered` 带 01、02 序号和行间细线;`columns` 并排;`ordered` 带 1、2 序号 |
 | `KV` | `items: {label, value}[]`, `labelCols?` | 键值表;`labelCols` 让标签占几列网格 |
@@ -45,10 +45,10 @@ import { Page, Section, Group, Grid, Block, Text, Stat, DataTable, TrendChart, B
 
 | 组件 | props | 说明 |
 |---|---|---|
-| `FigureStrip` | children | 一行截图,放在 shadcn `ScrollArea` 里横向滚动,滚动条是 shadcn 的样式(不是浏览器原生滚动条),只在鼠标悬停时出现,静止时不占地方也不画横条;超出宽度的部分裁掉,不把页面撑宽。所有图同高(3 个场,480px)、宽度各按原比例,所以手机 375×760 和分析图 1200×760 能并排对齐;整条从下一条场线开始 |
-| `FigureGrid` | children | 一版对照图,两列铺满内容列宽,每格一张 `Figure`;每格的图框 3 个场高(480px)、铺满列宽,图按原比例放进去、靠左上,用于要看清图内细节的对照;每一行从场线开始 |
+| `FigureStrip` | children | 一行截图,放在 shadcn `ScrollArea` 里横向滚动,滚动条是 shadcn 的样式(不是浏览器原生滚动条),只在鼠标悬停时出现,静止时不占地方也不画横条;超出宽度的部分裁掉,不把页面撑宽。所有图同高(3 个场,480px)、宽度各按原比例,所以手机 375×760 和分析图 1200×760 能并排对齐 |
+| `FigureGrid` | children | 一版对照图,两列铺满内容列宽,每格一张 `Figure`;每格的图框 3 个场高(480px)、铺满列宽,图按原比例放进去、靠左上,用于要看清图内细节的对照 |
 | `FigureCompare` | children | 一组四张的对照图(原界面 + 三种色觉模拟),一行四张铺满内容列宽。四张并排是一屏能读完的最短排法:内容列宽正好放四张,一行比两行两列少占一半高度,四张始终在同一屏里,可以直接横向比。每张图占行的四分之一,图框 3 个场高(480px),图按原比例放进去、靠左上,所以再长的截图也不会把这一组顶出屏幕;每格的图注占满整格宽,窄图的长图注不会折成多行把整组撑高。要看图内细节(宽的分析视图)用 `FigureGrid`,不在这里把图放大成两行 |
-| `Figure` | children, `span?`, `start?`, `rowSpan?`, `rowStart?` | 一张截图的外框,纵向排图、标签和说明;宽度随所在布局,不收缩。每个 `Figure` 都从下一条场线开始。直接放在 `Grid` 里并写 `span` 时,它占满这几列,可以把截图排成「一行一个阶段、一列一个产品」这样的对照 |
+| `Figure` | children, `span?`, `start?`, `rowSpan?`, `rowStart?` | 一张截图的外框,纵向排图、标签和说明;宽度随所在布局,不收缩。直接放在 `Grid` 里并写 `span` 时,它占满这几列,可以把截图排成「一行一个阶段、一列一个产品」这样的对照 |
 | `FigureImage` | `src`, `alt` | 截图本体。图框 3 个场高(480px):在 `FigureStrip` 里图框随图宽(比例不同的图才对得齐),在别处铺满所在列宽、图按原比例放进去靠左上。不裁剪 |
 | `FigureLabel` | children(字符串) | 图下面或上面的视图名(屏名、步号),12px 灰色 |
 | `FigureText` | children(字符串) | 图下面的说明(内容、操作、输入项),14px 正文 |

@@ -48,7 +48,8 @@ function legendOrder(series: Series[]) {
 }
 
 // A chart is a picture: unless it fills its block, it is a whole number of fields
-// tall and starts on a field line (data-field-snap, see useFieldPass in layout.tsx).
+// tall (data-picture marks it for book/check.mjs), starting on the line the
+// content above it ends on.
 function frame(height: number | "fill" | undefined) {
   const fill = height === "fill"
   return {
@@ -80,7 +81,7 @@ function TrendChart({ series, data, xKey, height: h, band, yTicks: ticks, pointL
     const rows = band ? data.map((r) => ({ ...r, __band: [r[band.low], r[band.high]] })) : data
     const n = data.length
     return (
-      <div data-slot="custom-chart" data-field-snap={snap} className={wrap}>
+      <div data-slot="custom-chart" data-picture={snap} className={wrap}>
         <ChartContainer config={cfg} className={cn("aspect-auto w-full", height)} style={style}>
           <ComposedChart data={rows} margin={{ left: 0, right: 24, top: 24, bottom: 0 }}>
             {ticks && <CartesianGrid vertical={false} strokeOpacity={0.5} />}
@@ -115,7 +116,7 @@ function TrendChart({ series, data, xKey, height: h, band, yTicks: ticks, pointL
   const yHi = Math.ceil((Math.max(...vals) + 1) / 10) * 10
   const yTicks = Array.from({ length: (yHi - yLo) / 10 + 1 }, (_, i) => yLo + i * 10)
   return (
-    <div data-slot="custom-chart" data-field-snap={snap} className={wrap}>
+    <div data-slot="custom-chart" data-picture={snap} className={wrap}>
       <ChartContainer config={cfg} className={cn("aspect-auto w-full", height)} style={style}>
         {series.length === 1 ? (
           // One series: no axes or grid; each point carries its value, so the line
@@ -154,7 +155,7 @@ function BarChart({ series, data, xKey, height: h, layout, span, start, rowSpan,
   if (horizontal && series.length === 1) {
     const key = series[0].key
     return (
-      <div data-slot="custom-chart" data-field-snap="" className={cn(place({ span, start, rowSpan, rowStart }), className)}>
+      <div data-slot="custom-chart" data-picture="" className={cn(place({ span, start, rowSpan, rowStart }), className)}>
         <ChartContainer config={cfg} className="aspect-auto w-full" style={{ height: fields(Math.ceil((data.length * LINE + LINE) / PITCH)) }}>
           <RechartsBarChart data={data} layout="vertical" margin={{ left: 0, right: 40, top: 0, bottom: 0 }} barCategoryGap={0}>
             <XAxis type="number" hide domain={[0, "dataMax"]} />
@@ -168,7 +169,7 @@ function BarChart({ series, data, xKey, height: h, layout, span, start, rowSpan,
     )
   }
   return (
-    <div data-slot="custom-chart" data-field-snap={snap} className={cn(fill ? "flex min-h-0 flex-1 flex-col" : undefined, place({ span, start, rowSpan, rowStart }), className)}>
+    <div data-slot="custom-chart" data-picture={snap} className={cn(fill ? "flex min-h-0 flex-1 flex-col" : undefined, place({ span, start, rowSpan, rowStart }), className)}>
       <ChartContainer config={cfg} className={cn("aspect-auto w-full", height)} style={style}>
         <RechartsBarChart data={data} layout={horizontal ? "vertical" : "horizontal"} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
           <CartesianGrid vertical={horizontal} horizontal={!horizontal} />

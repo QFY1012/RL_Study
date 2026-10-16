@@ -30,14 +30,13 @@ function Page({ title, meta = [], className, children }: { title: string; meta?:
 // The page's rows are fields: 144px tall with a 24px gutter, so field lines are
 // 168px apart, counted from the top of the page header (itself one field).
 //
-// Once the page is laid out, one pass runs down it in reading order, as the book
-// places pictures: every picture (a [data-field-snap] element: a screenshot strip,
-// a chart, a Grid of fields) that does not already start on a field line moves
-// down to the next one, the lines above it left empty; then each section is
-// rounded up to a whole number of fields (n × 168 − 24). With the 192px gap
-// between sections (one empty field) every section starts on a field line. The
-// pass goes top to bottom so that whatever it measures already sits where the
-// pass put it; it runs again when anything resizes (fonts, images).
+// A field is a unit of measure, not a box for one thing: a label, a picture and
+// its notes can share a field, each on the 24px lines, and a picture starts on
+// whichever line the content above it ends on. Only the sections keep to the
+// fields: once the page is laid out, each section is rounded up to a whole
+// number of fields (n × 168 − 24), so with the 192px gap between sections (one
+// empty field) every section starts on a field line. The pass runs again when
+// anything resizes (fonts, images).
 function useFieldPass() {
   const ref = React.useRef<HTMLElement>(null)
   React.useLayoutEffect(() => {
@@ -45,17 +44,8 @@ function useFieldPass() {
     const head = main?.querySelector<HTMLElement>("[data-slot=page-header]")
     if (!main || !head) return
     const pass = () => {
-      const top = head.getBoundingClientRect().top
       for (const sec of main.querySelectorAll<HTMLElement>("[data-slot=section]")) {
         sec.style.minHeight = ""
-        for (const el of sec.querySelectorAll<HTMLElement>("[data-field-snap]")) {
-          // a picture inside another (a chart in a Grid of fields) moves with it
-          if (el.parentElement?.closest("[data-field-snap]")) continue
-          el.style.marginTop = ""
-          const y = el.getBoundingClientRect().top - top
-          const down = Math.ceil((y - 0.5) / PITCH) * PITCH - y
-          if (down > 0.5) el.style.marginTop = `${down}px`
-        }
         const t = sec.getBoundingClientRect().top
         const h = Math.max(...[...sec.children].map((c) => c.getBoundingClientRect().bottom)) - t
         sec.style.minHeight = `${Math.ceil((h + LINE) / PITCH) * PITCH - LINE}px`
@@ -103,15 +93,15 @@ function Group({ title, className, children }: { title?: string; className?: str
   )
 }
 
-// Rows are 144px fields unless fields={false}; a grid of fields is a picture on
-// the page, so it starts on a field line (see useFieldPass). A child takes `span` columns from
+// Rows are 144px fields unless fields={false}, so the pieces in it are whole
+// fields tall; the grid starts on the line the content above it ends on. A child takes `span` columns from
 // column `start` (and a Block `rows` fields). Without `cols` the grid has one
 // column per page column it is wide (its `span`, else the width around it).
 function Grid({ cols, fields = true, className, children, span, start, rowSpan, rowStart }: Placed & { cols?: number; fields?: boolean; children: React.ReactNode }) {
   const around = React.useContext(Width)
   const n = cols ?? span ?? around
   return (
-    <div data-slot="grid" data-field-snap={fields ? "" : undefined} className={cn("grid gap-x-6 gap-y-6", COLS[n], place({ span, start, rowSpan, rowStart }), className)} style={fields ? { gridAutoRows: "144px" } : undefined}>
+    <div data-slot="grid" data-picture={fields ? "" : undefined} className={cn("grid gap-x-6 gap-y-6", COLS[n], place({ span, start, rowSpan, rowStart }), className)} style={fields ? { gridAutoRows: "144px" } : undefined}>
       <Width.Provider value={n}>{children}</Width.Provider>
     </div>
   )

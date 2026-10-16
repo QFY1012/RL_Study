@@ -1,11 +1,9 @@
 // Screenshots: one screen per Figure, laid out in a FigureStrip (a row that scrolls
 // sideways), a FigureGrid (two to a row) or a FigureCompare (four to a row).
 //
-// A screenshot is a picture on the grid: its image is three fields (480px) tall
-// and starts on a field line, and its label and text are lines under it. Every
-// Figure carries data-field-snap, so the page's field pass moves it down to the
-// next field line; inside a scrolling strip the strip moves as one (see
-// useFieldPass in layout.tsx).
+// A screenshot is a picture on the grid: its image is three fields (480px) tall,
+// and it starts on the line right after whatever is above it (a label, a rule)
+// in the same field; its label and text are lines under it.
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -45,7 +43,7 @@ function FigureStrip({ className, children, span, ...props }: React.ComponentPro
       </div>
     )
   return (
-    <ScrollArea data-slot="figure-strip" data-field-snap="" type="hover" className={cn("w-full min-w-0", className)} {...props}>
+    <ScrollArea data-slot="figure-strip" data-picture="" type="hover" className={cn("w-full min-w-0", className)} {...props}>
       <div
         data-slot="figure-strip-row"
         className={cn(
@@ -112,8 +110,8 @@ function FigureCompare({ className, children, ...props }: React.ComponentProps<"
 // Placed in a Grid (`span`, `start`, `rowSpan`, `rowStart`), it takes its cells instead and the image fills their width,
 // so a row of screens can be laid on the page's columns (one product per column group, one stage per row).
 function Figure({ className, span, start, rowSpan, rowStart, ...props }: React.ComponentProps<"figure"> & Placed) {
-  if (span) return <figure data-slot="figure" data-field-snap="" className={cn("flex min-w-0 flex-col", place({ span, start, rowSpan, rowStart }), className)} {...props} />
-  return <figure data-slot="figure" data-field-snap="" className={cn("flex w-min shrink-0 flex-col", className)} {...props} />
+  if (span) return <figure data-slot="figure" data-picture="" className={cn("flex min-w-0 flex-col", place({ span, start, rowSpan, rowStart }), className)} {...props} />
+  return <figure data-slot="figure" data-picture="" className={cn("flex w-min shrink-0 flex-col", className)} {...props} />
 }
 
 // The image box is three fields tall and as wide as its cell; the screenshot
