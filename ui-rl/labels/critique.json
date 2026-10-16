@@ -1,0 +1,275 @@
+[
+ {
+  "id": "s01-v3",
+  "image": "critique-pages/s01-v3.webp",
+  "nodes": "critique-pages/s01-v3.json",
+  "w": 1248,
+  "h": 5602
+ },
+ {
+  "id": "s01-v5",
+  "image": "critique-pages/s01-v5.webp",
+  "nodes": "critique-pages/s01-v5.json",
+  "w": 1248,
+  "h": 5414
+ },
+ {
+  "id": "s01-v1",
+  "image": "critique-pages/s01-v1.webp",
+  "nodes": "critique-pages/s01-v1.json",
+  "w": 1248,
+  "h": 5558
+ },
+ {
+  "id": "s02-v6",
+  "image": "critique-pages/s02-v6.webp",
+  "nodes": "critique-pages/s02-v6.json",
+  "w": 1248,
+  "h": 3589
+ },
+ {
+  "id": "s02-v3",
+  "image": "critique-pages/s02-v3.webp",
+  "nodes": "critique-pages/s02-v3.json",
+  "w": 1248,
+  "h": 3772
+ },
+ {
+  "id": "s02-v2",
+  "image": "critique-pages/s02-v2.webp",
+  "nodes": "critique-pages/s02-v2.json",
+  "w": 1248,
+  "h": 3588
+ },
+ {
+  "id": "s03-v1",
+  "image": "critique-pages/s03-v1.webp",
+  "nodes": "critique-pages/s03-v1.json",
+  "w": 1248,
+  "h": 4337
+ },
+ {
+  "id": "s03-v4",
+  "image": "critique-pages/s03-v4.webp",
+  "nodes": "critique-pages/s03-v4.json",
+  "w": 1248,
+  "h": 4047
+ },
+ {
+  "id": "s03-v5",
+  "image": "critique-pages/s03-v5.webp",
+  "nodes": "critique-pages/s03-v5.json",
+  "w": 1248,
+  "h": 4251
+ },
+ {
+  "id": "s04-v6",
+  "image": "critique-pages/s04-v6.webp",
+  "nodes": "critique-pages/s04-v6.json",
+  "w": 1248,
+  "h": 7668
+ },
+ {
+  "id": "s04-v3",
+  "image": "critique-pages/s04-v3.webp",
+  "nodes": "critique-pages/s04-v3.json",
+  "w": 1248,
+  "h": 7658
+ },
+ {
+  "id": "s04-v2",
+  "image": "critique-pages/s04-v2.webp",
+  "nodes": "critique-pages/s04-v2.json",
+  "w": 1248,
+  "h": 7494
+ },
+ {
+  "id": "s05-v6",
+  "image": "critique-pages/s05-v6.webp",
+  "nodes": "critique-pages/s05-v6.json",
+  "w": 1248,
+  "h": 4325
+ },
+ {
+  "id": "s05-v5",
+  "image": "critique-pages/s05-v5.webp",
+  "nodes": "critique-pages/s05-v5.json",
+  "w": 1248,
+  "h": 4839
+ },
+ {
+  "id": "s05-v2",
+  "image": "critique-pages/s05-v2.webp",
+  "nodes": "critique-pages/s05-v2.json",
+  "w": 1248,
+  "h": 4322
+ },
+ {
+  "id": "s06-v1",
+  "image": "critique-pages/s06-v1.webp",
+  "nodes": "critique-pages/s06-v1.json",
+  "w": 1248,
+  "h": 4000
+ },
+ {
+  "id": "s06-v2",
+  "image": "critique-pages/s06-v2.webp",
+  "nodes": "critique-pages/s06-v2.json",
+  "w": 1248,
+  "h": 3803
+ },
+ {
+  "id": "s06-v3",
+  "image": "critique-pages/s06-v3.webp",
+  "nodes": "critique-pages/s06-v3.json",
+  "w": 1248,
+  "h": 4090
+ },
+ {
+  "id": "s07-v2",
+  "image": "critique-pages/s07-v2.webp",
+  "nodes": "critique-pages/s07-v2.json",
+  "w": 1248,
+  "h": 4963
+ },
+ {
+  "id": "s07-v6",
+  "image": "critique-pages/s07-v6.webp",
+  "nodes": "critique-pages/s07-v6.json",
+  "w": 1248,
+  "h": 4852
+ },
+ {
+  "id": "s07-v1",
+  "image": "critique-pages/s07-v1.webp",
+  "nodes": "critique-pages/s07-v1.json",
+  "w": 1248,
+  "h": 5290
+ },
+ {
+  "id": "s08-v6",
+  "image": "critique-pages/s08-v6.webp",
+  "nodes": "critique-pages/s08-v6.json",
+  "w": 1248,
+  "h": 3601
+ },
+ {
+  "id": "s08-v5",
+  "image": "critique-pages/s08-v5.webp",
+  "nodes": "critique-pages/s08-v5.json",
+  "w": 1248,
+  "h": 3230
+ },
+ {
+  "id": "s08-v4",
+  "image": "critique-pages/s08-v4.webp",
+  "nodes": "critique-pages/s08-v4.json",
+  "w": 1248,
+  "h": 3545
+ },
+ {
+  "id": "s09-v4",
+  "image": "critique-pages/s09-v4.webp",
+  "nodes": "critique-pages/s09-v4.json",
+  "w": 1248,
+  "h": 5407
+ },
+ {
+  "id": "s09-v5",
+  "image": "critique-pages/s09-v5.webp",
+  "nodes": "critique-pages/s09-v5.json",
+  "w": 1248,
+  "h": 5542
+ },
+ {
+  "id": "s09-v6",
+  "image": "critique-pages/s09-v6.webp",
+  "nodes": "critique-pages/s09-v6.json",
+  "w": 1248,
+  "h": 5518
+ },
+ {
+  "id": "s10-v6",
+  "image": "critique-pages/s10-v6.webp",
+  "nodes": "critique-pages/s10-v6.json",
+  "w": 1248,
+  "h": 3621
+ },
+ {
+  "id": "s10-v4",
+  "image": "critique-pages/s10-v4.webp",
+  "nodes": "critique-pages/s10-v4.json",
+  "w": 1248,
+  "h": 3585
+ },
+ {
+  "id": "s10-v3",
+  "image": "critique-pages/s10-v3.webp",
+  "nodes": "critique-pages/s10-v3.json",
+  "w": 1248,
+  "h": 3429
+ },
+ {
+  "id": "s11-v4",
+  "image": "critique-pages/s11-v4.webp",
+  "nodes": "critique-pages/s11-v4.json",
+  "w": 1248,
+  "h": 4297
+ },
+ {
+  "id": "s11-v6",
+  "image": "critique-pages/s11-v6.webp",
+  "nodes": "critique-pages/s11-v6.json",
+  "w": 1248,
+  "h": 4091
+ },
+ {
+  "id": "s11-v3",
+  "image": "critique-pages/s11-v3.webp",
+  "nodes": "critique-pages/s11-v3.json",
+  "w": 1248,
+  "h": 4222
+ },
+ {
+  "id": "s12-v1",
+  "image": "critique-pages/s12-v1.webp",
+  "nodes": "critique-pages/s12-v1.json",
+  "w": 1248,
+  "h": 4612
+ },
+ {
+  "id": "s12-v6",
+  "image": "critique-pages/s12-v6.webp",
+  "nodes": "critique-pages/s12-v6.json",
+  "w": 1248,
+  "h": 4656
+ },
+ {
+  "id": "s12-v4",
+  "image": "critique-pages/s12-v4.webp",
+  "nodes": "critique-pages/s12-v4.json",
+  "w": 1248,
+  "h": 4169
+ },
+ {
+  "id": "s13-v6",
+  "image": "critique-pages/s13-v6.webp",
+  "nodes": "critique-pages/s13-v6.json",
+  "w": 1248,
+  "h": 7455
+ },
+ {
+  "id": "s13-v5",
+  "image": "critique-pages/s13-v5.webp",
+  "nodes": "critique-pages/s13-v5.json",
+  "w": 1248,
+  "h": 8288
+ },
+ {
+  "id": "s13-v1",
+  "image": "critique-pages/s13-v1.webp",
+  "nodes": "critique-pages/s13-v1.json",
+  "w": 1248,
+  "h": 7611
+ }
+]

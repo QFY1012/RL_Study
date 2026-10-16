@@ -5,11 +5,13 @@
 // ui-rl 的副本:从 ui-loop/scripts/generate.mjs 原样复制(2026-10-13),只改了 --data 的默认目录(ui-rl/data/flow)
 // 和加了 --traces(页面写到哪个目录)。agent.mjs 改了两处:等模型开始回复的时限 10 秒 → 60 秒;沙箱里只能用 node 运行
 // 检查脚本。训练由 ui-rl/scripts/rollout.mjs 调用。
+// 2026-10-16 加了 change 的 kind "critique":按设计师框选的意见改页面,由 ui-rl/scripts/revise.mjs 调用。
 //
 //   source judge.env && node scripts/generate.mjs --run r0-v0 --cases ops,sales [--design design.md] [--version v0]
 //     [--data skills/flow/data] [--guide skills/flow/guides/g0.md]      a Skill's data and output guide
 //     [--base flow-g0 --change change.json]                              edit the base run's pages for one change:
-//                                                                        a guide rule, or (kind "component") a component library change
+//                                                                        a guide rule, or (kind "component") a component library change,
+//                                                                        or (kind "critique") a designer's boxed comments (marked.png in the base)
 //     [--traces <dir>]                                                   where the workspaces go (default traces/)
 //
 // One workspace per report in traces/<run>/<case>/ (the trajectory store):
@@ -107,6 +109,10 @@ async function generate(name) {
 ${CHANGE.summary}
 
 请按这项改动修改 Page.tsx:只改和它有关的地方(例如原来没法呈现、或绕过组件库自己画的内容,改用新组件),其他部分保持原样;如果页面用不上这项改动,就不要改,直接结束。改了就运行检查。`
+    : CHANGE?.kind === "critique" ? `工作目录里的 Page.tsx 是已经写好的页面,thumb.png 是它的截图;marked.png 是同一张截图,上面用橙色框标出了设计师圈的地方,框左上角是编号。设计师的意见:
+${CHANGE.items.map((it) => `${it.n}. ${it.hit ? `「${it.hit.section || "页头"}」里的 ${it.hit.slot}${it.hit.text ? `(开头是「${it.hit.text}」)` : ""}` : "框里的地方"}:${it.comment}`).join("\n")}${CHANGE.note ? `\n整页:${CHANGE.note}` : ""}
+
+请先用 read 看 marked.png 找到每个框,再按这些意见修改 Page.tsx:只改意见涉及的地方,其他部分保持原样。意见用组件库做不到时,不要绕过组件库,在最后的说明里写清楚。改完运行检查。`
     : CHANGE ? `工作目录里的 Page.tsx 是按上一版输出指南写好的页面,thumb.png 是它的截图。输出指南这次只改了一条规则:
 ${CHANGE.old ? `原文:${CHANGE.old.trim()}\n改为:${CHANGE.new.trim()}` : `新增:${CHANGE.new.trim()}`}
 

@@ -95,3 +95,21 @@
 - 检查:`gen/scripts/grid-check.mjs`,`shoot.mjs` 在组件库带 `grid.ts` 时调用,量每一块的左右边,不在栏线上就报「网格」问题。拿第 1 遍观察的 16 版页面试:带清单的 3 版为了「四项一行」在 9 列宽里写了 `Grid cols={12}`,4 个指标全不在栏线上;g0 有 2 版两列的 `List` 不在栏线上。ia5 都没看出来。
 - 场(纵向):`Section` 渲染后把高度补到整数个场(一场 144px,场间距 24px,场线相隔 168px),节与节之间本来就空一个场(192px),所以每一节都从场线开始;节里面不限。网格检查也量每一节的上边在不在场线上。代价是每节底部多出不到一场的空白(f15 那页总高从 5304px 变成 5832px)。这一条会改变所有页面的渲染,不再和旧组件库逐字节一致。
 - 规范和组件说明的草稿:`gen/next/design.md`(在 `design-b2b9.md` 基础上加 A6 网格,B 改成默认排法,C2 加 `stack`,C4 改成自由组合;B9 的 2 条改用单列,因为 9 列分不成两半)、`gen/next/components.md`。
+
+## 框选标注(2026-10-16)
+
+参照 Wu et al., *Improving User Interface Generation Models from Designer Feedback*(CHI '26):设计师直接两两排序的数据和别人的判断几乎对不上(49%),在页面上圈出问题、写一句怎么改,再把「改后 vs 改前」做成偏好对,一致率高得多(草图 64%、直接修改 76%)。这里试同样的做法。
+
+| 步骤 | 命令 | 状态 |
+|---|---|---|
+| 挑页面、重新渲染 | `node scripts/critique-pages.mjs`(先在 `gen/` 里 `npm ci`) | 已跑:pilot 13 步 × 最高、中间、最低各 1 版 = 39 页;重新渲染的缩略图和训练时逐字节相同 |
+| 圈问题 | 标注页 `labels/critique.html`(已发布为 artifact,标注存在它的 db 里) | 进行中 |
+| 按意见改页面 | `source judge.env && node scripts/revise.mjs --critiques labels/critiques.json` | 用一条测试意见跑通过一页(47 秒,改了 1 行),测试产物已删 |
+| 看改后 | 同一个标注页的「看改后」 | 等改完 |
+
+- 标注页上点一下组件就选中它(悬停时虚线框标出鼠标下最里层的组件,「大一层」换成外面那层),也可以拖框圈住任意区域;每处写一句怎么改。每页记用时(只在页面可见时计)。
+- 组件的位置由 `critique-pages.mjs` 从渲染后的 DOM 量出(带 `data-slot` 的元素),存在 `labels/critique-pages/<页面>.json`;点选记 `pick: "dom"`,拖框记 `pick: "box"`,拖框按 IoU 对应到组件。
+- `labels/critique-key.json` 是每页来自哪一步、哪一版、分数;标注页不发布它。
+- 标注从 db 导出到 `labels/critiques.json`(Claude 用 ArtifactData 读 `critiques` 集合),每条 `{page, items:[{x,y,w,h,comment,hit,pick}], note, fine, seconds}`;看改后的结论在 `reviews` 集合。
+- `revise.mjs` 在缩略图上画出框和编号(`marked.png`),用 `generate.mjs` 的 `--base` 加 change kind `critique` 让生成 Agent 在原页面上改(用这页当时那一步的输出指南);改后的页面在 `runs/critique/revised/<页面>/<报告>/`。
+- 要回答的问题:每页标注花多久;改后的页面你认不认可(「看改后」里逐条记改到了 / 没改到 / 改坏了)。认可的改后页面和改前页面组成偏好对,给 reward / DPO 用。

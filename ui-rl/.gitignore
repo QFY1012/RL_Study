@@ -11,3 +11,14 @@ runs/*/pages/**/shot.png
 runs/*/pages/**/tile-*.png
 runs/*/pages/**/tsconfig.json
 gen/node_modules/
+# 框选标注:整页截图和改前页面(训练页面的副本)由 critique-pages.mjs 重新生成;改后的页面和训练页面一样只留源码、缩略图和记录
+labels/critique-pages/
+runs/critique/pages/
+runs/critique/revised/**/marked.png
+runs/critique/revised/**/.build/
+runs/critique/revised/**/.private/
+runs/critique/revised/**/assets/
+runs/critique/revised/**/session.jsonl
+runs/critique/revised/**/shot.png
+runs/critique/revised/**/tile-*.png
+runs/critique/revised/**/tsconfig.json

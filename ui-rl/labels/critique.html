@@ -1,0 +1,451 @@
+<title>页面框选标注</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* 和 label.html 同一套色:灰底白面板,橙色标出要改的地方。左边整页截图,右边意见清单 */
+  :root {
+    --bg: #f4f5f7; --panel: #ffffff; --fg: #1d2129; --dim: #5f6673; --line: #dfe2e8;
+    --accent: #c2410c; --accent-soft: #fbe9df; --ok: #2f7d4f; --ok-soft: #e3f1e8; --bad: #b42318; --bad-soft: #fbe4e2; --chip: #eef0f4;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15171b; --panel: #1e2126; --fg: #e8eaee; --dim: #9aa1ad; --line: #30343b;
+      --accent: #f08a4b; --accent-soft: #3a2619; --ok: #6cc28f; --ok-soft: #1c3226; --bad: #f2877d; --bad-soft: #3a1f1d; --chip: #2a2e35; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15171b; --panel: #1e2126; --fg: #e8eaee; --dim: #9aa1ad; --line: #30343b;
+    --accent: #f08a4b; --accent-soft: #3a2619; --ok: #6cc28f; --ok-soft: #1c3226; --bad: #f2877d; --bad-soft: #3a1f1d; --chip: #2a2e35; color-scheme: dark;
+  }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 14px/1.5 "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel); }
+  header {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 3;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+    padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    border-bottom: 1px solid var(--line); background: var(--panel);
+  }
+  header h1 { font-size: 15px; margin: 0; }
+  .meta { color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bar { flex: 1; min-width: 100px; height: 4px; background: var(--chip); border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent); width: 0; }
+  .modes { display: flex; gap: 4px; }
+  .warn { color: var(--accent); font-size: 13px; }
+  button {
+    font: inherit; color: var(--fg); background: var(--chip); border: 1px solid transparent;
+    border-radius: 6px; padding: 5px 10px; cursor: pointer;
+  }
+  button:hover { border-color: var(--line); }
+  button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button.on { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  button.primary { background: var(--accent); color: var(--panel); }
+  button:disabled { opacity: .45; cursor: default; }
+  kbd { font: 11px var(--mono); color: var(--dim); margin-left: 4px; }
+  button.primary kbd { color: inherit; opacity: .8; }
+
+  .wrap {
+    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; align-items: start;
+    padding-block: 8px 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; }
+  .stage.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shot { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .shot .tag { font-size: 13px; color: var(--dim); }
+  .frame { position: relative; background: var(--panel); border: 1px solid var(--line); max-width: 1248px; }
+  .frame img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+  .ov { position: absolute; inset: 0; cursor: crosshair; }
+  .ov.view { cursor: default; pointer-events: none; }
+  .box { position: absolute; border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 2px; }
+  .box.draft { border-style: dashed; }
+  .box.hot { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+  .box[hidden] { display: none; }
+  .box.hover { border: 1.5px dashed var(--accent); background: color-mix(in srgb, var(--accent) 5%, transparent); pointer-events: none; }
+  .box.hover i {
+    position: absolute; left: -1.5px; bottom: 100%; white-space: nowrap; font: 12px/18px "PingFang SC", "Noto Sans SC", system-ui, sans-serif; font-style: normal;
+    padding: 0 6px; background: var(--panel); color: var(--accent); border: 1px solid var(--accent); border-radius: 3px 3px 3px 0;
+  }
+  ol.items li .lv { grid-column: 2 / 4; display: flex; gap: 4px; }
+  ol.items li .lv button { padding: 1px 8px; font-size: 12px; }
+  .box b {
+    position: absolute; left: -2px; top: -22px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box;
+    background: var(--accent); color: var(--panel); font: 600 12px/20px var(--mono); text-align: center; border-radius: 3px 3px 3px 0;
+  }
+
+  aside {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 58px); max-height: calc(100vh - 76px); overflow: auto;
+    display: flex; flex-direction: column; gap: 12px; padding: 12px; box-sizing: border-box;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  }
+  .help { color: var(--dim); font-size: 13px; margin: 0; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .timer { font: 13px var(--mono); color: var(--dim); }
+  ol.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  ol.items li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 4px 8px; align-items: start; }
+  ol.items li .n { background: var(--accent); color: var(--panel); font: 600 12px/20px var(--mono); text-align: center; border-radius: 3px; height: 20px; }
+  ol.items li .hit { grid-column: 2 / 4; font-size: 12px; color: var(--dim); overflow-wrap: anywhere; }
+  ol.items li .say { grid-column: 2 / 4; display: flex; gap: 6px; }
+  ol.items li .say input { flex: 1; min-width: 0; }
+  ol.items li .del { padding: 2px 8px; color: var(--dim); }
+  ol.items li .said { grid-column: 2 / 4; overflow-wrap: anywhere; }
+  ol.items li .judge { grid-column: 2 / 4; display: flex; gap: 4px; flex-wrap: wrap; }
+  .judge button { padding: 2px 8px; font-size: 13px; }
+  .judge button.on.ok { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
+  .judge button.on.bad { background: var(--bad-soft); color: var(--bad); border-color: var(--bad); }
+  textarea, input[type=text] {
+    width: 100%; box-sizing: border-box; font: inherit; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; resize: vertical;
+  }
+  label.lab { font-size: 13px; color: var(--dim); display: flex; flex-direction: column; gap: 4px; }
+  .empty { color: var(--dim); font-size: 13px; padding: 8px 0; }
+  .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .actions .primary { flex: 1; }
+  .saved { font-size: 13px; color: var(--ok); min-height: 1.5em; }
+  .note { padding: 24px 0; color: var(--dim); }
+  .touch { display: none; }
+
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns: minmax(0, 1fr); padding-bottom: 46vh; }
+    .stage.two { grid-template-columns: minmax(0, 1fr); }
+    aside {
+      position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 4; max-height: 44vh; border-radius: 12px 12px 0 0; border-width: 1px 0 0;
+      padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+      padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    }
+    .touch { display: inline-block; }
+    .ov.scroll { pointer-events: none; }
+    kbd { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) { .box { transition: background .12s; } }
+</style>
+
+<header>
+  <h1>页面框选标注</h1>
+  <div class="modes" role="group" aria-label="做什么">
+    <button id="mC" class="on">圈问题</button>
+    <button id="mR">看改后</button>
+  </div>
+  <span class="meta" id="pos">—</span>
+  <div class="bar"><i id="prog"></i></div>
+  <span class="meta" id="done">—</span>
+  <span class="warn" id="store"></span>
+</header>
+
+<div class="wrap">
+  <div class="stage" id="stage">
+    <section class="shot" id="shotA">
+      <span class="tag" id="tagA" hidden>改前(框是你圈的地方)</span>
+      <div class="frame" id="frameA"><img id="imgA" alt="页面整页截图"><div class="ov" id="ov"></div></div>
+    </section>
+    <section class="shot" id="shotB" hidden>
+      <span class="tag">改后</span>
+      <div class="frame"><img id="imgB" alt="按意见改过的页面整页截图"></div>
+    </section>
+  </div>
+
+  <aside id="panel">
+    <!-- 圈问题 -->
+    <div id="pC" class="col" style="display:flex;flex-direction:column;gap:12px">
+      <div class="row">
+        <p class="help">点一下截图上的组件选中它（不够大就点「大一层」），或者拖一个框圈住任意区域，再写一句这里要怎么改。</p>
+        <button class="touch" id="drawToggle">现在：滚动</button>
+      </div>
+      <ol class="items" id="items"></ol>
+      <div class="empty" id="noItems">还没有圈。点一个组件，或者在截图上拖一个框。</div>
+      <label class="lab" for="note">整页意见（可选）<textarea id="note" rows="2" placeholder="比如「结论应该放在最前面」"></textarea></label>
+      <div class="row"><span class="timer" id="timer">用时 0:00</span><span class="saved" id="saved"></span></div>
+      <div class="actions">
+        <button class="primary" id="save">保存，下一页<kbd>⌘↵</kbd></button>
+        <button id="fine">这页不用改</button>
+      </div>
+      <div class="actions">
+        <button id="prev">上一页<kbd>←</kbd></button>
+        <button id="next">下一页<kbd>→</kbd></button>
+        <button id="skip">下一个没标的</button>
+      </div>
+    </div>
+    <!-- 看改后 -->
+    <div id="pR" style="display:none;flex-direction:column;gap:12px">
+      <p class="help">左边是改前，右边是按你的意见改出来的。逐条看有没有改到，再给整页一个结论。</p>
+      <ol class="items" id="rItems"></ol>
+      <div class="lab">整页
+        <div class="judge" id="overall">
+          <button data-v="accept" class="okb">认可</button>
+          <button data-v="partial">部分认可</button>
+          <button data-v="reject" class="badb">不认可</button>
+        </div>
+      </div>
+      <label class="lab" for="rNote">补充（可选）<textarea id="rNote" rows="2" placeholder="比如「指标改对了，但截图那节被挤乱了」"></textarea></label>
+      <div class="row"><span class="timer" id="rTimer">用时 0:00</span><span class="saved" id="rSaved"></span></div>
+      <div class="actions">
+        <button class="primary" id="rSave">保存，下一页<kbd>⌘↵</kbd></button>
+      </div>
+      <div class="actions">
+        <button id="rPrev">上一页<kbd>←</kbd></button>
+        <button id="rNext">下一页<kbd>→</kbd></button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+(async () => {
+  // 圈问题:每页存一份 critiques/<页面>:框(截图像素坐标)、每个框的一句意见、框中的组件、整页意见、用时。
+  // 看改后:reviews/<页面>:每条意见改到没有,整页认不认可。都存在 artifact 的 db 里,Claude 读得到;db 不可用时存浏览器本地。
+  const $ = (id) => document.getElementById(id);
+  let pages = [], revs = [];
+  try { pages = await (await fetch('critique.json')).json(); }
+  catch { $('stage').outerHTML = '<p class="note">读不到 critique.json，页面没有加载。</p>'; return; }
+  try { revs = await (await fetch('critique-revisions.json')).json(); } catch { revs = []; }
+  const nodeCache = {}, nodesNow = {};
+  const nodesOf = async (p) => (nodeCache[p.id] ??= fetch(p.nodes).then((r) => r.json()).catch(() => []).then((n) => (nodesNow[p.id] = n)));
+  // 点到的地方从里到外的组件:按面积从小到大
+  const stackAt = (p, pt) => (nodesNow[p.id] ?? [])
+    .filter((n) => pt.x >= n.x && pt.x <= n.x + n.w && pt.y >= n.y && pt.y <= n.y + n.h)
+    .sort((a, b) => a.w * a.h - b.w * b.h);
+
+  let mode = 'c', idx = 0, ridx = 0;
+  const crit = {}, rev = {};          // 已保存的 db 文档
+  const drafts = {};                   // 还没保存的改动(切页不丢)
+
+  // ---------- 存储 ----------
+  let db = null;
+  const LS = 'critique-labels';
+  const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify({ crit, rev })); } catch {} };
+  const useLocal = () => {
+    try { const s = JSON.parse(localStorage.getItem(LS) || '{}'); Object.assign(crit, s.crit || {}); Object.assign(rev, s.rev || {}); } catch {}
+    $('store').textContent = '标注只存在这个浏览器里，标完请告诉 Claude 换个方式导出';
+    render();
+  };
+  (window.claude?.use ? window.claude.use('db') : Promise.resolve(null)).then((d) => {
+    if (!d) return useLocal();
+    db = d;
+    db.collection('critiques').onSnapshot((s) => { for (const doc of s.docs) crit[doc.id] = doc.data(); render(); }, useLocal);
+    db.collection('reviews').onSnapshot((s) => { for (const doc of s.docs) rev[doc.id] = doc.data(); render(); }, useLocal);
+  }).catch(useLocal);
+  async function put(col, id, doc, savedEl) {
+    savedEl.textContent = '保存中…';
+    try { if (db) await db.collection(col).doc(id).set(doc); else saveLocal(); savedEl.textContent = '已保存'; }
+    catch { saveLocal(); savedEl.textContent = '存到本地了'; }
+  }
+
+  // ---------- 用时:只在页面可见时计 ----------
+  let tick = 0, base = 0;
+  setInterval(() => { if (document.visibilityState === 'visible') { tick++; showTime(); } }, 1000);
+  const fmt = (s) => `用时 ${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+  const showTime = () => { $(mode === 'c' ? 'timer' : 'rTimer').textContent = fmt(base + tick); };
+  const startClock = (prev) => { base = prev || 0; tick = 0; showTime(); };
+
+  // ---------- 框和组件 ----------
+  const iou = (a, b) => {
+    const x = Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x));
+    const y = Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+    const i = x * y; return i / (a.w * a.h + b.w * b.h - i);
+  };
+  const SLOT = { section: '整节', 'section-header': '节标题', 'page-header': '页头', block: '块', grid: '网格', group: '分组', 'custom-stat': '指标', 'custom-table': '表格', 'custom-list': '列表', 'custom-kv': '键值', 'custom-chart': '图表', 'custom-progress-list': '进度条', 'custom-badges': '标签', figure: '截图', 'figure-strip': '截图排', 'figure-grid': '截图网格', 'figure-compare': '截图对比', 'figure-image': '截图图片', 'figure-text': '截图说明', text: '文字' };
+  const hitText = (h) => !h ? '没有对上组件' : `${h.section || '页头'} › ${SLOT[h.slot] ?? h.slot}${h.text ? `「${h.text.slice(0, 24)}${h.text.length > 24 ? '…' : ''}」` : ''}`;
+  async function match(p, b) {
+    let best = null, s = 0.05;
+    for (const n of await nodesOf(p)) { const v = iou(b, n); if (v > s) { s = v; best = n; } }
+    return best && { slot: best.slot, section: best.section, text: best.text, iou: Math.round(s * 100) / 100 };
+  }
+
+  const cur = () => pages[idx];
+  const draftOf = (p) => (drafts[p.id] ??= structuredClone(crit[p.id] ?? { items: [], note: '' }));
+  const pct = (p, b) => `left:${b.x / p.w * 100}%;top:${b.y / p.h * 100}%;width:${b.w / p.w * 100}%;height:${b.h / p.h * 100}%`;
+
+  function drawBoxes(p, items, ov, temp) {
+    ov.innerHTML = items.map((it, i) => `<div class="box" data-i="${i}" style="${pct(p, it)}"><b>${i + 1}</b></div>`).join('')
+      + (temp ? `<div class="box draft" style="${pct(p, temp)}"></div>` : '')
+      + '<div class="box hover" id="hover" hidden><i></i></div>';
+  }
+  const hitOf = (n) => ({ slot: n.slot, section: n.section, text: n.text, iou: 1 });
+  const nodeLabel = (n) => `${n.section || '页头'} › ${SLOT[n.slot] ?? n.slot}`;
+
+  // ---------- 圈问题 ----------
+  function renderC() {
+    const p = cur(); if (!p) return;
+    if ($('imgA').getAttribute('src') !== p.image) { $('imgA').src = p.image; window.scrollTo(0, 0); }
+    const d = draftOf(p);
+    nodesOf(p);
+    drawBoxes(p, d.items, $('ov'));
+    $('items').innerHTML = d.items.map((it, i) => `<li data-i="${i}">
+      <span class="n">${i + 1}</span><span class="hit">${escapeHtml(hitText(it.hit))}</span>
+      ${it.stack ? `<span class="lv"><button data-lv="1" data-i="${i}" ${it.level >= it.stack.length - 1 ? 'disabled' : ''}>大一层</button><button data-lv="-1" data-i="${i}" ${it.level <= 0 ? 'disabled' : ''}>小一层</button></span>` : ''}
+      <span class="say"><input type="text" id="c-${p.id}-${i}" data-i="${i}" value="${escapeAttr(it.comment)}" placeholder="这里要怎么改">
+      <button class="del" data-i="${i}" aria-label="删掉第 ${i + 1} 处">删</button></span></li>`).join('');
+    $('noItems').hidden = d.items.length > 0;
+    if (document.activeElement !== $('note')) $('note').value = d.note ?? '';
+    const n = pages.filter((q) => crit[q.id]).length;
+    $('pos').textContent = `第 ${idx + 1} / ${pages.length} 页 · ${p.id}`;
+    $('done').textContent = `已标 ${n}`;
+    $('prog').style.width = (n / pages.length * 100) + '%';
+    const q = pages[idx + 1]; if (q) { new Image().src = q.image; nodesOf(q); }
+  }
+
+  // 拖框
+  let drag = null;
+  const toImg = (e) => {
+    const r = $('imgA').getBoundingClientRect(), p = cur(), k = p.w / r.width;
+    return { x: Math.max(0, Math.min(p.w, (e.clientX - r.left) * k)), y: Math.max(0, Math.min(p.h, (e.clientY - r.top) * k)) };
+  };
+  // 悬停:高亮鼠标下面最里层的组件
+  let hoverRaf = 0;
+  $('ov').addEventListener('pointermove', (e) => {
+    if (drag) {
+      const b = toImg(e), a = drag.a;
+      drag.r = { x: Math.round(Math.min(a.x, b.x)), y: Math.round(Math.min(a.y, b.y)), w: Math.round(Math.abs(b.x - a.x)), h: Math.round(Math.abs(b.y - a.y)) };
+      if (drag.r.w > 6 || drag.r.h > 6) drawBoxes(cur(), draftOf(cur()).items, $('ov'), drag.r);
+      return;
+    }
+    if (e.pointerType !== 'mouse' || mode !== 'c') return;
+    cancelAnimationFrame(hoverRaf);
+    hoverRaf = requestAnimationFrame(() => {
+      const p = cur(), n = stackAt(p, toImg(e))[0], h = $('hover');
+      if (!h) return;
+      h.hidden = !n;
+      if (n) { h.style.cssText = pct(p, n); h.querySelector('i').textContent = nodeLabel(n); }
+    });
+  });
+  $('ov').addEventListener('pointerleave', () => { const h = $('hover'); if (h) h.hidden = true; });
+  $('ov').addEventListener('pointerdown', (e) => {
+    if (mode !== 'c' || e.button !== 0) return;
+    e.preventDefault(); $('ov').setPointerCapture(e.pointerId);
+    drag = { a: toImg(e) };
+  });
+  // 松开:几乎没动是点选组件,拖开了是框选区域
+  $('ov').addEventListener('pointerup', async () => {
+    if (!drag) return;
+    const { a, r } = drag; drag = null;
+    const p = cur(), d = draftOf(p);
+    if (!r || (r.w < 8 && r.h < 8)) {
+      await nodesOf(p);
+      const stack = stackAt(p, a);
+      if (!stack.length) return drawBoxes(p, d.items, $('ov'));
+      const n = stack[0];
+      d.items.push({ x: n.x, y: n.y, w: n.w, h: n.h, comment: '', hit: hitOf(n), stack: stack.map(({ x, y, w, h, slot, section, text }) => ({ x, y, w, h, slot, section, text })), level: 0 });
+    } else {
+      if (r.w < 8 || r.h < 8) return drawBoxes(p, d.items, $('ov'));
+      d.items.push({ ...r, comment: '', hit: await match(p, r) });
+    }
+    renderC();
+    $(`c-${p.id}-${d.items.length - 1}`)?.focus();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drag) { drag = null; drawBoxes(cur(), draftOf(cur()).items, $('ov')); } });
+
+  $('items').addEventListener('input', (e) => { const i = e.target.dataset.i; if (i != null) draftOf(cur()).items[i].comment = e.target.value; });
+  $('items').addEventListener('click', (e) => {
+    const t = e.target, it = draftOf(cur()).items[t.dataset.i];
+    if (t.classList.contains('del')) { draftOf(cur()).items.splice(+t.dataset.i, 1); renderC(); }
+    else if (t.dataset.lv && it?.stack) {
+      it.level = Math.max(0, Math.min(it.stack.length - 1, it.level + Number(t.dataset.lv)));
+      const n = it.stack[it.level];
+      Object.assign(it, { x: n.x, y: n.y, w: n.w, h: n.h, hit: hitOf(n) });
+      renderC(); hot(t.dataset.i);
+    }
+  });
+  $('items').addEventListener('focusin', (e) => hot(e.target.dataset.i));
+  $('items').addEventListener('focusout', () => hot(null));
+  $('items').addEventListener('mouseover', (e) => hot(e.target.closest('li')?.dataset.i));
+  $('items').addEventListener('mouseleave', () => hot(null));
+  const hot = (i) => document.querySelectorAll('#ov .box').forEach((b) => b.classList.toggle('hot', b.dataset.i === String(i)));
+  $('note').addEventListener('input', () => { draftOf(cur()).note = $('note').value; });
+
+  async function saveC(fine) {
+    const p = cur(), d = draftOf(p);
+    // pick:dom = 点选的组件,box = 拖出来的框
+    const items = fine ? [] : d.items.filter((it) => it.comment.trim()).map(({ x, y, w, h, comment, hit, stack }) => ({ x, y, w, h, comment: comment.trim(), hit: hit ?? null, pick: stack ? 'dom' : 'box' }));
+    if (!fine && !items.length && !d.note.trim()) { $('saved').textContent = '先圈一处并写一句，或者点「这页不用改」'; return; }
+    const doc = { page: p.id, items, note: fine ? '' : d.note.trim(), fine: !!fine, seconds: base + tick, at: new Date().toISOString() };
+    crit[p.id] = doc; delete drafts[p.id];
+    await put('critiques', p.id, doc, $('saved'));
+    setTimeout(() => goC(1), 250);
+  }
+  function goC(k) { idx = Math.max(0, Math.min(pages.length - 1, idx + k)); $('saved').textContent = ''; startClock(crit[cur().id]?.seconds); renderC(); }
+  $('save').onclick = () => saveC(false);
+  $('fine').onclick = () => saveC(true);
+  $('prev').onclick = () => goC(-1);
+  $('next').onclick = () => goC(1);
+  $('skip').onclick = () => { const i = pages.findIndex((q) => !crit[q.id]); if (i >= 0) { idx = i; goC(0); } };
+  $('drawToggle').onclick = () => { const on = $('ov').classList.toggle('scroll'); $('drawToggle').textContent = on ? '现在：滚动' : '现在：画框'; $('ov').style.touchAction = on ? '' : 'none'; };
+  $('ov').classList.add('scroll'); // 手机上默认能滚动,点按钮切到画框;桌面上这个类不起作用
+
+  // ---------- 看改后 ----------
+  const curR = () => revs[ridx];
+  const rDraftOf = (r) => (drafts['r:' + r.id] ??= structuredClone(rev[r.id] ?? { items: [], overall: null, note: '' }));
+  function renderR() {
+    const r = curR();
+    if (!r) {
+      $('rItems').innerHTML = '<li class="empty">还没有改后的页面。先在「圈问题」里标几页，Claude 跑完修改后会出现在这里。</li>';
+      $('pos').textContent = '看改后 · 0 页'; $('done').textContent = ''; $('prog').style.width = '0';
+      $('shotA').hidden = $('shotB').hidden = true; return;
+    }
+    $('shotA').hidden = $('shotB').hidden = false;
+    const p = pages.find((q) => q.id === r.id) ?? { w: r.w, h: r.h, image: r.before };
+    if ($('imgA').getAttribute('src') !== p.image) { $('imgA').src = p.image; window.scrollTo(0, 0); }
+    if ($('imgB').getAttribute('src') !== r.after) $('imgB').src = r.after;
+    drawBoxes(p, r.items, $('ov'));
+    const d = rDraftOf(r);
+    const J = [['done', '改到了', 'ok'], ['missed', '没改到', ''], ['worse', '改坏了', 'bad']];
+    $('rItems').innerHTML = r.items.map((it, i) => `<li><span class="n">${i + 1}</span><span class="said">${escapeHtml(it.comment)}</span>
+      <div class="judge" data-i="${i}">${J.map(([v, t, c]) => `<button data-v="${v}" class="${c}${d.items[i] === v ? ' on' : ''}">${t}</button>`).join('')}</div></li>`).join('')
+      + (r.note ? `<li><span class="n">页</span><span class="said">${escapeHtml(r.note)}</span></li>` : '');
+    document.querySelectorAll('#overall button').forEach((b) => b.classList.toggle('on', d.overall === b.dataset.v));
+    if (document.activeElement !== $('rNote')) $('rNote').value = d.note ?? '';
+    const n = revs.filter((q) => rev[q.id]).length;
+    $('pos').textContent = `第 ${ridx + 1} / ${revs.length} 页 · ${r.id}`;
+    $('done').textContent = `已看 ${n}`;
+    $('prog').style.width = (n / revs.length * 100) + '%';
+  }
+  $('rItems').addEventListener('click', (e) => {
+    const b = e.target.closest('button'), g = e.target.closest('.judge'); if (!b || !g) return;
+    rDraftOf(curR()).items[+g.dataset.i] = b.dataset.v; renderR();
+  });
+  $('overall').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { rDraftOf(curR()).overall = b.dataset.v; renderR(); } });
+  $('rNote').addEventListener('input', () => { rDraftOf(curR()).note = $('rNote').value; });
+  async function saveR() {
+    const r = curR(); if (!r) return;
+    const d = rDraftOf(r);
+    if (!d.overall) { $('rSaved').textContent = '先给整页一个结论'; return; }
+    const doc = { page: r.id, items: r.items.map((_, i) => d.items[i] ?? null), overall: d.overall, note: d.note.trim(), seconds: base + tick, at: new Date().toISOString() };
+    rev[r.id] = doc; delete drafts['r:' + r.id];
+    await put('reviews', r.id, doc, $('rSaved'));
+    setTimeout(() => goR(1), 250);
+  }
+  function goR(k) { ridx = Math.max(0, Math.min(revs.length - 1, ridx + k)); $('rSaved').textContent = ''; startClock(rev[curR()?.id]?.seconds); renderR(); }
+  $('rSave').onclick = saveR;
+  $('rPrev').onclick = () => goR(-1);
+  $('rNext').onclick = () => goR(1);
+
+  // ---------- 模式、键盘 ----------
+  function setMode(m) {
+    mode = m;
+    $('mC').classList.toggle('on', m === 'c'); $('mR').classList.toggle('on', m === 'r');
+    $('pC').style.display = m === 'c' ? 'flex' : 'none'; $('pR').style.display = m === 'r' ? 'flex' : 'none';
+    $('stage').classList.toggle('two', m === 'r'); $('tagA').hidden = m === 'c'; $('shotB').hidden = m === 'c'; $('shotA').hidden = false;
+    $('ov').classList.toggle('view', m === 'r');
+    try { localStorage.setItem(LS + '-mode', m); } catch {}
+    m === 'c' ? goC(0) : goR(0);
+  }
+  $('mC').onclick = () => setMode('c');
+  $('mR').onclick = () => setMode('r');
+  $('mR').textContent = `看改后 · ${revs.length}`;
+  $('mC').textContent = `圈问题 · ${pages.length}`;
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); mode === 'c' ? saveC(false) : saveR(); return; }
+    if (e.target.matches('input, textarea')) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') e.target.blur(); return; }
+    if (e.key === 'ArrowRight') mode === 'c' ? goC(1) : goR(1);
+    else if (e.key === 'ArrowLeft') mode === 'c' ? goC(-1) : goR(-1);
+  });
+
+  function render() { mode === 'c' ? renderC() : renderR(); }
+  function escapeHtml(s) { return String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+  function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
+
+  let start = 'c'; try { if (localStorage.getItem(LS + '-mode') === 'r' && revs.length) start = 'r'; } catch {}
+  setMode(start);
+})();
+</script>
