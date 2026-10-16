@@ -12,7 +12,7 @@
 
 ## 材料不在仓库里
 
-数据、生成的页面、截图、traces、runs、标注和分析报告放在 Google Drive「我的云端硬盘」根目录的 `QFY1012.github.io-claude-beautiful-faraday-cypsxn.zip`(780 MB)。它是 `QFY1012.github.io` 的 `claude/beautiful-faraday-cypsxn` 分支的完整快照,`experiments/` 下就是这个仓库的三个目录加上材料。把材料补回仓库(已有的代码文件不覆盖):
+数据、生成的页面、截图、traces、runs、标注和分析报告放在 Google Drive「我的云端硬盘」根目录的 [`QFY1012.github.io-claude-beautiful-faraday-cypsxn.zip`](https://drive.google.com/file/d/1jpXB4V73xjuZvNdZEFkfrQbu6aGIj4cL/view)(780 MB,只有本人账号能打开)。它是 `QFY1012.github.io` 的 `claude/beautiful-faraday-cypsxn` 分支的完整快照,`experiments/` 下就是这个仓库的三个目录加上材料。把材料补回仓库(已有的代码文件不覆盖):
 
 ```bash
 unzip QFY1012.github.io-claude-beautiful-faraday-cypsxn.zip
