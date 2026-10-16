@@ -64,11 +64,17 @@ function useFieldPass() {
 // the right 9. layout "stack": the title sits above the content and the content
 // takes all 12 columns, for what needs the full width (a wide table, a matrix of
 // screens). Both keep every edge on the page's column lines.
+// The title and its description are a blank line apart: within the description
+// the lines are 24px apart, so a tighter title-to-description gap (20px type on
+// a 24px line sits closer to the next line than two 14px lines do) would read
+// as if the description belonged less to the title than to itself. The blank
+// line also puts the description on the third line, level with the first row
+// of the content beside it (a table's header, a group's first text).
 function Section({ title, description, layout = "side", className, children }: { title: string; description?: string; layout?: "side" | "stack"; className?: string; children: React.ReactNode }) {
   const stack = layout === "stack"
   return (
     <section data-slot="section" className={cn("grid grid-cols-12 content-start items-start gap-x-6", stack && "gap-y-6")}>
-      <div data-slot="section-header" className={cn(stack ? "col-span-12" : "col-span-3", "flex flex-col")}>
+      <div data-slot="section-header" className={cn(stack ? "col-span-12" : "col-span-3", "flex flex-col gap-6")}>
         <h2 className="text-xl leading-6 font-medium">{title}</h2>
         {description && <p className="text-sm leading-6 text-muted-foreground">{description}</p>}
       </div>
