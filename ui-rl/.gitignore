@@ -22,3 +22,6 @@ runs/critique/revised/**/session.jsonl
 runs/critique/revised/**/shot.png
 runs/critique/revised/**/tile-*.png
 runs/critique/revised/**/tsconfig.json
+
+# API key (lib/llm.mjs reads DEEPSEEK_API_KEY); keep it out of git
+judge.env

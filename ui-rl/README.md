@@ -1,6 +1,6 @@
 # ui-rl
 
-输出层强化学习环境的重建,计划见 `PLAN.md`。运行需要的组件库、截图检查和生成 Agent 都复制在 `gen/`(先在 `gen/` 里 `npm ci`),不依赖 ui-loop;ui-loop 原样保留作对照。全部是 mock 数据;密钥只走环境变量(`source judge.env`)。
+输出层强化学习环境的重建,计划见 `PLAN.md`。运行需要的组件库、截图检查和生成 Agent 都复制在 `gen/`(先在 `gen/` 里 `npm ci`),不依赖 ui-loop;ui-loop 原样保留作对照。全部是 mock 数据;密钥只走环境变量(`source judge.env`;judge.env 已被 .gitignore 排除,云端会话里放在 `~/.config/ui-rl/judge.env`)。
 
 ## 第 0 阶段:测基线
 
