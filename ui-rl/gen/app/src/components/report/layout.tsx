@@ -87,10 +87,14 @@ function Group({ title, className, children }: { title?: string; className?: str
   )
 }
 
-// Rows are 144px fields unless fields={false}; a child takes `span` columns from
-// column `start` (and a Block `rows` fields). Without `cols` the grid has one
-// column per page column it is wide (its `span`, else the width around it).
-function Grid({ cols, fields = true, className, children, span, start, rowSpan, rowStart }: Placed & { cols?: number; fields?: boolean; children: React.ReactNode }) {
+// A child takes `span` columns from column `start`. Each piece in the grid is one
+// whole on the page: the grid places its box on the columns, and its height is
+// its own, so a piece can take half a field and the next one a field and a half;
+// only the section around them is rounded up to whole fields. With `fields` the
+// rows are fixed 144px fields instead (a Block's `rows` then counts fields).
+// Without `cols` the grid has one column per page column it is wide (its
+// `span`, else the width around it).
+function Grid({ cols, fields = false, className, children, span, start, rowSpan, rowStart }: Placed & { cols?: number; fields?: boolean; children: React.ReactNode }) {
   const around = React.useContext(Width)
   const n = cols ?? span ?? around
   return (
