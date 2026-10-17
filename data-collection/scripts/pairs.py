@@ -1,5 +1,5 @@
-# Checks the renders of one snapshot and cuts out the pairs.
-#   python3 -I scripts/pairs.py <snapshot-dir>
+# Checks the renders of one recorded page and cuts out the pairs.
+#   python3 -I scripts/pairs.py <dir>
 # Isolation: for each swapped section, the page above it must be unchanged and the
 # page below it the same once shifted by the height difference.
 # Writes pairs/<i>-orig.png and pairs/<i>-gen.png (the section with MARGIN px of

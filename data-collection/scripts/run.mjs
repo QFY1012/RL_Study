@@ -1,8 +1,8 @@
-// Snapshot, generate, render and pair a list of sites, many at once.
+// Record, replay, generate, render and pair a list of sites, many at once.
 //   node scripts/run.mjs <out-root> <url>...      (or a file of URLs, one per line, via --list <file>)
 // Each site goes to <out-root>/<host>/ and its output to <out-root>/<host>.log; every
 // line is also printed here, prefixed with the host. JOBS sites run at once (default
-// 20); the browser steps (snapshot, render, fidelity, pairs) are CPU-bound, so at most
+// 20); the browser steps (record, render, pairs) are CPU-bound, so at most
 // BROWSER_JOBS of them run at a time (default 4) while the others wait on the model.
 // Needs ~/.config/ui-rl/judge.env in the environment for generate.mjs.
 import fs from "node:fs"
@@ -56,9 +56,8 @@ async function site(url) {
   const log = fs.createWriteStream(`${dir}.log`)
   const t = Date.now()
   try {
-    await browser(() => step(host, log, "node", ["scripts/snapshot.mjs", url, dir]))
+    await browser(() => step(host, log, "node", ["scripts/record.mjs", url, dir]))
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
-    await browser(() => step(host, log, "python3", ["-I", "scripts/fidelity.py", dir]))
     await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, COUNT], { NODE_USE_ENV_PROXY: "1" })
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
     await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir]))

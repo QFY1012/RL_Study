@@ -1,5 +1,5 @@
-// Has a model redesign sections of a snapshotted page from their content alone.
-//   node scripts/generate.mjs <snapshot-dir> [count]
+// Has a model redesign sections of a recorded page from their content alone.
+//   node scripts/generate.mjs <dir> [count]
 // Picks up to <count> sections (default 2) and writes gen/<i>.html (the fragment)
 // and gen/<i>.json (prompt, model, usage) for each. The model gets the section's
 // text, images, illustrations and icons plus the page's fonts and colors, never the original
@@ -10,7 +10,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 const [dir, countArg] = process.argv.slice(2)
-if (!dir) throw new Error("usage: generate.mjs <snapshot-dir> [count]")
+if (!dir) throw new Error("usage: generate.mjs <dir> [count]")
 const count = Number(countArg ?? 2)
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
 const MODEL = process.env.GEN_MODEL ?? process.env.JUDGE_MODEL ?? "deepseek-v4.1-flash"
@@ -20,14 +20,14 @@ if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
 const snap = JSON.parse(fs.readFileSync(path.join(dir, "sections.json"), "utf8"))
 const { sections, tokens } = snap
 
-// Sections worth redesigning: rendered faithfully, not the first or last (header, footer), a sensible
+// Sections worth redesigning: the same in the replay, not the first or last (header, footer), a sensible
 // height, and content that is mostly text and images rather than a mock-up of an
 // app built out of hundreds of tiny labels.
 const texts = (s) => s.items.filter((t) => t.text)
-// Only sections whose offline render matches the live page (fidelity.py) are used:
-// a pair is only as good as the original it is measured against.
-const fidelity = JSON.parse(fs.readFileSync(path.join(dir, "fidelity.json"), "utf8")).sections
-const candidates = sections.filter((s, k) => fidelity[s.i]?.ok && k > 0 && k < sections.length - 1 && s.box.h >= 200 && s.box.h <= 1400 && texts(s).length >= 3 && s.items.length <= 40)
+// Only sections that replay with the same height and content as recorded
+// (render.mjs, replay.json) are used: the pair is rendered in the replay.
+const replay = JSON.parse(fs.readFileSync(path.join(dir, "replay.json"), "utf8"))
+const candidates = sections.filter((s, k) => replay[s.i]?.same && k > 0 && k < sections.length - 1 && s.box.h >= 200 && s.box.h <= 1400 && texts(s).length >= 3 && s.items.length <= 40)
 const step = candidates.length / Math.min(count, candidates.length)
 const chosen = Array.from({ length: Math.min(count, candidates.length) }, (_, k) => candidates[Math.floor(k * step)])
 console.log(`${candidates.length} candidate sections, chosen: ${chosen.map((s) => s.i).join(", ") || "none"}`)

@@ -1,39 +1,51 @@
 # data-collection
 
-为通用的页面 judge 造偏好数据:把真实网站的一节换成模型按同样内容重新设计的一节,两版放在同一页里、同样条件下截图,成对作为 (原版, 生成版)。
+为通用的页面 judge 造偏好数据:把真实网站的一节换成模型按同样内容重新设计的一节,两版在同一个运行中的页面里先后截图,成对作为 (原版, 生成版)。
 
 ## 流程
 
 | 步骤 | 脚本 | 产出 |
 |---|---|---|
-| 冻结页面 | `scripts/snapshot.mjs <url> <dir>` | `page.har.zip`(页面加载的所有响应)、`page.html`(JS 执行后的 DOM,去掉脚本,每节标 `data-sec`)、`live.png`、`sections.json`(设计 token、每节的位置和内容、内联 SVG 转成的独立文件) |
-| 离线渲染原版 | `scripts/render.mjs <dir>` | `render/orig.png`、`render/orig.json` |
-| 逐节保真 | `python3 -I scripts/fidelity.py <dir>` | `fidelity.json`:每节带上下 300px,离线渲染和在线截图比,高度一样且不超过 3% 的行不同才可用 |
+| 录制 | `scripts/record.mjs <url> <dir>` | `page.har`(页面的全部请求和响应)、`live.png`(参考用)、`sections.json`(设计 token、每节的位置和内容、内联 SVG 转成的独立文件) |
+| 回放 | `scripts/render.mjs <dir>` | `replay.json`(每节在回放里是否和录制时一样)、`render/orig.png`、`render/orig.json` |
 | 重新设计 | `scripts/generate.mjs <dir> [count]` | `gen/<i>.html`、`gen/<i>.json`(提示词、模型、用量) |
-| 渲染生成版 | `scripts/render.mjs <dir>`(已渲染的跳过) | `render/<i>.png`、`render/<i>.json`(位置和检查) |
+| 换节截图 | `scripts/render.mjs <dir>`(再跑一次) | `render/<i>.png`、`render/<i>.json`(位置和检查) |
 | 检查和裁切 | `python3 -I scripts/pairs.py <dir>` | `pairs/<i>-orig.png`、`pairs/<i>-gen.png`、`pairs/<i>-side.png`、`pairs/report.json` |
 
 `node scripts/run.mjs <out-root> <url>...`(或 `--list <文件>`,一行一个 URL)对每个网站跑完上面几步,每个网站一个目录 `<out-root>/<host>/`,日志在 `<out-root>/<host>.log`,同时带着网站名打印到终端。
 
 - `JOBS`(默认 20):同时处理的网站数,也就是同时在等模型的网站数。一个网站选中的几节同时请求模型,遇到 429、5xx 或断线会隔 10s、30s、60s 重试。
-- `BROWSER_JOBS`(默认 4):快照、渲染、裁切这些浏览器步骤同时最多跑几个。它们吃 CPU,机器是 4 核。
+- `BROWSER_JOBS`(默认 4):录制、回放、裁切这些浏览器步骤同时最多跑几个。它们吃 CPU,机器是 4 核。
 - `COUNT`(默认 2):每个网站换几节。
 
-要点:
+## 页面怎么跑
 
-- 生成模型只拿到内容(文字、图片、插图、图标,按阅读顺序)和页面的设计 token(字体、颜色、内容宽度、上下两节的背景),拿不到原版的 HTML 和布局。所以两版的差别只在设计决策上。
-- 渲染时所有请求都从 HAR 回放,HAR 里没有的请求直接中止;文档本身用 `page.html`。原版和生成版走同一条路径。
+页面一直带着自己的脚本跑,录制和回放用同一套加载过程(`scripts/browser.mjs`),把会让两次运行不一样的东西都固定住:
+
+- 时钟从固定时刻开始,加载完停在固定时刻(Playwright 的 `page.clock`);停住以后页面的定时器和动画帧都不再走,页面在截图之间保持不动。
+- `Math.random` 和 `crypto.getRandomValues` 用固定种子,带随机参数的请求也和录制时一样。
+- `IntersectionObserver` 对每个元素都报"在屏幕上",`content-visibility` 一律 `visible`:整页截图要的是整页,不是读者滚到的那一屏。
+- 视口、语言、时区、配色、减弱动效都固定。
+- 回放时所有请求都从 HAR 回答,HAR 里没有的直接中止。录制时重定向回自身的响应(服务器先设 cookie 再给页面)会删掉,否则回放会原地打转。
+
+回放后重新读一遍页面,每节的高度和内容(文字、图片、链接)要和录制时一样才算可用,`generate.mjs` 只从可用的节里挑。每次打开内容都不一样的节(随机轮换的卡片、打乱顺序的评价)在这里被筛掉。
+
+原版和每个生成版在同一个回放页面里截:先截原版,再把一节换成生成版截图,截完换回去,换下一节。中间页面的时钟不走,所以除了换掉的那节,两张图的其余部分应当一样,隔离检查核对这一点。
+
+- 生成模型只拿到内容(文字、图片、插图、图标,按阅读顺序)和页面的设计 token(字体、颜色、内容宽度、上下两节的背景),拿不到原版的 HTML 和布局。
 - 生成的节放进一个 shadow root,宿主元素占原节的位置:两边的 CSS 互不影响,字体、颜色这些继承属性照常从页面传进来。
-- 生成版和原版的高度差取整到整像素,否则下面整页会重新栅格化,隔离检查过不了。
+- 生成版和原版的高度差取整到整像素,否则下面整页会重新栅格化。
 
 ## 检查
 
 | 检查 | 在哪 | 含义 |
 |---|---|---|
-| 保真 | `fidelity.json` | 每节离线渲染的原版和在线截图是否一致;不一致的节不拿去生成 |
-| 隔离 | `above_rows_differing` / `below_rows_differing` | 换掉的那节上方应完全不变,下方平移高度差后应完全不变 |
+| 回放一致 | `replay.json` | 每节在回放里的高度和内容是否和录制时一样;不一样的节不拿去生成 |
+| 隔离 | `pairs/report.json` 的 `above_rows_differing` / `below_rows_differing` | 换掉的那节上方应完全不变,下方平移高度差后应完全不变 |
 | 内容 | `missingText` / `missingImages` / `brokenImages` | 每段文字、每张图都要出现,图要加载成功;被原版截断的文字只看开头 |
 | 破版 | `overflow` / `fontsMissing` | 超出宿主宽度的元素数、没加载上的字体 |
+
+`pairs/report.json` 里每对的 `failed` 列出没过的检查,空的才可用。
 
 ## 依赖
 

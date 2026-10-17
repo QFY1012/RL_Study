@@ -1,107 +1,112 @@
-// Renders a snapshot offline: the original page, and the page once more for each
-// generated section, with that section swapped in. What is already rendered is
-// skipped, so run.mjs calls it once before generating (the original, which
-// fidelity.py checks) and once after (the generated sections).
-//   node scripts/render.mjs <snapshot-dir>
-// Every request is answered from page.har.zip (anything not in it is aborted), and
-// the document itself is page.html, so all renders share the same DOM, fonts and
-// images. A generated section goes into a shadow root on a host element that takes
-// the old section's place: its CSS and the page's CSS cannot reach each other, while
-// inherited properties (font, color, line height) still flow in from the page.
-// Writes render/orig.png, render/<i>.png and render/<i>.json (boxes and checks).
+// Replays a recorded page and screenshots it as it is and with each generated
+// section swapped in, all in the one running page.
+//   node scripts/render.mjs <dir>
+// The page runs its own scripts; every request is answered from page.har (anything
+// not in it is aborted), and browser.mjs pins the clock and the random numbers. The
+// page is read again and each section compared with the recording: only a section
+// that comes back with the same height and content is usable (replay.json), so
+// generate.mjs picks from those.
+// With the page clock stopped, the original is screenshot, then for each generated
+// section: the section is swapped for a host element with the fragment in its shadow
+// root (the fragment's CSS and the page's cannot reach each other; inherited
+// properties such as font and color still flow in), screenshot, and swapped back.
+// Writes replay.json, render/orig.png, render/orig.json, render/<i>.png and render/<i>.json.
 import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
-import { CONTEXT, settle } from "./browser.mjs"
+import { CONTEXT, load, freeze } from "./browser.mjs"
+import { readPage, signature } from "./read-page.mjs"
 
 const [dir] = process.argv.slice(2)
-if (!dir) throw new Error("usage: render.mjs <snapshot-dir>")
+if (!dir) throw new Error("usage: render.mjs <dir>")
 const snap = JSON.parse(fs.readFileSync(path.join(dir, "sections.json"), "utf8"))
-const html = fs.readFileSync(path.join(dir, "page.html"), "utf8")
 const out = path.join(dir, "render")
 fs.mkdirSync(out, { recursive: true })
 const gens = fs.existsSync(path.join(dir, "gen")) ? fs.readdirSync(path.join(dir, "gen")).filter((f) => f.endsWith(".html")).map((f) => Number(f.slice(0, -5))) : []
 
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" })
+const context = await browser.newContext(CONTEXT)
+await context.routeFromHAR(path.join(dir, "page.har"), { notFound: "abort" })
+const page = await context.newPage()
+await load(page, snap.url)
 
-async function render(sec, fragment) {
-  const context = await browser.newContext(CONTEXT)
-  await context.routeFromHAR(path.join(dir, "page.har.zip"), { notFound: "abort" })
-  const page = await context.newPage()
-  await page.route(snap.url, (r) => r.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: html }))
-  await page.goto(snap.url, { waitUntil: "load", timeout: 60000 })
-  if (fragment != null) {
-    await page.evaluate(({ sec, fragment }) => {
-      const old = document.querySelector(`[data-sec="${sec}"]`)
-      const host = document.createElement("div")
-      host.setAttribute("data-sec", String(sec))
-      host.setAttribute("data-gen", "")
-      host.style.display = "block"
-      host.dataset.oldHeight = String(old.getBoundingClientRect().height)
-      old.replaceWith(host)
-      host.attachShadow({ mode: "open" }).innerHTML = fragment
-    }, { sec, fragment: fragment.replace(/asset:(\d+)/g, (m, n) => snap.assets[Number(n)] ?? m) })
-  }
-  await settle(page)
-  if (fragment != null) {
-    // The page below moves by the height difference; a fraction of a pixel would
-    // re-rasterize everything below and fail the isolation check, so it is rounded.
-    await page.evaluate((sec) => {
-      const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
-      const was = Number(host.dataset.oldHeight), now = host.getBoundingClientRect().height
-      host.style.height = `${was + Math.round(now - was)}px`
-    }, sec)
-    await settle(page)
-  }
-  const name = fragment == null ? "orig" : String(sec)
+// the same section, with the same content, in the replay as in the recording
+const again = await readPage(page)
+const replay = {}
+for (const s of snap.sections) {
+  const r = again.sections[s.i]
+  const videos = r ? await page.evaluate((i) => [...document.querySelector(`[data-sec="${i}"]`).querySelectorAll("video")].filter((v) => v.readyState < 2).length, s.i) : 0
+  replay[s.i] = !r ? { same: false, why: "missing" }
+    : signature(r) !== signature(s) ? { same: false, why: r.box.h !== s.box.h ? `height ${s.box.h} → ${r.box.h}` : "content" }
+    : videos ? { same: false, why: `${videos} videos without a frame` }
+    : { same: true }
+}
+fs.writeFileSync(path.join(dir, "replay.json"), JSON.stringify(replay, null, 1))
+console.log(`replay: ${Object.values(replay).filter((r) => r.same).length}/${snap.sections.length} sections the same as recorded; ${Object.entries(replay).filter(([, r]) => !r.same).map(([i, r]) => `#${i} ${r.why}`).join(", ") || "all"}`)
+
+const boxes = () => page.evaluate(() => Object.fromEntries([...document.querySelectorAll("[data-sec]")].map((el) => {
+  const r = el.getBoundingClientRect()
+  return [el.getAttribute("data-sec"), { x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), w: Math.round(r.width), h: Math.round(r.height) }]
+})))
+const shoot = async (name) => {
   await page.screenshot({ path: path.join(out, `${name}.png`), fullPage: true, timeout: 120000 })
-  const boxes = await page.evaluate(() => Object.fromEntries([...document.querySelectorAll("[data-sec]")].map((el) => {
-    const r = el.getBoundingClientRect()
-    return [el.getAttribute("data-sec"), { x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), w: Math.round(r.width), h: Math.round(r.height) }]
-  })))
-  const height = await page.evaluate(() => document.documentElement.scrollHeight)
-  let checks = null
-  if (fragment != null) {
-    const items = snap.sections[sec].items
-    checks = await page.evaluate(({ sec, items, raw }) => {
-      const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
-      const root = host.shadowRoot
-      const norm = (t) => t.toLowerCase().replace(/\s+/g, "")
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.parentElement?.closest("style") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) })
-      let shown = ""
-      for (let n; (n = walker.nextNode());) shown += n.textContent
-      shown = norm(shown)
-      // clamped text only has to show its beginning
-      const missingText = items.filter((t) => t.text && !shown.includes(norm(t.clamped ? t.text.slice(0, 24) : t.text))).map((t) => t.text)
-      const imgs = [...root.querySelectorAll("img")]
-      const brokenImages = imgs.filter((i) => !i.complete || !i.naturalWidth).map((i) => i.getAttribute("src"))
-      const missingImages = items.filter((t) => (t.kind === "image" || t.kind === "illustration") && !(t.src.startsWith("asset:") ? new RegExp(`${t.src}(?!\\d)`).test(raw) : raw.includes(t.src))).map((t) => t.src.slice(0, 120))
-      const hr = host.getBoundingClientRect()
-      const overflow = [...root.querySelectorAll("*")].filter((el) => {
-        const r = el.getBoundingClientRect()
-        return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1)
-      }).length
-      // only the first family of each stack has to be there; the rest are fallbacks
-      const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily.split(",")[0].trim()))]
-      const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(`16px ${f}`))
-      return { missingText, brokenImages, missingImages, overflow, fontsMissing }
-    }, { sec, items, raw: fragment })
-  }
-  await context.close()
-  return { name, height, boxes, checks }
+  return { name, height: await page.evaluate(() => document.documentElement.scrollHeight), boxes: await boxes() }
 }
 
-let orig
-if (fs.existsSync(path.join(out, "orig.json"))) orig = JSON.parse(fs.readFileSync(path.join(out, "orig.json"), "utf8"))
-else {
-  orig = await render(null, null)
-  fs.writeFileSync(path.join(out, "orig.json"), JSON.stringify(orig, null, 1))
-  console.log(`orig: height ${orig.height}, ${Object.keys(orig.boxes).length} sections`)
-}
-for (const sec of gens.filter((g) => !fs.existsSync(path.join(out, `${g}.json`)))) {
-  const r = await render(sec, fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8"))
+const orig = await shoot("orig")
+fs.writeFileSync(path.join(out, "orig.json"), JSON.stringify(orig, null, 1))
+console.log(`orig: height ${orig.height}`)
+
+for (const sec of gens) {
+  const fragment = fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8")
+  await page.evaluate(({ sec, fragment }) => {
+    const old = document.querySelector(`[data-sec="${sec}"]`)
+    const host = document.createElement("div")
+    host.setAttribute("data-sec", String(sec))
+    host.setAttribute("data-gen", "")
+    host.style.display = "block"
+    host.dataset.oldHeight = String(old.getBoundingClientRect().height)
+    window.__swapped = old
+    old.replaceWith(host)
+    host.attachShadow({ mode: "open" }).innerHTML = fragment
+  }, { sec, fragment: fragment.replace(/asset:(\d+)/g, (m, n) => snap.assets[Number(n)] ?? m) })
+  await freeze(page)
+  // The page below moves by the height difference; a fraction of a pixel would
+  // re-rasterize everything below and fail the isolation check, so it is rounded.
+  await page.evaluate((sec) => {
+    const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
+    const was = Number(host.dataset.oldHeight), now = host.getBoundingClientRect().height
+    host.style.height = `${was + Math.round(now - was)}px`
+  }, sec)
+  const r = await shoot(String(sec))
+  const items = snap.sections[sec].items
+  r.checks = await page.evaluate(({ sec, items, raw }) => {
+    const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
+    const root = host.shadowRoot
+    const norm = (t) => t.toLowerCase().replace(/\s+/g, "")
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.parentElement?.closest("style") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) })
+    let shown = ""
+    for (let n; (n = walker.nextNode());) shown += n.textContent
+    shown = norm(shown)
+    // clamped text only has to show its beginning
+    const missingText = items.filter((t) => t.text && !shown.includes(norm(t.clamped ? t.text.slice(0, 24) : t.text))).map((t) => t.text)
+    const imgs = [...root.querySelectorAll("img")]
+    const brokenImages = imgs.filter((i) => !i.complete || !i.naturalWidth).map((i) => (i.getAttribute("src") ?? "").slice(0, 120))
+    const missingImages = items.filter((t) => (t.kind === "image" || t.kind === "illustration") && !(t.src.startsWith("asset:") ? new RegExp(`${t.src}(?!\\d)`).test(raw) : raw.includes(t.src))).map((t) => t.src.slice(0, 120))
+    const hr = host.getBoundingClientRect()
+    const overflow = [...root.querySelectorAll("*")].filter((el) => {
+      const r = el.getBoundingClientRect()
+      return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1)
+    }).length
+    // only the first family of each stack has to be there; the rest are fallbacks
+    const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily.split(",")[0].trim()))]
+    const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(`16px ${f}`))
+    return { missingText, brokenImages, missingImages, overflow, fontsMissing }
+  }, { sec, items, raw: fragment })
   fs.writeFileSync(path.join(out, `${sec}.json`), JSON.stringify(r, null, 1))
   const c = r.checks
   console.log(`section ${sec}: height ${orig.boxes[sec].h} → ${r.boxes[sec].h}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}`)
+  await page.evaluate((sec) => document.querySelector(`[data-sec="${sec}"][data-gen]`).replaceWith(window.__swapped), sec)
+  await freeze(page)
 }
 await browser.close()
