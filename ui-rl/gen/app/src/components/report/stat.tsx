@@ -17,10 +17,12 @@ type StatProps = Placed & {
   direction?: "up" | "down"
 }
 
-// A key figure.
+// A key figure. In a row of figures every Stat sits on the row's baseline, so a
+// large figure and the smaller ones beside it share one baseline instead of
+// lining up at the top (the page code does not have to ask for it).
 function Stat({ label, value, unit, size, captionBelow, quiet, delta, note, direction, span, start, rowSpan, rowStart, className }: StatProps) {
   return (
-    <div data-slot="custom-stat" className={cn(cn("flex flex-col", captionBelow ? "gap-1" : "gap-2"), place({ span, start, rowSpan, rowStart }), className)}>
+    <div data-slot="custom-stat" className={cn(cn("flex flex-col self-baseline", captionBelow ? "gap-0" : "gap-2"), place({ span, start, rowSpan, rowStart }), className)}>
       {label && !captionBelow && <span className="text-sm leading-6 text-muted-foreground">{label}</span>}
       <div className="flex items-baseline gap-2">
         <span className={cn("font-light tabular-nums", size === "lg" ? "text-5xl leading-[60px]" : size === "xl" ? "text-[44px] leading-[56px]" : "text-3xl leading-9")}>{value}</span>
