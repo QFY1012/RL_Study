@@ -53,21 +53,19 @@ function useWholeFields() {
 }
 
 // Groups inside a section are one empty field apart, so they stay on field lines.
-// layout "side" (default): the title hangs in the left 3 columns, the content takes
-// the right 9. layout "stack": the title sits above the content and the content
-// takes all 12 columns, for what needs the full width (a wide table, a matrix of
-// screens). Both keep every edge on the page's column lines.
-function Section({ title, description, layout = "side", className, children }: { title: string; description?: string; layout?: "side" | "stack"; className?: string; children: React.ReactNode }) {
+// The title always hangs in the left 3 columns and the content takes the right 9,
+// so every section title stands on one vertical line down the page; wide content
+// fits the 9 columns (a table splits them, screenshots scroll in one row).
+function Section({ title, description, className, children }: { title: string; description?: string; className?: string; children: React.ReactNode }) {
   const ref = useWholeFields()
-  const stack = layout === "stack"
   return (
-    <section ref={ref} data-slot="section" className={cn("grid grid-cols-12 content-start items-start gap-x-6", stack && "gap-y-6")}>
-      <div data-slot="section-header" className={cn(stack ? "col-span-12" : "col-span-3", "flex flex-col gap-2")}>
+    <section ref={ref} data-slot="section" className="grid grid-cols-12 content-start items-start gap-x-6">
+      <div data-slot="section-header" className="col-span-3 flex flex-col gap-2">
         <h2 className="text-xl leading-6 font-medium">{title}</h2>
         {description && <p className="text-sm leading-6 text-muted-foreground">{description}</p>}
       </div>
-      <div data-slot="section-body" className={cn(stack ? "col-span-12" : "col-span-9", "flex flex-col gap-[192px]", className)}>
-        {stack ? <Width.Provider value={12}>{children}</Width.Provider> : children}
+      <div data-slot="section-body" className={cn("col-span-9 flex flex-col gap-[192px]", className)}>
+        {children}
       </div>
     </section>
   )

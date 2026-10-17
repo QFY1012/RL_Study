@@ -28,8 +28,8 @@ export function place({ span, start, rowSpan, rowStart }: Placed) {
   return [span ? SPAN[span] : "", start ? START[start] : "", rowSpan ? ROWS[rowSpan] : "", rowStart ? ROW_START[rowStart] : ""].filter(Boolean).join(" ") || undefined
 }
 
-// How many page columns the content around a piece is wide: 9 in a side section
-// body, 12 in a stacked one, a Grid's own cols, a Block's span. A Grid (or a
+// How many page columns the content around a piece is wide: 9 in a section body,
+// a Grid's own cols, a Block's span. A Grid (or a
 // FigureStrip with `span`) without `cols` takes it, so its columns are the
 // page's columns and everything in it lands on them.
 export const Width = React.createContext(9)
