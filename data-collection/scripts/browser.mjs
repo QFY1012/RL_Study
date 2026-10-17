@@ -32,7 +32,7 @@ const VIDEO_AT = 1
 // while the page loads (INIT).
 const DRAWN_EVERY = 1000
 
-// Runs before the page's own scripts: seeded random numbers, visibility and WebGL as
+// Runs before the page's own scripts: seeded random numbers, visibility, WebGL and idle callbacks as
 // follows.
 // Visibility: a page shows much of itself only while it is in view, by observing the
 // window (IntersectionObserver): reveals, but also parts dimmed (arc.net) or not even
@@ -53,7 +53,19 @@ const DRAWN_EVERY = 1000
 // every loop shows where it has got to). Drawing buffers are kept
 // (preserveDrawingBuffer), so what a canvas shows can be read after the frame it was
 // drawn in (load: canvases are pinned before scripts go off).
+// Idle callbacks: the clock (Playwright's) runs them with a deadline that has no time
+// left, ever, so a page's idle-time work never gets done and is put off again and
+// again (reCAPTCHA, on webflow and attio: about 20 more such callbacks at every scroll
+// stop, each run every 50ms of page time, until a second of page time took half a
+// minute); they get the 50ms of real time a browser gives an idle period.
 const INIT = `(() => {
+  const realNow = window[Symbol.for("gen-real-now")]
+  const idle = window.requestIdleCallback
+  window.requestIdleCallback = (cb, options) => idle.call(window, (d) => {
+    const end = realNow() + 50
+    return cb({ didTimeout: d.didTimeout, timeRemaining: () => Math.max(0, end - realNow()) })
+  }, options)
+
   let s = 42
   const next = () => (s = (s * 1664525 + 1013904223) >>> 0)
   Math.random = () => next() / 4294967296
@@ -117,6 +129,27 @@ const INIT = `(() => {
   }
 })()`
 
+// Runs before the clock is installed, for the clock: after every timer it fires, the
+// clock waits for a real zero-delay timeout before the next, and the browser puts
+// nested ones off by at least 4ms; at 60 animation frames a second, each with its
+// callbacks, that is seconds of real time for every second of page time. So the real
+// setTimeout, which only the clock uses from then on, has its zero-delay calls run as
+// a message, with no wait. And the real performance.now is kept, for INIT.
+const UNDER_CLOCK = `(() => {
+  const setTimeout = window.setTimeout, clearTimeout = window.clearTimeout
+  const channel = new MessageChannel(), queued = new Map()
+  let id = 0
+  channel.port1.onmessage = (e) => { const f = queued.get(e.data); queued.delete(e.data); f?.() }
+  window.setTimeout = function (f, delay, ...args) {
+    if (delay > 0 || typeof f !== "function") return setTimeout.call(window, f, delay, ...args)
+    queued.set(--id, () => f(...args))
+    channel.port2.postMessage(id)
+    return id
+  }
+  window.clearTimeout = function (id) { if (id < 0) queued.delete(id); else clearTimeout.call(window, id) }
+  window[Symbol.for("gen-real-now")] = performance.now.bind(performance)
+})()`
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 // What the page is still waiting for, run in it: fonts loading, images not in yet,
@@ -166,11 +199,17 @@ function network(page) {
   }
 }
 
+// Runs fn in every frame of the page that has a document. A frame that has not loaded
+// anything yet (a lazy iframe out of view: miro's YouTube embed) has none, and nothing
+// runs in it; Playwright would wait for one to come, forever.
+const inFrames = (page, fn) => Promise.all(page.frames().filter((f) => f.url() !== "").map((f) => f.evaluate(fn).catch(() => {})))
+
 export async function load(page, url) {
   const quiet = network(page)
   // installed clocks run in real time until paused, and pausing can only go forward:
   // started an hour early, page time stands at T0 however long the pause takes to
   // come (on a busy machine, past 100ms, a clock started at T0 is already past it)
+  await page.addInitScript(UNDER_CLOCK)
   await page.clock.install({ time: T0 - 3600_000 })
   await page.clock.pauseAt(T0)
   await page.addInitScript(INIT)
@@ -243,7 +282,7 @@ export async function load(page, url) {
   // Everything in view at once (INIT: visibility), then more page time, the same
   // amount every time: for what that brings in, and for content that came in late (an
   // image on a slow network) to have its reveal run.
-  for (const f of page.frames()) await f.evaluate(() => window.__inView?.()).catch(() => {})
+  await inFrames(page, () => window.__inView?.())
   for (let k = 0; k < 4; k++) await step(1000)
 
   // Hide what is not the page's design: consent banners, chat widgets, modals, and
@@ -276,9 +315,9 @@ export async function load(page, url) {
   // A few frames with every WebGL context drawing, so each render loop shows where it
   // has got to (INIT); then how everything looks at the top, and each element put back
   // to how it looks in view (look).
-  for (const f of page.frames()) await f.evaluate(() => { window.__drawAll = true }).catch(() => {})
+  await inFrames(page, () => { window.__drawAll = true })
   await step(50)
-  for (const f of page.frames()) await f.evaluate(() => { window.__drawAll = false }).catch(() => {})
+  await inFrames(page, () => { window.__drawAll = false })
   await page.evaluate(look, LOOK)
   const restyled = await page.evaluate(lookBack, LOOK)
   if (restyled) console.log(`${restyled} elements put back to how they look in view`)
