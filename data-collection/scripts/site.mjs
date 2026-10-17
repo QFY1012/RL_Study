@@ -19,7 +19,7 @@
 //                      how it did (spill, fits, content checks)
 //   pairs/<i>-orig.png, <i>-gen.png, <i>-side.png, <i>-gen.jpg   (images.mjs, pair)
 //   pairs/report.json  per pair its checks and the ones it failed (none: usable)
-// COUNT sections (default 2), ROUNDS revisions at most (default 2). Loading the page
+// COUNT sections (default: every candidate section), ROUNDS revisions at most (default 2). Loading the page
 // may take LOAD_SECONDS (default 300); a page that takes longer is given up. Run from run.mjs, which shares out
 // the CPU among the sites: the load is done when it says so (slot); a loaded page
 // with its scripts off costs no CPU while it waits on the model.
@@ -35,7 +35,7 @@ import { images } from "./images.mjs"
 
 const [url, dir] = process.argv.slice(2)
 if (!url || !dir) throw new Error("usage: site.mjs <url> <dir>")
-const COUNT = Number(process.env.COUNT ?? 2)
+const COUNT = Number(process.env.COUNT ?? Infinity)
 const ROUNDS = Number(process.env.ROUNDS ?? 2)
 const LOAD_SECONDS = Number(process.env.LOAD_SECONDS ?? 300)
 const SEAM = 0.02
