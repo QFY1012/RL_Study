@@ -21,6 +21,27 @@ const page = await context.newPage()
 await page.goto(url, { waitUntil: "load", timeout: 60000 })
 await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out, going on"))
 
+// Some pages scroll inside a full-screen container instead of the window; such a
+// container is opened up to its full height, so the page is as tall as its content.
+const opened = await page.evaluate(() => {
+  let n = 0
+  for (const el of document.querySelectorAll("body *")) {
+    const s = getComputedStyle(el)
+    if (/(auto|scroll)/.test(s.overflowY) && el.scrollHeight > el.clientHeight + 100 && el.clientWidth > innerWidth * 0.5 && el.clientHeight >= innerHeight * 0.5) {
+      el.style.setProperty("overflow", "visible", "important")
+      el.style.setProperty("height", "auto", "important")
+      el.style.setProperty("max-height", "none", "important")
+      n++
+    }
+  }
+  if (n) for (const el of [document.documentElement, document.body]) {
+    el.style.setProperty("overflow", "visible", "important")
+    el.style.setProperty("height", "auto", "important")
+  }
+  return n
+})
+if (opened) console.log(`opened ${opened} scroll containers`)
+
 // Scroll through the page so lazy images and scroll-triggered reveals load, then back to the top.
 await page.evaluate(async () => {
   const step = innerHeight * 0.7
@@ -33,8 +54,7 @@ await page.evaluate(async () => {
 await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out after scrolling, going on"))
 
 // Remove what is not the page's design: consent banners, chat widgets, modals, and
-// fixed elements away from the top (a fixed header stays). Canvases are drawn by
-// scripts that will be gone, so each is swapped for an image of what it shows.
+// fixed elements away from the top (a fixed header stays).
 const removed = await page.evaluate(() => {
   const gone = []
   const drop = (el, why) => { gone.push(`${why}: <${el.tagName.toLowerCase()} class="${(el.className?.baseVal ?? el.className ?? "").toString().slice(0, 60)}">`); el.remove() }
@@ -47,23 +67,51 @@ const removed = await page.evaluate(() => {
     if ((s.position === "fixed" || s.position === "sticky") && junk.test(id)) drop(el, "widget")
     else if (s.position === "fixed" && el.getBoundingClientRect().top > 50) drop(el, "fixed")
   }
-  for (const c of document.querySelectorAll("canvas")) {
-    try {
-      const img = document.createElement("img")
-      img.src = c.toDataURL()
-      img.className = c.className
-      img.style.cssText = c.style.cssText
-      const r = c.getBoundingClientRect()
-      img.style.width = `${r.width}px`
-      img.style.height = `${r.height}px`
-      c.replaceWith(img)
-    } catch { gone.push("canvas kept (tainted)") }
-  }
   for (const img of document.querySelectorAll("img[loading=lazy]")) img.loading = "eager"
   for (const v of document.querySelectorAll("video")) { v.removeAttribute("autoplay"); v.pause() }
   return gone
 })
 console.log(`removed ${removed.length}:`, removed.join(" | ") || "nothing")
+await settle(page)
+
+// Videos and canvases show what scripts and media streams put there, which the
+// replay does not have; each is swapped for a screenshot of itself, at its size.
+let swapped = 0
+for (const handle of await page.$$("video, canvas")) {
+  const box = await handle.boundingBox()
+  if (!box || box.width < 16 || box.height < 16) continue
+  const png = await handle.screenshot({ timeout: 15000 }).catch(() => null)
+  if (!png) continue
+  await handle.evaluate((el, src) => {
+    const img = document.createElement("img")
+    const r = el.getBoundingClientRect(), cs = getComputedStyle(el)
+    img.src = src
+    img.className = el.className?.baseVal ?? el.className ?? ""
+    img.style.cssText = el.style.cssText
+    img.style.width = `${r.width}px`
+    img.style.height = `${r.height}px`
+    img.style.objectFit = "fill"
+    if (cs.display === "inline") img.style.display = "inline-block"
+    el.replaceWith(img)
+  }, `data:image/png;base64,${png.toString("base64")}`)
+  swapped++
+}
+console.log(`swapped ${swapped} videos and canvases for screenshots`)
+
+// Scripted animations (element.animate, as Framer and Motion use) hold their end
+// state only while the animation exists; it is written into inline styles so the
+// frozen DOM keeps it. settle() has already put every animation at its end.
+const committed = await page.evaluate(() => {
+  let n = 0
+  const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
+  for (const root of roots) {
+    for (const a of root.getAnimations()) {
+      try { a.commitStyles(); a.cancel(); n++ } catch {}
+    }
+  }
+  return n
+})
+console.log(`committed ${committed} animations`)
 await settle(page)
 
 // Sections: from <body>, go down through wrappers (one child holding most of the
@@ -125,8 +173,9 @@ const { secs: sections, assets } = await page.evaluate(({ MIN, MAX }) => {
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs")
     for (const u of clone.querySelectorAll("use")) {
       const ref = (u.getAttribute("href") || u.getAttribute("xlink:href") || "").trim()
-      if (ref.startsWith("#") && !clone.querySelector(ref)) {
-        const target = document.querySelector(ref)
+      const id = ref.slice(1)
+      if (ref.startsWith("#") && ![...clone.querySelectorAll("[id]")].some((e) => e.id === id)) {
+        const target = document.getElementById(id)
         if (target) defs.append(target.cloneNode(true))
       }
     }
@@ -219,8 +268,6 @@ const tokens = await page.evaluate(() => {
   }
 })
 
-await page.screenshot({ path: path.join(out, "live.png"), fullPage: true })
-
 // The frozen document: same DOM, no scripts, so a replay renders what we saw.
 // CSS-in-JS libraries add rules with insertRule, which leaves the <style> element's
 // text empty, and constructed (adopted) style sheets have no element at all; both
@@ -251,6 +298,8 @@ const html = await page.evaluate(() => {
   const attrs = [...root.attributes].map((a) => ` ${a.name}="${a.value.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`).join("")
   return `<!doctype html>\n<html${attrs}>${root.getHTML({ serializableShadowRoots: true, shadowRoots: roots })}</html>`
 })
+// right after the DOM is taken, so a carousel or ticker has had no time to move on
+await page.screenshot({ path: path.join(out, "live.png"), fullPage: true, timeout: 120000 })
 fs.writeFileSync(path.join(out, "page.html"), html)
 fs.writeFileSync(path.join(out, "sections.json"), JSON.stringify({ url: finalUrl, title: await page.title(), tokens, sections, assets }, null, 1))
 await context.close()

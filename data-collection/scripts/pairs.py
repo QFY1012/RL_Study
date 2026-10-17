@@ -5,12 +5,15 @@
 # page below it the same once shifted by the height difference.
 # Writes pairs/<i>-orig.png and pairs/<i>-gen.png (the section with MARGIN px of
 # page above and below), pairs/<i>-side.png (both side by side, for looking at) and
-# pairs/report.json.
+# pairs/report.json, which lists for each pair the checks it failed (none: usable).
 import json, os, sys
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 Image.MAX_IMAGE_PIXELS = None
 MARGIN = 300
+# A pair is usable only if every check passes: the page around the section is
+# unchanged (at most ISOLATION of its rows differ), and the content is all there.
+ISOLATION = 0.01
 
 d = sys.argv[1]
 r = os.path.join(d, "render")
@@ -64,7 +67,14 @@ for f in sorted(os.listdir(r)):
     side.paste(b, (a.width + pad * 2, top))
     side.save(os.path.join(out, f"{sec}-side.png"))
     entry = {"orig_box": o, "gen_box": g, "above_rows_differing": round(above, 3), "below_rows_differing": round(below, 3), **meta["checks"]}
+    entry["failed"] = [name for name, bad in [
+        ("isolation", above > ISOLATION or below > ISOLATION),
+        ("text", bool(entry["missingText"])),
+        ("images", bool(entry["missingImages"] or entry["brokenImages"])),
+        ("overflow", entry["overflow"] > 0),
+        ("fonts", bool(entry["fontsMissing"])),
+    ] if bad]
     report["pairs"][sec] = entry
-    print(f"section {sec}: above differs {above:.1%}, below differs {below:.1%}, missing text {len(entry['missingText'])}, overflow {entry['overflow']}")
+    print(f"section {sec}: {'ok' if not entry['failed'] else 'FAILED ' + ', '.join(entry['failed'])} (above differs {above:.1%}, below {below:.1%}, missing text {len(entry['missingText'])}, missing images {len(entry['missingImages'])}, overflow {entry['overflow']})")
 
 json.dump(report, open(os.path.join(out, "report.json"), "w"), indent=1)

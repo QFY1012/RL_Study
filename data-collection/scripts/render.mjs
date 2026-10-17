@@ -52,7 +52,7 @@ async function render(sec, fragment) {
     await settle(page)
   }
   const name = fragment == null ? "orig" : String(sec)
-  await page.screenshot({ path: path.join(out, `${name}.png`), fullPage: true })
+  await page.screenshot({ path: path.join(out, `${name}.png`), fullPage: true, timeout: 120000 })
   const boxes = await page.evaluate(() => Object.fromEntries([...document.querySelectorAll("[data-sec]")].map((el) => {
     const r = el.getBoundingClientRect()
     return [el.getAttribute("data-sec"), { x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), w: Math.round(r.width), h: Math.round(r.height) }]
@@ -79,7 +79,8 @@ async function render(sec, fragment) {
         const r = el.getBoundingClientRect()
         return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1)
       }).length
-      const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily))]
+      // only the first family of each stack has to be there; the rest are fallbacks
+      const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily.split(",")[0].trim()))]
       const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(`16px ${f}`))
       return { missingText, brokenImages, missingImages, overflow, fontsMissing }
     }, { sec, items, raw: fragment })
