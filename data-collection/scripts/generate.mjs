@@ -1,17 +1,17 @@
 // Has a model redesign sections of a recorded page from their content alone.
 //   node scripts/generate.mjs <dir> [count]     picks up to <count> sections (default 2)
-//   node scripts/generate.mjs <dir> --revise    sends back the ones that missed their height
+//   node scripts/generate.mjs <dir> --revise    sends back the ones that did not fit their box
 // Writes gen/<i>.html (the fragment) and gen/<i>.json (the conversation, model, usage)
 // for each. The model gets the section's text, images, illustrations and icons, the
-// page's fonts and colors, and the height to come out at (fit.mjs), never the
-// original markup or layout, so the two versions differ only in design decisions.
-// With --revise, every section whose render (render/<i>.json) does not fit is told
-// its height and asked again, in the same conversation.
+// page's fonts and colors, and the size of the box it goes in (the original's width
+// and exact height), never the original markup or layout, so the two versions differ
+// only in design decisions. With --revise, every section whose render
+// (render/<i>.json) runs past its box is told by how much and asked again, in the
+// same conversation.
 // Endpoint and key come from JUDGE_URL / JUDGE_MODEL / DEEPSEEK_API_KEY
 // (source ~/.config/ui-rl/judge.env); run with NODE_USE_ENV_PROXY=1.
 import fs from "node:fs"
 import path from "node:path"
-import { range } from "./fit.mjs"
 
 const [dir, arg] = process.argv.slice(2)
 if (!dir) throw new Error("usage: generate.mjs <dir> [count | --revise]")
@@ -46,7 +46,7 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
 - Fonts: only the font families listed in the tokens (they are already loaded). Colors: stay within the page's palette; the section background may be any of the page's background colors.
-- Height: the section has to come out between the two heights given, at 1440px wide; the page around it is laid out for that. Make it fit by how you lay it out (columns, image sizes, spacing, type sizes), never by cutting content off, hiding overflow or fixing a height that clips.
+- Size: the section's box is exactly the width and height given, and your outer box is stretched to fill it. Lay the content out to fit inside that height; how the space is used (where the room goes, how big images and type are) is your design decision. Nothing may reach past the top or bottom of the box, and nothing may be cut off: no hidden overflow, no heights that clip.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
 Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
 
@@ -64,7 +64,7 @@ Page tokens:
 - background colors: ${tokens.backgroundColors.join("; ")}
 - page background: ${tokens.pageBackground}
 - the other sections keep their content within ${tokens.contentWidth}px
-Section ${k + 1} of ${sections.length}, to be between ${range(s.box.h).min}px and ${range(s.box.h).max}px tall.
+Section ${k + 1} of ${sections.length}. Its box is ${s.box.w}px wide and exactly ${s.box.h}px tall.
 - section above: ${around(sections[k - 1]) ?? "none"}
 - section below: ${around(sections[k + 1]) ?? "none"}
 
@@ -127,17 +127,17 @@ if (!revise) {
     const r = path.join(dir, "render", `${i}.json`)
     return fs.existsSync(r) && !JSON.parse(fs.readFileSync(r, "utf8")).fits
   })
-  console.log(`${misses.length} sections missed their height${misses.length ? `: ${misses.join(", ")}` : ""}`)
+  console.log(`${misses.length} sections did not fit their box${misses.length ? `: ${misses.join(", ")}` : ""}`)
   await Promise.all(misses.map(async (i) => {
     const t = Date.now()
     const record = JSON.parse(fs.readFileSync(path.join(dir, "gen", `${i}.json`), "utf8"))
-    const natural = JSON.parse(fs.readFileSync(path.join(dir, "render", `${i}.json`), "utf8")).natural
-    const { min, max } = range(sections[i].box.h)
-    record.messages.push({ role: "user", content: `Rendered at 1440px wide, your section is ${natural}px tall; it has to be between ${min}px and ${max}px. Change the layout so it fits (${natural > max ? "less tall" : "taller"}), keeping every rule above. Reply with the whole fragment again.` })
+    const spill = JSON.parse(fs.readFileSync(path.join(dir, "render", `${i}.json`), "utf8")).spill
+    const h = sections[i].box.h
+    record.messages.push({ role: "user", content: `Rendered in its ${h}px box, your content reaches ${spill}px past the edge of the box. Change the layout so everything fits inside ${h}px, keeping every rule above. Reply with the whole fragment again.` })
     const { fragment, usage } = await turn(i, record.messages)
-    record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, was: natural })
+    record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, spill })
     if (!fragment) { console.log(`section ${i}: no html block in the revision, kept the last one`); fs.writeFileSync(path.join(dir, "gen", `${i}.json`), JSON.stringify(record, null, 1)); return }
     save(i, record, fragment)
-    console.log(`section ${i}: revised (was ${natural}px, wanted ${min}–${max}px) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
+    console.log(`section ${i}: revised (it ran ${spill}px past its ${h}px box) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
   }))
 }

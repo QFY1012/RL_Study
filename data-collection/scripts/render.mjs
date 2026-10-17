@@ -7,8 +7,8 @@
 // that comes back with the same height and content is usable (replay.json), so
 // generate.mjs picks from those.
 // With the page clock stopped, the original is screenshot, then for each generated
-// section: the section is swapped for a host element with the fragment in its shadow
-// root (the fragment's CSS and the page's cannot reach each other; inherited
+// section: the section is swapped for a host element of the same height with the
+// fragment in its shadow root (the fragment's CSS and the page's cannot reach each other; inherited
 // properties such as font and color still flow in), screenshot, and swapped back.
 // Writes replay.json, render/orig.png, render/orig.json, render/<i>.png and render/<i>.json.
 import fs from "node:fs"
@@ -16,7 +16,6 @@ import path from "node:path"
 import { chromium } from "playwright-core"
 import { CONTEXT, load, freeze } from "./browser.mjs"
 import { readPage, signature } from "./read-page.mjs"
-import { range, fits } from "./fit.mjs"
 
 const [dir] = process.argv.slice(2)
 if (!dir) throw new Error("usage: render.mjs <dir>")
@@ -61,36 +60,34 @@ console.log(`orig: height ${orig.height}`)
 
 for (const sec of gens) {
   const fragment = fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8")
+  // The host takes the old section's exact box height, so the page around it does
+  // not move; it is a grid, so the fragment's outer box stretches to fill it.
   await page.evaluate(({ sec, fragment }) => {
     const old = document.querySelector(`[data-sec="${sec}"]`)
     const host = document.createElement("div")
     host.setAttribute("data-sec", String(sec))
     host.setAttribute("data-gen", "")
     host.style.display = "grid"
-    host.dataset.oldHeight = String(old.getBoundingClientRect().height)
+    host.style.height = `${old.getBoundingClientRect().height}px`
     window.__swapped = old
     old.replaceWith(host)
     host.attachShadow({ mode: "open" }).innerHTML = fragment
   }, { sec, fragment: fragment.replace(/asset:(\d+)/g, (m, n) => snap.assets[Number(n)] ?? m) })
   await freeze(page)
-  // A section that fits (fit.mjs) is padded to exactly the original's height: the
-  // host is a grid, so the fragment's outer box stretches to fill it. One that does
-  // not fit keeps its own height, rounded to a whole pixel (a fraction would
-  // re-rasterize the page below), and goes back to the model.
-  const natural = await page.evaluate(({ sec }) => {
-    const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
-    return host.getBoundingClientRect().height
-  }, { sec })
-  const target = orig.boxes[sec].h
-  const fitted = fits(target, Math.round(natural))
-  await page.evaluate(({ sec, fitted }) => {
-    const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
-    const was = Number(host.dataset.oldHeight), now = host.getBoundingClientRect().height
-    host.style.height = fitted ? `${was}px` : `${was + Math.round(now - was)}px`
-  }, { sec, fitted })
   const r = await shoot(String(sec))
-  r.natural = Math.round(natural)
-  r.fits = fitted
+  // How far the content reaches past the top or bottom of the box, cut off or not.
+  // Anything past it does not fit, and the section goes back to the model.
+  r.spill = await page.evaluate((sec) => {
+    const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
+    const hr = host.getBoundingClientRect()
+    let spill = 0
+    for (const el of host.shadowRoot.querySelectorAll("*")) {
+      const r = el.getBoundingClientRect()
+      if (r.width && r.height) spill = Math.max(spill, r.bottom - hr.bottom, hr.top - r.top)
+    }
+    return Math.round(spill)
+  }, sec)
+  r.fits = r.spill <= 1
   const items = snap.sections[sec].items
   r.checks = await page.evaluate(({ sec, items, raw }) => {
     const host = document.querySelector(`[data-sec="${sec}"][data-gen]`)
@@ -108,7 +105,7 @@ for (const sec of gens) {
     const hr = host.getBoundingClientRect()
     const overflow = [...root.querySelectorAll("*")].filter((el) => {
       const r = el.getBoundingClientRect()
-      return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1 || r.bottom > hr.bottom + 1 || r.top < hr.top - 1)
+      return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1)
     }).length
     // only the first family of each stack has to be there; the rest are fallbacks
     const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily.split(",")[0].trim()))]
@@ -117,7 +114,7 @@ for (const sec of gens) {
   }, { sec, items, raw: fragment })
   fs.writeFileSync(path.join(out, `${sec}.json`), JSON.stringify(r, null, 1))
   const c = r.checks
-  console.log(`section ${sec}: height ${target} → ${r.natural} (${fitted ? "fits" : `does not fit ${range(target).min}–${range(target).max}`}); missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}`)
+  console.log(`section ${sec}: ${r.fits ? `fits its ${orig.boxes[sec].h}px box` : `runs ${r.spill}px past its ${orig.boxes[sec].h}px box`}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}`)
   await page.evaluate((sec) => document.querySelector(`[data-sec="${sec}"][data-gen]`).replaceWith(window.__swapped), sec)
   await freeze(page)
 }
