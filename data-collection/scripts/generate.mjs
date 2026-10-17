@@ -63,22 +63,39 @@ Content, in reading order:
 ${items.join("\n")}`
 }
 
+// One request, retried after 10s, 30s and 60s when the endpoint is busy (429, 5xx)
+// or the connection drops: with many sites at once the endpoint does get busy.
+async function complete(prompt) {
+  for (const wait of [10, 30, 60, null]) {
+    try {
+      const res = await fetch(URL_, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },
+        body: JSON.stringify({ model: MODEL, messages: [{ role: "system", content: system }, { role: "user", content: prompt }], temperature: 0.7, max_tokens: 32000 }),
+      })
+      if (res.ok) return await res.json()
+      const text = (await res.text()).slice(0, 300)
+      if (wait == null || !(res.status === 429 || res.status >= 500)) throw new Error(`HTTP ${res.status} ${text}`)
+      console.log(`HTTP ${res.status}, retrying in ${wait}s`)
+    } catch (e) {
+      if (wait == null || e.message.startsWith("HTTP")) throw e
+      console.log(`${e.message}, retrying in ${wait}s`)
+    }
+    await new Promise((r) => setTimeout(r, wait * 1000))
+  }
+}
+
+// All chosen sections are asked for at once.
 fs.mkdirSync(path.join(dir, "gen"), { recursive: true })
-for (const s of chosen) {
+await Promise.all(chosen.map(async (s) => {
   const prompt = user(s)
   const t = Date.now()
-  const res = await fetch(URL_, {
-    method: "POST",
-    headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },
-    body: JSON.stringify({ model: MODEL, messages: [{ role: "system", content: system }, { role: "user", content: prompt }], temperature: 0.7, max_tokens: 32000 }),
-  })
-  if (!res.ok) throw new Error(`section ${s.i}: HTTP ${res.status} ${(await res.text()).slice(0, 300)}`)
-  const body = await res.json()
+  const body = await complete(prompt).catch((e) => { throw new Error(`section ${s.i}: ${e.message}`) })
   const reply = body.choices?.[0]?.message?.content
   if (typeof reply !== "string") throw new Error(`section ${s.i}: no content, finish_reason ${body.choices?.[0]?.finish_reason}, usage ${JSON.stringify(body.usage)}`)
   const m = reply.match(/```html\s*\n([\s\S]*?)```/)
-  if (!m) { console.log(`section ${s.i}: no html block in the reply, skipped`); continue }
+  if (!m) { console.log(`section ${s.i}: no html block in the reply, skipped`); return }
   fs.writeFileSync(path.join(dir, "gen", `${s.i}.html`), m[1])
   fs.writeFileSync(path.join(dir, "gen", `${s.i}.json`), JSON.stringify({ section: s.i, model: MODEL, seconds: (Date.now() - t) / 1000, usage: body.usage, system, prompt }, null, 1))
   console.log(`section ${s.i}: ${m[1].length} chars in ${((Date.now() - t) / 1000).toFixed(0)}s, tokens ${JSON.stringify(body.usage)}`)
-}
+}))

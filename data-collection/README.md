@@ -11,7 +11,11 @@
 | 离线渲染 | `scripts/render.mjs <dir>` | `render/orig.png`、`render/<i>.png`、`render/<i>.json`(位置和检查) |
 | 检查和裁切 | `python3 -I scripts/pairs.py <dir>` | `pairs/<i>-orig.png`、`pairs/<i>-gen.png`、`pairs/<i>-side.png`、`pairs/report.json` |
 
-`scripts/run.sh <out-root> <url>...` 依次跑完上面四步,每个网站一个目录 `<out-root>/<host>/`。
+`node scripts/run.mjs <out-root> <url>...`(或 `--list <文件>`,一行一个 URL)对每个网站跑完上面四步,每个网站一个目录 `<out-root>/<host>/`,日志在 `<out-root>/<host>.log`,同时带着网站名打印到终端。
+
+- `JOBS`(默认 20):同时处理的网站数,也就是同时在等模型的网站数。一个网站选中的几节同时请求模型,遇到 429、5xx 或断线会隔 10s、30s、60s 重试。
+- `BROWSER_JOBS`(默认 4):快照、渲染、裁切这些浏览器步骤同时最多跑几个。它们吃 CPU,机器是 4 核。
+- `COUNT`(默认 2):每个网站换几节。
 
 要点:
 
