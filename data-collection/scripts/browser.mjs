@@ -52,35 +52,16 @@ export async function routeMedia(context, dir, recording) {
 const T0 = Date.UTC(2026, 9, 1, 12)
 const PAUSE = 10 * 60 * 1000
 
-// Runs before the page's own scripts. Besides the seeded random numbers, every element
-// a page observes for visibility is reported as on screen: reveal-on-scroll effects and
-// lazy loading mostly hang on IntersectionObserver, and a full-page screenshot sees
-// the whole page at once, not the part a reader has scrolled to.
+// Runs before the page's own scripts: seeded random numbers. What a page observes for
+// visibility (IntersectionObserver) is left alone: scrolling through the page below
+// sets off its lazy loading and reveals, and reporting every element as on screen
+// would have every animation and WebGL scene on the page drawing at once, which with no
+// GPU here takes the whole machine.
 const INIT = `(() => {
   let s = 42
   const next = () => (s = (s * 1664525 + 1013904223) >>> 0)
   Math.random = () => next() / 4294967296
   crypto.getRandomValues = (a) => { const b = new Uint8Array(a.buffer, a.byteOffset, a.byteLength); for (let i = 0; i < b.length; i++) b[i] = next() & 255; return a }
-  window.IntersectionObserver = class {
-    constructor(callback, options = {}) {
-      this.callback = callback
-      this.root = options.root ?? null
-      this.rootMargin = options.rootMargin ?? "0px"
-      this.thresholds = [].concat(options.threshold ?? 0)
-      this.targets = new Set()
-    }
-    observe(target) {
-      this.targets.add(target)
-      queueMicrotask(() => {
-        if (!this.targets.has(target)) return
-        const r = target.getBoundingClientRect()
-        this.callback([{ target, isIntersecting: true, intersectionRatio: 1, boundingClientRect: r, intersectionRect: r, rootBounds: null, time: performance.now() }], this)
-      })
-    }
-    unobserve(target) { this.targets.delete(target) }
-    disconnect() { this.targets.clear() }
-    takeRecords() { return [] }
-  }
 })()`
 
 export async function load(page, url) {
