@@ -1,7 +1,7 @@
-// The page frame (swiss): 12 columns of 74px with 24px gutters on an 8px
-// baseline. Section titles hang in the left 3 columns; section content sits in
-// the right 9, so the left margin stays a regular, empty field that gives the
-// page its vertical axis.
+// The page frame (swiss): 12 columns of 74px with 24px gutters, and fields of
+// 144px down the page (see useWholeFields). Section titles hang in the left 3
+// columns; section content sits in the right 9, so the left margin stays a
+// regular, empty field that gives the page its vertical axis.
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -64,7 +64,6 @@ function useWholeFields() {
   return ref
 }
 
-// Groups inside a section are one empty field apart, so they stay on field lines.
 // The title always hangs in the left 3 columns and the content takes the right 9,
 // so every section title stands on one vertical line down the page; wide content
 // fits the 9 columns (a table splits them, screenshots scroll in one row).
@@ -76,6 +75,7 @@ function Section({ title, description, className, children }: { title: string; d
         <h2 className="text-xl leading-6 font-medium">{title}</h2>
         {description && <p className="text-sm leading-6 text-muted-foreground">{description}</p>}
       </div>
+      {/* the pieces of a section body are one empty field apart (192px), like the sections */}
       <div data-slot="section-body" className={cn("col-span-9 flex flex-col gap-[192px]", className)}>
         {children}
       </div>
@@ -114,10 +114,10 @@ function Grid({ cols, fields = false, className, children, span, start, rowSpan,
   )
 }
 
-// A titled block without card chrome. The title sits directly on the line above
-// its content, as a bold subhead does in running text, so lines stay on the 24px
-// register. The content is flex-1: a block stretched by its grid row passes the
-// height on, so elastic content (charts, distributed lists) can fill the band.
+// A titled block without card chrome. The title sits directly above its
+// content, as a bold subhead does in running text. The content is flex-1: a
+// block stretched by its grid row passes the height on, so elastic content
+// (charts, distributed lists) can fill the band.
 // `rowSpan` is how many rows it spans, the same prop every other piece takes.
 // `rows` is the old name for it, kept so existing pages render as before.
 function Block({ span, start, rowSpan, rowStart, rows, title, description, className, contentClassName, children }: Placed & { rows?: number; title?: string; description?: string; contentClassName?: string; children: React.ReactNode }) {
