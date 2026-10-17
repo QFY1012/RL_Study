@@ -1,7 +1,10 @@
-# Checks the renders of one recorded page and cuts out the pairs.
+# Cuts the pairs out of the renders of one recorded page and records their checks.
 #   python3 -I scripts/pairs.py <dir>
-# Isolation: for each swapped section, the page above it must be unchanged and the
-# page below it the same once shifted by the height difference.
+# A generated section has the original's box, so the generated image is the original
+# screenshot with only that box's pixels taken from the render with the section
+# swapped in: everything around it is the original's own pixels. How much the page
+# around the box did change in that render (scripts reacting to the swap, say) is
+# recorded as above/below_rows_differing, for information.
 # Writes pairs/<i>-orig.png and pairs/<i>-gen.png (the section with MARGIN px of
 # page above and below), pairs/<i>-side.png (both side by side, for looking at) and
 # pairs/report.json, which lists for each pair the checks it failed (none: usable).
@@ -10,9 +13,6 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 Image.MAX_IMAGE_PIXELS = None
 MARGIN = 300
-# A pair is usable only if every check passes: the page around the section is
-# unchanged (at most ISOLATION of its rows differ), and the content is all there.
-ISOLATION = 0.01
 
 d = sys.argv[1]
 r = os.path.join(d, "render")
@@ -21,17 +21,16 @@ os.makedirs(out, exist_ok=True)
 
 
 def differs(a, b):
-    """Share of pixel rows that differ between two equally sized images, and the first one."""
+    """Share of pixel rows that differ between two equally sized images."""
     diff = ImageChops.difference(a.convert("RGB"), b.convert("RGB")).convert("L").point(lambda v: 255 if v > 16 else 0)
-    rows = [y for y in range(diff.height) if diff.crop((0, y, diff.width, y + 1)).getbbox()]
-    return (len(rows) / max(diff.height, 1), rows[0] if rows else None)
+    return sum(1 for y in range(diff.height) if diff.crop((0, y, diff.width, y + 1)).getbbox()) / max(diff.height, 1)
 
 
 def band(img, top, bottom):
     return img.crop((0, max(top, 0), img.width, min(bottom, img.height)))
 
 
-orig = Image.open(os.path.join(r, "orig.png"))
+orig = Image.open(os.path.join(r, "orig.png")).convert("RGB")
 ob = json.load(open(os.path.join(r, "orig.json")))["boxes"]
 report = {"pairs": {}}
 
@@ -43,34 +42,34 @@ for f in sorted(os.listdir(r)):
         continue
     sec = f[:-5]
     meta = json.load(open(os.path.join(r, f)))
-    gen = Image.open(os.path.join(r, f"{sec}.png"))
-    o, g = ob[sec], meta["boxes"][sec]
-    above, _ = differs(band(orig, 0, o["y"]), band(gen, 0, g["y"])) if o["y"] == g["y"] else (1.0, None)
-    below_o, below_g = band(orig, o["y"] + o["h"], orig.height), band(gen, g["y"] + g["h"], gen.height)
-    n = min(below_o.height, below_g.height)
-    below, _ = differs(band(below_o, 0, n), band(below_g, 0, n))
-    a = band(orig, o["y"] - MARGIN, o["y"] + o["h"] + MARGIN)
-    b = band(gen, g["y"] - MARGIN, g["y"] + g["h"] + MARGIN)
+    rendered = Image.open(os.path.join(r, f"{sec}.png")).convert("RGB")
+    o = ob[sec]
+    top, bottom = o["y"], o["y"] + o["h"]
+    above = differs(band(orig, 0, top), band(rendered, 0, top))
+    below = differs(band(orig, bottom, orig.height), band(rendered, bottom, orig.height)) if rendered.height == orig.height else 1.0
+    gen = orig.copy()
+    gen.paste(rendered.crop((0, top, rendered.width, bottom)), (0, top))
+    a = band(orig, top - MARGIN, bottom + MARGIN)
+    b = band(gen, top - MARGIN, bottom + MARGIN)
     a.save(os.path.join(out, f"{sec}-orig.png"))
     b.save(os.path.join(out, f"{sec}-gen.png"))
-    pad, top = 32, 56
-    side = Image.new("RGB", (a.width + b.width + pad * 3, max(a.height, b.height) + top + pad), "white")
+    pad, head = 32, 56
+    side = Image.new("RGB", (a.width + b.width + pad * 3, a.height + head + pad), "white")
     draw = ImageDraw.Draw(side)
     draw.text((pad, 16), f"section {sec}: original", fill="black", font=font)
     draw.text((a.width + pad * 2, 16), f"section {sec}: generated ({MARGIN}px of page above and below)", fill="black", font=font)
-    side.paste(a, (pad, top))
-    side.paste(b, (a.width + pad * 2, top))
+    side.paste(a, (pad, head))
+    side.paste(b, (a.width + pad * 2, head))
     side.save(os.path.join(out, f"{sec}-side.png"))
-    entry = {"orig_box": o, "gen_box": g, "above_rows_differing": round(above, 3), "below_rows_differing": round(below, 3), **meta["checks"]}
+    entry = {"box": o, "spill": meta["spill"], "above_rows_differing": round(above, 3), "below_rows_differing": round(below, 3), **meta["checks"]}
     entry["failed"] = [name for name, bad in [
-        ("height", not meta["fits"]),
-        ("isolation", above > ISOLATION or below > ISOLATION),
+        ("fit", not meta["fits"]),
         ("text", bool(entry["missingText"])),
         ("images", bool(entry["missingImages"] or entry["brokenImages"])),
         ("overflow", entry["overflow"] > 0),
         ("fonts", bool(entry["fontsMissing"])),
     ] if bad]
     report["pairs"][sec] = entry
-    print(f"section {sec}: {'ok' if not entry['failed'] else 'FAILED ' + ', '.join(entry['failed'])} (above differs {above:.1%}, below {below:.1%}, missing text {len(entry['missingText'])}, missing images {len(entry['missingImages'])}, overflow {entry['overflow']})")
+    print(f"section {sec}: {'ok' if not entry['failed'] else 'FAILED ' + ', '.join(entry['failed'])} (spill {meta['spill']}px, page around changed: above {above:.1%}, below {below:.1%}; missing text {len(entry['missingText'])}, missing images {len(entry['missingImages'])}, overflow {entry['overflow']})")
 
 json.dump(report, open(os.path.join(out, "report.json"), "w"), indent=1)
