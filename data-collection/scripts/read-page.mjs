@@ -79,8 +79,11 @@ export async function readPage(page) {
     const content = (sec) => {
       const items = []
       const isBlock = (el) => getComputedStyle(el).display !== "inline"
+      // A hidden element hides everything in it; an element with no size of its own
+      // does not (a <picture> around an absolutely placed <img> is 0x0), so only the
+      // first ends the walk.
       const walk = (el) => {
-        if (!visible(el)) return
+        if (!el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return
         const tag = el.tagName
         if (tag === "IMG") {
           const r = el.getBoundingClientRect()
@@ -107,7 +110,7 @@ export async function readPage(page) {
         if (m && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3) })
         const blockKids = [...el.children].filter((c) => visible(c) && isBlock(c) && c.innerText?.trim())
         const text = el.innerText?.trim()
-        const leaf = text && blockKids.length === 0
+        const leaf = text && blockKids.length === 0 && r.width > 0 && r.height > 0
         if (leaf) {
           const kind = /^H[1-6]$/.test(tag) || el.closest("h1,h2,h3,h4,h5,h6") ? "heading"
             : tag === "BUTTON" || el.closest("button,[role=button]") ? "button"

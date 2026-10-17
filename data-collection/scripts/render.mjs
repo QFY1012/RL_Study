@@ -102,7 +102,11 @@ for (const sec of gens) {
     const missingText = items.filter((t) => t.text && !shown.includes(norm(t.clamped ? t.text.slice(0, 24) : t.text))).map((t) => t.text)
     const imgs = [...root.querySelectorAll("img")]
     const brokenImages = imgs.filter((i) => !i.complete || !i.naturalWidth).map((i) => (i.getAttribute("src") ?? "").slice(0, 120))
-    const missingImages = items.filter((t) => (t.kind === "image" || t.kind === "illustration") && !(t.src.startsWith("asset:") ? new RegExp(`${t.src}(?!\\d)`).test(raw) : raw.includes(t.src))).map((t) => t.src.slice(0, 120))
+    // an image is used when an <img> has its src (as parsed: the raw HTML may write & as
+    // &amp;) or the fragment's CSS names it; asset:N is replaced in the page, so it is
+    // looked for in the raw fragment
+    const srcs = imgs.map((i) => i.getAttribute("src"))
+    const missingImages = items.filter((t) => (t.kind === "image" || t.kind === "illustration") && !(t.src.startsWith("asset:") ? new RegExp(`${t.src}(?!\\d)`).test(raw) : srcs.includes(t.src) || raw.includes(t.src))).map((t) => t.src.slice(0, 120))
     const hr = host.getBoundingClientRect()
     const overflow = [...root.querySelectorAll("*")].filter((el) => {
       const r = el.getBoundingClientRect()

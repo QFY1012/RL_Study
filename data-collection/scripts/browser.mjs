@@ -86,7 +86,10 @@ const INIT = `(() => {
 export async function load(page, url) {
   await page.clock.install({ time: T0 })
   await page.addInitScript(INIT)
+  const t0 = Date.now()
+  const mark = (what) => console.log(`${what} (${((Date.now() - t0) / 1000).toFixed(1)}s)`)
   await page.goto(url, { waitUntil: "load", timeout: 60000 })
+  mark("loaded")
   // content-visibility: auto skips painting what is off screen, which a full-page
   // screenshot then shows as blank
   await page.addStyleTag({ content: "* { content-visibility: visible !important }" })
@@ -112,6 +115,7 @@ export async function load(page, url) {
     return n
   })
   if (opened) console.log(`opened ${opened} scroll containers`)
+  mark("network idle")
 
   // Scroll through the page so lazy images and scroll-triggered reveals load, then back
   // to the top. Smooth scrolling is turned off first, or the page would still be gliding
@@ -125,6 +129,7 @@ export async function load(page, url) {
     }
     for (let k = 0; k < 40 && (to(0), scrollY !== 0); k++) await new Promise((r) => setTimeout(r, 100))
   })
+  mark("scrolled through")
   await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out after scrolling, going on"))
 
   // Hide what is not the page's design: consent banners, chat widgets, modals, and
@@ -151,22 +156,27 @@ export async function load(page, url) {
     return gone
   })
   console.log(`hid ${hidden.length}:`, hidden.join(" | ") || "nothing")
+  mark("network idle again")
 
   await freeze(page)
   await page.clock.pauseAt(T0 + PAUSE)
+  mark("fonts and images in, clock paused")
   // Content that arrives late (an image or video loading on a busy machine) can start
   // its reveal after the clock stopped, and would stay at its first frame. Page time is
   // stepped on, with a pause between steps for the network, until the page's height
   // and the number of visible elements hold still.
   let last = ""
-  for (let k = 0; k < 10; k++) {
+  let k = 0
+  for (; k < 10; k++) {
     await page.clock.runFor(2000)
     await new Promise((r) => setTimeout(r, 500))
     const now = await page.evaluate(() => `${document.documentElement.scrollHeight}:${[...document.querySelectorAll("body *")].filter((e) => e.checkVisibility({ opacityProperty: true, visibilityProperty: true })).length}`)
     if (now === last) break
     last = now
   }
+  mark(`settled after ${k + 1} steps of 2s page time`)
   await freeze(page)
+  mark("frozen")
 }
 
 // Waits for fonts and images (with a timer on this side: the page's own timers stop
