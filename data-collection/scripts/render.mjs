@@ -14,7 +14,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
-import { CONTEXT, load, freeze } from "./browser.mjs"
+import { CHROME, CONTEXT, load, freeze, routeMedia } from "./browser.mjs"
 import { readPage, signature } from "./read-page.mjs"
 
 const [dir] = process.argv.slice(2)
@@ -24,9 +24,10 @@ const out = path.join(dir, "render")
 fs.mkdirSync(out, { recursive: true })
 const gens = fs.existsSync(path.join(dir, "gen")) ? fs.readdirSync(path.join(dir, "gen")).filter((f) => f.endsWith(".html")).map((f) => Number(f.slice(0, -5))) : []
 
-const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" })
+const browser = await chromium.launch({ executablePath: CHROME })
 const context = await browser.newContext(CONTEXT)
 await context.routeFromHAR(path.join(dir, "page.har"), { notFound: "abort" })
+await routeMedia(context, dir, false)
 const page = await context.newPage()
 await load(page, snap.url)
 

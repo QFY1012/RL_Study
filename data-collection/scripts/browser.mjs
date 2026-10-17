@@ -4,6 +4,14 @@
 // Math.random and crypto.getRandomValues are seeded (INIT), and the viewport, locale, time zone
 // and color scheme are fixed. Once the clock is stopped, page timers and animation
 // frames no longer run, so the page holds still between screenshots.
+// Google Chrome, not the Chromium Playwright ships: Chromium has no H.264 or AAC, so
+// the MP4 videos most sites use would not play, live or replayed (README: setup).
+import fs from "node:fs"
+import path from "node:path"
+import crypto from "node:crypto"
+export const CHROME = process.env.CHROME ?? "/opt/chrome-stable/opt/google/chrome/chrome"
+if (!fs.existsSync(CHROME)) throw new Error(`no Chrome at ${CHROME}; see README (setup) or set CHROME`)
+
 export const CONTEXT = {
   viewport: { width: 1440, height: 900 },
   deviceScaleFactor: 1,
@@ -11,7 +19,34 @@ export const CONTEXT = {
   timezoneId: "UTC",
   colorScheme: "light",
   reducedMotion: "reduce",
-  userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+}
+
+// Video and audio come in as range requests, which a HAR keeps as the pieces asked
+// for and cannot answer again. They are taken out of the HAR: when recording, each is
+// fetched whole, saved under <dir>/media/ and given to the page in full; when
+// replaying, it is served from there (a page accepts a whole file for a range request).
+export async function routeMedia(context, dir, recording) {
+  const store = path.join(dir, "media")
+  fs.mkdirSync(store, { recursive: true })
+  const file = (url) => path.join(store, crypto.createHash("sha1").update(url).digest("hex"))
+  await context.route("**/*", async (route) => {
+    const req = route.request()
+    if (req.resourceType() !== "media") return route.fallback()
+    const f = file(req.url())
+    if (recording) {
+      const headers = { ...req.headers() }
+      delete headers.range
+      const res = await route.fetch({ headers }).catch(() => null)
+      if (!res || !res.ok()) return route.abort()
+      const body = await res.body()
+      fs.writeFileSync(f, body)
+      fs.writeFileSync(`${f}.type`, res.headers()["content-type"] ?? "application/octet-stream")
+      return route.fulfill({ status: 200, body, contentType: res.headers()["content-type"] })
+    }
+    if (!fs.existsSync(f)) return route.abort()
+    return route.fulfill({ status: 200, body: fs.readFileSync(f), contentType: fs.readFileSync(`${f}.type`, "utf8") })
+  })
 }
 
 const T0 = Date.UTC(2026, 9, 1, 12)
@@ -113,6 +148,18 @@ export async function load(page, url) {
 
   await freeze(page)
   await page.clock.pauseAt(T0 + PAUSE)
+  // Content that arrives late (an image or video loading on a busy machine) can start
+  // its reveal after the clock stopped, and would stay at its first frame. Page time is
+  // stepped on, with a pause between steps for the network, until the page's height
+  // and the number of visible elements hold still.
+  let last = ""
+  for (let k = 0; k < 10; k++) {
+    await page.clock.runFor(2000)
+    await new Promise((r) => setTimeout(r, 500))
+    const now = await page.evaluate(() => `${document.documentElement.scrollHeight}:${[...document.querySelectorAll("body *")].filter((e) => e.checkVisibility({ opacityProperty: true, visibilityProperty: true })).length}`)
+    if (now === last) break
+    last = now
+  }
   await freeze(page)
 }
 

@@ -130,9 +130,12 @@ export async function readPage(page) {
 
     // Elements outside a section that paint over its box (content positioned from
     // elsewhere on the page) would stay put when the section is swapped and land on
-    // top of the new one. An element counts when it paints something (text, an image,
-    // a background, a border) and lies mostly over the section; a page-wide
-    // decoration spanning several sections does not.
+    // top of the new one. Counted are elements that paint something (text, an image,
+    // a background, a border), are bigger than a hairline, and lie mostly over the
+    // section, not page-wide decorations spanning several sections. A section is
+    // covered when they take up more than COVERED of its area: a corner mark or a
+    // guide line crossing it does not count.
+    const COVERED = 0.03
     const paints = (e) => {
       if (["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName)) return true
       const cs = getComputedStyle(e)
@@ -140,16 +143,18 @@ export async function readPage(page) {
     }
     const overlaps = (sec) => {
       const R = sec.getBoundingClientRect()
+      let area = 0
       const found = []
       for (const e of document.querySelectorAll("body *")) {
         if (sec.contains(e) || e.contains(sec) || e.closest("svg") !== null && e.tagName !== "svg") continue
         const r = e.getBoundingClientRect()
-        if (r.height > 2 * R.height || !r.width || !r.height) continue
+        if (r.height > 2 * R.height || r.width < 4 || r.height < 4) continue
         const w = Math.min(r.right, R.right) - Math.max(r.left, R.left), h = Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top)
         if (w <= 0 || h <= 0 || (w * h) < 0.25 * r.width * r.height || !visible(e) || !paints(e)) continue
-        found.push(`<${e.tagName.toLowerCase()} class="${(e.className?.baseVal ?? e.className ?? "").toString().slice(0, 40)}">`)
+        area += w * h
+        if (found.length < 3) found.push(`<${e.tagName.toLowerCase()} class="${(e.className?.baseVal ?? e.className ?? "").toString().slice(0, 40)}">`)
       }
-      return found
+      return area > COVERED * R.width * R.height ? found : []
     }
 
     const secs = list.map((el, i) => {

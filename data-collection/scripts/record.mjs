@@ -2,13 +2,14 @@
 //   node scripts/record.mjs <url> <out-dir>
 // Writes to <out-dir>:
 //   page.har        every request and response (render.mjs replays it, scripts included)
+//   media/          videos and audio, whole (browser.mjs, routeMedia)
 //   live.png        full-page screenshot of the live page, for reference
 //   sections.json   the page URL, design tokens, per section its box and content,
 //                   and the inline SVGs as standalone files (assets)
 import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
-import { CONTEXT, load } from "./browser.mjs"
+import { CHROME, CONTEXT, load, routeMedia } from "./browser.mjs"
 import { readPage } from "./read-page.mjs"
 
 const [url, out] = process.argv.slice(2)
@@ -16,8 +17,9 @@ if (!url || !out) throw new Error("usage: record.mjs <url> <out-dir>")
 fs.mkdirSync(out, { recursive: true })
 const har = path.join(out, "page.har")
 
-const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", proxy: { server: process.env.HTTPS_PROXY } })
+const browser = await chromium.launch({ executablePath: CHROME, proxy: { server: process.env.HTTPS_PROXY } })
 const context = await browser.newContext({ ...CONTEXT, recordHar: { path: har, mode: "full", content: "embed" } })
+await routeMedia(context, out, true)
 const page = await context.newPage()
 await load(page, url)
 const { sections, assets, tokens } = await readPage(page)

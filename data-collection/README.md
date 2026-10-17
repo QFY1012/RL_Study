@@ -28,7 +28,9 @@
 - `Math.random` 和 `crypto.getRandomValues` 用固定种子,带随机参数的请求也和录制时一样。
 - `IntersectionObserver` 对每个元素都报"在屏幕上",`content-visibility` 一律 `visible`:整页截图要的是整页,不是读者滚到的那一屏。
 - 视口、语言、时区、配色、减弱动效都固定。
+- 加载完以后让时钟一次走 2 秒,直到页面高度和可见元素数不再变,再停住:晚开始的入场动画(比如滚动后才开始淡入的整页内容)也要走完。
 - 回放时所有请求都从 HAR 回答,HAR 里没有的直接中止。录制时重定向回自身的响应(服务器先设 cookie 再给页面)会删掉,否则回放会原地打转。
+- 视频和音频是分段请求的,HAR 存下的是一段段,回放答不上:录制时整个下载到 `media/`,回放时从那里整个给页面。
 
 回放后重新读一遍页面,每节的高度和内容(文字、图片、链接)要和录制时一样才算可用,`generate.mjs` 只从可用的节里挑。每次打开内容都不一样的节(随机轮换的卡片、打乱顺序的评价)在这里被筛掉。
 
@@ -38,7 +40,7 @@
 - 生成的节放进一个 shadow root,宿主元素占原节的位置:两边的 CSS 互不影响,字体、颜色这些继承属性照常从页面传进来。
 - 生成的节放在一个和原版一样大的框里:提示里给出原版的宽和确切的高,宿主元素就是这个高度(它是 grid,片段的外框拉伸填满)。框里的空间怎么分是模型自己的设计;内容伸出框的上下边(包括被裁掉的)就把伸出多少告诉模型重写。两版尺寸相同,高度不能当作区分两版的捷径,下面的页面也不动。
 - 视频和 canvas 在读页面时截成图(JPEG 资源),当作插图交给模型。
-- 被页面别处的元素盖住的节(比如别处绝对定位过来的图)不可用:换掉这节以后那个元素还在原位,会压在新的一节上。
+- 被页面别处的元素盖住的节(比如别处绝对定位过来的图)不可用:换掉这节以后那个元素还在原位,会压在新的一节上。按面积算:别处画得出东西的元素(文字、图、背景、边框)盖住这节超过 3% 才算,不画东西的透明层和读屏用的隐藏文字不算。
 
 ## 检查
 
@@ -54,7 +56,12 @@
 
 ## 依赖
 
-- `npm install`(playwright-core,用 `/opt/pw-browsers/chromium`)
+- `npm install`(playwright-core)
+- Google Chrome:Playwright 自带的 Chromium 不含 H.264/AAC 解码器,放不了大多数网站的 MP4 视频。默认路径 `/opt/chrome-stable/opt/google/chrome/chrome`,别处的用 `CHROME` 指定。安装(不需要 apt 的依赖):
+  ```sh
+  curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  dpkg -x google-chrome-stable_current_amd64.deb /opt/chrome-stable
+  ```
 - Python 3 和 Pillow(`pairs.py`)
 - 模型的地址和 key 来自 `~/.config/ui-rl/judge.env`(`JUDGE_URL`、`JUDGE_MODEL`、`DEEPSEEK_API_KEY`),`GEN_MODEL` 可以换生成模型。
 
