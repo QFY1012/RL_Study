@@ -28,11 +28,14 @@ function Page({ title, meta = [], className, children }: { title: string; meta?:
 // The page's rows are fields: 144px tall with a 24px gutter, so field lines are
 // 168px apart, counted from the top of the page header (itself one field).
 // A section takes a whole number of fields: once its content is laid out, its
-// height is rounded up to n fields (n × 168 − 24), the rest left empty. With the
-// 192px gap (24 + 144 + 24, one empty field) every section then starts on a field
-// line. Inside a section the content is free: several pieces can share a field as
-// long as they fit.
-const FIELD = 168, GUTTER = 24
+// height is rounded to n fields (n × 168 − 24). Content that runs less than half
+// a field (72px) into its last field does not count as taking it: the section
+// keeps the fields before it and the content runs on into the gap below, which
+// still leaves more than half the gap. Otherwise the section is rounded up and
+// the rest is left empty. With the 192px gap (24 + 144 + 24, one empty field)
+// every section then starts on a field line. Inside a section the content is
+// free: several pieces can share a field as long as they fit.
+const FIELD = 168, GUTTER = 24, HALF = 72
 
 function useWholeFields() {
   const ref = React.useRef<HTMLElement>(null)
@@ -42,7 +45,16 @@ function useWholeFields() {
     const fit = () => {
       // the content's own height: the header and the body, without the rounding
       const h = Math.max(...[...el.children].map((c) => c.getBoundingClientRect().bottom)) - el.getBoundingClientRect().top
-      el.style.minHeight = `${Math.ceil((h + GUTTER) / FIELD) * FIELD - GUTTER}px`
+      const n = Math.ceil((h + GUTTER) / FIELD)
+      // how far the content runs into the n-th field (at most 0 when it ends in the gutter before it)
+      const into = h - (n - 1) * FIELD
+      if (n > 1 && into < HALF) {
+        el.style.minHeight = ""
+        el.style.height = `${(n - 1) * FIELD - GUTTER}px`
+      } else {
+        el.style.height = ""
+        el.style.minHeight = `${n * FIELD - GUTTER}px`
+      }
     }
     fit()
     const ro = new ResizeObserver(fit)
