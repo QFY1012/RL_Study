@@ -1,6 +1,5 @@
 # Checks the renders of one snapshot and cuts out the pairs.
 #   python3 -I scripts/pairs.py <snapshot-dir>
-# Fidelity: the offline original against live.png (how much of the page differs).
 # Isolation: for each swapped section, the page above it must be unchanged and the
 # page below it the same once shifted by the height difference.
 # Writes pairs/<i>-orig.png and pairs/<i>-gen.png (the section with MARGIN px of
@@ -33,12 +32,8 @@ def band(img, top, bottom):
 
 
 orig = Image.open(os.path.join(r, "orig.png"))
-live = Image.open(os.path.join(d, "live.png"))
 ob = json.load(open(os.path.join(r, "orig.json")))["boxes"]
-h = min(orig.height, live.height)
-share, first = differs(band(orig, 0, h), band(live, 0, h))
-report = {"fidelity": {"live_height": live.height, "orig_height": orig.height, "rows_differing": round(share, 3), "first_differing_row": first}, "pairs": {}}
-print(f"fidelity: live {live.height}px, offline {orig.height}px, {share:.1%} of rows differ, first at {first}")
+report = {"pairs": {}}
 
 font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 font = ImageFont.truetype(font_path, 22) if os.path.exists(font_path) else ImageFont.load_default()

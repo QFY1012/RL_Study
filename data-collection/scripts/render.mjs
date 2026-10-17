@@ -1,5 +1,7 @@
 // Renders a snapshot offline: the original page, and the page once more for each
-// generated section, with that section swapped in.
+// generated section, with that section swapped in. What is already rendered is
+// skipped, so run.mjs calls it once before generating (the original, which
+// fidelity.py checks) and once after (the generated sections).
 //   node scripts/render.mjs <snapshot-dir>
 // Every request is answered from page.har.zip (anything not in it is aborted), and
 // the document itself is page.html, so all renders share the same DOM, fonts and
@@ -89,10 +91,14 @@ async function render(sec, fragment) {
   return { name, height, boxes, checks }
 }
 
-const orig = await render(null, null)
-fs.writeFileSync(path.join(out, "orig.json"), JSON.stringify(orig, null, 1))
-console.log(`orig: height ${orig.height}, ${Object.keys(orig.boxes).length} sections`)
-for (const sec of gens) {
+let orig
+if (fs.existsSync(path.join(out, "orig.json"))) orig = JSON.parse(fs.readFileSync(path.join(out, "orig.json"), "utf8"))
+else {
+  orig = await render(null, null)
+  fs.writeFileSync(path.join(out, "orig.json"), JSON.stringify(orig, null, 1))
+  console.log(`orig: height ${orig.height}, ${Object.keys(orig.boxes).length} sections`)
+}
+for (const sec of gens.filter((g) => !fs.existsSync(path.join(out, `${g}.json`)))) {
   const r = await render(sec, fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8"))
   fs.writeFileSync(path.join(out, `${sec}.json`), JSON.stringify(r, null, 1))
   const c = r.checks

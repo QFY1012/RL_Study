@@ -7,11 +7,13 @@
 | 步骤 | 脚本 | 产出 |
 |---|---|---|
 | 冻结页面 | `scripts/snapshot.mjs <url> <dir>` | `page.har.zip`(页面加载的所有响应)、`page.html`(JS 执行后的 DOM,去掉脚本,每节标 `data-sec`)、`live.png`、`sections.json`(设计 token、每节的位置和内容、内联 SVG 转成的独立文件) |
+| 离线渲染原版 | `scripts/render.mjs <dir>` | `render/orig.png`、`render/orig.json` |
+| 逐节保真 | `python3 -I scripts/fidelity.py <dir>` | `fidelity.json`:每节带上下 300px,离线渲染和在线截图比,高度一样且不超过 3% 的行不同才可用 |
 | 重新设计 | `scripts/generate.mjs <dir> [count]` | `gen/<i>.html`、`gen/<i>.json`(提示词、模型、用量) |
-| 离线渲染 | `scripts/render.mjs <dir>` | `render/orig.png`、`render/<i>.png`、`render/<i>.json`(位置和检查) |
+| 渲染生成版 | `scripts/render.mjs <dir>`(已渲染的跳过) | `render/<i>.png`、`render/<i>.json`(位置和检查) |
 | 检查和裁切 | `python3 -I scripts/pairs.py <dir>` | `pairs/<i>-orig.png`、`pairs/<i>-gen.png`、`pairs/<i>-side.png`、`pairs/report.json` |
 
-`node scripts/run.mjs <out-root> <url>...`(或 `--list <文件>`,一行一个 URL)对每个网站跑完上面四步,每个网站一个目录 `<out-root>/<host>/`,日志在 `<out-root>/<host>.log`,同时带着网站名打印到终端。
+`node scripts/run.mjs <out-root> <url>...`(或 `--list <文件>`,一行一个 URL)对每个网站跑完上面几步,每个网站一个目录 `<out-root>/<host>/`,日志在 `<out-root>/<host>.log`,同时带着网站名打印到终端。
 
 - `JOBS`(默认 20):同时处理的网站数,也就是同时在等模型的网站数。一个网站选中的几节同时请求模型,遇到 429、5xx 或断线会隔 10s、30s、60s 重试。
 - `BROWSER_JOBS`(默认 4):快照、渲染、裁切这些浏览器步骤同时最多跑几个。它们吃 CPU,机器是 4 核。
@@ -28,7 +30,7 @@
 
 | 检查 | 在哪 | 含义 |
 |---|---|---|
-| 保真 | `pairs/report.json` 的 `fidelity` | 离线渲染的原版和在线截图有多少行像素不同 |
+| 保真 | `fidelity.json` | 每节离线渲染的原版和在线截图是否一致;不一致的节不拿去生成 |
 | 隔离 | `above_rows_differing` / `below_rows_differing` | 换掉的那节上方应完全不变,下方平移高度差后应完全不变 |
 | 内容 | `missingText` / `missingImages` / `brokenImages` | 每段文字、每张图都要出现,图要加载成功;被原版截断的文字只看开头 |
 | 破版 | `overflow` / `fontsMissing` | 超出宿主宽度的元素数、没加载上的字体 |

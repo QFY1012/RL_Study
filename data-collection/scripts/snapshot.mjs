@@ -42,15 +42,22 @@ const opened = await page.evaluate(() => {
 })
 if (opened) console.log(`opened ${opened} scroll containers`)
 
-// Scroll through the page so lazy images and scroll-triggered reveals load, then back to the top.
+// Scroll through the page so lazy images and scroll-triggered reveals load, then back
+// to the top. Smooth scrolling (scroll-behavior, or a library like Lenis) is turned
+// off first: otherwise the page is still gliding back up while boxes are measured
+// and the screenshot is taken, and a sticky header lands in the middle of the page.
 await page.evaluate(async () => {
+  for (const el of [document.documentElement, document.body]) el.style.setProperty("scroll-behavior", "auto", "important")
+  const to = (y) => window.scrollTo({ top: y, behavior: "instant" })
   const step = innerHeight * 0.7
   for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
-    scrollTo(0, y)
+    to(y)
     await new Promise((r) => setTimeout(r, 250))
   }
-  scrollTo(0, 0)
+  for (let k = 0; k < 40 && (to(0), scrollY !== 0); k++) await new Promise((r) => setTimeout(r, 100))
+  await new Promise((r) => setTimeout(r, 500))
 })
+console.log(`back at the top: scrollY ${await page.evaluate(() => scrollY)}`)
 await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out after scrolling, going on"))
 
 // Remove what is not the page's design: consent banners, chat widgets, modals, and
@@ -80,7 +87,10 @@ let swapped = 0
 for (const handle of await page.$$("video, canvas")) {
   const box = await handle.boundingBox()
   if (!box || box.width < 16 || box.height < 16) continue
-  const png = await handle.screenshot({ timeout: 15000 }).catch(() => null)
+  // a clip of the full page, not handle.screenshot(): that waits for the element to
+  // hold still, which a WebGL canvas drawing every frame never does
+  const at = await handle.evaluate((el) => { const r = el.getBoundingClientRect(); return { x: r.left + scrollX, y: r.top + scrollY, width: r.width, height: r.height } })
+  const png = await page.screenshot({ clip: at, fullPage: true, timeout: 30000 }).catch((e) => { console.log(`could not screenshot a ${box.width}×${box.height} video or canvas: ${e.message.split("\n")[0]}`); return null })
   if (!png) continue
   await handle.evaluate((el, src) => {
     const img = document.createElement("img")
