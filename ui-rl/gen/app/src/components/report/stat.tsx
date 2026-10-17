@@ -19,13 +19,16 @@ type StatProps = Placed & {
 
 // A key figure. In a row of figures every Stat sits on the row's baseline, so a
 // large figure and the smaller ones beside it share one baseline instead of
-// lining up at the top (the page code does not have to ask for it).
+// lining up at the top (the page code does not have to ask for it). The figure's
+// box is trimmed to its cap height and baseline, so what follows it (the caption)
+// starts the same distance below the baseline whatever the figure's size, and
+// the captions of a row line up too.
 function Stat({ label, value, unit, size, captionBelow, quiet, delta, note, direction, span, start, rowSpan, rowStart, className }: StatProps) {
   return (
     <div data-slot="custom-stat" className={cn(cn("flex flex-col self-baseline", captionBelow ? "gap-0" : "gap-2"), place({ span, start, rowSpan, rowStart }), className)}>
       {label && !captionBelow && <span className="text-sm leading-6 text-muted-foreground">{label}</span>}
-      <div className="flex items-baseline gap-2">
-        <span className={cn("font-light tabular-nums", size === "lg" ? "text-5xl leading-[60px]" : size === "xl" ? "text-[44px] leading-[56px]" : "text-3xl leading-9")}>{value}</span>
+      <div className="flex items-baseline gap-2 pb-1">
+        <span className={cn("inline-block leading-none font-light tabular-nums [text-box:trim-both_cap_alphabetic]", size === "lg" ? "text-5xl" : size === "xl" ? "text-[44px]" : "text-3xl")}>{value}</span>
         {unit && <span className="text-sm text-muted-foreground">{unit}</span>}
       </div>
       {label && captionBelow && <span className={quiet ? "text-xs leading-6 text-muted-foreground" : "text-sm leading-6"}>{label}</span>}
