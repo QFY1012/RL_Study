@@ -32,7 +32,7 @@ export default function Report() {
       <Section title="核心指标" description="对比产品数、分析截图数与问题计数">
         <Grid fields={false}>
           <Stat
-            span={3}
+            span={2}
             size="lg"
             value={kpi("fewest").value}
             unit={kpi("fewest").unit}

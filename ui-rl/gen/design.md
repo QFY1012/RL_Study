@@ -27,7 +27,7 @@
 下面是每类内容的默认排法。在网格上的位置和宽度(占几列、从哪列开始、和谁并排)可以按内容改,守住 A6 就行。
 
 - **B1 结论**:一句话的判断(summary、verdict)用 `Text`,结论句字号(A3),放在第一节,占满 9 列。
-- **B2 关键数字**:`Stat`,`captionBelow`(数字在上、说明在下),不加框。所有关键数字排在同一行,不让任何一项单独掉到下一行:`<Grid cols={9} fields={false} className="items-baseline">`,3 个时每个 `span={3}`;4 个时第一个 `span={3}`、其余 `span={2}`,数字底部对齐。结论性的数字(如步骤最少)排第一个,是主指标,`size="lg"`,其余用普通大小;产品数、截图数这类样本量排在后面。环比、上次值等写在 `note` 里,下降时 `direction="down"`。
+- **B2 关键数字**:`Stat`,`captionBelow`(数字在上、说明在下),不加框。所有关键数字排在同一行,不让任何一项单独掉到下一行:`<Grid cols={9} fields={false} className="items-baseline">`,每个占同样的栏数(3 个时各 `span={3}`,4 个时各 `span={2}`),间距一致,数字底部对齐。结论性的数字(如步骤最少)排第一个,是主指标,`size="lg"`,其余用普通大小;产品数、截图数这类样本量排在后面。环比、上次值等写在 `note` 里,下降时 `direction="down"`。
 - **B3 带对照的指标**:`DataTable`。每列写 `span`(占几列网格),各列 `span` 之和为 9;数字列 `align: "right"`。不显著的行用 `muteWhen` 灰显;有置信区间时加一列 `interval`,区间的数值另起一列。
 - **B4 时间趋势**:`TrendChart`。单独一行时 `height="h-48"`;和别的块并排时 `height="fill"`。只标最后一个点(`pointLabels="last"`)。有置信区间画 `band`,有正负之分画 `zero`。
 - **B5 分群结果**:每个分群一个 `Stat`(普通大小),说明里写分群名和对照值。一行最多 4 个,每个 `span={2}`。
