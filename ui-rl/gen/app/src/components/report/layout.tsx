@@ -101,7 +101,7 @@ function Group({ title, className, children }: { title?: string; className?: str
 // whole on the page: the grid places its box on the columns, and its height is
 // its own, so a piece can take half a field and the next one a field and a half;
 // only the section around them is rounded up to whole fields. With `fields` the
-// rows are fixed 144px fields instead (a Block's `rows` then counts fields).
+// rows are fixed 144px fields instead (a Block's `rowSpan` then counts fields).
 // Without `cols` the grid has one column per page column it is wide (its
 // `span`, else the width around it).
 function Grid({ cols, fields = false, className, children, span, start, rowSpan, rowStart }: Placed & { cols?: number; fields?: boolean; children: React.ReactNode }) {
@@ -119,10 +119,9 @@ function Grid({ cols, fields = false, className, children, span, start, rowSpan,
 // block stretched by its grid row passes the height on, so elastic content
 // (charts, distributed lists) can fill the band.
 // `rowSpan` is how many rows it spans, the same prop every other piece takes.
-// `rows` is the old name for it, kept so existing pages render as before.
-function Block({ span, start, rowSpan, rowStart, rows, title, description, className, contentClassName, children }: Placed & { rows?: number; title?: string; description?: string; contentClassName?: string; children: React.ReactNode }) {
+function Block({ span, start, rowSpan, rowStart, title, description, className, contentClassName, children }: Placed & { title?: string; description?: string; contentClassName?: string; children: React.ReactNode }) {
   return (
-    <div data-slot="block" className={cn("flex min-h-0 flex-col", place({ span, start, rowSpan, rowStart }), className)} style={rows && !rowSpan ? { gridRow: `span ${rows}` } : undefined}>
+    <div data-slot="block" className={cn("flex min-h-0 flex-col", place({ span, start, rowSpan, rowStart }), className)}>
       {(title || description) && (
         <div data-slot="block-header" className="flex flex-col">
           {title && <h3 className="text-sm leading-6 font-semibold">{title}</h3>}

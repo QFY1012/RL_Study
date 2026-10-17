@@ -17,6 +17,7 @@ import react from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 import { chromium } from "playwright-core"
 import { createRequire } from "node:module"
+import { gridOffenders } from "./grid-check.mjs"
 
 const require = createRequire(import.meta.url)
 
@@ -136,14 +137,9 @@ try {
     add("组件库", `页面上有不是组件库画的元素:${Object.entries(n).map(([t, k]) => `${k} 个 <${t}>`).join("、")};组件库没有的能力不要自己画,在最后的说明里写出缺什么组件`)
   }
   for (const o of dom.out) add("元素越界", o)
-  // 组件库能写 start、rowSpan(带 placement.ts,2026-10-17 前叫 grid.ts)时才量网格:旧组件库没有让内容落到任意栏线上的办法。
-  if (process.env.SHOOT_GRID !== "0" && ["placement.ts", "grid.ts"].some((f) => fs.existsSync(path.join(APP, "src", "components", "report", f)))) {
-    // loaded only here: the old component library never needs it
-    const { gridOffenders } = await import("./grid-check.mjs")
-    const offGrid = await page.evaluate(gridOffenders)
-    for (const o of offGrid.slice(0, 8)) add("网格", o)
-    if (offGrid.length > 8) add("网格", `还有 ${offGrid.length - 8} 块没有落在栏线上`)
-  }
+  const offGrid = await page.evaluate(gridOffenders)
+  for (const o of offGrid.slice(0, 8)) add("网格", o)
+  if (offGrid.length > 8) add("网格", `还有 ${offGrid.length - 8} 块没有落在栏线上`)
 
   // Data coverage: every short value outside long series should appear on the page.
   // A component demo has no data.json (the agent makes its own test data): nothing to compare.
@@ -189,7 +185,6 @@ try {
   await half.screenshot({ path: path.join(ws, "thumb.png"), clip, fullPage: true })
   // For people: SHOOT_OVERLAY=1 also writes grid.png, the page with the grid check drawn on it.
   if (process.env.SHOOT_OVERLAY === "1") {
-    const { gridOffenders } = await import("./grid-check.mjs")
     await page.evaluate(gridOffenders, true)
     await page.screenshot({ path: path.join(ws, "grid.png"), clip, fullPage: true })
   }
