@@ -2,9 +2,11 @@
 // the conversations). The model gets what the page's designer would have, short of
 // the section's own design: its text, images, illustrations and icons, each image as
 // it looks, a screenshot of the page around the section with the section emptied down
-// to its backdrop (looks/<i>.json), the page's fonts, loaded faces and colors, and the
-// size of the box it goes in (the original's width and exact height); never the
-// original markup or layout, so the two versions differ only in design decisions. A
+// to its backdrop (looks/<i>.json), the page's fonts, loaded faces, type scale (the
+// other sections' titles and body text first), colors and content column, where the
+// sections around run, and where the box it goes in lies (the original's place, width
+// and exact height); never the original markup or layout, so the two versions differ
+// only in design decisions. A
 // section that fails a check is told what is wrong, shown how it rendered, and asked
 // again, in the same conversation (revision).
 // The chosen sections are shared out among the models in GEN_MODELS (comma-separated,
@@ -46,7 +48,8 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - It is inserted into a shadow root that takes the place of the old section, at the full width of its slot. Style the outer box with :host or a wrapper class, never html or body.
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
-- Type: only the font families listed in the tokens, in the weights and styles the page has loaded (others are not available and would fall back to another font). Set text in the page's type scale, as the other sections are, so the section reads as part of this page. Colors: stay within the page's palette.
+- Type: only the font families listed in the tokens, in the weights and styles the page has loaded (others are not available and would fall back to another font). Set text in the page's type scale, as the other sections are (their titles and body text are given), so the section reads as part of this page. Colors: stay within the page's palette.
+- Grid: keep to the page's content column, as the sections around do: the outer edges of your content (text, pictures, panels) start at the column's left edge, or your layout is centered on the page. Positions are given in page x and in your box.
 - Backdrop: the section's backdrop (given: the color behind it and the layers of color, gradient, image or frame lines that run through the section, which belong to the page) stays in place under your fragment and is not yours to change; keep content clear of its frame lines. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
 - Size: the section's box is exactly the width and height given, and your outer box is stretched to fill it. Lay the content out to fit inside that height; how the space is used (where the room goes, how big images and type are) is your design decision. Nothing may reach past the top or bottom of the box, and nothing may be cut off: no hidden overflow, no heights that clip.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
@@ -64,14 +67,35 @@ const backdrop = (s) => {
 }
 
 // The text styles the rest of the page is set in, the way its designer would know
-// them: styles found only in this section are left out, as they are its own design.
-const typeScale = (tokens, s) => tokens.typeScale.filter((t) => t.sections.some((i) => i !== s.i)).slice(0, 20)
-  .map((t) => `  ${t.role}: ${t.family} ${t.size}/${t.lineHeight}, ${t.weight}, ${t.letterSpacing}${t.transform === "none" ? "" : `, ${t.transform}`}; ${t.chars}`).join("\n")
+// them: for the other sections, what their titles are set in (the largest text in
+// each) and their body text (most of the text in each), then all the styles they use,
+// the most used first. Styles found only in this section are left out, as they are its
+// own design.
+const typeScale = (tokens, s) => {
+  const style = (t) => `${t.role}: ${t.family} ${t.size}/${t.lineHeight}, ${t.weight}, ${t.letterSpacing}${t.transform === "none" ? "" : `, ${t.transform}`}`
+  const other = tokens.typeScale.filter((t) => Object.keys(t.sections).some((i) => Number(i) !== s.i))
+  const secs = [...new Set(other.flatMap((t) => Object.keys(t.sections).map(Number)))].filter((i) => i !== s.i).sort((a, b) => a - b)
+  // the style each other section has most of by score, with the sections that have it
+  const by = (score) => {
+    const m = new Map()
+    for (const i of secs) {
+      const best = other.filter((t) => t.sections[i]).reduce((a, b) => (score(b, i) > score(a, i) ? b : a))
+      m.set(best, [...(m.get(best) ?? []), i + 1])
+    }
+    return [...m].map(([t, n]) => `    ${style(t)} (section${n.length > 1 ? "s" : ""} ${n.join(", ")})`).join("\n")
+  }
+  return `  titles (the largest text in each section):\n${by((t, i) => parseFloat(t.size) * 1e6 + t.sections[i])}
+  body text (most of the text in each section):\n${by((t, i) => t.sections[i])}
+  all their styles (role: font size/line height, weight, letter spacing; characters set in it):
+${other.slice(0, 20).map((t) => `    ${style(t)}; ${t.chars}`).join("\n")}`
+}
 
 const user = (snap, s) => {
   const { sections, tokens } = snap
   const k = sections.indexOf(s)
-  const around = (n) => n && `${n.background}, starts with ${JSON.stringify(texts(n)[0]?.text?.slice(0, 80) ?? "(no text)")}`
+  const col = tokens.column, x0 = s.box.x
+  const runs = (e) => (e ? `, its content runs from x ${e.left} to ${e.right}` : "")
+  const around = (n) => n && `${n.background}, starts with ${JSON.stringify(texts(n)[0]?.text?.slice(0, 80) ?? "(no text)")}${runs(n.edges)}`
   const items = s.items.map((t, j) => {
     if (t.src) return `${j + 1}. ${t.kind}: ${t.src} (alt ${JSON.stringify(t.alt)}, aspect ratio ${t.aspect})`
     return `${j + 1}. ${t.kind}: ${JSON.stringify(t.text)}${t.href ? ` → ${t.href}` : ""}${t.clamped ? " (long: you may cut it off with an ellipsis)" : ""}`
@@ -80,13 +104,13 @@ const user = (snap, s) => {
 Page tokens:
 - fonts: heading ${tokens.fonts.heading}; subheading ${tokens.fonts.subheading}; body ${tokens.fonts.body}
 - font faces loaded (family: weights): ${Object.entries(tokens.faces).map(([f, w]) => `${f}: ${w.join(", ")}`).join("; ")}
-- type scale of the other sections (role: font size/line height, weight, letter spacing; characters set in it):
+- type scale of the other sections:
 ${typeScale(tokens, s)}
 - text colors: ${tokens.textColors.join("; ")}
 - background colors: ${tokens.backgroundColors.join("; ")}
 - page background: ${tokens.pageBackground}
-- the other sections keep their content within ${tokens.contentWidth}px
-Section ${k + 1} of ${sections.length}. Its box is ${s.box.w}px wide and exactly ${s.box.h}px tall.
+- content column: from x ${col.left} to ${col.right} of the ${snap.size.w}px-wide page (${col.left - x0}px to ${col.right - x0}px in your box)
+Section ${k + 1} of ${sections.length}. Its box runs from x ${x0} to ${x0 + s.box.w} of the page: ${s.box.w}px wide and exactly ${s.box.h}px tall.
 - its backdrop (stays under your content): ${backdrop(s)}
 - section above: ${around(sections[k - 1]) ?? "none"}
 - section below: ${around(sections[k + 1]) ?? "none"}
@@ -112,11 +136,12 @@ export const start = (snap, s, look) => {
 
 // What the model is told when its section failed a check (site.mjs, the pair's
 // checks: it does not fit its box, shows a seam, leaves out or changes text, leaves
-// out an image, runs past the sides or uses a face the page has not loaded), with how
-// it rendered: the generated image at half size, with the page above and below. Only
-// these, which are not matters of taste, are sent back.
-export const revision = (s, p, rendered) => {
-  const h = s.box.h
+// out an image, runs past the sides, uses a face the page has not loaded or leaves the
+// page's grid the original keeps to), with how it rendered: the generated image at
+// half size, with the page above and below. Only these, which are not matters of
+// taste, are sent back.
+export const revision = (snap, s, p, rendered) => {
+  const h = s.box.h, col = snap.tokens.column
   const wrong = []
   if (p.failed.includes("fit")) wrong.push(`your content reaches ${p.spill}px past the top or bottom edge of the ${h}px box: everything has to fit inside ${h}px, with nothing cut off`)
   if (p.failed.includes("seam")) {
@@ -128,6 +153,7 @@ export const revision = (s, p, rendered) => {
   if (p.brokenImages.length) wrong.push(`these images did not load: ${p.brokenImages.join(", ")}. Use each src exactly as given`)
   if (p.overflow) wrong.push(`${p.overflow} elements reach past the left or right edge of the box`)
   if (p.fontsMissing.length) wrong.push(`these faces are not loaded by the page and fall back to another font: ${p.fontsMissing.join(", ")}. Use only the families, weights and styles the page has loaded`)
+  if (p.offGrid) wrong.push(`your content runs from x ${p.edges?.left} to ${p.edges?.right} of the page, off the page's grid: the sections around keep their content to the column from x ${col.left} to ${col.right} (${col.left - s.box.x}px to ${col.right - s.box.x}px in your box). Start your content's left edge on the column's, or center your layout on the page`)
   return { role: "user", content: [
     { type: "text", text: `Rendered in the page, the section has these problems:\n${wrong.map((w, k) => `${k + 1}. ${w}`).join("\n")}\nThis is how it looks (half size, with the page above and below):` },
     image(rendered),
