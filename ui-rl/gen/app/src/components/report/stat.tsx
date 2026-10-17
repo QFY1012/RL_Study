@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 type StatProps = Placed & {
   label?: string

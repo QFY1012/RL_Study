@@ -3,7 +3,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { COLS, Width, place, type Placed } from "./grid"
+import { COLS, Width, place, type Placed } from "./placement"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 // Screenshots: one screen per Figure, laid out in a FigureStrip that scrolls

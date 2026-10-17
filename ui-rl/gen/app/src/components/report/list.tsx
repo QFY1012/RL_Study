@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemSeparator, ItemTitle } from "@/components/ui/item"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 // Columns for `columns` (no 6 here: a 6-column list has never been laid out on the grid).
 const LIST_COLS: Record<number, string> = { 2: "grid-cols-2", 3: "grid-cols-3", 4: "grid-cols-4", 9: "grid-cols-9", 12: "grid-cols-12" }

@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 type KVProps = Placed & {
   items: { label: string; value: string }[]

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Progress } from "@/components/ui/progress"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 type ProgressItem = { label: string; value: number; max?: number; display?: string }
 

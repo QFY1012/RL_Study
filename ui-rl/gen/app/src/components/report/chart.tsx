@@ -3,7 +3,7 @@ import { Area, Bar, BarChart as RechartsBarChart, CartesianGrid, ComposedChart, 
 
 import { cn } from "@/lib/utils"
 import { ChartContainer, ChartLegend, ChartLegendContent, type ChartConfig } from "@/components/ui/chart"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 type Series = { key: string; label: string }
 

@@ -1,7 +1,7 @@
 // 网格检查:页面上每一块内容的左右边都要落在页面的栏线上(12 列,每列 74px,列间距 24px);
 // 每一节的上边落在场线上(场高 144px、场间距 24px)。
 // 网格里怎么填都可以(从哪一列开始、占几列、留不留空格),但不能落在两条栏线之间。
-// shoot.mjs 在组件库带 grid.ts(能写 start、rowSpan 的那一版)时调用;SHOOT_GRID=0 关掉。
+// shoot.mjs 在组件库带 placement.ts(能写 start、rowSpan 的那一版,以前叫 grid.ts)时调用;SHOOT_GRID=0 关掉。
 //
 // 量的是这些块:节标题和节内容、Group、Grid、Block、Rule、各内容组件(Text、Stat、表格、图表、列表、KV、
 // 进度条列表、截图条),放在 Grid 或按网格换行的截图条(写了 span)里的 Figure,以及多列 List 的每一条。表格、图表里面的东西不量;

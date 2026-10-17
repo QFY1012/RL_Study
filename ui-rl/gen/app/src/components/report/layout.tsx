@@ -6,7 +6,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import { COLS, Width, place, type Placed } from "./grid"
+import { COLS, Width, place, type Placed } from "./placement"
 
 // Sections are one empty field apart (24 + 144 + 24 = 192px). The title takes the
 // 9-column field; the report's facts sit in the margin column, their last line on

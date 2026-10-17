@@ -1,4 +1,6 @@
-// The page grid: 12 columns of 74px with 24px gutters, 1152px wide.
+// Placement on the page grid (12 columns of 74px with 24px gutters, 1152px wide):
+// the props every component takes to say which columns it sits on, and the
+// class names they turn into. Not a component; the Grid component is in layout.tsx.
 import * as React from "react"
 
 // Class names are written out in full so Tailwind generates them.

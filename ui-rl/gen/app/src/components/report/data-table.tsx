@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Progress } from "@/components/ui/progress"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 type Column = {
   key: string

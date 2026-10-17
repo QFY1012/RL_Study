@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { place, type Placed } from "./grid"
+import { place, type Placed } from "./placement"
 
 // A paragraph of body text.
 function Text({ children, className, span, start, rowSpan, rowStart }: Placed & { children: string }) {
