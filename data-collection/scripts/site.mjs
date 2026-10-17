@@ -19,10 +19,11 @@
 //                      how it did (spill, fits, content checks)
 //   pairs/<i>-orig.png, <i>-gen.png, <i>-side.png, <i>-gen.jpg   (images.mjs, pair)
 //   pairs/report.json  per pair its checks and the ones it failed (none: usable)
-// COUNT sections (default: every candidate section), ROUNDS revisions at most (default 2). Loading the page
-// may take LOAD_SECONDS (default 300); a page that takes longer is given up. Run from run.mjs, which shares out
-// the CPU among the sites: the load is done when it says so (slot); a loaded page
-// with its scripts off costs no CPU while it waits on the model.
+// COUNT sections (default: every candidate section), ROUNDS revisions at most
+// (default 2). Loading the page may take LOAD_SECONDS (default 300); a page that takes
+// longer is given up. Run from run.mjs, which starts the next site's load as soon as
+// this one's is done (loading): a loaded page with its scripts off costs no CPU while
+// it waits on the model.
 // Needs ~/.config/ui-rl/judge.env in the environment and NODE_USE_ENV_PROXY=1.
 import fs from "node:fs"
 import path from "node:path"
@@ -44,20 +45,16 @@ const write = (f, data) => fs.writeFileSync(path.join(dir, f), typeof data === "
 const t0 = Date.now()
 const log = (...a) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s]`, ...a)
 
-// a turn at the CPU from run.mjs; run on its own, no waiting
-const slot = async (fn) => {
-  if (!process.send) return fn()
-  process.send("take")
-  await new Promise((r) => process.once("message", r))
-  try { return await fn() } finally { process.send("give") }
-}
+// Loading is what takes the CPU; once it is done, run.mjs starts loading the next site
+// while this one waits on the model ("loaded")
+const loading = async (fn) => { try { return await fn() } finally { process.send?.("loaded") } }
 // the page takes one swap at a time
 let queue = Promise.resolve()
 const exclusive = (fn) => { const run = queue.then(fn); queue = run.catch(() => {}); return run }
 
 const browser = await chromium.launch({ executablePath: CHROME, proxy: { server: process.env.HTTPS_PROXY } })
 const page = await (await browser.newContext(CONTEXT)).newPage()
-const { snap, pagePng, unusable } = await slot(async () => {
+const { snap, pagePng, unusable } = await loading(async () => {
   const late = setTimeout(() => { log(`loading took over ${LOAD_SECONDS}s, given up`); process.exit(1) }, LOAD_SECONDS * 1000)
   await load(page, url)
   clearTimeout(late)

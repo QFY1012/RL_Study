@@ -27,14 +27,14 @@ const MAX_TOKENS = 65536
 
 const texts = (s) => s.items.filter((t) => t.text)
 
-// Sections worth redesigning: not the first or last (header, footer), within the
-// page's width (the swap is screenshot box by box), a sensible height, and content that
+// Sections worth redesigning: within the page's width (the swap is screenshot box by
+// box), a sensible height (a navigation bar is too short), and content that
 // is mostly text and images rather than a mock-up of an app built out of hundreds of
 // tiny labels. Up to count of them, spread over the page, each with the model that is
 // to make it; none of those in skip.
 export function choose(snap, count, skip = []) {
   const { sections } = snap
-  const candidates = sections.filter((s, k) => !skip.includes(s.i) && s.box.x >= 0 && s.box.x + s.box.w <= snap.size.w && k > 0 && k < sections.length - 1 && s.box.h >= 200 && s.box.h <= 1400 && texts(s).length >= 3 && s.items.length <= 40)
+  const candidates = sections.filter((s) => !skip.includes(s.i) && s.box.x >= 0 && s.box.x + s.box.w <= snap.size.w && s.box.h >= 200 && s.box.h <= 1400 && texts(s).length >= 3 && s.items.length <= 40)
   const n = Math.min(count, candidates.length)
   const first = [...snap.url].reduce((m, c) => m + c.charCodeAt(0), 0)
   return { candidates, chosen: Array.from({ length: n }, (_, k) => ({ s: candidates[Math.floor((k * candidates.length) / n)], model: MODELS[(first + k) % MODELS.length] })) }
