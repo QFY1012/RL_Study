@@ -47,10 +47,18 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
 - Fonts: only the font families listed in the tokens (they are already loaded). Colors: stay within the page's palette.
-- Background: the section's background is given and is not yours to change; the box already has it. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
+- Backdrop: the section's backdrop (given: the color behind it and any full-section layers of color, gradient or image) stays in place under your fragment and is not yours to change. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
 - Size: the section's box is exactly the width and height given, and your outer box is stretched to fill it. Lay the content out to fit inside that height; how the space is used (where the room goes, how big images and type are) is your design decision. Nothing may reach past the top or bottom of the box, and nothing may be cut off: no hidden overflow, no heights that clip.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
 Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
+
+// What stays behind the content: the color behind the section and the layers in it
+// that paint its background (read-page.mjs, backdrop; render.mjs keeps them).
+const backdrop = (s) => {
+  const layers = s.backdrop.filter((l) => l.image || l.color !== "rgba(0, 0, 0, 0)")
+    .map((l) => [l.color !== "rgba(0, 0, 0, 0)" ? l.color : null, l.image].filter(Boolean).join(" with ") + (l.opacity < 1 ? ` at opacity ${l.opacity}` : ""))
+  return `${s.background}${layers.length ? `, under full-section layers: ${layers.join("; ")}` : ""}`
+}
 
 const user = (s) => {
   const k = sections.indexOf(s)
@@ -67,7 +75,7 @@ Page tokens:
 - page background: ${tokens.pageBackground}
 - the other sections keep their content within ${tokens.contentWidth}px
 Section ${k + 1} of ${sections.length}. Its box is ${s.box.w}px wide and exactly ${s.box.h}px tall.
-- its background: ${s.background}
+- its backdrop (stays under your content): ${backdrop(s)}
 - section above: ${around(sections[k - 1]) ?? "none"}
 - section below: ${around(sections[k + 1]) ?? "none"}
 
@@ -136,7 +144,7 @@ if (!revise) {
     if (p.failed.includes("fit")) wrong.push(`your content reaches ${p.spill}px past the edge of the ${h}px box`)
     if (p.failed.includes("seam")) {
       const sides = Object.entries(p.seam).filter(([, v]) => v > 0.02).map(([side, v]) => `${side} (${Math.round(v * 100)}% of it)`)
-      wrong.push(`a visible line runs along the ${sides.join(", ")} edge of the box, where the original joins the page with none: something you paint (a background, panel, border or shadow) meets the edge of the box. The section's background is ${sections[i].background} and the box already has it`)
+      wrong.push(`a visible line runs along the ${sides.join(", ")} edge of the box, where the original joins the page with none: something you paint (a background, panel, border or shadow) meets the edge of the box. The section's backdrop is ${backdrop(sections[i])} and stays under your fragment`)
     }
     record.messages.push({ role: "user", content: `Rendered in the page, ${wrong.join("; and ")}. Change the design so everything fits inside ${h}px and the outer box is unpainted, with panels clear of its edges, keeping every rule above. Reply with the whole fragment again.` })
     const { fragment, usage } = await turn(i, record.messages)

@@ -107,7 +107,7 @@ export async function readPage(page) {
         const bgImg = getComputedStyle(el).backgroundImage
         const m = bgImg && bgImg.match(/url\("?([^")]+)"?\)/)
         const r = el.getBoundingClientRect()
-        if (m && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3) })
+        if (m && !el.hasAttribute("data-backdrop") && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3) })
         const blockKids = [...el.children].filter((c) => visible(c) && isBlock(c) && c.innerText?.trim())
         const text = el.innerText?.trim()
         const leaf = text && blockKids.length === 0 && r.width > 0 && r.height > 0
@@ -160,10 +160,36 @@ export async function readPage(page) {
       return area > COVERED * R.width * R.height ? found : []
     }
 
+    // A section's backdrop: the section itself and the elements in it that cover
+    // (nearly) all of its box and only paint a background (no text of their own; not an
+    // image, video, canvas or svg), such as layers of gradient behind the content. When
+    // a section is swapped (render.mjs) the backdrop stays and only the content on top
+    // is redesigned, so a section that has its own band of color keeps it. Marked
+    // data-backdrop; their backgrounds are not content items.
+    const backdrop = (sec) => {
+      const R = sec.getBoundingClientRect()
+      const layers = [sec, ...sec.querySelectorAll("*")].filter((e) => {
+        if (["IMG", "VIDEO", "CANVAS", "PICTURE"].includes(e.tagName) || e.closest("svg")) return false
+        if (!e.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return false
+        const cs = getComputedStyle(e)
+        if (cs.backgroundColor === "rgba(0, 0, 0, 0)" && cs.backgroundImage === "none") return false
+        if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return false
+        const r = e.getBoundingClientRect()
+        const w = Math.min(r.right, R.right) - Math.max(r.left, R.left), h = Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top)
+        return w > 0 && h > 0 && w * h >= 0.9 * R.width * R.height
+      })
+      return layers.map((e) => {
+        e.setAttribute("data-backdrop", "")
+        const cs = getComputedStyle(e)
+        return { color: cs.backgroundColor, image: cs.backgroundImage === "none" ? null : cs.backgroundImage.slice(0, 400), opacity: +cs.opacity }
+      })
+    }
+
     const secs = list.map((el, i) => {
       el.setAttribute("data-sec", String(i))
+      const layers = backdrop(el)
       const items = content(el)
-      return { i, tag: el.tagName.toLowerCase(), box: abs(el.getBoundingClientRect()), background: bg(el), items, overlappedBy: overlaps(el) }
+      return { i, tag: el.tagName.toLowerCase(), box: abs(el.getBoundingClientRect()), background: bg(el), backdrop: layers, items, overlappedBy: overlaps(el) }
     })
     return { secs, assets, shots }
   }, { MIN, MAX })

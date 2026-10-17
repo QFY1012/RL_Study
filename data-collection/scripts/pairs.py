@@ -15,6 +15,9 @@
 # card it has flush with the edge is not a seam), and what is left, if more than SEAM
 # on any side, fails the pair (run.mjs then sends it back to the model). A side on the
 # edge of the page has nothing outside it and is not measured.
+# Replay: the section must have come back the same as recorded (replay.json, written by
+# the render that made these images); otherwise what the model was given is not what
+# the original image shows.
 import json, os, sys
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
@@ -46,6 +49,7 @@ def band(img, top, bottom):
     return img.crop((0, max(top, 0), img.width, min(bottom, img.height)))
 
 
+replay = json.load(open(os.path.join(d, "replay.json")))
 orig = Image.open(os.path.join(r, "orig.png")).convert("RGB")
 ob = json.load(open(os.path.join(r, "orig.json")))["boxes"]
 report = {"pairs": {}}
@@ -88,7 +92,9 @@ for f in sorted(os.listdir(r)):
     side.paste(b, (a.width + pad * 2, head))
     side.save(os.path.join(out, f"{sec}-side.png"))
     entry = {"box": o, "spill": meta["spill"], "seam": seam, "above_rows_differing": round(above, 3), "below_rows_differing": round(below, 3), **meta["checks"]}
+    entry["replay"] = replay[sec]
     entry["failed"] = [name for name, bad in [
+        ("replay", not replay[sec]["same"]),
         ("fit", not meta["fits"]),
         ("seam", max(seam.values(), default=0) > SEAM),
         ("text", bool(entry["missingText"])),
