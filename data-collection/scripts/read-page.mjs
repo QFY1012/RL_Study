@@ -1,6 +1,8 @@
 // Reads a loaded page (site.mjs): splits it into sections, takes each section's
 // content in reading order, and measures the page's design tokens. Sections are marked
 // data-sec="<i>" in the page.
+import { alone } from "./browser.mjs"
+
 export async function readPage(page) {
   // Sections are the bands the page is stacked from, top to bottom. From <body> down:
   // an element whose children (those in flow) lie one under the other, none beside
@@ -13,9 +15,9 @@ export async function readPage(page) {
   // a band with it, not gone through. A child shorter than MIN with nothing in it (a
   // spacer, a rule) is no section. Each section gets data-sec="<i>".
   const MIN = 120, MAX = 1800
-  const { secs: sections, assets, shots } = await page.evaluate(({ MIN, MAX }) => {
+  const { secs: sections, assets } = await page.evaluate(({ MIN, MAX }) => {
     // read afresh (site.mjs reads again once the page has come to rest)
-    for (const e of document.querySelectorAll("[data-sec], [data-backdrop]")) { e.removeAttribute("data-sec"); e.removeAttribute("data-backdrop") }
+    for (const e of document.querySelectorAll("[data-sec], [data-backdrop], [data-part], [data-shoot]")) for (const a of ["data-sec", "data-backdrop", "data-part", "data-shoot"]) e.removeAttribute(a)
     // shown: rendered, not hidden, not fully transparent (itself or an ancestor), with a size
     const visible = (el) => {
       const r = el.getBoundingClientRect()
@@ -60,8 +62,47 @@ export async function readPage(page) {
       })
     }
     const list = split(document.body).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
+    list.forEach((el, i) => el.setAttribute("data-sec", String(i)))
 
     const abs = (r) => ({ x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), w: Math.round(r.width), h: Math.round(r.height) })
+    const W = document.documentElement.scrollWidth, H = document.documentElement.scrollHeight
+    // the part of a box that lies on the page (only that can show), or null
+    const onPage = (r) => {
+      const x0 = Math.max(0, r.left + scrollX), y0 = Math.max(0, r.top + scrollY)
+      const x1 = Math.min(W, r.right + scrollX), y1 = Math.min(H, r.bottom + scrollY)
+      return x1 - x0 >= 1 && y1 - y0 >= 1 ? { x: Math.round(x0), y: Math.round(y0), w: Math.round(x1 - x0), h: Math.round(y1 - y0) } : null
+    }
+    const PICTURES = ["IMG", "svg", "CANVAS", "VIDEO", "IFRAME"]
+    const ownText = (e) => [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())
+
+    // What lies over a section from outside it. A page's framework can put part of a
+    // section's content in a layer of its own elsewhere in the document, placed over the
+    // section (vercel's hero picture and its link sit in a fixed layer at the end of
+    // <body>): a reader sees it as the section's, and left out, it would stay over the
+    // new content when the section is swapped. So a layer placed out of flow (absolute,
+    // fixed) outside every section, the outermost such, with something in it to see
+    // (text, a picture), is part of the section that at least half of what it shows lies
+    // over: marked data-part="<i>", read with it and hidden with it (swap.mjs). One
+    // mostly over no one section (a header across the top of the page) stays the page's.
+    const holders = new Set()
+    for (const el of list) for (let a = el.parentElement; a; a = a.parentElement) holders.add(a)
+    const loose = [...document.body.querySelectorAll("*")].filter((e) => !holders.has(e) && !e.closest("[data-sec]") && !e.parentElement.closest("svg") && ["absolute", "fixed"].includes(getComputedStyle(e).position))
+    const placed = new Set(loose)
+    const secBoxes = list.map((el) => onPage(el.getBoundingClientRect()))
+    for (const layer of loose) {
+      let outer = true
+      for (let a = layer.parentElement; a && outer; a = a.parentElement) if (placed.has(a)) outer = false
+      if (!outer) continue
+      const shown = [layer, ...layer.querySelectorAll("*")]
+        .filter((e) => !e.parentElement.closest("svg") && (PICTURES.includes(e.tagName) || ownText(e)) && e.checkVisibility({ opacityProperty: true, visibilityProperty: true }))
+        .map((e) => onPage(e.getBoundingClientRect())).filter(Boolean)
+      if (!shown.length) continue
+      const x0 = Math.min(...shown.map((b) => b.x)), y0 = Math.min(...shown.map((b) => b.y))
+      const x1 = Math.max(...shown.map((b) => b.x + b.w)), y1 = Math.max(...shown.map((b) => b.y + b.h))
+      const over = secBoxes.map((b) => (b ? Math.max(0, Math.min(x1, b.x + b.w) - Math.max(x0, b.x)) * Math.max(0, Math.min(y1, b.y + b.h) - Math.max(y0, b.y)) : 0))
+      const best = over.indexOf(Math.max(...over))
+      if (over[best] >= 0.5 * (x1 - x0) * (y1 - y0)) layer.setAttribute("data-part", String(best))
+    }
     const bg = (el) => {
       for (let e = el; e; e = e.parentElement) {
         const c = getComputedStyle(e).backgroundColor
@@ -101,6 +142,35 @@ export async function readPage(page) {
     // An image given as a data: URL is an asset too: it can run to many kilobytes
     const asset = (url) => { assets.push(url); return `asset:${assets.length - 1}` }
     const source = (url) => (url.startsWith("data:") ? asset(url) : url)
+    // A picture shot from the page (pictures, below, for the sections a model gets):
+    // marked data-shoot="<k>", its item's src shot:<k> until then
+    let shoots = 0
+    const shoot = (el) => { el.setAttribute("data-shoot", String(shoots)); return shoots++ }
+
+    // A drawing: what the page marks as one picture (role=img), or keeps from screen
+    // readers (aria-hidden) while its text is nowhere else on the page to read (not the
+    // visible copy of a heading also given to screen readers whole, nor a carousel's
+    // repeat of its cards): a product's screen, a diagram, a keyboard, built of HTML.
+    // Its labels are part of the picture, not the section's copy, so it is one picture,
+    // shot as it shows, not text items.
+    const norm = (t) => t.toLowerCase().replace(/\s+/g, "")
+    const readable = (() => {
+      let out = ""
+      const add = (n) => {
+        for (const c of n.childNodes) {
+          if (c.nodeType === 3) out += c.textContent
+          else if (c.nodeType === 1 && !["SCRIPT", "STYLE", "NOSCRIPT", "TEMPLATE"].includes(c.tagName) && c.getAttribute("aria-hidden") !== "true") add(c)
+        }
+      }
+      add(document.body)
+      return norm(out)
+    })()
+    const drawing = (el) => {
+      if (PICTURES.includes(el.tagName)) return false
+      if (el.getAttribute("role") === "img") return true
+      const t = el.getAttribute("aria-hidden") === "true" && norm(el.textContent)
+      return !!t && !readable.includes(t)
+    }
 
     // Rendered: laid out, not inside content-visibility: hidden, and not transparent
     // (itself or an ancestor). What is not rendered shows nothing of what is in it;
@@ -137,27 +207,31 @@ export async function readPage(page) {
       // An element that is not rendered shows nothing in it; one with no size of its
       // own still can (a <picture> around an absolutely placed <img> is 0x0, an element
       // with display: contents has no box at all), so only the first ends the walk.
+      // A picture is given only for the part of it on the page, all that can show
       const walk = (el) => {
         if (getComputedStyle(el).display === "contents") { for (const c of el.children) walk(c); return }
         if (!rendered(el)) return
         const tag = el.tagName
         if (tag === "IMG") {
-          const r = el.getBoundingClientRect()
-          if (seen(el) && r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: source(el.currentSrc || el.src), alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3), box: abs(r) })
+          const r = el.getBoundingClientRect(), box = onPage(r)
+          if (seen(el) && box && r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: source(el.currentSrc || el.src), alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3), box })
           return
         }
-        // what a video or canvas shows is screenshot into an asset (shots, below)
-        if (tag === "VIDEO" || tag === "CANVAS") {
-          const r = el.getBoundingClientRect()
-          if (seen(el) && r.width >= 48 && r.height >= 48) {
-            shots.push(abs(r))
-            items.push({ kind: "illustration", src: `shot:${shots.length - 1}`, alt: tag === "VIDEO" ? "video" : "canvas", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
+        // what a video or canvas shows, and a drawing, is shot as it shows
+        if (tag === "VIDEO" || tag === "CANVAS" || drawing(el)) {
+          const box = onPage(el.getBoundingClientRect())
+          const least = tag === "VIDEO" || tag === "CANVAS" ? 48 : 8
+          if (seen(el) && box && box.w >= least && box.h >= least) {
+            const k = shoot(el)
+            items.push({ kind: box.w <= 48 && box.h <= 48 ? "icon" : "illustration", src: `shot:${k}`, alt: tag === "VIDEO" ? "video" : tag === "CANVAS" ? "canvas" : el.getAttribute("aria-label") || "", aspect: +(box.w / box.h).toFixed(3), box, shoot: k })
           }
           return
         }
+        // an inline SVG is kept as its own source, and shot too: one that does not render
+        // alone as it does in the page is given as its shot (pictures)
         if (tag === "svg") {
-          const r = el.getBoundingClientRect()
-          if (seen(el) && r.width >= 8 && r.height >= 8) items.push({ kind: r.width <= 48 && r.height <= 48 ? "icon" : "illustration", src: svgAsset(el), alt: el.getAttribute("aria-label") || "", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
+          const r = el.getBoundingClientRect(), box = onPage(r)
+          if (seen(el) && box && r.width >= 8 && r.height >= 8) items.push({ kind: r.width <= 48 && r.height <= 48 ? "icon" : "illustration", src: svgAsset(el), alt: el.getAttribute("aria-label") || "", aspect: +(r.width / r.height).toFixed(3), box, shoot: shoot(el) })
           return
         }
         // a background image: an element showing only that, with nothing in it, is an
@@ -165,10 +239,10 @@ export async function readPage(page) {
         // it behind the content, a picture when big enough
         // (the first url() of the computed value, which writes it in double quotes)
         const m = getComputedStyle(el).backgroundImage.match(/url\("((?:[^"\\]|\\.)*)"\)/)
-        const r = el.getBoundingClientRect()
+        const r = el.getBoundingClientRect(), box = onPage(r)
         const bare = !el.children.length && !el.textContent.trim()
-        if (m && seen(el) && !el.hasAttribute("data-backdrop") && (bare ? r.width >= 8 && r.height >= 8 : r.width >= 100 && r.height >= 100)) {
-          items.push({ kind: bare && r.width <= 48 && r.height <= 48 ? "icon" : "image", src: source(m[1].replace(/\\(.)/g, "$1")), alt: bare ? el.getAttribute("aria-label") || el.getAttribute("title") || "" : "background", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
+        if (m && seen(el) && box && !el.hasAttribute("data-backdrop") && (bare ? r.width >= 8 && r.height >= 8 : r.width >= 100 && r.height >= 100)) {
+          items.push({ kind: bare && r.width <= 48 && r.height <= 48 ? "icon" : "image", src: source(m[1].replace(/\\(.)/g, "$1")), alt: bare ? el.getAttribute("aria-label") || el.getAttribute("title") || "" : "background", aspect: +(r.width / r.height).toFixed(3), box })
         }
         const blockKids = laidOut(el).filter((c) => rendered(c) && isBlock(c) && shownText(c))
         const text = shownText(el)
@@ -190,6 +264,8 @@ export async function readPage(page) {
         for (const c of el.children) walk(c)
       }
       walk(sec)
+      // and what lies over it from outside (data-part, above), after it
+      for (const part of document.querySelectorAll(`[data-part="${sec.dataset.sec}"]`)) walk(part)
       return items
     }
 
@@ -230,7 +306,6 @@ export async function readPage(page) {
     }
 
     const secs = list.map((el, i) => {
-      el.setAttribute("data-sec", String(i))
       // text right in the section element is wrapped in a plain <span>, so that, like the
       // rest of its content, it can be hidden on its own when the section is swapped
       // (swap.mjs): hiding the section element would hide its backdrop with it
@@ -239,31 +314,22 @@ export async function readPage(page) {
       const items = content(el)
       return { i, tag: el.tagName.toLowerCase(), box: abs(el.getBoundingClientRect()), background: bg(el), backdrop: layers, items }
     })
-    return { secs, assets, shots }
+    return { secs, assets }
   }, { MIN, MAX })
 
-  // Videos and canvases are screenshot as they are now, as JPEG assets. A clip of the
-  // full page, not an element screenshot: that waits for the element to hold still,
-  // which a canvas drawing every frame never does.
-  // Only what lies on the page can be screenshot: the clip is cut to the page, and an
-  // element entirely off it (placed outside, say) shows nothing and is no item.
-  const size = await page.evaluate(() => ({ w: document.documentElement.scrollWidth, h: document.documentElement.scrollHeight }))
-  for (const [k, clip] of shots.entries()) {
-    const x = Math.max(0, clip.x), y = Math.max(0, clip.y)
-    const w = Math.min(clip.x + clip.w, size.w) - x, h = Math.min(clip.y + clip.h, size.h) - y
-    let src = null
-    if (w >= 1 && h >= 1) {
-      const jpg = await page.screenshot({ clip: { x, y, width: w, height: h }, fullPage: true, type: "jpeg", quality: 90, timeout: 60000 })
-      assets.push(`data:image/jpeg;base64,${jpg.toString("base64")}`)
-      src = `asset:${assets.length - 1}`
-    }
-    for (const s of sections) s.items = s.items.flatMap((t) => (t.src !== `shot:${k}` ? [t] : src ? [{ ...t, src }] : []))
-  }
+  // Where each section's content runs across the page (extent), and from that the
+  // page's column: the left edge most sections' content starts at (within 2px), and as
+  // far from the right edge of the page
+  for (const s of sections) s.edges = await page.evaluate(extent, { sec: s.i })
+  const W = await page.evaluate(() => document.documentElement.scrollWidth)
+  const lefts = sections.map((s) => s.edges?.left).filter((x) => x != null && x < W / 2)
+  const count = (x) => lefts.filter((y) => Math.abs(y - x) <= 2).length
+  const left = lefts.length ? lefts.reduce((a, b) => (count(b) > count(a) || (count(b) === count(a) && b < a) ? b : a)) : 0
+  const column = { left, right: W - left }
 
   // Page-level design tokens: the fonts actually used for headings and body text, the
   // font faces the page has loaded (family, weight, style: only these render), the type
-  // scale, the most used text
-  // and background colors, and the width the content keeps to.
+  // scale, the most used text and background colors, and the page's column.
   const tokens = await page.evaluate(() => {
     const font = (sel) => { const el = document.querySelector(sel); return el ? getComputedStyle(el).fontFamily : null }
     const count = (m, k, w = 1) => m.set(k, (m.get(k) ?? 0) + w)
@@ -278,28 +344,28 @@ export async function readPage(page) {
       if (s.backgroundColor !== "rgba(0, 0, 0, 0)") count(back, s.backgroundColor, r.width * r.height)
     }
     const top = (m, n) => [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k]) => k)
-    const blocks = [...document.querySelectorAll("[data-sec] *")].map((el) => el.getBoundingClientRect()).filter((r) => r.width > 200 && r.width < innerWidth * 0.95)
-    const contentWidth = blocks.length ? Math.max(...blocks.map((r) => r.width)) : null
-    // The page's type scale: every style text is set in, inside the sections (font, size,
-    // line height, weight, letter spacing), with its role (heading level, button, link,
-    // text), how many characters use it and in which sections. generate.mjs gives the
-    // model the styles used in other sections than the one it redesigns.
+    // The page's type scale: every style the sections' copy is set in (font, size, line
+    // height, weight, letter spacing), with its role (heading level, button, link, text)
+    // and how many characters use it in each section; not the labels of a picture
+    // (data-shoot: a drawing, an SVG). generate.mjs gives the model the styles of the
+    // other sections than the one it redesigns.
     const styles = new Map()
-    for (const el of document.querySelectorAll("[data-sec] *")) {
+    for (const el of document.querySelectorAll("[data-sec] *, [data-part], [data-part] *")) {
       const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join("")
-      if (!own || !el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue
+      if (!own || el.closest("[data-shoot]") || !el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue
       const cs = getComputedStyle(el)
       const h = el.closest("h1,h2,h3,h4,h5,h6")
       const role = h ? h.tagName.toLowerCase() : el.closest("button,[role=button]") ? "button" : el.closest("a") ? "link" : "text"
       const key = [role, cs.fontFamily.split(",")[0].trim().replace(/^["']|["']$/g, ""), cs.fontSize, cs.lineHeight, cs.fontWeight, cs.letterSpacing, cs.textTransform].join("|")
-      const st = styles.get(key) ?? { chars: 0, sections: new Set() }
+      const st = styles.get(key) ?? { chars: 0, sections: {} }
+      const i = el.closest("[data-sec]")?.getAttribute("data-sec") ?? el.closest("[data-part]").getAttribute("data-part")
       st.chars += own.length
-      st.sections.add(Number(el.closest("[data-sec]").getAttribute("data-sec")))
+      st.sections[i] = (st.sections[i] ?? 0) + own.length
       styles.set(key, st)
     }
-    const typeScale = [...styles.entries()].sort((a, b) => b[1].chars - a[1].chars).slice(0, 40).map(([key, st]) => {
+    const typeScale = [...styles.entries()].sort((a, b) => b[1].chars - a[1].chars).map(([key, st]) => {
       const [role, family, size, lineHeight, weight, letterSpacing, transform] = key.split("|")
-      return { role, family, size, lineHeight, weight, letterSpacing, transform, chars: st.chars, sections: [...st.sections].sort((a, b) => a - b) }
+      return { role, family, size, lineHeight, weight, letterSpacing, transform, chars: st.chars, sections: st.sections }
     })
     const faces = {}
     for (const f of document.fonts) if (f.status === "loaded") (faces[f.family.replace(/^["']|["']$/g, "")] ??= new Set()).add(`${f.weight}${f.style === "normal" ? "" : ` ${f.style}`}`)
@@ -310,8 +376,84 @@ export async function readPage(page) {
       textColors: top(text, 6),
       backgroundColors: top(back, 6),
       pageBackground: getComputedStyle(document.body).backgroundColor,
-      contentWidth: contentWidth && Math.round(contentWidth),
     }
   })
-  return { sections, assets, tokens }
+  return { sections, assets, tokens: { ...tokens, column } }
+}
+
+// Where content runs across the page: from the left edge of the leftmost thing it shows
+// to the right edge of the rightmost, cut to the page ({ left, right }, or null if it
+// shows nothing), and the same of its text alone (text). Things shown are lines of
+// text, pictures (img, svg, canvas, video, iframe) and boxes painted with a background,
+// border or shadow (a card, a panel), not the section's backdrop. Of section i with its
+// parts as the page has it ({ sec: i }), or of the fragment swapped in for it
+// ({ gen: i }, swap.mjs). Run in the page (page.evaluate).
+export function extent({ sec, gen }) {
+  const roots = gen != null ? [document.querySelector(`[data-gen="${gen}"]`).shadowRoot] : [...document.querySelectorAll(`[data-sec="${sec}"], [data-part="${sec}"]`)]
+  const W = document.documentElement.scrollWidth
+  const all = { left: Infinity, right: -Infinity }, text = { left: Infinity, right: -Infinity }
+  const add = (e, r) => { if (r.width > 0 && r.height > 0) { e.left = Math.min(e.left, r.left + scrollX); e.right = Math.max(e.right, r.right + scrollX) } }
+  const range = document.createRange()
+  for (const root of roots) {
+    for (const el of [...(root.nodeType === 1 ? [root] : []), ...root.querySelectorAll("*")]) {
+      if (el.parentElement?.closest("svg") || !el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue
+      if (["IMG", "svg", "CANVAS", "VIDEO", "IFRAME"].includes(el.tagName)) { add(all, el.getBoundingClientRect()); continue }
+      for (const n of el.childNodes) if (n.nodeType === 3 && n.textContent.trim()) { range.selectNodeContents(n); const r = range.getBoundingClientRect(); add(all, r); add(text, r) }
+      const cs = getComputedStyle(el)
+      const painted = cs.backgroundColor !== "rgba(0, 0, 0, 0)" || cs.backgroundImage !== "none" || cs.boxShadow !== "none" || ["Top", "Right", "Bottom", "Left"].some((d) => parseFloat(cs[`border${d}Width`]) > 0 && cs[`border${d}Style`] !== "none")
+      if (painted && !el.hasAttribute("data-backdrop")) add(all, el.getBoundingClientRect())
+    }
+  }
+  const cut = (e) => (e.left < e.right ? { left: Math.round(Math.max(0, e.left)), right: Math.round(Math.min(W, e.right)) } : null)
+  return all.left < all.right ? { ...cut(all), text: cut(text) } : null
+}
+
+// Whether content running across the page as e does (extent) keeps to its grid, all of
+// it or its text: starts at the page's column (within 2px) or at the page's edge, or
+// is centered on the page (within 3px). Text can keep to the grid while a picture runs
+// past it (stripe's background of dots), and the edge of a card to it while the text in
+// it is set in.
+export const onGrid = (e, column, W) => {
+  const keeps = (x) => !!x && (Math.abs(x.left - column.left) <= 2 || x.left <= 2 || Math.abs((x.left + x.right) / 2 - W / 2) <= 3)
+  return !!e && (keeps(e) || keeps(e.text))
+}
+
+// The pictures in the given sections' items that are shot from the page (data-shoot):
+// each shot alone (browser.mjs) into an asset, a PNG. An inline SVG kept as its own
+// source (svgAsset) is shot too and compared with it (images.mjs, shot: unlike, the
+// share of its pixels that differ), and given as its shot where it does not render
+// alone as it does in the page: an SVG used as an image has no page around it, so none
+// of the page's CSS (a keyboard drawn in HTML inside an SVG lays out as a column of
+// labels), fonts or images. A picture that shows nothing in its shot (none of it on
+// the page; or hidden there, say one of two logos stacked to cross-fade, cut away by
+// what holds it) is no item. Done only for the sections a model gets: a shot is a
+// full-page capture. Returns how many were shot, which SVGs are given as their shot
+// (with how much they differed) and how many pictures showed nothing.
+const UNLIKE = 0.01
+export async function pictures(page, snap, sections, shotOf) {
+  let shot = 0, unseen = 0
+  const unlikeSvgs = []
+  for (const s of sections) {
+    const items = []
+    for (const t of s.items) {
+      if (t.shoot == null) { items.push(t); continue }
+      const png = await alone(page, `[data-shoot="${t.shoot}"]`)
+      const svg = t.src.startsWith("asset:") ? snap.assets[Number(t.src.slice("asset:".length))] : null
+      const seen = png && (await shotOf(png, svg))
+      if (!seen?.shows) { unseen++; continue }
+      const url = `data:image/png;base64,${png.toString("base64")}`
+      const { shoot, ...item } = t
+      if (!svg) {
+        snap.assets.push(url)
+        item.src = `asset:${snap.assets.length - 1}`
+        shot++
+      } else if (seen.unlike > UNLIKE) {
+        snap.assets[Number(t.src.slice("asset:".length))] = url
+        unlikeSvgs.push(`#${s.i} ${t.src} ${t.box.w}x${t.box.h} ${(seen.unlike * 100).toFixed(1)}%`)
+      }
+      items.push(item)
+    }
+    s.items = items
+  }
+  return { shot, unlikeSvgs, unseen }
 }

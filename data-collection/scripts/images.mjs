@@ -1,7 +1,8 @@
 // The image work of a site (site.mjs), done with canvases in a blank page of its own,
 // where the page's screenshot (page.png) is decoded once and kept: where a section's
-// content shows (differs), what the model is shown (look), and each pair with its seam
-// (pair).
+// content shows (differs), whether a picture shot alone shows anything and an SVG
+// renders alone as it shows (shot), what the model is shown (look), and each pair with
+// its seam (pair).
 const MARGIN = 700 // page above and below the section in what the model is shown
 const BAND = 300 // page above and below the section in a pair
 
@@ -48,6 +49,29 @@ export async function images(browser, pagePng) {
       }
       return x1 < 0 ? null : { x: x0, y: top + y0, w: x1 - x0 + 1, h: y1 - y0 + 1 }
     }, { band: url(png), top, base: base && url(base), over }),
+
+    // A shot (a PNG; read-page.mjs, pictures): whether anything shows in it (a pixel
+    // not near transparent: shows), and, given an SVG (a data: URL), the share of its
+    // pixels that differ, by more than 32 in some channel, alpha included, from the SVG
+    // drawn alone at the shot's size (unlike; 1 if it does not draw at all)
+    shot: (png, svg = null) => blank.evaluate(async ({ svg, png }) => {
+      const b = await window.__open(png)
+      const c = new OffscreenCanvas(b.width, b.height)
+      const g = c.getContext("2d", { willReadFrequently: true })
+      g.drawImage(b, 0, 0)
+      const q = g.getImageData(0, 0, b.width, b.height).data
+      let shows = false
+      for (let k = 3; k < q.length && !shows; k += 4) shows = q[k] > 8
+      if (!svg) return { shows }
+      let a
+      try { a = await window.__open(svg) } catch { return { shows, unlike: 1 } }
+      g.clearRect(0, 0, b.width, b.height)
+      g.drawImage(a, 0, 0, b.width, b.height)
+      const p = g.getImageData(0, 0, b.width, b.height).data
+      let n = 0
+      for (let k = 0; k < p.length; k += 4) if (Math.max(Math.abs(p[k] - q[k]), Math.abs(p[k + 1] - q[k + 1]), Math.abs(p[k + 2] - q[k + 2]), Math.abs(p[k + 3] - q[k + 3])) > 32) n++
+      return { shows, unlike: n / (p.length / 4) }
+    }, { svg, png: url(png) }),
 
     // What the model is shown for section s (generate.mjs), as JPEG data URLs:
     // - slot: the page around the section, MARGIN px above and below, at half size,

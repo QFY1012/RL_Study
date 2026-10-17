@@ -1,22 +1,24 @@
 // Swapping a generated section into the loaded page (site.mjs), in place of the
 // original's content, and back.
 import { freeze } from "./browser.mjs"
+import { extent, onGrid } from "./read-page.mjs"
 
 // A section's content is hidden with visibility (nothing moves) and its backdrop, the
-// layers marked data-backdrop (read-page.mjs), left showing; at once, with no
-// transition (a page's "transition: all" would keep it showing for a while). By a
-// style sheet of ours and an attribute on the section (data-hiding), not by writing
-// the page's own styles: a style attribute does not always read back as it was set (a
+// layers marked data-backdrop (read-page.mjs), left showing; and with it, whole, what
+// lies over it from outside (its parts, data-part); at once, with no transition (a
+// page's "transition: all" would keep it showing for a while). By a style sheet of
+// ours and an attribute on the section and its parts (data-hiding), not by writing the
+// page's own styles: a style attribute does not always read back as it was set (a
 // shorthand set to a var() reads back with its longhands empty), so one written back
 // as it was read can lose what it had (a button its background).
 export const hide = (page, secs) => page.evaluate((secs) => {
   if (!document.getElementById("gen-hiding")) {
     document.head.append(Object.assign(document.createElement("style"), {
       id: "gen-hiding",
-      textContent: "[data-hiding] *:not([data-backdrop]) { visibility: hidden !important; transition-property: none !important } [data-hiding] [data-backdrop] { visibility: visible !important; transition-property: none !important }",
+      textContent: "[data-hiding] *:not([data-backdrop]), [data-part][data-hiding] { visibility: hidden !important; transition-property: none !important } [data-hiding] [data-backdrop] { visibility: visible !important; transition-property: none !important }",
     }))
   }
-  for (const i of secs) document.querySelector(`[data-sec="${i}"]`).setAttribute("data-hiding", "")
+  for (const i of secs) for (const e of document.querySelectorAll(`[data-sec="${i}"], [data-part="${i}"]`)) e.setAttribute("data-hiding", "")
 }, secs)
 export const unhide = async (page) => {
   await page.evaluate(() => { for (const e of document.querySelectorAll("[data-hiding]")) e.removeAttribute("data-hiding") })
@@ -128,7 +130,7 @@ export async function swap(page, snap, s, fragment) {
   try {
     await put(page, s, s.box, fragment.replace(/asset:(\d+)/g, (m, n) => snap.assets[Number(n)] ?? m))
     await freeze(page)
-    return { png: await shoot(page, s.box), ...(await check(page, s, fragment)) }
+    return { png: await shoot(page, s.box), ...(await check(page, snap, s, fragment)) }
   } finally {
     await takeOut(page, s)
     await unhide(page)
@@ -136,10 +138,14 @@ export async function swap(page, snap, s, fragment) {
 }
 
 // How the swapped-in fragment did: how far its content reaches past the top or bottom
-// of the box (spill: anything past it does not fit, cut off or not) and the content
-// checks. No callbacks into the page (a TreeWalker filter, say): with its scripts off,
-// the browser runs none.
-async function check(page, s, fragment) {
+// of the box (spill: anything past it does not fit, cut off or not), the content
+// checks, and whether it keeps to the page's grid (read-page.mjs, onGrid) where the
+// original does: the sections around keep to it, so a section that does not stands out
+// by that alone (offGrid, with where its content runs: edges). No callbacks into the
+// page (a TreeWalker filter, say): with its scripts off, the browser runs none.
+async function check(page, snap, s, fragment) {
+  const edges = await page.evaluate(extent, { gen: s.i })
+  const offGrid = onGrid(s.edges, snap.tokens.column, snap.size.w) && !onGrid(edges, snap.tokens.column, snap.size.w)
   const r = await page.evaluate(({ sec, items, raw }) => {
     const host = document.querySelector(`[data-gen="${sec}"]`)
     const root = host.shadowRoot
@@ -167,5 +173,5 @@ async function check(page, s, fragment) {
     const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(f))
     return { spill, checks: { missingText, brokenImages, missingImages, overflow, fontsMissing } }
   }, { sec: s.i, items: s.items, raw: fragment })
-  return { spill: r.spill, fits: r.spill <= 1, checks: r.checks }
+  return { spill: r.spill, fits: r.spill <= 1, checks: { ...r.checks, offGrid, edges } }
 }

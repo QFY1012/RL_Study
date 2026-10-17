@@ -269,28 +269,41 @@ export async function load(page, url) {
     return gone
   })
   console.log(`hid ${hidden.length}:`, hidden.join(" | ") || "nothing")
+  // What the page does about what is gone (an observer of sizes, held back a while
+  // by a timer, say) is done in page time: some of it
+  await step(1000)
 
   // A few frames with every WebGL context drawing, so each render loop shows where it
   // has got to (INIT); then how everything looks at the top, and each element put back
   // to how it looks in view (look).
   for (const f of page.frames()) await f.evaluate(() => { window.__drawAll = true }).catch(() => {})
   await step(50)
+  for (const f of page.frames()) await f.evaluate(() => { window.__drawAll = false }).catch(() => {})
   await page.evaluate(look, LOOK)
   const restyled = await page.evaluate(lookBack, LOOK)
   if (restyled) console.log(`${restyled} elements put back to how they look in view`)
+
+  // Canvases and videos pinned as what they show (pin; those that cannot be read, shot
+  // alone, while scripts still run: with them off a canvas shows nothing), and then,
+  // again, page time for the page to do what it does about what changed: a full-page
+  // capture resizes the window for a moment, and a page that sizes things from the
+  // window's size, or watches sizes, acts on that, and on getting its size back only
+  // once page time moves (stripe's drawings of a checkout, measured in that moment,
+  // stayed at a 56th of their size).
+  const pinned = await pin(page)
+  const shot = await pinAlone(page, pinned.unread)
+  console.log(`pinned ${pinned.read} canvases and videos as read${shot.length ? `, ${shot.length} as shot alone: ${shot.slice(0, 5).join(" | ")}` : ""}${pinned.unread.length > shot.length ? `; ${pinned.unread.length - shot.length} reach past the page, not pinned` : ""}${pinned.unshown ? `; ${pinned.unshown} videos did not show their frame in 5s` : ""}`)
+  await step(1000)
   await freeze(page)
   mark(`${(pageTime / 1000).toFixed(2)}s of page time in all, frozen`)
 
   // The page's scripts off: it is now one fixed state. That must not change how it
   // renders, but HTML renders some things differently without scripting: <noscript>
-  // and video controls (both kept as with scripts, above), canvases (pinned first,
-  // with videos) and @media (scripting); so everything's layout and paint is compared
+  // and video controls (both kept as with scripts, above), canvases (pinned, with
+  // videos) and @media (scripting); so everything's layout and paint is compared
   // before and after (unchanged). A first full-page capture (thrown away) has the
   // browser load what only a capture of the whole page asks for (lazy frames and images
   // far from the window); after it, every capture is the same.
-  const pinned = await pin(page)
-  console.log(`pinned ${pinned.read} canvases and videos as read${pinned.shot.length ? `, ${pinned.shot.length} as shot alone: ${pinned.shot.slice(0, 5).join(" | ")}` : ""}${pinned.unshown ? `; ${pinned.unshown} videos did not show their frame in 5s` : ""}`)
-  await freeze(page)
   const before = await page.evaluate(rendering)
   const cdp = await page.context().newCDPSession(page)
   await cdp.send("Emulation.setScriptExecutionDisabled", { value: true })
@@ -366,7 +379,8 @@ function lookBack(LOOK) {
 // read where it can be: a canvas's own pixels, a video's frame drawn on a canvas, once
 // that frame is on screen (requestVideoFrameCallback; at most 5s). What cannot be read
 // so (a canvas with an image from another origin drawn in it, a video from another
-// origin, a canvas handed to a worker, a video with no frame) is shot alone (isolated).
+// origin, a canvas handed to a worker, a video with no frame) is marked data-pin="<k>"
+// (unread), to be shot alone (pinAlone).
 async function pin(page) {
   const unshown = await page.evaluate(() => {
     const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
@@ -382,7 +396,7 @@ async function pin(page) {
   for (const end = Date.now() + 5000; left && Date.now() < end; await sleep(100)) left = await page.evaluate(() => window.__videos.filter((v) => !window.__shown.has(v)).length)
   const { read, unread } = await page.evaluate(() => {
     const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
-    window.__pins = []
+    const unread = []
     let read = 0
     for (const el of roots.flatMap((r) => [...r.querySelectorAll("canvas, video")])) {
       if (!el.checkVisibility()) continue
@@ -400,46 +414,74 @@ async function pin(page) {
         el.style.setProperty("content", `url("${url}")`, "important")
         el.setAttribute("data-pinned", "")
         read++
-      } catch { window.__pins.push(el) }
+      } catch {
+        el.setAttribute("data-pin", String(unread.length))
+        unread.push(`<${el.tagName.toLowerCase()} class="${(el.className?.baseVal ?? el.className ?? "").toString().slice(0, 40)}">`)
+      }
     }
-    return { read, unread: window.__pins.map((el) => `<${el.tagName.toLowerCase()} class="${(el.className?.baseVal ?? el.className ?? "").toString().slice(0, 40)}">`) }
+    return { read, unread }
   })
-  const shot = []
-  for (const [k, what] of unread.entries()) if (await isolated(page, k)) shot.push(what)
-  return { read, shot, unshown: left }
+  return { read, unread, unshown: left }
 }
 
-// Pinned element k (window.__pins) as shot from the page alone: everything else made
-// invisible and the page's background transparent; and what it and its ancestors do to
-// its pixels on the way to the screen (opacity, filters, blending, masks, transforms),
-// which the pinned image goes through again, undone for the shot. By a style sheet of
-// ours and attributes, taken out after (swap.mjs, hide: why). One reaching past the page
-// is left as it is (false).
-async function isolated(page, k) {
-  const clip = await page.evaluate((k) => {
-    const el = window.__pins[k]
+// The canvases and videos pin could not read, shot alone (with what the pinned image
+// goes through again on the way to the screen undone: all) and pinned as that; one
+// reaching past the page is left as it is. Returns those shot.
+async function pinAlone(page, unread) {
+  const shot = []
+  for (const [k, what] of unread.entries()) {
+    const png = await alone(page, `[data-pin="${k}"]`, { all: true, whole: true })
+    await page.evaluate(({ k, url }) => {
+      const roots = [document, ...[...document.querySelectorAll("*")].filter((e) => e.shadowRoot).map((e) => e.shadowRoot)]
+      for (const r of roots) for (const el of r.querySelectorAll(`[data-pin="${k}"]`)) {
+        el.removeAttribute("data-pin")
+        if (!url) continue
+        el.style.setProperty("content", `url("${url}")`, "important")
+        el.setAttribute("data-pinned", "")
+      }
+    }, { k, url: png && `data:image/png;base64,${png.toString("base64")}` })
+    if (png) shot.push(what)
+  }
+  return shot
+}
+
+// The element matching selector (in the document or an open shadow root) shot from the
+// page alone, as a PNG with a transparent background, or null: everything else made
+// invisible (what is in it keeps its own visibility) and the page's background
+// transparent; and what its ancestors do to its pixels on the way to the screen
+// (opacity, filters, blending, masks) undone, as that is how the section shows it, not
+// what it is. With all, also its own and its ancestors' transforms, and its own
+// opacity, filter, blending and mask (a pinned image goes through them again). Cut to
+// the page; with whole, null if it reaches past the page. By a style sheet of ours and
+// attributes, taken out after (swap.mjs, hide: why).
+export async function alone(page, selector, { all = false, whole = false } = {}) {
+  const clip = await page.evaluate(({ selector, all, whole }) => {
+    const roots = [document, ...[...document.querySelectorAll("*")].filter((e) => e.shadowRoot).map((e) => e.shadowRoot)]
+    const el = roots.map((r) => r.querySelector(selector)).find(Boolean)
+    if (!el) return null
     el.setAttribute("data-isolated", "")
-    for (let a = el; a; a = a.parentElement ?? a.getRootNode().host) a.setAttribute("data-isolated-in", "")
+    for (let a = all ? el : el.parentElement ?? el.getRootNode().host; a; a = a.parentElement ?? a.getRootNode().host) a.setAttribute("data-isolated-in", "")
+    const undo = `opacity: 1 !important; filter: none !important; mix-blend-mode: normal !important; mask: none !important${all ? "; transform: none !important; translate: none !important; scale: none !important; rotate: none !important" : ""}`
     document.head.append(Object.assign(document.createElement("style"), {
       id: "gen-isolating",
-      textContent: ":root *:not([data-isolated]) { visibility: hidden !important } :root * { transition-property: none !important } :root, :root body { background: transparent !important } :root [data-isolated] { visibility: visible !important } :root [data-isolated-in] { opacity: 1 !important; filter: none !important; mix-blend-mode: normal !important; mask: none !important; transform: none !important; translate: none !important; scale: none !important; rotate: none !important }",
+      textContent: `:root *:not([data-isolated], [data-isolated] *) { visibility: hidden !important } :root * { transition-property: none !important } :root, :root body { background: transparent !important } :root [data-isolated] { visibility: visible !important } :root [data-isolated-in] { ${undo} }`,
     }))
     const r = el.getBoundingClientRect()
-    const x = r.left + scrollX, y = r.top + scrollY
-    const inside = x >= 0 && y >= 0 && x + r.width <= document.documentElement.scrollWidth && y + r.height <= document.documentElement.scrollHeight && r.width >= 1 && r.height >= 1
-    return inside ? { x, y, width: r.width, height: r.height } : null
-  }, k)
-  const png = clip && (await page.screenshot({ clip, fullPage: true, omitBackground: true, timeout: 60000 }))
-  await page.evaluate(({ k, url }) => {
-    document.getElementById("gen-isolating").remove()
-    for (const e of document.querySelectorAll("[data-isolated], [data-isolated-in]")) { e.removeAttribute("data-isolated"); e.removeAttribute("data-isolated-in") }
-    for (const r of [...document.querySelectorAll("*")].filter((e) => e.shadowRoot)) for (const e of r.shadowRoot.querySelectorAll("[data-isolated], [data-isolated-in]")) { e.removeAttribute("data-isolated"); e.removeAttribute("data-isolated-in") }
-    if (!url) return
-    const el = window.__pins[k]
-    el.style.setProperty("content", `url("${url}")`, "important")
-    el.setAttribute("data-pinned", "")
-  }, { k, url: png && `data:image/png;base64,${png.toString("base64")}` })
-  return !!png
+    const W = document.documentElement.scrollWidth, H = document.documentElement.scrollHeight
+    const x0 = Math.max(0, r.left + scrollX), y0 = Math.max(0, r.top + scrollY)
+    const x1 = Math.min(W, r.right + scrollX), y1 = Math.min(H, r.bottom + scrollY)
+    if (x1 - x0 < 1 || y1 - y0 < 1 || (whole && (x0 > r.left + scrollX || y0 > r.top + scrollY || x1 < r.right + scrollX || y1 < r.bottom + scrollY))) return null
+    return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 }
+  }, { selector, all, whole })
+  try {
+    return clip && (await page.screenshot({ clip, fullPage: true, omitBackground: true, timeout: 60000 }))
+  } finally {
+    await page.evaluate(() => {
+      document.getElementById("gen-isolating")?.remove()
+      const roots = [document, ...[...document.querySelectorAll("*")].filter((e) => e.shadowRoot).map((e) => e.shadowRoot)]
+      for (const r of roots) for (const e of r.querySelectorAll("[data-isolated], [data-isolated-in]")) { e.removeAttribute("data-isolated"); e.removeAttribute("data-isolated-in") }
+    })
+  }
 }
 
 // Every element's box and paint, in document order (rendering), and which of them

@@ -28,7 +28,7 @@ import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
 import { CHROME, CONTEXT, load } from "./browser.mjs"
-import { readPage } from "./read-page.mjs"
+import { readPage, pictures } from "./read-page.mjs"
 import { choose, start, revision, turn } from "./generate.mjs"
 import { hide, unhide, shoot, swap, measure, crowded } from "./swap.mjs"
 import { images } from "./images.mjs"
@@ -80,12 +80,12 @@ const { snap, pagePng, unusable } = await slot(async () => {
   fs.writeFileSync(path.join(dir, "page.png"), pagePng)
   const { sections, assets, tokens } = read
   // the screenshot has to show the sections where they were read, and as they were
-  // with scripts on: one that moved since, or has anything in it that renders
-  // differently with scripts off (browser.mjs), is not used
+  // with scripts on: one that moved since, or has anything in it (or in its parts,
+  // read-page.mjs) that renders differently with scripts off (browser.mjs), is not used
   const unusable = await page.evaluate((sections) => sections.flatMap(({ i, box }) => {
     const el = document.querySelector(`[data-sec="${i}"]`), r = el.getBoundingClientRect()
     if ([r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round).join() !== [box.x, box.y, box.w, box.h].join()) return [{ i, why: "moved after the screenshot" }]
-    if (el.matches("[data-changed-without-scripts]") || el.querySelector("[data-changed-without-scripts]")) return [{ i, why: "renders differently with scripts off" }]
+    if ([...document.querySelectorAll(`[data-sec="${i}"], [data-part="${i}"]`)].some((e) => e.matches("[data-changed-without-scripts]") || e.querySelector("[data-changed-without-scripts]"))) return [{ i, why: "renders differently with scripts off" }]
     return []
   }), sections)
   const size = await page.evaluate(() => ({ w: document.documentElement.scrollWidth, h: document.documentElement.scrollHeight }))
@@ -113,6 +113,9 @@ for (const s of choose(snap, 0, skip).candidates) {
 }
 const { candidates, chosen } = choose(snap, COUNT, skip)
 log(`${candidates.length} candidate sections, chosen: ${chosen.map(({ s, model }) => `${s.i} (${model})`).join(", ") || "none"}`)
+// the chosen sections' pictures, as they show (read-page.mjs, pictures)
+const shots = await pictures(page, snap, chosen.map(({ s }) => s), pic.shot)
+log(`${shots.shot} pictures shot from the page${shots.unseen ? `, ${shots.unseen} showing nothing left out` : ""}${shots.unlikeSvgs.length ? `; SVGs that render differently alone, given as shot: ${shots.unlikeSvgs.join(" | ")}` : ""}`)
 write("sections.json", snap)
 
 const report = { pairs: {} }
@@ -146,12 +149,13 @@ async function section({ s, model }) {
       ["images", c.missingImages.length + c.brokenImages.length > 0],
       ["overflow", c.overflow > 0],
       ["fonts", c.fontsMissing.length > 0],
+      ["grid", c.offGrid],
     ].filter(([, bad]) => bad).map(([name]) => name)
     report.pairs[s.i] = entry
     write("pairs/report.json", report)
-    log(`section ${s.i}: ${entry.failed.length ? `FAILED ${entry.failed.join(", ")}` : "ok"} (spill ${r.spill}px of its ${s.box.h}px box, seam ${Object.entries(p.seam).map(([k, v]) => `${k} ${(v * 100).toFixed(1)}%`).join(" ") || "none measured"}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length})`)
+    log(`section ${s.i}: ${entry.failed.length ? `FAILED ${entry.failed.join(", ")}` : "ok"} (spill ${r.spill}px of its ${s.box.h}px box, seam ${Object.entries(p.seam).map(([k, v]) => `${k} ${(v * 100).toFixed(1)}%`).join(" ") || "none measured"}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}; content x ${c.edges ? `${c.edges.left}..${c.edges.right}` : "none"}, original ${s.edges ? `${s.edges.left}..${s.edges.right}` : "none"}, column ${snap.tokens.column.left}..${snap.tokens.column.right})`)
     if (!entry.failed.length || round === ROUNDS) return
-    messages.push(revision(s, entry, p.genJpg))
+    messages.push(revision(snap, s, entry, p.genJpg))
   }
 }
 
