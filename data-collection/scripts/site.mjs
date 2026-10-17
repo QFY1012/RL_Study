@@ -10,7 +10,9 @@
 // Writes to <dir>:
 //   page.png           the page as loaded, full page: the original
 //   sections.json      the page URL and size, design tokens, per section its box and
-//                      content, and the inline SVGs as standalone files (assets)
+//                      content (a chosen one: box where it shows, own its element's),
+//                      and images kept as files of their own (assets: inline SVGs,
+//                      data: URLs, videos and canvases as shot)
 //   looks/<i>.json     what the model is shown of the page around section i (images.mjs)
 //   gen/<i>.html       the fragment; gen/<i>.json the conversation, model and rounds
 //   render/<i>.png     the section's box with the fragment swapped in; render/<i>.json
@@ -18,8 +20,7 @@
 //   pairs/<i>-orig.png, <i>-gen.png, <i>-side.png, <i>-gen.jpg   (images.mjs, pair)
 //   pairs/report.json  per pair its checks and the ones it failed (none: usable)
 // COUNT sections (default 2), ROUNDS revisions at most (default 2). Loading the page
-// may take LOAD_SECONDS (default 300); a page that takes longer (a large WebGL scene
-// drawn on the CPU, with no GPU here) is given up. Run from run.mjs, which shares out
+// may take LOAD_SECONDS (default 300); a page that takes longer is given up. Run from run.mjs, which shares out
 // the CPU among the sites: the load is done when it says so (slot); a loaded page
 // with its scripts off costs no CPU while it waits on the model.
 // Needs ~/.config/ui-rl/judge.env in the environment and NODE_USE_ENV_PROXY=1.
@@ -29,7 +30,7 @@ import { chromium } from "playwright-core"
 import { CHROME, CONTEXT, load } from "./browser.mjs"
 import { readPage } from "./read-page.mjs"
 import { choose, start, revision, turn } from "./generate.mjs"
-import { hide, unhide, shoot, swap } from "./swap.mjs"
+import { hide, unhide, shoot, swap, measure, crowded } from "./swap.mjs"
 import { images } from "./images.mjs"
 
 const [url, dir] = process.argv.slice(2)
@@ -56,29 +57,64 @@ const exclusive = (fn) => { const run = queue.then(fn); queue = run.catch(() => 
 
 const browser = await chromium.launch({ executablePath: CHROME, proxy: { server: process.env.HTTPS_PROXY } })
 const page = await (await browser.newContext(CONTEXT)).newPage()
-const { snap, pagePng, moved } = await slot(async () => {
+const { snap, pagePng, unusable } = await slot(async () => {
   const late = setTimeout(() => { log(`loading took over ${LOAD_SECONDS}s, given up`); process.exit(1) }, LOAD_SECONDS * 1000)
   await load(page, url)
   clearTimeout(late)
-  const { sections, assets, tokens } = await readPage(page)
-  const pagePng = await page.screenshot({ path: path.join(dir, "page.png"), fullPage: true, timeout: 120000 })
-  // the screenshot has to show the sections where they were read; one that moved is
-  // not used (with the page's scripts off nothing should)
-  const moved = await page.evaluate((sections) => sections.filter(({ i, box }) => {
-    const r = document.querySelector(`[data-sec="${i}"]`).getBoundingClientRect()
-    return [r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round).join() !== [box.x, box.y, box.w, box.h].join()
-  }).map(({ i }) => i), sections)
+  // At rest under what is done to it from here on: hiding and showing a section
+  // (swap.mjs) restyles it, and a page is not always at a fixed point of its own styles
+  // until restyled (stripe's navigation shows its buttons, and once restyled hides
+  // them: a CSS animation on its own overflow decides). So every section is hidden and
+  // shown again, round after round, until a round leaves the page as it was (at most
+  // 4), and read again after a round that changed it; page.png is that page.
+  let read = await readPage(page)
+  let pagePng = await page.screenshot({ fullPage: true, timeout: 120000 })
+  for (let round = 1; ; round++) {
+    for (const s of read.sections) { await hide(page, [s.i]); await unhide(page) }
+    const next = await page.screenshot({ fullPage: true, timeout: 120000 })
+    if (next.equals(pagePng)) break
+    pagePng = next
+    read = await readPage(page)
+    if (round === 4) { log("still changing when its sections are hidden and shown, after 4 rounds"); break }
+  }
+  fs.writeFileSync(path.join(dir, "page.png"), pagePng)
+  const { sections, assets, tokens } = read
+  // the screenshot has to show the sections where they were read, and as they were
+  // with scripts on: one that moved since, or has anything in it that renders
+  // differently with scripts off (browser.mjs), is not used
+  const unusable = await page.evaluate((sections) => sections.flatMap(({ i, box }) => {
+    const el = document.querySelector(`[data-sec="${i}"]`), r = el.getBoundingClientRect()
+    if ([r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round).join() !== [box.x, box.y, box.w, box.h].join()) return [{ i, why: "moved after the screenshot" }]
+    if (el.matches("[data-changed-without-scripts]") || el.querySelector("[data-changed-without-scripts]")) return [{ i, why: "renders differently with scripts off" }]
+    return []
+  }), sections)
   const size = await page.evaluate(() => ({ w: document.documentElement.scrollWidth, h: document.documentElement.scrollHeight }))
-  return { snap: { url: page.url(), title: await page.title(), size, tokens, sections, assets }, pagePng, moved }
+  return { snap: { url: page.url(), title: await page.title(), size, tokens, sections, assets }, pagePng, unusable }
 })
-write("sections.json", snap)
 log(`${snap.url}: ${snap.sections.length} sections`)
 for (const s of snap.sections) console.log(`  #${s.i} <${s.tag}> y=${s.box.y} h=${s.box.h} items=${s.items.length} ${JSON.stringify(s.items.find((t) => t.text)?.text?.slice(0, 50) ?? "")}`)
-if (moved.length) log(`moved after the screenshot, not used: ${moved.map((i) => `#${i}`).join(", ")}`)
+for (const { i, why } of unusable) log(`#${i} not used: ${why}`)
 
-const { candidates, chosen } = choose(snap, COUNT, moved)
-log(`${candidates.length} candidate sections, chosen: ${chosen.map(({ s, model }) => `${s.i} (${model})`).join(", ") || "none"}`)
 const pic = await images(browser, pagePng)
+
+// Each candidate's box (s.box) from here on: where its content shows, or new content in
+// its place would (swap.mjs, measure); its element's own box is s.own. One whose box
+// takes in another section's content (the original laid over the next section, by
+// design) cannot be swapped without the new content overlapping that too, and is not
+// used (swap.mjs, crowded).
+const W = pagePng.readUInt32BE(16), H = pagePng.readUInt32BE(20)
+const skip = unusable.map(({ i }) => i)
+for (const s of choose(snap, 0, skip).candidates) {
+  s.own = s.box
+  s.box = await measure(page, s, W, H, pic.differs)
+  if (JSON.stringify(s.box) !== JSON.stringify(s.own)) log(`section ${s.i}: shows in ${JSON.stringify(s.box)}, its element is at ${JSON.stringify(s.own)}`)
+  const other = await crowded(page, snap, s, pic.differs)
+  if (other !== null) { skip.push(s.i); log(`#${s.i} not used: section #${other}'s content shows in its box`) }
+}
+const { candidates, chosen } = choose(snap, COUNT, skip)
+log(`${candidates.length} candidate sections, chosen: ${chosen.map(({ s, model }) => `${s.i} (${model})`).join(", ") || "none"}`)
+write("sections.json", snap)
+
 const report = { pairs: {} }
 
 async function section({ s, model }) {

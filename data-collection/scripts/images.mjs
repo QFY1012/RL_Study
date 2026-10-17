@@ -1,6 +1,7 @@
 // The image work of a site (site.mjs), done with canvases in a blank page of its own,
-// where the page's screenshot (page.png) is decoded once and kept: what the model is
-// shown (look), and each pair with its seam (pair).
+// where the page's screenshot (page.png) is decoded once and kept: where a section's
+// content shows (differs), what the model is shown (look), and each pair with its seam
+// (pair).
 const MARGIN = 700 // page above and below the section in what the model is shown
 const BAND = 300 // page above and below the section in a pair
 
@@ -25,6 +26,29 @@ export async function images(browser, pagePng) {
   const url = (png) => `data:image/png;base64,${png.toString("base64")}`
 
   return {
+    // Where a band of the page (a PNG of the page's full width, from top down) differs
+    // from another band of the same place (base; or page.png), by more than over in
+    // some channel: the box around every pixel that does, in page coordinates, or null.
+    differs: (png, top, base = null, over = 0) => blank.evaluate(async ({ band, top, base, over }) => {
+      const b = await window.__open(band)
+      const a = base ? await window.__open(base) : window.__page
+      const y = base ? 0 : top
+      const w = Math.min(a.width, b.width), h = Math.min(b.height, a.height - y)
+      const c = new OffscreenCanvas(w, h)
+      const g = c.getContext("2d", { willReadFrequently: true })
+      g.drawImage(a, 0, y, w, h, 0, 0, w, h)
+      const p = g.getImageData(0, 0, w, h).data
+      g.drawImage(b, 0, 0, w, h, 0, 0, w, h)
+      const q = g.getImageData(0, 0, w, h).data
+      let x0 = Infinity, y0 = Infinity, x1 = -1, y1 = -1
+      for (let k = 0; k < p.length; k += 4) {
+        if (Math.abs(p[k] - q[k]) <= over && Math.abs(p[k + 1] - q[k + 1]) <= over && Math.abs(p[k + 2] - q[k + 2]) <= over) continue
+        const x = (k / 4) % w, yy = Math.floor(k / 4 / w)
+        x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, yy); y1 = Math.max(y1, yy)
+      }
+      return x1 < 0 ? null : { x: x0, y: top + y0, w: x1 - x0 + 1, h: y1 - y0 + 1 }
+    }, { band: url(png), top, base: base && url(base), over }),
+
     // What the model is shown for section s (generate.mjs), as JPEG data URLs:
     // - slot: the page around the section, MARGIN px above and below, at half size,
     //   with the section's content gone and its backdrop showing (empty: the box

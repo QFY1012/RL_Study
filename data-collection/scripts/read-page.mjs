@@ -2,11 +2,20 @@
 // content in reading order, and measures the page's design tokens. Sections are marked
 // data-sec="<i>" in the page.
 export async function readPage(page) {
-  // Sections: from <body>, go down through wrappers (one child holding most of the
-  // height) to the element whose children are stacked blocks; children taller than
-  // MAX are split the same way. Each section gets data-sec="<i>".
+  // Sections are the bands the page is stacked from, top to bottom. From <body> down:
+  // an element whose children (those in flow) lie one under the other, none beside
+  // another, is a stack, and each child is a section, or, if taller than MAX or only a
+  // wrapper (one child in flow), split the same way; an element whose children sit
+  // side by side (columns, a grid of cards) is one section, however tall, as cutting
+  // it would cut a band apart. What is placed out of flow (absolute or fixed) lies over
+  // the stack, not in it: a section's background layer, a header laid over the page.
+  // But a wrapper with content placed over its one child (a heading over a picture) is
+  // a band with it, not gone through. A child shorter than MIN with nothing in it (a
+  // spacer, a rule) is no section. Each section gets data-sec="<i>".
   const MIN = 120, MAX = 1800
   const { secs: sections, assets, shots } = await page.evaluate(({ MIN, MAX }) => {
+    // read afresh (site.mjs reads again once the page has come to rest)
+    for (const e of document.querySelectorAll("[data-sec], [data-backdrop]")) { e.removeAttribute("data-sec"); e.removeAttribute("data-backdrop") }
     // shown: rendered, not hidden, not fully transparent (itself or an ancestor), with a size
     const visible = (el) => {
       const r = el.getBoundingClientRect()
@@ -16,24 +25,39 @@ export async function readPage(page) {
     // its children are laid out as its parent's (Framer wraps whole pages in them)
     const laidOut = (el) => [...el.children].flatMap((c) => (getComputedStyle(c).display === "contents" ? laidOut(c) : [c]))
     const kids = (el) => laidOut(el).filter((c) => !["SCRIPT", "STYLE", "NOSCRIPT", "LINK", "TEMPLATE"].includes(c.tagName) && visible(c))
-    const unwrap = (el) => {
-      for (;;) {
-        const k = kids(el)
-        const h = el.getBoundingClientRect().height
-        const big = k.filter((c) => c.getBoundingClientRect().height >= 0.8 * h)
-        if (k.length >= 1 && big.length === 1 && k.length <= 3) el = big[0]
-        else return el
-      }
+    const outOfFlow = (c) => ["absolute", "fixed"].includes(getComputedStyle(c).position)
+    const inFlow = (el) => kids(el).filter((c) => !outOfFlow(c))
+    // one under the other: no two side by side, that is sharing rows (more than 2px)
+    // while apart across (sharing less than half the narrower one's width). Two
+    // sharing rows and the same width are stacked too, one laid over the other (a
+    // negative margin pulling a block up over the one before).
+    const stacked = (els) => {
+      const rs = els.map((c) => c.getBoundingClientRect())
+      return rs.every((a, k) => rs.slice(k + 1).every((b) => {
+        const rows = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top)
+        const across = Math.min(a.right, b.right) - Math.max(a.left, b.left)
+        return rows <= 2 || across >= Math.min(a.width, b.width) / 2
+      }))
+    }
+    const empty = (el) => !el.textContent.trim() && !el.querySelector("img, svg, video, canvas, picture, iframe")
+    // content placed (absolutely) over el's box, more than a speck of it (not a
+    // screen-reader-only label, nor one moved off the page)
+    const over = (el) => {
+      const R = el.getBoundingClientRect()
+      return kids(el).some((c) => {
+        if (getComputedStyle(c).position !== "absolute" || empty(c)) return false
+        const r = c.getBoundingClientRect()
+        return Math.min(r.right, R.right) - Math.max(r.left, R.left) > 2 && Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top) > 2
+      })
     }
     const split = (el) => {
-      const out = []
-      for (const c of kids(unwrap(el))) {
-        const r = c.getBoundingClientRect()
-        if (r.width < innerWidth * 0.5) continue
-        if (r.height > MAX && kids(unwrap(c)).length >= 2) out.push(...split(c))
-        else if (r.height >= MIN || c.tagName === "HEADER" || c.tagName === "NAV" || c.tagName === "FOOTER") out.push(c)
-      }
-      return out
+      const k = inFlow(el)
+      if (!k.length || !stacked(k) || (k.length === 1 && over(el))) return [el]
+      return k.flatMap((c) => {
+        const h = c.getBoundingClientRect().height
+        if (h > MAX || inFlow(c).length === 1) return split(c)
+        return h < MIN && empty(c) ? [] : [c]
+      })
     }
     const list = split(document.body).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)
 
@@ -72,9 +96,11 @@ export async function readPage(page) {
         }
       }
       if (defs.children.length) clone.prepend(defs)
-      assets.push("data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(clone)))))
-      return `asset:${assets.length - 1}`
+      return asset("data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(clone)))))
     }
+    // An image given as a data: URL is an asset too: it can run to many kilobytes
+    const asset = (url) => { assets.push(url); return `asset:${assets.length - 1}` }
+    const source = (url) => (url.startsWith("data:") ? asset(url) : url)
 
     // Rendered: laid out, not inside content-visibility: hidden, and not transparent
     // (itself or an ancestor). What is not rendered shows nothing of what is in it;
@@ -117,7 +143,7 @@ export async function readPage(page) {
         const tag = el.tagName
         if (tag === "IMG") {
           const r = el.getBoundingClientRect()
-          if (seen(el) && r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: el.currentSrc || el.src, alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3), box: abs(r) })
+          if (seen(el) && r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: source(el.currentSrc || el.src), alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3), box: abs(r) })
           return
         }
         // what a video or canvas shows is screenshot into an asset (shots, below)
@@ -134,10 +160,16 @@ export async function readPage(page) {
           if (seen(el) && r.width >= 8 && r.height >= 8) items.push({ kind: r.width <= 48 && r.height <= 48 ? "icon" : "illustration", src: svgAsset(el), alt: el.getAttribute("aria-label") || "", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
           return
         }
-        const bgImg = getComputedStyle(el).backgroundImage
-        const m = bgImg && bgImg.match(/url\("?([^")]+)"?\)/)
+        // a background image: an element showing only that, with nothing in it, is an
+        // image like any other (a logo set as a background); one holding content shows
+        // it behind the content, a picture when big enough
+        // (the first url() of the computed value, which writes it in double quotes)
+        const m = getComputedStyle(el).backgroundImage.match(/url\("((?:[^"\\]|\\.)*)"\)/)
         const r = el.getBoundingClientRect()
-        if (m && seen(el) && !el.hasAttribute("data-backdrop") && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
+        const bare = !el.children.length && !el.textContent.trim()
+        if (m && seen(el) && !el.hasAttribute("data-backdrop") && (bare ? r.width >= 8 && r.height >= 8 : r.width >= 100 && r.height >= 100)) {
+          items.push({ kind: bare && r.width <= 48 && r.height <= 48 ? "icon" : "image", src: source(m[1].replace(/\\(.)/g, "$1")), alt: bare ? el.getAttribute("aria-label") || el.getAttribute("title") || "" : "background", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
+        }
         const blockKids = laidOut(el).filter((c) => rendered(c) && isBlock(c) && shownText(c))
         const text = shownText(el)
         const leaf = text && blockKids.length === 0 && r.width > 0 && r.height > 0
