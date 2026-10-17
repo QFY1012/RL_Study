@@ -62,7 +62,9 @@ console.log(`orig: height ${orig.height}`)
 for (const sec of gens) {
   const fragment = fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8")
   // The host takes the old section's exact box height, so the page around it does
-  // not move; it is a grid, so the fragment's outer box stretches to fill it.
+  // not move; it is a grid, so the fragment's outer box stretches to fill it. It also
+  // takes the old section's own background color, which the model is told is fixed:
+  // a section that paints its own background keeps it.
   await page.evaluate(({ sec, fragment }) => {
     const old = document.querySelector(`[data-sec="${sec}"]`)
     const host = document.createElement("div")
@@ -70,6 +72,7 @@ for (const sec of gens) {
     host.setAttribute("data-gen", "")
     host.style.display = "grid"
     host.style.height = `${old.getBoundingClientRect().height}px`
+    host.style.backgroundColor = getComputedStyle(old).backgroundColor
     window.__swapped = old
     old.replaceWith(host)
     host.attachShadow({ mode: "open" }).innerHTML = fragment

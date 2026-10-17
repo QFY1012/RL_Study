@@ -4,8 +4,9 @@
 // line is also printed here, prefixed with the host. JOBS sites run at once (default
 // 20); the browser steps (record, render, pairs) are CPU-bound, so at most
 // BROWSER_JOBS of them run at a time (default 4) while the others wait on the model.
-// A generated section that does not fit its box is sent back to the model and
-// rendered again, up to ROUNDS times (default 2).
+// After each render pairs.py checks the pairs; a generated section that does not fit
+// its box or shows a seam at its edge is sent back to the model and rendered again, up
+// to ROUNDS times (default 2).
 // A browser step that takes longer than STEP_SECONDS (default 300) is stopped and the
 // site counted as failed: some pages (a large WebGL scene drawn on the CPU, with no
 // GPU here) are too heavy to load, and they are dropped rather than waited on.
@@ -23,10 +24,7 @@ const BROWSER_JOBS = Number(process.env.BROWSER_JOBS ?? 4)
 const COUNT = process.env.COUNT ?? "2"
 const ROUNDS = Number(process.env.ROUNDS ?? 2)
 const STEP_SECONDS = Number(process.env.STEP_SECONDS ?? 300)
-const misses = (dir) => {
-  const r = path.join(dir, "render")
-  return fs.existsSync(r) && fs.readdirSync(r).some((f) => /^\d+\.json$/.test(f) && !JSON.parse(fs.readFileSync(path.join(r, f), "utf8")).fits)
-}
+const misses = (dir) => Object.values(JSON.parse(fs.readFileSync(path.join(dir, "pairs", "report.json"), "utf8")).pairs).some((p) => p.failed.includes("fit") || p.failed.includes("seam"))
 const here = path.dirname(import.meta.dirname)
 fs.mkdirSync(root, { recursive: true })
 
@@ -76,12 +74,13 @@ async function site(url) {
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
     await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, COUNT], { NODE_USE_ENV_PROXY: "1" })
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
-    // sections that did not fit their box go back to the model, up to ROUNDS times
+    await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir], {}, STEP_SECONDS))
+    // sections that do not fit their box or show a seam go back to the model, up to ROUNDS times
     for (let k = 0; k < ROUNDS && misses(dir); k++) {
       await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, "--revise"], { NODE_USE_ENV_PROXY: "1" })
       await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
+      await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir], {}, STEP_SECONDS))
     }
-    await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir], {}, STEP_SECONDS))
     console.log(`[${host}] done in ${((Date.now() - t) / 1000).toFixed(0)}s`)
     return { host, ok: true }
   } catch (e) {

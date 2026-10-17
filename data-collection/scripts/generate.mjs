@@ -1,13 +1,14 @@
 // Has a model redesign sections of a recorded page from their content alone.
 //   node scripts/generate.mjs <dir> [count]     picks up to <count> sections (default 2)
-//   node scripts/generate.mjs <dir> --revise    sends back the ones that did not fit their box
+//   node scripts/generate.mjs <dir> --revise    sends back the ones that do not fit their box or show a seam
 // Writes gen/<i>.html (the fragment) and gen/<i>.json (the conversation, model, usage)
 // for each. The model gets the section's text, images, illustrations and icons, the
 // page's fonts and colors, and the size of the box it goes in (the original's width
 // and exact height), never the original markup or layout, so the two versions differ
-// only in design decisions. With --revise, every section whose render
-// (render/<i>.json) runs past its box is told by how much and asked again, in the
-// same conversation.
+// only in design decisions. With --revise, every section whose pair failed "fit" or
+// "seam" (pairs/report.json: it runs past its box, or its edge shows as a line where
+// the original joins the page) is told what is wrong and asked again, in the same
+// conversation.
 // Endpoint and key come from JUDGE_URL / JUDGE_MODEL / DEEPSEEK_API_KEY
 // (source ~/.config/ui-rl/judge.env); run with NODE_USE_ENV_PROXY=1.
 import fs from "node:fs"
@@ -45,7 +46,8 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - It is inserted into a shadow root that takes the place of the old section, at the full width of its slot. Style the outer box with :host or a wrapper class, never html or body.
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
-- Fonts: only the font families listed in the tokens (they are already loaded). Colors: stay within the page's palette; the section background may be any of the page's background colors.
+- Fonts: only the font families listed in the tokens (they are already loaded). Colors: stay within the page's palette.
+- Background: the section's background is given and is not yours to change; the box already has it. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
 - Size: the section's box is exactly the width and height given, and your outer box is stretched to fill it. Lay the content out to fit inside that height; how the space is used (where the room goes, how big images and type are) is your design decision. Nothing may reach past the top or bottom of the box, and nothing may be cut off: no hidden overflow, no heights that clip.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
 Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
@@ -65,6 +67,7 @@ Page tokens:
 - page background: ${tokens.pageBackground}
 - the other sections keep their content within ${tokens.contentWidth}px
 Section ${k + 1} of ${sections.length}. Its box is ${s.box.w}px wide and exactly ${s.box.h}px tall.
+- its background: ${s.background}
 - section above: ${around(sections[k - 1]) ?? "none"}
 - section below: ${around(sections[k + 1]) ?? "none"}
 
@@ -122,22 +125,24 @@ if (!revise) {
     console.log(`section ${s.i}: ${fragment.length} chars in ${((Date.now() - t) / 1000).toFixed(0)}s, tokens ${JSON.stringify(usage)}`)
   }))
 } else {
-  const sent = fs.readdirSync(path.join(dir, "gen")).filter((f) => f.endsWith(".json")).map((f) => Number(f.slice(0, -5)))
-  const misses = sent.filter((i) => {
-    const r = path.join(dir, "render", `${i}.json`)
-    return fs.existsSync(r) && !JSON.parse(fs.readFileSync(r, "utf8")).fits
-  })
-  console.log(`${misses.length} sections did not fit their box${misses.length ? `: ${misses.join(", ")}` : ""}`)
-  await Promise.all(misses.map(async (i) => {
+  const report = JSON.parse(fs.readFileSync(path.join(dir, "pairs", "report.json"), "utf8")).pairs
+  const misses = Object.entries(report).filter(([, p]) => p.failed.includes("fit") || p.failed.includes("seam")).map(([i, p]) => [Number(i), p])
+  console.log(`${misses.length} sections to revise${misses.length ? `: ${misses.map(([i, p]) => `${i} (${p.failed.filter((f) => f === "fit" || f === "seam").join(", ")})`).join(", ")}` : ""}`)
+  await Promise.all(misses.map(async ([i, p]) => {
     const t = Date.now()
     const record = JSON.parse(fs.readFileSync(path.join(dir, "gen", `${i}.json`), "utf8"))
-    const spill = JSON.parse(fs.readFileSync(path.join(dir, "render", `${i}.json`), "utf8")).spill
     const h = sections[i].box.h
-    record.messages.push({ role: "user", content: `Rendered in its ${h}px box, your content reaches ${spill}px past the edge of the box. Change the layout so everything fits inside ${h}px, keeping every rule above. Reply with the whole fragment again.` })
+    const wrong = []
+    if (p.failed.includes("fit")) wrong.push(`your content reaches ${p.spill}px past the edge of the ${h}px box`)
+    if (p.failed.includes("seam")) {
+      const sides = Object.entries(p.seam).filter(([, v]) => v > 0.02).map(([side, v]) => `${side} (${Math.round(v * 100)}% of it)`)
+      wrong.push(`a visible line runs along the ${sides.join(", ")} edge of the box, where the original joins the page with none: something you paint (a background, panel, border or shadow) meets the edge of the box. The section's background is ${sections[i].background} and the box already has it`)
+    }
+    record.messages.push({ role: "user", content: `Rendered in the page, ${wrong.join("; and ")}. Change the design so everything fits inside ${h}px and the outer box is unpainted, with panels clear of its edges, keeping every rule above. Reply with the whole fragment again.` })
     const { fragment, usage } = await turn(i, record.messages)
-    record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, spill })
+    record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, failed: p.failed, spill: p.spill, seam: p.seam })
     if (!fragment) { console.log(`section ${i}: no html block in the revision, kept the last one`); fs.writeFileSync(path.join(dir, "gen", `${i}.json`), JSON.stringify(record, null, 1)); return }
     save(i, record, fragment)
-    console.log(`section ${i}: revised (it ran ${spill}px past its ${h}px box) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
+    console.log(`section ${i}: revised (${wrong.map((w) => w.split(":")[0]).join("; ")}) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
   }))
 }
