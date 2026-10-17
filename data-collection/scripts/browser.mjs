@@ -1,14 +1,15 @@
-// How a page is loaded, shared by record.mjs (live, recording a HAR) and render.mjs
-// (replaying that HAR). The page runs with its own scripts both times; what would make
-// two runs differ is pinned down: the clock starts at T0 and is stopped at T0 + PAUSE,
-// Math.random and crypto.getRandomValues are seeded (INIT), and the viewport, locale, time zone
-// and color scheme are fixed. Once the clock is stopped, page timers and animation
-// frames no longer run, so the page holds still between screenshots.
+// How a page is loaded: once per site (site.mjs), and everything after happens in that
+// one loaded page. The page runs its own scripts while it loads, with page time
+// standing still from its first script on and moved only by us, in fixed steps, with
+// the network let go quiet in between, and with Math.random and
+// crypto.getRandomValues seeded (INIT): every page gets the same load. Once loaded,
+// the page's scripts are switched off: from then on it is one fixed rendered state. A
+// page left running reacts to being measured and screenshot (a full-page capture
+// resizes the window and sets off its resize and visibility observers) and comes out
+// differently each time; switched off, nothing in it changes but what we change.
 // Google Chrome, not the Chromium Playwright ships: Chromium has no H.264 or AAC, so
-// the MP4 videos most sites use would not play, live or replayed (README: setup).
+// the MP4 videos most sites use would not play (README: setup).
 import fs from "node:fs"
-import path from "node:path"
-import crypto from "node:crypto"
 export const CHROME = process.env.CHROME ?? "/opt/chrome-stable/opt/google/chrome/chrome"
 if (!fs.existsSync(CHROME)) throw new Error(`no Chrome at ${CHROME}; see README (setup) or set CHROME`)
 
@@ -22,35 +23,10 @@ export const CONTEXT = {
   userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
 }
 
-// Video and audio come in as range requests, which a HAR keeps as the pieces asked
-// for and cannot answer again. They are taken out of the HAR: when recording, each is
-// fetched whole, saved under <dir>/media/ and given to the page in full; when
-// replaying, it is served from there (a page accepts a whole file for a range request).
-export async function routeMedia(context, dir, recording) {
-  const store = path.join(dir, "media")
-  fs.mkdirSync(store, { recursive: true })
-  const file = (url) => path.join(store, crypto.createHash("sha1").update(url).digest("hex"))
-  await context.route("**/*", async (route) => {
-    const req = route.request()
-    if (req.resourceType() !== "media") return route.fallback()
-    const f = file(req.url())
-    if (recording) {
-      const headers = { ...req.headers() }
-      delete headers.range
-      const res = await route.fetch({ headers }).catch(() => null)
-      if (!res || !res.ok()) return route.abort()
-      const body = await res.body()
-      fs.writeFileSync(f, body)
-      fs.writeFileSync(`${f}.type`, res.headers()["content-type"] ?? "application/octet-stream")
-      return route.fulfill({ status: 200, body, contentType: res.headers()["content-type"] })
-    }
-    if (!fs.existsSync(f)) return route.abort()
-    return route.fulfill({ status: 200, body: fs.readFileSync(f), contentType: fs.readFileSync(`${f}.type`, "utf8") })
-  })
-}
-
 const T0 = Date.UTC(2026, 9, 1, 12)
-const PAUSE = 10 * 60 * 1000
+// A video is shown at this point (or halfway, if shorter): its first frame is often
+// black, the start of a fade.
+const VIDEO_AT = 1
 
 // Runs before the page's own scripts: seeded random numbers. What a page observes for
 // visibility (IntersectionObserver) is left alone: scrolling through the page below
@@ -64,17 +40,72 @@ const INIT = `(() => {
   crypto.getRandomValues = (a) => { const b = new Uint8Array(a.buffer, a.byteOffset, a.byteLength); for (let i = 0; i < b.length; i++) b[i] = next() & 255; return a }
 })()`
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+// What the page is still waiting for, run in it: fonts loading, images not in yet,
+// videos seeking or loading their frame. Covers shadow roots, where a swapped-in
+// section lives.
+const pending = () => {
+  const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
+  const all = (sel) => roots.flatMap((r) => [...r.querySelectorAll(sel)])
+  return [
+    ...[...document.fonts].filter((f) => f.status === "loading").map((f) => `font ${f.family} ${f.weight}`),
+    ...all("img").filter((i) => !i.complete).map((i) => `image ${(i.currentSrc || i.src).slice(0, 100)}`),
+    ...all("video").filter((v) => v.seeking || (v.readyState < 2 && v.networkState === HTMLMediaElement.NETWORK_LOADING)).map((v) => `video ${v.currentSrc.slice(0, 100)}`),
+  ]
+}
+
+// Waits on this side (the page's timers stand still; once its scripts are off, its
+// events do not run either) until nothing is pending, at most 8s; what is still not
+// in then is logged.
+async function settle(page) {
+  const end = Date.now() + 8000
+  let left
+  while ((left = await page.evaluate(pending)).length && Date.now() < end) await sleep(100)
+  if (left.length) console.log(`still not in after 8s, going on without: ${left.slice(0, 5).join(" | ")}${left.length > 5 ? ` and ${left.length - 5} more` : ""}`)
+}
+
+// The network is quiet when no request has started or ended for 400ms; a request open
+// for over 5s is a stream (live updates, analytics) and not waited on. At most 10s.
+function network(page) {
+  const open = new Map()
+  let last = Date.now()
+  page.on("request", (r) => { open.set(r, Date.now()); last = Date.now() })
+  const done = (r) => { open.delete(r); last = Date.now() }
+  page.on("requestfinished", done)
+  page.on("requestfailed", done)
+  return async () => {
+    const end = Date.now() + 10000
+    while (Date.now() < end) {
+      const now = Date.now()
+      if (now - last >= 400 && [...open.values()].every((t) => now - t > 5000)) return true
+      await sleep(100)
+    }
+    return false
+  }
+}
+
 export async function load(page, url) {
+  const quiet = network(page)
   await page.clock.install({ time: T0 })
+  await page.clock.pauseAt(T0)
   await page.addInitScript(INIT)
   const t0 = Date.now()
   const mark = (what) => console.log(`${what} (${((Date.now() - t0) / 1000).toFixed(1)}s)`)
+  // page time moves only here: ms at a time, then the network is let go quiet, so what
+  // the page asked for in that time has come in before time moves on, however slow
+  let pageTime = 0
+  const step = async (ms) => { await page.clock.runFor(ms); pageTime += ms; await quiet() }
+
   await page.goto(url, { waitUntil: "load", timeout: 60000 })
   mark("loaded")
   // content-visibility: auto skips painting what is off screen, which a full-page
-  // screenshot then shows as blank
-  await page.addStyleTag({ content: "* { content-visibility: visible !important }" })
-  await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out, going on"))
+  // screenshot then shows as blank. <noscript> stays hidden: the page was loaded with
+  // its scripts on, but once they are switched off the browser would show what is in
+  // it (as raw text, since it was read with scripts on: "<style>...</style>").
+  await page.addStyleTag({ content: "* { content-visibility: visible !important } noscript { display: none !important }" })
+  for (let k = 0; k < 4; k++) await step(1000)
+  mark("4s of page time")
 
   // Some pages scroll inside a full-screen container instead of the window; such a
   // container is opened up to its full height, so the page is as tall as its content.
@@ -96,22 +127,22 @@ export async function load(page, url) {
     return n
   })
   if (opened) console.log(`opened ${opened} scroll containers`)
-  mark("network idle")
 
   // Scroll through the page so lazy images and scroll-triggered reveals load, then back
-  // to the top. Smooth scrolling is turned off first, or the page would still be gliding
-  // back up when it is measured.
-  await page.evaluate(async () => {
-    for (const el of [document.documentElement, document.body]) el.style.setProperty("scroll-behavior", "auto", "important")
-    const to = (y) => window.scrollTo({ top: y, behavior: "instant" })
-    for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.7) {
-      to(y)
-      await new Promise((r) => setTimeout(r, 250))
-    }
-    for (let k = 0; k < 40 && (to(0), scrollY !== 0); k++) await new Promise((r) => setTimeout(r, 100))
-  })
-  mark("scrolled through")
-  await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out after scrolling, going on"))
+  // to the top: at each stop a few real frames for the page to see what came into view,
+  // then 250ms of page time for it to act on it. Smooth scrolling is turned off first.
+  await page.evaluate(() => { for (const el of [document.documentElement, document.body]) el.style.setProperty("scroll-behavior", "auto", "important") })
+  const to = (y) => page.evaluate((y) => { window.scrollTo({ top: y, behavior: "instant" }); return document.documentElement.scrollHeight }, y)
+  let stops = 0
+  for (let y = 0, height = 1; y < height; y += CONTEXT.viewport.height * 0.7, stops++) {
+    height = await to(y)
+    await sleep(100)
+    await step(250)
+  }
+  await to(0)
+  await sleep(100)
+  await step(250)
+  mark(`scrolled through, ${stops} stops`)
 
   // Hide what is not the page's design: consent banners, chat widgets, modals, and
   // fixed elements away from the top (a fixed header stays). Hidden, not removed: the
@@ -133,52 +164,49 @@ export async function load(page, url) {
       if ((s.position === "fixed" || s.position === "sticky") && junk.test(id)) drop(el, "widget")
       else if (s.position === "fixed" && el.getBoundingClientRect().top > 50) drop(el, "fixed")
     }
-    for (const img of document.querySelectorAll("img[loading=lazy]")) img.loading = "eager"
     return gone
   })
   console.log(`hid ${hidden.length}:`, hidden.join(" | ") || "nothing")
-  mark("network idle again")
 
+  // Content that came in late (an image on a slow network) has its reveal run: more
+  // page time, the same amount every time.
+  for (let k = 0; k < 4; k++) await step(1000)
   await freeze(page)
-  await page.clock.pauseAt(T0 + PAUSE)
-  mark("fonts and images in, clock paused")
-  // Content that arrives late (an image or video loading on a busy machine) can start
-  // its reveal after the clock stopped, and would stay at its first frame. Page time is
-  // stepped on, with a pause between steps for the network, until the page's height
-  // and the number of visible elements hold still.
-  let last = ""
-  let k = 0
-  for (; k < 10; k++) {
-    await page.clock.runFor(2000)
-    await new Promise((r) => setTimeout(r, 500))
-    const now = await page.evaluate(() => `${document.documentElement.scrollHeight}:${[...document.querySelectorAll("body *")].filter((e) => e.checkVisibility({ opacityProperty: true, visibilityProperty: true })).length}`)
-    if (now === last) break
-    last = now
-  }
-  mark(`settled after ${k + 1} steps of 2s page time`)
+  mark(`${(pageTime / 1000).toFixed(2)}s of page time in all, frozen`)
+
+  // The page's scripts off: it is now one fixed state. A first full-page capture (thrown
+  // away) has the browser load what only a capture of the whole page asks for (lazy
+  // frames and images far from the window); after it, every capture is the same.
+  const cdp = await page.context().newCDPSession(page)
+  await cdp.send("Emulation.setScriptExecutionDisabled", { value: true })
+  await page.screenshot({ fullPage: true, timeout: 120000 })
+  await quiet()
   await freeze(page)
-  mark("frozen")
+  mark("scripts off")
 }
 
-// Waits for fonts and images (with a timer on this side: the page's own timers stop
-// with its clock), then puts every animation at its end (finite ones) or its first
-// frame (infinite ones) and pauses videos. Covers shadow roots, where a swapped-in
-// section lives.
+// Puts the page at rest: every image and frame loaded (a lazy one far from the window
+// would never load, so all are made eager), fonts in, every animation at its end
+// (finite ones) or its first frame (infinite ones), every video paused at VIDEO_AT
+// with that frame shown. Covers shadow roots, where a swapped-in section lives.
 export async function freeze(page) {
-  const wait = page.evaluate(async () => {
-    await document.fonts.ready
-    const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
-    const imgs = roots.flatMap((r) => [...r.querySelectorAll("img")]).filter((i) => !i.complete)
-    await Promise.all(imgs.map((i) => new Promise((r) => { i.addEventListener("load", r, { once: true }); i.addEventListener("error", r, { once: true }) })))
-  })
-  await Promise.race([wait, new Promise((r) => setTimeout(r, 8000))])
   await page.evaluate(() => {
+    const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
+    for (const root of roots) for (const el of root.querySelectorAll("img[loading=lazy], iframe[loading=lazy]")) el.loading = "eager"
+  })
+  await settle(page)
+  await page.evaluate((VIDEO_AT) => {
     const roots = [document, ...[...document.querySelectorAll("*")].filter((el) => el.shadowRoot).map((el) => el.shadowRoot)]
     for (const root of roots) {
       for (const a of root.getAnimations()) {
         try { a.finish() } catch { a.pause(); a.currentTime = 0 }
       }
-      for (const v of root.querySelectorAll("video")) v.pause()
+      for (const v of root.querySelectorAll("video")) {
+        v.pause()
+        const at = Math.min(VIDEO_AT, (v.duration || 0) / 2)
+        if (Math.abs(v.currentTime - at) > 0.01) v.currentTime = at
+      }
     }
-  })
+  }, VIDEO_AT)
+  await settle(page)
 }
