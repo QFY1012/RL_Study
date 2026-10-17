@@ -33,7 +33,6 @@ export default function Report() {
         <Grid fields={false}>
           <Stat
             span={2}
-            size="lg"
             value={kpi("fewest").value}
             unit={kpi("fewest").unit}
             captionBelow
