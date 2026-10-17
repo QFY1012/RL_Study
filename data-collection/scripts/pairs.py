@@ -63,6 +63,7 @@ for f in sorted(os.listdir(r)):
     side.save(os.path.join(out, f"{sec}-side.png"))
     entry = {"orig_box": o, "gen_box": g, "above_rows_differing": round(above, 3), "below_rows_differing": round(below, 3), **meta["checks"]}
     entry["failed"] = [name for name, bad in [
+        ("height", not meta["fits"]),
         ("isolation", above > ISOLATION or below > ISOLATION),
         ("text", bool(entry["missingText"])),
         ("images", bool(entry["missingImages"] or entry["brokenImages"])),

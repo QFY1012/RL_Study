@@ -9,7 +9,8 @@
 | 录制 | `scripts/record.mjs <url> <dir>` | `page.har`(页面的全部请求和响应)、`live.png`(参考用)、`sections.json`(设计 token、每节的位置和内容、内联 SVG 转成的独立文件) |
 | 回放 | `scripts/render.mjs <dir>` | `replay.json`(每节在回放里是否和录制时一样)、`render/orig.png`、`render/orig.json` |
 | 重新设计 | `scripts/generate.mjs <dir> [count]` | `gen/<i>.html`、`gen/<i>.json`(提示词、模型、用量) |
-| 换节截图 | `scripts/render.mjs <dir>`(再跑一次) | `render/<i>.png`、`render/<i>.json`(位置和检查) |
+| 换节截图 | `scripts/render.mjs <dir>`(再跑一次) | `render/<i>.png`、`render/<i>.json`(位置、高度和检查) |
+| 改高度 | `scripts/generate.mjs <dir> --revise`,再 `render.mjs` | 高度不合的节把实际高度告诉模型重写,最多 `ROUNDS` 轮 |
 | 检查和裁切 | `python3 -I scripts/pairs.py <dir>` | `pairs/<i>-orig.png`、`pairs/<i>-gen.png`、`pairs/<i>-side.png`、`pairs/report.json` |
 
 `node scripts/run.mjs <out-root> <url>...`(或 `--list <文件>`,一行一个 URL)对每个网站跑完上面几步,每个网站一个目录 `<out-root>/<host>/`,日志在 `<out-root>/<host>.log`,同时带着网站名打印到终端。
@@ -17,6 +18,7 @@
 - `JOBS`(默认 20):同时处理的网站数,也就是同时在等模型的网站数。一个网站选中的几节同时请求模型,遇到 429、5xx 或断线会隔 10s、30s、60s 重试。
 - `BROWSER_JOBS`(默认 4):录制、回放、裁切这些浏览器步骤同时最多跑几个。它们吃 CPU,机器是 4 核。
 - `COUNT`(默认 2):每个网站换几节。
+- `ROUNDS`(默认 2):高度不合时最多让模型改几轮。
 
 ## 页面怎么跑
 
@@ -34,16 +36,19 @@
 
 - 生成模型只拿到内容(文字、图片、插图、图标,按阅读顺序)和页面的设计 token(字体、颜色、内容宽度、上下两节的背景),拿不到原版的 HTML 和布局。
 - 生成的节放进一个 shadow root,宿主元素占原节的位置:两边的 CSS 互不影响,字体、颜色这些继承属性照常从页面传进来。
-- 生成版和原版的高度差取整到整像素,否则下面整页会重新栅格化。
+- 生成版必须和原版一样高(`scripts/fit.mjs`):提示里给出高度范围(不高于原版,最多矮 24px 或 4%),渲染后不在范围内就把实际高度告诉模型重写;在范围内的补到和原版完全一样高(宿主元素是 grid,片段的外框拉伸填满)。两版尺寸相同,高度就不能当作区分两版的捷径,下面的页面也不用移动。
+- 视频和 canvas 在读页面时截成图(JPEG 资源),当作插图交给模型。
+- 被页面别处的元素盖住的节(比如别处绝对定位过来的图)不可用:换掉这节以后那个元素还在原位,会压在新的一节上。
 
 ## 检查
 
 | 检查 | 在哪 | 含义 |
 |---|---|---|
-| 回放一致 | `replay.json` | 每节在回放里的高度和内容是否和录制时一样;不一样的节不拿去生成 |
+| 回放一致 | `replay.json` | 每节在回放里的高度和内容是否和录制时一样、有没有被别处的元素盖住;不合的节不拿去生成 |
 | 隔离 | `pairs/report.json` 的 `above_rows_differing` / `below_rows_differing` | 换掉的那节上方应完全不变,下方平移高度差后应完全不变 |
 | 内容 | `missingText` / `missingImages` / `brokenImages` | 每段文字、每张图都要出现,图要加载成功;被原版截断的文字只看开头 |
-| 破版 | `overflow` / `fontsMissing` | 超出宿主宽度的元素数、没加载上的字体 |
+| 高度 | `render/<i>.json` 的 `natural` / `fits` | 生成版本来的高度,是否在范围内 |
+| 破版 | `overflow` / `fontsMissing` | 超出宿主边框的元素数(左右,以及被裁掉的上下)、没加载上的字体 |
 
 `pairs/report.json` 里每对的 `failed` 列出没过的检查,空的才可用。
 

@@ -4,6 +4,8 @@
 // line is also printed here, prefixed with the host. JOBS sites run at once (default
 // 20); the browser steps (record, render, pairs) are CPU-bound, so at most
 // BROWSER_JOBS of them run at a time (default 4) while the others wait on the model.
+// A generated section that misses its height (fit.mjs) is sent back to the model and
+// rendered again, up to ROUNDS times (default 2).
 // Needs ~/.config/ui-rl/judge.env in the environment for generate.mjs.
 import fs from "node:fs"
 import path from "node:path"
@@ -16,6 +18,11 @@ const urls = args[0] === "--list" ? fs.readFileSync(args[1], "utf8").split("\n")
 const JOBS = Number(process.env.JOBS ?? 20)
 const BROWSER_JOBS = Number(process.env.BROWSER_JOBS ?? 4)
 const COUNT = process.env.COUNT ?? "2"
+const ROUNDS = Number(process.env.ROUNDS ?? 2)
+const misses = (dir) => {
+  const r = path.join(dir, "render")
+  return fs.existsSync(r) && fs.readdirSync(r).some((f) => /^\d+\.json$/.test(f) && !JSON.parse(fs.readFileSync(path.join(r, f), "utf8")).fits)
+}
 const here = path.dirname(import.meta.dirname)
 fs.mkdirSync(root, { recursive: true })
 
@@ -60,6 +67,11 @@ async function site(url) {
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
     await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, COUNT], { NODE_USE_ENV_PROXY: "1" })
     await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
+    // sections that missed their height go back to the model, up to ROUNDS times
+    for (let k = 0; k < ROUNDS && misses(dir); k++) {
+      await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, "--revise"], { NODE_USE_ENV_PROXY: "1" })
+      await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
+    }
     await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir]))
     console.log(`[${host}] done in ${((Date.now() - t) / 1000).toFixed(0)}s`)
     return { host, ok: true }

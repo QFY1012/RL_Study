@@ -1,17 +1,22 @@
 // Has a model redesign sections of a recorded page from their content alone.
-//   node scripts/generate.mjs <dir> [count]
-// Picks up to <count> sections (default 2) and writes gen/<i>.html (the fragment)
-// and gen/<i>.json (prompt, model, usage) for each. The model gets the section's
-// text, images, illustrations and icons plus the page's fonts and colors, never the original
-// markup or layout, so the two versions differ only in design decisions.
+//   node scripts/generate.mjs <dir> [count]     picks up to <count> sections (default 2)
+//   node scripts/generate.mjs <dir> --revise    sends back the ones that missed their height
+// Writes gen/<i>.html (the fragment) and gen/<i>.json (the conversation, model, usage)
+// for each. The model gets the section's text, images, illustrations and icons, the
+// page's fonts and colors, and the height to come out at (fit.mjs), never the
+// original markup or layout, so the two versions differ only in design decisions.
+// With --revise, every section whose render (render/<i>.json) does not fit is told
+// its height and asked again, in the same conversation.
 // Endpoint and key come from JUDGE_URL / JUDGE_MODEL / DEEPSEEK_API_KEY
 // (source ~/.config/ui-rl/judge.env); run with NODE_USE_ENV_PROXY=1.
 import fs from "node:fs"
 import path from "node:path"
+import { range } from "./fit.mjs"
 
-const [dir, countArg] = process.argv.slice(2)
-if (!dir) throw new Error("usage: generate.mjs <dir> [count]")
-const count = Number(countArg ?? 2)
+const [dir, arg] = process.argv.slice(2)
+if (!dir) throw new Error("usage: generate.mjs <dir> [count | --revise]")
+const revise = arg === "--revise"
+const count = revise ? 0 : Number(arg ?? 2)
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
 const MODEL = process.env.GEN_MODEL ?? process.env.JUDGE_MODEL ?? "deepseek-v4.1-flash"
 const KEY = process.env.DEEPSEEK_API_KEY
@@ -30,7 +35,7 @@ const replay = JSON.parse(fs.readFileSync(path.join(dir, "replay.json"), "utf8")
 const candidates = sections.filter((s, k) => replay[s.i]?.same && k > 0 && k < sections.length - 1 && s.box.h >= 200 && s.box.h <= 1400 && texts(s).length >= 3 && s.items.length <= 40)
 const step = candidates.length / Math.min(count, candidates.length)
 const chosen = Array.from({ length: Math.min(count, candidates.length) }, (_, k) => candidates[Math.floor(k * step)])
-console.log(`${candidates.length} candidate sections, chosen: ${chosen.map((s) => s.i).join(", ") || "none"}`)
+if (!revise) console.log(`${candidates.length} candidate sections, chosen: ${chosen.map((s) => s.i).join(", ") || "none"}`)
 
 const system = `You are a senior web designer. You redesign one section of an existing marketing website.
 You get the section's content (in reading order) and the page's design tokens. You do not see the current design.
@@ -41,6 +46,7 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
 - Fonts: only the font families listed in the tokens (they are already loaded). Colors: stay within the page's palette; the section background may be any of the page's background colors.
+- Height: the section has to come out between the two heights given, at 1440px wide; the page around it is laid out for that. Make it fit by how you lay it out (columns, image sizes, spacing, type sizes), never by cutting content off, hiding overflow or fixing a height that clips.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
 Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
 
@@ -58,7 +64,7 @@ Page tokens:
 - background colors: ${tokens.backgroundColors.join("; ")}
 - page background: ${tokens.pageBackground}
 - the other sections keep their content within ${tokens.contentWidth}px
-Section ${k + 1} of ${sections.length}.
+Section ${k + 1} of ${sections.length}, to be between ${range(s.box.h).min}px and ${range(s.box.h).max}px tall.
 - section above: ${around(sections[k - 1]) ?? "none"}
 - section below: ${around(sections[k + 1]) ?? "none"}
 
@@ -68,13 +74,13 @@ ${items.join("\n")}`
 
 // One request, retried after 10s, 30s and 60s when the endpoint is busy (429, 5xx)
 // or the connection drops: with many sites at once the endpoint does get busy.
-async function complete(prompt) {
+async function complete(messages) {
   for (const wait of [10, 30, 60, null]) {
     try {
       const res = await fetch(URL_, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },
-        body: JSON.stringify({ model: MODEL, messages: [{ role: "system", content: system }, { role: "user", content: prompt }], temperature: 0.7, max_tokens: 32000 }),
+        body: JSON.stringify({ model: MODEL, messages, temperature: 0.7, max_tokens: 32000 }),
       })
       if (res.ok) return await res.json()
       const text = (await res.text()).slice(0, 300)
@@ -88,17 +94,50 @@ async function complete(prompt) {
   }
 }
 
-// All chosen sections are asked for at once.
-fs.mkdirSync(path.join(dir, "gen"), { recursive: true })
-await Promise.all(chosen.map(async (s) => {
-  const prompt = user(s)
-  const t = Date.now()
-  const body = await complete(prompt).catch((e) => { throw new Error(`section ${s.i}: ${e.message}`) })
+// One turn of a section's conversation: sends the messages, keeps the reply's
+// fragment. Returns the fragment, or null when the reply has none.
+async function turn(sec, messages) {
+  const body = await complete(messages).catch((e) => { throw new Error(`section ${sec}: ${e.message}`) })
   const reply = body.choices?.[0]?.message?.content
-  if (typeof reply !== "string") throw new Error(`section ${s.i}: no content, finish_reason ${body.choices?.[0]?.finish_reason}, usage ${JSON.stringify(body.usage)}`)
+  if (typeof reply !== "string") throw new Error(`section ${sec}: no content, finish_reason ${body.choices?.[0]?.finish_reason}, usage ${JSON.stringify(body.usage)}`)
+  messages.push({ role: "assistant", content: reply })
   const m = reply.match(/```html\s*\n([\s\S]*?)```/)
-  if (!m) { console.log(`section ${s.i}: no html block in the reply, skipped`); return }
-  fs.writeFileSync(path.join(dir, "gen", `${s.i}.html`), m[1])
-  fs.writeFileSync(path.join(dir, "gen", `${s.i}.json`), JSON.stringify({ section: s.i, model: MODEL, seconds: (Date.now() - t) / 1000, usage: body.usage, system, prompt }, null, 1))
-  console.log(`section ${s.i}: ${m[1].length} chars in ${((Date.now() - t) / 1000).toFixed(0)}s, tokens ${JSON.stringify(body.usage)}`)
-}))
+  return { fragment: m?.[1] ?? null, usage: body.usage }
+}
+
+const save = (sec, record, fragment) => {
+  fs.writeFileSync(path.join(dir, "gen", `${sec}.html`), fragment)
+  fs.writeFileSync(path.join(dir, "gen", `${sec}.json`), JSON.stringify(record, null, 1))
+}
+
+fs.mkdirSync(path.join(dir, "gen"), { recursive: true })
+if (!revise) {
+  // all chosen sections are asked for at once
+  await Promise.all(chosen.map(async (s) => {
+    const t = Date.now()
+    const messages = [{ role: "system", content: system }, { role: "user", content: user(s) }]
+    const { fragment, usage } = await turn(s.i, messages)
+    if (!fragment) { console.log(`section ${s.i}: no html block in the reply, skipped`); return }
+    save(s.i, { section: s.i, model: MODEL, rounds: [{ seconds: (Date.now() - t) / 1000, usage }], messages }, fragment)
+    console.log(`section ${s.i}: ${fragment.length} chars in ${((Date.now() - t) / 1000).toFixed(0)}s, tokens ${JSON.stringify(usage)}`)
+  }))
+} else {
+  const sent = fs.readdirSync(path.join(dir, "gen")).filter((f) => f.endsWith(".json")).map((f) => Number(f.slice(0, -5)))
+  const misses = sent.filter((i) => {
+    const r = path.join(dir, "render", `${i}.json`)
+    return fs.existsSync(r) && !JSON.parse(fs.readFileSync(r, "utf8")).fits
+  })
+  console.log(`${misses.length} sections missed their height${misses.length ? `: ${misses.join(", ")}` : ""}`)
+  await Promise.all(misses.map(async (i) => {
+    const t = Date.now()
+    const record = JSON.parse(fs.readFileSync(path.join(dir, "gen", `${i}.json`), "utf8"))
+    const natural = JSON.parse(fs.readFileSync(path.join(dir, "render", `${i}.json`), "utf8")).natural
+    const { min, max } = range(sections[i].box.h)
+    record.messages.push({ role: "user", content: `Rendered at 1440px wide, your section is ${natural}px tall; it has to be between ${min}px and ${max}px. Change the layout so it fits (${natural > max ? "less tall" : "taller"}), keeping every rule above. Reply with the whole fragment again.` })
+    const { fragment, usage } = await turn(i, record.messages)
+    record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, was: natural })
+    if (!fragment) { console.log(`section ${i}: no html block in the revision, kept the last one`); fs.writeFileSync(path.join(dir, "gen", `${i}.json`), JSON.stringify(record, null, 1)); return }
+    save(i, record, fragment)
+    console.log(`section ${i}: revised (was ${natural}px, wanted ${min}–${max}px) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
+  }))
+}

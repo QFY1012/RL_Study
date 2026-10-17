@@ -7,7 +7,7 @@ export async function readPage(page) {
   // height) to the element whose children are stacked blocks; children taller than
   // MAX are split the same way. Each section gets data-sec="<i>".
   const MIN = 120, MAX = 1800
-  const { secs: sections, assets } = await page.evaluate(({ MIN, MAX }) => {
+  const { secs: sections, assets, shots } = await page.evaluate(({ MIN, MAX }) => {
     // shown: rendered, not hidden, not fully transparent (itself or an ancestor), with a size
     const visible = (el) => {
       const r = el.getBoundingClientRect()
@@ -47,7 +47,7 @@ export async function readPage(page) {
     // styles that come from the page's CSS are written onto each shape, the color
     // that currentColor stands for onto the root, and symbols pulled in with <use>
     // are copied into <defs>. render.mjs puts them back as data: URLs.
-    const assets = []
+    const assets = [], shots = []
     const PAINT = ["fill", "stroke", "stroke-width", "stroke-opacity", "fill-opacity", "opacity", "stroke-dasharray", "stroke-linecap", "stroke-linejoin", "stop-color", "stop-opacity"]
     const svgAsset = (el) => {
       const clone = el.cloneNode(true)
@@ -87,8 +87,13 @@ export async function readPage(page) {
           if (r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: el.currentSrc || el.src, alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3) })
           return
         }
-        if (tag === "VIDEO") {
-          if (el.poster) items.push({ kind: "image", src: el.poster, alt: "video", aspect: +(el.getBoundingClientRect().width / el.getBoundingClientRect().height).toFixed(3) })
+        // what a video or canvas shows is screenshot into an asset (shots, below)
+        if (tag === "VIDEO" || tag === "CANVAS") {
+          const r = el.getBoundingClientRect()
+          if (r.width >= 48 && r.height >= 48) {
+            shots.push(abs(r))
+            items.push({ kind: "illustration", src: `shot:${shots.length - 1}`, alt: tag === "VIDEO" ? "video" : "canvas", aspect: +(r.width / r.height).toFixed(3) })
+          }
           return
         }
         if (tag === "svg") {
@@ -123,13 +128,46 @@ export async function readPage(page) {
       return items
     }
 
+    // Elements outside a section that paint over its box (content positioned from
+    // elsewhere on the page) would stay put when the section is swapped and land on
+    // top of the new one. An element counts when it paints something (text, an image,
+    // a background, a border) and lies mostly over the section; a page-wide
+    // decoration spanning several sections does not.
+    const paints = (e) => {
+      if (["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName)) return true
+      const cs = getComputedStyle(e)
+      return [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) || cs.backgroundColor !== "rgba(0, 0, 0, 0)" || cs.backgroundImage !== "none" || parseFloat(cs.borderTopWidth) > 0
+    }
+    const overlaps = (sec) => {
+      const R = sec.getBoundingClientRect()
+      const found = []
+      for (const e of document.querySelectorAll("body *")) {
+        if (sec.contains(e) || e.contains(sec) || e.closest("svg") !== null && e.tagName !== "svg") continue
+        const r = e.getBoundingClientRect()
+        if (r.height > 2 * R.height || !r.width || !r.height) continue
+        const w = Math.min(r.right, R.right) - Math.max(r.left, R.left), h = Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top)
+        if (w <= 0 || h <= 0 || (w * h) < 0.25 * r.width * r.height || !visible(e) || !paints(e)) continue
+        found.push(`<${e.tagName.toLowerCase()} class="${(e.className?.baseVal ?? e.className ?? "").toString().slice(0, 40)}">`)
+      }
+      return found
+    }
+
     const secs = list.map((el, i) => {
       el.setAttribute("data-sec", String(i))
       const items = content(el)
-      return { i, tag: el.tagName.toLowerCase(), box: abs(el.getBoundingClientRect()), background: bg(el), items }
+      return { i, tag: el.tagName.toLowerCase(), box: abs(el.getBoundingClientRect()), background: bg(el), items, overlappedBy: overlaps(el) }
     })
-    return { secs, assets }
+    return { secs, assets, shots }
   }, { MIN, MAX })
+
+  // Videos and canvases are screenshot as they are now, as JPEG assets. A clip of the
+  // full page, not an element screenshot: that waits for the element to hold still,
+  // which a canvas drawing every frame never does.
+  for (const [k, clip] of shots.entries()) {
+    const jpg = await page.screenshot({ clip: { x: clip.x, y: clip.y, width: clip.w, height: clip.h }, fullPage: true, type: "jpeg", quality: 90, timeout: 60000 })
+    assets.push(`data:image/jpeg;base64,${jpg.toString("base64")}`)
+    for (const s of sections) for (const t of s.items) if (t.src === `shot:${k}`) t.src = `asset:${assets.length - 1}`
+  }
 
   // Page-level design tokens: the fonts actually used for headings and body text,
   // the most used text and background colors, and the width the content keeps to.
@@ -161,8 +199,8 @@ export async function readPage(page) {
 }
 
 // What has to be the same in two readings of a section for it to count as the same
-// section: its height and its content (inline SVGs by their size, as their data
-// carries computed styles).
+// section: its height and its content (assets by their shape: an SVG's data carries
+// computed styles, a screenshot's the moment it was taken).
 export function signature(s) {
   return JSON.stringify([s.box.h, s.items.map((t) => [t.kind, t.text ?? (t.src.startsWith("asset:") ? t.aspect : t.src), t.href ?? null])])
 }
