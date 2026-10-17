@@ -60,7 +60,7 @@ font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 font = ImageFont.truetype(font_path, 22) if os.path.exists(font_path) else ImageFont.load_default()
 
 for f in sorted(os.listdir(r)):
-    if not f.endswith(".json") or f == "orig.json":
+    if not (f.endswith(".json") and f[:-5].isdigit()):  # render/<i>.json, one per generated section
         continue
     sec = f[:-5]
     meta = json.load(open(os.path.join(r, f)))
