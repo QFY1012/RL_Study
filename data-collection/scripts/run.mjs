@@ -3,7 +3,8 @@
 // Each site goes to <out-root>/<host>/ and its output to <out-root>/<host>.log; every
 // line is also printed here, prefixed with the host. JOBS sites run at once (default
 // 20); the browser steps (record, render, pairs) are CPU-bound, so at most
-// BROWSER_JOBS of them run at a time (default 4) while the others wait on the model.
+// BROWSER_JOBS of them run at a time (default 2: with no GPU a heavy page takes about
+// two of the four cores) while the others wait on the model.
 // After each render pairs.py checks the pairs; a generated section that does not fit
 // its box or shows a seam at its edge is sent back to the model and rendered again, up
 // to ROUNDS times (default 2).
@@ -20,7 +21,7 @@ const root = args.shift()
 if (!root) throw new Error("usage: run.mjs <out-root> <url>... | --list <file>")
 const urls = args[0] === "--list" ? fs.readFileSync(args[1], "utf8").split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#")) : args
 const JOBS = Number(process.env.JOBS ?? 20)
-const BROWSER_JOBS = Number(process.env.BROWSER_JOBS ?? 4)
+const BROWSER_JOBS = Number(process.env.BROWSER_JOBS ?? 2)
 const COUNT = process.env.COUNT ?? "2"
 const ROUNDS = Number(process.env.ROUNDS ?? 2)
 const STEP_SECONDS = Number(process.env.STEP_SECONDS ?? 300)

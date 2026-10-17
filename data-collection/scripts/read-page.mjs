@@ -87,7 +87,7 @@ export async function readPage(page) {
         const tag = el.tagName
         if (tag === "IMG") {
           const r = el.getBoundingClientRect()
-          if (r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: el.currentSrc || el.src, alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3) })
+          if (r.width >= 24 && r.height >= 24) items.push({ kind: "image", src: el.currentSrc || el.src, alt: el.alt || "", aspect: +(el.naturalWidth / el.naturalHeight || r.width / r.height).toFixed(3), box: abs(r) })
           return
         }
         // what a video or canvas shows is screenshot into an asset (shots, below)
@@ -95,19 +95,19 @@ export async function readPage(page) {
           const r = el.getBoundingClientRect()
           if (r.width >= 48 && r.height >= 48) {
             shots.push(abs(r))
-            items.push({ kind: "illustration", src: `shot:${shots.length - 1}`, alt: tag === "VIDEO" ? "video" : "canvas", aspect: +(r.width / r.height).toFixed(3) })
+            items.push({ kind: "illustration", src: `shot:${shots.length - 1}`, alt: tag === "VIDEO" ? "video" : "canvas", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
           }
           return
         }
         if (tag === "svg") {
           const r = el.getBoundingClientRect()
-          if (r.width >= 8 && r.height >= 8) items.push({ kind: r.width <= 48 && r.height <= 48 ? "icon" : "illustration", src: svgAsset(el), alt: el.getAttribute("aria-label") || "", aspect: +(r.width / r.height).toFixed(3) })
+          if (r.width >= 8 && r.height >= 8) items.push({ kind: r.width <= 48 && r.height <= 48 ? "icon" : "illustration", src: svgAsset(el), alt: el.getAttribute("aria-label") || "", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
           return
         }
         const bgImg = getComputedStyle(el).backgroundImage
         const m = bgImg && bgImg.match(/url\("?([^")]+)"?\)/)
         const r = el.getBoundingClientRect()
-        if (m && !el.hasAttribute("data-backdrop") && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3) })
+        if (m && !el.hasAttribute("data-backdrop") && r.width >= 100 && r.height >= 100) items.push({ kind: "image", src: m[1], alt: "background", aspect: +(r.width / r.height).toFixed(3), box: abs(r) })
         const blockKids = [...el.children].filter((c) => visible(c) && isBlock(c) && c.innerText?.trim())
         const text = el.innerText?.trim()
         const leaf = text && blockKids.length === 0 && r.width > 0 && r.height > 0
@@ -203,8 +203,10 @@ export async function readPage(page) {
     for (const s of sections) for (const t of s.items) if (t.src === `shot:${k}`) t.src = `asset:${assets.length - 1}`
   }
 
-  // Page-level design tokens: the fonts actually used for headings and body text,
-  // the most used text and background colors, and the width the content keeps to.
+  // Page-level design tokens: the fonts actually used for headings and body text, the
+  // font faces the page has loaded (family, weight, style: only these render, a weight
+  // the page never loaded is not in the recording), the most used text and background
+  // colors, and the width the content keeps to.
   const tokens = await page.evaluate(() => {
     const font = (sel) => { const el = document.querySelector(sel); return el ? getComputedStyle(el).fontFamily : null }
     const count = (m, k, w = 1) => m.set(k, (m.get(k) ?? 0) + w)
@@ -221,8 +223,11 @@ export async function readPage(page) {
     const top = (m, n) => [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k]) => k)
     const blocks = [...document.querySelectorAll("[data-sec] *")].map((el) => el.getBoundingClientRect()).filter((r) => r.width > 200 && r.width < innerWidth * 0.95)
     const contentWidth = blocks.length ? Math.max(...blocks.map((r) => r.width)) : null
+    const faces = {}
+    for (const f of document.fonts) if (f.status === "loaded") (faces[f.family.replace(/^["']|["']$/g, "")] ??= new Set()).add(`${f.weight}${f.style === "normal" ? "" : ` ${f.style}`}`)
     return {
       fonts: { heading: font("h1") ?? font("h2"), subheading: font("h2") ?? font("h3"), body: font("p") ?? getComputedStyle(document.body).fontFamily },
+      faces: Object.fromEntries(Object.entries(faces).map(([k, v]) => [k, [...v].sort()])),
       textColors: top(text, 6),
       backgroundColors: top(back, 6),
       pageBackground: getComputedStyle(document.body).backgroundColor,

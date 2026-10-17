@@ -10,7 +10,9 @@
 // section: the section's content is hidden, its backdrop left as it is (read-page.mjs),
 // and a host element is laid over its box with the fragment in its shadow root (the
 // fragment's CSS and the page's cannot reach each other); screenshot, and put back.
-// Writes replay.json, render/orig.png, render/orig.json, render/<i>.png and render/<i>.json.
+// Writes replay.json, render/orig.png, render/orig.json, render/<i>.png and
+// render/<i>.json; on the first render (nothing generated yet) also render/backdrop.png
+// and render/look-<i>.json, what generate.mjs shows the model.
 import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
@@ -41,6 +43,14 @@ const shoot = async (name) => {
   return { name, height: await page.evaluate(() => document.documentElement.scrollHeight), boxes: await boxes() }
 }
 
+// A section's content is hidden with visibility (nothing moves) and its backdrop, the
+// layers marked data-backdrop (read-page.mjs), left showing; unhide puts every style back.
+const hide = (secs) => page.evaluate((secs) => {
+  window.__styles = secs.flatMap((i) => [...document.querySelector(`[data-sec="${i}"]`).querySelectorAll("*")].map((e) => [e, e.getAttribute("style")]))
+  for (const [e] of window.__styles) e.style.setProperty("visibility", e.hasAttribute("data-backdrop") ? "visible" : "hidden", "important")
+}, secs)
+const unhide = () => page.evaluate(() => { for (const [e, style] of window.__styles) style === null ? e.removeAttribute("style") : e.setAttribute("style", style) })
+
 const orig = await shoot("orig")
 fs.writeFileSync(path.join(out, "orig.json"), JSON.stringify(orig, null, 1))
 console.log(`orig: height ${orig.height}`)
@@ -67,7 +77,6 @@ const changed = await blank.evaluate(async ({ live, shot, boxes }) => {
   }
   return out
 }, { live: url(path.join(dir, "live.png")), shot: url(path.join(out, "orig.png")), boxes: snap.sections.filter((s) => orig.boxes[s.i]).map((s) => [s.i, s.box, orig.boxes[s.i]]) })
-await blank.close()
 
 const replay = {}
 for (const s of snap.sections) {
@@ -81,18 +90,66 @@ for (const s of snap.sections) {
 fs.writeFileSync(path.join(dir, "replay.json"), JSON.stringify(replay, null, 1))
 console.log(`replay: ${Object.values(replay).filter((r) => r.same).length}/${snap.sections.length} sections the same as recorded; ${Object.entries(replay).filter(([, r]) => !r.same).map(([i, r]) => `#${i} ${r.why}`).join(", ") || "all"}`)
 
+// What the model sees, the way the page's designer would (first render only, before
+// anything is generated): for each usable section, render/look-<i>.json with
+// - slot: the page around the section, MARGIN px above and below, at half size, with
+//   the section's content gone and its backdrop showing, its box outlined (dashed);
+//   from orig.png, with the box taken from backdrop.png (every usable section hidden)
+// - items: each image, illustration and icon as it looks on the page, cut from
+//   orig.png, at most 400px on its longer side
+// Both JPEG data URLs.
+const MARGIN = 700
+const usable = snap.sections.filter((s) => replay[s.i].same).map((s) => s.i)
+if (!gens.length && usable.length) {
+  await hide(usable)
+  await page.screenshot({ path: path.join(out, "backdrop.png"), fullPage: true, timeout: 120000 })
+  await unhide()
+  const looks = await blank.evaluate(async ({ shot, empty, secs, MARGIN }) => {
+    const open = (src) => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src })
+    const [a, b] = await Promise.all([open(shot), open(empty)])
+    const jpeg = async (c) => {
+      const blob = await c.convertToBlob({ type: "image/jpeg", quality: 0.85 })
+      return await new Promise((ok) => { const f = new FileReader(); f.onload = () => ok(f.result); f.readAsDataURL(blob) })
+    }
+    const out = {}
+    for (const { i, box, items } of secs) {
+      const top = Math.max(0, box.y - MARGIN), bottom = Math.min(a.height, box.y + box.h + MARGIN)
+      const c = new OffscreenCanvas(Math.round(a.width / 2), Math.round((bottom - top) / 2))
+      const g = c.getContext("2d")
+      g.scale(0.5, 0.5)
+      g.drawImage(a, 0, top, a.width, bottom - top, 0, 0, a.width, bottom - top)
+      g.drawImage(b, box.x, box.y, box.w, box.h, box.x, box.y - top, box.w, box.h)
+      g.setLineDash([12, 8]); g.lineWidth = 4; g.strokeStyle = "rgb(255, 0, 128)"
+      g.strokeRect(box.x + 2, box.y - top + 2, box.w - 4, box.h - 4)
+      const look = { slot: await jpeg(c), items: {} }
+      for (const [j, r] of items) {
+        const k = Math.min(1, 400 / Math.max(r.w, r.h))
+        const ci = new OffscreenCanvas(Math.max(1, Math.round(r.w * k)), Math.max(1, Math.round(r.h * k)))
+        ci.getContext("2d").drawImage(a, r.x, r.y, r.w, r.h, 0, 0, ci.width, ci.height)
+        look.items[j] = await jpeg(ci)
+      }
+      out[i] = look
+    }
+    return out
+  }, {
+    shot: url(path.join(out, "orig.png")), empty: url(path.join(out, "backdrop.png")), MARGIN,
+    secs: usable.map((i) => ({ i, box: orig.boxes[i], items: again.sections[i].items.map((t, j) => [j, t.box]).filter(([, b]) => b && b.w > 0 && b.h > 0) })),
+  })
+  for (const [i, look] of Object.entries(looks)) fs.writeFileSync(path.join(out, `look-${i}.json`), JSON.stringify(look))
+  console.log(`looks: ${Object.keys(looks).length} sections`)
+}
+await blank.close()
+
 for (const sec of gens) {
   const fragment = fs.readFileSync(path.join(dir, "gen", `${sec}.html`), "utf8")
-  // The section's content is hidden (visibility, so nothing moves) and its backdrop,
-  // the layers marked data-backdrop, left showing: the generated version keeps the
-  // original's band of color or gradient. The host lies over the section's box, exactly
+  // The section's content is hidden and its backdrop left showing: the generated
+  // version keeps the original's band of color or gradient. The host lies over the section's box, exactly
   // its size, above everything (no element from elsewhere covers a usable section); it
   // is a grid, so the fragment's outer box stretches to fill it. It takes the
   // section's inherited text properties, as if it were inside it.
+  await hide([sec])
   await page.evaluate(({ sec, fragment }) => {
     const old = document.querySelector(`[data-sec="${sec}"]`)
-    window.__styles = [...old.querySelectorAll("*")].map((e) => [e, e.getAttribute("style")])
-    for (const [e] of window.__styles) e.style.setProperty("visibility", e.hasAttribute("data-backdrop") ? "visible" : "hidden", "important")
     const box = old.getBoundingClientRect()
     const host = document.createElement("div")
     host.setAttribute("data-gen", String(sec))
@@ -144,18 +201,17 @@ for (const sec of gens) {
       const r = el.getBoundingClientRect()
       return r.width && r.height && (r.right > hr.right + 1 || r.left < hr.left - 1)
     }).length
-    // only the first family of each stack has to be there; the rest are fallbacks
-    const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => getComputedStyle(el).fontFamily.split(",")[0].trim()))]
-    const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(`16px ${f}`))
+    // the face each element asks for (the first family of its stack, the rest are
+    // fallbacks, in its weight and style) has to be loaded
+    const fontsUsed = [...new Set([...root.querySelectorAll("*")].map((el) => { const cs = getComputedStyle(el); return `${cs.fontStyle} ${cs.fontWeight} 16px ${cs.fontFamily.split(",")[0].trim()}` }))]
+    const fontsMissing = fontsUsed.filter((f) => !document.fonts.check(f))
     return { missingText, brokenImages, missingImages, overflow, fontsMissing }
   }, { sec, items, raw: fragment })
   fs.writeFileSync(path.join(out, `${sec}.json`), JSON.stringify(r, null, 1))
   const c = r.checks
   console.log(`section ${sec}: ${r.fits ? `fits its ${orig.boxes[sec].h}px box` : `runs ${r.spill}px past its ${orig.boxes[sec].h}px box`}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}`)
-  await page.evaluate((sec) => {
-    document.querySelector(`[data-gen="${sec}"]`).remove()
-    for (const [e, style] of window.__styles) style === null ? e.removeAttribute("style") : e.setAttribute("style", style)
-  }, sec)
+  await page.evaluate((sec) => document.querySelector(`[data-gen="${sec}"]`).remove(), sec)
+  await unhide()
   await freeze(page)
 }
 await browser.close()

@@ -7,7 +7,9 @@
 # recorded as above/below_rows_differing, for information.
 # Writes pairs/<i>-orig.png and pairs/<i>-gen.png (the section with MARGIN px of
 # page above and below), pairs/<i>-side.png (both side by side, for looking at) and
-# pairs/report.json, which lists for each pair the checks it failed (none: usable).
+# pairs/report.json, which lists for each pair the checks it failed (none: usable), and
+# pairs/<i>-gen.jpg, the generated image at half size, which generate.mjs --revise shows
+# the model so it sees what it made.
 # Seam: the generated image must join the page the way the original does, or a judge
 # could tell the two apart by the edge of the box alone. For each side of the box, the
 # line of pixels just outside it is compared with the line just inside: the share that
@@ -83,6 +85,7 @@ for f in sorted(os.listdir(r)):
     b = band(gen, top - MARGIN, bottom + MARGIN)
     a.save(os.path.join(out, f"{sec}-orig.png"))
     b.save(os.path.join(out, f"{sec}-gen.png"))
+    b.resize((b.width // 2, b.height // 2)).save(os.path.join(out, f"{sec}-gen.jpg"), quality=85)
     pad, head = 32, 56
     side = Image.new("RGB", (a.width + b.width + pad * 3, a.height + head + pad), "white")
     draw = ImageDraw.Draw(side)
