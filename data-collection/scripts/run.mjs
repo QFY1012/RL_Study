@@ -6,6 +6,9 @@
 // BROWSER_JOBS of them run at a time (default 4) while the others wait on the model.
 // A generated section that does not fit its box is sent back to the model and
 // rendered again, up to ROUNDS times (default 2).
+// A browser step that takes longer than STEP_SECONDS (default 300) is stopped and the
+// site counted as failed: some pages (a large WebGL scene drawn on the CPU, with no
+// GPU here) are too heavy to load, and they are dropped rather than waited on.
 // Needs ~/.config/ui-rl/judge.env in the environment for generate.mjs.
 import fs from "node:fs"
 import path from "node:path"
@@ -19,6 +22,7 @@ const JOBS = Number(process.env.JOBS ?? 20)
 const BROWSER_JOBS = Number(process.env.BROWSER_JOBS ?? 4)
 const COUNT = process.env.COUNT ?? "2"
 const ROUNDS = Number(process.env.ROUNDS ?? 2)
+const STEP_SECONDS = Number(process.env.STEP_SECONDS ?? 300)
 const misses = (dir) => {
   const r = path.join(dir, "render")
   return fs.existsSync(r) && fs.readdirSync(r).some((f) => /^\d+\.json$/.test(f) && !JSON.parse(fs.readFileSync(path.join(r, f), "utf8")).fits)
@@ -37,9 +41,11 @@ function limiter(n) {
 }
 const browser = limiter(BROWSER_JOBS)
 
-function step(host, log, cmd, argv, env = {}) {
+function step(host, log, cmd, argv, env = {}, seconds = Infinity) {
   return new Promise((resolve, reject) => {
     const child = spawn(cmd, argv, { cwd: here, env: { ...process.env, ...env } })
+    let late = false
+    const timer = seconds < Infinity && setTimeout(() => { late = true; child.kill("SIGTERM") }, seconds * 1000)
     let rest = ""
     const out = (chunk) => {
       log.write(chunk)
@@ -50,8 +56,11 @@ function step(host, log, cmd, argv, env = {}) {
     child.stdout.on("data", out)
     child.stderr.on("data", out)
     child.on("close", (code) => {
+      clearTimeout(timer)
       if (rest) console.log(`[${host}] ${rest}`)
-      code === 0 ? resolve() : reject(new Error(`${path.basename(argv[0] ?? cmd)} exited with ${code}`))
+      const name = path.basename(argv.find((a) => a.startsWith("scripts/")) ?? cmd)
+      late ? reject(new Error(`${name} took over ${seconds}s`))
+        : code === 0 ? resolve() : reject(new Error(`${name} exited with ${code}`))
     })
   })
 }
@@ -63,16 +72,16 @@ async function site(url) {
   const log = fs.createWriteStream(`${dir}.log`)
   const t = Date.now()
   try {
-    await browser(() => step(host, log, "node", ["scripts/record.mjs", url, dir]))
-    await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
+    await browser(() => step(host, log, "node", ["scripts/record.mjs", url, dir], {}, STEP_SECONDS))
+    await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
     await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, COUNT], { NODE_USE_ENV_PROXY: "1" })
-    await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
+    await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
     // sections that did not fit their box go back to the model, up to ROUNDS times
     for (let k = 0; k < ROUNDS && misses(dir); k++) {
       await step(host, log, "node", ["--no-warnings", "scripts/generate.mjs", dir, "--revise"], { NODE_USE_ENV_PROXY: "1" })
-      await browser(() => step(host, log, "node", ["scripts/render.mjs", dir]))
+      await browser(() => step(host, log, "node", ["scripts/render.mjs", dir], {}, STEP_SECONDS))
     }
-    await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir]))
+    await browser(() => step(host, log, "python3", ["-I", "scripts/pairs.py", dir], {}, STEP_SECONDS))
     console.log(`[${host}] done in ${((Date.now() - t) / 1000).toFixed(0)}s`)
     return { host, ok: true }
   } catch (e) {

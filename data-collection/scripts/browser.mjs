@@ -127,15 +127,21 @@ export async function load(page, url) {
   })
   await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => console.log("networkidle timed out after scrolling, going on"))
 
-  // Remove what is not the page's design: consent banners, chat widgets, modals, and
-  // fixed elements away from the top (a fixed header stays).
-  const removed = await page.evaluate(() => {
+  // Hide what is not the page's design: consent banners, chat widgets, modals, and
+  // fixed elements away from the top (a fixed header stays). Hidden, not removed: the
+  // page's framework still owns these nodes, and one it later fails to find in the
+  // document (React unmounting it, say) crashes the whole page.
+  const hidden = await page.evaluate(() => {
     const gone = []
-    const drop = (el, why) => { gone.push(`${why}: <${el.tagName.toLowerCase()} class="${(el.className?.baseVal ?? el.className ?? "").toString().slice(0, 60)}">`); el.remove() }
+    const drop = (el, why) => {
+      if (el.closest("[data-hidden-by-load]")) return
+      gone.push(`${why}: <${el.tagName.toLowerCase()} class="${(el.className?.baseVal ?? el.className ?? "").toString().slice(0, 60)}">`)
+      el.setAttribute("data-hidden-by-load", "")
+      el.style.setProperty("display", "none", "important")
+    }
     for (const el of document.querySelectorAll("[role=dialog], [aria-modal=true], dialog[open]")) drop(el, "dialog")
     const junk = /cookie|consent|gdpr|onetrust|intercom|drift-|crisp|hubspot-messages|zendesk|chat-widget/i
     for (const el of document.querySelectorAll("body *")) {
-      if (!el.isConnected) continue
       const s = getComputedStyle(el)
       const id = `${el.id} ${el.className?.baseVal ?? el.className ?? ""}`
       if ((s.position === "fixed" || s.position === "sticky") && junk.test(id)) drop(el, "widget")
@@ -144,7 +150,7 @@ export async function load(page, url) {
     for (const img of document.querySelectorAll("img[loading=lazy]")) img.loading = "eager"
     return gone
   })
-  console.log(`removed ${removed.length}:`, removed.join(" | ") || "nothing")
+  console.log(`hid ${hidden.length}:`, hidden.join(" | ") || "nothing")
 
   await freeze(page)
   await page.clock.pauseAt(T0 + PAUSE)
