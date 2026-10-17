@@ -33,7 +33,8 @@
 |---|---|
 | vercel、cal、raycast、resend、figma、linear、supabase | 2/2 |
 | framer、notion、arc | 1/2 |
-| 其余(stripe、webflow、loom、dropbox、attio、posthog、mercury、ramp) | 还在跑 |
+| webflow | 失败:加载超过 300 秒放弃(没查原因,先看是 WebGL、视频还是滚动时不停加载) |
+| 其余(stripe、loom、dropbox、attio、posthog、mercury、ramp) | 还在跑 |
 
 注意:这些数据在云端容器的临时目录里,会话结束就没了。按 `CLAUDE.md` 应该传到 Google Drive,这个会话没有 Drive 的权限,没传。接手后要么重跑:
 
