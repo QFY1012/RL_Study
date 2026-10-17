@@ -160,28 +160,39 @@ export async function readPage(page) {
       return area > COVERED * R.width * R.height ? found : []
     }
 
-    // A section's backdrop: the section itself and the elements in it that cover
-    // (nearly) all of its box and only paint a background (no text of their own; not an
-    // image, video, canvas or svg), such as layers of gradient behind the content. When
-    // a section is swapped (render.mjs) the backdrop stays and only the content on top
-    // is redesigned, so a section that has its own band of color keeps it. Marked
-    // data-backdrop; their backgrounds are not content items.
+    // A section's backdrop: what in it belongs to the page rather than to the section's
+    // design. That is the section itself and, in it, the elements that only paint a
+    // background or a border (no text of their own; not an image, video, canvas or svg)
+    // and either cover (nearly) all of its box, such as layers of gradient behind the
+    // content, or run from its top edge to its bottom edge, such as the frame lines of a
+    // page whose grid runs through every section: what reaches both edges carries on
+    // into the sections above and below. When a section is swapped (render.mjs) the
+    // backdrop stays and only the content on top is redesigned, so the generated
+    // version keeps the original's band of color and the page's lines run on through
+    // it. Marked data-backdrop; their backgrounds are not content items.
     const backdrop = (sec) => {
       const R = sec.getBoundingClientRect()
       const layers = [sec, ...sec.querySelectorAll("*")].filter((e) => {
         if (["IMG", "VIDEO", "CANVAS", "PICTURE"].includes(e.tagName) || e.closest("svg")) return false
         if (!e.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return false
-        const cs = getComputedStyle(e)
-        if (cs.backgroundColor === "rgba(0, 0, 0, 0)" && cs.backgroundImage === "none") return false
         if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return false
+        const cs = getComputedStyle(e)
+        const border = ["Top", "Right", "Bottom", "Left"].some((d) => parseFloat(cs[`border${d}Width`]) > 0 && cs[`border${d}Style`] !== "none")
+        if (cs.backgroundColor === "rgba(0, 0, 0, 0)" && cs.backgroundImage === "none" && !border) return false
         const r = e.getBoundingClientRect()
         const w = Math.min(r.right, R.right) - Math.max(r.left, R.left), h = Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top)
-        return w > 0 && h > 0 && w * h >= 0.9 * R.width * R.height
+        return e === sec || (w > 0 && h > 0 && (w * h >= 0.9 * R.width * R.height || (r.top <= R.top + 2 && r.bottom >= R.bottom - 2)))
       })
       return layers.map((e) => {
         e.setAttribute("data-backdrop", "")
-        const cs = getComputedStyle(e)
-        return { color: cs.backgroundColor, image: cs.backgroundImage === "none" ? null : cs.backgroundImage.slice(0, 400), opacity: +cs.opacity }
+        const cs = getComputedStyle(e), r = e.getBoundingClientRect()
+        const borders = ["top", "right", "bottom", "left"].filter((d) => parseFloat(cs.getPropertyValue(`border-${d}-width`)) > 0 && cs.getPropertyValue(`border-${d}-style`) !== "none")
+          .map((d) => `${d} ${cs.getPropertyValue(`border-${d}-width`)} ${cs.getPropertyValue(`border-${d}-color`)}`)
+        return {
+          x: Math.round(r.left - R.left), w: Math.round(r.width),
+          color: cs.backgroundColor, image: cs.backgroundImage === "none" ? null : cs.backgroundImage.slice(0, 400),
+          border: borders.length ? borders.join(", ") : null, opacity: +cs.opacity,
+        }
       })
     }
 
@@ -205,8 +216,8 @@ export async function readPage(page) {
 
   // Page-level design tokens: the fonts actually used for headings and body text, the
   // font faces the page has loaded (family, weight, style: only these render, a weight
-  // the page never loaded is not in the recording), the most used text and background
-  // colors, and the width the content keeps to.
+  // the page never loaded is not in the recording), the type scale, the most used text
+  // and background colors, and the width the content keeps to.
   const tokens = await page.evaluate(() => {
     const font = (sel) => { const el = document.querySelector(sel); return el ? getComputedStyle(el).fontFamily : null }
     const count = (m, k, w = 1) => m.set(k, (m.get(k) ?? 0) + w)
@@ -223,11 +234,33 @@ export async function readPage(page) {
     const top = (m, n) => [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k]) => k)
     const blocks = [...document.querySelectorAll("[data-sec] *")].map((el) => el.getBoundingClientRect()).filter((r) => r.width > 200 && r.width < innerWidth * 0.95)
     const contentWidth = blocks.length ? Math.max(...blocks.map((r) => r.width)) : null
+    // The page's type scale: every style text is set in, inside the sections (font, size,
+    // line height, weight, letter spacing), with its role (heading level, button, link,
+    // text), how many characters use it and in which sections. generate.mjs gives the
+    // model the styles used in other sections than the one it redesigns.
+    const styles = new Map()
+    for (const el of document.querySelectorAll("[data-sec] *")) {
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join("")
+      if (!own || !el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue
+      const cs = getComputedStyle(el)
+      const h = el.closest("h1,h2,h3,h4,h5,h6")
+      const role = h ? h.tagName.toLowerCase() : el.closest("button,[role=button]") ? "button" : el.closest("a") ? "link" : "text"
+      const key = [role, cs.fontFamily.split(",")[0].trim().replace(/^["']|["']$/g, ""), cs.fontSize, cs.lineHeight, cs.fontWeight, cs.letterSpacing, cs.textTransform].join("|")
+      const st = styles.get(key) ?? { chars: 0, sections: new Set() }
+      st.chars += own.length
+      st.sections.add(Number(el.closest("[data-sec]").getAttribute("data-sec")))
+      styles.set(key, st)
+    }
+    const typeScale = [...styles.entries()].sort((a, b) => b[1].chars - a[1].chars).slice(0, 40).map(([key, st]) => {
+      const [role, family, size, lineHeight, weight, letterSpacing, transform] = key.split("|")
+      return { role, family, size, lineHeight, weight, letterSpacing, transform, chars: st.chars, sections: [...st.sections].sort((a, b) => a - b) }
+    })
     const faces = {}
     for (const f of document.fonts) if (f.status === "loaded") (faces[f.family.replace(/^["']|["']$/g, "")] ??= new Set()).add(`${f.weight}${f.style === "normal" ? "" : ` ${f.style}`}`)
     return {
       fonts: { heading: font("h1") ?? font("h2"), subheading: font("h2") ?? font("h3"), body: font("p") ?? getComputedStyle(document.body).fontFamily },
       faces: Object.fromEntries(Object.entries(faces).map(([k, v]) => [k, [...v].sort()])),
+      typeScale,
       textColors: top(text, 6),
       backgroundColors: top(back, 6),
       pageBackground: getComputedStyle(document.body).backgroundColor,

@@ -53,8 +53,8 @@ Output one HTML fragment: a <style> block followed by the markup. Rules:
 - It is inserted into a shadow root that takes the place of the old section, at the full width of its slot. Style the outer box with :host or a wrapper class, never html or body.
 - Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
 - Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
-- Fonts: only the font families listed in the tokens, in the weights and styles the page has loaded (others are not available and would fall back to another font). Colors: stay within the page's palette.
-- Backdrop: the section's backdrop (given: the color behind it and any full-section layers of color, gradient or image) stays in place under your fragment and is not yours to change. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
+- Type: only the font families listed in the tokens, in the weights and styles the page has loaded (others are not available and would fall back to another font). Set text in the page's type scale, as the other sections are, so the section reads as part of this page. Colors: stay within the page's palette.
+- Backdrop: the section's backdrop (given: the color behind it and the layers of color, gradient, image or frame lines that run through the section, which belong to the page) stays in place under your fragment and is not yours to change; keep content clear of its frame lines. Leave your outer box unpainted (no background, border or shadow on it), so the box joins the page around it with no visible edge. Cards and panels inside may use the page's background colors, kept clear of the box's edges.
 - Size: the section's box is exactly the width and height given, and your outer box is stretched to fill it. Lay the content out to fit inside that height; how the space is used (where the room goes, how big images and type are) is your design decision. Nothing may reach past the top or bottom of the box, and nothing may be cut off: no hidden overflow, no heights that clip.
 - Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
 Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
@@ -62,10 +62,18 @@ Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
 // What stays behind the content: the color behind the section and the layers in it
 // that paint its background (read-page.mjs, backdrop; render.mjs keeps them).
 const backdrop = (s) => {
-  const layers = s.backdrop.filter((l) => l.image || l.color !== "rgba(0, 0, 0, 0)")
-    .map((l) => [l.color !== "rgba(0, 0, 0, 0)" ? l.color : null, l.image].filter(Boolean).join(" with ") + (l.opacity < 1 ? ` at opacity ${l.opacity}` : ""))
-  return `${s.background}${layers.length ? `, under full-section layers: ${layers.join("; ")}` : ""}`
+  const layers = s.backdrop.filter((l) => l.image || l.border || l.color !== "rgba(0, 0, 0, 0)").map((l) => {
+    const paint = [l.color !== "rgba(0, 0, 0, 0)" ? l.color : null, l.image, l.border && `border ${l.border}`].filter(Boolean).join(", ")
+    const where = l.x <= 2 && l.w >= s.box.w - 4 ? "full width" : `x ${l.x}px to ${l.x + l.w}px`
+    return `${paint} (${where}${l.opacity < 1 ? `, opacity ${l.opacity}` : ""})`
+  })
+  return `${s.background}${layers.length ? `; layers running through the section: ${layers.join("; ")}` : ""}`
 }
+
+// The text styles the rest of the page is set in, the way its designer would know
+// them: styles found only in this section are left out, as they are its own design.
+const typeScale = (s) => tokens.typeScale.filter((t) => t.sections.some((i) => i !== s.i)).slice(0, 20)
+  .map((t) => `  ${t.role}: ${t.family} ${t.size}/${t.lineHeight}, ${t.weight}, ${t.letterSpacing}${t.transform === "none" ? "" : `, ${t.transform}`}; ${t.chars}`).join("\n")
 
 const user = (s) => {
   const k = sections.indexOf(s)
@@ -78,6 +86,8 @@ const user = (s) => {
 Page tokens:
 - fonts: heading ${tokens.fonts.heading}; subheading ${tokens.fonts.subheading}; body ${tokens.fonts.body}
 - font faces loaded (family: weights): ${Object.entries(tokens.faces).map(([f, w]) => `${f}: ${w.join(", ")}`).join("; ")}
+- type scale of the other sections (role: font size/line height, weight, letter spacing; characters set in it):
+${typeScale(s)}
 - text colors: ${tokens.textColors.join("; ")}
 - background colors: ${tokens.backgroundColors.join("; ")}
 - page background: ${tokens.pageBackground}
@@ -106,17 +116,24 @@ const ask = (s) => {
   ]
 }
 
-// One request, retried after 10s, 30s and 60s when the endpoint is busy (429, 5xx)
-// or the connection drops: with many sites at once the endpoint does get busy.
+// One request, retried after 10s, 30s and 60s when the endpoint is busy (429, 5xx),
+// the connection drops, or the reply comes back empty (it now and then does, with no
+// error): with many sites at once the endpoint does get busy. The model's own default
+// temperature.
 async function complete(model, messages) {
   for (const wait of [10, 30, 60, null]) {
     try {
       const res = await fetch(URL_, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },
-        body: JSON.stringify({ model, messages, temperature: 0.7, max_tokens: 32000 }),
+        body: JSON.stringify({ model, messages, max_tokens: 32000 }),
       })
-      if (res.ok) return await res.json()
+      if (res.ok) {
+        const body = await res.json()
+        const reply = body.choices?.[0]?.message?.content
+        if (typeof reply === "string" && reply.trim()) return { reply, usage: body.usage }
+        throw new Error(`empty reply, finish_reason ${body.choices?.[0]?.finish_reason}, usage ${JSON.stringify(body.usage)}`)
+      }
       const text = (await res.text()).slice(0, 300)
       if (wait == null || !(res.status === 429 || res.status >= 500)) throw new Error(`HTTP ${res.status} ${text}`)
       console.log(`HTTP ${res.status}, retrying in ${wait}s`)
@@ -130,14 +147,16 @@ async function complete(model, messages) {
 
 // One turn of a section's conversation: sends the messages, keeps the reply's
 // fragment. Returns the fragment, or null when the reply has none.
-async function turn(sec, model, messages) {
-  const body = await complete(model, messages).catch((e) => { throw new Error(`section ${sec}: ${e.message}`) })
-  const reply = body.choices?.[0]?.message?.content
-  if (typeof reply !== "string") throw new Error(`section ${sec}: no content, finish_reason ${body.choices?.[0]?.finish_reason}, usage ${JSON.stringify(body.usage)}`)
+async function turn(model, messages) {
+  const { reply, usage } = await complete(model, messages)
   messages.push({ role: "assistant", content: reply })
   const m = reply.match(/```html\s*\n([\s\S]*?)```/)
-  return { fragment: m?.[1] ?? null, usage: body.usage }
+  return { fragment: m?.[1] ?? null, usage }
 }
+
+// A section whose request still fails after the retries is left out (logged), so it
+// does not take the site's other sections down with it.
+const each = (list, fn) => Promise.all(list.map((x, k) => fn(x, k).catch((e) => console.log(`section ${x.i ?? x[0]}: failed, left out: ${e.message}`))))
 
 const save = (sec, record, fragment) => {
   fs.writeFileSync(path.join(dir, "gen", `${sec}.html`), fragment)
@@ -148,20 +167,20 @@ fs.mkdirSync(path.join(dir, "gen"), { recursive: true })
 if (!revise) {
   // all chosen sections are asked for at once, the models taking them in turn
   const start = [...snap.url].reduce((n, c) => n + c.charCodeAt(0), 0)
-  await Promise.all(chosen.map(async (s, k) => {
+  await each(chosen, async (s, k) => {
     const t = Date.now()
     const model = MODELS[(start + k) % MODELS.length]
     const messages = [{ role: "system", content: system }, { role: "user", content: ask(s) }]
-    const { fragment, usage } = await turn(s.i, model, messages)
+    const { fragment, usage } = await turn(model, messages)
     if (!fragment) { console.log(`section ${s.i}: no html block in the reply from ${model}, skipped`); return }
     save(s.i, { section: s.i, model, rounds: [{ seconds: (Date.now() - t) / 1000, usage }], messages }, fragment)
     console.log(`section ${s.i}: ${model}, ${fragment.length} chars in ${((Date.now() - t) / 1000).toFixed(0)}s, tokens ${JSON.stringify(usage)}`)
-  }))
+  })
 } else {
   const report = JSON.parse(fs.readFileSync(path.join(dir, "pairs", "report.json"), "utf8")).pairs
   const misses = Object.entries(report).filter(([, p]) => p.failed.includes("fit") || p.failed.includes("seam")).map(([i, p]) => [Number(i), p])
   console.log(`${misses.length} sections to revise${misses.length ? `: ${misses.map(([i, p]) => `${i} (${p.failed.filter((f) => f === "fit" || f === "seam").join(", ")})`).join(", ")}` : ""}`)
-  await Promise.all(misses.map(async ([i, p]) => {
+  await each(misses, async ([i, p]) => {
     const t = Date.now()
     const record = JSON.parse(fs.readFileSync(path.join(dir, "gen", `${i}.json`), "utf8"))
     const h = sections[i].box.h
@@ -176,10 +195,10 @@ if (!revise) {
       image(`data:image/jpeg;base64,${fs.readFileSync(path.join(dir, "pairs", `${i}-gen.jpg`)).toString("base64")}`),
       { type: "text", text: `Change the design so everything fits inside ${h}px and the outer box is unpainted, with panels clear of its edges, keeping every rule above. Reply with the whole fragment again.` },
     ] })
-    const { fragment, usage } = await turn(i, record.model, record.messages)
+    const { fragment, usage } = await turn(record.model, record.messages)
     record.rounds.push({ seconds: (Date.now() - t) / 1000, usage, failed: p.failed, spill: p.spill, seam: p.seam })
     if (!fragment) { console.log(`section ${i}: no html block in the revision, kept the last one`); fs.writeFileSync(path.join(dir, "gen", `${i}.json`), JSON.stringify(record, null, 1)); return }
     save(i, record, fragment)
     console.log(`section ${i}: revised (${wrong.map((w) => w.split(":")[0]).join("; ")}) in ${((Date.now() - t) / 1000).toFixed(0)}s`)
-  }))
+  })
 }
