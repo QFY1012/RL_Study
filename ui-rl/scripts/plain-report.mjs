@@ -6,7 +6,8 @@
 // <输出目录>/<tag>-<k>.html,并在 1440px 宽下截整页图 <tag>-<k>.png;请求和回复存在 <tag>-<k>.json。
 // --tag 区分不同模型或端点的结果(默认 plain)。--prompt 选提示词:data(默认,三句中文:把数据做成网页)
 // 或 design(照 data-collection/scripts/plain-site.mjs 写首页的提示词:为 1440px 宽的桌面屏设计一个呈现这份报告的页面)
-// 或 polished(和 design 一样,只多要求「精美的报告」)或 featured(同上,换成「featured report」)。
+// 或 polished(和 design 一样,只多要求「精美的报告」)或 featured(同上,换成「featured report」),
+// 或 website / editorial(和 design 一样,只把要做的东西说成「一个网站的首页」/「杂志式的长篇数据专题文章」)。
 // 模型用 JUDGE_URL 的端点,GEN_MODEL 选模型(默认 deepseek-v4.1-flash),默认温度。
 import fs from "node:fs"
 import path from "node:path"
@@ -34,6 +35,12 @@ Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
 Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
 Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
   featured: `Design a featured report: a web page that presents the report described by the user, for a 1440px-wide desktop screen. The report's data is the JSON the user gives; its image fields are relative paths of screenshots, use them as they are.
+Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
+Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
+  website: `Design the home page of a website that presents the report described by the user, for a 1440px-wide desktop screen. The report's data is the JSON the user gives; its image fields are relative paths of screenshots, use them as they are.
+Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
+Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
+  editorial: `Design a long-form editorial web article, like a data story in a magazine, that presents the report described by the user, for a 1440px-wide desktop screen. The report's data is the JSON the user gives; its image fields are relative paths of screenshots, use them as they are.
 Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
 Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
 }
