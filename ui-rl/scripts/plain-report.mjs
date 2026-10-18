@@ -1,17 +1,18 @@
 // 只给报告数据(JSON)让模型直接写一个报告网页:不给组件库、设计规范、网格和示例,看模型自己会做成什么样。
 //
-//   source judge.env && NODE_USE_ENV_PROXY=1 node ui-rl/scripts/plain-report.mjs <数据 json> <输出目录> [--n 3] [--tag plain]
+//   source judge.env && NODE_USE_ENV_PROXY=1 node ui-rl/scripts/plain-report.mjs <数据 json> <输出目录> [--n 3] [--tag plain] [--prompt data]
 //
 // 截图(json 里 image 字段的相对路径)要先放在 <输出目录> 里(data/draw.mjs 的 phone() 画)。每一版写
 // <输出目录>/<tag>-<k>.html,并在 1440px 宽下截整页图 <tag>-<k>.png;请求和回复存在 <tag>-<k>.json。
-// --tag 区分不同模型或端点的结果(默认 plain)。
+// --tag 区分不同模型或端点的结果(默认 plain)。--prompt 选提示词:data(默认,三句中文:把数据做成网页)
+// 或 design(照 data-collection/scripts/plain-site.mjs 写首页的提示词:为 1440px 宽的桌面屏设计一个呈现这份报告的页面)。
 // 模型用 JUDGE_URL 的端点,GEN_MODEL 选模型(默认 deepseek-v4.1-flash),默认温度。
 import fs from "node:fs"
 import path from "node:path"
 import { createRequire } from "node:module"
 
 const [dataFile, out] = process.argv.slice(2)
-if (!dataFile || !out) throw new Error("usage: plain-report.mjs <数据 json> <输出目录> [--n 3] [--tag plain]")
+if (!dataFile || !out) throw new Error("usage: plain-report.mjs <数据 json> <输出目录> [--n 3] [--tag plain] [--prompt data]")
 const arg = (k, d) => (process.argv.includes(`--${k}`) ? process.argv[process.argv.indexOf(`--${k}`) + 1] : d)
 const N = Number(arg("n", 3)), TAG = arg("tag", "plain")
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
@@ -21,9 +22,16 @@ if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
 const { chromium } = createRequire(import.meta.url)("../gen/node_modules/playwright-core")
 const CHROME = process.env.CHROME ?? "/opt/pw-browsers/chromium"
 
-const SYSTEM = `把用户给的报告数据(JSON)做成一个网页。
+const PROMPTS = {
+  data: `把用户给的报告数据(JSON)做成一个网页。
 输出一个完整的 HTML 文件,CSS 和 JS 都写在文件里,不引用外部资源(图片除外)。JSON 里 image 字段是截图的相对路径,直接用。
-只回复放在一个 \`\`\`html 代码块里的 HTML。`
+只回复放在一个 \`\`\`html 代码块里的 HTML。`,
+  design: `Design a web page that presents the report described by the user, for a 1440px-wide desktop screen. The report's data is the JSON the user gives; its image fields are relative paths of screenshots, use them as they are.
+Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
+Reply with the HTML inside one \`\`\`html fenced block and nothing else.`,
+}
+const SYSTEM = PROMPTS[arg("prompt", "data")]
+if (!SYSTEM) throw new Error(`--prompt is one of ${Object.keys(PROMPTS).join(", ")}`)
 const data = fs.readFileSync(dataFile, "utf8")
 
 async function one(k) {
