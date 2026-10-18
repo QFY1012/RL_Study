@@ -26,7 +26,8 @@ export const model = {
 }
 
 // Runs prompt, then each nudge while missing() is still true. Returns what meta.json records.
-export async function runAgent({ name, ws, priv, system, prompt, nudges = [], missing = () => false, maxShoots = 5, stream = false, effort = EFFORT }) {
+// shoot: the check script the agent may run (as `node $SHOOT ...`); shootCommand is how the refusal message tells it to.
+export async function runAgent({ name, ws, priv, system, prompt, nudges = [], missing = () => false, maxShoots = 5, stream = false, effort = EFFORT, shoot = SHOOT, shootCommand = "node $SHOOT ." }) {
   const KEY = process.env.DEEPSEEK_API_KEY
   if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
   const loader = {
@@ -64,11 +65,11 @@ export async function runAgent({ name, ws, priv, system, prompt, nudges = [], mi
   const q = (x) => `'${x.replace(/'/g, `'\\''`)}'`
   const bash = createBashToolDefinition(ws, {
     spawnHook: ({ command }) => {
-      const isShoot = /node\s+("?\$SHOOT"?|\S*shoot\.mjs)/.test(command)
+      const isShoot = /node\s+("?\$SHOOT"?|\S*shoot(-page)?\.mjs)/.test(command)
       // ui-rl 加的:只允许用 node 运行检查脚本。自己写脚本截图、渲染会绕过检查次数的限制(试跑时有一版因此写了 20 分钟还没结束)
-      if (!isShoot && command.split(/[;&|\n]+|\$\(|`/).some((seg) => /^\s*(?:\w+=\S*\s+)*(node|npx|npm|bun|deno|python3?)(\s|$)/.test(seg))) command = `echo "只能用 node $SHOOT . 检查页面,不能运行别的脚本;看页面用 read 读截图。"`
+      if (!isShoot && command.split(/[;&|\n]+|\$\(|`/).some((seg) => /^\s*(?:\w+=\S*\s+)*(node|npx|npm|bun|deno|python3?)(\s|$)/.test(seg))) command = `echo "只能用 ${shootCommand} 检查页面,不能运行别的脚本;看页面用 read 读截图。"`
       else if (isShoot && ++shoots > maxShoots) command = `echo "检查已运行 ${maxShoots} 次,不能再运行;请结束。"`
-      return { command: `${q(SANDBOX)} ${q(ws)} ${q(command)}`, cwd: ws, env: { PATH: process.env.PATH } }
+      return { command: `${q(SANDBOX)} ${q(ws)} ${q(command)}`, cwd: ws, env: { PATH: process.env.PATH, SHOOT: shoot } }
     },
   })
   fs.rmSync(priv, { recursive: true, force: true })
