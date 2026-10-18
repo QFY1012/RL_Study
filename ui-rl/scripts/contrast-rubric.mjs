@@ -79,8 +79,15 @@ async function judge(method, set, rub, a, b) {
   fs.mkdirSync(path.dirname(file), { recursive: true })
   const content = [request(set), ...(rub ? [{ type: "text", text: `<评分表>\n${listRubric(rub)}\n</评分表>` }] : []),
     ...shot(set, a, "页面 A"), ...shot(set, b, "页面 B")]
-  const res = await call(rub ? JUDGE : NONE, content, { key: KEY, model: MODEL, effort: EFFORT, label: `${method} ${set} ${a}/${b}` })
-  const winner = String(res.json.winner).trim().replace(/^页面\s*/, "")
+  // 回复偶尔只在理由里写谁赢、没有 winner 这一项:没有 A 或 B 就重问,不能当成选了哪边
+  let res, winner
+  for (let t = 1; ; t++) {
+    res = await call(rub ? JUDGE : NONE, content, { key: KEY, model: MODEL, effort: EFFORT, label: `${method} ${set} ${a}/${b}` })
+    winner = String(res.json.winner ?? "").trim().replace(/^页面\s*/, "")
+    if (winner === "A" || winner === "B") break
+    if (t === 3) throw new Error(`${method} ${set} ${a}/${b}:三次回复都没有 A 或 B 的 winner`)
+    console.log(`  ↻ ${method} ${set} ${a}/${b}:回复里没有 A 或 B 的 winner,重问`)
+  }
   const r = { method, set, A: a, B: b, rubric: rub ? `${rub.set}-${rub.kind}` : null, winner, correct: (winner === "A" ? a : b).startsWith("editorial"), json: res.json, usage: res.usage, latencyMs: res.latencyMs }
   fs.writeFileSync(file, JSON.stringify(r, null, 1))
   return r

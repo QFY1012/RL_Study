@@ -70,8 +70,15 @@ const rubricBlock = (text) => ({ type: "text", text: `<评分标准>\n${text}\n<
 async function judge(file, set, a, b, rubricText, label) {
   if (fs.existsSync(file)) return load(file)
   const content = [request(set), ...(rubricText ? [rubricBlock(rubricText)] : []), ...shot(set, a, "页面 A"), ...shot(set, b, "页面 B")]
-  const res = await ask(rubricText ? JUDGE : NONE, content, label)
-  const winner = String(res.json.winner).trim().replace(/^页面\s*/, "")
+  // 回复偶尔只在理由里写谁赢、没有 winner 这一项:没有 A 或 B 就重问,不能当成选了哪边
+  let res, winner
+  for (let t = 1; ; t++) {
+    res = await ask(rubricText ? JUDGE : NONE, content, label)
+    winner = String(res.json.winner ?? "").trim().replace(/^页面\s*/, "")
+    if (winner === "A" || winner === "B") break
+    if (t === 3) throw new Error(`${label}:三次回复都没有 A 或 B 的 winner`)
+    console.log(`  ↻ ${label}:回复里没有 A 或 B 的 winner,重问`)
+  }
   const r = { set, A: a, B: b, winner, correct: (winner === "A" ? a : b).startsWith("editorial"), json: res.json, usage: res.usage, latencyMs: res.latencyMs }
   save(file, r)
   return r
