@@ -99,6 +99,16 @@
 
 都在 `pairs/report.json` 里;每对的 `failed` 列出没过的检查(`fit`、`seam`、`text`、`images`、`overflow`、`fonts`、`grid`),空的才可用。
 
+## 网站名单
+
+要的是设计好看的网站，所以名单从设计收录站来，不用流量排行。
+
+1. Mobbin 的网站库(Sites,496 个，每个带网址):登录后从它的列表接口 `api/discover/fetch-discover-page-sites` 一页页取(每页 24 个，每页间隔 4 秒)。账号不写进仓库。Awwwards 从这里连不上(连接被对方重置),没用。
+2. `node scripts/galleries.mjs <out-dir> [收录站]...`:从收录站的站点地图读出每个条目页，取出条目页上指向被收录网站的链接。现在有 CSS Nectar(约 8000 条)、Minimal Gallery(约 3000 条)、SaaS Landing Page(约 850 条);新的先取(老的更可能已经关站)。每个收录站同时 `JOBS`(默认 5)个请求，每个之后停 `PAUSE_MS`(默认 300)。已取过的条目不重取。
+3. `node scripts/domains.mjs <out> --list <来源>=<文件>... [--tranco <top-1m.csv>]`:合并、去重、逐个访问首页，只留下返回 200 的英文 HTML 首页(有标题，不是停放页、验证墙、错误页、登录页、成人或博彩站)。一个品牌只留一个(google.com 和 google.co.uk 算一个;跳转到别的域名的算那个域名;framer.website 这类谁都能开站的托管域名按完整主机名算)。名单里的网址一律取它的首页。凑够 `TARGET`(默认 4500)个就停。产出 `<out>.tsv`(来源、排名、域名、网址、语言、标题)、`<out>.rejected.tsv`(没收的和原因)、`<out>.txt`(给 `run.mjs --list` 用)。
+
+都要 `NODE_USE_ENV_PROXY=1`。名单是数据，不进 git,放在 `/home/user/ui-rl-scratch/domains/`。
+
 ## 依赖
 
 - `npm install`(playwright-core)
