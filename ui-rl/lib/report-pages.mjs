@@ -1,5 +1,5 @@
-// 让模型看报告页面的共用部分:页面照的请求、报告数据、整页截图切块,和不给评分标准时的判定提示词。
-// scripts/contrast-rubric.mjs 和 scripts/rubric-set.mjs 用。
+// 让模型看报告页面、判两版哪版好的共用部分:页面照的请求、报告数据、整页截图切块,判定提示词(不给标准、按一套主题加要点的标准),
+// 和问到有 A 或 B 的赢家为止。scripts/contrast-rubric.mjs、rubric-set.mjs、judge-marks.mjs 用。
 import fs from "node:fs"
 import path from "node:path"
 import { execFileSync } from "node:child_process"
@@ -26,3 +26,22 @@ export function shot(png, prefix, label) {
 // 不给评分标准,直接问哪版好
 export const NONE = `你是公正的评委。按给定的请求比较页面 A 和页面 B 哪版做得更好。先写两版的主要差别,再写理由,最后给结论。只能选一个。
 只输出 JSON:{"diff":"两版的主要差别","reason":"理由","winner":"A 或 B"}`
+
+// 按一套评分标准(rubric-set.mjs 合成的主题加要点)判
+export const RUBRIC_JUDGE = `你是公正的评委。按给定的请求和评分标准,比较页面 A 和页面 B 哪版做得更好。
+先逐条对照评分标准:这条上 A 好、B 好还是差不多,引用页面上的具体证据。再综合决定赢家:标准之间按对读者看清、看懂内容的影响大小取舍。只能选一个。A、B 的先后顺序是随意的,不要受它影响。
+只输出 JSON:{"criteria":[{"no":"条目编号","better":"A 或 B 或 一样","why":"证据"}],"reason":"一到三句话","winner":"A 或 B"}`
+export const listThemes = (themes) => themes.map((t, i) => `${i + 1}. ${t.name}\n${t.tips.map((x, j) => `   ${i + 1}.${j + 1} ${x}`).join("\n")}`).join("\n")
+export const rubricBlock = (text) => ({ type: "text", text: `<评分标准>\n${text}\n</评分标准>` })
+
+// 问一次判定。回复偶尔只在理由里写谁赢、没有 winner 这一项:没有 A 或 B 就重问(最多 3 次),不能当成选了哪边。
+// ask(sys, content, label) 返回 lib/llm.mjs 的 call 的结果
+export async function askWinner(ask, sys, content, label) {
+  for (let t = 1; ; t++) {
+    const res = await ask(sys, content, label)
+    const winner = String(res.json.winner ?? "").trim().replace(/^页面\s*/, "")
+    if (winner === "A" || winner === "B") return { winner, res }
+    if (t === 3) throw new Error(`${label}:三次回复都没有 A 或 B 的 winner`)
+    console.log(`  ↻ ${label}:回复里没有 A 或 B 的 winner,重问`)
+  }
+}

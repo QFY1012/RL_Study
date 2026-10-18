@@ -128,6 +128,21 @@
 - 准备:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(pages 和 pairs)、`labels/report-marks-key.json`(页面编号对应哪份数据的哪一版;标注页不发布它)。页面编号看不出是哪种提示词,左右随机。
 - 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每对 `{pair, set, left, right, repeat?, choice, items:[{side,x,y,w,h,kind:"good"|"bad",comment}], note, seconds}`,坐标是 1440px 宽截图的像素。
 
+### 拿标注测评委(2026-10-18,先标了 7 对)
+
+`node scripts/judge-marks.mjs <实验目录> <标注目录> <rubric-set 输出目录> <输出目录>`:标注目录是用 ArtifactData 把 `marks` 存下来的目录;每对两种顺序,none 和 merged(第二版标准)各判一次,和你选的比。
+
+| | none 和你一致 | merged 和你一致 |
+|---|---|---|
+| 同类(5 对,10 次) | 4 次,两种顺序都一致 1 对 | 7 次,两种顺序都一致 3 对 |
+| 跨类(2 对,4 次) | 4 次 | 4 次 |
+
+- 跨类(editorial 对 design)两种判法都和你一致;同类才是难的。none 在同类对上 3 对换个顺序就换答案,基本是跟着位置走。
+- 不一致的方向一样:S-bare editorial-1 对 editorial-3,你选 3(更干净、一眼看到重点,1 有点繁琐),评委两种判法、两种顺序都选 1,理由是 1 多了带均值线的点图、编号的下一步、关键读数,它也承认 3 的表格更整齐、导语更齐全,但算作次要。和 P0 那 4 次一样:评委偏向「东西多、指标全」,你偏向「简洁、清楚、重点突出」;你在 P0 design-1 上还写了「数据太多,超过认知极限」。merged 在 S0 editorial-3 对 editorial-2 上两次都选 B 位置,相近的对还有位置偏差。
+- 你的理由里常出现、标准里没有的:信息密度要克制、数据墨水比、强调要真的突出(对比度、小字和大字同色)、图表编码不能误导(男款的条一样长却标着不同的数)。
+
+数据(只在容器里):标注 `/home/user/ui-rl-scratch/report-marks/marks/`,判定 `/home/user/ui-rl-scratch/judge-marks/`。
+
 ## 只给数据让模型写报告(2026-10-18)
 
 起因:让 DeepSeek 只凭网站名和一句描述写首页,结果很像样;同一个模型拿报告数据写报告页,却很难看。两边都是 HTML、都是排版,差距为什么这么大?这一轮就查这个。网站一边的实验见 `data-collection/README.md`「不给风格的生成」。

@@ -18,7 +18,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { call } from "../lib/llm.mjs"
-import { request as requestOf, shot as shotOf, NONE } from "../lib/report-pages.mjs"
+import { request as requestOf, shot as shotOf, NONE, RUBRIC_JUDGE, listThemes, rubricBlock, askWinner } from "../lib/report-pages.mjs"
 
 const [dir, out] = process.argv.slice(2)
 if (!dir || !out) throw new Error("usage: rubric-set.mjs <实验目录> <输出目录> [--seed S0,P0,S-mix] [--test S-bare,P-small] [--none-from <dir>] [--workers 8]")
@@ -58,27 +58,13 @@ const MERGE = `下面是从几对报告页面里分别总结的评分标准,每�
 - 分成 4–8 个主题,每个主题 2–5 条要点;内容组织和版面都要有主题;主题按对读者看清、看懂内容的影响从大到小排。
 ${RULES}
 只输出 JSON:{"themes":[{"name":"主题名","tips":["页面……"]}]}`
-const JUDGE = `你是公正的评委。按给定的请求和评分标准,比较页面 A 和页面 B 哪版做得更好。
-先逐条对照评分标准:这条上 A 好、B 好还是差不多,引用页面上的具体证据。再综合决定赢家:标准之间按对读者看清、看懂内容的影响大小取舍。只能选一个。A、B 的先后顺序是随意的,不要受它影响。
-只输出 JSON:{"criteria":[{"no":"条目编号","better":"A 或 B 或 一样","why":"证据"}],"reason":"一到三句话","winner":"A 或 B"}`
-
 const listFlat = (rubric) => rubric.map((t, i) => `${i + 1}. ${t}`).join("\n")
-const listThemes = (themes) => themes.map((t, i) => `${i + 1}. ${t.name}\n${t.tips.map((x, j) => `   ${i + 1}.${j + 1} ${x}`).join("\n")}`).join("\n")
-const rubricBlock = (text) => ({ type: "text", text: `<评分标准>\n${text}\n</评分标准>` })
 
 // 判一次:rubricText 为 null 时不给标准(NONE)。结果存在 file,已有就直接读
 async function judge(file, set, a, b, rubricText, label) {
   if (fs.existsSync(file)) return load(file)
   const content = [request(set), ...(rubricText ? [rubricBlock(rubricText)] : []), ...shot(set, a, "页面 A"), ...shot(set, b, "页面 B")]
-  // 回复偶尔只在理由里写谁赢、没有 winner 这一项:没有 A 或 B 就重问,不能当成选了哪边
-  let res, winner
-  for (let t = 1; ; t++) {
-    res = await ask(rubricText ? JUDGE : NONE, content, label)
-    winner = String(res.json.winner ?? "").trim().replace(/^页面\s*/, "")
-    if (winner === "A" || winner === "B") break
-    if (t === 3) throw new Error(`${label}:三次回复都没有 A 或 B 的 winner`)
-    console.log(`  ↻ ${label}:回复里没有 A 或 B 的 winner,重问`)
-  }
+  const { winner, res } = await askWinner(ask, rubricText ? RUBRIC_JUDGE : NONE, content, label)
   const r = { set, A: a, B: b, winner, correct: (winner === "A" ? a : b).startsWith("editorial"), json: res.json, usage: res.usage, latencyMs: res.latencyMs }
   save(file, r)
   return r
