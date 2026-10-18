@@ -14,6 +14,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { spawn } from "node:child_process"
+import { pageName } from "./names.mjs"
 
 const args = process.argv.slice(2)
 const root = args.shift()
@@ -30,9 +31,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 // One site; loaded() is called once its page is loaded (site.mjs says "loaded") or it
 // ends, whichever comes first.
 function site(url, loaded) {
-  // a home page is named by its host; a page deeper in a site by its host and path (pudding.cool_2025_04_birthday-effect)
-  const u = new URL(url)
-  const host = [u.hostname.replace(/^www\./, ""), ...u.pathname.split("/").filter(Boolean)].join("_")
+  const host = pageName(url)
   const dir = path.join(root, host)
   fs.rmSync(dir, { recursive: true, force: true })
   const log = fs.createWriteStream(`${dir}.log`)

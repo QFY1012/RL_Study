@@ -6,9 +6,13 @@
 // word with none of its own: the same task with the content fixed, as a report's is.
 // With --json as well, the same brief and text come as one JSON object instead of lines, the way
 // a report's data does: to see whether the JSON form alone pulls the page toward a dashboard.
-//   node scripts/plain-site.mjs <out-dir> [--text <run-dir> [--json]] <url>...      (or --list <file>)
-// Writes <out-dir>/<host>.html (the page), <host>.json (the brief, the reply, usage) and
-// <host>.png (the page at 1440px wide, full page); with --text, also how many of the
+// With --images as well, the page's images come too, in their place among the text (their URL, alt
+// text and size on the page), and are the only images the page may use: for pages whose content is
+// partly pictures (a data story's charts drawn as images).
+// A URL deeper in a site than its home page (an article) is a web page to design, not a home page.
+//   node scripts/plain-site.mjs <out-dir> [--text <run-dir> [--json] [--images]] <url>...      (or --list <file>)
+// Writes <out-dir>/<name>.html (the page), <name>.json (the brief, the reply, usage) and
+// <name>.png (the page at 1440px wide, full page), <name> as in names.mjs; with --text, also how many of the
 // text items the page shows. GEN_MODEL picks the model (default deepseek-v4.1-flash), on
 // JUDGE_URL with DEEPSEEK_API_KEY (source ~/.config/ui-rl/judge.env); run with
 // NODE_USE_ENV_PROXY=1.
@@ -16,13 +20,15 @@ import fs from "node:fs"
 import path from "node:path"
 import { chromium } from "playwright-core"
 import { CHROME } from "./browser.mjs"
+import { pageName } from "./names.mjs"
 
 const args = process.argv.slice(2)
 const out = args.shift()
-if (!out) throw new Error("usage: plain-site.mjs <out-dir> [--text <run-dir> [--json]] <url>... | --list <file>")
+if (!out) throw new Error("usage: plain-site.mjs <out-dir> [--text <run-dir> [--json] [--images]] <url>... | --list <file>")
 const textRoot = args[0] === "--text" ? (args.shift(), args.shift()) : null
 const asJson = args[0] === "--json" ? (args.shift(), true) : false
-if (asJson && !textRoot) throw new Error("--json goes with --text")
+const withImages = args[0] === "--images" ? (args.shift(), true) : false
+if ((asJson || withImages) && !textRoot) throw new Error("--json and --images go with --text")
 const urls = args[0] === "--list" ? fs.readFileSync(args[1], "utf8").split("\n").map((l) => l.trim()).filter(Boolean) : args
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
 const MODEL = process.env.GEN_MODEL ?? "deepseek-v4.1-flash"
@@ -30,9 +36,9 @@ const KEY = process.env.DEEPSEEK_API_KEY
 if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
 fs.mkdirSync(out, { recursive: true })
 
-const SYSTEM = `Design the home page of the website described by the user, for a 1440px-wide desktop screen.
-Output one complete HTML file with its CSS inside; no external resources (no images, fonts or scripts from elsewhere).${textRoot ? `
-The user gives all of the page's text. Use every piece of it exactly as given (same words), and add no text of your own; how it is laid out, grouped and ordered is up to you.` : ""}
+const system = (home) => `Design the ${home ? "home page of the website" : "web page"} described by the user, for a 1440px-wide desktop screen.
+Output one complete HTML file with its CSS inside; no external resources (${withImages ? "no fonts or scripts from elsewhere; the images the user gives, by their URLs, are the only images" : "no images, fonts or scripts from elsewhere"}).${textRoot ? `
+The user gives all of the page's text${withImages ? " and images" : ""}. Use every piece of ${withImages ? "text" : "it"} exactly as given (same words), and add no text of your own; how it is laid out, grouped and ordered is up to you.` : ""}
 Reply with the HTML inside one \`\`\`html fenced block and nothing else.`
 
 const unescape = (s) => s.replace(/&amp;/g, "&").replace(/&#0?39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim()
@@ -44,16 +50,25 @@ async function about(url) {
   return { title, description: unescape(meta("description") ?? meta("og:description") ?? "") }
 }
 // the real page's text items in reading order, across its sections
-const texts = (host) => JSON.parse(fs.readFileSync(path.join(textRoot, host, "sections.json"), "utf8")).sections.flatMap((s) => s.items.filter((t) => t.text))
+const read = (name) => JSON.parse(fs.readFileSync(path.join(textRoot, name, "sections.json"), "utf8")).sections.flatMap((s) => s.items)
+const texts = (name) => read(name).filter((t) => t.text)
+// with --images: the text items and the page's images (by URL; each once), in reading order
+const items = (name) => {
+  const seen = new Set()
+  return read(name).filter((t) => t.text || (withImages && /^https?:/.test(t.src ?? "") && !seen.has(t.src) && seen.add(t.src)))
+}
+const line = (x) => x.text ? `${x.kind}: ${JSON.stringify(x.text)}${x.href ? ` → ${x.href}` : ""}` : `image: ${x.src} (${x.box.w}×${x.box.h} on the page${x.alt ? `; alt ${JSON.stringify(x.alt)}` : ""})`
+const entry = (x) => x.text ? { kind: x.kind, text: x.text, ...(x.href ? { href: x.href } : {}) } : { kind: "image", src: x.src, alt: x.alt || null, width: x.box.w, height: x.box.h }
 
 async function one(url) {
-  const host = new URL(url).hostname.replace(/^www\./, "")
+  const host = pageName(url), home = new URL(url).pathname.replace(/\/$/, "") === ""
   const t = Date.now()
   const { title, description } = await about(url)
-  let brief = `Website: ${host}\nTitle: ${title || "(none)"}\nDescription: ${description || "(none)"}`
-  if (asJson) brief = JSON.stringify({ website: host, title: title || null, description: description || null, text: texts(host).map((x) => ({ kind: x.kind, text: x.text, ...(x.href ? { href: x.href } : {}) })) }, null, 1)
-  else if (textRoot) brief += `\n\nThe page's text, in reading order:\n${texts(host).map((x, j) => `${j + 1}. ${x.kind}: ${JSON.stringify(x.text)}${x.href ? ` → ${x.href}` : ""}`).join("\n")}`
-  const messages = [{ role: "system", content: SYSTEM }, { role: "user", content: brief }]
+  const where = home ? { key: "website", value: new URL(url).hostname.replace(/^www\./, "") } : { key: "page", value: url }
+  let brief = `${where.key[0].toUpperCase() + where.key.slice(1)}: ${where.value}\nTitle: ${title || "(none)"}\nDescription: ${description || "(none)"}`
+  if (asJson) brief = JSON.stringify({ [where.key]: where.value, title: title || null, description: description || null, [withImages ? "content" : "text"]: items(host).map(entry) }, null, 1)
+  else if (textRoot) brief += `\n\nThe page's ${withImages ? "text and images" : "text"}, in reading order:\n${items(host).map((x, j) => `${j + 1}. ${line(x)}`).join("\n")}`
+  const messages = [{ role: "system", content: system(home) }, { role: "user", content: brief }]
   const res = await fetch(URL_, {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },

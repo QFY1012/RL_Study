@@ -133,6 +133,16 @@
 
 名单就是上面的网站(首页网址),要的话按表里的命令重跑。
 
+### 数据报告:The Pudding(2026-10-18)
+
+找人做的、有设计的数据报告当原版。看过的来源里,年报、调研报告(Stack Overflow、Octoverse、Stripe 年度信)基本没有设计;澎湃美数课是普通新闻页加长图;OWID 是同一套图表文章模板;Reuters 的滚动叙事页整页截图截不全。人看下来 Pudding 可以,存档页 `https://pudding.cool/archives/` 有 207 篇(2017–2026)。
+
+- 换一节(`COUNT=3 GEN_MODELS=deepseek-v4.1-flash node scripts/run.mjs <out> <文章网址>...`):4 篇里 3 篇出了 7 对,全过检查;walk 整页一个滚动容器,分不出候选节。模型照着周围页面的样子补一节,生成版和原版很像,看不出谁好,标签不可靠。
+- 整页重写(`node scripts/plain-site.mjs <out> --text <run 的目录> --images <文章网址>...`):给全部文字和图片(按阅读顺序,图片给网址),从头写一整页。birthday-effect、kids-books、language 各两版(language 一版中转 524 两次,没有):全是像样的长文(衬线标题、窄栏正文、图片配说明),没有一版是后台面板。Pudding 的内容是叙事文字,不是一堆指标和表格,所以带不出模型的毛病;language 的图是内联 SVG,没有网址,给不了。
+- 结论:「数据报告」这个题材不是问题,问题是输入是结构化数据。用 Pudding 当原版,要给模型的应该是它背后的数据,而不是写好的文字。
+
+数据只在容器里:`/home/user/ui-rl-scratch/report-sources/`(`pudding-urls.txt` 网址清单;`pilot/` 换一节的结果和各篇的 `sections.json`;`whole-1/`、`whole-2/` 整页重写;`compare-*.jpg` 原版和重写并排;`overview*.jpg` 各来源的页面截图)。
+
 ## 依赖
 
 - `npm install`(playwright-core)
