@@ -57,20 +57,34 @@ const data = fs.readFileSync(dataFile, "utf8")
 async function one(k) {
   const t = Date.now()
   const messages = [{ role: "system", content: SYSTEM }, { role: "user", content: data }]
+  // 流式收回复:模型先想很久时,不流式的连接 100 秒左右没有字节就被端点前面的 Cloudflare 断开(HTTP 524);
+  // 流式时思考的内容也一段段发过来,连接一直有数据
   const res = await fetch(URL_, {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${KEY}` },
-    body: JSON.stringify({ model: MODEL, messages, max_tokens: 65536 }),
+    body: JSON.stringify({ model: MODEL, messages, max_tokens: 65536, stream: true, stream_options: { include_usage: true } }),
     signal: AbortSignal.timeout(900_000),
   })
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 300)}`)
-  const body = await res.json()
-  const reply = body.choices?.[0]?.message?.content ?? ""
-  fs.writeFileSync(path.join(out, `${TAG}-${k}.json`), JSON.stringify({ model: MODEL, messages, reply, usage: body.usage, finish: body.choices?.[0]?.finish_reason }, null, 1))
+  if (!res.ok) throw new Error(`第 ${k} 版:HTTP ${res.status} ${(await res.text()).slice(0, 300)}`)
+  let reply = "", usage = null, finish = null, buffer = ""
+  for await (const chunk of res.body.pipeThrough(new TextDecoderStream())) {
+    buffer += chunk
+    const lines = buffer.split("\n")
+    buffer = lines.pop()
+    for (const line of lines) {
+      const data = line.match(/^data:\s*(.*)/)?.[1]
+      if (!data || data === "[DONE]") continue
+      const event = JSON.parse(data)
+      reply += event.choices?.[0]?.delta?.content ?? ""
+      finish = event.choices?.[0]?.finish_reason ?? finish
+      usage = event.usage ?? usage
+    }
+  }
+  fs.writeFileSync(path.join(out, `${TAG}-${k}.json`), JSON.stringify({ model: MODEL, messages, reply, usage, finish }, null, 1))
   const html = reply.match(/```html\s*\n([\s\S]*?)```/)?.[1]
-  if (!html) throw new Error(`第 ${k} 版:回复里没有 html 代码块(结束原因 ${body.choices?.[0]?.finish_reason})`)
+  if (!html) throw new Error(`第 ${k} 版:回复里没有 html 代码块(结束原因 ${finish})`)
   fs.writeFileSync(path.join(out, `${TAG}-${k}.html`), html)
-  console.log(`第 ${k} 版:${html.length} 字符,${Math.round((Date.now() - t) / 1000)} 秒,token ${JSON.stringify(body.usage)}`)
+  console.log(`第 ${k} 版:${html.length} 字符,${Math.round((Date.now() - t) / 1000)} 秒,token ${JSON.stringify(usage)}`)
 }
 
 const results = await Promise.allSettled(Array.from({ length: N }, (_, k) => one(k + 1)))
