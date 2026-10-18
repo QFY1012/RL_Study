@@ -7,6 +7,7 @@
 //   P0 口袋原样;P-zh 标题、说明、列说明译成中文(数据行不动);P-notitle 去掉标题;P-nodesc 去掉说明和列说明;
 //   P-summary 原始数据行换成月报写法(算好的指标、分组表、各品牌表和一段结论,英文,标题不变)。
 //   S0 销售月报原样;S-en 整份译成英文;S-thesis 标题换成一句论点;S-desc 加上 Pudding 那样的数据说明和每个字段的说明。
+//   第二轮:P-genre 汇总版套上月报体裁;P-blocks 汇总版再加几块并列的表;S-single 销售只留华南退货一条主线。
 import fs from "node:fs"
 import path from "node:path"
 
@@ -68,7 +69,7 @@ const brands = [...new Map(file.rows.map((r) => [key(r), r.brand.trim()]))].map(
   return { brand, womenFrontDepth: avg(w, "maxHeightFront"), menFrontDepth: avg(m, "maxHeightFront"), gap: Math.round((avg(m, "maxHeightFront") - avg(w, "maxHeightFront")) * 10) / 10 }
 }).sort((a, b) => b.gap - a.gap)
 const deeper = brands.filter((b) => b.gap > 0).length
-write("P-summary", {
+const pSummary = {
   title: pockets.title,
   sample: `${file.rows.length} pairs of jeans from ${brands.length} brands, measured in stores in Nashville, New York and Seattle, June–August 2018`,
   summary: `Women's front pockets are ${depthW} cm deep on average, against ${depthM} cm for men's: ${Math.round((1 - depthW / depthM) * 100)}% shallower. They are also ${Math.round((1 - widthW / widthM) * 100)}% narrower (${widthW} cm against ${widthM} cm). In ${deeper} of ${brands.length} brands the men's front pocket is deeper. Back pockets are about the same size.`,
@@ -84,6 +85,27 @@ write("P-summary", {
     return { group: `${g} - ${s}`, pairs: rows.length, frontDepth: avg(rows, "maxHeightFront"), frontWidth: avg(rows, "maxWidthFront"), backDepth: avg(rows, "maxHeightBack"), backWidth: avg(rows, "maxWidthBack"), price: avg(rows, "price") }
   })),
   brands,
+}
+write("P-summary", pSummary)
+// 第二轮:第一轮里口袋怎么改都还是一栏长文,销售怎么改都还是面板。剩下的差别是体裁和并列的块数
+// P-genre 汇总版套上月报的体裁(标题、公司、时间段);P-blocks 汇总版再加几块并列的、和主线无关的表(按价位、面料、后口袋)
+write("P-genre", { ...pSummary, title: "Denim Category Report, August 2018", company: "Northline Retail Research (fictional)", period: "2018-06-29 to 2018-08-06" })
+const stretch = (r) => /spandex|elastane|lycra/i.test(r.fabric ?? "")
+const bands = ["<$50", "$50 - $99", "$100 - $149", "$150+"], band = (p) => (p < 50 ? 0 : p < 100 ? 1 : p < 150 ? 2 : 3)
+write("P-blocks", {
+  ...pSummary,
+  priceBands: bands.map((b, i) => {
+    const rows = pick((r) => band(r.price) === i)
+    return { band: b, pairs: rows.length, womenFrontDepth: avg(rows.filter((r) => r.menWomen === "women"), "maxHeightFront"), menFrontDepth: avg(rows.filter((r) => r.menWomen === "men"), "maxHeightFront") }
+  }),
+  fabrics: ["women", "men"].map((g) => {
+    const rows = pick((r) => r.menWomen === g)
+    return { group: g, stretchShare: Math.round((rows.filter(stretch).length / rows.length) * 100) / 100, avgCotton: mean(rows.map((r) => Number((r.fabric ?? "").match(/(\d+)%\s*cotton/i)?.[1] ?? 0))) }
+  }),
+  backPockets: ["women", "men"].map((g) => {
+    const rows = pick((r) => r.menWomen === g)
+    return { group: g, depth: avg(rows, "maxHeightBack"), width: avg(rows, "maxWidthBack"), shallowestDepth: avg(rows, "minHeightBack") }
+  }),
 })
 
 write("S0", sales)
@@ -118,6 +140,12 @@ write("S-en", {
     "For the Double 11 presale, lead with the Cloud Sofa and mattress bundle, and keep discounts within 10%",
     "Douyin livestream is growing fastest; add two brand livestreams in October",
   ],
+})
+// S-single:只留一条主线(华南退货)的数据,别的块都去掉;标题、公司、时间段不变
+write("S-single", {
+  title: sales.title, company: sales.company, period: sales.period,
+  summary: "华南区连续两个月下滑,9 月销售额 214 万元,环比 -5.8%,退货率升到 6.1%,是各地区最高,主要是物流破损。",
+  regions: sales.regions, topProducts: sales.topProducts, issues: [sales.issues[0]], nextSteps: [sales.nextSteps[0]],
 })
 write("S-thesis", { ...sales, title: "9 月的增长靠华东线上,华南的物流破损在拖后腿" })
 write("S-desc", {
