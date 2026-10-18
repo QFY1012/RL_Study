@@ -1,212 +1,447 @@
-[
- {
-  "id": "S0-a",
-  "set": "S0",
-  "image": "report-marks-pages/S0-a.webp",
-  "w": 1440,
-  "h": 1780
- },
- {
-  "id": "S0-b",
-  "set": "S0",
-  "image": "report-marks-pages/S0-b.webp",
-  "w": 1440,
-  "h": 2564
- },
- {
-  "id": "S0-c",
-  "set": "S0",
-  "image": "report-marks-pages/S0-c.webp",
-  "w": 1440,
-  "h": 2156
- },
- {
-  "id": "S0-d",
-  "set": "S0",
-  "image": "report-marks-pages/S0-d.webp",
-  "w": 1440,
-  "h": 4362
- },
- {
-  "id": "S0-e",
-  "set": "S0",
-  "image": "report-marks-pages/S0-e.webp",
-  "w": 1440,
-  "h": 4426
- },
- {
-  "id": "S0-f",
-  "set": "S0",
-  "image": "report-marks-pages/S0-f.webp",
-  "w": 1440,
-  "h": 5128
- },
- {
-  "id": "S-bare-a",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-a.webp",
-  "w": 1440,
-  "h": 1255
- },
- {
-  "id": "S-bare-b",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-b.webp",
-  "w": 1440,
-  "h": 2225
- },
- {
-  "id": "S-bare-c",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-c.webp",
-  "w": 1440,
-  "h": 1882
- },
- {
-  "id": "S-bare-d",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-d.webp",
-  "w": 1440,
-  "h": 5248
- },
- {
-  "id": "S-bare-e",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-e.webp",
-  "w": 1440,
-  "h": 4659
- },
- {
-  "id": "S-bare-f",
-  "set": "S-bare",
-  "image": "report-marks-pages/S-bare-f.webp",
-  "w": 1440,
-  "h": 3923
- },
- {
-  "id": "S-mix-a",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-a.webp",
-  "w": 1440,
-  "h": 4374
- },
- {
-  "id": "S-mix-b",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-b.webp",
-  "w": 1440,
-  "h": 4990
- },
- {
-  "id": "S-mix-c",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-c.webp",
-  "w": 1440,
-  "h": 1520
- },
- {
-  "id": "S-mix-d",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-d.webp",
-  "w": 1440,
-  "h": 6188
- },
- {
-  "id": "S-mix-e",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-e.webp",
-  "w": 1440,
-  "h": 1444
- },
- {
-  "id": "S-mix-f",
-  "set": "S-mix",
-  "image": "report-marks-pages/S-mix-f.webp",
-  "w": 1440,
-  "h": 1434
- },
- {
-  "id": "P0-a",
-  "set": "P0",
-  "image": "report-marks-pages/P0-a.webp",
-  "w": 1440,
-  "h": 4183
- },
- {
-  "id": "P0-b",
-  "set": "P0",
-  "image": "report-marks-pages/P0-b.webp",
-  "w": 1440,
-  "h": 5112
- },
- {
-  "id": "P0-c",
-  "set": "P0",
-  "image": "report-marks-pages/P0-c.webp",
-  "w": 1440,
-  "h": 6599
- },
- {
-  "id": "P0-d",
-  "set": "P0",
-  "image": "report-marks-pages/P0-d.webp",
-  "w": 1440,
-  "h": 3227
- },
- {
-  "id": "P0-e",
-  "set": "P0",
-  "image": "report-marks-pages/P0-e.webp",
-  "w": 1440,
-  "h": 8176
- },
- {
-  "id": "P0-f",
-  "set": "P0",
-  "image": "report-marks-pages/P0-f.webp",
-  "w": 1440,
-  "h": 4070
- },
- {
-  "id": "P-small-a",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-a.webp",
-  "w": 1440,
-  "h": 2869
- },
- {
-  "id": "P-small-b",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-b.webp",
-  "w": 1440,
-  "h": 3204
- },
- {
-  "id": "P-small-c",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-c.webp",
-  "w": 1440,
-  "h": 5981
- },
- {
-  "id": "P-small-d",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-d.webp",
-  "w": 1440,
-  "h": 6225
- },
- {
-  "id": "P-small-e",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-e.webp",
-  "w": 1440,
-  "h": 7853
- },
- {
-  "id": "P-small-f",
-  "set": "P-small",
-  "image": "report-marks-pages/P-small-f.webp",
-  "w": 1440,
-  "h": 2999
- }
-]
+{
+ "pages": [
+  {
+   "id": "S0-a",
+   "set": "S0",
+   "image": "report-marks-pages/S0-a.webp",
+   "w": 1440,
+   "h": 1780
+  },
+  {
+   "id": "S0-b",
+   "set": "S0",
+   "image": "report-marks-pages/S0-b.webp",
+   "w": 1440,
+   "h": 2564
+  },
+  {
+   "id": "S0-c",
+   "set": "S0",
+   "image": "report-marks-pages/S0-c.webp",
+   "w": 1440,
+   "h": 2156
+  },
+  {
+   "id": "S0-d",
+   "set": "S0",
+   "image": "report-marks-pages/S0-d.webp",
+   "w": 1440,
+   "h": 4362
+  },
+  {
+   "id": "S0-e",
+   "set": "S0",
+   "image": "report-marks-pages/S0-e.webp",
+   "w": 1440,
+   "h": 4426
+  },
+  {
+   "id": "S0-f",
+   "set": "S0",
+   "image": "report-marks-pages/S0-f.webp",
+   "w": 1440,
+   "h": 5128
+  },
+  {
+   "id": "S-bare-a",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-a.webp",
+   "w": 1440,
+   "h": 1255
+  },
+  {
+   "id": "S-bare-b",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-b.webp",
+   "w": 1440,
+   "h": 2225
+  },
+  {
+   "id": "S-bare-c",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-c.webp",
+   "w": 1440,
+   "h": 1882
+  },
+  {
+   "id": "S-bare-d",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-d.webp",
+   "w": 1440,
+   "h": 5248
+  },
+  {
+   "id": "S-bare-e",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-e.webp",
+   "w": 1440,
+   "h": 4659
+  },
+  {
+   "id": "S-bare-f",
+   "set": "S-bare",
+   "image": "report-marks-pages/S-bare-f.webp",
+   "w": 1440,
+   "h": 3923
+  },
+  {
+   "id": "S-mix-a",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-a.webp",
+   "w": 1440,
+   "h": 4374
+  },
+  {
+   "id": "S-mix-b",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-b.webp",
+   "w": 1440,
+   "h": 4990
+  },
+  {
+   "id": "S-mix-c",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-c.webp",
+   "w": 1440,
+   "h": 1520
+  },
+  {
+   "id": "S-mix-d",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-d.webp",
+   "w": 1440,
+   "h": 6188
+  },
+  {
+   "id": "S-mix-e",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-e.webp",
+   "w": 1440,
+   "h": 1444
+  },
+  {
+   "id": "S-mix-f",
+   "set": "S-mix",
+   "image": "report-marks-pages/S-mix-f.webp",
+   "w": 1440,
+   "h": 1434
+  },
+  {
+   "id": "P0-a",
+   "set": "P0",
+   "image": "report-marks-pages/P0-a.webp",
+   "w": 1440,
+   "h": 4183
+  },
+  {
+   "id": "P0-b",
+   "set": "P0",
+   "image": "report-marks-pages/P0-b.webp",
+   "w": 1440,
+   "h": 5112
+  },
+  {
+   "id": "P0-c",
+   "set": "P0",
+   "image": "report-marks-pages/P0-c.webp",
+   "w": 1440,
+   "h": 6599
+  },
+  {
+   "id": "P0-d",
+   "set": "P0",
+   "image": "report-marks-pages/P0-d.webp",
+   "w": 1440,
+   "h": 3227
+  },
+  {
+   "id": "P0-e",
+   "set": "P0",
+   "image": "report-marks-pages/P0-e.webp",
+   "w": 1440,
+   "h": 8176
+  },
+  {
+   "id": "P0-f",
+   "set": "P0",
+   "image": "report-marks-pages/P0-f.webp",
+   "w": 1440,
+   "h": 4070
+  },
+  {
+   "id": "P-small-a",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-a.webp",
+   "w": 1440,
+   "h": 2869
+  },
+  {
+   "id": "P-small-b",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-b.webp",
+   "w": 1440,
+   "h": 3204
+  },
+  {
+   "id": "P-small-c",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-c.webp",
+   "w": 1440,
+   "h": 5981
+  },
+  {
+   "id": "P-small-d",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-d.webp",
+   "w": 1440,
+   "h": 6225
+  },
+  {
+   "id": "P-small-e",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-e.webp",
+   "w": 1440,
+   "h": 7853
+  },
+  {
+   "id": "P-small-f",
+   "set": "P-small",
+   "image": "report-marks-pages/P-small-f.webp",
+   "w": 1440,
+   "h": 2999
+  }
+ ],
+ "pairs": [
+  {
+   "id": "S0-1",
+   "set": "S0",
+   "left": "S0-e",
+   "right": "S0-d"
+  },
+  {
+   "id": "S-bare-1",
+   "set": "S-bare",
+   "left": "S-bare-e",
+   "right": "S-bare-d"
+  },
+  {
+   "id": "S-mix-1",
+   "set": "S-mix",
+   "left": "S-mix-c",
+   "right": "S-mix-d"
+  },
+  {
+   "id": "P0-1",
+   "set": "P0",
+   "left": "P0-b",
+   "right": "P0-f"
+  },
+  {
+   "id": "P-small-1",
+   "set": "P-small",
+   "left": "P-small-d",
+   "right": "P-small-b"
+  },
+  {
+   "id": "S0-2",
+   "set": "S0",
+   "left": "S0-e",
+   "right": "S0-f"
+  },
+  {
+   "id": "S-bare-2",
+   "set": "S-bare",
+   "left": "S-bare-b",
+   "right": "S-bare-a"
+  },
+  {
+   "id": "S-mix-2",
+   "set": "S-mix",
+   "left": "S-mix-f",
+   "right": "S-mix-e"
+  },
+  {
+   "id": "P0-2",
+   "set": "P0",
+   "left": "P0-b",
+   "right": "P0-d"
+  },
+  {
+   "id": "P-small-2",
+   "set": "P-small",
+   "left": "P-small-a",
+   "right": "P-small-f"
+  },
+  {
+   "id": "S0-3",
+   "set": "S0",
+   "left": "S0-c",
+   "right": "S0-b"
+  },
+  {
+   "id": "S-bare-3",
+   "set": "S-bare",
+   "left": "S-bare-c",
+   "right": "S-bare-a"
+  },
+  {
+   "id": "S-mix-3",
+   "set": "S-mix",
+   "left": "S-mix-a",
+   "right": "S-mix-b"
+  },
+  {
+   "id": "P0-3",
+   "set": "P0",
+   "left": "P0-b",
+   "right": "P0-e"
+  },
+  {
+   "id": "P-small-3",
+   "set": "P-small",
+   "left": "P-small-b",
+   "right": "P-small-f"
+  },
+  {
+   "id": "S0-4",
+   "set": "S0",
+   "left": "S0-f",
+   "right": "S0-d"
+  },
+  {
+   "id": "S-bare-4",
+   "set": "S-bare",
+   "left": "S-bare-a",
+   "right": "S-bare-e"
+  },
+  {
+   "id": "S-mix-4",
+   "set": "S-mix",
+   "left": "S-mix-a",
+   "right": "S-mix-d"
+  },
+  {
+   "id": "P0-4",
+   "set": "P0",
+   "left": "P0-c",
+   "right": "P0-a"
+  },
+  {
+   "id": "P-small-4",
+   "set": "P-small",
+   "left": "P-small-d",
+   "right": "P-small-c"
+  },
+  {
+   "id": "S0-5",
+   "set": "S0",
+   "left": "S0-a",
+   "right": "S0-b"
+  },
+  {
+   "id": "S-bare-5",
+   "set": "S-bare",
+   "left": "S-bare-d",
+   "right": "S-bare-f"
+  },
+  {
+   "id": "S-mix-5",
+   "set": "S-mix",
+   "left": "S-mix-d",
+   "right": "S-mix-b"
+  },
+  {
+   "id": "P0-5",
+   "set": "P0",
+   "left": "P0-d",
+   "right": "P0-f"
+  },
+  {
+   "id": "P-small-5",
+   "set": "P-small",
+   "left": "P-small-c",
+   "right": "P-small-e"
+  },
+  {
+   "id": "S0-6",
+   "set": "S0",
+   "left": "S0-d",
+   "right": "S0-b"
+  },
+  {
+   "id": "S-bare-6",
+   "set": "S-bare",
+   "left": "S-bare-e",
+   "right": "S-bare-f"
+  },
+  {
+   "id": "S-mix-6",
+   "set": "S-mix",
+   "left": "S-mix-c",
+   "right": "S-mix-f"
+  },
+  {
+   "id": "P0-6",
+   "set": "P0",
+   "left": "P0-e",
+   "right": "P0-a"
+  },
+  {
+   "id": "P-small-6",
+   "set": "P-small",
+   "left": "P-small-a",
+   "right": "P-small-b"
+  },
+  {
+   "id": "S0-7",
+   "set": "S0",
+   "left": "S0-c",
+   "right": "S0-a"
+  },
+  {
+   "id": "S-bare-7",
+   "set": "S-bare",
+   "left": "S-bare-c",
+   "right": "S-bare-b"
+  },
+  {
+   "id": "S-mix-7",
+   "set": "S-mix",
+   "left": "S-mix-c",
+   "right": "S-mix-e"
+  },
+  {
+   "id": "P0-7",
+   "set": "P0",
+   "left": "P0-c",
+   "right": "P0-e"
+  },
+  {
+   "id": "P-small-7",
+   "set": "P-small",
+   "left": "P-small-d",
+   "right": "P-small-e"
+  },
+  {
+   "id": "S0-3-r",
+   "set": "S0",
+   "left": "S0-b",
+   "right": "S0-c",
+   "repeat": "S0-3"
+  },
+  {
+   "id": "S-mix-1-r",
+   "set": "S-mix",
+   "left": "S-mix-d",
+   "right": "S-mix-c",
+   "repeat": "S-mix-1"
+  },
+  {
+   "id": "S0-1-r",
+   "set": "S0",
+   "left": "S0-d",
+   "right": "S0-e",
+   "repeat": "S0-1"
+  }
+ ]
+}

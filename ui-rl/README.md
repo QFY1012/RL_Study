@@ -122,10 +122,11 @@
 
 ## 报告页框选标注(2026-10-18)
 
-控制变量那次 5 份数据(S0、S-bare、S-mix、P0、P-small)各 editorial、design 3 版,共 30 页。你在页面上圈出好和有问题的地方,用来对照评分标准和评委的理由抓的是不是同样的地方。
+控制变量那次 5 份数据(S0、S-bare、S-mix、P0、P-small)各 editorial、design 3 版,共 30 页,两两成对标:两版并排,先选哪版好(左明显好 / 左稍好 / 差不多 / 右稍好 / 右明显好),再只圈让你这样选的那几处(两边都能圈,标「好」或「问题」,各写一句)。用途:看评委和评分标准在同一对上选得是不是一样、理由是不是你看到的那几处;以后当写评分标准的种子对。
 
-- 准备页面:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(页面清单)、`labels/report-marks-key.json`(编号对应哪份数据的哪一版;标注页不发布它)。同一份数据的 6 版排在一起,组内打乱,编号看不出是哪种提示词。
-- 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每页 `{page, set, items:[{x,y,w,h,kind:"good"|"bad",comment}], rating:"good"|"ok"|"bad"|null, note, seconds}`,坐标是 1440px 宽截图的像素。
+- 选哪些对:每份数据 editorial 之间 3 对、design 之间 3 对(训练时要分的是同一个提示词出的相近几版,评委在这上面还没测过),editorial-1 对 design-1 1 对(差别早有结论,只为记下好在哪),共 35 对;几份数据轮流排,标到一半停下每份都有;最后 3 对是前面出现过的对左右调换(`repeat`),看自己前后判得一不一致。
+- 准备:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(pages 和 pairs)、`labels/report-marks-key.json`(页面编号对应哪份数据的哪一版;标注页不发布它)。页面编号看不出是哪种提示词,左右随机。
+- 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每对 `{pair, set, left, right, repeat?, choice, items:[{side,x,y,w,h,kind:"good"|"bad",comment}], note, seconds}`,坐标是 1440px 宽截图的像素。
 
 ## 只给数据让模型写报告(2026-10-18)
 

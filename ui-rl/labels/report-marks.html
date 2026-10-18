@@ -1,7 +1,7 @@
 <title>报告页框选标注</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
-  /* 和 critique.html 同一套色:灰底白面板;问题用橙色框,好的地方用绿色框。左边整页截图,右边这页的标记清单 */
+  /* 和 critique.html 同一套色:灰底白面板;问题用橙色框,好的地方用绿色框。左边两版截图并排,右边选哪版好和圈出的理由 */
   :root {
     --bg: #f4f5f7; --panel: #ffffff; --fg: #1d2129; --dim: #5f6673; --line: #dfe2e8;
     --accent: #c2410c; --accent-soft: #fbe9df; --ok: #2f7d4f; --ok-soft: #e3f1e8; --chip: #eef0f4;
@@ -41,15 +41,18 @@
   button:hover { border-color: var(--line); }
   button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   button.primary { background: var(--accent); color: var(--panel); }
-  button:disabled { opacity: .45; cursor: default; }
   kbd { font: 11px var(--mono); color: var(--dim); margin-left: 4px; }
   button.primary kbd { color: inherit; opacity: .8; }
 
   .wrap {
-    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; align-items: start;
+    display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; align-items: start;
     padding-block: 8px 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
-  .frame { position: relative; background: var(--panel); border: 1px solid var(--line); max-width: 1440px; }
+  .stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; min-width: 0; }
+  .stage.one { grid-template-columns: minmax(0, 1fr); }
+  .shot { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .shot .tag { font-size: 13px; font-weight: 600; color: var(--dim); }
+  .frame { position: relative; background: var(--panel); border: 1px solid var(--line); }
   .frame img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
   .ov { position: absolute; inset: 0; cursor: crosshair; }
   .box { position: absolute; border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 2px; }
@@ -71,23 +74,25 @@
   .help { color: var(--dim); font-size: 13px; margin: 0; }
   .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
   .timer { font: 13px var(--mono); color: var(--dim); }
+  .lab { font-size: 13px; color: var(--dim); display: flex; flex-direction: column; gap: 4px; }
+  .seg { display: flex; gap: 4px; flex-wrap: wrap; }
+  .seg button { padding: 2px 10px; font-size: 13px; }
+  .seg button.on { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  .seg button.on.okb { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
+  #choice button { flex: 1; min-width: 56px; padding: 5px 4px; }
   ol.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   ol.items li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 4px 8px; align-items: start; }
   ol.items li .n { background: var(--accent); color: var(--panel); font: 600 12px/20px var(--mono); text-align: center; border-radius: 3px; height: 20px; }
   ol.items li.good .n { background: var(--ok); }
   ol.items li .kind { display: flex; gap: 4px; align-items: center; }
+  ol.items li .kind .side { font-size: 12px; color: var(--dim); margin-right: 4px; }
   ol.items li .kind .del { margin-left: auto; color: var(--dim); }
   ol.items li .say { grid-column: 2; }
-  .seg button { padding: 2px 10px; font-size: 13px; }
-  .seg button.on { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
-  .seg button.on.okb { background: var(--ok-soft); color: var(--ok); border-color: var(--ok); }
   textarea, input[type=text] {
     width: 100%; box-sizing: border-box; font: inherit; color: var(--fg); background: var(--bg);
     border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; resize: vertical;
   }
-  .lab { font-size: 13px; color: var(--dim); display: flex; flex-direction: column; gap: 4px; }
-  .seg { display: flex; gap: 4px; flex-wrap: wrap; }
-  .empty { color: var(--dim); font-size: 13px; padding: 8px 0; }
+  .empty { color: var(--dim); font-size: 13px; }
   .actions { display: flex; gap: 6px; flex-wrap: wrap; }
   .actions .primary { flex: 1; }
   .saved { font-size: 13px; color: var(--ok); min-height: 1.5em; }
@@ -117,30 +122,34 @@
 </header>
 
 <div class="wrap">
-  <div class="frame" id="frame"><img id="img" alt="报告页面整页截图"><div class="ov" id="ov"></div></div>
+  <div class="stage" id="stage">
+    <section class="shot" id="shotL"><span class="tag">左</span><div class="frame"><img id="imgL" alt="左边那版的整页截图"><div class="ov" id="ovL" data-side="left"></div></div></section>
+    <section class="shot" id="shotR"><span class="tag">右</span><div class="frame"><img id="imgR" alt="右边那版的整页截图"><div class="ov" id="ovR" data-side="right"></div></div></section>
+  </div>
 
   <aside>
+    <p class="help">同一份数据做出的两版。先选哪版好；再只圈让你这样选的那几处（两边都可以圈），选「好」或「问题」，各写一句为什么。很像就选「差不多」。</p>
+    <div class="lab">哪版好
+      <div class="seg" id="choice">
+        <button data-v="left2">左明显好</button><button data-v="left1">左稍好</button><button data-v="tie">差不多</button><button data-v="right1">右稍好</button><button data-v="right2">右明显好</button>
+      </div>
+    </div>
     <div class="row">
-      <p class="help">同一份数据做出的 6 版排在一起。在截图上拖框圈出做得好或有问题的地方，选「好」或「问题」，写一句为什么。</p>
+      <div class="seg" id="view" aria-label="怎么看">
+        <button data-v="both" class="on">并排</button><button data-v="left">只看左</button><button data-v="right">只看右</button>
+      </div>
       <button class="touch" id="drawToggle">现在：滚动</button>
     </div>
     <ol class="items" id="items"></ol>
     <div class="empty" id="noItems">还没有圈。在截图上拖一个框。</div>
-    <div class="lab">整页（可选）
-      <div class="seg" id="rating">
-        <button data-v="good" class="okb">好</button>
-        <button data-v="ok">一般</button>
-        <button data-v="bad">差</button>
-      </div>
-    </div>
-    <label class="lab" for="note">整页意见（可选）<textarea id="note" rows="2" placeholder="比如「结论应该放在最前面」"></textarea></label>
+    <label class="lab" for="note">补充（可选）<textarea id="note" rows="2" placeholder="比如「两版都把结论放最后，差别只在图表」"></textarea></label>
     <div class="row"><span class="timer" id="timer">用时 0:00</span><span class="saved" id="saved"></span></div>
     <div class="actions">
-      <button class="primary" id="save">保存，下一页<kbd>⌘↵</kbd></button>
+      <button class="primary" id="save">保存，下一对<kbd>⌘↵</kbd></button>
     </div>
     <div class="actions">
-      <button id="prev">上一页<kbd>←</kbd></button>
-      <button id="next">下一页<kbd>→</kbd></button>
+      <button id="prev">上一对<kbd>←</kbd></button>
+      <button id="next">下一对<kbd>→</kbd></button>
       <button id="skip">下一个没标的</button>
     </div>
   </aside>
@@ -148,12 +157,12 @@
 
 <script>
 (async () => {
-  // 每页存一份 marks/<页面>:框(截图像素坐标)、每个框是好还是问题和一句话、整页好坏、整页意见、用时。
+  // 每对存一份 marks/<对>:选哪版好(left2/left1/tie/right1/right2)、圈的框(side、截图像素坐标、好还是问题、一句话)、补充、用时。
   // 存在 artifact 的 db 里,Claude 读得到;db 不可用时存浏览器本地。
   const $ = (id) => document.getElementById(id);
-  let pages = [];
-  try { pages = await (await fetch('report-marks.json')).json(); }
-  catch { $('frame').outerHTML = '<p class="note">读不到 report-marks.json，页面没有加载。</p>'; return; }
+  let pages = {}, pairs = [];
+  try { const j = await (await fetch('report-marks.json')).json(); pairs = j.pairs; for (const p of j.pages) pages[p.id] = p; }
+  catch { $('stage').outerHTML = '<p class="note">读不到 report-marks.json，页面没有加载。</p>'; return; }
 
   let idx = 0;
   const marks = {};                    // 已保存的 db 文档
@@ -186,61 +195,71 @@
   const startClock = (prev) => { base = prev || 0; tick = 0; showTime(); };
 
   // ---------- 框 ----------
-  const cur = () => pages[idx];
-  const draftOf = (p) => (drafts[p.id] ??= structuredClone(marks[p.id] ?? { items: [], rating: null, note: '' }));
+  const cur = () => pairs[idx];
+  const pageOf = (side) => pages[cur()[side]];
+  const ovOf = (side) => $(side === 'left' ? 'ovL' : 'ovR');
+  const imgOf = (side) => $(side === 'left' ? 'imgL' : 'imgR');
+  const draftOf = (q) => (drafts[q.id] ??= structuredClone(marks[q.id] ?? { choice: null, items: [], note: '' }));
   const pct = (p, b) => `left:${b.x / p.w * 100}%;top:${b.y / p.h * 100}%;width:${b.w / p.w * 100}%;height:${b.h / p.h * 100}%`;
-  function drawBoxes(p, items, temp) {
-    $('ov').innerHTML = items.map((it, i) => `<div class="box${it.kind === 'good' ? ' good' : ''}" data-i="${i}" style="${pct(p, it)}"><b>${i + 1}</b></div>`).join('')
+  function drawBoxes(side, temp) {
+    const p = pageOf(side), items = draftOf(cur()).items;
+    ovOf(side).innerHTML = items.map((it, i) => it.side !== side ? '' : `<div class="box${it.kind === 'good' ? ' good' : ''}" data-i="${i}" style="${pct(p, it)}"><b>${i + 1}</b></div>`).join('')
       + (temp ? `<div class="box draft" style="${pct(p, temp)}"></div>` : '');
   }
 
   function render() {
-    const p = cur(); if (!p) return;
-    if ($('img').getAttribute('src') !== p.image) { $('img').src = p.image; window.scrollTo(0, 0); }
-    const d = draftOf(p);
-    drawBoxes(p, d.items);
+    const q = cur(); if (!q) return;
+    for (const side of ['left', 'right']) {
+      const p = pageOf(side);
+      if (imgOf(side).getAttribute('src') !== p.image) { imgOf(side).src = p.image; window.scrollTo(0, 0); }
+      drawBoxes(side);
+    }
+    const d = draftOf(q);
+    document.querySelectorAll('#choice button').forEach((b) => b.classList.toggle('on', d.choice === b.dataset.v));
     $('items').innerHTML = d.items.map((it, i) => `<li data-i="${i}" class="${it.kind === 'good' ? 'good' : ''}">
       <span class="n">${i + 1}</span>
-      <span class="kind seg"><button data-k="bad" data-i="${i}" class="${it.kind === 'bad' ? 'on' : ''}">问题</button><button data-k="good" data-i="${i}" class="okb${it.kind === 'good' ? ' on' : ''}">好</button>
+      <span class="kind seg"><span class="side">${it.side === 'left' ? '左' : '右'}</span><button data-k="bad" data-i="${i}" class="${it.kind === 'bad' ? 'on' : ''}">问题</button><button data-k="good" data-i="${i}" class="okb${it.kind === 'good' ? ' on' : ''}">好</button>
         <button class="del" data-i="${i}" aria-label="删掉第 ${i + 1} 处">删</button></span>
-      <span class="say"><input type="text" id="c-${p.id}-${i}" data-i="${i}" value="${escapeAttr(it.comment)}" placeholder="${it.kind === 'good' ? '好在哪' : '问题在哪、该怎么做'}"></span></li>`).join('');
+      <span class="say"><input type="text" id="c-${q.id}-${i}" data-i="${i}" value="${escapeAttr(it.comment)}" placeholder="${it.kind === 'good' ? '好在哪' : '问题在哪'}"></span></li>`).join('');
     $('noItems').hidden = d.items.length > 0;
-    document.querySelectorAll('#rating button').forEach((b) => b.classList.toggle('on', d.rating === b.dataset.v));
     if (document.activeElement !== $('note')) $('note').value = d.note ?? '';
-    const inSet = pages.filter((q) => q.set === p.set), n = pages.filter((q) => marks[q.id]).length;
-    $('pos').textContent = `第 ${idx + 1} / ${pages.length} 页 · 数据 ${p.set} 的第 ${inSet.indexOf(p) + 1} / ${inSet.length} 版`;
+    const inSet = pairs.filter((x) => x.set === q.set), n = pairs.filter((x) => marks[x.id]).length;
+    $('pos').textContent = `第 ${idx + 1} / ${pairs.length} 对 · 数据 ${q.set}`;
     $('done').textContent = `已标 ${n}`;
-    $('prog').style.width = (n / pages.length * 100) + '%';
-    const q = pages[idx + 1]; if (q) new Image().src = q.image;
+    $('prog').style.width = (n / pairs.length * 100) + '%';
+    const nx = pairs[idx + 1]; if (nx) { new Image().src = pages[nx.left].image; new Image().src = pages[nx.right].image; }
   }
 
-  // 拖框
+  // 拖框:在哪边的截图上拖,框就记在哪边
   let drag = null;
-  const toImg = (e) => {
-    const r = $('img').getBoundingClientRect(), p = cur(), k = p.w / r.width;
+  const toImg = (side, e) => {
+    const r = imgOf(side).getBoundingClientRect(), p = pageOf(side), k = p.w / r.width;
     return { x: Math.max(0, Math.min(p.w, (e.clientX - r.left) * k)), y: Math.max(0, Math.min(p.h, (e.clientY - r.top) * k)) };
   };
-  $('ov').addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    e.preventDefault(); $('ov').setPointerCapture(e.pointerId);
-    drag = { a: toImg(e) };
-  });
-  $('ov').addEventListener('pointermove', (e) => {
-    if (!drag) return;
-    const b = toImg(e), a = drag.a;
-    drag.r = { x: Math.round(Math.min(a.x, b.x)), y: Math.round(Math.min(a.y, b.y)), w: Math.round(Math.abs(b.x - a.x)), h: Math.round(Math.abs(b.y - a.y)) };
-    if (drag.r.w > 6 || drag.r.h > 6) drawBoxes(cur(), draftOf(cur()).items, drag.r);
-  });
-  $('ov').addEventListener('pointerup', () => {
-    if (!drag) return;
-    const { r } = drag; drag = null;
-    const p = cur(), d = draftOf(p);
-    if (!r || r.w < 8 || r.h < 8) return drawBoxes(p, d.items);
-    d.items.push({ ...r, kind: 'bad', comment: '' });
-    render();
-    $(`c-${p.id}-${d.items.length - 1}`)?.focus();
-  });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drag) { drag = null; drawBoxes(cur(), draftOf(cur()).items); } });
+  for (const ov of [$('ovL'), $('ovR')]) {
+    const side = ov.dataset.side;
+    ov.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      e.preventDefault(); ov.setPointerCapture(e.pointerId);
+      drag = { side, a: toImg(side, e) };
+    });
+    ov.addEventListener('pointermove', (e) => {
+      if (!drag || drag.side !== side) return;
+      const b = toImg(side, e), a = drag.a;
+      drag.r = { x: Math.round(Math.min(a.x, b.x)), y: Math.round(Math.min(a.y, b.y)), w: Math.round(Math.abs(b.x - a.x)), h: Math.round(Math.abs(b.y - a.y)) };
+      if (drag.r.w > 6 || drag.r.h > 6) drawBoxes(side, drag.r);
+    });
+    ov.addEventListener('pointerup', () => {
+      if (!drag || drag.side !== side) return;
+      const { r } = drag; drag = null;
+      if (!r || r.w < 8 || r.h < 8) return drawBoxes(side);
+      const d = draftOf(cur());
+      d.items.push({ side, ...r, kind: 'bad', comment: '' });
+      render();
+      $(`c-${cur().id}-${d.items.length - 1}`)?.focus();
+    });
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drag) { const s = drag.side; drag = null; drawBoxes(s); } });
 
   $('items').addEventListener('input', (e) => { const i = e.target.dataset.i; if (i != null) draftOf(cur()).items[i].comment = e.target.value; });
   $('items').addEventListener('click', (e) => {
@@ -254,27 +273,39 @@
   $('items').addEventListener('focusout', () => hot(null));
   $('items').addEventListener('mouseover', (e) => hot(e.target.closest('li')?.dataset.i));
   $('items').addEventListener('mouseleave', () => hot(null));
-  const hot = (i) => document.querySelectorAll('#ov .box').forEach((b) => b.classList.toggle('hot', b.dataset.i === String(i)));
-  $('rating').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; const d = draftOf(cur()); d.rating = d.rating === b.dataset.v ? null : b.dataset.v; render(); });
+  const hot = (i) => document.querySelectorAll('.ov .box').forEach((b) => b.classList.toggle('hot', b.dataset.i === String(i)));
+  $('choice').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { draftOf(cur()).choice = b.dataset.v; render(); } });
   $('note').addEventListener('input', () => { draftOf(cur()).note = $('note').value; });
+  $('view').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const v = b.dataset.v;
+    document.querySelectorAll('#view button').forEach((x) => x.classList.toggle('on', x === b));
+    $('stage').classList.toggle('one', v !== 'both');
+    $('shotL').hidden = v === 'right'; $('shotR').hidden = v === 'left';
+  });
 
   async function save() {
-    const p = cur(), d = draftOf(p);
-    const items = d.items.filter((it) => it.comment.trim()).map(({ x, y, w, h, kind, comment }) => ({ x, y, w, h, kind, comment: comment.trim() }));
-    if (!items.length && !d.note.trim() && !d.rating) { $('saved').textContent = '先圈一处并写一句，或者给整页一个评价'; return; }
+    const q = cur(), d = draftOf(q);
+    if (!d.choice) { $('saved').textContent = '先选哪版好'; return; }
+    const items = d.items.filter((it) => it.comment.trim()).map(({ side, x, y, w, h, kind, comment }) => ({ side, x, y, w, h, kind, comment: comment.trim() }));
     if (items.length < d.items.length) { $('saved').textContent = '有框还没写字：写一句，或者删掉它'; return; }
-    const doc = { page: p.id, set: p.set, items, rating: d.rating, note: d.note.trim(), seconds: base + tick, at: new Date().toISOString() };
-    marks[p.id] = doc; delete drafts[p.id];
-    await put(p.id, doc);
+    if (d.choice !== 'tie' && !items.length && !d.note.trim()) { $('saved').textContent = '圈一处让你这样选的地方，或者在补充里写一句'; return; }
+    const doc = { pair: q.id, set: q.set, left: q.left, right: q.right, ...(q.repeat ? { repeat: q.repeat } : {}), choice: d.choice, items, note: d.note.trim(), seconds: base + tick, at: new Date().toISOString() };
+    marks[q.id] = doc; delete drafts[q.id];
+    await put(q.id, doc);
     setTimeout(() => go(1), 250);
   }
-  function go(k) { idx = Math.max(0, Math.min(pages.length - 1, idx + k)); $('saved').textContent = ''; startClock(marks[cur().id]?.seconds); render(); }
+  function go(k) { idx = Math.max(0, Math.min(pairs.length - 1, idx + k)); $('saved').textContent = ''; startClock(marks[cur().id]?.seconds); render(); }
   $('save').onclick = save;
   $('prev').onclick = () => go(-1);
   $('next').onclick = () => go(1);
-  $('skip').onclick = () => { const i = pages.findIndex((q) => !marks[q.id]); if (i >= 0) { idx = i; go(0); } };
-  $('drawToggle').onclick = () => { const on = $('ov').classList.toggle('scroll'); $('drawToggle').textContent = on ? '现在：滚动' : '现在：画框'; $('ov').style.touchAction = on ? '' : 'none'; };
-  $('ov').classList.add('scroll'); // 手机上默认能滚动,点按钮切到画框;桌面上这个类不起作用
+  $('skip').onclick = () => { const i = pairs.findIndex((x) => !marks[x.id]); if (i >= 0) { idx = i; go(0); } };
+  $('drawToggle').onclick = () => {
+    const on = $('ovL').classList.toggle('scroll'); $('ovR').classList.toggle('scroll', on);
+    $('drawToggle').textContent = on ? '现在：滚动' : '现在：画框';
+    for (const ov of [$('ovL'), $('ovR')]) ov.style.touchAction = on ? '' : 'none';
+  };
+  $('ovL').classList.add('scroll'); $('ovR').classList.add('scroll'); // 手机上默认能滚动,点按钮切到画框;桌面上这个类不起作用
   document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); save(); return; }
     if (e.target.matches('input, textarea')) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') e.target.blur(); return; }
