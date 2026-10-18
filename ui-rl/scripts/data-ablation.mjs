@@ -11,6 +11,7 @@
 //   第三轮:P-small 并列多块版去掉 20 个品牌的大表;S-bigtable 销售加一张 36 家门店的表。
 //   第四轮:S-birds 销售月报的结构和数字不动,讲的东西换成城市鸟类观测。
 //   第五轮:S-nodelta 去掉环比同比;S-noops 去掉趋势、问题、下一步;S-bare 两样都去掉;P-ops 口袋汇总版加上这几块。
+//   第六轮:S-mix 是 S-bare 译成英文、标题换成论点、去掉公司和时间段(几处一起改)。
 import fs from "node:fs"
 import path from "node:path"
 
@@ -190,7 +191,7 @@ write("S-birds", {
 })
 
 write("S0", sales)
-write("S-en", {
+const en = {
   title: "Monthly Sales Report, September 2026",
   company: "Qinghe Home (fictional)",
   period: "2026-09-01 to 2026-09-30",
@@ -221,7 +222,8 @@ write("S-en", {
     "For the Double 11 presale, lead with the Cloud Sofa and mattress bundle, and keep discounts within 10%",
     "Douyin livestream is growing fastest; add two brand livestreams in October",
   ],
-})
+}
+write("S-en", en)
 // S-single:只留一条主线(华南退货)的数据,别的块都去掉;标题、公司、时间段不变
 write("S-single", {
   title: sales.title, company: sales.company, period: sales.period,
@@ -242,4 +244,12 @@ write("S-desc", {
     nextSteps: "10 月要做的事。",
   },
 })
+// 第六轮:S-bare 和 P-small 的骨架已经很像(一段结论 + 5 个指标 + 几张小表),一个还是面板、一个还是一栏。剩下的表面差别
+// (语言、论点式标题、公司和时间段)单独改都没翻,这里一起改:S-mix 是 S-bare 译成英文、标题换成论点、去掉公司和时间段
+write("S-mix", {
+  title: "East China's online channels carried September; shipping damage in South China held it back",
+  summary: en.summary,
+  kpis: en.kpis.map(noDelta), regions: en.regions.map(noDelta), channels: en.channels.map(noDelta), topProducts: en.topProducts,
+})
+
 console.log(`写好 ${fs.readdirSync(out).length} 个变体:${fs.readdirSync(out).join(" ")}`)
