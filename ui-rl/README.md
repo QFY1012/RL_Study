@@ -206,6 +206,26 @@ f15 的 JSON 约 1,950 字(其中汉字 1,653),提示词 3,428 token,不算长�
 
 数据(只在容器里):`/home/user/ui-rl-scratch/ablation/`(`data/` 各变体的 JSON,`gen/<变体>/` 生成的页面,`metrics.jsonl`,`grid-*.jpg` 每轮的拼图)。
 
+### 对比写评分表(OpenRubrics 的做法,2026-10-18)
+
+`scripts/contrast-rubric.mjs`:上面控制变量的 5 份数据(S0、S-bare、S-mix、P0、P-small),每份 editorial 3 版 × design 3 版 = 9 对,按人看的结论算 editorial 赢。每份拿 editorial-1 对 design-1 让模型写评分表(看页面截图、告诉它哪版好 = contrast;不看页面只看请求和数据 = blind),其余 8 对每对正反两种顺序判,共 330 次。
+
+| 判法 | 判对(80 次) | 两种顺序都对(40 对) | 各份 P0 / P-small / S0 / S-bare / S-mix(各 16 次) |
+|---|---|---|---|
+| none 不给评分表 | 60 | 25 | 8 / 13 / 13 / 15 / 11 |
+| blind 只看请求写的表 | 18 | 5 | 0 / 9 / 5 / 1 / 3 |
+| contrast 对比写的表 | 65 | 28 | 12 / 10 / 13 / 16 / 14 |
+| cross 另一类数据的对比表 | 59 | 28 | 1 / 11 / 15 / 16 / 16 |
+
+检验(按对比表判写它的那一对,两种顺序):10 次对 8 次,S0 两次都错。
+
+- 判错的大多由门槛条「完整呈现全部字段和条目」决定:blind 判错 62 次里 47 次以上是这类条,cross 判错 21 次里 20 次(S0 的表用在 P0 上:editorial 版没把 80 行原始数据列出来)。S0 自己的检验两次都错也是这条。这条不该算(你定的):editorial 不列原始表不算错。
+- blind 表几乎全是「完整、忠实、格式对」这类要求,没有内容怎么组织的条,所以偏向把数据全摆出来的 design 版,比不给表还差得多。
+- contrast 表里有「少用同质卡片、圆角、阴影」这类风格条,有认体裁的风险;口袋的表(P0)用在销售上 47/48,说明它的条目能搬到别的报告。
+- 选 A 的比例四种判法都在一半上下(39–47/80),没有明显的先后偏差。
+
+数据(只在容器里):`/home/user/ui-rl-scratch/contrast-rubric/`(`rubrics/` 评分表,`rubrics.md` 给人看的版本,`judge/<判法>/` 每次判定,`summary.json`,`run.log`)。
+
 ### 数据位置
 
 - 现编的 4 份 JSON 在 Drive 文件夹 `ui-rl-report-plain-2026-10-18`(id `1cOo8wWYSb5DgUiy4Rh7MuwNAcfF3rGCw`),各放进 `<输出目录>/<名字>/<名字>.json` 就能重跑;它们没有截图,不用画图。f7、f13、f15 用 `data/flow/` 的数据(Drive 位置见上表),截图用 `draw.mjs` 重画。
