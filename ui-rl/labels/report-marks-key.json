@@ -1,0 +1,122 @@
+{
+ "S0-a": {
+  "set": "S0",
+  "version": "design-2"
+ },
+ "S0-b": {
+  "set": "S0",
+  "version": "design-1"
+ },
+ "S0-c": {
+  "set": "S0",
+  "version": "design-3"
+ },
+ "S0-d": {
+  "set": "S0",
+  "version": "editorial-1"
+ },
+ "S0-e": {
+  "set": "S0",
+  "version": "editorial-3"
+ },
+ "S0-f": {
+  "set": "S0",
+  "version": "editorial-2"
+ },
+ "S-bare-a": {
+  "set": "S-bare",
+  "version": "design-1"
+ },
+ "S-bare-b": {
+  "set": "S-bare",
+  "version": "design-2"
+ },
+ "S-bare-c": {
+  "set": "S-bare",
+  "version": "design-3"
+ },
+ "S-bare-d": {
+  "set": "S-bare",
+  "version": "editorial-3"
+ },
+ "S-bare-e": {
+  "set": "S-bare",
+  "version": "editorial-1"
+ },
+ "S-bare-f": {
+  "set": "S-bare",
+  "version": "editorial-2"
+ },
+ "S-mix-a": {
+  "set": "S-mix",
+  "version": "editorial-2"
+ },
+ "S-mix-b": {
+  "set": "S-mix",
+  "version": "editorial-3"
+ },
+ "S-mix-c": {
+  "set": "S-mix",
+  "version": "design-1"
+ },
+ "S-mix-d": {
+  "set": "S-mix",
+  "version": "editorial-1"
+ },
+ "S-mix-e": {
+  "set": "S-mix",
+  "version": "design-2"
+ },
+ "S-mix-f": {
+  "set": "S-mix",
+  "version": "design-3"
+ },
+ "P0-a": {
+  "set": "P0",
+  "version": "editorial-2"
+ },
+ "P0-b": {
+  "set": "P0",
+  "version": "design-1"
+ },
+ "P0-c": {
+  "set": "P0",
+  "version": "editorial-3"
+ },
+ "P0-d": {
+  "set": "P0",
+  "version": "design-2"
+ },
+ "P0-e": {
+  "set": "P0",
+  "version": "editorial-1"
+ },
+ "P0-f": {
+  "set": "P0",
+  "version": "design-3"
+ },
+ "P-small-a": {
+  "set": "P-small",
+  "version": "design-3"
+ },
+ "P-small-b": {
+  "set": "P-small",
+  "version": "design-1"
+ },
+ "P-small-c": {
+  "set": "P-small",
+  "version": "editorial-3"
+ },
+ "P-small-d": {
+  "set": "P-small",
+  "version": "editorial-1"
+ },
+ "P-small-e": {
+  "set": "P-small",
+  "version": "editorial-2"
+ },
+ "P-small-f": {
+  "set": "P-small",
+  "version": "design-2"
+ }
+}

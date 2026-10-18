@@ -120,6 +120,13 @@
 - `revise.mjs` 在缩略图上画出框和编号(`marked.png`),用 `generate.mjs` 的 `--base` 加 change kind `critique` 让生成 Agent 在原页面上改(用这页当时那一步的输出指南);改后的页面在 `runs/critique/revised/<页面>/<报告>/`。
 - 要回答的问题:每页标注花多久;改后的页面你认不认可(「看改后」里逐条记改到了 / 没改到 / 改坏了)。认可的改后页面和改前页面组成偏好对,给 reward / DPO 用。
 
+## 报告页框选标注(2026-10-18)
+
+控制变量那次 5 份数据(S0、S-bare、S-mix、P0、P-small)各 editorial、design 3 版,共 30 页。你在页面上圈出好和有问题的地方,用来对照评分标准和评委的理由抓的是不是同样的地方。
+
+- 准备页面:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(页面清单)、`labels/report-marks-key.json`(编号对应哪份数据的哪一版;标注页不发布它)。同一份数据的 6 版排在一起,组内打乱,编号看不出是哪种提示词。
+- 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每页 `{page, set, items:[{x,y,w,h,kind:"good"|"bad",comment}], rating:"good"|"ok"|"bad"|null, note, seconds}`,坐标是 1440px 宽截图的像素。
+
 ## 只给数据让模型写报告(2026-10-18)
 
 起因:让 DeepSeek 只凭网站名和一句描述写首页,结果很像样;同一个模型拿报告数据写报告页,却很难看。两边都是 HTML、都是排版,差距为什么这么大?这一轮就查这个。网站一边的实验见 `data-collection/README.md`「不给风格的生成」。

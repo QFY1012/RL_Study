@@ -25,3 +25,5 @@ runs/critique/revised/**/tsconfig.json
 
 # API key (lib/llm.mjs reads DEEPSEEK_API_KEY); keep it out of git
 judge.env
+# 报告页标注:整页截图由 scripts/report-marks.py 从实验目录生成
+labels/report-marks-pages/
