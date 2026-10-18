@@ -10,6 +10,7 @@
 //   第二轮:P-genre 汇总版套上月报体裁;P-blocks 汇总版再加几块并列的表;S-single 销售只留华南退货一条主线。
 //   第三轮:P-small 并列多块版去掉 20 个品牌的大表;S-bigtable 销售加一张 36 家门店的表。
 //   第四轮:S-birds 销售月报的结构和数字不动,讲的东西换成城市鸟类观测。
+//   第五轮:S-nodelta 去掉环比同比;S-noops 去掉趋势、问题、下一步;S-bare 两样都去掉;P-ops 口袋汇总版加上这几块。
 import fs from "node:fs"
 import path from "node:path"
 
@@ -127,6 +128,27 @@ const stores = sales.regions.flatMap((r) => {
   }))
 })
 write("S-bigtable", { ...sales, stores })
+// 第五轮:拆销售的骨架。S-nodelta 去掉所有环比、同比(指标、地区、渠道里的 mom、yoy);S-noops 去掉 12 个月趋势、问题、
+// 下一步;S-bare 两样都去掉。P-ops 反过来给口袋汇总版加上这几块:按周的测量进度、问题、下一步(虚构,和数据不矛盾)
+const noDelta = ({ mom, yoy, ...rest }) => rest
+write("S-nodelta", { ...sales, kpis: sales.kpis.map(noDelta), regions: sales.regions.map(noDelta), channels: sales.channels.map(noDelta) })
+const { trend: _t, issues: _i, nextSteps: _n, ...salesNoOps } = sales
+write("S-noops", salesNoOps)
+write("S-bare", { ...salesNoOps, kpis: sales.kpis.map(noDelta), regions: sales.regions.map(noDelta), channels: sales.channels.map(noDelta) })
+write("P-ops", {
+  ...pSummary,
+  trend: [["2018-06-25", 6], ["2018-07-02", 14], ["2018-07-09", 18], ["2018-07-16", 16], ["2018-07-23", 12], ["2018-07-30", 14]].map(([week, pairs]) => ({ week, pairsMeasured: pairs })),
+  issues: [
+    { title: "Some women's pockets are sewn shut", detail: "Several women's styles had front pockets sewn shut; another version of the same style with a real pocket was measured instead", owner: "Field team" },
+    { title: "Waist size is below the US median for women", detail: "All pairs have a 32-inch waistband, smaller than the median women's waist in the US, so women's pockets in larger sizes may differ", owner: "Analysis" },
+  ],
+  nextSteps: [
+    "Measure the same styles in two more sizes to check whether the gap holds",
+    "Add the largest phone that fits each front pocket",
+    "Repeat the study in 2019 with the same 20 brands",
+  ],
+})
+
 // 第四轮:三轮改结构都没翻,剩下的是内容讲什么(经营指标 / 一项测量研究)。S-birds 销售月报的结构、数字、语言、
 // 「月报」都不动,只把讲的东西换成城市鸟类观测:销售额→观测到的只数,地区→观测区,渠道→观测方式,商品→鸟种
 write("S-birds", {
