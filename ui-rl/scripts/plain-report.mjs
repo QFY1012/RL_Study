@@ -54,7 +54,19 @@ const SYSTEM = PROMPTS[arg("prompt", "data")]
 if (!SYSTEM) throw new Error(`--prompt is one of ${Object.keys(PROMPTS).join(", ")}`)
 const data = fs.readFileSync(dataFile, "utf8")
 
+// 中转端点同时有几个长回复时,有时提前结束流(只有思考没有正文,或 HTML 写到一半),结束原因照样是 stop:
+// 回复里没有完整的 html 代码块就重来,最多 TRIES 次
+const TRIES = 3
 async function one(k) {
+  for (let i = 1; ; i++) {
+    try { return await attempt(k) } catch (e) {
+      if (i === TRIES) throw e
+      console.log(`${e.message};重试(第 ${i + 1} 次)`)
+    }
+  }
+}
+
+async function attempt(k) {
   const t = Date.now()
   const messages = [{ role: "system", content: SYSTEM }, { role: "user", content: data }]
   // 流式收回复:模型先想很久时,不流式的连接 100 秒左右没有字节就被端点前面的 Cloudflare 断开(HTTP 524);
@@ -82,7 +94,7 @@ async function one(k) {
   }
   fs.writeFileSync(path.join(out, `${TAG}-${k}.json`), JSON.stringify({ model: MODEL, messages, reply, usage, finish }, null, 1))
   const html = reply.match(/```html\s*\n([\s\S]*?)```/)?.[1]
-  if (!html) throw new Error(`第 ${k} 版:回复里没有 html 代码块(结束原因 ${finish})`)
+  if (!html) throw new Error(`第 ${k} 版:回复里没有完整的 html 代码块(${reply.length} 字符,结束原因 ${finish},${Math.round((Date.now() - t) / 1000)} 秒)`)
   fs.writeFileSync(path.join(out, `${TAG}-${k}.html`), html)
   console.log(`第 ${k} 版:${html.length} 字符,${Math.round((Date.now() - t) / 1000)} 秒,token ${JSON.stringify(usage)}`)
 }
