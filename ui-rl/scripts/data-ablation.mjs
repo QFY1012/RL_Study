@@ -8,6 +8,7 @@
 //   P-summary 原始数据行换成月报写法(算好的指标、分组表、各品牌表和一段结论,英文,标题不变)。
 //   S0 销售月报原样;S-en 整份译成英文;S-thesis 标题换成一句论点;S-desc 加上 Pudding 那样的数据说明和每个字段的说明。
 //   第二轮:P-genre 汇总版套上月报体裁;P-blocks 汇总版再加几块并列的表;S-single 销售只留华南退货一条主线。
+//   第三轮:P-small 并列多块版去掉 20 个品牌的大表;S-bigtable 销售加一张 36 家门店的表。
 import fs from "node:fs"
 import path from "node:path"
 
@@ -92,7 +93,7 @@ write("P-summary", pSummary)
 write("P-genre", { ...pSummary, title: "Denim Category Report, August 2018", company: "Northline Retail Research (fictional)", period: "2018-06-29 to 2018-08-06" })
 const stretch = (r) => /spandex|elastane|lycra/i.test(r.fabric ?? "")
 const bands = ["<$50", "$50 - $99", "$100 - $149", "$150+"], band = (p) => (p < 50 ? 0 : p < 100 ? 1 : p < 150 ? 2 : 3)
-write("P-blocks", {
+const pBlocks = {
   ...pSummary,
   priceBands: bands.map((b, i) => {
     const rows = pick((r) => band(r.price) === i)
@@ -106,7 +107,25 @@ write("P-blocks", {
     const rows = pick((r) => r.menWomen === g)
     return { group: g, depth: avg(rows, "maxHeightBack"), width: avg(rows, "maxWidthBack"), shallowestDepth: avg(rows, "minHeightBack") }
   }),
+}
+write("P-blocks", pBlocks)
+// 第三轮:两轮下来页面类型都没翻,剩下的差别是有没有一张占主导的大表(口袋的 20 个品牌;销售全是 4–5 行的小表)
+// P-small 并列多块版去掉 20 个品牌那张大表;S-bigtable 销售原样再加一张 36 家门店的表(虚构,数随种子固定)
+const { brands: _, ...pSmall } = pBlocks
+write("P-small", pSmall)
+let seed = 7
+const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+const cities = { 华东: ["上海", "杭州", "南京", "苏州", "宁波", "合肥", "无锡", "温州", "济南"], 华北: ["北京", "天津", "石家庄", "太原", "青岛", "郑州", "大连"], 华南: ["广州", "深圳", "东莞", "佛山", "南宁", "厦门", "福州"], 西南: ["成都", "重庆", "昆明", "贵阳", "绵阳"], 其他: ["武汉", "长沙", "西安", "沈阳", "哈尔滨", "兰州", "乌鲁木齐", "南昌"] }
+const stores = sales.regions.flatMap((r) => {
+  const list = cities[r.name], weights = list.map(() => 0.5 + rand()), total = weights.reduce((a, b) => a + b, 0)
+  return list.map((city, i) => ({
+    store: `${city}店`, region: r.name,
+    sales: Math.round((r.sales * weights[i]) / total * 10) / 10,
+    mom: Math.round((r.mom + (rand() - 0.5) * 0.12) * 1000) / 1000,
+    returnRate: Math.round((r.returnRate + (rand() - 0.5) * 0.02) * 1000) / 1000,
+  }))
 })
+write("S-bigtable", { ...sales, stores })
 
 write("S0", sales)
 write("S-en", {
