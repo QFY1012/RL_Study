@@ -119,14 +119,16 @@
 | 一节,简单提示词 | `GEN_PROMPT=plain node scripts/run.mjs ...`(中转 deepseek-v4.1-flash):只给框的大小和内容项,不给页面字号、配色、网格和截图;图片照给。只按 `fit`、`text`、`images`、`overflow` 打回重写(`REVISED`) | 51 节里只有 14 节通过检查,失败的多是 `seam`:模型给自己画背景,和上下两节接不上。样子是典型的 AI 风格(衬线大标题、卡片、渐变),单看还行,放进原页面就不合群。「合不合页面」比「好不好看」客观 |
 | 整个首页,只给描述 | `node scripts/plain-site.mjs <out> --list <名单>`:只给域名、`<title>` 和 meta description | 中转端点和官方 deepseek-flash 都写得很像样,而且风格统一(米色底、斜体衬线强调、等宽小标签、深色按钮)。内容是模型自己编的 |
 | 整个首页,给全部真实文字 | `node scripts/plain-site.mjs <out> --text <v18 的运行目录> --list <名单>`:再给真实首页的每一条文字(按阅读顺序,来自 `sections.json`),要求一字不改、不加自己的字 | 官方 deepseek-flash 照样像样。用上的文字条数:monotonomo 53/57、duties 83/83、standard-projects 123/123、useportal 84/87、nelsoncash 54/54、canvas 116/116、gonefishing 65/66、imprint 67/69。只有图片多的 nelsoncash 排成了一张清单 |
+| 整个首页,同样的文字改成 JSON | `node scripts/plain-site.mjs <out> --text <v18 的运行目录> --json --list <名单>`:内容和上一行一字不差,只是网站名、标题、描述和全部文字写成一个 JSON 对象(`{website, title, description, text:[{kind, text, href}]}`),像报告数据那样给 | 中转 deepseek-v4.1-flash,同一端点上清单和 JSON 各跑一遍:两种都是像样的落地页,看不出差别,没有一版变成后台面板;用上的文字条数也差不多(JSON 版 monotonomo 53/57、duties 82/83、useportal 84/87、imprint 67/69,其余全用上)。所以 JSON 这个格式本身不会把页面带向后台面板,报告难看是内容的事(一堆指标、表格、步骤) |
 
-结论:「内容是模型自己编的才好看」这个猜测被第三个实验否定了。模型在网站上的审美来自对落地页这种结构的熟悉,不来自自由发挥。同一个模型写没见过结构的报告就难看(见 `ui-rl/README.md`「只给数据让模型写报告」)。所以网站数据收集建议暂停,待定(见 `PLAN.md` 第 9 条)。
+结论:「内容是模型自己编的才好看」这个猜测被第三个实验否定了;第四个实验说明 JSON 格式也不是原因。模型在网站上的审美来自对落地页这种结构的熟悉,不来自自由发挥。同一个模型写没见过结构的报告就难看(见 `ui-rl/README.md`「只给数据让模型写报告」)。所以网站数据收集建议暂停,待定(见 `PLAN.md` 第 9 条)。
 
 数据(共约 195MB)只在跑实验的容器里,没有上传到 Drive(Drive 的工具只能内联上传,传不了这么多文件),容器回收后就没了:
 - `/home/user/ui-rl-scratch/data-collection/v19-plain/`(一节的实验)
 - `site-plain/`(只给描述,中转端点)
 - `site-brief/`(只给描述,官方 flash)
 - `site-text/`(给全部文字,官方 flash)
+- `site-text-relay/`、`site-json-relay/`(给全部文字,清单 / JSON,中转端点;`site-json-relay/compare/` 是真网站、清单、JSON 三栏,`overview.jpg` 是 8 个站的前一截)
 - `site-plain/compare/` 是真网站和生成版并排;`site-text/compare/` 是真网站、只给描述、给全部文字三张并排
 
 名单就是上面的网站(首页网址),要的话按表里的命令重跑。
