@@ -10,10 +10,10 @@ export async function readPage(page) {
   // wrapper (one child in flow), split the same way; an element whose children sit
   // side by side (columns, a grid of cards) is one section, however tall, as cutting
   // it would cut a band apart. What is placed out of flow (absolute or fixed) lies over
-  // the stack, not in it: a section's background layer, a header laid over the page.
-  // But a wrapper with content placed over its one child (a heading over a picture) is
-  // a band with it, not gone through. A child shorter than MIN with nothing in it (a
-  // spacer, a rule) is no section. Each section gets data-sec="<i>".
+  // the stack, not in it: a section's background layer, a header laid over the page;
+  // content placed over a section (a heading over a picture) is a part of it (below).
+  // A child shorter than MIN with nothing in it (a spacer, a rule) is no section. Each
+  // section gets data-sec="<i>".
   const MIN = 120, MAX = 1800
   const { secs: sections, assets } = await page.evaluate(({ MIN, MAX }) => {
     // read afresh (site.mjs reads again once the page has come to rest)
@@ -42,19 +42,9 @@ export async function readPage(page) {
       }))
     }
     const empty = (el) => !el.textContent.trim() && !el.querySelector("img, svg, video, canvas, picture, iframe")
-    // content placed (absolutely) over el's box, more than a speck of it (not a
-    // screen-reader-only label, nor one moved off the page)
-    const over = (el) => {
-      const R = el.getBoundingClientRect()
-      return kids(el).some((c) => {
-        if (getComputedStyle(c).position !== "absolute" || empty(c)) return false
-        const r = c.getBoundingClientRect()
-        return Math.min(r.right, R.right) - Math.max(r.left, R.left) > 2 && Math.min(r.bottom, R.bottom) - Math.max(r.top, R.top) > 2
-      })
-    }
     const split = (el) => {
       const k = inFlow(el)
-      if (!k.length || !stacked(k) || (k.length === 1 && over(el))) return [el]
+      if (!k.length || !stacked(k)) return [el]
       return k.flatMap((c) => {
         const h = c.getBoundingClientRect().height
         if (h > MAX || inFlow(c).length === 1) return split(c)
@@ -78,7 +68,8 @@ export async function readPage(page) {
     // What lies over a section from outside it. A page's framework can put part of a
     // section's content in a layer of its own elsewhere in the document, placed over the
     // section (vercel's hero picture and its link sit in a fixed layer at the end of
-    // <body>): a reader sees it as the section's, and left out, it would stay over the
+    // <body>; a heading placed over the picture its wrapper holds): a reader sees it as
+    // the section's, and left out, it would stay over the
     // new content when the section is swapped. So a layer placed out of flow (absolute,
     // fixed) outside every section, the outermost such, with something in it to see
     // (text, a picture), is part of the section that at least half of what it shows lies

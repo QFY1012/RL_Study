@@ -75,11 +75,17 @@ const takeOut = (page, s) => page.evaluate((sec) => document.querySelector(`[dat
 // is, then with the content hidden, then with a host as a generated section would have
 // over the element's own box, filled with one colour (each shot of the same band: a
 // band and a full-page capture of the same place need not agree, a frosted panel
-// rendering a little differently): wherever hiding the content changes the band at
-// all, the original's content showed; wherever the host then changes it plainly (by
-// more than 32 in some channel: the colour itself, not the little of it a frosted
-// panel elsewhere lets through), new content would show. The band starts 400px above
-// and below and is doubled until nothing differs at its edges.
+// rendering a little differently): wherever hiding the content changes the band (by
+// more than NOISE), the original's content showed; wherever the host then changes it
+// plainly (by more than 32 in some channel: the colour itself, not the little of it a
+// frosted panel elsewhere lets through), new content would show. The band starts
+// 400px above and below and is doubled until nothing differs at its edges.
+// NOISE: hiding anything can change how the browser splits the page into layers, and
+// what it then paints into a different layer can come out a few levels apart where
+// nothing about it changed (cloudflare's dot grid, an SVG pattern the height of the
+// page behind every section: up to 14 apart across the whole page when one section is
+// hidden). Content that shows differs by more than that.
+const NOISE = 16
 export async function measure(page, s, W, H, differs) {
   for (let m = 400; ; m *= 2) {
     const top = Math.max(0, s.own.y - m), bottom = Math.min(H, s.own.y + s.own.h + m)
@@ -95,7 +101,7 @@ export async function measure(page, s, W, H, differs) {
       await takeOut(page, s)
       await unhide(page)
     }
-    const found = [await differs(hidden, top, shown), await differs(probed, top, hidden, 32)].filter(Boolean)
+    const found = [await differs(hidden, top, shown, NOISE), await differs(probed, top, hidden, 32)].filter(Boolean)
     if (!found.length) return s.own
     const x0 = Math.min(...found.map((d) => d.x)), y0 = Math.min(...found.map((d) => d.y))
     const x1 = Math.max(...found.map((d) => d.x + d.w)), y1 = Math.max(...found.map((d) => d.y + d.h))
@@ -106,7 +112,7 @@ export async function measure(page, s, W, H, differs) {
 
 // The section, other than s, whose content shows inside s's box (measure), if any:
 // within the box, the page as it is against the page with that section's content
-// hidden. Sections more than 1500px from the box are not looked at.
+// hidden (by more than NOISE). Sections more than 1500px from the box are not looked at.
 export async function crowded(page, snap, s, differs) {
   const clip = { x: s.box.x, y: s.box.y, width: s.box.w, height: s.box.h }
   const shown = await page.screenshot({ clip, fullPage: true, timeout: 60000 })
@@ -116,7 +122,7 @@ export async function crowded(page, snap, s, differs) {
     await hide(page, [o.i])
     let hidden
     try { hidden = await page.screenshot({ clip, fullPage: true, timeout: 60000 }) } finally { await unhide(page) }
-    if (await differs(hidden, s.box.y, shown)) return o.i
+    if (await differs(hidden, s.box.y, shown, NOISE)) return o.i
   }
   return null
 }
