@@ -105,7 +105,7 @@
 
 1. Mobbin 的网站库(Sites,496 个，每个带网址):登录后从它的列表接口 `api/discover/fetch-discover-page-sites` 一页页取(每页 24 个，每页间隔 4 秒)。账号不写进仓库。
    Awwwards 拒绝云端机器的连接(连接被对方重置),在自己的电脑上取:`node scripts/awwwards.mjs <out-dir>`(要 `npm install` 和 Google Chrome)。它在屏幕上开一个 Chrome,逐页翻 Sites of the Day 和全部网站的列表，再打开每个条目页取 "Visit" 链接:列表一次一页，条目页同时开 `JOBS`(默认 4)个标签页，每个标签页翻下一页前停 `PAUSE_MS`(默认 1500)。Awwwards 问"你是不是人"时在窗口里回答，脚本会等。中断后再运行从断处接着取。交回的是 `<out-dir>/awwwards.txt`。
-2. `node scripts/galleries.mjs <out-dir> [收录站]...`:从收录站的站点地图读出每个条目页，取出条目页上指向被收录网站的链接。现在有 CSS Nectar(约 8000 条)、Minimal Gallery(约 3000 条)、SaaS Landing Page(约 850 条);新的先取(老的更可能已经关站)。每个收录站同时 `JOBS`(默认 5)个请求，每个之后停 `PAUSE_MS`(默认 300)。已取过的条目不重取。
+2. `node scripts/galleries.mjs <out-dir> [收录站]...`:从收录站的站点地图读出每个条目页，取出条目页上指向被收录网站的链接。现在有 Minimal Gallery(约 3000 条)、SaaS Landing Page(约 850 条)。CSS Nectar 试过，收的网站大多不好看，不用。新的先取(老的更可能已经关站)。每个收录站同时 `JOBS`(默认 5)个请求，每个之后停 `PAUSE_MS`(默认 300)。已取过的条目不重取。
 3. `node scripts/domains.mjs <out> --list <来源>=<文件>... [--tranco <top-1m.csv>]`:合并、去重、逐个访问首页，只留下返回 200 的英文 HTML 首页(有标题，不是停放页、验证墙、错误页、登录页、成人或博彩站)。一个品牌只留一个(google.com 和 google.co.uk 算一个;跳转到别的域名的算那个域名;framer.website 这类谁都能开站的托管域名按完整主机名算)。名单里的网址一律取它的首页。凑够 `TARGET`(默认 4500)个就停。产出 `<out>.tsv`(来源、排名、域名、网址、语言、标题)、`<out>.rejected.tsv`(没收的和原因)、`<out>.txt`(给 `run.mjs --list` 用)。
 
 都要 `NODE_USE_ENV_PROXY=1`。名单是数据，不进 git,放在 `/home/user/ui-rl-scratch/domains/`。

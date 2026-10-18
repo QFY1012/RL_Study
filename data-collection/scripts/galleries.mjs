@@ -11,11 +11,6 @@ import fs from "node:fs"
 // Per gallery: its sitemaps (or a sitemap index, whose sitemaps are those matching `maps`), what
 // in them is an entry page, and the link on an entry page to the site it shows.
 const GALLERIES = {
-  cssnectar: {
-    index: "https://cssnectar.com/sitemap_index.xml", maps: /site-sitemap\d*\.xml$/,
-    entry: /^https:\/\/cssnectar\.com\/css-gallery-inspiration\/[^/]+\/$/,
-    site: /<a [^>]*href="([^"]+)"[^>]*class="gray-btn"/,
-  },
   "minimal-gallery": {
     index: "https://minimal.gallery/wp-sitemap.xml", maps: /wp-sitemap-posts-post-\d+\.xml$/,
     entry: /^https:\/\/minimal\.gallery\/[^/]+\/$/,
