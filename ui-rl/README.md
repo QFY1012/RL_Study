@@ -124,7 +124,7 @@
 
 控制变量那次 5 份数据(S0、S-bare、S-mix、P0、P-small)各 editorial、design 3 版,共 30 页,两两成对标:两版并排,先选哪版好(左明显好 / 左稍好 / 差不多 / 右稍好 / 右明显好),再只圈让你这样选的那几处(两边都能圈,标「好」或「问题」,各写一句)。用途:看评委和评分标准在同一对上选得是不是一样、理由是不是你看到的那几处;以后当写评分标准的种子对。
 
-- 选哪些对:每份数据 editorial 之间 3 对、design 之间 3 对(训练时要分的是同一个提示词出的相近几版,评委在这上面还没测过),editorial-1 对 design-1 1 对(差别早有结论,只为记下好在哪),共 35 对;几份数据轮流排,标到一半停下每份都有;最后 3 对是前面出现过的对左右调换(`repeat`),看自己前后判得一不一致。
+- 选哪些对:每份数据 editorial 之间 3 对、design 之间 3 对(训练时要分的是同一个提示词出的相近几版,评委在这上面还没测过),editorial-1 对 design-1 1 对(差别早有结论,只为记下好在哪),共 35 对;几份数据轮流排,标到一半停下每份都有;再加 2 对评委和预设结论不一致的(P0 的 editorial-2 对 design-1、design-3:按合并标准两种顺序都判 design 赢,`--extra`);最后 3 对是前面出现过的对左右调换(`repeat`),看自己前后判得一不一致。共 40 对。
 - 准备:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(pages 和 pairs)、`labels/report-marks-key.json`(页面编号对应哪份数据的哪一版;标注页不发布它)。页面编号看不出是哪种提示词,左右随机。
 - 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每对 `{pair, set, left, right, repeat?, choice, items:[{side,x,y,w,h,kind:"good"|"bad",comment}], note, seconds}`,坐标是 1440px 宽截图的像素。
 
@@ -233,6 +233,21 @@ f15 的 JSON 约 1,950 字(其中汉字 1,653),提示词 3,428 token,不算长�
 - 选 A 的比例四种判法都在一半上下(39–47/80),没有明显的先后偏差。
 
 数据(只在容器里):`/home/user/ui-rl-scratch/contrast-rubric/`(`rubrics/` 评分表,`rubrics.md` 给人看的版本,`judge/<判法>/` 每次判定,`summary.json`,`run.log`)。
+
+### 合成一套通用标准(Auto-Rubric as Reward 的做法,2026-10-18)
+
+`scripts/rubric-set.mjs`:写标准时不许写「完整呈现全部数据」(editorial 不列原始表不算错,你定的)和只关于装饰风格的条,只写截图上看得出的条。种子集 S0、P0、S-mix 各取 editorial-k 对 design-k 3 对写标准,按标准判回这一对(两种顺序),判错就带着评委理由重写(最多 2 次);9 对都一次通过。合成 7 个主题 30 条要点:开篇结论与阅读主线、章节结构与可扫读性、关键指标与对比口径、图表解读与数据呈现、异常识别与问题归因、行动建议与后续跟踪、数据可信度与呈现边界。
+
+| 判法 | 种子集其余 6 对 × 3 份(36 次) | 测试集 S-bare、P-small 全部 9 对 × 2 份(36 次) |
+|---|---|---|
+| none 不给标准 | 23(两种顺序都对 8/18) | 32(15/18) |
+| merged 合并后的标准 | 32(16/18) | 36(18/18) |
+
+- 选 A 的比例都在一半上下(16–19/36),没有先后偏差。
+- merged 判错的 4 次全是 P0 的 editorial-2(最短的一版,4183px)对 design-1、design-3,两种顺序都判 design 赢,理由一致:design 版开头就给关键数字、小标题写结论、有品牌层面的证据,editorial-2 开篇没数字、标题只是类目名。这可能是预设「editorial 都更好」错了,已加进标注页让你判。
+- 合并后的标准里还留着销售数据才有的条(环比同比、责任方、下一步清单),通用规则没完全拦住;标准整体偏向「有结论、有叙述」的写法,有认体裁的风险,要用同类之间的对(标注页)才看得出。
+
+数据(只在容器里):`/home/user/ui-rl-scratch/rubric-set/`(`seed/` 每对的标准和验证,`merged.json`,`rubric-set.md` 给人看的版本,`judge/{none,merged}/`,`summary.json`,`run.log`)。
 
 ### 数据位置
 

@@ -1,6 +1,6 @@
 """给标注页 labels/report-marks.html 准备页面和页面对:控制变量那次(data-ablation.mjs)的报告页面,每份数据 editorial、design 各 3 版。
 
-    python3 ui-rl/scripts/report-marks.py <实验目录> [--sets S0,S-bare,S-mix,P0,P-small]
+    python3 ui-rl/scripts/report-marks.py <实验目录> [--sets S0,S-bare,S-mix,P0,P-small] [--extra P0:editorial-2:design-1,...]
 
 实验目录里 gen/<集>/{editorial,design}-<k>.png 是 plain-report.mjs 截的 1440px 宽整页图。写出:
   labels/report-marks-pages/<页面>.webp   整页截图(webp,原尺寸);不进 git,标注页发布时一起传
@@ -9,6 +9,7 @@
 页面编号是「<集>-<a..f>」(组内顺序打乱,固定种子),看编号看不出是哪种提示词。每份数据比 7 对:
 editorial 之间 3 对、design 之间 3 对(训练时要分的是同一个提示词出的相近几版,评委在这上面还没测过),
 editorial-1 对 design-1 1 对(差别早有结论,只为记下好在哪)。几份数据轮流排(标到一半停下,每份都有),左右随机;
+--extra 再加几对要你判的(<集>:<一版>:<另一版>,比如评委和预设结论不一致的对),排在轮流的对后面;
 最后加 3 对前面出现过的对,左右调换(repeat 记着是哪一对),看自己前后判得一不一致。
 """
 import json
@@ -51,6 +52,12 @@ for n in range(max(len(v) for v in per_set.values())):
             a, b = per_set[s][n]
             pairs.append({"id": f"{s}-{n + 1}", "set": s, "left": pid_of[(s, a)], "right": pid_of[(s, b)]})
             print(f"{s}-{n + 1}", a, "|", b)
+extra = [x.split(":") for x in args[args.index("--extra") + 1].split(",")] if "--extra" in args else []
+for n, (s, a, b) in enumerate(extra, 1):
+    if rng.random() < 0.5:
+        a, b = b, a
+    pairs.append({"id": f"{s}-x{n}", "set": s, "left": pid_of[(s, a)], "right": pid_of[(s, b)]})
+    print(f"{s}-x{n}", a, "|", b)
 for p in rng.sample(pairs[: len(pairs) // 2], 3):
     pairs.append({"id": f"{p['id']}-r", "set": p["set"], "left": p["right"], "right": p["left"], "repeat": p["id"]})
     print(f"{p['id']}-r 重复 {p['id']},左右调换")

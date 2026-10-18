@@ -423,25 +423,37 @@
    "right": "P-small-e"
   },
   {
-   "id": "S0-3-r",
-   "set": "S0",
-   "left": "S0-b",
-   "right": "S0-c",
-   "repeat": "S0-3"
+   "id": "P0-x1",
+   "set": "P0",
+   "left": "P0-a",
+   "right": "P0-b"
   },
   {
-   "id": "S-mix-1-r",
+   "id": "P0-x2",
+   "set": "P0",
+   "left": "P0-f",
+   "right": "P0-a"
+  },
+  {
+   "id": "S-mix-2-r",
+   "set": "S-mix",
+   "left": "S-mix-e",
+   "right": "S-mix-f",
+   "repeat": "S-mix-2"
+  },
+  {
+   "id": "S-mix-4-r",
    "set": "S-mix",
    "left": "S-mix-d",
-   "right": "S-mix-c",
-   "repeat": "S-mix-1"
+   "right": "S-mix-a",
+   "repeat": "S-mix-4"
   },
   {
-   "id": "S0-1-r",
-   "set": "S0",
-   "left": "S0-d",
-   "right": "S0-e",
-   "repeat": "S0-1"
+   "id": "S-bare-1-r",
+   "set": "S-bare",
+   "left": "S-bare-d",
+   "right": "S-bare-e",
+   "repeat": "S-bare-1"
   }
  ]
 }
