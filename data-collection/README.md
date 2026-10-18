@@ -140,8 +140,10 @@
 - 换一节(`COUNT=3 GEN_MODELS=deepseek-v4.1-flash node scripts/run.mjs <out> <文章网址>...`):4 篇里 3 篇出了 7 对,全过检查;walk 整页一个滚动容器,分不出候选节。模型照着周围页面的样子补一节,生成版和原版很像,看不出谁好,标签不可靠。
 - 整页重写(`node scripts/plain-site.mjs <out> --text <run 的目录> --images <文章网址>...`):给全部文字和图片(按阅读顺序,图片给网址),从头写一整页。birthday-effect、kids-books、language 各两版(language 一版中转 524 两次,没有):全是像样的长文(衬线标题、窄栏正文、图片配说明),没有一版是后台面板。Pudding 的内容是叙事文字,不是一堆指标和表格,所以带不出模型的毛病;language 的图是内联 SVG,没有网址,给不了。
 - 结论:「数据报告」这个题材不是问题,问题是输入是结构化数据。用 Pudding 当原版,要给模型的应该是它背后的数据,而不是写好的文字。
+- 只给数据(`ui-rl/scripts/pudding-data.mjs` 把 github.com/the-pudding/data 里一篇的 CSV 和 README 转成 `{title, files:[{file, about, columns, rows}]}`;生日效应 57 万行按 `days_from_birthday` 汇总):pockets、makeup-shades、boy-bands、birthday-effect,`plain-report.mjs` 的 design、editorial 各两版,pi agent(`pi-report.mjs`)各一版。design 版不少不像后台面板(结论式标题、图配说明,只在开头一排数字),editorial 是杂志长文。pi agent:makeup-shades、birthday-effect、pockets 写完(pockets 重跑一次),boy-bands 两次都在第一轮输出撞上 65k token 上限,没写出页面。Pudding 原版多是滚动叙事,整页截图截不全(pockets 大片空白,boy-bands 是全屏应用),截图不能直接和生成版配对。
+- 控制变量:为避开中转 524,`plain-report.mjs` 改成流式并在回复不完整时重试。用改后的脚本重跑 sales、survey、abtest、features 的 design(`design-s-*`),和之前一次性返回的 `design-r-*` 一样是后台面板(`/home/user/ui-rl-scratch/report-plain/compare/stream-check.jpg`),所以请求方式不是原因。但两批数据之间还有好几处不同,没拆开:中文 / 英文、约 3KB / 24–147KB、七块算好的指标和写好的结论 / 一两张原始数据表、论点式标题、列说明、内部月报 / 大众话题。
 
-数据只在容器里:`/home/user/ui-rl-scratch/report-sources/`(`pudding-urls.txt` 网址清单;`pilot/` 换一节的结果和各篇的 `sections.json`;`whole-1/`、`whole-2/` 整页重写;`compare-*.jpg` 原版和重写并排;`overview*.jpg` 各来源的页面截图)。
+数据只在容器里:`/home/user/ui-rl-scratch/report-sources/`(`pudding-urls.txt` 网址清单;`pilot/` 换一节的结果和各篇的 `sections.json`;`whole-1/`、`whole-2/` 整页重写;`compare-*.jpg` 原版和重写并排;`overview*.jpg` 各来源的页面截图;`data-json/` 只给数据的 JSON;`data-gen/` 只给数据生成的页面,`data-gen/pi/` 是 pi agent 的工作目录,`data-gen/compare-*.jpg` 是原版、design、editorial、pi agent 并排)。
 
 ## 依赖
 
