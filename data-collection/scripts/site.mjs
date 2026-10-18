@@ -2,7 +2,7 @@
 // then off and it holds still), read its sections, screenshot it, and for each chosen
 // section have a model redesign it (generate.mjs), swap the design in (swap.mjs),
 // screenshot it, put the pair together and check it, and send it back to the model
-// while it fails a check, up to ROUNDS times. Everything is
+// while it fails a check it is held to (generate.mjs, REVISED), up to ROUNDS times. Everything is
 // taken from the same page, so what the model is given is exactly what the original
 // image shows. The chosen sections go through this each on its own, at once; the page
 // takes one swap at a time.
@@ -30,7 +30,7 @@ import path from "node:path"
 import { chromium } from "playwright-core"
 import { CHROME, CONTEXT, load } from "./browser.mjs"
 import { readPage, pictures } from "./read-page.mjs"
-import { choose, start, revision, turn } from "./generate.mjs"
+import { choose, start, revision, turn, REVISED } from "./generate.mjs"
 import { hide, unhide, shoot, swap, measure, crowded } from "./swap.mjs"
 import { images } from "./images.mjs"
 
@@ -151,7 +151,7 @@ async function section({ s, model }) {
     report.pairs[s.i] = entry
     write("pairs/report.json", report)
     log(`section ${s.i}: ${entry.failed.length ? `FAILED ${entry.failed.join(", ")}` : "ok"} (spill ${r.spill}px of its ${s.box.h}px box, seam ${Object.entries(p.seam).map(([k, v]) => `${k} ${(v * 100).toFixed(1)}%`).join(" ") || "none measured"}; missing text ${c.missingText.length}, missing images ${c.missingImages.length}, broken images ${c.brokenImages.length}, overflowing elements ${c.overflow}, fonts not loaded ${c.fontsMissing.length}; content x ${c.edges ? `${c.edges.left}..${c.edges.right}` : "none"}, original ${s.edges ? `${s.edges.left}..${s.edges.right}` : "none"}, column ${snap.tokens.column.left}..${snap.tokens.column.right})`)
-    if (!entry.failed.length || round === ROUNDS) return
+    if (!entry.failed.some((f) => REVISED.includes(f)) || round === ROUNDS) return
     messages.push(revision(snap, s, entry, p.genJpg))
   }
 }

@@ -13,10 +13,19 @@
 // default deepseek-v4.1-flash,glm-5.3-flash) in turn, starting at a place that
 // depends on the site, so no one model's style marks all generated sections; a
 // revision goes back to the model that made the section, in its conversation.
+// GEN_PROMPT=plain instead gives a short brief with the section's content (its text and
+// images, each as it looks) and its box, and nothing of the page's design: no
+// screenshot, fonts, type scale, colors, grid or backdrop. That is how the model designs
+// with no style to go by. Only the checks such a brief can be held to are sent back
+// (REVISED).
 // Endpoint and key come from JUDGE_URL / DEEPSEEK_API_KEY (source
 // ~/.config/ui-rl/judge.env); run with NODE_USE_ENV_PROXY=1.
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
 export const MODELS = (process.env.GEN_MODELS ?? "deepseek-v4.1-flash,glm-5.3-flash").split(",").map((m) => m.trim()).filter(Boolean)
+const PLAIN = process.env.GEN_PROMPT === "plain"
+if (process.env.GEN_PROMPT && !PLAIN) throw new Error(`GEN_PROMPT is plain or unset, not ${process.env.GEN_PROMPT}`)
+// the failed checks that send a section back to its model
+export const REVISED = PLAIN ? ["fit", "text", "images", "overflow"] : ["fit", "seam", "text", "images", "overflow", "fonts", "grid"]
 const KEY = process.env.DEEPSEEK_API_KEY
 if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
 // a request that has not been answered in this long is given up and retried
@@ -119,16 +128,35 @@ Content, in reading order:
 ${items.join("\n")}`
 }
 
+const plainSystem = `You are a web designer. Design one section of a website for a 1440px-wide desktop page, from its content.
+
+Output one HTML fragment: a <style> block followed by the markup. Rules:
+- It is inserted into a shadow root at the full width of its slot. Style the outer box with :host or a wrapper class, never html or body.
+- Use every text item exactly as given (same words, same case); do not add, drop or rewrite text. Links and buttons keep their href.
+- Images, illustrations and icons are given by a src (a URL, or asset:<n>); use them as <img src="..."> or as a CSS url() with exactly that src. You may drop icons, not images or illustrations.
+- The section's box is exactly the width and height given. Everything has to fit inside it, with nothing cut off.
+- Plain CSS only: no frameworks, no external stylesheets, scripts or fonts, no position: fixed.
+Reply with the fragment inside one \`\`\`html fenced block and nothing else.`
+
+const plainUser = (s) => `The section's box: ${s.box.w}px wide and exactly ${s.box.h}px tall.
+
+Content, in reading order:
+${s.items.map((t, j) => t.src
+    ? `${j + 1}. ${t.kind}: ${t.src} (alt ${JSON.stringify(t.alt)}, aspect ratio ${t.aspect})`
+    : `${j + 1}. ${t.kind}: ${JSON.stringify(t.text)}${t.href ? ` → ${t.href}` : ""}${t.clamped ? " (long: you may cut it off with an ellipsis)" : ""}`).join("\n")}`
+
 // The first messages of a section's conversation: the text above, then the screenshot
 // of the page around the section and each image as it looks (site.mjs, looks/<i>.json),
-// as image parts.
+// as image parts; with GEN_PROMPT=plain, the plain brief and the images.
 const image = (url) => ({ type: "image_url", image_url: { url } })
 export const start = (snap, s, look) => {
   const shown = s.items.map((t, j) => [t, j]).filter(([, j]) => look.items[j])
-  return [{ role: "system", content: system }, { role: "user", content: [
-    { type: "text", text: user(snap, s) },
-    { type: "text", text: `The page around the section, at half size. The dashed outline (${s.box.w}x${s.box.h}px) is the section's box, with its content removed and its backdrop showing: your fragment goes there. The page above and below stays as it is.` },
-    image(look.slot),
+  return [{ role: "system", content: PLAIN ? plainSystem : system }, { role: "user", content: [
+    ...(PLAIN ? [{ type: "text", text: plainUser(s) }] : [
+      { type: "text", text: user(snap, s) },
+      { type: "text", text: `The page around the section, at half size. The dashed outline (${s.box.w}x${s.box.h}px) is the section's box, with its content removed and its backdrop showing: your fragment goes there. The page above and below stays as it is.` },
+      image(look.slot),
+    ]),
     ...(shown.length ? [{ type: "text", text: "How the images, illustrations and icons look, each as it appears on the page:" }] : []),
     ...shown.flatMap(([t, j]) => [{ type: "text", text: `${j + 1}. ${t.kind} ${t.src.length > 100 ? t.src.slice(0, 100) + "..." : t.src}` }, image(look.items[j])]),
   ] }]
@@ -137,23 +165,24 @@ export const start = (snap, s, look) => {
 // What the model is told when its section failed a check (site.mjs, the pair's
 // checks: it does not fit its box, shows a seam, leaves out or changes text, leaves
 // out an image, runs past the sides, uses a face the page has not loaded or leaves the
-// page's grid the original keeps to), with how it rendered: the generated image at
+// page's grid the original keeps to; with GEN_PROMPT=plain, only those in REVISED), with how it rendered: the generated image at
 // half size, with the page above and below. Only these, which are not matters of
 // taste, are sent back.
 export const revision = (snap, s, p, rendered) => {
   const h = s.box.h, col = snap.tokens.column
+  const failed = p.failed.filter((f) => REVISED.includes(f))
   const wrong = []
-  if (p.failed.includes("fit")) wrong.push(`your content reaches ${p.spill}px past the top or bottom edge of the ${h}px box: everything has to fit inside ${h}px, with nothing cut off`)
-  if (p.failed.includes("seam")) {
+  if (failed.includes("fit")) wrong.push(`your content reaches ${p.spill}px past the top or bottom edge of the ${h}px box: everything has to fit inside ${h}px, with nothing cut off`)
+  if (failed.includes("seam")) {
     const sides = Object.entries(p.seam).filter(([, v]) => v > 0.02).map(([side, v]) => `${side} (${Math.round(v * 100)}% of it)`)
     wrong.push(`a visible line runs along the ${sides.join(", ")} edge of the box, where the original joins the page with none: something you paint (a background, panel, border or shadow) meets the edge of the box. The section's backdrop is ${backdrop(s)} and stays under your fragment: leave the outer box unpainted, with panels clear of its edges`)
   }
-  if (p.missingText.length) wrong.push(`these text items are missing or changed: ${p.missingText.map((t) => JSON.stringify(t)).join("; ")}. Every text item has to appear, word for word as given`)
-  if (p.missingImages.length) wrong.push(`these images are not used: ${p.missingImages.join(", ")}. Every image and illustration has to appear, with exactly that src`)
-  if (p.brokenImages.length) wrong.push(`these images did not load: ${p.brokenImages.join(", ")}. Use each src exactly as given`)
-  if (p.overflow) wrong.push(`${p.overflow} elements reach past the left or right edge of the box`)
-  if (p.fontsMissing.length) wrong.push(`these faces are not loaded by the page and fall back to another font: ${p.fontsMissing.join(", ")}. Use only the families, weights and styles the page has loaded`)
-  if (p.offGrid) wrong.push(`your content runs from x ${p.edges?.left} to ${p.edges?.right} of the page, off the page's grid: the sections around keep their content to the column from x ${col.left} to ${col.right} (${col.left - s.box.x}px to ${col.right - s.box.x}px in your box). Start your content's left edge on the column's, or center your layout on the page`)
+  if (failed.includes("text")) wrong.push(`these text items are missing or changed: ${p.missingText.map((t) => JSON.stringify(t)).join("; ")}. Every text item has to appear, word for word as given`)
+  if (failed.includes("images") && p.missingImages.length) wrong.push(`these images are not used: ${p.missingImages.join(", ")}. Every image and illustration has to appear, with exactly that src`)
+  if (failed.includes("images") && p.brokenImages.length) wrong.push(`these images did not load: ${p.brokenImages.join(", ")}. Use each src exactly as given`)
+  if (failed.includes("overflow")) wrong.push(`${p.overflow} elements reach past the left or right edge of the box`)
+  if (failed.includes("fonts")) wrong.push(`these faces are not loaded by the page and fall back to another font: ${p.fontsMissing.join(", ")}. Use only the families, weights and styles the page has loaded`)
+  if (failed.includes("grid")) wrong.push(`your content runs from x ${p.edges?.left} to ${p.edges?.right} of the page, off the page's grid: the sections around keep their content to the column from x ${col.left} to ${col.right} (${col.left - s.box.x}px to ${col.right - s.box.x}px in your box). Start your content's left edge on the column's, or center your layout on the page`)
   return { role: "user", content: [
     { type: "text", text: `Rendered in the page, the section has these problems:\n${wrong.map((w, k) => `${k + 1}. ${w}`).join("\n")}\nThis is how it looks (half size, with the page above and below):` },
     image(rendered),
