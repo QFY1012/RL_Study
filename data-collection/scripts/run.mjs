@@ -1,7 +1,8 @@
 // Runs site.mjs for a list of sites as a pipeline.
 //   node scripts/run.mjs <out-root> <url>...      (or a file of URLs, one per line, via --list <file>)
-// Each site goes to <out-root>/<host>/ and its output to <out-root>/<host>.log; every
-// line is also printed here, prefixed with the host. A site goes through two stages:
+// Each page goes to <out-root>/<name>/ and its output to <out-root>/<name>.log (<name> is the
+// host, with the path after it for a page that isn't the home page); every
+// line is also printed here, prefixed with the name. A site goes through two stages:
 // loading its page, which takes the CPU (with no GPU a heavy page takes about two of
 // the four cores), then the model and the swaps, which take minutes of waiting on the
 // model and next to no CPU (the page's scripts are off). So the two run as a pipeline:
@@ -29,7 +30,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 // One site; loaded() is called once its page is loaded (site.mjs says "loaded") or it
 // ends, whichever comes first.
 function site(url, loaded) {
-  const host = new URL(url).hostname.replace(/^www\./, "")
+  // a home page is named by its host; a page deeper in a site by its host and path (pudding.cool_2025_04_birthday-effect)
+  const u = new URL(url)
+  const host = [u.hostname.replace(/^www\./, ""), ...u.pathname.split("/").filter(Boolean)].join("_")
   const dir = path.join(root, host)
   fs.rmSync(dir, { recursive: true, force: true })
   const log = fs.createWriteStream(`${dir}.log`)
