@@ -9,6 +9,7 @@
 //   S0 销售月报原样;S-en 整份译成英文;S-thesis 标题换成一句论点;S-desc 加上 Pudding 那样的数据说明和每个字段的说明。
 //   第二轮:P-genre 汇总版套上月报体裁;P-blocks 汇总版再加几块并列的表;S-single 销售只留华南退货一条主线。
 //   第三轮:P-small 并列多块版去掉 20 个品牌的大表;S-bigtable 销售加一张 36 家门店的表。
+//   第四轮:S-birds 销售月报的结构和数字不动,讲的东西换成城市鸟类观测。
 import fs from "node:fs"
 import path from "node:path"
 
@@ -126,6 +127,45 @@ const stores = sales.regions.flatMap((r) => {
   }))
 })
 write("S-bigtable", { ...sales, stores })
+// 第四轮:三轮改结构都没翻,剩下的是内容讲什么(经营指标 / 一项测量研究)。S-birds 销售月报的结构、数字、语言、
+// 「月报」都不动,只把讲的东西换成城市鸟类观测:销售额→观测到的只数,地区→观测区,渠道→观测方式,商品→鸟种
+write("S-birds", {
+  title: "2026 年 9 月城市鸟类观测月报",
+  company: "青禾观鸟会(虚构)",
+  period: sales.period,
+  summary: "9 月共观测到 1,284 只次鸟类,比 8 月多 8.6%,比去年 9 月多 21.3%,主要来自华东区的湿地样点和新记录到的「白腰杓鹬」。华南区连续两个月减少,受伤个体比例升到 6.1%,主要是撞上玻璃幕墙。本地留鸟占 38.2%,比 8 月低 1.4 个点,原因是秋季迁徙的候鸟增多。",
+  kpis: [
+    { label: "观测只次", value: 1284, unit: "只次", mom: 0.086, yoy: 0.213 },
+    { label: "观测记录", value: 18420, unit: "条", mom: 0.052, yoy: 0.174 },
+    { label: "每条记录平均只数", value: 697, unit: "‰", mom: 0.032, yoy: 0.033 },
+    { label: "本地留鸟占比", value: 0.382, unit: "", mom: -0.014, yoy: 0.006 },
+    { label: "受伤个体比例", value: 0.047, unit: "", mom: 0.004, yoy: -0.002 },
+  ],
+  trend: sales.trend.map((t) => ({ month: t.month, birds: t.sales })),
+  regions: sales.regions.map((r) => ({ name: r.name, birds: r.sales, mom: r.mom, share: r.share, injuredRate: r.returnRate })),
+  methods: [
+    { name: "志愿者样线调查", birds: 512, mom: 0.118 },
+    { name: "自动相机", birds: 341, mom: 0.064 },
+    { name: "声纹记录仪", birds: 226, mom: 0.215 },
+    { name: "公园定点观察", birds: 205, mom: -0.031 },
+  ],
+  topSpecies: [
+    { name: "白腰杓鹬", group: "鸻鹬类", birds: 198, records: 1420, note: "8 月底首次记录,首月即第一" },
+    { name: "白鹭", group: "鹭类", birds: 132, records: 1890, note: "" },
+    { name: "红嘴鸥", group: "鸥类", birds: 121, records: 980, note: "中秋前后集中到达" },
+    { name: "麻雀", group: "雀类", birds: 87, records: 4350, note: "" },
+    { name: "珠颈斑鸠", group: "鸠鸽类", birds: 64, records: 2210, note: "华南受伤最多的鸟种" },
+  ],
+  issues: [
+    { title: "华南区玻璃幕墙撞击导致受伤", detail: "华南区受伤个体中 62% 是撞上玻璃幕墙,集中在珠颈斑鸠和白鹭,与 8 月新建的两栋写字楼有关", owner: "保护组" },
+    { title: "迁徙高峰拉低留鸟占比", detail: "中秋前后到达的候鸟占全月观测的 23%,其中留鸟只占 29%", owner: "数据组" },
+  ],
+  nextSteps: [
+    "10 月起在华南区两栋写字楼的玻璃幕墙贴防撞贴纸,月底复盘受伤比例",
+    "11 月候鸟高峰前优先安排白腰杓鹬和红嘴鸥的样点,控制每个样点的志愿者人数在 10 人以内",
+    "声纹记录仪增长最快,10 月再加装两台",
+  ],
+})
 
 write("S0", sales)
 write("S-en", {
