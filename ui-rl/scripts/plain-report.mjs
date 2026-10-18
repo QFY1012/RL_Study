@@ -54,7 +54,12 @@ for (let k = 1; k <= N; k++) {
   await page.goto(`file://${path.resolve(f)}`, { waitUntil: "load" })
   // 页面常给图片写 loading="lazy":改成立即加载,等每张图都加载完再截
   await page.evaluate(() => Promise.all([...document.images].map((i) => { i.loading = "eager"; return i.complete ? null : new Promise((r) => { i.onload = i.onerror = r }) })))
-  await page.waitForTimeout(500)
+  // 也常有滚动到才淡入的内容(IntersectionObserver):一屏一屏滚到底再回顶,等动画走完
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.documentElement.scrollHeight; y += 400) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)) }
+    scrollTo(0, 0)
+  })
+  await page.waitForTimeout(1500)
   await page.screenshot({ path: path.join(out, `plain-${k}.png`), fullPage: true })
   const h = await page.evaluate(() => document.documentElement.scrollHeight)
   console.log(`第 ${k} 版:截图 1440×${h}`)
