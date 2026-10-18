@@ -110,6 +110,27 @@
 
 都要 `NODE_USE_ENV_PROXY=1`。名单是数据，不进 git,放在 `/home/user/ui-rl-scratch/domains/`。
 
+## 不给风格的生成(2026-10-18)
+
+想知道模型自己做决定时会做成什么样:不给页面的样式信息,看它写出来的东西。三个实验,都是 2026-10-18 跑的,各用 8 个网站。一节的实验用 monotonomo、duties、focalglow、useportal、nelsoncash、gonefishing、theworkshop、imprint;整个首页的两个实验用 monotonomo、duties、standard-projects、useportal、nelsoncash、canvas、gonefishing、imprint。
+
+| 实验 | 怎么跑 | 结果 |
+|---|---|---|
+| 一节,简单提示词 | `GEN_PROMPT=plain node scripts/run.mjs ...`(中转 deepseek-v4.1-flash):只给框的大小和内容项,不给页面字号、配色、网格和截图;图片照给。只按 `fit`、`text`、`images`、`overflow` 打回重写(`REVISED`) | 51 节里只有 14 节通过检查,失败的多是 `seam`:模型给自己画背景,和上下两节接不上。样子是典型的 AI 风格(衬线大标题、卡片、渐变),单看还行,放进原页面就不合群。「合不合页面」比「好不好看」客观 |
+| 整个首页,只给描述 | `node scripts/plain-site.mjs <out> --list <名单>`:只给域名、`<title>` 和 meta description | 中转端点和官方 deepseek-flash 都写得很像样,而且风格统一(米色底、斜体衬线强调、等宽小标签、深色按钮)。内容是模型自己编的 |
+| 整个首页,给全部真实文字 | `node scripts/plain-site.mjs <out> --text <v18 的运行目录> --list <名单>`:再给真实首页的每一条文字(按阅读顺序,来自 `sections.json`),要求一字不改、不加自己的字 | 官方 deepseek-flash 照样像样。用上的文字条数:monotonomo 53/57、duties 83/83、standard-projects 123/123、useportal 84/87、nelsoncash 54/54、canvas 116/116、gonefishing 65/66、imprint 67/69。只有图片多的 nelsoncash 排成了一张清单 |
+
+结论:「内容是模型自己编的才好看」这个猜测被第三个实验否定了。模型在网站上的审美来自对落地页这种结构的熟悉,不来自自由发挥。同一个模型写没见过结构的报告就难看(见 `ui-rl/README.md`「只给数据让模型写报告」)。所以网站数据收集建议暂停,待定(见 `PLAN.md` 第 9 条)。
+
+数据(共约 195MB)只在跑实验的容器里,没有上传到 Drive(Drive 的工具只能内联上传,传不了这么多文件),容器回收后就没了:
+- `/home/user/ui-rl-scratch/data-collection/v19-plain/`(一节的实验)
+- `site-plain/`(只给描述,中转端点)
+- `site-brief/`(只给描述,官方 flash)
+- `site-text/`(给全部文字,官方 flash)
+- `site-plain/compare/` 是真网站和生成版并排;`site-text/compare/` 是真网站、只给描述、给全部文字三张并排
+
+名单就是上面的网站(首页网址),要的话按表里的命令重跑。
+
 ## 依赖
 
 - `npm install`(playwright-core)

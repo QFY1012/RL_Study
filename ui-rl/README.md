@@ -119,3 +119,66 @@
 - 标注从 db 导出到 `labels/critiques.json`(Claude 用 ArtifactData 读 `critiques` 集合),每条 `{page, items:[{x,y,w,h,comment,hit,pick}], note, fine, seconds}`;看改后的结论在 `reviews` 集合。
 - `revise.mjs` 在缩略图上画出框和编号(`marked.png`),用 `generate.mjs` 的 `--base` 加 change kind `critique` 让生成 Agent 在原页面上改(用这页当时那一步的输出指南);改后的页面在 `runs/critique/revised/<页面>/<报告>/`。
 - 要回答的问题:每页标注花多久;改后的页面你认不认可(「看改后」里逐条记改到了 / 没改到 / 改坏了)。认可的改后页面和改前页面组成偏好对,给 reward / DPO 用。
+
+## 只给数据让模型写报告(2026-10-18)
+
+起因:让 DeepSeek 只凭网站名和一句描述写首页,结果很像样;同一个模型拿报告数据写报告页,却很难看。两边都是 HTML、都是排版,差距为什么这么大?这一轮就查这个。网站一边的实验见 `data-collection/README.md`「不给风格的生成」。
+
+脚本 `scripts/plain-report.mjs`:不给组件库、设计规范、网格和示例,系统提示只说把数据做成网页,用户消息就是 JSON 原文。截图先用 `data/draw.mjs` 的 `phone()` 画进输出目录,页面在 1440px 宽下截整页图。截图前做了三件事:懒加载的图片改成立即加载并等它加载完;一屏屏滚到底,让滚动才淡入的内容显示出来;记下脚本报错和页面里出现的 `undefined`。
+
+```sh
+source ~/.config/ui-rl/judge.env && NODE_USE_ENV_PROXY=1 node ui-rl/scripts/plain-report.mjs <数据 json> <输出目录> --n 2 --tag plain
+# 官方端点:JUDGE_URL=https://api.deepseek.com/chat/completions GEN_MODEL=deepseek-flash,key 换成官方的
+... --n 1 --tag flash                     # 提示词 data(默认):三句中文
+... --n 1 --tag design --prompt design    # 提示词 design:照 plain-site.mjs 写首页的那段话改成报告
+```
+
+Opus 对照不走脚本:子 agent 拿同一段 data 提示词和同一份 JSON,一次写完一个文件,不检查、不修改。
+
+### 数据
+
+| 报告 | 来源 | 结构 |
+|---|---|---|
+| f15、f7、f13 | 现有的流程挖掘报告(`data/flow/` 的 json 不进 git,在 Drive 文件夹 id `1s_PHlUtuNSJYAADMsdb-x5Q5EI1Z5u3B`) | 多个产品 × 多个步骤,每步一张高手机截图,问题和建议引用具体的产品和步骤 |
+| sales(销售月报)、survey(满意度调研)、abtest(A/B 实验)、features(竞品功能矩阵) | 现编的,各 3–4KB | 常见的报告模板:KPI 卡、趋势、分组表、矩阵、结论和建议 |
+
+f15 的 JSON 约 1,950 字(其中汉字 1,653),提示词 3,428 token,不算长。
+
+### 结果
+
+每份数据出 5 版:中转端点 deepseek-v4.1-flash 两版(plain-1、plain-2),官方 deepseek-flash 一版(flash-1),Opus 一版(opus-1),官方 deepseek-flash 用 design 提示词一版(design-1)。页面高度(px):
+
+| 报告 | plain-1 | plain-2 | flash-1 | opus-1 | design-1 |
+|---|---|---|---|---|---|
+| f15 | 4963 | 3485 | 978 | 4319 | 8873 |
+| f7 | 3861 | 2461 | 2871 | 2665 | 2884 |
+| f13 | 3421 | 3596 | 3407 | 2591 | 3544 |
+| sales | 2118 | 2405 | 2441 | 2170 | 2084 |
+| survey | 2728 | 3066 | 2629 | 2584 | 2529 |
+| abtest | 2059 | 2330 | 2178 | 2229 | 2124 |
+| features | 3000 | 2332 | 2883 | 2941 | 2570 |
+
+- **模板类(sales、survey、abtest、features):每个模型、每版都像样。** 有 KPI 卡、折线图、条形图、矩阵、结论和建议,层次清楚,和常见的 dashboard 或实验报告没有区别。
+- **流程报告(f7、f13、f15):每个 DeepSeek 版本都难看,而且难看的方式一样。**
+  - 每步一行,左边一张截图,右边几行字,大片空白。
+  - 其他产品藏在 tab 后面,截图里看不到产品之间的对比。
+  - 宽内容横向溢出。
+  - 版面按 JSON 的字段顺序从上往下排,问题和建议与它们说的步骤离得很远。
+  - design 提示词把脚本去掉了(7 页都没有 `<script>`,没有报错,内容全部可见),风格变成杂志式排版;但流程的组织方式没变,f15 拉到 8,873px 高。
+- **Opus 会自己发明结构:** 把各产品的同一步排成一张对齐表,问题链接到它说的步骤。但一次写成,也有 bug:survey 页上出现 19 个 `undefined`(字段名写错)。
+- 一次写成的 bug,DeepSeek 也有:官方 flash 的 f15 报 `Cannot set properties of null`,页面只剩 978px;f7 的问题和建议两节是空的,原因没查清,可能和截图方式有关。中转端点的 abtest 有一次回复在约 2.77 万 completion token 处断了,没有结束的代码块,重跑就好了。
+- 对比图:`compare/<报告>.jpg` 是中转两版,`<报告>-3.jpg` 是中转、官方 flash、Opus 三版并排,`<报告>-design.jpg` 是 data 和 design 两种提示词的对比。
+
+### 结论
+
+- 模型的「审美」主要是**模板记忆**,不能泛化到没见过的信息结构。分界线不是「网页 vs 报告」,也不是「内容自己编 vs 内容固定」。后一条被网站一边的 `--text` 实验否定了:首页的文字一字不改地交给模型,页面照样好看。真正的分界线是**结构熟不熟**。
+  - 见过的结构:落地页,还有销售、调研、A/B、功能矩阵这类模板报告。模型照着记忆里的样子排,排得好。
+  - 没见过的结构:流程报告,多产品 × 多步骤 × 高截图 × 交叉引用。模型没有可抄的样子,就退回按字段顺序堆。
+- 所以值得训练的是**结构化数据的信息设计**(怎么让多产品可比、让问题挨着证据、让截图排得紧凑),不是视觉风格。视觉风格模型已经会了。
+- 这一点也说明网站数据对(真网站 vs AI 重写一节)教不了要学的东西:网站是模型最熟的结构。
+- 局限:每种只有 1–2 版,好不好看是 Claude 看图判断的,还要你盲评确认。下一步见 `PLAN.md` 第 9 节。
+
+### 数据位置
+
+- 现编的 4 份 JSON 在 Drive 文件夹 `ui-rl-report-plain-2026-10-18`(id `1cOo8wWYSb5DgUiy4Rh7MuwNAcfF3rGCw`),各放进 `<输出目录>/<名字>/<名字>.json` 就能重跑;它们没有截图,不用画图。f7、f13、f15 用 `data/flow/` 的数据(Drive 位置见上表),截图用 `draw.mjs` 重画。
+- 生成的页面、截图、请求和回复(共 21MB)只在跑实验的容器里(`/home/user/ui-rl-scratch/report-plain/`),没有上传到 Drive:Drive 的工具只能内联上传,传不了这么多文件。容器回收后就没了;要留的话,在本地按上面的命令重跑。
