@@ -16,8 +16,8 @@
 // 已有的跳过,断了可以重跑。最后打印每种判法判对的比例,写 <输出目录>/summary.json 和 rubrics.md(给人看的评分表)。
 import fs from "node:fs"
 import path from "node:path"
-import { execFileSync } from "node:child_process"
 import { call } from "../lib/llm.mjs"
+import { request as requestOf, shot as shotOf, NONE } from "../lib/report-pages.mjs"
 
 const [dir, out] = process.argv.slice(2)
 if (!dir || !out) throw new Error("usage: contrast-rubric.mjs <实验目录> <输出目录> [--sets P0,P-small,S0,S-bare,S-mix] [--workers 8]")
@@ -28,24 +28,10 @@ const KEY = process.env.DEEPSEEK_API_KEY
 if (!KEY) throw new Error("set DEEPSEEK_API_KEY (source judge.env)")
 const MODEL = process.env.JUDGE_MODEL ?? "deepseek-v4.1-flash"
 const EFFORT = process.env.JUDGE_EFFORT ?? "high"
-const TILE = path.join(import.meta.dirname, "tile-shot.py")
 for (const d of ["tiles", "rubrics", "judge"]) fs.mkdirSync(path.join(out, d), { recursive: true })
 
-// 页面是照这个请求做的(和 plain-report.mjs 的 design 提示词一字不差):editorial 版换过提示词,
-// 但评分表和判定都按同一个请求来,看的是「同一个请求下哪版做得好」
-const REQUEST = `Design a web page that presents the report described by the user, for a 1440px-wide desktop screen. The report's data is the JSON the user gives; its image fields are relative paths of screenshots, use them as they are.
-Output one complete HTML file with its CSS inside; no external resources (no fonts or scripts from elsewhere; the screenshots are the only images).
-Reply with the HTML inside one \`\`\`html fenced block and nothing else.`
-const request = (set) => ({ type: "text", text: `<请求>\n${REQUEST}\n</请求>\n<报告数据>\n${fs.readFileSync(path.join(dir, "data", `${set}.json`), "utf8")}\n</报告数据>` })
-
-// 一版页面:先切块(缓存在 <输出目录>/tiles),再给「<名字>:共 n 张,从上到下」和这些图
-function shot(set, name, label) {
-  const prefix = path.join(out, "tiles", `${set}-${name}`)
-  if (!fs.existsSync(`${prefix}-1.jpg`)) execFileSync("python3", [TILE, path.join(dir, "gen", set, `${name}.png`), prefix])
-  const files = fs.readdirSync(path.join(out, "tiles")).filter((f) => f.startsWith(`${set}-${name}-`)).sort((a, b) => parseInt(a.split("-").pop()) - parseInt(b.split("-").pop()))
-  return [{ type: "text", text: `${label}:整页截图(1440px 宽),共 ${files.length} 张,从上到下:` },
-    ...files.map((f) => ({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${fs.readFileSync(path.join(out, "tiles", f)).toString("base64")}` } }))]
-}
+const request = (set) => requestOf(path.join(dir, "data", `${set}.json`))
+const shot = (set, name, label) => shotOf(path.join(dir, "gen", set, `${name}.png`), path.join(out, "tiles", `${set}-${name}`), label)
 
 // ---------------------------------------------------------------- 写评分表
 // OpenRubrics 生成器的提示词(RubricRM-8B-Rubric-v2 的模型说明里的原文)译成中文,「回答」换成「页面」
@@ -85,8 +71,6 @@ const JUDGE = `你是公正的评委。按给定的请求和评分表,比较页�
 第二步 逐条分析:对门槛条和评分表的其他每一条,分别看 A 和 B,先引用页面上的具体证据,再判「达到」「部分达到」或「没达到」。
 第三步 最终判定:综合前两步决定赢家,先写理由再给结论。只能选一个。
 只输出 JSON:{"gatekeeper":{"no":条目编号,"why":"一两句话"},"A":[{"no":1,"verdict":"达到 或 部分达到 或 没达到","why":"证据"}],"B":[同上],"summary":"一到三句话:门槛条和其他条怎么决定了结果","winner":"A 或 B"}`
-const NONE = `你是公正的评委。按给定的请求比较页面 A 和页面 B 哪版做得更好。先写两版的主要差别,再写理由,最后给结论。只能选一个。
-只输出 JSON:{"diff":"两版的主要差别","reason":"理由","winner":"A 或 B"}`
 const listRubric = (r) => r.rubric.map((c, i) => `${i + 1}. ${c.text} [${c.type}]`).join("\n")
 
 async function judge(method, set, rub, a, b) {
