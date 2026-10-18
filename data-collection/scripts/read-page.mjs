@@ -191,7 +191,8 @@ export async function readPage(page) {
     }
 
     // Content of a section, in reading order. Text comes from leaf blocks: elements
-    // that are not inline and lay out no rendered non-inline element with text of its own.
+    // that are not inline and either have text of their own or lay out no rendered
+    // non-inline element with text.
     const content = (sec) => {
       const items = []
       const isBlock = (el) => getComputedStyle(el).display !== "inline"
@@ -235,9 +236,13 @@ export async function readPage(page) {
         if (m && seen(el) && box && !el.hasAttribute("data-backdrop") && (bare ? r.width >= 8 && r.height >= 8 : r.width >= 100 && r.height >= 100)) {
           items.push({ kind: bare && r.width <= 48 && r.height <= 48 ? "icon" : "image", src: source(m[1].replace(/\\(.)/g, "$1")), alt: bare ? el.getAttribute("aria-label") || el.getAttribute("title") || "" : "background", aspect: +(r.width / r.height).toFixed(3), box })
         }
+        // text of its own (not in a child element) makes el a leaf, whatever is in it besides:
+        // the text runs on around the rest, one sentence (chris-corby.com: "<a>Chris Corby</a>
+        // is an independent ... <button>[...]</button>, as well as ..." in one <p>; read
+        // child by child, only the link and the button were left of it)
         const blockKids = laidOut(el).filter((c) => rendered(c) && isBlock(c) && shownText(c))
         const text = shownText(el)
-        const leaf = text && blockKids.length === 0 && r.width > 0 && r.height > 0
+        const leaf = text && (blockKids.length === 0 || ownText(el)) && r.width > 0 && r.height > 0
         if (leaf) {
           const kind = /^H[1-6]$/.test(tag) || el.closest("h1,h2,h3,h4,h5,h6") ? "heading"
             : tag === "BUTTON" || el.closest("button,[role=button]") ? "button"
