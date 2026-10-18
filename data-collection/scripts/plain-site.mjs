@@ -4,7 +4,9 @@
 // With --text, the model also gets every piece of text the real home page shows, in
 // reading order (as site.mjs read it: <run-dir>/<host>/sections.json), to use word for
 // word with none of its own: the same task with the content fixed, as a report's is.
-//   node scripts/plain-site.mjs <out-dir> [--text <run-dir>] <url>...      (or --list <file>)
+// With --json as well, the same brief and text come as one JSON object instead of lines, the way
+// a report's data does: to see whether the JSON form alone pulls the page toward a dashboard.
+//   node scripts/plain-site.mjs <out-dir> [--text <run-dir> [--json]] <url>...      (or --list <file>)
 // Writes <out-dir>/<host>.html (the page), <host>.json (the brief, the reply, usage) and
 // <host>.png (the page at 1440px wide, full page); with --text, also how many of the
 // text items the page shows. GEN_MODEL picks the model (default deepseek-v4.1-flash), on
@@ -17,8 +19,10 @@ import { CHROME } from "./browser.mjs"
 
 const args = process.argv.slice(2)
 const out = args.shift()
-if (!out) throw new Error("usage: plain-site.mjs <out-dir> [--text <run-dir>] <url>... | --list <file>")
+if (!out) throw new Error("usage: plain-site.mjs <out-dir> [--text <run-dir> [--json]] <url>... | --list <file>")
 const textRoot = args[0] === "--text" ? (args.shift(), args.shift()) : null
+const asJson = args[0] === "--json" ? (args.shift(), true) : false
+if (asJson && !textRoot) throw new Error("--json goes with --text")
 const urls = args[0] === "--list" ? fs.readFileSync(args[1], "utf8").split("\n").map((l) => l.trim()).filter(Boolean) : args
 const URL_ = process.env.JUDGE_URL ?? "https://api.deepseek.com/chat/completions"
 const MODEL = process.env.GEN_MODEL ?? "deepseek-v4.1-flash"
@@ -47,7 +51,8 @@ async function one(url) {
   const t = Date.now()
   const { title, description } = await about(url)
   let brief = `Website: ${host}\nTitle: ${title || "(none)"}\nDescription: ${description || "(none)"}`
-  if (textRoot) brief += `\n\nThe page's text, in reading order:\n${texts(host).map((x, j) => `${j + 1}. ${x.kind}: ${JSON.stringify(x.text)}${x.href ? ` → ${x.href}` : ""}`).join("\n")}`
+  if (asJson) brief = JSON.stringify({ website: host, title: title || null, description: description || null, text: texts(host).map((x) => ({ kind: x.kind, text: x.text, ...(x.href ? { href: x.href } : {}) })) }, null, 1)
+  else if (textRoot) brief += `\n\nThe page's text, in reading order:\n${texts(host).map((x, j) => `${j + 1}. ${x.kind}: ${JSON.stringify(x.text)}${x.href ? ` → ${x.href}` : ""}`).join("\n")}`
   const messages = [{ role: "system", content: SYSTEM }, { role: "user", content: brief }]
   const res = await fetch(URL_, {
     method: "POST",
