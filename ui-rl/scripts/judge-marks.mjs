@@ -6,6 +6,7 @@
 // 标注目录是 ArtifactData 把 marks 集合存下来的目录(每对一个 <对>.json);页面编号对应哪一版查 labels/report-marks-key.json。
 // 标准用 <rubric-set 输出目录>/merged.json;那次已经判过的同一对(judge/{none,merged}/<集>-<A>-<B>.json)直接拿来用,
 // 缺的补跑,结果存在 <输出目录>/judge/<判法>/。你选「差不多」的对不算对错,单独列出。
+// 左右调换的重复对只看你自己前后一不一致,不拿去判。
 // 打印每对你选的、两种判法各两次的结果,按同类(editorial 之间、design 之间)和跨类分开数一致的次数,写 <输出目录>/summary.json。
 import fs from "node:fs"
 import path from "node:path"
@@ -27,6 +28,7 @@ const rubricText = listThemes(load(path.join(rubricDir, "merged.json")).themes)
 for (const m of ["none", "merged"]) fs.mkdirSync(path.join(out, "judge", m), { recursive: true })
 fs.mkdirSync(path.join(out, "tiles"), { recursive: true })
 
+const CHOICE = { left2: "左明显好", left1: "左稍好", tie: "差不多", right1: "右稍好", right2: "右明显好" }
 // 你的标注:choice 是 left2/left1/tie/right1/right2,换成你选的那一版
 const marks = fs.readdirSync(marksDir).filter((f) => f.endsWith(".json")).map((f) => load(path.join(marksDir, f))).map((m) => {
   const [l, r] = [pageKey[m.left].version, pageKey[m.right].version]
@@ -34,6 +36,13 @@ const marks = fs.readdirSync(marksDir).filter((f) => f.endsWith(".json")).map((f
   const kind = l.split("-")[0] === r.split("-")[0] ? "同类" : "跨类"
   return { ...m, l, r, pick, kind, strong: m.choice.endsWith("2") }
 }).sort((a, b) => a.pair.localeCompare(b.pair))
+// 左右调换的重复对(repeat)只用来看你自己前后一不一致,不拿去判
+const repeats = marks.filter((m) => m.repeat)
+for (const r of repeats) {
+  const o = marks.find((m) => m.pair === r.repeat)
+  console.log(`重复 ${r.repeat}:第一次 ${CHOICE[o.choice]}(${o.pick ?? "差不多"}),第二次 ${CHOICE[r.choice]}(${r.pick ?? "差不多"}),${o.pick === r.pick ? "一致" : "不一致"}`)
+}
+marks.splice(0, marks.length, ...marks.filter((m) => !m.repeat))
 
 async function judge(method, set, a, b) {
   const name = `${set}-${a}-${b}.json`, file = path.join(out, "judge", method, name), old = path.join(rubricDir, "judge", method, name)
@@ -58,7 +67,6 @@ await Promise.all(Array.from({ length: Math.min(WORKERS, jobs.length) }, async (
   }
 }))
 
-const CHOICE = { left2: "左明显好", left1: "左稍好", tie: "差不多", right1: "右稍好", right2: "右明显好" }
 const summary = {}
 for (const m of marks) {
   const cells = ["none", "merged"].map((method) => jobs.filter((j) => j.m === m && j.method === method).map((j) => j.picked ?? "失败").join(" / "))
