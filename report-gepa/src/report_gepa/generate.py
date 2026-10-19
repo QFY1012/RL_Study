@@ -22,6 +22,7 @@ from .render import render
 
 GEN_MODEL = "deepseek-v4.1-flash"
 MAX_ATTEMPTS = 3
+SPACED_TAG = re.compile(r"<\s+/?(?:div|span|p|section|h[1-6]|table|tr|td|th|li|ul|svg|text|a|img|header|footer|main|article)\b", re.I)
 
 SEED_GUIDE = "把用户给的 JSON 数据做成一个网页报告。只回复一个完整的 HTML 文件,放在一个 ```html 代码块里。"
 
@@ -54,9 +55,12 @@ def generate_page(llm: LLM, guide: str, report: dict, out_dir: Path, name: str,
         html = extract_html(reply.text) if reply.complete else None
         # The relay has returned finish_reason=stop with the text cut mid-stylesheet,
         # so a page counts as delivered only when the document is closed.
+        # A deepseek reply once wrote every tag in the body as "< div", which the
+        # browser shows as text; it renders "ok" with text on it, so check here.
         problem = ("reply incomplete" if not reply.complete else
                    "no html in reply" if html is None else
-                   "html not closed" if "</html>" not in html.lower() else None)
+                   "html not closed" if "</html>" not in html.lower() else
+                   "tags written as text" if len(SPACED_TAG.findall(html)) >= 5 else None)
         record["attempts"].append({"finish_reason": reply.finish_reason, "seconds": reply.seconds,
                                    "completion_tokens": reply.completion_tokens,
                                    "text_chars": len(reply.text), "problem": problem})
