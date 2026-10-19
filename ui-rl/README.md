@@ -128,6 +128,8 @@
 - 准备:`python3 scripts/report-marks.py /home/user/ui-rl-scratch/ablation`,写 `labels/report-marks-pages/*.webp`(不进 git)、`labels/report-marks.json`(pages 和 pairs)、`labels/report-marks-key.json`(页面编号对应哪份数据的哪一版;标注页不发布它)。页面编号看不出是哪种提示词,左右随机。
 - 标注页 `labels/report-marks.html`,已发布为 artifact(https://claude.ai/artifact/CGTUYZ4LA1tWdAa2oytw41),标注存在它的 db 的 `marks` 集合,每对 `{pair, set, left, right, repeat?, choice, items:[{side,x,y,w,h,kind:"good"|"bad",comment}], note, seconds}`,坐标是 1440px 宽截图的像素。
 
+- 离线标:`python3 scripts/report-marks-offline.py <输出 html> [<之前的标注目录>]` 把标注页、页面清单、截图(data URI)和之前的标注打包成一个 HTML(约 7.7MB),双击在浏览器里打开就能标,标注存浏览器本地,「导出标注」存成 JSON(`{<对>: 标注}`,和 db 里每对的文档一样),发给 Claude 后放进标注目录(每对一个 `<对>.json`)给 `judge-marks.mjs` 用。
+
 ### 拿标注测评委(2026-10-18,先标了 7 对)
 
 `node scripts/judge-marks.mjs <实验目录> <标注目录> <rubric-set 输出目录> <输出目录>`:标注目录是用 ArtifactData 把 `marks` 存下来的目录;每对两种顺序,none 和 merged(第二版标准)各判一次,和你选的比。

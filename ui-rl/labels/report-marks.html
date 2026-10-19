@@ -98,6 +98,7 @@
   .saved { font-size: 13px; color: var(--ok); min-height: 1.5em; }
   .note { padding: 24px 0; color: var(--dim); }
   .touch { display: none; }
+  .filebtn { font-size: 14px; color: var(--fg); background: var(--chip); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
 
   @media (max-width: 860px) {
     .wrap { grid-template-columns: minmax(0, 1fr); padding-bottom: 46vh; }
@@ -152,6 +153,10 @@
       <button id="next">下一对<kbd>→</kbd></button>
       <button id="skip">下一个没标的</button>
     </div>
+    <div class="actions" id="offline" hidden>
+      <button id="export">导出标注</button>
+      <label class="filebtn" for="import">导入标注<input type="file" id="import" accept=".json,application/json" hidden></label>
+    </div>
   </aside>
 </div>
 
@@ -159,9 +164,11 @@
 (async () => {
   // 每对存一份 marks/<对>:选哪版好(left2/left1/tie/right1/right2)、圈的框(side、截图像素坐标、好还是问题、一句话)、补充、用时。
   // 存在 artifact 的 db 里,Claude 读得到;db 不可用时存浏览器本地。
+  // 离线版(scripts/report-marks-offline.py 打包):清单和截图在 window.REPORT_MARKS 里,之前的标注在 window.REPORT_MARKS_SEED 里,
+  // 标注存浏览器本地,用「导出标注」存成 JSON 文件发给 Claude。
   const $ = (id) => document.getElementById(id);
   let pages = {}, pairs = [];
-  try { const j = await (await fetch('report-marks.json')).json(); pairs = j.pairs; for (const p of j.pages) pages[p.id] = p; }
+  try { const j = window.REPORT_MARKS ?? await (await fetch('report-marks.json')).json(); pairs = j.pairs; for (const p of j.pages) pages[p.id] = p; }
   catch { $('stage').outerHTML = '<p class="note">读不到 report-marks.json，页面没有加载。</p>'; return; }
 
   let idx = 0;
@@ -173,8 +180,14 @@
   const LS = 'report-marks';
   const saveLocal = () => { try { localStorage.setItem(LS, JSON.stringify(marks)); } catch {} };
   const useLocal = () => {
-    try { Object.assign(marks, JSON.parse(localStorage.getItem(LS) || '{}')); } catch {}
-    $('store').textContent = '标注只存在这个浏览器里，标完请告诉 Claude 换个方式导出';
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(LS) || 'null'); } catch {}
+    Object.assign(marks, saved ?? window.REPORT_MARKS_SEED ?? {});
+    if (!saved && window.REPORT_MARKS_SEED) saveLocal();
+    // 离线打开时没有 window.claude,能导出文件;在 artifact 里 db 不可用时下载被拦,只能提示
+    const offline = !window.claude;
+    $('store').textContent = offline ? '标注存在这个浏览器里，标完点「导出标注」把文件发给 Claude' : '标注只存在这个浏览器里，标完请告诉 Claude 换个方式导出';
+    $('offline').hidden = !offline;
     render();
   };
   (window.claude?.use ? window.claude.use('db') : Promise.resolve(null)).then((d) => {
@@ -199,7 +212,9 @@
   const pageOf = (side) => pages[cur()[side]];
   const ovOf = (side) => $(side === 'left' ? 'ovL' : 'ovR');
   const imgOf = (side) => $(side === 'left' ? 'imgL' : 'imgR');
-  const draftOf = (q) => (drafts[q.id] ??= structuredClone(marks[q.id] ?? { choice: null, items: [], note: '' }));
+  // 看用 draftOf(没改过就是已保存的那份,db 晚到也能显示);要改时用 edit,才建一份草稿
+  const draftOf = (q) => drafts[q.id] ?? marks[q.id] ?? { choice: null, items: [], note: '' };
+  const edit = (q) => (drafts[q.id] ??= structuredClone(marks[q.id] ?? { choice: null, items: [], note: '' }));
   const pct = (p, b) => `left:${b.x / p.w * 100}%;top:${b.y / p.h * 100}%;width:${b.w / p.w * 100}%;height:${b.h / p.h * 100}%`;
   function drawBoxes(side, temp) {
     const p = pageOf(side), items = draftOf(cur()).items;
@@ -253,7 +268,7 @@
       if (!drag || drag.side !== side) return;
       const { r } = drag; drag = null;
       if (!r || r.w < 8 || r.h < 8) return drawBoxes(side);
-      const d = draftOf(cur());
+      const d = edit(cur());
       d.items.push({ side, ...r, kind: 'bad', comment: '' });
       render();
       $(`c-${cur().id}-${d.items.length - 1}`)?.focus();
@@ -261,10 +276,10 @@
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drag) { const s = drag.side; drag = null; drawBoxes(s); } });
 
-  $('items').addEventListener('input', (e) => { const i = e.target.dataset.i; if (i != null) draftOf(cur()).items[i].comment = e.target.value; });
+  $('items').addEventListener('input', (e) => { const i = e.target.dataset.i; if (i != null) edit(cur()).items[i].comment = e.target.value; });
   $('items').addEventListener('click', (e) => {
     const t = e.target.closest('button'); if (!t) return;
-    const d = draftOf(cur()), i = +t.dataset.i;
+    const d = edit(cur()), i = +t.dataset.i;
     if (t.classList.contains('del')) d.items.splice(i, 1);
     else if (t.dataset.k) d.items[i].kind = t.dataset.k;
     render(); hot(t.classList.contains('del') ? null : i);
@@ -274,8 +289,8 @@
   $('items').addEventListener('mouseover', (e) => hot(e.target.closest('li')?.dataset.i));
   $('items').addEventListener('mouseleave', () => hot(null));
   const hot = (i) => document.querySelectorAll('.ov .box').forEach((b) => b.classList.toggle('hot', b.dataset.i === String(i)));
-  $('choice').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { draftOf(cur()).choice = b.dataset.v; render(); } });
-  $('note').addEventListener('input', () => { draftOf(cur()).note = $('note').value; });
+  $('choice').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { edit(cur()).choice = b.dataset.v; render(); } });
+  $('note').addEventListener('input', () => { edit(cur()).note = $('note').value; });
   $('view').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const v = b.dataset.v;
@@ -300,6 +315,20 @@
   $('prev').onclick = () => go(-1);
   $('next').onclick = () => go(1);
   $('skip').onclick = () => { const i = pairs.findIndex((x) => !marks[x.id]); if (i >= 0) { idx = i; go(0); } };
+  // 导出:把全部标注存成一个 JSON 文件;导入:读回导出的文件(换浏览器或清了本地数据时用)
+  $('export').onclick = () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(marks, null, 1)], { type: 'application/json' }));
+    a.download = `report-marks-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-')}.json`;
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    $('saved').textContent = `导出了 ${Object.keys(marks).length} 对`;
+  };
+  $('import').onchange = async (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    try { Object.assign(marks, JSON.parse(await f.text())); saveLocal(); $('saved').textContent = `导入了，共 ${Object.keys(marks).length} 对`; render(); }
+    catch { $('saved').textContent = '这个文件读不了，要用「导出标注」存下的 JSON'; }
+    e.target.value = '';
+  };
   $('drawToggle').onclick = () => {
     const on = $('ovL').classList.toggle('scroll'); $('ovR').classList.toggle('scroll', on);
     $('drawToggle').textContent = on ? '现在：滚动' : '现在：画框';
