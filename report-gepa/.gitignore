@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.egg-info/
+
+# data stays in Google Drive (see README)
+data/
+runs/
+labels/
+*.png
+*.jpg
+*.jsonl
+*.log
