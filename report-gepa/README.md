@@ -52,6 +52,16 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
 - 已生成的文件会跳过,中途断了重跑同一命令即可。
 - 第一版不带图片,流程对比类的截图只有文字描述。
 
+## 生成页面(`src/report_gepa/generate.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.generate <report.json> <out_dir> [--guide guide.md] [--n 2]
+```
+
+系统提示词是指南(GEPA 优化的对象,不给 `--guide` 时用一句话的种子指南),用户消息是报告 JSON 原文,模型 `deepseek-v4.1-flash`。每一版写出 `<n>.html`、截图 `<n>.png` 和记录 `<n>.json`(指南哈希、结束原因、耗时、token、渲染结果)。回复不完整或没有 HTML 时记为没有交付,不渲染。
+
+2026-10-19 用种子指南在一份产品周报上试过:70 秒,2.2 万输出 token,页面 4,243px 高,没有脚本错误,截图完整。
+
 ## 数据
 
 还没有上传。生成完放 Google Drive,到时在这里写清楚位置和取回方法。
