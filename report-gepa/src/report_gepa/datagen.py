@@ -167,6 +167,7 @@ def main():
             path = args.out / kind.id / f"{rid}.json"
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+            row["data"] = f"{kind.id}/{rid}.json"
             row["features"] = features(data)
         with lock:
             with manifest.open("a", encoding="utf-8") as f:

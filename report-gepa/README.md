@@ -52,35 +52,54 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
 - 已生成的文件会跳过,中途断了重跑同一命令即可。
 - 第一版不带图片,流程对比类的截图只有文字描述。
 
-## 生成页面(`src/report_gepa/generate.py`)
+## 生成页面(`agent/gen.mjs`、`src/report_gepa/generate.py`)
+
+页面由 pi agent(`@mariozechner/pi-coding-agent` 0.73.1)写。先装一次:
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.generate <report.json> <out_dir> [--guide guide.md] [--n 2]
+cd agent && npm ci
 ```
 
-系统提示词是指南(GEPA 优化的对象,不给 `--guide` 时用一句话的种子指南),用户消息是报告 JSON 原文,模型 `deepseek-v4.1-flash`。每一版写出 `<n>.html`、截图 `<n>.png` 和记录 `<n>.json`(指南哈希、结束原因、耗时、token、渲染结果)。回复不完整或没有 HTML 时记为没有交付,不渲染。
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.generate <out_dir> <数据文件或目录>... [--guide guides/seed.md] [--model deepseek-v4.1-flash] [--n 2]
+```
 
-2026-10-19 用种子指南在一份产品周报上试过:70 秒,2.2 万输出 token,页面 4,243px 高,没有脚本错误,截图完整。
+- 系统提示词是指南(GEPA 优化的对象,默认 `guides/seed.md`,一句话)。用户消息是 `agent/gen.mjs` 里固定的任务说明:数据在 `data/`、页面写到 `index.html`、不引用外部资源、环境里没有浏览器。数据不放进提示词,agent 用工具自己读。
+- 工具:读、写、改文件只限工作目录;shell 命令在 `agent/sandbox.sh` 里跑(新的挂载、网络、进程命名空间,只看得到工作目录和只读的 `/usr`、node;没有网络,环境变量里没有密钥)。
+- 每一版在 `<out_dir>/<名字>/`:`index.html`、截图 `page.png`、记录 `record.json`(每次 agent 运行的步数、token、耗时,渲染结果)、agent 全程记录 `session.jsonl`。拷进去的数据跑完就删。
+- 没写出 `index.html`、HTML 没闭合、标签写成了文字(`< div`)算没交付,整轮重来,最多 2 轮。
+- 每步输出上限 65536 token(pi 默认 32000,glm 不指定时停在 8192)。
+
+2026-10-19 用 Pudding 风格指南在一份 A/B 实验数据上试过:7.4 分钟、39 步、输入 37.7 万 token、输出 6.2 万 token,页面 7,635px,五张不同的图,数字是 agent 用 python 从数据里算的。那一次 agent 花了很多步在沙盒里找浏览器想自查,之后在任务说明里写明了没有。
 
 ## 批量生成页面(`src/report_gepa/pagegen.py`)
 
 ```sh
 PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages --workers 6 --renders 3 | tee runs/pagegen.log
+PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
 ```
 
-和 datagen 同时跑:每 30 秒读一次 datagen 的 `manifest.jsonl`,新写完的报告立刻排队生成;datagen 写出 `split.json` 且排队的页面全部完成后退出。已有记录的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
+每 30 秒读一次数据目录的 `manifest.jsonl`(每行的 `data` 是数据相对数据目录的路径),新的数据立刻排队;`split.json` 出现且排队的页面全部完成后退出。已有 `record.json` 的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
 
-每份报告 4 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
+每份数据 5 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
 
 | 名字 | 指南 | 模型 | 个数 |
 |---|---|---|---|
-| `seed-ds-1`、`seed-ds-2` | 种子指南(一句话) | deepseek-v4.1-flash | 2,也是 GEPA 的参照页面 |
-| `seed-glm-1` | 种子指南 | glm-5.3-flash | 1 |
+| `seed-ds-1`、`seed-ds-2` | `guides/seed.md`(一句话) | deepseek-v4.1-flash | 2,也是 GEPA 的参照页面 |
+| `seed-glm-1` | `guides/seed.md` | glm-5.3-flash | 1 |
 | `detail-ds-1` | `guides/detailed.md` | deepseek-v4.1-flash | 1 |
+| `pudding-ds-1` | `guides/pudding.md` | deepseek-v4.1-flash | 1 |
 
-`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南(读懂数据、组织内容、排版、选图表、写文字、写 HTML、自查),不针对任何一份数据,代表「认真写过提示词」的水平。
+`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平;`guides/pudding.md` 照 The Pudding 的可视化叙事写(问题当标题、一节一个发现配一张专门画的图、图上直接标注),代表我们想要的方向。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
 
-输出在 `runs/pages/<报告 id>/<名字>.{html,png,json}`。
+## Pudding 数据(`src/report_gepa/pudding.py`)
+
+```sh
+GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/the-pudding/data ~/the-pudding/data
+PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding/data data/pudding runs/pudding-originals | tee runs/pudding.log
+```
+
+从 The Pudding 公开的数据仓库(MIT 许可,40 个目录)里挑 20 个:页面主要由这份数据构成、静态截图看得懂(kidz-bop、boybands、stand-up 打开是一个开始按钮,截图只有封面,没选)、数据不超过 70MB。每个复制 csv/tsv/json 和 README 到 `data/pudding/<名字>/`,README 里指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,最高 30000px),当标杆。
 
 ## 数据
 

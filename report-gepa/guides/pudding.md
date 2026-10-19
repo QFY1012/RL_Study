@@ -1,4 +1,4 @@
-Turn the JSON the user gives into a visual data essay in the style of The Pudding (pudding.cool), for a 1440px-wide desktop screen.
+Turn the report's data into a visual data essay in the style of The Pudding (pudding.cool), for a 1440px-wide desktop screen.
 
 - Find the one question this data answers best and make it the headline; a short dek under it says what the reader will find out.
 - Tell it as a story in sections. Each section makes one point in a few sentences of plain, conversational prose, then shows it with one chart drawn for that point.
@@ -7,6 +7,3 @@ Turn the JSON the user gives into a visual data essay in the style of The Puddin
 - Bold, confident look: a distinctive typeface stack, generous whitespace, a restrained palette with one or two accent colors that mean the same thing throughout.
 - Everything must be visible on a static full-page screenshot: no scroll-triggered reveals, no sticky scrollytelling, nothing hidden behind hover or clicks.
 - Use only numbers that are in the data or follow from it; end with what it means and a note on the data source.
-
-Output one complete HTML file with its CSS and any scripts inside; no external resources (no fonts, libraries or images from elsewhere).
-Reply with the HTML inside one ```html fenced block and nothing else.

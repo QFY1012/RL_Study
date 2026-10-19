@@ -44,16 +44,16 @@ FREEZE_CSS = """
 """
 
 SCROLL_THROUGH = """
-async () => {
+async (maxHeight) => {
   const step = window.innerHeight * 0.8;
-  const limit = Math.min(document.documentElement.scrollHeight, %d);
+  const limit = Math.min(document.documentElement.scrollHeight, maxHeight);
   for (let y = 0; y < limit; y += step) {
     window.scrollTo(0, y);
     await new Promise(r => setTimeout(r, 120));
   }
   window.scrollTo(0, 0);
 }
-""" % MAX_PAGE_H
+"""
 
 PAGE_TEXT = "() => (document.body ? document.body.innerText.trim().length : 0)"
 
@@ -108,6 +108,43 @@ def _serve(root: Path) -> tuple[http.server.ThreadingHTTPServer, str]:
     return server, f"http://127.0.0.1:{server.server_address[1]}/page.html"
 
 
+def _shoot(url: str, out_png: Path, proxy: str | None, syntax_errors: list[str], max_height: int,
+           wait_until: str = "load", timeout_ms: int = LOAD_TIMEOUT_MS) -> RenderResult:
+    try:
+        with sync_playwright() as p:
+            launch = {"executable_path": CHROMIUM}
+            if proxy:
+                launch["proxy"] = {"server": proxy, "bypass": "127.0.0.1,localhost"}
+            browser = p.chromium.launch(**launch)
+            try:
+                page = browser.new_page(viewport={"width": VIEW_W, "height": VIEW_H})
+                page_errors: list[str] = []
+                page.on("pageerror", lambda e: page_errors.append(str(e)[:300]))
+                try:
+                    page.goto(url, wait_until=wait_until, timeout=timeout_ms)
+                except PlaywrightError as e:
+                    return RenderResult("ok", hang=True, page_errors=page_errors, syntax_errors=syntax_errors,
+                                        detail=f"load did not finish: {str(e)[:200]}")
+                page.wait_for_timeout(SETTLE_MS)
+                try:
+                    page.evaluate(SCROLL_THROUGH, max_height)
+                except PlaywrightError as e:
+                    return RenderResult("ok", hang=True, page_errors=page_errors, syntax_errors=syntax_errors,
+                                        detail=f"page stopped answering: {str(e)[:200]}")
+                page.add_style_tag(content=FREEZE_CSS)
+                page.wait_for_timeout(200)
+                height = min(page.evaluate("document.documentElement.scrollHeight"), max_height)
+                text_len = page.evaluate(PAGE_TEXT)
+                out_png.parent.mkdir(parents=True, exist_ok=True)
+                page.screenshot(path=str(out_png), full_page=True, clip={"x": 0, "y": 0, "width": VIEW_W, "height": height})
+                verdict = "ok" if text_len > 0 else "blank"
+                return RenderResult(verdict, out_png, height, page_errors, syntax_errors)
+            finally:
+                browser.close()
+    except PlaywrightError as e:
+        return RenderResult("render_failed", detail=str(e)[:300])
+
+
 def render(html: str, out_png: Path, proxy: str | None = None) -> RenderResult:
     """Render `html` and write a full-page PNG to `out_png`."""
     syntax_errors = inline_script_syntax_errors(html)
@@ -116,40 +153,16 @@ def render(html: str, out_png: Path, proxy: str | None = None) -> RenderResult:
         (root / "page.html").write_text(html, encoding="utf-8")
         server, url = _serve(root)
         try:
-            with sync_playwright() as p:
-                launch = {"executable_path": CHROMIUM}
-                if proxy:
-                    launch["proxy"] = {"server": proxy, "bypass": "127.0.0.1,localhost"}
-                browser = p.chromium.launch(**launch)
-                try:
-                    page = browser.new_page(viewport={"width": VIEW_W, "height": VIEW_H})
-                    page_errors: list[str] = []
-                    page.on("pageerror", lambda e: page_errors.append(str(e)[:300]))
-                    try:
-                        page.goto(url, wait_until="load", timeout=LOAD_TIMEOUT_MS)
-                    except PlaywrightError as e:
-                        return RenderResult("ok", hang=True, page_errors=page_errors, syntax_errors=syntax_errors,
-                                            detail=f"load did not finish: {str(e)[:200]}")
-                    page.wait_for_timeout(SETTLE_MS)
-                    try:
-                        page.evaluate(SCROLL_THROUGH)
-                    except PlaywrightError as e:
-                        return RenderResult("ok", hang=True, page_errors=page_errors, syntax_errors=syntax_errors,
-                                            detail=f"page stopped answering: {str(e)[:200]}")
-                    page.add_style_tag(content=FREEZE_CSS)
-                    page.wait_for_timeout(200)
-                    height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
-                    text_len = page.evaluate(PAGE_TEXT)
-                    out_png.parent.mkdir(parents=True, exist_ok=True)
-                    page.screenshot(path=str(out_png), full_page=True, clip={"x": 0, "y": 0, "width": VIEW_W, "height": height})
-                    verdict = "ok" if text_len > 0 else "blank"
-                    return RenderResult(verdict, out_png, height, page_errors, syntax_errors)
-                finally:
-                    browser.close()
-        except PlaywrightError as e:
-            return RenderResult("render_failed", detail=str(e)[:300])
+            return _shoot(url, out_png, proxy, syntax_errors, MAX_PAGE_H)
         finally:
             server.shutdown()
+
+
+def render_url(url: str, out_png: Path, proxy: str | None, max_height: int = MAX_PAGE_H) -> RenderResult:
+    """Screenshot a published page the same way as a generated one, except that it
+    waits only for the DOM: some published pages never fire load (vogue waited on a
+    request that never finished)."""
+    return _shoot(url, out_png, proxy, [], max_height, "domcontentloaded", 60000)
 
 
 if __name__ == "__main__":

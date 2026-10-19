@@ -2,15 +2,17 @@
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages | tee runs/pagegen.log
 
-Every report gets pages from three sources, so the pages people label differ in
-quality for reasons other than sampling noise:
+Every report gets pages from four sources, so the pages people label differ in
+quality for reasons other than sampling noise. Each page is made by a pi agent
+that reads the report file itself (see generate.py):
 
-    seed-ds    seed guide, deepseek-v4.1-flash, 2 pages (also GEPA's reference pages)
-    seed-glm   seed guide, glm-5.3-flash, 1 page
-    detail-ds  guides/detailed.md, deepseek-v4.1-flash, 1 page
+    seed-ds     guides/seed.md, deepseek-v4.1-flash, 2 pages (also GEPA's reference pages)
+    seed-glm    guides/seed.md, glm-5.3-flash, 1 page
+    detail-ds   guides/detailed.md, deepseek-v4.1-flash, 1 page
+    pudding-ds  guides/pudding.md, deepseek-v4.1-flash, 1 page
 
 The loop rereads datagen's manifest every 30 s and queues what is missing; a
-page whose record exists is skipped, so a restart resumes. It exits once
+page whose record.json exists is skipped, so a restart resumes. It exits once
 datagen has written split.json and every queued page is done.
 """
 
@@ -23,20 +25,14 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .generate import SEED_GUIDE, generate_page
-from .llm import LLM
-
-GUIDES_DIR = Path(__file__).resolve().parents[2] / "guides"
+from .generate import GUIDES, generate_page
 
 SOURCES = {
-    "seed-ds": ("deepseek-v4.1-flash", "seed", 2),
-    "seed-glm": ("glm-5.3-flash", "seed", 1),
+    "seed-ds": ("deepseek-v4.1-flash", "seed.md", 2),
+    "seed-glm": ("glm-5.3-flash", "seed.md", 1),
     "detail-ds": ("deepseek-v4.1-flash", "detailed.md", 1),
+    "pudding-ds": ("deepseek-v4.1-flash", "pudding.md", 1),
 }
-
-
-def load_guide(name: str) -> str:
-    return SEED_GUIDE if name == "seed" else (GUIDES_DIR / name).read_text(encoding="utf-8")
 
 
 def main():
@@ -47,8 +43,6 @@ def main():
     ap.add_argument("--renders", type=int, default=3, help="browsers open at the same time")
     args = ap.parse_args()
 
-    llms = {model: LLM(model=model) for model, _, _ in SOURCES.values()}
-    guides = {src: load_guide(g) for src, (_, g, _) in SOURCES.items()}
     render_slots = threading.Semaphore(args.renders)
     queued: set[tuple[str, str]] = set()
     counts = {"done": 0, "delivered": 0, "failed": 0}
@@ -57,13 +51,12 @@ def main():
     futures = []
 
     def run(report_path: Path, rid: str, source: str, name: str):
-        model, _, _ = SOURCES[source]
+        model, guide, _ = SOURCES[source]
         try:
-            report = json.loads(report_path.read_text(encoding="utf-8"))
-            rec = generate_page(llms[model], guides[source], report, args.out / rid, name, render_slots)
+            rec = generate_page(GUIDES / guide, [report_path], args.out / rid, name, model, render_slots=render_slots)
             rend = rec.get("render", {})
             tries = "/".join(a["problem"] or "ok" for a in rec["attempts"])
-            line = (f"{rid}/{name}: delivered={rec['delivered']} tries={tries} {rec['seconds']}s tokens={rec['completion_tokens']} "
+            line = (f"{rid}/{name}: delivered={rec['delivered']} tries={tries} {rec['seconds']}s tokens={rec['output_tokens']} "
                     f"verdict={rend.get('verdict')} height={rend.get('page_height')} "
                     f"errors={len(rend.get('page_errors', [])) + len(rend.get('syntax_errors', []))} hang={rend.get('hang')}")
             ok = rec["delivered"]
@@ -81,11 +74,11 @@ def main():
             if manifest.exists() else []
         for row in sorted((r for r in rows if r["ok"]), key=lambda r: r["id"]):
             rid = row["id"]
-            report_path = args.reports / row["kind"] / f"{rid}.json"
+            report_path = args.reports / row["data"]
             for source, (_, _, n) in SOURCES.items():
                 for k in range(1, n + 1):
                     name = f"{source}-{k}"
-                    if (rid, name) in queued or (args.out / rid / f"{name}.json").exists():
+                    if (rid, name) in queued or (args.out / rid / name / "record.json").exists():
                         continue
                     queued.add((rid, name))
                     futures.append(pool.submit(run, report_path, rid, source, name))
