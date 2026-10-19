@@ -72,12 +72,15 @@ for (const m of marks) {
   const cells = ["none", "merged"].map((method) => jobs.filter((j) => j.m === m && j.method === method).map((j) => j.picked ?? "失败").join(" / "))
   console.log(`${m.pair.padEnd(11)} ${m.kind} 左 ${m.l} 右 ${m.r};你:${CHOICE[m.choice]}(${m.pick ?? "差不多"});none 两次选 ${cells[0]};merged 两次选 ${cells[1]}`)
 }
+// 按对数:两种顺序都选你那版算对,都选另一版算错,换个顺序就换答案的是跟着位置走、没有偏好,单独数;有一次判失败的不算
 for (const kind of ["同类", "跨类"]) for (const method of ["none", "merged"]) {
-  const js = jobs.filter((j) => j.m.kind === kind && j.method === method && j.m.pick && j.picked)
-  const pairs = [...new Set(js.map((j) => j.m))]
-  const both = pairs.filter((m) => js.filter((j) => j.m === m).every((j) => j.picked === m.pick)).length
-  summary[`${kind} ${method}`] = { agree: `${js.filter((j) => j.picked === j.m.pick).length}/${js.length}`, pairsBothOrders: `${both}/${pairs.length}` }
-  console.log(`${kind} ${method.padEnd(6)} 和你一致 ${summary[`${kind} ${method}`].agree} 次,两种顺序都一致 ${both}/${pairs.length} 对`)
+  const c = { right: 0, wrong: 0, flip: 0, failed: 0 }
+  for (const m of marks.filter((m) => m.kind === kind && m.pick)) {
+    const picked = jobs.filter((j) => j.m === m && j.method === method).map((j) => j.picked)
+    c[picked.includes(undefined) ? "failed" : picked[0] !== picked[1] ? "flip" : picked[0] === m.pick ? "right" : "wrong"]++
+  }
+  summary[`${kind} ${method}`] = c
+  console.log(`${kind} ${method.padEnd(6)} 两次都和你一样 ${c.right} 对,两次都和你相反 ${c.wrong} 对,换顺序就换答案 ${c.flip} 对${c.failed ? `,判失败 ${c.failed} 对` : ""}`)
 }
 const ties = marks.filter((m) => !m.pick).map((m) => m.pair)
 if (ties.length) console.log(`你选差不多的(不算):${ties.join("、")}`)
