@@ -62,7 +62,8 @@ def main():
             report = json.loads(report_path.read_text(encoding="utf-8"))
             rec = generate_page(llms[model], guides[source], report, args.out / rid, name, render_slots)
             rend = rec.get("render", {})
-            line = (f"{rid}/{name}: delivered={rec['delivered']} {rec['seconds']}s tokens={rec['completion_tokens']} "
+            tries = "/".join(a["problem"] or "ok" for a in rec["attempts"])
+            line = (f"{rid}/{name}: delivered={rec['delivered']} tries={tries} {rec['seconds']}s tokens={rec['completion_tokens']} "
                     f"verdict={rend.get('verdict')} height={rend.get('page_height')} "
                     f"errors={len(rend.get('page_errors', [])) + len(rend.get('syntax_errors', []))} hang={rend.get('hang')}")
             ok = rec["delivered"]
