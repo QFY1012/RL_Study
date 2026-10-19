@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import json
 import re
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -38,7 +39,8 @@ def extract_html(text: str) -> str | None:
     return text[start:].strip() if start >= 0 else None
 
 
-def generate_page(llm: LLM, guide: str, report: dict, out_dir: Path, name: str) -> dict:
+def generate_page(llm: LLM, guide: str, report: dict, out_dir: Path, name: str,
+                  render_slots: threading.Semaphore | None = None) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
     record = {"model": llm.model, "guide_hash": guide_hash(guide), "name": name}
     reply = llm.chat([
@@ -54,7 +56,11 @@ def generate_page(llm: LLM, guide: str, report: dict, out_dir: Path, name: str) 
     else:
         record["delivered"] = True
         (out_dir / f"{name}.html").write_text(html, encoding="utf-8")
-        record["render"] = render(html, out_dir / f"{name}.png").to_json()
+        if render_slots is None:
+            record["render"] = render(html, out_dir / f"{name}.png").to_json()
+        else:
+            with render_slots:
+                record["render"] = render(html, out_dir / f"{name}.png").to_json()
     (out_dir / f"{name}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8")
     return record
 

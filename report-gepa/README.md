@@ -62,6 +62,26 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.generate <report.json> <out_dir> 
 
 2026-10-19 用种子指南在一份产品周报上试过:70 秒,2.2 万输出 token,页面 4,243px 高,没有脚本错误,截图完整。
 
+## 批量生成页面(`src/report_gepa/pagegen.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages --workers 6 --renders 3 | tee runs/pagegen.log
+```
+
+和 datagen 同时跑:每 30 秒读一次 datagen 的 `manifest.jsonl`,新写完的报告立刻排队生成;datagen 写出 `split.json` 且排队的页面全部完成后退出。已有记录的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
+
+每份报告 4 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
+
+| 名字 | 指南 | 模型 | 个数 |
+|---|---|---|---|
+| `seed-ds-1`、`seed-ds-2` | 种子指南(一句话) | deepseek-v4.1-flash | 2,也是 GEPA 的参照页面 |
+| `seed-glm-1` | 种子指南 | glm-5.3-flash | 1 |
+| `detail-ds-1` | `guides/detailed.md` | deepseek-v4.1-flash | 1 |
+
+`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南(读懂数据、组织内容、排版、选图表、写文字、写 HTML、自查),不针对任何一份数据,代表「认真写过提示词」的水平。
+
+输出在 `runs/pages/<报告 id>/<名字>.{html,png,json}`。
+
 ## 数据
 
 还没有上传。生成完放 Google Drive,到时在这里写清楚位置和取回方法。
