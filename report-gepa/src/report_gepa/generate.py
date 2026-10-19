@@ -22,6 +22,9 @@ from .render import render
 
 GEN_MODEL = "deepseek-v4.1-flash"
 MAX_ATTEMPTS = 3
+# glm-5.3-flash stops at 8192 output tokens unless told otherwise; a Pudding-style
+# deepseek page took 47k, so ask for more than any page needs.
+MAX_TOKENS = 65536
 SPACED_TAG = re.compile(r"<\s+/?(?:div|span|p|section|h[1-6]|table|tr|td|th|li|ul|svg|text|a|img|header|footer|main|article)\b", re.I)
 
 SEED_GUIDE = "把用户给的 JSON 数据做成一个网页报告。只回复一个完整的 HTML 文件,放在一个 ```html 代码块里。"
@@ -51,7 +54,7 @@ def generate_page(llm: LLM, guide: str, report: dict, out_dir: Path, name: str,
     ]
     html = None
     for _ in range(MAX_ATTEMPTS):
-        reply = llm.chat(messages)
+        reply = llm.chat(messages, max_tokens=MAX_TOKENS)
         html = extract_html(reply.text) if reply.complete else None
         # The relay has returned finish_reason=stop with the text cut mid-stylesheet,
         # so a page counts as delivered only when the document is closed.
