@@ -73,7 +73,7 @@ SYSTEM = """你是数据报告网页的评审。读者是普通大众，不是�
 
 规则:
 - 只判给你的这一条，不评别的方面。
-- 照片、手绘插画、音频、梗图这类数据里没有的外部素材不算优点也不算缺点;品牌、logo、署名不看。
+- 真实照片、音频、梗图这类数据里没有、页面也画不出来的素材不算优点也不算缺点;插画和图标算页面自己画的。品牌、logo、署名不看。
 - 内容多、篇幅长不是优点。
 - 先在证据里找到具体位置(第几帧、哪一节、哪张图)，再下结论。"""
 
@@ -105,7 +105,7 @@ CHECK_TOGETHER = """下面这几条一起判，每条判这个页面有没有犯
 
 PICK = """下面 {n} 个页面用的是同一份数据，编号 1 到 {n}(顺序随机，与质量无关)。对下面每一条，只就这一条挑出明显比组内其他页面更好的页面和明显更差的页面(各可以是 0 个、1 个或多个);整组看不出明显差别就判「无明显差别」，不要硬排。
 
-「明显」的标准：一个普通人把这几个页面并排看一眼，不用细想就能指出来。需要反复对比、放大细看才分得出高下的，不算明显。宁可少选，不要为了凑数把中游的选进来。
+「明显」的标准：认真看完这几个页面后，能指出具体位置(第几帧、哪张图)、说出具体理由的差别就算明显，不要求一眼看出;说不出具体位置的不算。宁可少选，不要为了凑数把中游的选进来。
 各条独立判断，不要因为某一条的结论连带改变其它条。
 
 {items}
@@ -314,7 +314,7 @@ def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tup
 # rounds: a group of 8 gets 8, a pair gets AB, BA four times.
 PICK_ROUNDS = 8
 PICK_MIN_OK = 5  # fewer usable rounds than this: no result
-PICK_NCD_ZERO_MIN = 2  # this many "no clear difference" rounds zero the whole pick
+PICK_NCD_ZERO_MIN = 2  # in a group of more than two, this many "no clear difference" rounds zero the whole pick
 PICK_NET_DEADZONE = 1  # a page whose |net votes| is at most this gets 0: position bias alone can make that much
 PICK_PARALLEL = 4
 
@@ -341,7 +341,10 @@ def combine(votes: list[dict], pages: list[str]) -> dict:
     n_ncd = sum(1 for v in votes if v.get("ncd"))
     pick_sum = {p: sum(1 if v.get(p) == "G" else -1 if v.get(p) == "B" else 0 for v in votes) for p in pages}
     ok = rounds >= PICK_MIN_OK
-    ncd = n_ncd >= PICK_NCD_ZERO_MIN
+    # In MiMo's groups of eight, two rounds of "no clear difference" mean the group is
+    # all alike. In a pair it erased clear signals: birth-control's original won 5-0
+    # with three such rounds. A pair keeps only the dead zone.
+    ncd = len(pages) > 2 and n_ncd >= PICK_NCD_ZERO_MIN
     noise = [p for p, x in pick_sum.items() if x != 0 and abs(x) <= PICK_NET_DEADZONE]
     eff = {p: 0 if (ncd or p in noise) else x for p, x in pick_sum.items()}
     norm = {p: (x / rounds if ok else 0.0) for p, x in eff.items()}
