@@ -8,11 +8,20 @@ Data: The Pudding's stories whose published original is a scrolling story
 with --seed and split into val (GEPA's Pareto set) and train (its feedback
 minibatches).
 
+Reflection uses REFLECT instead of GEPA's default prompt, which asks to put
+"all niche and domain specific factual information" into the instruction: with
+pages of one story as the examples, it rewrote the guide into instructions for
+that story ("把 The Pudding 的「Who is the Biggest Pop Star?」数据制作成一个中文网页报告").
+The guide is used on every story, so REFLECT asks for general practice only.
+
 One rollout is one story with one guide. The pi agent writes the page with the
 guide as its system prompt; the fixed task adds that the page is in English and
 that pageshot (agent/bin) shows the page the way the judge sees it. The page is
 captured and judged by deepseek:
 - trust: 1.1 from the capture and 1.3 by eye; a violation makes the score 0.
+  A 1.3 violation counts only when a second, independent call finds it too: the
+  judge estimates bar lengths from screenshots and once read 525px against 265px
+  as 402px against 247px (pop-music), and one misreading is a whole page at 0.
   1.2 (the agent fact check) is left out.
 - expression: every scored 2.x item, 0-1, in one call.
 - aesthetics: 3.1 and 3.2, 0-1, in one call, after the rubric's worked examples
@@ -54,6 +63,28 @@ REFLECT_MODEL = "deepseek-v4.1-flash"
 TASK = """工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据,再按系统提示词的要求把它做成一个网页,写到工作目录的 index.html。页面上的文字用英文写。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面,不引用任何外部资源(打开页面时没有网络)。
 想看页面的效果,运行 pageshot index.html:它像读者一样滚动页面,每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。"""
+
+
+REFLECT = """下面是一个写数据报告网页的 agent 用的指南(它的系统提示词):
+```
+<curr_param>
+```
+
+agent 按这份指南，为下面几份数据各写了一个网页。每个网页由一个评审按 rubric 打了分，并写了理由:
+```
+<side_info>
+```
+
+你的任务：改写这份指南，让 agent 以后写出的网页得分更高。
+
+要求:
+- 这份指南会用在各种完全不同的数据上(体育、文化、科学、社会……),上面只是其中几份。指南里只写通用的做法，不要出现任何具体数据集的名字、字段、数字、人物或结论，也不要针对某个话题写规定。
+- 页面用什么语言、写到哪个文件、能用哪些工具，由固定的任务说明决定，指南里不要规定。
+- 从分数和理由里找出反复出现的问题和做得好的地方，归纳成可操作的原则(怎么选图、怎么组织叙事、怎么写字、怎么标注、怎么让形象和气质贴合话题……)。不要只为某一条分数去改，也不要把评审的原话照抄成规则。
+- 信(1.x)被判犯了的页面整页 0 分：理由里指出的问题(例如柱子长度和数值不成比例、柱状图的轴不从 0 开始)要写成明确的禁止。
+- 保留原指南里有效的部分;新指南要完整，能直接替换原指南使用。
+
+把新指南完整地写在一个 ``` 代码块里。"""
 
 
 def stories() -> list[dict]:
@@ -140,7 +171,7 @@ class Adapter:
         items: dict[str, dict] = json.loads(judged.read_text(encoding="utf-8")) if judged.exists() else {}
         gate = J.gate(ev)
         items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
-        jobs = [("1.3", lambda: {"1.3": J.check(self.rubric["1.3"], ev, JUDGE_MODEL)}, ["1.3"])]
+        jobs = [("1.3", lambda: {"1.3": self._trust_13(ev)}, ["1.3"])]
         jobs += [(dim[0].id[0] + ".x", lambda dim=dim: J.page_group(dim, ev, JUDGE_MODEL)[1], [it.id for it in dim]) for dim in self.dims]
         for name, fn, ids in jobs:
             if all(i in items for i in ids):
@@ -157,6 +188,15 @@ class Adapter:
         return {"score": score, "vetoed": vetoed, "parts": parts,
                 "summary": ("vetoed by " + ",".join(vetoed) if vetoed else " ".join(f"{k}={v:.2f}" for k, v in parts.items())),
                 "feedback": self._feedback(items, vetoed, ev)}
+
+    def _trust_13(self, ev: Path) -> dict:
+        """1.3 by eye, confirmed: a violation stands only if a second, independent call finds it too."""
+        first = J.check(self.rubric["1.3"], ev, JUDGE_MODEL)
+        if first["violated"] is not True:
+            return first
+        second = J.check(self.rubric["1.3"], ev, JUDGE_MODEL)
+        return {**first, "violated": second["violated"] is True,
+                "confirm": {k: second[k] for k in ("violated", "where", "reason")}}
 
     def _feedback(self, items: dict, vetoed: list[str], ev: Path) -> list[str]:
         out = []
@@ -228,7 +268,7 @@ def main():
     adapter = Adapter(args.run, args.workers, args.browsers)
     result = gepa.optimize(
         seed_candidate={"guide": args.seed_guide.read_text(encoding="utf-8")},
-        trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm,
+        trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm, reflection_prompt_template=REFLECT,
         reflection_minibatch_size=args.minibatch, max_metric_calls=args.max_calls,
         run_dir=str(args.run / "gepa"), seed=args.seed, display_progress_bar=False,
     )
