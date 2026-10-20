@@ -115,9 +115,12 @@ PICK = """下面 {n} 个页面用的是同一份数据，编号 1 到 {n}(顺序
 good 和 bad 里填页面编号(整数),可以为空，两者不能有重复;no_clear_difference 为 true 时 good 和 bad 必须都为空。"""
 
 
+RUBRIC_HASH = rubric_hash()  # taken with the rubric the run loads, so a mid-run edit cannot relabel its records
+
+
 def prompt_hash(template: str) -> str:
     """The system prompt and the one template a record was made with, plus the rubric."""
-    return hashlib.sha256((SYSTEM + template).encode()).hexdigest()[:12] + "-" + rubric_hash()
+    return hashlib.sha256((SYSTEM + template).encode()).hexdigest()[:12] + "-" + RUBRIC_HASH
 
 
 def _image(path: Path, width: int | None) -> dict:
