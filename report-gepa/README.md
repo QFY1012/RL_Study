@@ -139,11 +139,11 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-page
 ### 判
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,2.4,2.11
-PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare runs/evidence/titletowns --pairs original~pudding-ds-1 --items 3.1,3.2
+PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,1.3,2.1,2.4,2.11 [--per-item]
+PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare runs/evidence/titletowns --pairs original~pudding-ds-1 --items 3.1,3.2 [--per-item]
 ```
 
-- 每次只问一条,条目之间不互相带偏,之后能测耦合性(`judgestats.py`)。`judge together <页面>... --items 2.1,...` 是对照:一次调用打几条,照 MiMo 评测 rubric 一次返回七个维度的做法(提示词里也写了「各条独立判断」),写同样的逐条记录。两种方式在同一批页面上比,能看出一起判时一条的印象会不会带到别的条上。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。
+- 信、达、雅各是一组,每组一次调用,照 MiMo 评测 rubric 一次返回七个维度的做法(提示词里写了「各条独立判断」)。信里 1.1 和 1.2 不调模型,所以信的这次调用只有 1.3;达的 12 条一次打完;雅的两条一次比完,A/B 换位各一次。每条照样单独写一份记录,组的共同回答在 `group-<维度>.json`。`--per-item` 改成每条单独一次调用,是测耦合时的对照:一起判时一条的印象会不会带到别的条上,比一比就知道。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。
 - 1.1 不调模型,按采集结果判。只对生成页判脚本报错:Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用。
 - 1.2 由 `factcheck.py` 判:pi agent 在沙盒里读数据和 `page.txt`(页面全部文字),列出页面上的每个数字和带量的说法,用 python 复算,每条记 ok、wrong 或 unverifiable。有一条 wrong 就算犯了;原文引用了没公开的数据时会是 unverifiable,不算犯。
 - 1.3 由 judge 看图判犯没犯,写出犯在哪张图。信的三条犯了任何一条,整页 0 分。

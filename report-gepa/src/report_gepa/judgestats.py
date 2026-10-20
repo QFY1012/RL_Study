@@ -52,7 +52,7 @@ def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
     pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
     for path in (root / "page").glob("*/*/*.json"):
         rec = json.loads(path.read_text(encoding="utf-8"))
-        if "item" not in rec:  # together-answer.json: the shared answer of a together call
+        if "item" not in rec:  # group-<dimension>.json: the shared answer of a group call
             continue
         key = (path.parent.parent.name, path.parent.name)
         if rec.get("score") is not None:
@@ -67,6 +67,8 @@ def load_compare(root: Path) -> dict[tuple[str, str, str, str], str]:
     out = {}
     for path in (root / "compare").glob("*/*/*.json"):
         rec = json.loads(path.read_text(encoding="utf-8"))
+        if "item" not in rec:
+            continue
         a, b = path.parent.name.split("~")
         out[(path.parent.parent.name, a, b, rec["item"])] = rec["winner"]
     return out

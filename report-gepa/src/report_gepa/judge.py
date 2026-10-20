@@ -1,40 +1,38 @@
-"""Judge captured pages against the rubric, one item per call.
+"""Judge captured pages against the rubric, one call per group of items.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.4 [--out runs/judge]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge together <evidence_dir>... --items 2.1,2.2,2.3 [--out runs/judge]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --pairs original~pudding-ds-1 --items 3.1,3.2 [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --pairs original~pudding-ds-1 --items 3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
-charts stay pinned while the page scrolls and how many states they show), and
-judges exactly one rubric item, so that items do not lean on each other and
-their coupling can be measured.
+charts stay pinned while the page scrolls and how many states they show).
 
-The rubric says how each item is judged:
-- gate (1.1) is decided from the capture, not by a model. It applies to
-  generated pages only: published Pudding pages throw errors of their own
-  (titletowns: "reading 'latitude'") and still work.
-- trust items (1.x) are vetoes: violated or not, where, why; any violation makes
-  the page 0, like MiMo's runtime gate. 1.2 is checked against the data by an
-  agent (factcheck.py), not from screenshots.
-- expression items (2.x) are scored 0-1 on one page, the way MiMo's eval rubric
-  scores (recipes/design, webdev/eval_rubric.py): each item has its own five
-  band descriptions; pick the band first, then a value inside it; the reason
-  for every point taken off is GEPA's feedback text.
-- aesthetic items (3.x) are compared on two pages built from the same data,
-  asked in both orders; if the two orders disagree the result is a tie and the
-  disagreement is kept.
+The rubric's three dimensions are three groups, each judged in one call, the
+way MiMo's evaluation rubric returns its seven dimensions from one vision call
+(recipes/design, webdev/eval_rubric.py, "各维独立判断"):
+- trust (1.x) is a veto: each item violated or not, where, why; any violation
+  makes the page 0, like MiMo's runtime gate. 1.1 is decided from the capture
+  and 1.2 by an agent that recomputes the page's claims from the data
+  (factcheck.py), so the trust call itself holds the items judged by eye (1.3).
+  1.1 applies to generated pages only: published Pudding pages throw errors of
+  their own (titletowns: "reading 'latitude'") and still work.
+- expression (2.x) is scored 0-1, each item with its own five band
+  descriptions: pick the band first, then a value inside it; the reason for
+  every point taken off is GEPA's feedback text.
+- aesthetics (3.x) compares two pages built from the same data, asked in both
+  orders; an item whose two orders disagree is a tie, and the disagreement is
+  kept.
 
-`together` scores several items in one call, the way MiMo's evaluation rubric
-returns its seven dimensions from one vision call (webdev/eval_rubric.py, "各维
-独立判断"). It writes the same per-item records, so the two ways can be compared:
-a judge that sees all items at once may let one impression colour the rest,
-which shows up as coupling that is not in the pages.
+--per-item asks one item per call instead. It is the control for coupling: a
+judge that sees a whole group at once may let one impression colour the rest,
+which shows up as correlation between items that is not in the pages.
 
 Every record keeps the judge model, a hash of the prompt and the rubric, and the
 capture version, so scores made under different settings are never mixed.
 Records go to <out>/page/<dataset>/<version>/<item>.json and
-<out>/compare/<dataset>/<a>~<b>/<item>.json; existing records are skipped.
+<out>/compare/<dataset>/<a>~<b>/<item>.json, one per item either way; a group
+call also leaves its shared answer in group-<dimension>.json beside them.
+Existing records are skipped.
 """
 
 from __future__ import annotations
@@ -91,6 +89,18 @@ SCORE = """要打分的一条:{id} {name}
 
 TOGETHER = """下面这几条一起打分，每条打一个 0 到 1 的连续分数。各条独立判断，不要因为某一条表现好或差而连带改变其它条。
 每条先依据它自己的五段说明确定分数所在区间，再根据问题的严重程度、数量和影响在区间内连续取值;不要只输出区间端点或固定档位。
+
+{items}
+
+最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+
+CHECK_TOGETHER = """下面这几条一起判，每条判这个页面有没有犯。各条独立判断，不要因为某一条的结论连带改变其它条。只要有一处犯了就算犯了，写出犯在哪里。
+
+{items}
+
+最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+
+COMPARE_TOGETHER = """页面 A 和页面 B 用的是同一份数据。下面这几条一起比较，每条只就这一条比较哪个页面做得更好，差别不明显就判 tie。各条独立判断，不要因为某一条的结论连带改变其它条。
 
 {items}
 
@@ -220,27 +230,81 @@ def score(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
             "reason": v.get("reason"), "answer": answer}
 
 
-def together(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> dict[str, dict]:
-    """All `items` in one call; returns one record per item, plus the shared answer under "_answer"."""
-    blocks = "\n\n".join(f"{it.id} {it.name}\n说明:{it.description}\n" + "\n".join(f"- {b}" for b in it.bands) for it in items)
-    keys = ", ".join(f'"{it.id}": {{"score": 0.0, "reason": "扣分的理由"}}' for it in items)
-    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": TOGETHER.format(items=blocks, keys=keys)}]
+def _usable_score(value) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
+        return None  # an answer without a usable score is a failed judgement, not a 0
+    return float(value)
+
+
+def _item_block(it: Item, with_bands: bool) -> str:
+    text = f"{it.id} {it.name}\n说明:{it.description}"
+    return text + ("\n" + "\n".join(f"- {b}" for b in it.bands) if with_bands else "")
+
+
+def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
+    """One call for a group of scored items or of binary items on one page.
+    Returns the shared answer and one record per item."""
+    scored = all(it.scored for it in items)
+    if not scored and not all(it.binary for it in items):
+        raise ValueError("a group is all scored items or all binary items")
+    template = TOGETHER if scored else CHECK_TOGETHER
+    blocks = "\n\n".join(_item_block(it, scored) for it in items)
+    shape = '{"score": 0.0, "reason": "扣分的理由"}' if scored else '{"violated": false, "where": "第几帧/哪张图", "reason": "一两句话"}'
+    keys = ", ".join(f'"{it.id}": {shape}' for it in items)
+    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": template.format(items=blocks, keys=keys)}]
     answer = _ask(model, content)
     parsed = _json_object(answer["text"]) or {}
-    out = {"_answer": {"page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(TOGETHER), "items": [it.id for it in items],
-                       "answer": answer}}
+    shared = {"page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(template), "items": [it.id for it in items],
+              "answer": answer}
+    recs = {}
     for it in items:
         v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else {}
-        value = v.get("score")
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
-            value = None
-        out[it.id] = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "together", "prompt_hash": prompt_hash(TOGETHER),
-                      "capture_version": _capture_version(ev_dir), "score": value, "reason": v.get("reason")}
-    return out
+        rec = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "group", "prompt_hash": prompt_hash(template),
+               "capture_version": _capture_version(ev_dir), "where": v.get("where"), "reason": v.get("reason")}
+        if scored:
+            rec["score"] = _usable_score(v.get("score"))
+        else:
+            rec["violated"] = v.get("violated") if isinstance(v.get("violated"), bool) else None
+        recs[it.id] = rec
+    return shared, recs
+
+
+def compare_group(items: list[Item], ev_a: Path, ev_b: Path, model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
+    """One call per order for a group of compared items; per item, the two orders
+    must agree or the item is a tie."""
+    blocks = "\n\n".join(_item_block(it, False) for it in items)
+    keys = ", ".join(f'"{it.id}": {{"winner": "A 或 B 或 tie", "reason": "一两句话，说出两边各自的具体位置"}}' for it in items)
+    prompt = COMPARE_TOGETHER.format(items=blocks, keys=keys)
+    runs = []
+    for first, second in ((ev_a, ev_b), (ev_b, ev_a)):
+        content = evidence_parts(first, "A") + evidence_parts(second, "B") + [{"type": "text", "text": prompt}]
+        answer = _ask(model, content)
+        runs.append((first == ev_a, _json_object(answer["text"]) or {}, answer))
+    shared = {"a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(COMPARE_TOGETHER),
+              "items": [it.id for it in items], "answers": [{"order": "ab" if ab else "ba", "answer": ans} for ab, _, ans in runs]}
+    recs = {}
+    for it in items:
+        per_order = []
+        for ab, parsed, _ in runs:
+            v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else {}
+            w = v.get("winner")
+            named = {"A": "a" if ab else "b", "B": "b" if ab else "a", "tie": "tie"}.get(w)
+            per_order.append({"order": "ab" if ab else "ba", "winner": named, "reason": v.get("reason")})
+        winners = [r["winner"] for r in per_order]
+        if None in winners:
+            winner, consistent = None, None  # no usable verdict in one order: a failed judgement
+        else:
+            consistent = winners[0] == winners[1]
+            winner = winners[0] if consistent else "tie"
+        recs[it.id] = {"item": it.id, "a": str(ev_a), "b": str(ev_b), "model": model, "mode": "group",
+                       "prompt_hash": prompt_hash(COMPARE_TOGETHER),
+                       "capture_version": [_capture_version(ev_a), _capture_version(ev_b)],
+                       "winner": winner, "consistent": consistent, "runs": per_order}
+    return shared, recs
 
 
 def _json_object(text: str) -> dict | None:
-    """The last top-level {...} in the text that parses (the together answer nests objects)."""
+    """The last top-level {...} in the text that parses (a group answer nests objects)."""
     depth, start, found = 0, None, None
     for i, ch in enumerate(text):
         if ch == "{":
@@ -291,57 +355,70 @@ def _name(ev_dir: Path) -> tuple[str, str]:
     return ev_dir.parent.name, ev_dir.name
 
 
+def _groups(items: list[Item], per_item: bool) -> list[list[Item]]:
+    """One group per dimension (1.x, 2.x, 3.x); 1.1 and 1.2 are not model calls and stay alone."""
+    if per_item:
+        return [[it] for it in items]
+    by_dim: dict[str, list[Item]] = {}
+    for it in items:
+        by_dim.setdefault(it.id.split(".")[0], []).append(it)
+    out = []
+    for its in by_dim.values():
+        alone = [it for it in its if it.gate or it.id == "1.2"]
+        rest = [it for it in its if it not in alone]
+        out += [[it] for it in alone]
+        if rest:
+            out.append(rest)
+    return out
+
+
+def _group_job(folder: Path, dim: str, fn):
+    """A group call writes one record per item (those with a usable verdict) and its shared answer."""
+    def run():
+        shared, recs = fn()
+        folder.mkdir(parents=True, exist_ok=True)
+        for item_id, rec in recs.items():
+            if rec.get("score") is not None or rec.get("violated") is not None or rec.get("winner") is not None:
+                (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+        shared["results"] = {k: r.get("score", r.get("violated", r.get("winner"))) for k, r in recs.items()}
+        return shared
+    return folder / f"group-{dim}.json", run
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("page")
     c.add_argument("pages", type=Path, nargs="+")
-    t = sub.add_parser("together")
-    t.add_argument("pages", type=Path, nargs="+")
     k = sub.add_parser("compare")
     k.add_argument("stories", type=Path, nargs="+", help="story directories under the evidence root")
     k.add_argument("--pairs", required=True, help="comma-separated version pairs, e.g. original~pudding-ds-1")
-    for p in (c, t, k):
+    for p in (c, k):
         p.add_argument("--items", required=True)
+        p.add_argument("--per-item", action="store_true", help="one call per item instead of one per dimension")
         p.add_argument("--out", type=Path, default=Path("runs/judge"))
         p.add_argument("--model", default=JUDGE_MODEL)
         p.add_argument("--workers", type=int, default=6)
     args = ap.parse_args()
     rubric = load()
     items = [rubric[i] for i in args.items.split(",")]
+    for it in items:
+        if (args.cmd == "page") == it.pairwise:
+            raise SystemExit(f"{it.id} is judged " + ("by comparing two pages, use compare" if it.pairwise else "on one page, use page"))
+    groups = _groups(items, args.per_item)
 
     jobs = []
     if args.cmd == "page":
         for page in args.pages:
             dataset, version = _name(page)
-            for it in items:
-                if it.pairwise:
-                    raise SystemExit(f"{it.id} is judged by comparing two pages, use compare")
-                path = args.out / "page" / dataset / version / f"{it.id}.json"
-                jobs.append((path, (lambda it=it, page=page, path=path: judge_page(it, page, args.model, path.parent))))
-    elif args.cmd == "together":
-        for it in items:
-            if not it.scored or it.id == "1.2":
-                raise SystemExit(f"{it.id} is not a scored item")
-        for page in args.pages:
-            dataset, version = _name(page)
             folder = args.out / "page" / dataset / version
-
-            def run_together(page=page, folder=folder):
-                recs = together(items, page, args.model)
-                answer = recs.pop("_answer")
-                folder.mkdir(parents=True, exist_ok=True)
-                for item_id, rec in recs.items():
-                    if rec["score"] is not None:
-                        (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
-                answer["scores"] = {k: r["score"] for k, r in recs.items()}
-                return answer
-
-            jobs.append((folder / "together-answer.json", run_together))
+            for group in groups:
+                if len(group) == 1:
+                    it = group[0]
+                    jobs.append((folder / f"{it.id}.json", (lambda it=it, page=page, folder=folder: judge_page(it, page, args.model, folder))))
+                else:
+                    jobs.append(_group_job(folder, group[0].id.split(".")[0], lambda g=group, page=page: page_group(g, page, args.model)))
     else:
-        for it in items:
-            if not it.pairwise:
-                raise SystemExit(f"{it.id} is judged on one page, use page")
         for story in args.stories:
             for pair in args.pairs.split(","):
                 va, vb = pair.split("~")
@@ -349,9 +426,13 @@ def main():
                 if not (a / "evidence.json").exists() or not (b / "evidence.json").exists():
                     print(f"{story.name} {pair}: not captured, skipped", flush=True)
                     continue
-                for it in items:
-                    path = args.out / "compare" / story.name / pair / f"{it.id}.json"
-                    jobs.append((path, (lambda it=it, a=a, b=b: compare(it, a, b, args.model))))
+                folder = args.out / "compare" / story.name / pair
+                for group in groups:
+                    if len(group) == 1:
+                        it = group[0]
+                        jobs.append((folder / f"{it.id}.json", (lambda it=it, a=a, b=b: compare(it, a, b, args.model))))
+                    else:
+                        jobs.append(_group_job(folder, group[0].id.split(".")[0], lambda g=group, a=a, b=b: compare_group(g, a, b, args.model)))
 
     def run(job):
         path, fn = job
@@ -371,8 +452,8 @@ def main():
         for path, rec in pool.map(run, jobs):
             if "error" in rec:
                 print(f"{path}: FAILED {rec['error']}", flush=True)
-            elif "scores" in rec:
-                print(f"{path}: " + " ".join(f"{k}={v}" for k, v in rec["scores"].items()), flush=True)
+            elif "results" in rec:
+                print(f"{path}: " + " ".join(f"{k}={v}" for k, v in rec["results"].items()), flush=True)
             elif "winner" in rec:
                 print(f"{path}: winner={rec['winner']} consistent={rec['consistent']} "
                       + " | ".join(f"{r['order']}:{r['winner']}" for r in rec["runs"]), flush=True)
