@@ -52,6 +52,8 @@ def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
     pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
     for path in (root / "page").glob("*/*/*.json"):
         rec = json.loads(path.read_text(encoding="utf-8"))
+        if "item" not in rec:  # together-answer.json: the shared answer of a together call
+            continue
         key = (path.parent.parent.name, path.parent.name)
         if rec.get("score") is not None:
             pages[key][rec["item"]] = float(rec["score"])

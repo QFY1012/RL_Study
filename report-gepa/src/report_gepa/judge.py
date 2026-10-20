@@ -1,6 +1,7 @@
 """Judge captured pages against the rubric, one item per call.
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.4 [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge together <evidence_dir>... --items 2.1,2.2,2.3 [--out runs/judge]
     PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --pairs original~pudding-ds-1 --items 3.1,3.2 [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
@@ -23,6 +24,12 @@ The rubric says how each item is judged:
 - aesthetic items (3.x) are compared on two pages built from the same data,
   asked in both orders; if the two orders disagree the result is a tie and the
   disagreement is kept.
+
+`together` scores several items in one call, the way MiMo's evaluation rubric
+returns its seven dimensions from one vision call (webdev/eval_rubric.py, "各维
+独立判断"). It writes the same per-item records, so the two ways can be compared:
+a judge that sees all items at once may let one impression colour the rest,
+which shows up as coupling that is not in the pages.
 
 Every record keeps the judge model, a hash of the prompt and the rubric, and the
 capture version, so scores made under different settings are never mixed.
@@ -82,6 +89,13 @@ SCORE = """要打分的一条:{id} {name}
 {bands}
 最后单独输出一行 JSON:{{"score": 0 到 1 的小数, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由;满分就说做到了什么"}}"""
 
+TOGETHER = """下面这几条一起打分，每条打一个 0 到 1 的连续分数。各条独立判断，不要因为某一条表现好或差而连带改变其它条。
+每条先依据它自己的五段说明确定分数所在区间，再根据问题的严重程度、数量和影响在区间内连续取值;不要只输出区间端点或固定档位。
+
+{items}
+
+最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+
 COMPARE = """要比的一条:{id} {name}
 说明:{description}
 
@@ -89,8 +103,9 @@ COMPARE = """要比的一条:{id} {name}
 最后单独输出一行 JSON:{{"winner": "A" 或 "B" 或 "tie", "reason": "一两句话，说出两边各自的具体位置"}}"""
 
 
-def prompt_hash() -> str:
-    return hashlib.sha256((SYSTEM + CHECK + SCORE + COMPARE).encode()).hexdigest()[:12] + "-" + rubric_hash()
+def prompt_hash(template: str) -> str:
+    """The system prompt and the one template a record was made with, plus the rubric."""
+    return hashlib.sha256((SYSTEM + template).encode()).hexdigest()[:12] + "-" + rubric_hash()
 
 
 def _image(path: Path, width: int | None) -> dict:
@@ -186,7 +201,7 @@ def check(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
     answer = _ask(model, content)
     v = answer["verdict"] or {}
     violated = v.get("violated") if isinstance(v.get("violated"), bool) else None  # no usable verdict is a failed judgement
-    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(),
+    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(CHECK),
             "capture_version": _capture_version(ev_dir), "violated": violated, "where": v.get("where"),
             "reason": v.get("reason"), "answer": answer}
 
@@ -200,9 +215,46 @@ def score(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
     value = v.get("score")
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
         value = None  # an answer without a usable score is a failed judgement, not a 0
-    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(),
+    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(SCORE),
             "capture_version": _capture_version(ev_dir), "score": value, "where": v.get("where"),
             "reason": v.get("reason"), "answer": answer}
+
+
+def together(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> dict[str, dict]:
+    """All `items` in one call; returns one record per item, plus the shared answer under "_answer"."""
+    blocks = "\n\n".join(f"{it.id} {it.name}\n说明:{it.description}\n" + "\n".join(f"- {b}" for b in it.bands) for it in items)
+    keys = ", ".join(f'"{it.id}": {{"score": 0.0, "reason": "扣分的理由"}}' for it in items)
+    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": TOGETHER.format(items=blocks, keys=keys)}]
+    answer = _ask(model, content)
+    parsed = _json_object(answer["text"]) or {}
+    out = {"_answer": {"page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(TOGETHER), "items": [it.id for it in items],
+                       "answer": answer}}
+    for it in items:
+        v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else {}
+        value = v.get("score")
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
+            value = None
+        out[it.id] = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "together", "prompt_hash": prompt_hash(TOGETHER),
+                      "capture_version": _capture_version(ev_dir), "score": value, "reason": v.get("reason")}
+    return out
+
+
+def _json_object(text: str) -> dict | None:
+    """The last top-level {...} in the text that parses (the together answer nests objects)."""
+    depth, start, found = 0, None, None
+    for i, ch in enumerate(text):
+        if ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}" and depth:
+            depth -= 1
+            if depth == 0:
+                try:
+                    found = json.loads(text[start:i + 1])
+                except json.JSONDecodeError:
+                    pass
+    return found
 
 
 def judge_page(item: Item, ev_dir: Path, model: str, record_dir: Path) -> dict:
@@ -230,7 +282,7 @@ def compare(item: Item, ev_a: Path, ev_b: Path, model: str = JUDGE_MODEL) -> dic
         runs.append({"order": "ab" if first == ev_a else "ba", "winner": named, "answer": answer})
     winners = [r["winner"] for r in runs]
     consistent = winners[0] == winners[1]
-    return {"item": item.id, "a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(),
+    return {"item": item.id, "a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(COMPARE),
             "capture_version": [_capture_version(ev_a), _capture_version(ev_b)],
             "winner": winners[0] if consistent else "tie", "consistent": consistent, "runs": runs}
 
@@ -244,10 +296,12 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("page")
     c.add_argument("pages", type=Path, nargs="+")
+    t = sub.add_parser("together")
+    t.add_argument("pages", type=Path, nargs="+")
     k = sub.add_parser("compare")
     k.add_argument("stories", type=Path, nargs="+", help="story directories under the evidence root")
     k.add_argument("--pairs", required=True, help="comma-separated version pairs, e.g. original~pudding-ds-1")
-    for p in (c, k):
+    for p in (c, t, k):
         p.add_argument("--items", required=True)
         p.add_argument("--out", type=Path, default=Path("runs/judge"))
         p.add_argument("--model", default=JUDGE_MODEL)
@@ -265,6 +319,25 @@ def main():
                     raise SystemExit(f"{it.id} is judged by comparing two pages, use compare")
                 path = args.out / "page" / dataset / version / f"{it.id}.json"
                 jobs.append((path, (lambda it=it, page=page, path=path: judge_page(it, page, args.model, path.parent))))
+    elif args.cmd == "together":
+        for it in items:
+            if not it.scored or it.id == "1.2":
+                raise SystemExit(f"{it.id} is not a scored item")
+        for page in args.pages:
+            dataset, version = _name(page)
+            folder = args.out / "page" / dataset / version
+
+            def run_together(page=page, folder=folder):
+                recs = together(items, page, args.model)
+                answer = recs.pop("_answer")
+                folder.mkdir(parents=True, exist_ok=True)
+                for item_id, rec in recs.items():
+                    if rec["score"] is not None:
+                        (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+                answer["scores"] = {k: r["score"] for k, r in recs.items()}
+                return answer
+
+            jobs.append((folder / "together-answer.json", run_together))
     else:
         for it in items:
             if not it.pairwise:
@@ -298,6 +371,8 @@ def main():
         for path, rec in pool.map(run, jobs):
             if "error" in rec:
                 print(f"{path}: FAILED {rec['error']}", flush=True)
+            elif "scores" in rec:
+                print(f"{path}: " + " ".join(f"{k}={v}" for k, v in rec["scores"].items()), flush=True)
             elif "winner" in rec:
                 print(f"{path}: winner={rec['winner']} consistent={rec['consistent']} "
                       + " | ".join(f"{r['order']}:{r['winner']}" for r in rec["runs"]), flush=True)
