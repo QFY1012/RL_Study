@@ -23,7 +23,8 @@ import sys
 import tempfile
 from pathlib import Path
 
-from .generate import CREDIT_REFUSED, OutOfCredit, run_agent
+from .generate import run_agent
+from .llm import CREDIT_REFUSED, OutOfCredit
 
 FACT_MODEL = "glm-5.3-flash"
 SYSTEM = "你负责核对数据报告网页上写的内容是否和数据一致。你只核对，不评价设计和写法。\n"

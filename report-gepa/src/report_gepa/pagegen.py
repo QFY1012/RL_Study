@@ -28,7 +28,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .generate import GUIDES, OutOfCredit, generate_page
+from .generate import GUIDES, generate_page
+from .llm import OutOfCredit
 
 SOURCES = {
     "seed-ds": ("deepseek-v4.1-flash", "seed.md", 2),

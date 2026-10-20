@@ -22,7 +22,7 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .llm import load_env
+from .llm import CREDIT_REFUSED, OutOfCredit, load_env
 from .render import render
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,13 +30,7 @@ AGENT = ROOT / "agent" / "gen.mjs"
 GUIDES = ROOT / "guides"
 GEN_MODEL = "deepseek-v4.1-flash"
 MAX_ATTEMPTS = 2
-# What the endpoint answers when the balance cannot cover a request's pre-charge.
-CREDIT_REFUSED = "预扣费额度失败"
 SPACED_TAG = re.compile(r"<\s+/?(?:div|span|p|section|h[1-6]|table|tr|td|th|li|ul|svg|text|a|img|header|footer|main|article)\b", re.I)
-
-
-class OutOfCredit(RuntimeError):
-    """The endpoint refused a request because the account balance is too low."""
 
 
 def guide_hash(guide: str) -> str:

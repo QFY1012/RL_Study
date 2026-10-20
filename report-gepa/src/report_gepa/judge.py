@@ -50,8 +50,7 @@ from PIL import Image
 
 from .capture import VIEW_H
 from .factcheck import factcheck
-from .generate import OutOfCredit
-from .llm import LLM
+from .llm import LLM, OutOfCredit
 from .rubric import Item, load, rubric_hash
 
 JUDGE_MODEL = "glm-5.3-flash"
@@ -448,8 +447,10 @@ def main():
         path.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
         return path, rec
 
-    with ThreadPoolExecutor(args.workers) as pool:
-        for path, rec in pool.map(run, jobs):
+    pool = ThreadPoolExecutor(args.workers)
+    try:
+        results = pool.map(run, jobs)
+        for path, rec in results:
             if "error" in rec:
                 print(f"{path}: FAILED {rec['error']}", flush=True)
             elif "results" in rec:
@@ -461,6 +462,10 @@ def main():
                 print(f"{path}: violated={rec['violated']} {rec.get('where') or ''} {rec.get('reason') or rec.get('problems') or rec.get('wrong') or ''}", flush=True)
             else:
                 print(f"{path}: score={rec['score']} {rec.get('where') or ''} {rec.get('reason') or ''}", flush=True)
+    except OutOfCredit as e:
+        pool.shutdown(wait=True, cancel_futures=True)
+        raise SystemExit(f"stopped: out of credit ({e}); top up and rerun the same command, finished records are kept")
+    pool.shutdown()
 
 
 if __name__ == "__main__":

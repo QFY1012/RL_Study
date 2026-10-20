@@ -20,7 +20,8 @@ import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .generate import CREDIT_REFUSED, OutOfCredit, page_problem, run_agent
+from .generate import page_problem, run_agent
+from .llm import CREDIT_REFUSED, OutOfCredit
 from .render import render
 
 ROOT = Path(__file__).resolve().parents[2]
