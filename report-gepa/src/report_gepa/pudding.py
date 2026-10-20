@@ -17,8 +17,10 @@ agent gets, with the folder's README when it describes the data. README lines
 that link to the published story are dropped, so the task stays "make a report
 from this data" rather than "recall this article". The story is screenshotted to
 <originals>/<slug>.png the same way generated pages are; "original_static" in
-the manifest is false where the page opens on a start button or is a video, so
-the screenshot is not a usable bar.
+the manifest is false where the page opens on a start button, is a video, or is
+an app that fits one screen (falsetto, book-covers, birthday-paradox: a 900px
+page with no scrolling story), so neither the screenshot nor the scroll capture
+is a usable bar.
 
 Left out: the newsletter dump (winning-the-internet), folders with no story
 (clutch) or no data (queues), the Whole Foods story (data only on Notion) and
@@ -57,7 +59,7 @@ class Story:
     url: str
     published: str
     data: str
-    static: bool = True  # False: the page opens on a start button or is a video
+    static: bool = True  # False: a start button, a video, or an app that fits one screen instead of a scrolling story
 
 
 STORIES = [
@@ -67,7 +69,7 @@ STORIES = [
     Story("romance-covers", "What Does a Happily Ever After Look Like?", "https://pudding.cool/2023/10/romance-covers/", "October 2023", "git:the-pudding/romance-covers-new:src/data/listings.csv"),
     Story("country-radio", "They Won't Play a Lady-O on Country Radio", "https://pudding.cool/2023/05/country-radio/", "May 2023", "git:the-pudding/country-radio-data"),
     Story("nba-unexpected", "The Greatest Unexpected NBA Performances", "https://www.youtube.com/watch?v=jV49bDzkQhY", "February 2023", "data:nba-unexpected", static=False),
-    Story("random", "We think this cool study we found is flawed. Help us reproduce it.", "https://pudding.cool/2022/04/random/", "April 2022", "data:random"),
+    Story("random", "We think this cool study we found is flawed. Help us reproduce it.", "https://pudding.cool/2022/04/random/", "April 2022", "data:random", static=False),
     Story("banknotes", "Who's in Your Wallet?", "https://pudding.cool/2022/04/banknotes/", "April 2022", "git:the-pudding/banknotes:src/data"),
     Story("women-in-headlines", "When Women Make Headlines", "https://pudding.cool/2022/02/women-in-headlines", "February 2022", "data:women-in-headlines"),
     Story("same-gender-lyrics", "\"I Kissed a Girl\" to \"Call Me By Your Name\"", "https://pudding.cool/2021/06/same-gender-lyrics/", "June 2021", "git:the-pudding/same-gender-lyrics-viz:src/data/data.csv"),
@@ -81,12 +83,12 @@ STORIES = [
     Story("rain", "Where will you need your umbrella?", "https://pudding.cool/2020/02/rain", "Feb 2020", "data:rain"),
     Story("laugh", "Laughing OnLine", "https://pudding.cool/2019/10/laugh", "Oct 2019", "data:laugh"),
     Story("dog-shelters", "Finding Forever Homes", "https://pudding.cool/2019/10/shelters", "Oct 2019", "data:dog-shelters"),
-    Story("falsetto", "Vocal Register and Singing Voices", "https://pudding.cool/2019/08/register/", "Aug 2019", "git:the-pudding/falsetto-story"),
-    Story("book-covers", "Book Covers", "https://pudding.cool/2019/07/book-covers/", "July 2019", "git:the-pudding/book-covers"),
+    Story("falsetto", "Vocal Register and Singing Voices", "https://pudding.cool/2019/08/register/", "Aug 2019", "git:the-pudding/falsetto-story", static=False),
+    Story("book-covers", "Book Covers", "https://pudding.cool/2019/07/book-covers/", "July 2019", "git:the-pudding/book-covers", static=False),
     Story("summer-reading", "Hipster Summer Reading List", "https://pudding.cool/2019/06/summer-reading/", "June 2019", "data:summer-reading"),
-    Story("music-history", "Best Year in Music", "https://pudding.cool/projects/music-history/", "June 2019", "git:the-pudding/music-taste-2019"),
-    Story("people-map-uk", "A People Map of the UK", "https://pudding.cool/2019/06/people-map-uk", "June 2019", "data:people-map-uk"),
-    Story("people-map", "A People Map of the US", "https://pudding.cool/2019/05/people-map", "May 2019", "data:people-map"),
+    Story("music-history", "Best Year in Music", "https://pudding.cool/projects/music-history/", "June 2019", "git:the-pudding/music-taste-2019", static=False),
+    Story("people-map-uk", "A People Map of the UK", "https://pudding.cool/2019/06/people-map-uk", "June 2019", "data:people-map-uk", static=False),
+    Story("people-map", "A People Map of the US", "https://pudding.cool/2019/05/people-map", "May 2019", "data:people-map", static=False),
     Story("names-in-songs", "Sing My Name", "https://pudding.cool/2019/05/names-in-songs", "May 2019", "data:names-in-songs"),
     Story("hyphens", "The Rise of Hyphenated Last Names in Pro Sports", "https://pudding.cool/2019/05/hyphens/", "May 2019", "git:the-pudding/hyphenated-names"),
     Story("three-seconds", "The NBA Has A Defensive Three Seconds Problem", "https://pudding.cool/2019/05/three-seconds", "May 2019", "data:three-seconds", static=False),
@@ -112,7 +114,7 @@ STORIES = [
     Story("skate-music", "The Good, the Rad, and the Gnarly", "https://pudding.cool/2018/06/skate-music/", "June 2018", "data:skate-music"),
     Story("cookies", "Baking the Most Average Chocolate Chip Cookie", "https://pudding.cool/2018/05/cookies", "May 2018", "data:cookies"),
     Story("one-hit-wonders", "One-Hit Wonders in Sports", "https://pudding.cool/2018/04/one-hit-wonders", "April 2018", "data:one-hit-wonders"),
-    Story("birthday-paradox", "The Birthday Paradox Experiment", "https://pudding.cool/2018/04/birthday-paradox", "April 2018", "http:https://pudding.cool/2018/04/birthday-data/data.json"),
+    Story("birthday-paradox", "The Birthday Paradox Experiment", "https://pudding.cool/2018/04/birthday-paradox", "April 2018", "http:https://pudding.cool/2018/04/birthday-data/data.json", static=False),
     Story("neighborhoods", "A Tale of Two Cities", "https://pudding.cool/2018/03/neighborhoods", "March 2018", "data:neighborhoods"),
     Story("stand-up", "The Structure of Stand-Up Comedy", "https://pudding.cool/2018/02/stand-up", "February 2018", "data:stand-up", static=False),
     Story("mars-weather", "Greetings from Mars", "https://pudding.cool/2018/01/mars-weather/", "February 2018", "data:mars-weather"),

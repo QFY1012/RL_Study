@@ -134,7 +134,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-page
 - 每帧记下屏幕上每张图的位置和内容指纹。页面在滚、图在屏幕上的位置不动,就是固定住了(sticky);指纹变了,就是图重画了。汇总成 `scroll_story`:哪张图在哪几帧固定、出现了几种状态。2026-10-20 试过:foundation-names 原文主图第 8–21 帧固定、5 种状态;titletowns 原文三张图各固定 4–7 帧、4–7 种状态;titletowns 指南版没有固定的图。
 - 另外截一张整页图缩成 480px 宽的缩略图;按页面顺序抽出全部文字(带位置、是否在图里、是否隐藏)和图表清单(svg、canvas、img 的大小,svg 里的图形和标签个数)。
 - 输出 `<out_dir>/frames/NN.jpg`、`thumb.jpg`、`evidence.json`(还记着页面用的数据,给事实核对用)。
-- `pudding` 命令采集每篇的原文(`<out>/<篇>/original`)和生成的版本(`<out>/<篇>/<版本>`),已采集的跳过。
+- `pudding` 命令采集每篇的原文(`<out>/<篇>/original`)和生成的版本(`<out>/<篇>/<版本>`),已采集的跳过。原文是交互式页面、不是滚动长文的(manifest 里 `original_static` 为 false:开始按钮、视频,或只有一屏的应用,如 falsetto、boybands、book-covers、birthday-paradox)不采原文;`judgestats` 也把这些篇整篇排除,它们的原文只能看到一屏,judge 和人工比较都用不了。
 
 ### 判
 

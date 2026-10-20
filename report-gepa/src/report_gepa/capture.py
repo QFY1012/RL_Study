@@ -33,7 +33,9 @@ the proxy and get the same waits as render_url.
 
 The pudding command captures, for every story, the published original
 (<out>/<story>/original) and the generated versions (<out>/<story>/<version>),
-skipping captures that already exist.
+skipping captures that already exist. Originals that are interactive apps
+rather than scrolling stories (original_static false in the manifest) are not
+captured.
 """
 
 from __future__ import annotations
@@ -341,6 +343,8 @@ def pudding(pages: Path, data_root: Path, out: Path, versions: list[str], worker
             if (dest / "evidence.json").exists():
                 continue
             if v == "original":
+                if story.get("original_static") is False:
+                    continue  # an interactive app, not a scrolling story: one screen of it says nothing
                 jobs.append((story["url"], dest, data))
             elif (pages / story["id"] / v / "index.html").exists():
                 jobs.append((str(pages / story["id"] / v / "index.html"), dest, data))

@@ -4,6 +4,9 @@
     PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b
     PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1
 
+Stories whose published original is an interactive app (original_static false
+in the Pudding manifest: falsetto, boybands...) are left out everywhere.
+
 stats
   - per item and page version (original, seed-ds-1, pudding-ds-1): the mean
     0-1 score of an expression item, the share of pages that pass a trust item;
@@ -46,11 +49,27 @@ def _key(item: str) -> tuple[int, int]:
     return int(a), int(b)
 
 
+MANIFEST = Path(__file__).resolve().parents[2] / "data" / "pudding" / "manifest.jsonl"
+
+
+def interactive_stories(manifest: Path = MANIFEST) -> set[str]:
+    """Stories whose published page is an app rather than a scrolling story
+    (falsetto, boybands...): the capture sees one screen of it, so neither the
+    judge nor a comparison with people can use them."""
+    if not manifest.exists():
+        return set()
+    rows = [json.loads(line) for line in manifest.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return {r["id"] for r in rows if r.get("original_static") is False}
+
+
 def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
     """(story, version) -> {item: value}: the 0-1 score of an expression item, and
     for a trust item 1 when it holds and 0 when it is violated."""
     pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
+    skip = interactive_stories()
     for path in (root / "page").glob("*/*/*.json"):
+        if path.parent.parent.name in skip:
+            continue
         rec = json.loads(path.read_text(encoding="utf-8"))
         if "item" not in rec:  # group-<dimension>.json: the shared answer of a group call
             continue
@@ -65,7 +84,10 @@ def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
 def load_compare(root: Path) -> dict[tuple[str, str, str, str], str]:
     """(story, a, b, item) -> "a" | "b" | "tie"."""
     out = {}
+    skip = interactive_stories()
     for path in (root / "compare").glob("*/*/*.json"):
+        if path.parent.parent.name in skip:
+            continue
         rec = json.loads(path.read_text(encoding="utf-8"))
         if "item" not in rec:
             continue
@@ -193,6 +215,8 @@ def read_labels(folder: Path) -> dict[str, str]:
         if path.name.endswith("-boxes.csv"):
             continue
         for row in csv.DictReader(path.open(encoding="utf-8-sig")):
+            if row["dataset"] in interactive_stories():
+                continue
             out[row["dataset"]] = row["winner"] if row["winner"] in ("original", "pudding-ds-1") else "tie"
     return out
 
