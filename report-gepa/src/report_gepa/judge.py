@@ -13,10 +13,11 @@ The rubric says how each item is judged:
 - gate (1.1) is decided from the capture, not by a model. It applies to
   generated pages only: published Pudding pages throw errors of their own
   (titletowns: "reading 'latitude'") and still work.
-- trust items (1.x) are violations: violated or not, where, why. 1.2 is
-  checked against the data by an agent (factcheck.py), not from screenshots.
-- expression items (2.x) are scored 1-5 on one page, with the reason for every
-  point taken off; the reasons are GEPA's feedback text.
+- trust and expression items (1.2-1.3, 2.x) are scored 0-1 on one page, the
+  way MiMo's query judge scores (recipes/design, prompts/query_fit.md): pick the
+  band first, then a value inside it; the reason for every point taken off is
+  GEPA's feedback text. 1.2 is checked against the data by an agent
+  (factcheck.py), not from screenshots.
 - aesthetic items (3.x) are compared on two pages built from the same data,
   asked in both orders; if the two orders disagree the result is a tie and the
   disagreement is kept.
@@ -65,17 +66,16 @@ SYSTEM = """你是数据报告网页的评审。读者是普通大众，不是�
 - 内容多、篇幅长不是优点。
 - 先在证据里找到具体位置(第几帧、哪一节、哪张图)，再下结论。"""
 
-CHECK = """要判的一条:{id} {name}
-说明:{description}
-
-判断这个页面有没有犯这一条(没做到就算犯了)。
-最后单独输出一行 JSON:{{"violated": true 或 false, "where": "第几帧/哪一节/哪张图", "reason": "一两句话"}}"""
-
 SCORE = """要打分的一条:{id} {name}
 说明:{description}
 
-按这一条给这个页面打 1–5 分:5 完全做到;4 基本做到，有个别小问题;3 一半做到;2 大部分没做到;1 完全没做到。
-最后单独输出一行 JSON:{{"score": 1 到 5 的整数, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由;5 分就说做到了什么"}}"""
+按这一条给这个页面打一个 0 到 1 的连续分数。先确定区间，再按问题的多少和轻重在区间内取值，不要只输出端点:
+- [0.0, 0.2):基本没做到
+- [0.2, 0.4):只做到一点表面，大部分没做到
+- [0.4, 0.6):做到了主要方向，但有几处明显没做到
+- [0.6, 0.8):基本做到，只有少量次要问题
+- [0.8, 1.0]:完整做到
+最后单独输出一行 JSON:{{"score": 0 到 1 的小数, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由;满分就说做到了什么"}}"""
 
 COMPARE = """要比的一条:{id} {name}
 说明:{description}
@@ -85,7 +85,7 @@ COMPARE = """要比的一条:{id} {name}
 
 
 def prompt_hash() -> str:
-    return hashlib.sha256((SYSTEM + CHECK + SCORE + COMPARE).encode()).hexdigest()[:12] + "-" + rubric_hash()
+    return hashlib.sha256((SYSTEM + SCORE + COMPARE).encode()).hexdigest()[:12] + "-" + rubric_hash()
 
 
 def _image(path: Path, width: int | None) -> dict:
@@ -172,25 +172,19 @@ def gate(ev_dir: Path) -> dict:
         problems.append("hang")
     if generated:
         problems += [f"page error: {e}" for e in ev["page_errors"]] + [f"syntax error: {e}" for e in ev["syntax_errors"]]
-    return {"item": "1.1", "violated": bool(problems), "problems": problems, "generated": generated,
+    return {"item": "1.1", "score": 0.0 if problems else 1.0, "problems": problems, "generated": generated,
             "capture_version": ev["capture_version"]}
-
-
-def check(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
-    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": CHECK.format(**item.__dict__)}]
-    answer = _ask(model, content)
-    v = answer["verdict"] or {}
-    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(),
-            "capture_version": _capture_version(ev_dir), "violated": v.get("violated"), "where": v.get("where"),
-            "reason": v.get("reason"), "answer": answer}
 
 
 def score(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
     content = evidence_parts(ev_dir, "") + [{"type": "text", "text": SCORE.format(**item.__dict__)}]
     answer = _ask(model, content)
     v = answer["verdict"] or {}
+    value = v.get("score")
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
+        value = None  # an answer without a usable score is a failed judgement, not a 0
     return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(),
-            "capture_version": _capture_version(ev_dir), "score": v.get("score"), "where": v.get("where"),
+            "capture_version": _capture_version(ev_dir), "score": value, "where": v.get("where"),
             "reason": v.get("reason"), "answer": answer}
 
 
@@ -200,8 +194,6 @@ def judge_page(item: Item, ev_dir: Path, model: str, record_dir: Path) -> dict:
     if item.id == "1.2":  # needs the data and arithmetic, not screenshots
         ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
         return factcheck(ev_dir, [Path(p) for p in ev["data"]], record_dir)
-    if item.binary:
-        return check(item, ev_dir, model)
     if item.scored:
         return score(item, ev_dir, model)
     raise ValueError(f"{item.id} is judged by comparing two pages, use compare")
@@ -278,10 +270,8 @@ def main():
             if "winner" in rec:
                 print(f"{path}: winner={rec['winner']} consistent={rec['consistent']} "
                       + " | ".join(f"{r['order']}:{r['winner']}" for r in rec["runs"]), flush=True)
-            elif "score" in rec:
-                print(f"{path}: score={rec['score']} {rec.get('where') or ''} {rec.get('reason') or ''}", flush=True)
             else:
-                print(f"{path}: violated={rec['violated']} {rec.get('where') or ''} {rec.get('reason') or rec.get('problems') or ''}", flush=True)
+                print(f"{path}: score={rec['score']} {rec.get('where') or ''} {rec.get('reason') or rec.get('problems') or rec.get('summary') or ''}", flush=True)
 
 
 if __name__ == "__main__":

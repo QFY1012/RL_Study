@@ -2,8 +2,8 @@
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats runs/judge [--min-pages 10]
 
-- By version: for every item, the mean score (2.x) or the share of pages that
-  violate it (1.x), per page version (original, seed-ds-1, pudding-ds-1...).
+- By version: for every item, the mean 0-1 score per page version (original,
+  seed-ds-1, pudding-ds-1...).
 - Coupling: Spearman correlation between every two items over the pages that
   have both. Two items that move together almost always are one item judged
   twice, or one item leaning on the other; pairs above 0.7 are listed.
@@ -22,15 +22,13 @@ from pathlib import Path
 
 
 def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
-    """(story, version) -> {item: value}; a violation is 1, no violation 0."""
+    """(story, version) -> {item: 0-1 score}."""
     pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
     for path in (root / "page").glob("*/*/*.json"):
         rec = json.loads(path.read_text(encoding="utf-8"))
         key = (path.parent.parent.name, path.parent.name)
         if rec.get("score") is not None:
             pages[key][rec["item"]] = float(rec["score"])
-        elif rec.get("violated") is not None:
-            pages[key][rec["item"]] = 1.0 if rec["violated"] else 0.0
     return pages
 
 
@@ -73,7 +71,7 @@ def main():
     versions = sorted({v for _, v in pages})
 
     print(f"{len(pages)} pages, items {', '.join(items)}\n")
-    print("by version (2.x mean score 1-5, 1.x share violated):")
+    print("by version (mean 0-1 score):")
     print("item  " + "".join(f"{v:>16}" for v in versions))
     for it in items:
         row = []

@@ -29,10 +29,6 @@ class Item:
         return "门槛" in self.mode
 
     @property
-    def binary(self) -> bool:
-        return "二值" in self.mode
-
-    @property
     def scored(self) -> bool:
         return "打分" in self.mode
 
@@ -56,5 +52,5 @@ def rubric_hash(path: Path = RUBRIC) -> str:
 
 if __name__ == "__main__":
     for it in load().values():
-        kind = "gate" if it.gate else "binary" if it.binary else "scored" if it.scored else "pairwise" if it.pairwise else "?"
+        kind = "gate" if it.gate else "scored" if it.scored else "pairwise" if it.pairwise else "?"
         print(f"{it.id:5} {kind:8} {it.name}  [{it.mode}]")
