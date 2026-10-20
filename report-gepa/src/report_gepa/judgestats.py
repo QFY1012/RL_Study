@@ -8,6 +8,8 @@ Stories whose published original is an interactive app (original_static false
 in the Pudding manifest: falsetto, boybands...) are left out everywhere.
 
 stats
+  - position bias of the group pick: how often the page shown first is the one
+    picked better, over the rounds that picked something (50% is none);
   - per item and page version (original, seed-ds-1, pudding-ds-1): the mean
     0-1 score of an expression item, the share of pages that pass a trust item;
   - coupling: Spearman correlation between every two items over the pages that
@@ -82,14 +84,14 @@ def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
 
 
 def load_compare(root: Path) -> dict[tuple[str, str, str, str], str]:
-    """(story, a, b, item) -> "a" | "b" | "tie"."""
+    """(story, a, b, item) -> the winning version, or "tie", for picks within a pair."""
     out = {}
     skip = interactive_stories()
     for path in (root / "compare").glob("*/*/*.json"):
         if path.parent.parent.name in skip:
             continue
         rec = json.loads(path.read_text(encoding="utf-8"))
-        if "item" not in rec:
+        if "item" not in rec or "winner" not in rec:  # a shared group answer, or a group of more than two
             continue
         a, b = path.parent.name.split("~")
         out[(path.parent.parent.name, a, b, rec["item"])] = rec["winner"]
@@ -159,6 +161,10 @@ def stats(root: Path, min_pages: int) -> None:
     for r, a, b, n in sorted(pairs, key=lambda x: -abs(x[0])):
         print(f"  {a:5} {b:5} r={r:+.2f} n={n}" + ("  <- coupled" if abs(r) > 0.7 else ""))
 
+    if (root / "compare").exists():
+        print("\nposition bias in the group pick (3.x):")
+        position_bias(root)
+
     full = [p for p in pages.values() if all(i in p for i in scored)]
     keep = [i for i in scored if np.std([p[i] for p in full]) > 0] if full else []
     print(f"\nmulticollinearity over {len(full)} pages that have all {len(scored)} items"
@@ -179,6 +185,35 @@ def stats(root: Path, min_pages: int) -> None:
     share = eig / eig.sum()
     print("  correlation eigenvalues: " + " ".join(f"{e:.2f}" for e in eig))
     print(f"  first component explains {share[0]:.0%}; components needed for 80%: {int(np.searchsorted(np.cumsum(share), 0.8)) + 1}")
+
+
+def position_bias(root: Path) -> None:
+    """For the group pick (3.x): where the pages picked clearly better were shown.
+    With n pages a round, no position bias puts 1/n of them in each position."""
+    skip = interactive_stories()
+    for item in sorted({p.stem for p in (root / "compare").glob("*/*/3.*.json")}, key=_key):
+        at = defaultdict(int)
+        n_pages, ncd, rounds = 0, 0, 0
+        for path in (root / "compare").glob(f"*/*/{item}.json"):
+            if path.parent.parent.name in skip:
+                continue
+            rec = json.loads(path.read_text(encoding="utf-8"))
+            for r in rec.get("per_round", []):
+                if not r.get("usable"):
+                    continue
+                rounds += 1
+                n_pages = len(r["order"])
+                if r["vote"].get("ncd"):
+                    ncd += 1
+                    continue
+                for pos, page in enumerate(r["order"]):
+                    if r["vote"].get(page) == "G":
+                        at[pos] += 1
+        good = sum(at.values())
+        if rounds:
+            share = " ".join(f"pos{pos + 1}={at[pos] / good:.0%}" for pos in range(n_pages)) if good else "-"
+            print(f"  {item}: picked-better pages by position {share} (no bias: {1 / n_pages:.0%} each); "
+                  f"{rounds} rounds, {ncd} no clear difference")
 
 
 def agree(root_a: Path, root_b: Path) -> None:
@@ -282,9 +317,8 @@ def human(root: Path, labels_dir: Path) -> None:
             for (s, a, b, i), w in comps.items():
                 if i != it or s not in decided:
                     continue
-                named = {"a": a, "b": b}.get(w, "tie")
                 n += 1
-                agree_n += named == decided[s]
+                agree_n += w == decided[s]
             if n:
                 print(f"  {it:12} agree {agree_n}/{n} ({agree_n / n:.0%})")
 

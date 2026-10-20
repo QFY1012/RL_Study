@@ -1,7 +1,7 @@
 """Judge captured pages against the rubric, one call per group of items.
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.2 [--per-item] [--out runs/judge]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --pairs original~pudding-ds-1 --items 3.1,3.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --versions original,pudding-ds-1 --items 3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
@@ -19,9 +19,11 @@ way MiMo's evaluation rubric returns its seven dimensions from one vision call
 - expression (2.x) is scored 0-1, each item with its own five band
   descriptions: pick the band first, then a value inside it; the reason for
   every point taken off is GEPA's feedback text.
-- aesthetics (3.x) compares two pages built from the same data, asked in both
-  orders; an item whose two orders disagree is a tie, and the disagreement is
-  kept.
+- aesthetics (3.x) is MiMo's group pick on the versions of one story (two for
+  checking against pairwise labels, eight in training): each round shows the
+  whole group in a Latin-square order and picks the clearly better and the
+  clearly worse pages or says there is no clear difference; votes are summed
+  with MiMo's denoising (see PICK_* below).
 
 --per-item asks one item per call instead. It is the control for coupling: a
 judge that sees a whole group at once may let one impression colour the rest,
@@ -41,7 +43,9 @@ import argparse
 import base64
 import hashlib
 import json
+import random
 import re
+import zlib
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from pathlib import Path
@@ -99,17 +103,15 @@ CHECK_TOGETHER = """下面这几条一起判，每条判这个页面有没有犯
 
 写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
 
-COMPARE_TOGETHER = """页面 A 和页面 B 用的是同一份数据。下面这几条一起比较，每条只就这一条比较哪个页面做得更好，差别不明显就判 tie。各条独立判断，不要因为某一条的结论连带改变其它条。
+PICK = """下面 {n} 个页面用的是同一份数据，编号 1 到 {n}(顺序随机，与质量无关)。对下面每一条，只就这一条挑出明显比组内其他页面更好的页面和明显更差的页面(各可以是 0 个、1 个或多个);整组看不出明显差别就判「无明显差别」，不要硬排。
+
+「明显」的标准：一个普通人把这几个页面并排看一眼，不用细想就能指出来。需要反复对比、放大细看才分得出高下的，不算明显。宁可少选，不要为了凑数把中游的选进来。
+各条独立判断，不要因为某一条的结论连带改变其它条。
 
 {items}
 
-写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
-
-COMPARE = """要比的一条:{id} {name}
-说明:{description}
-
-页面 A 和页面 B 用的是同一份数据。只就这一条比较哪个页面做得更好;差别不明显就判 tie。
-最后单独输出一行 JSON:{{"winner": "A" 或 "B" 或 "tie", "reason": "一两句话，说出两边各自的具体位置"}}"""
+写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}
+good 和 bad 里填页面编号(整数),可以为空，两者不能有重复;no_clear_difference 为 true 时 good 和 bad 必须都为空。"""
 
 
 def prompt_hash(template: str) -> str:
@@ -281,7 +283,7 @@ def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tup
         raise ValueError("a group is all scored items or all binary items")
     template = TOGETHER if scored else CHECK_TOGETHER
     blocks = "\n\n".join(_item_block(it, scored) for it in items)
-    shape = '{"score": 0.0, "reason": "扣分的理由"}' if scored else '{"violated": false, "where": "第几帧/哪张图", "reason": "一两句话"}'
+    shape = '{"score": 0.0, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由"}' if scored else '{"violated": false, "where": "第几帧/哪张图", "reason": "一两句话"}'
     keys = ", ".join(f'"{it.id}": {shape}' for it in items)
     content = evidence_parts(ev_dir, "") + [{"type": "text", "text": template.format(items=blocks, keys=keys)}]
     answer = _ask(model, content)
@@ -301,38 +303,103 @@ def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tup
     return shared, recs
 
 
-def compare_group(items: list[Item], ev_a: Path, ev_b: Path, model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
-    """One call per order for a group of compared items; per item, the two orders
-    must agree or the item is a tie."""
-    blocks = "\n\n".join(_item_block(it, False) for it in items)
-    keys = ", ".join(f'"{it.id}": {{"winner": "A 或 B 或 tie", "reason": "一两句话，说出两边各自的具体位置"}}' for it in items)
-    prompt = COMPARE_TOGETHER.format(items=blocks, keys=keys)
-    runs = []
-    for first, second in ((ev_a, ev_b), (ev_b, ev_a)):
-        content = evidence_parts(first, "A") + evidence_parts(second, "B") + [{"type": "text", "text": prompt}]
-        answer = _ask(model, content)
-        runs.append((first == ev_a, _json_object(answer["text"]) or {}, answer))
+# MiMo's group pick (recipes/design, grader_service/.../group_pick.py) on a
+# group of pages built from the same data. Each round shows the whole group and
+# picks the clearly better and the clearly worse pages, or says there is no
+# clear difference. Round orders are rows of a Latin square (row r is the base
+# order shifted by r), so every page sits in every position equally often; for
+# an even group the base is Williams', which also balances who comes right after
+# whom. MiMo measured this flattening the first-position bias from +-0.28 to
+# +-0.03 votes. The square is repeated until there are at least PICK_ROUNDS
+# rounds: a group of 8 gets 8, a pair gets AB, BA four times.
+PICK_ROUNDS = 8
+PICK_MIN_OK = 5  # fewer usable rounds than this: no result
+PICK_NCD_ZERO_MIN = 2  # this many "no clear difference" rounds zero the whole pick
+PICK_NET_DEADZONE = 1  # a page whose |net votes| is at most this gets 0: position bias alone can make that much
+PICK_PARALLEL = 4
 
-    shared = {"a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(COMPARE_TOGETHER),
-              "items": [it.id for it in items], "answers": [{"order": "ab" if ab else "ba", "answer": ans} for ab, _, ans in runs]}
+
+def pick_orders(n: int, seed: int) -> list[list[int]]:
+    base = [0]
+    lo, hi = 1, n - 1
+    while len(base) < n:  # Williams' base: 0, n-1, 1, n-2, ...
+        base.append(hi)
+        hi -= 1
+        if len(base) < n:
+            base.append(lo)
+            lo += 1
+    perm = list(range(n))
+    random.Random(seed).shuffle(perm)  # which page is "page 0" changes per group
+    square = [[perm[(x + r) % n] for x in base] for r in range(n)]
+    return [row for _ in range(-(-PICK_ROUNDS // n)) for row in square]
+
+
+def combine(votes: list[dict], pages: list[str]) -> dict:
+    """MiMo's combine for one item. votes: one dict per usable round, page -> "G" | "B" | "-",
+    or {"ncd": True} for a round that saw no clear difference."""
+    rounds = len(votes)
+    n_ncd = sum(1 for v in votes if v.get("ncd"))
+    pick_sum = {p: sum(1 if v.get(p) == "G" else -1 if v.get(p) == "B" else 0 for v in votes) for p in pages}
+    ok = rounds >= PICK_MIN_OK
+    ncd = n_ncd >= PICK_NCD_ZERO_MIN
+    noise = [p for p, x in pick_sum.items() if x != 0 and abs(x) <= PICK_NET_DEADZONE]
+    eff = {p: 0 if (ncd or p in noise) else x for p, x in pick_sum.items()}
+    norm = {p: (x / rounds if ok else 0.0) for p, x in eff.items()}
+    out = {"ok": ok, "rounds": rounds, "n_ncd": n_ncd, "ncd_zeroed": ncd, "noise_zeroed": noise,
+           "pick_sum": pick_sum, "pick_norm": norm}
+    if len(pages) == 2:  # a pair also gets a winner, for comparing with pairwise labels
+        a, b = pages
+        out["winner"] = None if not ok else a if norm[a] > norm[b] else b if norm[b] > norm[a] else "tie"
+    return out
+
+
+def pick(items: list[Item], group: list[Path], model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
+    """MiMo's group pick on `group` (evidence dirs of one story), each round judging all `items`."""
+    names = [p.name for p in group]
+    n = len(group)
+    blocks = "\n\n".join(_item_block(it, False) for it in items)
+    keys = ", ".join(f'"{it.id}": {{"good": [], "bad": [], "no_clear_difference": false, "reason": "一两句话，说出被选页面的具体位置"}}'
+                     for it in items)
+    prompt = PICK.format(n=n, items=blocks, keys=keys)
+    orders = pick_orders(n, seed=zlib.crc32(group[0].parent.name.encode()))
+    parts = {(i, pos): evidence_parts(group[i], str(pos + 1)) for i in range(n) for pos in range(n)}
+
+    def one_round(order: list[int]) -> tuple[list[int], dict, dict]:
+        content = [part for pos, i in enumerate(order) for part in parts[(i, pos)]]
+        answer = _ask(model, content + [{"type": "text", "text": prompt}])
+        return order, _json_object(answer["text"]) or {}, answer
+
+    with ThreadPoolExecutor(PICK_PARALLEL) as pool:
+        rounds = list(pool.map(one_round, orders))
+    shared = {"pages": [str(p) for p in group], "model": model, "prompt_hash": prompt_hash(PICK), "items": [it.id for it in items],
+              "answers": [{"order": [names[i] for i in order], "answer": ans} for order, _, ans in rounds]}
     recs = {}
     for it in items:
-        per_order = []
-        for ab, parsed, ans in runs:
-            v = _item_verdict(parsed, ans["text"], it.id)
-            w = v.get("winner")
-            named = {"A": "a" if ab else "b", "B": "b" if ab else "a", "tie": "tie"}.get(w)
-            per_order.append({"order": "ab" if ab else "ba", "winner": named, "reason": v.get("reason")})
-        winners = [r["winner"] for r in per_order]
-        if None in winners:
-            winner, consistent = None, None  # no usable verdict in one order: a failed judgement
-        else:
-            consistent = winners[0] == winners[1]
-            winner = winners[0] if consistent else "tie"
-        recs[it.id] = {"item": it.id, "a": str(ev_a), "b": str(ev_b), "model": model, "mode": "group",
-                       "prompt_hash": prompt_hash(COMPARE_TOGETHER),
-                       "capture_version": [_capture_version(ev_a), _capture_version(ev_b)],
-                       "winner": winner, "consistent": consistent, "runs": per_order}
+        votes, per_round = [], []
+        for order, parsed, _ in rounds:
+            shown = [names[i] for i in order]
+            v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else None
+            if v is None or not isinstance(v.get("good", []), list) or not isinstance(v.get("bad", []), list):
+                per_round.append({"order": shown, "usable": False})
+                continue  # a round without a usable verdict for this item is not counted
+
+            def at(k):
+                try:
+                    k = int(k)
+                except (TypeError, ValueError):
+                    return None
+                return shown[k - 1] if 1 <= k <= n else None
+            good = {at(k) for k in v.get("good", [])} - {None}
+            bad = {at(k) for k in v.get("bad", [])} - {None} - good
+            if v.get("no_clear_difference") is True and not good and not bad:
+                vote = {"ncd": True}
+            else:
+                vote = {p: "G" if p in good else "B" if p in bad else "-" for p in names}
+            votes.append(vote)
+            per_round.append({"order": shown, "usable": True, "vote": vote, "reason": v.get("reason")})
+        recs[it.id] = {"item": it.id, "pages": [str(p) for p in group], "model": model, "mode": "pick",
+                       "prompt_hash": prompt_hash(PICK), "capture_version": [_capture_version(p) for p in group],
+                       **combine(votes, names), "per_round": per_round}
     return shared, recs
 
 
@@ -367,21 +434,9 @@ def judge_page(item: Item, ev_dir: Path, model: str, record_dir: Path) -> dict:
     raise ValueError(f"{item.id} is judged by comparing two pages, use compare")
 
 
-def compare(item: Item, ev_a: Path, ev_b: Path, model: str = JUDGE_MODEL) -> dict:
-    """Ask with a first and with b first; the winner is reported as "a", "b" or "tie"."""
-    runs = []
-    for first, second in ((ev_a, ev_b), (ev_b, ev_a)):
-        content = (evidence_parts(first, "A") + evidence_parts(second, "B")
-                   + [{"type": "text", "text": COMPARE.format(**item.__dict__)}])
-        answer = _ask(model, content)
-        w = (answer["verdict"] or {}).get("winner")
-        named = {"A": "a" if first == ev_a else "b", "B": "b" if first == ev_a else "a", "tie": "tie"}.get(w)
-        runs.append({"order": "ab" if first == ev_a else "ba", "winner": named, "answer": answer})
-    winners = [r["winner"] for r in runs]
-    consistent = winners[0] == winners[1]
-    return {"item": item.id, "a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(COMPARE),
-            "capture_version": [_capture_version(ev_a), _capture_version(ev_b)],
-            "winner": winners[0] if consistent else "tie", "consistent": consistent, "runs": runs}
+def compare(item: Item, group: list[Path], model: str = JUDGE_MODEL) -> dict:
+    """One aesthetic item on its own: the same group pick with a single item."""
+    return pick([item], group, model)[1][item.id]
 
 
 def _name(ev_dir: Path) -> tuple[str, str]:
@@ -416,7 +471,8 @@ def _group_job(folder: Path, dim: str, fn):
     def run():
         for attempt in range(GROUP_ATTEMPTS):
             shared, recs = fn()
-            missing = [k for k, r in recs.items() if all(r.get(f) is None for f in ("score", "violated", "winner"))]
+            missing = [k for k, r in recs.items()
+                       if all(r.get(f) is None for f in ("score", "violated")) and not r.get("ok", False)]
             if not missing:
                 break
         else:
@@ -424,7 +480,7 @@ def _group_job(folder: Path, dim: str, fn):
         folder.mkdir(parents=True, exist_ok=True)
         for item_id, rec in recs.items():
             (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
-        shared["results"] = {k: r.get("score", r.get("violated", r.get("winner"))) for k, r in recs.items()}
+        shared["results"] = {k: r.get("score", r.get("violated", r.get("pick_sum"))) for k, r in recs.items()}
         return shared
     return folder / f"group-{dim}.json", run
 
@@ -436,7 +492,7 @@ def main():
     c.add_argument("pages", type=Path, nargs="+")
     k = sub.add_parser("compare")
     k.add_argument("stories", type=Path, nargs="+", help="story directories under the evidence root")
-    k.add_argument("--pairs", required=True, help="comma-separated version pairs, e.g. original~pudding-ds-1")
+    k.add_argument("--versions", required=True, help="comma-separated versions picked within one group, e.g. original,pudding-ds-1")
     for p in (c, k):
         p.add_argument("--items", required=True)
         p.add_argument("--per-item", action="store_true", help="one call per item instead of one per dimension")
@@ -463,20 +519,19 @@ def main():
                 else:
                     jobs.append(_group_job(folder, group[0].id.split(".")[0], lambda g=group, page=page: page_group(g, page, args.model)))
     else:
+        versions = args.versions.split(",")
         for story in args.stories:
-            for pair in args.pairs.split(","):
-                va, vb = pair.split("~")
-                a, b = story / va, story / vb
-                if not (a / "evidence.json").exists() or not (b / "evidence.json").exists():
-                    print(f"{story.name} {pair}: not captured, skipped", flush=True)
-                    continue
-                folder = args.out / "compare" / story.name / pair
-                for group in groups:
-                    if len(group) == 1:
-                        it = group[0]
-                        jobs.append((folder / f"{it.id}.json", (lambda it=it, a=a, b=b: compare(it, a, b, args.model))))
-                    else:
-                        jobs.append(_group_job(folder, group[0].id.split(".")[0], lambda g=group, a=a, b=b: compare_group(g, a, b, args.model)))
+            group = [story / v for v in versions]
+            if not all((p / "evidence.json").exists() for p in group):
+                print(f"{story.name} {args.versions}: not captured, skipped", flush=True)
+                continue
+            folder = args.out / "compare" / story.name / "~".join(versions)
+            for g in groups:
+                if len(g) == 1:
+                    it = g[0]
+                    jobs.append((folder / f"{it.id}.json", (lambda it=it, group=group: compare(it, group, args.model))))
+                else:
+                    jobs.append(_group_job(folder, g[0].id.split(".")[0], lambda g=g, group=group: pick(g, group, args.model)))
 
     def run(job):
         path, fn = job
@@ -484,7 +539,7 @@ def main():
             return path, json.loads(path.read_text(encoding="utf-8"))
         try:
             rec = fn()
-            unusable = rec.get("item") and all(rec.get(k) is None for k in ("score", "violated", "winner"))
+            unusable = rec.get("item") and all(rec.get(k) is None for k in ("score", "violated")) and not rec.get("ok", False)
             if unusable:
                 raise RuntimeError("no usable verdict in the answer")
         except OutOfCredit:
@@ -503,9 +558,9 @@ def main():
                 print(f"{path}: FAILED {rec['error']}", flush=True)
             elif "results" in rec:
                 print(f"{path}: " + " ".join(f"{k}={v}" for k, v in rec["results"].items()), flush=True)
-            elif "winner" in rec:
-                print(f"{path}: winner={rec['winner']} consistent={rec['consistent']} "
-                      + " | ".join(f"{r['order']}:{r['winner']}" for r in rec["runs"]), flush=True)
+            elif "pick_sum" in rec:
+                print(f"{path}: votes " + " ".join(f"{k}={v}" for k, v in rec["pick_sum"].items())
+                      + f" rounds={rec['rounds']} no_clear_difference={rec['n_ncd']} winner={rec.get('winner')}", flush=True)
             elif "violated" in rec:
                 print(f"{path}: violated={rec['violated']} {rec.get('where') or ''} {rec.get('reason') or rec.get('problems') or rec.get('wrong') or ''}", flush=True)
             else:
