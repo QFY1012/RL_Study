@@ -24,7 +24,10 @@ is a usable bar.
 
 Left out: the newsletter dump (winning-the-internet), folders with no story
 (clutch) or no data (queues), the Whole Foods story (data only on Notion) and
-Human Terrain (a how-to, no data). The data repo is MIT licensed; other repos
+Human Terrain (a how-to, no data), and stories whose data is thousands of
+small files rather than a dataset to report on (wiki-billboard, one file per
+person; two-minute-report, one per game; country-radio, one per station plus
+the analysis' intermediates). The data repo is MIT licensed; other repos
 carry their own licenses.
 """
 
@@ -67,7 +70,6 @@ STORIES = [
     Story("birthday-effect", "Are you more likely to die on your birthday", "https://pudding.cool/2025/04/birthday-effect/", "April 2025", "data:birthday-effect"),
     Story("mow", "Why some people mow a lawn better than others", "https://pudding.cool/2026/06/mow", "June 2026", "data:mow", static=False),
     Story("romance-covers", "What Does a Happily Ever After Look Like?", "https://pudding.cool/2023/10/romance-covers/", "October 2023", "git:the-pudding/romance-covers-new:src/data/listings.csv"),
-    Story("country-radio", "They Won't Play a Lady-O on Country Radio", "https://pudding.cool/2023/05/country-radio/", "May 2023", "git:the-pudding/country-radio-data"),
     Story("nba-unexpected", "The Greatest Unexpected NBA Performances", "https://www.youtube.com/watch?v=jV49bDzkQhY", "February 2023", "data:nba-unexpected", static=False),
     Story("random", "We think this cool study we found is flawed. Help us reproduce it.", "https://pudding.cool/2022/04/random/", "April 2022", "data:random", static=False),
     Story("banknotes", "Who's in Your Wallet?", "https://pudding.cool/2022/04/banknotes/", "April 2022", "git:the-pudding/banknotes:src/data"),
@@ -103,7 +105,6 @@ STORIES = [
     Story("boybands", "Internet Boy Band Database", "https://pudding.cool/2018/11/boy-bands/", "November 2018", "data:boybands", static=False),
     Story("dearabby", "Thirty Years of American Anxieties", "https://pudding.cool/2018/11/dearabby/", "November 2018", "data:dearabby"),
     Story("titletowns", "The Winningest Cities in North American Sports", "https://pudding.cool/2018/11/titletowns/", "November 2018", "data:titletowns"),
-    Story("wiki-billboard", "The Celebrity Billboard Project", "https://pudding.cool/2018/09/wiki-billboard/", "September 2018", "git:the-pudding/wiki-billboard-data"),
     Story("filmordigital", "Film vs. Digital", "https://pudding.cool/2018/08/filmordigital/", "August 2018", "data:filmordigital"),
     Story("pockets", "Women's Pockets are Inferior", "https://pudding.cool/2018/08/pockets", "August 2018", "data:pockets"),
     Story("wiki-death", "Life After Death on Wikipedia", "https://pudding.cool/2018/08/wiki-death", "August 2018", "git:the-pudding/wiki-death-data"),
@@ -121,7 +122,6 @@ STORIES = [
     Story("clinics", "How far is too far? An analysis of driving times to abortion clinics in the US.", "https://pudding.cool/2017/09/clinics/", "September 2017", "data:clinics"),
     Story("cetaceans", "Free Willy & Flipper by the Numbers", "https://pudding.cool/2017/07/cetaceans/", "July 2017", "data:cetaceans"),
     Story("births", "The Timing of Baby Making", "https://pudding.cool/2017/05/births/", "May 2017", "data:births"),
-    Story("two-minute-report", "NBA Last Two Minute Report", "https://pudding.cool/2017/02/two-minute-report", "February 2017", "git:polygraph-cool/last-two-minute-report:output"),
 ]
 
 

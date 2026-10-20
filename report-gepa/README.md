@@ -112,7 +112,7 @@ ln -sfn ~/the-pudding/data ~/the-pudding/the-pudding__data
 PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/pudding runs/pudding-originals | tee runs/pudding.log
 ```
 
-收的是 The Pudding 公开了数据的全部数据报道(59 篇):`the-pudding/data` README 表格里的,加上表格没列、但目录 README 写明了对应文章的 gayborhoods、mow。每篇在 `STORIES` 里写明数据从哪来:数据仓库的目录、另一个仓库(浅克隆,只检出 csv/tsv/json)或单独发布的文件(pudding.cool 上的 json、Google 表格导出的 csv)。没收:newsletter 链接库(winning-the-internet)、没有文章的(clutch)、没有数据的(queues)、数据只在 Notion 上的 Whole Foods、只有做法说明的 Human Terrain。
+收的是 The Pudding 公开了数据的全部数据报道(56 篇):`the-pudding/data` README 表格里的,加上表格没列、但目录 README 写明了对应文章的 gayborhoods、mow。每篇在 `STORIES` 里写明数据从哪来:数据仓库的目录、另一个仓库(浅克隆,只检出 csv/tsv/json)或单独发布的文件(pudding.cool 上的 json、Google 表格导出的 csv)。没收:newsletter 链接库(winning-the-internet)、没有文章的(clutch)、没有数据的(queues)、数据只在 Notion 上的 Whole Foods、只有做法说明的 Human Terrain,以及数据是成千上万个小文件、不是一份可以写报告的数据集的 wiki-billboard(一人一个文件)、two-minute-report(一场比赛一个)、country-radio(一家电台一个,外加分析的中间文件)。
 
 每篇的数据复制到 `data/pudding/<名字>/`;数据仓库目录自带的 README 说明数据,一起复制,指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,再给 5 秒,最高 30000px)。打开是开始按钮或者是视频的(kidz-bop、boybands、stand-up、three-seconds、nba-unexpected、mow),manifest 里 `original_static` 为 false,截图不能当标杆。
 
