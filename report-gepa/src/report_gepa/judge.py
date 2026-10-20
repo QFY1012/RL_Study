@@ -1,6 +1,6 @@
 """Judge captured pages against the rubric, one call per group of items.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.2,2.3 [--per-item] [--out runs/judge]
     PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --versions original,pudding-ds-1 --items 3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll

@@ -139,7 +139,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-page
 ### 判
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,1.3,2.1,2.4,2.11 [--per-item]
+PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,1.3,2.2,2.4,2.11 [--per-item]
 PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare runs/evidence/titletowns --versions original,pudding-ds-1 --items 3.1,3.2 [--per-item]
 ```
 
