@@ -91,19 +91,19 @@ TOGETHER = """下面这几条一起打分，每条打一个 0 到 1 的连续分
 
 {items}
 
-最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
 
 CHECK_TOGETHER = """下面这几条一起判，每条判这个页面有没有犯。各条独立判断，不要因为某一条的结论连带改变其它条。只要有一处犯了就算犯了，写出犯在哪里。
 
 {items}
 
-最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
 
 COMPARE_TOGETHER = """页面 A 和页面 B 用的是同一份数据。下面这几条一起比较，每条只就这一条比较哪个页面做得更好，差别不明显就判 tie。各条独立判断，不要因为某一条的结论连带改变其它条。
 
 {items}
 
-最后单独输出一行 JSON,每条一个键:{{{keys}}}"""
+写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
 
 COMPARE = """要比的一条:{id} {name}
 说明:{description}
@@ -405,14 +405,25 @@ def _groups(items: list[Item], per_item: bool) -> list[list[Item]]:
     return out
 
 
+GROUP_ATTEMPTS = 2
+
+
 def _group_job(folder: Path, dim: str, fn):
-    """A group call writes one record per item (those with a usable verdict) and its shared answer."""
+    """A group call writes one record per item and its shared answer. An answer
+    that leaves any item without a verdict (deepseek once wrote twelve paragraphs
+    of review and no JSON) is asked again, and after GROUP_ATTEMPTS it is a
+    failure: nothing is written and the next run asks again."""
     def run():
-        shared, recs = fn()
+        for attempt in range(GROUP_ATTEMPTS):
+            shared, recs = fn()
+            missing = [k for k, r in recs.items() if all(r.get(f) is None for f in ("score", "violated", "winner"))]
+            if not missing:
+                break
+        else:
+            raise RuntimeError(f"no usable verdict for {', '.join(missing)} after {GROUP_ATTEMPTS} attempts")
         folder.mkdir(parents=True, exist_ok=True)
         for item_id, rec in recs.items():
-            if rec.get("score") is not None or rec.get("violated") is not None or rec.get("winner") is not None:
-                (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+            (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
         shared["results"] = {k: r.get("score", r.get("violated", r.get("winner"))) for k, r in recs.items()}
         return shared
     return folder / f"group-{dim}.json", run
