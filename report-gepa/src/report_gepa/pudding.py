@@ -33,6 +33,7 @@ STORIES = [
     "birthday-effect", "foundation-names", "mars-weather", "census-history", "rain", "laugh", "clinics",
     "vogue", "hype", "dress-codes", "titletowns", "pockets", "makeup-shades", "cetaceans", "births",
     "filmordigital", "one-hit-wonders", "campaign-colors", "names-in-songs", "skate-music",
+    "birth-control", "cookies", "neighborhoods", "summer-reading", "dearabby",
 ]
 DATA_SUFFIXES = (".csv", ".tsv", ".json")
 STORY_LINK = re.compile(r"pudding\.cool|polygraph\.cool", re.I)

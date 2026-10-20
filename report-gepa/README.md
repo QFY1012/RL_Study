@@ -79,6 +79,8 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages -
 PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
 ```
 
+`--pages seed-ds-1,pudding-ds-1` 只生成列出的页面。2026-10-20 补进来的 5 个 Pudding 数据集(birth-control、cookies、neighborhoods、summer-reading、dearabby)只生成了这两页。
+
 每 30 秒读一次数据目录的 `manifest.jsonl`(每行的 `data` 是数据相对数据目录的路径),新的数据立刻排队;`split.json` 出现且排队的页面全部完成后退出。中转返回「预扣费额度失败」(余额不够)时整批立即停下,那一页不留记录,充值后重跑同一命令即可。已有 `record.json` 的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
 
 每份数据 5 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
@@ -109,7 +111,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/the-pudding/data ~/
 PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding/data data/pudding runs/pudding-originals | tee runs/pudding.log
 ```
 
-从 The Pudding 公开的数据仓库(MIT 许可,40 个目录)里挑 20 个:页面主要由这份数据构成、静态截图看得懂(kidz-bop、boybands、stand-up 打开是一个开始按钮,截图只有封面;three-seconds 主体是视频;都没选)、数据不超过 70MB。每个复制 csv/tsv/json 和 README 到 `data/pudding/<名字>/`,README 里指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,再给 5 秒,最高 30000px),当标杆。
+从 The Pudding 公开的数据仓库(MIT 许可,40 个目录)里挑 25 个:页面主要由这份数据构成、静态截图看得懂(kidz-bop、boybands、stand-up 打开是一个开始按钮,截图只有封面;three-seconds 主体是视频;都没选)、数据不超过 70MB。每个复制 csv/tsv/json 和 README 到 `data/pudding/<名字>/`,README 里指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,再给 5 秒,最高 30000px),当标杆。
 
 ## 数据
 

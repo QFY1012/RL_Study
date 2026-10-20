@@ -12,7 +12,8 @@ that reads the report file itself (see generate.py):
     pudding-ds  guides/pudding.md, deepseek-v4.1-flash, 1 page
 
 The loop rereads datagen's manifest every 30 s and queues what is missing; a
-page whose record.json exists is skipped, so a restart resumes. It exits once
+page whose record.json exists is skipped, so a restart resumes. --pages limits
+the run to some of the names (seed-ds-1, pudding-ds-1, ...). It exits once
 datagen has written split.json and every queued page is done, or as soon as the
 endpoint says the balance is too low; that page leaves no record, so the next
 run makes it.
@@ -43,7 +44,9 @@ def main():
     ap.add_argument("out", type=Path)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--renders", type=int, default=3, help="browsers open at the same time")
+    ap.add_argument("--pages", help="only these page names, comma-separated (e.g. seed-ds-1,pudding-ds-1)")
     args = ap.parse_args()
+    only = set(args.pages.split(",")) if args.pages else None
 
     render_slots = threading.Semaphore(args.renders)
     queued: set[tuple[str, str]] = set()
@@ -87,6 +90,8 @@ def main():
             for source, (_, _, n) in SOURCES.items():
                 for k in range(1, n + 1):
                     name = f"{source}-{k}"
+                    if only is not None and name not in only:
+                        continue
                     if (rid, name) in queued or (args.out / rid / name / "record.json").exists():
                         continue
                     queued.add((rid, name))
