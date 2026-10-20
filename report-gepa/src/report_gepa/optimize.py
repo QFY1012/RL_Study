@@ -84,6 +84,8 @@ def guide_hash(text: str) -> str:
 class Adapter:
     """GEPA adapter: a candidate is {"guide": text}; a data instance is a story id."""
 
+    propose_new_texts = None  # GEPA reads this; None means its own reflection with reflection_lm
+
     def __init__(self, run: Path, workers: int, browsers: int):
         self.run = run
         self.workers = workers
