@@ -25,7 +25,7 @@ const MAX_TOKENS = 65536
 
 const TASK = `工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据，再按系统提示词的要求把它做成一个网页，写到工作目录的 index.html。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面，不引用任何外部资源(打开页面时没有网络)。
-工作环境里没有浏览器，也没有把 SVG 或 HTML 转成图片的工具，不用找，也不用自己渲染检查。写完就结束。`
+想看页面的效果，运行 pageshot index.html:它像读者一样滚动页面，每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。`
 const [wsArg, guidePath, modelId, effort = "high", taskPath, output = "index.html"] = process.argv.slice(2)
 const NUDGE = `工作目录里还没有 ${output}。请把结果写到 ${output}。`
 if (!wsArg || !guidePath || !modelId) {
@@ -40,7 +40,7 @@ const system = fs.readFileSync(guidePath, "utf8")
 // Both models go through the same OpenAI-compatible endpoint, described with pi's
 // deepseek entry; reasoning effort is sent as reasoning_effort.
 const base = getModel("deepseek", "deepseek-v4-flash")
-const model = { ...base, id: modelId, baseUrl: BASE, input: ["text"], maxTokens: MAX_TOKENS, compat: { ...base.compat, thinkingFormat: "openai" } }
+const model = { ...base, id: modelId, baseUrl: BASE, input: ["text", "image"], maxTokens: MAX_TOKENS, compat: { ...base.compat, thinkingFormat: "openai" } }
 
 const inside = (p) => {
   const abs = path.resolve(ws, p ?? "")

@@ -9,21 +9,25 @@ with --seed and split into val (GEPA's Pareto set) and train (its feedback
 minibatches).
 
 One rollout is one story with one guide. The pi agent writes the page with the
-guide as its system prompt; the fixed task adds that the page is in English, so
-the judge does not pick by language against the English original. The page is
-captured like the originals and judged by deepseek:
+guide as its system prompt; the fixed task adds that the page is in English and
+that pageshot (agent/bin) shows the page the way the judge sees it. The page is
+captured and judged by deepseek:
 - trust: 1.1 from the capture and 1.3 by eye; a violation makes the score 0.
   1.2 (the agent fact check) is left out.
 - expression: every scored 2.x item, 0-1, in one call.
-- aesthetics: 3.1 and 3.2 by group pick against the published original, AB and
-  BA; the page's net share of votes in [-1, 1] maps to [0, 1].
-The score is the mean of the expression items and the two aesthetics items:
-equal weights until weights are fitted on whole-page labels. An item the judge
-gave no verdict for is left out of the mean rather than counted as 0.
+- aesthetics (with --compare): 3.1 and 3.2 by group pick within the story, not
+  against the published original, which generated pages nearly always lose to.
+  The group is the page and two reference pages the seed guide wrote for the
+  story (made once, reused by every rollout): three pages, three rounds in a
+  Latin square. The page's net share of votes in [-1, 1] maps to [0, 1], so 0.5
+  is "no clear difference from the seed guide's pages".
+The score is the mean of the expression items and, when compared, the two
+aesthetics items: equal weights until weights are fitted on whole-page labels.
+An item the judge gave no verdict for is left out of the mean, not counted as 0.
 
 Each rollout's page, evidence and judgements stay in
-<run>/rollouts/<guide hash>/<story>/, and result.json there makes a repeated
-evaluation (a restart, or GEPA asking again) reuse it.
+<run>/rollouts/<guide hash>/<story>/ and are reused when present, so a restart or
+GEPA asking again costs nothing; result.json (result-compare.json) holds the score.
 """
 
 from __future__ import annotations
@@ -32,7 +36,6 @@ import argparse
 import csv
 import hashlib
 import json
-import os
 import random
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -49,15 +52,13 @@ from .rubric import load
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pudding"
-ORIGINALS = ROOT / "runs" / "evidence"
 LABELS = ROOT / "labels" / "round1"
 GEN_MODEL = "deepseek-v4.1-flash"
 JUDGE_MODEL = "deepseek-v4.1-flash"
 REFLECT_MODEL = "deepseek-v4.1-flash"
 TASK = """工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据,再按系统提示词的要求把它做成一个网页,写到工作目录的 index.html。页面上的文字用英文写。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面,不引用任何外部资源(打开页面时没有网络)。
-工作环境里没有浏览器,也没有把 SVG 或 HTML 转成图片的工具,不用找,也不用自己渲染检查。写完就结束。"""
-PROXY = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+想看页面的效果,运行 pageshot index.html:它像读者一样滚动页面,每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。"""
 
 
 def stories() -> list[dict]:
@@ -88,10 +89,13 @@ def guide_hash(text: str) -> str:
 class Adapter:
     """GEPA adapter: a candidate is {"guide": text}; a data instance is a story id."""
 
-    def __init__(self, run: Path, workers: int, browsers: int):
+    def __init__(self, run: Path, workers: int, browsers: int, seed_guide: Path, compare: bool, refs: int = 2):
         self.run = run
         self.workers = workers
         self.browsers = threading.Semaphore(browsers)
+        self.seed_guide = seed_guide
+        self.compare = compare
+        self.refs = refs
         self.rubric = load()
         self.scored = [it for it in self.rubric.values() if it.scored]
         self.pick_items = [it for it in self.rubric.values() if it.pairwise]
@@ -105,19 +109,28 @@ class Adapter:
         with self.locks_lock:
             return self.locks.setdefault(key, threading.Lock())
 
-    def original(self, story: str) -> Path:
-        """The published original's evidence, captured once and shared by every rollout."""
-        ev = ORIGINALS / story / "original"
-        with self._lock("original/" + story):
-            if not (ev / "evidence.json").exists():
-                with self.browsers:
-                    capture(self.meta[story]["url"], ev, PROXY, [DATA / story])
-        return ev
+    def _page(self, guide_path: Path, story: str, pages: Path, name: str, ev: Path) -> dict:
+        """Write and capture one page, reusing what is already there."""
+        record = pages / name / "record.json"
+        rec = (json.loads(record.read_text(encoding="utf-8")) if record.exists() else
+               generate_page(guide_path, [DATA / story], pages, name, GEN_MODEL, render_slots=self.browsers, task_path=self.task))
+        if rec["delivered"] and not (ev / "evidence.json").exists():
+            with self.browsers:
+                capture(str(pages / name / "index.html"), ev, None, [DATA / story])
+        return rec
+
+    def reference(self, story: str, k: int) -> Path | None:
+        """Reference page k of a story, written by the seed guide; None if it was not delivered."""
+        base = self.run / "references" / story
+        ev = base / f"ref-{k}"
+        with self._lock(f"ref/{story}/{k}"):
+            rec = self._page(self.seed_guide, story, base / "pages", f"ref-{k}", ev)
+        return ev if rec["delivered"] else None
 
     def rollout(self, guide: str, story: str) -> dict:
         h = guide_hash(guide)
         base = self.run / "rollouts" / h / story
-        result_path = base / "result.json"
+        result_path = base / ("result-compare.json" if self.compare else "result.json")
         with self._lock(f"{h}/{story}"):
             if result_path.exists():
                 return json.loads(result_path.read_text(encoding="utf-8"))
@@ -131,39 +144,39 @@ class Adapter:
             return result
 
     def _rollout(self, guide_path: Path, story: str, base: Path) -> dict:
-        data = DATA / story
-        rec = generate_page(guide_path, [data], base, "page", GEN_MODEL, render_slots=self.browsers, task_path=self.task)
+        ev = base / "evidence"
+        with ThreadPoolExecutor(1 + (self.refs if self.compare else 0)) as pool:
+            page = pool.submit(self._page, guide_path, story, base, "page", ev)
+            refs = [pool.submit(self.reference, story, k) for k in range(1, self.refs + 1)] if self.compare else []
+            rec, refs = page.result(), [r.result() for r in refs]
         if not rec["delivered"]:
             return {"score": 0.0, "summary": f"no page: {rec.get('detail')}", "feedback": [f"没有交付页面:{rec.get('detail')}"]}
-        ev = base / "evidence"
-        with self.browsers:
-            capture(str(base / "page" / "index.html"), ev, None, [data])
-        orig = self.original(story)
 
-        items: dict[str, dict] = {}
+        judged = base / "judgements.json"
+        items: dict[str, dict] = json.loads(judged.read_text(encoding="utf-8")) if judged.exists() else {}
         gate = J.gate(ev)
         items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
-        for name, fn in (("1.3", lambda: J.check(self.rubric["1.3"], ev, JUDGE_MODEL)),
-                         ("2.x", lambda: J.page_group(self.scored, ev, JUDGE_MODEL)[1]),
-                         ("3.x", lambda: J.pick(self.pick_items, [orig, ev], JUDGE_MODEL)[1])):
+        jobs = [("1.3", lambda: {"1.3": J.check(self.rubric["1.3"], ev, JUDGE_MODEL)}, ["1.3"]),
+                ("2.x", lambda: J.page_group(self.scored, ev, JUDGE_MODEL)[1], [it.id for it in self.scored])]
+        group = [r for r in refs if r] + [ev]
+        if self.compare and len(group) >= 2:
+            jobs.append(("3.x", lambda: J.pick(self.pick_items, group, JUDGE_MODEL)[1], [it.id for it in self.pick_items]))
+        for name, fn, ids in jobs:
+            if all(i in items for i in ids):
+                continue
             try:
-                got = fn()
+                items.update(fn())
             except Exception as e:  # noqa: BLE001 - a judge failure leaves these items out, it is not a 0
                 print(f"[judge] {base.parent.name}/{story} {name}: FAILED {str(e)[:200]}", flush=True)
-                continue
-            for item_id, r in ({"1.3": got} if name == "1.3" else got).items():
-                items[item_id] = r
-        (base / "judgements.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+        judged.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
 
         vetoed = [k for k in ("1.1", "1.3") if items.get(k, {}).get("violated") is True]
-        parts = {}
-        for it in self.scored:
-            if items.get(it.id, {}).get("score") is not None:
-                parts[it.id] = items[it.id]["score"]
-        for it in self.pick_items:
-            r = items.get(it.id)
-            if r and r.get("ok"):
-                parts[it.id] = (r["pick_norm"]["evidence"] + 1) / 2
+        parts = {it.id: items[it.id]["score"] for it in self.scored if items.get(it.id, {}).get("score") is not None}
+        if self.compare:
+            for it in self.pick_items:
+                r = items.get(it.id)
+                if r and r.get("ok"):
+                    parts[it.id] = (r["pick_norm"]["evidence"] + 1) / 2
         score = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
         return {"score": score, "vetoed": vetoed, "parts": parts,
                 "summary": ("vetoed by " + ",".join(vetoed) if vetoed else " ".join(f"{k}={v:.2f}" for k, v in parts.items())),
@@ -178,14 +191,20 @@ class Adapter:
             r = items.get(it.id)
             if r and r.get("score") is not None:
                 out.append(f"{it.id} {it.name}:{r['score']:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
-        for it in self.pick_items:
-            r = items.get(it.id)
-            if not r or not r.get("ok"):
-                continue
-            net = r["pick_norm"]["evidence"]
-            verdict = "比原文明显好" if net > 0 else "比原文明显差" if net < 0 else "和原文没有明显差别"
-            reasons = " / ".join(p["reason"] for p in r.get("per_round", []) if p.get("usable") and p.get("reason"))
-            out.append(f"{it.id} {it.name}(和 The Pudding 原文比):{verdict}。{reasons}")
+        if self.compare:
+            label = {"evidence": "这一版"} | {f"ref-{k}": f"参照{k}" for k in range(1, self.refs + 1)}
+            for it in self.pick_items:
+                r = items.get(it.id)
+                if not r or not r.get("ok"):
+                    continue
+                net = r["pick_norm"]["evidence"]
+                verdict = "比参照页明显好" if net > 0 else "比参照页明显差" if net < 0 else "和参照页没有明显差别"
+                rounds = []
+                for p in r.get("per_round", []):
+                    if p.get("usable") and p.get("reason"):
+                        order = ",".join(f"页面{i}={label.get(n, n)}" for i, n in enumerate(p["order"], 1))
+                        rounds.append(f"(本轮:{order}){p['reason']}")
+                out.append(f"{it.id} {it.name}(和种子指南写的参照页组内比较):{verdict}。" + " / ".join(rounds))
         evid = json.loads((ev / "evidence.json").read_text(encoding="utf-8"))
         out.append(f"页面高 {evid.get('page_height')}px,滚动截了 {len(evid.get('frames', []))} 帧,"
                    f"滚动时固定在屏幕上的图 {sum(1 for c in evid.get('scroll_story', []) if c['pinned'])} 张。")
@@ -237,6 +256,8 @@ def main():
     ap.add_argument("--minibatch", type=int, default=3)
     ap.add_argument("--workers", type=int, default=8, help="rollouts at the same time")
     ap.add_argument("--browsers", type=int, default=4)
+    ap.add_argument("--no-compare", dest="compare", action="store_false",
+                    help="leave aesthetics out: no reference pages, no group pick")
     args = ap.parse_args()
 
     args.run.mkdir(parents=True, exist_ok=True)
@@ -244,7 +265,7 @@ def main():
     (args.run / "split.json").write_text(json.dumps({"train": train, "val": val, "test": test}, indent=1), encoding="utf-8")
     print(f"train {len(train)}: {' '.join(train)}\nval {len(val)}: {' '.join(val)}\ntest {len(test)} (not used here)", flush=True)
 
-    adapter = Adapter(args.run, args.workers, args.browsers)
+    adapter = Adapter(args.run, args.workers, args.browsers, args.seed_guide, args.compare)
     result = gepa.optimize(
         seed_candidate={"guide": args.seed_guide.read_text(encoding="utf-8")},
         trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm,

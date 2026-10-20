@@ -1,0 +1,17 @@
+#!/bin/bash
+# pageshot [page.html] [out_dir]: screenshot a page the way the judge sees it.
+# Scrolls it like a reader and saves one 1440x900 frame per screen (out_dir/frames/NN.jpg), a shrunk
+# whole-page image (out_dir/thumb.jpg) and the run's facts (out_dir/evidence.json: script errors,
+# page height, which charts stay pinned while scrolling and how many states they show).
+set -euo pipefail
+page="${1:-index.html}"
+out="${2:-_shots}"
+rm -rf "$out"
+PYTHONPATH="$REPORT_GEPA/src" "$REPORT_GEPA/.venv/bin/python" -m report_gepa.capture one "$page" "$out"
+python3 - "$out" <<'PY'
+import json, sys
+ev = json.load(open(sys.argv[1] + "/evidence.json"))
+print(f"verdict={ev['verdict']} height={ev.get('page_height')}px frames={len(ev.get('frames', []))} "
+      f"script_errors={ev['page_errors'] + ev['syntax_errors']}")
+print("look at", sys.argv[1] + "/thumb.jpg", "and", ", ".join(sys.argv[1] + "/" + f["file"] for f in ev.get("frames", [])))
+PY
