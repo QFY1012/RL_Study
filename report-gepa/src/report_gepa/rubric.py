@@ -1,10 +1,10 @@
 """Read the rubric items from rubric/judge-dimensions.md.
 
 The markdown is the only copy of the rubric: every table row that starts with an
-item number ("| 2.4 | 一图多用 | ...") is an item, with its name, its description
+item number ("| 2.4 | 连续变换 | ...") is an item, with its name, its description
 and how it is judged. The basis column (which labels and papers it comes from)
 is for people and is not sent to the judge. A scored item also has five band
-descriptions under "#### 2.4 一图多用" in the banding section, the way MiMo's
+descriptions under "#### 2.4 连续变换" in the banding section, the way MiMo's
 eval rubric describes each of its dimensions.
 """
 
