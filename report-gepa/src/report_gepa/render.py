@@ -109,7 +109,7 @@ def _serve(root: Path) -> tuple[http.server.ThreadingHTTPServer, str]:
 
 
 def _shoot(url: str, out_png: Path, proxy: str | None, syntax_errors: list[str], max_height: int,
-           wait_until: str = "load", timeout_ms: int = LOAD_TIMEOUT_MS) -> RenderResult:
+           wait_until: str = "load", timeout_ms: int = LOAD_TIMEOUT_MS, settle_ms: int = SETTLE_MS) -> RenderResult:
     try:
         with sync_playwright() as p:
             launch = {"executable_path": CHROMIUM}
@@ -125,7 +125,7 @@ def _shoot(url: str, out_png: Path, proxy: str | None, syntax_errors: list[str],
                 except PlaywrightError as e:
                     return RenderResult("ok", hang=True, page_errors=page_errors, syntax_errors=syntax_errors,
                                         detail=f"load did not finish: {str(e)[:200]}")
-                page.wait_for_timeout(SETTLE_MS)
+                page.wait_for_timeout(settle_ms)
                 try:
                     page.evaluate(SCROLL_THROUGH, max_height)
                 except PlaywrightError as e:
@@ -161,8 +161,9 @@ def render(html: str, out_png: Path, proxy: str | None = None) -> RenderResult:
 def render_url(url: str, out_png: Path, proxy: str | None, max_height: int = MAX_PAGE_H) -> RenderResult:
     """Screenshot a published page the same way as a generated one, except that it
     waits only for the DOM: some published pages never fire load (vogue waited on a
-    request that never finished)."""
-    return _shoot(url, out_png, proxy, [], max_height, "domcontentloaded", 60000)
+    request that never finished). It then gives the page 5 s to build itself;
+    mars-weather was 2,266px tall after 0.8 s and 8,036px after 3 s."""
+    return _shoot(url, out_png, proxy, [], max_height, "domcontentloaded", 60000, 5000)
 
 
 if __name__ == "__main__":
