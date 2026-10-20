@@ -9,10 +9,10 @@ labels included) is in page.txt, and bash runs python in the sandbox. It lists
 the numbers and the quantitative claims the page makes (most, twice, rose,
 share...), recomputes each from the data, and writes verdict.json.
 
-The score is the share of checkable claims that hold: ok / (ok + wrong). A
-claim the data cannot settle (published Pudding stories often cite figures
-that are not in the files they released) is recorded as unverifiable and left
-out of the score; a page with nothing checkable gets no score.
+One claim the data contradicts is a violation, and trust items veto the page.
+A claim the data cannot settle (published Pudding stories often cite figures
+that are not in the files they released) is recorded as unverifiable and does
+not count.
 """
 
 from __future__ import annotations
@@ -78,10 +78,9 @@ def factcheck(ev_dir: Path, data: list[Path], out_dir: Path, model: str = FACT_M
     claims = (verdict or {}).get("claims", [])
     wrong = [c for c in claims if c.get("result") == "wrong"]
     counts = {r: sum(c.get("result") == r for c in claims) for r in ("ok", "wrong", "unverifiable")}
-    checkable = counts["ok"] + counts["wrong"]
     return {"item": "1.2", "page": str(ev_dir), "model": model, "data": [str(p) for p in data],
             "capture_version": ev["capture_version"], "delivered": verdict is not None,
-            "score": round(counts["ok"] / checkable, 3) if checkable else None, "counts": counts,
+            "violated": bool(wrong) if verdict is not None else None, "counts": counts,
             "wrong": wrong, "summary": (verdict or {}).get("summary"), "claims": claims, "agent": run}
 
 
@@ -89,4 +88,4 @@ if __name__ == "__main__":
     ev_dir, out_dir = Path(sys.argv[1]), Path(sys.argv[2])
     ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
     rec = factcheck(ev_dir, [Path(p) for p in ev["data"]], out_dir)
-    print(json.dumps({k: rec[k] for k in ("score", "counts", "wrong", "summary")}, ensure_ascii=False, indent=1))
+    print(json.dumps({k: rec[k] for k in ("violated", "counts", "wrong", "summary")}, ensure_ascii=False, indent=1))

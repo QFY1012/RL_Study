@@ -34,6 +34,10 @@ class Item:
         return "门槛" in self.mode
 
     @property
+    def binary(self) -> bool:
+        return "二值" in self.mode
+
+    @property
     def scored(self) -> bool:
         return "打分" in self.mode
 
@@ -61,7 +65,7 @@ def load(path: Path = RUBRIC) -> dict[str, Item]:
         if m:
             items[m[1]] = Item(m[1], m[2].strip(), m[3].strip(), m[4].strip(), tuple(bands.get(m[1], ())))
     for it in items.values():
-        if it.scored and it.id != "1.2" and len(it.bands) != 5:
+        if it.scored and len(it.bands) != 5:
             raise ValueError(f"{it.id} is scored but has {len(it.bands)} band descriptions, not 5")
     return items
 
@@ -72,5 +76,5 @@ def rubric_hash(path: Path = RUBRIC) -> str:
 
 if __name__ == "__main__":
     for it in load().values():
-        kind = "gate" if it.gate else "scored" if it.scored else "pairwise" if it.pairwise else "?"
+        kind = "gate" if it.gate else "binary" if it.binary else "scored" if it.scored else "pairwise" if it.pairwise else "?"
         print(f"{it.id:5} {kind:8} {it.name}  [{it.mode}] bands={len(it.bands)}")

@@ -5,7 +5,8 @@
     PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1
 
 stats
-  - mean 0-1 score per item and page version (original, seed-ds-1, pudding-ds-1);
+  - per item and page version (original, seed-ds-1, pudding-ds-1): the mean
+    0-1 score of an expression item, the share of pages that pass a trust item;
   - coupling: Spearman correlation between every two items over the pages that
     have both, pairs above 0.7 flagged;
   - multicollinearity: each item regressed on all the others over the pages that
@@ -21,8 +22,8 @@ agree (two runs over the same pages: the same judge twice, or two judge models)
 human (labels exported by the labeling page: original vs pudding-ds-1)
   - per item: on the stories where people preferred one page, how often the item
     scores that page higher (ties counted apart);
-  - per layer, and the rubric's page score: 0 when trust vetoes the page
-    (1.1 failed, or 1.2 / 1.3 under 0.6), otherwise the mean expression score;
+  - per layer, and the rubric's page score: 0 when the page violates a trust
+    item (1.x), otherwise the mean expression score;
   - the aesthetic comparisons (3.x) against the same labels.
 """
 
@@ -46,12 +47,16 @@ def _key(item: str) -> tuple[int, int]:
 
 
 def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
-    """(story, version) -> {item: 0-1 score}."""
+    """(story, version) -> {item: value}: the 0-1 score of an expression item, and
+    for a trust item 1 when it holds and 0 when it is violated."""
     pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
     for path in (root / "page").glob("*/*/*.json"):
         rec = json.loads(path.read_text(encoding="utf-8"))
+        key = (path.parent.parent.name, path.parent.name)
         if rec.get("score") is not None:
-            pages[(path.parent.parent.name, path.parent.name)][rec["item"]] = float(rec["score"])
+            pages[key][rec["item"]] = float(rec["score"])
+        elif rec.get("violated") is not None:
+            pages[key][rec["item"]] = 0.0 if rec["violated"] else 1.0
     return pages
 
 
@@ -107,7 +112,7 @@ def stats(root: Path, min_pages: int) -> None:
     items = sorted({i for v in pages.values() for i in v}, key=_key)
     versions = sorted({v for _, v in pages})
     print(f"{len(pages)} pages, items {', '.join(items)}\n")
-    print("mean score by version:")
+    print("by version (2.x mean score; 1.x share of pages that pass):")
     print("item  " + "".join(f"{v:>18}" for v in versions))
     for it in items:
         cells = []
@@ -172,11 +177,9 @@ def agree(root_a: Path, root_b: Path) -> None:
         print(f"comparisons: same winner on {np.mean([ca[k] == cb[k] for k in common]):.0%} of {len(common)}")
 
 
-VETO_BELOW = 0.6  # rubric: 1.1 failed, or 1.2 / 1.3 under this, makes the page 0
-
-
 def vetoed(p: dict[str, float]) -> bool:
-    return p.get("1.1") == 0.0 or any(p.get(i) is not None and p[i] < VETO_BELOW for i in ("1.2", "1.3"))
+    """Rubric: violating any trust item (1.x) makes the page 0."""
+    return any(v == 0.0 for k, v in p.items() if k.startswith("1."))
 
 
 def read_labels(folder: Path) -> dict[str, str]:
