@@ -120,7 +120,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/puddin
 
 ## judge(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`)
 
-rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:1.1 是门槛;信和达(1.2–1.3、2.x)每条打 0–1 分;雅(3.x)两两比较。判法照 MiMo 开源打分服务(`recipes/design`)的 query judge 和 group pick。
+rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:信一票否决(1.1 不过,或 1.2、1.3 打分低于 0.6,整页 0 分);达(2.x)每条打 0–1 分;雅(3.x)两两比较。判法照 MiMo 开源打分服务(`recipes/design`)的 query judge 和 group pick。
 
 ### 采集证据
 
@@ -160,7 +160,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a
 
 - 耦合:两条分数的 Spearman 相关超过 0.7 就标出来;再把每条对其余各条做回归,VIF 超过 5 说明这一条大部分能由别的条目说出来。相关矩阵的特征值看这些条目实际上有几个独立方向。
 - 一致率:同一个 judge 判两次(重测),或换一个模型判(跨模型),逐条算 Spearman、平均绝对差、落在同一个分数区间的比例、按区间算的加权 kappa。
-- 和人比:标注是「原文 vs 指南版」哪边好。逐条看这一条单独挑出的高分页面和人选的是否一致,再看每层平均分和全部平均分;雅的两两比较也和同一批标注比。
+- 和人比:标注是「原文 vs 指南版」哪边好。逐条看这一条单独挑出的高分页面和人选的是否一致,再看每层平均分,和按 rubric 合成的页面分(信否决就是 0,否则是达的平均分);雅的两两比较也和同一批标注比。
 
 
 ## 数据

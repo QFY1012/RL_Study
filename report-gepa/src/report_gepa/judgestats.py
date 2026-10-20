@@ -21,7 +21,8 @@ agree (two runs over the same pages: the same judge twice, or two judge models)
 human (labels exported by the labeling page: original vs pudding-ds-1)
   - per item: on the stories where people preferred one page, how often the item
     scores that page higher (ties counted apart);
-  - per layer and overall: the same with the mean score of the layer;
+  - per layer, and the rubric's page score: 0 when trust vetoes the page
+    (1.1 failed, or 1.2 / 1.3 under 0.6), otherwise the mean expression score;
   - the aesthetic comparisons (3.x) against the same labels.
 """
 
@@ -171,6 +172,13 @@ def agree(root_a: Path, root_b: Path) -> None:
         print(f"comparisons: same winner on {np.mean([ca[k] == cb[k] for k in common]):.0%} of {len(common)}")
 
 
+VETO_BELOW = 0.6  # rubric: 1.1 failed, or 1.2 / 1.3 under this, makes the page 0
+
+
+def vetoed(p: dict[str, float]) -> bool:
+    return p.get("1.1") == 0.0 or any(p.get(i) is not None and p[i] < VETO_BELOW for i in ("1.2", "1.3"))
+
+
 def read_labels(folder: Path) -> dict[str, str]:
     """story -> "original" | "pudding-ds-1" | "tie" (both good or both bad)."""
     out = {}
@@ -220,10 +228,20 @@ def human(root: Path, labels_dir: Path) -> None:
             return float(np.mean(xs)) if xs else None
         return f
 
-    print("\nper layer (mean score of the layer's items):")
+    expression = mean_of(("2.",))
+
+    def page_score(p):
+        """The rubric's rule: a trust veto makes the page 0, otherwise the mean expression score."""
+        if vetoed(p):
+            return 0.0
+        return expression(p)
+
+    print("\nper layer:")
     report("layer 1", mean_of(("1.",)))
-    report("layer 2", mean_of(("2.",)))
-    report("all 1.x+2.x", mean_of(("1.", "2.")))
+    report("layer 2", expression)
+    report("veto+layer2", page_score)
+    vetoes = [(s, v) for (s, v), p in pages.items() if vetoed(p)]
+    print(f"\nvetoed pages ({len(vetoes)}): " + ", ".join(f"{s}/{v}" for s, v in sorted(vetoes)))
 
     comps = load_compare(root)
     if comps:
