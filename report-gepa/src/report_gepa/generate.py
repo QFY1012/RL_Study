@@ -74,7 +74,9 @@ def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: s
 
 
 def generate_page(guide_path: Path, data: list[Path], out_dir: Path, name: str, model: str = GEN_MODEL,
-                  effort: str = "high", render_slots: threading.Semaphore | None = None) -> dict:
+                  effort: str = "high", render_slots: threading.Semaphore | None = None,
+                  task_path: Path | None = None) -> dict:
+    """task_path replaces the agent's fixed task message (agent/gen.mjs TASK) when given."""
     ws = out_dir / name
     guide = guide_path.read_text(encoding="utf-8")
     record = {"model": model, "effort": effort, "guide": guide_path.name, "guide_hash": guide_hash(guide),
@@ -87,7 +89,7 @@ def generate_page(guide_path: Path, data: list[Path], out_dir: Path, name: str, 
                 shutil.copytree(p, ws / "data" / p.name)
             else:
                 shutil.copy2(p, ws / "data" / p.name)
-        run = run_agent(ws, guide_path, model, effort, f"  {out_dir.name}/{name}")
+        run = run_agent(ws, guide_path, model, effort, f"  {out_dir.name}/{name}", task_path)
         if CREDIT_REFUSED in (run.get("error") or ""):
             # not the page's fault: leave no record, so a later run makes this page again
             shutil.rmtree(ws, ignore_errors=True)
