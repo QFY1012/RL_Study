@@ -6,7 +6,7 @@
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0
+.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0 pillow==13.0.0
 ```
 
 浏览器用容器里预装的 Chromium(`/opt/pw-browsers/chromium`),不跑 `playwright install`。
@@ -117,6 +117,36 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/puddin
 每篇的数据复制到 `data/pudding/<名字>/`;数据仓库目录自带的 README 说明数据,一起复制,指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,再给 5 秒,最高 30000px)。打开是开始按钮或者是视频的(kidz-bop、boybands、stand-up、three-seconds、nba-unexpected、mow),manifest 里 `original_static` 为 false,截图不能当标杆。
 
 数据仓库是 MIT 许可;其他仓库各有各的许可。
+
+## judge(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`)
+
+rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:信(1.x)判违规,达(2.x)打 1–5 分,雅(3.x)两两比较。
+
+### 采集证据
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.capture one <page.html 或 url> <out_dir> [--data <数据>...]
+PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-pages data/pudding runs/evidence --workers 4 | tee runs/capture.log
+```
+
+- 像真人一样滚动:鼠标滚轮每次 80px,让 scrollama 这类滚动触发一步一步地触发;每 450px 等动画停下来截一屏(1440×900),不冻结动画;和上一帧几乎一样的帧不留。页面太长时加大间隔,最多 60 帧。
+- 每帧记下屏幕上每张图的位置和内容指纹。页面在滚、图在屏幕上的位置不动,就是固定住了(sticky);指纹变了,就是图重画了。汇总成 `scroll_story`:哪张图在哪几帧固定、出现了几种状态。2026-10-20 试过:foundation-names 原文主图第 8–21 帧固定、5 种状态;titletowns 原文三张图各固定 4–7 帧、4–7 种状态;titletowns 指南版没有固定的图。
+- 另外截一张整页图缩成 480px 宽的缩略图;按页面顺序抽出全部文字(带位置、是否在图里、是否隐藏)和图表清单(svg、canvas、img 的大小,svg 里的图形和标签个数)。
+- 输出 `<out_dir>/frames/NN.jpg`、`thumb.jpg`、`evidence.json`(还记着页面用的数据,给事实核对用)。
+- `pudding` 命令采集每篇的原文(`<out>/<篇>/original`)和生成的版本(`<out>/<篇>/<版本>`),已采集的跳过。
+
+### 判
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,2.4,2.11
+PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare runs/evidence/titletowns/original runs/evidence/titletowns/pudding-ds-1 --items 3.1,3.2
+```
+
+- 每次只问一条,条目之间不互相带偏,之后能测耦合性。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。
+- 1.1 不调模型,按采集结果判。只对生成页判脚本报错:Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用。
+- 1.2 由 `factcheck.py` 判:pi agent 在沙盒里读数据和 `page.txt`(页面全部文字),列出页面上的每个数字和带量的说法,用 python 复算,每条记 ok、wrong 或 unverifiable。只有 wrong 算违规;原文引用了没公开的数据时会是 unverifiable,不算。
+- 其他信的条目判违规,达的条目打 1–5 分,都要写出位置和理由;雅的条目把两个页面放在一起比,A/B 换位各问一次,两次不一致记平局。
+- 记录在 `runs/judge/page/<篇>/<版本>/<条目>.json` 和 `runs/judge/compare/<篇>/<a>~<b>/<条目>.json`,带 judge 模型、提示词和 rubric 的哈希、采集版本;已有的跳过。
 
 ## 数据
 

@@ -1,12 +1,13 @@
-// Write one report page with a pi agent.
+// Run a pi agent in a workspace: write a report page, fix one, or check one.
 //
-//   LLM_API_KEY=... LLM_BASE_URL=... node agent/gen.mjs <workspace> <guide.md> <model> [effort] [task.txt]
+//   LLM_API_KEY=... LLM_BASE_URL=... node agent/gen.mjs <workspace> <system.md> <model> [effort] [task.txt] [output]
 //
 // <workspace>/data/ holds the report's files. The guide is the system prompt; the
 // user message only says where the data is and where the page goes, so the data
 // reaches the model only through the read and bash tools. A task file replaces
-// that message (repair.py uses it to fix a page in place). The agent writes
-// <workspace>/index.html. read / write / edit are limited to the workspace and
+// that message (repair.py uses it to fix a page in place, factcheck.py to check
+// one). The agent writes <workspace>/<output>, index.html unless given, and is
+// asked once more if it has not. read / write / edit are limited to the workspace and
 // bash runs in sandbox.sh. Prints one line per tool call, then one JSON line
 // starting with "RESULT " that generate.py parses.
 import fs from "node:fs"
@@ -25,11 +26,10 @@ const MAX_TOKENS = 65536
 const TASK = `工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据，再按系统提示词的要求把它做成一个网页，写到工作目录的 index.html。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面，不引用任何外部资源(打开页面时没有网络)。
 工作环境里没有浏览器，也没有把 SVG 或 HTML 转成图片的工具，不用找，也不用自己渲染检查。写完就结束。`
-const NUDGE = "工作目录里还没有 index.html。请把页面写到 index.html。"
-
-const [wsArg, guidePath, modelId, effort = "high", taskPath] = process.argv.slice(2)
+const [wsArg, guidePath, modelId, effort = "high", taskPath, output = "index.html"] = process.argv.slice(2)
+const NUDGE = `工作目录里还没有 ${output}。请把结果写到 ${output}。`
 if (!wsArg || !guidePath || !modelId) {
-  console.error("usage: node agent/gen.mjs <workspace> <guide.md> <model> [effort] [task.txt]")
+  console.error("usage: node agent/gen.mjs <workspace> <system.md> <model> [effort] [task.txt] [output]")
   process.exit(2)
 }
 const { LLM_API_KEY: KEY, LLM_BASE_URL: BASE } = process.env
@@ -100,7 +100,7 @@ session.subscribe((e) => {
 })
 await session.prompt(taskPath ? fs.readFileSync(taskPath, "utf8") : TASK)
 let nudged = false
-if (!fs.existsSync(path.join(ws, "index.html"))) {
+if (!fs.existsSync(path.join(ws, output))) {
   nudged = true
   console.log(`${name}: nudge`)
   await session.prompt(NUDGE)
