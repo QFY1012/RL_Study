@@ -57,10 +57,10 @@ def page_problem(ws: Path) -> str | None:
     return None
 
 
-def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: str) -> dict:
+def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: str, task_path: Path | None = None) -> dict:
     env = load_env()
     proc = subprocess.Popen(
-        ["node", str(AGENT), str(ws), str(guide_path), model, effort],
+        ["node", str(AGENT), str(ws), str(guide_path), model, effort] + ([str(task_path)] if task_path else []),
         env={**os.environ, "LLM_API_KEY": env["LLM_API_KEY"], "LLM_BASE_URL": env["LLM_BASE_URL"]},
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
     )

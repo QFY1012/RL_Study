@@ -92,6 +92,16 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding
 
 `guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平;`guides/pudding.md` 照 The Pudding 的可视化叙事写(问题当标题、一节一个发现配一张专门画的图、图上直接标注),代表我们想要的方向。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
 
+## 修脚本报错的页面(`src/report_gepa/repair.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pages --workers 4 | tee runs/repair.log
+```
+
+渲染时记录到脚本报错(运行时异常或语法错误)的页面,交给 deepseek-v4.1-flash 的 agent 在原页面上修:任务说明列出报错,要求只改出错的地方、不改设计和文字(`agent/gen.mjs` 的第 5 个参数传入这段任务说明)。原页面留作 `index.broken.html`、`page.broken.png`,`record.json` 里加 `repair`(修复用的模型、报错前后、agent 运行记录),`render` 换成修好后的结果;agent 记录在 `repair-session.jsonl`。最多试 2 次。
+
+2026-10-20 第一批:Pudding 和模拟报告里共 8 页有报错,7 页是 glm 写的(3 个语法错误、4 个运行时异常),1 页是 deepseek 留下了没替换的 `__DATA__` 占位符。
+
 ## Pudding 数据(`src/report_gepa/pudding.py`)
 
 ```sh
