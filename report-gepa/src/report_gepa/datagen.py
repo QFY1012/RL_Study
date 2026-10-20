@@ -24,6 +24,9 @@ from .llm import LLM
 
 DATA_MODEL = "glm-5.3-flash"
 MAX_REWRITES = 2
+# glm-5.3-flash stops at 8192 output tokens unless told otherwise, which cut the
+# large reports off before any JSON came out.
+MAX_TOKENS = 65536
 
 PROMPT = """你在为一个「把 JSON 数据做成报告网页」的系统准备测试输入。请编一份「{name}」的原始数据,像真实业务系统导出给报告作者的那样。
 
@@ -101,7 +104,7 @@ def make_one(llm: LLM, kind: Kind, scale: str, narrative: str) -> tuple[dict | N
         name=kind.name, contents=kind.contents, scale=SCALES[scale], narrative=NARRATIVE[narrative])}]
     attempts = []
     for _ in range(MAX_REWRITES + 1):
-        reply = llm.chat(messages)
+        reply = llm.chat(messages, max_tokens=MAX_TOKENS)
         try:
             data = extract_json(reply.text)
             problems = check(data, scale)
