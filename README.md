@@ -8,6 +8,7 @@
 | `ui-loop/` | 第一版迭代 loop:组件库、生成 Agent、比较与合并脚本 |
 | `ui-rl/` | 重建的强化学习环境(Training-Free GRPO),计划见 `ui-rl/PLAN.md`,进度见 `ui-rl/README.md` |
 | `report-gepa/` | 从头新写的一套:用 GEPA 优化写报告页面的提示词,judge 照 MiMo 的做法校准,不用上面三个目录的任何东西;计划见 `report-gepa/PLAN.md` |
+| `report-tfgrpo/` | 用 Training-Free GRPO 给写报告页面的 agent 学经验清单,生成、截图和 judge 直接调用 `report-gepa`;做法见 `report-tfgrpo/README.md` |
 
 各目录的说明见各自的 README。
 

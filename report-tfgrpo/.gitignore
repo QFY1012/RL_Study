@@ -1,0 +1,7 @@
+# data stays in Google Drive (see README)
+runs/
+__pycache__/
+*.png
+*.jpg
+*.jsonl
+*.log
