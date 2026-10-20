@@ -11,7 +11,7 @@
 - **体系:信、达、雅**。达分图、文、图文联系三块。
 - **信全是一票否决**,判「犯了 / 没犯」,不打分。1.1 渲染器判,1.2 agent 拿数据复算(数据里查不到的不算犯),1.3 judge 看图判。**1.2 不加「无依据的因果解释」**,这类问题只在 2.7 里不给分。
 - **达打 0–1 分**,每条五段分段说明(照 MiMo `eval_rubric.py`),先定区间再取值,每条写 where 和 reason。
-- **只有雅两两比**,用 MiMo 的组内挑选:拉丁方顺序,好 / 差 / 无明显差别;两个页面判 AB、BA 两轮(不要判 8 轮)。
+- **雅照典型案例打分,不再对比**(用户定,2026-10-20):组内挑选比不出来。3.1、3.2 单页打 0–1 分,rubric 里每条附 4–5 个典型案例(一帧截图、分数、理由),judge 先看案例再定档。案例要用户过目确认。
 - **一组一次调用**:信、达、雅各一组。
 - **排除交互式原文**(`pudding.py` 里 `static=False`:falsetto、book-covers、birthday-paradox、random、music-history、people-map、people-map-uk),被排除的页面不判。
 - **滚动要模拟好**:`capture.py` 用 80px 一格的鼠标滚轮,每 450px 停 800ms 截一帧,记每帧图表指纹和 `scroll_story`(哪张图被固定、变了几种状态)。
@@ -119,7 +119,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/v3-gl
 - rubric 文件过时的地方:「判分流程」第 3 步还写 A/B 换位(现在是组内挑选);1.3 的依据写「VLM 看截图判不了」(现在就是 judge 看图判);「还缺的」里多帧截图那条已经做完。README「判」一节第一条也还写着雅「A/B 换位各一次」。
 - README 安装那行漏了 numpy(venv 里装的是 2.5.4)。
 - 数据上 Drive:`data/pudding` 已传(README「数据」一节);`runs/`、`labels/`、调研报告还没传(CLAUDE.md 要求)。Drive 连接器只能把内容写进调用参数,大文件要打包后由用户手动上传。
-- rubric 盘完后重跑:`runs/judge-page.sh <名字> <模型>`(达和信,48 页),雅用 `report_gepa.judge compare $(cat runs/judge-stories-static.txt) --versions original,pudding-ds-1 --items 3.1,3.2`。然后 `judgestats stats / agree / human` 看重测、共线和标注一致率。
+- rubric 盘完后重跑:`runs/judge-page.sh <名字> <模型>`(达和信,48 页),雅和达一样用 `report_gepa.judge page`,条目加上 3.1,3.2。然后 `judgestats stats / agree / human` 看重测、共线和标注一致率。
 - 验证文字类条目要用对抗页面(删掉标题承诺的内容、去掉图上标注、灌水、相关说成因果),或者挑几篇请人逐条标;两个标注者要有 5 篇重叠才能算人和人的一致率。
 
 ## 注意

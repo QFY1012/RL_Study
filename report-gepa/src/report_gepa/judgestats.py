@@ -8,8 +8,6 @@ Stories whose published original is an interactive app (original_static false
 in the Pudding manifest: falsetto, boybands...) are left out everywhere.
 
 stats
-  - position bias of the group pick: how often the page shown first is the one
-    picked better, over the rounds that picked something (50% is none);
   - per item and page version (original, seed-ds-1, pudding-ds-1): the mean
     0-1 score of an expression item, the share of pages that pass a trust item;
   - coupling: Spearman correlation between every two items over the pages that
@@ -28,8 +26,9 @@ human (labels exported by the labeling page: original vs pudding-ds-1)
   - per item: on the stories where people preferred one page, how often the item
     scores that page higher (ties counted apart);
   - per layer, and the rubric's page score: 0 when the page violates a trust
-    item (1.x), otherwise the mean expression score;
-  - the aesthetic comparisons (3.x) against the same labels.
+    item (1.x), otherwise the mean of the expression and aesthetics scores.
+  An item with worked examples (3.x) is not checked on the stories its examples
+  come from: the judge has seen those pages with their scores.
 """
 
 from __future__ import annotations
@@ -42,6 +41,8 @@ from itertools import combinations
 from pathlib import Path
 
 import numpy as np
+
+from .rubric import load as load_rubric
 
 BANDS = (0.2, 0.4, 0.6, 0.8)
 
@@ -81,21 +82,6 @@ def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
         elif rec.get("violated") is not None:
             pages[key][rec["item"]] = 0.0 if rec["violated"] else 1.0
     return pages
-
-
-def load_compare(root: Path) -> dict[tuple[str, str, str, str], str]:
-    """(story, a, b, item) -> the winning version, or "tie", for picks within a pair."""
-    out = {}
-    skip = interactive_stories()
-    for path in (root / "compare").glob("*/*/*.json"):
-        if path.parent.parent.name in skip:
-            continue
-        rec = json.loads(path.read_text(encoding="utf-8"))
-        if "item" not in rec or "winner" not in rec:  # a shared group answer, or a group of more than two
-            continue
-        a, b = path.parent.name.split("~")
-        out[(path.parent.parent.name, a, b, rec["item"])] = rec["winner"]
-    return out
 
 
 def _ranks(xs: np.ndarray) -> np.ndarray:
@@ -161,10 +147,6 @@ def stats(root: Path, min_pages: int) -> None:
     for r, a, b, n in sorted(pairs, key=lambda x: -abs(x[0])):
         print(f"  {a:5} {b:5} r={r:+.2f} n={n}" + ("  <- coupled" if abs(r) > 0.7 else ""))
 
-    if (root / "compare").exists():
-        print("\nposition bias in the group pick (3.x):")
-        position_bias(root)
-
     full = [p for p in pages.values() if all(i in p for i in scored)]
     keep = [i for i in scored if np.std([p[i] for p in full]) > 0] if full else []
     print(f"\nmulticollinearity over {len(full)} pages that have all {len(scored)} items"
@@ -187,35 +169,6 @@ def stats(root: Path, min_pages: int) -> None:
     print(f"  first component explains {share[0]:.0%}; components needed for 80%: {int(np.searchsorted(np.cumsum(share), 0.8)) + 1}")
 
 
-def position_bias(root: Path) -> None:
-    """For the group pick (3.x): where the pages picked clearly better were shown.
-    With n pages a round, no position bias puts 1/n of them in each position."""
-    skip = interactive_stories()
-    for item in sorted({p.stem for p in (root / "compare").glob("*/*/3.*.json")}, key=_key):
-        at = defaultdict(int)
-        n_pages, ncd, rounds = 0, 0, 0
-        for path in (root / "compare").glob(f"*/*/{item}.json"):
-            if path.parent.parent.name in skip:
-                continue
-            rec = json.loads(path.read_text(encoding="utf-8"))
-            for r in rec.get("per_round", []):
-                if not r.get("usable"):
-                    continue
-                rounds += 1
-                n_pages = len(r["order"])
-                if r["vote"].get("ncd"):
-                    ncd += 1
-                    continue
-                for pos, page in enumerate(r["order"]):
-                    if r["vote"].get(page) == "G":
-                        at[pos] += 1
-        good = sum(at.values())
-        if rounds:
-            share = " ".join(f"pos{pos + 1}={at[pos] / good:.0%}" for pos in range(n_pages)) if good else "-"
-            print(f"  {item}: picked-better pages by position {share} (no bias: {1 / n_pages:.0%} each); "
-                  f"{rounds} rounds, {ncd} no clear difference")
-
-
 def agree(root_a: Path, root_b: Path) -> None:
     pa, pb = load(root_a), load(root_b)
     items = sorted({i for v in pa.values() for i in v} & {i for v in pb.values() for i in v}, key=_key)
@@ -232,10 +185,6 @@ def agree(root_a: Path, root_b: Path) -> None:
         same = np.mean([band(x) == band(y) for x, y in zip(a, b)])
         kw = weighted_kappa([band(x) for x in a], [band(y) for y in b])
         print(f"{it:5} {len(keys):>4} {'-' if r is None else f'{r:+.2f}':>9} {diff:>7.2f} {same:>10.0%} {'-' if kw is None else f'{kw:+.2f}':>8}")
-    ca, cb = load_compare(root_a), load_compare(root_b)
-    common = [k for k in ca if k in cb]
-    if common:
-        print(f"comparisons: same winner on {np.mean([ca[k] == cb[k] for k in common]):.0%} of {len(common)}")
 
 
 def vetoed(p: dict[str, float]) -> bool:
@@ -267,9 +216,13 @@ def human(root: Path, labels_dir: Path) -> None:
     print(f"{len(labels)} labelled stories, {len(decided)} with a preferred page "
           f"({sum(w == 'original' for w in decided.values())} original, {sum(w == 'pudding-ds-1' for w in decided.values())} generated)\n")
 
-    def report(name: str, value) -> None:
+    shown = {e.story for it in load_rubric().values() for e in it.examples}
+
+    def report(name: str, value, skip: set[str] = frozenset()) -> None:
         agree_n = disagree = tie = 0
         for s, w in decided.items():
+            if s in skip:
+                continue
             o, g = pages.get((s, "original")), pages.get((s, "pudding-ds-1"))
             if not o or not g:
                 continue
@@ -282,12 +235,13 @@ def human(root: Path, labels_dir: Path) -> None:
             tie += v == "tie"
         n = agree_n + disagree + tie
         if n:
-            print(f"  {name:12} agree {agree_n}/{n} ({agree_n / n:.0%})  opposite {disagree}  tie {tie}")
+            print(f"  {name:12} agree {agree_n}/{n} ({agree_n / n:.0%})  opposite {disagree}  tie {tie}"
+                  + (f"  (left out, used as examples: {', '.join(sorted(skip & set(decided)))})" if skip & set(decided) else ""))
 
     items = sorted({i for v in pages.values() for i in v}, key=_key)
     print("per item (the item alone picks the page with the higher score):")
     for it in items:
-        report(it, lambda p, it=it: p.get(it))
+        report(it, lambda p, it=it: p.get(it), shown if it.startswith("3.") else frozenset())
     def mean_of(prefixes: tuple[str, ...]):
         def f(p):
             xs = [v for k, v in p.items() if k.startswith(prefixes) and k != "1.1"]
@@ -295,33 +249,22 @@ def human(root: Path, labels_dir: Path) -> None:
         return f
 
     expression = mean_of(("2.",))
+    aesthetics = mean_of(("3.",))
+    both = mean_of(("2.", "3."))
 
     def page_score(p):
-        """The rubric's rule: a trust veto makes the page 0, otherwise the mean expression score."""
+        """The rubric's rule: a trust veto makes the page 0, otherwise the mean of expression and aesthetics."""
         if vetoed(p):
             return 0.0
-        return expression(p)
+        return both(p)
 
     print("\nper layer:")
     report("layer 1", mean_of(("1.",)))
     report("layer 2", expression)
-    report("veto+layer2", page_score)
+    report("layer 3", aesthetics, shown)
+    report("page score", page_score, shown)
     vetoes = [(s, v) for (s, v), p in pages.items() if vetoed(p)]
     print(f"\nvetoed pages ({len(vetoes)}): " + ", ".join(f"{s}/{v}" for s, v in sorted(vetoes)))
-
-    comps = load_compare(root)
-    if comps:
-        print("\naesthetic comparisons (3.x):")
-        for it in sorted({k[3] for k in comps}, key=_key):
-            agree_n = n = 0
-            for (s, a, b, i), w in comps.items():
-                if i != it or s not in decided:
-                    continue
-                n += 1
-                agree_n += w == decided[s]
-            if n:
-                print(f"  {it:12} agree {agree_n}/{n} ({agree_n / n:.0%})")
-
 
 def main():
     ap = argparse.ArgumentParser()
