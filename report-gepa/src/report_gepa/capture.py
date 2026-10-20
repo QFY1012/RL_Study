@@ -51,7 +51,7 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, SCROLL_THROUGH, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-2"
+CAPTURE_VERSION = "capture-3"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
 FRAME_EVERY = 450  # px between frames, unless the page is too long for MAX_FRAMES
@@ -195,7 +195,10 @@ def _walk(page, out: Path) -> list[dict]:
 
     frames_dir = out / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
-    page.mouse.move(VIEW_W / 2, VIEW_H / 2)
+    # the wheel needs the pointer over the page, but mid-screen it sits on every chart that scrolls past and
+    # leaves hover tooltips in the frames (titletowns: "Notre Dame 13.8x" over text about LA); the judge ignores
+    # interaction, so the pointer waits at the bottom-left edge
+    page.mouse.move(2, VIEW_H - 2)
     frames, last, target = [], None, 0
     while len(frames) < MAX_FRAMES:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
