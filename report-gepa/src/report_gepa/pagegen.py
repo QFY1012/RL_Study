@@ -13,7 +13,9 @@ that reads the report file itself (see generate.py):
 
 The loop rereads datagen's manifest every 30 s and queues what is missing; a
 page whose record.json exists is skipped, so a restart resumes. It exits once
-datagen has written split.json and every queued page is done.
+datagen has written split.json and every queued page is done, or as soon as the
+endpoint says the balance is too low; that page leaves no record, so the next
+run makes it.
 """
 
 from __future__ import annotations
@@ -25,7 +27,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .generate import GUIDES, generate_page
+from .generate import GUIDES, OutOfCredit, generate_page
 
 SOURCES = {
     "seed-ds": ("deepseek-v4.1-flash", "seed.md", 2),
@@ -49,8 +51,11 @@ def main():
     lock = threading.Lock()
     pool = ThreadPoolExecutor(args.workers)
     futures = []
+    out_of_credit = threading.Event()
 
     def run(report_path: Path, rid: str, source: str, name: str):
+        if out_of_credit.is_set():
+            return
         model, guide, _ = SOURCES[source]
         try:
             rec = generate_page(GUIDES / guide, [report_path], args.out / rid, name, model, render_slots=render_slots)
@@ -60,6 +65,10 @@ def main():
                     f"verdict={rend.get('verdict')} height={rend.get('page_height')} "
                     f"errors={len(rend.get('page_errors', [])) + len(rend.get('syntax_errors', []))} hang={rend.get('hang')}")
             ok = rec["delivered"]
+        except OutOfCredit as e:
+            out_of_credit.set()
+            print(f"{rid}/{name}: OUT OF CREDIT, stopping: {str(e)[:200]}", flush=True)
+            return
         except Exception as e:  # noqa: BLE001 - one page must not stop the pipeline
             line, ok = f"{rid}/{name}: FAILED {str(e)[:200]}", False
         with lock:
@@ -83,11 +92,13 @@ def main():
                     queued.add((rid, name))
                     futures.append(pool.submit(run, report_path, rid, source, name))
         data_finished = (args.reports / "split.json").exists()
-        if data_finished and all(f.done() for f in futures):
+        if out_of_credit.is_set() or (data_finished and all(f.done() for f in futures)):
             break
         time.sleep(30)
-    pool.shutdown()
-    print(f"pages done {counts['done']}: delivered {counts['delivered']}, failed {counts['failed']}", flush=True)
+    # out of credit: queued pages are dropped and running ones end at their next request
+    pool.shutdown(cancel_futures=out_of_credit.is_set())
+    print(f"pages done {counts['done']}: delivered {counts['delivered']}, failed {counts['failed']}"
+          + (" (stopped: out of credit)" if out_of_credit.is_set() else ""), flush=True)
 
 
 if __name__ == "__main__":

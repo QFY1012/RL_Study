@@ -79,7 +79,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages -
 PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
 ```
 
-每 30 秒读一次数据目录的 `manifest.jsonl`(每行的 `data` 是数据相对数据目录的路径),新的数据立刻排队;`split.json` 出现且排队的页面全部完成后退出。已有 `record.json` 的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
+每 30 秒读一次数据目录的 `manifest.jsonl`(每行的 `data` 是数据相对数据目录的路径),新的数据立刻排队;`split.json` 出现且排队的页面全部完成后退出。中转返回「预扣费额度失败」(余额不够)时整批立即停下,那一页不留记录,充值后重跑同一命令即可。已有 `record.json` 的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
 
 每份数据 5 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
 

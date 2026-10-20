@@ -30,7 +30,13 @@ AGENT = ROOT / "agent" / "gen.mjs"
 GUIDES = ROOT / "guides"
 GEN_MODEL = "deepseek-v4.1-flash"
 MAX_ATTEMPTS = 2
+# What the endpoint answers when the balance cannot cover a request's pre-charge.
+CREDIT_REFUSED = "预扣费额度失败"
 SPACED_TAG = re.compile(r"<\s+/?(?:div|span|p|section|h[1-6]|table|tr|td|th|li|ul|svg|text|a|img|header|footer|main|article)\b", re.I)
+
+
+class OutOfCredit(RuntimeError):
+    """The endpoint refused a request because the account balance is too low."""
 
 
 def guide_hash(guide: str) -> str:
@@ -87,6 +93,10 @@ def generate_page(guide_path: Path, data: list[Path], out_dir: Path, name: str, 
             else:
                 shutil.copy2(p, ws / "data" / p.name)
         run = run_agent(ws, guide_path, model, effort, f"  {out_dir.name}/{name}")
+        if CREDIT_REFUSED in (run.get("error") or ""):
+            # not the page's fault: leave no record, so a later run makes this page again
+            shutil.rmtree(ws, ignore_errors=True)
+            raise OutOfCredit(run["error"])
         run["problem"] = page_problem(ws)
         record["attempts"].append(run)
         shutil.rmtree(ws / "data")
