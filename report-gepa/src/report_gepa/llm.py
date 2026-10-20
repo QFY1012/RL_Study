@@ -3,6 +3,9 @@
 Responses are streamed: long generations through the relay can be cut off when
 the whole reply is held until the end. A reply with no finish reason, or one cut
 by the length limit, is reported as incomplete so callers do not score half a page.
+So is a "stop" with no answer text: deepseek through the relay sometimes ends a
+long image request that way within seconds (completion_tokens 0), or after
+reasoning only; the same request usually succeeds when sent again.
 """
 
 from __future__ import annotations
@@ -49,7 +52,7 @@ class Reply:
 
     @property
     def complete(self) -> bool:
-        return self.finish_reason == "stop"
+        return self.finish_reason == "stop" and bool(self.text.strip())
 
 
 class LLM:
@@ -63,7 +66,7 @@ class LLM:
             raise RuntimeError("no model given and LLM_MODEL is not set")
         self.client = OpenAI(api_key=env["LLM_API_KEY"], base_url=env["LLM_BASE_URL"], timeout=900, max_retries=0)
 
-    def chat(self, messages: list[dict], *, retries: int = 3, **params) -> Reply:
+    def chat(self, messages: list[dict], *, retries: int = 5, **params) -> Reply:
         """One chat completion; retries on transport errors and on replies that stop early."""
         last_error: Exception | None = None
         for attempt in range(retries + 1):
