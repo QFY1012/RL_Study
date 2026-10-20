@@ -70,7 +70,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.generate <out_dir> <数据文件�
 - 没写出 `index.html`、HTML 没闭合、标签写成了文字(`< div`)算没交付,整轮重来,最多 2 轮。
 - 每步输出上限 65536 token(pi 默认 32000,glm 不指定时停在 8192)。
 
-2026-10-19 用 Pudding 风格指南在一份 A/B 实验数据上试过:7.4 分钟、39 步、输入 37.7 万 token、输出 6.2 万 token,页面 7,635px,五张不同的图,数字是 agent 用 python 从数据里算的。那一次 agent 花了很多步在沙盒里找浏览器想自查,之后在任务说明里写明了没有。
+2026-10-19 用一份 Pudding 风格的指南(已删)在一份 A/B 实验数据上试过:7.4 分钟、39 步、输入 37.7 万 token、输出 6.2 万 token,页面 7,635px,五张不同的图,数字是 agent 用 python 从数据里算的。那一次 agent 花了很多步在沙盒里找浏览器想自查,之后在任务说明里写明了没有。
 
 ## 批量生成页面(`src/report_gepa/pagegen.py`)
 
@@ -79,20 +79,19 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages -
 PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
 ```
 
-`--pages seed-ds-1,pudding-ds-1` 只生成列出的页面。2026-10-20 补进来的 5 个 Pudding 数据集(birth-control、cookies、neighborhoods、summer-reading、dearabby)只生成了这两页。
+`--pages seed-ds-1,detail-ds-1` 只生成列出的页面。
 
 每 30 秒读一次数据目录的 `manifest.jsonl`(每行的 `data` 是数据相对数据目录的路径),新的数据立刻排队;`split.json` 出现且排队的页面全部完成后退出。中转返回「预扣费额度失败」(余额不够)时整批立即停下,那一页不留记录,充值后重跑同一命令即可。已有 `record.json` 的页面跳过,断了重跑即可。`--renders` 限制同时打开的浏览器数。
 
-每份数据 5 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
+每份数据 4 个页面,来源不同,让标注时好坏的差别不只来自抽样波动:
 
 | 名字 | 指南 | 模型 | 个数 |
 |---|---|---|---|
 | `seed-ds-1`、`seed-ds-2` | `guides/seed.md`(一句话) | deepseek-v4.1-flash | 2,也是 GEPA 的参照页面 |
 | `seed-glm-1` | `guides/seed.md` | glm-5.3-flash | 1 |
 | `detail-ds-1` | `guides/detailed.md` | deepseek-v4.1-flash | 1 |
-| `pudding-ds-1` | `guides/pudding.md` | deepseek-v4.1-flash | 1 |
 
-`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平;`guides/pudding.md` 照 The Pudding 的可视化叙事写(问题当标题、一节一个发现配一张专门画的图、图上直接标注),代表我们想要的方向。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
+`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平。人工标注里的「指南版」(`pudding-ds-1`)是 2026-10-20 用一份 Pudding 风格的指南生成的;那份指南禁止滚动叙事、每节一张图,和 rubric 2.4 相反,已经删掉,标注过的页面作为数据留在 Drive。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
 
 ## 修脚本报错的页面(`src/report_gepa/repair.py`)
 

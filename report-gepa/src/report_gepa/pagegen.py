@@ -9,11 +9,10 @@ that reads the report file itself (see generate.py):
     seed-ds     guides/seed.md, deepseek-v4.1-flash, 2 pages (also GEPA's reference pages)
     seed-glm    guides/seed.md, glm-5.3-flash, 1 page
     detail-ds   guides/detailed.md, deepseek-v4.1-flash, 1 page
-    pudding-ds  guides/pudding.md, deepseek-v4.1-flash, 1 page
 
 The loop rereads datagen's manifest every 30 s and queues what is missing; a
 page whose record.json exists is skipped, so a restart resumes. --pages limits
-the run to some of the names (seed-ds-1, pudding-ds-1, ...). It exits once
+the run to some of the names (seed-ds-1, detail-ds-1, ...). It exits once
 datagen has written split.json and every queued page is done, or as soon as the
 endpoint says the balance is too low; that page leaves no record, so the next
 run makes it.
@@ -35,7 +34,6 @@ SOURCES = {
     "seed-ds": ("deepseek-v4.1-flash", "seed.md", 2),
     "seed-glm": ("glm-5.3-flash", "seed.md", 1),
     "detail-ds": ("deepseek-v4.1-flash", "detailed.md", 1),
-    "pudding-ds": ("deepseek-v4.1-flash", "pudding.md", 1),
 }
 
 
@@ -45,7 +43,7 @@ def main():
     ap.add_argument("out", type=Path)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--renders", type=int, default=3, help="browsers open at the same time")
-    ap.add_argument("--pages", help="only these page names, comma-separated (e.g. seed-ds-1,pudding-ds-1)")
+    ap.add_argument("--pages", help="only these page names, comma-separated (e.g. seed-ds-1,detail-ds-1)")
     args = ap.parse_args()
     only = set(args.pages.split(",")) if args.pages else None
 
