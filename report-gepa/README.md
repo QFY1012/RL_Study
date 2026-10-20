@@ -146,7 +146,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare runs/evidence/title
 - 每次只问一条,条目之间不互相带偏,之后能测耦合性(`judgestats.py`)。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。
 - 1.1 不调模型,按采集结果判,过了 1 分、不过 0 分。只对生成页判脚本报错:Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用。
 - 1.2 由 `factcheck.py` 判:pi agent 在沙盒里读数据和 `page.txt`(页面全部文字),列出页面上的每个数字和带量的说法,用 python 复算,每条记 ok、wrong 或 unverifiable。分数是能核对的说法里对的比例,ok /(ok + wrong);原文引用了没公开的数据时会是 unverifiable,不进分数。
-- 其他信和达的条目照 MiMo query judge 的写法打 0–1 分:先定五个区间里的哪一个,再在区间内取值,写出位置和扣分理由。给不出合法分数的回答记为没判出来,不当 0 分。雅的条目把两个页面放在一起比,A/B 换位各问一次,两次不一致记平局。
+- 其他信和达的条目照 MiMo 评测 rubric(`recipes/design/webdev/eval_rubric.py`)的写法打 0–1 分:每条在 rubric 的「打分的分段说明」里有自己的五段描述,先按它定区间,再在区间内取值,写出位置和扣分理由。给不出合法分数的回答记为没判出来,不当 0 分。雅的条目把两个页面放在一起比,A/B 换位各问一次,两次不一致记平局。
 - 记录在 `runs/judge/page/<篇>/<版本>/<条目>.json` 和 `runs/judge/compare/<篇>/<a>~<b>/<条目>.json`,带 judge 模型、提示词和 rubric 的哈希、采集版本;已有的跳过。
 - 调用失败(重试后仍失败)不写记录,打出 FAILED,重跑同一命令会补上;额度不够时整批停下。
 

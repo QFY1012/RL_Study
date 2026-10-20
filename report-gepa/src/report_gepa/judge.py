@@ -14,8 +14,9 @@ The rubric says how each item is judged:
   generated pages only: published Pudding pages throw errors of their own
   (titletowns: "reading 'latitude'") and still work.
 - trust and expression items (1.2-1.3, 2.x) are scored 0-1 on one page, the
-  way MiMo's query judge scores (recipes/design, prompts/query_fit.md): pick the
-  band first, then a value inside it; the reason for every point taken off is
+  way MiMo's eval rubric scores (recipes/design, webdev/eval_rubric.py): each
+  item has its own five band descriptions; pick the band first, then a value
+  inside it; the reason for every point taken off is
   GEPA's feedback text. 1.2 is checked against the data by an agent
   (factcheck.py), not from screenshots.
 - aesthetic items (3.x) are compared on two pages built from the same data,
@@ -70,12 +71,8 @@ SYSTEM = """你是数据报告网页的评审。读者是普通大众，不是�
 SCORE = """要打分的一条:{id} {name}
 说明:{description}
 
-按这一条给这个页面打一个 0 到 1 的连续分数。先确定区间，再按问题的多少和轻重在区间内取值，不要只输出端点:
-- [0.0, 0.2):基本没做到
-- [0.2, 0.4):只做到一点表面，大部分没做到
-- [0.4, 0.6):做到了主要方向，但有几处明显没做到
-- [0.6, 0.8):基本做到，只有少量次要问题
-- [0.8, 1.0]:完整做到
+按这一条给这个页面打一个 0 到 1 的连续分数。先依据下面的五段说明确定分数所在区间，再根据问题的严重程度、数量和影响在区间内连续取值;不要只输出区间端点或固定档位。临界情况选择和证据最匹配的相邻区间。
+{bands}
 最后单独输出一行 JSON:{{"score": 0 到 1 的小数, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由;满分就说做到了什么"}}"""
 
 COMPARE = """要比的一条:{id} {name}
@@ -178,7 +175,9 @@ def gate(ev_dir: Path) -> dict:
 
 
 def score(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
-    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": SCORE.format(**item.__dict__)}]
+    prompt = SCORE.format(id=item.id, name=item.name, description=item.description,
+                          bands="\n".join(f"- {b}" for b in item.bands))
+    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": prompt}]
     answer = _ask(model, content)
     v = answer["verdict"] or {}
     value = v.get("score")
