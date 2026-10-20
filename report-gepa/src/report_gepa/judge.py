@@ -171,17 +171,50 @@ def evidence_parts(ev_dir: Path, label: str) -> list[dict]:
     return parts
 
 
+FIELDS = {
+    "score": r'"score"\s*:\s*(-?[0-9]+(?:\.[0-9]+)?)',
+    "violated": r'"violated"\s*:\s*(true|false)',
+    "winner": r'"winner"\s*:\s*"(A|B|tie)"',
+    "where": r'"where"\s*:\s*"(.*?)"\s*,\s*"',
+    "reason": r'"reason"\s*:\s*"(.*)"\s*\}',
+}
+
+
+def _fields(text: str) -> dict:
+    """The verdict fields read one by one, for a reply whose JSON does not parse
+    (glm writes unescaped quotes inside its reasons: ...标签也始终是同一 "FIRST" 样式...)."""
+    out = {}
+    for key, pattern in FIELDS.items():
+        m = re.search(pattern, text, re.S)
+        if m:
+            raw = m.group(1)
+            out[key] = float(raw) if key == "score" else raw == "true" if key == "violated" else raw
+    return out
+
+
 def _verdict(text: str) -> dict | None:
     for m in reversed(list(re.finditer(r"\{[^{}]*\}", text))):
         try:
             return json.loads(m.group(0))
         except json.JSONDecodeError:
             continue
-    return None
+    return _fields(text) or None
+
+
+def _item_verdict(parsed: dict, text: str, item_id: str) -> dict:
+    """One item's verdict from a group answer: from the parsed JSON, or read
+    field by field from the text after the item's key when the JSON is broken."""
+    if isinstance(parsed.get(item_id), dict):
+        return parsed[item_id]
+    m = re.search(r'"' + re.escape(item_id) + r'"\s*:\s*\{(.*?)\}\s*(?:,\s*"\d+\.\d+"|\}\s*$)', text.strip(), re.S)
+    return _fields("{" + m.group(1) + "}") if m else {}
 
 
 def _ask(model: str, content: list[dict]) -> dict:
     r = LLM(model).chat([{"role": "system", "content": SYSTEM}, {"role": "user", "content": content}], max_tokens=MAX_TOKENS)
+    if not r.text.strip():
+        # deepseek sometimes ends a long image request with an empty "stop"; that is no judgement at all
+        raise RuntimeError(f"empty reply (finish={r.finish_reason}, completion_tokens={r.completion_tokens})")
     return {"verdict": _verdict(r.text), "text": r.text, "reasoning_chars": len(r.reasoning), "finish": r.finish_reason,
             "prompt_tokens": r.prompt_tokens, "completion_tokens": r.completion_tokens, "seconds": r.seconds}
 
@@ -257,7 +290,7 @@ def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tup
               "answer": answer}
     recs = {}
     for it in items:
-        v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else {}
+        v = _item_verdict(parsed, answer["text"], it.id)
         rec = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "group", "prompt_hash": prompt_hash(template),
                "capture_version": _capture_version(ev_dir), "where": v.get("where"), "reason": v.get("reason")}
         if scored:
@@ -279,13 +312,14 @@ def compare_group(items: list[Item], ev_a: Path, ev_b: Path, model: str = JUDGE_
         content = evidence_parts(first, "A") + evidence_parts(second, "B") + [{"type": "text", "text": prompt}]
         answer = _ask(model, content)
         runs.append((first == ev_a, _json_object(answer["text"]) or {}, answer))
+
     shared = {"a": str(ev_a), "b": str(ev_b), "model": model, "prompt_hash": prompt_hash(COMPARE_TOGETHER),
               "items": [it.id for it in items], "answers": [{"order": "ab" if ab else "ba", "answer": ans} for ab, _, ans in runs]}
     recs = {}
     for it in items:
         per_order = []
-        for ab, parsed, _ in runs:
-            v = parsed.get(it.id) if isinstance(parsed.get(it.id), dict) else {}
+        for ab, parsed, ans in runs:
+            v = _item_verdict(parsed, ans["text"], it.id)
             w = v.get("winner")
             named = {"A": "a" if ab else "b", "B": "b" if ab else "a", "tie": "tie"}.get(w)
             per_order.append({"order": "ab" if ab else "ba", "winner": named, "reason": v.get("reason")})
@@ -439,6 +473,9 @@ def main():
             return path, json.loads(path.read_text(encoding="utf-8"))
         try:
             rec = fn()
+            unusable = rec.get("item") and all(rec.get(k) is None for k in ("score", "violated", "winner"))
+            if unusable:
+                raise RuntimeError("no usable verdict in the answer")
         except OutOfCredit:
             raise
         except Exception as e:  # noqa: BLE001 - a failed call is an infrastructure failure: no record, rerun later
