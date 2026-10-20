@@ -85,7 +85,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/v3-gl
 - deepseek 空回复:按上一节做验证再定修法。
 - rubric 文件过时的地方:「判分流程」第 3 步还写 A/B 换位(现在是组内挑选);1.3 的依据写「VLM 看截图判不了」(现在就是 judge 看图判);「还缺的」里多帧截图那条已经做完。README「判」一节第一条也还写着雅「A/B 换位各一次」。
 - README 安装那行漏了 numpy(venv 里装的是 2.5.4)。
-- 数据上 Drive:`runs/`、`labels/`、`data/`、调研报告都还没传(CLAUDE.md 要求),传完在 README「数据」一节写位置和取回方法。
+- 数据上 Drive:`data/pudding` 已传(README「数据」一节);`runs/`、`labels/`、调研报告还没传(CLAUDE.md 要求)。Drive 连接器只能把内容写进调用参数,大文件要打包后由用户手动上传。
 - rubric 盘完后重跑:`runs/judge-page.sh <名字> <模型>`(达和信,48 页),雅用 `report_gepa.judge compare $(cat runs/judge-stories-static.txt) --versions original,pudding-ds-1 --items 3.1,3.2`。然后 `judgestats stats / agree / human` 看重测、共线和标注一致率。
 - 验证文字类条目要用对抗页面(删掉标题承诺的内容、去掉图上标注、灌水、相关说成因果),或者挑几篇请人逐条标;两个标注者要有 5 篇重叠才能算人和人的一致率。
 

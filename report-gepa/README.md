@@ -166,4 +166,16 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a
 
 ## 数据
 
-还没有上传。生成完放 Google Drive,到时在这里写清楚位置和取回方法。
+数据放 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录,只有本人账号能打开。
+
+| 文件 | 内容 | 解压到 |
+|---|---|---|
+| [`pudding-data.tar.xz`](https://drive.google.com/file/d/1rN-754lKNpakj4Y7bAYHzhZOzSrvQVph/view)(81 MB,解压后 617 MB) | `data/pudding/`:56 篇的数据文件和 `manifest.jsonl`(2026-10-20) | `report-gepa/data/` |
+
+```sh
+tar -xJf pudding-data.tar.xz -C report-gepa/data/
+```
+
+不从 Drive 取也能重做:`report_gepa.pudding` 从 the-pudding 的公开仓库重新克隆生成同样的 `data/pudding/`(见上面「Pudding 数据」)。
+
+还没上传:`runs/`(生成的页面、截图、证据、judge 记录)和 `labels/`(人工标注)。
