@@ -153,12 +153,12 @@ def _story(ev: dict) -> str:
     return "\n".join(lines) or "没有图在滚动时固定在屏幕上，也没有图随滚动改变。"
 
 
-def evidence_parts(ev_dir: Path, label: str) -> list[dict]:
+def evidence_parts(ev_dir: Path, label: str, max_frames: int = MAX_FRAMES) -> list[dict]:
     ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
     frames = ev["frames"]
     keep = list(range(len(frames)))
-    if len(keep) > MAX_FRAMES:
-        keep = sorted({round(i * (len(frames) - 1) / (MAX_FRAMES - 1)) for i in range(MAX_FRAMES)})
+    if len(keep) > max_frames:
+        keep = sorted({round(i * (len(frames) - 1) / (max_frames - 1)) for i in range(max_frames)})
     text_lines, used = [], 0
     for t in ev["text"]:
         line = f"[第 {_frame_of(t['y'], frames)} 帧]{'(隐藏)' if t['hidden'] else ''}{'(图内)' if t['in_svg'] else ''} {t['text']}"
@@ -360,8 +360,10 @@ def combine(votes: list[dict], pages: list[str]) -> dict:
     return out
 
 
-def pick(items: list[Item], group: list[Path], model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
-    """MiMo's group pick on `group` (evidence dirs of one story), each round judging all `items`."""
+def pick(items: list[Item], group: list[Path], model: str = JUDGE_MODEL, max_frames: int = MAX_FRAMES) -> tuple[dict, dict[str, dict]]:
+    """MiMo's group pick on `group` (evidence dirs of one story), each round judging all `items`.
+    max_frames caps the frames shown per page: a group of four pages at 40 frames each is a request
+    deepseek mostly answers with an empty reply."""
     names = [p.name for p in group]
     n = len(group)
     blocks = "\n\n".join(_item_block(it, False) for it in items)
@@ -369,7 +371,7 @@ def pick(items: list[Item], group: list[Path], model: str = JUDGE_MODEL) -> tupl
                      for it in items)
     prompt = PICK.format(n=n, items=blocks, keys=keys)
     orders = pick_orders(n, seed=zlib.crc32(group[0].parent.name.encode()))
-    parts = {(i, pos): evidence_parts(group[i], str(pos + 1)) for i in range(n) for pos in range(n)}
+    parts = {(i, pos): evidence_parts(group[i], str(pos + 1), max_frames) for i in range(n) for pos in range(n)}
 
     def one_round(order: list[int]) -> tuple[list[int], dict, dict]:
         content = [part for pos, i in enumerate(order) for part in parts[(i, pos)]]
@@ -405,7 +407,7 @@ def pick(items: list[Item], group: list[Path], model: str = JUDGE_MODEL) -> tupl
             votes.append(vote)
             per_round.append({"order": shown, "usable": True, "vote": vote, "reason": v.get("reason")})
         recs[it.id] = {"item": it.id, "pages": [str(p) for p in group], "model": model, "mode": "pick",
-                       "prompt_hash": prompt_hash(PICK), "capture_version": [_capture_version(p) for p in group],
+                       "prompt_hash": prompt_hash(PICK), "capture_version": [_capture_version(p) for p in group], "max_frames": max_frames,
                        **combine(votes, names), "per_round": per_round}
     return shared, recs
 

@@ -158,12 +158,7 @@ class Practice:
     # the four learning steps
 
     def summarise(self, story: str, ev: Path, critique: list[str]) -> str:
-        saved = J.MAX_FRAMES
-        J.MAX_FRAMES = SUMMARY_FRAMES
-        try:
-            parts = J.evidence_parts(ev, "")
-        finally:
-            J.MAX_FRAMES = saved
+        parts = J.evidence_parts(ev, "", SUMMARY_FRAMES)
         user = [{"type": "text", "text": P.SINGLE_SUMMARY_UP.format(question=self.question(story), critique="\n".join(critique))}] + parts
         return ask(self.sp["summary"], user)
 

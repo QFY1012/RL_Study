@@ -15,14 +15,16 @@ captured and judged by deepseek:
 - trust: 1.1 from the capture and 1.3 by eye; a violation makes the score 0.
   1.2 (the agent fact check) is left out.
 - expression: every scored 2.x item, 0-1, in one call.
-- aesthetics (with --compare): 3.1 and 3.2 by group pick within the story, not
-  against the published original, which generated pages nearly always lose to.
-  The group is the page and two reference pages the seed guide wrote for the
-  story (made once, reused by every rollout): three pages, three rounds in a
-  Latin square. The page's net share of votes in [-1, 1] maps to [0, 1], so 0.5
-  is "no clear difference from the seed guide's pages".
-The score is the mean of the expression items and, when compared, the two
-aesthetics items: equal weights until weights are fitted on whole-page labels.
+- aesthetics: 3.1 and 3.2 by group pick against a ladder of three fixed opponents
+  for the story, made once and reused: a page by the seed guide (low), a page by
+  guides/detailed.md (middle) and the published Pudding original (high). The
+  page and the three opponents form a group of four judged in four Latin-square
+  rounds, at PICK_FRAMES frames a page. The page's net share of votes in [-1, 1]
+  maps to [0, 1]. One opponent alone either always wins (the original) or soon
+  always loses (the seed page), and then the score stops telling versions apart;
+  the reasons the judge gives for the original's wins are also how reflection
+  learns what no generated page has done yet.
+The score is the mean of the expression items and the two aesthetics items: equal weights until weights are fitted on whole-page labels.
 An item the judge gave no verdict for is left out of the mean, not counted as 0.
 
 Each rollout's page, evidence and judgements stay in
@@ -36,6 +38,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import random
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -53,9 +56,14 @@ from .rubric import load
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pudding"
 LABELS = ROOT / "labels" / "round1"
+ORIGINALS = ROOT / "runs" / "evidence"
+ANCHORS = {"seed": GUIDES / "seed.md", "detail": GUIDES / "detailed.md"}
+ANCHOR_NAMES = {"seed": "种子指南页", "detail": "详细指南页", "original": "Pudding 原文", "evidence": "这一版"}
+PICK_FRAMES = 12
 GEN_MODEL = "deepseek-v4.1-flash"
 JUDGE_MODEL = "deepseek-v4.1-flash"
 REFLECT_MODEL = "deepseek-v4.1-flash"
+PROXY = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
 TASK = """工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据,再按系统提示词的要求把它做成一个网页,写到工作目录的 index.html。页面上的文字用英文写。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面,不引用任何外部资源(打开页面时没有网络)。
 想看页面的效果,运行 pageshot index.html:它像读者一样滚动页面,每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。"""
@@ -89,13 +97,11 @@ def guide_hash(text: str) -> str:
 class Adapter:
     """GEPA adapter: a candidate is {"guide": text}; a data instance is a story id."""
 
-    def __init__(self, run: Path, workers: int, browsers: int, seed_guide: Path, compare: bool, refs: int = 2):
+    def __init__(self, run: Path, workers: int, browsers: int, compare: bool):
         self.run = run
         self.workers = workers
         self.browsers = threading.Semaphore(browsers)
-        self.seed_guide = seed_guide
         self.compare = compare
-        self.refs = refs
         self.rubric = load()
         self.scored = [it for it in self.rubric.values() if it.scored]
         self.pick_items = [it for it in self.rubric.values() if it.pairwise]
@@ -119,13 +125,18 @@ class Adapter:
                 capture(str(pages / name / "index.html"), ev, None, [DATA / story])
         return rec
 
-    def reference(self, story: str, k: int) -> Path | None:
-        """Reference page k of a story, written by the seed guide; None if it was not delivered."""
-        base = self.run / "references" / story
-        ev = base / f"ref-{k}"
-        with self._lock(f"ref/{story}/{k}"):
-            rec = self._page(self.seed_guide, story, base / "pages", f"ref-{k}", ev)
-        return ev if rec["delivered"] else None
+    def anchor(self, story: str, name: str) -> Path | None:
+        """One fixed opponent of the ladder: "seed" or "detail" (a page by that guide) or "original"."""
+        with self._lock(f"anchor/{story}/{name}"):
+            if name == "original":
+                ev = ORIGINALS / story / "original"
+                if not (ev / "evidence.json").exists():
+                    with self.browsers:
+                        capture(self.meta[story]["url"], ev, PROXY, [DATA / story])
+                return ev
+            base = self.run / "anchors" / story
+            rec = self._page(ANCHORS[name], story, base / "pages", name, base / name)
+            return base / name if rec["delivered"] else None
 
     def rollout(self, guide: str, story: str) -> dict:
         h = guide_hash(guide)
@@ -145,10 +156,11 @@ class Adapter:
 
     def _rollout(self, guide_path: Path, story: str, base: Path) -> dict:
         ev = base / "evidence"
-        with ThreadPoolExecutor(1 + (self.refs if self.compare else 0)) as pool:
+        names = ["seed", "detail", "original"] if self.compare else []
+        with ThreadPoolExecutor(1 + len(names)) as pool:
             page = pool.submit(self._page, guide_path, story, base, "page", ev)
-            refs = [pool.submit(self.reference, story, k) for k in range(1, self.refs + 1)] if self.compare else []
-            rec, refs = page.result(), [r.result() for r in refs]
+            anchors = [pool.submit(self.anchor, story, n) for n in names]
+            rec, anchors = page.result(), [a.result() for a in anchors]
         if not rec["delivered"]:
             return {"score": 0.0, "summary": f"no page: {rec.get('detail')}", "feedback": [f"没有交付页面:{rec.get('detail')}"]}
 
@@ -158,9 +170,9 @@ class Adapter:
         items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
         jobs = [("1.3", lambda: {"1.3": J.check(self.rubric["1.3"], ev, JUDGE_MODEL)}, ["1.3"]),
                 ("2.x", lambda: J.page_group(self.scored, ev, JUDGE_MODEL)[1], [it.id for it in self.scored])]
-        group = [r for r in refs if r] + [ev]
+        group = [a for a in anchors if a] + [ev]
         if self.compare and len(group) >= 2:
-            jobs.append(("3.x", lambda: J.pick(self.pick_items, group, JUDGE_MODEL)[1], [it.id for it in self.pick_items]))
+            jobs.append(("3.x", lambda: J.pick(self.pick_items, group, JUDGE_MODEL, PICK_FRAMES)[1], [it.id for it in self.pick_items]))
         for name, fn, ids in jobs:
             if all(i in items for i in ids):
                 continue
@@ -192,19 +204,20 @@ class Adapter:
             if r and r.get("score") is not None:
                 out.append(f"{it.id} {it.name}:{r['score']:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
         if self.compare:
-            label = {"evidence": "这一版"} | {f"ref-{k}": f"参照{k}" for k in range(1, self.refs + 1)}
             for it in self.pick_items:
                 r = items.get(it.id)
                 if not r or not r.get("ok"):
                     continue
                 net = r["pick_norm"]["evidence"]
-                verdict = "比参照页明显好" if net > 0 else "比参照页明显差" if net < 0 else "和参照页没有明显差别"
+                verdict = "在对手梯子里偏上" if net > 0 else "在对手梯子里偏下" if net < 0 else "和对手们没有明显差别"
+                tally = ",".join(f"{ANCHOR_NAMES.get(n, n)} {v:+d}" for n, v in r["pick_sum"].items())
                 rounds = []
                 for p in r.get("per_round", []):
                     if p.get("usable") and p.get("reason"):
-                        order = ",".join(f"页面{i}={label.get(n, n)}" for i, n in enumerate(p["order"], 1))
+                        order = ",".join(f"页面{i}={ANCHOR_NAMES.get(n, n)}" for i, n in enumerate(p["order"], 1))
                         rounds.append(f"(本轮:{order}){p['reason']}")
-                out.append(f"{it.id} {it.name}(和种子指南写的参照页组内比较):{verdict}。" + " / ".join(rounds))
+                out.append(f"{it.id} {it.name}(和种子指南页、详细指南页、Pudding 原文组内比较):{verdict};"
+                           f"各页净票数 {tally}。" + " / ".join(rounds))
         evid = json.loads((ev / "evidence.json").read_text(encoding="utf-8"))
         out.append(f"页面高 {evid.get('page_height')}px,滚动截了 {len(evid.get('frames', []))} 帧,"
                    f"滚动时固定在屏幕上的图 {sum(1 for c in evid.get('scroll_story', []) if c['pinned'])} 张。")
@@ -257,7 +270,7 @@ def main():
     ap.add_argument("--workers", type=int, default=8, help="rollouts at the same time")
     ap.add_argument("--browsers", type=int, default=4)
     ap.add_argument("--no-compare", dest="compare", action="store_false",
-                    help="leave aesthetics out: no reference pages, no group pick")
+                    help="leave aesthetics out: no ladder pages, no group pick")
     args = ap.parse_args()
 
     args.run.mkdir(parents=True, exist_ok=True)
@@ -265,7 +278,7 @@ def main():
     (args.run / "split.json").write_text(json.dumps({"train": train, "val": val, "test": test}, indent=1), encoding="utf-8")
     print(f"train {len(train)}: {' '.join(train)}\nval {len(val)}: {' '.join(val)}\ntest {len(test)} (not used here)", flush=True)
 
-    adapter = Adapter(args.run, args.workers, args.browsers, args.seed_guide, args.compare)
+    adapter = Adapter(args.run, args.workers, args.browsers, args.compare)
     result = gepa.optimize(
         seed_candidate={"guide": args.seed_guide.read_text(encoding="utf-8")},
         trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm,
