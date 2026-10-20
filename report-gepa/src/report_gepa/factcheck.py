@@ -17,6 +17,7 @@ not count.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import sys
@@ -36,9 +37,9 @@ TASK = """工作目录里:
 1. 从 page.txt 里找出页面写的每个数字(总数、平均、比例、排名、年份对应的值……)和每个带量的说法(最高、最多、几倍、增长、下降、超过一半……)。图里的坐标轴刻度不用核对。
 2. 用 python 读 data/ 里的数据，逐条复算或查证。
 3. 每条的结论只能是三种之一:
-   - ok:和数据一致(四舍五入、单位换算后的出入算一致);
-   - wrong:和数据矛盾，或者算出来明显不同;
-   - unverifiable:数据里没有能核对它的信息。
+   - ok:和数据一致。四舍五入、单位换算后的出入，以及和你算出来的差在 10% 以内，都算一致;页面只举了几个例子(「例如」「包括」),没说只有这些，没列全也算一致。
+   - wrong:方向和数据相反(说最高其实不是、说增长其实下降、说多数其实是少数、说浅其实是深),或者和你算出来的差超过 10%。
+   - unverifiable:数据里没有能核对它的信息;或者出入来自统计口径、去重方式、时间范围和这份数据不同，说不清是页面算错了。
 4. 把结果写到工作目录的 verdict.json,格式:
 {"claims": [{"text": "页面原文", "result": "ok|wrong|unverifiable", "detail": "你怎么算的、算出来是多少"}], "summary": "一两句话"}
 
@@ -79,7 +80,8 @@ def factcheck(ev_dir: Path, data: list[Path], out_dir: Path, model: str = FACT_M
     claims = (verdict or {}).get("claims", [])
     wrong = [c for c in claims if c.get("result") == "wrong"]
     counts = {r: sum(c.get("result") == r for c in claims) for r in ("ok", "wrong", "unverifiable")}
-    return {"item": "1.2", "page": str(ev_dir), "model": model, "data": [str(p) for p in data],
+    return {"item": "1.2", "page": str(ev_dir), "model": model, "prompt_hash": hashlib.sha256((SYSTEM + TASK).encode()).hexdigest()[:12],
+            "data": [str(p) for p in data],
             "capture_version": ev["capture_version"], "delivered": verdict is not None,
             "violated": bool(wrong) if verdict is not None else None, "counts": counts,
             "wrong": wrong, "summary": (verdict or {}).get("summary"), "claims": claims, "agent": run}
