@@ -1,7 +1,7 @@
 """Capture what the judge sees of a page: scroll frames, a thumbnail, the text and the charts.
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.capture one <page.html | url> <out_dir> [--data <file or dir>...]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-pages data/pudding runs/evidence [--versions original,seed-ds-1,pudding-ds-1] [--workers 4]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-pages data/pudding runs/evidence [--versions original,seed-ds-1,pudding-ds-1] [--stories a,b] [--workers 4]
 
 A single full-page shot keeps one state of a page whose chart changes as you
 scroll, so the page is scrolled the way a reader scrolls it: small mouse-wheel
@@ -326,13 +326,14 @@ def _summary(ev: dict) -> str:
             f"page_errors={len(ev['page_errors'])} syntax_errors={len(ev['syntax_errors'])} hang={ev['hang']}")
 
 
-def pudding(pages: Path, data_root: Path, out: Path, versions: list[str], workers: int, proxy: str | None) -> None:
+def pudding(pages: Path, data_root: Path, out: Path, versions: list[str], workers: int, proxy: str | None,
+            stories: set[str] | None = None) -> None:
     from concurrent.futures import ThreadPoolExecutor
 
     jobs = []
     for line in (data_root / "manifest.jsonl").read_text(encoding="utf-8").splitlines():
         story = json.loads(line)
-        if not story.get("ok"):
+        if not story.get("ok") or (stories and story["id"] not in stories):
             continue
         data = [data_root / story["data"]]
         for v in versions:
@@ -369,6 +370,7 @@ if __name__ == "__main__":
     pud.add_argument("out", type=Path)
     pud.add_argument("--versions", default="original,seed-ds-1,pudding-ds-1")
     pud.add_argument("--workers", type=int, default=4)
+    pud.add_argument("--stories", help="comma-separated story ids; all stories when omitted")
     args = ap.parse_args()
     proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
     if args.cmd == "one":
@@ -378,4 +380,5 @@ if __name__ == "__main__":
             if c["pinned"] or c["states"] > 1:
                 print(f"chart {c['chart']} {c['kind']} {c['size']}: frames {c['frames']} pinned {c['pinned']} states {c['states']}")
     else:
-        pudding(args.pages, args.data_root, args.out, args.versions.split(","), args.workers, proxy)
+        pudding(args.pages, args.data_root, args.out, args.versions.split(","), args.workers, proxy,
+                set(args.stories.split(",")) if args.stories else None)

@@ -1,7 +1,7 @@
 """Judge captured pages against the rubric, one item per call.
 
     PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.1,2.4 [--out runs/judge]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <evidence_a> <evidence_b> --items 3.1,3.2 [--out runs/judge]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judge compare <story_dir>... --pairs original~pudding-ds-1 --items 3.1,3.2 [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
@@ -43,6 +43,7 @@ from PIL import Image
 
 from .capture import VIEW_H
 from .factcheck import factcheck
+from .generate import OutOfCredit
 from .llm import LLM
 from .rubric import Item, load, rubric_hash
 
@@ -226,8 +227,8 @@ def main():
     c = sub.add_parser("page")
     c.add_argument("pages", type=Path, nargs="+")
     k = sub.add_parser("compare")
-    k.add_argument("a", type=Path)
-    k.add_argument("b", type=Path)
+    k.add_argument("stories", type=Path, nargs="+", help="story directories under the evidence root")
+    k.add_argument("--pairs", required=True, help="comma-separated version pairs, e.g. original~pudding-ds-1")
     for p in (c, k):
         p.add_argument("--items", required=True)
         p.add_argument("--out", type=Path, default=Path("runs/judge"))
@@ -250,24 +251,36 @@ def main():
         for it in items:
             if not it.pairwise:
                 raise SystemExit(f"{it.id} is judged on one page, use page")
-        dataset, va = _name(args.a)
-        _, vb = _name(args.b)
-        for it in items:
-            path = args.out / "compare" / dataset / f"{va}~{vb}" / f"{it.id}.json"
-            jobs.append((path, (lambda it=it: compare(it, args.a, args.b, args.model))))
+        for story in args.stories:
+            for pair in args.pairs.split(","):
+                va, vb = pair.split("~")
+                a, b = story / va, story / vb
+                if not (a / "evidence.json").exists() or not (b / "evidence.json").exists():
+                    print(f"{story.name} {pair}: not captured, skipped", flush=True)
+                    continue
+                for it in items:
+                    path = args.out / "compare" / story.name / pair / f"{it.id}.json"
+                    jobs.append((path, (lambda it=it, a=a, b=b: compare(it, a, b, args.model))))
 
     def run(job):
         path, fn = job
         if path.exists():
             return path, json.loads(path.read_text(encoding="utf-8"))
-        rec = fn()
+        try:
+            rec = fn()
+        except OutOfCredit:
+            raise
+        except Exception as e:  # noqa: BLE001 - a failed call is an infrastructure failure: no record, rerun later
+            return path, {"error": str(e)[:300]}
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
         return path, rec
 
     with ThreadPoolExecutor(args.workers) as pool:
         for path, rec in pool.map(run, jobs):
-            if "winner" in rec:
+            if "error" in rec:
+                print(f"{path}: FAILED {rec['error']}", flush=True)
+            elif "winner" in rec:
                 print(f"{path}: winner={rec['winner']} consistent={rec['consistent']} "
                       + " | ".join(f"{r['order']}:{r['winner']}" for r in rec["runs"]), flush=True)
             else:

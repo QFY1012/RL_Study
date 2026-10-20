@@ -1,59 +1,42 @@
-"""Summarize judge records: scores by version, coupling between items, the known answer.
+"""Analyse judge records: score coupling, agreement between runs, agreement with people.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats runs/judge [--min-pages 10]
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats stats runs/judge/glm-a
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b
+    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1
 
-- By version: for every item, the mean 0-1 score per page version (original,
-  seed-ds-1, pudding-ds-1...).
-- Coupling: Spearman correlation between every two items over the pages that
-  have both. Two items that move together almost always are one item judged
-  twice, or one item leaning on the other; pairs above 0.7 are listed.
-- Known answer: Pudding originals are taken to be better than generated pages
-  (PLAN.md section 3). For every story, the original's expression total is
-  compared with each generated version's.
+stats
+  - mean 0-1 score per item and page version (original, seed-ds-1, pudding-ds-1);
+  - coupling: Spearman correlation between every two items over the pages that
+    have both, pairs above 0.7 flagged;
+  - multicollinearity: each item regressed on all the others over the pages that
+    have every item; R^2 and VIF = 1 / (1 - R^2). VIF above 5 means the item is
+    mostly predictable from the rest, i.e. it adds little that the others do not
+    already say. The eigenvalues of the correlation matrix show how many
+    independent directions the items really span.
+
+agree (two runs over the same pages: the same judge twice, or two judge models)
+  - per item: Spearman, mean absolute difference, how often both land in the
+    same of the five score bands, and quadratic-weighted kappa on the bands.
+
+human (labels exported by the labeling page: original vs pudding-ds-1)
+  - per item: on the stories where people preferred one page, how often the item
+    scores that page higher (ties counted apart);
+  - per layer and overall: the same with the mean score of the layer;
+  - the aesthetic comparisons (3.x) against the same labels.
 """
 
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
 
+import numpy as np
 
-def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
-    """(story, version) -> {item: 0-1 score}."""
-    pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
-    for path in (root / "page").glob("*/*/*.json"):
-        rec = json.loads(path.read_text(encoding="utf-8"))
-        key = (path.parent.parent.name, path.parent.name)
-        if rec.get("score") is not None:
-            pages[key][rec["item"]] = float(rec["score"])
-    return pages
-
-
-def _ranks(xs: list[float]) -> list[float]:
-    order = sorted(range(len(xs)), key=lambda i: xs[i])
-    ranks = [0.0] * len(xs)
-    i = 0
-    while i < len(order):
-        j = i
-        while j + 1 < len(order) and xs[order[j + 1]] == xs[order[i]]:
-            j += 1
-        for k in range(i, j + 1):
-            ranks[order[k]] = (i + j) / 2
-        i = j + 1
-    return ranks
-
-
-def spearman(a: list[float], b: list[float]) -> float | None:
-    ra, rb = _ranks(a), _ranks(b)
-    n = len(ra)
-    ma, mb = sum(ra) / n, sum(rb) / n
-    cov = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
-    va = sum((x - ma) ** 2 for x in ra)
-    vb = sum((y - mb) ** 2 for y in rb)
-    return None if va == 0 or vb == 0 else cov / (va * vb) ** 0.5
+BANDS = (0.2, 0.4, 0.6, 0.8)
 
 
 def _key(item: str) -> tuple[int, int]:
@@ -61,51 +44,221 @@ def _key(item: str) -> tuple[int, int]:
     return int(a), int(b)
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("root", type=Path)
-    ap.add_argument("--min-pages", type=int, default=10)
-    args = ap.parse_args()
-    pages = load(args.root)
+def load(root: Path) -> dict[tuple[str, str], dict[str, float]]:
+    """(story, version) -> {item: 0-1 score}."""
+    pages: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
+    for path in (root / "page").glob("*/*/*.json"):
+        rec = json.loads(path.read_text(encoding="utf-8"))
+        if rec.get("score") is not None:
+            pages[(path.parent.parent.name, path.parent.name)][rec["item"]] = float(rec["score"])
+    return pages
+
+
+def load_compare(root: Path) -> dict[tuple[str, str, str, str], str]:
+    """(story, a, b, item) -> "a" | "b" | "tie"."""
+    out = {}
+    for path in (root / "compare").glob("*/*/*.json"):
+        rec = json.loads(path.read_text(encoding="utf-8"))
+        a, b = path.parent.name.split("~")
+        out[(path.parent.parent.name, a, b, rec["item"])] = rec["winner"]
+    return out
+
+
+def _ranks(xs: np.ndarray) -> np.ndarray:
+    order = np.argsort(xs, kind="mergesort")
+    ranks = np.empty(len(xs))
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and xs[order[j + 1]] == xs[order[i]]:
+            j += 1
+        ranks[order[i:j + 1]] = (i + j) / 2
+        i = j + 1
+    return ranks
+
+
+def spearman(a, b) -> float | None:
+    ra, rb = _ranks(np.asarray(a, float)), _ranks(np.asarray(b, float))
+    if ra.std() == 0 or rb.std() == 0:
+        return None
+    return float(np.corrcoef(ra, rb)[0, 1])
+
+
+def band(x: float) -> int:
+    return sum(x >= t for t in BANDS)
+
+
+def weighted_kappa(a: list[int], b: list[int], k: int = 5) -> float | None:
+    obs = np.zeros((k, k))
+    for x, y in zip(a, b):
+        obs[x, y] += 1
+    n = obs.sum()
+    if n == 0:
+        return None
+    w = np.array([[(i - j) ** 2 for j in range(k)] for i in range(k)]) / (k - 1) ** 2
+    exp = np.outer(obs.sum(1), obs.sum(0)) / n
+    denom = (w * exp).sum()
+    return None if denom == 0 else float(1 - (w * obs).sum() / denom)
+
+
+def stats(root: Path, min_pages: int) -> None:
+    pages = load(root)
     items = sorted({i for v in pages.values() for i in v}, key=_key)
     versions = sorted({v for _, v in pages})
-
     print(f"{len(pages)} pages, items {', '.join(items)}\n")
-    print("by version (mean 0-1 score):")
-    print("item  " + "".join(f"{v:>16}" for v in versions))
+    print("mean score by version:")
+    print("item  " + "".join(f"{v:>18}" for v in versions))
     for it in items:
-        row = []
+        cells = []
         for v in versions:
-            xs = [p[it] for (s, ver), p in pages.items() if ver == v and it in p]
-            row.append(f"{sum(xs) / len(xs):>11.2f} n={len(xs):<2}" if xs else f"{'-':>16}")
-        print(f"{it:5} " + "".join(row))
+            xs = [p[it] for (_, ver), p in pages.items() if ver == v and it in p]
+            cells.append(f"{np.mean(xs):>12.2f} n={len(xs):<3}" if xs else f"{'-':>18}")
+        print(f"{it:5} " + "".join(cells))
 
-    print("\ncoupling (Spearman over pages that have both items):")
+    scored = [i for i in items if i != "1.1"]  # the gate is 0/1 and almost always 1
+    print("\ncoupling (Spearman, pages with both items):")
     pairs = []
-    for a, b in combinations([i for i in items if i != "1.1"], 2):
+    for a, b in combinations(scored, 2):
         common = [p for p in pages.values() if a in p and b in p]
-        if len(common) < args.min_pages:
-            continue
-        r = spearman([p[a] for p in common], [p[b] for p in common])
-        if r is not None:
-            pairs.append((r, a, b, len(common)))
+        if len(common) >= min_pages:
+            r = spearman([p[a] for p in common], [p[b] for p in common])
+            if r is not None:
+                pairs.append((r, a, b, len(common)))
     for r, a, b, n in sorted(pairs, key=lambda x: -abs(x[0])):
-        flag = "  <- coupled" if abs(r) > 0.7 else ""
-        print(f"  {a:5} {b:5} r={r:+.2f} n={n}{flag}")
+        print(f"  {a:5} {b:5} r={r:+.2f} n={n}" + ("  <- coupled" if abs(r) > 0.7 else ""))
 
-    print("\nknown answer (original's expression total vs each generated version):")
-    expr = [i for i in items if i.startswith("2.")]
-    tally: dict[str, list[int]] = defaultdict(lambda: [0, 0, 0])
-    for (story, ver), p in pages.items():
-        if ver == "original":
+    full = [p for p in pages.values() if all(i in p for i in scored)]
+    keep = [i for i in scored if np.std([p[i] for p in full]) > 0] if full else []
+    print(f"\nmulticollinearity over {len(full)} pages that have all {len(scored)} items"
+          + (f" (constant, left out: {', '.join(sorted(set(scored) - set(keep), key=_key))})" if set(scored) - set(keep) else "") + ":")
+    if len(full) <= len(keep) + 1:
+        print("  too few pages for the regression")
+        return
+    X = np.array([[p[i] for i in keep] for p in full])
+    Z = (X - X.mean(0)) / X.std(0)
+    for j, it in enumerate(keep):
+        y = Z[:, j]
+        others = np.column_stack([np.ones(len(Z)), np.delete(Z, j, axis=1)])
+        coef, *_ = np.linalg.lstsq(others, y, rcond=None)
+        r2 = 1 - ((y - others @ coef) ** 2).sum() / ((y - y.mean()) ** 2).sum()
+        vif = float("inf") if r2 >= 1 else 1 / (1 - r2)
+        print(f"  {it:5} R^2={r2:.2f} VIF={vif:6.1f}" + ("  <- mostly said by the others" if vif > 5 else ""))
+    eig = np.sort(np.linalg.eigvalsh(np.corrcoef(Z, rowvar=False)))[::-1]
+    share = eig / eig.sum()
+    print("  correlation eigenvalues: " + " ".join(f"{e:.2f}" for e in eig))
+    print(f"  first component explains {share[0]:.0%}; components needed for 80%: {int(np.searchsorted(np.cumsum(share), 0.8)) + 1}")
+
+
+def agree(root_a: Path, root_b: Path) -> None:
+    pa, pb = load(root_a), load(root_b)
+    items = sorted({i for v in pa.values() for i in v} & {i for v in pb.values() for i in v}, key=_key)
+    print(f"{root_a} vs {root_b}")
+    print(f"{'item':5} {'n':>4} {'spearman':>9} {'|diff|':>7} {'same band':>10} {'kappa_w':>8}")
+    for it in items:
+        keys = [k for k in pa if it in pa[k] and k in pb and it in pb[k]]
+        if not keys:
             continue
-        orig = pages.get((story, "original"))
-        if not orig or any(i not in orig or i not in p for i in expr):
+        a = [pa[k][it] for k in keys]
+        b = [pb[k][it] for k in keys]
+        r = spearman(a, b)
+        diff = np.mean(np.abs(np.array(a) - np.array(b)))
+        same = np.mean([band(x) == band(y) for x, y in zip(a, b)])
+        kw = weighted_kappa([band(x) for x in a], [band(y) for y in b])
+        print(f"{it:5} {len(keys):>4} {'-' if r is None else f'{r:+.2f}':>9} {diff:>7.2f} {same:>10.0%} {'-' if kw is None else f'{kw:+.2f}':>8}")
+    ca, cb = load_compare(root_a), load_compare(root_b)
+    common = [k for k in ca if k in cb]
+    if common:
+        print(f"comparisons: same winner on {np.mean([ca[k] == cb[k] for k in common]):.0%} of {len(common)}")
+
+
+def read_labels(folder: Path) -> dict[str, str]:
+    """story -> "original" | "pudding-ds-1" | "tie" (both good or both bad)."""
+    out = {}
+    for path in sorted(folder.glob("*.csv")):
+        if path.name.endswith("-boxes.csv"):
             continue
-        so, sg = sum(orig[i] for i in expr), sum(p[i] for i in expr)
-        tally[ver][0 if so > sg else 1 if so == sg else 2] += 1
-    for ver, (win, tie, lose) in sorted(tally.items()):
-        print(f"  original vs {ver}: original higher {win}, equal {tie}, lower {lose}")
+        for row in csv.DictReader(path.open(encoding="utf-8-sig")):
+            out[row["dataset"]] = row["winner"] if row["winner"] in ("original", "pudding-ds-1") else "tie"
+    return out
+
+
+def _verdict(x: float, y: float) -> str:
+    return "original" if x > y else "pudding-ds-1" if y > x else "tie"
+
+
+def human(root: Path, labels_dir: Path) -> None:
+    labels = read_labels(labels_dir)
+    pages = load(root)
+    decided = {s: w for s, w in labels.items() if w != "tie"}
+    print(f"{len(labels)} labelled stories, {len(decided)} with a preferred page "
+          f"({sum(w == 'original' for w in decided.values())} original, {sum(w == 'pudding-ds-1' for w in decided.values())} generated)\n")
+
+    def report(name: str, value) -> None:
+        agree_n = disagree = tie = 0
+        for s, w in decided.items():
+            o, g = pages.get((s, "original")), pages.get((s, "pudding-ds-1"))
+            if not o or not g:
+                continue
+            vo, vg = value(o), value(g)
+            if vo is None or vg is None:
+                continue
+            v = _verdict(vo, vg)
+            agree_n += v == w
+            disagree += v not in (w, "tie")
+            tie += v == "tie"
+        n = agree_n + disagree + tie
+        if n:
+            print(f"  {name:12} agree {agree_n}/{n} ({agree_n / n:.0%})  opposite {disagree}  tie {tie}")
+
+    items = sorted({i for v in pages.values() for i in v}, key=_key)
+    print("per item (the item alone picks the page with the higher score):")
+    for it in items:
+        report(it, lambda p, it=it: p.get(it))
+    def mean_of(prefixes: tuple[str, ...]):
+        def f(p):
+            xs = [v for k, v in p.items() if k.startswith(prefixes) and k != "1.1"]
+            return float(np.mean(xs)) if xs else None
+        return f
+
+    print("\nper layer (mean score of the layer's items):")
+    report("layer 1", mean_of(("1.",)))
+    report("layer 2", mean_of(("2.",)))
+    report("all 1.x+2.x", mean_of(("1.", "2.")))
+
+    comps = load_compare(root)
+    if comps:
+        print("\naesthetic comparisons (3.x):")
+        for it in sorted({k[3] for k in comps}, key=_key):
+            agree_n = n = 0
+            for (s, a, b, i), w in comps.items():
+                if i != it or s not in decided:
+                    continue
+                named = {"a": a, "b": b}.get(w, "tie")
+                n += 1
+                agree_n += named == decided[s]
+            if n:
+                print(f"  {it:12} agree {agree_n}/{n} ({agree_n / n:.0%})")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    s = sub.add_parser("stats")
+    s.add_argument("root", type=Path)
+    s.add_argument("--min-pages", type=int, default=10)
+    a = sub.add_parser("agree")
+    a.add_argument("a", type=Path)
+    a.add_argument("b", type=Path)
+    h = sub.add_parser("human")
+    h.add_argument("root", type=Path)
+    h.add_argument("labels", type=Path)
+    args = ap.parse_args()
+    if args.cmd == "stats":
+        stats(args.root, args.min_pages)
+    elif args.cmd == "agree":
+        agree(args.a, args.b)
+    else:
+        human(args.root, args.labels)
 
 
 if __name__ == "__main__":
