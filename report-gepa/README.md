@@ -99,7 +99,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/the-pudding/data ~/
 PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding/data data/pudding runs/pudding-originals | tee runs/pudding.log
 ```
 
-从 The Pudding 公开的数据仓库(MIT 许可,40 个目录)里挑 20 个:页面主要由这份数据构成、静态截图看得懂(kidz-bop、boybands、stand-up 打开是一个开始按钮,截图只有封面,没选)、数据不超过 70MB。每个复制 csv/tsv/json 和 README 到 `data/pudding/<名字>/`,README 里指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,最高 30000px),当标杆。
+从 The Pudding 公开的数据仓库(MIT 许可,40 个目录)里挑 20 个:页面主要由这份数据构成、静态截图看得懂(kidz-bop、boybands、stand-up 打开是一个开始按钮,截图只有封面;three-seconds 主体是视频;都没选)、数据不超过 70MB。每个复制 csv/tsv/json 和 README 到 `data/pudding/<名字>/`,README 里指向原文的行删掉,让任务是「用这份数据做报告」而不是「回忆这篇文章」。原文用同样的方式整页截图到 `runs/pudding-originals/<名字>.png`(只等 DOM 加载完,再给 5 秒,最高 30000px),当标杆。
 
 ## 数据
 

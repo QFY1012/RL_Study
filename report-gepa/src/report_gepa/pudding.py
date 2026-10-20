@@ -14,8 +14,8 @@ and split.json puts them all under "pudding".
 Stories were picked from the repo's 40 folders: the published page is built
 mainly from this data (not a video, a game, a map of names or a newsletter), it
 reads as a static page (kidz-bop, boybands and stand-up open on a start button,
-so a screenshot shows only the cover), and the data is at most 70 MB. The repo
-is MIT licensed.
+so a screenshot shows only the cover; three-seconds is a video), and the data is
+at most 70 MB. The repo is MIT licensed.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from pathlib import Path
 from .render import render_url
 
 STORIES = [
-    "birthday-effect", "foundation-names", "mars-weather", "census-history", "rain", "laugh", "three-seconds",
+    "birthday-effect", "foundation-names", "mars-weather", "census-history", "rain", "laugh", "clinics",
     "vogue", "hype", "dress-codes", "titletowns", "pockets", "makeup-shades", "cetaceans", "births",
     "filmordigital", "one-hit-wonders", "campaign-colors", "names-in-songs", "skate-music",
 ]
