@@ -43,6 +43,7 @@ import argparse
 import base64
 import hashlib
 import json
+import math
 import random
 import re
 import zlib
@@ -310,10 +311,10 @@ def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tup
 # order shifted by r), so every page sits in every position equally often; for
 # an even group the base is Williams', which also balances who comes right after
 # whom. MiMo measured this flattening the first-position bias from +-0.28 to
-# +-0.03 votes. The square is repeated until there are at least PICK_ROUNDS
-# rounds: a group of 8 gets 8, a pair gets AB, BA four times.
-PICK_ROUNDS = 8
-PICK_MIN_OK = 5  # fewer usable rounds than this: no result
+# +-0.03 votes. One square is judged: a group of 8 gets 8 rounds as in MiMo, a
+# pair gets AB and BA (two glm runs of 8 rounds on 16 pairs already agreed on
+# every pair, so more rounds of a pair bought nothing).
+PICK_MIN_OK_SHARE = 0.6  # fewer usable rounds than this share of the square: no result (MiMo: 5 of 8)
 PICK_NCD_ZERO_MIN = 2  # in a group of more than two, this many "no clear difference" rounds zero the whole pick
 PICK_NET_DEADZONE = 1  # a page whose |net votes| is at most this gets 0: position bias alone can make that much
 PICK_PARALLEL = 4
@@ -330,8 +331,7 @@ def pick_orders(n: int, seed: int) -> list[list[int]]:
             lo += 1
     perm = list(range(n))
     random.Random(seed).shuffle(perm)  # which page is "page 0" changes per group
-    square = [[perm[(x + r) % n] for x in base] for r in range(n)]
-    return [row for _ in range(-(-PICK_ROUNDS // n)) for row in square]
+    return [[perm[(x + r) % n] for x in base] for r in range(n)]
 
 
 def combine(votes: list[dict], pages: list[str]) -> dict:
@@ -340,7 +340,7 @@ def combine(votes: list[dict], pages: list[str]) -> dict:
     rounds = len(votes)
     n_ncd = sum(1 for v in votes if v.get("ncd"))
     pick_sum = {p: sum(1 if v.get(p) == "G" else -1 if v.get(p) == "B" else 0 for v in votes) for p in pages}
-    ok = rounds >= PICK_MIN_OK
+    ok = rounds >= math.ceil(PICK_MIN_OK_SHARE * len(pages))
     # In MiMo's groups of eight, two rounds of "no clear difference" mean the group is
     # all alike. In a pair it erased clear signals: birth-control's original won 5-0
     # with three such rounds. A pair keeps only the dead zone.
