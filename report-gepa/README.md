@@ -163,6 +163,32 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a
 - 和人比:标注是「原文 vs 指南版」哪边好。逐条看这一条单独挑出的高分页面和人选的是否一致,再看每层,和按 rubric 合成的页面分(信犯了任何一条就是 0,否则是达的平均分);雅的两两比较也和同一批标注比。
 
 
+## GEPA(`src/report_gepa/optimize.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/<名字> [--max-calls 120] [--val 8] [--train 19] [--minibatch 3] [--no-compare] | tee runs/gepa/<名字>.log
+```
+
+用 `gepa==0.1.4` 优化写页面 agent 的系统提示词 `{"guide": ...}`,从 `guides/seed.md` 起步。
+
+- **数据**:Pudding 里原文是滚动长文的 43 篇。人工标注过的 16 篇是测试集,GEPA 不碰;其余 27 篇按 `--seed` 分成验证 8 篇(帕累托集)和训练 19 篇(反思用的小批量)。划分写在 `<run>/split.json`。
+- **一次 rollout** = 一篇数据 + 一版指南:pi agent 写页面(固定任务说明要求写英文、可以用 `pageshot` 看自己的页面),采集截图,deepseek 判:
+  - 信:1.1、1.3,犯了整页 0 分;1.2 不做。
+  - 达:2.x 每条 0–1 分,一次调用。
+  - 雅:3.1、3.2 和这篇的「水平梯子」比:种子指南写的页(低)、`guides/detailed.md` 写的页(中)、Pudding 原文(高),只准备一次。候选页和这三页 4 页一组,拉丁方 4 轮,每页给 12 帧;净票数换算到 0–1。只和一个对手比会饱和(原文永远赢,种子页很快永远输);原文赢的理由也是反思模型学到「生成页从没做过的做法」的来源。
+  - 分数 = 达和雅各条的平均(等权)。
+- **反馈**:每条的分数、位置和理由;雅每轮标明页面1–4 各是谁,并给出各页的净票数。
+- 每次 rollout 的页面、截图、判分都在 `<run>/rollouts/<指南哈希>/<篇>/`,梯子在 `<run>/anchors/<篇>/`,原文截图在 `runs/evidence/<篇>/original/`;已有的复用,断了重跑同一命令。
+- `--no-compare` 只算信和达,不准备梯子。
+
+## 写页面 agent 的浏览器(`agent/bin/pageshot`)
+
+沙盒(`agent/sandbox.sh`)里打开了本地回环,只读挂上 Chromium、本项目的 Python 环境和 `src/`,`pageshot index.html` 用 `capture.py` 像读者一样滚动截图,输出 `_shots/frames/NN.jpg`、`_shots/thumb.jpg` 和 `evidence.json`;仍然上不了外网。`gen.mjs` 把模型声明为能收图片,read 工具才会把截图交给模型。2026-10-20 cookies 上试过:没有浏览器时一页 62 步、16 分钟、输入 250 万 token;有了以后 21–34 步、4.5–7.5 分钟、输入 9–26 万 token。agent 会跑 pageshot,但不一定把截图看全(一页的条形图没画出来,它只看了 2 张截图)。
+
+## 调用失败和重试(`src/report_gepa/llm.py`)
+
+deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「模型请求失败」或正文为空的 stop(同一请求成功和失败时 prompt token 数不同,像是分到了不同后端),有时 524 超时。和截图内容、图片张数、`max_tokens` 都无关(2026-10-20 逐项排除过)。正文为空也算没完成,和其他失败一起最多重试 5 次;加上以后 v5 一轮判分没有一次失败。
+
 ## 数据
 
 数据放 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录,只有本人账号能打开。
