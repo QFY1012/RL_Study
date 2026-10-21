@@ -31,6 +31,23 @@
 - **1.3 放过标明的非线性刻度**(用户定):对数轴、注明按面积缩放的圆、折线图和散点图截轴不算犯;柱状图、面积图截轴和没标明的缩放仍算。
 - 2.9 文字简洁和 2.10 图文映射不冲突,只是旧写法容易被读成冲突:简洁指每句话都有用,一句能讲清不写两句,只念数据不讲洞察才算多余;为讲洞察提到图上的数是在支撑结论。
 
+## GEPA(2026-10-21 开跑)
+
+**全量**:`runs/gepa/full`,日志 `runs/gepa/full.log`。默认配置:验证 8 篇、训练 19 篇、小批量 3、最多 120 次 rollout、8 篇同时写。写页面和判分都用 deepseek-v4.1-flash;一页 agent 要写约 30 分钟,整轮估计十几个小时。结束时写 `best-guide.md` 和 `result.json`。容器重启会杀掉进程,重跑同一命令从 GEPA 保存的状态和已缓存的 rollout 接着走:
+
+```sh
+cd report-gepa && nohup env PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/full >> runs/gepa/full.log 2>&1 &
+```
+
+**雅的验证**(照典型案例打分,deepseek 两遍,16 篇原文和指南版 32 页,`runs/judge/v4-aes-ds-a`、`-b`):重测 Spearman 3.1 0.95、3.2 0.84;和标注一致(排除做案例的 5 篇,9 篇)雅的平均 8/9、9/9;分数从 0.08 到 0.93。
+
+**冒烟**(`runs/gepa/smoke2`,验证 2、训练 3、小批量 2)走通了一整轮:种子验证集 0.559 → 反思出通用指南 → 小批量 0.495 → 1.095 被接受 → 验证集 0.5685 成为最好。冒烟查出并修好三处:
+- 适配器缺 `propose_new_texts`,gepa 0.1.4 反思时报 AttributeError(148bca4)。
+- GEPA 默认反思提示词要求写进「领域相关的具体信息」,第一版就成了只讲 pop-music 一篇、要求写中文的指南;换成 `REFLECT`,只写通用做法(894aea3)。
+- 1.3 看截图目测柱长会量错(pop-music 实际 525px 对 265px、数值比都是 1.98,judge 读成 402 对 247 而否决);现在第二次独立判也犯才否决(894aea3,用户还没确认)。代价:dog-shelters 真的失真(11,571 和 9,450 画得一样高),复核时第二次没判出来,漏了。根本办法是程序读 SVG 柱长,还没做。
+
+**雅不再对比**:用户定改成照典型案例打分(4cb7c68、9c1c0e8、a6f66b6)。案例:3.1 bears-boys 0.95、birthday-effect 0.9、banknotes 0.65、gayborhoods 原文 0.55、gayborhoods 指南版 0.15;3.2 bears-boys 0.95、laugh 原文 0.9、gayborhoods 原文 0.5、laugh 指南版 0.15。用户要求:bears-boys 是第一名,不要 hype(篮球)那篇。
+
 ## 最近改的 rubric(v3 已重跑,结果见下一节)
 
 | 提交 | 改了什么 | 为什么 |
