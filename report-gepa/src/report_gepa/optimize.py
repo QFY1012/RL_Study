@@ -32,6 +32,8 @@ An item the judge gave no verdict for is left out of the mean, not counted as 0.
 Each rollout's page, evidence and judgements stay in
 <run>/rollouts/<guide hash>/<story>/ and are reused when present, so a restart or
 GEPA asking again costs nothing; result.json holds the score.
+Reflection replies are kept in <run>/reflections/<prompt hash>.md the same way, so a restart
+mid-iteration proposes the same guide again and reuses its rollouts.
 """
 
 from __future__ import annotations
@@ -236,9 +238,21 @@ class Adapter:
         return {name: records for name in components_to_update}
 
 
+REFLECTIONS: Path  # set by main to <run>/reflections
+
+
+def reflection_path(messages) -> Path:
+    return REFLECTIONS / f"{hashlib.sha256(json.dumps(messages, ensure_ascii=False).encode()).hexdigest()[:12]}.md"
+
+
 def reflection_lm(prompt) -> str:
     messages = [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
-    return LLM(REFLECT_MODEL).chat(messages, max_tokens=16384).text
+    path = reflection_path(messages)
+    if path.exists():
+        return path.read_text(encoding="utf-8")
+    text = LLM(REFLECT_MODEL).chat(messages, max_tokens=16384).text
+    path.write_text(text, encoding="utf-8")
+    return text
 
 
 def main():
@@ -255,6 +269,9 @@ def main():
     args = ap.parse_args()
 
     args.run.mkdir(parents=True, exist_ok=True)
+    global REFLECTIONS
+    REFLECTIONS = args.run / "reflections"
+    REFLECTIONS.mkdir(exist_ok=True)
     train, val, test = split(args.val, args.train, args.seed)
     (args.run / "split.json").write_text(json.dumps({"train": train, "val": val, "test": test}, indent=1), encoding="utf-8")
     print(f"train {len(train)}: {' '.join(train)}\nval {len(val)}: {' '.join(val)}\ntest {len(test)} (not used here)", flush=True)
