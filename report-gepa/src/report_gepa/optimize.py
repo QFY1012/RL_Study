@@ -51,7 +51,7 @@ from gepa.core.adapter import EvaluationBatch
 from . import judge as J
 from .capture import capture
 from .generate import GUIDES, generate_page
-from .llm import LLM
+from .llm import LLM, OutOfCredit
 from .rubric import load
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -177,6 +177,8 @@ class Adapter:
                 continue
             try:
                 items.update(fn())
+            except OutOfCredit:
+                raise
             except Exception as e:  # noqa: BLE001 - a judge failure leaves these items out, it is not a 0
                 print(f"[judge] {base.parent.name}/{story} {name}: FAILED {str(e)[:200]}", flush=True)
         judged.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -210,6 +212,8 @@ class Adapter:
         def one(story: str) -> dict:
             try:
                 return self.rollout(guide, story)
+            except OutOfCredit:
+                raise  # not the guide's fault: stop the run rather than hand GEPA a 0
             except Exception as e:  # noqa: BLE001 - GEPA wants a score for every example
                 print(f"[rollout] {guide_hash(guide)}/{story}: FAILED {str(e)[:200]}", flush=True)
                 return {"score": 0.0, "summary": "failed", "feedback": [f"生成或评判出错:{str(e)[:200]}"]}
@@ -256,12 +260,15 @@ def main():
     print(f"train {len(train)}: {' '.join(train)}\nval {len(val)}: {' '.join(val)}\ntest {len(test)} (not used here)", flush=True)
 
     adapter = Adapter(args.run, args.workers, args.browsers)
-    result = gepa.optimize(
-        seed_candidate={"guide": args.seed_guide.read_text(encoding="utf-8")},
-        trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm, reflection_prompt_template=REFLECT,
-        reflection_minibatch_size=args.minibatch, max_metric_calls=args.max_calls,
-        run_dir=str(args.run / "gepa"), seed=args.seed, display_progress_bar=False,
-    )
+    try:
+        result = gepa.optimize(
+            seed_candidate={"guide": args.seed_guide.read_text(encoding="utf-8")},
+            trainset=train, valset=val, adapter=adapter, reflection_lm=reflection_lm, reflection_prompt_template=REFLECT,
+            reflection_minibatch_size=args.minibatch, max_metric_calls=args.max_calls,
+            run_dir=str(args.run / "gepa"), seed=args.seed, display_progress_bar=False,
+        )
+    except OutOfCredit as e:
+        raise SystemExit(f"stopped: out of credit ({e}); top up and rerun the same command: GEPA resumes from its saved state and finished rollouts are reused")
     best = result.candidates[result.best_idx]["guide"]
     (args.run / "best-guide.md").write_text(best, encoding="utf-8")
     summary = {"best_idx": result.best_idx, "val_scores": result.val_aggregate_scores,
