@@ -46,6 +46,8 @@ cd report-gepa && nohup env PYTHONPATH=src .venv/bin/python -m report_gepa.optim
 - GEPA 默认反思提示词要求写进「领域相关的具体信息」,第一版就成了只讲 pop-music 一篇、要求写中文的指南;换成 `REFLECT`,只写通用做法(894aea3)。
 - 1.3 看截图目测柱长会量错(pop-music 实际 525px 对 265px、数值比都是 1.98,judge 读成 402 对 247 而否决);现在第二次独立判也犯才否决(894aea3,用户还没确认)。代价:dog-shelters 真的失真(11,571 和 9,450 画得一样高),复核时第二次没判出来,漏了。根本办法是程序读 SVG 柱长,还没做。
 
+**从第 1 轮的指南接着跑**(用户定,2026-10-21):第 1 轮被接受的指南 `e7d538554fa4`(在旧规则下比出来的)按现在的规则重算,10 篇全部高于种子指南:验证集 7 篇 0.543 → 0.628,训练小批量 3 篇也都更高;2.4 视图连贯 +0.30、2.12 +0.22、2.3 +0.20,但雅没涨(3.1 持平,3.2 0.57 → 0.48:页面统一成了米色衬线编辑风,skate-music 的唱片插画、深色霓虹都没了)。GEPA 改从它起步:`--seed-guide runs/gepa/start-e7d538554fa4.md`(和 `runs/gepa/full/guides/e7d538554fa4.md` 同一份)。从种子起步的那次状态在 `runs/gepa/full/gepa-from-seed`。最后汇报要拿 `guides/seed.md` 单独比一次;种子在验证集 8 篇上(不判 1.3)平均 0.541。待定:总分里达 8 条、雅 2 条等权,反思偏向「讲清楚」;可以改成达、雅各半,或在反思提示词里要求不同话题用不同的视觉方案。
+
 **GEPA 不判 1.3**(用户定,2026-10-21):1.3 靠看截图目测柱长,复核也挡不住误判(one-hit-wonders 两次各量错一张不同的图,凑成否决)。信只剩 1.1。改之前的 GEPA 状态留在 `runs/gepa/full/gepa-with-1.3`,rollout 的分数按新规则从缓存的判分重算,页面不重写。
 
 **雅不再对比**:用户定改成照典型案例打分(4cb7c68、9c1c0e8、a6f66b6)。案例:3.1 bears-boys 0.95、birthday-effect 0.9、banknotes 0.65、gayborhoods 原文 0.55、gayborhoods 指南版 0.15;3.2 bears-boys 0.95、laugh 原文 0.9、gayborhoods 原文 0.5、laugh 指南版 0.15。用户要求:bears-boys 是第一名,不要 hype(篮球)那篇。
