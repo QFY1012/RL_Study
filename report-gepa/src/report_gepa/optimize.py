@@ -18,11 +18,11 @@ One rollout is one story with one guide. The pi agent writes the page with the
 guide as its system prompt; the fixed task adds that the page is in English and
 that pageshot (agent/bin) shows the page the way the judge sees it. The page is
 captured and judged by deepseek:
-- trust: 1.1 from the capture and 1.3 by eye; a violation makes the score 0.
-  A 1.3 violation counts only when a second, independent call finds it too: the
-  judge estimates bar lengths from screenshots and once read 525px against 265px
-  as 402px against 247px (pop-music), and one misreading is a whole page at 0.
-  1.2 (the agent fact check) is left out.
+- trust: 1.1 from the capture; a violation makes the score 0. 1.2 (the agent
+  fact check) and 1.3 (the lie factor, by eye) are left out: the judge estimates
+  bar lengths from screenshots and misreads them (pop-music: 525px against 265px
+  read as 402px against 247px; one-hit-wonders: two calls, each misreading a
+  different chart), and a misreading is a whole page at 0.
 - expression: every scored 2.x item, 0-1, in one call.
 - aesthetics: 3.1 and 3.2, 0-1, in one call, after the rubric's worked examples
   (a frame of a hand-scored page, its score and why), which pin the scale.
@@ -81,7 +81,7 @@ agent 按这份指南，为下面几份数据各写了一个网页。每个网�
 - 这份指南会用在各种完全不同的数据上(体育、文化、科学、社会……),上面只是其中几份。指南里只写通用的做法，不要出现任何具体数据集的名字、字段、数字、人物或结论，也不要针对某个话题写规定。
 - 页面用什么语言、写到哪个文件、能用哪些工具，由固定的任务说明决定，指南里不要规定。
 - 从分数和理由里找出反复出现的问题和做得好的地方，归纳成可操作的原则(怎么选图、怎么组织叙事、怎么写字、怎么标注、怎么让形象和气质贴合话题……)。不要只为某一条分数去改，也不要把评审的原话照抄成规则。
-- 信(1.x)被判犯了的页面整页 0 分：理由里指出的问题(例如柱子长度和数值不成比例、柱状图的轴不从 0 开始)要写成明确的禁止。
+- 页面打不开、脚本报错导致图或正文缺失(1.1)整页 0 分：理由里指出的问题要写成明确的禁止。
 - 保留原指南里有效的部分;新指南要完整，能直接替换原指南使用。
 
 把新指南完整地写在一个 ``` 代码块里。"""
@@ -171,8 +171,7 @@ class Adapter:
         items: dict[str, dict] = json.loads(judged.read_text(encoding="utf-8")) if judged.exists() else {}
         gate = J.gate(ev)
         items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
-        jobs = [("1.3", lambda: {"1.3": self._trust_13(ev)}, ["1.3"])]
-        jobs += [(dim[0].id[0] + ".x", lambda dim=dim: J.page_group(dim, ev, JUDGE_MODEL)[1], [it.id for it in dim]) for dim in self.dims]
+        jobs = [(dim[0].id[0] + ".x", lambda dim=dim: J.page_group(dim, ev, JUDGE_MODEL)[1], [it.id for it in dim]) for dim in self.dims]
         for name, fn, ids in jobs:
             if all(i in items for i in ids):
                 continue
@@ -182,21 +181,12 @@ class Adapter:
                 print(f"[judge] {base.parent.name}/{story} {name}: FAILED {str(e)[:200]}", flush=True)
         judged.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
 
-        vetoed = [k for k in ("1.1", "1.3") if items.get(k, {}).get("violated") is True]
+        vetoed = [k for k in ("1.1",) if items.get(k, {}).get("violated") is True]
         parts = {it.id: items[it.id]["score"] for it in self.scored if items.get(it.id, {}).get("score") is not None}
         score = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
         return {"score": score, "vetoed": vetoed, "parts": parts,
                 "summary": ("vetoed by " + ",".join(vetoed) if vetoed else " ".join(f"{k}={v:.2f}" for k, v in parts.items())),
                 "feedback": self._feedback(items, vetoed, ev)}
-
-    def _trust_13(self, ev: Path) -> dict:
-        """1.3 by eye, confirmed: a violation stands only if a second, independent call finds it too."""
-        first = J.check(self.rubric["1.3"], ev, JUDGE_MODEL)
-        if first["violated"] is not True:
-            return first
-        second = J.check(self.rubric["1.3"], ev, JUDGE_MODEL)
-        return {**first, "violated": second["violated"] is True,
-                "confirm": {k: second[k] for k in ("violated", "where", "reason")}}
 
     def _feedback(self, items: dict, vetoed: list[str], ev: Path) -> list[str]:
         out = []
