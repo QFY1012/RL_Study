@@ -177,8 +177,12 @@ class Practice:
         raise RuntimeError(f"{story}: the group comparison gave no experiences three times")
 
     def group_update(self, exps: dict[str, str], new: str) -> list[dict]:
-        text = ask(self.sp["group"], P.GROUP_UPDATE_UP.format(existing=format_experiences(exps), new=new))
-        return json_array(text)
+        for _ in range(3):
+            try:
+                return json_array(ask(self.sp["group"], P.GROUP_UPDATE_UP.format(existing=format_experiences(exps), new=new)))
+            except ValueError as e:  # an empty or malformed reply; asked again, as the batch update does
+                print(f"[group update] could not read the operations: {str(e)[:120]}", flush=True)
+        raise RuntimeError("the group update gave no readable operations three times")
 
     def batch_update(self, exps: dict[str, str], ops: list[dict]) -> dict[str, str]:
         if not ops:
