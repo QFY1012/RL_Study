@@ -76,8 +76,7 @@ class Practice:
         self.scored = [it for it in self.rubric.values() if it.scored]
         self.dims = [[it for it in self.scored if it.id.startswith(d)] for d in ("2.", "3.")]
         self.meta = {r["id"]: r for r in stories()}
-        rubric_text = "\n".join(f"- {it.id} {it.name}:{it.description}" for it in self.rubric.values() if it.id not in ("1.2", "1.3"))
-        objectives = {"agent_objective": P.AGENT_OBJECTIVE, "learning_objective": P.LEARNING_OBJECTIVE.format(rubric=rubric_text)}
+        objectives = {"agent_objective": P.AGENT_OBJECTIVE, "learning_objective": P.LEARNING_OBJECTIVE}
         self.sp = {
             "summary": P.SINGLE_SUMMARY_SP.format(**objectives),
             "advantage": P.GROUP_ADVANTAGE_SP.format(**objectives, num_experiences=per_story),
