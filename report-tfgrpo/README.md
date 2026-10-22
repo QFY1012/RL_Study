@@ -52,6 +52,14 @@ PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgr
 - 每一步结束后的经验清单在 `runs/<名字>/experiences/step-NN.json` 和 `.md`。
 - 断了重跑同一命令:已有的页面、采集、判分、总结都复用,从最后一个没写完经验清单的步接着跑。
 
+学完后在 GEPA 的验证集 8 篇上打分,和 report-gepa `runs/gepa/full` 的验证分(种子 0.541,最好的 0112 0.669)可比:
+
+```sh
+PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.valeval runs/<名字> [--step N] | tee runs/<名字>-val.log
+```
+
+提示词是种子指南加这一步之后的经验清单(默认最后一步),每篇写一页,用 report-gepa 的 `Adapter` 写页面和判分;结果在 `runs/<名字>/val/`。
+
 ## 数据
 
 `runs/` 不进仓库。跑出来的结果上传 Google Drive 后,在这里写位置和取回方法。
