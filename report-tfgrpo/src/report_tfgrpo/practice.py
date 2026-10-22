@@ -130,10 +130,11 @@ class Practice:
         return out
 
     def reward(self, items: dict) -> tuple[float, list[str]]:
-        """A page's reward and the lines the summariser reads: the scores, not the judge's reasons.
-        The reasons speak the rubric's words and the experiences echoed them; as the paper's summary
-        sees only right or wrong, the summariser here sees where the page lost points and has to find
-        why in the screenshots. A render failure keeps its message: it comes from the renderer."""
+        """A page's reward and the lines the summariser reads: the expression and aesthetics means, nothing
+        finer. The judge's reasons and even the item names speak the rubric's words, and the experiences
+        followed them; as the paper's summary sees only right or wrong, the summariser here sees two
+        numbers and has to find what made them in the screenshots. A render failure keeps its message:
+        it comes from the renderer, not the judge."""
         lines, parts = [], {}
         vetoed = [k for k in ("1.1",) if items.get(k, {}).get("violated") is True]
         for k in vetoed:
@@ -143,7 +144,10 @@ class Practice:
             r = items.get(it.id)
             if r and r.get("score") is not None:
                 parts[it.id] = r["score"]
-                lines.append(f"{it.id} {it.name}:{r['score']:.2f}")
+        for dim, name in (("2.", "表达"), ("3.", "美学")):
+            got = [v for k, v in parts.items() if k.startswith(dim)]
+            if got and not vetoed:
+                lines.append(f"{name}:{sum(got) / len(got):.2f}")
         reward = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
         return reward, lines
 
