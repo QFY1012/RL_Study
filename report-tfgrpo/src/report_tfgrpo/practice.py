@@ -11,13 +11,11 @@ experiences into ADD/UPDATE/DELETE/NONE operations on the list (group update),
 and merges the batch's operations into one revision of the list (batch update).
 There is no acceptance test: the revised list is used for the next batch.
 
-Reward of a page, with report-gepa's judge (deepseek) and rubric:
-- trust: 1.1 from the capture and 1.3 by eye; a violation makes the reward 0.
-  1.2 (the agent fact check) is left out.
-- expression: every scored 2.x item, 0-1, in one call per page.
-- aesthetics: 3.1 and 3.2 by group pick among the story's pages, in a Latin
-  square (three pages, three rounds); a page's net share of votes in [-1, 1]
-  maps to [0, 1].
+Reward of a page, with report-gepa's judge (deepseek) and rubric, the same as GEPA's score:
+- trust: 1.1 from the capture; a violation makes the reward 0. 1.2 (the agent
+  fact check) and 1.3 (the lie factor by eye) are left out, as in GEPA.
+- expression: every 2.x item, 0-1, in one call per page.
+- aesthetics: 3.1 and 3.2, 0-1, in one call per page, against the rubric's worked examples.
 The reward is the mean of those items (equal weights). Only who is better within
 a story matters to the method, not how rewards compare across stories.
 
@@ -40,7 +38,7 @@ from pathlib import Path
 from report_gepa import judge as J
 from report_gepa.capture import capture
 from report_gepa.generate import GUIDES, generate_page
-from report_gepa.llm import LLM
+from report_gepa.llm import LLM, OutOfCredit
 from report_gepa.optimize import DATA, TASK, split, stories
 from report_gepa.rubric import load
 
@@ -76,9 +74,9 @@ class Practice:
         self.browsers = threading.Semaphore(browsers)
         self.rubric = load()
         self.scored = [it for it in self.rubric.values() if it.scored]
-        self.pick_items = [it for it in self.rubric.values() if it.pairwise]
+        self.dims = [[it for it in self.scored if it.id.startswith(d)] for d in ("2.", "3.")]
         self.meta = {r["id"]: r for r in stories()}
-        rubric_text = "\n".join(f"- {it.id} {it.name}:{it.description}" for it in self.rubric.values() if it.id != "1.2")
+        rubric_text = "\n".join(f"- {it.id} {it.name}:{it.description}" for it in self.rubric.values() if it.id not in ("1.2", "1.3"))
         objectives = {"agent_objective": P.AGENT_OBJECTIVE, "learning_objective": P.LEARNING_OBJECTIVE.format(rubric=rubric_text)}
         self.sp = {
             "summary": P.SINGLE_SUMMARY_SP.format(**objectives),
@@ -117,26 +115,23 @@ class Practice:
             items = out.setdefault(ev.name, {})
             gate = J.gate(ev)
             items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
-            for name, fn, ids in (("1.3", lambda: {"1.3": J.check(self.rubric["1.3"], ev, MODEL)}, ["1.3"]),
-                                  ("2.x", lambda: J.page_group(self.scored, ev, MODEL)[1], [it.id for it in self.scored])):
+            for dim in self.dims:
+                name, ids = dim[0].id[0] + ".x", [it.id for it in dim]
                 if all(i in items for i in ids):
                     continue
                 try:
-                    items.update(fn())
+                    items.update(J.page_group(dim, ev, MODEL)[1])
+                except OutOfCredit:
+                    raise
                 except Exception as e:  # noqa: BLE001 - a failed judgement leaves the items out, it is not a 0
                     print(f"[judge] {step_dir.name}/{story}/{ev.name} {name}: FAILED {str(e)[:200]}", flush=True)
-        if len(evs) >= 2 and "pick" not in out:
-            try:
-                out["pick"] = J.pick(self.pick_items, evs, MODEL)[1]
-            except Exception as e:  # noqa: BLE001
-                print(f"[judge] {step_dir.name}/{story} pick: FAILED {str(e)[:200]}", flush=True)
         path.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         return out
 
-    def reward(self, items: dict, pick: dict, name: str) -> tuple[float, list[str]]:
+    def reward(self, items: dict) -> tuple[float, list[str]]:
         """A page's reward and the critique lines the summariser reads."""
         lines, parts = [], {}
-        vetoed = [k for k in ("1.1", "1.3") if items.get(k, {}).get("violated") is True]
+        vetoed = [k for k in ("1.1",) if items.get(k, {}).get("violated") is True]
         for k in vetoed:
             r = items[k]
             lines.append(f"{k} {self.rubric[k].name}:犯了,整页 0 分。{r.get('where') or ''} {r.get('reason') or ''}".strip())
@@ -145,13 +140,6 @@ class Practice:
             if r and r.get("score") is not None:
                 parts[it.id] = r["score"]
                 lines.append(f"{it.id} {it.name}:{r['score']:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
-        for it in self.pick_items:
-            r = pick.get(it.id)
-            if r and r.get("ok"):
-                net = r["pick_norm"][name]
-                parts[it.id] = (net + 1) / 2
-                verdict = "比同组其他页面明显好" if net > 0 else "比同组其他页面明显差" if net < 0 else "和同组其他页面没有明显差别"
-                lines.append(f"{it.id} {it.name}(同一份数据的几个页面组内比较):{verdict}")
         reward = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
         return reward, lines
 
@@ -229,7 +217,7 @@ class Practice:
             judged = self.judge_story(step_dir, story, evs[story])
             rollouts = []
             for ev in evs[story]:
-                reward, critique = self.reward(judged.get(ev.name, {}), judged.get("pick", {}), ev.name)
+                reward, critique = self.reward(judged.get(ev.name, {}))
                 cache = step_dir / story / f"summary-{ev.name}.md"
                 if not cache.exists():
                     cache.write_text(self.summarise(story, ev, critique), encoding="utf-8")
