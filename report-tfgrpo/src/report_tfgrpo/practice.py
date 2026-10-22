@@ -130,7 +130,10 @@ class Practice:
         return out
 
     def reward(self, items: dict) -> tuple[float, list[str]]:
-        """A page's reward and the critique lines the summariser reads."""
+        """A page's reward and the lines the summariser reads: the scores, not the judge's reasons.
+        The reasons speak the rubric's words and the experiences echoed them; as the paper's summary
+        sees only right or wrong, the summariser here sees where the page lost points and has to find
+        why in the screenshots. A render failure keeps its message: it comes from the renderer."""
         lines, parts = [], {}
         vetoed = [k for k in ("1.1",) if items.get(k, {}).get("violated") is True]
         for k in vetoed:
@@ -140,15 +143,15 @@ class Practice:
             r = items.get(it.id)
             if r and r.get("score") is not None:
                 parts[it.id] = r["score"]
-                lines.append(f"{it.id} {it.name}:{r['score']:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
+                lines.append(f"{it.id} {it.name}:{r['score']:.2f}")
         reward = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
         return reward, lines
 
     # the four learning steps
 
-    def summarise(self, story: str, ev: Path, critique: list[str]) -> str:
+    def summarise(self, story: str, ev: Path, scores: list[str]) -> str:
         parts = J.evidence_parts(ev, "", SUMMARY_FRAMES)
-        user = [{"type": "text", "text": P.SINGLE_SUMMARY_UP.format(question=self.question(story), critique="\n".join(critique))}] + parts
+        user = [{"type": "text", "text": P.SINGLE_SUMMARY_UP.format(question=self.question(story), scores="\n".join(scores))}] + parts
         return ask(self.sp["summary"], user)
 
     def question(self, story: str) -> str:
@@ -226,10 +229,10 @@ class Practice:
             judged = self.judge_story(step_dir, story, evs[story])
             rollouts = []
             for ev in evs[story]:
-                reward, critique = self.reward(judged.get(ev.name, {}))
+                reward, scores = self.reward(judged.get(ev.name, {}))
                 cache = step_dir / story / f"summary-{ev.name}.md"
                 if not cache.exists():
-                    cache.write_text(self.summarise(story, ev, critique), encoding="utf-8")
+                    cache.write_text(self.summarise(story, ev, scores), encoding="utf-8")
                 rollouts.append({"page": ev.name, "reward": reward, "summary": cache.read_text(encoding="utf-8")})
             print(f"[rewards] {step_dir.name}/{story}: " + " ".join(f"{r['page']}={r['reward']:.3f}" for r in rollouts), flush=True)
             if len(rollouts) < 2:
