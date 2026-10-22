@@ -22,6 +22,12 @@ const SANDBOX = path.join(import.meta.dirname, "sandbox.sh")
 // pi asks for at most 32000 output tokens per step by default; a Pudding-style
 // page took 47k including reasoning.
 const MAX_TOKENS = 65536
+// Steps (assistant turns) before the agent is told to stop polishing, and before it is cut off. Every step re-sends
+// the whole context, so a runaway session costs many pages: 111 GEPA pages took 49 steps at the median and 123 at
+// most, then one infinite page went past 300 (2026-10-22).
+const WRAP_UP_STEPS = 150
+const MAX_STEPS = 170
+const WRAP_UP = `已经用了 ${WRAP_UP_STEPS} 步，到上限了。不要再截图检查或继续打磨，确认结果已经写好就结束。`
 
 const TASK = `工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据，再按系统提示词的要求把它做成一个网页，写到工作目录的 index.html。
 index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面，不引用任何外部资源(打开页面时没有网络)。
@@ -92,7 +98,18 @@ session.agent.streamFn = (m, context, options) => streamFn(m, context, { ...opti
 const name = path.basename(ws)
 const t0 = Date.now()
 let tools = 0
+let steps = 0
 session.subscribe((e) => {
+  if (e.type === "message_end" && e.message.role === "assistant") {
+    steps += 1
+    if (steps === WRAP_UP_STEPS) {
+      console.log(`${name}: wrap up at ${steps} steps`)
+      session.steer(WRAP_UP)
+    } else if (steps === MAX_STEPS) {
+      console.log(`${name}: stopped at ${steps} steps`)
+      session.abort()
+    }
+  }
   if (e.type === "tool_execution_start") {
     tools += 1
     console.log(`${name}: ${e.toolName} ${String(e.args?.path ?? e.args?.command ?? "").replace(/\s+/g, " ").slice(0, 100)}`)
