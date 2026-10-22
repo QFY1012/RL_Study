@@ -52,6 +52,21 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
 - 已生成的文件会跳过,中途断了重跑同一命令即可。
 - 第一版不带图片,流程对比类的截图只有文字描述。
 
+## 明细 mock 数据(`src/report_gepa/rawgen.py`)
+
+给 benchmark 用:和 Pudding 一样,每题一个 CSV,一行一条业务记录(一次就诊、一个订单、一张工单……),要参赛的 agent 自己统计、找规律。
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.rawgen data/mock --per-kind 2 --workers 8 | tee runs/rawgen.log
+```
+
+- 类别同 `domains.py` 的 24 类,每类一行是什么写在 `rawgen.RECORDS`。规模按行数抽:小 300–3000、中 3000–3 万、大 3 万–30 万。
+- `glm-5.3-flash` 写一个只用标准库的 `gen.py`:`gen` 写出 CSV,`check` 只从 CSV 读回来,对埋的 3–5 条规律重新算数并判断是否成立。规律要来自这个业务自己的机制,不许用周几效应这类通用套路(第一版原型两份都埋了「周一高峰」后加的要求)。
+- 程序检查:能跑、行数符合规模、列名 snake_case、文本是中文、有缺失值、没有占位符、每条规律 `holds` 为真;不通过把问题发回去重写,最多 2 次。
+- 输出 `data/mock/<id>/{data.csv, gen.py, findings.json}`;`findings.json` 是从写好的 CSV 算出来的,作为「页面有没有找到规律」的答案。`manifest.jsonl` 记规模、种子、每次尝试的问题和 CSV 的形状。
+- 2026-10-21 跑了 48 份(24 类 × 2):26 份一次通过、15 份重写一次、7 份两次;6 份因中转站 524 超时或规律不成立失败,重跑两轮补齐。文件 89 KB–29.5 MB,中位数 0.9 MB,共 150 MB;规律共 208 条。
+- 已生成的(有 `findings.json`)会跳过,失败的重跑同一命令即可。
+
 ## 生成页面(`agent/gen.mjs`、`src/report_gepa/generate.py`)
 
 页面由 pi agent(`@mariozechner/pi-coding-agent` 0.73.1)写。先装一次:
@@ -195,8 +210,11 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 |---|---|---|
 | [`pudding-data.tar.xz`](https://drive.google.com/file/d/1rN-754lKNpakj4Y7bAYHzhZOzSrvQVph/view)(81 MB,解压后 617 MB) | `data/pudding/`:56 篇的数据文件和 `manifest.jsonl`(2026-10-20) | `report-gepa/data/` |
 
+| `mock-data.tar.xz`(15 MB,解压后 150 MB;待上传) | `data/mock/`:48 份明细 CSV、造数脚本、规律和 `manifest.jsonl`(2026-10-21) | `report-gepa/data/` |
+
 ```sh
 tar -xJf pudding-data.tar.xz -C report-gepa/data/
+tar -xJf mock-data.tar.xz -C report-gepa/data/
 ```
 
 不从 Drive 取也能重做:`report_gepa.pudding` 从 the-pudding 的公开仓库重新克隆生成同样的 `data/pudding/`(见上面「Pudding 数据」)。
