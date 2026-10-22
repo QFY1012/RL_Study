@@ -154,11 +154,18 @@ class Practice:
         files = ", ".join(m["files"][:12]) + (f" 等 {len(m['files'])} 个文件" if len(m["files"]) > 12 else "")
         return f"The Pudding 公开的数据「{m['title']}」,文件:{files}"
 
-    def advantage(self, story: str, rollouts: list[dict]) -> str:
+    def advantage(self, story: str, rollouts: list[dict], raw: Path) -> str:
+        """The experiences a group comparison yields. The reply often leaves out the closing tag;
+        a reply with no experiences at all is asked again rather than kept as an empty result."""
         trajectories = "\n\n".join(f"尝试 {i + 1}(reward {r['reward']:.2f}):\n{r['summary']}" for i, r in enumerate(rollouts))
-        text = ask(self.sp["advantage"], P.GROUP_ADVANTAGE_UP.format(question=self.question(story), trajectories=trajectories))
-        m = re.search(r"<Experiences>\s*(.*?)\s*</Experiences>", text, re.S | re.I)
-        return m.group(1).strip() if m else ""
+        for _ in range(3):
+            text = ask(self.sp["advantage"], P.GROUP_ADVANTAGE_UP.format(question=self.question(story), trajectories=trajectories))
+            raw.write_text(text, encoding="utf-8")
+            m = re.search(r"<Experiences>\s*(.*?)\s*(?:</Experiences>|$)", text, re.S | re.I)
+            if m and m.group(1).strip():
+                return m.group(1).strip()
+            print(f"[advantage] {story}: no experiences in the reply, asking again", flush=True)
+        raise RuntimeError(f"{story}: the group comparison gave no experiences three times")
 
     def group_update(self, exps: dict[str, str], new: str) -> list[dict]:
         text = ask(self.sp["group"], P.GROUP_UPDATE_UP.format(existing=format_experiences(exps), new=new))
@@ -226,7 +233,7 @@ class Practice:
                 return {"story": story, "rollouts": rollouts, "experiences": "", "operations": []}
             adv = step_dir / story / "advantage.md"
             if not adv.exists():
-                adv.write_text(self.advantage(story, rollouts), encoding="utf-8")
+                adv.write_text(self.advantage(story, rollouts, step_dir / story / "advantage-reply.md"), encoding="utf-8")
             new = adv.read_text(encoding="utf-8")
             ops_path = step_dir / story / "operations.json"
             if not ops_path.exists() and new:
