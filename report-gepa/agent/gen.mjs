@@ -81,8 +81,10 @@ const { session } = await createAgentSession({
   noTools: "builtin",
   customTools: [fence(createReadToolDefinition(ws)), fence(createWriteToolDefinition(ws)), fence(createEditToolDefinition(ws)), bash],
   sessionManager: SessionManager.create(ws, priv),
-  // A request that gets no response within 30 s is retried; a long streamed reply is not cut.
-  settingsManager: SettingsManager.inMemory({ compaction: { enabled: false }, retry: { enabled: true, maxRetries: 3, provider: { timeoutMs: 30_000 } } }),
+  // A request that gets no response within 5 min is retried; a long streamed reply is not cut.
+  // 30 s was too short once a session held a few dozen screenshots: the relay took longer than that to start
+  // answering, so every turn timed out and re-sent the whole context (cetaceans, 2026-10-22).
+  settingsManager: SettingsManager.inMemory({ compaction: { enabled: false }, retry: { enabled: true, maxRetries: 3, provider: { timeoutMs: 300_000 } } }),
 })
 const streamFn = session.agent.streamFn
 session.agent.streamFn = (m, context, options) => streamFn(m, context, { ...options, maxTokens: MAX_TOKENS })
