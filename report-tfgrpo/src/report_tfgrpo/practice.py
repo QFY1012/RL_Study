@@ -8,7 +8,8 @@ guide plus the current experience list; every page gets a reward; an LLM
 summarises each page, compares the pages of one story to extract at most
 --per-story experiences (the semantic group advantage), turns each story's
 experiences into ADD/UPDATE/DELETE/NONE operations on the list (group update),
-and merges the batch's operations into one revision of the list (batch update).
+and merges the batch's operations into one revision of the list (batch update),
+which changes at most --max-ops experiences.
 There is no acceptance test: the revised list is used for the next batch.
 
 Reward of a page, with report-gepa's judge (deepseek) and rubric, the same as GEPA's score:
@@ -65,11 +66,12 @@ def format_experiences(exps: dict[str, str]) -> str:
 
 
 class Practice:
-    def __init__(self, run: Path, guide: Path, group: int, per_story: int, workers: int, browsers: int):
+    def __init__(self, run: Path, guide: Path, group: int, per_story: int, max_ops: int, workers: int, browsers: int):
         self.run = run
         self.guide = guide.read_text(encoding="utf-8")
         self.group = group
         self.per_story = per_story
+        self.max_ops = max_ops
         self.workers = workers
         self.browsers = threading.Semaphore(browsers)
         self.rubric = load()
@@ -81,7 +83,7 @@ class Practice:
             "summary": P.SINGLE_SUMMARY_SP.format(**objectives),
             "advantage": P.GROUP_ADVANTAGE_SP.format(**objectives, num_experiences=per_story),
             "group": P.GROUP_UPDATE_SP.format(**objectives),
-            "batch": P.BATCH_UPDATE_SP.format(**objectives),
+            "batch": P.BATCH_UPDATE_SP.format(**objectives, max_ops=max_ops),
         }
         self.task = run / "task.txt"
         self.task.write_text(TASK, encoding="utf-8")
@@ -190,6 +192,7 @@ class Practice:
                 break
             except Exception as e:  # noqa: BLE001 - the official code retries a plan that does not parse
                 print(f"[batch update] could not read the plan: {str(e)[:120]}", flush=True)
+        plan = [op for op in plan if op.get("operation") != "NONE"][:self.max_ops]  # the prompt asks for this; the cap holds anyway
         new = dict(exps)
         next_id = max([int(i) for i in new] + [-1]) + 1
         for op in plan:
@@ -265,6 +268,7 @@ def main():
     ap.add_argument("--group", type=int, default=3, help="pages per story (the official grpo_n)")
     ap.add_argument("--batch", type=int, default=4, help="stories per step")
     ap.add_argument("--per-story", type=int, default=2, help="experiences extracted per story at most")
+    ap.add_argument("--max-ops", type=int, default=3, help="experiences a step may add, change or delete at most")
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--steps", type=int, help="stop after this many steps")
     ap.add_argument("--stories", help="comma-separated story ids instead of the train split")
@@ -275,7 +279,7 @@ def main():
 
     args.run.mkdir(parents=True, exist_ok=True)
     train = args.stories.split(",") if args.stories else split(8, 19, 0)[0]
-    practice = Practice(args.run, args.guide, args.group, args.per_story, args.workers, args.browsers)
+    practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers)
     order = []
     for epoch in range(args.epochs):
         ids = list(train)

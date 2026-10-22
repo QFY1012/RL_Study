@@ -170,7 +170,7 @@ BATCH_UPDATE_SP = HEAD + """现在你要合并并执行一批经验更新操作,
 - 有冲突时,按上下文、可靠程度和具体程度取舍;能统一成一条兼顾的做法就统一,不能就选更通用、更合理的。
 </任务>
 
-""" + OPS.replace("{count_rule}", "按合并后的净操作来定")
+""" + OPS.replace("{count_rule}", "按合并后的净操作来定,但 ADD、UPDATE、DELETE 合起来最多 {max_ops} 个;超过时只留对学习目标最重要的,有多组数据印证的优先")
 
 BATCH_UPDATE_UP = """<现有经验和针对它们的操作>
 {experiences_and_operations}

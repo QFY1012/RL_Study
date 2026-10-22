@@ -30,6 +30,7 @@ GEPA 改写整份指南,每一版都要和父版本比分数,决定留不留,所
 | 和标准答案比,对 1 错 0 | rubric 的分数 | 页面没有标准答案;论文也有不给答案、只靠组内对比的版本 |
 | 学习目标只说要答对 | 学习目标只说要页面更好、好坏看 reward 和 judge 对这一页的评语,不给 rubric 原文 | `tf1` 把 rubric 原文写进了学习目标,学到的经验多是在复述 rubric(「先列颜色语义表」「配色从话题取形」),和论文里「直接让模型写经验」没有区别 |
 | 每条经验不超过 32 个英文词 | 每条写成「当〈条件〉时,〈做法〉」,不超过 60 个汉字,一条只讲一个做法 | `tf1` 没设上限,4 条经验一步就从 1199 字涨到 2577 字,都是往旧经验里堆细节 |
+| 每步的操作数有上限(官方提示词里是一个占位参数) | `--max-ops`,默认每步最多新增、改写、删除合起来 3 条 | 每一步只改几条,清单变化慢、可追溯;`tf2` 第 0 步一下子加了 5 条 |
 | 单条总结读 agent 的完整轨迹 | 读页面本身(截图、文字、judge 的理由) | agent 一次要几十步、上百万 token;judge 判的也是页面 |
 | 温度 0.7 | 不设 | 生成用 deepseek 的思考模式,温度不起作用;同一份提示词写的页面本来就不同 |
 | 数学一批 50 题、每题 5 个 | 一批 4 篇、每篇 3 个 | 一个页面要写 5–15 分钟 |
@@ -39,7 +40,7 @@ GEPA 改写整份指南,每一版都要和父版本比分数,决定留不留,所
 用 report-gepa 的环境(`../report-gepa/.venv`,装法见 report-gepa 的 README),密钥也一样在 `~/.config/report-gepa/llm.env`。
 
 ```sh
-PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 2] [--epochs 1] [--steps N] [--stories a,b] | tee runs/<名字>.log
+PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 2] [--max-ops 3] [--epochs 1] [--steps N] [--stories a,b] | tee runs/<名字>.log
 ```
 
 - 数据用 report-gepa 的划分(`report_gepa.optimize.split`):训练 19 篇用来学;验证 8 篇和测试 16 篇(人工标注过的)不碰。`--stories` 指定别的篇。
