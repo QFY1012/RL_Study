@@ -19,7 +19,7 @@ from openai import OpenAI
 
 ENV_FILE = Path.home() / ".config" / "report-gepa" / "llm.env"
 # What the endpoint answers when the balance cannot cover a request: the pre-charge refused, or the quota spent.
-CREDIT_REFUSED = ("预扣费额度失败", "Insufficient user quota")
+CREDIT_REFUSED = ("预扣费额度失败", "Insufficient user quota", "Not enough quota")
 
 
 def credit_refused(text: str | None) -> bool:
