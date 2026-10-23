@@ -48,6 +48,7 @@ from . import prompts as P
 MODEL = "deepseek-v4.1-flash"  # writes the pages, judges them, and runs the four learning steps
 SUMMARY_FRAMES = 12  # frames shown to the summariser per page, sampled evenly
 MAX_TOKENS = 32768
+MOCK = DATA.parent / "mock"  # report-gepa's rawgen output; the agent gets only data.csv, never gen.py or findings.json
 
 
 def ask(system: str, user: str | list[dict]) -> str:
@@ -66,7 +67,8 @@ def format_experiences(exps: dict[str, str]) -> str:
 
 
 class Practice:
-    def __init__(self, run: Path, guide: Path, group: int, per_story: int, max_ops: int, workers: int, browsers: int):
+    def __init__(self, run: Path, guide: Path, group: int, per_story: int, max_ops: int, workers: int, browsers: int,
+                 mock: list[dict] = ()):
         self.run = run
         self.guide = guide.read_text(encoding="utf-8")
         self.group = group
@@ -77,7 +79,8 @@ class Practice:
         self.rubric = load()
         self.scored = [it for it in self.rubric.values() if it.scored]
         self.dims = [[it for it in self.scored if it.id.startswith(d)] for d in ("2.", "3.")]
-        self.meta = {r["id"]: r for r in stories()}
+        self.meta = {r["id"]: {**r, "source": "The Pudding 公开的数据"} for r in stories()}
+        self.meta |= {r["id"]: {"id": r["id"], "title": r["name"], "files": ["data.csv"], "source": "一份模拟的业务明细数据"} for r in mock}
         objectives = {"agent_objective": P.AGENT_OBJECTIVE, "learning_objective": P.LEARNING_OBJECTIVE}
         self.sp = {
             "summary": P.SINGLE_SUMMARY_SP.format(**objectives),
@@ -93,19 +96,22 @@ class Practice:
     def system_prompt(self, exps: dict[str, str]) -> str:
         return self.guide + (P.EXPERIENCE_HEADER + format_experiences(exps) if exps else "")
 
+    def data(self, story: str) -> list[Path]:
+        return [MOCK / story / "data.csv"] if (MOCK / story).is_dir() else [DATA / story]
+
     def page(self, step_dir: Path, story: str, k: int, guide_path: Path) -> Path | None:
         """Write and capture page k of a story; its evidence dir, or None if no page was delivered."""
         base = step_dir / story
         record = base / f"page-{k}" / "record.json"
         rec = (json.loads(record.read_text(encoding="utf-8")) if record.exists() else
-               generate_page(guide_path, [DATA / story], base, f"page-{k}", MODEL, render_slots=self.browsers, task_path=self.task))
+               generate_page(guide_path, self.data(story), base, f"page-{k}", MODEL, render_slots=self.browsers, task_path=self.task))
         if not rec["delivered"]:
             print(f"[page] {step_dir.name}/{story}/page-{k}: not delivered ({rec.get('detail')})", flush=True)
             return None
         ev = base / f"ev-{k}"
         if not (ev / "evidence.json").exists():
             with self.browsers:
-                capture(str(base / f"page-{k}" / "index.html"), ev, None, [DATA / story])
+                capture(str(base / f"page-{k}" / "index.html"), ev, None, self.data(story))
         return ev
 
     def judge_story(self, step_dir: Path, story: str, evs: list[Path]) -> dict[str, dict]:
@@ -161,7 +167,7 @@ class Practice:
     def question(self, story: str) -> str:
         m = self.meta[story]
         files = ", ".join(m["files"][:12]) + (f" 等 {len(m['files'])} 个文件" if len(m["files"]) > 12 else "")
-        return f"The Pudding 公开的数据「{m['title']}」,文件:{files}"
+        return f"{m['source']}「{m['title']}」,文件:{files}"
 
     def advantage(self, story: str, rollouts: list[dict], raw: Path) -> str:
         """The experiences a group comparison yields. The reply often leaves out the closing tag;
@@ -283,6 +289,7 @@ def main():
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--steps", type=int, help="stop after this many steps")
     ap.add_argument("--stories", help="comma-separated story ids instead of the train split")
+    ap.add_argument("--mock", action="store_true", help="add report-gepa's mock datasets (data/mock) to the train stories")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8, help="pages written at the same time")
     ap.add_argument("--browsers", type=int, default=4)
@@ -290,7 +297,10 @@ def main():
 
     args.run.mkdir(parents=True, exist_ok=True)
     train = args.stories.split(",") if args.stories else split(8, 19, 0)[0]
-    practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers)
+    mock = [json.loads(line) for line in (MOCK / "manifest.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()] if args.mock else []
+    mock = [r for r in mock if r["ok"]]
+    train += [r["id"] for r in mock]
+    practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers, mock)
     order = []
     for epoch in range(args.epochs):
         ids = list(train)
