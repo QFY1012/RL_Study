@@ -21,7 +21,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from .generate import page_problem, run_agent
-from .llm import CREDIT_REFUSED, OutOfCredit
+from .llm import OutOfCredit, credit_refused
 from .render import render
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -71,7 +71,7 @@ def repair_page(page_dir: Path) -> dict:
             if kept is not None:
                 session.write_bytes(kept)
             shutil.rmtree(page_dir / "data", ignore_errors=True)
-            if CREDIT_REFUSED in (run.get("error") or ""):
+            if credit_refused(run.get("error")):
                 shutil.copy2(page_dir / "index.broken.html", page_dir / "index.html")
                 raise OutOfCredit(run["error"])
             run["problem"] = page_problem(page_dir)

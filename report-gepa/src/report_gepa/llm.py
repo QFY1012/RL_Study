@@ -18,8 +18,12 @@ from pathlib import Path
 from openai import OpenAI
 
 ENV_FILE = Path.home() / ".config" / "report-gepa" / "llm.env"
-# What the endpoint answers when the balance cannot cover a request's pre-charge.
-CREDIT_REFUSED = "预扣费额度失败"
+# What the endpoint answers when the balance cannot cover a request: the pre-charge refused, or the quota spent.
+CREDIT_REFUSED = ("预扣费额度失败", "Insufficient user quota")
+
+
+def credit_refused(text: str | None) -> bool:
+    return any(m in (text or "") for m in CREDIT_REFUSED)
 
 
 class OutOfCredit(RuntimeError):
@@ -74,7 +78,7 @@ class LLM:
             try:
                 reply = self._stream(messages, start, **params)
             except Exception as e:  # noqa: BLE001 - any transport failure is retried the same way
-                if CREDIT_REFUSED in str(e):
+                if credit_refused(str(e)):
                     raise OutOfCredit(str(e)[:300]) from e  # retrying cannot help until the balance is topped up
                 last_error = e
             else:

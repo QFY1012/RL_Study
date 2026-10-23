@@ -22,7 +22,7 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .llm import CREDIT_REFUSED, OutOfCredit, load_env
+from .llm import OutOfCredit, credit_refused, load_env
 from .render import render
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -90,7 +90,7 @@ def generate_page(guide_path: Path, data: list[Path], out_dir: Path, name: str, 
             else:
                 shutil.copy2(p, ws / "data" / p.name)
         run = run_agent(ws, guide_path, model, effort, f"  {out_dir.name}/{name}", task_path)
-        if CREDIT_REFUSED in (run.get("error") or ""):
+        if credit_refused(run.get("error")):
             # not the page's fault: leave no record, so a later run makes this page again
             shutil.rmtree(ws, ignore_errors=True)
             raise OutOfCredit(run["error"])

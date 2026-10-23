@@ -25,7 +25,7 @@ import tempfile
 from pathlib import Path
 
 from .generate import run_agent
-from .llm import CREDIT_REFUSED, OutOfCredit
+from .llm import OutOfCredit, credit_refused
 
 FACT_MODEL = "glm-5.3-flash"
 SYSTEM = "你负责核对数据报告网页上写的内容是否和数据一致。你只核对，不评价设计和写法。\n"
@@ -67,7 +67,7 @@ def factcheck(ev_dir: Path, data: list[Path], out_dir: Path, model: str = FACT_M
         system.write_text(SYSTEM, encoding="utf-8")
         task.write_text(TASK, encoding="utf-8")
         run = run_agent(ws, system, model, "high", f"  factcheck {ev_dir.parent.name}/{ev_dir.name}", task, "verdict.json")
-        if CREDIT_REFUSED in (run.get("error") or ""):
+        if credit_refused(run.get("error")):
             raise OutOfCredit(run["error"])
         verdict = None
         if (ws / "verdict.json").exists():
