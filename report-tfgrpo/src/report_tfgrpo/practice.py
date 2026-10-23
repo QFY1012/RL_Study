@@ -142,18 +142,19 @@ class Practice:
 
     def judge_story(self, step_dir: Path, story: str, evs: list[Path]) -> dict[str, dict]:
         """Judgements per page (keyed by evidence dir name), reusing judgements.json. A dimension the judge
-        fails on, or answers without a score for some item, is asked again up to JUDGE_TRIES times."""
+        fails on, or answers without a score for some item, is asked again up to JUDGE_TRIES times; the
+        tries are kept in judgements.json ("tries"), so a restarted run does not ask a hopeless page again."""
         path = step_dir / story / "judgements.json"
         out = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
         for ev in evs:
             items = out.setdefault(ev.name, {})
             gate = J.gate(ev)
             items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
+            tries = items.setdefault("tries", {})
             for dim in self.dims:
                 name, ids = dim[0].id[0] + ".x", [it.id for it in dim]
-                for _ in range(JUDGE_TRIES):
-                    if all(items.get(i, {}).get("score") is not None for i in ids):
-                        break
+                while tries.get(name, 0) < JUDGE_TRIES and not all(items.get(i, {}).get("score") is not None for i in ids):
+                    tries[name] = tries.get(name, 0) + 1
                     try:
                         items.update(J.page_group(dim, ev, MODEL)[1])
                     except OutOfCredit:
