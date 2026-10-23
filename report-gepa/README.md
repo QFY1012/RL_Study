@@ -132,6 +132,17 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/puddin
 
 数据仓库是 MIT 许可;其他仓库各有各的许可。
 
+## 没公开数据的 Pudding 文章(`src/report_gepa/puddingweb.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb harvest ~/the-pudding/web | tee runs/puddingweb-harvest.log
+PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web data/pudding-web | tee runs/puddingweb-pack.log
+```
+
+`harvest` 打开网站文章列表(`pudding.cool/assets/data/stories.json`)里 `data/pudding` 没有的每一篇,从头滚到尾,把页面从 pudding.cool 加载的 csv/tsv/json 存到 `~/the-pudding/web/<篇>/`,每篇一行记在 `summary.jsonl`(2026-10-20 跑过一遍:216 篇里 156 篇要打开,82 篇加载了数据文件)。`pack` 只留 csv 和 tsv:页面加载的 json 多是地图边界、精灵图和文章自己的文案,不是要报告的数据,还会把原文交给 agent。和 `data/pudding` 或前面某篇内容完全相同的文件去掉(同一篇的两个网址、`data/pudding` 里已有的文章),剩下不到 20 KB 的整篇不要。结果 58 篇,63 MB,在 `data/pudding-web/<篇>/` 和 `manifest.jsonl`。
+
+这些文章只用来学(report-tfgrpo 的 `--extra web`):`report_gepa.optimize.split` 看不到它们,GEPA 的验证集和测试集不变。
+
 ## judge(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`)
 
 rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:信(1.x)判「犯了 / 没犯」,犯了任何一条整页 0 分;达(2.x)和雅(3.x)每条打 0–1 分;雅的每条另附几个打过分的典型案例。判法照 MiMo 开源打分服务(`recipes/design`)的 query judge 和评测 rubric。
@@ -235,11 +246,12 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 | 文件 | 内容 | 解压到 |
 |---|---|---|
 | [`pudding-data.tar.xz`](https://drive.google.com/file/d/1rN-754lKNpakj4Y7bAYHzhZOzSrvQVph/view)(81 MB,解压后 617 MB) | `data/pudding/`:56 篇的数据文件和 `manifest.jsonl`(2026-10-20) | `report-gepa/data/` |
-
+| `pudding-web-data.tar.xz`(13 MB,解压后 61 MB;待上传) | `data/pudding-web/`:58 篇没公开数据的文章,从页面加载的 csv/tsv 和 `manifest.jsonl`(2026-10-23) | `report-gepa/data/` |
 | `mock-data.tar.xz`(15 MB,解压后 150 MB;待上传) | `data/mock/`:48 份明细 CSV、造数脚本、规律和 `manifest.jsonl`(2026-10-21) | `report-gepa/data/` |
 
 ```sh
 tar -xJf pudding-data.tar.xz -C report-gepa/data/
+tar -xJf pudding-web-data.tar.xz -C report-gepa/data/
 tar -xJf mock-data.tar.xz -C report-gepa/data/
 ```
 

@@ -40,7 +40,7 @@ from report_gepa import judge as J
 from report_gepa.capture import capture
 from report_gepa.generate import GUIDES, generate_page
 from report_gepa.llm import LLM, OutOfCredit
-from report_gepa.optimize import DATA, TASK, split, stories
+from report_gepa.optimize import DATA, TASK, split
 from report_gepa.rubric import load
 
 from . import prompts as P
@@ -49,6 +49,33 @@ MODEL = "deepseek-v4.1-flash"  # writes the pages, judges them, and runs the fou
 SUMMARY_FRAMES = 12  # frames shown to the summariser per page, sampled evenly
 MAX_TOKENS = 32768
 MOCK = DATA.parent / "mock"  # report-gepa's rawgen output; the agent gets only data.csv, never gen.py or findings.json
+WEB = DATA.parent / "pudding-web"  # report-gepa's puddingweb output
+EXTRA = {"app": "the Pudding stories GEPA's split leaves out because the original is not a scrolling page",
+         "web": "the Pudding stories with no published data, from the files their pages load (data/pudding-web)",
+         "mock": "the mock datasets (data/mock)"}
+
+
+def rows(path: Path) -> list[dict]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.exists() else []
+
+
+def datasets() -> tuple[dict[str, dict], dict[str, list[str]]]:
+    """Every dataset a page can be written for (id -> title, file names, where it is from, the paths the
+    agent gets), and the ids of each --extra pool."""
+    meta, pools = {}, {k: [] for k in EXTRA}
+    for r in rows(DATA / "manifest.jsonl"):
+        if r["ok"]:
+            meta[r["id"]] = {"title": r["title"], "files": r["files"], "source": "The Pudding 公开的数据", "paths": [DATA / r["data"]]}
+            if not r["original_static"]:
+                pools["app"].append(r["id"])
+    for r in rows(WEB / "manifest.jsonl"):
+        meta[r["id"]] = {"title": r["title"], "files": r["files"], "source": "The Pudding 公开的数据", "paths": [WEB / r["id"]]}
+        pools["web"].append(r["id"])
+    for r in rows(MOCK / "manifest.jsonl"):
+        if r["ok"]:
+            meta[r["id"]] = {"title": r["name"], "files": ["data.csv"], "source": "一份模拟的业务明细数据", "paths": [MOCK / r["id"] / "data.csv"]}
+            pools["mock"].append(r["id"])
+    return meta, pools
 
 
 def ask(system: str, user: str | list[dict]) -> str:
@@ -67,8 +94,7 @@ def format_experiences(exps: dict[str, str]) -> str:
 
 
 class Practice:
-    def __init__(self, run: Path, guide: Path, group: int, per_story: int, max_ops: int, workers: int, browsers: int,
-                 mock: list[dict] = ()):
+    def __init__(self, run: Path, guide: Path, group: int, per_story: int, max_ops: int, workers: int, browsers: int):
         self.run = run
         self.guide = guide.read_text(encoding="utf-8")
         self.group = group
@@ -79,8 +105,7 @@ class Practice:
         self.rubric = load()
         self.scored = [it for it in self.rubric.values() if it.scored]
         self.dims = [[it for it in self.scored if it.id.startswith(d)] for d in ("2.", "3.")]
-        self.meta = {r["id"]: {**r, "source": "The Pudding 公开的数据"} for r in stories()}
-        self.meta |= {r["id"]: {"id": r["id"], "title": r["name"], "files": ["data.csv"], "source": "一份模拟的业务明细数据"} for r in mock}
+        self.meta = datasets()[0]
         objectives = {"agent_objective": P.AGENT_OBJECTIVE, "learning_objective": P.LEARNING_OBJECTIVE}
         self.sp = {
             "summary": P.SINGLE_SUMMARY_SP.format(**objectives),
@@ -97,7 +122,7 @@ class Practice:
         return self.guide + (P.EXPERIENCE_HEADER + format_experiences(exps) if exps else "")
 
     def data(self, story: str) -> list[Path]:
-        return [MOCK / story / "data.csv"] if (MOCK / story).is_dir() else [DATA / story]
+        return self.meta[story]["paths"]
 
     def page(self, step_dir: Path, story: str, k: int, guide_path: Path) -> Path | None:
         """Write and capture page k of a story; its evidence dir, or None if no page was delivered."""
@@ -289,7 +314,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--steps", type=int, help="stop after this many steps")
     ap.add_argument("--stories", help="comma-separated story ids instead of the train split")
-    ap.add_argument("--mock", action="store_true", help="add report-gepa's mock datasets (data/mock) to the train stories")
+    ap.add_argument("--extra", default="", help="comma-separated pools added to the train stories: "
+                    + "; ".join(f"{k}: {v}" for k, v in EXTRA.items()))
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8, help="pages written at the same time")
     ap.add_argument("--browsers", type=int, default=4)
@@ -297,10 +323,10 @@ def main():
 
     args.run.mkdir(parents=True, exist_ok=True)
     train = args.stories.split(",") if args.stories else split(8, 19, 0)[0]
-    mock = [json.loads(line) for line in (MOCK / "manifest.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()] if args.mock else []
-    mock = [r for r in mock if r["ok"]]
-    train += [r["id"] for r in mock]
-    practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers, mock)
+    pools = datasets()[1]
+    for k in filter(None, args.extra.split(",")):
+        train += pools[k]
+    practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers)
     order = []
     for epoch in range(args.epochs):
         ids = list(train)

@@ -44,11 +44,14 @@ GEPA 改写整份指南,每一版都要和父版本比分数,决定留不留,所
 用 report-gepa 的环境(`../report-gepa/.venv`,装法见 report-gepa 的 README),密钥也一样在 `~/.config/report-gepa/llm.env`。
 
 ```sh
-PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--stories a,b] [--mock] | tee runs/<名字>.log
+PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--stories a,b] [--extra app,web,mock] | tee runs/<名字>.log
 ```
 
 - 数据用 report-gepa 的划分(`report_gepa.optimize.split`):训练 19 篇用来学;验证 8 篇和测试 16 篇(人工标注过的)不碰。`--stories` 指定别的篇。
-- `--mock` 把 report-gepa 的 48 份 mock 明细数据(`data/mock/`,取回方法见 report-gepa 的 README)也加进训练集。agent 只拿到 `data.csv`,`gen.py` 和 `findings.json` 不给;总结和比较时只知道它是哪类业务数据。
+- `--extra` 往训练集里加数据(取回方法都见 report-gepa 的 README),都不和验证集、测试集重叠:
+  - `app`:`data/pudding` 里原文不是滚动页面、GEPA 的划分没收的 13 篇(mow、kidz-bop……);
+  - `web`:没公开数据的 58 篇,数据是从文章页面加载的 csv/tsv(`data/pudding-web/`);
+  - `mock`:48 份 mock 明细数据(`data/mock/`)。agent 只拿到 `data.csv`,`gen.py` 和 `findings.json` 不给;总结和比较时只知道它是哪类业务数据。
 - 每一步的东西在 `runs/<名字>/step-NN/`:`system.md`(这一步用的提示词)、`<篇>/page-K/`(页面、agent 记录)、`<篇>/ev-K/`(截图采集)、`judgements.json`、`summary-ev-K.md`、`advantage.md`、`operations.json`,`rollouts.json` 是这一步每个页面的 reward 和总结。
 - 每一步结束后的经验清单在 `runs/<名字>/experiences/step-NN.json` 和 `.md`。
 - 断了重跑同一命令:已有的页面、采集、判分、总结都复用,从最后一个没写完经验清单的步接着跑。
