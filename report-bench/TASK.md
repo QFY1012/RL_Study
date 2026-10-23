@@ -1,4 +1,4 @@
-You are given one table of data, `data.csv`, and a one-line title saying what the data is. Read and analyse the data, then make a data report about it: a web page that tells a reader what this data shows.
+You are given data in the folder `data/`: one or more tables as CSV files, and a one-line title saying what the data is. Read and analyse the data, then make a data report about it: a web page that tells a reader what this data shows.
 
 Deliver one file, `index.html`:
 - Write all the text on the page in English.
