@@ -48,6 +48,7 @@ from . import prompts as P
 MODEL = "deepseek-v4.1-flash"  # writes the pages, judges them, and runs the four learning steps
 SUMMARY_FRAMES = 12  # frames shown to the summariser per page, sampled evenly
 MAX_TOKENS = 32768
+JUDGE_TRIES = 3  # judge calls per page and dimension; report-gepa's LLM already retries each call
 MOCK = DATA.parent / "mock"  # report-gepa's rawgen output; the agent gets only data.csv, never gen.py or findings.json
 WEB = DATA.parent / "pudding-web"  # report-gepa's puddingweb output
 EXTRA = {"app": "the Pudding stories GEPA's split leaves out because the original is not a scrolling page",
@@ -140,7 +141,8 @@ class Practice:
         return ev
 
     def judge_story(self, step_dir: Path, story: str, evs: list[Path]) -> dict[str, dict]:
-        """Judgements per page (keyed by evidence dir name), reusing judgements.json."""
+        """Judgements per page (keyed by evidence dir name), reusing judgements.json. A dimension the judge
+        fails on, or answers without a score for some item, is asked again up to JUDGE_TRIES times."""
         path = step_dir / story / "judgements.json"
         out = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
         for ev in evs:
@@ -149,16 +151,22 @@ class Practice:
             items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
             for dim in self.dims:
                 name, ids = dim[0].id[0] + ".x", [it.id for it in dim]
-                if all(i in items for i in ids):
-                    continue
-                try:
-                    items.update(J.page_group(dim, ev, MODEL)[1])
-                except OutOfCredit:
-                    raise
-                except Exception as e:  # noqa: BLE001 - a failed judgement leaves the items out, it is not a 0
-                    print(f"[judge] {step_dir.name}/{story}/{ev.name} {name}: FAILED {str(e)[:200]}", flush=True)
+                for _ in range(JUDGE_TRIES):
+                    if all(items.get(i, {}).get("score") is not None for i in ids):
+                        break
+                    try:
+                        items.update(J.page_group(dim, ev, MODEL)[1])
+                    except OutOfCredit:
+                        raise
+                    except Exception as e:  # noqa: BLE001 - asked again; a judgement still missing drops the page
+                        print(f"[judge] {step_dir.name}/{story}/{ev.name} {name}: FAILED {str(e)[:200]}", flush=True)
         path.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         return out
+
+    def judged(self, items: dict) -> bool:
+        """Whether every scored item has a score, or the page is vetoed; a reward from part of the items
+        would not compare with the other pages of its group."""
+        return items.get("1.1", {}).get("violated") is True or all(items.get(it.id, {}).get("score") is not None for it in self.scored)
 
     def reward(self, items: dict) -> tuple[float, list[str]]:
         """A page's reward and the lines the summariser reads: the expression and aesthetics means, nothing
@@ -268,6 +276,9 @@ class Practice:
             judged = self.judge_story(step_dir, story, evs[story])
             rollouts = []
             for ev in evs[story]:
+                if not self.judged(judged.get(ev.name, {})):
+                    print(f"[judge] {step_dir.name}/{story}/{ev.name}: still not judged, left out of the group", flush=True)
+                    continue
                 reward, scores = self.reward(judged.get(ev.name, {}))
                 cache = step_dir / story / f"summary-{ev.name}.md"
                 if not cache.exists():
