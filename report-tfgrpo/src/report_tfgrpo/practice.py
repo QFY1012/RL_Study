@@ -51,7 +51,8 @@ MAX_TOKENS = 32768
 JUDGE_TRIES = 3  # judge calls per page and dimension; report-gepa's LLM already retries each call
 MOCK = DATA.parent / "mock"  # report-gepa's rawgen output; the agent gets only data.csv, never gen.py or findings.json
 WEB = DATA.parent / "pudding-web"  # report-gepa's puddingweb output
-EXTRA = {"app": "the Pudding stories GEPA's split leaves out because the original is not a scrolling page",
+POOLS = {"pudding": "the train stories of GEPA's split (report_gepa.optimize.split)",
+         "app": "the Pudding stories GEPA's split leaves out because the original is not a scrolling page",
          "web": "the Pudding stories with no published data, from the files their pages load (data/pudding-web)",
          "mock": "the mock datasets (data/mock)"}
 
@@ -62,8 +63,9 @@ def rows(path: Path) -> list[dict]:
 
 def datasets() -> tuple[dict[str, dict], dict[str, list[str]]]:
     """Every dataset a page can be written for (id -> title, file names, where it is from, the paths the
-    agent gets), and the ids of each --extra pool."""
-    meta, pools = {}, {k: [] for k in EXTRA}
+    agent gets), and the ids of each --train pool."""
+    meta, pools = {}, {k: [] for k in POOLS}
+    pools["pudding"] = split(8, 19, 0)[0]
     for r in rows(DATA / "manifest.jsonl"):
         if r["ok"]:
             meta[r["id"]] = {"title": r["title"], "files": r["files"], "source": "The Pudding 公开的数据", "paths": [DATA / r["data"]]}
@@ -325,19 +327,18 @@ def main():
     ap.add_argument("--max-ops", type=int, default=3, help="experiences a step may add, change or delete at most (ours; the official code has no cap)")
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--steps", type=int, help="stop after this many steps")
-    ap.add_argument("--stories", help="comma-separated story ids instead of the train split")
-    ap.add_argument("--extra", default="", help="comma-separated pools added to the train stories: "
-                    + "; ".join(f"{k}: {v}" for k, v in EXTRA.items()))
+    ap.add_argument("--train", default="pudding", help="comma-separated pools to learn from: "
+                    + "; ".join(f"{k}: {v}" for k, v in POOLS.items()))
+    ap.add_argument("--stories", help="comma-separated story ids instead of --train")
+    ap.add_argument("--init", type=Path, help="experience list to start from (another run's experiences/step-NN.json)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8, help="pages written at the same time")
     ap.add_argument("--browsers", type=int, default=4)
     args = ap.parse_args()
 
     args.run.mkdir(parents=True, exist_ok=True)
-    train = args.stories.split(",") if args.stories else split(8, 19, 0)[0]
     pools = datasets()[1]
-    for k in filter(None, args.extra.split(",")):
-        train += pools[k]
+    train = args.stories.split(",") if args.stories else [s for k in args.train.split(",") for s in pools[k]]
     practice = Practice(args.run, args.guide, args.group, args.per_story, args.max_ops, args.workers, args.browsers)
     order = []
     for epoch in range(args.epochs):
@@ -347,7 +348,7 @@ def main():
     if args.steps:
         order = order[:args.steps]
 
-    exps: dict[str, str] = {}
+    exps: dict[str, str] = json.loads(args.init.read_text(encoding="utf-8")) if args.init else {}
     for n, batch in enumerate(order):
         done = args.run / "experiences" / f"step-{n:02d}.json"
         if done.exists():

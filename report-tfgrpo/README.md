@@ -44,16 +44,17 @@ GEPA 改写整份指南,每一版都要和父版本比分数,决定留不留,所
 用 report-gepa 的环境(`../report-gepa/.venv`,装法见 report-gepa 的 README),密钥也一样在 `~/.config/report-gepa/llm.env`。
 
 ```sh
-PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--stories a,b] [--extra app,web,mock] | tee runs/<名字>.log
+PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--train pudding,app,web,mock] [--stories a,b] [--init runs/<别的>/experiences/step-NN.json] | tee runs/<名字>.log
 ```
 
-- 数据用 report-gepa 的划分(`report_gepa.optimize.split`):训练 19 篇用来学;验证 8 篇和测试 16 篇(人工标注过的)不碰。`--stories` 指定别的篇。
-- `--extra` 往训练集里加数据(取回方法都见 report-gepa 的 README),都不和验证集、测试集重叠:
+- `--train` 选从哪些数据学(取回方法都见 report-gepa 的 README),都不和 report-gepa 划分(`report_gepa.optimize.split`)的验证 8 篇、测试 16 篇(人工标注过的)重叠;`--stories` 直接指定篇目:
+  - `pudding`(默认):划分里的训练 19 篇;
   - `app`:`data/pudding` 里原文不是滚动页面、GEPA 的划分没收的 13 篇(mow、kidz-bop……);
   - `web`:没公开数据的 58 篇,数据是从文章页面加载的 csv/tsv(`data/pudding-web/`);
   - `mock`:48 份 mock 明细数据(`data/mock/`)。agent 只拿到 `data.csv`,`gen.py` 和 `findings.json` 不给;总结和比较时只知道它是哪类业务数据。
 - 每一步的东西在 `runs/<名字>/step-NN/`:`system.md`(这一步用的提示词)、`<篇>/page-K/`(页面、agent 记录)、`<篇>/ev-K/`(截图采集)、`judgements.json`、`summary-ev-K.md`、`advantage.md`、`operations.json`,`rollouts.json` 是这一步每个页面的 reward 和总结。
 - 每一步结束后的经验清单在 `runs/<名字>/experiences/step-NN.json` 和 `.md`。
+- `--init` 从别的 run 学到的清单接着学,第 0 步就带着它写页面。
 - 断了重跑同一命令:已有的页面、采集、判分、总结都复用,从最后一个没写完经验清单的步接着跑。
 
 学完后在 GEPA 的验证集 8 篇上打分,和 report-gepa `runs/gepa/full` 的验证分(种子 0.541,最好的 0112 0.669)可比:
