@@ -4,15 +4,15 @@
 
 - 开放赛道:模型、agent、整套流程都行,只要按格式交页面;比的是整个系统。不设基线。
 - 每题给 `data/` 下一张或几张原始数据表(csv),和一句说明数据是什么的题目;页面一律用英文。
-- 163 题:The Pudding 的 115 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 50 篇、`pudding-repo` 18 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。107 题是一张表,其余 2 到 8 张。
+- 170 题:The Pudding 的 122 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 51 篇、`pudding-repo` 24 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。108 题是一张表,其余 2 到 8 张。
 
 ## 题目(`tasks.json`)
 
 每题一项:`id`、`source`(`pudding`、`pudding-web`、`pudding-repo`、`mock`)、`tables`(那份数据里给哪几张表,相对它在 `report-gepa/data/<source>/<id>/` 下的路径)、`title`。
 
-- 只给原始数据表,为某张图算好的中间表(按年汇总、百分比、排名、图表坐标)不给;一篇文章的几张原始表(比如电影、演职人员、制片公司各一张)都给。同一份数据重复的(`docs/` 和 `src/` 下各一份)只给一份。json 不给。
+- 只给原始数据表,为某张图算好的中间表(按年汇总、百分比、排名、图表坐标)不给;一篇文章的几张原始表(比如电影、演职人员、制片公司各一张)都给。同一份数据重复的(`docs/` 和 `src/` 下各一份)只给一份。json 只给一条条记录结构的,转成 csv(文件名 `<原名>.json.csv`)。
 - 没收的 Pudding 文章:只有中间表的(birth-control、neighborhoods、prosecutors、hater、hip-hop-words、the-office、comics、incarceration、words-against-strangers),只有对照表、没有数据的(airports),数据不全的(same-name 只有一个州),和 music-bubble 是同一份数据的(music-map),不是能写报告的数据的(menu-collection 的菜单图片尺寸、cloud-zoo 的动物园直播列表、science_etc_1 的论文文本片段),以及数据只有 json 的。
-- `pudding-repo`(各篇自己的 GitHub 仓库)里没收的:动画的分镜和精灵图参数(ivf、sesame),一个时刻一个小文件的(clocks,1444 个),问题只有编号、没有题面的(spades),内容看不懂的(genre 的排名矩阵和缺排名的地区表),和 `pudding` 里 heat-records-map 是同一份数据的(weather-map)。`pudding-web` 新进的 10 篇只收了 authors、death、lifeafter、nba-top-plays:其余是平滑后的趋势和计数(big-hair、eating-alone、best-sellers)、词表和网站对照表(millennials、elections),和 vocabulary 重复的(projects_vocabulary)。
+- `pudding-repo`(各篇自己的 GitHub 仓库)里没收的:动画的分镜和精灵图参数(ivf、sesame),一个时刻一个小文件的(clocks,1444 个),问题只有编号、没有题面的(spades),内容看不懂的(genre 的排名矩阵和缺排名的地区表),和 `pudding` 里 heat-records-map 是同一份数据的(weather-map),一场比赛一个文件的(caption-contest,397 个),按年计数的(crossword)。`pudding-web` 新进的 10 篇只收了 authors、death、lifeafter、nba-top-plays:其余是平滑后的趋势和计数(big-hair、eating-alone、best-sellers)、词表和网站对照表(millennials、elections),和 vocabulary 重复的(projects_vocabulary);后来 json 转出的 chyrons(三元图坐标)和 happy-map(地图标签)也不收。
 - 题目只说数据是什么,不说结论:原文标题常常就是结论(「Women's Pockets are Inferior」),不用。
 
 ## 生成题目目录(`src/report_bench/build.py`)
@@ -21,7 +21,7 @@
 cd report-bench && PYTHONPATH=src python3 -m report_bench.build out | tee out-build.log
 ```
 
-- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 758 MB,最大的是 mow(250 MB)。
+- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 768 MB,最大的是 mow(250 MB)。
 - `out/tasks.jsonl`:每题的来源、题目和每张表的行列数、大小。
 - `out/answers/<id>/findings.json`:mock 题里预埋的规律,打分用,不发给参赛者。
 

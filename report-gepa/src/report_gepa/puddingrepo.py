@@ -8,17 +8,20 @@ file and report_gepa.puddingweb finds nothing: the table is inlined in a JS chun
 The source data usually sits in the story's repo under the-pudding (src/data/,
 static/assets/...). clone takes every story of puddingweb's summary.jsonl that
 data/pudding-web has nothing for, looks for a public repo named after its slug
-(also with _ for -), and shallow-clones it without LFS objects; <repos>/repos.jsonl
-gets one line per story with the repo found, or null.
+(also with _ for -), plus the repo OTHER names when the data sits elsewhere (the
+page links to it), and shallow-clones them without LFS objects into <repos>/<slug>/
+(the story's own) and <repos>/<slug>--<owner>-<name>/ (another); <repos>/repos.jsonl
+gets one line per story with the repos found.
 
 pack keeps the csv and tsv files outside node_modules and .git, minus the
-starter template's placeholders (test.csv, sample.csv, demo folders). A file
+starter template's placeholders (test.csv, sample.csv, demo folders), and the
+json lists of records as csv (puddingweb.records_csv). A file
 whose contents data/pudding, data/pudding-web or an earlier file already has is
 dropped (the copy a build puts in docs/ or public/), and a story is kept under
 the same rule as puddingweb's pack: one of its files is a table of at least
 MIN_ROWS rows and MIN_COLUMNS columns. The files go to <out>/<id>/ under their own
 names (with their folders when two share a name) and <out>/manifest.jsonl gets
-{id, title, url, repo, published, files, bytes}. These stories are for learning
+{id, title, url, repos, published, files, bytes}. These stories are for learning
 and the benchmark only: report_gepa.optimize.split does not see them.
 """
 
@@ -32,11 +35,19 @@ import subprocess
 from pathlib import Path
 
 from .optimize import DATA
-from .puddingweb import KEEP, MIN_COLUMNS, MIN_ROWS, digest, manifest, table_shape
+from .puddingweb import KEEP, MIN_COLUMNS, MIN_ROWS, digest, manifest, records_csv, table_shape
 
 WEB = DATA.parent / "pudding-web"
 OWNER = "https://github.com/the-pudding/"
-SKIP_DIRS = {".git", "node_modules", ".svelte-kit"}
+SKIP_DIRS = {".git", "node_modules", ".svelte-kit", "_records"}
+OTHER = {  # story slug -> repo with its data, linked from the story page
+    "love-songs": "the-pudding/pop-love-songs",
+    "lenna": "the-pudding/lenna-data",
+    "hamilton": "sxywu/hamilton",
+    "asne": "googletrends/asne",
+    "nba-moments": "googletrends/google_nba",
+    "caption-contest": "nextml/caption-contest-data",
+}
 TEMPLATE = {"test.csv", "sample.csv", "demo-layercake.csv"}
 
 
@@ -53,24 +64,33 @@ def clone(web: Path, repos: Path):
     print(f"{len(todo)} stories to look up", flush=True)
     for s in todo:
         slug = s["url"].rstrip("/").split("/")[-1]
-        repo = next((name for name in dict.fromkeys([slug, slug.replace("-", "_")])
-                     if git("ls-remote", "--heads", OWNER + name, timeout=60).returncode == 0), None)
-        if repo and not (repos / slug / ".git").is_dir():
-            r = git("clone", "--depth", "1", "--single-branch", OWNER + repo, str(repos / slug))
-            if r.returncode != 0:
-                print(f"{s['url']:40s} clone failed: {r.stderr.strip()[-200:]}", flush=True)
-                continue
+        own = next((name for name in dict.fromkeys([slug, slug.replace("-", "_")])
+                    if git("ls-remote", "--heads", OWNER + name, timeout=60).returncode == 0), None)
+        found = ([f"the-pudding/{own}"] if own else []) + ([OTHER[slug]] if slug in OTHER else [])
+        for full in found:
+            folder = repos / folder_name(slug, full)
+            if not (folder / ".git").is_dir():
+                r = git("clone", "--depth", "1", "--single-branch", f"https://github.com/{full}", str(folder))
+                if r.returncode != 0:
+                    print(f"{s['url']:40s} clone of {full} failed: {r.stderr.strip()[-200:]}", flush=True)
         with (repos / "repos.jsonl").open("a", encoding="utf-8") as f:
-            f.write(json.dumps({"url": s["url"], "slug": slug, "title": s["title"], "repo": repo}, ensure_ascii=False) + "\n")
-        print(f"{s['url']:40s} {repo or '-'}", flush=True)
+            f.write(json.dumps({"url": s["url"], "slug": slug, "title": s["title"], "repos": found}, ensure_ascii=False) + "\n")
+        print(f"{s['url']:40s} {' '.join(found) or '-'}", flush=True)
+
+
+def folder_name(slug: str, full: str) -> str:
+    owner, name = full.split("/")
+    return slug if owner == "the-pudding" and name in (slug, slug.replace("-", "_")) else f"{slug}--{owner}-{name}"
 
 
 def tables(folder: Path) -> list[Path]:
-    found = []
+    """The csv/tsv files first, then the json records, so a duplicate keeps the original csv."""
+    found, records = [], []
     for root, dirs, files in os.walk(folder):
         dirs[:] = sorted(d for d in dirs if d not in SKIP_DIRS and "demo" not in d.lower())
         found += [Path(root) / f for f in sorted(files) if Path(f).suffix.lower() in KEEP and f.lower() not in TEMPLATE]
-    return found
+        records += [Path(root) / f for f in sorted(files) if f.endswith(".json")]
+    return found + [c for p in records if (c := records_csv(p))]
 
 
 def pack(repos: Path, out: Path):
@@ -80,10 +100,9 @@ def pack(repos: Path, out: Path):
     out.mkdir(parents=True)
     rows = []
     for row in manifest(repos / "repos.jsonl"):
-        if not row["repo"]:
-            continue
+        folders = [repos / folder_name(row["slug"], full) for full in row["repos"]]
         fresh = []
-        for p in tables(repos / row["slug"]):
+        for p in (p for folder in folders for p in tables(folder)):
             h = digest(p)
             if h not in seen:
                 seen.add(h)
@@ -96,14 +115,14 @@ def pack(repos: Path, out: Path):
         taken.add(sid)
         names = [p.name for p in fresh]
         if len(set(names)) != len(names):  # two folders hold a file of the same name
-            names = [str(p.relative_to(repos / row["slug"])).replace("/", "__") for p in fresh]
+            names = [str(p.relative_to(repos)).split("/", 1)[1].replace("/", "__").replace("_records__", "") for p in fresh]
         (out / sid).mkdir()
         for p, name in zip(fresh, names):
             shutil.copy2(p, out / sid / name)
         parts = row["url"].strip("/").split("/")
         size = sum(p.stat().st_size for p in fresh)
         rows.append({"id": sid, "title": row["title"], "url": f"https://pudding.cool/{row['url'].strip('/')}/",
-                     "repo": OWNER + row["repo"], "published": f"{parts[1]}/{parts[0]}" if parts[0].isdigit() else "",
+                     "repos": [f"https://github.com/{full}" for full in row["repos"]], "published": f"{parts[1]}/{parts[0]}" if parts[0].isdigit() else "",
                      "files": names, "bytes": size})
         print(f"{row['url']:40s} -> {sid}: {len(names)} files {size / 1e6:.2f} MB  {row['title'][:50]}", flush=True)
     (out / "manifest.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")

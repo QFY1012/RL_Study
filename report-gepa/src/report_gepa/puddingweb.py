@@ -9,9 +9,10 @@ charts load their data late) and keeps every csv/tsv/json response from
 pudding.cool under <cache_dir>/web/<slug>/, with one line per story in
 summary.jsonl. A story already in summary.jsonl is not opened again.
 
-pack keeps only the csv and tsv files: the json a page loads is mostly map
-outlines, sprite sheets and the story's own copy, which is not data to report on
-and would hand the agent the article. A file whose contents data/pudding or an
+pack keeps the csv and tsv files, and a json file only when it is a list of at
+least MIN_ROWS records (written out as a csv, nested fields one level deep as
+"field.key"): the other json a page loads is map outlines, sprite sheets and the
+story's own copy, which is not data to report on and would hand the agent the article. A file whose contents data/pudding or an
 earlier story already has is dropped (a story told twice, or one data/pudding
 has under another url); a story is kept when one of what is left is a table of
 at least MIN_ROWS rows and MIN_COLUMNS columns (smaller files are a page's copy,
@@ -29,6 +30,7 @@ import json
 import os
 import re
 import shutil
+import sys
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
@@ -42,6 +44,8 @@ KEEP = (".csv", ".tsv")
 MIN_ROWS = 50
 MIN_COLUMNS = 3
 CHROMIUM = "/opt/pw-browsers/chromium"
+
+csv.field_size_limit(sys.maxsize)  # a records json can carry a whole text in one field
 
 
 def manifest(path: Path) -> list[dict]:
@@ -111,6 +115,29 @@ def table_shape(path: Path) -> tuple[int, int]:
         return sum(1 for _ in rows), len(header)
 
 
+def records_csv(path: Path) -> Path | None:
+    """A json list of records as <its folder>/_records/<name>.json.csv; None for any other json."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if not (isinstance(data, list) and len(data) >= MIN_ROWS and all(isinstance(r, dict) for r in data)):
+        return None
+    flat = [{f"{k}.{k2}": v2 for k, v in r.items() for k2, v2 in (v.items() if isinstance(v, dict) else [(None, v)])}
+            for r in data]
+    flat = [{k.removesuffix(".None"): json.dumps(v) if isinstance(v, (list, dict)) else v for k, v in r.items()} for r in flat]
+    header = list(dict.fromkeys(k for r in flat for k in r))
+    if len(header) < MIN_COLUMNS:
+        return None
+    dst = path.parent / "_records" / (path.name + ".csv")
+    dst.parent.mkdir(exist_ok=True)
+    with dst.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, header)
+        w.writeheader()
+        w.writerows(flat)
+    return dst
+
+
 def pack(src: Path, out: Path):
     seen = {digest(p) for p in DATA.rglob("*") if p.is_file() and p.suffix.lower() in KEEP}
     taken = {row["id"] for row in manifest(DATA / "manifest.jsonl")}
@@ -120,6 +147,7 @@ def pack(src: Path, out: Path):
     for row in manifest(src / "summary.jsonl"):
         folder = src / row["slug"]
         files = sorted(p for p in folder.glob("*") if p.suffix.lower() in KEEP) if folder.is_dir() else []
+        files += [c for p in sorted(folder.glob("*.json")) if (c := records_csv(p))] if folder.is_dir() else []
         fresh = []
         for p in files:
             h = digest(p)
