@@ -22,8 +22,8 @@ cd report-bench && PYTHONPATH=src python3 -m report_bench.build out | tee out-bu
 ```
 
 - `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 768 MB,最大的是 mow(250 MB)。
-- `out/tasks.jsonl`:每题的来源、题目和每张表的行列数、大小。
-- `out/answers/<id>/findings.json`:mock 题里预埋的规律,打分用,不发给参赛者。
+- `out/tasks.jsonl`:每题的来源、题目、每张表的行列数和大小;Pudding 题另有 `original`,数据出自的那篇文章的网址。
+- `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照。
 
 `instruction` 是 `TASK.md` 的全文,每题一样。
 

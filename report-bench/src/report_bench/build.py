@@ -6,8 +6,10 @@ For every task in tasks.json its tables go to <out>/tasks/<id>/data/ under
 their own file names (a tsv becomes a csv, a url-escaped name is unescaped) and
 <out>/tasks/<id>/task.json gets the task statement: the fixed instruction
 (TASK.md), the task's one-line title and the file names. <out>/tasks.jsonl lists
-every task with its source and each table's shape. A mock task's planted findings
-go to <out>/answers/<id>/findings.json, which participants do not get.
+every task with its source, each table's shape and, for a Pudding task, the
+story page the data comes from. Participants do not get <out>/answers/: a mock
+task's planted findings (findings.json), and for a Pudding task the original
+story (original.json: url, title, published), the reference for scoring.
 """
 
 from __future__ import annotations
@@ -57,6 +59,8 @@ def main():
     tasks = json.loads(TASKS.read_text(encoding="utf-8"))
     shutil.rmtree(args.out / "tasks", ignore_errors=True)
     shutil.rmtree(args.out / "answers", ignore_errors=True)
+    stories = {s: {r["id"]: r for r in map(json.loads, (path / "manifest.jsonl").read_text(encoding="utf-8").splitlines())}
+               for s, path in SOURCES.items() if s != "mock"}
     lines = []
     for t in tasks:
         folder = args.out / "tasks" / t["id"]
@@ -74,8 +78,16 @@ def main():
             answers = args.out / "answers" / t["id"]
             answers.mkdir(parents=True)
             shutil.copy2(SOURCES["mock"] / t["id"] / "findings.json", answers / "findings.json")
+        line = {"id": t["id"], "source": t["source"], "title": t["title"], "tables": shapes}
+        if t["source"] != "mock":
+            story = stories[t["source"]][t["id"]]
+            answers = args.out / "answers" / t["id"]
+            answers.mkdir(parents=True)
+            (answers / "original.json").write_text(json.dumps({k: story[k] for k in ("url", "title", "published")}, ensure_ascii=False, indent=1),
+                                                   encoding="utf-8")
+            line["original"] = story["url"]
         size = sum(x["bytes"] for x in shapes)
-        lines.append({"id": t["id"], "source": t["source"], "title": t["title"], "tables": shapes})
+        lines.append(line)
         print(f"{t['id']:24} {t['source']:11} {len(shapes):>2} tables {sum(x['rows'] for x in shapes):>9} rows {size / 1e6:7.2f} MB", flush=True)
     (args.out / "tasks.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in lines), encoding="utf-8")
     print(f"{len(lines)} tasks in {args.out}", flush=True)
