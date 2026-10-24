@@ -31,9 +31,17 @@ cd report-bench && PYTHONPATH=src python3 -m report_bench.build out | tee out-bu
 
 每个系统一个目录,每题一个 `index.html`:`submissions/<系统>/<id>/index.html`。页面要离线能打开,css、脚本、数据都写在文件里(见 `TASK.md`)。
 
-## 打分
+## 打分(`src/report_bench/score.py`)
 
-打分脚本还没写。打算:用 report-gepa 的 judge(1.1 打不开整页 0 分;表达 2.x、美学 3.x 各条 0–1),mock 题另加一项,逐条看页面有没有讲出 `findings.json` 里的规律。
+```sh
+PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_bench.score submissions/<系统> [--tasks a,b] [--workers 4] [--browsers 2] | tee runs/<系统>.log
+```
+
+- 每题的页面是 `submissions/<系统>/<id>/index.html`,没有就记 0 分。
+- 和 GEPA 给页面打分一样(judge 模型也同是 `deepseek-v4.1-flash`,分数可以和 `report-gepa/runs/gepa` 比):`capture.py` 带着这题的数据截屏采集;1.1 看采集结果,打不开、没渲染出文字、脚本报错的整页 0 分;否则表达 2.x、美学 3.x 各一次 judge 调用,每条 0–1 分,总分是这些条的平均。
+- 一次回复里有条目没解析出分数,这一维重问,最多 3 次;还没有分数的条目不进平均,结果里记在 `unjudged`,这一题下次运行会再判。
+- 结果在 `runs/<系统>/<id>/`(`evidence/`、`judgements.json`、`result.json`,重跑时复用)和 `runs/<系统>/scores.jsonl`;最后按来源打印平均分。
+- mock 题的 findings 召回还没做。
 
 ## 评测代码
 
