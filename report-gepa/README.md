@@ -143,6 +143,15 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web
 
 这些文章只用来学(report-tfgrpo 的 `--extra web`):`report_gepa.optimize.split` 看不到它们,GEPA 的验证集和测试集不变。
 
+## Pudding 文章自己的仓库(`src/report_gepa/puddingrepo.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo clone /home/user/the-pudding/web /home/user/the-pudding/repos | tee runs/puddingrepo-clone.log
+PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo pack /home/user/the-pudding/repos data/pudding-repo | tee runs/puddingrepo-pack.log
+```
+
+大多数文章在构建时把数据打包进 JS,页面不加载数据文件,`puddingweb` 拿不到;原始数据常在 the-pudding 下这篇文章自己的仓库里(`src/data/`、`static/assets/`……)。`clone` 对 `data/pudding-web` 没收的每一篇,找名字和网址末段相同(或把 `-` 换成 `_`)的公开仓库,浅克隆、不取 LFS,每篇一行记在 `repos.jsonl`(2026-10-24:88 篇里 55 篇有仓库,6.8 GB)。`pack` 收 node_modules、.git 以外的 csv/tsv,不要模板自带的占位文件(test.csv、sample.csv、demo 目录);和 `data/pudding`、`data/pudding-web` 或前面文件内容相同的去掉(构建复制到 `docs/`、`public/` 的那份),留篇的规则同 `puddingweb`。结果 24 篇,30 MB,在 `data/pudding-repo/<篇>/` 和 `manifest.jsonl`(多一个 `repo` 字段)。
+
 ## judge(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`)
 
 rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:信(1.x)判「犯了 / 没犯」,犯了任何一条整页 0 分;达(2.x)和雅(3.x)每条打 0–1 分;雅的每条另附几个打过分的典型案例。判法照 MiMo 开源打分服务(`recipes/design`)的 query judge 和评测 rubric。
@@ -264,12 +273,14 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 | 文件 | 内容 | 解压到 |
 |---|---|---|
 | [`pudding-data.tar.xz`](https://drive.google.com/file/d/1rN-754lKNpakj4Y7bAYHzhZOzSrvQVph/view)(81 MB,解压后 617 MB) | `data/pudding/`:56 篇的数据文件和 `manifest.jsonl`(2026-10-20) | `report-gepa/data/` |
-| `pudding-web-data.tar.xz`(13 MB,解压后 61 MB;待上传) | `data/pudding-web/`:58 篇没公开数据的文章,从页面加载的 csv/tsv 和 `manifest.jsonl`(2026-10-23) | `report-gepa/data/` |
+| `pudding-web-data.tar.xz`(待上传) | `data/pudding-web/`:68 篇没公开数据的文章,从页面加载的 csv/tsv 和 `manifest.jsonl`(2026-10-24) | `report-gepa/data/` |
+| `pudding-repo-data.tar.xz`(待上传) | `data/pudding-repo/`:24 篇从文章自己的 GitHub 仓库收的 csv/tsv 和 `manifest.jsonl`(2026-10-24) | `report-gepa/data/` |
 | `mock-data.tar.xz`(15 MB,解压后 150 MB;待上传) | `data/mock/`:48 份明细 CSV、造数脚本、规律和 `manifest.jsonl`(2026-10-21) | `report-gepa/data/` |
 
 ```sh
 tar -xJf pudding-data.tar.xz -C report-gepa/data/
 tar -xJf pudding-web-data.tar.xz -C report-gepa/data/
+tar -xJf pudding-repo-data.tar.xz -C report-gepa/data/
 tar -xJf mock-data.tar.xz -C report-gepa/data/
 ```
 

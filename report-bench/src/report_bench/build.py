@@ -22,7 +22,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT.parent / "report-gepa" / "data"
-SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "mock": DATA / "mock"}
+SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "pudding-repo": DATA / "pudding-repo", "mock": DATA / "mock"}
 TASKS = ROOT / "tasks.json"
 INSTRUCTION = ROOT / "TASK.md"
 
