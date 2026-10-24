@@ -134,6 +134,16 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo p
 
 大多数文章在构建时把数据打包进 JS,页面不加载数据文件,`puddingweb` 拿不到;原始数据常在 the-pudding 下这篇文章自己的仓库里(`src/data/`、`static/assets/`……)。`clone` 对 `data/pudding-web` 没收的每一篇,找名字和网址末段相同(或把 `-` 换成 `_`)的公开仓库,再加上 `OTHER` 里写明的、文章页面链接到的数据仓库(pop-love-songs、lenna-data、sxywu/hamilton、googletrends/asne、googletrends/google_nba、nextml/caption-contest-data),浅克隆、不取 LFS,每篇一行记在 `repos.jsonl`(2026-10-24:85 篇里 55 篇有仓库,9.2 GB)。`pack` 收 node_modules、.git 以外的 csv/tsv 和记录结构的 json(同 `puddingweb`;和 csv 重复时留 csv),不要模板自带的占位文件(test.csv、sample.csv、demo 目录);和 `data/pudding`、`data/pudding-web` 或前面文件内容相同的去掉(构建复制到 `docs/`、`public/` 的那份),留篇的规则同 `puddingweb`。结果 32 篇,在 `data/pudding-repo/<篇>/` 和 `manifest.jsonl`(多一个 `repos` 字段)。
 
+## Pudding 文章打包进 JS 的数据(`src/report_gepa/puddingjs.py`、`jsdata/extract.mjs`)
+
+```sh
+cd jsdata && npm ci && cd ..
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs harvest /home/user/the-pudding/js | tee runs/puddingjs-harvest.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs pack /home/user/the-pudding/js data/pudding-js | tee runs/puddingjs-pack.log
+```
+
+构建时 import 进来的数据,打包后就是 JS 块里的字面量。`harvest` 打开网站文章列表里 `report_gepa.pudding` 和 benchmark(`report-bench/tasks.json` 的 pudding-web、pudding-repo 题)都没收的每一篇(和 `puddingweb` 一样从头滚到尾),存下页面从 pudding.cool 加载的全部 JS 和页面里的内联脚本,用 `jsdata/extract.mjs`(acorn 语法树)找表:至少 50 个对象字面量的数组(键就是列名)、至少 50 行等长的数组套数组(构建时去掉了表头,列名记成 `c0`、`c1`……)、至少 3 列等长数组组成的对象、csv/tsv 文本的字符串,`JSON.parse` 里的字符串也一样找。只认字面量:行里有函数、变量或算出来的键就不算。每篇一行记在 `summary.jsonl`。`pack` 留至少一张表有 50 行、3 列的文章,同一篇内容相同的表(同一份数据在两个块里)只留一张,写到 `data/pudding-js/<篇>/` 和 `manifest.jsonl`(`tables` 记每张表在 JS 里的位置、类型、行列数和表头,没表头的要照原文补列名)。
+
 ## judge
 
 评测代码和 rubric 在 `report-bench`(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
