@@ -139,7 +139,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb harvest ~/the-pudding/
 PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web data/pudding-web | tee runs/puddingweb-pack.log
 ```
 
-`harvest` 打开网站文章列表(`pudding.cool/assets/data/stories.json`)里 `data/pudding` 没有的每一篇,从头滚到尾,把页面从 pudding.cool 加载的 csv/tsv/json 存到 `~/the-pudding/web/<篇>/`,每篇一行记在 `summary.jsonl`(2026-10-20 跑过一遍:216 篇里 156 篇要打开,82 篇加载了数据文件)。`pack` 只留 csv 和 tsv:页面加载的 json 多是地图边界、精灵图和文章自己的文案,不是要报告的数据,还会把原文交给 agent。和 `data/pudding` 或前面某篇内容完全相同的文件去掉(同一篇的两个网址、`data/pudding` 里已有的文章),剩下不到 20 KB 的整篇不要。结果 58 篇,63 MB,在 `data/pudding-web/<篇>/` 和 `manifest.jsonl`。
+`harvest` 打开网站文章列表(`pudding.cool/assets/data/stories.json`)里 `data/pudding` 没有的每一篇,从头滚到尾,把页面从 pudding.cool 加载的 csv/tsv/json 存到 `~/the-pudding/web/<篇>/`,每篇一行记在 `summary.jsonl`(2026-10-20 跑过一遍:216 篇里 156 篇要打开,82 篇加载了数据文件)。`pack` 只留 csv 和 tsv:页面加载的 json 多是地图边界、精灵图和文章自己的文案,不是要报告的数据,还会把原文交给 agent。和 `data/pudding` 或前面某篇内容完全相同的文件去掉(同一篇的两个网址、`data/pudding` 里已有的文章),剩下的文件里没有一张至少 50 行、3 列的表的整篇不要(小文件多是文章的文案、配色表和词表)。结果 68 篇,61 MB,在 `data/pudding-web/<篇>/` 和 `manifest.jsonl`(2026-10-24;之前按「不到 20 KB 不要」只有 58 篇)。
 
 这些文章只用来学(report-tfgrpo 的 `--extra web`):`report_gepa.optimize.split` 看不到它们,GEPA 的验证集和测试集不变。
 

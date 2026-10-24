@@ -13,8 +13,9 @@ pack keeps only the csv and tsv files: the json a page loads is mostly map
 outlines, sprite sheets and the story's own copy, which is not data to report on
 and would hand the agent the article. A file whose contents data/pudding or an
 earlier story already has is dropped (a story told twice, or one data/pudding
-has under another url); a story is kept when what is left comes to at least
-MIN_BYTES. The files go to <out>/<id>/ under their own names, and <out>/manifest.jsonl
+has under another url); a story is kept when one of what is left is a table of
+at least MIN_ROWS rows and MIN_COLUMNS columns (smaller files are a page's copy,
+colour keys and word lists). The files go to <out>/<id>/ under their own names, and <out>/manifest.jsonl
 gets {id, title, url, published, files, bytes}. These stories are for learning only:
 report_gepa.optimize.split does not see them, so GEPA's val and test stories stay as they were.
 """
@@ -22,6 +23,7 @@ report_gepa.optimize.split does not see them, so GEPA's val and test stories sta
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -37,7 +39,8 @@ STORY_LIST = "https://pudding.cool/assets/data/stories.json"
 SKIP = re.compile(r"/assets/data/stories\.json$|manifest\.json$|/_app/|version\.json$|\.webmanifest$", re.I)
 SCROLL = """async () => { for (let y = 0; y < document.documentElement.scrollHeight; y += 700) { scrollTo(0, y); await new Promise(r => setTimeout(r, 150)); } }"""
 KEEP = (".csv", ".tsv")
-MIN_BYTES = 20_000
+MIN_ROWS = 50
+MIN_COLUMNS = 3
 CHROMIUM = "/opt/pw-browsers/chromium"
 
 
@@ -101,6 +104,13 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def table_shape(path: Path) -> tuple[int, int]:
+    with path.open(encoding="utf-8", errors="replace", newline="") as f:
+        rows = csv.reader(f, delimiter="\t" if path.suffix.lower() == ".tsv" else ",")
+        header = next(rows, [])
+        return sum(1 for _ in rows), len(header)
+
+
 def pack(src: Path, out: Path):
     seen = {digest(p) for p in DATA.rglob("*") if p.is_file() and p.suffix.lower() in KEEP}
     taken = {row["id"] for row in manifest(DATA / "manifest.jsonl")}
@@ -117,8 +127,9 @@ def pack(src: Path, out: Path):
                 seen.add(h)
                 fresh.append(p)
         size = sum(p.stat().st_size for p in fresh)
-        if size < MIN_BYTES:
-            print(f"{row['url']:40s} skipped: {len(fresh)} new csv/tsv files, {size} bytes", flush=True)
+        shapes = [table_shape(p) for p in fresh]
+        if not any(r >= MIN_ROWS and c >= MIN_COLUMNS for r, c in shapes):
+            print(f"{row['url']:40s} skipped: {len(fresh)} new csv/tsv files, rows x columns {shapes}", flush=True)
             continue
         sid = row["url"].rstrip("/").split("/")[-1]
         sid = sid if sid not in taken else row["slug"]
