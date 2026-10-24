@@ -205,6 +205,14 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/<名字> [--ma
 - **反馈**:每条的分数、位置和理由。
 - 每次 rollout 的页面、截图、判分都在 `<run>/rollouts/<指南哈希>/<篇>/`;已有的复用,断了重跑同一命令。
 
+### 单独给一份指南打验证分(`src/report_gepa/evalguide.py`)
+
+```sh
+PYTHONPATH=src .venv/bin/python -m report_gepa.evalguide runs/<名字> [--guide guides/seed.md] [--with-rubric] | tee runs/<名字>.log
+```
+
+用和 GEPA 一样的 `Adapter` 在验证集 8 篇上各写一页、打分,分数和 `runs/gepa/full` 的验证分可比。`--with-rubric` 把 judge 拿到的评分标准接在指南后面:1.1 的一票否决,每条打分项的说明、五段分档和典型案例的文字(judge 还看案例截图,指南里只有文字)。它是基于 judge 优化提示词要胜过的基线:写页面的一开始就知道评审的标准。
+
 ### 2026-10-22 的 `runs/gepa/full`
 
 从第 1 代 `e7d538554fa4` 起步(它是从种子起跑那次的第一轮产物),120 次 rollout,11 轮。结果在 `<run>/result.json`,最好的指南在 `<run>/best-guide.md`。
