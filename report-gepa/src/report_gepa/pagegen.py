@@ -1,6 +1,6 @@
 """Generate pages for every report as soon as the report exists, alongside datagen.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages | tee runs/pagegen.log
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages | tee runs/pagegen.log
 
 Every report gets pages from four sources, so the pages people label differ in
 quality for reasons other than sampling noise. Each page is made by a pi agent
@@ -28,7 +28,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from .generate import GUIDES, generate_page
-from .llm import OutOfCredit
+from report_bench.llm import OutOfCredit
 
 SOURCES = {
     "seed-ds": ("deepseek-v4.1-flash", "seed.md", 2),

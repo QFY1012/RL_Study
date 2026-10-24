@@ -1,7 +1,7 @@
 """Capture what the judge sees of a page: scroll frames, a thumbnail, the text and the charts.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.capture one <page.html | url> <out_dir> [--data <file or dir>...]
-    PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-pages data/pudding runs/evidence [--versions original,seed-ds-1,pudding-ds-1] [--stories a,b] [--workers 4]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.capture one <page.html | url> <out_dir> [--data <file or dir>...]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.capture pudding runs/pudding-pages data/pudding runs/evidence [--versions original,seed-ds-1,pudding-ds-1] [--stories a,b] [--workers 4]
 
 A single full-page shot keeps one state of a page whose chart changes as you
 scroll, so the page is scrolled the way a reader scrolls it: small mouse-wheel

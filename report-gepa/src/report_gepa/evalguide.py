@@ -1,6 +1,6 @@
 """Score a guide on the val stories of runs/gepa/full, the way GEPA scores a candidate.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.evalguide runs/<name> [--guide guides/seed.md] [--with-rubric]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide runs/<name> [--guide guides/seed.md] [--with-rubric]
 
 --with-rubric appends the scoring rules the judge is given: 1.1's veto, and every
 scored item with its description, its five bands and the text of its worked
@@ -18,9 +18,9 @@ from pathlib import Path
 from statistics import mean
 
 from .generate import GUIDES
-from .judge import _item_block
+from report_bench.judge import _item_block
 from .optimize import Adapter, split
-from .rubric import load
+from report_bench.rubric import load
 
 RUBRIC_HEADER = """
 

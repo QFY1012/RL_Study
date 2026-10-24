@@ -1,6 +1,6 @@
 """Generate raw mock data the way The Pudding publishes it: one CSV of records per task.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.rawgen data/mock --per-kind 2 | tee runs/rawgen.log
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.rawgen data/mock --per-kind 2 | tee runs/rawgen.log
 
 For every kind in `domains.KINDS` the model writes a stdlib-only Python script.
 `python gen.py gen data.csv` writes one row per business record (a visit, an
@@ -29,7 +29,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from .domains import KINDS, Kind
-from .llm import LLM, OutOfCredit
+from report_bench.llm import LLM, OutOfCredit
 
 MODEL = "glm-5.3-flash"
 MAX_REWRITES = 2

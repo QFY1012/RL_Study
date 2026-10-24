@@ -7,7 +7,7 @@ set -euo pipefail
 page="${1:-index.html}"
 out="${2:-_shots}"
 rm -rf "$out"
-PYTHONPATH="$REPORT_GEPA/src" "$REPORT_GEPA/.venv/bin/python" -m report_gepa.capture one "$page" "$out"
+PYTHONPATH="$REPORT_GEPA/src:$REPORT_BENCH/src" "$REPORT_GEPA/.venv/bin/python" -m report_bench.capture one "$page" "$out"
 python3 - "$out" <<'PY'
 import json, sys
 ev = json.load(open(sys.argv[1] + "/evidence.json"))

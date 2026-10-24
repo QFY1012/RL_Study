@@ -1,6 +1,6 @@
 """Check whether a group pick sees more in aesthetics than the worked-example scores.
 
-    PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.aescheck runs/tf1/step-00
+    PYTHONPATH=src:../report-gepa/src:../report-bench/src ../report-gepa/.venv/bin/python -m report_tfgrpo.aescheck runs/tf1/step-00
 
 For every story of a step whose pages are judged, runs MiMo's group pick on 3.1
 and 3.2 over the story's pages (Williams square, one round per page, the prompt
@@ -20,8 +20,8 @@ from concurrent.futures import ThreadPoolExecutor
 from itertools import combinations
 from pathlib import Path
 
-from report_gepa import judge as J
-from report_gepa.rubric import load
+from report_bench import judge as J
+from report_bench.rubric import load
 
 MODEL = "deepseek-v4.1-flash"
 MAX_FRAMES = 15  # per page; three pages of 40 frames is a request deepseek mostly answers empty

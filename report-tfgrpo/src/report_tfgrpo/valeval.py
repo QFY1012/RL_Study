@@ -1,6 +1,6 @@
 """Score an experience list on GEPA's validation stories, the way GEPA scores a guide.
 
-    PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.valeval runs/tf2 [--step N]
+    PYTHONPATH=src:../report-gepa/src:../report-bench/src ../report-gepa/.venv/bin/python -m report_tfgrpo.valeval runs/tf2 [--step N]
 
 The system prompt is the one a further step would have used (seed guide plus the
 step's experiences); one page per val story is written and judged by report-gepa's

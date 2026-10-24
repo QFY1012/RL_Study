@@ -1,8 +1,8 @@
 """Analyse judge records: score coupling, agreement between runs, agreement with people.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats stats runs/judge/glm-a
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats stats runs/judge/glm-a
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1
 
 Stories whose published original is an interactive app (original_static false
 in the Pudding manifest: falsetto, boybands...) are left out everywhere.
@@ -42,7 +42,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .rubric import load as load_rubric
+from report_bench.rubric import load as load_rubric
 
 BANDS = (0.2, 0.4, 0.6, 0.8)
 

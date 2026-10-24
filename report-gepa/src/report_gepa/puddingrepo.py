@@ -1,7 +1,7 @@
 """Data of the pudding.cool stories that published none, from each story's own GitHub repo.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo clone <cache_dir>/web <cache_dir>/repos
-    PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo pack <cache_dir>/repos data/pudding-repo
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo clone <cache_dir>/web <cache_dir>/repos
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo pack <cache_dir>/repos data/pudding-repo
 
 Most Pudding stories import their data at build time, so the page loads no data
 file and report_gepa.puddingweb finds nothing: the table is inlined in a JS chunk.

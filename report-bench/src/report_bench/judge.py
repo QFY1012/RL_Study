@@ -1,6 +1,6 @@
 """Judge captured pages against the rubric, one call per group of items.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.judge page <evidence_dir>... --items 1.1,1.3,2.2,2.3,3.1,3.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 1.1,1.3,2.2,2.3,3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
@@ -55,7 +55,7 @@ from .factcheck import factcheck
 from .llm import LLM, OutOfCredit
 from .rubric import Item, load, rubric_hash
 
-EVIDENCE = Path(__file__).resolve().parents[2] / "runs" / "evidence"  # where the worked examples' pages are
+EVIDENCE = Path(__file__).resolve().parents[3] / "report-gepa" / "runs" / "evidence"  # where the worked examples' pages are
 
 JUDGE_MODEL = "glm-5.3-flash"
 FRAME_W = 1080  # frames are sent at this width; 1440 cost glm 1.7k tokens a frame

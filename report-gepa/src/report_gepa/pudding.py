@@ -1,6 +1,6 @@
 """Take The Pudding's published data, with each published story as the bar.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.pudding <cache_dir> data/pudding runs/pudding-originals
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pudding <cache_dir> data/pudding runs/pudding-originals
 
 STORIES is every data story The Pudding publishes data for: the table in the
 README of github.com/the-pudding/data, plus folders of that repo the table
@@ -43,7 +43,7 @@ import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
-from .render import render_url
+from report_bench.render import render_url
 
 DATA_REPO = "the-pudding/data"
 DATA_SUFFIXES = (".csv", ".tsv", ".json")

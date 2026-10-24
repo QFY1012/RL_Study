@@ -2,7 +2,7 @@
 
 用 Training-Free GRPO(arXiv 2510.08191)给写报告页面的 agent 学一份经验清单。照官方实现做:`TencentCloudADP/youtu-agent` 的 `utu/practice/` 和 `utu/prompts/practice/experience.yaml`。
 
-生成页面、截图采集、judge 和 rubric 都直接调用 `report-gepa`(`report_gepa.generate`、`capture`、`judge`、`rubric/judge-dimensions.md`),这里只有学习的循环和它的四个提示词。
+生成页面调用 `report-gepa`(`report_gepa.generate`),截图采集、judge 和 rubric 调用 `report-bench`(`report_bench.capture`、`judge`、`rubric/judge-dimensions.md`),这里只有学习的循环和它的四个提示词。
 
 ## 和 GEPA 的区别
 
@@ -44,7 +44,7 @@ GEPA 改写整份指南,每一版都要和父版本比分数,决定留不留,所
 用 report-gepa 的环境(`../report-gepa/.venv`,装法见 report-gepa 的 README),密钥也一样在 `~/.config/report-gepa/llm.env`。
 
 ```sh
-PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--train pudding,app,web,mock] [--stories a,b] [--init runs/<别的>/experiences/step-NN.json] | tee runs/<名字>.log
+PYTHONPATH=src:../report-gepa/src:../report-bench/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<名字> [--group 3] [--batch 4] [--per-story 1] [--max-ops 3] [--epochs 1] [--steps N] [--train pudding,app,web,mock] [--stories a,b] [--init runs/<别的>/experiences/step-NN.json] | tee runs/<名字>.log
 ```
 
 - `--train` 选从哪些数据学(取回方法都见 report-gepa 的 README),都不和 report-gepa 划分(`report_gepa.optimize.split`)的验证 8 篇、测试 16 篇(人工标注过的)重叠;`--stories` 直接指定篇目:
@@ -60,7 +60,7 @@ PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgr
 学完后在 GEPA 的验证集 8 篇上打分,和 report-gepa `runs/gepa/full` 的验证分(种子 0.541,最好的 0112 0.669)可比:
 
 ```sh
-PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.valeval runs/<名字> [--step N] | tee runs/<名字>-val.log
+PYTHONPATH=src:../report-gepa/src:../report-bench/src ../report-gepa/.venv/bin/python -m report_tfgrpo.valeval runs/<名字> [--step N] | tee runs/<名字>-val.log
 ```
 
 提示词是种子指南加这一步之后的经验清单(默认最后一步),每篇写一页,用 report-gepa 的 `Adapter` 写页面和判分;结果在 `runs/<名字>/val/`。

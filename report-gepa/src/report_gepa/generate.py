@@ -1,6 +1,6 @@
 """Make one report page with a pi agent (agent/gen.mjs), then render it.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.generate <out_dir> <data file or dir>... [--guide guides/seed.md] [--model m] [--n 2]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.generate <out_dir> <data file or dir>... [--guide guides/seed.md] [--model m] [--n 2]
 
 The guide is the agent's system prompt and is the thing GEPA optimizes. The data
 files are copied into the agent's workspace and never put in a prompt: the agent
@@ -22,8 +22,8 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .llm import OutOfCredit, credit_refused, load_env
-from .render import render
+from report_bench.llm import OutOfCredit, credit_refused, load_env
+from report_bench.render import render
 
 ROOT = Path(__file__).resolve().parents[2]
 AGENT = ROOT / "agent" / "gen.mjs"

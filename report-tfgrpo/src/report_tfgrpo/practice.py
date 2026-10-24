@@ -1,6 +1,6 @@
 """Training-Free GRPO on report pages: learn an experience list for the page agent.
 
-    PYTHONPATH=src:../report-gepa/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<name> [--group 3] [--batch 4]
+    PYTHONPATH=src:../report-gepa/src:../report-bench/src ../report-gepa/.venv/bin/python -m report_tfgrpo.practice runs/<name> [--group 3] [--batch 4]
 
 Follows the official implementation (TencentCloudADP/youtu-agent, utu/practice/):
 for every batch of stories, each story gets --group pages written with the base
@@ -36,12 +36,12 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from report_gepa import judge as J
-from report_gepa.capture import capture
+from report_bench import judge as J
+from report_bench.capture import capture
 from report_gepa.generate import GUIDES, generate_page
-from report_gepa.llm import LLM, OutOfCredit
+from report_bench.llm import LLM, OutOfCredit
 from report_gepa.optimize import DATA, TASK, split
-from report_gepa.rubric import load
+from report_bench.rubric import load
 
 from . import prompts as P
 

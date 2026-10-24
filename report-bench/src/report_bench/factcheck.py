@@ -1,6 +1,6 @@
 """Rubric item 1.2: check every number and claim on a page against the data, with a pi agent.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.factcheck <evidence_dir> <out_dir>
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.factcheck <evidence_dir> <out_dir>
 
 A model reading screenshots cannot tell that "twice as many" is really 30% more;
 that needs the data and arithmetic. The agent works like the page writer: the
@@ -24,7 +24,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from .generate import run_agent
+from report_gepa.generate import run_agent
 from .llm import OutOfCredit, credit_refused
 
 FACT_MODEL = "glm-5.3-flash"

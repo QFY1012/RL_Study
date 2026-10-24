@@ -1,6 +1,6 @@
 """Generate simulated report data (JSON) for every kind in `domains.KINDS`.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
 
 Each report draws a scale and whether it carries written conclusions, asks the
 model for a JSON export in the shape a real system of that business would
@@ -20,7 +20,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from .domains import KINDS, NARRATIVE, SCALES, Kind
-from .llm import LLM
+from report_bench.llm import LLM
 
 DATA_MODEL = "glm-5.3-flash"
 MAX_REWRITES = 2

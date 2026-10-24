@@ -1,6 +1,6 @@
 """GEPA on the page-writing guide, scored by the rubric judge (PLAN section 6).
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/<name> [--max-calls 120] [--val 8] [--train 19]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.optimize runs/gepa/<name> [--max-calls 120] [--val 8] [--train 19]
 
 Data: The Pudding's stories whose published original is a scrolling story
 (original_static in data/pudding/manifest.jsonl). The stories people labelled
@@ -50,11 +50,11 @@ from pathlib import Path
 import gepa
 from gepa.core.adapter import EvaluationBatch
 
-from . import judge as J
-from .capture import capture
+from report_bench import judge as J
+from report_bench.capture import capture
 from .generate import GUIDES, generate_page
-from .llm import LLM, OutOfCredit
-from .rubric import load
+from report_bench.llm import LLM, OutOfCredit
+from report_bench.rubric import load
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pudding"

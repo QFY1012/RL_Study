@@ -21,28 +21,10 @@ LLM_MODEL=deepseek-v4.1-flash
 
 同名的环境变量会覆盖文件里的值。
 
-## 模型调用(`src/report_gepa/llm.py`)
-
-```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.llm "提示词"
-```
-
-用 OpenAI SDK 流式调用,中转端点上长回复不会因为整段等到最后才返回而被掐断。结束原因不是 `stop`(没结束就断了,或撞了长度上限)算不完整,会重试;最后一次仍不完整就照原样返回,由调用方决定怎么记。2026-10-19 在 `deepseek-v4.1-flash` 上调通。
-
-## 渲染(`src/report_gepa/render.py`)
-
-```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.render <page.html> <out.png>
-```
-
-输出 JSON:`verdict` 是 `ok`、`blank`(正常加载但没有文字)或 `render_failed`(没看到页面,打分时屏蔽);另外记录 `page_errors`(加载时未捕获的异常)、`syntax_errors`(内联脚本过不了 `node --check`)、`hang`(页面卡死)。
-
-2026-10-19 用五个测试页验证过:正常页、白页、语法错误、加载时报错、`while(true){}` 卡死,五个都分对。
-
 ## 模拟报告数据(`src/report_gepa/datagen.py`、`domains.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3 --workers 8 | tee runs/datagen.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3 --workers 8 | tee runs/datagen.log
 ```
 
 - `domains.py` 列了 24 类数据:销售月报、电商漏斗、产品指标周报、城市气象月报、部门预算执行、A/B 实验、满意度调研、客服工单、物流时效、园区用电、门店运营、招聘、考试分析、服务可用性、广告投放、多款 App 流程对比、项目进度、竞品功能对比、库存周转;另 5 类只进测试集:多城市气候对比、医院门诊、地铁客流、农场种植、楼盘销售。每类只写「真实系统导出的数据里有什么」,不写页面该怎么排。
@@ -57,7 +39,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.datagen data/reports --per-kind 3
 给 benchmark 用:和 Pudding 一样,每题一个 CSV,一行一条业务记录(一次就诊、一个订单、一张工单……),要参赛的 agent 自己统计、找规律。
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.rawgen data/mock --per-kind 2 --workers 8 | tee runs/rawgen.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.rawgen data/mock --per-kind 2 --workers 8 | tee runs/rawgen.log
 ```
 
 - 类别同 `domains.py` 的 24 类,每类一行是什么写在 `rawgen.RECORDS`。规模按行数抽:小 300–3000、中 3000–3 万、大 3 万–30 万。
@@ -76,7 +58,7 @@ cd agent && npm ci
 ```
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.generate <out_dir> <数据文件或目录>... [--guide guides/seed.md] [--model deepseek-v4.1-flash] [--n 2]
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.generate <out_dir> <数据文件或目录>... [--guide guides/seed.md] [--model deepseek-v4.1-flash] [--n 2]
 ```
 
 - 系统提示词是指南(GEPA 优化的对象,默认 `guides/seed.md`,一句话)。用户消息是 `agent/gen.mjs` 里固定的任务说明:数据在 `data/`、页面写到 `index.html`、不引用外部资源、环境里没有浏览器。数据不放进提示词,agent 用工具自己读。
@@ -90,8 +72,8 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.generate <out_dir> <数据文件�
 ## 批量生成页面(`src/report_gepa/pagegen.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages --workers 6 --renders 3 | tee runs/pagegen.log
-PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pagegen data/reports runs/pages --workers 6 --renders 3 | tee runs/pagegen.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding-pages --workers 5 --renders 3 | tee runs/pudding-pages.log
 ```
 
 `--pages seed-ds-1,detail-ds-1` 只生成列出的页面。
@@ -111,7 +93,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pagegen data/pudding runs/pudding
 ## 修脚本报错的页面(`src/report_gepa/repair.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pages --workers 4 | tee runs/repair.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pages --workers 4 | tee runs/repair.log
 ```
 
 渲染时记录到脚本报错(运行时异常或语法错误)的页面,交给 deepseek-v4.1-flash 的 agent 在原页面上修:任务说明列出报错,要求只改出错的地方、不改设计和文字(`agent/gen.mjs` 的第 5 个参数传入这段任务说明)。原页面留作 `index.broken.html`、`page.broken.png`,`record.json` 里加 `repair`(修复用的模型、报错前后、agent 运行记录),`render` 换成修好后的结果;agent 记录在 `repair-session.jsonl`。最多试 2 次。
@@ -123,7 +105,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pa
 ```sh
 GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/the-pudding/data ~/the-pudding/data
 ln -sfn ~/the-pudding/data ~/the-pudding/the-pudding__data
-PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/pudding runs/pudding-originals | tee runs/pudding.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/pudding runs/pudding-originals | tee runs/pudding.log
 ```
 
 收的是 The Pudding 公开了数据的全部数据报道(56 篇):`the-pudding/data` README 表格里的,加上表格没列、但目录 README 写明了对应文章的 gayborhoods、mow。每篇在 `STORIES` 里写明数据从哪来:数据仓库的目录、另一个仓库(浅克隆,只检出 csv/tsv/json)或单独发布的文件(pudding.cool 上的 json、Google 表格导出的 csv)。没收:newsletter 链接库(winning-the-internet)、没有文章的(clutch)、没有数据的(queues)、数据只在 Notion 上的 Whole Foods、只有做法说明的 Human Terrain,以及数据是成千上万个小文件、不是一份可以写报告的数据集的 wiki-billboard(一人一个文件)、two-minute-report(一场比赛一个)、country-radio(一家电台一个,外加分析的中间文件)。
@@ -135,8 +117,8 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.pudding ~/the-pudding data/puddin
 ## 没公开数据的 Pudding 文章(`src/report_gepa/puddingweb.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb harvest ~/the-pudding/web | tee runs/puddingweb-harvest.log
-PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web data/pudding-web | tee runs/puddingweb-pack.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingweb harvest ~/the-pudding/web | tee runs/puddingweb-harvest.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web data/pudding-web | tee runs/puddingweb-pack.log
 ```
 
 `harvest` 打开网站文章列表(`pudding.cool/assets/data/stories.json`)里 `data/pudding` 没有的每一篇,从头滚到尾,把页面从 pudding.cool 加载的 csv/tsv/json 存到 `~/the-pudding/web/<篇>/`,每篇一行记在 `summary.jsonl`(2026-10-20 跑过一遍:216 篇里 156 篇要打开,82 篇加载了数据文件)。`pack` 留 csv 和 tsv;json 只留一条条记录(至少 50 条)的列表,转成 `<原名>.json.csv`,嵌套一层的字段展开成 `字段.键`:页面加载的其他 json 多是地图边界、精灵图和文章自己的文案,不是要报告的数据,还会把原文交给 agent。和 `data/pudding` 或前面某篇内容完全相同的文件去掉(同一篇的两个网址、`data/pudding` 里已有的文章),剩下的文件里没有一张至少 50 行、3 列的表的整篇不要(小文件多是文章的文案、配色表和词表)。结果 71 篇,在 `data/pudding-web/<篇>/` 和 `manifest.jsonl`(2026-10-24;之前按「不到 20 KB 不要」、不收 json 时是 58 篇)。
@@ -146,50 +128,22 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack ~/the-pudding/web
 ## Pudding 文章自己的仓库(`src/report_gepa/puddingrepo.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo clone /home/user/the-pudding/web /home/user/the-pudding/repos | tee runs/puddingrepo-clone.log
-PYTHONPATH=src .venv/bin/python -m report_gepa.puddingrepo pack /home/user/the-pudding/repos data/pudding-repo | tee runs/puddingrepo-pack.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo clone /home/user/the-pudding/web /home/user/the-pudding/repos | tee runs/puddingrepo-clone.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo pack /home/user/the-pudding/repos data/pudding-repo | tee runs/puddingrepo-pack.log
 ```
 
 大多数文章在构建时把数据打包进 JS,页面不加载数据文件,`puddingweb` 拿不到;原始数据常在 the-pudding 下这篇文章自己的仓库里(`src/data/`、`static/assets/`……)。`clone` 对 `data/pudding-web` 没收的每一篇,找名字和网址末段相同(或把 `-` 换成 `_`)的公开仓库,再加上 `OTHER` 里写明的、文章页面链接到的数据仓库(pop-love-songs、lenna-data、sxywu/hamilton、googletrends/asne、googletrends/google_nba、nextml/caption-contest-data),浅克隆、不取 LFS,每篇一行记在 `repos.jsonl`(2026-10-24:85 篇里 55 篇有仓库,9.2 GB)。`pack` 收 node_modules、.git 以外的 csv/tsv 和记录结构的 json(同 `puddingweb`;和 csv 重复时留 csv),不要模板自带的占位文件(test.csv、sample.csv、demo 目录);和 `data/pudding`、`data/pudding-web` 或前面文件内容相同的去掉(构建复制到 `docs/`、`public/` 的那份),留篇的规则同 `puddingweb`。结果 32 篇,在 `data/pudding-repo/<篇>/` 和 `manifest.jsonl`(多一个 `repos` 字段)。
 
-## judge(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`)
+## judge
 
-rubric 只有一份:`rubric/judge-dimensions.md`。`rubric.py` 读里面以条目编号开头的表格行,判法写在表里:信(1.x)判「犯了 / 没犯」,犯了任何一条整页 0 分;达(2.x)和雅(3.x)每条打 0–1 分;雅的每条另附几个打过分的典型案例。判法照 MiMo 开源打分服务(`recipes/design`)的 query judge 和评测 rubric。
+评测代码和 rubric 在 `report-bench`(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
 
-### 采集证据
-
-```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.capture one <page.html 或 url> <out_dir> [--data <数据>...]
-PYTHONPATH=src .venv/bin/python -m report_gepa.capture pudding runs/pudding-pages data/pudding runs/evidence --workers 4 | tee runs/capture.log
-```
-
-- 为什么不只用现成的整页截图:MiMo 的渲染服务(`render.py` 照它做)截一张整页长图,截前冻结动画。滚动叙事的页面上,一张图随滚动变化的几个状态在整页图里只剩一个(titletowns 原文第一张图有 4 个状态,整页图只截到最后一个)。整页图保留下来做缩略图,滚动帧另外截。
-- 像真人一样滚动:鼠标滚轮每次 80px,让 scrollama 这类滚动触发一步一步地触发;每 450px 等动画停下来截一屏(1440×900),不冻结动画;和上一帧几乎一样的帧不留。页面太长时加大间隔,最多 60 帧。
-- 每帧记下屏幕上每张图的位置和内容指纹。页面在滚、图在屏幕上的位置不动,就是固定住了(sticky);指纹变了,就是图重画了。汇总成 `scroll_story`:哪张图在哪几帧固定、出现了几种状态。2026-10-20 试过:foundation-names 原文主图第 8–21 帧固定、5 种状态;titletowns 原文三张图各固定 4–7 帧、4–7 种状态;titletowns 指南版没有固定的图。
-- 另外截一张整页图缩成 480px 宽的缩略图;按页面顺序抽出全部文字(带位置、是否在图里、是否隐藏)和图表清单(svg、canvas、img 的大小,svg 里的图形和标签个数)。
-- 输出 `<out_dir>/frames/NN.jpg`、`thumb.jpg`、`evidence.json`(还记着页面用的数据,给事实核对用)。
-- `pudding` 命令采集每篇的原文(`<out>/<篇>/original`)和生成的版本(`<out>/<篇>/<版本>`),已采集的跳过。原文是交互式页面、不是滚动长文的(manifest 里 `original_static` 为 false:开始按钮、视频,或只有一屏的应用,如 falsetto、boybands、book-covers、birthday-paradox)不采原文;`judgestats` 也把这些篇整篇排除,它们的原文只能看到一屏,judge 和人工比较都用不了。
-
-### 判
+### judge 分析(`judgestats.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.judge page runs/evidence/titletowns/original --items 1.1,1.2,1.3,2.2,2.4,2.11,3.1,3.2 [--per-item]
-```
-
-- 信、达、雅各是一组,每组一次调用,照 MiMo 评测 rubric 一次返回七个维度的做法(提示词里写了「各条独立判断」)。信里 1.1 和 1.2 不调模型,所以信的这次调用只有 1.3;达的各条一次打完;雅的两条一次打完。每条照样单独写一份记录,组的共同回答在 `group-<维度>.json`。`--per-item` 改成每条单独一次调用,是测耦合时的对照:一起判时一条的印象会不会带到别的条上,比一比就知道。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。
-- 1.1 不调模型,按采集结果判。只对生成页判脚本报错:Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用。
-- 1.2 由 `factcheck.py` 判:pi agent 在沙盒里读数据和 `page.txt`(页面全部文字),列出页面上的每个数字和带量的说法,用 python 复算,每条记 ok、wrong 或 unverifiable。有一条 wrong 就算犯了;原文引用了没公开的数据时会是 unverifiable,不算犯。
-- 1.3 由 judge 看图判犯没犯,写出犯在哪张图。信的三条犯了任何一条,整页 0 分。
-- 达的条目照 MiMo 评测 rubric(`recipes/design/webdev/eval_rubric.py`)的写法打 0–1 分:每条在 rubric 的「打分的分段说明」里有自己的五段描述,先按它定区间,再在区间内取值,写出位置和扣分理由。给不出合法分数或结论的回答记为没判出来,不当 0 分。雅也打 0–1 分,但先给 judge 看 rubric 里每条的典型案例:`runs/evidence/<篇>/<版本>/frames/` 里的一帧、分数和理由,标明「不是要评的页面」,再给要评的页面,judge 照着案例定档。案例取自人工标注过的页面,算雅和标注的一致率时排除这几篇。原来的组内挑选(MiMo 的 group pick)比不出来,多数轮次判「无明显差别」,已经删掉。
-- 记录在 `runs/judge/page/<篇>/<版本>/<条目>.json`,带 judge 模型、提示词和 rubric 的哈希、采集版本;已有的跳过。
-- 调用失败(重试后仍失败)不写记录,打出 FAILED,重跑同一命令会补上;额度不够时整批停下。
-
-### 分析(`judgestats.py`)
-
-```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats stats runs/judge/glm-a          # 各版本平均分、条目两两相关、VIF
-PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b   # 两次判分的一致率
-PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1     # 和人工标注的一致率
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats stats runs/judge/glm-a          # 各版本平均分、条目两两相关、VIF
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats agree runs/judge/glm-a runs/judge/glm-b   # 两次判分的一致率
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a labels/round1     # 和人工标注的一致率
 ```
 
 - 耦合:两条分数的 Spearman 相关超过 0.7 就标出来;再把每条对其余各条做回归,VIF 超过 5 说明这一条大部分能由别的条目说出来。相关矩阵的特征值看这些条目实际上有几个独立方向。
@@ -200,7 +154,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.judgestats human runs/judge/glm-a
 ## GEPA(`src/report_gepa/optimize.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/<名字> [--max-calls 120] [--val 8] [--train 19] [--minibatch 3] | tee runs/gepa/<名字>.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.optimize runs/gepa/<名字> [--max-calls 120] [--val 8] [--train 19] [--minibatch 3] | tee runs/gepa/<名字>.log
 ```
 
 用 `gepa==0.1.4` 优化写页面 agent 的系统提示词 `{"guide": ...}`,从 `guides/seed.md` 起步。
@@ -217,7 +171,7 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.optimize runs/gepa/<名字> [--ma
 ### 单独给一份指南打验证分(`src/report_gepa/evalguide.py`)
 
 ```sh
-PYTHONPATH=src .venv/bin/python -m report_gepa.evalguide runs/<名字> [--guide guides/seed.md] [--with-rubric] | tee runs/<名字>.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide runs/<名字> [--guide guides/seed.md] [--with-rubric] | tee runs/<名字>.log
 ```
 
 用和 GEPA 一样的 `Adapter` 在验证集 8 篇上各写一页、打分,分数和 `runs/gepa/full` 的验证分可比。`--with-rubric` 把 judge 拿到的评分标准接在指南后面:1.1 的一票否决,每条打分项的说明、五段分档和典型案例的文字(judge 还看案例截图,指南里只有文字)。它是基于 judge 优化提示词要胜过的基线:写页面的一开始就知道评审的标准。
@@ -261,10 +215,6 @@ PYTHONPATH=src .venv/bin/python -m report_gepa.evalguide runs/<名字> [--guide 
 ## 写页面 agent 的浏览器(`agent/bin/pageshot`)
 
 沙盒(`agent/sandbox.sh`)里打开了本地回环,只读挂上 Chromium、本项目的 Python 环境和 `src/`,`pageshot index.html` 用 `capture.py` 像读者一样滚动截图,输出 `_shots/frames/NN.jpg`、`_shots/thumb.jpg` 和 `evidence.json`;仍然上不了外网。`gen.mjs` 把模型声明为能收图片,read 工具才会把截图交给模型。2026-10-20 cookies 上试过:没有浏览器时一页 62 步、16 分钟、输入 250 万 token;有了以后 21–34 步、4.5–7.5 分钟、输入 9–26 万 token。agent 会跑 pageshot,但不一定把截图看全(一页的条形图没画出来,它只看了 2 张截图)。
-
-## 调用失败和重试(`src/report_gepa/llm.py`)
-
-deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「模型请求失败」或正文为空的 stop(同一请求成功和失败时 prompt token 数不同,像是分到了不同后端),有时 524 超时。和截图内容、图片张数、`max_tokens` 都无关(2026-10-20 逐项排除过)。正文为空也算没完成,和其他失败一起最多重试 5 次;加上以后 v5 一轮判分没有一次失败。
 
 ## 数据
 

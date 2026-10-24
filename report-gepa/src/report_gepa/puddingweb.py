@@ -1,7 +1,7 @@
 """Data from the pudding.cool stories that publish none: the files each story page loads.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb harvest <cache_dir>/web
-    PYTHONPATH=src .venv/bin/python -m report_gepa.puddingweb pack <cache_dir>/web data/pudding-web
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingweb harvest <cache_dir>/web
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingweb pack <cache_dir>/web data/pudding-web
 
 harvest opens every story on the site's list (pudding.cool/assets/data/stories.json)
 that report_gepa.pudding has no data for, scrolls through it (scroll-triggered

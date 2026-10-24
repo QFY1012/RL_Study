@@ -1,6 +1,6 @@
 """Fix pages whose scripts fail, in place, with a deepseek agent.
 
-    PYTHONPATH=src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pages [--workers 4]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.repair runs/pudding-pages runs/pages [--workers 4]
 
 A page needs repair when its render recorded page errors or script syntax errors.
 The agent works in the page's own directory with the data copied back in; the
@@ -21,8 +21,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from .generate import page_problem, run_agent
-from .llm import OutOfCredit, credit_refused
-from .render import render
+from report_bench.llm import OutOfCredit, credit_refused
+from report_bench.render import render
 
 ROOT = Path(__file__).resolve().parents[2]
 REPAIR_MODEL = "deepseek-v4.1-flash"
