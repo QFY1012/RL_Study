@@ -14,22 +14,14 @@ pages of one story as the examples, it rewrote the guide into instructions for
 that story ("把 The Pudding 的「Who is the Biggest Pop Star?」数据制作成一个中文网页报告").
 The guide is used on every story, so REFLECT asks for general practice only.
 
-One rollout is one story with one guide. The pi agent writes the page with the
-guide as its system prompt; the fixed task adds that the page is in English and
-that pageshot (agent/bin) shows the page the way the judge sees it. The page is
-captured and judged by deepseek:
-- trust: 1.1 from the capture; a violation makes the score 0. 1.2 (the agent
-  fact check) and 1.3 (the lie factor, by eye) are left out: the judge estimates
-  bar lengths from screenshots and misreads them (pop-music: 525px against 265px
-  read as 402px against 247px; one-hit-wonders: two calls, each misreading a
-  different chart), and a misreading is a whole page at 0.
-- expression: every scored 2.x item, 0-1, in one call.
-- aesthetics: 3.1 and 3.2, 0-1, in one call, after the rubric's worked examples
-  (a frame of a hand-scored page, its score and why), which pin the scale.
-The score is the mean of the expression and aesthetics items: equal weights until weights are fitted on whole-page labels.
-An item the judge gave no verdict for is left out of the mean, not counted as 0.
+One rollout is one story with one guide. The pi agent writes the page (and its
+facts.json) with the guide as its system prompt and the benchmark's task
+(generate.py), and the page is scored the one way every page is scored
+(report_bench.score.score_page, judged by deepseek): trust items 1.1-1.3 veto
+the page to 0; otherwise the score is the mean of the expression and
+aesthetics items. The result's feedback lines are what reflection reads.
 
-Each rollout's page, evidence and judgements stay in
+Each rollout's page, evidence, trust check and judgements stay in
 <run>/rollouts/<guide hash>/<story>/ and are reused when present, so a restart or
 GEPA asking again costs nothing; result.json holds the score.
 Reflection replies are kept in <run>/reflections/<prompt hash>.md the same way, so a restart
@@ -50,11 +42,9 @@ from pathlib import Path
 import gepa
 from gepa.core.adapter import EvaluationBatch
 
-from report_bench import judge as J
-from report_bench.capture import capture
-from .generate import GUIDES, generate_page
 from report_bench.llm import LLM, OutOfCredit
-from report_bench.rubric import load
+from report_bench.score import score_page
+from .generate import GUIDES, generate_page
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "pudding"
@@ -62,11 +52,6 @@ LABELS = ROOT / "labels" / "round1"
 GEN_MODEL = "deepseek-v4.1-flash"
 JUDGE_MODEL = "deepseek-v4.1-flash"
 REFLECT_MODEL = "deepseek-v4.1-flash"
-TASK = """工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据,再按系统提示词的要求把它做成一个网页,写到工作目录的 index.html。页面上的文字用英文写。
-index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面,不引用任何外部资源(打开页面时没有网络)。
-想看页面的效果,运行 pageshot index.html:它像读者一样滚动页面,每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。"""
-
-
 REFLECT = """下面是一个写数据报告网页的 agent 用的指南(它的系统提示词):
 ```
 <curr_param>
@@ -83,7 +68,7 @@ agent 按这份指南，为下面几份数据各写了一个网页。每个网�
 - 这份指南会用在各种完全不同的数据上(体育、文化、科学、社会……),上面只是其中几份。指南里只写通用的做法，不要出现任何具体数据集的名字、字段、数字、人物或结论，也不要针对某个话题写规定。
 - 页面用什么语言、写到哪个文件、能用哪些工具，由固定的任务说明决定，指南里不要规定。
 - 从分数和理由里找出反复出现的问题和做得好的地方，归纳成可操作的原则(怎么选图、怎么组织叙事、怎么写字、怎么标注、怎么让形象和气质贴合话题……)。不要只为某一条分数去改，也不要把评审的原话照抄成规则。
-- 页面打不开、脚本报错导致图或正文缺失(1.1)整页 0 分：理由里指出的问题要写成明确的禁止。
+- 可信(1.1 页面可渲染、1.2 引用完整、1.3 数据准确)犯了任何一条整页 0 分：理由里指出的问题要写成明确的禁止。
 - 保留原指南里有效的部分;新指南要完整，能直接替换原指南使用。
 
 把新指南完整地写在一个 ``` 代码块里。"""
@@ -123,12 +108,6 @@ class Adapter:
         self.run = run
         self.workers = workers
         self.browsers = threading.Semaphore(browsers)
-        self.rubric = load()
-        self.scored = [it for it in self.rubric.values() if it.scored]
-        # one judge call per dimension: expression (2.x) and aesthetics (3.x)
-        self.dims = [[it for it in self.scored if it.id.startswith(d)] for d in ("2.", "3.")]
-        self.task = run / "task.txt"
-        self.task.write_text(TASK, encoding="utf-8")
         self.meta = {r["id"]: r for r in stories()}
         self.locks: dict[str, threading.Lock] = {}
         self.locks_lock = threading.Lock()
@@ -136,16 +115,6 @@ class Adapter:
     def _lock(self, key: str) -> threading.Lock:
         with self.locks_lock:
             return self.locks.setdefault(key, threading.Lock())
-
-    def _page(self, guide_path: Path, story: str, pages: Path, name: str, ev: Path) -> dict:
-        """Write and capture one page, reusing what is already there."""
-        record = pages / name / "record.json"
-        rec = (json.loads(record.read_text(encoding="utf-8")) if record.exists() else
-               generate_page(guide_path, [DATA / story], pages, name, GEN_MODEL, render_slots=self.browsers, task_path=self.task))
-        if rec["delivered"] and not (ev / "evidence.json").exists():
-            with self.browsers:
-                capture(str(pages / name / "index.html"), ev, None, [DATA / story])
-        return rec
 
     def rollout(self, guide: str, story: str) -> dict:
         h = guide_hash(guide)
@@ -164,47 +133,12 @@ class Adapter:
             return result
 
     def _rollout(self, guide_path: Path, story: str, base: Path) -> dict:
-        ev = base / "evidence"
-        rec = self._page(guide_path, story, base, "page", ev)
+        record = base / "page" / "record.json"
+        rec = (json.loads(record.read_text(encoding="utf-8")) if record.exists() else
+               generate_page(guide_path, [DATA / story], base, "page", GEN_MODEL, render_slots=self.browsers))
         if not rec["delivered"]:
             return {"score": 0.0, "summary": f"no page: {rec.get('detail')}", "feedback": [f"没有交付页面:{rec.get('detail')}"]}
-
-        judged = base / "judgements.json"
-        items: dict[str, dict] = json.loads(judged.read_text(encoding="utf-8")) if judged.exists() else {}
-        gate = J.gate(ev)
-        items["1.1"] = {"violated": gate["violated"], "reason": "; ".join(gate["problems"])}
-        jobs = [(dim[0].id[0] + ".x", lambda dim=dim: J.page_group(dim, ev, JUDGE_MODEL)[1], [it.id for it in dim]) for dim in self.dims]
-        for name, fn, ids in jobs:
-            if all(i in items for i in ids):
-                continue
-            try:
-                items.update(fn())
-            except OutOfCredit:
-                raise
-            except Exception as e:  # noqa: BLE001 - a judge failure leaves these items out, it is not a 0
-                print(f"[judge] {base.parent.name}/{story} {name}: FAILED {str(e)[:200]}", flush=True)
-        judged.write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
-
-        vetoed = [k for k in ("1.1",) if items.get(k, {}).get("violated") is True]
-        parts = {it.id: items[it.id]["score"] for it in self.scored if items.get(it.id, {}).get("score") is not None}
-        score = 0.0 if vetoed else (sum(parts.values()) / len(parts) if parts else 0.0)
-        return {"score": score, "vetoed": vetoed, "parts": parts,
-                "summary": ("vetoed by " + ",".join(vetoed) if vetoed else " ".join(f"{k}={v:.2f}" for k, v in parts.items())),
-                "feedback": self._feedback(items, vetoed, ev)}
-
-    def _feedback(self, items: dict, vetoed: list[str], ev: Path) -> list[str]:
-        out = []
-        for k in vetoed:
-            r = items[k]
-            out.append(f"{k} {self.rubric[k].name}:犯了,整页 0 分。{r.get('where') or ''} {r.get('reason') or ''}".strip())
-        for it in self.scored:
-            r = items.get(it.id)
-            if r and r.get("score") is not None:
-                out.append(f"{it.id} {it.name}:{r['score']:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
-        evid = json.loads((ev / "evidence.json").read_text(encoding="utf-8"))
-        out.append(f"页面高 {evid.get('page_height')}px,滚动截了 {len(evid.get('frames', []))} 帧,"
-                   f"滚动时固定在屏幕上的图 {sum(1 for c in evid.get('scroll_story', []) if c['pinned'])} 张。")
-        return out
+        return score_page(base / "page", [DATA / story], base, JUDGE_MODEL, self.browsers)
 
     # GEPA's adapter protocol
 

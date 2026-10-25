@@ -2,11 +2,14 @@
 
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.generate <out_dir> <data file or dir>... [--guide guides/seed.md] [--model m] [--n 2]
 
-The guide is the agent's system prompt and is the thing GEPA optimizes. The data
-files are copied into the agent's workspace and never put in a prompt: the agent
-reads them with its tools. Each version lives in <out_dir>/<name>/: index.html,
-page.png, record.json (the agent runs and the render) and session.jsonl (the
-agent's transcript). The copied data is removed afterwards.
+The guide is the agent's system prompt and is the thing GEPA optimizes. The task
+is the benchmark's (report-bench/TASK.md: deliver facts.json and index.html)
+plus how to look at the page with pageshot, so every page is made under the same
+terms it is scored on. The data files are copied into the agent's workspace and
+never put in a prompt: the agent reads them with its tools. Each version lives in
+<out_dir>/<name>/: index.html, facts.json, page.png, record.json (the agent runs
+and the render) and session.jsonl (the agent's transcript). The copied data is
+removed afterwards.
 """
 
 from __future__ import annotations
@@ -27,6 +30,10 @@ from report_bench.render import render
 
 ROOT = Path(__file__).resolve().parents[2]
 AGENT = ROOT / "agent" / "gen.mjs"
+TASK = ROOT.parent / "report-bench" / "TASK.md"
+TOOLS = """
+To see the page, run `pageshot index.html`: it scrolls the page like a reader, saves one screenshot per screen to _shots/frames/ and a shrunk full page to _shots/thumb.jpg; look at them with the read tool. Change the page with the edit tool. Stop once both files are written.
+"""
 GUIDES = ROOT / "guides"
 GEN_MODEL = "deepseek-v4.1-flash"
 MAX_ATTEMPTS = 2
@@ -41,6 +48,8 @@ def page_problem(ws: Path) -> str | None:
     page = ws / "index.html"
     if not page.exists():
         return "no index.html"
+    if not (ws / "facts.json").exists():
+        return "no facts.json"
     html = page.read_text(encoding="utf-8", errors="replace")
     if "</html>" not in html.lower():
         return "html not closed"
@@ -51,11 +60,11 @@ def page_problem(ws: Path) -> str | None:
     return None
 
 
-def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: str, task_path: Path | None = None,
+def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: str, task_path: Path,
               output: str = "index.html") -> dict:
     env = load_env()
     proc = subprocess.Popen(
-        ["node", str(AGENT), str(ws), str(guide_path), model, effort, str(task_path) if task_path else "", output],
+        ["node", str(AGENT), str(ws), str(guide_path), model, effort, str(task_path), output],
         env={**os.environ, "LLM_API_KEY": env["LLM_API_KEY"], "LLM_BASE_URL": env["LLM_BASE_URL"]},
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
     )
@@ -74,10 +83,11 @@ def run_agent(ws: Path, guide_path: Path, model: str, effort: str, log_prefix: s
 
 
 def generate_page(guide_path: Path, data: list[Path], out_dir: Path, name: str, model: str = GEN_MODEL,
-                  effort: str = "high", render_slots: threading.Semaphore | None = None,
-                  task_path: Path | None = None) -> dict:
-    """task_path replaces the agent's fixed task message (agent/gen.mjs TASK) when given."""
+                  effort: str = "high", render_slots: threading.Semaphore | None = None) -> dict:
     ws = out_dir / name
+    task_path = out_dir / f"{name}.task.md"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    task_path.write_text(TASK.read_text(encoding="utf-8") + TOOLS, encoding="utf-8")
     guide = guide_path.read_text(encoding="utf-8")
     record = {"model": model, "effort": effort, "guide": guide_path.name, "guide_hash": guide_hash(guide),
               "data": [str(p) for p in data], "attempts": []}

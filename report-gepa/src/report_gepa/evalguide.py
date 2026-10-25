@@ -2,7 +2,7 @@
 
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide runs/<name> [--guide guides/seed.md] [--with-rubric]
 
---with-rubric appends the scoring rules the judge is given: 1.1's veto, and every
+--with-rubric appends the scoring rules the page is scored by: the trust vetoes (1.1-1.3), and every
 scored item with its description, its five bands and the text of its worked
 examples (the judge also sees the examples' screenshots; a guide carries only
 their text). It is the baseline a judge-driven optimiser has to beat: the
@@ -24,13 +24,12 @@ from report_bench.rubric import load
 
 RUBRIC_HEADER = """
 
-下面是这些网页的评分标准。每个网页由评审照这份标准打分:先看 1.1,犯了就整页 0 分;否则「表达」各条和「美感」各条分别打 0–1 分,总分是这些条的平均。"""
+下面是这些网页的评分标准。每个网页由评审照这份标准打分:先看可信 1.1–1.3,犯了任何一条就整页 0 分;否则「表达」各条和「美感」各条分别打 0–1 分,总分是这些条的平均。"""
 
 
 def rubric_text() -> str:
     rubric = load()
-    gate = rubric["1.1"]
-    parts = [f"{gate.id} {gate.name}(一票否决)\n说明:{gate.description}"]
+    parts = [f"{it.id} {it.name}(一票否决)\n说明:{it.description}" for it in rubric.values() if "门槛" in it.mode]
     for it in (r for r in rubric.values() if r.scored):
         block = _item_block(it, True)
         if it.examples:

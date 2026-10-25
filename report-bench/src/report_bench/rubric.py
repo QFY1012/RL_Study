@@ -39,17 +39,9 @@ class Item:
     id: str
     name: str
     description: str
-    mode: str  # the rubric's own words, e.g. "门槛", "打分(要按滚动位置截多帧)", "打分(照典型案例)"
+    mode: str  # the rubric's own words, e.g. "门槛,代码", "打分(要按滚动位置截多帧)", "打分(照典型案例)"
     bands: tuple[str, ...] = ()  # five "[0.0, 0.2):..." lines for a scored item
     examples: tuple[Example, ...] = ()  # worked examples for an aesthetic item
-
-    @property
-    def gate(self) -> bool:
-        return "门槛" in self.mode
-
-    @property
-    def binary(self) -> bool:
-        return "二值" in self.mode
 
     @property
     def scored(self) -> bool:
@@ -91,5 +83,4 @@ def rubric_hash(path: Path = RUBRIC) -> str:
 
 if __name__ == "__main__":
     for it in load().values():
-        kind = "gate" if it.gate else "binary" if it.binary else "scored" if it.scored else "?"
-        print(f"{it.id:5} {kind:8} {it.name}  [{it.mode}] bands={len(it.bands)} examples={len(it.examples)}")
+        print(f"{it.id:5} {'scored' if it.scored else 'trust':7} {it.name}  [{it.mode}] bands={len(it.bands)} examples={len(it.examples)}")

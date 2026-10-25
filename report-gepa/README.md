@@ -6,7 +6,7 @@
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0 pillow==13.0.0 ftfy==6.3.1
+.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0 pillow==13.0.0 ftfy==6.3.1 pandas==3.0.5
 ```
 
 浏览器用容器里预装的 Chromium(`/opt/pw-browsers/chromium`),不跑 `playwright install`。
@@ -175,7 +175,7 @@ same-name 要请求 5,554 个小文件,连接被代理断开时每个文件最�
 
 ## judge
 
-评测代码和 rubric 在 `report-bench`(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
+评测代码和 rubric 在 `report-bench`(`score.py` 的 `score_page` 是唯一的打分入口;`capture.py`、`trust.py`、`facts.py`、`judge.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
 
 ### judge 分析(`judgestats.py`)
 
@@ -199,13 +199,13 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.optimize runs
 用 `gepa==0.1.4` 优化写页面 agent 的系统提示词 `{"guide": ...}`,从 `guides/seed.md` 起步。
 
 - **数据**:Pudding 里原文是滚动长文的 43 篇。人工标注过的 16 篇是测试集,GEPA 不碰;其余 27 篇按 `--seed` 分成验证 8 篇(帕累托集)和训练 19 篇(反思用的小批量)。划分写在 `<run>/split.json`。
-- **一次 rollout** = 一篇数据 + 一版指南:pi agent 写页面(固定任务说明要求写英文、可以用 `pageshot` 看自己的页面),采集截图,deepseek 判:
-  - 信:只判 1.1,犯了整页 0 分;1.2 和 1.3 不做(1.3 靠看截图目测柱长,会量错,一次量错就是整页 0 分)。
+- **一次 rollout** = 一篇数据 + 一版指南:pi agent 按 benchmark 的任务说明(`report-bench/TASK.md`:交付 `facts.json` 和用 `data-ref` 标好的 `index.html`,页面写英文)加上 `pageshot` 的用法写页面,再由 `report_bench.score.score_page` 打分,和 benchmark、TF-GRPO 是同一个定义,judge 是 deepseek:
+  - 信:1.1 页面可渲染、1.2 引用完整、1.3 数据准确,犯了任何一条整页 0 分。
   - 达:2.x 每条 0–1 分,一次调用。
   - 雅:3.1、3.2 每条 0–1 分,一次调用,照 rubric 里的典型案例定档。
   - 分数 = 达和雅各条的平均(等权)。
-- **反馈**:每条的分数、位置和理由。
-- 每次 rollout 的页面、截图、判分都在 `<run>/rollouts/<指南哈希>/<篇>/`;已有的复用,断了重跑同一命令。
+- **反馈**:`score_page` 结果里的 `feedback`:信的每处问题和原因,每条的分数、位置和理由。
+- 每次 rollout 的页面、截图、信的核对、判分都在 `<run>/rollouts/<指南哈希>/<篇>/`;已有的复用,断了重跑同一命令。
 
 ### 单独给一份指南打验证分(`src/report_gepa/evalguide.py`)
 
@@ -213,7 +213,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.optimize runs
 PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide runs/<名字> [--guide guides/seed.md] [--with-rubric] | tee runs/<名字>.log
 ```
 
-用和 GEPA 一样的 `Adapter` 在验证集 8 篇上各写一页、打分,分数和 `runs/gepa/full` 的验证分可比。`--with-rubric` 把 judge 拿到的评分标准接在指南后面:1.1 的一票否决,每条打分项的说明、五段分档和典型案例的文字(judge 还看案例截图,指南里只有文字)。它是基于 judge 优化提示词要胜过的基线:写页面的一开始就知道评审的标准。
+用和 GEPA 一样的 `Adapter` 在验证集 8 篇上各写一页、打分,分数和 `runs/gepa/full` 的验证分可比。`--with-rubric` 把评分标准接在指南后面:信 1.1–1.3 的一票否决,每条打分项的说明、五段分档和典型案例的文字(judge 还看案例截图,指南里只有文字)。它是基于 judge 优化提示词要胜过的基线:写页面的一开始就知道评审的标准。
 
 2026-10-24 跑的 `runs/seed-rubric`(种子 + 评分标准,4645 字):
 

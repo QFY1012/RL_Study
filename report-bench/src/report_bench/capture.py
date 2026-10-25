@@ -51,7 +51,7 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, SCROLL_THROUGH, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-3"
+CAPTURE_VERSION = "capture-4"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
 FRAME_EVERY = 450  # px between frames, unless the page is too long for MAX_FRAMES
@@ -65,10 +65,18 @@ JPEG_QUALITY = 80
 
 # Text in page order. Each piece of text belongs to its nearest block-level
 # element (a heading, paragraph, list item, table cell, svg <text>...), so a
-# paragraph with a <b> inside comes out as one item.
+# paragraph with a <b> inside comes out as one item. A page that names the facts
+# behind its sentences and charts (data-ref, see facts.py) gets each item's text
+# again as `marked`, the referenced pieces wrapped as ⟦ids⟧...⟦/⟧ (⟦chart ids⟧
+# for text inside a referenced chart), so a checker knows what each sentence rests on.
 PAGE_TEXT = r"""
 () => {
   const BLOCK = 'h1,h2,h3,h4,h5,h6,p,li,figcaption,blockquote,td,th,dt,dd,label,button,option,caption,summary,text,title,pre';
+  const charts = new Map();
+  const isChart = (el) => {
+    if (!charts.has(el)) charts.set(el, el.matches('svg,canvas,img') || !!el.querySelector('svg,canvas,img'));
+    return charts.get(el);
+  };
   const out = new Map();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let n = walker.nextNode(); n; n = walker.nextNode()) {
@@ -77,24 +85,52 @@ PAGE_TEXT = r"""
     const parent = n.parentElement;
     if (!parent || parent.closest('script,style,noscript,template')) continue;
     const el = parent.closest(BLOCK) || parent;
+    const ref = parent.closest('[data-ref]');
+    const tag = ref ? (isChart(ref) ? 'chart ' : '') + ref.getAttribute('data-ref').trim().split(/\s+/).join(' ') : null;
     if (!out.has(el)) out.set(el, []);
-    out.get(el).push(t);
+    out.get(el).push({t, tag});
   }
   const items = [];
   for (const [el, parts] of out) {
     const r = el.getBoundingClientRect();
     const s = getComputedStyle(el);
-    items.push({
+    const item = {
       tag: el.tagName.toLowerCase(),
       y: Math.round(r.top + scrollY), x: Math.round(r.left), w: Math.round(r.width),
       in_svg: !!el.closest('svg'),
       hidden: s.display === 'none' || s.visibility === 'hidden' || r.width === 0,
-      text: parts.join(' ').slice(0, 2000),
-    });
+      text: parts.map(p => p.t).join(' ').slice(0, 2000),
+    };
+    if (parts.some(p => p.tag)) {
+      const runs = [];
+      for (const p of parts) {
+        const last = runs[runs.length - 1];
+        if (last && last.tag === p.tag) last.t += ' ' + p.t;
+        else runs.push({...p});
+      }
+      item.marked = runs.map(p => p.tag ? `⟦${p.tag}⟧${p.t}⟦/⟧` : p.t).join(' ').slice(0, 3000);
+    }
+    items.push(item);
   }
   items.sort((a, b) => a.y - b.y || a.x - b.x);
   return items;
 }
+"""
+
+# Every element that names facts with data-ref: which facts, whether it is a
+# chart (it is or holds an svg, canvas or img) or a sentence, and whether a reader sees it.
+REFS = r"""
+() => [...document.querySelectorAll('[data-ref]')].map(el => {
+  const r = el.getBoundingClientRect();
+  const s = getComputedStyle(el);
+  return {
+    ids: el.getAttribute('data-ref').trim().split(/\s+/).filter(Boolean),
+    chart: el.matches('svg,canvas,img') || !!el.querySelector('svg,canvas,img'),
+    visible: r.width > 0 && r.height > 0 && s.display !== 'none' && s.visibility !== 'hidden',
+    y: Math.round(r.top + scrollY),
+    text: (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 500),
+  };
+})
 """
 
 # Charts: svg and canvas big enough not to be an icon, and images (assets the
@@ -296,6 +332,7 @@ def capture(target: str, out: Path, proxy: str | None = None, data: list[Path] =
                     evidence["scroll_story"] = scroll_story(evidence["frames"])
                     evidence["text"] = _merge_letters(page.evaluate(PAGE_TEXT))
                     evidence["charts"] = page.evaluate(CHARTS)
+                    evidence["refs"] = page.evaluate(REFS)
                     page.evaluate("window.scrollTo(0, 0)")
                     page.evaluate(SCROLL_THROUGH, MAX_PAGE_H)
                     page.add_style_tag(content=FREEZE_CSS)

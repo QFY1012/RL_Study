@@ -1,13 +1,12 @@
 // Run a pi agent in a workspace: write a report page, fix one, or check one.
 //
-//   LLM_API_KEY=... LLM_BASE_URL=... node agent/gen.mjs <workspace> <system.md> <model> [effort] [task.txt] [output]
+//   LLM_API_KEY=... LLM_BASE_URL=... node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]
 //
-// <workspace>/data/ holds the report's files. The guide is the system prompt; the
-// user message only says where the data is and where the page goes, so the data
-// reaches the model only through the read and bash tools. A task file replaces
-// that message (repair.py uses it to fix a page in place, factcheck.py to check
-// one). The agent writes <workspace>/<output>, index.html unless given, and is
-// asked once more if it has not. read / write / edit are limited to the workspace and
+// <workspace>/data/ holds the report's files. The guide is the system prompt and
+// the task file is the user message (generate.py: the benchmark task plus how to
+// use pageshot; repair.py: fix a page in place), so the data reaches the model
+// only through the read and bash tools. The agent writes <workspace>/<output>,
+// index.html unless given, and is asked once more if it has not. read / write / edit are limited to the workspace and
 // bash runs in sandbox.sh. Prints one line per tool call, then one JSON line
 // starting with "RESULT " that generate.py parses.
 import fs from "node:fs"
@@ -29,13 +28,10 @@ const WRAP_UP_STEPS = 150
 const MAX_STEPS = 170
 const WRAP_UP = `已经用了 ${WRAP_UP_STEPS} 步，到上限了。不要再截图检查或继续打磨，确认结果已经写好就结束。`
 
-const TASK = `工作目录下的 data/ 里是一份报告的数据(有 README 的话是数据说明)。先读懂数据，再按系统提示词的要求把它做成一个网页，写到工作目录的 index.html。
-index.html 是一个完整的 HTML 文件,CSS 和脚本都写在里面，不引用任何外部资源(打开页面时没有网络)。
-想看页面的效果，运行 pageshot index.html:它像读者一样滚动页面，每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。写完就结束。`
-const [wsArg, guidePath, modelId, effort = "high", taskPath, output = "index.html"] = process.argv.slice(2)
+const [wsArg, guidePath, modelId, effort, taskPath, output = "index.html"] = process.argv.slice(2)
 const NUDGE = `工作目录里还没有 ${output}。请把结果写到 ${output}。`
-if (!wsArg || !guidePath || !modelId) {
-  console.error("usage: node agent/gen.mjs <workspace> <system.md> <model> [effort] [task.txt] [output]")
+if (!wsArg || !guidePath || !modelId || !effort || !taskPath) {
+  console.error("usage: node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]")
   process.exit(2)
 }
 const { LLM_API_KEY: KEY, LLM_BASE_URL: BASE } = process.env
@@ -117,7 +113,7 @@ session.subscribe((e) => {
     console.log(`${name}: error ${e.message.errorMessage.slice(0, 200)}`)
   }
 })
-await session.prompt(taskPath ? fs.readFileSync(taskPath, "utf8") : TASK)
+await session.prompt(fs.readFileSync(taskPath, "utf8"))
 let nudged = false
 if (!fs.existsSync(path.join(ws, output))) {
   nudged = true

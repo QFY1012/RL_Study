@@ -1,20 +1,15 @@
-"""Judge captured pages against the rubric, one call per group of items.
+"""Score captured pages on the rubric's scored items, one call per group of items.
 
-    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 1.1,1.3,2.2,2.3,3.1,3.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 2.2,2.3,3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
 charts stay pinned while the page scrolls and how many states they show).
 
-The rubric's three dimensions are three groups, each judged in one call, the
-way MiMo's evaluation rubric returns its seven dimensions from one vision call
-(recipes/design, webdev/eval_rubric.py, "各维独立判断"):
-- trust (1.x) is a veto: each item violated or not, where, why; any violation
-  makes the page 0, like MiMo's runtime gate. 1.1 is decided from the capture
-  and 1.2 by an agent that recomputes the page's claims from the data
-  (factcheck.py), so the trust call itself holds the items judged by eye (1.3).
-  1.1 applies to generated pages only: published Pudding pages throw errors of
-  their own (titletowns: "reading 'latitude'") and still work.
+Trust (1.x) is not judged here: it is decided by code and one text call against
+the data (trust.py). The two scored dimensions are two groups, each judged in
+one call, the way MiMo's evaluation rubric returns its seven dimensions from one
+vision call (recipes/design, webdev/eval_rubric.py, "各维独立判断"):
 - expression (2.x) is scored 0-1, each item with its own five band
   descriptions: pick the band first, then a value inside it; the reason for
   every point taken off is GEPA's feedback text.
@@ -51,7 +46,6 @@ from pathlib import Path
 from PIL import Image
 
 from .capture import VIEW_H
-from .factcheck import factcheck
 from .llm import LLM, OutOfCredit
 from .rubric import Item, load, rubric_hash
 
@@ -78,12 +72,6 @@ SYSTEM = """你是数据报告网页的评审。读者是普通大众，不是�
 - 交互不看：悬停提示、点击、筛选、按钮切换这些要读者操作才出现的东西，不算优点也不算缺点，也不因为某些内容要操作才看得到而扣分;只判滚动时看得到的内容。
 - 先在证据里找到具体位置(第几帧、哪一节、哪张图)，再下结论。"""
 
-CHECK = """要判的一条:{id} {name}
-说明:{description}
-
-判断这个页面有没有犯这一条。只要有一处犯了就算犯了，写出犯在哪里。
-最后单独输出一行 JSON:{{"violated": true 或 false, "where": "第几帧/哪一节/哪张图", "reason": "一两句话"}}"""
-
 SCORE = """要打分的一条:{id} {name}
 说明:{description}
 
@@ -97,14 +85,6 @@ TOGETHER = """下面这几条一起打分，每条打一个 0 到 1 的连续分
 {items}
 
 写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
-
-CHECK_TOGETHER = """下面这几条一起判，每条判这个页面有没有犯。各条独立判断，不要因为某一条的结论连带改变其它条。只要有一处犯了就算犯了，写出犯在哪里。
-
-{items}
-
-写完评语后，最后必须单独输出一行 JSON,每条一个键，不能省略:{{{keys}}}"""
-
-
 
 RUBRIC_HASH = rubric_hash()  # taken with the rubric the run loads, so a mid-run edit cannot relabel its records
 
@@ -170,8 +150,6 @@ def evidence_parts(ev_dir: Path, label: str, max_frames: int = MAX_FRAMES) -> li
 
 FIELDS = {
     "score": r'"score"\s*:\s*(-?[0-9]+(?:\.[0-9]+)?)',
-    "violated": r'"violated"\s*:\s*(true|false)',
-    "winner": r'"winner"\s*:\s*"(A|B|tie)"',
     "where": r'"where"\s*:\s*"(.*?)"\s*,\s*"',
     "reason": r'"reason"\s*:\s*"(.*)"\s*\}',
 }
@@ -185,7 +163,7 @@ def _fields(text: str) -> dict:
         m = re.search(pattern, text, re.S)
         if m:
             raw = m.group(1)
-            out[key] = float(raw) if key == "score" else raw == "true" if key == "violated" else raw
+            out[key] = float(raw) if key == "score" else raw
     return out
 
 
@@ -220,21 +198,6 @@ def _capture_version(ev_dir: Path) -> str:
     return json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))["capture_version"]
 
 
-def gate(ev_dir: Path) -> dict:
-    """1.1: the page opened, rendered text, and (for generated pages) ran without errors."""
-    ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
-    generated = not ev["target"].startswith(("http://", "https://"))
-    problems = []
-    if ev["verdict"] != "ok":
-        problems.append(f"verdict {ev['verdict']}")
-    if ev.get("hang"):
-        problems.append("hang")
-    if generated:
-        problems += [f"page error: {e}" for e in ev["page_errors"]] + [f"syntax error: {e}" for e in ev["syntax_errors"]]
-    return {"item": "1.1", "violated": bool(problems), "problems": problems, "generated": generated,
-            "capture_version": ev["capture_version"]}
-
-
 def example_parts(items: list[Item]) -> list[dict]:
     """The worked examples of the items that have them, each one frame with its score and why.
     They go before the page and are marked as examples, so they are not taken for the page."""
@@ -248,16 +211,6 @@ def example_parts(items: list[Item]) -> list[dict]:
         parts.insert(0, {"type": "text", "text": "下面先给几个打过分的典型案例，用来对齐分数的尺度。案例之后才是要评的页面。"})
         parts.append({"type": "text", "text": "典型案例到此为止。下面是要评的页面。"})
     return parts
-
-
-def check(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
-    content = evidence_parts(ev_dir, "") + [{"type": "text", "text": CHECK.format(id=item.id, name=item.name, description=item.description)}]
-    answer = _ask(model, content)
-    v = answer["verdict"] or {}
-    violated = v.get("violated") if isinstance(v.get("violated"), bool) else None  # no usable verdict is a failed judgement
-    return {"item": item.id, "page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(CHECK),
-            "capture_version": _capture_version(ev_dir), "violated": violated, "where": v.get("where"),
-            "reason": v.get("reason"), "answer": answer}
 
 
 def score(item: Item, ev_dir: Path, model: str = JUDGE_MODEL) -> dict:
@@ -286,30 +239,23 @@ def _item_block(it: Item, with_bands: bool) -> str:
 
 
 def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
-    """One call for a group of scored items or of binary items on one page.
-    Returns the shared answer and one record per item."""
-    scored = all(it.scored for it in items)
-    if not scored and not all(it.binary for it in items):
-        raise ValueError("a group is all scored items or all binary items")
-    template = TOGETHER if scored else CHECK_TOGETHER
-    blocks = "\n\n".join(_item_block(it, scored) for it in items)
-    shape = '{"score": 0.0, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由"}' if scored else '{"violated": false, "where": "第几帧/哪张图", "reason": "一两句话"}'
+    """One call for a group of scored items on one page. Returns the shared answer and one record per item."""
+    if not all(it.scored for it in items):
+        raise ValueError("only scored items are judged; trust is trust.py")
+    blocks = "\n\n".join(_item_block(it, True) for it in items)
+    shape = '{"score": 0.0, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由"}'
     keys = ", ".join(f'"{it.id}": {shape}' for it in items)
-    content = (example_parts(items) if scored else []) + evidence_parts(ev_dir, "") + [{"type": "text", "text": template.format(items=blocks, keys=keys)}]
+    content = example_parts(items) + evidence_parts(ev_dir, "") + [{"type": "text", "text": TOGETHER.format(items=blocks, keys=keys)}]
     answer = _ask(model, content)
     parsed = _json_object(answer["text"]) or {}
-    shared = {"page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(template), "items": [it.id for it in items],
+    shared = {"page": str(ev_dir), "model": model, "prompt_hash": prompt_hash(TOGETHER), "items": [it.id for it in items],
               "answer": answer}
     recs = {}
     for it in items:
         v = _item_verdict(parsed, answer["text"], it.id)
-        rec = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "group", "prompt_hash": prompt_hash(template),
-               "capture_version": _capture_version(ev_dir), "where": v.get("where"), "reason": v.get("reason")}
-        if scored:
-            rec["score"] = _usable_score(v.get("score"))
-        else:
-            rec["violated"] = v.get("violated") if isinstance(v.get("violated"), bool) else None
-        recs[it.id] = rec
+        recs[it.id] = {"item": it.id, "page": str(ev_dir), "model": model, "mode": "group", "prompt_hash": prompt_hash(TOGETHER),
+                       "capture_version": _capture_version(ev_dir), "score": _usable_score(v.get("score")),
+                       "where": v.get("where"), "reason": v.get("reason")}
     return shared, recs
 
 
@@ -331,38 +277,18 @@ def _json_object(text: str) -> dict | None:
     return found
 
 
-def judge_page(item: Item, ev_dir: Path, model: str, record_dir: Path) -> dict:
-    if item.gate:
-        return gate(ev_dir)
-    if item.id == "1.2":  # needs the data and arithmetic, not screenshots
-        ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
-        return factcheck(ev_dir, [Path(p) for p in ev["data"]], record_dir)
-    if item.binary:
-        return check(item, ev_dir, model)
-    if item.scored:
-        return score(item, ev_dir, model)
-    raise ValueError(f"{item.id} has no judging mode")
-
-
 def _name(ev_dir: Path) -> tuple[str, str]:
     return ev_dir.parent.name, ev_dir.name
 
 
 def _groups(items: list[Item], per_item: bool) -> list[list[Item]]:
-    """One group per dimension (1.x, 2.x, 3.x); 1.1 and 1.2 are not model calls and stay alone."""
+    """One group per dimension (2.x, 3.x), or one item per group."""
     if per_item:
         return [[it] for it in items]
     by_dim: dict[str, list[Item]] = {}
     for it in items:
         by_dim.setdefault(it.id.split(".")[0], []).append(it)
-    out = []
-    for its in by_dim.values():
-        alone = [it for it in its if it.gate or it.id == "1.2"]
-        rest = [it for it in its if it not in alone]
-        out += [[it] for it in alone]
-        if rest:
-            out.append(rest)
-    return out
+    return list(by_dim.values())
 
 
 GROUP_ATTEMPTS = 2
@@ -376,7 +302,7 @@ def _group_job(folder: Path, dim: str, fn):
     def run():
         for attempt in range(GROUP_ATTEMPTS):
             shared, recs = fn()
-            missing = [k for k, r in recs.items() if all(r.get(f) is None for f in ("score", "violated"))]
+            missing = [k for k, r in recs.items() if r.get("score") is None]
             if not missing:
                 break
         else:
@@ -384,7 +310,7 @@ def _group_job(folder: Path, dim: str, fn):
         folder.mkdir(parents=True, exist_ok=True)
         for item_id, rec in recs.items():
             (folder / f"{item_id}.json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
-        shared["results"] = {k: r.get("score", r.get("violated")) for k, r in recs.items()}
+        shared["results"] = {k: r["score"] for k, r in recs.items()}
         return shared
     return folder / f"group-{dim}.json", run
 
@@ -402,6 +328,8 @@ def main():
     args = ap.parse_args()
     rubric = load()
     items = [rubric[i] for i in args.items.split(",")]
+    if unscored := [it.id for it in items if not it.scored]:
+        raise SystemExit(f"not scored items: {', '.join(unscored)}; trust is checked by report_bench.trust")
     groups = _groups(items, args.per_item)
 
     jobs = []
@@ -411,7 +339,7 @@ def main():
         for group in groups:
             if len(group) == 1:
                 it = group[0]
-                jobs.append((folder / f"{it.id}.json", (lambda it=it, page=page, folder=folder: judge_page(it, page, args.model, folder))))
+                jobs.append((folder / f"{it.id}.json", (lambda it=it, page=page: score(it, page, args.model))))
             else:
                 jobs.append(_group_job(folder, group[0].id.split(".")[0], lambda g=group, page=page: page_group(g, page, args.model)))
 
@@ -421,7 +349,7 @@ def main():
             return path, json.loads(path.read_text(encoding="utf-8"))
         try:
             rec = fn()
-            unusable = rec.get("item") and all(rec.get(k) is None for k in ("score", "violated"))
+            unusable = rec.get("item") and rec.get("score") is None
             if unusable:
                 raise RuntimeError("no usable verdict in the answer")
         except OutOfCredit:
@@ -440,8 +368,6 @@ def main():
                 print(f"{path}: FAILED {rec['error']}", flush=True)
             elif "results" in rec:
                 print(f"{path}: " + " ".join(f"{k}={v}" for k, v in rec["results"].items()), flush=True)
-            elif "violated" in rec:
-                print(f"{path}: violated={rec['violated']} {rec.get('where') or ''} {rec.get('reason') or rec.get('problems') or rec.get('wrong') or ''}", flush=True)
             else:
                 print(f"{path}: score={rec['score']} {rec.get('where') or ''} {rec.get('reason') or ''}", flush=True)
     except OutOfCredit as e:
