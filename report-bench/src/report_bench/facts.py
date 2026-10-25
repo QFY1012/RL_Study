@@ -2,15 +2,16 @@
 
 facts.json is a list of facts:
 
-    {"id": "books-female-animals",
-     "claim": "Among animals in at least 10 books, only birds and ducks are more often female.",
-     "series": [{"table": "kids-book-animals.csv",
-                 "filter": "pronoun in ['he/him', 'she/her'] and title.groupby(animal).transform('nunique') >= 10",
-                 "group": "animal",
-                 "measure": "mean(pronoun == 'she/her')"}]}
+    {"id": "west-returns-most",
+     "claim": "Among regions with at least 100 orders, the West has the highest return rate: 19% of its 160 orders.",
+     "series": [{"table": "orders.csv",
+                 "filter": "region.map(region.value_counts()) >= 100",
+                 "group": "region",
+                 "measure": "mean(returned == 'yes')"}]}
 
 A series keeps the rows `filter` selects (DataFrame.query), splits them by `group`
-(a column or an expression, DataFrame.eval) and gives every group one value:
+(a column or an expression, DataFrame.eval, or a list of them to group by
+several at once; a group is then named "a | b") and gives every group one value:
 `count` rows, or an aggregation (mean, median, sum, max, min) of a column or an
 expression. A table is named by its path under the writer's data/, which holds
 the given files and folders by their own names (as generate.py copies them).
@@ -59,8 +60,10 @@ def run_series(files: dict[str, Path], s: dict) -> pd.DataFrame:
     try:
         df = pd.read_csv(files[s["table"]])
         rows = df.query(s["filter"], engine="python") if s.get("filter") else df
-        key = rows.eval(s["group"], engine="python") if s.get("group") else "all"
-        key = pd.Series(key, index=rows.index).astype(object).fillna("<missing>").astype(str)
+        group = s.get("group") or []
+        parts = [pd.Series(rows.eval(g, engine="python"), index=rows.index).astype(object).fillna("<missing>").astype(str)
+                 for g in ([group] if isinstance(group, str) else group)]
+        key = pd.concat(parts, axis=1).agg(" | ".join, axis=1) if parts else pd.Series("all", index=rows.index)
         if s["measure"] == "count":
             values, agg = pd.Series(1, index=rows.index), "sum"
         else:
