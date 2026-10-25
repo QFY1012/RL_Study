@@ -16,7 +16,7 @@ Deliver two files.
 - `tables`: the files the code reads, each a variable name and the file's path under `data/`; every file is read with `pd.read_csv`.
 - `code`: one Python expression over those variables, with `pd` (pandas) and `np` (numpy) available, such as `(orders.units > 690).sum()` or `orders.groupby(['region', 'product']).discount.max()`.
 
-How the findings are checked: every `code` is evaluated as written, its value is printed the way pandas prints it, and each claim is compared with that printout and nothing else. A claim that says anything the printout does not show counts as wrong, and one wrong finding scores the whole page 0. So every number, name and comparison in a claim must be readable from the printout of its code. Evaluate every `code` yourself before you finish and read its printout against the claim.
+How the findings are checked: every `code` is evaluated as written, its value is printed the way pandas prints it, and each claim is compared with that printout and nothing else. A claim that says anything the printout does not show counts as wrong, and one wrong finding scores the whole page 0. So every number, name and comparison in a claim must be readable from the printout of its code, and computed by that code from the tables: code that writes a finding's numbers itself, such as a string or a Series of typed-in values, counts as wrong. Evaluate every `code` yourself before you finish and read its printout against the claim.
 
 `index.html`: the page.
 - Write all the text on the page in English.
