@@ -199,7 +199,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.optimize runs
 用 `gepa==0.1.4` 优化写页面 agent 的系统提示词 `{"guide": ...}`,从 `guides/seed.md` 起步。
 
 - **数据**:Pudding 里原文是滚动长文的 43 篇。人工标注过的 16 篇是测试集,GEPA 不碰;其余 27 篇按 `--seed` 分成验证 8 篇(帕累托集)和训练 19 篇(反思用的小批量)。划分写在 `<run>/split.json`。
-- **一次 rollout** = 一篇数据 + 一版指南:pi agent 按 benchmark 的任务说明(`report-bench/TASK.md`:交付 `facts.json`(每个发现的结论和算出它的规格)和 `index.html`,页面写英文)加上 `pageshot` 的用法写页面,再由 `report_bench.score.score_page` 打分,和 benchmark、TF-GRPO 是同一个定义,judge 是 deepseek:
+- **一次 rollout** = 一篇数据 + 一版指南:pi agent 按 benchmark 的任务说明(`report-bench/TASK.md`:交付 `facts.json`(每个发现的结论和算出它的 pandas 代码)和 `index.html`,页面写英文)加上 `pageshot` 的用法写页面,再由 `report_bench.score.score_page` 打分,和 benchmark、TF-GRPO 是同一个定义,judge 是 deepseek:
   - 信:1.1 页面可渲染、1.2 fact 能执行、1.3 结论和数据一致,犯了任何一条整页 0 分。
   - 达:2.x 每条 0–1 分,一次调用。
   - 雅:3.1、3.2 每条 0–1 分,一次调用,照 rubric 里的典型案例定档。

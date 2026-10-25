@@ -1,35 +1,53 @@
-"""Data facts: the findings a page's writer delivers, and the computation behind each, run again by us.
+"""Data facts: the findings a page's writer delivers, with the code behind each, run again by us.
 
 facts.json is a list of facts:
 
     {"id": "west-returns-most",
-     "claim": "Among regions with at least 100 orders, the West has the highest return rate: 19% of its 160 orders.",
-     "series": [{"table": "orders.csv",
-                 "filter": "region.map(region.value_counts()) >= 100",
-                 "group": "region",
-                 "measure": "mean(returned == 'yes')"}]}
+     "claim": "Among regions with at least 100 orders, the West has the highest return rate, 19%, against 14% in the East and 13% in the North.",
+     "tables": {"orders": "orders.csv"},
+     "code": "orders[orders.region.map(orders.region.value_counts()) >= 100].groupby('region').returned.apply(lambda s: (s == 'yes').mean())"}
 
-A series keeps the rows `filter` selects (DataFrame.query), splits them by `group`
-(a column or an expression, DataFrame.eval, or a list of them to group by
-several at once; a group is then named "a | b") and gives every group one value:
-`count` rows, or an aggregation (mean, median, sum, max, min) of a column or an
-expression. A table is named by its path under the writer's data/, which holds
-the given files and folders by their own names (as generate.py copies them).
+`tables` names the files (paths under the writer's data/) that are read with
+pd.read_csv into variables; `code` is one Python expression over them, with pd
+and np available. Every fact's code is evaluated as written, in the page agent's
+sandbox (report-gepa/agent/sandbox.sh: no network, nothing but the workspace),
+since it is code someone else wrote, and its value is printed the way pandas
+prints it.
 """
 
 from __future__ import annotations
 
 import json
-import re
+import os
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 
+SANDBOX = Path(__file__).resolve().parents[3] / "report-gepa" / "agent" / "sandbox.sh"
+TIMEOUT = 600
+
+RUN = r'''
+import json
+import numpy as np
 import pandas as pd
 
-AGGS = ("mean", "median", "sum", "max", "min")
+pd.set_option("display.width", 200)
+out = {}
+for f in json.load(open("facts.json")):
+    try:
+        env = {"pd": pd, "np": np}
+        env.update({name: pd.read_csv("data/" + path) for name, path in f["tables"].items()})
+        value = eval(f["code"], env)
+        out[f["id"]] = {"output": value.to_string() if hasattr(value, "to_string") else str(value)}
+    except Exception as e:
+        out[f["id"]] = {"error": f"{type(e).__name__}: {e}"[:300]}
+print(json.dumps(out))
+'''
 
 
 class FactError(ValueError):
-    """A fact that cannot be run: bad JSON, a missing table, an expression pandas rejects."""
+    """facts.json that cannot be read as a list of facts."""
 
 
 def load(path: Path) -> list[dict]:
@@ -37,48 +55,26 @@ def load(path: Path) -> list[dict]:
         facts = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as e:
         raise FactError(f"{path.name}: {e}") from e
-    if not isinstance(facts, list) or not all(isinstance(f, dict) and f.get("id") and f.get("claim") and f.get("series") for f in facts):
-        raise FactError(f"{path.name}: not a list of facts with id, claim and series")
+    keys = ("id", "claim", "tables", "code")
+    if not isinstance(facts, list) or not all(isinstance(f, dict) and all(f.get(k) for k in keys) for f in facts):
+        raise FactError(f"{path.name}: not a list of facts with {', '.join(keys)}")
     return facts
 
 
-def tables(data: list[Path]) -> dict[str, Path]:
-    """Every file the writer saw, by its path under data/."""
-    out = {}
-    for p in data:
-        if p.is_dir():
-            out.update({f"{p.name}/{f.relative_to(p).as_posix()}": f for f in sorted(p.rglob("*")) if f.is_file()})
-        else:
-            out[p.name] = p
-    return out
-
-
-def run_series(files: dict[str, Path], s: dict) -> pd.DataFrame:
-    """One row per group: the group, its value and how many rows it has."""
-    if s.get("table") not in files:
-        raise FactError(f"table {s.get('table')!r} is not in data/")
-    try:
-        df = pd.read_csv(files[s["table"]])
-        rows = df.query(s["filter"], engine="python") if s.get("filter") else df
-        group = s.get("group") or []
-        parts = [pd.Series(rows.eval(g, engine="python"), index=rows.index).astype(object).fillna("<missing>").astype(str)
-                 for g in ([group] if isinstance(group, str) else group)]
-        key = pd.concat(parts, axis=1).agg(" | ".join, axis=1) if parts else pd.Series("all", index=rows.index)
-        if s["measure"] == "count":
-            values, agg = pd.Series(1, index=rows.index), "sum"
-        else:
-            m = re.fullmatch(r"\s*(\w+)\((.*)\)\s*", s["measure"])
-            if not m or m.group(1) not in AGGS:
-                raise FactError(f"measure {s['measure']!r}: use count or one of {', '.join(AGGS)}(...)")
-            values, agg = pd.Series(rows.eval(m.group(2), engine="python"), index=rows.index).astype(float), m.group(1)
-        out = values.groupby(key).agg([agg, "size"])
-        return out.set_axis(["value", "rows"], axis=1).rename_axis("group").reset_index().sort_values("value", ascending=False)
-    except FactError:
-        raise
-    except Exception as e:  # noqa: BLE001 - whatever pandas raises, the fact does not run
-        raise FactError(f"{s.get('table')}: {type(e).__name__}: {str(e)[:200]}") from e
-
-
-def run(files: dict[str, Path], fact: dict) -> list[pd.DataFrame]:
-    """The result of every series of a fact."""
-    return [run_series(files, s) for s in fact["series"]]
+def run(facts: list[dict], data: list[Path]) -> dict[str, dict]:
+    """Every fact's printed value ("output") or why it failed ("error"), by id.
+    `data` is what the writer found in data/: files and folders, by their own names."""
+    with tempfile.TemporaryDirectory() as tmp:
+        ws = Path(tmp)
+        (ws / "data").mkdir()
+        for p in data:
+            if p.is_dir():
+                shutil.copytree(p, ws / "data" / p.name, copy_function=os.link)
+            else:
+                os.link(p, ws / "data" / p.name)
+        (ws / "facts.json").write_text(json.dumps(facts), encoding="utf-8")
+        (ws / "run.py").write_text(RUN, encoding="utf-8")
+        proc = subprocess.run([str(SANDBOX), str(ws), "python3 run.py"], capture_output=True, text=True, timeout=TIMEOUT)
+    if proc.returncode != 0:
+        return {f["id"]: {"error": f"the run failed: {proc.stderr.strip()[-300:]}"} for f in facts}
+    return json.loads(proc.stdout.strip().splitlines()[-1])

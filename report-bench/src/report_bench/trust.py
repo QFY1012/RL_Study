@@ -3,15 +3,15 @@
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.trust <evidence_dir> <facts.json> [--model m]
 
 The page's writer delivers facts.json (facts.py): every finding as a claim and
-the computation that produces it. The items, in order, each a veto:
+the pandas code that computes it. The items, in order, each a veto:
 
 - 1.1 renders: the capture opened the page and it showed text; a generated page
   also ran without errors. Published Pudding pages throw errors of their own
   (titletowns: "reading 'latitude'") and still work, so for them only the first
   part applies.
-- 1.2 facts run: facts.json loads and every fact's computation runs on the data.
-- 1.3 claims hold: code runs every fact; one model call reads each claim next to
-  its result tables and says whether they agree.
+- 1.2 facts run: facts.json loads and every fact's code runs on the data.
+- 1.3 claims hold: one model call reads each claim next to its code and what the
+  code printed, and says whether they agree.
 
 An item is checked only if the ones before it hold.
 """
@@ -30,13 +30,13 @@ from .llm import LLM
 MODEL = "deepseek-v4.1-flash"
 MAX_TOKENS = 32768  # the reasoning counts too
 
-PROMPT = """下面是一份数据报告给出的发现。每条发现有结论(claim),以及程序按它的计算方法从数据算出的结果表。
+PROMPT = """下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
 
-逐条判断结论和结果表是否一致:
-- ok:结论里的数字、比较、多少、趋势都和结果表相符。四舍五入造成的出入不算不符。
-- wrong:结论和结果表矛盾，或者结论说的东西结果表里没有。
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有。
 
-每条先在 basis 里写出结果表里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
 
 {facts}
 """
@@ -56,31 +56,23 @@ def renders(ev: dict) -> list[str]:
 
 
 def run_facts(facts_path: Path, data: list[Path]) -> tuple[list[str], list[dict], dict]:
-    """1.2: problems, the facts and every fact's result tables."""
+    """1.2: problems, the facts and every fact's output."""
     try:
         facts = F.load(facts_path)
     except F.FactError as e:
         return [str(e)], [], {}
-    files = F.tables(data)
-    problems, results = [], {}
-    for f in facts:
-        try:
-            results[f["id"]] = F.run(files, f)
-        except F.FactError as e:
-            problems.append(f"fact {f['id']} does not run: {e}")
+    results = F.run(facts, data)
+    problems = [f"fact {i} does not run: {r['error']}" for i, r in results.items() if "error" in r]
     return problems, facts, results
 
 
-def block(fact: dict, result: list) -> str:
-    parts = [f"[{fact['id']}]", f"claim: {fact['claim']}"]
-    for s, table in zip(fact["series"], result):
-        how = "; ".join(f"{k}: {s[k]}" for k in ("table", "filter", "group", "measure") if s.get(k))
-        parts.append(f"computed: {how}\n{table.to_csv(index=False).strip()}")
-    return "\n".join(parts)
+def block(fact: dict, result: dict) -> str:
+    tables = ", ".join(f"{name} = {path}" for name, path in fact["tables"].items())
+    return f"[{fact['id']}]\nclaim: {fact['claim']}\ntables: {tables}\ncode: {fact['code']}\noutput:\n{result['output']}"
 
 
 def claims_hold(facts: list[dict], results: dict, model: str) -> dict:
-    """1.3: one model call over every claim and its result tables."""
+    """1.3: one model call over every claim, its code and its output."""
     prompt = PROMPT.replace("{facts}", "\n\n".join(block(f, results[f["id"]]) for f in facts))
     reply = LLM(model).chat([{"role": "user", "content": prompt}], max_tokens=MAX_TOKENS)
     m = re.search(r"\{.*\}", reply.text, re.S)

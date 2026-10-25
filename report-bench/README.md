@@ -39,7 +39,7 @@ cd report-bench && PYTHONPATH=src ../report-gepa/.venv/bin/python -m report_benc
 
 ## 提交
 
-每个系统一个目录,每题一个文件夹,里面是 `index.html` 和 `facts.json`:`submissions/<系统>/<id>/`。页面要离线能打开,css、脚本、数据都写在文件里;`facts.json` 写页面报告的每个发现(结论和算出它的规格,见 `TASK.md`)。
+每个系统一个目录,每题一个文件夹,里面是 `index.html` 和 `facts.json`:`submissions/<系统>/<id>/`。页面要离线能打开,css、脚本、数据都写在文件里;`facts.json` 写页面报告的每个发现(结论和算出它的 pandas 代码,见 `TASK.md`)。
 
 ## 打分(`src/report_bench/score.py`)
 
@@ -105,11 +105,11 @@ PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_benc
 PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_bench.trust <evidence_dir> <facts.json>
 ```
 
-页面按 `TASK.md` 交付 `facts.json`:每个发现一条,写 `id`、结论 `claim` 和算出它的规格 `series`(表、`filter` 选行、`group` 分类、`measure` 每类算什么,用 pandas 的 query / eval 表达式)。按顺序判,前一条犯了后面不判:
+页面按 `TASK.md` 交付 `facts.json`:每个发现一条,写 `id`、结论 `claim`、读哪些表 `tables`(变量名对应 `data/` 下的文件,用 `pd.read_csv` 读)和一段 pandas 表达式 `code`。代码在 report-gepa 的沙盒(`agent/sandbox.sh`,没有网络,只看得到临时工作目录)里用系统的 python3 原样 `eval`,输出按 pandas 默认的打印格式。按顺序判,前一条犯了后面不判:
 
 - 1.1 页面可渲染:看采集结果,打不开、没渲染出文字、卡死的犯;生成的页面脚本报错也犯。Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用,所以原文只看前一半。
-- 1.2 fact 能执行:代码判。`facts.json` 读得出来,每条规格在数据上都执行得了。
-- 1.3 结论和数据一致:代码执行每条规格,得到结果表(每组一行:组、值、行数);一次模型调用,拿每条结论和它的结果表对照,判一致或不一致。没给出可用回答记为没判出来,不当没犯。
+- 1.2 fact 能执行:`facts.json` 读得出来,每条代码在数据上都运行得了。
+- 1.3 结论和数据一致:一次模型调用(开推理),拿每条结论、它的代码和代码的输出对照,判一致或不一致;结论说了输出里没有的东西也算不一致。没给出可用回答记为没判出来,不当没犯。
 
 信只看 `facts.json`,不看网页正文和图。
 
