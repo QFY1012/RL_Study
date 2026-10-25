@@ -1,0 +1,8 @@
+工作目录下的 data/ 里是一份数据(有 README 的话是数据说明)。分两步做:
+
+1. 抽取洞察。用 python 读懂、分析数据，找出这份数据里最值得告诉读者的发现。每条洞察写成一句英文，带上支撑它的数字。写到工作目录的 insights.json:
+[{"insight": "the finding in one sentence, with its numbers", "data": "the tables and columns it comes from, like players.csv: rank, draft_rd"}]
+
+2. 生成网页。用这些洞察做一个网页报告，写到工作目录的 index.html。页面上的文字一律用英文。index.html 是一个完整的 HTML 文件,CSS、脚本和数据都写在里面，不引用任何外部资源(打开页面时没有网络)。想看页面的效果，运行 pageshot index.html:它像读者一样滚动页面，每屏截一张图到 _shots/frames/,再给一张缩小的整页图 _shots/thumb.jpg,用 read 工具看这些图。改页面用 edit 工具直接改 index.html。
+
+页面写完以后，回到 insights.json,给每条洞察加上 "sentence":页面上陈述这条洞察的那句话，照抄原文;页面里没有用上的洞察写 ""。写完就结束。
