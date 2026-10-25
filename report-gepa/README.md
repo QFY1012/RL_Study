@@ -266,7 +266,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide run
 | `pudding-repo-data.tar.xz`(待上传) | `data/pudding-repo/`:32 篇从文章自己的 GitHub 仓库收的 csv/tsv 和 `manifest.jsonl`(2026-10-24) | `report-gepa/data/` |
 | `mock-data.tar.xz`(15 MB,解压后 150 MB;待上传) | `data/mock/`:48 份明细 CSV、造数脚本、规律和 `manifest.jsonl`(2026-10-21) | `report-gepa/data/` |
 | [`pudding-js-data.tar.xz`](https://drive.google.com/file/d/1bJ_W40DzagQBibUKzMbopabWJaYopDmY/view)(1.1 MB,解压后 6 MB) | `data/pudding-js/`:15 篇从文章 JS 里提出的表和 `manifest.jsonl`(2026-10-25) | `report-gepa/data/` |
-| `pudding-merge-data.tar.xz`(待上传) | `data/pudding-merge/`:11 篇合并或展开好的表和 `manifest.jsonl`(2026-10-25,解压后 368 MB) | `report-gepa/data/` |
+| [`pudding-merge-data.tar.xz`](https://drive.google.com/file/d/1jKV68pCxT1vOsZiJwkQ2dxwCHg_AJOUK/view)(77 MB,解压后 368 MB) | `data/pudding-merge/`:11 篇合并或展开好的表和 `manifest.jsonl`(2026-10-25) | `report-gepa/data/` |
 
 ```sh
 tar -xJf pudding-data.tar.xz -C report-gepa/data/
