@@ -88,16 +88,17 @@ const { session } = await createAgentSession({
   // answering, so every turn timed out and re-sent the whole context (cetaceans, 2026-10-22).
   settingsManager: SettingsManager.inMemory({ compaction: { enabled: false }, retry: { enabled: true, maxRetries: 3, provider: { timeoutMs: 300_000 } } }),
 })
-// Images the agent read before its latest pageshot show an older version of the page, and every image kept in the
-// context is processed again on every later step, uncached: about 0.85 s per image per step, as much as 10k tokens of
-// text, so a page whose context held 20-26 screenshots spent 6-7 of its 17-22 minutes on them (pages4, 2026-10-25).
-// They are left out of what the model is sent; the session file keeps them.
+// Every image kept in the context is processed again on every later step, uncached: about 0.85 s per image per step,
+// as much as 10k tokens of text, so a page whose context held 20-26 screenshots spent 6-7 of its 17-22 minutes on them
+// (pages4, 2026-10-25). Images the agent read before its second-to-last pageshot are left out of what the model is
+// sent, so it still sees the page before and after its latest change; the session file keeps them all.
 const STALE = { type: "text", text: "[screenshot of an earlier version of the page, left out]" }
 const isPageshot = (m) => m.role === "assistant" && m.content.some((c) => c.type === "toolCall" && String(c.arguments?.command ?? "").includes("pageshot"))
 const dropStaleShots = (messages) => {
-  const last = messages.findLastIndex(isPageshot)
+  const shots = messages.flatMap((m, i) => (isPageshot(m) ? [i] : []))
+  const keepFrom = shots.length >= 2 ? shots.at(-2) : -1
   return messages.map((m, i) =>
-    i < last && m.role === "toolResult" && m.content.some((c) => c.type === "image")
+    i < keepFrom && m.role === "toolResult" && m.content.some((c) => c.type === "image")
       ? { ...m, content: m.content.map((c) => (c.type === "image" ? STALE : c)) }
       : m)
 }
