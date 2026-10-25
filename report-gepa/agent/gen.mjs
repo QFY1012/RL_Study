@@ -88,8 +88,22 @@ const { session } = await createAgentSession({
   // answering, so every turn timed out and re-sent the whole context (cetaceans, 2026-10-22).
   settingsManager: SettingsManager.inMemory({ compaction: { enabled: false }, retry: { enabled: true, maxRetries: 3, provider: { timeoutMs: 300_000 } } }),
 })
+// Images the agent read before its latest pageshot show an older version of the page, and every image kept in the
+// context is processed again on every later step, uncached: about 0.85 s per image per step, as much as 10k tokens of
+// text, so a page whose context held 20-26 screenshots spent 6-7 of its 17-22 minutes on them (pages4, 2026-10-25).
+// They are left out of what the model is sent; the session file keeps them.
+const STALE = { type: "text", text: "[screenshot of an earlier version of the page, left out]" }
+const isPageshot = (m) => m.role === "assistant" && m.content.some((c) => c.type === "toolCall" && String(c.arguments?.command ?? "").includes("pageshot"))
+const dropStaleShots = (messages) => {
+  const last = messages.findLastIndex(isPageshot)
+  return messages.map((m, i) =>
+    i < last && m.role === "toolResult" && m.content.some((c) => c.type === "image")
+      ? { ...m, content: m.content.map((c) => (c.type === "image" ? STALE : c)) }
+      : m)
+}
 const streamFn = session.agent.streamFn
-session.agent.streamFn = (m, context, options) => streamFn(m, context, { ...options, maxTokens: MAX_TOKENS })
+session.agent.streamFn = (m, context, options) =>
+  streamFn(m, { ...context, messages: dropStaleShots(context.messages) }, { ...options, maxTokens: MAX_TOKENS })
 
 const name = path.basename(ws)
 const t0 = Date.now()
