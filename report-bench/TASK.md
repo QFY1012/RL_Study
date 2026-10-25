@@ -2,7 +2,7 @@ You are given data in the folder `data/`: one or more tables as CSV files, and a
 
 Deliver two files.
 
-`facts.json`: the findings the page reports, each with the computation that produces it from the data. The computation is run again to check the page, so it must reproduce what the page says.
+`facts.json`: the findings the page reports, each with the computation that produces it from the data. The computation is run again to check each finding, so it must reproduce what the claim says.
 
 ```json
 [{"id": "books-female-animals",
@@ -25,6 +25,5 @@ Deliver two files.
 - Write all the text on the page in English.
 - The page is opened offline. Put all CSS, scripts and data in the file; do not load anything from the network (no CDNs, web fonts, remote images or APIs).
 - The page must open and show its content in a desktop browser (1440 px wide) without errors.
-- Mark where the page states each fact with `data-ref`, its value the fact's `id`: wrap the sentence that states it in `<span data-ref="...">`, and put `data-ref` on the outermost element of the chart that shows it (several ids separated by spaces when one chart shows several facts). Every statement about the data (a number, a comparison, a most or least, a trend) belongs in a sentence marked with the fact that computes it. Background, history, quotes and method notes need no mark.
 
-How you analyse the data, which tools you use, how charts are drawn (SVG or canvas) and what the page looks like is up to you.
+How you analyse the data, which tools you use and what the page looks like is up to you.
