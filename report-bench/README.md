@@ -4,17 +4,24 @@
 
 - 开放赛道:模型、agent、整套流程都行,只要按格式交页面;比的是整个系统。不设基线。
 - 每题给 `data/` 下一张或几张原始数据表(csv),和一句说明数据是什么的题目;页面一律用英文。
-- 185 题:The Pudding 的 137 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 51 篇、`pudding-repo` 24 篇、`pudding-js` 15 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。118 题是一张表,其余 2 到 8 张。
+- 196 题:The Pudding 的 148 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 51 篇、`pudding-repo` 24 篇、`pudding-js` 15 篇、`pudding-merge` 11 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。127 题是一张表,其余 2 到 8 张。
 
 ## 题目(`tasks.json`)
 
-每题一项:`id`、`source`(`pudding`、`pudding-web`、`pudding-repo`、`pudding-js`、`mock`)、`tables`(那份数据里给哪几张表,相对它在 `report-gepa/data/<source>/<id>/` 下的路径)、`title`。
+每题一项:`id`、`source`(`pudding`、`pudding-web`、`pudding-repo`、`pudding-js`、`pudding-merge`、`mock`)、`tables`(那份数据里给哪几张表,相对它在 `report-gepa/data/<source>/<id>/` 下的路径)、`title`。
 
 - 只给原始数据表,为某张图算好的中间表(按年汇总、百分比、排名、图表坐标)不给;一篇文章的几张原始表(比如电影、演职人员、制片公司各一张)都给。同一份数据重复的(`docs/` 和 `src/` 下各一份)只给一份。json 只给一条条记录结构的,转成 csv(文件名 `<原名>.json.csv`)。
-- 没收的 Pudding 文章:只有中间表的(birth-control、neighborhoods、prosecutors、hater、hip-hop-words、the-office、comics、incarceration、words-against-strangers),只有对照表、没有数据的(airports),数据不全的(same-name 只有一个州),和 music-bubble 是同一份数据的(music-map),不是能写报告的数据的(menu-collection 的菜单图片尺寸、cloud-zoo 的动物园直播列表、science_etc_1 的论文文本片段),以及数据只有 json 的。
-- `pudding-repo`(各篇自己的 GitHub 仓库)里没收的:动画的分镜和精灵图参数(ivf、sesame),一个时刻一个小文件的(clocks,1444 个),问题只有编号、没有题面的(spades),内容看不懂的(genre 的排名矩阵和缺排名的地区表),和 `pudding` 里 heat-records-map 是同一份数据的(weather-map),一场比赛一个文件的(caption-contest,397 个),按年计数的(crossword)。`pudding-web` 新进的 10 篇只收了 authors、death、lifeafter、nba-top-plays:其余是平滑后的趋势和计数(big-hair、eating-alone、best-sellers)、词表和网站对照表(millennials、elections),和 vocabulary 重复的(projects_vocabulary);后来 json 转出的 chyrons(三元图坐标)和 happy-map(地图标签)也不收。
-- `pudding-js`(文章构建时打包进 JS 的表,`report_gepa.puddingjs`)只看上面三个来源都没收的文章,收哪几篇、哪几张表写在 `puddingjs.TABLES`,没表头的照文章代码里读这张表的写法补上列名。上面因为数据不对没收的 menu-collection 和 spades,JS 里有能用的:菜单的餐厅、城市、年份和菜品,问卷的题面。
+- 五个 Pudding 来源依次补前面没收的文章:`pudding` 是 the-pudding/data 公开的数据,`pudding-web` 是文章页面加载的数据文件,`pudding-repo` 是文章自己仓库里的数据,`pudding-js` 是构建时打包进 JS 的表(`report_gepa.puddingjs`,收哪几张表写在 `puddingjs.TABLES`,没表头的照文章代码补上列名),`pudding-merge` 是数据在、但不是一张表的(`report_gepa.puddingmerge`,每篇一个配方):散在几百上千个小文件里的合成一张表,文件代表的东西(比赛、电台、期数、人、读音组)成为一列;嵌套的 json 展开成行;放在 pudding.cool 以外的文件照原样取。
 - 题目只说数据是什么,不说结论:原文标题常常就是结论(「Women's Pockets are Inferior」),不用。
+
+### 没收的 Pudding 文章(2026-10-25 对网站列表 217 篇逐篇查过,剩 70 篇)
+
+- 不是网页(3):两个 YouTube 视频(The Loneliness Epidemic、queues 那篇)和一个播客(Failures to Act)。
+- 只有为图算好的中间表、对照表,或不是能写报告的数据(21):汇总和中间结果(birth-control、neighborhoods、hater、hip-hop-words、the-office、comics、prosecutors、incarceration),平滑后的趋势和计数(big-hair、eating-alone、best-sellers),按年计数(crossword),对照表(airports、millennials 的词表、elections 的网站表),三元图坐标(chyrons),线上实验的汇总状态(infinite 的关卡、birthday-paradox 的分箱),游戏键盘和成绩(words-against-strangers),动物园直播列表(cloud-zoo),论文文本片段(science_etc_1)。
+- 数据打包在 JS 里,但读不了或不是数据(11):每格是一串编码数字(teenagers、love-story、invisible-epidemic、judge-my-music 的邻接矩阵),排名矩阵和缺排名的地区表(genre),词向量近邻(text-prediction),只有球员名单(asterisks),动画精灵图(ivf、sesame、dark-patterns),菜单图片的区间(menu-story)。
+- 作品本身没有数据集(27):视频和音频(walk、flipbook、lighting-cost、groove、cdmx、language、sampling、waveforms、motifs),插画、随笔和小说(kimchi、love-and-ai、plain、jordans 的鞋子轮廓、wnba-kicks、gifs、rickrolling 只有一个播放量),游戏、工具和模拟(where、emotion-wheel、onions、yard-sale、streaming、deepwork、clocks 的 1440 段视频),只有一二十行(democracy、kpop-survey、crokinole、happy-map 的地图标签)。
+- 数据在地图瓦片或做好的图里(6):travel-local、3d-cities-story、city_3d(Mapbox 矢量瓦片,页面只拿得到城市名和坐标);wedding-playlists、oscars_so_mapped、outkast 没加载数据文件、JS 里也没有表,图应该是做好的 SVG 或图片(没逐张核实)。
+- 和已收的是同一份数据(2):music-map(music-bubble)、weather-map(heat-records-map)。
 
 ## 生成题目目录(`src/report_bench/build.py`)
 
@@ -24,7 +31,7 @@ cd report-bench && PYTHONPATH=src python3 -m report_bench.build out [--tasks a,b
 
 `--tasks` 只重建列出的题,其余题的目录和 `tasks.jsonl` 里的行不动,所以只要这几题的来源在 `report-gepa/data/` 下就行(加新题时用)。
 
-- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 773 MB,最大的是 mow(250 MB)。
+- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
 - `out/tasks.jsonl`:每题的来源、题目、每张表的行列数和大小;Pudding 题另有 `original`,数据出自的那篇文章的网址。
 - `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照。
 

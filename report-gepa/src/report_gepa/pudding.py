@@ -27,7 +27,7 @@ Left out: the newsletter dump (winning-the-internet), folders with no story
 Human Terrain (a how-to, no data), and stories whose data is thousands of
 small files rather than a dataset to report on (wiki-billboard, one file per
 person; two-minute-report, one per game; country-radio, one per station plus
-the analysis' intermediates). The data repo is MIT licensed; other repos
+the analysis' intermediates); report_gepa.puddingmerge makes each of these one table. The data repo is MIT licensed; other repos
 carry their own licenses.
 """
 

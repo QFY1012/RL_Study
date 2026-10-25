@@ -151,6 +151,28 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs pac
 
 2026-10-25 跑的:去掉 `report_gepa.pudding` 的 56 篇和 benchmark 已有的 75 篇,剩下 83 篇,33 篇提出了至少 50 行、3 列的表。逐张看过以后收了 15 篇(都进了 benchmark 的 `pudding-js`);没收的是文章文案和滚动步骤、配色表、动画精灵图和图形的位置尺寸、地图边界、为一张图算好的计数(crossword 按年、country-radio 按区间)、每格是一串编码数字读不懂的(teenagers、love-story、invisible-epidemic、judge-my-music)、缺排名的地区表(genre),以及只有名单或坐标的(asterisks、city_3d、same-name)。
 
+## 数据在、但不是一张表的 Pudding 文章(`src/report_gepa/puddingmerge.py`)
+
+```sh
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingmerge /home/user/the-pudding/repos data/pudding-merge [--stories a,b] | tee runs/puddingmerge.log
+```
+
+前面几个来源没收、但数据其实在的 11 篇,`RECIPES` 里每篇一个配方,写到 `data/pudding-merge/<篇>/` 和 `manifest.jsonl`。仓库只检出配方读的路径(浅克隆,不取 LFS),缓存在第一个参数的目录下。
+
+| 篇 | 原来为什么没收 | 配方 |
+|---|---|---|
+| two-minute-report | 一场比赛一个文件(1,476 个) | 仓库 `polygraph-cool/last-two-minute-report` 里已有合并好的 `output/all_games.csv`,26,822 次判罚 |
+| country-radio | 一家电台一个文件,加上分析的中间文件 | `the-pudding/country-radio-data` 的 `input/`:29 家电台 2022 年的播放记录合成 `plays.csv`(209,572 行),城市取自文件名 |
+| caption-contest | 一期一个文件(397 个) | `nextml/caption-contest-data` 的 `summaries/` 合成 `captions.csv`(385 期、2,349,117 条配文、269 MB),期数和抽样算法取自文件名 |
+| wiki-billboard | 一人一个文件 | `the-pudding/wiki-billboard-data` 的每周浏览量合成 `weekly-pageviews.csv`(约 6,700 人,2015-07 到 2018-09),加 `category.csv` 的 247 人 |
+| same-name | 页面只加载读者所在的州 | 页面按读音组取的 `assets/places/0000.csv` 到 `5553.csv` 合成 `places.csv`(22,042 个地点),读音组成为一列 |
+| book-covers | 只有 json | 记录转成 `books.csv`;`grid_point` 是文章排版的坐标,去掉 |
+| eu-regions | 数据在地图文件的属性里 | NUTS2 地区、国家、首都三张表的 2017 年人均 GDP(PPS,欧盟平均 = 100) |
+| nba-spelling、gyllenhaal | json 是「名字 → 拼法列表」 | 展开成 `spellings.csv`(名字、拼法、次数) |
+| restaurants、new-slang | 文件在 googletrends.github.io,`puddingweb` 只收 pudding.cool 的 | 照原样取,改成好读的文件名;new-slang 旁边的 `summary_3.csv` 是文章算的相关系数,不收 |
+
+same-name 要请求 5,554 个小文件,连接被代理断开时每个文件最多重试 4 次;已取的文件留在缓存里,重跑不再取。
+
 ## judge
 
 评测代码和 rubric 在 `report-bench`(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
@@ -244,6 +266,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide run
 | `pudding-repo-data.tar.xz`(待上传) | `data/pudding-repo/`:32 篇从文章自己的 GitHub 仓库收的 csv/tsv 和 `manifest.jsonl`(2026-10-24) | `report-gepa/data/` |
 | `mock-data.tar.xz`(15 MB,解压后 150 MB;待上传) | `data/mock/`:48 份明细 CSV、造数脚本、规律和 `manifest.jsonl`(2026-10-21) | `report-gepa/data/` |
 | [`pudding-js-data.tar.xz`](https://drive.google.com/file/d/1bJ_W40DzagQBibUKzMbopabWJaYopDmY/view)(1.1 MB,解压后 6 MB) | `data/pudding-js/`:15 篇从文章 JS 里提出的表和 `manifest.jsonl`(2026-10-25) | `report-gepa/data/` |
+| `pudding-merge-data.tar.xz`(待上传) | `data/pudding-merge/`:11 篇合并或展开好的表和 `manifest.jsonl`(2026-10-25,解压后 368 MB) | `report-gepa/data/` |
 
 ```sh
 tar -xJf pudding-data.tar.xz -C report-gepa/data/
@@ -251,6 +274,7 @@ tar -xJf pudding-web-data.tar.xz -C report-gepa/data/
 tar -xJf pudding-repo-data.tar.xz -C report-gepa/data/
 tar -xJf mock-data.tar.xz -C report-gepa/data/
 tar -xJf pudding-js-data.tar.xz -C report-gepa/data/
+tar -xJf pudding-merge-data.tar.xz -C report-gepa/data/
 ```
 
 不从 Drive 取也能重做:`report_gepa.pudding` 从 the-pudding 的公开仓库重新克隆生成同样的 `data/pudding/`(见上面「Pudding 数据」)。
