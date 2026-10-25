@@ -107,9 +107,9 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 
 ## 数据
 
-`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench.tar.xz`](https://drive.google.com/file/d/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd/view)(109 MB,md5 `40707a7ba193629ee509129035c1aab3`,2026-10-24),只有本人账号能打开。包里的路径从仓库根目录起:
+`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench.tar.xz`](https://drive.google.com/file/d/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd/view)(109 MB,md5 `c046fd4b97eae6349a000e421afff260`,2026-10-25;Drive 上永久保留着 2026-10-24 的 170 题版本,md5 `40707a7ba193629ee509129035c1aab3`,在文件的「管理版本」里),只有本人账号能打开。包里的路径从仓库根目录起:
 
-- `report-bench/out/`:170 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、122 份 `original.json`),解压后 769 MB;
+- `report-bench/out/`:185 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、137 份 `original.json`),解压后 775 MB;
 - `report-gepa/runs/evidence/`:雅的典型案例用到的 8 帧截图,judge 打分要用;
 - `report-bench/` 的代码,打包时和仓库一样,解压时不取,免得盖掉后来的改动。
 
