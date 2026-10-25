@@ -7,8 +7,12 @@ A single full-page shot keeps one state of a page whose chart changes as you
 scroll, so the page is scrolled the way a reader scrolls it: small mouse-wheel
 steps, so scroll-triggered steps (scrollama, IntersectionObserver) fire one by
 one instead of being jumped over. A viewport frame is taken every FRAME_EVERY
-pixels after transitions settle, without freezing animations; a frame that looks
-the same as the one before it is dropped.
+pixels once the screen has stopped changing, without freezing animations: a
+chart that animates in when it scrolls into view is taken in its final state
+(hype's dot chart moves for 6-18 s; at the old fixed 0.8 s its counters still
+read 4%, 1%, 0% and no player was labelled yet). An animation that never stops
+is taken after SETTLE_MAX_MS. A frame that looks the same as the one before it
+is dropped.
 
 At every frame the charts on screen are recorded with their screen position and
 a fingerprint of their content. From these the capture works out the scroll
@@ -51,14 +55,17 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, SCROLL_THROUGH, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-3"
+CAPTURE_VERSION = "capture-4"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
 FRAME_EVERY = 450  # px between frames, unless the page is too long for MAX_FRAMES
 WHEEL_PX = 80  # one wheel tick
 WHEEL_PAUSE_MS = 40
-FRAME_SETTLE_MS = 800
-SAME_FRAME = 1.0  # mean absolute pixel difference (0-255) below which a frame repeats the last one
+SETTLE_EVERY_MS = 250  # how often the screen is checked for motion
+SETTLE_STILL = 4  # checks in a row without change before a frame is taken
+SETTLE_MAX_MS = 20000  # an animation that loops is taken after this
+CHANGED = 30  # a pixel has changed if one of its channels moved by more than this (0-255)
+SAME_PX = 20  # two screens with at most this many changed pixels are the same
 PINNED_PX = 4  # a chart whose screen position moves less than this while the page scrolls is pinned
 THUMB_W = 480
 JPEG_QUALITY = 80
@@ -166,11 +173,25 @@ def _jpeg(png: bytes, path: Path, width: int | None = None) -> None:
 
 
 def _same(a: Image.Image, b: Image.Image) -> bool:
-    from PIL import ImageChops, ImageStat
+    """Counted pixel by pixel: a few dozen small dots moving across the screen hardly move a mean difference."""
+    import numpy as np
 
-    small = (a.width // 4, a.height // 4)
-    diff = ImageChops.difference(a.convert("L").resize(small), b.convert("L").resize(small))
-    return ImageStat.Stat(diff).mean[0] < SAME_FRAME
+    return int((np.abs(np.asarray(a, int) - np.asarray(b, int)).max(axis=2) > CHANGED).sum()) <= SAME_PX
+
+
+def _settled(page) -> tuple[Image.Image, int]:
+    """The screen once it has stopped changing, and how long that took (ms)."""
+    from io import BytesIO
+
+    waited, still, last = 0, 0, None
+    while True:
+        img = Image.open(BytesIO(page.screenshot())).convert("RGB")
+        still = still + 1 if last is not None and _same(img, last) else 0
+        if still >= SETTLE_STILL or waited >= SETTLE_MAX_MS:
+            return img, waited
+        last = img
+        page.wait_for_timeout(SETTLE_EVERY_MS)
+        waited += SETTLE_EVERY_MS
 
 
 def _wheel_to(page, target: int) -> int:
@@ -191,8 +212,6 @@ def _wheel_to(page, target: int) -> int:
 
 def _walk(page, out: Path) -> list[dict]:
     """Viewport frames from top to bottom, with the charts on screen at each one."""
-    from io import BytesIO
-
     frames_dir = out / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
     # the wheel needs the pointer over the page, but mid-screen it sits on every chart that scrolls past and
@@ -204,13 +223,12 @@ def _walk(page, out: Path) -> list[dict]:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
         every = max(FRAME_EVERY, -(-height // MAX_FRAMES))
         at = _wheel_to(page, target)
-        page.wait_for_timeout(FRAME_SETTLE_MS)
-        img = Image.open(BytesIO(page.screenshot())).convert("RGB")
+        img, waited = _settled(page)
         charts = page.evaluate(CHART_STATE)
         if last is None or not _same(img, last):
             name = f"frames/{len(frames):02d}.jpg"
             img.save(out / name, "JPEG", quality=JPEG_QUALITY)
-            frames.append({"file": name, "scroll_y": at, "charts": charts})
+            frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
             last = img
         if at + VIEW_H >= height or at < target:
             break  # reached the bottom, or the page would not scroll further
