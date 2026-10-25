@@ -1,6 +1,6 @@
 """Build the benchmark's task folders from report-gepa's data.
 
-    python3 -m report_bench.build <out>
+    python3 -m report_bench.build <out> [--tasks a,b]
 
 For every task in tasks.json its tables go to <out>/tasks/<id>/data/ under
 their own file names (a tsv becomes a csv, a url-escaped name is unescaped) and
@@ -10,6 +10,9 @@ every task with its source, each table's shape and, for a Pudding task, the
 story page the data comes from. Participants do not get <out>/answers/: a mock
 task's planted findings (findings.json), and for a Pudding task the original
 story (original.json: url, title, published), the reference for scoring.
+
+--tasks rebuilds only the tasks listed and keeps the rest of <out> as it is (their
+lines in tasks.jsonl too), so only those tasks' sources need to be in report-gepa/data.
 """
 
 from __future__ import annotations
@@ -24,7 +27,8 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT.parent / "report-gepa" / "data"
-SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "pudding-repo": DATA / "pudding-repo", "mock": DATA / "mock"}
+SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "pudding-repo": DATA / "pudding-repo",
+           "pudding-js": DATA / "pudding-js", "mock": DATA / "mock"}
 TASKS = ROOT / "tasks.json"
 INSTRUCTION = ROOT / "TASK.md"
 
@@ -53,16 +57,31 @@ def copy_table(src: Path, dst: Path) -> tuple[int, list[str]]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("out", type=Path)
+    ap.add_argument("--tasks", help="comma-separated task ids to rebuild; the others stay as they are")
     args = ap.parse_args()
 
     instruction = INSTRUCTION.read_text(encoding="utf-8")
     tasks = json.loads(TASKS.read_text(encoding="utf-8"))
-    shutil.rmtree(args.out / "tasks", ignore_errors=True)
-    shutil.rmtree(args.out / "answers", ignore_errors=True)
-    stories = {s: {r["id"]: r for r in map(json.loads, (path / "manifest.jsonl").read_text(encoding="utf-8").splitlines())}
-               for s, path in SOURCES.items() if s != "mock"}
+    wanted = set(args.tasks.split(",")) if args.tasks else {t["id"] for t in tasks}
+    if unknown := wanted - {t["id"] for t in tasks}:
+        raise SystemExit(f"not in tasks.json: {sorted(unknown)}")
+    kept = {}
+    if args.tasks:
+        kept = {r["id"]: r for r in map(json.loads, (args.out / "tasks.jsonl").read_text(encoding="utf-8").splitlines())}
+        for i in wanted:
+            shutil.rmtree(args.out / "tasks" / i, ignore_errors=True)
+            shutil.rmtree(args.out / "answers" / i, ignore_errors=True)
+    else:
+        shutil.rmtree(args.out / "tasks", ignore_errors=True)
+        shutil.rmtree(args.out / "answers", ignore_errors=True)
+    used = {t["source"] for t in tasks if t["id"] in wanted} - {"mock"}
+    stories = {s: {r["id"]: r for r in map(json.loads, (SOURCES[s] / "manifest.jsonl").read_text(encoding="utf-8").splitlines())}
+               for s in used}
     lines = []
     for t in tasks:
+        if t["id"] not in wanted:
+            lines.append(kept[t["id"]])
+            continue
         folder = args.out / "tasks" / t["id"]
         (folder / "data").mkdir(parents=True)
         names = [published_name(x) for x in t["tables"]]

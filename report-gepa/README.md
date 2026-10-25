@@ -139,10 +139,17 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo p
 ```sh
 cd jsdata && npm ci && cd ..
 PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs harvest /home/user/the-pudding/js | tee runs/puddingjs-harvest.log
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs extract /home/user/the-pudding/js | tee runs/puddingjs-extract.log
 PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs pack /home/user/the-pudding/js data/pudding-js | tee runs/puddingjs-pack.log
 ```
 
-构建时 import 进来的数据,打包后就是 JS 块里的字面量。`harvest` 打开网站文章列表里 `report_gepa.pudding` 和 benchmark(`report-bench/tasks.json` 的 pudding-web、pudding-repo 题)都没收的每一篇(和 `puddingweb` 一样从头滚到尾),存下页面从 pudding.cool 加载的全部 JS 和页面里的内联脚本,用 `jsdata/extract.mjs`(acorn 语法树)找表:至少 50 个对象字面量的数组(键就是列名)、至少 50 行等长的数组套数组(构建时去掉了表头,列名记成 `c0`、`c1`……)、至少 3 列等长数组组成的对象、csv/tsv 文本的字符串,`JSON.parse` 里的字符串也一样找。只认字面量:行里有函数、变量或算出来的键就不算。每篇一行记在 `summary.jsonl`。`pack` 留至少一张表有 50 行、3 列的文章,同一篇内容相同的表(同一份数据在两个块里)只留一张,写到 `data/pudding-js/<篇>/` 和 `manifest.jsonl`(`tables` 记每张表在 JS 里的位置、类型、行列数和表头,没表头的要照原文补列名)。
+构建时 import 进来的数据,打包后就是 JS 块里的字面量。
+
+- `harvest` 打开网站文章列表里 `report_gepa.pudding` 和 benchmark(`report-bench/tasks.json` 的 pudding-web、pudding-repo 题)都没收的每一篇(和 `puddingweb` 一样从头滚到尾),存下页面从 pudding.cool 加载的全部 JS 和页面里的内联脚本,每篇一行记在 `summary.jsonl`。
+- `extract` 对存下的 JS 跑 `jsdata/extract.mjs`(acorn 语法树)找表:至少 50 个对象字面量的数组(键就是列名)、至少 50 行等长的数组套数组(构建时去掉了表头,列名记成 `c0`、`c1`……)、至少 3 列等长数组组成的对象、csv/tsv 文本的字符串、至少 5 条按编号排的文字(问卷的题面这类对照表),`JSON.parse` 里的字符串也一样找。只认字面量:行里有函数、变量或算出来的键就不算。表在 `<篇>/tables/`,每张一行记在 `<篇>/tables.jsonl`(在 JS 里的位置、类型、行列数、表头)。改了提取器只要重跑这一步,不用重新打开页面。
+- `pack` 只取 `puddingjs.TABLES` 列出的表,按它在 JS 里的位置找,改成好读的文件名,没表头的换上 `TABLES` 里的列名(照文章代码里读这张表的写法,比如 kevin-bacon 的 `Ke.nodes.map(([e,t,n,…])=>({pid:e,name:t,hop:n,…}))`),写到 `data/pudding-js/<篇>/` 和 `manifest.jsonl`。
+
+2026-10-25 跑的:去掉 `report_gepa.pudding` 的 56 篇和 benchmark 已有的 75 篇,剩下 83 篇,33 篇提出了至少 50 行、3 列的表。逐张看过以后收了 15 篇(都进了 benchmark 的 `pudding-js`);没收的是文章文案和滚动步骤、配色表、动画精灵图和图形的位置尺寸、地图边界、为一张图算好的计数(crossword 按年、country-radio 按区间)、每格是一串编码数字读不懂的(teenagers、love-story、invisible-epidemic、judge-my-music)、缺排名的地区表(genre),以及只有名单或坐标的(asterisks、city_3d、same-name)。
 
 ## judge
 

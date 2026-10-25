@@ -7,6 +7,7 @@
 //   arrays   an array of at least MIN_ROWS arrays of one length, at least MIN_COLUMNS; the build dropped the header, columns are c0, c1...
 //   columns  an object of at least MIN_COLUMNS arrays of one length, at least MIN_ROWS
 //   text     a string of csv or tsv text (the build inlined the file as it was)
+//   keyed    an object of at least MIN_KEYED numbered entries, columns key and value (a codebook: question 1 is "...")
 // A JSON.parse of a string literal is parsed and searched the same way. Only literals
 // count: a row with a function, a variable or a computed key is not data.
 // Each table goes to <out_dir>/<file>__<where>.csv (.tsv for tsv text), where is the
@@ -19,6 +20,7 @@ import * as walk from "acorn-walk";
 
 const MIN_ROWS = 50;
 const MIN_COLUMNS = 3;
+const MIN_KEYED = 5;
 const FAIL = Symbol("not a literal");
 
 function value(n) {
@@ -87,6 +89,8 @@ function table(v) {
     const n = cols.length && Array.isArray(cols[0][1]) ? cols[0][1].length : 0;
     if (cols.length >= MIN_COLUMNS && n >= MIN_ROWS && cols.every(([, c]) => Array.isArray(c) && c.length === n))
       return { kind: "columns", header: cols.map(([k]) => k), rows: [...Array(n).keys()].map((i) => cols.map(([, c]) => c[i])) };
+    if (cols.length >= MIN_KEYED && cols.every(([k, x]) => /^\d+$/.test(k) && typeof x === "string"))
+      return { kind: "keyed", header: ["key", "value"], rows: cols };
   }
   return null;
 }
@@ -151,7 +155,7 @@ function extract(file) {
       try { v = JSON.parse(s); } catch { return; }
       for (const t of search(v, [...where(ancestors), "json"])) found.push({ ...at, ...t });
     } else if (n.type === "ArrayExpression" || n.type === "ObjectExpression") {
-      if (n.type === "ArrayExpression" ? n.elements.length < MIN_ROWS : n.properties.length < MIN_COLUMNS) return;
+      if (n.type === "ArrayExpression" ? n.elements.length < MIN_ROWS : n.properties.length < Math.min(MIN_COLUMNS, MIN_KEYED)) return;
       const v = value(n);
       const t = v === FAIL ? null : table(v);
       if (t) found.push({ ...at, where: where(ancestors), ...t });

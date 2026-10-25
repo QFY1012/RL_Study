@@ -1,47 +1,76 @@
 """Data the pudding.cool stories bundle into their JS: the tables a build inlined from its data files.
 
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs harvest <cache_dir>/js
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs extract <cache_dir>/js
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingjs pack <cache_dir>/js data/pudding-js
 
 Most stories import their data at build time, so the page loads no data file
 (report_gepa.puddingweb finds nothing) and the table sits in a JS chunk instead.
 harvest opens every story on the site's list that neither report_gepa.pudding nor
-the benchmark (report-bench/tasks.json) has data for, scrolls through it (a chunk can load late), keeps every JS file the page loads
-from pudding.cool and every inline script of the page (a json script as
-`export default <json>`) under <cache_dir>/js/<slug>/js/, and runs
-jsdata/extract.mjs on them: the tables go to <slug>/tables/, one line per story
-to summary.jsonl. A story already in summary.jsonl is not opened again.
+the benchmark (report-bench/tasks.json) has data for, scrolls through it (a chunk
+can load late) and keeps every JS file the page loads from pudding.cool and every
+inline script of the page (a json script as `export default <json>`) under
+<cache_dir>/js/<slug>/js/, one line per story in summary.jsonl. A story already in
+summary.jsonl is not opened again.
 
-The extractor only takes literals: an array of records, an array of equal rows
-(the build dropped the header: columns c0, c1...), an object of equal columns, a
-csv or tsv string, each also inside a JSON.parse; see jsdata/extract.mjs.
+extract runs jsdata/extract.mjs on every harvested story: the tables go to
+<slug>/tables/ and one line per table to <slug>/tables.jsonl (where it sits in the
+JS, its kind, rows, columns and header). The extractor only takes literals: an
+array of records, an array of equal rows (the build dropped the header: columns
+c0, c1...), an object of equal columns, a csv or tsv string, a numbered codebook,
+each also inside a JSON.parse; see jsdata/extract.mjs.
 
-pack leaves out the stories the benchmark has (it may have got them since harvest
-ran) and keeps a story when one of its tables has at least MIN_ROWS rows and
-MIN_COLUMNS columns, drops a table whose contents an earlier one of the story
-has (the same data in two chunks), and copies the tables to <out>/<id>/ with
-<out>/manifest.jsonl getting {id, title, url, published, files, bytes, tables}
-(tables: where each one sits in the JS, its kind, rows and columns, so a
-headerless one can be named from the story).
+pack takes the tables TABLES names, looked up by where they sit in the JS, and
+writes them to <out>/<id>/<name> with the header TABLES gives (read from the code
+that uses a headerless table), <out>/manifest.jsonl getting {id, title, url,
+published, files, bytes}. The other tables were looked at and left out: the
+story's copy and scroll steps, colour keys, sprite and layout boxes, map shapes,
+tables computed for one chart (counts per year or per bin), and rows whose cells
+are encoded arrays nobody can read without the story's code.
 """
 
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
 import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
 from .pudding import STORIES
-from .puddingweb import CHROMIUM, MIN_COLUMNS, MIN_ROWS, SCROLL, STORY_LIST, digest, manifest, table_shape
+from .puddingweb import CHROMIUM, SCROLL, STORY_LIST, manifest
 
 EXTRACT = Path(__file__).resolve().parents[2] / "jsdata" / "extract.mjs"
 BENCH = Path(__file__).resolve().parents[3] / "report-bench" / "tasks.json"
 INLINE = re.compile(r"<script\b([^>]*)>(.*?)</script>", re.S | re.I)
+
+# story id (the url's last part) -> {file name: (where the table sits in the JS, header or None to keep its own)}
+TABLES = {
+    "kevin-bacon": {"actors.csv": ("Ke.nodes", ["pid", "name", "hop", "films", "avgDistance", "rank", "conc", "top50",
+                                                 "predFilm", "predFilmConc", "predFilmDeg", "predAll", "careerAge"])},
+    "menu-collection": {"menus.csv": ("or", None)},
+    "street-view": {"terms.csv": ("Ot", None)},
+    "aapi-casting": {"roles.csv": ("zt", None)},
+    "music-dna": {"songs.csv": ("Aht", None), "samples.csv": ("fme", None)},
+    "middle-school": {"survey.csv": ("Yg.json", None)},
+    "love-songs": {"top10-songs.csv": ("sm", ["performers_list_str", "song", "date_as_decimal", "love_song_sub_type",
+                                              "total_weeks_in_top_10"])},
+    "abortion-mazes": {"states.csv": ("V1", None), "policies.csv": ("ef", None)},
+    "scifi": {"films.csv": ("wt", None)},
+    "climate-zones": {"cities.csv": ("un", None)},
+    "greatest-music": {"albums.csv": ("yt", None), "voters.csv": ("Yn", None)},
+    "upward-mobility": {"cities.csv": ("Kl.points.geometries", None)},
+    "tiktok-story": {"artists.csv": ("B", None), "charting-artists.csv": ("v1", None)},
+    "spades": {"answers.csv": ("app.ln", None), "questions.csv": ("app.i", ["question", "text"])},
+    "cool": {"cools.csv": ("app.Je", None)},
+}
+
+csv.field_size_limit(sys.maxsize)
 
 
 def story_path(url: str) -> str:
@@ -114,54 +143,63 @@ def harvest(out: Path):
                 err = str(e)[:120]
             page.close()
             files = sorted(js.iterdir())
-            run = subprocess.run(["node", str(EXTRACT), str(out / slug / "tables"), *map(str, files)],
-                                 capture_output=True, text=True, timeout=900)
-            found = [json.loads(line) for line in run.stdout.splitlines() if line.strip()]
-            tables = [t for t in found if "file" in t]
             row = {"url": s["url"], "slug": slug, "title": s.get("hed", ""), "js": len(files),
-                   "js_bytes": sum(f.stat().st_size for f in files), "tables": tables,
-                   "parse_errors": [t for t in found if "error" in t], "error": err or (run.stderr.strip()[-200:] or None if run.returncode else None)}
+                   "js_bytes": sum(f.stat().st_size for f in files), "error": err}
             with (out / "summary.jsonl").open("a", encoding="utf-8") as f:
                 f.write(json.dumps(row, ensure_ascii=False) + "\n")
-            biggest = max(tables, key=lambda t: t["rows"], default=None)
-            print(f"{s['url']:40s} {len(files):3d} js {row['js_bytes'] / 1e6:6.2f} MB {len(tables):3d} tables"
-                  + (f"  biggest {biggest['rows']}x{biggest['columns']} {biggest['kind']} {biggest['where'][:30]}" if biggest else "")
-                  + (f"  ERROR {row['error']}" if row["error"] else ""), flush=True)
+            print(f"{s['url']:40s} {len(files):3d} js {row['js_bytes'] / 1e6:6.2f} MB" + (f"  ERROR {err}" if err else ""), flush=True)
         browser.close()
+
+
+def extract(src: Path):
+    for row in manifest(src / "summary.jsonl"):
+        folder = src / row["slug"]
+        shutil.rmtree(folder / "tables", ignore_errors=True)
+        run = subprocess.run(["node", str(EXTRACT), str(folder / "tables"), *map(str, sorted((folder / "js").iterdir()))],
+                             capture_output=True, text=True, timeout=900)
+        if run.returncode:
+            raise SystemExit(f"{row['url']}: extract.mjs failed\n{run.stderr[-2000:]}")
+        found = [json.loads(line) for line in run.stdout.splitlines() if line.strip()]
+        tables = [t for t in found if "file" in t]
+        (folder / "tables.jsonl").write_text("".join(json.dumps(t, ensure_ascii=False) + "\n" for t in tables), encoding="utf-8")
+        biggest = max(tables, key=lambda t: t["rows"], default=None)
+        errors = [t for t in found if "error" in t]
+        print(f"{row['url']:40s} {len(tables):3d} tables"
+              + (f"  biggest {biggest['rows']}x{biggest['columns']} {biggest['kind']} {biggest['where'][:30]}" if biggest else "")
+              + (f"  {len(errors)} files did not parse" if errors else ""), flush=True)
 
 
 def pack(src: Path, out: Path):
     shutil.rmtree(out, ignore_errors=True)
     out.mkdir(parents=True)
-    rows = []
+    stories = {row["url"].rstrip("/").split("/")[-1]: row for row in manifest(src / "summary.jsonl")}
     ids = bench_ids()
-    for row in manifest(src / "summary.jsonl"):
+    rows = []
+    for sid, wanted in TABLES.items():
+        row = stories[sid]
         if benched(row["url"], ids):
-            print(f"{row['url']:40s} skipped: in the benchmark", flush=True)
-            continue
-        seen, kept = set(), []
-        for t in row["tables"]:
-            p = src / row["slug"] / "tables" / t["file"]
-            r, c = table_shape(p)
-            h = digest(p)
-            if r >= MIN_ROWS and c >= MIN_COLUMNS and h not in seen:
-                seen.add(h)
-                kept.append((p, t))
-        if not kept:
-            print(f"{row['url']:40s} skipped: {len(row['tables'])} tables, none of {MIN_ROWS} rows x {MIN_COLUMNS} columns", flush=True)
-            continue
-        sid = row["url"].rstrip("/").split("/")[-1]
-        sid = sid if sid not in {r["id"] for r in rows} else row["slug"]
+            raise SystemExit(f"{sid}: the benchmark already has this story as a pudding-web or pudding-repo task")
+        tables = manifest(src / row["slug"] / "tables.jsonl")
         (out / sid).mkdir()
-        for p, _ in kept:
-            shutil.copy2(p, out / sid / p.name)
+        for name, (where, header) in wanted.items():
+            hits = [t for t in tables if t["where"] == where]
+            if len(hits) != 1:
+                raise SystemExit(f"{sid}: {len(hits)} tables sit at {where!r}, want 1")
+            t = hits[0]
+            if header and len(header) != t["columns"]:
+                raise SystemExit(f"{sid}: {where} has {t['columns']} columns, the header {len(header)}")
+            with (src / row["slug"] / "tables" / t["file"]).open(encoding="utf-8", newline="") as f, \
+                 (out / sid / name).open("w", encoding="utf-8", newline="") as g:
+                reader, writer = csv.reader(f, delimiter="\t" if t["file"].endswith(".tsv") else ","), csv.writer(g)
+                writer.writerow(header or next(reader))
+                if header:
+                    next(reader)
+                writer.writerows(reader)
         parts = row["url"].strip("/").split("/")
-        published = f"{parts[1]}/{parts[0]}" if parts[0].isdigit() else ""
-        size = sum(p.stat().st_size for p, _ in kept)
+        size = sum(p.stat().st_size for p in (out / sid).iterdir())
         rows.append({"id": sid, "title": row["title"], "url": f"https://pudding.cool/{row['url'].strip('/')}/",
-                     "published": published, "files": [p.name for p, _ in kept], "bytes": size,
-                     "tables": [{k: t[k] for k in ("file", "where", "kind", "rows", "columns", "header")} for _, t in kept]})
-        print(f"{row['url']:40s} -> {sid}: {len(kept)} tables {size / 1e6:.2f} MB  {row['title'][:50]}", flush=True)
+                     "published": f"{parts[1]}/{parts[0]}" if parts[0].isdigit() else "", "files": list(wanted), "bytes": size})
+        print(f"{row['url']:40s} -> {sid}: {', '.join(wanted)} {size / 1e6:.2f} MB  {row['title'][:50]}", flush=True)
     (out / "manifest.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
     print(f"{len(rows)} stories in {out}", flush=True)
 
@@ -169,13 +207,13 @@ def pack(src: Path, out: Path):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    h = sub.add_parser("harvest")
-    h.add_argument("out", type=Path)
+    for cmd in ("harvest", "extract"):
+        sub.add_parser(cmd).add_argument("src", type=Path)
     k = sub.add_parser("pack")
     k.add_argument("src", type=Path)
     k.add_argument("out", type=Path)
     args = ap.parse_args()
-    harvest(args.out) if args.cmd == "harvest" else pack(args.src, args.out)
+    {"harvest": lambda: harvest(args.src), "extract": lambda: extract(args.src), "pack": lambda: pack(args.src, args.out)}[args.cmd]()
 
 
 if __name__ == "__main__":
