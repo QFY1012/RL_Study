@@ -6,7 +6,7 @@
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0 pillow==13.0.0
+.venv/bin/pip install gepa==0.1.4 openai==3.35.1 playwright==1.64.0 pillow==13.0.0 ftfy==6.3.1
 ```
 
 浏览器用容器里预装的 Chromium(`/opt/pw-browsers/chromium`),不跑 `playwright install`。

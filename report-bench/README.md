@@ -26,12 +26,12 @@
 ## 生成题目目录(`src/report_bench/build.py`)
 
 ```sh
-cd report-bench && PYTHONPATH=src python3 -m report_bench.build out [--tasks a,b] | tee out-build.log
+cd report-bench && PYTHONPATH=src ../report-gepa/.venv/bin/python -m report_bench.build out [--tasks a,b] | tee out-build.log
 ```
 
-`--tasks` 只重建列出的题,其余题的目录和 `tasks.jsonl` 里的行不动,所以只要这几题的来源在 `report-gepa/data/` 下就行(加新题时用)。
+用 report-gepa 的环境(要 `ftfy`)。`--tasks` 只重建列出的题,其余题的目录和 `tasks.jsonl` 里的行不动,所以只要这几题的来源在 `report-gepa/data/` 下就行(加新题时用)。
 
-- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
+- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原;源数据里 utf-8 被当成 latin-1 或 cp1252 读过一遍的乱码用 `ftfy` 改回来,比如 `fiancÃ©` → `fiancé`,本来就对的文字不动,字节已经丢了的 `�` 改不回来;没有列名、又是全空或只是行号的列去掉,是表格软件和 pandas 导出时留下的)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
 - `out/tasks.jsonl`:每题的来源、题目、每张表的行列数和大小;Pudding 题另有 `original`,数据出自的那篇文章的网址。
 - `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照。
 

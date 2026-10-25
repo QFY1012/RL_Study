@@ -1,9 +1,11 @@
 """Build the benchmark's task folders from report-gepa's data.
 
-    python3 -m report_bench.build <out> [--tasks a,b]
+    ../report-gepa/.venv/bin/python -m report_bench.build <out> [--tasks a,b]
 
 For every task in tasks.json its tables go to <out>/tasks/<id>/data/ under
-their own file names (a tsv becomes a csv, a url-escaped name is unescaped) and
+their own file names (a tsv becomes a csv, a url-escaped name is unescaped),
+with text that was utf-8 decoded the wrong way fixed (ftfy) and columns with no
+name left out when they are empty or only count the rows, and
 <out>/tasks/<id>/task.json gets the task statement: the fixed instruction
 (TASK.md), the task's one-line title and the file names. <out>/tasks.jsonl lists
 every task with its source, each table's shape and, for a Pudding task, the
@@ -20,10 +22,13 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
 from urllib.parse import unquote
+
+import ftfy
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT.parent / "report-gepa" / "data"
@@ -31,6 +36,7 @@ SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "pu
            "pudding-js": DATA / "pudding-js", "pudding-merge": DATA / "pudding-merge", "mock": DATA / "mock"}
 TASKS = ROOT / "tasks.json"
 INSTRUCTION = ROOT / "TASK.md"
+MOJIBAKE = re.compile(r"[ÃÂâÅÄðÐÑ][\x80-\xbfŒœŠšŸŽžƒˆ˜–-›€™]")
 
 csv.field_size_limit(sys.maxsize)
 
@@ -40,16 +46,41 @@ def published_name(table: str) -> str:
     return name[:-4] + ".csv" if name.lower().endswith(".tsv") else name
 
 
+def fix(cell: str) -> str:
+    """Undo utf-8 read as latin-1 or cp1252 (fiancÃ© -> fiancé); text already right is left as it is."""
+    return ftfy.fix_encoding(cell) if MOJIBAKE.search(cell) else cell
+
+
+def stray_columns(src: Path, delimiter: str) -> set[int]:
+    """Columns with no name that hold nothing, or only a row number: what a spreadsheet or pandas export leaves behind."""
+    with src.open(encoding="utf-8-sig", errors="replace", newline="") as f:
+        reader = csv.reader(f, delimiter=delimiter)
+        header = next(reader)
+        open_ = {i for i, c in enumerate(header) if not c.strip()}
+        empty, counter = set(open_), set(open_)
+        for n, row in enumerate(reader):
+            for i in list(empty | counter):
+                v = row[i].strip() if i < len(row) else ""
+                if v:
+                    empty.discard(i)
+                if v not in (str(n), str(n + 1)):
+                    counter.discard(i)
+            if not empty and not counter:
+                break
+    return empty | counter
+
+
 def copy_table(src: Path, dst: Path) -> tuple[int, list[str]]:
-    """Copy as utf-8 csv; return the row count and header."""
+    """Copy as utf-8 csv with the text encoding fixed and the stray columns left out; return the row count and header."""
     delimiter = "\t" if src.suffix.lower() == ".tsv" else ","
+    drop = stray_columns(src, delimiter)
     with src.open(encoding="utf-8-sig", errors="replace", newline="") as f, dst.open("w", encoding="utf-8", newline="") as g:
         reader, writer = csv.reader(f, delimiter=delimiter), csv.writer(g)
-        header = next(reader)
+        header = [fix(c) for i, c in enumerate(next(reader)) if i not in drop]
         writer.writerow(header)
         rows = 0
         for row in reader:
-            writer.writerow(row)
+            writer.writerow([fix(c) for i, c in enumerate(row) if i not in drop])
             rows += 1
     return rows, header
 

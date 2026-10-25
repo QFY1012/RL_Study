@@ -9,8 +9,9 @@ The source data usually sits in the story's repo under the-pudding (src/data/,
 static/assets/...). clone takes every story of puddingweb's summary.jsonl that
 data/pudding-web has nothing for, looks for a public repo named after its slug
 (also with _ for -), plus the repo OTHER names when the data sits elsewhere (the
-page links to it), and shallow-clones them without LFS objects into <repos>/<slug>/
-(the story's own) and <repos>/<slug>--<owner>-<name>/ (another); <repos>/repos.jsonl
+page links to it), and shallow-clones them, checking out only their csv, tsv and
+json files (no LFS objects), into <repos>/<slug>/ (the story's own) and
+<repos>/<slug>--<owner>-<name>/ (another); <repos>/repos.jsonl
 gets one line per story with the repos found.
 
 pack keeps the csv and tsv files outside node_modules and .git, minus the
@@ -70,7 +71,12 @@ def clone(web: Path, repos: Path):
         for full in found:
             folder = repos / folder_name(slug, full)
             if not (folder / ".git").is_dir():
-                r = git("clone", "--depth", "1", "--single-branch", f"https://github.com/{full}", str(folder))
+                # only the files pack reads: the rest of a story repo (images, audio, builds) is most of its size
+                r = git("clone", "--depth", "1", "--single-branch", "--filter=blob:none", "--no-checkout",
+                        f"https://github.com/{full}", str(folder))
+                for step in (["sparse-checkout", "set", "--no-cone", "*.csv", "*.tsv", "*.json", "*.CSV", "*.TSV", "*.JSON"], ["checkout"]):
+                    if r.returncode == 0:
+                        r = git("-C", str(folder), *step)
                 if r.returncode != 0:
                     print(f"{s['url']:40s} clone of {full} failed: {r.stderr.strip()[-200:]}", flush=True)
         with (repos / "repos.jsonl").open("a", encoding="utf-8") as f:
