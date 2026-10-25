@@ -116,7 +116,7 @@ PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_benc
 #### 达和雅(`judge.py`)
 
 ```sh
-PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_bench.judge page runs/evidence/titletowns/original --items 2.2,2.4,2.11,3.1,3.2 [--per-item]
+PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_bench.judge page runs/evidence/titletowns/original --items 2.6,2.8,2.10,3.1,3.2 [--per-item]
 ```
 
 - 达、雅各是一组,每组一次调用,照 MiMo 评测 rubric 一次返回七个维度的做法(提示词里写了「各条独立判断」)。每条照样单独写一份记录,组的共同回答在 `group-<维度>.json`。`--per-item` 改成每条单独一次调用,是测耦合时的对照:一起判时一条的印象会不会带到别的条上,比一比就知道。judge 看到:全部帧(超过 40 帧均匀抽 40)、缩略图、页面文字(每段标了在第几帧)、滚动记录。帧按 1080px 宽发送。默认 judge 是 `glm-5.3-flash`。

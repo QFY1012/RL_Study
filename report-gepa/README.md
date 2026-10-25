@@ -88,7 +88,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pagegen data/
 | `seed-glm-1` | `guides/seed.md` | glm-5.3-flash | 1 |
 | `detail-ds-1` | `guides/detailed.md` | deepseek-v4.1-flash | 1 |
 
-`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平。人工标注里的「指南版」(`pudding-ds-1`)是 2026-10-20 用一份 Pudding 风格的指南生成的;那份指南禁止滚动叙事、每节一张图,和 rubric 2.4 相反,已经删掉,标注过的页面作为数据留在 Drive。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
+`guides/detailed.md` 是让 deepseek-v4.1-flash 自己写的通用详细指南,代表「认真写过提示词」的水平。人工标注里的「指南版」(`pudding-ds-1`)是 2026-10-20 用一份 Pudding 风格的指南生成的;那份指南禁止滚动叙事、每节一张图,和 rubric 2.8 视图连贯相反,已经删掉,标注过的页面作为数据留在 Drive。`guides/editorial.md` 是杂志专题风格,只试过,没进批量。
 
 ## 修脚本报错的页面(`src/report_gepa/repair.py`)
 
@@ -217,13 +217,13 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.evalguide run
 
 2026-10-24 跑的 `runs/seed-rubric`(种子 + 评分标准,4645 字):
 
-| 指南 | 验证 8 篇 | 去掉 skate-music 的 7 篇 | 2.2 | 2.4 | 2.12 | 3.1 | 3.2 |
+| 指南 | 验证 8 篇 | 去掉 skate-music 的 7 篇 | 2.6 | 2.8 | 2.11 | 3.1 | 3.2 |
 |---|---|---|---|---|---|---|---|
 | 种子 | 0.541 | 0.542 | 0.69 | 0.33 | 0.27 | 0.33 | 0.61 |
 | 种子 + 评分标准 | 0.622 | 0.711 | 0.57 | 0.68 | 0.71 | 0.56 | 0.74 |
 | GEPA `0112` | 0.669 | 0.657 | 0.65 | 0.62 | 0.54 | 0.49 | 0.65 |
 
-(各条是没被 1.1 否决的页面的平均。)skate-music 脚本报错(`T is not a function`)被 1.1 判 0;其余 7 篇每篇都比 `0112` 高,规定了做法的几条(2.4 一张图连续变、2.12 句中小图、3.1 数据标记做成话题里的东西)涨得比 GEPA 还多。`0112` 多出来的是 2.2 图表可读(它写了字号下限)和渲染兜底(第 0 节);只有一篇报错,还说不清是不是系统性的差别。
+(各条是没被 1.1 否决的页面的平均。)skate-music 脚本报错(`T is not a function`)被 1.1 判 0;其余 7 篇每篇都比 `0112` 高,规定了做法的几条(2.8 一张图连续变、2.11 句中小图、3.1 数据标记做成话题里的东西)涨得比 GEPA 还多。`0112` 多出来的是 2.6 图表可读(它写了字号下限)和渲染兜底(第 0 节);只有一篇报错,还说不清是不是系统性的差别。
 
 ### 2026-10-22 的 `runs/gepa/full`
 
