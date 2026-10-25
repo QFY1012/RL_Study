@@ -3,8 +3,8 @@
     PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.trust <evidence_dir> <facts.json> [--model m]
 
 The page's writer delivers facts.json (facts.py): the findings and how each was
-computed. The page marks the sentences and charts that state a fact with
-data-ref, and the capture (capture.py) records the marks with the page text. The
+computed. The page marks the sentences that state a fact with data-ref, and
+the capture (capture.py) records the marks with the page text. The
 items, in order, each a veto:
 
 - 1.1 renders: the capture opened the page and it showed text; a generated page
@@ -43,7 +43,7 @@ NO_REASONING = {"reasoning_effort": "none", "extra_body": {"thinking": {"type": 
 
 PROMPT = """你核对一个数据报告网页上关于数据的说法是否和数据一致。数据已经由程序算好(见「结果」),你只拿这些结果核对，不要自己估算。
 
-「网页文字」是页面正文，按从上到下的顺序，不含图里的文字。⟦id⟧……⟦/⟧ 包着的句子，页面声明它依据结果里编号为 id 的那一条。
+「网页文字」是页面正文，按从上到下的顺序。⟦id⟧……⟦/⟧ 包着的句子，页面声明它依据结果里编号为 id 的那一条。
 
 逐句检查页面上关于这份数据的说法:数字、比较、最多最少、「只有」「每个」、几倍、占比、趋势。没有标记的句子也要查。背景、历史、引语、方法说明、教读者操作的话不是关于这份数据的说法，不查。
 
@@ -95,26 +95,14 @@ def refs(ev: dict, facts_path: Path) -> tuple[list[str], dict, dict]:
     return problems, facts, results
 
 
-CHART_TEXT = re.compile(r"⟦chart [^⟧]*⟧.*?⟦/⟧")
-
-
 def page_text(ev: dict) -> str:
-    """The visible prose in page order, with the fact marks. Text drawn in charts (labels, ticks, legends)
-    is left out: whether a chart shows its data truly is 1.4's question, and listing a few hundred
-    labels made one call 16k tokens long and cut some off."""
-    lines = []
-    for t in ev.get("text", []):
-        if t["hidden"] or t["in_svg"]:
-            continue
-        line = CHART_TEXT.sub("", t.get("marked", t["text"])).strip()
-        if line:
-            lines.append(line)
-    return "\n".join(lines)
+    """The visible prose in page order, with the fact marks; text drawn inside svg is not prose."""
+    return "\n".join(t.get("marked", t["text"]) for t in ev.get("text", []) if not t["hidden"] and not t["in_svg"])
 
 
 def said(text: str, fact_id: str) -> str:
     """What the page's marked sentences say about one fact."""
-    return " ".join(m.group(2) for m in re.finditer(r"⟦(?:chart )?([^⟧]*)⟧(.*?)⟦/⟧", text) if fact_id in m.group(1).split())
+    return " ".join(m.group(2) for m in re.finditer(r"⟦([^⟧]*)⟧(.*?)⟦/⟧", text) if fact_id in m.group(1).split())
 
 
 def accuracy(ev: dict, facts: dict, results: dict, model: str) -> dict:

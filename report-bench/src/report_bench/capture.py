@@ -66,17 +66,12 @@ JPEG_QUALITY = 80
 # Text in page order. Each piece of text belongs to its nearest block-level
 # element (a heading, paragraph, list item, table cell, svg <text>...), so a
 # paragraph with a <b> inside comes out as one item. A page that names the facts
-# behind its sentences and charts (data-ref, see facts.py) gets each item's text
-# again as `marked`, the referenced pieces wrapped as ⟦ids⟧...⟦/⟧ (⟦chart ids⟧
-# for text inside a referenced chart), so a checker knows what each sentence rests on.
+# behind its sentences (data-ref, see facts.py) gets each item's text again as
+# `marked`, the referenced pieces wrapped as ⟦ids⟧...⟦/⟧, so a checker knows what
+# each sentence rests on.
 PAGE_TEXT = r"""
 () => {
   const BLOCK = 'h1,h2,h3,h4,h5,h6,p,li,figcaption,blockquote,td,th,dt,dd,label,button,option,caption,summary,text,title,pre';
-  const charts = new Map();
-  const isChart = (el) => {
-    if (!charts.has(el)) charts.set(el, el.matches('svg,canvas,img') || !!el.querySelector('svg,canvas,img'));
-    return charts.get(el);
-  };
   const out = new Map();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let n = walker.nextNode(); n; n = walker.nextNode()) {
@@ -86,7 +81,7 @@ PAGE_TEXT = r"""
     if (!parent || parent.closest('script,style,noscript,template')) continue;
     const el = parent.closest(BLOCK) || parent;
     const ref = parent.closest('[data-ref]');
-    const tag = ref ? (isChart(ref) ? 'chart ' : '') + ref.getAttribute('data-ref').trim().split(/\s+/).join(' ') : null;
+    const tag = ref ? ref.getAttribute('data-ref').trim().split(/\s+/).join(' ') : null;
     if (!out.has(el)) out.set(el, []);
     out.get(el).push({t, tag});
   }
@@ -117,15 +112,13 @@ PAGE_TEXT = r"""
 }
 """
 
-# Every element that names facts with data-ref: which facts, whether it is a
-# chart (it is or holds an svg, canvas or img) or a sentence, and whether a reader sees it.
+# Every element that names facts with data-ref: which facts, and whether a reader sees it.
 REFS = r"""
 () => [...document.querySelectorAll('[data-ref]')].map(el => {
   const r = el.getBoundingClientRect();
   const s = getComputedStyle(el);
   return {
     ids: el.getAttribute('data-ref').trim().split(/\s+/).filter(Boolean),
-    chart: el.matches('svg,canvas,img') || !!el.querySelector('svg,canvas,img'),
     visible: r.width > 0 && r.height > 0 && s.display !== 'none' && s.visibility !== 'hidden',
     y: Math.round(r.top + scrollY),
     text: (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 500),
