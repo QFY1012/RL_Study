@@ -28,10 +28,7 @@ from . import facts as F
 from .llm import LLM
 
 MODEL = "deepseek-v4.1-flash"
-MAX_TOKENS = 32768
-# The relay passes one of these switches to some backends and the other to the rest; with reasoning on,
-# a check spent 16k tokens (80 s) thinking for an answer of a few hundred.
-NO_REASONING = {"reasoning_effort": "none", "extra_body": {"thinking": {"type": "disabled"}}}
+MAX_TOKENS = 32768  # the reasoning counts too
 
 PROMPT = """下面是一份数据报告给出的发现。每条发现有结论(claim),以及程序按它的计算方法从数据算出的结果表。
 
@@ -85,7 +82,7 @@ def block(fact: dict, result: list) -> str:
 def claims_hold(facts: list[dict], results: dict, model: str) -> dict:
     """1.3: one model call over every claim and its result tables."""
     prompt = PROMPT.replace("{facts}", "\n\n".join(block(f, results[f["id"]]) for f in facts))
-    reply = LLM(model).chat([{"role": "user", "content": prompt}], max_tokens=MAX_TOKENS, temperature=0, **NO_REASONING)
+    reply = LLM(model).chat([{"role": "user", "content": prompt}], max_tokens=MAX_TOKENS)
     m = re.search(r"\{.*\}", reply.text, re.S)
     try:
         verdicts = json.loads(m.group(0))["facts"]
