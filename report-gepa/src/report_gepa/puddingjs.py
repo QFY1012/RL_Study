@@ -22,8 +22,8 @@ each also inside a JSON.parse; see jsdata/extract.mjs.
 
 pack takes the tables TABLES names, looked up by where they sit in the JS, and
 writes them to <out>/<id>/<name> with the header TABLES gives (read from the code
-that uses a headerless table), <out>/manifest.jsonl getting {id, title, url,
-published, files, bytes}. The other tables were looked at and left out: the
+that uses a headerless table) and without the columns that have no name,
+<out>/manifest.jsonl getting {id, title, url, published, files, bytes}. The other tables were looked at and left out: the
 story's copy and scroll steps, colour keys, sprite and layout boxes, map shapes,
 tables computed for one chart (counts per year or per bin), and rows whose cells
 are encoded arrays nobody can read without the story's code.
@@ -63,7 +63,10 @@ TABLES = {
     "abortion-mazes": {"states.csv": ("V1", None), "policies.csv": ("ef", None)},
     "scifi": {"films.csv": ("wt", None)},
     "climate-zones": {"cities.csv": ("un", None)},
-    "greatest-music": {"albums.csv": ("yt", None), "voters.csv": ("Yn", None)},
+    # the voters sheet calls its photo links "Race"; it has no race column
+    "greatest-music": {"albums.csv": ("yt", None), "voters.csv": ("Yn", ["Year", "ID", "General Category", "Specific Category", "Voter",
+                                                                         "Additional Info", "Gender", "photo_url", "Birthyear", "",
+                                                                         "Age at Vote", "Teenage Decade"])},
     "upward-mobility": {"cities.csv": ("Kl.points.geometries", None)},
     "tiktok-story": {"artists.csv": ("B", None), "charting-artists.csv": ("v1", None)},
     "spades": {"answers.csv": ("app.ln", None), "questions.csv": ("app.i", ["question", "text"])},
@@ -188,13 +191,12 @@ def pack(src: Path, out: Path):
             t = hits[0]
             if header and len(header) != t["columns"]:
                 raise SystemExit(f"{sid}: {where} has {t['columns']} columns, the header {len(header)}")
-            with (src / row["slug"] / "tables" / t["file"]).open(encoding="utf-8", newline="") as f, \
-                 (out / sid / name).open("w", encoding="utf-8", newline="") as g:
-                reader, writer = csv.reader(f, delimiter="\t" if t["file"].endswith(".tsv") else ","), csv.writer(g)
-                writer.writerow(header or next(reader))
-                if header:
-                    next(reader)
-                writer.writerows(reader)
+            with (src / row["slug"] / "tables" / t["file"]).open(encoding="utf-8", newline="") as f:
+                cells = list(csv.reader(f, delimiter="\t" if t["file"].endswith(".tsv") else ","))
+            cells[0] = header or cells[0]
+            keep = [i for i, c in enumerate(cells[0]) if c.strip()]  # a column with no name is a spreadsheet's stray column
+            with (out / sid / name).open("w", encoding="utf-8", newline="") as g:
+                csv.writer(g).writerows([r[i] if i < len(r) else "" for i in keep] for r in cells)
         parts = row["url"].strip("/").split("/")
         size = sum(p.stat().st_size for p in (out / sid).iterdir())
         rows.append({"id": sid, "title": row["title"], "url": f"https://pudding.cool/{row['url'].strip('/')}/",

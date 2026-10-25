@@ -162,9 +162,10 @@ def eu_regions(cache: Path, out: Path):
         topo = json.loads((folder / f"{level}_gdppps17_topo.json").read_text(encoding="utf-8"))
         geoms = [g["properties"] for o in topo["objects"].values() for g in o["geometries"]]
         write(out / name, cols, ([str(p.get(c, "")).strip() for c in cols] for p in geoms))
-    caps = json.loads((folder / "capitals-gdppps17.json").read_text(encoding="utf-8"))["features"]
+    # the file also labels capitals outside the EU on the map; only the 28 EU ones have a region and a GDP
+    caps = [f["properties"] for f in json.loads((folder / "capitals-gdppps17.json").read_text(encoding="utf-8"))["features"]]
     write(out / "capitals.csv", ["capital", "NUTS_ID", "CNTR_CODE", "gdppps17"],
-          ([f["properties"][c] for c in ("name", "NUTS_ID", "CNTR_CODE", "gdppps17")] for f in caps))
+          ([p["name"], p["NUTS_ID"], p["CNTR_CODE"], p["gdppps17"]] for p in caps if p.get("NUTS_ID")))
 
 
 def spellings(story: str):
