@@ -114,7 +114,7 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 
 ## 数据
 
-`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench.tar.xz`](https://drive.google.com/file/d/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd/view)(187 MB,md5 `4e75a96d3b12ecb6bd54b732ad69d48e`,2026-10-25;文件的「管理版本」里永久保留着之前两版:2026-10-24 的 170 题,md5 `40707a7ba193629ee509129035c1aab3`;2026-10-25 的 185 题,md5 `c046fd4b97eae6349a000e421afff260`),只有本人账号能打开。包里的路径从仓库根目录起:
+`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench.tar.xz`](https://drive.google.com/file/d/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd/view)(186 MB,md5 `8effb42850da220c7761281ba514d52f`,2026-10-25,全部题目从原料重建、修过乱码和空列;文件的「管理版本」里永久保留着之前三版:2026-10-24 的 170 题,md5 `40707a7ba193629ee509129035c1aab3`;2026-10-25 的 185 题,md5 `c046fd4b97eae6349a000e421afff260`;2026-10-25 修乱码前的 196 题,md5 `4e75a96d3b12ecb6bd54b732ad69d48e`),只有本人账号能打开。包里的路径从仓库根目录起:
 
 - `report-bench/out/`:196 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、148 份 `original.json`),解压后 1.1 GB;
 - `report-gepa/runs/evidence/`:雅的典型案例用到的 8 帧截图,judge 打分要用;
