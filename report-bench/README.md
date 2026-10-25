@@ -105,7 +105,7 @@ PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_benc
 PYTHONPATH=../report-gepa/src:src ../report-gepa/.venv/bin/python -m report_bench.trust <evidence_dir> <facts.json>
 ```
 
-页面按 `TASK.md` 交付 `facts.json`:每个发现一条,写 `id`、结论 `claim`、读哪些表 `tables`(变量名对应 `data/` 下的文件,用 `pd.read_csv` 读)和一段 pandas 表达式 `code`。代码在 report-gepa 的沙盒(`agent/sandbox.sh`,没有网络,只看得到临时工作目录)里用系统的 python3 原样 `eval`,输出按 pandas 默认的打印格式。按顺序判,前一条犯了后面不判:
+页面按 `TASK.md` 交付 `facts.json`:每个发现一条,写 `id`、结论 `claim`、读哪些表 `tables`(变量名对应从页面所在文件夹看的文件路径，如 `data/orders.csv`,用 `pd.read_csv` 原样读)和一段 pandas 表达式 `code`。代码在 report-gepa 的沙盒(`agent/sandbox.sh`,没有网络,只看得到临时工作目录)里用系统的 python3 原样 `eval`,输出按 pandas 默认的打印格式。按顺序判,前一条犯了后面不判:
 
 - 1.1 页面可渲染:看采集结果,打不开、没渲染出文字、卡死的犯;生成的页面脚本报错也犯。Pudding 原文自己也报错(titletowns 有 "reading 'latitude'"),页面照样能用,所以原文只看前一半。
 - 1.2 fact 能执行:`facts.json` 读得出来,每条代码在数据上都运行得了。

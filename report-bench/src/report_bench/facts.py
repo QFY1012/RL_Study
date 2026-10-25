@@ -4,11 +4,11 @@ facts.json is a list of facts:
 
     {"id": "west-returns-most",
      "claim": "Among regions with at least 100 orders, the West has the highest return rate, 19%, against 14% in the East and 13% in the North.",
-     "tables": {"orders": "orders.csv"},
+     "tables": {"orders": "data/orders.csv"},
      "code": "orders[orders.region.map(orders.region.value_counts()) >= 100].groupby('region').returned.apply(lambda s: (s == 'yes').mean())"}
 
-`tables` names the files (paths under the writer's data/) that are read with
-pd.read_csv into variables; `code` is one Python expression over them, with pd
+`tables` names the files (paths from the writer's folder, as data/orders.csv)
+that are read with pd.read_csv into variables; `code` is one Python expression over them, with pd
 and np available. Every fact's code is evaluated as written, in the page agent's
 sandbox (report-gepa/agent/sandbox.sh: no network, nothing but the workspace),
 since it is code someone else wrote, and its value is printed the way pandas
@@ -37,7 +37,7 @@ out = {}
 for f in json.load(open("facts.json")):
     try:
         env = {"pd": pd, "np": np}
-        env.update({name: pd.read_csv("data/" + path) for name, path in f["tables"].items()})
+        env.update({name: pd.read_csv(path) for name, path in f["tables"].items()})
         value = eval(f["code"], env)
         out[f["id"]] = {"output": value.to_string() if hasattr(value, "to_string") else str(value)}
     except Exception as e:
