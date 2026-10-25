@@ -8,7 +8,7 @@
 
 ## 题目(`tasks.json`)
 
-每题一项:`id`、`source`(`pudding`、`pudding-web`、`pudding-repo`、`pudding-js`、`pudding-merge`、`mock`)、`tables`(那份数据里给哪几张表,相对它在 `report-gepa/data/<source>/<id>/` 下的路径)、`title`。
+每题一项:`id`、`source`(`pudding`、`pudding-web`、`pudding-repo`、`pudding-js`、`pudding-merge`、`mock`)、`tables`(那份数据里给哪几张表,相对它在 `report-gepa/data/<source>/<id>/` 下的路径)、`title`,可选的 `dedupe`(哪几张表去掉完全相同的行:只给自己重复了很多遍的对照表用,比如 similarity 的歌名表同一首歌列了 27 遍;别的表里相同的行多半是真的,比如两次一样的猜测)。
 
 - 只给原始数据表,为某张图算好的中间表(按年汇总、百分比、排名、图表坐标)不给;一篇文章的几张原始表(比如电影、演职人员、制片公司各一张)都给。同一份数据重复的(`docs/` 和 `src/` 下各一份)只给一份。json 只给一条条记录结构的,转成 csv(文件名 `<原名>.json.csv`)。
 - 五个 Pudding 来源依次补前面没收的文章:`pudding` 是 the-pudding/data 公开的数据,`pudding-web` 是文章页面加载的数据文件,`pudding-repo` 是文章自己仓库里的数据,`pudding-js` 是构建时打包进 JS 的表(`report_gepa.puddingjs`,收哪几张表写在 `puddingjs.TABLES`,没表头的照文章代码补上列名),`pudding-merge` 是数据在、但不是一张表的(`report_gepa.puddingmerge`,每篇一个配方):散在几百上千个小文件里的合成一张表,文件代表的东西(比赛、电台、期数、人、读音组)成为一列;嵌套的 json 展开成行;放在 pudding.cool 以外的文件照原样取。
@@ -31,7 +31,7 @@ cd report-bench && PYTHONPATH=src ../report-gepa/.venv/bin/python -m report_benc
 
 用 report-gepa 的环境(要 `ftfy`)。`--tasks` 只重建列出的题,其余题的目录和 `tasks.jsonl` 里的行不动,所以只要这几题的来源在 `report-gepa/data/` 下就行(加新题时用)。
 
-- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原;源数据里 utf-8 被当成 latin-1 或 cp1252 读过一遍的乱码用 `ftfy` 改回来,比如 `fiancÃ©` → `fiancé`,本来就对的文字不动,字节已经丢了的 `�` 改不回来;没有列名、又是全空或只是行号的列去掉,是表格软件和 pandas 导出时留下的)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
+- `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原;源数据里 utf-8 被当成 latin-1 或 cp1252 读过一遍的乱码用 `ftfy` 改回来,比如 `fiancÃ©` → `fiancé`,本来就对的文字不动,字节已经丢了的 `�` 改不回来;每一行都是空(空白、NA、NaN、null、None)的列去掉,没有列名、只是行号的列也去掉,是表格软件和 pandas 导出时留下的)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
 - `out/tasks.jsonl`:每题的来源、题目、每张表的行列数和大小;Pudding 题另有 `original`,数据出自的那篇文章的网址。
 - `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照。
 

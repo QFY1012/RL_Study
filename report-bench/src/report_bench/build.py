@@ -4,8 +4,10 @@
 
 For every task in tasks.json its tables go to <out>/tasks/<id>/data/ under
 their own file names (a tsv becomes a csv, a url-escaped name is unescaped),
-with text that was utf-8 decoded the wrong way fixed (ftfy) and columns with no
-name left out when they are empty or only count the rows, and
+with text that was utf-8 decoded the wrong way fixed (ftfy), columns left out
+when no row has a value in them or when they have no name and only count the
+rows, and, for the tables a task lists under "dedupe" (a lookup table that
+repeats itself), each row only once; and
 <out>/tasks/<id>/task.json gets the task statement: the fixed instruction
 (TASK.md), the task's one-line title and the file names. <out>/tasks.jsonl lists
 every task with its source, each table's shape and, for a Pudding task, the
@@ -36,6 +38,7 @@ SOURCES = {"pudding": DATA / "pudding", "pudding-web": DATA / "pudding-web", "pu
            "pudding-js": DATA / "pudding-js", "pudding-merge": DATA / "pudding-merge", "mock": DATA / "mock"}
 TASKS = ROOT / "tasks.json"
 INSTRUCTION = ROOT / "TASK.md"
+EMPTY = {"", "na", "n/a", "nan", "null", "none"}
 MOJIBAKE = re.compile(r"[ÃÂâÅÄðÐÑ][\x80-\xbfŒœŠšŸŽžƒˆ˜–-›€™]")
 
 csv.field_size_limit(sys.maxsize)
@@ -52,16 +55,16 @@ def fix(cell: str) -> str:
 
 
 def stray_columns(src: Path, delimiter: str) -> set[int]:
-    """Columns with no name that hold nothing, or only a row number: what a spreadsheet or pandas export leaves behind."""
+    """Columns that hold nothing in any row, and columns with no name that only count the rows (a pandas index)."""
     with src.open(encoding="utf-8-sig", errors="replace", newline="") as f:
         reader = csv.reader(f, delimiter=delimiter)
         header = next(reader)
-        open_ = {i for i, c in enumerate(header) if not c.strip()}
-        empty, counter = set(open_), set(open_)
+        empty = set(range(len(header)))
+        counter = {i for i, c in enumerate(header) if not c.strip()}
         for n, row in enumerate(reader):
             for i in list(empty | counter):
                 v = row[i].strip() if i < len(row) else ""
-                if v:
+                if v.lower() not in EMPTY:
                     empty.discard(i)
                 if v not in (str(n), str(n + 1)):
                     counter.discard(i)
@@ -70,17 +73,25 @@ def stray_columns(src: Path, delimiter: str) -> set[int]:
     return empty | counter
 
 
-def copy_table(src: Path, dst: Path) -> tuple[int, list[str]]:
-    """Copy as utf-8 csv with the text encoding fixed and the stray columns left out; return the row count and header."""
+def copy_table(src: Path, dst: Path, dedupe: bool = False) -> tuple[int, list[str]]:
+    """Copy as utf-8 csv with the text encoding fixed, the stray columns left out and, with dedupe, each row
+    only once; return the row count and header."""
     delimiter = "\t" if src.suffix.lower() == ".tsv" else ","
     drop = stray_columns(src, delimiter)
+    seen = set()
     with src.open(encoding="utf-8-sig", errors="replace", newline="") as f, dst.open("w", encoding="utf-8", newline="") as g:
         reader, writer = csv.reader(f, delimiter=delimiter), csv.writer(g)
         header = [fix(c) for i, c in enumerate(next(reader)) if i not in drop]
         writer.writerow(header)
         rows = 0
         for row in reader:
-            writer.writerow([fix(c) for i, c in enumerate(row) if i not in drop])
+            row = [fix(c) for i, c in enumerate(row) if i not in drop]
+            if dedupe:
+                key = tuple(row)
+                if key in seen:
+                    continue
+                seen.add(key)
+            writer.writerow(row)
             rows += 1
     return rows, header
 
@@ -120,7 +131,7 @@ def main():
             raise SystemExit(f"{t['id']}: two tables would get the same file name: {names}")
         shapes = []
         for table, name in zip(t["tables"], names):
-            rows, header = copy_table(SOURCES[t["source"]] / t["id"] / table, folder / "data" / name)
+            rows, header = copy_table(SOURCES[t["source"]] / t["id"] / table, folder / "data" / name, table in t.get("dedupe", []))
             shapes.append({"file": name, "rows": rows, "columns": len(header), "bytes": (folder / "data" / name).stat().st_size})
         (folder / "task.json").write_text(json.dumps({"id": t["id"], "title": t["title"], "files": [f"data/{n}" for n in names],
                                                       "instruction": instruction}, ensure_ascii=False, indent=1), encoding="utf-8")
