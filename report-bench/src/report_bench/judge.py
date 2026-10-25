@@ -52,7 +52,6 @@ from .rubric import Item, load, rubric_hash
 EVIDENCE = Path(__file__).resolve().parents[3] / "report-gepa" / "runs" / "evidence"  # where the worked examples' pages are
 
 JUDGE_MODEL = "glm-5.3-flash"
-FRAME_W = 1080  # frames are sent at this width; 1440 cost glm 1.7k tokens a frame
 MAX_FRAMES = 40  # per page in one call; longer pages are sampled evenly
 MAX_TEXT = 15000  # characters of page text per page
 MAX_TOKENS = 32768
@@ -94,10 +93,10 @@ def prompt_hash(template: str) -> str:
     return hashlib.sha256((SYSTEM + template).encode()).hexdigest()[:12] + "-" + RUBRIC_HASH
 
 
-def _image(path: Path, width: int | None) -> dict:
+def _image(path: Path) -> dict:
+    """An image at the size it was captured: a frame is what a reader sees at 1440 px, and shrinking it made
+    small but legible chart labels unreadable to the judge (pockets' card wall, 2026-10-25)."""
     img = Image.open(path).convert("RGB")
-    if width and img.width > width:
-        img = img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
     buf = BytesIO()
     img.save(buf, "JPEG", quality=80)
     return {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()}}
@@ -140,11 +139,11 @@ def evidence_parts(ev_dir: Path, label: str, max_frames: int = MAX_FRAMES) -> li
     parts = [{"type": "text", "text": f"===== 页面 {label} =====\n页面高 {ev['page_height']}px,截了 {len(frames)} 帧"
                                        + (f",这里给其中均匀抽取的 {len(keep)} 帧" if len(keep) < len(frames) else "")
                                        + f"。\n\n滚动记录:\n{_story(ev)}\n\n页面文字:\n" + "\n".join(text_lines)},
-             {"type": "text", "text": f"页面 {label} 的缩略整页图:"}, _image(ev_dir / ev["thumb"], None)]
+             {"type": "text", "text": f"页面 {label} 的缩略整页图:"}, _image(ev_dir / ev["thumb"])]
     for i in keep:
         f = frames[i]
         parts.append({"type": "text", "text": f"页面 {label} 第 {i} 帧(页面 y={f['scroll_y']}–{f['scroll_y'] + VIEW_H}):"})
-        parts.append(_image(ev_dir / f["file"], FRAME_W))
+        parts.append(_image(ev_dir / f["file"]))
     return parts
 
 
@@ -206,7 +205,7 @@ def example_parts(items: list[Item]) -> list[dict]:
         for e in it.examples:
             parts.append({"type": "text", "text": f"【典型案例，不是要评的页面】{it.id} {it.name}:{e.score} 分。"
                                                   f"{e.story} 第 {e.frame} 帧:{e.note}"})
-            parts.append(_image(EVIDENCE / e.story / e.version / "frames" / f"{e.frame:02d}.jpg", FRAME_W))
+            parts.append(_image(EVIDENCE / e.story / e.version / "frames" / f"{e.frame:02d}.jpg"))
     if parts:
         parts.insert(0, {"type": "text", "text": "下面先给几个打过分的典型案例，用来对齐分数的尺度。案例之后才是要评的页面。"})
         parts.append({"type": "text", "text": "典型案例到此为止。下面是要评的页面。"})
