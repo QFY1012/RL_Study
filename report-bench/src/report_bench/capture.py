@@ -19,8 +19,11 @@ A frame is taken once the screen has stopped changing, without freezing animatio
 chart that animates in when it scrolls into view is taken in its final state
 (hype's dot chart moves for 6-18 s; at the old fixed 0.8 s its counters still
 read 4%, 1%, 0% and no player was labelled yet). An animation that never stops
-is taken after SETTLE_MAX_MS. A frame that looks the same as the one before it
-is dropped.
+is taken after SETTLE_MAX_MS; once one has, the page is known to animate on its
+own, so later frames wait at most LOOP_SETTLE_MS, and pixels that change while
+the page stands still are left out of the check for changes (cetaceans waited
+the full 20 s at 17 of 38 frames and was checked into extra frames by its own
+animation). A frame that looks the same as the one before it is dropped.
 
 At every frame the charts on screen are recorded with their screen position and
 a fingerprint of their content. From these the capture works out the scroll
@@ -29,8 +32,9 @@ pinned (sticky or fixed), and a fingerprint that changes means the chart was
 redrawn, so "one chart, pinned over frames 5-12, four different states" reaches
 the judge as text and does not have to be guessed from the pictures.
 
-Afterwards a full-page shot is taken the way render.py takes it (scroll
-through, freeze animations, back to the top) and shrunk into a thumbnail for
+Afterwards a full-page shot is taken the way render.py takes it (freeze
+animations, back to the top; the walk has already scrolled the page through,
+so lazy content is in) and shrunk into a thumbnail for
 whole-page judgements such as visual consistency.
 
 The text is read from the DOM in page order, with its position, so the judge
@@ -61,19 +65,21 @@ from PIL import Image
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
-from .render import CHROMIUM, FREEZE_CSS, SCROLL_THROUGH, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
+from .render import CHROMIUM, FREEZE_CSS, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
 CAPTURE_VERSION = "capture-5"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
 CHECK_EVERY = 225  # px of scroll between checks for a change on screen
-CHECK_PAUSE_MS = 150  # wait after a scroll before checking, so scroll-triggered steps have started
+CHECK_PAUSE_MS = 50  # wait after a scroll before checking, so scroll-triggered steps have started
 CHANGED_AREA = 0.005  # share of the screen that has to change, other than by scrolling, for an extra frame
 WHEEL_PX = 80  # one wheel tick
 WHEEL_PAUSE_MS = 40
 SETTLE_EVERY_MS = 250  # how often the screen is checked for motion
 SETTLE_STILL = 4  # checks in a row without change before a frame is taken
 SETTLE_MAX_MS = 20000  # an animation that loops is taken after this
+LOOP_SETTLE_MS = 3000  # the longest wait on a page that has shown an animation that never stops
+LOOP_PAUSE_MS = 250  # between two shots at one place, to see what moves by itself
 CHANGED = 30  # a pixel has changed if one of its channels moved by more than this (0-255)
 SAME_PX = 20  # two screens with at most this many changed pixels are the same
 PINNED_PX = 4  # a chart whose screen position moves less than this while the page scrolls is pinned
@@ -183,16 +189,18 @@ def _jpeg(png: bytes, path: Path, width: int | None = None) -> None:
 
 
 def _same(a: Image.Image, b: Image.Image) -> bool:
-    """Counted pixel by pixel: a few dozen small dots moving across the screen hardly move a mean difference."""
+    """Counted pixel by pixel: a few dozen small dots moving across the screen hardly move a mean difference.
+    Every other pixel is compared, four times faster; SAME_PX stays in full-size pixels."""
     import numpy as np
 
-    return int((np.abs(np.asarray(a, int) - np.asarray(b, int)).max(axis=2) > CHANGED).sum()) <= SAME_PX
+    return 4 * int((np.abs(np.asarray(a, int)[::2, ::2] - np.asarray(b, int)[::2, ::2]).max(axis=2) > CHANGED).sum()) <= SAME_PX
 
 
-def _changed_beyond_scroll(last: Image.Image, now: Image.Image, moved: int) -> bool:
+def _changed_beyond_scroll(last: Image.Image, now: Image.Image, moved: int, again: Image.Image | None = None) -> bool:
     """Something on screen changed other than by scrolling `moved` px down since `last`: a pixel counts if it
     matches neither `last` moved up by that distance (content that scrolled) nor `last` where it was (content
-    pinned to the screen)."""
+    pinned to the screen). `again` is a second shot of `now` a moment later; pixels that differ between the two
+    move by themselves and do not count."""
     import numpy as np
 
     a, b = np.asarray(last, int), np.asarray(now, int)
@@ -202,18 +210,25 @@ def _changed_beyond_scroll(last: Image.Image, now: Image.Image, moved: int) -> b
     # shifted at full size, then every other pixel compared: halving first would misalign odd scroll distances
     scrolled = np.abs(b[:shared:2, ::2] - a[moved::2, ::2]).max(axis=2) > CHANGED
     pinned = np.abs(b[:shared:2, ::2] - a[:shared:2, ::2]).max(axis=2) > CHANGED
-    return int((scrolled & pinned).sum()) > CHANGED_AREA * scrolled.size * len(a) / shared
+    changed = scrolled & pinned
+    if again is not None:
+        changed &= np.abs(np.asarray(again, int)[:shared:2, ::2] - b[:shared:2, ::2]).max(axis=2) <= CHANGED
+    return int(changed.sum()) > CHANGED_AREA * scrolled.size * len(a) / shared
 
 
-def _settled(page) -> tuple[Image.Image, int]:
-    """The screen once it has stopped changing, and how long that took (ms)."""
+def _shot(page) -> Image.Image:
     from io import BytesIO
 
+    return Image.open(BytesIO(page.screenshot())).convert("RGB")
+
+
+def _settled(page, max_ms: int = SETTLE_MAX_MS) -> tuple[Image.Image, int]:
+    """The screen once it has stopped changing, and how long that took (ms)."""
     waited, still, last = 0, 0, None
     while True:
-        img = Image.open(BytesIO(page.screenshot())).convert("RGB")
+        img = _shot(page)
         still = still + 1 if last is not None and _same(img, last) else 0
-        if still >= SETTLE_STILL or waited >= SETTLE_MAX_MS:
+        if still >= SETTLE_STILL or waited >= max_ms:
             return img, waited
         last = img
         page.wait_for_timeout(SETTLE_EVERY_MS)
@@ -239,15 +254,13 @@ def _wheel_to(page, target: int) -> int:
 def _walk(page, out: Path) -> list[dict]:
     """Viewport frames from top to bottom, with the charts on screen at each one: one per screen of scroll, plus
     one wherever the screen changed other than by scrolling or a chart cut by the last frame shows whole."""
-    from io import BytesIO
-
     frames_dir = out / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
     # the wheel needs the pointer over the page, but mid-screen it sits on every chart that scrolls past and
     # leaves hover tooltips in the frames (titletowns: "Notre Dame 13.8x" over text about LA); the judge ignores
     # interaction, so the pointer waits at the bottom-left edge
     page.mouse.move(2, VIEW_H - 2)
-    frames, last, last_at, target = [], None, 0, 0
+    frames, last, last_at, target, looping = [], None, 0, 0, False
     seen_whole, cut = set(), set()  # chart ids shown whole by some frame; ids the last frame cut at its bottom
     while len(frames) < MAX_FRAMES:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
@@ -256,10 +269,15 @@ def _walk(page, out: Path) -> list[dict]:
         bottom = at + VIEW_H >= height or at < target
         charts = page.evaluate(CHART_STATE)
         due = (last is None or bottom or at - last_at >= VIEW_H
-               or any(c["id"] in cut and c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H for c in charts)
-               or _changed_beyond_scroll(last, Image.open(BytesIO(page.screenshot())).convert("RGB"), at - last_at))
+               or any(c["id"] in cut and c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H for c in charts))
+        if not due:
+            now = _shot(page)
+            if looping:
+                page.wait_for_timeout(LOOP_PAUSE_MS)
+            due = _changed_beyond_scroll(last, now, at - last_at, _shot(page) if looping else None)
         if due:
-            img, waited = _settled(page)
+            img, waited = _settled(page, LOOP_SETTLE_MS if looping else SETTLE_MAX_MS)
+            looping = looping or waited >= SETTLE_MAX_MS
             charts = page.evaluate(CHART_STATE)
             if last is None or not _same(img, last):
                 name = f"frames/{len(frames):02d}.jpg"
@@ -352,8 +370,7 @@ def capture(target: str, out: Path, proxy: str | None = None, data: list[Path] =
                     evidence["scroll_story"] = scroll_story(evidence["frames"])
                     evidence["text"] = _merge_letters(page.evaluate(PAGE_TEXT))
                     evidence["charts"] = page.evaluate(CHARTS)
-                    page.evaluate("window.scrollTo(0, 0)")
-                    page.evaluate(SCROLL_THROUGH, MAX_PAGE_H)
+                    page.evaluate("window.scrollTo(0, 0)")  # the walk already scrolled the whole page: lazy content is in
                     page.add_style_tag(content=FREEZE_CSS)
                     page.wait_for_timeout(200)
                     height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
