@@ -1,6 +1,6 @@
 """Score captured pages on the rubric's scored items, one call per group of items.
 
-    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 2.5,2.7,3.1,3.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 2.4,2.6,3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
