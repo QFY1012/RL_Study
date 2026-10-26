@@ -6,8 +6,16 @@
 A single full-page shot keeps one state of a page whose chart changes as you
 scroll, so the page is scrolled the way a reader scrolls it: small mouse-wheel
 steps, so scroll-triggered steps (scrollama, IntersectionObserver) fire one by
-one instead of being jumped over. A viewport frame is taken every FRAME_EVERY
-pixels once the screen has stopped changing, without freezing animations: a
+one instead of being jumped over. A viewport frame is taken every screen of
+scroll, and in between whenever something on screen changed other than by
+scrolling (a pinned chart moved to its next step, a chart animated in) or a
+chart the last frame cut at its bottom edge has come into view whole. The page
+is checked every CHECK_EVERY pixels: the screen is compared with the last frame
+moved up by the distance scrolled, and pixels that match neither the moved nor
+the unmoved last frame are a change; this works for charts drawn in any way.
+Half-screen frames, the old rule, showed every static part of a page twice and
+gave long originals 40-60 frames, more images than one judge request carries.
+A frame is taken once the screen has stopped changing, without freezing animations: a
 chart that animates in when it scrolls into view is taken in its final state
 (hype's dot chart moves for 6-18 s; at the old fixed 0.8 s its counters still
 read 4%, 1%, 0% and no player was labelled yet). An animation that never stops
@@ -55,10 +63,12 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, SCROLL_THROUGH, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-4"
+CAPTURE_VERSION = "capture-5"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
-FRAME_EVERY = 450  # px between frames, unless the page is too long for MAX_FRAMES
+CHECK_EVERY = 225  # px of scroll between checks for a change on screen
+CHECK_PAUSE_MS = 150  # wait after a scroll before checking, so scroll-triggered steps have started
+CHANGED_AREA = 0.005  # share of the screen that has to change, other than by scrolling, for an extra frame
 WHEEL_PX = 80  # one wheel tick
 WHEEL_PAUSE_MS = 40
 SETTLE_EVERY_MS = 250  # how often the screen is checked for motion
@@ -179,6 +189,22 @@ def _same(a: Image.Image, b: Image.Image) -> bool:
     return int((np.abs(np.asarray(a, int) - np.asarray(b, int)).max(axis=2) > CHANGED).sum()) <= SAME_PX
 
 
+def _changed_beyond_scroll(last: Image.Image, now: Image.Image, moved: int) -> bool:
+    """Something on screen changed other than by scrolling `moved` px down since `last`: a pixel counts if it
+    matches neither `last` moved up by that distance (content that scrolled) nor `last` where it was (content
+    pinned to the screen)."""
+    import numpy as np
+
+    a, b = np.asarray(last, int), np.asarray(now, int)
+    if moved >= len(a):
+        return True
+    shared = len(a) - moved
+    # shifted at full size, then every other pixel compared: halving first would misalign odd scroll distances
+    scrolled = np.abs(b[:shared:2, ::2] - a[moved::2, ::2]).max(axis=2) > CHANGED
+    pinned = np.abs(b[:shared:2, ::2] - a[:shared:2, ::2]).max(axis=2) > CHANGED
+    return int((scrolled & pinned).sum()) > CHANGED_AREA * scrolled.size * len(a) / shared
+
+
 def _settled(page) -> tuple[Image.Image, int]:
     """The screen once it has stopped changing, and how long that took (ms)."""
     from io import BytesIO
@@ -211,28 +237,40 @@ def _wheel_to(page, target: int) -> int:
 
 
 def _walk(page, out: Path) -> list[dict]:
-    """Viewport frames from top to bottom, with the charts on screen at each one."""
+    """Viewport frames from top to bottom, with the charts on screen at each one: one per screen of scroll, plus
+    one wherever the screen changed other than by scrolling or a chart cut by the last frame shows whole."""
+    from io import BytesIO
+
     frames_dir = out / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
     # the wheel needs the pointer over the page, but mid-screen it sits on every chart that scrolls past and
     # leaves hover tooltips in the frames (titletowns: "Notre Dame 13.8x" over text about LA); the judge ignores
     # interaction, so the pointer waits at the bottom-left edge
     page.mouse.move(2, VIEW_H - 2)
-    frames, last, target = [], None, 0
+    frames, last, last_at, target = [], None, 0, 0
+    seen_whole, cut = set(), set()  # chart ids shown whole by some frame; ids the last frame cut at its bottom
     while len(frames) < MAX_FRAMES:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
-        every = max(FRAME_EVERY, -(-height // MAX_FRAMES))
         at = _wheel_to(page, target)
-        img, waited = _settled(page)
+        page.wait_for_timeout(CHECK_PAUSE_MS)
+        bottom = at + VIEW_H >= height or at < target
         charts = page.evaluate(CHART_STATE)
-        if last is None or not _same(img, last):
-            name = f"frames/{len(frames):02d}.jpg"
-            img.save(out / name, "JPEG", quality=JPEG_QUALITY)
-            frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
-            last = img
-        if at + VIEW_H >= height or at < target:
+        due = (last is None or bottom or at - last_at >= VIEW_H
+               or any(c["id"] in cut and c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H for c in charts)
+               or _changed_beyond_scroll(last, Image.open(BytesIO(page.screenshot())).convert("RGB"), at - last_at))
+        if due:
+            img, waited = _settled(page)
+            charts = page.evaluate(CHART_STATE)
+            if last is None or not _same(img, last):
+                name = f"frames/{len(frames):02d}.jpg"
+                img.save(out / name, "JPEG", quality=JPEG_QUALITY)
+                frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
+            last, last_at = img, at
+            seen_whole |= {c["id"] for c in charts if c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H}
+            cut = {c["id"] for c in charts if c["top"] + c["h"] > VIEW_H and c["h"] <= VIEW_H} - seen_whole
+        if bottom:
             break  # reached the bottom, or the page would not scroll further
-        target = at + every
+        target = at + CHECK_EVERY
     return frames
 
 
