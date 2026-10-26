@@ -9,9 +9,12 @@ see TASK.md) made from `data`, the files and folders its writer found in data/:
 2. trust (1.x, trust.py): renders, refs hold, data accurate. Any violated item
    makes the score 0 and the page is not judged further: a page that misstates
    its data is not a better page for being clear or pretty.
-3. expression (2.x) and aesthetics (3.x): one judge call each (judge.py).
+3. expression (2.x) and aesthetics (3.x): 2.2 argument and 2.3 narrative from
+   the page's prose, one call each (article.py); the rest from the screenshots,
+   one judge call per dimension (judge.py).
 4. the score: the mean of the scored items, equal weights until weights are
-   fitted on whole-page labels.
+   fitted on whole-page labels, except that 2.2 and 2.3 count as one item
+   between them (WEIGHT): together they say how the article is told.
 
 A check that gives no usable answer (1.3 without parseable JSON, a judge call
 that leaves an item without a score) is asked again, up to TRIES times in all;
@@ -19,8 +22,8 @@ the tries are kept, so a restart does not ask a hopeless page again. A page whos
 checks are still missing an answer is `complete: false`: its score covers only
 what was answered, and callers that compare pages (TF-GRPO) leave it out.
 
-Everything is kept in <out>: evidence/, trust.json, judgements.json and
-result.json, and reused when present, so a restart or a repeated request costs
+Everything is kept in <out>: evidence/, trust.json, judgements.json,
+article.json and result.json, and reused when present, so a restart or a repeated request costs
 nothing. The result's feedback lines (every trust problem, every item's score and
 reason, the page's scroll facts) are what GEPA reflects on.
 
@@ -39,6 +42,7 @@ from contextlib import nullcontext
 from pathlib import Path
 from statistics import mean
 
+from . import article as A
 from . import judge as J
 from . import trust as T
 from .capture import capture
@@ -49,6 +53,7 @@ ROOT = Path(__file__).resolve().parents[2]
 TASKS = ROOT / "out" / "tasks"
 MODEL = "deepseek-v4.1-flash"  # GEPA's and TF-GRPO's judge, so benchmark scores compare with their runs
 TRIES = 3
+WEIGHT = {"2.2": 0.5, "2.3": 0.5}  # argument and narrative are halves of one item; every other item weighs 1
 
 
 def _read(path: Path, default):
@@ -76,7 +81,7 @@ def _judge(ev: Path, out: Path, model: str) -> dict:
     path = out / "judgements.json"
     items = _read(path, {})
     tries = items.setdefault("tries", {})
-    scored = [it for it in load().values() if it.scored]
+    scored = [it for it in load().values() if it.scored and not it.prose_only]
     for dim in ([it for it in scored if it.id.startswith(d)] for d in ("2.", "3.")):
         name = dim[0].id[0] + ".x"
         while tries.get(name, 0) < TRIES and not all(items.get(it.id, {}).get("score") is not None for it in dim):
@@ -87,6 +92,23 @@ def _judge(ev: Path, out: Path, model: str) -> dict:
                 raise
             except Exception as e:  # noqa: BLE001 - asked again; still missing, the page is incomplete
                 print(f"[judge] {out.name} {name}: FAILED {str(e)[:200]}", flush=True)
+            _write(path, items)
+    return items
+
+
+def _article(ev: Path, out: Path, model: str) -> dict:
+    path = out / "article.json"
+    items = _read(path, {})
+    tries = items.setdefault("tries", {})
+    for it in (it for it in load().values() if it.prose_only):
+        while tries.get(it.id, 0) < TRIES and items.get(it.id, {}).get("score") is None:
+            tries[it.id] = tries.get(it.id, 0) + 1
+            try:
+                items[it.id] = A.judge(it.id, ev, model)
+            except OutOfCredit:
+                raise
+            except Exception as e:  # noqa: BLE001 - asked again; still missing, the page is incomplete
+                print(f"[article] {out.name} {it.id}: FAILED {str(e)[:200]}", flush=True)
             _write(path, items)
     return items
 
@@ -108,7 +130,7 @@ def score_page(page: Path, data: list[Path], out: Path, model: str = MODEL, brow
         result = {"score": 0.0, "vetoed": trust["vetoed"], "parts": {}, "complete": True,
                   "summary": "vetoed by " + ",".join(trust["vetoed"])}
     else:
-        items = _judge(ev, out, model)
+        items = {**_judge(ev, out, model), **_article(ev, out, model)}
         parts = {k: items[k]["score"] for k in rubric if items.get(k, {}).get("score") is not None}
         for k, it in rubric.items():
             if k in parts:
@@ -116,7 +138,9 @@ def score_page(page: Path, data: list[Path], out: Path, model: str = MODEL, brow
                 feedback.append(f"{k} {it.name}:{parts[k]:.2f}。{r.get('where') or ''} {r.get('reason') or ''}".strip())
         missing = [k for k in rubric if k not in parts]
         unchecked = trust["items"].get("1.3", {}).get("violated") is None
-        result = {"score": mean(parts.values()) if parts else 0.0, "vetoed": [], "parts": parts,
+        weights = {k: WEIGHT.get(k, 1.0) for k in parts}
+        result = {"score": sum(v * weights[k] for k, v in parts.items()) / sum(weights.values()) if parts else 0.0,
+                  "vetoed": [], "parts": parts,
                   "complete": not missing and not unchecked,
                   "summary": " ".join(f"{k}={v:.2f}" for k, v in parts.items())
                              + (f"  unjudged {','.join(missing)}" if missing else "") + ("  1.3 unchecked" if unchecked else "")}

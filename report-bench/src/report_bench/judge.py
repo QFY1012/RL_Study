@@ -1,13 +1,14 @@
 """Score captured pages on the rubric's scored items, one call per group of items.
 
-    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 2.2,2.3,3.1,3.2 [--per-item] [--out runs/judge]
+    PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_bench.judge page <evidence_dir>... --items 2.5,2.7,3.1,3.2 [--per-item] [--out runs/judge]
 
 An evidence directory is what capture.py writes. The judge gets the scroll
 frames, the thumbnail, the page text in page order and the scroll story (which
 charts stay pinned while the page scrolls and how many states they show).
 
 Trust (1.x) is not judged here: it is decided by code and one text call against
-the data (trust.py). The two scored dimensions are two groups, each judged in
+the data (trust.py). Nor are 2.2 argument and 2.3 narrative, which are read from
+the page's prose alone (article.py). The two scored dimensions are two groups, each judged in
 one call, the way MiMo's evaluation rubric returns its seven dimensions from one
 vision call (recipes/design, webdev/eval_rubric.py, "各维独立判断"):
 - expression (2.x) is scored 0-1, each item with its own five band
@@ -239,8 +240,8 @@ def _item_block(it: Item, with_bands: bool) -> str:
 
 def page_group(items: list[Item], ev_dir: Path, model: str = JUDGE_MODEL) -> tuple[dict, dict[str, dict]]:
     """One call for a group of scored items on one page. Returns the shared answer and one record per item."""
-    if not all(it.scored for it in items):
-        raise ValueError("only scored items are judged; trust is trust.py")
+    if not all(it.banded and not it.prose_only for it in items):
+        raise ValueError("judge.py scores the screenshot items; trust is trust.py, the prose items article.py")
     blocks = "\n\n".join(_item_block(it, True) for it in items)
     shape = '{"score": 0.0, "where": "第几帧/哪一节/哪张图", "reason": "扣分的理由"}'
     keys = ", ".join(f'"{it.id}": {shape}' for it in items)
@@ -327,8 +328,9 @@ def main():
     args = ap.parse_args()
     rubric = load()
     items = [rubric[i] for i in args.items.split(",")]
-    if unscored := [it.id for it in items if not it.scored]:
-        raise SystemExit(f"not scored items: {', '.join(unscored)}; trust is checked by report_bench.trust")
+    if unscored := [it.id for it in items if not it.banded or it.prose_only]:
+        raise SystemExit(f"not screenshot items: {', '.join(unscored)}; trust is checked by report_bench.trust, "
+                         "the prose items by report_bench.article")
     groups = _groups(items, args.per_item)
 
     jobs = []
