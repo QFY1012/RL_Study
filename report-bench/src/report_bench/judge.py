@@ -53,7 +53,6 @@ from .rubric import Item, load, rubric_hash
 EVIDENCE = Path(__file__).resolve().parents[3] / "report-gepa" / "runs" / "evidence"  # where the worked examples' pages are
 
 JUDGE_MODEL = "glm-5.3-flash"
-MAX_FRAMES = 40  # per page in one call; longer pages are sampled evenly
 MAX_TEXT = 15000  # characters of page text per page
 MAX_TOKENS = 32768
 
@@ -123,11 +122,13 @@ def _story(ev: dict) -> str:
     return "\n".join(lines) or "没有图在滚动时固定在屏幕上，也没有图随滚动改变。"
 
 
-def evidence_parts(ev_dir: Path, label: str, max_frames: int = MAX_FRAMES) -> list[dict]:
+def evidence_parts(ev_dir: Path, label: str, max_frames: int | None = None) -> list[dict]:
+    """The page as the judge gets it: every frame the capture took. `max_frames` samples them evenly, for callers
+    that put several pages in one request (TF-GRPO's summaries); a page judged on its own gets all of them."""
     ev = json.loads((ev_dir / "evidence.json").read_text(encoding="utf-8"))
     frames = ev["frames"]
     keep = list(range(len(frames)))
-    if len(keep) > max_frames:
+    if max_frames and len(keep) > max_frames:
         keep = sorted({round(i * (len(frames) - 1) / (max_frames - 1)) for i in range(max_frames)})
     text_lines, used = [], 0
     for t in ev["text"]:
