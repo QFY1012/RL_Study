@@ -10,7 +10,7 @@ one instead of being jumped over. A viewport frame is taken every FRAME_EVERY
 pixels, half a screen, so every part of the page is seen in two frames, the way
 a reader scrolling past sees it, and words and the chart they sit next to share
 a frame. Other rules were tried and dropped: one frame per screen, with extra
-frames where the screen changed or something was pinned, lost 2.8 its split
+frames where the screen changed or something was pinned, lost 2.7 text-chart linking its split
 between originals and guide pages (0.76/0.68 became 0.70/0.74 on 15 pairs) and
 made the score depend on where the frames happened to cut.
 A frame is taken once the screen has stopped changing, without freezing animations: a
