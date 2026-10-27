@@ -6,34 +6,20 @@
 A single full-page shot keeps one state of a page whose chart changes as you
 scroll, so the page is scrolled the way a reader scrolls it: small mouse-wheel
 steps, so scroll-triggered steps (scrollama, IntersectionObserver) fire one by
-one instead of being jumped over. A viewport frame is taken every screen of
-scroll, and in between whenever something on screen changed other than by
-scrolling (a pinned chart moved to its next step, a chart animated in) or a
-chart the last frame cut at its bottom edge has come into view whole. The page
-is checked every CHECK_EVERY pixels: the screen is compared with the last frame
-moved up by the distance scrolled, and pixels that match neither the moved nor
-the unmoved last frame are a change; this works for charts drawn in any way.
-Pixels that match the unmoved last frame but not the moved one stayed put while
-the page scrolled. Something is pinned when a chart from CHART_STATE (svg or
-canvas) keeps its place on screen while the page scrolls, or, for charts built
-otherwise, when such pixels cover PINNED_AREA of the screen; there frames are
-taken every half screen, so each step of a scrolling story's text is seen next
-to the chart it runs over. Area alone does not tell them apart: rain's pinned
-chart kept 11% of the screen still, its sticky page furniture 10% everywhere.
-Half-screen frames everywhere, the old rule, showed every static part of a page
-twice and gave long originals 40-60 frames, more images than one judge request
-carries; whole-screen frames everywhere lost 2.8 its split between originals
-and guide pages (0.76/0.68 became 0.70/0.74 on 15 pairs): in scrolling stories
-the frame showed the next step's text before its chart had changed.
+one instead of being jumped over. A viewport frame is taken every FRAME_EVERY
+pixels, half a screen, so every part of the page is seen in two frames, the way
+a reader scrolling past sees it, and words and the chart they sit next to share
+a frame. Other rules were tried and dropped: one frame per screen, with extra
+frames where the screen changed or something was pinned, lost 2.8 its split
+between originals and guide pages (0.76/0.68 became 0.70/0.74 on 15 pairs) and
+made the score depend on where the frames happened to cut.
 A frame is taken once the screen has stopped changing, without freezing animations: a
 chart that animates in when it scrolls into view is taken in its final state
 (hype's dot chart moves for 6-18 s; at the old fixed 0.8 s its counters still
 read 4%, 1%, 0% and no player was labelled yet). An animation that never stops
 is taken after SETTLE_MAX_MS; once one has, the page is known to animate on its
-own, so later frames wait at most LOOP_SETTLE_MS, and pixels that change while
-the page stands still are left out of the check for changes (cetaceans waited
-the full 20 s at 17 of 38 frames and was checked into extra frames by its own
-animation). A frame that looks the same as the one before it is dropped.
+own and later frames wait at most LOOP_SETTLE_MS (cetaceans waited the full 20 s
+at 17 of its frames). A frame that looks the same as the one before it is dropped.
 
 At every frame the charts on screen are recorded with their screen position and
 a fingerprint of their content. From these the capture works out the scroll
@@ -77,20 +63,16 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-7"
+CAPTURE_VERSION = "capture-8"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
-CHECK_EVERY = 225  # px of scroll between checks for a change on screen
-CHECK_PAUSE_MS = 50  # wait after a scroll before checking, so scroll-triggered steps have started
-CHANGED_AREA = 0.005  # share of the screen that has to change, other than by scrolling, for an extra frame
-PINNED_AREA = 0.2  # share of the screen that stays put while the page scrolls, for half-screen frames
+FRAME_EVERY = 450  # px between frames, unless the page is too long for MAX_FRAMES
 WHEEL_PX = 80  # one wheel tick
 WHEEL_PAUSE_MS = 40
 SETTLE_EVERY_MS = 250  # how often the screen is checked for motion
 SETTLE_STILL = 4  # checks in a row without change before a frame is taken
 SETTLE_MAX_MS = 20000  # an animation that loops is taken after this
 LOOP_SETTLE_MS = 3000  # the longest wait on a page that has shown an animation that never stops
-LOOP_PAUSE_MS = 250  # between two shots at one place, to see what moves by itself
 CHANGED = 30  # a pixel has changed if one of its channels moved by more than this (0-255)
 SAME_PX = 20  # two screens with at most this many changed pixels are the same
 PINNED_PX = 4  # a chart whose screen position moves less than this while the page scrolls is pinned
@@ -207,30 +189,6 @@ def _same(a: Image.Image, b: Image.Image) -> bool:
     return 4 * int((np.abs(np.asarray(a, int)[::2, ::2] - np.asarray(b, int)[::2, ::2]).max(axis=2) > CHANGED).sum()) <= SAME_PX
 
 
-def _screen_change(last: Image.Image, now: Image.Image, moved: int, again: Image.Image | None = None) -> tuple[bool, bool]:
-    """How the screen moved over `moved` px of scroll since `last`. A pixel that matches neither `last` moved up by
-    that distance (content that scrolled) nor `last` where it was (content pinned to the screen) changed; a pixel
-    that matches `last` where it was but not moved up stayed put while the page scrolled. Returns whether enough
-    changed for a frame (CHANGED_AREA) and whether enough stayed put for something to be pinned on screen
-    (PINNED_AREA), the way a scrolling story pins its chart while the text runs over it. `again` is a second shot
-    of `now` a moment later; pixels that differ between the two move by themselves and count as neither."""
-    import numpy as np
-
-    a, b = np.asarray(last, int), np.asarray(now, int)
-    if moved >= len(a):
-        return True, False
-    shared = len(a) - moved
-    # shifted at full size, then every other pixel compared: halving first would misalign odd scroll distances
-    off_scrolled = np.abs(b[:shared:2, ::2] - a[moved::2, ::2]).max(axis=2) > CHANGED
-    off_place = np.abs(b[:shared:2, ::2] - a[:shared:2, ::2]).max(axis=2) > CHANGED
-    changed, stayed = off_scrolled & off_place, off_scrolled & ~off_place
-    if again is not None:
-        still = np.abs(np.asarray(again, int)[:shared:2, ::2] - b[:shared:2, ::2]).max(axis=2) <= CHANGED
-        changed, stayed = changed & still, stayed & still
-    screen = off_scrolled.size * len(a) / shared
-    return int(changed.sum()) > CHANGED_AREA * screen, int(stayed.sum()) > PINNED_AREA * screen
-
-
 def _shot(page) -> Image.Image:
     from io import BytesIO
 
@@ -267,47 +225,29 @@ def _wheel_to(page, target: int) -> int:
 
 
 def _walk(page, out: Path) -> list[dict]:
-    """Viewport frames from top to bottom, with the charts on screen at each one: one per screen of scroll, one
-    per half screen while something is pinned on screen (text running over a pinned chart, where what matters is
-    which words sit next to which state of the chart), plus one wherever the screen changed other than by
-    scrolling or a chart cut by the last frame shows whole."""
+    """Viewport frames from top to bottom, with the charts on screen at each one."""
     frames_dir = out / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
     # the wheel needs the pointer over the page, but mid-screen it sits on every chart that scrolls past and
     # leaves hover tooltips in the frames (titletowns: "Notre Dame 13.8x" over text about LA); the judge ignores
     # interaction, so the pointer waits at the bottom-left edge
     page.mouse.move(2, VIEW_H - 2)
-    frames, last, last_at, last_charts, target, looping = [], None, 0, [], 0, False
-    seen_whole, cut = set(), set()  # chart ids shown whole by some frame; ids the last frame cut at its bottom
+    frames, last, target, looping = [], None, 0, False
     while len(frames) < MAX_FRAMES:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
+        every = max(FRAME_EVERY, -(-height // MAX_FRAMES))
         at = _wheel_to(page, target)
-        page.wait_for_timeout(CHECK_PAUSE_MS)
-        bottom = at + VIEW_H >= height or at < target
+        img, waited = _settled(page, LOOP_SETTLE_MS if looping else SETTLE_MAX_MS)
+        looping = looping or waited >= SETTLE_MAX_MS
         charts = page.evaluate(CHART_STATE)
-        due = last is None or bottom or any(c["id"] in cut and c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H for c in charts)
-        if not due:
-            now = _shot(page)
-            if looping:
-                page.wait_for_timeout(LOOP_PAUSE_MS)
-            changed, pinned = _screen_change(last, now, at - last_at, _shot(page) if looping else None)
-            tops = {c["id"]: c["top"] for c in last_charts}
-            pinned = pinned or any(c["id"] in tops and abs(c["top"] - tops[c["id"]]) < PINNED_PX for c in charts)
-            due = changed or at - last_at >= (VIEW_H // 2 if pinned else VIEW_H)
-        if due:
-            img, waited = _settled(page, LOOP_SETTLE_MS if looping else SETTLE_MAX_MS)
-            looping = looping or waited >= SETTLE_MAX_MS
-            charts = page.evaluate(CHART_STATE)
-            if last is None or not _same(img, last):
-                name = f"frames/{len(frames):02d}.jpg"
-                img.save(out / name, "JPEG", quality=JPEG_QUALITY)
-                frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
-            last, last_at, last_charts = img, at, charts
-            seen_whole |= {c["id"] for c in charts if c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H}
-            cut = {c["id"] for c in charts if c["top"] + c["h"] > VIEW_H and c["h"] <= VIEW_H} - seen_whole
-        if bottom:
+        if last is None or not _same(img, last):
+            name = f"frames/{len(frames):02d}.jpg"
+            img.save(out / name, "JPEG", quality=JPEG_QUALITY)
+            frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
+            last = img
+        if at + VIEW_H >= height or at < target:
             break  # reached the bottom, or the page would not scroll further
-        target = at + CHECK_EVERY
+        target = at + every
     return frames
 
 
