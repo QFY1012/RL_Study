@@ -14,9 +14,12 @@ is checked every CHECK_EVERY pixels: the screen is compared with the last frame
 moved up by the distance scrolled, and pixels that match neither the moved nor
 the unmoved last frame are a change; this works for charts drawn in any way.
 Pixels that match the unmoved last frame but not the moved one stayed put while
-the page scrolled; when they cover PINNED_AREA of the screen something is pinned
-(a scrolling story's chart with its text running over it) and frames are taken
-every half screen there, so each step of the text is seen next to the chart.
+the page scrolled. Something is pinned when a chart from CHART_STATE (svg or
+canvas) keeps its place on screen while the page scrolls, or, for charts built
+otherwise, when such pixels cover PINNED_AREA of the screen; there frames are
+taken every half screen, so each step of a scrolling story's text is seen next
+to the chart it runs over. Area alone does not tell them apart: rain's pinned
+chart kept 11% of the screen still, its sticky page furniture 10% everywhere.
 Half-screen frames everywhere, the old rule, showed every static part of a page
 twice and gave long originals 40-60 frames, more images than one judge request
 carries; whole-screen frames everywhere lost 2.8 its split between originals
@@ -74,7 +77,7 @@ from playwright.sync_api import sync_playwright
 
 from .render import CHROMIUM, FREEZE_CSS, VIEW_H, VIEW_W, _serve, inline_script_syntax_errors
 
-CAPTURE_VERSION = "capture-6"
+CAPTURE_VERSION = "capture-7"
 MAX_PAGE_H = 30000
 MAX_FRAMES = 60
 CHECK_EVERY = 225  # px of scroll between checks for a change on screen
@@ -274,7 +277,7 @@ def _walk(page, out: Path) -> list[dict]:
     # leaves hover tooltips in the frames (titletowns: "Notre Dame 13.8x" over text about LA); the judge ignores
     # interaction, so the pointer waits at the bottom-left edge
     page.mouse.move(2, VIEW_H - 2)
-    frames, last, last_at, target, looping = [], None, 0, 0, False
+    frames, last, last_at, last_charts, target, looping = [], None, 0, [], 0, False
     seen_whole, cut = set(), set()  # chart ids shown whole by some frame; ids the last frame cut at its bottom
     while len(frames) < MAX_FRAMES:
         height = min(page.evaluate("document.documentElement.scrollHeight"), MAX_PAGE_H)
@@ -288,6 +291,8 @@ def _walk(page, out: Path) -> list[dict]:
             if looping:
                 page.wait_for_timeout(LOOP_PAUSE_MS)
             changed, pinned = _screen_change(last, now, at - last_at, _shot(page) if looping else None)
+            tops = {c["id"]: c["top"] for c in last_charts}
+            pinned = pinned or any(c["id"] in tops and abs(c["top"] - tops[c["id"]]) < PINNED_PX for c in charts)
             due = changed or at - last_at >= (VIEW_H // 2 if pinned else VIEW_H)
         if due:
             img, waited = _settled(page, LOOP_SETTLE_MS if looping else SETTLE_MAX_MS)
@@ -297,7 +302,7 @@ def _walk(page, out: Path) -> list[dict]:
                 name = f"frames/{len(frames):02d}.jpg"
                 img.save(out / name, "JPEG", quality=JPEG_QUALITY)
                 frames.append({"file": name, "scroll_y": at, "settle_ms": waited, "charts": charts})
-            last, last_at = img, at
+            last, last_at, last_charts = img, at, charts
             seen_whole |= {c["id"] for c in charts if c["top"] >= 0 and c["top"] + c["h"] <= VIEW_H}
             cut = {c["id"] for c in charts if c["top"] + c["h"] > VIEW_H and c["h"] <= VIEW_H} - seen_whole
         if bottom:
