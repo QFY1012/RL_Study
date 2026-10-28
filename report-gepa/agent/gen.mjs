@@ -1,13 +1,14 @@
 // Run a pi agent in a workspace: write a report page, fix one, or check one.
 //
-//   LLM_API_KEY=... LLM_BASE_URL=... node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]
+//   LLM_API_KEY=... LLM_BASE_URL=... [WEB_TOOLS=1] node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]
 //
 // <workspace>/data/ holds the report's files. The guide is the system prompt and
 // the task file is the user message (generate.py: the benchmark task plus how to
 // use pageshot; repair.py: fix a page in place), so the data reaches the model
 // only through the read and bash tools. The agent writes <workspace>/<output>,
 // index.html unless given, and is asked once more if it has not. read / write / edit are limited to the workspace and
-// bash runs in sandbox.sh. Prints one line per tool call, then one JSON line
+// bash runs in sandbox.sh. WEB_TOOLS=1 adds web_fetch and web_view (web.mjs), which reach the network
+// from here (originals.py: reading a published story). Prints one line per tool call, then one JSON line
 // starting with "RESULT " that generate.py parses.
 import fs from "node:fs"
 import path from "node:path"
@@ -16,6 +17,7 @@ import {
   AuthStorage, createAgentSession, createExtensionRuntime, ModelRegistry, SessionManager, SettingsManager,
   createBashToolDefinition, createEditToolDefinition, createReadToolDefinition, createWriteToolDefinition,
 } from "@mariozechner/pi-coding-agent"
+import { webTools } from "./web.mjs"
 
 const SANDBOX = path.join(import.meta.dirname, "sandbox.sh")
 // pi asks for at most 32000 output tokens per step by default; a Pudding-style
@@ -81,7 +83,8 @@ const { session } = await createAgentSession({
   modelRegistry: ModelRegistry.inMemory(auth),
   resourceLoader: loader,
   noTools: "builtin",
-  customTools: [fence(createReadToolDefinition(ws)), fence(createWriteToolDefinition(ws)), fence(createEditToolDefinition(ws)), bash],
+  customTools: [fence(createReadToolDefinition(ws)), fence(createWriteToolDefinition(ws)), fence(createEditToolDefinition(ws)), bash,
+    ...(process.env.WEB_TOOLS ? webTools : [])],
   sessionManager: SessionManager.create(ws, priv),
   // A request that gets no response within 5 min is retried; a long streamed reply is not cut.
   // 30 s was too short once a session held a few dozen screenshots: the relay took longer than that to start
@@ -123,7 +126,7 @@ session.subscribe((e) => {
   }
   if (e.type === "tool_execution_start") {
     tools += 1
-    console.log(`${name}: ${e.toolName} ${String(e.args?.path ?? e.args?.command ?? "").replace(/\s+/g, " ").slice(0, 100)}`)
+    console.log(`${name}: ${e.toolName} ${String(e.args?.path ?? e.args?.command ?? e.args?.url ?? "").replace(/\s+/g, " ").slice(0, 100)}`)
   } else if (e.type === "message_end" && e.message.role === "assistant" && e.message.errorMessage) {
     console.log(`${name}: error ${e.message.errorMessage.slice(0, 200)}`)
   }
