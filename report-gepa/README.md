@@ -134,6 +134,14 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingrepo p
 
 大多数文章在构建时把数据打包进 JS,页面不加载数据文件,`puddingweb` 拿不到;原始数据常在 the-pudding 下这篇文章自己的仓库里(`src/data/`、`static/assets/`……)。`clone` 对 `data/pudding-web` 没收的每一篇,找名字和网址末段相同(或把 `-` 换成 `_`)的公开仓库,再加上 `OTHER` 里写明的、文章页面链接到的数据仓库(pop-love-songs、lenna-data、sxywu/hamilton、googletrends/asne、googletrends/google_nba、nextml/caption-contest-data),浅克隆、不取 LFS,每篇一行记在 `repos.jsonl`(2026-10-24:85 篇里 55 篇有仓库,9.2 GB)。`pack` 收 node_modules、.git 以外的 csv/tsv 和记录结构的 json(同 `puddingweb`;和 csv 重复时留 csv),不要模板自带的占位文件(test.csv、sample.csv、demo 目录);和 `data/pudding`、`data/pudding-web` 或前面文件内容相同的去掉(构建复制到 `docs/`、`public/` 的那份),留篇的规则同 `puddingweb`。结果 32 篇,在 `data/pudding-repo/<篇>/` 和 `manifest.jsonl`(多一个 `repos` 字段)。
 
+## Pudding 原文 vs 生成页(`src/report_gepa/pairs.py`)
+
+```sh
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.pairs runs/pairs --capture-missing | tee runs/pairs.log
+```
+
+把 `data/pudding` 每篇的 Pudding 原文和所有用它的数据生成的页面放到一起:`runs/pairs/<篇>/original/`(网址、`runs/pudding-originals` 的整页长图、滚动截屏),`runs/pairs/<篇>/pages/<页>/`(`index.html`、有的话滚动截屏,以及判它的记录:GEPA 式的 `result.json`/`judgements.json`、TF-GRPO 的 `reward.json`、`runs/judge` 各轮的逐条记录)。生成页来自 `runs/pudding-pages` 的各版本、所有 GEPA 式的 run(report-gepa 的 `runs/*/rollouts`、`runs/gepa/*/rollouts`,report-tfgrpo 的 `runs/*/val/rollouts`)和 TF-GRPO 每一步的组;写它用的提示词在 `runs/pairs/guides/`。`pairs.jsonl` 一行一个生成页(来源、提示词、分数、`labels/round1` 里原文对 pudding-ds-1 的人工标注),`stories.jsonl` 一行一篇。`--capture-missing` 先给还没滚动截屏的原文截屏(存进 `runs/evidence/<篇>/original/`,只用浏览器)。2026-10-28:56 篇,576 个生成页,20 条人工标注,约 1 GB。
+
 ## judge
 
 评测代码和 rubric 在 `report-bench`(`capture.py`、`judge.py`、`factcheck.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
