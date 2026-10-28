@@ -47,7 +47,7 @@ The files: {files}
 Write down the story's findings that this data reproduces.
 
 1. Read the story on the web. web_fetch returns the page as the server sends it. web_view opens it in a browser and scrolls it like a reader, so it also gets text drawn by scripts, chart labels and the text of scrolling steps: use it when web_fetch returns little of the story, and to read what the charts label. Follow links to the story's methods or data notes when they say how a number was computed.
-2. List every finding the authors draw from data: each number, comparison, ranking, share, trend or pattern the text states or a chart labels. A description of the data itself is not a finding: how many records, people, items, categories or sources it has, and how it was collected.
+2. List every finding the authors draw from data: each number, comparison, ranking, share, trend or pattern the text states or a chart labels. A description of the data itself is not a finding: how many records, people, items, categories or sources it has, and how it was collected. When a chart states the same thing for each of its items (the top three for each phrase, the share for each year), that is one finding, written as one fact whose code computes it for every item at once.
 3. Write each finding the files in data/ can reproduce as a fact in `facts.json`:
 
 ```json
@@ -108,6 +108,9 @@ def extract(task_id: str, out_dir: Path, model: str, effort: str = "high") -> di
     problems, facts, results = run_facts(ws / "facts.json", data)
     record["facts"] = len(facts)
     record["problems"] = problems
+    if not facts and not problems:  # the story states nothing this data reproduces
+        record["dropped"], record["answer"] = [], 0
+        (ws / "answer.json").write_text("[]", encoding="utf-8")
     if facts and not problems:
         check = claims_hold(facts, results, model)
         record["wrong"] = check["wrong"]

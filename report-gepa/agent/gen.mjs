@@ -31,7 +31,7 @@ const MAX_STEPS = 170
 const WRAP_UP = `已经用了 ${WRAP_UP_STEPS} 步，到上限了。不要再截图检查或继续打磨，确认结果已经写好就结束。`
 
 const [wsArg, guidePath, modelId, effort, taskPath, output = "index.html"] = process.argv.slice(2)
-const NUDGE = `工作目录里还没有 ${output}。请把结果写到 ${output}。`
+const NUDGE = `工作目录里还没有 ${output}。现在就把已经做好的部分写进 ${output},写完就结束，不要再检查或修改。`
 const MAX_NUDGES = 3
 if (!wsArg || !guidePath || !modelId || !effort || !taskPath) {
   console.error("usage: node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]")
