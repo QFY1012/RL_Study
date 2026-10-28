@@ -82,6 +82,12 @@ def _norm(s: str) -> str:
     return re.sub(r"[\W_]+", " ", s.replace("\u2019", "'")).lower().strip()
 
 
+def quoted(source: str, read: str) -> bool:
+    """Whether every part of a quote is in what was read; parts joined by an ellipsis may sit apart, as chart labels do."""
+    parts = [_norm(x) for x in re.split(r"\.\.\.|\u2026", source)]
+    return bool(any(parts)) and all(x in read for x in parts if x)
+
+
 def read_on_web(session: Path) -> str:
     """Everything the agent's web tools returned, normalised for looking quotes up."""
     text = []
@@ -120,7 +126,7 @@ def extract(task_id: str, out_dir: Path, model: str, effort: str = "high") -> di
             wrong = {v["id"] for v in check["wrong"]}
             dropped = [{"id": f["id"], "why": "claim does not agree with its printout"} for f in facts if f["id"] in wrong]
             dropped += [{"id": f["id"], "why": "source not in the story as read"} for f in facts
-                        if f["id"] not in wrong and _norm(str(f.get("source", ""))) not in read]
+                        if f["id"] not in wrong and not quoted(str(f.get("source", "")), read)]
             gone = {d["id"] for d in dropped}
             answer = [f for f in facts if f["id"] not in gone]
             record["dropped"] = dropped
