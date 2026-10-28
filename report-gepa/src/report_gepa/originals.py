@@ -53,16 +53,16 @@ Write down the story's findings that this data reproduces.
 ```json
 [{{"id": "women-front-shorter",
   "source": "On average, the pockets in women's jeans are 48% shorter and 6.5% narrower than men's pockets.",
-  "claim": "Women's front pockets are 48% shorter than men's on average: mean maximum front height 14.3 against 23.1.",
+  "claim": "Women's front pockets average 14.3 cm of maximum height against 23.1 cm for men.",
   "tables": {{"m": "data/measurements.csv"}},
   "code": "m.groupby('menWomen').maxHeightFront.mean()"}}]
 ```
 
 - `id`: unique in the file, a few meaningful words.
 - `source`: the story's own words for this finding, quoted exactly, from its text or a chart label.
-- `claim`: the finding in one sentence, with the numbers the code prints.
+- `claim`: the finding in one sentence, with the numbers the code prints, and nothing the printout does not show: the story's own wording and numbers belong in `source`, not in the claim.
 - `tables`: the files the code reads, each a variable name and the file's path from this folder, such as `data/orders.csv`; every file is read with `pd.read_csv(path)`.
-- `code`: one Python expression over those variables, with `pd` (pandas) and `np` (numpy) available.
+- `code`: one Python expression over those variables, with `pd` (pandas) and `np` (numpy) available: the plain pandas computation whose printout shows the finding, such as a filter, a group-by, a count, a share or a sort. Do not assemble the result into a hand-made Series or dict.
 
 Evaluate every fact from this folder the way it will be checked: read its `tables` with `pd.read_csv`, evaluate its `code`, print the value the way pandas prints it, and read the printout against the claim and the source. Every number, name and comparison in the claim must be in the printout, computed from the tables: code that writes a number itself, such as a string or a Series of typed-in values, does not count. The printout must agree with the story's numbers, up to rounding; filters and definitions may follow the story's methods. If after a fair try the data does not give the story's number (it needs other data, a different period, or the numbers differ beyond rounding), leave the finding out of facts.json.
 
