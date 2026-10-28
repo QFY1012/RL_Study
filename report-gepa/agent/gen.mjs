@@ -139,6 +139,8 @@ let nudged = 0
 while (!fs.existsSync(path.join(ws, output)) && nudged < MAX_NUDGES && steps < MAX_STEPS) {
   nudged += 1
   console.log(`${name}: nudge ${nudged}`)
+  // answering every nudge with reasoning only happened too (apology, 2026-10-28): the last one goes without it
+  if (nudged === MAX_NUDGES) session.setThinkingLevel("off")
   await session.prompt(NUDGE)
 }
 const assistant = session.messages.filter((m) => m.role === "assistant")
