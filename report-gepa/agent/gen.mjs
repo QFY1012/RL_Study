@@ -145,8 +145,10 @@ while (!fs.existsSync(path.join(ws, output)) && nudged < MAX_NUDGES && steps < M
 }
 const assistant = session.messages.filter((m) => m.role === "assistant")
 const usage = assistant.reduce((u, m) => ({ input: u.input + (m.usage?.input ?? 0), output: u.output + (m.usage?.output ?? 0) }), { input: 0, output: 0 })
-if (session.sessionFile && fs.existsSync(session.sessionFile)) fs.renameSync(session.sessionFile, path.join(ws, "session.jsonl"))
+// dispose first: the session file may still be being written, and a file moved mid-write was read with a cut-off line
+const sessionFile = session.sessionFile
 session.dispose()
+if (sessionFile && fs.existsSync(sessionFile)) fs.renameSync(sessionFile, path.join(ws, "session.jsonl"))
 fs.rmSync(priv, { recursive: true, force: true })
 console.log("RESULT " + JSON.stringify({
   model: model.id, effort, seconds: Math.round((Date.now() - t0) / 1000), steps: assistant.length, tools, nudged, usage,

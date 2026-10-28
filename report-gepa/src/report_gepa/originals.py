@@ -92,7 +92,10 @@ def read_on_web(session: Path) -> str:
     """Everything the agent's web tools returned, normalised for looking quotes up."""
     text = []
     for line in session.read_text(encoding="utf-8").splitlines():
-        m = json.loads(line).get("message", {})
+        try:
+            m = json.loads(line).get("message", {})
+        except json.JSONDecodeError:  # a line cut off while the file was written
+            continue
         if m.get("role") == "toolResult" and m.get("toolName") in ("web_fetch", "web_view"):
             text += [c.get("text", "") for c in m.get("content", []) if c.get("type") == "text"]
     return _norm(" ".join(text))
@@ -158,7 +161,13 @@ def main():
     def one(task_id):
         if (args.out / task_id / "answer.json").exists():  # done in an earlier run
             return
-        r = extract(task_id, args.out, args.model)
+        try:
+            r = extract(task_id, args.out, args.model)
+        except OutOfCredit:
+            raise
+        except Exception as e:  # noqa: BLE001 - one task's failure is reported, not the end of the run
+            print(f"{task_id}: crashed {type(e).__name__}: {str(e)[:200]}", flush=True)
+            return
         answer = args.out / task_id / "answer.json"
         if args.answers and answer.exists():
             shutil.copy2(answer, BENCH / "answers" / task_id / "facts.json")
