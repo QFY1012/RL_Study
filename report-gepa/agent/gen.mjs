@@ -6,7 +6,7 @@
 // the task file is the user message (generate.py: the benchmark task plus how to
 // use pageshot; repair.py: fix a page in place), so the data reaches the model
 // only through the read and bash tools. The agent writes <workspace>/<output>,
-// index.html unless given, and is asked once more if it has not. read / write / edit are limited to the workspace and
+// index.html unless given, and is asked again, up to MAX_NUDGES times, if it has not. read / write / edit are limited to the workspace and
 // bash runs in sandbox.sh. WEB_TOOLS=1 adds web_fetch and web_view (web.mjs), which reach the network
 // from here (originals.py: reading a published story). Prints one line per tool call, then one JSON line
 // starting with "RESULT " that generate.py parses.
@@ -32,6 +32,7 @@ const WRAP_UP = `已经用了 ${WRAP_UP_STEPS} 步，到上限了。不要再截
 
 const [wsArg, guidePath, modelId, effort, taskPath, output = "index.html"] = process.argv.slice(2)
 const NUDGE = `工作目录里还没有 ${output}。请把结果写到 ${output}。`
+const MAX_NUDGES = 3
 if (!wsArg || !guidePath || !modelId || !effort || !taskPath) {
   console.error("usage: node agent/gen.mjs <workspace> <system.md> <model> <effort> <task.md> [output]")
   process.exit(2)
@@ -132,10 +133,12 @@ session.subscribe((e) => {
   }
 })
 await session.prompt(fs.readFileSync(taskPath, "utf8"))
-let nudged = false
-if (!fs.existsSync(path.join(ws, output))) {
-  nudged = true
-  console.log(`${name}: nudge`)
+// deepseek sometimes ends a turn with reasoning only, no text and no tool call, which ends the session mid-task
+// (3 of the first 5 originals.py runs, 2026-10-28); one nudge did not always bring it back
+let nudged = 0
+while (!fs.existsSync(path.join(ws, output)) && nudged < MAX_NUDGES && steps < MAX_STEPS) {
+  nudged += 1
+  console.log(`${name}: nudge ${nudged}`)
   await session.prompt(NUDGE)
 }
 const assistant = session.messages.filter((m) => m.role === "assistant")

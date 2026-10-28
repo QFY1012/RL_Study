@@ -17,7 +17,8 @@ again and its claim read against its printout, as trust.py does for a page (1.2,
 facts that pass are the answer, answer.json; the others are listed in
 record.json under `dropped`. Each task lives in <out_dir>/<id>/: facts.json (the
 agent's), answer.json, skipped.json, record.json and session.jsonl; the copied
-data is removed afterwards. With --answers, answer.json is also copied to
+data is removed afterwards. A task whose answer.json exists is skipped, so a
+stopped run picks up where it was. With --answers, answer.json is also copied to
 report-bench/out/answers/<id>/facts.json.
 """
 
@@ -67,7 +68,7 @@ Evaluate every fact from this folder the way it will be checked: read its `table
 
 4. Write `skipped.json`: every finding you left out, as [{{"source": "the story's words", "why": "..."}}].
 
-Deliver both files.
+Deliver both files, even when the data reproduces none of the story's findings: then `facts.json` is `[]`.
 """
 
 
@@ -146,6 +147,8 @@ def main():
     os.environ["WEB_TOOLS"] = "1"  # run_agent passes the environment on to gen.mjs
 
     def one(task_id):
+        if (args.out / task_id / "answer.json").exists():  # done in an earlier run
+            return
         r = extract(task_id, args.out, args.model)
         answer = args.out / task_id / "answer.json"
         if args.answers and answer.exists():
