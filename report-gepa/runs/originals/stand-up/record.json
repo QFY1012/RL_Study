@@ -1,0 +1,24 @@
+{
+ "id": "stand-up",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 2,
+  "steps": 4,
+  "tools": 0,
+  "nudged": 3,
+  "usage": {
+   "input": 0,
+   "output": 0
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 5cb8c437-e15b-408c-9410-1582c6ce6758)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/stand-up/facts.json'"
+ ],
+ "skipped": null
+}

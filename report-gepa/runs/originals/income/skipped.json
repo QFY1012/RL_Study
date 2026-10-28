@@ -1,0 +1,26 @@
+[
+  {
+    "source": "Generally speaking, white families experience more cumulative years above the middle quintile in either the upper-middle or upper income levels (50% of cumulative years) than below it. In contrast, Black and Latino families spend more time below the middle quintile in either lower-middle or lower income levels (50%, and 40% of cumulative years, respectively).",
+    "why": "The file has no race or ethnicity column, so cumulative years cannot be split by race."
+  },
+  {
+    "source": "White families 9% 17% 25% 27% 22% (across 4,784 families); Black families 23% 27% 25% 17% 7% (across 2,716 families); Latino families 14% 26% 28% 20% 12% (across 467 families)",
+    "why": "The file has no race or ethnicity column; the race charts are also computed over the larger 11,172-family sample, not the 7,857 families in this file."
+  },
+  {
+    "source": "A study released in 2018, focused specifically on mobility of children compared to their parents, found that even when Black and white boys both started life at the highest levels of wealth, white boys were more likely to remain at that income level. In contrast, Black boys were much more likely to end up in the lower income levels as adults.",
+    "why": "This is a finding reported from an external study, not computed from line_chart_data.csv."
+  },
+  {
+    "source": "Another study found that income gaps between Black and white Americans have only become slightly narrower overall since 1970, whereas Hispanic families are now further from earning incomes equivalent to white families than they were in 1970.",
+    "why": "This is a finding reported from an external study, not computed from line_chart_data.csv."
+  },
+  {
+    "source": "the 2018 State of Working America Wages reports that wages for white workers continued to grow at a faster rate than wages for both Black or Hispanic workers since 2000.",
+    "why": "This is a finding reported from an external report, not computed from line_chart_data.csv."
+  },
+  {
+    "source": "white family wealth was seven times greater than [B]lack family wealth and five times greater than Hispanic family wealth in 2016.",
+    "why": "This is a finding reported from The Urban Institute, not computed from line_chart_data.csv."
+  }
+]

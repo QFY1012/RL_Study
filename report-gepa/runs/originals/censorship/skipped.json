@@ -1,0 +1,22 @@
+[
+  {
+    "source": "77 of the first 100 episodes had at least one edit",
+    "why": "The file records cuts in only 76 distinct season/episode pairs (11 in season 1, 16 in season 2, 19 in season 3, 19 in season 4 and 11 in season 5), all within the first 100 episodes; no reasonable definition applied to this file gives 77, so the episode count does not reproduce."
+  },
+  {
+    "source": "nearly three full episodes of purely censored content",
+    "why": "The file records the duration of the removed scenes (3,700 seconds, about 61.7 minutes) but not the full runtime of an episode, so the 'nearly three full episodes' comparison cannot be computed from the data."
+  },
+  {
+    "source": "in season two, episode 15 of The Big Bang Theory, a six-second kissing scene was cut from the Youku version, while the streaming platform allowed a 42-second kissing scene in the Chinese drama Because of Love to air",
+    "why": "The 42-second scene from Because of Love is not in data/cuts.csv. The file has two kissing cuts in season 2, episode 15 (6 seconds and 49 seconds), so the six-second scene cannot be isolated without filtering on the number being checked."
+  },
+  {
+    "source": "a naked back in season three, episode 21 was cut while in a show called Stealth Walker (2021) on Youku, the nude back remained",
+    "why": "The Stealth Walker comparison is not in data/cuts.csv; the file only records the naked-back cut in The Big Bang Theory (season 3, episode 21) and gives no number for the story's comparison."
+  },
+  {
+    "source": "a three-second line was cut out of The Big Bang Theory because the character mentioned the mercy killing of a dog",
+    "why": "The mercy-killing-of-a-dog line in season 1, episode 15 is recorded as a 4-second cut (20:08 to 20:12), not three seconds, so the story's number is not reproduced."
+  }
+]

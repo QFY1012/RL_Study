@@ -1,0 +1,22 @@
+[
+  {
+    "source": "These symbols can be found in real Aztec iconography, like in the 137 restored illustrations below.",
+    "why": "This is a record count (the number of restored god illustrations, repeated as “around 137 gods” in the work-in-progress note), a description of the dataset rather than a finding derived from it."
+  },
+  {
+    "source": "Be sure to seek out the 13 major Gods",
+    "why": "The bare count of 13 major gods is a description of a category in the dataset, not a finding; the 13 major gods are used as a subgroup in the multiple-category fact instead."
+  },
+  {
+    "source": "most are both creative and destructive, spiritual and material",
+    "why": "Read as two pairwise overlaps, the data does not support “most”: 30 of the 137 gods carry both life and death and 12 carry both spiritual expansion and material expansion. The reproduced fact uses the broader pattern that a majority carry more than one of the four thematic categories."
+  },
+  {
+    "source": "Spoken since the 7th century, today it’s the second most common language in the country, with around 2M speakers, mostly in rural areas.",
+    "why": "External statistic about Náhuatl speakers; light-db.csv contains no language or speaker data, so the number cannot be reproduced from this file."
+  },
+  {
+    "source": "pulque represents only 10% of the alcoholic beverages consumed in Mexico.",
+    "why": "External statistic about pulque consumption; light-db.csv contains no beverage-consumption data, so the number cannot be reproduced from this file."
+  }
+]

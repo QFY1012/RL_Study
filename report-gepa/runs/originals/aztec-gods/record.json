@@ -1,0 +1,42 @@
+{
+ "id": "aztec-gods",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 780,
+  "steps": 72,
+  "tools": 128,
+  "nudged": 0,
+  "usage": {
+   "input": 133219,
+   "output": 82352
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "gods-multiple-thematic-categories",
+   "basis": "major=False: single=39, multi=85, total=124; major=True: single=3, multi=10, total=13",
+   "verdict": "ok"
+  },
+  {
+   "id": "gods-single-domain-rare",
+   "basis": "major=False: single=19, multi=105, count=124; major=True: single=0, multi=13, count=13",
+   "verdict": "ok"
+  },
+  {
+   "id": "life-death-same-deity",
+   "basis": "death=True: life sum=30, count=46",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 5
+}

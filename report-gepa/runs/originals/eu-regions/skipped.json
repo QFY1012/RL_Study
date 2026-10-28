@@ -1,0 +1,46 @@
+[
+  {
+    "source": "In order to receive more EU funding, Hungary was divided into 7 regions, each with its own demographic, social, and economic characteristics.",
+    "why": "The files hold only the post-2018 Hungarian NUTS 2016 regions (8 rows for HU, with 2017 GDP); there is no pre-2018 seven-region breakdown to count."
+  },
+  {
+    "source": "The region of Andalucia received the most money: it ’absorbed’ more than 15 billion euro over 10 years.",
+    "why": "No funding data: regions.csv, countries.csv and capitals.csv only carry the 2017 GDP-per-capita index, with no catch-up fund amounts by region."
+  },
+  {
+    "source": "For some regions, funds from the EU amount to more than 5 percent of the area’s GDP",
+    "why": "Requires 2015 catch-up funding amounts and total regional GDP; the files contain only the GDP index, not funding euros or GDP totals."
+  },
+  {
+    "source": "which dedicates a third of its budget (50 billion euros) to less economically developed regions",
+    "why": "No EU budget or funding data in the files."
+  },
+  {
+    "source": "The least developed regions get a bigger share of the 50 billion euros distributed annually",
+    "why": "No catch-up fund allocation data in the files, and the 50 billion figure is not derived from them."
+  },
+  {
+    "source": "In 2016, its GDP was exactly 75% of the EU average.",
+    "why": "The files contain only the 2017 regional GDP index (Lithuania's country index is 78 there), not the 2016 figures the article used for split regions."
+  },
+  {
+    "source": "A score of 100 represents the average GDP across all regions in the EU.",
+    "why": "This is the definition of the index; it cannot be recomputed from the files, which contain no population weights (the unweighted mean of the 281 regional indices is 95.7, so the population-weighted EU average of 100 is not derivable)."
+  },
+  {
+    "source": "As a result, the entire region was not eligible for 85% of project funding by the EU.",
+    "why": "The pre-2018 Central Hungary region (HU10) and its combined GDP are not in the files; only the post-split 2017 values for Budapest and Pest exist, with no population weights to recombine them."
+  },
+  {
+    "source": "If you’re familiar with the geography and economics of Europe, you might know that the more economically developed countries are situated in western and northern Europe.",
+    "why": "No geographic grouping (west/north/east/south) is given in the files, and the sentence states background knowledge rather than a computed result; only the country GDP indices are available."
+  },
+  {
+    "source": "even wealthy countries have less wealthy regions",
+    "why": "Qualitative statement with no single measure or number; the within-country spreads it rests on are reported in the country-ranges fact."
+  },
+  {
+    "source": "one dot in the middle of the chart is replaced by new ones on the left and right",
+    "why": "Needs the pre-split regional GDP values (e.g. Central Hungary HU10), which are not in the files: regions.csv holds only the post-split 2017 regions."
+  }
+]

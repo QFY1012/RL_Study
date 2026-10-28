@@ -1,0 +1,150 @@
+[
+ {
+  "id": "insensitive-most-common",
+  "source": "The most common controversy type was insensitive videos, like the notorious Logan Paul “suicide forest” video.",
+  "claim": "Insensitive Video is the most common controversy type, with 9 people.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), 'controversy_type'].value_counts()"
+ },
+ {
+  "id": "racist-comments-count",
+  "source": "This was closely followed by vloggers like Laura Lee apologizing for racist comments they’ve made.",
+  "claim": "Racist Comments accounts for 6 of the analyzed apologizers, level with YouTuber Beef and behind Insensitive Video's 9.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), 'controversy_type'].value_counts()"
+ },
+ {
+  "id": "beauty-share",
+  "source": "We noticed that beauty YouTubers have a curiously large share of the shame pie.",
+  "claim": "9 of the 34 analyzed apologizers (26.5%) are beauty YouTubers.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), 'beauty'].eq('yes').agg(['sum', 'count', 'mean'])"
+ },
+ {
+  "id": "pre-controversy-gains",
+  "source": "We compare their daily total subscribers to their pre-controversy max. As expected, nearly all channels were making gains.",
+  "claim": "32 of the 34 channels had a higher normalized subscriber value at the end of the pre-controversy period than at its start.",
+  "tables": {
+   "pre": "data/pre.csv"
+  },
+  "code": "(pre[pre['days'].eq(1)].set_index('id')['value'] > pre[pre['days'].eq(90)].set_index('id')['value']).agg(['sum', 'count'])"
+ },
+ {
+  "id": "jake-paul-doubled",
+  "source": "Steeper lines means faster growth. Jake Paul (not a beauty vlogger) doubled his subscribers in the three months prior to his controversy.",
+  "claim": "Jake Paul's normalized subscriber value on day 1, the last day before the controversy, is 2.07 times its value on day 90.",
+  "tables": {
+   "pre": "data/pre.csv",
+   "people": "data/people.csv"
+  },
+  "code": "pre[pre['id'].eq(39)].merge(people[['id', 'name']], on='id').query('days in [1, 90]').pivot(index='name', columns='days', values='value').assign(ratio=lambda d: d[1] / d[90])"
+ },
+ {
+  "id": "growth-classes-before-after",
+  "source": "We go from relatively consistent growth to a range of reactions post-apology.",
+  "claim": "Growth classes before the apology are 6 A, 13 B, 14 C and 1 D; after the apology they are 4 A, 11 B, 13 C and 6 D.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), ['growth_pre', 'growth_post']].apply(pd.Series.value_counts).fillna(0).astype(int)"
+ },
+ {
+  "id": "growth-shift-pos-neg",
+  "source": "The shift was positive for some. For others it was negative.",
+  "claim": "After the apology, 5 channels moved to a faster growth class, 10 moved to a slower class, and 19 did not change.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), 'growth_delta'].apply(np.sign).value_counts()"
+ },
+ {
+  "id": "gabriel-zamora-growth-up",
+  "source": "Gabriel Zamora received a big boost by getting wrapped up in a feud with YouTube royalty Jeffree Star.",
+  "claim": "Gabriel Zamora's growth class improved from B before the apology to A after it, a change of +1.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['name'].eq('Gabriel Zamora'), ['name', 'growth_pre', 'growth_post', 'growth_delta']]"
+ },
+ {
+  "id": "gabriel-zamora-post-doubles",
+  "source": "Gabriel Zamora received a big boost by getting wrapped up in a feud with YouTube royalty Jeffree Star.",
+  "claim": "Gabriel Zamora's normalized subscriber value rose from 0.97 at the apology to 1.96 at the end of the post period, a 2.02-fold increase.",
+  "tables": {
+   "post": "data/post.csv",
+   "people": "data/people.csv"
+  },
+  "code": "post[post['id'].eq(8)].merge(people[['id', 'name']], on='id').sort_values('days').iloc[[0, -1]][['name', 'days', 'value']].assign(ratio=lambda d: d['value'].iloc[1] / d['value'].iloc[0])"
+ },
+ {
+  "id": "laura-lee-growth-down",
+  "source": "Whereas Laura Lee’s questionable and quickly removed vlogpology didn’t exactly help her audience development...",
+  "claim": "Laura Lee's growth class fell from B before the apology to D after it, a change of -2.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['name'].eq('Laura Lee'), ['name', 'growth_pre', 'growth_post', 'growth_delta']]"
+ },
+ {
+  "id": "laura-lee-post-decline",
+  "source": "Whereas Laura Lee’s questionable and quickly removed vlogpology didn’t exactly help her audience development...",
+  "claim": "Laura Lee's normalized subscriber value fell from 0.97 at the apology to 0.88 at the end of the post period, a 9.4% decline.",
+  "tables": {
+   "post": "data/post.csv",
+   "people": "data/people.csv"
+  },
+  "code": "post[post['id'].eq(18)].merge(people[['id', 'name']], on='id').sort_values('days').iloc[[0, -1]][['name', 'days', 'value']].assign(change=lambda d: d['value'].iloc[1] / d['value'].iloc[0] - 1)"
+ },
+ {
+  "id": "laura-lee-video-removed",
+  "source": "And then there is Laura Lee’s apology. The dramatic rendition got such backlash that she had to take the video down.",
+  "claim": "Laura Lee's apology video is marked as not available in its original form (original_available is False).",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['name'].eq('Laura Lee'), ['name', 'original_available']]"
+ },
+ {
+  "id": "likes-dislikes-shares",
+  "source": "Ratio of likes to dislikes",
+  "claim": "Like shares range from 5.9% for Social Repose to 99.0% for Jenna Marbles; Jaclyn Hill's video is at 48.1%, with more dislikes than likes.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['remove_flag'].eq(False), ['name', 'likes_dislikes_views']].dropna().assign(likes=lambda d: pd.to_numeric(d['likes_dislikes_views'].str.split('/').str[0], errors='coerce'), dislikes=lambda d: pd.to_numeric(d['likes_dislikes_views'].str.split('/').str[1], errors='coerce')).dropna(subset=['likes', 'dislikes']).assign(like_share=lambda d: d['likes'] / (d['likes'] + d['dislikes'])).set_index('name')[['likes', 'dislikes', 'like_share']].sort_values('like_share').assign(more_dislikes=lambda d: d['like_share'] < 0.5)"
+ },
+ {
+  "id": "cuts-per-minute",
+  "source": "Cuts Per Minute",
+  "claim": "Cuts per minute range from 0.02 for Gabriel Zamora to 1.88 for Jaclyn Hill.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['avg_shot_length'].notna(), ['name', 'avg_shot_length']].assign(cuts_per_min=lambda d: 60 / d['avg_shot_length']).sort_values('cuts_per_min')"
+ },
+ {
+  "id": "gabriel-zamora-one-take",
+  "source": "Gabriel Zamora produced an authentic and heartfelt apology in a 40-minute, one-take video!",
+  "claim": "Gabriel Zamora's apology video is effectively one shot: its average shot length is 2,936, against 45, 35 and 32 for the only other videos with cut data.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.loc[people['avg_shot_length'].notna(), ['name', 'avg_shot_length']].sort_values('avg_shot_length', ascending=False)"
+ },
+ {
+  "id": "post-start-varies",
+  "source": "However, since the 1x baseline calculation falls somewhere in that period, the post-apology starting point can vary dramatically.",
+  "claim": "Post-apology starting values range from 0.81 for James Charles to 1.01 for Jake Dufner.",
+  "tables": {
+   "post": "data/post.csv",
+   "people": "data/people.csv"
+  },
+  "code": "post[post['days'].eq(0)].merge(people[['id', 'name']], on='id').set_index('name')['value'].agg(['min', 'idxmin', 'max', 'idxmax'])"
+ }
+]

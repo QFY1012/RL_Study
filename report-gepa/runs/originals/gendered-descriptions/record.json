@@ -1,0 +1,42 @@
+{
+ "id": "gendered-descriptions",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 384,
+  "steps": 39,
+  "tools": 57,
+  "nudged": 0,
+  "usage": {
+   "input": 61500,
+   "output": 46608
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "bushy-mens-hair",
+   "basis": "totalM=16, totalF=6, diff=1.798986 (≈1.80)",
+   "verdict": "ok"
+  },
+  {
+   "id": "bushy-rare-hair-adjective",
+   "basis": "total=22, freq_rank=117.0, n_adjectives=121",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-skewed-hair-adjectives-less-frequent",
+   "basis": "top10=True median=38.0, count=10; top10=False median=49.0, count=111",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 5
+}

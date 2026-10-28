@@ -1,0 +1,47 @@
+[
+ {
+  "id": "nba-first-hyphen-1960s",
+  "source": "The NBA had its first hyphenated name in the 1960s",
+  "claim": "The NBA's first hyphenated-name player debuted in 1969, in the 1960s.",
+  "tables": {
+   "d": "data/allCombinedNames.csv"
+  },
+  "code": "d[d.hyphen & (d.league == 'nba') & ~d.name.isin(['Hong Myung-bo', 'Lee Young-pyo', 'Kim Kee-hee', 'Hwang In-beom', 'Ha Seung-Jin', 'Jung Sun-Min']) & d.name.str.contains(' ')][['startDate', 'decade']].min()"
+ },
+ {
+  "id": "nfl-first-hyphen-mul-key",
+  "source": "the NFL followed in the 1970s with Herb Mul-Key",
+  "claim": "The NFL's first hyphenated-name player was Herb Mul-Key, who debuted in 1972, in the 1970s.",
+  "tables": {
+   "d": "data/allCombinedNames.csv"
+  },
+  "code": "d[d.hyphen & (d.league == 'nfl') & ~d.name.isin(['Hong Myung-bo', 'Lee Young-pyo', 'Kim Kee-hee', 'Hwang In-beom', 'Ha Seung-Jin', 'Jung Sun-Min']) & d.name.str.contains(' ')].sort_values('startDate').head(1)[['name', 'startDate', 'decade']]"
+ },
+ {
+  "id": "nhl-first-hyphen-grand-pierre",
+  "source": "The NHL didn’t have a player with a hyphenated last name until the 1990s with Jean-Luc Grand-Pierre.",
+  "claim": "The NHL's first hyphenated-name player was Jean-Luc Grand-Pierre, who debuted in 1999, in the 1990s.",
+  "tables": {
+   "d": "data/allCombinedNames.csv"
+  },
+  "code": "d[d.hyphen & (d.league == 'nhl') & ~d.name.isin(['Hong Myung-bo', 'Lee Young-pyo', 'Kim Kee-hee', 'Hwang In-beom', 'Ha Seung-Jin', 'Jung Sun-Min']) & d.name.str.contains(' ')].sort_values('startDate').head(1)[['name', 'startDate', 'decade']]"
+ },
+ {
+  "id": "mlb-first-hyphen-rowland-smith",
+  "source": "The MLB didn’t have a player with a hyphenated last name until 2007, when Rowland-Smith took the mound for the Seattle Mariners, and the league’s only had three others since.",
+  "claim": "MLB's first hyphenated-name player was Ryan Rowland-Smith in 2007; the only later ones are Austin Bibens-Dirkx in 2017 and Isiah Kiner-Falefa and Sean Reid-Foley in 2018.",
+  "tables": {
+   "d": "data/allCombinedNames.csv"
+  },
+  "code": "d[d.hyphen & (d.league == 'mlb') & ~d.name.isin(['Hong Myung-bo', 'Lee Young-pyo', 'Kim Kee-hee', 'Hwang In-beom', 'Ha Seung-Jin', 'Jung Sun-Min']) & d.name.str.contains(' ')].sort_values('startDate')[['name', 'startDate', 'decade']]"
+ },
+ {
+  "id": "hyphen-share-by-league-decade",
+  "source": "Players with hyphenated last names by decade of entrance into each league",
+  "claim": "By decade of entry, the 2010s shares of players with hyphenated last names are 0.15% in MLB, 2.17% in the NBA, 1.13% in the NFL, 0.51% in the NHL, 1.38% in MLS, 5.26% in the WNBA and 0.55% in the NWSL, versus 0% in the 1950s in MLB, the NBA, the NFL and the NHL; in the 1990s the WNBA's share is 5.53% against 0.46% in the NBA, 0.22% in the NFL, 0.09% in the NHL and 0% in MLB, and the WNBA's share is 4.55% in the 2000s.",
+  "tables": {
+   "d": "data/allCombinedNames.csv"
+  },
+  "code": "(d.assign(h=d.hyphen & ~d.name.isin(['Hong Myung-bo', 'Lee Young-pyo', 'Kim Kee-hee', 'Hwang In-beom', 'Ha Seung-Jin', 'Jung Sun-Min']) & d.name.str.contains(' ')).query(\"league != 'congress' and decade >= 1950\").groupby(['league', 'decade']).h.mean().mul(100).round(2))"
+ }
+]

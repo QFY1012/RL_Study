@@ -1,0 +1,57 @@
+{
+ "id": "beer",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 925,
+  "steps": 81,
+  "tools": 94,
+  "nudged": 0,
+  "usage": {
+   "input": 135235,
+   "output": 74249
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "santa-rosa-first",
+   "basis": "Output shows rank 1, city Santa Rosa, state California.",
+   "verdict": "ok"
+  },
+  {
+   "id": "santa-rosa-rating-breweries",
+   "basis": "Output shows Santa Rosa, California with score 3.901442, grade A+, and count 11.",
+   "verdict": "ok"
+  },
+  {
+   "id": "santa-rosa-top-breweries",
+   "basis": "Output lists the five breweries as Russian River Brewing, Bear Republic Brewing Company, Shady Oak Barrel House, Moonlight Brewing Company, and Cooperage Brewing Company.",
+   "verdict": "ok"
+  },
+  {
+   "id": "california-most-breweries",
+   "basis": "Output shows California 173, Colorado 73, Oregon 65; California is highest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "california-biggest-state",
+   "basis": "Output shows California population 38802500, Texas 26956958, Florida 19893297; California is highest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "vermont-per-capita",
+   "basis": "Output shows Vermont 0.183541, Oregon 0.081859, Alaska 0.074654; Vermont is highest and 0.183541 rounds to about 0.184.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 5
+}

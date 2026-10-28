@@ -1,0 +1,46 @@
+[
+  {
+    "source": "In fact, it’s the fourth most common item among the Buttolph Collection menus, after coffee, tea, and olives.",
+    "why": "menus.csv contains only menu-level metadata (filename, restaurant, place, year, menu type, and four rare-meat flags); it has no dish or item text, so the frequency ranking of menu items cannot be computed."
+  },
+  {
+    "source": "Rector’s, in Chicago, had a dizzying selection for every section, including 25 kinds of potatoes.",
+    "why": "There are no dish-level records in menus.csv, so the number of potato varieties on the Rector’s menu cannot be counted."
+  },
+  {
+    "source": "Baked Alaska is not among the 40-plus desserts on offer at Fleischmann’s 1917 menu.",
+    "why": "menus.csv has no dessert or menu-item list for the 1917 Fleischmann’s menu, so the 40-plus dessert count cannot be reproduced."
+  },
+  {
+    "source": "From 1880 to 1920, the number of professional occupations doubled, as did the percentage of Americans working in management. At the same time, employment in the dining industry grew 400%.",
+    "why": "These are labor-force and census statistics from outside the menu data; menus.csv has no occupation or employment figures."
+  },
+  {
+    "source": "For example, pictured is one such menu she personally archived: The Plaza in 1897, a high-end NYC restaurant, where the canvas-back duck runs $120 in today’s dollars.",
+    "why": "menus.csv records the Plaza 1897 menu’s metadata but not its dishes or prices, and the inflation adjustment requires an external price index, so the $120 figure cannot be computed."
+  },
+  {
+    "source": "Soup was the first true course of the decadent meals at the restaurants of the late 19th century, followed by 8 or more courses of French classics or other dishes given a European-sounding name.",
+    "why": "menus.csv has no course structure or item list, so the number of courses on late-19th-century menus cannot be counted."
+  },
+  {
+    "source": "Depicted are 5,000 menus from the New York Public Library’s Buttolph Collection , pulled from an archive of over 25,000 menus and dated from 1880-1920.",
+    "why": "This is a description of the size and coverage of the dataset rather than a data finding; moreover menus.csv contains 6,367 rows, of which 6,274 are dated 1880-1920, so the stated approximate count is not reproduced by the file."
+  },
+  {
+    "source": "The Buttolph Collection contains over 25,000 menus and 50,000 menu pages. These were filtered down to approximately 5,000 for visualization, primarily filtering by year, 1880-1920.",
+    "why": "These are counts of the external New York Public Library archive and a description of how the visualization subset was selected, not findings computed from menus.csv."
+  },
+  {
+    "source": "Guests at the Hotel Colorado would know that these dozen plus courses came standard.",
+    "why": "The claim concerns the number of courses on one Hotel Colorado menu; menus.csv has no course or item records, so it cannot be verified."
+  },
+  {
+    "source": "If you’re curious about the eating habits of royalty, the archive includes luncheons for President Taft with the Emperor of Japan, train service for the funeral of President McKinley, and the coronation dinner for the King of Norway.",
+    "why": "This is a qualitative list of holdings rather than a number, comparison, ranking, share, or trend; the menu titles in menus.csv mention Taft, Japan, McKinley, and the Norwegian coronation separately, but no Taft-with-the-Emperor-of-Japan menu is present, so the exact claim is not reproduced."
+  },
+  {
+    "source": "Most of the menus were painstakingly assembled by one woman.",
+    "why": "This is a statement about how the archive was collected, not a finding computed from the menu records."
+  }
+]

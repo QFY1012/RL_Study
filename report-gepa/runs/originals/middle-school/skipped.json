@@ -1,0 +1,38 @@
+[
+  {
+    "source": "Teacher-Student Relationships",
+    "why": "The story's chart gives a favorable share for each grade (for example, 70.3% in 4th grade and 45.0% in 6th grade), but the survey file's School Teacher-Student Relationships scale scores yield much higher favorable shares (79.6% in 4th grade and 59.4% in 6th grade). The file contains one already-aggregated scale score per student, not the item-level responses from which the story's percentages were computed, so the chart's numbers are not reproduced."
+  },
+  {
+    "source": "Climate",
+    "why": "The story's chart gives a favorable share for each grade (for example, 42.6% in 4th grade and 24.4% in 6th grade), but the survey file's School Climate scale scores yield 64.6% in 4th grade and 43.2% in 6th grade. The scale-level sample does not reproduce the story's item-level favorable percentages."
+  },
+  {
+    "source": "Supportive Relationships",
+    "why": "The story's chart gives a favorable share for each grade (for example, 74.6% in 4th grade and 71.1% in 6th grade), but the survey file's Supportive Relationships scale scores yield 92.0% in 4th grade and 85.4% in 6th grade. The scale-level sample does not reproduce the story's item-level favorable percentages."
+  },
+  {
+    "source": "Positive Feelings",
+    "why": "The story's chart gives a favorable share for each grade (for example, 56.2% in 4th grade and 43.9% in 6th grade), but the survey file's Positive Feelings scale scores yield 74.2% in 4th grade and 61.4% in 6th grade. The scale-level sample does not reproduce the story's item-level favorable percentages."
+  },
+  {
+    "source": "most sixth-graders in the US attend middle school",
+    "why": "survey.csv records a grade level and student characteristics but no school type or grade span, so it cannot show what share of sixth-graders attend middle school."
+  },
+  {
+    "source": "6th, 7th, and 8th graders who attend middle schools learn less, while feeling lower levels of belonging and self esteem, when compared to kids who attend K-8 schools.",
+    "why": "This comes from outside research, and survey.csv has no school-type or K-8-versus-middle-school field, so the comparison cannot be computed from this file."
+  },
+  {
+    "source": "One 2010 study of New York City students found that, when kids transition to middle school, their parents feel like the quality of education and safety of the schools is worse compared to the parents of students who still attend K-8 schools.",
+    "why": "This is an external New York City study of parents, not the Panorama student survey data in survey.csv."
+  },
+  {
+    "source": "parents of 5th graders in K-5 schools actually think education is better than parents of 5th graders in K-8 schools",
+    "why": "The claim comes from external parent data and a school-grade-span comparison; survey.csv contains only student responses and no parent or school-type data."
+  },
+  {
+    "source": "the benefits of being a top-dog in the 4th and 5th grades at a K-5 elementary school actually makes up for the amount of learning you’ll lose in middle school",
+    "why": "This summarizes external studies of learning and school grade spans; survey.csv has no achievement measure and no school-type field."
+  }
+]

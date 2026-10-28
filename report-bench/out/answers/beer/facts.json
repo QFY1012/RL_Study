@@ -1,0 +1,60 @@
+[
+ {
+  "id": "santa-rosa-first",
+  "source": "When you boil it down to a weighted blend of quality (beer ratings) and quantity (breweries in proximity), Santa Rosa tops the list.",
+  "claim": "Santa Rosa ranks first among cities with at least 5 breweries within 20 miles.",
+  "tables": {
+   "b": "data/breweries_geocoded_with_stats.csv",
+   "c": "data/cities_geocoded_40k.csv"
+  },
+  "code": "(lambda ns: (exec(\"\"\"\nbb = b.assign(_id=np.arange(len(b)), _beer=b.beers.astype(str).str.split('|')).explode('_beer')\nbb['_abv'] = pd.to_numeric(bb['_beer'].str.split('-').str[0], errors='coerce').fillna(0)\nbb['_score'] = pd.to_numeric(bb['_beer'].str.split('-').str[1], errors='coerce').fillna(0)\nbb['_reviews'] = pd.to_numeric(bb['_beer'].str.split('-').str[2], errors='coerce').fillna(0)\nbb['_weighted'] = bb['_score'] * bb['_reviews']\nbs = bb.groupby('_id', as_index=False).agg(name=('name','first'), cityIndex=('cityIndex','first'), cities=('cities','first'), score=('_weighted','sum'), reviews=('_reviews','sum'))\ncp = bs.assign(_pair=bs.cities.astype(str).str.split('|')).explode('_pair')\ncp['idx'] = pd.to_numeric(cp['_pair'].str.split('-').str[0], errors='coerce')\ncp['dist'] = pd.to_numeric(cp['_pair'].str.split('-').str[1], errors='coerce')\ncp = cp.dropna(subset=['idx','dist']).query('dist <= 20')[['_id','idx','dist']]\nown = bs[bs.cityIndex.notna()].assign(idx=lambda d: d.cityIndex.astype(int), dist=0)[['_id','idx','dist']]\nasn = pd.concat([own, cp]).sort_values(['_id','dist'], kind='stable').drop_duplicates('_id', keep='first')\nasn = asn.merge(bs[['_id','score','reviews']], on='_id')\ng = asn.groupby('idx', as_index=False).agg(count=('_id','size'), score=('score','sum'), reviews=('reviews','sum'))\ng['score'] = g.score / g.reviews\ng = g[g['count'] >= 5].merge(c, left_on='idx', right_on='index')\ng['weighted'] = (g.score-g.score.min())/(g.score.max()-g.score.min())*80 + (g['count']-g['count'].min())/(g['count'].max()-g['count'].min())*20\ngrades = ['C-','C','C+','B-','B','B+','A-','A','A+']\ng['grade'] = [grades[min(8, int((x-g.score.min())/(g.score.max()-g.score.min())*9))] for x in g.score]\ng = g.sort_values(['weighted','score','count'], ascending=False, kind='stable').reset_index(drop=True)\ng['rank'] = g.index + 1\n\nresult = g[['rank','city','state']].head(1)\"\"\", ns), ns[\"result\"])[1])({\"pd\": pd, \"np\": np, \"b\": b, \"c\": c})"
+ },
+ {
+  "id": "santa-rosa-rating-breweries",
+  "source": "rating: A+\nbreweries: 11",
+  "claim": "Santa Rosa has a review-weighted beer rating of 3.90, grade A+, and 11 breweries nearby.",
+  "tables": {
+   "b": "data/breweries_geocoded_with_stats.csv",
+   "c": "data/cities_geocoded_40k.csv"
+  },
+  "code": "(lambda ns: (exec(\"\"\"\nbb = b.assign(_id=np.arange(len(b)), _beer=b.beers.astype(str).str.split('|')).explode('_beer')\nbb['_abv'] = pd.to_numeric(bb['_beer'].str.split('-').str[0], errors='coerce').fillna(0)\nbb['_score'] = pd.to_numeric(bb['_beer'].str.split('-').str[1], errors='coerce').fillna(0)\nbb['_reviews'] = pd.to_numeric(bb['_beer'].str.split('-').str[2], errors='coerce').fillna(0)\nbb['_weighted'] = bb['_score'] * bb['_reviews']\nbs = bb.groupby('_id', as_index=False).agg(name=('name','first'), cityIndex=('cityIndex','first'), cities=('cities','first'), score=('_weighted','sum'), reviews=('_reviews','sum'))\ncp = bs.assign(_pair=bs.cities.astype(str).str.split('|')).explode('_pair')\ncp['idx'] = pd.to_numeric(cp['_pair'].str.split('-').str[0], errors='coerce')\ncp['dist'] = pd.to_numeric(cp['_pair'].str.split('-').str[1], errors='coerce')\ncp = cp.dropna(subset=['idx','dist']).query('dist <= 20')[['_id','idx','dist']]\nown = bs[bs.cityIndex.notna()].assign(idx=lambda d: d.cityIndex.astype(int), dist=0)[['_id','idx','dist']]\nasn = pd.concat([own, cp]).sort_values(['_id','dist'], kind='stable').drop_duplicates('_id', keep='first')\nasn = asn.merge(bs[['_id','score','reviews']], on='_id')\ng = asn.groupby('idx', as_index=False).agg(count=('_id','size'), score=('score','sum'), reviews=('reviews','sum'))\ng['score'] = g.score / g.reviews\ng = g[g['count'] >= 5].merge(c, left_on='idx', right_on='index')\ng['weighted'] = (g.score-g.score.min())/(g.score.max()-g.score.min())*80 + (g['count']-g['count'].min())/(g['count'].max()-g['count'].min())*20\ngrades = ['C-','C','C+','B-','B','B+','A-','A','A+']\ng['grade'] = [grades[min(8, int((x-g.score.min())/(g.score.max()-g.score.min())*9))] for x in g.score]\ng = g.sort_values(['weighted','score','count'], ascending=False, kind='stable').reset_index(drop=True)\ng['rank'] = g.index + 1\n\nresult = g[(g.city == 'Santa Rosa') & (g.state == 'California')][['city','state','score','grade','count']]\"\"\", ns), ns[\"result\"])[1])({\"pd\": pd, \"np\": np, \"b\": b, \"c\": c})"
+ },
+ {
+  "id": "santa-rosa-top-breweries",
+  "source": "Top breweries\nRussian River Brewing\nBear Republic Brewing Company\nShady Oak Barrel House\nMoonlight Brewing Company\nCooperage Brewing Company",
+  "claim": "Santa Rosa's five best-rated breweries are Russian River Brewing, Bear Republic Brewing Company, Shady Oak Barrel House, Moonlight Brewing Company, and Cooperage Brewing Company.",
+  "tables": {
+   "b": "data/breweries_geocoded_with_stats.csv",
+   "c": "data/cities_geocoded_40k.csv"
+  },
+  "code": "(lambda ns: (exec(\"\"\"\nbb = b.assign(_id=np.arange(len(b)), _beer=b.beers.astype(str).str.split('|')).explode('_beer')\nbb['_abv'] = pd.to_numeric(bb['_beer'].str.split('-').str[0], errors='coerce').fillna(0)\nbb['_score'] = pd.to_numeric(bb['_beer'].str.split('-').str[1], errors='coerce').fillna(0)\nbb['_reviews'] = pd.to_numeric(bb['_beer'].str.split('-').str[2], errors='coerce').fillna(0)\nbb['_weighted'] = bb['_score'] * bb['_reviews']\nbs = bb.groupby('_id', as_index=False).agg(name=('name','first'), cityIndex=('cityIndex','first'), cities=('cities','first'), score=('_weighted','sum'), reviews=('_reviews','sum'))\ncp = bs.assign(_pair=bs.cities.astype(str).str.split('|')).explode('_pair')\ncp['idx'] = pd.to_numeric(cp['_pair'].str.split('-').str[0], errors='coerce')\ncp['dist'] = pd.to_numeric(cp['_pair'].str.split('-').str[1], errors='coerce')\ncp = cp.dropna(subset=['idx','dist']).query('dist <= 20')[['_id','idx','dist']]\nown = bs[bs.cityIndex.notna()].assign(idx=lambda d: d.cityIndex.astype(int), dist=0)[['_id','idx','dist']]\nasn = pd.concat([own, cp]).sort_values(['_id','dist'], kind='stable').drop_duplicates('_id', keep='first')\nasn = asn.merge(bs[['_id','score','reviews']], on='_id')\ng = asn.groupby('idx', as_index=False).agg(count=('_id','size'), score=('score','sum'), reviews=('reviews','sum'))\ng['score'] = g.score / g.reviews\ng = g[g['count'] >= 5].merge(c, left_on='idx', right_on='index')\ng['weighted'] = (g.score-g.score.min())/(g.score.max()-g.score.min())*80 + (g['count']-g['count'].min())/(g['count'].max()-g['count'].min())*20\ngrades = ['C-','C','C+','B-','B','B+','A-','A','A+']\ng['grade'] = [grades[min(8, int((x-g.score.min())/(g.score.max()-g.score.min())*9))] for x in g.score]\ng = g.sort_values(['weighted','score','count'], ascending=False, kind='stable').reset_index(drop=True)\ng['rank'] = g.index + 1\n\nsridx = int(c.loc[(c.city == 'Santa Rosa') & (c.state == 'California'), 'index'].iloc[0])\nresult = asn[asn.idx == sridx].merge(bs[['_id','name']], on='_id').assign(rating=lambda d: d.score/d.reviews).sort_values('rating', ascending=False).head(5)['name']\"\"\", ns), ns[\"result\"])[1])({\"pd\": pd, \"np\": np, \"b\": b, \"c\": c})"
+ },
+ {
+  "id": "california-most-breweries",
+  "source": "While California has the most new breweries by volume, it’s also our biggest state.",
+  "claim": "California opened 173 breweries between 1997 and 2016, more than any other state.",
+  "tables": {
+   "b": "data/breweries_geocoded_with_stats.csv"
+  },
+  "code": "b.query('1997 <= year <= 2016').state.value_counts().head(3)"
+ },
+ {
+  "id": "california-biggest-state",
+  "source": "While California has the most new breweries by volume, it’s also our biggest state.",
+  "claim": "California has 38,802,500 residents, more than any other state.",
+  "tables": {
+   "p": "data/population.csv"
+  },
+  "code": "p.sort_values('population', ascending=False).head(3)"
+ },
+ {
+  "id": "vermont-per-capita",
+  "source": "Vermonters love the hops.",
+  "claim": "Over 1997-2016, Vermont averaged 0.184 brewery openings per 100,000 residents per year, the highest of any state.",
+  "tables": {
+   "b": "data/breweries_geocoded_with_stats.csv",
+   "p": "data/population.csv"
+  },
+  "code": "(lambda b, p: (b.query('1997 <= year <= 2016').groupby(['state','year']).size().unstack(fill_value=0).div(p.set_index('state').population, axis=0).mean(axis=1) * 100000).sort_values(ascending=False).head(3))(b, p)"
+ }
+]

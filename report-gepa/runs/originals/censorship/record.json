@@ -1,0 +1,73 @@
+{
+ "id": "censorship",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 191,
+  "steps": 13,
+  "tools": 16,
+  "nudged": 0,
+  "usage": {
+   "input": 28395,
+   "output": 24330
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "disrespect-targets",
+   "basis": "Output counts are china 8, north-korea 7, China 3, communist 1, Russia 1. The claim mentions Russia (1) but omits the equally frequent communist (1), so its list of most common targets is not fully consistent with the output.",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "removed-scenes-total",
+   "basis": "len(cuts) output is 206, matching the claimed 206 missing scenes.",
+   "verdict": "ok"
+  },
+  {
+   "id": "category-scene-counts",
+   "basis": "Output counts: sex 139, non-heteronormative-relationship 22, disrespect 20, illegal-actions 12, miscellaneous 8, religion 3, unhealthy-addiction 2; all match the claimed order and counts.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sex-scenes-and-minutes",
+   "basis": "Output shows sex has n=139 and minutes=43.100000, the highest n, matching the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "total-deleted-duration",
+   "basis": "Output shows cut_seconds sum=3700.000000 and sum/60=61.666667, which rounds to 61.7 minutes.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lgbtq-mostly-homosexual",
+   "basis": "Output subtype counts are homosexual 14, cousin 4, mother-issue 2, sexual-description 1; homosexual is the most common with 14.",
+   "verdict": "ok"
+  },
+  {
+   "id": "disrespect-targets",
+   "basis": "Output counts are china 8, north-korea 7, China 3, communist 1, Russia 1. The claim mentions Russia (1) but omits the equally frequent communist (1), so its list of most common targets is not fully consistent with the output.",
+   "verdict": "wrong"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 5,
+ "review": [
+  {
+   "id": "disrespect-targets",
+   "action": "restore",
+   "changed": [
+    "claim"
+   ],
+   "why": "the old claim left out 'communist', tied with Russia"
+  }
+ ]
+}

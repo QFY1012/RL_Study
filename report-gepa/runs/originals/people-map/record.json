@@ -1,0 +1,24 @@
+{
+ "id": "people-map",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 128,
+  "steps": 19,
+  "tools": 25,
+  "nudged": 3,
+  "usage": {
+   "input": 19959,
+   "output": 6883
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 83afb39f-b3d8-4b68-aad1-d837a433f0f3)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/people-map/facts.json'"
+ ],
+ "skipped": null
+}

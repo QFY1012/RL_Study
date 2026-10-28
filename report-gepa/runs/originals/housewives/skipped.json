@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Good vs. bad apologies by cast member",
+    "why": "The chart (and the text's claim that some cast members do a better job than others) gives each cast member's good/bad split (for example Lisa Barlow 19%/81%, Jen Shah 50%/50%, Heather Gay 65%/35%) and season count (5 seasons, 3 seasons, and so on), but apologies.csv has no cast-member column and no cast-to-season mapping. Its summaries mention multiple people and also include non-cast members, so the per-member shares and season labels cannot be computed."
+  },
+  {
+    "source": "Total \"sorry\"s by cast member",
+    "why": "The files contain no counts of the word \"sorry\" and no cast-member attribution. apologies.csv records apology moments, not utterances of \"sorry\", so the per-cast totals (65, 49, 40, 38, 21, 16, 14, 10, 5, 3) cannot be reproduced."
+  },
+  {
+    "source": "Fans of the show might be surprised that she has the second most total apologies (despite only 3 seasons as a main cast member) and many of them are classified as “good.”",
+    "why": "Ranking Jen Shah second in total apologies and counting how many of her apologies are classified good requires attributing every apology moment to a cast member, which the files do not do."
+  },
+  {
+    "source": "Lisa Barlow, who has the most opportunities to apologize, but seems to be the worst at it.",
+    "why": "Identifying Lisa Barlow as having the most apology opportunities and the worst record requires per-cast counts and classifications, but apologies.csv has no cast-member column."
+  },
+  {
+    "source": "A chart showing 91 episodes of The Real Housewives of Salt Lake City with markings where the apology moments occur.",
+    "why": "episodes.csv lists 94 episodes, and the apology log covers 80 distinct episodes, so the chart's 91-episode figure is not reproduced by the files."
+  },
+  {
+    "source": "We can tell the apologies don’t work because the same issues resurface in the next episode, again and again.",
+    "why": "No field marks repeated issues or links an apology moment to a later recurrence, so the claimed recurrence pattern cannot be computed from the files."
+  },
+  {
+    "source": "The final step of actually facing the thing you apologized for, bettering yourself, and being different rarely occurs.",
+    "why": "No field records post-apology follow-through or changed behavior, so the claim that follow-through rarely occurs cannot be computed from the files."
+  }
+]

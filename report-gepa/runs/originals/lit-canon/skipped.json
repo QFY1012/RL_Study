@@ -1,0 +1,30 @@
+[
+  {
+    "source": "It has 9,900 ratings—compare that to The Things They Carried’s 286,000 ratings!",
+    "why": "The data file gives each book's rank among most frequently rated Goodreads books, not the number of ratings, so the 9,900 and 286,000 ratings cannot be recomputed."
+  },
+  {
+    "source": "The Giver, in 2022, is tagged by users as a “classic” more than any other ’90s book",
+    "why": "The data file has no Goodreads user-tag or classics-genre frequencies; it only has a single Goodreads popularity rank per book."
+  },
+  {
+    "source": "’90s Books Ranking via Goodreads",
+    "why": "The chart of 2017 and 2022 Goodreads 'classics' tag rankings is not represented in data.csv; the file contains no tag counts or year-by-year classic rankings."
+  },
+  {
+    "source": "With the exception of Harry Potter and the Sorcerer’s Stone, few of the top ’90s New York Times Best Sellers end up assigned in English Literature syllabi.",
+    "why": "The chart behind this claim lists the top 20 longest-running 1990s New York Times Best Sellers with their syllabus appearances, but those books are not in data.csv (only Harry Potter overlaps), so the comparison cannot be computed."
+  },
+  {
+    "source": "The Top 20 Longest New York Times Best Sellers",
+    "why": "The top-20 New York Times Best Seller chart's weeks and syllabus-appearance values for its 20 titles are not in data.csv."
+  },
+  {
+    "source": "This top ten ranking is also notable because of how diverse it is: 5 are authors of color and 6 are women.",
+    "why": "The data file records author names but not authors' race or gender, so the counts of five authors of color and six women cannot be computed from it."
+  },
+  {
+    "source": "In 1951, Pulitzer Prize-winning The Caine Mutiny, by Herman Wouk, began its historic run of 2.5 years as a New York Times Best Seller. Around the same time, Catcher in the Rye would spend 7 months as a New York Times Best Seller as well.",
+    "why": "Neither The Caine Mutiny nor The Catcher in the Rye is in data.csv, and the file has no 1950s best-seller streak data."
+  }
+]

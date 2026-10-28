@@ -1,0 +1,24 @@
+{
+ "id": "menu-collection",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 316,
+  "steps": 50,
+  "tools": 80,
+  "nudged": 0,
+  "usage": {
+   "input": 194264,
+   "output": 31483
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 0,
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 11
+}

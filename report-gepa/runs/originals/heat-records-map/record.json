@@ -1,0 +1,109 @@
+{
+ "id": "heat-records-map",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 606,
+  "steps": 66,
+  "tools": 93,
+  "nudged": 0,
+  "usage": {
+   "input": 174755,
+   "output": 64775
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 8,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "us-one-day-since-daily-record",
+   "basis": "min(days_since_daily) = 1, so at least one city has 1 day since a daily record high.",
+   "verdict": "ok"
+  },
+  {
+   "id": "typical-city-record-gap",
+   "basis": "median(days_since_daily) = 21.0 days.",
+   "verdict": "ok"
+  },
+  {
+   "id": "daily-records-year-round",
+   "basis": "Output includes December 4, January 5, February 10, June 16, July 34, August 39, plus other months; all seasons are represented.",
+   "verdict": "ok"
+  },
+  {
+   "id": "valentine-most-recent-daily-record",
+   "basis": "nsmallest days_since_daily = 1; name = Valentine Area, state = NE, days_since_val = 84.",
+   "verdict": "ok"
+  },
+  {
+   "id": "marathon-longest-gap-since-daily-record",
+   "basis": "nlargest days_since_daily = 1001; name = Marathon Area, state = FL.",
+   "verdict": "ok"
+  },
+  {
+   "id": "all-time-record-time-range",
+   "basis": "all_time_days min = 91 for Rapid City Downtown Area, SD; max = 48636 for Morgantown Area, WV.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oct-23-record-highs",
+   "basis": "On 2026-10-23, Bismarck Area ND temp = 78, tie = False; Mobridge Area SD temp = 81, tie = False.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oct-23-tied-record",
+   "basis": "On 2026-10-23, Valentine Area NE temp = 84, tie = True.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "valentine-most-recent-daily-record",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "oct-23-record-highs",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "oct-23-tied-record",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "us-one-day-since-daily-record",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  },
+  {
+   "id": "marathon-longest-gap-since-daily-record",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  },
+  {
+   "id": "all-time-record-time-range",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  }
+ ],
+ "answer": 2,
+ "skipped": 2,
+ "review": [
+  {
+   "id": "us-one-day-since-daily-record",
+   "action": "drop",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  },
+  {
+   "id": "marathon-longest-gap-since-daily-record",
+   "action": "drop",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  },
+  {
+   "id": "all-time-record-time-range",
+   "action": "drop",
+   "why": "a live counter on a page that updates every day; the number is the data snapshot's, not a lasting finding of the story"
+  }
+ ]
+}

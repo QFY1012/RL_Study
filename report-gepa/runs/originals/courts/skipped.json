@@ -1,0 +1,10 @@
+[
+  {
+    "source": "Help us document the stories behind the 59,507 outdoor courts in America.",
+    "why": "This is a count of the dataset's records, which the task excludes as a description of the data rather than a finding. It also does not reproduce from data/data.csv, which contains 59,705 rows (59,705 unique court ids), not 59,507."
+  },
+  {
+    "source": "Explore Satellite Imagery of 59,507 Basketball Courts",
+    "why": "The page's meta description gives the same record count. It is a description of the size of the dataset, not a finding the authors draw from it, and the supplied file has 59,705 courts rather than 59,507."
+  }
+]

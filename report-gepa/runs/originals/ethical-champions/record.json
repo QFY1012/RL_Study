@@ -1,0 +1,87 @@
+{
+ "id": "ethical-champions",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 341,
+  "steps": 22,
+  "tools": 22,
+  "nudged": 0,
+  "usage": {
+   "input": 26226,
+   "output": 45096
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "five-ethical-champions",
+   "basis": "Positive nets in output: 2025 12.442129, 2006 12.203541, 2012 8.919870, 2026 5.096570, 2005 3.782923; all other listed seasons have negative net.",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-2015-least-ethical",
+   "basis": "2015: winner 6.690154, opponent 49.513650, net -42.823496; next lowest 2013 net -36.259510.",
+   "verdict": "ok"
+  },
+  {
+   "id": "thunder-2025-most-ethical-net",
+   "basis": "Top nets: 2025 12.442129, 2006 12.203541, 2012 8.919870.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-2006-fewest-opponent-absences",
+   "basis": "Smallest opponent values: 2006 1.206564, 2026 3.507970, 2014 6.192120.",
+   "verdict": "ok"
+  },
+  {
+   "id": "knicks-2026-second-fewest-opponent-absences",
+   "basis": "Smallest opponent values: 2006 1.206564, 2026 3.507970.",
+   "verdict": "ok"
+  },
+  {
+   "id": "knicks-2026-absences",
+   "basis": "2026 rows: Joel Embiid opponent Inactive 1; OG Anunoby winner Inactive 2; Mitchell Robinson winner Did Not Dress 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-2006-mourning-first-round",
+   "basis": "Output shows only Alonzo Mourning: round 1 Game 1 Did Not Dress, Game 2 Inactive, Game 6 Low Minutes, then Low Minutes in rounds 2, 3, 4, 4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-2006-opponents-chandler-only",
+   "basis": "Output has one 2006 opponent row: Tyson Chandler, Low Minutes, round 1 game 5, dpm 1.47142.",
+   "verdict": "ok"
+  },
+  {
+   "id": "thunder-2025-absences",
+   "basis": "Output counts: Brandon Clarke 4; Josh Minott 2; Ja Morant 1; Tyrese Haliburton 1; Kenrich Williams 7; Isaiah Joe Did Not Play 2 and Low Minutes 8; Aaron Wiggins Did Not Play 1 and Low Minutes 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-2015-opponents-across-rounds",
+   "basis": "Output has seven players in rounds 1, 2, and 4: Holiday/Evans round 1; Conley/Allen round 2; Varejao/Love/Irving round 4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-10-dpm-2026",
+   "basis": "Output top 10 matches: Jokic 7.48015, Wembanyama 6.87036, Leonard 6.26216, Gilgeous-Alexander 6.09413, Antetokounmpo 5.05769, Edwards 4.94348, Doncic 4.74149, Mitchell 4.61516, Tatum 4.33177, Holmgren 4.31951.",
+   "verdict": "ok"
+  },
+  {
+   "id": "plus-one-dpm-cutoff-about-80",
+   "basis": "Output min 66, max 92, mean 78.846154, which rounds to 78.85.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 10
+}

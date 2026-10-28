@@ -1,0 +1,87 @@
+  beer beer: web_fetch https://pudding.cool/2017/04/beer/
+  beer beer: bash cd /home/user/RL_Study/report-gepa/runs/originals/beer && ls -la data/ && head -3 data/*.csv
+  book-covers book-covers: web_fetch https://pudding.cool/2019/07/book-covers/
+  campaign-colors campaign-colors: bash ls -la; ls -la data; head -5 data/colors.csv; wc -l data/colors.csv
+  campaign-colors campaign-colors: web_fetch https://pudding.cool/2020/08/campaign-colors/
+  book-covers book-covers: bash cd /home/user/RL_Study/report-gepa/runs/originals/book-covers && ls -la && ls -la data && head -5 da
+  anthems anthems: bash ls -la data/ && head -5 data/src__data__ids.csv && echo "---" && head -5 data/src__data__pitch__desk
+  anthems anthems: web_fetch https://pudding.cool/2024/02/anthems/
+  bechdel bechdel: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/bechdel/data/ && head -5 /home/user/RL_Study/r
+  bechdel bechdel: web_fetch https://pudding.cool/2017/03/bechdel/
+  authors authors: bash ls -la; echo "---"; ls -la data; echo "---"; head -30 data/top-100.csv; echo "---"; wc -l data/top-1
+  authors authors: web_fetch https://pudding.cool/2020/02/authors/
+  asne asne: bash find /home/user/RL_Study/report-gepa/runs/originals/asne -type f | head -50; echo "---"; ls -la /hom
+  asne asne: web_fetch https://pudding.cool/2017/10/asne/
+  births births: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/births/ && ls -la /home/user/RL_Study/report-g
+  births births: web_fetch https://pudding.cool/2017/05/births/
+  brief-history brief-history: bash find /home/user/RL_Study/report-gepa/runs/originals/brief-history -type f | head -50; echo "---"; ls
+  bears-boys bears-boys: bash find . -type f | head -50; echo "---"; ls -la data/ 2>/dev/null; echo "---"; for f in data/*.csv; do
+  birthday-effect birthday-effect: bash ls -la; echo "---"; ls -la data/; echo "---"; head -5 data/birthdays.csv; echo "---"; wc -l data/bir
+  birthday-effect birthday-effect: web_fetch https://pudding.cool/2025/04/birthday-effect/
+  ai ai: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/ai; ls -la /home/user/RL_Study/report-gepa/run
+  ai ai: web_view https://pudding.cool/2024/07/ai/
+  bears-boys bears-boys: web_fetch https://pudding.cool/2025/07/kids-books/
+  aztec-gods aztec-gods: bash ls -la data/ && head -5 data/light-db.csv && wc -l data/light-db.csv
+  brief-history brief-history: web_fetch https://pudding.cool/2018/12/brief-history/
+  aztec-gods aztec-gods: web_fetch https://pudding.cool/2022/06/aztec-gods/
+  2022_02_redraft 2022_02_redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/2022_02_redraft && ls -la && ls -la data/ && head 
+  2022_02_redraft 2022_02_redraft: web_fetch https://pudding.cool/2022/02/redraft/
+  abortion-mazes abortion-mazes: bash ls -la data/ && head -5 data/states.csv && echo "---" && head -5 data/policies.csv && echo "---" && 
+  abortion-mazes abortion-mazes: web_fetch https://pudding.cool/2024/10/abortion-mazes/
+  apology apology: bash cd /home/user/RL_Study/report-gepa/runs/originals/apology && ls -la && ls -la data/ && head -5 data/
+  apology apology: web_view https://pudding.cool/2020/01/apology/
+  boybands boybands: bash cd /home/user/RL_Study/report-gepa/runs/originals/boybands && ls -la data/ && head -5 data/bands.csv
+  aapi-casting aapi-casting: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/aapi-casting/ && ls -la /home/user/RL_Study/re
+  boybands boybands: web_fetch https://pudding.cool/2018/11/boy-bands/
+  aapi-casting aapi-casting: web_fetch https://pudding.cool/2025/05/aapi-casting/
+  banknotes banknotes: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/banknotes; ls -la /home/user/RL_Study/report-g
+  banknotes banknotes: web_fetch https://pudding.cool/2022/04/banknotes/
+  anthems anthems: web_fetch https://pudding.cool/2024/02/anthems/
+  beer beer: web_view https://pudding.cool/2017/04/beer/
+  beer beer: bash cd /home/user/RL_Study/report-gepa/runs/originals/beer && wc -l data/*.csv && cat data/population.cs
+  book-covers book-covers: web_view https://pudding.cool/2019/07/book-covers/
+  boybands boybands: web_view https://pudding.cool/2018/11/boy-bands/
+  boybands boybands: bash cd /home/user/RL_Study/report-gepa/runs/originals/boybands && cat data/bands.csv
+  campaign-colors campaign-colors: web_view https://pudding.cool/2020/08/campaign-colors/
+  bears-boys bears-boys: web_fetch https://pudding.cool/2025/07/kids-books/
+  bears-boys bears-boys: bash cd data && python3 -c " import pandas as pd for f in ['kids-book-animals.csv','chatgpt-animal-storie
+  asne asne: bash cd /home/user/RL_Study/report-gepa/runs/originals/asne/data; for f in *.csv; do echo "=== $f ==="; h
+  asne asne: web_view https://pudding.cool/2017/10/asne/
+  bechdel bechdel: bash cd /home/user/RL_Study/report-gepa/runs/originals/bechdel && python3 -c " import pandas as pd m=pd.r
+  bechdel bechdel: web_view https://pudding.cool/2017/03/bechdel/
+  aapi-casting aapi-casting: web_view https://pudding.cool/2025/05/aapi-casting/
+  abortion-mazes abortion-mazes: bash cat data/states.csv
+  abortion-mazes abortion-mazes: web_view https://pudding.cool/2024/10/abortion-mazes/
+  aztec-gods aztec-gods: web_view https://pudding.cool/2022/06/aztec-gods/
+  banknotes banknotes: bash cd /home/user/RL_Study/report-gepa/runs/originals/banknotes; python3 -c " import pandas as pd d=pd.r
+  banknotes banknotes: web_view https://pudding.cool/2022/04/banknotes/
+  births births: bash cd /home/user/RL_Study/report-gepa/runs/originals/births && python3 -c " import pandas as pd d=pd.re
+  births births: web_view https://pudding.cool/2017/05/births/
+  authors authors: web_view https://pudding.cool/2020/02/authors/
+  authors authors: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('top-100.csv') print(df.shape) print(df.c
+  2022_02_redraft 2022_02_redraft: web_fetch https://pudding.cool/2022/02/redraft/
+  caption-contest caption-contest: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/caption-contest/ && ls -la /home/user/RL_Study
+  caption-contest caption-contest: web_fetch https://pudding.cool/projects/caption-contest/
+  brief-history brief-history: bash cd /home/user/RL_Study/report-gepa/runs/originals/brief-history; head -5 data/word_timelines.csv; ec
+  brief-history brief-history: web_view https://pudding.cool/2018/12/brief-history/
+  birthday-effect birthday-effect: web_view https://pudding.cool/2025/04/birthday-effect/
+  birthday-effect birthday-effect: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('birthdays.csv') print(df.shape) print(df
+  2022_02_redraft 2022_02_redraft: web_fetch https://pudding.cool/2022/02/redraft/
+  caption-contest caption-contest: web_fetch https://pudding.cool/projects/caption-contest/
+  bears-boys bears-boys: web_view https://pudding.cool/2025/07/kids-books/
+  anthems anthems: bash cd /home/user/RL_Study/report-gepa/runs/originals/anthems && python3 -c " import pandas as pd, numpy
+  caption-contest caption-contest: bash cd /home/user/RL_Study/report-gepa/runs/originals/caption-contest && python3 -c " import pandas as p
+  caption-contest caption-contest: web_view https://pudding.cool/projects/caption-contest/
+  boybands boybands: bash cd /tmp && curl -sL https://pudding.cool/2018/11/boy-bands/ -o bb.html && wc -c bb.html && grep -oE 
+  boybands boybands: bash cd /home/user/RL_Study/report-gepa/runs/originals/boybands && python3 -c " import pandas as pd b=pd.
+  boybands boybands: web_fetch https://pudding.cool/2018/11/boy-bands/#content
+  boybands boybands: web_fetch https://github.com/the-pudding/data/tree/master/boy-bands
+  apology apology: bash cd /home/user/RL_Study/report-gepa/runs/originals/apology && wc -l data/*.csv && python3 -c " import
+  apology apology: web_fetch https://pudding.cool/2020/01/apology/
+  ai ai: web_view https://pudding.cool/2024/07/ai/
+  ai ai: bash cd /home/user/RL_Study/report-gepa/runs/originals/ai; python -c " import pandas as pd df=pd.read_csv
+  2022_02_redraft 2022_02_redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/2022_02_redraft && python3 -c " import pandas as p
+  ai ai: bash cd /tmp; curl -sL "https://pudding.cool/2024/07/ai/" -o ai.html; ls -la ai.html; wc -c ai.html
+  ai ai: web_fetch https://pudding.cool/2024/07/ai/
+  anthems anthems: bash cd /home/user/RL_Study/report-gepa/runs/originals/anthems && python3 -c " import pandas as pd, numpy
+  book-covers book-covers: bash cd /home/user/RL_Study/report-gepa/runs/originals/book-covers && mkdir -p tmp && cd tmp && curl -L -

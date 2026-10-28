@@ -1,0 +1,92 @@
+[
+  {
+    "id": "finalist-ranking",
+    "source": "To rank the biggest carry jobs, I decided to look at the WAR share among the top three players on a team.",
+    "claim": "Ranking the Finals teams by the leading player's share of the top-three WAR puts 2018 CLE first (LeBron James, 0.681), followed by 2006 MIA (Dwyane Wade, 0.638), 1984 BOS (Larry Bird, 0.614), 2007 CLE (LeBron James, 0.604) and 2013 MIA (LeBron James, 0.598); the 90th and last is 1979 WSB (Wes Unseld, 0.361).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(p[p.mp>=150].sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda x: pd.Series({'player':x.player_name.iloc[0],'share':x.war.iloc[0]/x.war.head(3).sum(),'winner':x.winner.iloc[0]})).assign(rank=lambda r: r.share.rank(ascending=False,method='min').astype(int)).sort_values('share',ascending=False)).to_string()"
+  },
+  {
+    "id": "2018-cavs-reign-supreme",
+    "source": "The data say that LeBron’s (losing) effort with the 2018 Cavaliers reigns supreme.",
+    "claim": "The 2018 CLE team ranks first with LeBron James taking 68% (0.681) of its top-three WAR, and it is a Finals loser (winner False).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(p[p.mp>=150].sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda x: pd.Series({'player':x.player_name.iloc[0],'share':x.war.iloc[0]/x.war.head(3).sum(),'winner':x.winner.iloc[0]})).assign(rank=lambda r: r.share.rank(ascending=False,method='min').astype(int)).sort_values('share',ascending=False)).head(1)"
+  },
+  {
+    "id": "wade-tops-winners",
+    "source": "Wade tops the list for finals winners, carrying the load with an aging Shaq",
+    "claim": "Among Finals winners, the highest-ranked team is 2006 MIA, with Dwyane Wade at 64% (0.638) of the top-three WAR, followed by 1984 BOS and Larry Bird at 61% (0.614).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(p[p.mp>=150].sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda x: pd.Series({'player':x.player_name.iloc[0],'share':x.war.iloc[0]/x.war.head(3).sum(),'winner':x.winner.iloc[0]})).assign(rank=lambda r: r.share.rank(ascending=False,method='min').astype(int)).sort_values('share',ascending=False)).query('winner').sort_values('share',ascending=False).head(2)"
+  },
+  {
+    "id": "dirk-first-appearance",
+    "source": "Dirk’s final run is often cited as a carry job, but the data prefer his first appearance",
+    "claim": "Dirk Nowitzki's 2006 DAL ranks 15th with 51% (0.515) of the top-three WAR, while his 2011 DAL ranks 72nd at 40% (0.399).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(p[p.mp>=150].sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda x: pd.Series({'player':x.player_name.iloc[0],'share':x.war.iloc[0]/x.war.head(3).sum(),'winner':x.winner.iloc[0]})).assign(rank=lambda r: r.share.rank(ascending=False,method='min').astype(int)).sort_values('share',ascending=False)).loc[[(2006,'DAL'),(2011,'DAL')]]"
+  },
+  {
+    "id": "hakeem-1994-rank",
+    "source": "The biggest surprise here as Hakeem’s first title usually sits atop most lists",
+    "claim": "Hakeem Olajuwon's first title team, 1994 HOU, ranks 26th, with Olajuwon taking 49% (0.489) of the top-three WAR.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(p[p.mp>=150].sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda x: pd.Series({'player':x.player_name.iloc[0],'share':x.war.iloc[0]/x.war.head(3).sum(),'winner':x.winner.iloc[0]})).assign(rank=lambda r: r.share.rank(ascending=False,method='min').astype(int)).sort_values('share',ascending=False)).loc[[(1994,'HOU')]]"
+  },
+  {
+    "id": "bucks-bottom",
+    "source": "Less minutes for Giannis and some stellar support put this in the bottom",
+    "claim": "2021 MIL ranks 89th, with Giannis Antetokounmpo at 36% (0.362) of the top-three WAR; he played 800 minutes, fewer than Jrue Holiday (912) and Khris Middleton (922), whose 3.61 and 3.24 WAR trailed his 3.90.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(lambda x: (lambda t: x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).head(3).assign(share=lambda y: y.war/y.groupby(['season','team']).war.transform('sum')).merge(t[['season','team','rank']], on=['season','team']))(x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda y: pd.Series({'player':y.player_name.iloc[0],'share':y.war.iloc[0]/y.war.head(3).sum()})).assign(rank=lambda t: t.share.rank(ascending=False,method='min').astype(int)).reset_index()))(p[p.mp>=150]).query(\"season==2021 and team=='MIL'\")[['player_name','war','mp','share','rank']]"
+  },
+  {
+    "id": "pistons-no-i",
+    "source": "The 2005 Pistons represents the “no ‘I’ in team” philosophy.",
+    "claim": "The 2005 DET top three are close together: Chauncey Billups 4.40 WAR in 985 minutes, Ben Wallace 4.06 in 979 and Tayshaun Prince 3.39 in 1,023, splitting the top-three WAR 37% (0.371), 34% (0.343) and 29% (0.286).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(lambda x: (lambda t: x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).head(3).assign(share=lambda y: y.war/y.groupby(['season','team']).war.transform('sum')).merge(t[['season','team','rank']], on=['season','team']))(x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda y: pd.Series({'player':y.player_name.iloc[0],'share':y.war.iloc[0]/y.war.head(3).sum()})).assign(rank=lambda t: t.share.rank(ascending=False,method='min').astype(int)).reset_index()))(p[p.mp>=150]).query(\"season==2005 and team=='DET'\")[['player_name','war','mp','share','rank']]"
+  },
+  {
+    "id": "bulls-lakers-duos",
+    "source": "The 1998 Bulls and the 2020 Lakers are prime examples of a dynamic duo.",
+    "claim": "The 1998 CHI top two, Michael Jordan (4.67 WAR, 872 minutes) and Scottie Pippen (4.58, 836), and the 2020 LAL top two, Anthony Davis (6.19, 769) and LeBron James (5.23, 762), are far ahead of their third players (2.78 and 1.88 WAR).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(lambda x: (lambda t: x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).head(3).assign(share=lambda y: y.war/y.groupby(['season','team']).war.transform('sum')).merge(t[['season','team','rank']], on=['season','team']))(x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda y: pd.Series({'player':y.player_name.iloc[0],'share':y.war.iloc[0]/y.war.head(3).sum()})).assign(rank=lambda t: t.share.rank(ascending=False,method='min').astype(int)).reset_index()))(p[p.mp>=150]).query(\"(season==1998 and team=='CHI') or (season==2020 and team=='LAL')\")[['season','team','player_name','war','mp','share']]"
+  },
+  {
+    "id": "single-handed-carry-jobs",
+    "source": "And finally we have Duncan leading the 2003 Spurs, Wade with 2006 Heat, and LeBron basically every year, but notably with the 2018 Cavs representing the single-handed carry jobs.",
+    "claim": "The leading player's share of the top-three WAR is 56% (0.559) for 2003 SAS (Tim Duncan, 6.76 WAR, against Manu Ginobili's 3.15 and David Robinson's 2.18), 64% (0.638) for 2006 MIA (Dwyane Wade, 6.36, against James Posey's 2.01 and Shaquille O'Neal's 1.60), and 68% (0.681) for 2018 CLE (LeBron James, 5.00, against Kyle Korver's 1.22 and George Hill's 1.12).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(lambda x: (lambda t: x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).head(3).assign(share=lambda y: y.war/y.groupby(['season','team']).war.transform('sum')).merge(t[['season','team','rank']], on=['season','team']))(x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda y: pd.Series({'player':y.player_name.iloc[0],'share':y.war.iloc[0]/y.war.head(3).sum()})).assign(rank=lambda t: t.share.rank(ascending=False,method='min').astype(int)).reset_index()))(p[p.mp>=150]).query(\"(season==2003 and team=='SAS') or (season==2006 and team=='MIA') or (season==2018 and team=='CLE')\")[['season','team','player_name','war','mp','share','rank']]"
+  },
+  {
+    "id": "lebron-miami",
+    "source": "LeBron was just so good in Miami that even with other stars his numbers were crazy",
+    "claim": "LeBron James took 60% (0.598) of 2013 MIA's top-three WAR and 59% (0.592) of 2014 MIA's, ranking fifth and sixth, with Dwyane Wade at 2.35 WAR in 2013 and Chris Bosh at 1.45 in 2014.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "(lambda x: (lambda t: x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).head(3).assign(share=lambda y: y.war/y.groupby(['season','team']).war.transform('sum')).merge(t[['season','team','rank']], on=['season','team']))(x.sort_values(['season','team','war'],ascending=[True,True,False]).groupby(['season','team']).apply(lambda y: pd.Series({'player':y.player_name.iloc[0],'share':y.war.iloc[0]/y.war.head(3).sum()})).assign(rank=lambda t: t.share.rank(ascending=False,method='min').astype(int)).reset_index()))(p[p.mp>=150]).query(\"(season==2013 and team=='MIA') or (season==2014 and team=='MIA')\")[['season','team','player_name','war','mp','share','rank']]"
+  }
+]

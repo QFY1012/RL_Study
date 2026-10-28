@@ -1,0 +1,92 @@
+[
+ {
+  "id": "baby-most-songs",
+  "source": "In an analysis of over 15,000 hit songs in the US, 1,832 of them referenced someone referred to as Baby. The next closest name, Jesus, was found in only 142 songs.",
+  "claim": "Baby appears in 1,832 songs, while Jesus, the next closest name, appears in 142.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).groupby('name').size().sort_values(ascending=False).head(2)"
+ },
+ {
+  "id": "top-names-excluding-baby",
+  "source": "Most Common Names*\nBy count of songs\n*Excluding “Baby” with 1,832 songs",
+  "claim": "Excluding Baby, Jesus leads the ten most-mentioned names with 142 songs, followed by John, Joe, Mary, Michael, Jay, Bobby, Heaven, Mike and Jack.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna() & (names.name != 'Baby')].drop_duplicates(['artist','song','name']).groupby('name').size().reset_index(name='n').sort_values(['n','name'], ascending=[False,True]).head(10).set_index('name')['n']"
+ },
+ {
+  "id": "repeat-name-songs",
+  "source": "Songs with the Most Instances of the Same Name\nCount of name mentions in a single song",
+  "claim": "The songs with the most mentions of one name are Mickey (61, Toni Basil), Baby (56, Justin Bieber), Scotty (55, Lustra), Rhonda (51, The Beach Boys), Marco (49, Bow Wow featuring Soulja Boy), Kitty (43, Avril Lavigne), Mary (39, Run-D.M.C.), Bennie (38, Elton John), Annie (36, Alien Ant Farm), Floy (35, The Supremes) and Barbara Ann (35, The Beach Boys).",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].groupby(['artist','song','name']).size().sort_values(ascending=False).head(11)"
+ },
+ {
+  "id": "unique-names-songs",
+  "source": "Songs that Contain the Most Unique Names\nBy count of names mentioned at least once",
+  "claim": "We Didn't Start The Fire contains the most distinct names (27), followed by I Do The Rock (22), Wild, Wild West (21) and Dreams (19).",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].drop_duplicates(['song','name']).groupby('song').size().sort_values(ascending=False).head(4)"
+ },
+ {
+  "id": "mambo-no5-not-top-ten",
+  "source": "Though, with only 9 distinct names repeated several times, Lou Bega’s viral hit didn’t even crack the top 10 songs with the most number of names.",
+  "claim": "Mambo No. 5 has 9 distinct names and ranks 26th, outside the top 10, every member of which has at least 14 distinct names.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "(lambda c: c.to_frame('n').assign(rank=c.rank(ascending=False, method='min')).loc[lambda d: (d['rank'] <= 10) | d.index.str.contains('Mambo')])(names[names.nonPerson.isna()].drop_duplicates(['song','name']).groupby('song').size().sort_values(ascending=False))"
+ },
+ {
+  "id": "top-name-dropping-artists",
+  "source": "Artists Who Use the Most Unique Names\nBy count of names that appear in a collection of songs at least once",
+  "claim": "Drake used 111 distinct names across 49 songs, Eminem 95 across 31, Lil Wayne 52 across 21, Kanye West 43 across 20, and Future 39 across 16.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).groupby('artist').agg(names=('name','nunique'), songs=('song','nunique')).sort_values('names',ascending=False).head(5)"
+ },
+ {
+  "id": "artists-own-names",
+  "source": "the top 3 (Drake, Eminem, and Lil Wayne) use their own name in more songs than any other name in their repertoire",
+  "claim": "For Drake, Eminem and Lil Wayne, their own name is the name they use in the most songs: Drake in 9, Marshall (Eminem) in 9, and Wayne in 7.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).query(\"artist in ['Drake','Eminem','Lil Wayne']\").groupby(['artist','name']).size().sort_values(ascending=False).groupby(level=0, sort=False).head(1)"
+ },
+ {
+  "id": "baby-most-common-each-decade",
+  "source": "To the surprise of (probably) no one, “Baby” has been holding down the spot of most common name to sing about for the past 5 decades.",
+  "claim": "Baby is the most-mentioned name in every decade from the 1970s to the 2010s, with 198 songs in the 1970s, 230 in the 1980s, 273 in the 1990s, 413 in the 2000s and 521 in the 2010s.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).assign(decade=lambda d: (d.year // 10 * 10).astype('Int64')).query('1970 <= decade <= 2010').groupby(['decade','name']).size().sort_values(ascending=False).groupby(level=0).head(1)"
+ },
+ {
+  "id": "wayne-drake-nicki-2010s",
+  "source": "We also see the rise in naming either oneself or other reputable artists becoming more common in the 2010s with mentions of Wayne, Drake, and Nicki breaking into the top 10.",
+  "claim": "In the 2010s Nicki appears in 48 songs, Wayne in 34 and Drake in 33, and all three rank in the top 10.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "(lambda c: c.to_frame('n').assign(rank=c.rank(ascending=False, method='min')).loc[['Nicki','Wayne','Drake']])(names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).assign(decade=lambda d: d.year // 10 * 10).query('decade == 2010').groupby('name').size())"
+ },
+ {
+  "id": "top-ten-names-per-decade",
+  "source": "Top 10 Most Common Names Per Decade\nBy count of songs that mention a name at least once",
+  "claim": "Baby leads each decade's top ten with 198, 230, 273, 413 and 521 songs respectively; the rest of the ten are, for the 1970s, Jesus, John, Joe, Mary, Bobby, Heaven, Jack, Jane and Jim; for the 1980s, Heaven, Johnny, Bobby, Tom, Romeo, Jack, Jesse, Jesus and Joe; for the 1990s, Jesus, Heaven, Joe, John, Jay, Johnny, Billy, Jack and Mary; for the 2000s, Jesus, Jay, Joe, Mike, Chris, Kelly, Mary, Wayne and John; and for the 2010s, Jesus, Michael, Nicki, Wayne, Drake, Mike, John, Jay and Tom.",
+  "tables": {
+   "names": "data/allNames.csv"
+  },
+  "code": "(lambda c: c.reset_index(name='n').sort_values(['decade','n','name'], ascending=[True,False,True]).groupby('decade').head(10).set_index(['decade','name'])['n'])(names[names.nonPerson.isna()].drop_duplicates(['artist','song','name']).assign(decade=lambda d: (d.year // 10 * 10).astype('Int64')).query('1970 <= decade <= 2010').groupby(['decade','name']).size())"
+ }
+]

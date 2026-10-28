@@ -1,0 +1,54 @@
+[
+ {
+  "source": "the name Karen first appeared in the female Top 20 in 1941 and spent 30 years there until it dropped out in 1971.",
+  "why": "data/byYear.csv contains no rows for Karen and no rank data, so the 1941 entry, the 30-year span and the 1971 exit cannot be computed."
+ },
+ {
+  "source": "By the 1990s, the name had fallen out of the Top 100.",
+  "why": "The file has no Karen rows and no Top-100 ranks; only normalized name proportions are present."
+ },
+ {
+  "source": "when the name hit its peak at #3 in 1965",
+  "why": "The peak rank requires Karen's rank among all female names by year; Karen is absent and the file has no ranks."
+ },
+ {
+  "source": "the US was 88.6% White at the time",
+  "why": "This is an external census figure; data/byYear.csv has no race or population data."
+ },
+ {
+  "source": "high correlations between the names Karen and Kathy despite Kathy being a less popular name than Karen, overall",
+  "why": "Kathy is in the file but Karen is not, so neither the correlation nor the overall popularity comparison can be computed."
+ },
+ {
+  "source": "Kathy 0.91 correlation ... Brenda 0.88 correlation ... Pamela 0.88 correlation ... Cheryl 0.87 correlation ... Cynthia 0.85 correlation ... Deborah 0.84 correlation ... Debbie 0.83 correlation ... Debra 0.82 correlation ... Sandra 0.78 correlation ... Sharon 0.78 correlation ... Linda 0.76 correlation ... Diane 0.75 correlation ... Susan 0.75 correlation ... Julie 0.71 correlation",
+  "why": "Each label is a Kendall rank correlation with Karen; data/byYear.csv has no Karen trajectory to correlate against, so the correlations and their ranking cannot be computed."
+ },
+ {
+  "source": "David 0.84 correlation ... Gary 0.80 correlation ... Mark 0.75 correlation ... Steven 0.72 correlation ... Dennis 0.71 correlation",
+  "why": "Each label is a Kendall rank correlation with Karen; data/byYear.csv has no Karen trajectory to correlate against, so the correlations cannot be computed."
+ },
+ {
+  "source": "In 10 Yrs Lisa 0.87 ... In 20 Yrs Kelly 0.89 ... In 30 Yrs Danielle 0.93",
+  "why": "The lagged correlations compare Karen's shifted trajectory with other names; Karen's trajectory is absent from data/byYear.csv, so neither the top names nor the 0.87/0.89/0.93 values can be computed."
+ },
+ {
+  "source": "In 10 Yrs Jeffrey 0.89 ... In 20 Yrs Eric 0.87 ... In 30 Yrs Matthew 0.9",
+  "why": "The lagged correlations compare Karen's shifted trajectory with other names; Karen's trajectory is absent from data/byYear.csv, so neither the top names nor the 0.89/0.87/0.9 values can be computed."
+ },
+ {
+  "source": "Lisa 0.87 correlation ... Cindy 0.84 correlation ... Julie 0.84 correlation ... Lori 0.84 correlation ... Tracy 0.82 correlation ... Tina 0.81 correlation ... Tammy 0.79 correlation ... Angela 0.76 correlation ... Michelle 0.74 correlation ... Debbie 0.73 correlation ... Debra 0.73 correlation ... Kimberly 0.73 correlation",
+  "why": "Each label is a lagged Kendall correlation with Karen; data/byYear.csv has no Karen trajectory, so the correlations cannot be computed."
+ },
+ {
+  "source": "Jeffrey 0.89 correlation ... Scott 0.88 correlation ... Michael 0.87 correlation ... Mark 0.85 correlation ... Timothy 0.85 correlation ... Steven 0.79 correlation ... Kevin 0.78 correlation ... Brian 0.77 correlation",
+  "why": "Each label is a lagged Kendall correlation with Karen; data/byYear.csv has no Karen trajectory, so the correlations cannot be computed."
+ },
+ {
+  "source": "Turns out, that “BBQ Becky” and “Becky with the good hair” aren’t the names most closely correlated with Karen.",
+  "why": "Becky is not in data/byYear.csv and Karen's reference trajectory is absent, so the comparison cannot be computed."
+ },
+ {
+  "source": "The name Karen is largely reserved for women (especially White women) between 45–65",
+  "why": "The file has no age or race/ethnicity fields and no Karen rows, so this claim cannot be checked from it."
+ }
+]

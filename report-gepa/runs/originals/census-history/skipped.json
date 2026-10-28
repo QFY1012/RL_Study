@@ -1,0 +1,278 @@
+[
+  {
+    "source": "Veterans’ questions have appeared on every census since 1910, excluding 1920.",
+    "why": "The file has veteran-status rows in 1910 and in every census from 1930 through 2000 but none in 1920, 2010 or 2020; the 'every census since 1910' claim does not hold across the file, so the finding is not reproduced without restricting it to 1910-2000, a range the story does not state."
+  },
+  {
+    "source": "they were routinely asked throughout the twentieth century as the country engaged in more wars and military expeditions, added new branches of the armed services, and expanded its reserves.",
+    "why": "The file has veteran-status questions in 1910 and 1930-2000 but none in 1920, 2010 or 2020; the qualitative 'routinely' claim and the branch/reserve details are not measured."
+  },
+  {
+    "source": "The US became the first country to conduct a regular periodical count of its people.",
+    "why": "A cross-country historical claim; the file contains only U.S. census questions and no information on other countries."
+  },
+  {
+    "source": "In addition to demographic data, the 1810 census instructed marshals to record manufacturing information.",
+    "why": "The file has no 1810 manufacturing questions; the 1810 rows are five population questions only."
+  },
+  {
+    "source": "The 1840 census used an unwieldy 80-column questionnaire.",
+    "why": "The file records 28 catalogued 1840 questions and no count of form columns, so it cannot produce 80."
+  },
+  {
+    "source": "The 1910 census introduced a question on mother tongue, which provided another data point about ethnicity or cultural heritage that was in some cases (like for Yiddish-speaking Jews from Russia or Poland) more specific than their country of birth.",
+    "why": "The earliest row explicitly labelled 'Mother tongue' is 1920; the 1910 row records ability to speak English and the language spoken, not mother tongue."
+  },
+  {
+    "source": "Initial unemployment numbers were criticized for being too low and another count was conducted the following year to capture the severity of what would become the Great Depression.",
+    "why": "The file contains no 1931 recount and no unemployment values, only the 1930 question 'At work last work day'."
+  },
+  {
+    "source": "Congress suspended these rules in 1942, allowing the use of data from the 1940 census to locate and imprison Japanese-Americans in internment camps.",
+    "why": "A historical claim about data use; the question catalogue contains no internment or disclosure information."
+  },
+  {
+    "source": "After years of public debate, a question on religion was almost added to the 1960 census.",
+    "why": "The file has no religion question in any year and does not record questions that were proposed but not asked."
+  },
+  {
+    "source": "The long form census was eliminated and questions about education, housing, and jobs were shifted to the annual American Community Survey, which debuted in 2005.",
+    "why": "The file has only a single 2010 placeholder row for ACS-shifted questions; it has no ACS question rows and no 2005 debut information."
+  },
+  {
+    "source": "Some marshals chose to ask about the “professions and occupations” of the heads of households they visited, but it was not an official census question until decades later.",
+    "why": "The file records 'Professions and Occupations' as a 1790 question, contradicting the claim that it was not an official question until later."
+  },
+  {
+    "source": "In the 20th century, the number of occupation-related questions dramatically increased with the Depression and continued with growing opportunities for women and people of color in the workforce.",
+    "why": "Occupation-related rows go from 3 in 1920 to 4 in 1930 and 19 in 1940; the large increase is in 1940, not with the 1930 Depression, and the trend wording has no exact threshold."
+  },
+  {
+    "source": "In addition to the population census, this year saw the addition of separate schedules about agriculture, industry, and “social statistics” (topics like local taxes, newspapers, and churches) that enumerators collected from farms, businesses, and municipalities.",
+    "why": "The file has no separate-schedule field or agriculture/industry/social-statistics schedule rows for 1860."
+  },
+  {
+    "source": "The 1880 census revealed that more than half of the labor force worked in manufacturing, mining, trade, transportation, or services—industries concentrated in cities and far removed from America’s agrarian origins.",
+    "why": "A labor-force statistic; the file contains question descriptions, not employment counts."
+  },
+  {
+    "source": "Until the 16th Amendment (passed in 1909 and ratified in 1913), the federal government collected taxes based on census population counts.",
+    "why": "A historical/legal claim; the file contains no tax collections data."
+  },
+  {
+    "source": "The first time the question was asked, it covered just two sources: wages from work, and income over $50 from any other source.",
+    "why": "The 1940 file has salary and outside-income questions, but no $50 threshold or income amounts are recorded."
+  },
+  {
+    "source": "This year’s questionnaire also asked what time people left for work.",
+    "why": "The 1990 rows include commute mode, number in carpool and commute duration, but no question on the time people left for work; that question appears in 2000."
+  },
+  {
+    "source": "Questions about occupation, income, commutes, and unemployment were moved from the census to the American Community Survey (ACS) in the mid-2000s, leaving the census to focus on demographic information only.",
+    "why": "The file has no ACS question rows and no mid-2000s migration record beyond the 2010 placeholder."
+  },
+  {
+    "source": "Questions on the census reflect the country’s progression from a primarily agricultural economy to one of manufacturing, commerce, and services.",
+    "why": "A qualitative interpretation; the file has only question labels, not economic output or employment shares."
+  },
+  {
+    "source": "Apportionment in early America applied the Three-Fifths Compromise, which counted enslaved black Americans as ⅗ of a person for purposes of representation and taxes.",
+    "why": "A historical/legal claim; the file contains no apportionment counts or Three-Fifths calculation."
+  },
+  {
+    "source": "However, the 2010 census still undercounted 1.5 million minorities, including 2.1 percent of black Americans and 1.5 percent of Hispanics.",
+    "why": "Undercount estimates are not in the question catalogue."
+  },
+  {
+    "source": "After the Civil War, the census dropped the separate slave questionnaire.",
+    "why": "The file has no slave-schedule rows after 1840 (1850 and 1860 already lack them), so it cannot locate a post-Civil-War drop."
+  },
+  {
+    "source": "In 1880 and some of the following decades, a separate schedule was used to count the “Indian Population” on reservations.",
+    "why": "The file has no separate Indian-population schedule field or rows."
+  },
+  {
+    "source": "Previous censuses problematically let the enumerator decide a person’s race by looking at them, but in 1980 respondents were allowed to answer for themselves.",
+    "why": "Self-identification rules are not recorded in the file."
+  },
+  {
+    "source": "Individuals could still only respond with one race, even if they identified as multiracial.",
+    "why": "Response rules and multiracial reporting are not recorded in the file."
+  },
+  {
+    "source": "the shortest since 1820",
+    "why": "The 2000 short form has 7 non-sampled questions in the file, but 1960 has 6 on the same basis, so the 'shortest since 1820' ranking is not reproduced."
+  },
+  {
+    "source": "Previous censuses required respondents to select only one category when identifying their race, but in 2000 they were allowed to “select one or more.”",
+    "why": "Response rules and the one-or-more option are not recorded in the file."
+  },
+  {
+    "source": "The group labeled “other free persons” was defined by a process of elimination: those who were not free white people and were not enslaved.",
+    "why": "A definition of an answer category, not a quantitative finding; the file gives no membership rule."
+  },
+  {
+    "source": "The census is mandated to count residents, not citizens, but questions about naturalization, citizenship, and national origin have been important tools for understanding the makeup and growth of the country’s population.",
+    "why": "A legal/historical framing with no testable number in the question catalogue."
+  },
+  {
+    "source": "In many decades, the population grew faster from immigration than from the domestic birth rate.",
+    "why": "Population and birth-rate data are not in the file."
+  },
+  {
+    "source": "The explosion of European immigration in the second half of the 19th century led to the addition of census questions about a person’s place of birth and native language and those of their parents.",
+    "why": "The file records the added questions but has no immigration-volume data, so the causal trend cannot be reproduced."
+  },
+  {
+    "source": "In some cases these were intended as proxies for religion or ethnicity, which were not asked about directly.",
+    "why": "Intent behind questions is not recorded in the file."
+  },
+  {
+    "source": "To capture these changes, the 1890 census asked what “language or dialect” was spoken at home.",
+    "why": "The 1890 row records ability to speak English and the language spoken if not English, not a language-or-dialect-at-home question; the first explicit mother-tongue question is 1920."
+  },
+  {
+    "source": "The census made some adjustments to capture changing demographics and immigration, including counting people where they regularly slept instead of where they were during the count.",
+    "why": "Enumeration location is not recorded in the file."
+  },
+  {
+    "source": "After the 1941 bombing of Pearl Harbor, data from the previous year’s census was used to locate Japanese-Americans and imprison them in internment camps.",
+    "why": "A historical claim about data use; the file has no internment information."
+  },
+  {
+    "source": "The question remains on the ACS.",
+    "why": "The file has no ACS question rows."
+  },
+  {
+    "source": "After much criticism for anti-immigrant bias, a proposed question about citizenship status was dropped from the 2020 census plan after the Supreme Court ruled that the government’s reasons for asking it were illegitimate.",
+    "why": "The file records only final questions; it has no proposed 2020 citizenship question or court information (2020 simply lacks a citizenship row)."
+  },
+  {
+    "source": "Early American leaders like James Madison wanted to use questions about population by sex and age categories to assess the potential size of the army that the country could draft into service (only men were considered for enlistment).",
+    "why": "A historical statement of intent; the file records the age/sex questions but not the reasoning behind them."
+  },
+  {
+    "source": "After the 1860 count, census data similarly showed the Union that they had many times the fighting age population of the Confederacy.",
+    "why": "The file has no state or army population counts."
+  },
+  {
+    "source": "During the Civil War the census was used to measure the relative military strength, including by Union General William Tecumsah Sherman, who wrote “No military expedition was ever based on sounder or surer data.”",
+    "why": "A historical claim with no data in the question catalogue."
+  },
+  {
+    "source": "Each decade from 1950–1970, the list of wars a veteran might have fought in grew: World War II, then Korea, then Vietnam.",
+    "why": "1950 uses separate WWII, WWI and Other-service questions rather than a list, and only 1960 and 1970 have option lists; the three-decade growth is not reproduced."
+  },
+  {
+    "source": "The question was changed from “If this is a man…” to “Has this person…” ever served in the U.S. Armed Forces.",
+    "why": "Exact question wording history is not recorded; the file shows only that the 1970 question was asked of men and the 1980 question of everyone 15 or over."
+  },
+  {
+    "source": "collecting the name and age of all persons receiving pensions for Revolutionary or military services",
+    "why": "The 1840 row records a pensioners question, but the file does not record separate name and age fields."
+  },
+  {
+    "source": "those from both the Union and the Confederacy",
+    "why": "The 1890 question text says 'Soldier in Civil War or widow of one' but does not record which side the soldier served on."
+  },
+  {
+    "source": "Enumerators collected responses haphazardly by hand until a standardized table was introduced in 1830.",
+    "why": "A historical process claim; the file does not record form layout or collection method."
+  },
+  {
+    "source": "The door-to-door collection system remained more or less the same until 1960, when machine-readable forms were mailed straight to households, followed by telephone and internet surveys in recent decades.",
+    "why": "Collection mode is not recorded in the file."
+  },
+  {
+    "source": "Statistical sampling was introduced in 1940: not everyone was asked every question because statisticians could make inferences from a random subset of people.",
+    "why": "A methodological history; the file labels sampled questions but has no sampling introduction date or inference details."
+  },
+  {
+    "source": "The census asked more and more questions to sampled individuals and households about topics like education, family life, and occupation.",
+    "why": "A vague trend; sampled-question counts rise, but the story gives no exact measure or period to test."
+  },
+  {
+    "source": "In 1830, that changed with the first ever national printed schedule.",
+    "why": "A historical form-layout claim not recorded in the file."
+  },
+  {
+    "source": "The 1890 census form flipped its layout so each person was one column instead of one row. This format was short lived and inefficient — it allowed just five responses per sheet, compared to 25 per sheet — and it was switched back in 1900.",
+    "why": "Form layout and responses per sheet are not recorded in the file."
+  },
+  {
+    "source": "In 1902, a formal bureau was established.",
+    "why": "A historical institutional fact not in the file."
+  },
+  {
+    "source": "Two out of every 40 respondents (5%) were asked additional questions, including a new housing questionnaire.",
+    "why": "The file has no respondent counts or sample share; Unit labels identify sampled questions but cannot produce 2 of 40."
+  },
+  {
+    "source": "Shortly after the 1950 count, the Census Bureau began to use its first non-military computer in order to increase the speed and accuracy of aggregating the responses from individual census sheets.",
+    "why": "A historical technology fact not in the file."
+  },
+  {
+    "source": "The first mail-out census debuted in 1960. Having people fill out their own forms reduced errors introduced by enumerators. Each household received one form, so the bureau gave the long form questionnaire to a sample of households (and everyone in them) rather than sampled individuals.",
+    "why": "Mail-out history and form distribution are not recorded in the file."
+  },
+  {
+    "source": "In the decades following the Civil Rights movement, minority groups, who were often undercounted, advocated for change. The census expanded race and ethnicity questions and conducted special counts for hard-to-count populations.",
+    "why": "A qualitative historical trend; the file has question labels but no undercount or advocacy data."
+  },
+  {
+    "source": "In 1990, the Census Bureau debuted its TIGER System, which computerized and mapped geographic boundaries. Detailed census data was also made available to anyone with a personal computer for the first time on CD-ROM.",
+    "why": "A historical technology fact not in the file."
+  },
+  {
+    "source": "By law, individual-level census records are kept sealed until 72 years after collection, even though aggregate data are published almost immediately. That means the answers you give in 2020 won’t be publicly available until 2092.",
+    "why": "A legal/historical claim; the file contains no release-policy data."
+  },
+  {
+    "source": "Early questions about housing focused on land value, property ownership, and agricultural output.",
+    "why": "A qualitative summary; the file has question labels but no measure of focus over time."
+  },
+  {
+    "source": "In an attempt to measure the nation’s aggregate wealth, the 1850 census included questions about the value of people’s real estate (land and house) and personal estate (individual belongings).",
+    "why": "The 1850 file has a real-estate-value question but no personal-estate question; personal estate first appears in 1860."
+  },
+  {
+    "source": "The financial range was divided by plot size: under 10 acres was valued at either over or under $50 and over 10 acres was valued at over or under $250.",
+    "why": "The 1960 file has the opposite thresholds: under 10 acres uses $250 and more than 10 acres uses $50."
+  },
+  {
+    "source": "A question about whether a residence was rented or owned continued to appear on the housing and long form questionnaires, but it was also reintroduced in the short form questionnaire (given to 100% of the population) in 2000.",
+    "why": "The file has no short-form flag; it shows rent-or-own rows in the 1990 housing questionnaire and in both housing and non-sampled 2000 rows, but not the history of reintroduction."
+  },
+  {
+    "source": "Like much of the long form population questionnaire, the housing questionnaire was merged after 2000 into the ACS, where many of the same questions are still asked.",
+    "why": "The file has no ACS housing questions."
+  },
+  {
+    "source": "The census and the country have changed a lot in 24 decades—sometimes incrementally, other times dramatically.",
+    "why": "A summary statement without a specific measurable claim."
+  },
+  {
+    "source": "One of the longest continuously asked questions first appeared in 1850: “Profession, Occupation, or Trade.”",
+    "why": "The exact wording appears from 1850 to 1940 only; later censuses use differently worded occupation questions, so continuous asking through the present is not reproduced."
+  },
+  {
+    "source": "A wording alteration in 1980 marked the first time that data on women veterans had ever been gathered in a national survey.",
+    "why": "The file records the 1980 change in Asked of from Men to 15 or over but has no respondent sex counts or first-ever women-veterans measure."
+  },
+  {
+    "source": "Mexican—the first and only Hispanic origin option for several decades.",
+    "why": "The 1930 race options include Mexican, but the file does not label race options as Hispanic-origin options or establish that this was the only one; a separate Hispanic-origin question appears in 1970."
+  },
+  {
+    "source": "In a hint to how the census would aggregate the data, answers were collected in five or 10-year ranges.",
+    "why": "The 1970 answer options are five- and 10-year ranges, but the file does not record the aggregation intent."
+  },
+  {
+    "source": "After the 1965 Voting Rights Act, the census collected more detailed data to help enforce non-discrimination and equal representation.",
+    "why": "A historical/legal claim; the file does not record the Voting Rights Act or the enforcement purpose."
+  },
+  {
+    "source": "This reflects more modern ideas about pluralism and diversity within, and not just between, traditional race categories.",
+    "why": "A qualitative interpretation, not a measurable claim in the question catalogue."
+  }
+]

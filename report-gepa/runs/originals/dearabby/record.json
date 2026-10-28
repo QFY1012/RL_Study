@@ -1,0 +1,47 @@
+{
+ "id": "dearabby",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 239,
+  "steps": 22,
+  "tools": 26,
+  "nudged": 0,
+  "usage": {
+   "input": 23598,
+   "output": 28510
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "hiv-aids-1980s-presence",
+   "basis": "Output: 1985=5, 1986=9, 1987=15, 1988=16, 1989=15.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hiv-aids-decline",
+   "basis": "Output 1985-1993: 5, 9, 15, 16, 15, 7, 12, 15, 11; peak 16 in 1988. Output 2008-2017: 0, 1, 1, 0, 0, 1, 2, 1, 2, 0, all <=2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "internet-mentions-late-90s",
+   "basis": "Output 1985-1994 all 0; 1995=2, 1996=1, 1997=3, 1998=6, 1999=2, 2003=12.",
+   "verdict": "ok"
+  },
+  {
+   "id": "transgender-mentions-2010s",
+   "basis": "Output 1985-1999 all 0; 2000=1; 2009=1; 2013=3, 2014=4, 2016=1, 2017=4.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 31
+}

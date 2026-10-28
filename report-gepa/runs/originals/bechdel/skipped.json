@@ -1,0 +1,58 @@
+[
+  {
+    "source": "On bechdeltest.com, a site for crowdsourcing Bechdel Test results, about 40% of films don't pass.",
+    "why": "The 4,000 films in movies2.csv contain 1,494 failures (37.35%), and the story's own chart reports 37%, not 40%. The 40% figure describes the whole site, which these files do not contain."
+  },
+  {
+    "source": "It's a low bar, but many good movies don't pass. Birdman fails. Avatar fails. Fucking Toy Story fails.",
+    "why": "Avatar (rating 2) and Toy Story (rating 1) fail, but Birdman has rating 3 in movies2.csv and therefore passes, so the example set cannot be reproduced as stated."
+  },
+  {
+    "source": "The seven films written entirely by women all pass the Bechdel test.",
+    "why": "Among the 200 highest-grossing films, 8 films have all-female writing teams and all 8 pass; the 0% failure rate is reproduced, but the count of seven is not (the data give 8)."
+  },
+  {
+    "source": "(i.e., 85% of filmmakers are men...more on this later)",
+    "why": "Among the 34,574 gender-tagged director, producer and writer credits on the 4,000 films, 28,167 are men (81.5%), not 85%; counting the 4,821 untagged credits as male gives 83.8%. 85% is reached only by restricting to a high-grossing subset (for example, 85.3% among the top 200 films), which the sentence does not name."
+  },
+  {
+    "source": "Men outnumbered women 5:1.",
+    "why": "The gender-tagged director, producer and writer credits on the 4,000 films give 28,167 men to 6,407 women, a ratio of 4.4:1, not 5:1. The ratio is near 5:1 only in a high-grossing subset, not for the dataset as a whole."
+  },
+  {
+    "source": "4 out of 7 Star Wars fail the Bechdel Test.",
+    "why": "movies2.csv contains only four Star Wars titles released 1995-2015 (the original trilogy is outside the 1995-2015 filter), and only one of those four fails; the 4-of-7 statement cannot be reproduced from these files."
+  },
+  {
+    "source": "Studios and the Percent of Films that Fail the Bechdel Test ... Canal+: 34%, 214 films ... Warner Bros.: 53%, 189 films ... Columbia: 53%, 156 films ... DreamWorks: 55%, 99 films ... US-based Studios (overall 45%) ... International Studios (overall 34%)",
+    "why": "The studio chart uses studios2.csv, which is not among the provided files. production.csv has only numeric production_id values for a different and incomplete subset (for example, its DreamWorks ids cover 29 movies, not 99) and contains no company names or US/international region flag, so the named studio percentages cannot be computed."
+  },
+  {
+    "source": "For films with revenue over $500M+, 1995 - 2015, 10 of the 225 directors, 4.4%, were women.",
+    "why": "movies2.csv has 10 women among 224 director credits in the $500M+ bin (4.5%), and the story's chart labels that bin as 214 men and 10 women; the 225-director denominator and the 4.4% figure do not reproduce."
+  },
+  {
+    "source": "Directors for 4,000 films, sorted by Box Office Revenue ... 5:1 Men 9:1 11:1 23:1 22:1 Men",
+    "why": "The counts reproduce exactly (1,797 vs 373; 593 vs 67; 377 vs 34; 832 vs 36; 214 vs 10) and the first four bins round to 5:1, 9:1, 11:1 and 23:1, but the highest bin is 214 men to 10 women, or 21.4:1, not the chart's 22:1, so the chart finding is left out."
+  },
+  {
+    "source": "directors 41% 100% 100% 10%",
+    "why": "The two 100% labels are transparent placeholder boxes in the chart's script for the hidden 'At Least 1 Woman' and '2+ Women' director columns, not stated values. The reproduced endpoints are 41% (all men) and 10% (all women); the hidden categories would compute to 12% and 0%, but the chart does not display them."
+  },
+  {
+    "source": "Bechdel Test Results for Notable Producers, Directors, and Writers ... Top Directors ... Top Writers",
+    "why": "Only the Top Producers tab is rendered in the page text. The Top Directors and Top Writers tab percentages are computed client-side and are not displayed in the fetched story, so no exact chart labels for those percentages could be quoted."
+  },
+  {
+    "source": "12% of films fail - ... 18 fail and 40 pass ... Films that Don't Meet your Filter Criteria (46% of our 4,000 Film Dataset)",
+    "why": "These are pre-render placeholder texts for interactive filter states in the film grid, not the dataset's overall figures. The script's default all-films state computes 37% (1,494 fail, 2,506 pass), which is the fact written from this chart."
+  },
+  {
+    "source": "On blockbusters, Hollywood has fewer women directors per capita than the military has female generals ... \"69 of the 976 generals and admirals, 7.1%, were women\"",
+    "why": "The military figure is external CNN data, not in the provided files. The film-side comparison would use the $500M+ director share, which is 10/224 = 4.5% in these data (and is affected by the footnote discrepancy above)."
+  },
+  {
+    "source": "Likelihood of Failing the Bechdel Test 0%",
+    "why": "This is the simulator's default placeholder text and changes with the user's director/producer/writer selections; it is not a fixed data finding."
+  }
+]

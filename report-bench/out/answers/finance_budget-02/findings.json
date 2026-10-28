@@ -1,0 +1,43 @@
+[
+ {
+  "finding": "年中预算调整期冻结专项支出:专项经费(数字化/人才发展/市场推广)支出 5-6月合计 294,118 元,7-8月骤降至 90,092 元(仅为前者的 30.6%),9月回升至 179,049 元(为7月的 5.2 倍)",
+  "numbers": {
+   "may_jun_total": 294118.18,
+   "jul_aug_total": 90091.8,
+   "drop_ratio": 0.3063,
+   "sep_total": 179049.08,
+   "recovery_ratio": 5.2116
+  },
+  "holds": true
+ },
+ {
+  "finding": "年末预算额度收回前集中执行设备购置:12月设备购置支出 1,071,699 元,占全年的 48.3%,12月日均支出是其余月份的 10.1 倍",
+  "numbers": {
+   "dec_total": 1071699.05,
+   "annual_total": 2219394.6,
+   "dec_share": 0.4829,
+   "daily_ratio": 10.0909
+  },
+  "holds": true
+ },
+ {
+  "finding": "全公司性会议由行政管理部统一承办:其会议费单笔均值 7,700 元,是其他部门(923 元)的 8.3 倍;行政管理部会议费中场地租赁占 63.5%,其他部门仅 5.8%",
+  "numbers": {
+   "admin_mean": 7699.51,
+   "other_mean": 922.51,
+   "mean_ratio": 8.3462,
+   "admin_rent_share": 0.6349,
+   "other_rent_share": 0.0583
+  },
+  "holds": true
+ },
+ {
+  "finding": "水电费由物业代缴后补预算科目:水电费记录中预算科目缺失率 18.0%(16 条),远高于其他科目的 0.00%",
+  "numbers": {
+   "water_missing_rate": 0.1798,
+   "water_missing_count": 16,
+   "other_missing_rate": 0.0
+  },
+  "holds": true
+ }
+]

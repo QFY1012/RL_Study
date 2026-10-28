@@ -1,0 +1,11 @@
+[
+  {
+    "id": "culprit-categories-most-censored",
+    "source": "It does come down to the usual culprits: alcohol & drugs, sexual references, and profanity.",
+    "claim": "Counting each badword once per song, censored badword/song pairs are most numerous in the sexual (190), profanity (177) and alcohol & drugs (174) categories, ahead of violence (89), other (84) and identity (49).",
+    "tables": {
+      "df": "data/KB_censored-lyrics.csv"
+    },
+    "code": "df.drop_duplicates(['ogArtist','songName','year','badword'])['category'].value_counts()"
+  }
+]

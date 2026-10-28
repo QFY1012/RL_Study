@@ -1,0 +1,68 @@
+[
+  {
+    "id": "women-lead-share",
+    "source": "In 22% of our films, actresses had the most amount of dialogue (i.e., they were the lead).",
+    "claim": "Actors have the most dialogue in 78.2% of films and actresses in 21.8%.",
+    "tables": {
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.gender.isin(['m','f'])].sort_values(['script_id','words'],ascending=[True,False]).groupby('script_id').head(1).gender.value_counts(normalize=True)"
+  },
+  {
+    "id": "women-top3-share",
+    "source": "The most abysmal stat is when women occupy at least 2 of the top 3 roles in a film, which occurs in 18% of our films. That same scenario for men occurs in about 82% of films.",
+    "claim": "Men occupy at least two of the top three dialogue roles in 81.95% of films and women in 17.95%.",
+    "tables": {
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.gender.isin(['m','f'])].sort_values(['script_id','words'],ascending=[True,False]).groupby('script_id').head(3).groupby('script_id').gender.agg(women=lambda s:(s=='f').sum()>=2, men=lambda s:(s=='m').sum()>=2).mean()"
+  },
+  {
+    "id": "dialogue-share-by-age",
+    "source": "The amount of dialogue, by age-range, is completely opposite for women versus men. Dialogue available to women who are over 40 years old decrease substantially. For men, it’s the exact opposite: there are more roles available to older actors.",
+    "claim": "Female characters' words are 7.81% under 21, 37.50% at 21-31, 31.62% at 32-41, 19.99% at 42-64 and 3.08% at 65+, while male characters' words are 3.75%, 19.65%, 31.90%, 39.27% and 5.42%.",
+    "tables": {
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.gender.isin(['m','f'])&c.age.notna()].assign(age_group=lambda d: pd.cut(d.age,bins=[-1,20,31,41,64,np.inf],labels=['under 21','21-31','32-41','42-64','65+'])).groupby(['gender','age_group'],observed=True).words.sum().groupby(level=0).transform(lambda s:s/s.sum()*100)"
+  },
+  {
+    "id": "roles-by-age",
+    "source": "For men, it’s the exact opposite: there are more roles available to older actors.",
+    "claim": "Male characters number 549 under 21, 2,233 at 21-31, 3,564 at 32-41, 5,449 at 42-64 and 968 at 65+, while female characters number 451, 1,932, 1,581, 1,281 and 253.",
+    "tables": {
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.gender.isin(['m','f'])&c.age.notna()].assign(age_group=lambda d: pd.cut(d.age,bins=[-1,20,31,41,64,np.inf],labels=['under 21','21-31','32-41','42-64','65+'])).groupby(['gender','age_group'],observed=True).size()"
+  },
+  {
+    "id": "mulan-dialogue-share",
+    "source": "Even films with female leads, such as Mulan, the dialogue swings male.",
+    "claim": "Mulan's dialogue is 75.31% male and 24.69% female.",
+    "tables": {
+      "m": "data/meta_data7.csv",
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.script_id.eq(m.loc[m.title.eq('Mulan'),'script_id'].iloc[0]) & c.gender.isin(['m','f'])].groupby('gender').words.sum().pipe(lambda s:s/s.sum())"
+  },
+  {
+    "id": "truman-show-dialogue-share",
+    "source": "The Truman Show 87% Male 13% Female",
+    "claim": "The Truman Show's dialogue is 87.11% male and 12.89% female.",
+    "tables": {
+      "m": "data/meta_data7.csv",
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.script_id.eq(m.loc[m.title.eq('The Truman Show'),'script_id'].iloc[0]) & c.gender.isin(['m','f'])].groupby('gender').words.sum().pipe(lambda s:s/s.sum())"
+  },
+  {
+    "id": "truman-show-top5-characters",
+    "source": "2,133 truman burbank 1,521 christof 752 marlon 402 meryl burbank 268 chloe Top 5 Characters (by # of words)",
+    "claim": "The five largest speaking parts in The Truman Show are truman burbank with 2,133 words, christof with 1,521, marlon with 752, meryl burbank with 402 and chloe with 268.",
+    "tables": {
+      "m": "data/meta_data7.csv",
+      "c": "data/character_list5.csv"
+    },
+    "code": "c[c.script_id.eq(m.loc[m.title.eq('The Truman Show'),'script_id'].iloc[0])].nlargest(5,'words')[['imdb_character_name','words']]"
+  }
+]

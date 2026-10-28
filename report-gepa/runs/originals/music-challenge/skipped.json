@@ -1,0 +1,30 @@
+[
+  {
+    "source": "First, here are all the songs you just listened to, all Billboard Hot 100 top 5 hits and massively popular in their day.",
+    "why": "The ten songs are the reader's randomly drawn quiz set, so the chart's items change by reader and are not a fixed result in the supplied files."
+  },
+  {
+    "source": "You knew 5 of 10 songs, which were just added to the 3,438,337 data points we have on how music fades from cultural knowledge.",
+    "why": "The 5-of-10 score is the reader's own quiz result, and the total of 3,438,337 data points is not present in the supplied files."
+  },
+  {
+    "source": "For example, you knew the song , but of recognize it.",
+    "why": "The song name and the reader's answer are filled in by the interactive quiz at runtime; the static text gives no fixed song or number that the files can reproduce."
+  },
+  {
+    "source": "For example, hasn’t been passed down to the younger generation: Gen Z doesn’t recognize it as well as Millennials.",
+    "why": "The example song's name is inserted dynamically, so the comparison cannot be tied to a fixed row in the supplied files."
+  },
+  {
+    "source": "This song came out in 1998 . It’s been 30 years since its release. To someone under 20, it’s as old as a song from 1975 might seem to you.",
+    "why": "The song is chosen dynamically and the age comparison depends on the current date and the reader's age rather than on a fixed data finding."
+  },
+  {
+    "source": "Even the most popular songs from history—the equivalent of “Hey Ya” by Outkast in 1975 —might have faded in the same way as \"Gettin’ Jiggy With it\" by Will Smith.",
+    "why": "This is an editorial analogy, not a number or pattern computed from the files."
+  },
+  {
+    "source": "Take a look yourself...here’s a sampling of top 3 hits from 1975 : how many do you recognize?",
+    "why": "This is an interactive quiz prompt; the sampled three songs and the reader's answers are not a fixed finding in the supplied data."
+  }
+]

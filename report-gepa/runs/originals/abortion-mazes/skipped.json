@@ -1,0 +1,42 @@
+[
+  {
+    "source": "The state bans abortion at 15 weeks.",
+    "why": "Each state's gestational-limit sentence is an individual policy record shown in that state's maze. The story states the limits one state at a time and draws no aggregate comparison from them, and for the six featured-story states the summary is replaced by narrative, so these per-state limit labels are not reproduced as separate findings."
+  },
+  {
+    "source": "Abortion rights are explicitly excluded in the state constitution.",
+    "why": "This is one of the five individual policy statements shown in a state's maze (255 such policy records for the 45 non-story states, while the six story states show ten narrative segments instead). These are raw policy records, not a number, comparison, ranking, share, trend or aggregate pattern drawn by the authors."
+  },
+  {
+    "source": "The six personal stories included in this piece from “Ava”, “Billie”, “Courtney”, “Nicki”, “Margot”, and “Simone” were sourced from actual news reports, including reporting by CNN , The Indianapolis Star , Michigan Public Radio , Propublica , The New York Times , The 19th , The Tennessean , Texas Public Radio , and The Washington Post . Sometimes details were combined from multiple true stories to create a full narrative. Names, ages, and states were altered to protect the privacy and anonymity of the individuals.",
+    "why": "The six narratives and their personal details (ages, weeks of pregnancy, costs, travel times) come from news reporting and were altered for privacy, so they are not findings computed from the provided state policy data."
+  },
+  {
+    "source": "To calculate the complexity of each state maze, 28 state-level data points from the Guttmacher Institute were collected, normalized, weighted, and combined to produce a complexity score.",
+    "why": "This is methodology, and the provided files contain the resulting scores and five illustrative policy statements per state, not the 28 underlying metrics, so the weighting and combination cannot be recomputed from the supplied data."
+  },
+  {
+    "source": "Abortion bans were weighted at 10, with ban exceptions and constitutional measures weighted at 5. Other policies and laws aimed at limiting abortion access were weighted at 2. Other reproductive health policies, like sexual education and contraception access, were weighted at 1.",
+    "why": "These are methodological weights, not a data finding."
+  },
+  {
+    "source": "Mazes were generated using a depth first search algorithm, with a size and difficulty that matched the complexity score.",
+    "why": "This describes the maze-generation method, not a finding computed from the data."
+  },
+  {
+    "source": "Our complexity calculations were last updated on October 17, 2024 and represent a snapshot in time.",
+    "why": "This is a data-provenance date and a caveat, not a finding."
+  },
+  {
+    "source": "To help you navigate the mazes we've highlighted 6 individual abortion stories.",
+    "why": "This is a count of narrative features in the story, not a finding drawn from the data."
+  },
+  {
+    "source": "You've completed 0/51 mazes.",
+    "why": "This is a count of the state mazes (dataset items), a description of the data rather than a finding."
+  },
+  {
+    "source": "…other states have moved to strengthen their protections, creating a complicated patchwork of laws across the country.",
+    "why": "A qualitative characterization; no specific number, named subset or comparison is stated that can be computed. The separate maze-complexity categories are reproduced in facts.json."
+  }
+]

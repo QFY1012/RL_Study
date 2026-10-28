@@ -1,0 +1,54 @@
+[
+ {
+  "finding": "支付网关的错误率只在「华东区域 × 19-23点」组合显著恶化: 该组合错误率中位数 8.12%(18 个采样点), 该服务其余分钟仅 0.51%, 相差 16 倍; 其他服务在同样组合下最高也只有 0.86%(搜索服务), 指向华东支付专线晚间拥塞而非服务本身的问题。",
+  "numbers": {
+   "hot_east_err_median": 0.08124,
+   "pay_rest_err_median": 0.0051,
+   "ratio": 15.94,
+   "other_service_hot_east_err_median_max": 0.00857,
+   "hot_east_samples": 18
+  },
+  "holds": true
+ },
+ {
+  "finding": "消息推送在 11-12 14:00 切换短信供应商: 切换前错误率中位数 1.57%、P95 延迟 484ms; 切换后 0.13%、P95 222ms —— 错误率降为原来的 1/12, P95 降到 46%, 水平拐点清晰且与切换时刻对齐。",
+  "numbers": {
+   "err_median_before": 0.01568,
+   "err_median_after": 0.00135,
+   "err_ratio": 11.65,
+   "p95_before_ms": 484.0,
+   "p95_after_ms": 222.0,
+   "p95_after_over_before": 0.459,
+   "samples_before": 93,
+   "samples_after": 131
+  },
+  "holds": true
+ },
+ {
+  "finding": "库存服务的 P95 延迟在每天 0/6/12/18 点整点后约 10 分钟内显著抬升: 窗口内 P95 中位数 303ms, 窗口外 142ms(约 2.1 倍), 而两段请求量中位数接近(5894 与 5717 次/分钟, 比 1.03) —— 对应本地库存缓存 6 小时整点过期、集中重建的机制, 延迟问题是缓存而非流量引起。",
+  "numbers": {
+   "p95_window_ms": 303,
+   "p95_outside_ms": 142.0,
+   "p95_ratio": 2.13,
+   "req_window_median": 5894,
+   "req_outside_median": 5717.0,
+   "req_ratio": 1.031,
+   "window_samples": 105,
+   "outside_samples": 106
+  },
+  "holds": true
+ },
+ {
+  "finding": "11 月 11 日大促当天, 交易链路的五个服务(订单中心/支付网关/库存服务/搜索服务/消息推送)的分钟请求量中位数同时抬升为平日的 2.1~3.0 倍, 而内部使用的报表服务仅为 1.27 倍 —— 流量高峰由同一促销活动驱动, 内部系统不参与。",
+  "numbers": {
+   "req_ratio_订单中心": 2.79,
+   "req_ratio_支付网关": 2.97,
+   "req_ratio_库存服务": 2.7,
+   "req_ratio_消息推送": 2.91,
+   "req_ratio_搜索服务": 2.14,
+   "req_ratio_报表服务": 1.27,
+   "min_affected_ratio": 2.14
+  },
+  "holds": true
+ }
+]

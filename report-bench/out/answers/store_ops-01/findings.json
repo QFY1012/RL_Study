@@ -1,0 +1,51 @@
+[
+ {
+  "finding": "面积与城市等级存在交互效应: ≤130㎡小店在一线/新一线转化率9.0%, 在二线/三线达14.0%; ≥250㎡大店两类城市几乎相同(10.8% vs 11.0%)——小店在高线城市被路过型客流稀释",
+  "numbers": {
+   "conv_small_high_tier": 0.0905,
+   "conv_small_low_tier": 0.1402,
+   "conv_large_high_tier": 0.1083,
+   "conv_large_low_tier": 0.1099,
+   "diff_small": 0.0497,
+   "diff_large": 0.0016
+  },
+  "holds": true
+ },
+ {
+  "finding": "新店存在爬坡期: 开业后第1~4个月的日均销售额仅为自身稳定期(开业180天后)的41%/61%/79%/92%, 逐月抬升后趋稳——新店会员与口碑积累需要约一个季度",
+  "numbers": {
+   "month1_vs_steady": 0.4102,
+   "month2_vs_steady": 0.609,
+   "month3_vs_steady": 0.7929,
+   "month4_vs_steady": 0.9167,
+   "stores_sampled": 38
+  },
+  "holds": true
+ },
+ {
+  "finding": "闭店门店最后30天清仓甩卖: 客单价降为此前90天的61%, 日均客流升到162%(样本12家闭店门店)——打折去库存换短期客流",
+  "numbers": {
+   "clearance_ticket_ratio": 0.6056,
+   "clearance_traffic_ratio": 1.6157,
+   "closing_stores": 12
+  },
+  "holds": true
+ },
+ {
+  "finding": "广州门店在2024-07-10至2024-08-25期间因商圈市政施工, 日均客流仅为自身其余时段的53%; 同期其他城市门店客流基本持平(107%)——地点×时段的城市级异常",
+  "numbers": {
+   "gz_traffic_ratio_in_vs_out": 0.5282,
+   "other_cities_ratio_in_vs_out": 1.0659
+  },
+  "holds": true
+ },
+ {
+  "finding": "每月8/18/28日为会员日(双倍积分+满减): 成交单数比非会员日高35%, 客单价高12%, 日均销售额整体高51%——固定日期的会员营销周期",
+  "numbers": {
+   "memberday_sales_ratio": 1.5142,
+   "memberday_txn_ratio": 1.3511,
+   "memberday_ticket_ratio": 1.1207
+  },
+  "holds": true
+ }
+]

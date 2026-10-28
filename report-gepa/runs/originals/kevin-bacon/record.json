@@ -1,0 +1,72 @@
+{
+ "id": "kevin-bacon",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 315,
+  "steps": 31,
+  "tools": 39,
+  "nudged": 0,
+  "usage": {
+   "input": 26121,
+   "output": 48792
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "routes-one-two-films",
+   "basis": "Output shows Robert De Niro, Ryan Gosling, Tom Hanks, Benedict Cumberbatch, Meryl Streep, and Emma Stone at hop 1; Cillian Murphy, Timothée Chalamet, Saoirse Ronan, Anya Taylor-Joy, Jessie Buckley, Austin Butler, Margot Robbie, and Zendaya at hop 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bacon-remoteness-rank",
+   "basis": "Output shows Kevin Bacon avgDistance 2.2823 and rank 175.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-three-remoteness",
+   "basis": "Output shows Samuel L. Jackson rank 1 avgDistance 2.0872, Willem Dafoe rank 2 avgDistance 2.1284, Robert De Niro rank 3 avgDistance 2.1427.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-films-jackson-cage",
+   "basis": "Output shows Samuel L. Jackson films 116 and Nicolas Cage films 96 as the top two by films.",
+   "verdict": "ok"
+  },
+  {
+   "id": "portman-kendrick-same-films",
+   "basis": "Output shows Natalie Portman films 40 avgDistance 2.2312 and Anna Kendrick films 40 avgDistance 2.3990.",
+   "verdict": "ok"
+  },
+  {
+   "id": "portman-kendrick-co-star-prolificacy",
+   "basis": "Output shows Natalie Portman top50 4.0524 and Anna Kendrick top50 3.8651; Natalie's value is higher.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sweeney-16-films-15-years",
+   "basis": "Output shows Sydney Sweeney films 16 and careerAge 15.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "deniro-chevy-career-totals",
+   "basis": "Output shows Robert De Niro films 87 and Chevy Chase films 27.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bacon-mirren-hackman-film-count",
+   "basis": "Output shows Kevin Bacon careerAge 47.0 films 47, Gene Hackman films 47, and Helen Mirren films 55.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 9,
+ "skipped": 11
+}

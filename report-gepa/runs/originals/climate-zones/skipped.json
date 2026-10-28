@@ -1,0 +1,18 @@
+[
+  {
+    "source": "Nearly 90 million people who live in Temperate zones shift into harsher environments.",
+    "why": "cities.csv has one row per city and no population field, so the 90 million population figure cannot be computed from this file."
+  },
+  {
+    "source": "Overall, there are 30 unique subclassifications, and together they make up the K\u00f6ppen Climate Classification (KCC).",
+    "why": "This describes the full K\u00f6ppen system, not the 70 cities in this file: the file contains 16 distinct present-day subclasses (11 for 2070), and no computation from it yields 30."
+  },
+  {
+    "source": "Temperate climates shifting north",
+    "why": "cities.csv has no coordinates, latitude or region field, so a northward shift of Temperate climates cannot be measured from this file."
+  },
+  {
+    "source": "Within each climate subcategory, cities are ordered from highest average annual temperature top to bottom, left to right.",
+    "why": "This is a display rule for how the chart sorts cities, not a finding measured from the data; the CSV is not stored in that order, and sorting by temp_2023 only restates the rule."
+  }
+]

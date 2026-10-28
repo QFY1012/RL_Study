@@ -1,0 +1,38 @@
+[
+  {
+    "source": "Here's the stats for 600+ labels over the past 25 years:",
+    "why": "This describes the scope of the dataset rather than a finding drawn from it, and the file contains 552 distinct Imprint values, so the '600+' count itself does not reproduce."
+  },
+  {
+    "source": "#8 in the ranking of labels by success on Billboard, Ruffhouse was a joint venture with Columbia, signing Fugees, Cypress Hill, Kris Kross, and Wyclef Jean.",
+    "why": "Under the story's rank-and-weeks weighting (sum of 51 minus chart rank over all chart weeks), Ruffhouse ranks 11th, not 8th; the joint-venture and signing details are external roster information not present in the chart file."
+  },
+  {
+    "source": "In 1989, regional independent labels dominated with superstar signings: Young MC and the Pharcyde are signed to Delicious Vinyl. Biz Markie (Just a Friend), Big Daddy Kane (Smooth Operator), and Marley Marl are all on Cold Chillin’. Ruthless, Eazy E’s label, has N.W.A. and The D.O.C. on its roster. Jive is crushing it with a roster that includes Boogie Down Productions, DJ Jazzy Jeff and the Fresh Prince, and Too $hort. And Tommy Boy presciently released both De La Soul and Queen Latifah’s first albums.",
+    "why": "The roster/signing statements and the independent-versus-major distinction cannot be checked from the chart file, which records no label ownership, signing dates or album releases. Jive's 1989 chart dominance is reproduced separately."
+  },
+  {
+    "source": "For the past 25 years, there’s always been mega-popular labels (e.g., Shady/Aftermath, Rawkus, No Limit, Bad Boy) – there were just more of them at one time.",
+    "why": "The story gives no threshold for 'mega-popular', so the count of such labels depends on an arbitrary cutoff that the data cannot supply."
+  },
+  {
+    "source": "4. Jive 106 44 1255 '89 - '12",
+    "why": "The table's per-label artist counts do not reproduce exactly: after removing feature credits from artist names the file gives Jive 41 instead of the story's 44 and Roc-A-Fella 17 instead of 18, although most rows match (e.g., Def Jam 48, Young Money 9, Bad Boy 29, Ruffhouse 14, Columbia 24)."
+  },
+  {
+    "source": "Today, Young Money is dominating with a lineup of Nicki Minaj, Drake, Tyga, and Lil Wayne.",
+    "why": "The lineup is roster information rather than a chart statistic; Young Money's chart dominance is reproduced in the yearly top-label fact."
+  },
+  {
+    "source": "XL Recordings (Adele, M.I.A., FKA Twigs) is one potential model, who keeps its roster small and typically releases no more than six albums a year.",
+    "why": "Album-release counts and roster size are not in the chart file."
+  },
+  {
+    "source": "Rhymesayers’ model (who helped on this article) has sustained for 20 years, staying small and working with artists who have deep fan bases rather than the potential for massive commercial success.",
+    "why": "Label longevity and business strategy are not chart statistics available in the file."
+  },
+  {
+    "source": "The top ten list reads like a history of hip hop.",
+    "why": "Qualitative interpretation with no measurable claim."
+  }
+]

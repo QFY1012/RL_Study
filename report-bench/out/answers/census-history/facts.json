@@ -1,0 +1,362 @@
+[
+ {
+  "id": "census-1790-six-questions",
+  "source": "The first census asked six basic questions about race, sex, and age, as determined by Congress.",
+  "claim": "The 1790 census questionnaire contains six questions.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Year==1790].shape[0]"
+ },
+ {
+  "id": "census-2020-eight-substantive",
+  "source": "The 2020 census includes just eight substantive questions.",
+  "claim": "The 2020 census has eight questions outside the [Admin.] category.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==2020)&~p.Categories.fillna('').str.contains('Admin',regex=False)].shape[0]"
+ },
+ {
+  "id": "census-2010-ten-questions",
+  "source": "At 10 questions, the 2010 census was one of the shortest in history.",
+  "claim": "Excluding the ACS placeholder, the 2010 census questionnaire has 10 questions (including its administrative ones); only 1790 (6), 1800 (5) and 1810 (5) have fewer, and every census from 1820 through 2000 has more.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.UID.ne('2010_ACS')].groupby('Year').size()"
+ },
+ {
+  "id": "immigration-first-naturalization-1820",
+  "source": "The 1820 census asked a question about the “[number of people] not naturalized.”",
+  "claim": "The first census to ask a naturalization question is 1820, with one such question.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.contains('naturaliz',case=False,na=False)].groupby('Year').size()"
+ },
+ {
+  "id": "economy-1820-industry-first",
+  "source": "To try to capture the nature of the economy, the 1820 census included the first formal question about industry by asking about the number of individuals in a household working in agriculture, commerce, and manufacturing.",
+  "claim": "The 1820 census is the first to ask 'People engaged in' industry questions, with Agriculture, Commerce and Manufactures.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.startswith('People engaged in')][['Year','Question']]"
+ },
+ {
+  "id": "immigration-birthplace-1850-2000",
+  "source": "This year introduced a question that stayed on the census through 2000: state or country of birth.",
+  "claim": "A place-of-birth question appears in every census from 1850 through 2000.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.eq('Place of Birth (state or country)')].groupby('Year').size()"
+ },
+ {
+  "id": "immigration-parents-1870",
+  "source": "To capture demographic changes spurred by immigration, the 1870 census counted first-generation Americans by asking respondents if their parents were foreign born. First included as a Yes/No question, following censuses also asked for a specific place of birth.",
+  "claim": "In 1870 the census asks two yes/no questions: whether the father and whether the mother were of foreign birth.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==1870)&p.Question.str.contains('foreign birth')][['Question','Answer Type']]"
+ },
+ {
+  "id": "race-label-1890",
+  "source": "Previous censuses asked questions about “color,” but in 1890 “race” was used for the first time.",
+  "claim": "The census first labels a question 'Race' in 1890, after using 'Color' from 1850.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.isin(['Race','Color'])].groupby('Question').Year.min()"
+ },
+ {
+  "id": "race-1890-options",
+  "source": "Answer choices included Chinese and Japanese, two common non-white immigrant groups, as well as multiple black ancestry options that reflected mythic ideas about race.",
+  "claim": "The 1890 race question's answer options are White, Black, Mulatto, Quadroon, Octoroon, Chinese, Japanese and Indian.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1890)&(p.Question=='Race'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "race-1930-hindu-mexican",
+  "source": "The 1930 census gave enumerators abbreviations for the most common “races” (some were actually religions or nationalities), which included Hindu (meaning people from India), and Mexican—the first and only Hispanic origin option for several decades.",
+  "claim": "The 1930 race question's answer options include Hindu and Mexican.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1930)&(p.Question=='Color or race'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "race-1960-hawaiian-aleut-eskimo",
+  "source": "The country had just admitted two new states to the union, Alaska and Hawaii, so the census added multiple race categories, including Hawaiian, Aleut, and Eskimo, to try to account for the indigenous people from each region.",
+  "claim": "The 1960 race question's answer options include Hawaiian, Part Hawaiian, Aleut and Eskimo.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1960)&(p.Question=='Race'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "race-1970-hispanic-origin",
+  "source": "The 1970 census introduced a question about Hispanic origin, or “ethnicity,” distinct from “race.”",
+  "claim": "A separate Hispanic-origin question first appears in 1970.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.eq('Hispanic origin')].Year.min()"
+ },
+ {
+  "id": "race-2020-specify-heritage",
+  "source": "This year’s census asks people who identify as white or black more details about their heritage, including region or country of origin.",
+  "claim": "The 2020 race question offers 'White (specify)' and 'Black/African American (specify)' as answer options.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==2020)&(p.Question=='Race'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "economy-occupation-1850-1860",
+  "source": "In 1850, that meant only males 16 or older, but in 1860 it was revised to include females 16 or older as well.",
+  "claim": "The occupation question was asked of males 16 and over in 1850 and of everyone 16 and over in 1860.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.contains('Profession, occupation, or trade',case=False,na=False)&p.Year.isin([1850,1860])][['Year','Question','Asked of']]"
+ },
+ {
+  "id": "economy-1950-occupation-14",
+  "source": "To keep tabs on the post-WWII economy, the census asked every person 14 and over the type of job they did, the industry they worked in, and the class of work (private sector, public sector, self-employed, or unpaid).",
+  "claim": "In 1950 the type-of-work, industry and class-of-worker questions were each asked of everyone 14 or over.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==1950)&p.Question.isin(['Type of work','Industry','Class of worker'])][['Question','Asked of']]"
+ },
+ {
+  "id": "economy-carpool-first-1980",
+  "source": "Coming on the heels of the oil crisis in the late 1970s, the introduction of a question about carpooling for people who drive to work suggests that this was an increasingly common method for getting to work.",
+  "claim": "The first carpool question appears in 1980.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.contains('carpool',case=False,na=False)].Year.min()"
+ },
+ {
+  "id": "economy-commute-first-1960",
+  "source": "In 1960, the census began to ask people how they got to work",
+  "claim": "The census first asks how people got to work in 1960.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.eq('Commute mode of transportation')].Year.min()"
+ },
+ {
+  "id": "economy-commute-options-1990",
+  "source": "by 1990 the answer options had expanded to include “Bus or trolley bus”, “Streetcar or trolley car”, and “Ferryboat”.",
+  "claim": "The 1990 commute-mode options include Bus, Streetcar and Ferry.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1990)&(p.Question=='Commute mode of transportation'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "economy-income-six-sources-2000",
+  "source": "The census had asked people about their income since 1940, but in 2000 these questions covered not only wages from work but also six different potential sources of outside income, including pensions, Social Security, and other public benefit programs.",
+  "claim": "The 2000 income questions include two wage questions, a total, and six other sources: Social Security, SSI, public assistance/welfare, retirement or disability, VA/unemployment, and outside sources.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==2000)&p.Categories.fillna('').str.contains('Income')][['Question']]"
+ },
+ {
+  "id": "economy-income-first-1940",
+  "source": "For many decades starting in 1940, the census asked about people’s income despite concerns that this might be seen as intruding into private family matters.",
+  "claim": "Income questions first appear in 1940.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Categories.fillna('').str.contains('Income')].Year.min()"
+ },
+ {
+  "id": "war-war-expedition-1930",
+  "source": "This year introduced a question that would be asked in various forms for the rest of the 20th century: in which “war or expedition” did a veteran serve?",
+  "claim": "A 'war or expedition' question first appears in 1930.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.contains('war or expedition',case=False,na=False)].Year.min()"
+ },
+ {
+  "id": "war-women-veterans-1980",
+  "source": "A wording alteration in 1980 marked the first time that data on women veterans had ever been gathered in a national survey. The question was changed from “If this is a man…” to “Has this person…” ever served in the U.S. Armed Forces.",
+  "claim": "The 1970 veteran-status question was asked only of men, while in 1980 it was asked of everyone 15 or over.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Question.str.contains('Veteran status'))&p.Year.isin([1970,1980])][['Year','Question','Asked of']]"
+ },
+ {
+  "id": "war-veteran-options-1990",
+  "source": "In 1990, answers to veteran status were clarified and expanded to include current active duty, past active duty, service in the National Guard or Reserves only, and no service. All service, not just “active duty” was counted.",
+  "claim": "The 1990 armed-services question offers four options: Yes (active), Yes (active in past), Yes (Reserves/NG) and No.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1990)&(p.Question=='Armed services'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "war-first-veteran-1840-then-1890",
+  "source": "The 1840 census asked the first questions specifically about veterans, collecting the name and age of all persons receiving pensions for Revolutionary or military services. A question about veterans would not appear again until 1890.",
+  "claim": "The first veteran-status question appears in 1840, and the next one not until 1890.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Categories.fillna('').str.contains('Veteran status',regex=False)].groupby('Year').size()"
+ },
+ {
+  "id": "war-two-veteran-questions-first-century",
+  "source": "Questions about military service appeared only twice in the first 100 years of the census",
+  "claim": "Only two veteran-status questions appear in the census's first 100 years, in 1840 and 1890.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Categories.fillna('').str.contains('Veteran status',regex=False))&(p.Year<=1890)][['Year','Question']]"
+ },
+ {
+  "id": "housing-homeownership-1890",
+  "source": "The 1890 census included the first questions about homeownership: whether residents rent or own, and if they own, whether they have a home mortgage.",
+  "claim": "The first rent-or-own and mortgage questions both appear in 1890.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.isin(['Rent or own','If owned, mortgaged'])].groupby('Question').Year.min()"
+ },
+ {
+  "id": "housing-residence-five-years-1940",
+  "source": "Even after a separate housing questionnaire was added, the population section kept a handful of housing-related questions, including “where did you live five years ago?”",
+  "claim": "The 1940 census asks for residence in 1935.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.str.contains('Residence in')][['Year','Question']]"
+ },
+ {
+  "id": "housing-solar-first-1990",
+  "source": "Solar power is first included in 1990 as an option for a multiple choice question about the type of fuel used to heat a home.",
+  "claim": "Solar appears as an answer option in 1990 and again in 2000.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p['Multiple choice options'].fillna('').str.contains('Solar')].groupby('Year').size()"
+ },
+ {
+  "id": "housing-solar-coal-wood-2000",
+  "source": "Older methods, including coal and wood, remained as options in the housing questionnaire through 2000.",
+  "claim": "The 2000 heating-fuel options include Coal, Wood and Solar.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==2000)&(p.Question=='Heating fuel'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "housing-questionnaire-1940-2000",
+  "source": "From 1940 through 2000, the census included a housing questionnaire that was given to a sample of households with the long form of the population questionnaire.",
+  "claim": "Housing-questionnaire questions appear in every census from 1940 through 2000.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Categories.fillna('').str.contains('Housing+',regex=False)].groupby('Year').size()"
+ },
+ {
+  "id": "race-age-brackets-1800",
+  "source": "The 1800 census largely followed the same format as the 1790 one, but age categories for free white males and females were expanded.",
+  "claim": "The 1790 free-white-male question used 2 age brackets, while the 1800 question used 5.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.eq('Free white males')].assign(nb=p['Age range'].str.count(',')+1)[['Year','nb']]"
+ },
+ {
+  "id": "race-slave-age-sex-1820",
+  "source": "The 1820 census added age and sex breakdowns for enslaved people and “free colored” people who had previously been only counted as a bloc.",
+  "claim": "In 1820 enslaved people and free colored people are split into male and female groups with age ranges Under 14, 14 to 26, 26 to 45 and 45 and over, whereas in 1800 and 1810 enslaved people are single groups with no age breakdown.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Year.isin([1800,1810,1820])&p.Question.str.contains('slave|colored',case=False,na=False)][['Year','Question','Age range']]"
+ },
+ {
+  "id": "census-individual-level-1850",
+  "source": "To increase accuracy, the census used separate schedules for free and enslaved populations and collected data at the individual level instead of by household.",
+  "claim": "In 1850 all 11 questions are recorded at the individual level, while in 1840, 27 are household-level and one is individual.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Year.isin([1840,1850])].groupby('Year').Unit.value_counts()"
+ },
+ {
+  "id": "family-wife-not-husband-1970",
+  "source": "Feminists objected to the patriarchal nature of a question where one could identify as “wife of head,” but not “husband of head.” The question was revised in 1980.",
+  "claim": "The 1970 relationship options include Wife but not Husband.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1970)&(p.Question=='Relationship to head of family'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "family-husband-wife-1980",
+  "source": "Feminists objected to the patriarchal nature of a question where one could identify as “wife of head,” but not “husband of head.” The question was revised in 1980.",
+  "claim": "The 1980 relationship options include Husband/wife.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p.loc[(p.Year==1980)&(p.Question=='Relationship to head of family'),'Multiple choice options'].iloc[0]"
+ },
+ {
+  "id": "immigration-year-of-arrival-1970",
+  "source": "The 1970 census included a question last asked in 1930: what year did a person born in another country permanently move to the US?",
+  "claim": "The year-of-immigration question appears in 1900, 1910, 1920 and 1930, then not again until 1970.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[p.Question.eq('Year of immigration to US')].groupby('Year').size()"
+ },
+ {
+  "id": "war-men-16-1790",
+  "source": "The federal government was interested in counting men 16 or older because they represented potential military recruits in the event that they needed to raise an army.",
+  "claim": "The 1790 census asks for free white males split into 'Under 16' and '16 and over'.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==1790)&(p.Question=='Free white males')][['Question','Age range']]"
+ },
+ {
+  "id": "economy-1930-work-day",
+  "source": "A question about an individual’s most recent work day was used to evaluate growing unemployment in the first years of the Great Depression.",
+  "claim": "The 1930 census includes an unemployment question, 'At work last work day'.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==1930)&p.Question.str.contains('At work last work day')][['Question','Categories']]"
+ },
+ {
+  "id": "war-civil-war-widows-1890",
+  "source": "Twenty five years after the Civil War, the census included a single question that encompassed both former servicemen and their widows, and those from both the Union and the Confederacy.",
+  "claim": "The 1890 veteran question is 'Soldier in Civil War or widow of one'.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==1890)&p.Categories.fillna('').str.contains('Veteran status')][['Question']]"
+ },
+ {
+  "id": "census-2000-seven-short-form",
+  "source": "The short form contained only seven questions, the shortest since 1820.",
+  "claim": "The 2000 short form contained seven questions.",
+  "tables": {
+   "p": "data/full_data.csv"
+  },
+  "code": "p[(p.Year==2000)&p.Unit.isin(['Individual','Household'])&~p.Categories.fillna('').str.contains('Housing+',regex=False)].shape[0]"
+ }
+]

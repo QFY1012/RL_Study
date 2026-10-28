@@ -1,0 +1,42 @@
+[
+  {
+    "source": "Net missing DPM per game / \u22122.0 \u22121.5 \u22121.0 \u22120.5 0 +0.5 \u2190 less ethical / more ethical \u2192 (axis of the chart of every champion since 2001)",
+    "why": "The per-game values need the number of playoff games each champion played, which is not in either file. The ranking the chart encodes is reproduced by the summed-net facts (2015 lowest, 2025 highest), but the per-game numbers themselves cannot be computed."
+  },
+  {
+    "source": "Here is how many games above-average players (defined shortly) missed each playoff year.",
+    "why": "This chart covers every playoff team, but web-affected-players.csv only lists absences in the games the eventual champion played (at most 62 affected player-games in any season, against chart values around 100-150). The per-year counts cannot be reproduced from these files."
+  },
+  {
+    "source": "Here is the average DPM missed per game each playoff year.",
+    "why": "Same missing scope as above: the file has only the champions' series, not every playoff game, so the per-year league-wide averages cannot be computed."
+  },
+  {
+    "source": "Missing DPM per game each playoff year including low-minute games",
+    "why": "Same missing scope (all playoff teams) and a per-game denominator that the files do not contain."
+  },
+  {
+    "source": "Okay, it didn\u2019t add a ton, but I can sleep at night knowing unusually low-minute situations are accounted for.",
+    "why": "The claim compares the two league-wide per-year charts (with and without low-minute games), which cannot be built from champion-only data."
+  },
+  {
+    "source": "Each head is a game missed by the 2015 Warriors\u2019 opponents, approximately sized by their missing DPM value. / 2015 | GSW (opps.) 16 missed games, 1.8 missed DPM / game",
+    "why": "With the +1 DPM cutoff the file gives 22 opponent missed player-games worth 49.51 missing DPM for 2015, not 16 games; the per-game figure also needs the 21 playoff games, which are not in the files. The chart's per-year counts and per-game values do not match the data."
+  },
+  {
+    "source": "2025 | OKC (winner) 1.2 missed DPM / game",
+    "why": "The 26.86 missing DPM of Oklahoma City's own qualifying players matches, but converting it to a per-game figure needs the 23 games the Thunder played, which are not in the files."
+  },
+  {
+    "source": "2026 | NYK (opps.) 0.2 missed DPM / game",
+    "why": "3.51 missing DPM for Knicks opponents matches, but the per-game figure needs the 19 games New York played, which are not in the files."
+  },
+  {
+    "source": "missing DPM per game / winner +0.45, opponents -0.18, +0.27 (2026 Knicks detail) and +0.58, -0.05, +0.53 (2006 Heat detail)",
+    "why": "These appendix figures are per-game values; the DPM sums (8.60 / 3.51 / 5.10 for 2026 and 13.41 / 1.21 / 12.20 for 2006) reproduce, but dividing by the champions' playoff games (19 and 23) is impossible because games played are not in the data."
+  },
+  {
+    "source": "Every game missed by the opponents of each year\u2019s champ, as a pile of heads (per-champion missed-game counts for all champions, e.g. 2001 LAL 7 missed games, 2018 GSW 22 missed games)",
+    "why": "The per-year labels in that chart do not consistently match the file (e.g. 2015 shows 16 games versus 22 qualifying player-games in the data, 2017 shows 14 versus 10), so the chart's counts cannot be reproduced as a single finding."
+  }
+]

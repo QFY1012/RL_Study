@@ -1,0 +1,54 @@
+[
+ {
+  "finding": "主任医师门诊中复诊患者平均候诊仅约24分钟、初诊约50分钟(复诊/初诊=0.48),而主治医师门诊复诊/初诊=1.02、二者基本持平,说明复诊优先通道只在专家门诊生效",
+  "numbers": {
+   "chief_return_mean_wait": 23.9,
+   "chief_first_mean_wait": 50.28,
+   "chief_return_first_ratio": 0.475,
+   "attending_return_mean_wait": 39.04,
+   "attending_first_mean_wait": 38.15,
+   "attending_return_first_ratio": 1.023,
+   "min_group_n": 913
+  },
+  "holds": true
+ },
+ {
+  "finding": "2024-03-11 智能分诊叫号系统上线是明显拐点:候诊时间中位数由上线前的47分钟降至上线后的28分钟(比值0.60),同期投诉率由2.99%降至1.76%",
+  "numbers": {
+   "median_wait_before": 47.0,
+   "median_wait_after": 28.0,
+   "median_after_before_ratio": 0.596,
+   "complaint_rate_before": 0.0299,
+   "complaint_rate_after": 0.0176,
+   "cutover_date": "2024-03-11",
+   "n_before": 4663,
+   "n_after": 7281
+  },
+  "holds": true
+ },
+ {
+  "finding": "每月 1-5 日(慢病按月开方复诊窗口)复诊占比达54.21%,是其余日期(23.86%)的2.3倍",
+  "numbers": {
+   "return_rate_day_1_to_5": 0.5421,
+   "return_rate_other_days": 0.2386,
+   "ratio": 2.272,
+   "n_early": 1983,
+   "n_other": 10025
+  },
+  "holds": true
+ },
+ {
+  "finding": "呼吸内科主任医师马俊杰平均候诊67分钟,比其他主任医师(36分钟)高30分钟,投诉率6.02%为同职称其他医生(2.07%)的2.9倍",
+  "numbers": {
+   "slow_doctor_mean_wait": 66.64,
+   "other_chief_mean_wait": 36.48,
+   "wait_diff": 30.17,
+   "slow_doctor_complaint_rate": 0.0602,
+   "other_chief_complaint_rate": 0.0207,
+   "complaint_rate_ratio": 2.908,
+   "n_slow": 630,
+   "n_other_chief": 2492
+  },
+  "holds": true
+ }
+]

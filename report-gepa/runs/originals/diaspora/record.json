@@ -1,0 +1,37 @@
+{
+ "id": "diaspora",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 550,
+  "steps": 56,
+  "tools": 98,
+  "nudged": 0,
+  "usage": {
+   "input": 88486,
+   "output": 40313
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "country-top-puma",
+   "basis": "输出按 birthplace_edited 列出 154 行（Afghanistan 到 Zimbabwe），每个国家对应一个 Name（已去除 ' PUMA' 后缀），与声称的 154 个国家逐一对应。",
+   "verdict": "ok"
+  },
+  {
+   "id": "shared-pumas-four-countries",
+   "basis": "输出前两行：NYC-Brooklyn Community District 13--Brighton Beach & Coney Island PUMA count=4，join='Azerbaijan, Byelorussia, Republic of Georgia, Ukraine'；NYC-Brooklyn Community District 17--East Flatbush, Farragut & Rugby PUMA count=4，join='Barbados, Grenada, St. Vincent, Trinidad and Tobago'。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 0
+}

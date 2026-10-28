@@ -1,0 +1,121 @@
+{
+ "id": "mars-weather",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 736,
+  "steps": 60,
+  "tools": 103,
+  "nudged": 0,
+  "usage": {
+   "input": 168355,
+   "output": 73408
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "latest-transmission-sol-date",
+   "basis": "Output shows sol 1977 and terrestrial_date 2018-02-27.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sols-on-mars",
+   "basis": "d.sol.max() outputs 1977, matching the highest sol count.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sols-to-earth-days",
+   "basis": "Date difference outputs 2030 days.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sols-to-earth-years",
+   "basis": "2030/365 rounded to 1 decimal outputs 5.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mars-high-low-latest",
+   "basis": "Output shows max_temp 14.0 and min_temp -106.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mars-daily-temperature-swing",
+   "basis": "Output shows 121.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mars-season-latest",
+   "basis": "Output shows ls 135 and season winter.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mars-pressure-latest",
+   "basis": "Output shows 0.727.",
+   "verdict": "ok"
+  },
+  {
+   "id": "past-martian-year-temperature-range",
+   "basis": "Output shows low_f -124.6 and high_f 51.8.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "latest-transmission-sol-date",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sols-on-mars",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sols-to-earth-days",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sols-to-earth-years",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "mars-high-low-latest",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "mars-daily-temperature-swing",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "mars-season-latest",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "mars-pressure-latest",
+   "why": "a live page: today it reads sol 3,663 (2022-11-25); the agent filled the page's blank numbers with the data's values, so the quote is not the story's"
+  },
+  {
+   "id": "past-martian-year-temperature-range",
+   "why": "a live page: today it reads sol 3,663 (2022-11-25); the agent filled the page's blank numbers with the data's values, so the quote is not the story's"
+  }
+ ],
+ "answer": 0,
+ "skipped": 11,
+ "review": [
+  {
+   "id": "mars-pressure-latest",
+   "action": "drop",
+   "why": "a live page: today it reads sol 3,663 (2022-11-25); the agent filled the page's blank numbers with the data's values, so the quote is not the story's"
+  },
+  {
+   "id": "past-martian-year-temperature-range",
+   "action": "drop",
+   "why": "a live page: today it reads sol 3,663 (2022-11-25); the agent filled the page's blank numbers with the data's values, so the quote is not the story's"
+  }
+ ]
+}

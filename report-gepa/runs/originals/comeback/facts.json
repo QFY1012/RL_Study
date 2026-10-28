@@ -1,0 +1,101 @@
+[
+  {
+    "id": "comeback-low-point-probabilities",
+    "source": "\"96% of Teams will Lose when Down by 21, at Q3 9:27, and with the Ball\"; \"98% of Teams will Lose when Down by 9, at Q4 3:45 without the Ball\"; \"~100% of Teams will Lose when Down by 5, 9 seconds to go, and the ball\"; \"~100% of Teams will Lose when Down by 14 at Q4 5:03\"",
+    "claim": "The eventual winners' lowest win probabilities were 0.0423 in game 1 (home side, down 21 in Q3 with 9:27 left), 0.0208 in game 4 (away side, down 9 in Q4 with 3:45 left), 0.0014 in game 5 (away side, down 5 in Q4 with 0:09 left) and 0.0042 in game 7 (home side, down 14 in Q4 with 5:04 left), i.e. 95.77%, 97.92%, 99.86% and 99.58% chances of losing.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda x: x.loc[x.groupby('gid')['w'].idxmin()].assign(deficit=lambda y: (y['a']-y['h']).abs(), period=lambda y: np.ceil(y['gt']/720).astype(int), left=lambda y: np.ceil(y['gt']/720)*720-y['gt'], lose=lambda y: (1-y['w'])*100).assign(mmss=lambda y: pd.to_timedelta(y['left'], unit='s').astype(str).str[-5:])[['gid','side','w','lose','deficit','period','mmss','gst1']])(d.assign(w=np.where(d.groupby('gid')['h'].transform('max') > d.groupby('gid')['a'].transform('max'), d.wp, 1-d.wp), side=np.where(d.groupby('gid')['h'].transform('max') > d.groupby('gid')['a'].transform('max'), 'home', 'away')))"
+  },
+  {
+    "id": "heat-lead-21-q3-948",
+    "source": "At Q3 9:48, they were up by 21 points.",
+    "claim": "The away team's last basket before its collapse put it ahead 67-46 (by 21) with 9:48 left in the third quarter.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[[s.loc[:s['wp'].idxmin()].assign(dp=s['a'].diff()).loc[lambda x: x['dp']>0].index[-1]]].assign(margin=lambda x: x['a']-x['h'], left=lambda x: s.loc[s['gst1'].eq('EQ3'),'gt'].iloc[0]-x['gt']).assign(mmss=lambda x: pd.to_timedelta(x['left'], unit='s').astype(str).str[-5:])[['a','h','margin','mmss']])(d[d['gid']==1])"
+  },
+  {
+    "id": "heat-29-8-run-ties-third",
+    "source": "But by the end of the 3rd, the game was tied. Miami went on a 10 minute, 29-8 run.",
+    "claim": "From its low point, the home team outscored the away team 29-8 over the final 567 seconds of the third quarter, which ended tied 75-75.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[(s['gt']>=s.loc[s['wp'].idxmin(),'gt']) & (s['gt']<=s.loc[s['gst1'].eq('EQ3'),'gt'].iloc[0])].assign(hp=lambda x: x['h'].diff().fillna(0), ap=lambda x: x['a'].diff().fillna(0), secs=lambda x: x['gt'].max()-x['gt'].min()).agg({'hp':'sum','ap':'sum','h':'max','a':'max','secs':'max'}))(d[d['gid']==1])"
+  },
+  {
+    "id": "houston-14-fourth-quarter",
+    "source": "Even more depressing was that Houston kept it going, putting up 14 points in the 4th.",
+    "claim": "The away team's score rose from 75 at the start of the fourth quarter to 89 at the end, a gain of 14 points.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gst1'].isin(['Q4','EG'])].set_index('gst1')[['a']].assign(change=lambda x: x['a'].diff()))(d[d['gid']==1])"
+  },
+  {
+    "id": "heat-near-100-win-prob-3-min",
+    "source": "Miami secured a near-100% win probability with 3 minutes left in the game.",
+    "claim": "The home team's win probability was 0.9993 with 182 seconds (3:02) left in the fourth quarter.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gt']<=s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-180].assign(left=lambda x: s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-x['gt']).assign(mmss=lambda x: pd.to_timedelta(x['left'], unit='s').astype(str).str[-5:]).iloc[-1][['wp','left','mmss']])(d[d['gid']==1])"
+  },
+  {
+    "id": "okc-up-4-14-seconds",
+    "source": "With 14 seconds left, OKC was still up by 4.",
+    "claim": "With 14 seconds left in the fourth quarter, the home team led by 4 at 103-99.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gt']<=s.loc[s['gst1'].eq('EQ4'),'gt'].iloc[0]-14].iloc[-1][['gt','a','h']].to_frame().T.assign(margin=lambda x: x['h']-x['a'], left=lambda x: s.loc[s['gst1'].eq('EQ4'),'gt'].iloc[0]-x['gt']).assign(mmss=lambda x: pd.to_timedelta(x['left'], unit='s').astype(str).str[-5:]))(d[d['gid']==4])"
+  },
+  {
+    "id": "celtics-down-4-7-seconds",
+    "source": "with 7 seconds left, the Celtics have the ball and are down by 4.",
+    "claim": "With 7 seconds left in the fourth quarter, the away team trailed by 4 at 99-103.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gt']<=s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-7].iloc[-1][['gt','a','h']].to_frame().T.assign(deficit=lambda x: x['h']-x['a'], left=lambda x: s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-x['gt']).assign(mmss=lambda x: pd.to_timedelta(x['left'], unit='s').astype(str).str[-5:]))(d[d['gid']==5])"
+  },
+  {
+    "id": "celtics-two-point-game-4-seconds",
+    "source": "It's now a two point game.",
+    "claim": "With 4 seconds left, the away team trailed by 2 at 101-103 while in possession.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gt']<=s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-4].iloc[-1][['gt','a','h','gst1']].to_frame().T.assign(deficit=lambda x: x['h']-x['a'], left=lambda x: s.loc[s['gst1'].eq('EG'),'gt'].iloc[0]-x['gt']).assign(mmss=lambda x: pd.to_timedelta(x['left'], unit='s').astype(str).str[-5:]))(d[d['gid']==5])"
+  },
+  {
+    "id": "celtics-5-points-4-seconds",
+    "source": "Bradley hits a 3 pointer: 5 points in 4 seconds.",
+    "claim": "The away team's last two scoring plays produced 5 points in 4 seconds.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.assign(dp=s['a'].diff()).loc[lambda x: x['dp']>0].tail(2).assign(secs=lambda x: x['gt'].max()-x['gt'].min()).agg({'dp':'sum','secs':'max'}))(d[d['gid']==5])"
+  },
+  {
+    "id": "warriors-tie-regulation",
+    "source": "Durant commits a turnover + shooting foul with two seconds left, allowing Golden State to tie.",
+    "claim": "From 2 seconds left in regulation, Durant turned the ball over and committed a shooting foul; Iguodala made both free throws to tie the game 103-103.",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[(s['gt']>=s.loc[s['gst1'].eq('EQ4'),'gt'].iloc[0]-2) & (s['gt']<=s.loc[s['gst1'].eq('EQ4'),'gt'].iloc[0])].assign(left=lambda x: s.loc[s['gst1'].eq('EQ4'),'gt'].iloc[0]-x['gt'])[['gt','left','a','h','d']])(d[d['gid']==4])"
+  },
+  {
+    "id": "warriors-curry-ot-winner",
+    "source": "Later in OT, Curry will hit an impossible game-winner three.",
+    "claim": "Curry's 32-foot 3-pointer at the end of overtime gave the away team a 121-118 win (a 3-point margin).",
+    "tables": {
+      "d": "data/points2.csv"
+    },
+    "code": "(lambda s: s.loc[s['gt']>=s.loc[s['gst1'].eq('Q5'),'gt'].iloc[0]].assign(dp=lambda x: x['a'].diff()).loc[lambda x: x['dp']>0].tail(1).assign(margin=lambda x: x['a']-x['h'])[['gt','a','h','margin','d']])(d[d['gid']==4])"
+  }
+]

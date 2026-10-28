@@ -1,0 +1,24 @@
+{
+ "id": "police-misconduct",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 35,
+  "steps": 10,
+  "tools": 7,
+  "nudged": 3,
+  "usage": {
+   "input": 8238,
+   "output": 4178
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: d78c9d0d-1499-406d-b340-70801e8f4c05)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/police-misconduct/facts.json'"
+ ],
+ "skipped": null
+}

@@ -1,0 +1,72 @@
+{
+ "id": "dog-shelters",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 585,
+  "steps": 36,
+  "tools": 44,
+  "nudged": 0,
+  "usage": {
+   "input": 45308,
+   "output": 58798
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "import-origin-ranking",
+   "basis": "Output top origins: Texas 635, Alabama 268, North Carolina 158, South Carolina 139, Georgia 137.",
+   "verdict": "ok"
+  },
+  {
+   "id": "international-share",
+   "basis": "Output: sum 437, count 2460, pct 17.764228 (~17.8%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "puerto-rico-south-korea-ranks",
+   "basis": "Output: Puerto Rico count 131 rank 6; South Korea count 76 rank 8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "still-in-origin-state",
+   "basis": "Output: sum 238, count 2460, pct 9.674797 (~9.7%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "hurricane-displaced",
+   "basis": "Output: sum 54, count 2460, pct 2.195122 (~2.2%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "non-importing-states",
+   "basis": "Output lists imports 0 for Alaska, Hawaii, Idaho, Louisiana, Mississippi, Montana, Nebraska, New Mexico, North Dakota, South Dakota, Texas, West Virginia, Wyoming; exports are 0 only for Alaska and Montana.",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-york-import-share",
+   "basis": "Output: sum 390, count 4002, pct 9.745127 (~9.7%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-york-exports",
+   "basis": "Output: 17.",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-york-import-origins",
+   "basis": "Output top origins for New York: Texas 127, South Carolina 49, Puerto Rico 28, Georgia 26, Tennessee 22.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 9,
+ "skipped": 11
+}

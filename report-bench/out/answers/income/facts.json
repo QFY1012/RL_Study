@@ -1,0 +1,20 @@
+[
+ {
+  "id": "furthest-quintiles-moved",
+  "source": "As the chart above shows, middle income families are actually quite mobile. Nearly all families move at least one quintile during their lifetimes, with nearly half moving two quintiles. Interestingly, more middle income families moved four quintiles - meaning they experienced both the top and bottom quintiles at least once - while fewer families shifted up or down only one quintile from the middle.",
+  "claim": "The furthest number of quintiles moved is two for 41.8% of families, three for 34.4%, four for 18.3%, one for 5.4% and none for 0.1%.",
+  "tables": {
+   "d": "data/line_chart_data.csv"
+  },
+  "code": "d.assign(fam=d.id.astype(str)+'_'+(d.groupby('id',sort=False).year.diff().le(0)).groupby(d.id).cumsum().astype(str)).groupby('fam').quintile.agg(np.ptp).value_counts(normalize=True).mul(100).round(1).sort_index()"
+ },
+ {
+  "id": "cumulative-years-in-each-quintile",
+  "source": "Just watch as we draw one line per family and count up how many years the 7,857 families that we have at least ten years of data on have cumulatively spent at each income level.",
+  "claim": "Cumulative years are 23,163 in quintile 1, 35,140 in quintile 2, 42,720 in quintile 3, 40,583 in quintile 4 and 29,464 in quintile 5.",
+  "tables": {
+   "d": "data/line_chart_data.csv"
+  },
+  "code": "d.quintile.value_counts().sort_index()"
+ }
+]

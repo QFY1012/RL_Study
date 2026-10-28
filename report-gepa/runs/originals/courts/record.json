@@ -1,0 +1,24 @@
+{
+ "id": "courts",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 892,
+  "steps": 87,
+  "tools": 139,
+  "nudged": 0,
+  "usage": {
+   "input": 232171,
+   "output": 42543
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 0,
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 2
+}

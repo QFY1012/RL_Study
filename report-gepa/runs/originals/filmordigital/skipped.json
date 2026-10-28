@@ -1,0 +1,26 @@
+[
+  {
+    "source": "In the past ten years, digital has taken over the medium, with 92% of films shot with digital cameras in 2017.",
+    "why": "Using the story's stated medium definition (non-animated films with a known shooting medium), 2017 gives 92.6% for digital or both (93% rounded) and 82.4% for digital only. The 92% figure appears only if the four 2017 titles carrying a zero budget are dropped from the denominator, which is a missing-budget exclusion used in the budget charts but is not stated for the medium chart."
+  },
+  {
+    "source": "His latest movie, Guardian of the Galaxy Vol. 2 (2017) was the first to shoot with a RED 8K digital camera.",
+    "why": "The data record the film as digital with negative format Redcode RAW, but contain no camera model, resolution (8K) or 'first use' information, so the RED 8K first-use claim cannot be checked."
+  },
+  {
+    "source": "He started to shoot on digital in 2002 with Spy Kids 2 and shot all of his later films in the same medium.",
+    "why": "The data cover 2006-2017 and contain no 2002 release or Spy Kids 2 row, so the 2002 starting point cannot be reproduced; the fact that his later known-format films are digital is recorded separately."
+  },
+  {
+    "source": "On the other side, we also have early adopters who jumped to digital in 2006-2008 and have been using it ever since",
+    "why": "The story states no count, share or rule for this group; its named example, Robert Rodriguez, is reproduced individually."
+  },
+  {
+    "source": "Some of these directors are film loyalists who never switched to digital.",
+    "why": "The story states no count, share or rule for this group; its named examples (Nolan and Tarantino) are reproduced individually."
+  },
+  {
+    "source": "Digital camera adoption is not following a linear path. Despite the growing dominance of digital cameras in the last decade, we see some directors switching back to film in their latest movies.",
+    "why": "No specific count or definition of 'switching back' is given; the Apatow example and the yearly stabilization of the digital share are reproduced separately."
+  }
+]

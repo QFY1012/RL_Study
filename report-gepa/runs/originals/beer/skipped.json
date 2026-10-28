@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Which gives us the top 50 cities for beer-lovers in the US.",
+    "why": "The full top-50 order is not reproduced. With the story's method (at least 5 breweries within 20 miles, 80/20 quality/quantity), the data put Portland, Maine at #7, which the story's list leaves out and which shifts later ranks; only the top city (and a few of the top ranks) match."
+  },
+  {
+    "source": "After analyzing over 1,600 breweries, Columbus comes in 24th out of the 800+ biggest cities in the country.",
+    "why": "Under the story's default ranking (at least 5 breweries within 20 miles) Columbus, Ohio ranks 27th in this data, not 24th. A rank near 24th appears only with a 5-mile radius, which conflicts with Santa Rosa's 11-brewery count at the story's default."
+  },
+  {
+    "source": "Apparently not. New breweries are opening across the country at an increasing rate. Although the trend has been booming since 2010, it doesn’t appear to be slowing either, with nearly 900 new breweries established in 2016.",
+    "why": "The brewery file has only 5 breweries with year 2016, and its yearly counts fall after 2013 (2013: 155, 2014: 108, 2015: 40, 2016: 5). It cannot reproduce nearly 900 openings in 2016 or a trend that keeps increasing; the story's annual series must come from a larger unfiltered source not in these files."
+  },
+  {
+    "source": "States ordered from highest to lowest average per capita openings in the last 20 years",
+    "why": "Only Vermont's top position reproduces. The state order from these files is Vermont, Oregon, Alaska, Colorado, Maine, ..., while the chart orders Vermont, Montana, Wyoming, Alaska, Maine, Colorado, Oregon, ...; the chart's state totals appear to come from the unfiltered brewery set, not this filtered file."
+  },
+  {
+    "source": "the best breweries’’ (almost true)",
+    "why": "This is a qualitative aside with no stated ranking or threshold, and Minneapolis does not top the data's quality measure (Santa Rosa and Anchorage have higher review-weighted beer ratings)."
+  }
+]

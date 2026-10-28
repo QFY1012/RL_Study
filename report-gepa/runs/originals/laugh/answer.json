@@ -1,0 +1,29 @@
+[
+ {
+  "id": "lol-2019-laugh-share",
+  "source": "Anyone who spends time on the internet should not be surprised by lol ’s dominance.",
+  "claim": "In 2019, lol (all case variants combined) accounts for 55.8% of laugh usage with 13,042,622 comments, ahead of haha at 14.8% (3,451,564) and lmao at 13.0% (3,033,063).",
+  "tables": {
+   "df": "data/reddit-laughs.csv"
+  },
+  "code": "df.assign(laugh=df.id.str.lower()).groupby('laugh').count_2019.sum().sort_values(ascending=False).to_frame().assign(share_pct=lambda x: x.count_2019 / x.count_2019.sum() * 100)"
+ },
+ {
+  "id": "laugh-lowercase-uppercase-ratio",
+  "source": "So many variables at play! In this next chart you can go deeper to see not only the market share of each laugh, but the ratio of lower to uppercase usage.",
+  "claim": "Among the three most-used laughs, the lowercase form dominates: lol is 94.0% lowercase and 6.0% uppercase, haha is 98.9% lowercase and 1.1% uppercase, and lmao is 92.0% lowercase and 8.0% uppercase.",
+  "tables": {
+   "df": "data/reddit-laughs.csv"
+  },
+  "code": "df.assign(laugh=df.id.str.lower(), case=np.where(df.id.str.islower(), 'lower', 'upper')).groupby(['laugh', 'case']).count_2019.sum().unstack().assign(total=lambda x: x.sum(axis=1)).sort_values('total', ascending=False).pipe(lambda x: x[['lower', 'upper']].div(x['total'], axis=0) * 100)"
+ },
+ {
+  "id": "lol-usage-share-rise",
+  "source": "Here is the rise of lol in one chart.",
+  "claim": "Among the top 20 laughs, lol's usage share rose from 29.2% in 2009 to 56.0% in 2018.",
+  "tables": {
+   "df": "data/reddit-laughs.csv"
+  },
+  "code": "df[df.id.str.islower()].assign(laugh=lambda d: d.id.str.lower()).groupby('laugh')[[f'count_{y}' for y in range(2009, 2019)]].sum().sort_values('count_2009', ascending=False).head(20).pipe(lambda t: t.div(t.sum()) * 100)[['count_2009', 'count_2018']]"
+ }
+]

@@ -1,0 +1,57 @@
+[
+ {
+  "finding": "支付网关 P95 超过 700ms 的 581 分钟里，订单服务错误率为 2.05%，是其余时段（0.52%）的 4.0 倍，订单 P95 也从 186ms 升到 349ms——超时沿“订单→支付”同步调用链传导",
+  "numbers": {
+   "bad_minutes": 581,
+   "bad_err_rate": 0.02045,
+   "good_err_rate": 0.00516,
+   "err_rate_ratio": 3.96,
+   "order_p95_bad_ms": 349.4,
+   "order_p95_good_ms": 186.3,
+   "p95_ratio": 1.87
+  },
+  "holds": true
+ },
+ {
+  "finding": "支付网关每天 00:00–00:15 的日切对账窗口内错误率 5.71%，是其余时段（0.82%）的 7.0 倍，P95 达 563ms 对 171ms",
+  "numbers": {
+   "window_minutes": 210,
+   "window_err_rate": 0.05715,
+   "normal_err_rate": 0.00822,
+   "err_rate_ratio": 6.95,
+   "window_p95_ms": 563.0,
+   "normal_p95_ms": 171.3,
+   "p95_ratio": 3.29
+  },
+  "holds": true
+ },
+ {
+  "finding": "搜索服务错误率在 14 天内近似线性恶化：日均错误率与日期的皮尔逊相关系数 r=1.000，前 3 天平均 0.68%，后 3 天 2.49%（3.7 倍）",
+  "numbers": {
+   "days": 14,
+   "pearson_r": 0.9998,
+   "first3d_err_rate": 0.00675,
+   "last3d_err_rate": 0.02494,
+   "worsening_ratio": 3.69
+  },
+  "holds": true
+ },
+ {
+  "finding": "会员中心（老系统） 仅承载 0.66% 的请求量，却贡献了全部事故分钟的 65%（944/1461 分钟）",
+  "numbers": {
+   "legacy_traffic_share": 0.0066,
+   "legacy_incident_minute_share": 0.6461,
+   "legacy_incident_minutes": 944,
+   "total_incident_minutes": 1461
+  },
+  "holds": true
+ },
+ {
+  "finding": "每次事故结束后的 10 分钟内，服务请求量约为同时段基线的 1.46 倍（覆盖 250 个事故后分钟）——重试风暴与积压回放",
+  "numbers": {
+   "post_incident_minutes": 250,
+   "requests_vs_baseline": 1.456
+  },
+  "holds": true
+ }
+]

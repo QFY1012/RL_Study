@@ -1,0 +1,64 @@
+{
+ "id": "middle-school",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 538,
+  "steps": 33,
+  "tools": 41,
+  "nudged": 0,
+  "usage": {
+   "input": 84943,
+   "output": 53999
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "belonging-share-by-grade",
+   "basis": "Grades 4-12 values are 72.8, 67.8, 46.4, 38.2, 35.2, 33.4, 32.4, 33.8, 36.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sixth-grade-belonging-drop",
+   "basis": "5th grade = 67.8; 6th grade = 46.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "seventh-grade-belonging-lower",
+   "basis": "6th grade = 46.4; 7th grade = 38.2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "belonging-low-through-high-school",
+   "basis": "5th = 67.8; 8th = 35.2; 9th-12th = 33.4, 32.4, 33.8, 36.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "belonging-improves-late-high-school",
+   "basis": "10th = 32.4; 11th = 33.8; 12th = 36.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "belonging-only-slightly-better",
+   "basis": "5th grade = 67.8; 12th grade = 36.4.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 9,
+ "review": [
+  {
+   "id": "*",
+   "action": "keep",
+   "why": "the story states no percentages, only directions per grade (a drop in 6th grade, low through high school, a small rise late in high school); 'favorable' is a score of 4 or 5 on the 1-5 scale in every fact, and the printouts follow those directions"
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "id": "cetaceans",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 803,
+  "steps": 71,
+  "tools": 96,
+  "nudged": 0,
+  "usage": {
+   "input": 108838,
+   "output": 90162
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "over-500-cetaceans-alive",
+   "basis": "输出为 509，对应 status 为 Alive 或 Unknown 的行数。",
+   "verdict": "ok"
+  },
+  {
+   "id": "max-age-at-death-61",
+   "basis": "输出中最大年龄为 Bottlenose 的 61.0，其他物种均更低。",
+   "verdict": "ok"
+  },
+  {
+   "id": "annual-captures-tripled",
+   "basis": "输出显示 1971 年为 41，1972 年为 165；165 是 41 的三倍以上。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 20,
+ "review": [
+  {
+   "id": "max-age-at-death-61",
+   "action": "keep",
+   "why": "the quote is the label of an annotation the story's lifespan chart draws during one scroll step (polygraph-cool/cetaceans src/js/graphic-lifespan.js: 'maximum age at death in captivity' at age 61); not in the DOM text at any single moment"
+  }
+ ]
+}

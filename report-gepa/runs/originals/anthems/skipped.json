@@ -1,0 +1,70 @@
+[
+  {
+    "source": "F# (F sharp) is the most common key for women. It’s Bb (B flat) for men.",
+    "why": "The data has no performer-gender field, so the women/men split cannot be computed; overall, F# is the most common key (20 performances), but that is not the story's gendered finding."
+  },
+  {
+    "source": "Steven Tyler sings just a step below that in G, by far the highest of any other man in our dataset.",
+    "why": "No gender field identifies the men, so 'highest of any other man' cannot be computed from the files."
+  },
+  {
+    "source": "If you’ve been with us since the beginning, you’ll notice that Chaka Khan has racked up 5 top diva appearances in these first 9 phrases.",
+    "why": "Counting top-three phrase Diva Scores over the data's first nine phrases (phrases 0–8) gives Chaka Khan 4 appearances; 5 is obtained only by including a tenth phrase or the story chart's shifted phrase set, which the story does not define."
+  },
+  {
+    "source": "There are 7 performers in our dataset who have performed the National Anthem 3 or more times. This is their intra-Diva Score, or how they compare to themselves.",
+    "why": "The files contain no intra-Diva Score values. Distances computed from the phrase Diva Scores do not reproduce the chart's order (Carrie Underwood, Billy Joel, Jordin Sparks, Mary J. Blige, Demi Lovato, Kelly Clarkson, Jewel)."
+  },
+  {
+    "source": "Carrie Underwood performed in 2010, 2007, 2006, and 2017, with all her renditions sounding nearly identical.",
+    "why": "The four performances and years are in the data, but 'nearly identical' depends on the intra-Diva Score, which is not in the files; phrase-Diva distances do not make Carrie Underwood the most self-similar."
+  },
+  {
+    "source": "Meanwhile, Demi Lovato switches it up. They use unique vocal runs for each of their performances from 2012, 2015, and 2020.",
+    "why": "The three performances and years are in the data, but 'unique vocal runs' depends on the intra-Diva Score or pitch comparison, which is not in the files."
+  },
+  {
+    "source": "The true divas shine for the anthem’s closing phrase. Here are the top 10 Diva Scores.",
+    "why": "The data's top 10 closing-phrase scores include Reba McEntire at #6 (2082.0) and place Fergie at #11 (1478.7); the story's list omits Reba and includes Fergie, so the displayed top-10 list is not reproduced."
+  },
+  {
+    "source": "Back then she was just a kid with a guitar, so it’s understandable that she records some of the overall lowest Diva Scores (#114 and #129).",
+    "why": "The data rank Taylor Swift's 2008 World Series performance #115 and her 2006 NFL Regular Season performance #130 (the heatmap labels also say #115 and #130), not #114 and #129."
+  },
+  {
+    "source": "Top divas",
+    "why": "The per-phrase top-three lists could not be matched consistently to the data's 16 phrase columns: the displayed lists align with the data columns only after skipping phrase 3, and two sections show fewer than three names, so one top-three-per-phrase computation does not reproduce every label."
+  },
+  {
+    "source": "#69 Diva / Key: E",
+    "why": "The heatmap repeats each performance's overall rank and key; this is a display of the ids file's rank and key columns rather than a finding, so no separate fact is included."
+  },
+  {
+    "source": "This phrase was one of his top Diva Scores.",
+    "why": "The story's phrase labels are offset from the data's phrase columns; T-Pain's score in the corresponding data phrase (p7, 438.9) is only his 8th-highest phrase score, so the statement is not reproduced."
+  },
+  {
+    "source": "The vocal fireworks start to explode around the “bombs are bursting in air.”",
+    "why": "The data's phrase averages do not identify a clear 'bombs' threshold: the corresponding phrases average 224.5 (phrase 8), 245.7 (phrase 9) and 239.3 (phrase 10), while the big jump is at phrase 11 (399.0); the story's phrase labels are also offset from the data's columns."
+  },
+  {
+    "source": "Let’s see how Fergie is doing. Her 2018 NBA All-Star Game performance is surprisingly tame Diva Score-wise.",
+    "why": "Fergie's 2018 NBA All-Star performance has an overall Diva Score of 388.3 and rank #14; the phrase-level comparison needed to call it 'surprisingly tame' is not specified and is affected by the story/data phrase-label offset."
+  },
+  {
+    "source": "By looking at the pitch line, you can pick out artists’ signature shapes, like scooping into notes. This is a common technique for country stars like Chris Stapleton and Scotty McCreery.",
+    "why": "The claim is about visual pitch-contour shapes such as scooping; the files contain pitch traces but no defined numeric measure of scooping, so it cannot be checked as a data finding."
+  },
+  {
+    "source": "This phrase is a common trip up for performers like Christina Aguilera and Eric Burton, who both double back over previously sung phrases.",
+    "why": "The claim describes performance structure (doubling back over phrases); the files contain pitch and phrase Diva Scores but no marker of phrase order or doubled-back phrases, so it cannot be checked."
+  },
+  {
+    "source": "Here, you can also see the really tight vibrato waves from classical- and Broadway-trained singers like Renee Fleming and Kristen Chenoweth.",
+    "why": "Vibrato rate or tightness is not a column in the files; the pitch traces could be inspected visually, but no numeric vibrato measure is provided."
+  },
+  {
+    "source": "Remember, the Diva Score measures how different a performance is from the standard, so artists like Nicole Scherzinger and Steven Tyler who go up the octave and hit (well, sometimes hit) the high notes on “free” get bonus points.",
+    "why": "The claim combines an interpretation of the Diva Score with a specific octave jump on the word 'free'; no column identifies that word or the octave jump, so the finding is not numerically reproducible."
+  }
+]

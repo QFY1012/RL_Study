@@ -1,0 +1,74 @@
+[
+ {
+  "id": "newsrooms-more-white-than-cities",
+  "source": "On average, American newsrooms are still more white than the city, county, or state that they serve.",
+  "claim": "Among the 100 newsrooms with more than 25 staff whose city appears in the census, the mean white staff share is 84.9%, compared with a mean white population share of 54.7% in the cities they serve.",
+  "tables": {
+   "m": "data/map_data_3.csv",
+   "n": "data/newsidsunique_4.csv",
+   "c": "data/census_4.csv"
+  },
+  "code": "(m[m.Year.eq(2017) & m.total_num.gt(25)]\n .drop_duplicates(['NewsID','Year'])\n .merge(n.drop_duplicates('NewsID').drop(columns='Year'), on='NewsID')\n .assign(city_state=lambda d: d.City.str.lower().str.strip() + ' ' + d.State.str.lower().str.strip())\n .merge(c.assign(city_state=c.city_state.str.lower().str.strip()), on='city_state')\n .assign(white_staff_pct=lambda d: 100*d.white_num/d.total_num)\n [['white_staff_pct','white_2015']]\n .agg(['mean','count']))"
+ },
+ {
+  "id": "newsrooms-not-parity-2000",
+  "source": "Though they didn’t quite reach parity by the new millennium, they have since changed the goal to 2025.",
+  "claim": "In 2000, among 386 newsrooms with more than 25 staff matched to a census city, the mean white staff share was 90.1%, against a mean white population share of 66.2% in those cities.",
+  "tables": {
+   "m": "data/map_data_3.csv",
+   "n": "data/newsidsunique_4.csv",
+   "c": "data/census_4.csv"
+  },
+  "code": "(m[m.Year.eq(2000) & m.total_num.gt(25)]\n .drop_duplicates(['NewsID','Year'])\n .merge(n.drop_duplicates('NewsID').drop(columns='Year'), on='NewsID')\n .assign(city_state=lambda d: d.City.str.lower().str.strip() + ' ' + d.State.str.lower().str.strip())\n .merge(c.assign(city_state=c.city_state.str.lower().str.strip()), on='city_state')\n .assign(white_staff_pct=lambda d: 100*d.white_num/d.total_num)\n [['white_staff_pct','white_2000']]\n .dropna()\n .agg(['mean','count']))"
+ },
+ {
+  "id": "five-cities-white-gap",
+  "source": "For instance, the white populations in Chicago, Detroit, Houston, Dallas, and Philadelphia are all less than 40% of each city’s total population. But, in the newsrooms that cater to those cities, white journalists exceed 74% of the total team.",
+  "claim": "The cities' white population shares in the census were 32.2% (Chicago), 9.1% (Detroit), 25.5% (Houston), 29.4% (Dallas) and 35.8% (Philadelphia), while 2017 white staff shares were 80.8% at the Chicago Tribune, 75.0% at the Detroit Free Press, 74.4% at the Detroit News, 77.4% at the Houston Chronicle, 77.6% at the Dallas Morning News and 82.1% at the Philadelphia Inquirer.",
+  "tables": {
+   "m": "data/map_data_3.csv",
+   "n": "data/newsidsunique_4.csv",
+   "c": "data/census_4.csv"
+  },
+  "code": "(m[m.Year.eq(2017) & m.total_num.gt(25)]\n .drop_duplicates(['NewsID','Year'])\n .merge(n.drop_duplicates('NewsID').drop(columns='Year'), on='NewsID')\n .assign(city_state=lambda d: d.City.str.lower().str.strip() + ' ' + d.State.str.lower().str.strip())\n .merge(c.assign(city_state=c.city_state.str.lower().str.strip()), on='city_state')\n .loc[lambda d: d.city_state.isin(['chicago il','detroit mi','houston tx','dallas tx','philadelphia pa'])]\n .assign(white_staff_pct=lambda d: 100*d.white_num/d.total_num)\n [['Company','city_state','white_staff_pct','white_2015']]\n .sort_values('city_state'))"
+ },
+ {
+  "id": "desert-sun-hispanic-black",
+  "source": "When comparing the newsroom to the city of Palm Springs (though other geographies, such as neighboring counties could suit as well), we observe that Hispanic staff is just shy of matching Palm Spring’s Hispanic population at 26%, as well as Black staff reflecting more than double the city’s 5% of the population.",
+  "claim": "In 2017 the Desert Sun's staff was 20.6% Hispanic and 11.8% Black, against 25.8% Hispanic and 4.7% Black in Palm Springs.",
+  "tables": {
+   "m": "data/map_data_3.csv",
+   "n": "data/newsidsunique_4.csv",
+   "c": "data/census_4.csv"
+  },
+  "code": "(m[m.Year.eq(2017)]\n .merge(n.drop_duplicates('NewsID').drop(columns='Year'), on='NewsID')\n .assign(city_state=lambda d: d.City.str.lower().str.strip() + ' ' + d.State.str.lower().str.strip())\n .merge(c.assign(city_state=c.city_state.str.lower().str.strip()), on='city_state')\n .loc[lambda d: d.Company.str.lower().eq('the desert sun')]\n .assign(hispanic_staff_pct=lambda d: 100*d.hisp_num/d.total_num, black_staff_pct=lambda d: 100*d.black_num/d.total_num)\n .set_index('Company')[['hispanic_staff_pct','black_staff_pct','hispanic_2015','black_2015']].T)"
+ },
+ {
+  "id": "newsrooms-more-diverse-share",
+  "source": "Over the past 16 years, about 45% of newsrooms became more racially diverse.",
+  "claim": "From 2001 to 2017, 44.8% of the 402 newsrooms with data in both years increased their non-white staff share.",
+  "tables": {
+   "m": "data/map_data_3.csv"
+  },
+  "code": "(m[(m.total_num>0) & (m.white_num<=m.total_num)]\n .drop_duplicates(['NewsID','Year'])\n .assign(nonwhite=lambda d: 100*(d.total_num-d.white_num)/d.total_num)\n .pivot_table(index='NewsID', columns='Year', values='nonwhite')\n .pipe(lambda p: (p[2017]-p[2001]).dropna())).gt(0).mul(100).agg(['size','mean'])"
+ },
+ {
+  "id": "newsrooms-same-or-less-diverse-share",
+  "source": "However, just over half of the surveyed newsrooms either have maintained their 2001 levels of racial diversity or have become less diverse.",
+  "claim": "55.2% of those 402 newsrooms had a 2017 non-white staff share equal to or below their 2001 share.",
+  "tables": {
+   "m": "data/map_data_3.csv"
+  },
+  "code": "(m[(m.total_num>0) & (m.white_num<=m.total_num)]\n .drop_duplicates(['NewsID','Year'])\n .assign(nonwhite=lambda d: 100*(d.total_num-d.white_num)/d.total_num)\n .pivot_table(index='NewsID', columns='Year', values='nonwhite')\n .pipe(lambda p: (p[2017]-p[2001]).dropna())).le(0).mul(100).agg(['size','mean'])"
+ },
+ {
+  "id": "national-papers-wapo-only",
+  "source": "The Washington Post, USA Today, the New York Times, and the Wall Street Journal are all national publications. Of these four, only the Washington Post substantially increased its racial diversity among staff over the past 16 years.",
+  "claim": "The Washington Post's non-white staff share rose from 19.5% in 2001 to 30.8% in 2017 (change +11.3 points), against increases of +2.9 at USA Today, +2.8 at the New York Times and +1.7 at the Wall Street Journal.",
+  "tables": {
+   "m": "data/map_data_3.csv",
+   "n": "data/newsidsunique_4.csv"
+  },
+  "code": "(m[m.Year.isin([2001,2017])]\n .drop_duplicates(['NewsID','Year'])\n .merge(n.drop_duplicates('NewsID').drop(columns='Year'), on='NewsID')\n .loc[lambda d: d.Company.str.lower().isin(['the washington post','usa today','the new york times','the wall street journal'])]\n .assign(nonwhite_pct=lambda d: 100*(d.total_num-d.white_num)/d.total_num)\n .pivot_table(index='Company', columns='Year', values='nonwhite_pct')\n .assign(change=lambda d: d[2017]-d[2001]))"
+ }
+]

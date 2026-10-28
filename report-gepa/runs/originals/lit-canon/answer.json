@@ -1,0 +1,110 @@
+[
+ {
+  "id": "things-number-one-1990s",
+  "source": "Here’s the #1, most-assigned ’90s book, which appears on 2,050 syllabi.",
+  "claim": "Among all 1990s books in the data, The Things They Carried has the highest syllabus count, 2,050.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.decade == 199].nlargest(1, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-1990s-fiction-syllabi",
+  "source": "The Top 10 Most-Assigned ’90s Fiction",
+  "claim": "The ten most-assigned 1990s fiction books, in order, are The Things They Carried (2,050 syllabi), Woman Hollering Creek (891), The God of Small Things (801), Harry Potter and the Philosopher's Stone (788), Interpreter of Maladies (773), Disgrace (593), The Giver (575), Angels in America (508), Parable of the Sower (505), and The Lone Ranger and Tonto Fistfight in Heaven (405).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 199) & (d.type == 'fiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-1980s-fiction-syllabi",
+  "source": "What follows are the most-assigned fiction and non-fiction books from the ’80s and ’00s, along with the list from the ’90s we just explored.",
+  "claim": "The ten most-assigned 1980s fiction books, in order, are Beloved (1,836 syllabi), The Handmaid's Tale (1,255), The House on Mango Street (1,208), Cathedral (1,153), The Color Purple (724), Neuromancer (567), Watchmen (521), White Noise (493), Nervous Conditions (487), and The Joy Luck Club (485).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 198) & (d.type == 'fiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-1980s-nonfiction-syllabi",
+  "source": "What follows are the most-assigned fiction and non-fiction books from the ’80s and ’00s, along with the list from the ’90s we just explored.",
+  "claim": "The ten most-assigned 1980s nonfiction books, in order, are Gender Trouble (1,046 syllabi), Borderlands (851), The Empire Writes Back (669), A Small Place (539), Renaissance Self-Fashioning (460), Maus (390), A Cyborg Manifesto (382), Can the Subaltern Speak? (370), Hunger of Memory (345), and Orality and Literacy (304).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 198) & (d.type == 'nonfiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-1990s-nonfiction-syllabi",
+  "source": "What follows are the most-assigned fiction and non-fiction books from the ’80s and ’00s, along with the list from the ’90s we just explored.",
+  "claim": "The ten most-assigned 1990s nonfiction books, in order, are Understanding Comics (1,155 syllabi), Mother Tongue (869), Culture and Imperialism (846), Bird by Bird (795), The Black Atlantic (575), Playing in the Dark (562), The Location of Culture (559), Into the Wild (493), Postmodernism, Or, the Cultural Logic of Late Capitalism (396), and Bodies That Matter (370).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 199) & (d.type == 'nonfiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-2000s-fiction-syllabi",
+  "source": "What follows are the most-assigned fiction and non-fiction books from the ’80s and ’00s, along with the list from the ’90s we just explored.",
+  "claim": "The ten most-assigned 2000s fiction books, in order, are Persepolis (1,279 syllabi), Never Let Me Go (877), The Hunger Games (873), The Road (832), Absolutely True Diary of a Part-Time Indian (694), White Teeth (645), The Curious Incident of the Dog in the Night-Time (577), The Brief Wondrous Life of Oscar Wao (574), The Reluctant Fundamentalist (501), and American Born Chinese (493).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 200) & (d.type == 'fiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "top-2000s-nonfiction-syllabi",
+  "source": "What follows are the most-assigned fiction and non-fiction books from the ’80s and ’00s, along with the list from the ’90s we just explored.",
+  "claim": "The ten most-assigned 2000s nonfiction books, in order, are Fun Home (1,233 syllabi), Is Google Making Us Stupid? (870), A Theory of Adaptation (529), Outliers (476), Nickel and Dimed (276), Fast Food Nation (204), Regarding the Pain of Others (203), Undoing Gender (180), Convergence Culture (173), and Language of New Media (126).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 200) & (d.type == 'nonfiction')].nlargest(10, 'count').set_index('title')['count']"
+ },
+ {
+  "id": "woman-hollering-goodreads-lowest",
+  "source": "#5,403 most frequently rated book on Goodreads\n#52,311 most frequently rated book on Goodreads\n#5,696 most-frequently rated book on Goodreads\n#1 most-frequently rated book on Goodreads\n#8,519 most-frequently rated book on Goodreads\n#12,988 most-frequently rated book on Goodreads\n#763 most-frequently rated book on Goodreads\n#38,931 most-frequently rated book on Goodreads\n#16,524 most-frequently rated book on Goodreads\n#29,952 most-frequently rated book on Goodreads\nWoman Hollering Creek is ranked #52,311 in quantity of Goodreads ratings, the lowest among the 10 most-assigned ’90s fiction.",
+  "claim": "The Goodreads rating ranks of the ten most-assigned 1990s fiction books are #5,403 for The Things They Carried, #52,311 for Woman Hollering Creek, #5,696 for The God of Small Things, #1 for Harry Potter and the Philosopher's Stone, #8,519 for Interpreter of Maladies, #12,988 for Disgrace, #763 for The Giver, #38,931 for Angels in America, #16,524 for Parable of the Sower, and #29,952 for The Lone Ranger and Tonto Fistfight in Heaven, with Woman Hollering Creek the lowest.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 199) & (d.type == 'fiction')].nlargest(10, 'count').assign(goodreads_rank=lambda x: x.awards.str.extract(r'#([\\d,]+) most.frequently rated')[0].str.replace(',', '').astype(int)).sort_values('goodreads_rank', ascending=False).set_index('title')['goodreads_rank']"
+ },
+ {
+  "id": "nyt-1990s-fiction-status",
+  "source": "Never charted as a New York Times Best Seller\n31 weeks as a New York Times Best Seller\n19th-longest streak as a Best Seller in the 1990s\n77 weeks as a New York Times Best Seller\n10th-longest streak as a Best Seller in the 1990s",
+  "claim": "Of the ten most-assigned 1990s fiction books, The God of Small Things spent 31 weeks on the New York Times Best Seller list (the 19th-longest streak of the 1990s) and Harry Potter and the Philosopher's Stone spent 77 weeks (the 10th-longest); the other eight have no New York Times Best Seller weeks, with Parable of the Sower listed as never charting when published.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 199) & (d.type == 'fiction')].nlargest(10, 'count').assign(nyt=lambda x: x.awards.str.extract(r'(Never charted[^\\n]*|\\d+ weeks as a New York Times Best Seller)')[0].str.replace(' as a New York Times Best Seller', '').str.replace('Never charted', 'never').str.replace(' when published', ' (when published)'), streak=lambda x: x.awards.str.extract(r'(\\d+)(?:st|nd|rd|th)[ -]longest[ -]streak')[0]).set_index('title')[['nyt', 'streak']]"
+ },
+ {
+  "id": "nyt-1980s-fiction-status",
+  "source": "31 weeks as a New York Times Best Seller (the 45th longest-streak of the 1980s)\n14 weeks as a New York Times Best Seller\n3 weeks as a New York Times Best Seller\n35 weeks as a New York Times Best Seller (the 53rd longest-streak of the 1980s)",
+  "claim": "Of the ten most-assigned 1980s fiction books, Beloved spent 31 weeks on the New York Times Best Seller list (the 45th-longest streak of the 1980s), The Handmaid's Tale 14 weeks, The Color Purple 3 weeks, and The Joy Luck Club 35 weeks (the 53rd-longest streak); the other six never charted.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 198) & (d.type == 'fiction')].nlargest(10, 'count').assign(nyt=lambda x: x.awards.str.extract(r'(Never charted[^\\n]*|\\d+ weeks as a New York Times Best Seller)')[0].str.replace(' as a New York Times Best Seller', '').str.replace('Never charted', 'never').str.replace(' when published', ' (when published)'), streak=lambda x: x.awards.str.extract(r'(\\d+)(?:st|nd|rd|th)[ -]longest[ -]streak')[0]).set_index('title')[['nyt', 'streak']]"
+ },
+ {
+  "id": "goodreads-1980s-fiction",
+  "source": "#4,420 most frequently rated book on Goodreads\n#913 most frequently rated book on Goodreads\n#10,059 most frequently rated book on Goodreads\n#27,939 most frequently rated book on Goodreads\n#2,899 most frequently rated book on Goodreads\n#5,377 most frequently rated book on Goodreads\n#3,043 most frequently rated book on Goodreads\n#13,325 most frequently rated book on Goodreads\n#45,545 most frequently rated book on Goodreads\n#2,612 most frequently rated book on Goodreads",
+  "claim": "The Goodreads rating ranks of the ten most-assigned 1980s fiction books, in syllabi-count order, are #4,420 for Beloved, #913 for The Handmaid's Tale, #10,059 for The House on Mango Street, #27,939 for Cathedral, #2,899 for The Color Purple, #5,377 for Neuromancer, #3,043 for Watchmen, #13,325 for White Noise, #45,545 for Nervous Conditions, and #2,612 for The Joy Luck Club.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[(d.decade == 198) & (d.type == 'fiction')].nlargest(10, 'count').assign(goodreads_rank=lambda x: x.awards.str.extract(r'#([\\d,]+) most.frequently rated')[0].str.replace(',', '').astype(int)).set_index('title')['goodreads_rank']"
+ },
+ {
+  "id": "things-they-carried-context",
+  "source": "Never charted as a New York Times Best Seller\n#5,403 most frequently rated book on Goodreads\nPulitzer Prize Finalist; National Book Critics Circle Award Finalist",
+  "claim": "The Things They Carried is recorded as never charting as a New York Times Best Seller, ranked #5,403 among most frequently rated books on Goodreads, and a Pulitzer Prize and National Book Critics Circle Award finalist.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d.loc[d.title == 'The Things They Carried', 'awards'].iloc[0]"
+ }
+]

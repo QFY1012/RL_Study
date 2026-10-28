@@ -1,0 +1,30 @@
+[
+  {
+    "source": "The 183 different #1 songs in the world, by location",
+    "why": "This count is made from city_data plus country-level top songs loaded by the page from country_data.csv; country_data.csv is not in the provided data folder. The provided city_data.csv contains only 169 distinct track links, so 183 cannot be computed from the files given."
+  },
+  {
+    "source": "Contrast that with the area surrounding Orlando, where there are 5 different #1 songs in a 100 km radius.",
+    "why": "The page gets this count from a randomly chosen 100 km deck.gl hexagon, not a circular radius around Orlando. In city_data.csv a 100 km circle around Orlando contains 6 distinct #1 songs (Track Star, Tombstone, Street Runner, good 4 u, MONTERO, and Butter), so the story’s 5 is not reproducible without the page’s hex-bin geometry and random selection."
+  },
+  {
+    "source": "Generally, cities in the area around Columbus have the same #1 song, a sort of pop music monoculture.",
+    "why": "city_data.csv shows two different #1 songs within 100 km of Columbus: RAPSTAR in Columbus, Mansfield, Newark, and Springfield, and good 4 u in Dublin. The story calls this a monoculture and says ‘the same #1 song’, which the data do not reproduce literally as one song."
+  },
+  {
+    "source": "North Charleston’s musical bubble is mirrored in other parts of the world. In , km away, is the same top song as North Charleston, BeatBox 2 (feat. Pooh Shiesty) by SpotemGottem.",
+    "why": "This sister-place finding is derived from country-level top songs in country_data.csv, which is not among the provided files. In city_data.csv no city outside the US has BeatBox 2 (feat. Pooh Shiesty) as its #1 song."
+  },
+  {
+    "source": "Same with Ústí nad Labem, Czech Republic, with a number of hits you’ve likely never heard of.",
+    "why": "The story names no song or count for Ústí nad Labem; the place is selected from a random hexagon, and the underlying hexagon count is not reproducible from the provided files."
+  },
+  {
+    "source": "Or zoom over to Iceland for another unique pop music pattern.",
+    "why": "The story gives no number, comparison, or named song for Iceland, so there is no checkable data finding to reproduce."
+  },
+  {
+    "source": "The world is a musical cornucopia of ‘hits.’ Some songs are national exports, crossing cultural and linguistic boundaries. Others conform to their native country’s borders.",
+    "why": "This is a qualitative pattern statement with no specified measure, threshold, ranking, or named example, so it cannot be checked as a single fact."
+  }
+]

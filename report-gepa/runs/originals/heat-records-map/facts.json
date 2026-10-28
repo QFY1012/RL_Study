@@ -1,0 +1,76 @@
+[
+  {
+    "id": "us-one-day-since-daily-record",
+    "source": "The U.S. has gone 01 days",
+    "claim": "At the data's last update, 1 day had passed since at least one city set a daily record high.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "a.days_since_daily.min()"
+  },
+  {
+    "id": "typical-city-record-gap",
+    "source": "temperature records might seem “unprecedented,” but in reality occur nearly every few weeks.",
+    "claim": "The median city's most recent daily record high was 21 days before the data's last update.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "a.days_since_daily.median()"
+  },
+  {
+    "id": "daily-records-year-round",
+    "source": "Specifically, “daily high” records show that never-before-seen warm days are occurring year-round, not just in the heat of the summer months.",
+    "claim": "The most recent daily record highs in the data fall in every season, including December, January, February, June, July, and August.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "pd.to_datetime(a.days_since_daily_date).dt.month_name().value_counts()"
+  },
+  {
+    "id": "valentine-most-recent-daily-record",
+    "source": "1 day\n84°F in Valentine\nHottest Oct. 23 Ever",
+    "claim": "The highlighted city with the shortest time since a daily record high is Valentine, NE, at 1 day and 84°F.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "a.nsmallest(1, 'days_since_daily')[['name', 'state_abbr', 'days_since_daily', 'days_since_val']]"
+  },
+  {
+    "id": "marathon-longest-gap-since-daily-record",
+    "source": "Days since a city had a record-high temperature",
+    "claim": "Marathon, FL has gone 1001 days since its most recent daily record high.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "a.nlargest(1, 'days_since_daily')[['name', 'state_abbr', 'days_since_daily']]"
+  },
+  {
+    "id": "all-time-record-time-range",
+    "source": "Time since a city had the highest temperature ever recorded",
+    "claim": "Time since the highest temperature ever recorded ranges from 91 days for Rapid City Downtown, SD to 48636 days for Morgantown, WV.",
+    "tables": {
+      "a": "data/acis.csv"
+    },
+    "code": "a.sort_values('all_time_days').iloc[[0, -1]][['name', 'state_abbr', 'all_time_days']]"
+  },
+  {
+    "id": "oct-23-record-highs",
+    "source": "Hottest Oct. 23rd on record in:",
+    "claim": "On 2026-10-23, Bismarck, ND set a daily record high of 78°F and Mobridge, SD set one of 81°F.",
+    "tables": {
+      "a": "data/acis.csv",
+      "r": "data/heat-records-running.csv"
+    },
+    "code": "r[r.date == r.date.max()].merge(a.assign(station=a.station.str.split(' ').str[0]), on='station').query('tie == False')[['name', 'state_abbr', 'date', 'temp', 'tie']]"
+  },
+  {
+    "id": "oct-23-tied-record",
+    "source": "Tied the record for hottest Oct. 23rd:",
+    "claim": "On 2026-10-23, Valentine, NE tied its daily record high at 84°F.",
+    "tables": {
+      "a": "data/acis.csv",
+      "r": "data/heat-records-running.csv"
+    },
+    "code": "r[r.date == r.date.max()].merge(a.assign(station=a.station.str.split(' ').str[0]), on='station').query('tie == True')[['name', 'state_abbr', 'date', 'temp', 'tie']]"
+  }
+]

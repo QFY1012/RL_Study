@@ -1,0 +1,191 @@
+[
+  {
+    "id": "writers-45-from-23-countries",
+    "source": "19% of people featured on banknotes are Writers (45 people from 23 countries).",
+    "claim": "45 individuals from 23 countries are writers, 18.7% of all individuals on banknotes.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').groupby('profession').agg(people=('name','size'), countries=('country','nunique')).assign(share=lambda x: x.people/d.drop_duplicates('name').shape[0]).loc[['Writer']]"
+  },
+  {
+    "id": "writing-top-for-women-second-for-men",
+    "source": "Writing was the most common profession among women and the second most common for men",
+    "claim": "Writing is the most common profession among women (14) and the second most common among men (31, behind 37 heads of government).",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').groupby(['gender','profession']).size().unstack('gender')"
+  },
+  {
+    "id": "head-of-government-second-one-woman",
+    "source": "The second most common profession in the dataset is Head of Government, which only features one woman: Corazon C. Aquino",
+    "claim": "Head of Government is the second most common profession (38 individuals), with only one woman.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').groupby('profession').agg(people=('name','size'), women=('gender', lambda s: (s=='F').sum())).sort_values('people', ascending=False).head(2)"
+  },
+  {
+    "id": "four-female-politicians-three-firsts",
+    "source": "There are only four female Politicians featured on banknotes and three of them were the first women to hold a specific government role",
+    "claim": "There are 4 female politicians, 3 of whom are known for being a 'first'.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query(\"profession == 'Politician' and gender == 'F'\").agg({'name':'size','knownForBeingFirst':lambda s: (s=='Yes').sum()})"
+  },
+  {
+    "id": "no-woman-founders",
+    "source": "Not a single country we analyzed featured a woman who is considered the founder of their nation.",
+    "claim": "None of the 25 founders on banknotes is a woman.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query(\"profession == 'Founder'\").agg({'name':'size','gender':lambda s:(s=='F').sum()})"
+  },
+  {
+    "id": "twelve-monarchs-two-women",
+    "source": "There are just 12 monarchs featured on banknotes and only two of them are women: Queen Elizabeth II and Queen Tamar of Georgia.",
+    "claim": "Of the 12 monarchs, 2 are women.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query(\"profession == 'Monarch'\").agg({'name':'size','gender':lambda s:(s=='F').sum()})"
+  },
+  {
+    "id": "governance-combined-42-percent",
+    "source": "In other words, 42% of all the individuals we analyzed can be thought of playing a role in governance broadly defined.",
+    "claim": "102 individuals across 34 countries, 42.3% of all individuals, hold governance professions (heads of government, politicians, founders or monarchs).",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').assign(governance=lambda x: x.profession.isin([\"Head of Gov't\",\"Politician\",\"Founder\",\"Monarch\"])).groupby('governance').agg(people=('name','size'), countries=('country','nunique'), share=('name', lambda s: len(s)/d.drop_duplicates('name').shape[0])).tail(1)"
+  },
+  {
+    "id": "writers-second-after-governance",
+    "source": "Writers would still be a top profession, coming in second place.",
+    "claim": "With governance professions combined, writers (45) are the second-largest group after governance (102).",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').assign(profession=lambda x: np.where(x.profession.isin([\"Head of Gov't\",\"Politician\",\"Founder\",\"Monarch\"]), 'Governance', x.profession)).profession.value_counts().head(2)"
+  },
+  {
+    "id": "firsts-share-29-percent",
+    "source": "On average, 29% of people in a country’s currency were known for being the first ones to do something",
+    "claim": "69 individuals (28.6%) are known for being a 'first'.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').groupby('knownForBeingFirst').agg(people=('name','size'), share=('name', lambda s: len(s)/d.drop_duplicates('name').shape[0]))"
+  },
+  {
+    "id": "firsts-appear-sooner",
+    "source": "We found that people who were known for a “first” were issued on a banknote sooner than those who were not notable “firsts.”",
+    "claim": "Individuals known for a 'first' appeared on a banknote 89.9 years after death on average, versus 137.4 years for those not known for a first.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').groupby('knownForBeingFirst').appearanceDeathDiff.agg(['mean','median','count'])"
+  },
+  {
+    "id": "ten-people-alive-on-banknotes",
+    "source": "Among the 10 people who were alive to see themselves on a banknote, only Queen Elizabeth is still alive today (therefore, she isn’t represented in this graph).",
+    "claim": "Ten individuals appeared on a banknote while alive: nine died after appearing and one, Queen Elizabeth II, has no recorded death date.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query(\"appearanceDeathDiff < 0 or name == 'Queen Elizabeth II'\").assign(total=lambda x: len(x), no_death_date=lambda x: x.deathDate.isna()).groupby(['total','no_death_date']).agg(people=('name','size'), names=('name', lambda s: ', '.join(s)))"
+  },
+  {
+    "id": "ninety-six-percent-issued-after-death",
+    "source": "96% of the banknotes were issued after the person on them had died.",
+    "claim": "230 of the 239 individuals with a known death date (96.2%) appeared on a banknote after their death.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').appearanceDeathDiff.dropna().gt(0).agg(['sum','mean','count'])"
+  },
+  {
+    "id": "hannibal-oldest-person",
+    "source": "died in 183 BCE, which makes him the oldest person in our dataset.",
+    "claim": "Hannibal has the earliest death date in the dataset (183 BCE) and appeared on a banknote 2,196 years later.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').assign(deathYear=pd.to_numeric(d.drop_duplicates('name').deathDate, errors='coerce')).nsmallest(1, 'deathYear')[['country','name','deathDate','firstAppearanceDate','appearanceDeathDiff']]"
+  },
+  {
+    "id": "hannibal-current-five-dinar-note",
+    "source": "The current 5 dinar banknote with Hannibal on it was put into circulation in 2013.",
+    "claim": "Hannibal appears on Tunisia's 5-dinar note, which first appeared in 2013.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d[d.name=='Hannibal'][['country','currencyName','name','currentBillValue','firstAppearanceDate']]"
+  },
+  {
+    "id": "astrid-lindgren-twenty-krona",
+    "source": "This is the case of Sweden as they thoughtfully decided that Astrid Lindgren, the author of the children’s books about Pippi Longstocking, would be on the 20-note krona.",
+    "claim": "Astrid Lindgren appears on Sweden's 20-krona note.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d[d.name.str.contains('Astrid')][['country','currencyName','currentBillValue','firstAppearanceDate']]"
+  },
+  {
+    "id": "third-died-century-before-appearing",
+    "source": "For a third of the featured individuals, it took centuries to get issued on a banknote.",
+    "claim": "80 individuals (33.2%) died more than a century before appearing on a banknote.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').appearanceDeathDiff.gt(100).agg(['sum','mean'])"
+  },
+  {
+    "id": "shortest-wait-one-year-four-people",
+    "source": "The shortest waiting time for someone to be put on a banknote after their death was just one year, and this was only the case for four people: Gabriel García Márquez of Colombia, General Murtala Mohammed of Nigeria, Corazon C. Aquino and Manuel A. Roxas of the Philippines.",
+    "claim": "The shortest wait after death was 1 year, shared by 4 people.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query('appearanceDeathDiff == 1').assign(people=lambda x: len(x))[['name','appearanceDeathDiff','people']]"
+  },
+  {
+    "id": "shortest-wait-people-all-firsts",
+    "source": "All four of these people were notable “firsts” as well.",
+    "claim": "All 4 people with a one-year wait are marked known for a 'first'.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query('appearanceDeathDiff == 1').groupby('knownForBeingFirst').size()"
+  },
+  {
+    "id": "four-activist-nine-revolutionary-countries",
+    "source": "Four countries portray an activist and nine others portray revolutionaries who fought to overthrow their oppressors.",
+    "claim": "Four countries have an activist on a banknote and nine others have a revolutionary.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').query(\"profession in ['Activist','Revolutionary']\").groupby('profession').country.nunique()"
+  },
+  {
+    "id": "mirabal-sisters-forty-seven-years",
+    "source": "Tragically, they were assassinated by the dictator’s henchmen in 1960. In 2007, 47 years later, the Mirabal sisters were introduced to the peso as symbols of democratic and feminist resistance.",
+    "claim": "The three Mirabal sisters were assassinated in 1960 and appeared on a banknote in 2007, 47 years later.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d[d.name.str.contains('Mirabal')].groupby('appearanceDeathDiff').agg(sisters=('name','size'), death=('deathDate','min'), appeared=('firstAppearanceDate','min'))"
+  },
+  {
+    "id": "bill-values-similar-by-gender",
+    "source": "We found that the distribution across bill values was roughly the same.",
+    "claim": "The median bill value, normalized as a percentile within each country, is 0.60 for women and 0.57 for men.",
+    "tables": {
+      "d": "data/banknotesData.csv"
+    },
+    "code": "d.drop_duplicates('name').assign(percentile=lambda x: x.groupby('country').currentBillValue.rank(pct=True)).groupby('gender').percentile.agg(['median','mean','count'])"
+  }
+]

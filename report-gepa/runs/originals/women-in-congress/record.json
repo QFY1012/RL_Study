@@ -1,0 +1,24 @@
+{
+ "id": "women-in-congress",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1,
+  "steps": 4,
+  "tools": 0,
+  "nudged": 3,
+  "usage": {
+   "input": 0,
+   "output": 0
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 382fa1fc-d88f-4950-8b51-c02874c8da09)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/women-in-congress/facts.json'"
+ ],
+ "skipped": null
+}

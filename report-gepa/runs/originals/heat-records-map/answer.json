@@ -1,0 +1,20 @@
+[
+ {
+  "id": "typical-city-record-gap",
+  "source": "temperature records might seem “unprecedented,” but in reality occur nearly every few weeks.",
+  "claim": "The median city's most recent daily record high was 21 days before the data's last update.",
+  "tables": {
+   "a": "data/acis.csv"
+  },
+  "code": "a.days_since_daily.median()"
+ },
+ {
+  "id": "daily-records-year-round",
+  "source": "Specifically, “daily high” records show that never-before-seen warm days are occurring year-round, not just in the heat of the summer months.",
+  "claim": "The most recent daily record highs in the data fall in every season, including December, January, February, June, July, and August.",
+  "tables": {
+   "a": "data/acis.csv"
+  },
+  "code": "pd.to_datetime(a.days_since_daily_date).dt.month_name().value_counts()"
+ }
+]

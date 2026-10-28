@@ -1,0 +1,47 @@
+{
+ "id": "making-it-big",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 784,
+  "steps": 55,
+  "tools": 72,
+  "nudged": 0,
+  "usage": {
+   "input": 88235,
+   "output": 109211
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "bands-reach-medium-tier",
+   "basis": "d.tier.eq(1).sum() = 398",
+   "verdict": "ok"
+  },
+  {
+   "id": "twenty-one-made-bands",
+   "basis": "Output lists 21 names and made_bands = 21; names match the claim list.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sylvan-esso-under-two-years",
+   "basis": "Computed difference = 1.5195071868583163 years, approximately 1.52 years.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sylvan-esso-mercury-lounge",
+   "basis": "First row: vname=Mercury Lounge, capacity=250, date=2013-07-17, order=0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 13
+}

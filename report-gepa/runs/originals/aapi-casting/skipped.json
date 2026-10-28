@@ -1,0 +1,30 @@
+[
+  {
+    "source": "A study published in 2025 showed that less than 30% of Asian and Pacific Islanders feel like they are represented in the media.",
+    "why": "The 30% figure comes from an external McKinsey study; the provided roles data has no survey responses or measure of how represented people feel."
+  },
+  {
+    "source": "according to a 2023 poll by the Pew Research Center, many Asian Americans feel more closely aligned with their specific ethnicity, like “Chinese” or “Thai,” rather than broadly “Asian.”",
+    "why": "The Pew survey data is not in the provided files."
+  },
+  {
+    "source": "From 2007 to 2022, the percentage of Asian characters with speaking roles increased from 3.4% to 15.9%, the largest increase among any racial group during that time.",
+    "why": "These shares come from an external study; the provided roles data has no speaking-role measure or comparison with other racial groups."
+  },
+  {
+    "source": "the “Big Five” production studios—Universal, Paramount, Warner Bros., Disney, and Sony—control nearly 85% of the movie market share.",
+    "why": "The provided roles data has no market-share data, so the 85% figure cannot be computed from it."
+  },
+  {
+    "source": "In 2024, racial and gender diversity in Hollywood decreased for the first time in six years",
+    "why": "The 2024 industry-wide diversity figures come from an external UCLA report; the provided data ends in 2023 and has no industry-wide diversity measure."
+  },
+  {
+    "source": "director Daniel Kwan becoming the first Asian director to win the Oscar for Best Director for an Asian-led film.",
+    "why": "The Oscar history is external and is not recorded in the provided roles data."
+  },
+  {
+    "source": "These three films were more obscure—and chances are, you’ve never even heard of them, like Missing in Action (1984) or A Hologram for the King (2016).",
+    "why": "The 'obscure' characterization is subjective and not a number the provided data measures; the count of three completely inaccurate films is covered by the film-level casting-accuracy fact."
+  }
+]

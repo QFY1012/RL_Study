@@ -1,0 +1,191 @@
+[
+ {
+  "id": "mufe-shades-60-90",
+  "source": "In contrast, 31 of Make Up For Ever’s 40 shades fall in the 60-90 lightness range, primarily catering to light and tanned skin tones.",
+  "claim": "31 of Make Up For Ever's 40 Ultra HD shades have lightness values in the 60-90 range.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "pd.crosstab(df.query('group==1').brand, df.query('group==1').L.between(60,90,inclusive='left').rename('in_60_90'), margins=True)"
+ },
+ {
+  "id": "fenty-wider-range-than-mufe",
+  "source": "Fenty foundations have a wider range of shades than Make Up Forever.",
+  "claim": "Fenty's 40 shades span lightness 25-94 (a range of 69), while Make Up For Ever's 40 span 31-92 (a range of 61).",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,1]').groupby('brand').L.agg(['min','max',np.ptp,'size'])"
+ },
+ {
+  "id": "fenty-extremes-vs-mufe",
+  "source": "Fenty’s Pro Filt’r foundation evenly supports a greater range of skin tones, excelling on both the darkest and lightest ends of the spectrum.",
+  "claim": "Fenty has 1 shade in the 20-30 lightness band and 4 in 30-40, against Make Up For Ever's 0 and 2, and 4 shades in the 90-100 band against 1.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "pd.crosstab(pd.cut(df.query('group in [0,1]').L, range(0,101,10), right=False), df.query('group in [0,1]').brand)"
+ },
+ {
+  "id": "bestsellers-10-20-band",
+  "source": "(and Maybelline and L'Oréal actually cover the 10-20 lightness range that Fenty doesn’t!)",
+  "claim": "Among the US bestsellers, Maybelline's Fit Me and L'Oréal's Infalliable each carry one shade in the 10-20 lightness band, while Fenty's Pro Filt'r has none.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,2]').groupby(['brand','product']).L.agg(lambda s: (s<20).sum())"
+ },
+ {
+  "id": "fenty-lightest-among-bestsellers",
+  "source": "Additionally, Fenty supports the lightest skin tones to a degree that is unparalleled among the bestsellers, which makes it a champion of inclusivity on both ends of the shade spectrum.",
+  "claim": "Fenty's lightest shade reaches L 94, with 4 shades at L 90 or above, while no US bestseller line exceeds L 92 or has more than 2 shades that light.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,2]').groupby(['brand','product']).agg(max_L=('L','max'), shades_90_plus=('L',lambda s: (s>=90).sum()))"
+ },
+ {
+  "id": "bipoc-skew-darker",
+  "source": "What’s interesting is that these BIPOC-created brands skew darker than every brand we’ve seen so far (including Fenty)—the densest, most consistent clustering of shades lie in the 50-60 lightness range.",
+  "claim": "The 85 BIPOC-founded shades average L 56.0, darker than Fenty's 40 (65.6), Make Up For Ever's 40 (70.0), the 167 US bestseller shades (65.8) and the 112 white-founded shades (66.4).",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group<=4').groupby('group').L.agg(['mean','size'])"
+ },
+ {
+  "id": "bipoc-peak-50-60",
+  "source": "What’s interesting is that these BIPOC-created brands skew darker than every brand we’ve seen so far (including Fenty)—the densest, most consistent clustering of shades lie in the 50-60 lightness range.",
+  "claim": "The BIPOC-founded brands' most crowded lightness band is 50-60 with 20 of their 85 shades, while Fenty peaks at 80-90 (8) and Make Up For Ever, the US bestsellers and white-founded brands peak at 70-80 (12, 57 and 40).",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "pd.crosstab(pd.cut(df.query('group<=4').L, range(0,101,10), right=False), df.query('group<=4').group, margins=True)"
+ },
+ {
+  "id": "bipoc-brands-darkest-10-30",
+  "source": "Additionally, there is solid support for the darkest skin tones: every brand has at least one product within the 10-30 lightness range.",
+  "claim": "Each BIPOC-founded brand's darkest shade is inside the 10-30 band: Laws of Nature at L 11, Black Up 16, Beauty Bakerie 22, Black Opal 23 and Iman 27.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==3').groupby('brand').L.min()"
+ },
+ {
+  "id": "fenty-most-shades-bipoc",
+  "source": "Switching over to brands with BIPOC founders, we see that Fenty reigns here as the brand with the most number of shades.",
+  "claim": "Fenty's Pro Filt'r has 40 shades, more than any BIPOC-founded line, the next largest being Beauty Bakerie's #1 CAKE MIX with 30.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,3]').groupby(['brand','product']).size().sort_values(ascending=False)"
+ },
+ {
+  "id": "nigeria-product-shade-max",
+  "source": "While the total number of shades per brand (maxing out at 11) is lower than that of US bestsellers, the distribution does skew noticeably darker, even more so than the BIPOC-created brands in the US.",
+  "claim": "Nigerian foundation products top out at 11 shades (House of Tara's Oil Free and Elsas Pro's Full Coverage), against 42 for Estée Lauder's Double Wear.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [2,5]').groupby(['brand','product']).size().sort_values(ascending=False)"
+ },
+ {
+  "id": "nigeria-darker-than-bipoc",
+  "source": "While the total number of shades per brand (maxing out at 11) is lower than that of US bestsellers, the distribution does skew noticeably darker, even more so than the BIPOC-created brands in the US.",
+  "claim": "Nigeria's 50 shades average L 53.3, the lowest mean of any group and darker than the 85 BIPOC-founded US shades at 56.0.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.groupby('group').L.agg(['mean','size'])"
+ },
+ {
+  "id": "japan-no-dark-shades",
+  "source": "Perhaps unsurprisingly, beauty brands in Japan don’t cover anything darker than the 50-60 lightness range.",
+  "claim": "Japan's 74 shades run from L 58 to L 90, with none darker than the 50-60 band.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==6').L.agg(['min','max','size'])"
+ },
+ {
+  "id": "india-one-dark-shade",
+  "source": "Interestingly, only one product—a L’Oréal foundation shade—is darker than the 50-60 lightness range.",
+  "claim": "The only Indian shade below L 50 is L'Oréal's True Match at L 29, and the next-darkest Indian shade is at L 54.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==7')[['brand','product','L']].sort_values('L').head(5)"
+ },
+ {
+  "id": "india-fewer-than-five",
+  "source": "Most of the foundations that we surveyed in India offer fewer than five shades, as well as a narrow shade range, especially when compared to Fenty.",
+  "claim": "Five of India's nine foundation lines offer fewer than five shades.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==7').groupby(['brand','product']).size().agg(['size', lambda s: (s<5).sum()])"
+ },
+ {
+  "id": "us-bestsellers-largest-total",
+  "source": "US bestsellers have the largest total number of shades (i.e., the most resources).",
+  "claim": "US bestsellers offer 167 shades in total, against 50 for Nigeria, 74 for Japan and 57 for India.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [2,5,6,7]').groupby('group').size()"
+ },
+ {
+  "id": "japan-india-lighter-than-us",
+  "source": "Both Japanese and Indian beauty brands primarily cater to customers that have, on average, lighter skin than that of Americans.",
+  "claim": "Japanese shades average L 77.0 and Indian shades L 74.2, against L 65.8 for the US bestsellers.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [2,6,7]').groupby('group').L.agg(['mean','count'])"
+ },
+ {
+  "id": "few-brands-darkest-band",
+  "source": "Very few brands support the darkest skin tone range (10 - 20 lightness). Fenty isn't one of them.",
+  "claim": "Only five brands have any shade below L 20 — Black Up (2 shades, darkest 16), Maybelline (1, 16), L'Oréal (1, 19), Laws of Nature (1, 11) and Lancôme (1, 14) — and Fenty is not among them.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df[df.L<20].groupby('brand').agg(shades=('L','size'), darkest=('L','min'))"
+ },
+ {
+  "id": "white-founder-brand-ranges",
+  "source": "Starting with BIPOC-recommended brands with white founders, we see that while MAC is a bit of a disappointment, Lancôme and Bobbi Brown both cover a good, wide range, much like some of the bestsellers we profiled above.",
+  "claim": "MAC's 42 shades span L 36-90, while Lancôme's 40 span L 14-95 and Bobbi Brown's 30 span L 28-90.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==4').groupby('brand').L.agg(['min','max','size'])"
+ },
+ {
+  "id": "maybelline-breadth",
+  "source": "The bestsellers are not doing so bad. Maybelline’s Fit Me Foundation stands out in particular for its breadth of coverage.",
+  "claim": "Maybelline's Fit Me offers 40 shades, more than every other US bestseller except Estée Lauder's 42, and equal to Fenty's 40.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,2]').groupby(['brand','product']).size().sort_values(ascending=False)"
+ },
+ {
+  "id": "us-bestsellers-spectrum-coverage",
+  "source": "They might favor lighter skin tones, but they cover most of the shades across the spectrum.",
+  "claim": "US bestseller shades run from L 16 to L 92 and fill nine consecutive 10-point lightness bands.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group==2').assign(band=pd.cut(df.query('group==2').L, range(0,101,10), right=False)).groupby('group').agg(min_L=('L','min'), max_L=('L','max'), bands=('band','nunique'))"
+ },
+ {
+  "id": "fenty-beautybakerie-lightest",
+  "source": "If you have really light skin, Fenty or BIPOC-founded Beauty Bakerie have got you covered.",
+  "claim": "Fenty's Pro Filt'r and Beauty Bakerie's #1 CAKE MIX both reach L 94 at the lightest end of their ranges.",
+  "tables": {
+   "df": "data/shades.csv"
+  },
+  "code": "df.query('group in [0,3]').groupby(['brand','product']).L.agg(['min','max','size'])"
+ }
+]

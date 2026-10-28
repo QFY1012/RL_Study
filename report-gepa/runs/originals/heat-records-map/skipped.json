@@ -1,0 +1,10 @@
+[
+  {
+    "source": "The Kotzebue, AK area broke the daily record high 1day ago with a temperature of 40°F. That’s the hottest October 27 on record for the area.",
+    "why": "The data end at last_data_point 2026-10-23. In acis.csv, Kotzebue's most recent daily record high is on 2026-08-16 at 75°F, and heat-records-running.csv has no Kotzebue row at all, so the files cannot reproduce the 2026-10-27 / 40°F record."
+  },
+  {
+    "source": "No all-time heat records were set in the past 14 days.",
+    "why": "heat-records-running.csv contains only record='daily' rows and no complete event stream for all-time records, so the files cannot verify the all-time / past-14-days statement."
+  }
+]

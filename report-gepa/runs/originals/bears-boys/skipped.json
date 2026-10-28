@@ -1,0 +1,14 @@
+[
+  {
+    "source": "Anthropomorphized Animals in Popular Children’s Books\n*Animals That Appear in 10+ Books",
+    "why": "The exact per-animal female shares plotted in the dot plot (for example, cat 54.3% and pig 42.4%) require the deduplicated character-level dataset used for that chart; the supplied grid file includes repeat appearances and gives different shares (for example, cat 48.1%). The top-three female-leaning animals and the male skew are still reproduced from the supplied file."
+  },
+  {
+    "source": "The animal gender usage order almost identically mirrored those from the children’s books.",
+    "why": "Using the supplied survey file, the she/her shares order the animals cat, bird, pig, rabbit, mouse, dog, bear, which swaps mouse and dog relative to the story's survey chart order (cat, bird, pig, rabbit, dog, mouse, bear); the exact order is not reproduced."
+  },
+  {
+    "source": "or by they/them (3%)",
+    "why": "The supplied survey file codes 48 of 1,327 responses (3.6%) as they, not 3%; the difference is beyond rounding."
+  }
+]

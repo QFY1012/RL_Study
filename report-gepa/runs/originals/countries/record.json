@@ -1,0 +1,69 @@
+{
+ "id": "countries",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 376,
+  "steps": 22,
+  "tools": 27,
+  "nudged": 0,
+  "usage": {
+   "input": 27844,
+   "output": 54242
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "wwi-germany-wwii-britain-russia",
+   "basis": "WWI: germany=15. WWII: germany=6, united kingdom=7, russia=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cold-war-russia-until-vietnam",
+   "basis": "1947-1964: russia=39. 1965-1973: vietnam=18.",
+   "verdict": "ok"
+  },
+  {
+   "id": "vietnam-decade",
+   "basis": "1965-1973 top counts: vietnam=18, israel=3, cambodia=2, russia=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "iraq-five-years",
+   "basis": "2003-2007 top counts: iraq=13, united kingdom=1, israel=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "haiti-january-2010",
+   "basis": "January 2010 row: top=haiti, count=17.",
+   "verdict": "ok"
+  },
+  {
+   "id": "russia-returns-2016",
+   "basis": "1992-2015: months=72, russia=6. 2016-2018: months=9, russia=3.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 1,
+ "review": [
+  {
+   "id": "cold-war-russia-until-vietnam",
+   "action": "restore",
+   "why": "quote is in the rendered story word for word; web_view had chart labels inside the sentence"
+  },
+  {
+   "id": "haiti-january-2010",
+   "action": "restore",
+   "why": "quote is in the rendered story word for word; web_view had chart labels inside the sentence"
+  }
+ ]
+}

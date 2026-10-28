@@ -1,0 +1,62 @@
+{
+ "id": "jukebox",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 346,
+  "steps": 25,
+  "tools": 28,
+  "nudged": 0,
+  "usage": {
+   "input": 29819,
+   "output": 52311
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "blowin-energy-difference",
+   "basis": "output shows difference_energy = 0.8777 for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "blowin-valence-difference",
+   "basis": "output shows difference_valence = -0.112 for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "blowin-acousticness-difference",
+   "basis": "output shows difference_acousticness = -0.788 for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "blowin-instrumentalness-difference",
+   "basis": "output shows difference_instrumentalness = 0.0 for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "blowin-liveness-difference",
+   "basis": "output shows difference_liveness = 0.9245 for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "blowin-duration-difference",
+   "basis": "output shows duration difference = 106.76 seconds for Blowin' in the Wind",
+   "verdict": "ok"
+  },
+  {
+   "id": "heaven-acoustic-stripped-live",
+   "basis": "output shows difference_acousticness = 0.769 and difference_energy = -0.304 for Heaven - 2003 Remaster",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 7
+}

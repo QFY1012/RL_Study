@@ -1,0 +1,22 @@
+[
+  {
+    "source": "People who answer the above quiz, on average, guess the correct gender 88% of the time.",
+    "why": "The quiz-response data behind this average (the site's data.json) is not in data/; the only supplied file, adj_3.csv, contains adjective counts, not quiz answers."
+  },
+  {
+    "source": "Hair is twice as likely to be mentioned for women characters than for men.",
+    "why": "This needs body-part mention totals by gender (the published parts5_1.csv), which is not in data/. adj_3.csv contains only adjective counts for hair, and summing those gives a different measure (about 1.8x, not the story's 2x), so the finding cannot be reproduced from the supplied file."
+  },
+  {
+    "source": "Gender Skew of Body Parts in Literature — more frequently used for women / gender skew / more frequently used for men",
+    "why": "The body-part mention data behind the chart (parts5_1.csv) is not in data/. adj_3.csv covers adjectives for only 15 body parts and lacks the chart's per-body-part mention counts, so the plotted skew for each body part cannot be computed."
+  },
+  {
+    "source": "Consider this litany of woman-skewed body parts: hip, belly, waist, and thigh.",
+    "why": "Hip, belly, waist and thigh are not among the body parts in adj_3.csv, and the body-part mention data needed to compute their skew is not supplied."
+  },
+  {
+    "source": "Body parts such as fist, knuckles, chest, and jaw sketch an image of a commanding and intimidating presence, as empty of nuance as the soft, sexy image of women.",
+    "why": "Fist, knuckle, chest and jaw are not among the body parts in adj_3.csv, and the body-part mention data needed to compute their skew is not supplied."
+  }
+]

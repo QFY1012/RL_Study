@@ -1,0 +1,21 @@
+[
+  {
+    "id": "good-vs-bad-apology-share",
+    "source": "it’s clear that bad apologies are as central to the show (if not more) than good ones.",
+    "claim": "Of the 187 apology moments, 91 (49%) have solid_apology=True and 96 (51%) have solid_apology=False.",
+    "tables": {
+      "a": "data/apologies.csv"
+    },
+    "code": "a.solid_apology.value_counts().to_frame('n').assign(share=lambda d: d.n / d.n.sum(), total=lambda d: d.n.sum())"
+  },
+  {
+    "id": "episodes-with-at-least-one-apology",
+    "source": "Almost every episode has at least one, including the moment we just saw of Jen storming out in Season 1, Episode 1.",
+    "claim": "80 of the 94 episodes contain at least one apology moment.",
+    "tables": {
+      "a": "data/apologies.csv",
+      "e": "data/episodes.csv"
+    },
+    "code": "e.totalEpisode.isin(a.totalEpisode).agg(['sum', 'count'])"
+  }
+]

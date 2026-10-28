@@ -1,0 +1,52 @@
+[
+ {
+  "id": "eliza-next-song-with-hamilton",
+  "source": "The next time Eliza appears with Alexander is in Non-Stop after the war.",
+  "claim": "Characters 2 and 7 both appear in songs 1, 10, 11, 14, 17, 23, 26, 29, 40, 41, and 44; the next such song after song 17 ('That Would be Enough') is song 23 ('Non-Stop').",
+  "tables": {
+   "c": "data/characters.csv",
+   "s": "data/songs.csv"
+  },
+  "code": "c.assign(p=c.characters.astype(str).str.split('/')).explode('p').query(\"p == '2' or p == '7'\").groupby('song').p.unique().loc[lambda x: x.apply(len) == 2].reset_index().sort_values('song').merge(s, on='song')"
+ },
+ {
+  "id": "angelica-alexander-sing-together",
+  "source": "Their flirtation is amplified in Take A Break, the only time in the whole musical they sing together:",
+  "claim": "Characters 2 and 8 appear on the same line in only one song, song 26 ('Take a Break').",
+  "tables": {
+   "c": "data/characters.csv",
+   "s": "data/songs.csv"
+  },
+  "code": "c[c.characters.astype(str).str.split('/').apply(lambda x: {'2','8'} <= set(x))][['characters','lines','song']].drop_duplicates().merge(s, on='song')"
+ },
+ {
+  "id": "quiet-uptown-starts-angelica",
+  "source": "It's Quiet Uptown is the only song that starts with Angelica, as she and Alexander take turns narrating the aftermath of the Hamiltons losing their eldest son.",
+  "claim": "Song 41 ('It's Quiet Uptown') is the only song whose first listed characters entry is 8.",
+  "tables": {
+   "c": "data/characters.csv",
+   "s": "data/songs.csv"
+  },
+  "code": "c.groupby('song').characters.first().loc[lambda x: x.astype(str).str.split('/').apply(lambda y: '8' in y)].reset_index().merge(s, on='song')"
+ },
+ {
+  "id": "angelica-reappears-world-wide-enough",
+  "source": "Angelica does not re-appear with Alexander until his death in The World Was Wide Enough",
+  "claim": "Characters 2 and 8 both appear in songs 1, 10, 11, 14, 23, 26, 37, 41, and 45; after song 41 the next is song 45 ('The World Was Wide Enough').",
+  "tables": {
+   "c": "data/characters.csv",
+   "s": "data/songs.csv"
+  },
+  "code": "c.assign(p=c.characters.astype(str).str.split('/')).explode('p').query(\"p == '2' or p == '8'\").groupby('song').p.unique().loc[lambda x: x.apply(len) == 2].reset_index().sort_values('song').merge(s, on='song')"
+ },
+ {
+  "id": "eliza-one-line-quiet-uptown",
+  "source": "Eliza finally takes his hand and sings only one line: it's quiet uptown.",
+  "claim": "Character 7 has one line, line 55, in song 41 ('It's Quiet Uptown').",
+  "tables": {
+   "c": "data/characters.csv",
+   "s": "data/songs.csv"
+  },
+  "code": "c[(c.song == 41) & c.characters.astype(str).str.split('/').apply(lambda x: '7' in x)].groupby(['song','characters']).lines.agg(n='size', line='first').reset_index().merge(s, on='song')"
+ }
+]

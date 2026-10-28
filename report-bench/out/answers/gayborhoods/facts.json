@@ -1,0 +1,29 @@
+[
+ {
+  "id": "female-index-lower",
+  "source": "Overall, same-sex female households have lower index scores, suggesting that they are less likely to live in a neighborhood surrounded by other same-sex female households.",
+  "claim": "Across the ZIP codes in the analysis, the female index averages 1.32, compared with 1.78 for the male index.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.Cns_TotHH >= 250][['MM_Index', 'FF_Index']].rename(columns={'MM_Index': 'male', 'FF_Index': 'female'}).mean()"
+ },
+ {
+  "id": "male-index-parade-bars",
+  "source": "Two overarching trends emerge in the index: same-sex male couples are more likely to be concentrated where there is also a visible queer presence (parades, marches, and bars), and they are overall much more concentrated than same-sex female couples.",
+  "claim": "The male index averages 12.18 in ZIP codes on a parade route versus 1.58 in ZIP codes without one, and 9.87 in ZIP codes with a bar versus 1.41 in ZIP codes with none.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.Cns_TotHH >= 250].assign(parade=d.ParadeFlag == 1, bar=d.CountBars > 0)[['parade', 'bar', 'MM_Index']].rename(columns={'MM_Index': 'male'}).melt(id_vars='male').groupby(['variable', 'value']).male.mean()"
+ },
+ {
+  "id": "male-map-nearly-identical",
+  "source": "The map for same-sex male couples is nearly identical to the overall gayborhood map.",
+  "claim": "The overall index correlates 0.92 with the male index and 0.55 with the female index across ZIP codes.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.Cns_TotHH >= 250][['TOTINDEX', 'MM_Index', 'FF_Index']].rename(columns={'TOTINDEX': 'overall', 'MM_Index': 'male', 'FF_Index': 'female'}).corr().loc['overall']"
+ }
+]

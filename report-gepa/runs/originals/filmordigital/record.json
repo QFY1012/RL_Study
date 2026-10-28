@@ -1,0 +1,117 @@
+{
+ "id": "filmordigital",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 602,
+  "steps": 65,
+  "tools": 68,
+  "nudged": 0,
+  "usage": {
+   "input": 43759,
+   "output": 86679
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 18,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "yearly-digital-stabilizes",
+   "basis": "D column: 2014=74.5, 2016=83.0, 2017=82.4; trend rose then dipped as claimed.",
+   "verdict": "ok"
+  },
+  {
+   "id": "scifi-film-only",
+   "basis": "F share: sci-fi=3.6%, all genres=11.2%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "scifi-more-digital",
+   "basis": "Non-F share: all genres=88.8%, sci-fi=96.4%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "horror-digital-recent",
+   "basis": "Horror D or D|F: 21.2, 29.6, 75.0, 100.0 across periods; Sci-Fi 2009-2011=52.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "drama-film-only",
+   "basis": "Drama 2015-2017 F share=17.0%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "low-budget-more-digital",
+   "basis": "D share for <$20M by period: 13.3, 24.3, 74.6, 92.3; highest in each period.",
+   "verdict": "ok"
+  },
+  {
+   "id": "both-highest-budget",
+   "basis": "2015-2017 D|F share: <$20M=1.9, $20-40M=6.5, $40-80M=2.2, $80-160M=7.1, >$160M=23.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "low-budget-film-only",
+   "basis": "2015-2017 F share: <$20M=5.8%, >$160M=5.9%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "film-spans-budgets",
+   "basis": "Force Awakens F $306M; Dunkirk F $150M; Gifted F $7M; The Beguiled F $10.5M.",
+   "verdict": "ok"
+  },
+  {
+   "id": "directors-film-then-digital",
+   "basis": "2006-2008 F-only=74.0%; 2012-2014 D-only=62.4%, F-only=23.6%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nolan-all-film",
+   "basis": "Nolan rows all film_type F; The Prestige 2006 through Dunkirk 2017.",
+   "verdict": "ok"
+  },
+  {
+   "id": "tarantino-all-film",
+   "basis": "Tarantino rows all film_type F; Death Proof 2007 through The Hateful Eight 2015.",
+   "verdict": "ok"
+  },
+  {
+   "id": "rodriguez-all-digital",
+   "basis": "Known-medium Rodriguez rows 2007-2014 all D; U rows are Two Scoops, Demi Lovato: Confident, Sock 'em Dead (3 unknown).",
+   "verdict": "ok"
+  },
+  {
+   "id": "apatow-back-to-film",
+   "basis": "This Is 40 (2012)=D; Trainwreck (2015)=F.",
+   "verdict": "ok"
+  },
+  {
+   "id": "boyle-steve-jobs-both",
+   "basis": "Steve Jobs (2015)=D|F.",
+   "verdict": "ok"
+  },
+  {
+   "id": "prieto-passengers-digital",
+   "basis": "Passengers (2016)=D.",
+   "verdict": "ok"
+  },
+  {
+   "id": "prieto-silence-both",
+   "basis": "Silence (2016)=D|F.",
+   "verdict": "ok"
+  },
+  {
+   "id": "washington-melfi-film",
+   "basis": "Washington: The Great Debaters=F, Fences=F; Melfi known medium: St. Vincent=F, Hidden Figures=F.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 18,
+ "skipped": 6
+}

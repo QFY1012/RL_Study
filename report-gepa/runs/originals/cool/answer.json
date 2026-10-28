@@ -1,0 +1,20 @@
+[
+ {
+  "id": "total-cools",
+  "source": "It turns out that the 412 cools make it the second most used adjective, just behind good.",
+  "claim": "The captions contain 412 cools in total.",
+  "tables": {
+   "cools": "data/cools.csv"
+  },
+  "code": "cools['count'].sum()"
+ },
+ {
+  "id": "cools-per-character",
+  "source": "“Cools” per character",
+  "claim": "The counts by character are abed 164, jeff 48, troy 44, annie 28, britta 23, baby 22, chang 15, pierce 13, dean 9, shirley 8, and other 38.",
+  "tables": {
+   "cools": "data/cools.csv"
+  },
+  "code": "pd.concat([cools.assign(character=cools['character'], n=cools['count'] - cools['character_2'].notna().astype(int)), cools.dropna(subset=['character_2']).assign(character=lambda x: x['character_2'], n=1)]).groupby('character')['n'].sum().sort_values(ascending=False)"
+ }
+]

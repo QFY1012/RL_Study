@@ -1,0 +1,166 @@
+[
+  {
+    "source": "For this project, we're only going to look at ships with over 1,000 fanfic works, which gives us an ever-growing count of 500 unique fandoms and over 2,000 unique ships.",
+    "why": "This is a description of the data universe, and the file is only a 2024 M/M slice (759 ships, 272 distinct fandom values), so the 500-fandom and 2,000-ship counts cannot be reproduced."
+  },
+  {
+    "source": "Unique fandoms (1000+ fics) ... Unique ships (1000+ fics) 2013 2014 2015 2016 2017 2019 2020 2021 2022 2023 2024",
+    "why": "The file contains only 2024 rows, so the year-by-year counts of unique fandoms and unique ships cannot be reproduced."
+  },
+  {
+    "source": "1 Castiel/Dean Winchester 105,320 fics 2 Draco Malfoy/Harry Potter 64,660 3 Sherlock Holmes/John Watson 63,800 4 Derek Hale/Stiles Stilinski 63,570 5 Aziraphale/Crowley 59,570 6 James \"Bucky\" Barnes/Steve Rogers 58,510 7 Sirius Black/Remus Lupin 50,280 8 Bakugou Katsuki/Midoriya Izuku 42,850 9 Steve Rogers/Tony Stark 42,140 10 Harry Styles/Louis Tomlinson 40,110 11 Lán Zhàn/Wèi Yīng 37,620 12 Jungkook/V 37,330 13 Adrien Agreste/Marinette Dupain-Cheng 35,090 14 Merlin/Arthur Pendragon 33,360 15 Keith/Lance 32,750 16 Dazai Osamu/Nakahara Chuuya 32,720 17 Dean Winchester/Sam Winchester 31,000 18 Bakugou Katsuki/Kirishima Eijirou 30,260 19 Magnus Bane/Alec Lightwood 29,450 20 Peter Parker & Tony Stark 28,980",
+    "why": "The file has only M/M slash ships and omits five of the story's top 20 (Aziraphale/Crowley, Harry Styles/Louis Tomlinson, Jungkook/V, Adrien Agreste/Marinette Dupain-Cheng, Peter Parker & Tony Stark), so the all-relationship-type top-20 ranking cannot be rebuilt."
+  },
+  {
+    "source": "Most of the Top 20 ships are slash ships, or male-male (M/M) romantic pairings, named after the \"/\" between partner names.",
+    "why": "The top 20 is an all-relationship-type ranking; the file is M/M-only and lacks five of the twenty ships, so the composition of the top 20 cannot be recomputed."
+  },
+  {
+    "source": "The majority are also non-canon ships, or ships that exist outside the scope of the original storyline.",
+    "why": "The claim concerns the all-relationship-type top 20, which cannot be reconstructed from the M/M-only file that lacks five of those twenty ships."
+  },
+  {
+    "source": "Two of the Top 20 are real person fic (RPF), or stories about real people instead of fictional characters.",
+    "why": "The file contains no RPF top-20 ships (its isRPF column is No or missing and the RPF ships such as Harry Styles/Louis Tomlinson and Jungkook/V are absent)."
+  },
+  {
+    "source": "Fanfics by Relationship allShips 100% M/M 52% F/M 18% Gen 14% Other 10% F/F 6%",
+    "why": "The file contains only M/M ships, so shares of F/M, Gen, Other, and F/F fanfics cannot be computed."
+  },
+  {
+    "source": "Our analysis shows that slash fic has been over twice as popular as the next category of fanfic since at least 2013.",
+    "why": "The file has only M/M ships and only 2024, so neither the other relationship categories nor the 2013-onward time series is available."
+  },
+  {
+    "source": "only 2.5% of respondents identify as cisgender men, and 12.8% identify as straight",
+    "why": "These figures come from the 2024 AO3 user demographic survey, which is not part of the provided file."
+  },
+  {
+    "source": "On average, the top fandoms are 70% male.",
+    "why": "The file has no gender data for the characters or casts of the fandoms."
+  },
+  {
+    "source": "Top 50 fandoms 1 Marvel 2 Harry Potter 3 Supernatural 4 My Hero Academia 5 Sherlock 6 Teen Wolf 7 DC Comics 8 Star Wars 9 Dragon Age 10 Haikyuu!! ... 50 Jojo's Bizarre Adventure",
+    "why": "The file is an M/M-only slice; ranking fandoms by its works gives a different order (Harry Potter first, Marvel second) and misses fandoms such as Good Omens, so the story's all-ship top-50 ranking cannot be reproduced."
+  },
+  {
+    "source": "women only account for 40% of Harry Potter’s shipped characters, compared to 45% in the MCU",
+    "why": "The file records ships, not the gender of the characters making them up, and does not include all relationship types for those two fandoms."
+  },
+  {
+    "source": "men accounting for just over half (55%) of MCU shipped charcters, compared to 60% of the characters from Harry Potter",
+    "why": "No character-level gender data are present in the file."
+  },
+  {
+    "source": "F/F pairings accounting for 13% of Harry Potter ships and 12% of ships in the MCU",
+    "why": "The file contains only M/M ships, so the F/F share (and the denominator of all ships) cannot be computed."
+  },
+  {
+    "source": "M/M ships only make up 35% of Harry Potter ships, compared to 42% of MCU ships",
+    "why": "The file contains only M/M ships, so the all-relationship-type denominators for the two fandoms are missing."
+  },
+  {
+    "source": "fewer of its ships (46%) are F/M pairings in comparison to Harry Potter (52%)",
+    "why": "The file contains no F/M ships, so these shares cannot be computed."
+  },
+  {
+    "source": "Non-canon ships make up the overwhelming majority of pairings on AO3, accounting for nearly twice as many ships that exist canonically.",
+    "why": "This is an all-relationship-type claim; in the slash-only file non-canon ships outnumber canon ships by about 7 to 1 (629 to 86), not nearly 2 to 1."
+  },
+  {
+    "source": "femslash ships have seen the most significant non-canon shift, growing from just 3 ships with over 1,000 works in 2013 to 150 in 2024.",
+    "why": "The file contains no F/F ships and no 2013 data."
+  },
+  {
+    "source": "Marlene McKinnon/Dorcas Meadowes, the #6 most popular femslash ship",
+    "why": "The file contains no F/F ships, and that ship is absent."
+  },
+  {
+    "source": "Supergirl fans had biracial couple Alex Danvers/Kelly Olsen right in front of them, but chose to produce close to 18,000 more fics about on AO3 about non-canon pairing Kara Danvers/Lena Luthor instead.",
+    "why": "The file contains no F/F ships and neither Kara Danvers/Lena Luthor nor Alex Danvers/Kelly Olsen is present."
+  },
+  {
+    "source": "Out of the 202 characters that make up the top 100 most popular ships on AO3, there are only four Latino characters, one Indigenous character, and one Black (Afro-Latino) character. In contrast, roughly a third of these characters are Asian (55 characters), while over half are white (134 characters).",
+    "why": "The file has no race data, and the story's top-100 chart is a summer 2023 breakdown whose counts do not match the 2024 data."
+  },
+  {
+    "source": "Take a look at this summer 2023 gender and race breakdown from centreoftheselights. white 67% asian 27% latino 2.5% ambiguous 2.5% black 0.5% indigenous 0.5%",
+    "why": "The file has no character race or gender variables, and the chart is a 2023 breakdown."
+  },
+  {
+    "source": "Out of the 20 most popular Alternate Universe tags — where the setting itself, not just the characters, diverges from canon — nearly half are set in everyday circumstances like \"high school\" and \"coffee shops\" or transform extraordinary characters into \"humans\" with \"no powers\".",
+    "why": "The file contains no tag data."
+  },
+  {
+    "source": "Slash fics make up 56% of all fanfic on AO3 compared to 82% of RPF, while non-canon fics account for 59% of all fanfic, but 83% of RPF.",
+    "why": "The file has only 2024 M/M slash ships and no usable all-fanfic or RPF comparison (its isRPF values are No or missing)."
+  },
+  {
+    "source": "Over the last 11 years, roughly 13% of the fanfiction on AO3 has been reserved for this type of storytelling, or Real Person Fiction (RPF).",
+    "why": "The file covers only 2024, contains no RPF ships for a share calculation, and its isRPF column has no Yes values."
+  },
+  {
+    "source": "The list of top RPF ships (all slash and all non-canon) reads like a Spotify playlist with some YouTube and television content sprinkled in. Sixteen out of the Top 20 are boy bands (or bands of all boys).",
+    "why": "The file contains no RPF top-20 ships."
+  },
+  {
+    "source": "Harry Styles/Louis Tomlinson 40,110 ... Jungkook/V 37,330 ... Jungkook/Park Jimin 28,170 ... Suga/Park Jimin 27,450 ... RM/Jin 22,480",
+    "why": "The Top 20 romantic RPF ships chart cannot be reproduced because the file contains no RPF ships."
+  },
+  {
+    "source": "One Direction far outpaces all other fandoms, amassing over 60,000 fanfic works with ships by 2017.",
+    "why": "No RPF fandom data and no 2017 data are present in the file."
+  },
+  {
+    "source": "Ship fanfics about YouTube vloggers and video gamers overtook One Directioner fics in 2021.",
+    "why": "No RPF fandom data and no 2021 data are present in the file."
+  },
+  {
+    "source": "BTS skyrocketed into the top spot in 2019. In 2024, there were close to 350,000 BTS fanfic works with ships, over 4 times more than One Direction.",
+    "why": "The file contains no BTS or One Direction RPF ship rows and no multi-year fandom totals."
+  },
+  {
+    "source": "41% are slash ships (M/M) and 23% are XReader ships, where the author inserts themselves in the storyline.",
+    "why": "The BTS relationship breakdown cannot be computed from the file, which has no BTS ships or XReader/other relationship categories."
+  },
+  {
+    "source": "67% of YouTube RPF ships are friendship sagas, followed by M/M ships at 26%.",
+    "why": "The file has no YouTube RPF ships of all relationship types (its three YouTube RPF rows are M/M only), so the Gen and M/M shares cannot be computed."
+  },
+  {
+    "source": "Looking at Top 5 RPF ships by relationship type, we can see that 4 out of 5 straight ships are canon",
+    "why": "The file has no RPF ships and no F/M ships."
+  },
+  {
+    "source": "Conversely, the Top 5 ships for M/M and F/F are nearly all non-canon, with the exception of femslash soccer pairing Tobin Heath/Christen Press",
+    "why": "The RPF top-5 chart cannot be reproduced because the file contains no RPF ships, and it has no F/F ships."
+  },
+  {
+    "source": "Only 3.9% of top 1,000 solo music artists self-identify as members of the LGBTQ+ community, but 9.8% of millennials and a whopping 22.3% of Gen Zers do.",
+    "why": "These are external survey/industry figures, not data in the provided file."
+  },
+  {
+    "source": "the most popular fic on AO3 is over 500,000 words long, while the first Harry Potter book is less than 80,000 words",
+    "why": "The file contains no word-count data."
+  },
+  {
+    "source": "In the 2010s, there were roughly 91,000 video games documented by the LGBTQ Video Game Archive, a project organized by Temple University’s Adrienne Shaw. But, only about 1% had any type of queer representation.",
+    "why": "This is external data from the LGBTQ Video Game Archive, not present in the file."
+  },
+  {
+    "source": "Harry Styles himself has a cumulative total of close to 100 million across Instagram, TikTok, Twitter, and YouTube.",
+    "why": "The file contains no social-media follower data."
+  },
+  {
+    "source": "Spockanalia: \"somewhere around 20,000 copies\" that sold for 50 cents a piece",
+    "why": "This is historical fanzine information, not present in the file."
+  },
+  {
+    "source": "Destiel spent 12 years as a non-canon, largely fandom-driven ship until Castiel confessed his love for Dean before dying in the final episodes of Season 15, thus acknowledging their relationship as a semi-canonically romantic one",
+    "why": "The file contains only the 2024 canon classification (Castiel/Dean Winchester is Semi-Canon); the 12-year change in status is not recorded."
+  },
+  {
+    "source": "Straight (F/M) 1 Adrien Agreste/Marinette Dupain-Cheng 35,090 2 Hermione Granger/Draco Malfoy 28,960 3 Rey/Kylo Ren 26,930 4 Lily Evans Potter/James Potter 26,750 5 Pepper Potts/Tony Stark 21,520 ... Femslash (F/F) 1 Kara Danvers/Lena Luthor 20,320 2 Regina Mills/Emma Swan 14,800 3 Amity Blight/Luz Noceda 12,390 4 Clarke Griffin/Lexa 12,180 5 Adora/Catra 11,360",
+    "why": "The file contains only M/M ships, so the F/M and F/F panels of the Top ships by relationship chart cannot be computed; only the Slash (M/M) panel is reproduced."
+  }
+]

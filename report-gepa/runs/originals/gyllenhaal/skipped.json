@@ -1,0 +1,26 @@
+[
+  {
+    "source": "It’s no surprise that Jake Gyllenhaal, along with other celebrities, were atop the list.",
+    "why": "This refers to Colin Morris's Reddit comments marked with (sp?), not to the reader-submission spelling data in data/spellings.csv; that Reddit data is not provided."
+  },
+  {
+    "source": "This chart shows over 600k attempts of people trying to search for Britney Spears.",
+    "why": "The data file contains reader-quiz submissions for 15 celebrity surnames (337,492 submissions in total) and has no Britney Spears or Google search data, so the 600k Google-search attempt count cannot be computed from it."
+  },
+  {
+    "source": "Here are the 8 most common permutations of her first name, Britney.",
+    "why": "The data file has no Britney Spears first-name spellings or per-character search attempts; it only has surname spellings for 15 other names."
+  },
+  {
+    "source": "People nail the first three letters—then things get interesting.",
+    "why": "This describes the per-character Britney Spears Google-search flow chart, whose letter-by-letter counts are not in the data file."
+  },
+  {
+    "source": "1% of people type \"n\" at this point",
+    "why": "This chart tooltip comes from the Britney Spears per-character Google-search flow data, which is absent from the data file."
+  },
+  {
+    "source": "b 608k, r 608k, i 608k, t 606k, n 1.8k, n 496k, t 79.1k, a 24.3k, e 6.6k, e 1.8k, e 489k, y 7.3k, a 40.1k, n 36.3k, e 2.7k, n 24.3k, n 6.6k, y 1.8k, y 489k, n 40.1k, e 36.3k, n 2.7k, y 24.3k, y 6.6k, y 40.1k, y 36.3k, y 2.7k",
+    "why": "These are the per-character branch counts for the Britney Spears Google-search flow chart; the data file contains no per-character Britney search data from which to compute them."
+  }
+]

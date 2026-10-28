@@ -1,0 +1,107 @@
+{
+ "id": "hype",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 724,
+  "steps": 69,
+  "tools": 85,
+  "nudged": 0,
+  "usage": {
+   "input": 69256,
+   "output": 90278
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top100-superstars",
+   "basis": "sum=31, size=1535, mean=0.020195 (2.0%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "top100-past-two-seasons",
+   "basis": "sum=378, size=1535, mean=0.246254 (24.6%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "top10-nba-share",
+   "basis": "sum=132, size=158, mean=0.835443 (83.5%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "straight-to-nba-players",
+   "basis": "shape[0]=35",
+   "verdict": "ok"
+  },
+  {
+   "id": "straight-to-nba-past-rookie",
+   "basis": "sum=32, size=34, mean=0.941176 (94.1%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "straight-to-nba-mediocre",
+   "basis": "sum=19, size=34, mean=0.558824 (55.9%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "unranked-nba-players",
+   "basis": "sum=338",
+   "verdict": "ok"
+  },
+  {
+   "id": "drafted-ranked-past-rookie",
+   "basis": "sum=401, size=432, mean=0.928241 (92.8%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "unranked-two-seasons",
+   "basis": "sum=248, size=338, mean=0.733728 (73.4%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "unranked-superstars",
+   "basis": "7 rows: Damian Lillard 17.8, Dwyane Wade 4.7, Jimmy Butler 20.8, Marc Gasol 16.4, Paul George 13.1, Russell Westbrook 4.0, Stephen Curry 3.6; all <=30",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "straight-to-nba-past-rookie",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 88.2% against the story's 94%, and the fact got the story's number only by counting at least one season"
+  },
+  {
+   "id": "drafted-ranked-past-rookie",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 75.9% against the story's 92%, and the fact got the story's number only by counting at least one season"
+  },
+  {
+   "id": "unranked-two-seasons",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 62.1% against the story's 73%, and the fact got the story's number only by counting at least two seasons"
+  }
+ ],
+ "answer": 7,
+ "skipped": 7,
+ "review": [
+  {
+   "id": "straight-to-nba-past-rookie",
+   "action": "drop",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 88.2% against the story's 94%, and the fact got the story's number only by counting at least one season"
+  },
+  {
+   "id": "drafted-ranked-past-rookie",
+   "action": "drop",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 75.9% against the story's 92%, and the fact got the story's number only by counting at least one season"
+  },
+  {
+   "id": "unranked-two-seasons",
+   "action": "drop",
+   "why": "the story's rookie contract is two years (top-100 fact: more than two seasons, 24.6% vs the story's 25%); under that definition this group gives 62.1% against the story's 73%, and the fact got the story's number only by counting at least two seasons"
+  }
+ ]
+}

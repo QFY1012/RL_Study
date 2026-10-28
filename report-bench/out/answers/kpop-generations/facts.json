@@ -1,0 +1,38 @@
+[
+ {
+  "id": "debuts-by-generation",
+  "source": "1st Gen 1992-2002 35 groups; 2nd Gen 2003-2011 81 groups; 3rd Gen 2012-2017 327 groups; 4th Gen 2018-2022 348 groups; 5th Gen 2023-2025 203 groups",
+  "claim": "The first through fifth generations contain 35, 81, 327, 348 and 203 debuting groups, respectively.",
+  "tables": {
+   "d": "data/debuts.csv"
+  },
+  "code": "d.groupby('gen').size()"
+ },
+ {
+  "id": "annual-debuts-2012-2014-2017",
+  "source": "40 new acts in 2012, 60 by 2014, and 86 in 2017",
+  "claim": "Annual debuts numbered 40 in 2012, 60 in 2014 and 86 in 2017.",
+  "tables": {
+   "d": "data/debuts.csv"
+  },
+  "code": "d.groupby('year').size()"
+ },
+ {
+  "id": "gangnam-first-to-one-billion",
+  "source": "Psy’s “Gangnam Style” was the first music video to hit 1 billion views",
+  "claim": "The earliest video in the data to reach 1 billion cumulative views is the one titled Gangam Style, which stood at 1,013,121,166 views on 2012-12-21.",
+  "tables": {
+   "g": "data/gangnam-style.csv"
+  },
+  "code": "g.assign(dt=pd.to_datetime(g['date'], format='%d-%b-%y')).sort_values(['video_title','dt']).assign(cum=lambda x: x.groupby('video_title')['views'].cumsum()).query('cum >= 1_000_000_000').groupby('video_title').agg(dt=('dt','min'), cum=('cum','first')).sort_values('dt').head(1)"
+ },
+ {
+  "id": "gangnam-peak-daily-views",
+  "source": "At its peak, “Gangnam Style” was generating over 11 million views per day",
+  "claim": "The video titled Gangam Style had a single-day peak of 14,924,298 views on 2012-12-21.",
+  "tables": {
+   "g": "data/gangnam-style.csv"
+  },
+  "code": "g.assign(dt=pd.to_datetime(g['date'], format='%d-%b-%y')).query(\"video_title == 'Gangam Style'\").loc[lambda x: x['views'].idxmax(), ['video_title','dt','views']]"
+ }
+]

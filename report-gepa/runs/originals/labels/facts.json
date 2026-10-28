@@ -1,0 +1,74 @@
+[
+  {
+    "id": "def-jam-ranks-first",
+    "source": "Def Jam, the pioneer label in hip hop, is properly at #1.",
+    "claim": "Def Jam ranks first on rank-weighted chart success with 63,759 points, ahead of Young Money (52,213) and Roc-A-Fella (44,799).",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(score=d['Rank'].max()+1-d['Rank']).groupby('Imprint')['score'].sum().sort_values(ascending=False).head(3)"
+  },
+  {
+    "id": "young-money-second-six-years",
+    "source": "Young Money has only been active for the past six years, and it’s at #2, exemplifying the current state of hip hop and its concentration in one place.",
+    "claim": "Young Money ranks second on rank-weighted chart success with 52,213 points, and its chart entries run only from 2009-05-02 to 2015-04-18.",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(score=d['Rank'].max()+1-d['Rank']).groupby('Imprint').agg(score=('score','sum'),first=('Chart Date','min'),last=('Chart Date','max')).sort_values('score',ascending=False).head(2)"
+  },
+  {
+    "id": "young-money-top-label-2010-2015",
+    "source": "Young Money has been the top label for each of the past five years.",
+    "claim": "Young Money had the highest rank-weighted chart success of any label in every year of the 2010-2015 period.",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(year=pd.to_datetime(d['Chart Date']).dt.year,score=d['Rank'].max()+1-d['Rank']).pivot_table(index='year',columns='Imprint',values='score',aggfunc='sum').idxmax(axis=1).loc[2010:2015]"
+  },
+  {
+    "id": "success-concentrated-2015",
+    "source": "10 years ago, success was spread-out among large to mid-size labels. Today, hits are concentrated among a few major labels, with the remaining distributed among smaller labels.",
+    "claim": "In 2005 the five most successful labels took 33.9% of the year's rank-weighted chart success and the ten most successful took 55.8%, while in 2015 the top five took 58.5% and the top ten took 79.4%.",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(year=pd.to_datetime(d['Chart Date']).dt.year,score=d['Rank'].max()+1-d['Rank']).pivot_table(index='year',columns='Imprint',values='score',aggfunc='sum').pipe(lambda p: pd.DataFrame({'top5_share':p.apply(lambda r: r.nlargest(5).sum()/r.sum()*100,axis=1),'top10_share':p.apply(lambda r: r.nlargest(10).sum()/r.sum()*100,axis=1)})).loc[[2005,2015]]"
+  },
+  {
+    "id": "young-money-unprecedented-share",
+    "source": "For the first time in hip hop’s history, one label has had unprecedented influence.",
+    "claim": "Young Money's 27.5% of 2015's rank-weighted chart success is the largest single-year share of any label, ahead of Shady's peak of 13.0% in 2003.",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(year=pd.to_datetime(d['Chart Date']).dt.year,score=d['Rank'].max()+1-d['Rank']).pivot_table(index='year',columns='Imprint',values='score',aggfunc='sum').pipe(lambda p: p.div(p.sum(axis=1),axis=0)*100).pipe(lambda s: pd.DataFrame({'max_share':s.max(),'year':s.idxmax()})).sort_values('max_share',ascending=False).head(2)"
+  },
+  {
+    "id": "def-jam-most-charting-tracks",
+    "source": "1. Def Jam 152 tracks 48 artists 1925 weeks '89 - '14",
+    "claim": "Def Jam charted the most distinct tracks of any label (152), ahead of Jive (106), Roc-A-Fella (86) and Young Money (83).",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.groupby('Imprint')['Title'].nunique().sort_values(ascending=False).head(4)"
+  },
+  {
+    "id": "def-jam-most-weeks-on-chart",
+    "source": "1. Def Jam 152 tracks 48 artists 1925 weeks '89 - '14",
+    "claim": "Def Jam accumulated the most weeks on chart (1,925), followed by Young Money (1,322), Roc-A-Fella (1,293) and Jive (1,255).",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.groupby('Imprint').size().sort_values(ascending=False).head(4)"
+  },
+  {
+    "id": "jive-tops-1989",
+    "source": "Jive is crushing it with a roster that includes Boogie Down Productions, DJ Jazzy Jeff and the Fresh Prince, and Too $hort.",
+    "claim": "In 1989, Jive had the highest rank-weighted chart success of any label (3,066 points), ahead of Capitol (2,148) and Ruthless (1,793).",
+    "tables": {
+      "d": "data/label2.csv"
+    },
+    "code": "d.assign(year=pd.to_datetime(d['Chart Date']).dt.year,score=d['Rank'].max()+1-d['Rank']).pivot_table(index='year',columns='Imprint',values='score',aggfunc='sum').loc[1989].sort_values(ascending=False).head(3)"
+  }
+]

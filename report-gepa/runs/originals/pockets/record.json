@@ -1,0 +1,24 @@
+{
+ "id": "pockets",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 38,
+  "steps": 8,
+  "tools": 6,
+  "nudged": 3,
+  "usage": {
+   "input": 7279,
+   "output": 2106
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: b3864feb-f2a9-4d50-87e1-fa31450e39b9)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/pockets/facts.json'"
+ ],
+ "skipped": null
+}

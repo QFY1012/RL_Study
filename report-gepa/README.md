@@ -173,6 +173,25 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.puddingmerge 
 
 same-name 要请求 5,554 个小文件,连接被代理断开时每个文件最多重试 4 次;已取的文件留在缓存里,重跑不再取。
 
+## 原文的发现(`src/report_gepa/originals.py`)
+
+```sh
+PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.originals runs/originals [id ...] --workers 20 --model deepseek-flash --answers | tee -a runs/originals.log
+```
+
+给 benchmark 的 Pudding 题写标准答案:原文作者从这份数据得出的发现,写成和页面交的 `facts.json` 一样的结论加代码。pi agent(`agent/gen.mjs`,`WEB_TOOLS=1`)拿到题目的数据和原文网址,用 `web_fetch`、`web_view` 读原文,列出作者从数据得出的每个发现,能用数据重现的写进 `facts.json`(每条带原文的话 `source`),重现不了的写进 `skipped.json`。之后每条代码重新运行,结论和输出按 1.3 的同一个判法对一遍(`trust.claims_hold`),`source` 在 agent 读到的网页文字里查一遍;都过的进 `answer.json`,`--answers` 再拷成 `report-bench/out/answers/<id>/facts.json`。每篇在 `runs/originals/<id>/`:`facts.json`、`answer.json`、`skipped.json`、`record.json`、`session.jsonl`。已有 `answer.json` 的篇跳过。
+
+2026-10-28 用官方端点的 `deepseek-flash` 跑:148 篇里 81 篇写完,其余 67 篇在 key 失效后返回 401,换 key 重跑同一命令即可补上。写完的 81 篇逐条人工复核过,改动和理由记在各篇 `record.json` 的 `review` 里:
+
+- 每条代码在题目的数据上重跑,对着输出看结论;再对着原文看结论里的数和口径。只认原文网站读回来的文字(包括代理和存档),对不上的用 `report_bench.capture` 渲染原文页面再找,必要时查网页源码或原文自己的仓库。
+- 引语检查误判的捞回:引语在原文里,只是 `web_view` 读到的文字里图表标签插在句子中间,或引语把卡片上的几个标签连成了一段(countries、campaign-colors、lit-canon、miles、caption-contest 等)。
+- 1.3 判犯的 7 条:5 条是结论确实超出输出(「被暗杀」、漏了并列项、13.28% 写成 13.2%),改结论;2 条是结论对、输出看不出来(数据本身全是亚裔角色;两组国家不重叠),改代码把它打印出来。改完的都重跑核对过。
+- 1.3 看不出的问题:结论和输出一致,但和原文对不上(banknotes 的 Hannibal 1993 年就上了钞票;bears-boys 的猫在数据里偏男性),改结论;同一个词在不同 fact 里换口径凑原文的数(hype 的「熬过新秀合同」),去掉。
+- 实时更新的页面(heat-records、heat-records-map 的计数器、mars-weather)讲的是抓取那天的数,不是稳定的发现,去掉;mars-weather 的引语是 agent 拿数据填进页面空白处的,原文从来没这么写过。
+- 引语出自原文自己仓库里的文件、页面上要滚动到某一步或点开才显示的,保留,在 `review` 里写明出处(census-history 的话题文字、cetaceans 的图表标注、covid-science)。
+
+已知的漏洞:引语检查(`read_on_web`)把 agent 读过的所有网页都算进去,包括 GitHub、搜索结果和第三方页面(boybands 读到过一个第三方生成的博客),应该只认原文网站。
+
 ## judge
 
 评测代码和 rubric 在 `report-bench`(`score.py` 的 `score_page` 是唯一的打分入口;`capture.py`、`trust.py`、`facts.py`、`judge.py`、`rubric.py`、`render.py`、`llm.py`、`rubric/`),说明见 `report-bench/README.md`;这里的命令要 `PYTHONPATH=src:../report-bench/src`。
@@ -279,4 +298,4 @@ tar -xJf pudding-merge-data.tar.xz -C report-gepa/data/
 
 不从 Drive 取也能重做:`report_gepa.pudding` 从 the-pudding 的公开仓库重新克隆生成同样的 `data/pudding/`(见上面「Pudding 数据」)。
 
-还没上传:`runs/`(生成的页面、截图、证据、judge 记录)和 `labels/`(人工标注)。
+`runs/originals/`、`runs/evidence/` 和它们的日志在仓库里。更早的 `runs/`(生成的页面、截图、证据、judge 记录)和 `labels/`(人工标注)没有上传,也不在仓库里。

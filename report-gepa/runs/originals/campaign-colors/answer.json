@@ -1,0 +1,110 @@
+[
+ {
+  "id": "2020-majority-rwb",
+  "source": "A little over half of this year’s campaigns stuck to tried and true red, white, and blue (RWB) color palettes.",
+  "claim": "In 2020, 59.5% of candidates used RWB color schemes, while 40.5% used non-RWB schemes.",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "(d[d.year == 2020]['RWB'].value_counts(normalize=True) * 100).round(1)"
+ },
+ {
+  "id": "non-rwb-share-by-year",
+  "source": "Percentage of non-RWB and RWB color schemes Non-RWB colors RWB colors 2020 40.5% 2016 7.4% 2012 5.9% 2008 12.0% 2004 20.0% 2000 12.5% 1996 25.0% 1992 15.4% 1988 17.6% 1984 41.7% 1980 38.9% 1976 23.8% 1972 34.8% 1968 35.7%",
+  "claim": "The share of candidates using non-RWB schemes was 40.5% in 2020, 7.4% in 2016, 5.9% in 2012, 12.0% in 2008, 20.0% in 2004, 12.5% in 2000, 25.0% in 1996, 15.4% in 1992, 17.6% in 1988, 41.7% in 1984, 38.9% in 1980, 23.8% in 1976, 34.8% in 1972 and 35.7% in 1968.",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "(d.assign(nonRWB=d.RWB.eq('N')).groupby('year')['nonRWB'].mean() * 100).round(1)"
+ },
+ {
+  "id": "2020-highest-since-1984",
+  "source": "40.5% percent of candidates used non-RWB color schemes, the highest percentage since 1984 (41.7%).",
+  "claim": "2020 had the highest non-RWB share after 1984 at 40.5%; the only higher year was 1984 at 41.7%.",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "(d.assign(nonRWB=d.RWB.eq('N')).groupby('year')['nonRWB'].mean() * 100).round(1).sort_values(ascending=False).head(2)"
+ },
+ {
+  "id": "three-years-below-20",
+  "source": "The explosion of color for 2020’s candidates comes after a period of 3 election years (2008, 2012, 2016) where less than 20% of candidates stepped outside the RWB color palette — cycles where America’s first Black and first female major party nominees might have felt pressure to keep more traditional palettes.",
+  "claim": "In 2008, 2012 and 2016 fewer than 20% of candidates used non-RWB schemes: 12.0%, 5.9% and 7.4%, respectively.",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "(d.assign(nonRWB=d.RWB.eq('N')).groupby('year')['nonRWB'].mean() * 100).round(1).loc[[2008, 2012, 2016]]"
+ },
+ {
+  "id": "minority-non-rwb-vs-white-men",
+  "source": "40% of all minority candidates used non-RWB colors compared to only 21% of White male candidates. Non-RWB (17 candidates) RWB (25 candidates)",
+  "claim": "17 of the 42 minority candidates (40%) used non-RWB color schemes, compared with 48 of the 229 White male candidates (21%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d.assign(group=np.where(d.whiteMale, 'White male', 'Minority')).groupby('group')['RWB'].agg(total='size', nonRWB=lambda s: s.eq('N').sum(), pctNonRWB=lambda s: round(s.eq('N').mean() * 100))"
+ },
+ {
+  "id": "candidates-of-color-non-rwb",
+  "source": "29% of candidates of color used non-RWB colors compared to only 21% of White male candidates. Non-RWB (8 candidates) RWB (20 candidates)",
+  "claim": "8 of the 28 candidates of color (29%) used non-RWB color schemes, compared with 48 of the 229 White male candidates (21%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d.assign(coc=d.white.eq('N'), wm=d.whiteMale).melt(id_vars='RWB', value_vars=['coc', 'wm']).query('value').groupby('variable')['RWB'].agg(total='size', nonRWB=lambda s: s.eq('N').sum(), pctNonRWB=lambda s: round(s.eq('N').mean() * 100)).rename(index={'coc': 'Candidates of color', 'wm': 'White male'})"
+ },
+ {
+  "id": "female-non-rwb",
+  "source": "62% of female candidates used non-RWB colors compared to only 21% of White male candidates. Non-RWB (13 candidates) RWB (8 candidates)",
+  "claim": "13 of the 21 female candidates (62%) used non-RWB color schemes, compared with 48 of the 229 White male candidates (21%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d[d.male.eq('N') | d.whiteMale].assign(group=lambda x: np.where(x.male.eq('N'), 'Female candidates', 'White male')).groupby('group')['RWB'].agg(total='size', nonRWB=lambda s: s.eq('N').sum(), pctNonRWB=lambda s: round(s.eq('N').mean() * 100))"
+ },
+ {
+  "id": "women-of-color-non-rwb",
+  "source": "67% of women of color candidates used non-RWB colors compared to only 21% of White male candidates. Non-RWB (4 candidates) RWB (2 candidates)",
+  "claim": "4 of the 6 women of color candidates (67%) used non-RWB color schemes, compared with 48 of the 229 White male candidates (21%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d[(d.white.eq('N') & d.male.eq('N')) | d.whiteMale].assign(group=lambda x: np.where(x.white.eq('N') & x.male.eq('N'), 'Women of color candidates', 'White male')).groupby('group')['RWB'].agg(total='size', nonRWB=lambda s: s.eq('N').sum(), pctNonRWB=lambda s: round(s.eq('N').mean() * 100))"
+ },
+ {
+  "id": "major-party-rwb",
+  "source": "Although red and blue didn’t get cemented as the defacto colors for the Republican and Democratic parties until the 1990s, most major party candidates do employ some variation of a RWB color scheme.",
+  "claim": "180 of the 217 Democratic and Republican candidates (83%) used RWB color schemes.",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d[d.party.isin(['Democratic', 'Republican'])]['RWB'].agg(total='size', RWB=lambda s: s.eq('Y').sum(), pctRWB=lambda s: round(s.eq('Y').mean() * 100))"
+ },
+ {
+  "id": "2020-most-minority-candidates",
+  "source": "Although the two major parties’ presumptive nominees are two septuagenarian White men who play it safe with color (Joe Biden and Donald Trump), the 2020 candidates were the most diverse in modern political history, especially on the Democratic side.",
+  "claim": "2020 had the highest number and share of minority (non-White-male) candidates of any election year in the data: 13 of 37 (35.1%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d.assign(minority=~d.whiteMale).groupby('year')['minority'].agg(total='size', minority='sum', pct=lambda s: round(s.mean() * 100, 1))"
+ },
+ {
+  "id": "candidates-of-color-vs-white-candidates",
+  "source": "Looking just at race, instead of both race and gender, candidates of color are still more likely than White candidates to use non-RWB colors, but the gap is significantly narrowed.",
+  "claim": "8 of the 28 candidates of color (29%) used non-RWB color schemes, against 57 of the 243 White candidates (23%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d.assign(group=np.where(d.white.eq('N'), 'Candidates of color', 'White candidates')).groupby('group')['RWB'].agg(total='size', nonRWB=lambda s: s.eq('N').sum(), pctNonRWB=lambda s: round(s.eq('N').mean() * 100))"
+ },
+ {
+  "id": "2020-democratic-diversity",
+  "source": "Although the two major parties’ presumptive nominees are two septuagenarian White men who play it safe with color (Joe Biden and Donald Trump), the 2020 candidates were the most diverse in modern political history, especially on the Democratic side.",
+  "claim": "In 2020, 11 of the 29 Democratic candidates (37.9%) were minority candidates, compared with 1 of the 5 Republican candidates (20.0%).",
+  "tables": {
+   "d": "data/colors.csv"
+  },
+  "code": "d[d.year == 2020].assign(minority=~d.whiteMale).groupby('party')['minority'].agg(total='size', minority='sum', pct=lambda s: round(s.mean() * 100, 1))"
+ }
+]

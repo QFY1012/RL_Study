@@ -1,0 +1,47 @@
+{
+ "id": "cookies",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 558,
+  "steps": 45,
+  "tools": 55,
+  "nudged": 0,
+  "usage": {
+   "input": 48853,
+   "output": 72777
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "average-mathematical-cookie-ingredients",
+   "basis": "Output lists all claimed averages: all purpose flour 3.526 cup, baking powder 0.394 tsp, salt 1.139 tsp, baking soda 1.370 tsp, butter 1.133 cup, sugar 1.025 cup, light brown sugar 1.194 cup, dark brown sugar 0.125 cup, vanilla 2.979 tsp, semisweet chocolate chip 1.833 cup, milk chocolate chip 0.291 cup, dark chocolate chip 0.112 cup, white chocolate chip 0.049 cup, bittersweet chocolate chip 0.354 cup.",
+   "verdict": "ok"
+  },
+  {
+   "id": "applesauce-watered-down",
+   "basis": "For applesauce/cup, output shows recipes=1 and avg=0.002.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sparse-ingredients-diluted",
+   "basis": "Output shows molasses/tablespoon with recipes=1, avg=0.005 and white pepper/teaspoon with recipes=1, avg=0.005.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "sparse-ingredients-diluted",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 2,
+ "skipped": 12
+}

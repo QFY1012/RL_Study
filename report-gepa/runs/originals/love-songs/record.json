@@ -1,0 +1,112 @@
+{
+ "id": "love-songs",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 804,
+  "steps": 75,
+  "tools": 90,
+  "nudged": 0,
+  "usage": {
+   "input": 143867,
+   "output": 115583
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 17,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "serenade-share-falls",
+   "basis": "1958-1968=22.763038; 2020-2023=12.220982",
+   "verdict": "ok"
+  },
+  {
+   "id": "serenade-heartache-share-falls",
+   "basis": "1958-1968=44.684355; 2020-2023=27.343750",
+   "verdict": "ok"
+  },
+  {
+   "id": "heartache-surpasses-serenade",
+   "basis": "Serenade=219; Heartache=271",
+   "verdict": "ok"
+  },
+  {
+   "id": "blinding-lights-57-weeks",
+   "basis": "Blinding Lights=57",
+   "verdict": "ok"
+  },
+  {
+   "id": "taylor-mariah-top-heartache",
+   "basis": "Taylor Swift=12; Mariah Carey=10; Brenda Lee=7",
+   "verdict": "ok"
+  },
+  {
+   "id": "sexual-confidence-nears-serenade-2000s",
+   "basis": "Serenade=719; Sexual Confidence=677",
+   "verdict": "ok"
+  },
+  {
+   "id": "self-least-then-fourth",
+   "basis": "2020-2023=4.0; pre-2000=7.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "sexual-confidence-included-near-boomer",
+   "basis": "1958-1968=62.323879; 2020-2023=60.714286",
+   "verdict": "ok"
+  },
+  {
+   "id": "all-love-share-rises",
+   "basis": "1958-1968=62.415371; 2020-2023=69.363839",
+   "verdict": "ok"
+  },
+  {
+   "id": "serenade-peaks-1990s",
+   "basis": "1990-1998=26.313559; 1958-1968=22.763038; 2020-2023=12.220982",
+   "verdict": "ok"
+  },
+  {
+   "id": "pursuit-share-steady",
+   "basis": "1958-1968=8.325709; 2020-2023=7.756696; min=5.886103; max=11.982942",
+   "verdict": "ok"
+  },
+  {
+   "id": "good-riddance-rising",
+   "basis": "1990-1998=1.737288; 2000-2008=4.091584; 2020-2023=4.854911",
+   "verdict": "ok"
+  },
+  {
+   "id": "sexual-confidence-rising",
+   "basis": "1980-1988=4.413646; 1990-1998=8.728814; 2000-2008=14.352343",
+   "verdict": "ok"
+  },
+  {
+   "id": "self-share-jumps-2000s",
+   "basis": "1990-1998=1.080508; 2000-2008=5.575578; 2020-2023=8.649554",
+   "verdict": "ok"
+  },
+  {
+   "id": "pursuit-included-still-declines",
+   "basis": "1958-1968=53.010064; 2020-2023=35.100446",
+   "verdict": "ok"
+  },
+  {
+   "id": "its-complicated-included-still-declines",
+   "basis": "1958-1968=59.414456; 2020-2023=48.549107",
+   "verdict": "ok"
+  },
+  {
+   "id": "good-riddance-included-still-declines",
+   "basis": "1958-1968=60.969808; 2020-2023=53.404018",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 17,
+ "skipped": 15
+}

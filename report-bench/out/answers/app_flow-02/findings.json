@@ -1,0 +1,55 @@
+[
+ {
+  "finding": "按App×流程拆分后才可见:白鹭外卖的退换货申请流程单步出错率 15.2%,而白鹭外卖其他流程仅 7.5%、其他App的退换货申请仅 5.5%;该流程 75% 的出错描述与手动填写订单号有关(机制:该App订单号未自动带出)",
+  "numbers": {
+   "err_rate_bailu_return": 0.152,
+   "n_bailu_return": 888,
+   "err_rate_bailu_other_flows": 0.0748,
+   "n_bailu_other_flows": 2835,
+   "err_rate_other_apps_return": 0.0554,
+   "n_other_apps_return": 2364,
+   "ratio_vs_other_flows": 2.03,
+   "ratio_vs_other_apps": 2.74,
+   "order_no_desc_share": 0.748
+  },
+  "holds": true
+ },
+ {
+  "finding": "短信验证码步骤平均耗时自 2024-03-11 起从 17.9 秒升至 43.4 秒(约 2.4 倍),平均操作次数从 3.1 次升至 6.5 次,且新旧水平各自稳定(机制:验证通道当日统一接入前置图形验证)",
+  "numbers": {
+   "breakpoint_date": "2024-03-11",
+   "n_pre": 593,
+   "dur_pre_sec": 17.88,
+   "n_post": 983,
+   "dur_post_sec": 43.4,
+   "dur_ratio": 2.43,
+   "act_pre": 3.11,
+   "act_post": 6.5,
+   "act_ratio": 2.09
+  },
+  "holds": true
+ },
+ {
+  "finding": "实名认证流程中「身份证号」字段出错率 21.0%,是同流程其他字段(4.8%)的约 4.4 倍,错误描述集中在校验位/位数问题(机制:身份证含校验位且需切换数字键盘)",
+  "numbers": {
+   "err_rate_id_field": 0.2105,
+   "n_id_rows": 841,
+   "err_rate_other_fields": 0.0484,
+   "n_other_rows": 2523,
+   "ratio": 4.35
+  },
+  "holds": true
+ },
+ {
+  "finding": "武汉测试点的上传类步骤(证件照片、凭证照片)平均耗时 67.8 秒,是其他测试点(25.4 秒)的约 2.7 倍;同点非上传步骤耗时比仅 0.97,说明网络专线问题只影响上传环节",
+  "numbers": {
+   "n_upload_wuhan": 243,
+   "dur_upload_wuhan_sec": 67.83,
+   "n_upload_other": 1410,
+   "dur_upload_other_sec": 25.36,
+   "upload_dur_ratio": 2.67,
+   "nonupload_dur_ratio": 0.97
+  },
+  "holds": true
+ }
+]

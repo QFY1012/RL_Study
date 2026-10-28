@@ -1,0 +1,155 @@
+[
+  {
+    "id": "serenade-share-falls",
+    "source": "The proportion of love songs in the 1960s was 23%. In the 2020s, it’s 12%. The proportion of love songs has almost halved!",
+    "claim": "Measured by total weeks in the Top 10, Serenades were 22.8% of the chart in its first period (1958–1968) and 12.2% in 2020–2023, nearly halving.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type == 1, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade share of Top 10 weeks')"
+  },
+  {
+    "id": "serenade-heartache-share-falls",
+    "source": "Their decline is still dramatic: from 45% of all songs in the ’60s, to 27% in the 2020s.",
+    "claim": "Measured by total weeks in the Top 10, Serenades plus Heartache were 44.7% of the chart in 1958–1968 and 27.3% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type.isin([1, 2]), 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade + Heartache share of Top 10 weeks')"
+  },
+  {
+    "id": "heartache-surpasses-serenade",
+    "source": "The total number of Top 10 spots occupied by Heartache surpassed Serenades in the 2020s.",
+    "claim": "In 2020–2023 Heartache songs occupied 271 Top 10 weeks, while Serenades occupied 219.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs[songs.date_as_decimal >= 2020].groupby('love_song_sub_type').total_weeks_in_top_10.sum().loc[[1, 2]].rename({1: 'Serenade', 2: 'Heartache'}).rename('2020-2023 Top 10 weeks')"
+  },
+  {
+    "id": "blinding-lights-57-weeks",
+    "source": "Blinding Lights by The Weeknd played a big role, spending 57 weeks in the Top 10.",
+    "claim": "Blinding Lights spent 57 weeks in the Top 10.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.loc[songs.song == 'Blinding Lights', ['song', 'total_weeks_in_top_10']]"
+  },
+  {
+    "id": "taylor-mariah-top-heartache",
+    "source": "Taylor Swift and Mariah Carey, ever the love-lorn crooners, top the Heartache category.",
+    "claim": "Taylor Swift has 12 Heartache songs and Mariah Carey has 10, the two highest artist counts (next is Brenda Lee with 7).",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs[songs.love_song_sub_type == 2].performers_list_str.str.split('|').explode().loc[lambda s: s != ''].value_counts().head(3)"
+  },
+  {
+    "id": "sexual-confidence-nears-serenade-2000s",
+    "source": "As Boomers bemoan, these Sexual Confidence songs exploded in popularity, nearly eclipsing the Serenade in the 2000s.",
+    "claim": "In 2000–2008 Sexual Confidence songs occupied 677 Top 10 weeks, close to the Serenades’ 719.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs[(songs.date_as_decimal >= 2000) & (songs.date_as_decimal < 2009)].groupby('love_song_sub_type').total_weeks_in_top_10.sum().loc[[1, 6]].rename({1: 'Serenade', 6: 'Sexual Confidence'}).rename('2000-2008 Top 10 weeks')"
+  },
+  {
+    "id": "self-least-then-fourth",
+    "source": "Love Song for the Self is the least popular love song type (with barely any songs at all) before increasing suddenly in the 2000s and finishing as the fourth most popular love song category in the 2020s, out of all seven categories.",
+    "claim": "By Top 10 weeks, Love Song for the Self ranked 7th (last) among the love-song types before 2000 and 4th in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 2000, 'pre-2000', np.where(songs.date_as_decimal >= 2020, '2020-2023', '2000s-2010s'))).query(\"period != '2000s-2010s' and love_song_sub_type > 0\").groupby(['period', 'love_song_sub_type']).total_weeks_in_top_10.sum().groupby(level=0).rank(ascending=False, method='min').loc[(slice(None), 7)].rename('Love Song for the Self rank')"
+  },
+  {
+    "id": "sexual-confidence-included-near-boomer",
+    "source": "When we include this sensual side of love, the love song isn’t dying after all, but nearly as popular as in Boomer Bob’s day!",
+    "claim": "With Sexual Confidence counted but not Love Song for the Self, love songs were 62.3% of Top 10 weeks in 1958–1968, nearly the same as 60.7% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type.isin([1, 2, 3, 4, 5, 6]), 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade + Heartache + It’s Complicated + Pursuit + Good Riddance + Sexual Confidence share of Top 10 weeks')"
+  },
+  {
+    "id": "all-love-share-rises",
+    "source": "Not at all. In fact, it’s increasingly more popular!",
+    "claim": "With every love-song type counted, love songs were 62.4% of Top 10 weeks in 1958–1968 and 69.4% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type > 0, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('All love song types share of Top 10 weeks')"
+  },
+  {
+    "id": "serenade-peaks-1990s",
+    "source": "appearing to peak in total popularity in the 1990s before substantially decreasing.",
+    "claim": "Serenades’ share of Top 10 weeks peaked at 26.3% in 1990–1998, up from 22.8% in 1958–1968, and fell to 12.2% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.select([songs.date_as_decimal < 1969, songs.date_as_decimal.between(1970, 1979, inclusive='left'), songs.date_as_decimal.between(1980, 1989, inclusive='left'), songs.date_as_decimal.between(1990, 1999, inclusive='left'), songs.date_as_decimal.between(2000, 2009, inclusive='left'), songs.date_as_decimal.between(2010, 2019, inclusive='left'), songs.date_as_decimal >= 2020], ['1958-1968', '1970-1978', '1980-1988', '1990-1998', '2000-2008', '2010-2018', '2020-2023'], default='excluded')).query(\"period != 'excluded'\").groupby('period', sort=False).apply(lambda x: 100 * x.loc[x.love_song_sub_type == 1, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade share of Top 10 weeks')"
+  },
+  {
+    "id": "pursuit-share-steady",
+    "source": "These Pursuit songs remain fairly steady over time",
+    "claim": "Pursuit’s share of Top 10 weeks began at 8.3% in 1958–1968 and ended at 7.8% in 2020–2023, staying within a 5.9%–12.0% band.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.select([songs.date_as_decimal < 1969, songs.date_as_decimal.between(1970, 1979, inclusive='left'), songs.date_as_decimal.between(1980, 1989, inclusive='left'), songs.date_as_decimal.between(1990, 1999, inclusive='left'), songs.date_as_decimal.between(2000, 2009, inclusive='left'), songs.date_as_decimal.between(2010, 2019, inclusive='left'), songs.date_as_decimal >= 2020], ['1958-1968', '1970-1978', '1980-1988', '1990-1998', '2000-2008', '2010-2018', '2020-2023'], default='excluded')).query(\"period != 'excluded'\").groupby('period', sort=False).apply(lambda x: 100 * x.loc[x.love_song_sub_type == 4, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Pursuit share of Top 10 weeks')"
+  },
+  {
+    "id": "good-riddance-rising",
+    "source": "largely increasing in popularity starting in the 2000s.",
+    "claim": "Good Riddance’s share of Top 10 weeks was 1.7% in 1990–1998, then 4.1% in 2000–2008 and 4.9% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.select([songs.date_as_decimal < 1969, songs.date_as_decimal.between(1970, 1979, inclusive='left'), songs.date_as_decimal.between(1980, 1989, inclusive='left'), songs.date_as_decimal.between(1990, 1999, inclusive='left'), songs.date_as_decimal.between(2000, 2009, inclusive='left'), songs.date_as_decimal.between(2010, 2019, inclusive='left'), songs.date_as_decimal >= 2020], ['1958-1968', '1970-1978', '1980-1988', '1990-1998', '2000-2008', '2010-2018', '2020-2023'], default='excluded')).query(\"period != 'excluded'\").groupby('period', sort=False).apply(lambda x: 100 * x.loc[x.love_song_sub_type == 5, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Good Riddance share of Top 10 weeks')"
+  },
+  {
+    "id": "sexual-confidence-rising",
+    "source": "generally increasing starting in the 1980s, with a spike in the 1990s.",
+    "claim": "Sexual Confidence’s share of Top 10 weeks rose from 4.4% in 1980–1988 to 8.7% in 1990–1998 and peaked at 14.4% in 2000–2008.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.select([songs.date_as_decimal < 1969, songs.date_as_decimal.between(1970, 1979, inclusive='left'), songs.date_as_decimal.between(1980, 1989, inclusive='left'), songs.date_as_decimal.between(1990, 1999, inclusive='left'), songs.date_as_decimal.between(2000, 2009, inclusive='left'), songs.date_as_decimal.between(2010, 2019, inclusive='left'), songs.date_as_decimal >= 2020], ['1958-1968', '1970-1978', '1980-1988', '1990-1998', '2000-2008', '2010-2018', '2020-2023'], default='excluded')).query(\"period != 'excluded'\").groupby('period', sort=False).apply(lambda x: 100 * x.loc[x.love_song_sub_type == 6, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Sexual Confidence share of Top 10 weeks')"
+  },
+  {
+    "id": "self-share-jumps-2000s",
+    "source": "Love Song for the Self is the least popular love song type (with barely any songs at all) before increasing suddenly in the 2000s and finishing as the fourth most popular love song category in the 2020s, out of all seven categories.",
+    "claim": "Love Song for the Self's share of Top 10 weeks jumped from 1.1% in 1990–1998 to 5.6% in 2000–2008 and 8.6% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.select([songs.date_as_decimal < 1969, songs.date_as_decimal.between(1970, 1979, inclusive='left'), songs.date_as_decimal.between(1980, 1989, inclusive='left'), songs.date_as_decimal.between(1990, 1999, inclusive='left'), songs.date_as_decimal.between(2000, 2009, inclusive='left'), songs.date_as_decimal.between(2010, 2019, inclusive='left'), songs.date_as_decimal >= 2020], ['1958-1968', '1970-1978', '1980-1988', '1990-1998', '2000-2008', '2010-2018', '2020-2023'], default='excluded')).query(\"period != 'excluded'\").groupby('period', sort=False).apply(lambda x: 100 * x.loc[x.love_song_sub_type == 7, 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Love Song for the Self share of Top 10 weeks')"
+  },
+  {
+    "id": "pursuit-included-still-declines",
+    "source": "These Pursuit songs remain fairly steady over time, so the love song is still in decline",
+    "claim": "With Pursuit counted (Serenade + Heartache + Pursuit), love songs were 53.0% of Top 10 weeks in 1958–1968 and 35.1% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type.isin([1, 2, 4]), 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade + Heartache + Pursuit share of Top 10 weeks')"
+  },
+  {
+    "id": "its-complicated-included-still-declines",
+    "source": "Can this angsty genre save the love song? No, but we’re getting closer!",
+    "claim": "With It’s Complicated also counted, love songs were 59.4% of Top 10 weeks in 1958–1968 and 48.5% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type.isin([1, 2, 3, 4]), 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade + Heartache + Pursuit + It’s Complicated share of Top 10 weeks')"
+  },
+  {
+    "id": "good-riddance-included-still-declines",
+    "source": "With the predominantly modern Good Riddance love song added to the mix, maybe love is not dead -- it’s just a little wounded.",
+    "claim": "With Good Riddance also counted, love songs were 61.0% of Top 10 weeks in 1958–1968 and 53.4% in 2020–2023.",
+    "tables": {
+      "songs": "data/top10-songs.csv"
+    },
+    "code": "songs.assign(period=np.where(songs.date_as_decimal < 1969, '1958-1968', np.where(songs.date_as_decimal >= 2020, '2020-2023', 'other'))).query(\"period != 'other'\").groupby('period').apply(lambda x: 100 * x.loc[x.love_song_sub_type.isin([1, 2, 3, 4, 5]), 'total_weeks_in_top_10'].sum() / x.total_weeks_in_top_10.sum()).rename('Serenade + Heartache + Pursuit + It’s Complicated + Good Riddance share of Top 10 weeks')"
+  }
+]

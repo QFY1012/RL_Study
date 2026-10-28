@@ -1,0 +1,62 @@
+{
+ "id": "asne",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 565,
+  "steps": 58,
+  "tools": 72,
+  "nudged": 0,
+  "usage": {
+   "input": 66703,
+   "output": 65652
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "newsrooms-more-white-than-cities",
+   "basis": "white_staff_pct mean 84.858973; white_2015 mean 54.732; count 100",
+   "verdict": "ok"
+  },
+  {
+   "id": "newsrooms-not-parity-2000",
+   "basis": "white_staff_pct mean 90.080528; white_2000 mean 66.181606; count 386",
+   "verdict": "ok"
+  },
+  {
+   "id": "five-cities-white-gap",
+   "basis": "Chicago Tribune 80.836237/32.2; Dallas Morning News 77.625571/29.4; Detroit News 74.380165/9.1; Detroit Free Press 75.000000/9.1; Houston Chronicle 77.372263/25.5; Philadelphia Inquirer 82.071713/35.8",
+   "verdict": "ok"
+  },
+  {
+   "id": "desert-sun-hispanic-black",
+   "basis": "hispanic_staff_pct 20.588235; black_staff_pct 11.764706; hispanic_2015 25.8; black_2015 4.7",
+   "verdict": "ok"
+  },
+  {
+   "id": "newsrooms-more-diverse-share",
+   "basis": "size 402; mean 44.776119",
+   "verdict": "ok"
+  },
+  {
+   "id": "newsrooms-same-or-less-diverse-share",
+   "basis": "size 402; mean 55.223881",
+   "verdict": "ok"
+  },
+  {
+   "id": "national-papers-wapo-only",
+   "basis": "Washington Post 19.508449 to 30.769231, change 11.260782; USA Today change 2.876130; NYT change 2.779409; WSJ change 1.733382",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 7
+}

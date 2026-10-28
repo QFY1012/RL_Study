@@ -1,0 +1,37 @@
+{
+ "id": "cool",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 158,
+  "steps": 22,
+  "tools": 28,
+  "nudged": 0,
+  "usage": {
+   "input": 14029,
+   "output": 14005
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "total-cools",
+   "basis": "cools['count'].sum() output is 412.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cools-per-character",
+   "basis": "Output counts: abed 164, jeff 48, troy 44, other 38, annie 28, britta 23, baby 22, chang 15, pierce 13, dean 9, shirley 8.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 1
+}

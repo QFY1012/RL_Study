@@ -1,0 +1,50 @@
+[
+ {
+  "finding": "「拾光记账」绑卡流程的短信验证码输入步骤(安全键盘禁用粘贴与自动填充)平均操作次数 14.0 次、平均耗时 64 秒,是其他 App 同名步骤(5.1 次 / 29 秒)的约 2.8 倍",
+  "numbers": {
+   "mean_actions_shiguang": 14.04,
+   "mean_actions_others": 5.1,
+   "actions_ratio": 2.75,
+   "mean_duration_shiguang": 63.9,
+   "mean_duration_others": 29.1,
+   "n_shiguang": 55,
+   "n_others": 140
+  },
+  "holds": true
+ },
+ {
+  "finding": "「青柚外卖」收货地址确认步骤平均耗时在 2024-03-18 改版(手动输入改为地图选点)后由 58 秒降至 23 秒(比值 0.40),同期该 App 其他步骤耗时中位数比 1.00、其他 App 整体耗时中位数比 1.04,均基本不变",
+  "numbers": {
+   "mean_before_sec": 58.5,
+   "mean_after_sec": 23.5,
+   "after_before_ratio": 0.401,
+   "n_before": 30,
+   "n_after": 30,
+   "ctrl_same_app_other_steps_median_ratio": 1.0,
+   "ctrl_other_apps_median_ratio": 1.038
+  },
+  "holds": true
+ },
+ {
+  "finding": "「白鹭政务」社保查询流程中,身份证拍照识别步骤出错的会话(多因光线/摄像头环境差),其后续人脸核身步骤出错率为 60%,远高于拍照未出错会话的 8%(约 8.0 倍)",
+  "numbers": {
+   "face_err_rate_when_photo_err": 0.6,
+   "face_err_rate_when_photo_ok": 0.0755,
+   "rate_ratio": 7.95,
+   "n_photo_err_sessions": 15,
+   "n_photo_ok_sessions": 53
+  },
+  "holds": true
+ },
+ {
+  "finding": "「知了健身」体测预约流程的设备蓝牙配对步骤在小米 14 上出错率为 92%(该机型系统默认拦截其蓝牙权限),其他机型仅 2%,相差约 52.6 倍",
+  "numbers": {
+   "err_rate_xiaomi14": 0.9231,
+   "err_rate_other_devices": 0.0175,
+   "rate_ratio": 52.62,
+   "n_xiaomi14": 13,
+   "n_other_devices": 57
+  },
+  "holds": true
+ }
+]

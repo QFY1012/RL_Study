@@ -1,0 +1,38 @@
+[
+  {
+    "id": "russia-china-brain-death-rules",
+    "source": "Someone brain dead in Russia can be ambiguously alive in China",
+    "claim": "Russia has both a law and a guideline on brain death, while China has neither a law nor a guideline.",
+    "tables": {
+      "d": "data/countries_braindeath.csv"
+    },
+    "code": "d[d.country.isin(['Russia', 'China'])].set_index('country').sort_index()[['law', 'guideline']]"
+  },
+  {
+    "id": "mexico-guatemala-brain-death-rules",
+    "source": "they can be pronounced dead in Mexico and legally revived in Guatemala.",
+    "claim": "Mexico has both a law and a guideline on brain death, while Guatemala has neither a law nor a guideline.",
+    "tables": {
+      "d": "data/countries_braindeath.csv"
+    },
+    "code": "d[d.country.isin(['Mexico', 'Guatemala'])].set_index('country').sort_index()[['law', 'guideline']]"
+  },
+  {
+    "id": "sweden-norway-observation-time",
+    "source": "Effectively, this means that a Swedish physician could declare a patient’s death and immediately begin an organ transplantation process, while across its east border in Norway, that same person would have to be observed for another day.",
+    "claim": "Sweden’s observation-time entry is 'A', against 24 hours for Norway.",
+    "tables": {
+      "d": "data/countries_braindeath.csv"
+    },
+    "code": "d[d.country.isin(['Sweden', 'Norway'])].set_index('country').sort_index()['observation_time_h']"
+  },
+  {
+    "id": "countries-criteria-vary",
+    "source": "Once again, we find wildly different criteria across countries.",
+    "claim": "The countries’ criteria are not uniform: where the data give a numeric value, the number of physicians required ranges from 1 to 4 and the observation time from 2 to 24 hours.",
+    "tables": {
+      "d": "data/countries_braindeath.csv"
+    },
+    "code": "d[['no_of_physicians', 'observation_time_h']].apply(pd.to_numeric, errors='coerce').dropna(how='all').agg(['min', 'max'])"
+  }
+]

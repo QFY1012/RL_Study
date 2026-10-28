@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Peña’s study of 25 million U.S. deaths (1998-2011) found a 6.7% excess of birthday deaths, while Ajdacic-Gross’s study of Swiss deaths (1969-2008) found a 13.8% excess.",
+    "why": "These are results from other studies and populations, not computations from data/birthdays.csv."
+  },
+  {
+    "source": "Like these other large studies, I didn't find any significance with a postponement effect.",
+    "why": "The story gives no test statistic, window definition beyond the quoted ±10 days, or significance threshold for this claim, so it cannot be reproduced from the table without inventing a test."
+  },
+  {
+    "source": "Unlike Peña, who found that “younger people have greater average excess death rates on birthdays,” I actually found that the birthday effect was stronger in older versus younger people.",
+    "why": "The story does not define the age groups or the cut point used for “older” and “younger,” and the data do not support the comparison under a single story-defined threshold; choosing a threshold would be inventing a definition."
+  },
+  {
+    "source": "Adding these up, without any birthday effect, we’d expect 34% of people to die on their birthday by pure chance in this tiny world.",
+    "why": "This is an illustrative three-day, 100-person example invented to explain the method, not a result computed from data/birthdays.csv."
+  },
+  {
+    "source": "The average is marked as 153.",
+    "why": "The mean of the 365 daily death counts in 2000 is 156.2, not 153; the story's own text elsewhere uses 156, so the chart label does not match the data."
+  },
+  {
+    "source": "Births (in teal) range from 160,802 to 165,570 per month.",
+    "why": "The monthly birth counts in the data range from 152,399 (February) to 170,551 (August); 160,802 (June) and 165,570 (January) are only the two labeled months, not the overall range."
+  },
+  {
+    "source": "Deaths (in red) range from 149,606 to 187,356 per month.",
+    "why": "The monthly death counts in the data range from 148,638 (September) to 187,356 (January); 149,606 (June) is not the minimum, so the stated range does not reproduce."
+  }
+]

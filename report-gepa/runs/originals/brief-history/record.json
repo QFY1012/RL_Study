@@ -1,0 +1,32 @@
+{
+ "id": "brief-history",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 408,
+  "steps": 34,
+  "tools": 37,
+  "nudged": 0,
+  "usage": {
+   "input": 43296,
+   "output": 48165
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "decade-distinctive-terms",
+   "basis": "输出按 year 分组，每个十年正好列出 claim 中的 10 个词且顺序一致。各十年第1/第10名的 ratio 分别为：1900 1.962141/1.546999；1910 2.984516/2.587262；1920 2.977484/1.970693；1930 2.992277/2.357459；1940 3.000000/2.504296；1950 2.855112/2.108416；1960 2.990986/1.991870；1970 2.924031/2.030657；1980 2.995159/1.599186；1990 2.738551/1.367262；2000 2.984009/1.297683；2010 1.956719/1.476091。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 1,
+ "skipped": 3
+}

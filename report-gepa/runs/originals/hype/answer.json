@@ -1,0 +1,65 @@
+[
+ {
+  "id": "top100-superstars",
+  "source": "Just 31 players eventually reached “superstar” status (based on advanced statistics, details at the bottom).",
+  "claim": "31 of the 1,535 top-100 recruits (2.0%) had a mean composite rank of 30 or better, the story's superstar level.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[p['rank'].notna()].assign(comp=lambda x: x[['top_mean_vorp_rank','top_mean_wa_rank']].mean(axis=1))['comp'].le(30).agg(['sum','size','mean'])"
+ },
+ {
+  "id": "top100-past-two-seasons",
+  "source": "only 25% made it past their two-year rookie contract",
+  "claim": "378 of the 1,535 top-100 recruits (24.6%) played more than two NBA seasons.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[p['rank'].notna()]['total_seasons'].gt(2).agg(['sum','size','mean'])"
+ },
+ {
+  "id": "top10-nba-share",
+  "source": "a full 84% of them eventually made it to the NBA",
+  "claim": "132 of the 158 top-10 recruits (83.5%) played at least one NBA season.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[p['rank']<=10]['total_seasons'].ge(1).agg(['sum','size','mean'])"
+ },
+ {
+  "id": "straight-to-nba-players",
+  "source": "Percentage of players that reach each level (out of 35 players) from 1998 - 2005",
+  "claim": "35 players who never attended college were drafted between 1998 and 2005.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[(p['college'].isna()) & (p['draft_year'].between(1998,2005))].shape[0]"
+ },
+ {
+  "id": "straight-to-nba-mediocre",
+  "source": "55% eventually becoming mediocre or better NBA players",
+  "claim": "19 of the other 34 straight-to-NBA players (55.9%) reached mediocre or better, a composite rank of 120 or better.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[(p['college'].isna()) & (p['draft_year'].between(1998,2005))].assign(comp=lambda x: x[['top_mean_vorp_rank','top_mean_wa_rank']].mean(axis=1)).query(\"name != 'Korleone Young'\")['comp'].le(120).agg(['sum','size','mean'])"
+ },
+ {
+  "id": "unranked-nba-players",
+  "source": "We found 338 of these players that were eventually drafted into the NBA, despite being undervalued in high school.",
+  "claim": "338 players outside the top 100 appeared in the NBA.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "(p['rank'].isna() & p['bbrID'].notna()).sum()"
+ },
+ {
+  "id": "unranked-superstars",
+  "source": "Seven players—Dwyane Wade, Marc Gasol, Paul George, Jimmy Butler,Russell Westbrook, Stephen Curry, and Damian Lillard—whose high school careers were apparently not worthy of a spot amongst the top 100, still broke into the ranks of superstars in their NBA careers.",
+  "claim": "Seven unranked players—Damian Lillard, Dwyane Wade, Jimmy Butler, Marc Gasol, Paul George, Russell Westbrook and Stephen Curry—reached a composite rank of 30 or better.",
+  "tables": {
+   "p": "data/players.csv"
+  },
+  "code": "p[p['rank'].isna()].assign(comp=lambda x: x[['top_mean_vorp_rank','top_mean_wa_rank']].mean(axis=1)).query('comp <= 30').sort_values('name')[['name','comp']].to_string(index=False)"
+ }
+]

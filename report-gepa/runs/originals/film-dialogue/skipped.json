@@ -1,0 +1,34 @@
+[
+  {
+    "source": "The results: 22 of 30 Disney films have a male majority of dialogue.",
+    "why": "The files contain no studio, distributor or parent-company field, so the 30 Disney films (and which 22 have a male majority) cannot be identified from the tables; the title/genre data do not define a Disney subset. The per-film Disney scatter labels therefore cannot be reproduced as a defined cohort."
+  },
+  {
+    "source": "Mushu, her protector dragon, has 50% more words of dialogue than Mulan herself.",
+    "why": "The character list gives Mushu 4,594 words against Mulan's 3,028, i.e. 51.7% more (1.52 times), not 50%; the difference is beyond rounding."
+  },
+  {
+    "source": "Even romantic comedies have dialogue that is, on average, 58% male.",
+    "why": "Films tagged both comedy (genre_id 6) and romance (genre_id 22) number 111, and their mean male share of character words is 58.66% (59% rounded), not 58%. Using the minute-by-minute line data instead gives 57.55%, but that is not the story's word-based dialogue measure exposed in character_list5.csv."
+  },
+  {
+    "source": "For example, Pretty Woman and 10 Things I Hate About You both have lead women (i.e., characters with the most amount of dialogue). But the overall dialogue for both films is 52% male, due to the number of male supporting characters.",
+    "why": "Character-word shares are 53.60% male for Pretty Woman and 54.31% for 10 Things I Hate About You. The line data give 52.18% and 58.04% respectively. No single measure gives 52% for both films."
+  },
+  {
+    "source": "Women are more likely to be in the second place for most amount of dialogue, which occurs in 34% of films.",
+    "why": "Ranking characters within each film by words, a woman is the second-largest speaker in 655 of 2,000 films, or 32.75%, not 34%."
+  },
+  {
+    "source": "Count of Films 90%+ Male 307 films 60% - 90% 1206 films Gender Parity +/- 10% 314 films Female 164 films",
+    "why": "Banding the 2,000 films by male share of character words gives 337 films at 90%+ male, 1,187 at 60%-90%, 306 at parity (+/-10%) and 170 female. Banding the minute line data gives 249 / 1,237 / 334 / 180. Neither reproduces 307 / 1,206 / 314 / 164."
+  },
+  {
+    "source": "Schindler’s List, for example, has women with lines, just not over this threshold. Which means a more accurate result would be 99.5% male dialogue instead of our result of 100%.",
+    "why": "The character list, which contains only characters with at least 100 words, gives Schindler's List 100% male dialogue. The minute line data give 96.0% male. The 99.5% figure depends on lines for characters below the 100-word threshold, which are not present in the files."
+  },
+  {
+    "source": "# of Words by Character 2,690 pike bishop 928 dutch engstrom 852 deke thornton 788 angel 589 lyle gorch 587 freddie sykes",
+    "why": "This is the default view of the interactive \"All Films' Dialogue\" explorer. The displayed character word counts match the data, but the '9 films' cohort is the result of an unspecified filter selection that is not stated in the story or encoded in the files, so the chart's cohort cannot be reproduced as a finding; the character list is an illustration for the selected film rather than a stated result."
+  }
+]

@@ -1,0 +1,38 @@
+[
+ {
+  "id": "languages-last-decade",
+  "source": "The image appears on the internet in 30+ different languages in the last decade",
+  "claim": "From 2011 through 2021, the descriptions of the instances are tagged in 30 distinct languages, counting zh-Hant as Chinese.",
+  "tables": {
+   "df": "data/all_final.csv"
+  },
+  "code": "df[(df.year >= 2011) & (df.year <= 2021)]['descrip_lang'].str.replace('zh-Hant', 'zh').nunique()"
+ },
+ {
+  "id": "org-domains-before-1990",
+  "source": "moving from mostly .org domains before 1990",
+  "claim": "Before 1990, 43 of the 59 dated instances come from .org domains, the most common of 11 distinct domain endings.",
+  "tables": {
+   "df": "data/all_final.csv"
+  },
+  "code": "df[df.year < 1990].agg(instances=('domain_end', 'size'), org=('domain_end', lambda s: s.eq('org').sum()), endings=('domain_end', 'nunique'))"
+ },
+ {
+  "id": "over-100-domains",
+  "source": "over 100 different domains today, notably .com and .edu, along with others",
+  "claim": "Among the dated instances from 1972 onward, there are 109 distinct domain endings across 928 distinct hostnames, both over 100.",
+  "tables": {
+   "df": "data/all_final.csv"
+  },
+  "code": "df[df.year >= 1972][['domain', 'domain_end']].nunique()"
+ },
+ {
+  "id": "scholar-use-declines",
+  "source": "a slow, but noticeable decline in the image’s use for research",
+  "claim": "Google Scholar–sourced instances fall from a peak of 294 in 2012 to 165 in 2019.",
+  "tables": {
+   "df": "data/all_final.csv"
+  },
+  "code": "df[df.dataset.str.startswith('scholar')].groupby('year').size().loc[lambda s: s.index.isin([s.idxmax(), 2019])]"
+ }
+]

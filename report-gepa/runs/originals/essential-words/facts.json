@@ -1,0 +1,218 @@
+[
+  {
+    "id": "abstract-category-largest-and-growing",
+    "source": "The biggest category in the 1953 list was already General & Abstract Terms, with words such as maybe, discover, regular, important, and success. The world, by 2023, needed even more of it: the abstract category grew by about 28%, adding words such as possibility, responsibility, concept, justify, and perspective.",
+    "claim": "General and Abstract Terms is the largest semantic category in both lists, rising from 17.4% of the 1953 list to 22.3% of the 2023 list, a 27.9% increase.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda t: t.sort_values('1953', ascending=False).assign(growth_pct=(t['2023']/t['1953']-1)*100))(\n    pd.DataFrame({'1953': sem[sem.set!='added'].usas_top_level_name.value_counts(normalize=True).mul(100),\n                  '2023': sem[sem.set!='removed'].usas_top_level_name.value_counts(normalize=True).mul(100)}))"
+  },
+  {
+    "id": "tangible-categories-largest-drops",
+    "source": "The sharpest drops were in the most tangible categories: Substances & Objects, the Body & the Individual, Food & Farming, Life & Living Things.",
+    "claim": "Among the tangible categories, the largest relative declines are Life and Living Things at -52.6%, Substances, Materials, Objects and Equipment at -36.8%, Food and Farming at -33.3%, and The Body and the Individual at -29.9%.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda t: t.loc[['Substances, Materials, Objects and Equipment','The Body and the Individual','Food and Farming','Life and Living Things','Architecture, Housing and the Home','World and Environment']].sort_values('growth_pct'))(\n    pd.DataFrame({'1953': sem[sem.set!='added'].usas_top_level_name.value_counts(normalize=True).mul(100),\n                  '2023': sem[sem.set!='removed'].usas_top_level_name.value_counts(normalize=True).mul(100)}).assign(growth_pct=lambda d: (d['2023']/d['1953']-1)*100))"
+  },
+  {
+    "id": "emotion-shrinks-psychological-grows",
+    "source": "While words for emotions shrank by 1.8 percentage points, words for psychological processes grew just as much.",
+    "claim": "Emotion falls 1.8 percentage points, from 5.4% of the 1953 list to 3.7% of the 2023 list, while Psychological Actions, States and Processes rises 1.8 points, from 7.0% to 8.8%.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda t: t.assign(pp=t['2023']-t['1953']).loc[['Emotion','Psychological Actions, States and Processes']])(\n    pd.DataFrame({'1953': sem[sem.set!='added'].usas_top_level_name.value_counts(normalize=True).mul(100),\n                  '2023': sem[sem.set!='removed'].usas_top_level_name.value_counts(normalize=True).mul(100)}))"
+  },
+  {
+    "id": "social-domain-churn",
+    "source": "The “Social-Communicative” level barely changed in size. But nearly a quarter of the words in the 1953 list are gone, and 39% of the 2023 words are new.",
+    "claim": "In the Social/Communicative domain, 23.1% of the 1953 list's words were removed and 39.4% of the 2023 list's words were added.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda d: pd.concat([d[d.set!='added'].assign(list='1953'), d[d.set!='removed'].assign(list='2023')])\n    .groupby('list').set.value_counts(normalize=True).mul(100).unstack())(\n    sem[sem.usas_top_level_name.isin(['Social Actions, States and Processes', 'Movement, Location, Travel and Transport', 'Language and Communication', 'Entertainment, Sports and Games', 'Arts and Crafts'])])"
+  },
+  {
+    "id": "self-domain-shrinks",
+    "source": "The 2023 list has fewer words relating to the self.",
+    "claim": "Words in the Self domain fall from 10.5% of the 1953 list to 7.2% of the 2023 list, a 3.3-point decline.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda d: pd.DataFrame({'1953': d[d.set!='added'].domain.value_counts(normalize=True).mul(100),\n                         '2023': d[d.set!='removed'].domain.value_counts(normalize=True).mul(100)})\n    .assign(pp=lambda t: t['2023']-t['1953']).loc[['Self']])(\n    sem.assign(domain=sem.usas_top_level_name.map({'Emotion':'Self','The Body and the Individual':'Self','Substances, Materials, Objects and Equipment':'Local','Food and Farming':'Local','Life and Living Things':'Local','Architecture, Housing and the Home':'Local','World and Environment':'Local','Money and Commerce in Industry':'Institutional','Government and Public':'Institutional','Education':'Institutional','Science and Technology':'Institutional','Social Actions, States and Processes':'Social','Movement, Location, Travel and Transport':'Social','Language and Communication':'Social','Entertainment, Sports and Games':'Social','Arts and Crafts':'Social','General and Abstract Terms':'Universal','Psychological Actions, States and Processes':'Universal','Numbers and Measurement':'Universal','Names and Grammar':'Universal','Time':'Universal'})))"
+  },
+  {
+    "id": "local-domain-shrinks",
+    "source": "The “local” level shrank too.",
+    "claim": "Words in the Local/Immediate domain fall from 16.5% of the 1953 list to 10.9% of the 2023 list, a 5.7-point decline.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda d: pd.DataFrame({'1953': d[d.set!='added'].domain.value_counts(normalize=True).mul(100),\n                         '2023': d[d.set!='removed'].domain.value_counts(normalize=True).mul(100)})\n    .assign(pp=lambda t: t['2023']-t['1953']).loc[['Local']])(\n    sem.assign(domain=sem.usas_top_level_name.map({'Emotion':'Self','The Body and the Individual':'Self','Substances, Materials, Objects and Equipment':'Local','Food and Farming':'Local','Life and Living Things':'Local','Architecture, Housing and the Home':'Local','World and Environment':'Local','Money and Commerce in Industry':'Institutional','Government and Public':'Institutional','Education':'Institutional','Science and Technology':'Institutional','Social Actions, States and Processes':'Social','Movement, Location, Travel and Transport':'Social','Language and Communication':'Social','Entertainment, Sports and Games':'Social','Arts and Crafts':'Social','General and Abstract Terms':'Universal','Psychological Actions, States and Processes':'Universal','Numbers and Measurement':'Universal','Names and Grammar':'Universal','Time':'Universal'})))"
+  },
+  {
+    "id": "social-domain-size-stable",
+    "source": "The “Social-Communicative” level barely changed in size.",
+    "claim": "The Social/Communicative domain barely changes, from 26.0% of the 1953 list to 26.8% of the 2023 list, a 0.8-point gain.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda d: pd.DataFrame({'1953': d[d.set!='added'].domain.value_counts(normalize=True).mul(100),\n                         '2023': d[d.set!='removed'].domain.value_counts(normalize=True).mul(100)})\n    .assign(pp=lambda t: t['2023']-t['1953']).loc[['Social']])(\n    sem.assign(domain=sem.usas_top_level_name.map({'Emotion':'Self','The Body and the Individual':'Self','Substances, Materials, Objects and Equipment':'Local','Food and Farming':'Local','Life and Living Things':'Local','Architecture, Housing and the Home':'Local','World and Environment':'Local','Money and Commerce in Industry':'Institutional','Government and Public':'Institutional','Education':'Institutional','Science and Technology':'Institutional','Social Actions, States and Processes':'Social','Movement, Location, Travel and Transport':'Social','Language and Communication':'Social','Entertainment, Sports and Games':'Social','Arts and Crafts':'Social','General and Abstract Terms':'Universal','Psychological Actions, States and Processes':'Universal','Numbers and Measurement':'Universal','Names and Grammar':'Universal','Time':'Universal'})))"
+  },
+  {
+    "id": "universal-domain-grows-most",
+    "source": "The outermost level, which contains words that don’t belong in any specific domain, grew the most.",
+    "claim": "The Universal/Abstract domain grows most, from 39.4% of the 1953 list to 46.0% of the 2023 list, a 6.6-point gain; the next-largest gain is 1.5 points.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "(lambda d: pd.DataFrame({'1953': d[d.set!='added'].domain.value_counts(normalize=True).mul(100),\n                         '2023': d[d.set!='removed'].domain.value_counts(normalize=True).mul(100)})\n    .assign(pp=lambda t: t['2023']-t['1953']).sort_values('pp', ascending=False))(\n    sem.assign(domain=sem.usas_top_level_name.map({'Emotion':'Self','The Body and the Individual':'Self','Substances, Materials, Objects and Equipment':'Local','Food and Farming':'Local','Life and Living Things':'Local','Architecture, Housing and the Home':'Local','World and Environment':'Local','Money and Commerce in Industry':'Institutional','Government and Public':'Institutional','Education':'Institutional','Science and Technology':'Institutional','Social Actions, States and Processes':'Social','Movement, Location, Travel and Transport':'Social','Language and Communication':'Social','Entertainment, Sports and Games':'Social','Arts and Crafts':'Social','General and Abstract Terms':'Universal','Psychological Actions, States and Processes':'Universal','Numbers and Measurement':'Universal','Names and Grammar':'Universal','Time':'Universal'})))"
+  },
+  {
+    "id": "highly-concrete-share-falls",
+    "source": "The highly concrete end dropped the most: from 21% of the total in 1953 down to 14% in 2023.",
+    "claim": "Words at the highly concrete end fall from 21.4% of the 1953 list to 14.1% of the 2023 list.",
+    "tables": {
+      "con": "data/concreteness.csv"
+    },
+    "code": "(lambda c, t: pd.concat([c[c.set!='added'].assign(list='1953'), c[c.set!='removed'].assign(list='2023')])\n    .groupby('list').concreteness.apply(lambda s: s.ge(t).mean()*100))(\n    con, con[con.conc_category.eq('Concrete')].concreteness.max())"
+  },
+  {
+    "id": "most-concrete-removed-vs-added",
+    "source": "More than a quarter of all the words that were removed scored as the most concrete. Only 7.4% of words added scored that high.",
+    "claim": "28.4% of removed words but only 7.4% of added words score as the most concrete.",
+    "tables": {
+      "con": "data/concreteness.csv"
+    },
+    "code": "(lambda c, t: c[c.set.isin(['removed','added'])].assign(top=c.concreteness.ge(t)).groupby('set').top.mean().mul(100))(\n    con, con[con.conc_category.eq('Concrete')].concreteness.max())"
+  },
+  {
+    "id": "middle-concreteness-band",
+    "source": "Nearly a quarter of all added words land in the not quite picturable, but not entirely vague middle, including words such as regulation, reform, cooperation, obligation, initiative, negotiate, and perception. For comparison, the discarded words that have a similar score include shame, convenience, spite, fellowship, and companionship.",
+    "claim": "23.6% of added words, against 13.1% of removed words, fall in the middle concreteness band.",
+    "tables": {
+      "con": "data/concreteness.csv"
+    },
+    "code": "(lambda c, lo, hi: c[c.set.isin(['removed','added'])].assign(mid=c.concreteness.between(lo, (lo+hi)/2, inclusive='left')).groupby('set').mid.mean().mul(100))(\n    con, con[con.conc_category.eq('Very Abstract')].concreteness.max(), con[con.conc_category.eq('Abstract')].concreteness.max())"
+  },
+  {
+    "id": "lowest-concreteness-bands",
+    "source": "1.3% OF\n14.3% OF\n2.3% OF\n15.6% OF",
+    "claim": "In the lowest concreteness band (1.0-1.5), 1.3% of removed words and 2.3% of added words sit; in the next band (1.5-2.0), 14.3% of removed and 15.6% of added words sit.",
+    "tables": {
+      "con": "data/concreteness.csv"
+    },
+    "code": "(lambda c, lo, hi: pd.crosstab(pd.cut(c.concreteness, bins=[lo, (lo+hi)/2, hi], right=False), c.set)\n    .div(c.set.value_counts(), axis=1).mul(100).loc[:, ['removed','added']])(\n    con, np.floor(con.concreteness.min()), con[con.conc_category.eq('Very Abstract')].concreteness.max())"
+  },
+  {
+    "id": "nouns-dominate",
+    "source": "Nouns Still Dominate Both Lists",
+    "claim": "Nouns are the largest part of speech in both lists, making up 78.1% of the 1953 list and 74.8% of the 2023 list.",
+    "tables": {
+      "pos": "data/pos.csv"
+    },
+    "code": "pos[pos.set!='added'].pos.value_counts(normalize=True).mul(100).to_frame('1953').join(pos[pos.set!='removed'].pos.value_counts(normalize=True).mul(100).to_frame('2023'))"
+  },
+  {
+    "id": "adjectives-grow-modestly",
+    "source": "Adjectives Grew Modestly",
+    "claim": "Adjectives grow from 10.9% of the 1953 list to 12.2% of the 2023 list, a 1.3-point gain.",
+    "tables": {
+      "pos": "data/pos.csv"
+    },
+    "code": "(lambda t: t.loc[['adjective']])(\n    pos[pos.set!='added'].pos.value_counts(normalize=True).mul(100).to_frame('1953').join(pos[pos.set!='removed'].pos.value_counts(normalize=True).mul(100).to_frame('2023')).assign(pp=lambda d: d['2023']-d['1953']))"
+  },
+  {
+    "id": "adverbs-nearly-double",
+    "source": "Adverbs, However, Nearly Doubled",
+    "claim": "Adverbs grow from 3.6% of the 1953 list to 6.8% of the 2023 list, an 86.1% increase.",
+    "tables": {
+      "pos": "data/pos.csv"
+    },
+    "code": "(lambda t: t.loc[['adverb']])(\n    pos[pos.set!='added'].pos.value_counts(normalize=True).mul(100).to_frame('1953').join(pos[pos.set!='removed'].pos.value_counts(normalize=True).mul(100).to_frame('2023')).assign(pp=lambda d: d['2023']-d['1953'], growth_pct=lambda d: (d['2023']/d['1953']-1)*100))"
+  },
+  {
+    "id": "intro-word-swaps",
+    "source": "Some of the changes make immediate sense: Telegraph dropped out; computer was added, along with website and blog. Tobacco was replaced by cigarette. Motherhood became mom, and dad was added too, though fatherhood was never on the list to begin with.",
+    "claim": "Telegraph, tobacco and motherhood were removed; computer, website, blog, cigarette, mom and dad were added; fatherhood is on neither list.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['telegraph','computer','website','blog','tobacco','cigarette','motherhood','mom','dad','fatherhood'])['set']"
+  },
+  {
+    "id": "hands-on-words-removed",
+    "source": "But also: apple didn’t make the new list. Neither did fork, soap, umbrella or leaf, for example.",
+    "claim": "Apple, fork, soap, umbrella and leaf are all absent from the 2023 list, having been removed from the 1953 list.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['apple','fork','soap','umbrella','leaf'])['set']"
+  },
+  {
+    "id": "bread-survives-ingredients-drop",
+    "source": "Dog stayed; goat and donkey didn’t. Bread stayed; breadmaking ingredients— flour and wheat —dropped. Cook is on the new list. Boil, bake, and fry are not.",
+    "claim": "Dog, bread and cook are on both lists, while goat, donkey, flour, wheat, boil, bake and fry were removed from the 1953 list.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['dog','goat','donkey','bread','flour','wheat','cook','boil','bake','fry'])['set']"
+  },
+  {
+    "id": "concrete-word-examples",
+    "source": "Rust, brick, silk, screw, and cage all were discarded. Instead, magazine, jail, apartment, bomb, and guitar were added.",
+    "claim": "Rust, brick, silk, screw and cage were removed, while magazine, jail, apartment, bomb and guitar were added.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['rust','brick','silk','screw','cage','magazine','jail','apartment','bomb','guitar'])['set']"
+  },
+  {
+    "id": "abstract-word-examples",
+    "source": "Among the removed abstract words: courage, wisdom, mercy, loyalty, greed, fate, revenge, and honesty… Abstract, yes, yet carrying emotions grounded in experience. You can’t point to mercy but you’ve felt it. The abstract words that were added are nothing like that: interpretation, involvement, theoretical, somewhat, evaluate, justify.",
+    "claim": "Courage, wisdom, mercy, loyalty, greed, fate, revenge and honesty were removed, while interpretation, involvement, theoretical, somewhat, evaluate and justify were added.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['courage','wisdom','mercy','loyalty','greed','fate','revenge','honesty','interpretation','involvement','theoretical','somewhat','evaluate','justify'])['set']"
+  },
+  {
+    "id": "middle-band-word-examples",
+    "source": "Nearly a quarter of all added words land in the not quite picturable, but not entirely vague middle, including words such as regulation, reform, cooperation, obligation, initiative, negotiate, and perception. For comparison, the discarded words that have a similar score include shame, convenience, spite, fellowship, and companionship.",
+    "claim": "Regulation, reform, cooperation, obligation, initiative, negotiate and perception were added, while shame, convenience, spite, fellowship and companionship were removed.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['regulation','reform','cooperation','obligation','initiative','negotiate','perception','shame','convenience','spite','fellowship','companionship'])['set']"
+  },
+  {
+    "id": "abstract-additions-examples",
+    "source": "And many of the words that were added, such as mortgage, corporation, appropriate, analysis, fairly, and despite, don’t look anything like the ones that were discarded.",
+    "claim": "Mortgage, corporation, appropriate, analysis, fairly and despite were all added to the 2023 list.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['mortgage','corporation','appropriate','analysis','fairly','despite'])['set']"
+  },
+  {
+    "id": "tangible-word-examples",
+    "source": "Words such as clay, corn, hammer, beard, towel, and weave —words for what you grow, make, and hold in your hand—all thinned out.",
+    "claim": "Clay, corn, hammer, beard, towel and weave were all removed from the 1953 list.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['clay','corn','hammer','beard','towel','weave'])['set']"
+  },
+  {
+    "id": "inner-life-word-examples",
+    "source": "Plain sentiments such as happy, sad, afraid, and angry stayed. But the vocabulary of inner life dropped words for feelings such as patience, pity, despair, and sorrow, and picked up more words for thinking: focus, judgment, investigate, and logic.",
+    "claim": "Happy, sad, afraid and angry remained on both lists; patience, pity, despair and sorrow were removed; focus, judgment, investigate and logic were added.",
+    "tables": {
+      "sem": "data/semantics.csv"
+    },
+    "code": "sem.set_index('word').reindex(['happy','sad','afraid','angry','patience','pity','despair','sorrow','focus','judgment','investigate','logic'])['set']"
+  }
+]

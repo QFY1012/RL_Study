@@ -1,0 +1,6 @@
+[
+  {
+    "source": "It turns out that the 412 cools make it the second most used adjective, just behind good.",
+    "why": "The data contain only occurrences of cool and their context; there are no counts of other adjectives, including good, so the claim that cool is the second most used adjective cannot be computed from these files."
+  }
+]

@@ -1,0 +1,24 @@
+{
+ "id": "karen",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 473,
+  "steps": 62,
+  "tools": 86,
+  "nudged": 0,
+  "usage": {
+   "input": 74423,
+   "output": 44386
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 0,
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 13
+}

@@ -1,0 +1,52 @@
+{
+ "id": "foundation-names",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 341,
+  "steps": 40,
+  "tools": 42,
+  "nudged": 0,
+  "usage": {
+   "input": 43655,
+   "output": 41774
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "sequential-number-products",
+   "basis": "output is 130",
+   "verdict": "ok"
+  },
+  {
+   "id": "lighter-shades-first",
+   "basis": "sum=126, size=130, mean=0.969231",
+   "verdict": "ok"
+  },
+  {
+   "id": "dark-to-light-products",
+   "basis": "output lists 4 product lines with darkToLight=True: Beauty Bakerie InstaBake Aqua Glass Foundation, Exa High Fidelity Foundation, Juvia's Place I Am Magic Foundation, Pacifica Alight Clean Foundation",
+   "verdict": "ok"
+  },
+  {
+   "id": "nudestix-every-shade-nude",
+   "basis": "name Nude count = 14",
+   "verdict": "ok"
+  },
+  {
+   "id": "darkest-nude-shade-mocha",
+   "basis": "Milani Screen Queen Foundation Nude Mocha lightness = 0.190196, approximately 0.190",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 12
+}

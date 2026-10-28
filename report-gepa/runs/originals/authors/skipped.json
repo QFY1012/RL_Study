@@ -1,0 +1,146 @@
+[
+  {
+    "source": "Four of Smith’s five novels are partly set in or very near Willesden.",
+    "why": "data/top-100.csv contains only one Zadie Smith novel (White Teeth); it has no list of Smith's five novels or of Willesden settings, so the 4-of-5 count cannot be computed."
+  },
+  {
+    "source": "The exception to this is On Beauty, which is set in Cambridge, Massachusetts.",
+    "why": "On Beauty is not in data/top-100.csv, and the file has no Cambridge, Massachusetts setting for Smith."
+  },
+  {
+    "source": "His first three books are set entirely in New York and New Jersey.",
+    "why": "data/top-100.csv contains only two F. Scott Fitzgerald books (The Great Gatsby, set in New York City, and Tender Is the Night, set in Switzerland); it has no publication order and not his first three books."
+  },
+  {
+    "source": "The fictional West Egg, which forms the setting for The Great Gatsby, is based on Great Neck, the area of Long Island he lived in for three years.",
+    "why": "The file records The Great Gatsby's setting and Fitzgerald's residence simply as New York City, with no West Egg, Great Neck, or length-of-residence data."
+  },
+  {
+    "source": "His later works – like his later life – take place further afield, traveling across Europe and journeying to Los Angeles.",
+    "why": "Only Tender Is the Night (Switzerland) represents Fitzgerald's later work in data/top-100.csv; there is no complete bibliography or Los Angeles work in the file."
+  },
+  {
+    "source": "His penchant for using familiar settings continued through his final novel, The Last Tycoon, in which he takes on the world of Hollywood, where he spent his last few years writing film scripts.",
+    "why": "The Last Tycoon and Hollywood are absent from data/top-100.csv."
+  },
+  {
+    "source": "Orwell lived a life in transit; he rarely ever settled anywhere for over two years.",
+    "why": "The file has book-level residences only (London and Oxfordshire for Orwell), not a chronology of his residences or their durations."
+  },
+  {
+    "source": "Perhaps relatedly, his best works of fiction, Animal Farm and 1984, are not specifically concerned with evoking a sense of place; their preoccupations are more political.",
+    "why": "This is a qualitative claim about the novels' concerns; the file only has their settings and distances."
+  },
+  {
+    "source": "His lesser-known works, however, all explicitly draw on locations he’d lived in, as does some of his nonfiction, such as Down and Out in Paris and London and The Road To Wigan Pier.",
+    "why": "The lesser-known works and nonfiction titles, their settings, and Orwell's residence history are not in data/top-100.csv."
+  },
+  {
+    "source": "Geographical setting isn’t something Shirley Jackson’s best work much concerns itself with.",
+    "why": "No Shirley Jackson book is in data/top-100.csv, and the claim is qualitative rather than a setting/residence distance."
+  },
+  {
+    "source": "Jackson’s modern Gothic novels intimately acquaint readers with the layouts and quirks of the buildings at their centers, such as the Vermont estate of We Have Always Lived in the Castle and the titular Hill House.",
+    "why": "No Shirley Jackson books or building-level setting data are in data/top-100.csv."
+  },
+  {
+    "source": "Salinger is a New York City writer, through and through. He grew up in Manhattan, spending a good amount of his adult life in the city as well.",
+    "why": "The file has only one Salinger book and no childhood or adult residence history."
+  },
+  {
+    "source": "Most of his stories and novellas follow the fictional Glass family, who reside in Manhattan’s Upper East Side.",
+    "why": "The file has no Salinger bibliography or neighborhood-level residence data."
+  },
+  {
+    "source": "While his ubiquitous book, The Catcher in the Rye ventures beyond NYC to a school based on one he briefly attended in Wayne, PA, as well as fleetingly to Los Angeles",
+    "why": "data/top-100.csv records only The Catcher in the Rye's setting as New York City, at distance 0; Wayne, PA and Los Angeles are not present."
+  },
+  {
+    "source": "Morrison set her first novel in Lorain, OH, where she grew up.",
+    "why": "Morrison's first novel is not in data/top-100.csv; the file contains only Beloved, set in Cincinnati, OH, with a Lorain, OH residence."
+  },
+  {
+    "source": "However, many of her narratives unfold in places she never lived.",
+    "why": "The author-level chart data listing Morrison's many settings is not in data/top-100.csv, which contains one Morrison book."
+  },
+  {
+    "source": "Ishiguro’s family immigrated to Britain from Japan when he was only five years old.",
+    "why": "This biographical detail is not represented in data/top-100.csv, which has only book setting/residence rows."
+  },
+  {
+    "source": "That night sparked a journey that would turn into his first novel A Pale View of Hills.",
+    "why": "A Pale View of Hills is not in data/top-100.csv, and the file has no publication order."
+  },
+  {
+    "source": "Two of his three books travel the same path he did, from Kabul to California.",
+    "why": "No Khaled Hosseini book appears in data/top-100.csv, so his books and their settings cannot be counted."
+  },
+  {
+    "source": "And the Mountains Echoed even makes a stop in Paris, where his family spent four years waiting for unrest in Afghanistan to pass.",
+    "why": "And the Mountains Echoed, Paris, and the family's residence history are absent from data/top-100.csv."
+  },
+  {
+    "source": "Ng’s two novels take place in Ohio, where she spent eight years of her childhood.",
+    "why": "No Celeste Ng book or childhood residence data is in data/top-100.csv."
+  },
+  {
+    "source": "Her second book, Little Fires Everywhere all the more specifically unfolds in Shaker Heights, OH, the city she lived in.",
+    "why": "Little Fires Everywhere and Shaker Heights are absent from data/top-100.csv."
+  },
+  {
+    "source": "Almost every writer on this list set their earliest work where they grew up – even Shirley Jackson, who pretty much abandoned geographically locating her novels halfway through her literary career.",
+    "why": "The file has no publication years or order, no author childhood residences, and no Shirley Jackson book, so earliest works cannot be identified or compared with where authors grew up."
+  },
+  {
+    "source": "It can only help that they’re set in locations Rooney is intimately familiar with – Dublin and County Sligo, Ireland.",
+    "why": "No Sally Rooney book is in data/top-100.csv, and Dublin and County Sligo do not appear as her settings."
+  },
+  {
+    "source": "Woolf lived quite a fixed life: She lived in England throughout, maintaining a London residence for most of that time.",
+    "why": "data/top-100.csv gives a single residence per book (London for four Woolf books) but has no life-span residence chronology, so 'most of that time' cannot be computed."
+  },
+  {
+    "source": "She spent her childhood summers at St. Ives in Cornwall, which inspired the setting for To The Lighthouse, one of her most acclaimed works.",
+    "why": "The file has no childhood residence or St. Ives data; it records To the Lighthouse's setting as Skye, Scotland, not St. Ives."
+  },
+  {
+    "source": "Most of her writing is England-centric, with only brief sojourns elsewhere.",
+    "why": "The file contains only four Woolf books, not her complete output, so the share of England-centric writing cannot be computed."
+  },
+  {
+    "source": "For most of her career, she set her books in the present or immediate past; for example, Mrs. Dalloway, written in 1925, takes place on a single day in post-World War I London.",
+    "why": "The file has no publication dates or narrative time spans; it only records that Mrs. Dalloway is set in London at distance 0."
+  },
+  {
+    "source": "Even the ship that forms the setting for The Voyage Out is a microcosm of Edwardian London society, which Woolf was well acquainted with.",
+    "why": "The Voyage Out and its ship setting are not in data/top-100.csv."
+  },
+  {
+    "source": "the fourth and final book in a series that follows one man through 30 years. In the novel, protagonist Harry “Rabbit” Angstrom retires to Florida, having spent the first three books of the series in the fictional city of Brewer, Pennsylvania.",
+    "why": "The file has only two earlier Rabbit books, labels their setting as Pennsylvania rather than Brewer, and contains no series length or 30-year span; only the book-level distances for the three Rabbit books can be computed (reported in facts.json)."
+  },
+  {
+    "source": "Updike was a Pennsylvania native himself; Rabbit is thus a character steeped in and transplanted from a setting his creator was extremely familiar with.",
+    "why": "The file records a Berks County, PA residence for the Rabbit books but contains no birthplace or biography data."
+  },
+  {
+    "source": "Bolaño never visited Ciudad Juárez, Mexico, the city his novel’s Santa Teresa is based on.",
+    "why": "The file records the setting as Ciudad Juárez and the distance to a Mexico City residence, but contains no travel history or information about the fictional Santa Teresa."
+  },
+  {
+    "source": "However, he was in frequent contact with Sergio González Rodríguez, an investigative journalist who reported extensively on the murders of women in Ciudad Juárez that form the factual bedrock of Bolaño’s novel.",
+    "why": "This biographical and sourcing detail is not represented in data/top-100.csv."
+  },
+  {
+    "source": "Fitzgerald mainly grew up on the East Coast, and it shows in his writing.",
+    "why": "The file has no childhood residence data and only two Fitzgerald books, so this pattern cannot be checked."
+  },
+  {
+    "source": "At the 2017 event I mentioned earlier, she said she was working on a novel set 150 years in the past ... but still based in Willesden.",
+    "why": "This is a statement about an unpublished novel and is not represented in data/top-100.csv."
+  },
+  {
+    "source": "Analyzing the work of two early-career writers – Ng and Sally Rooney – highlighted to me how likely writers’ earliest works are to draw on childhood abodes.",
+    "why": "Neither Ng nor Rooney is in data/top-100.csv, and the file has no publication order or childhood residences."
+  }
+]

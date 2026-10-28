@@ -1,0 +1,24 @@
+{
+ "id": "superteams",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 2,
+  "steps": 4,
+  "tools": 0,
+  "nudged": 3,
+  "usage": {
+   "input": 0,
+   "output": 0
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 477562ec-9cb5-4561-b70c-9fa69e300796)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/superteams/facts.json'"
+ ],
+ "skipped": null
+}

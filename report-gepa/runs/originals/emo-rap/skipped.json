@@ -1,0 +1,14 @@
+[
+  {
+    "source": "For example, here’s the chorus of Lil Uzi Vert’s “XO Tour Llif3.” 33% of the words fall under the sadness/fear list, which is very high on the emo scale.",
+    "why": "The 33% and its chart label “4 emo words of 12 total words” are hard-coded for a hand-selected chorus in the story's interactive code; lines.csv records only lines containing emo words and gives no total word count for the chorus, while tracks.csv gives the full song 21.79% emo words, so 33% cannot be recomputed from the supplied files."
+  },
+  {
+    "source": "For example, “Cancer” by My Chemical Romance is off-the-scale sad, but since I’m measuring emotion via word usage, the analysis overlooks the song’s undertone.",
+    "why": "This is the author's caveat about subtext rather than a result of the word measure; tracks.csv scores “Cancer” at 10.53% emo words, nowhere near the top, so the files do not reproduce the “off-the-scale sad” characterization."
+  },
+  {
+    "source": "Most Emo Lyrics 22% Emo",
+    "why": "The chart's emo axis is labeled from 22% at the most-emo end to 1% at the least-emo end, and these are axis endpoints rather than album values; the highest album average in the data is 19.16% (black_parade) and the lowest is 2.55% (lilpump), so the 22% and 1% labels are not reproduced by the files."
+  }
+]

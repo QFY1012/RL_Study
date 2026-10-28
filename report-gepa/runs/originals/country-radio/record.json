@@ -1,0 +1,123 @@
+{
+ "id": "country-radio",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 836,
+  "steps": 59,
+  "tools": 61,
+  "nudged": 0,
+  "usage": {
+   "input": 56422,
+   "output": 117504
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 16,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "top-overall-men-artists",
+   "basis": "Luke Combs pct=5.429066; Morgan Wallen pct=4.140392; Luke Bryan pct=3.713071; exact top3_pct=13.282529, which rounds to 13.3, not 13.2; plays=149068.",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "kcyy-first-day-women-vs-men-b2b",
+   "basis": "KCYY-FM 1/7/22 b counts: women=3, men=245, not=115.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kcyy-19-day-b2b-shares",
+   "basis": "KCYY-FM total n=6474; women n=64 pct=0.988570; men n=4231 pct=65.353723; male-female n=36 pct=0.556070.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kcyy-release-vs-regular-days",
+   "basis": "regular Fridays mean=2.916667; release dates mean=4.142857.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kcyy-recode-mixed-as-women",
+   "basis": "n=200, pct=3.08928, days=19, per_day=10.526316.",
+   "verdict": "ok"
+  },
+  {
+   "id": "station-women-b2b-shares",
+   "basis": "Top share KKGO-FM=1.269592%, lowest WUBE-FM=0.032149%; KCYY-FM=0.988570% is third.",
+   "verdict": "ok"
+  },
+  {
+   "id": "zero-women-b2b-station-days",
+   "basis": "all_zero=166, all_days=551; WUBE-FM zero_days=17, days=19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-b2b-by-daypart",
+   "basis": "Averaged station crosstab: OVN=46.050203, AMD=16.647355, MID=9.744153, PMD=8.538986, EVE=19.019303.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-b2b-overnight-evening-share",
+   "basis": "OVN+EVE mean=65.069506%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-b2b-by-record-type",
+   "basis": "G=36.199233, R=43.741723, C=20.059044.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-b2b-gold-recurrent-share",
+   "basis": "G+R mean=79.940956%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-overall-women-artists",
+   "basis": "Carrie n=2638 pct=14.327612; Miranda n=1893 pct=10.281338; Maren n=1754 pct=9.526396; top3_pct=34.135347; plays=18412.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-current-women-artists",
+   "basis": "Gabby n=754 pct=23.171481; Kelsea n=554 pct=17.025200; Lainey n=389 pct=11.954518; top3_pct=52.151199; plays=3254.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-overall-men-artists",
+   "basis": "Luke Combs pct=5.429066; Morgan Wallen pct=4.140392; Luke Bryan pct=3.713071; exact top3_pct=13.282529, which rounds to 13.3, not 13.2; plays=149068.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "top-current-men-artists",
+   "basis": "Jelly Roll pct=8.674767; Jimmie Allen pct=6.376566; Zac Brown Band pct=5.274560; top3_pct=20.325892; plays=10617.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-b2b-rates",
+   "basis": "women_pct=0.501585; poc_pct=0.377024; woc_count=0.000000.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kcyy-first-women-b2b-after-start",
+   "basis": "time=5:51:00 PM; elapsed=0 days 09:16:00 from start 08:35:00; b=women; artist/title and preceding artists/title match.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 16,
+ "skipped": 13,
+ "review": [
+  {
+   "id": "top-overall-men-artists",
+   "action": "restore",
+   "changed": [
+    "claim"
+   ],
+   "why": "13.2% was the sum of the rounded shares; the printout's 13.28% rounds to 13.3%"
+  }
+ ]
+}

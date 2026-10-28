@@ -1,0 +1,92 @@
+[
+ {
+  "id": "2019-average-register",
+  "source": "The average register of these 80 songs, from 2019, is 5.95 (on a scale of 1 to 10).",
+  "claim": "The 80 songs from 2019 have an average vocal register of 5.95.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs[songs.year == 2019].register.agg(['size', 'mean'])"
+ },
+ {
+  "id": "2019-below-1970s-1980s",
+  "source": "Yet when it comes to 2019, men's voices in pop music are much lower than the ‘70s and ‘80s.",
+  "claim": "The 2019 average register of 5.95 is below the 1970s average of 6.60 and the 1980s average of 6.92.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs.groupby(np.where(songs.year == 2019, '2019', (songs.year // 10 * 10).astype(str) + 's')).register.mean()"
+ },
+ {
+  "id": "register-peaks-then-falls",
+  "source": "And I wasn't expecting to see such a clear trend: rising register until the early ‘90s and then a drop-off.",
+  "claim": "The yearly average register reaches its highest value, 7.08, in 1990 and its lowest, 5.72, in 2017.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs.groupby('year').register.mean().agg(['idxmax', 'max', 'idxmin', 'min'])"
+ },
+ {
+  "id": "steady-rise-until-1980s",
+  "source": "Up until the the late 1980s, men's voices were steadily shifting higher.",
+  "claim": "Average register rose from 5.77 in the 1950s to 6.15 in the 1960s, 6.60 in the 1970s and 6.92 in the 1980s.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs.groupby((songs.year // 10 * 10).astype(str) + 's').register.mean().loc['1950s':'1980s']"
+ },
+ {
+  "id": "2017-lowest-average",
+  "source": "Here is how that compares to 2017, one of the years with the lowest average register in our dataset.",
+  "claim": "2017 has the lowest average register of any year, at 5.72.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs.groupby('year').register.mean().sort_values().head(3)"
+ },
+ {
+  "id": "1984-vs-2017-high-register",
+  "source": "Note how, in 2017, fewer songs have a register of 7 or higher.",
+  "claim": "Of the top 100 songs in each year, 70 in 1984 and 32 in 2017 had a register of 7 or higher.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs[songs.year.isin([1984, 2017])].sort_values('points', ascending=False).groupby('year').head(100).groupby('year').register.agg(total='size', high=lambda x: (x >= 7).sum())"
+ },
+ {
+  "id": "2019-top10-highest-register",
+  "source": "2019 is the big circle on the upper right, the highest register in 60 years.",
+  "claim": "The average register of top-10 hits in 2019 was 7.6, the highest of any year in the data, above 1988's 7.21.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs[songs.peak_rank <= 10].groupby('year').register.mean().sort_values().tail(3)"
+ },
+ {
+  "id": "2019-top10-four-high",
+  "source": "If we remove any song that did not hit the top 10, we're left with 5 songs, and four of those have a high register, such as Khalid's Talk.",
+  "claim": "Of the 5 songs from 2019 that reached the top 10, 4 have a register of 7 or higher.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs[(songs.year == 2019) & (songs.peak_rank <= 10)].register.agg(songs='size', high=lambda x: (x >= 7).sum())"
+ },
+ {
+  "id": "1970-largest-rise",
+  "source": "Let's look at the first clear spike in register: 1970.",
+  "claim": "The average register rose by 0.23 in 1970, the largest one-year increase up to that point, versus 0.19 in 1963.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs.groupby('year').register.mean().diff().loc[:1970].dropna().sort_values().tail(4)"
+ },
+ {
+  "id": "1962-local-low",
+  "source": "Currently playing is \"Sherry\" by the 4 Seasons from 1962, a low year for register.",
+  "claim": "1962's average register of 5.84 was lower than 1961's 5.98 and 1963's 6.03.",
+  "tables": {
+   "songs": "data/songs.csv"
+  },
+  "code": "songs[songs.year.isin([1961, 1962, 1963])].groupby('year').register.mean()"
+ }
+]

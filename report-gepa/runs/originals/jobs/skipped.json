@@ -1,0 +1,34 @@
+[
+  {
+    "source": "truck drivers — who have a 79% chance of becoming automated — to be the most popular job in over 20 states",
+    "why": "The data files contain no state-by-state occupation counts. The 20-state ranking comes from the external NPR map linked in the story, not from these tables."
+  },
+  {
+    "source": "Even in the northeast, where states can be expected to be somewhat less affected, many counties would lose nearly 30% of jobs.",
+    "why": "The county file does not reproduce this. Its northeastern counties (CT, ME, MA, NH, NJ, NY, PA, RI, VT) have a mean job-loss share of about 39% and a minimum of 28.1%; only 2 of 217 counties are at or below 30%, so 'many counties ... nearly 30%' is not supported by the data."
+  },
+  {
+    "source": "In 90% of states, jobs that are highly susceptible to automation are filled by white Americans.",
+    "why": "Neither provided file has race or ethnicity counts. The story's state-level white/non-white aggregation uses IPUMS Census microdata that is not included in data/."
+  },
+  {
+    "source": "VOTERS WHO WILL: Lean conservative / Lean progressive — Maine 95% 5%, West Virginia 94% 6%, New Hampshire 93% 7%, ...",
+    "why": "The state-by-state white and non-white shares of workers in highly automatable jobs are not in either file; the county file contains only total county job-loss shares."
+  },
+  {
+    "source": "In these states, people at risk of losing their jobs due to automation tend to be white — this tips the scales in every single swing state in favor of the Republican party.",
+    "why": "Requires state-level race breakdowns of at-risk workers and a swing-state classification, neither of which is present in the data."
+  },
+  {
+    "source": "When trade adversely affected employment prospects in white areas, voters reacted by veering to the right, electing conservative Republicans.",
+    "why": "This is a finding of the cited Autor, Dorn, Hanson, and Majlesi paper on Chinese trade exposure, not a computation from the Frey-Osborne/BLS employment files."
+  },
+  {
+    "source": "Conversely, in predominantly non-white districts, voters were much more likely to elect progressive Democrats.",
+    "why": "Same external paper; the provided files contain no electoral or race data."
+  },
+  {
+    "source": "The political shift from the center to the extremes was clear.",
+    "why": "This is the external trade paper's conclusion; no electoral data is provided in data/."
+  }
+]

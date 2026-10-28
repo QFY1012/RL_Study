@@ -1,0 +1,107 @@
+{
+ "id": "apology",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 916,
+  "steps": 58,
+  "tools": 85,
+  "nudged": 0,
+  "usage": {
+   "input": 77492,
+   "output": 102175
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 16,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "insensitive-most-common",
+   "basis": "Insensitive Video has 9, more than YouTuber Beef and Racist Comments at 6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "racist-comments-count",
+   "basis": "Racist Comments is 6, YouTuber Beef is 6, Insensitive Video is 9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "beauty-share",
+   "basis": "sum = 9, count = 34, mean = 0.264706, which rounds to 26.5%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pre-controversy-gains",
+   "basis": "sum = 32, count = 34.",
+   "verdict": "ok"
+  },
+  {
+   "id": "jake-paul-doubled",
+   "basis": "day 1 value = 1.0, day 90 value = 0.483096, ratio = 2.069981.",
+   "verdict": "ok"
+  },
+  {
+   "id": "growth-classes-before-after",
+   "basis": "growth_pre: A=6, B=13, C=14, D=1; growth_post: A=4, B=11, C=13, D=6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "growth-shift-pos-neg",
+   "basis": "growth_delta sign counts: 1.0 = 5, -1.0 = 10, 0.0 = 19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gabriel-zamora-growth-up",
+   "basis": "Gabriel Zamora: growth_pre = B, growth_post = A, growth_delta = 1.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gabriel-zamora-post-doubles",
+   "basis": "day 0 value = 0.969624, day 179 value = 1.962735, ratio = 2.024223.",
+   "verdict": "ok"
+  },
+  {
+   "id": "laura-lee-growth-down",
+   "basis": "Laura Lee: growth_pre = B, growth_post = D, growth_delta = -2.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "laura-lee-post-decline",
+   "basis": "day 0 value = 0.969416, day 179 value = 0.878016, change = -0.094283.",
+   "verdict": "ok"
+  },
+  {
+   "id": "laura-lee-video-removed",
+   "basis": "Laura Lee original_available = False.",
+   "verdict": "ok"
+  },
+  {
+   "id": "likes-dislikes-shares",
+   "basis": "Social Repose like_share = 0.059365 (5.9%), Jenna Marbles = 0.989502 (99.0%), Jaclyn Hill = 0.480564 (48.1%) with more_dislikes = True.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cuts-per-minute",
+   "basis": "Gabriel Zamora cuts_per_min = 0.020436, Jaclyn Hill cuts_per_min = 1.875.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gabriel-zamora-one-take",
+   "basis": "avg_shot_length: Gabriel Zamora = 2936.0, Grav3yardgirl = 45.0, Alfie Deyes = 35.0, Jaclyn Hill = 32.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "post-start-varies",
+   "basis": "min = 0.813582 for James Charles, max = 1.007744 for Jake Dufner.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 16,
+ "skipped": 15
+}

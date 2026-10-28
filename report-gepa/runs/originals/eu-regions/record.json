@@ -1,0 +1,67 @@
+{
+ "id": "eu-regions",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 238,
+  "steps": 16,
+  "tools": 18,
+  "nudged": 0,
+  "usage": {
+   "input": 15498,
+   "output": 33536
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 8,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "inner-london-west-outlier",
+   "basis": "输出前三为 UKI3 Inner London - West 626、LU00 Luxembourg 253、IE05 Southern 220，与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "capital-regions-more-developed",
+   "basis": "输出 capital=True mean=135.821429 count=28，capital=False mean=91.233202 count=253，与结论相符。",
+   "verdict": "ok"
+  },
+  {
+   "id": "capital-regions-islands-of-development",
+   "basis": "输出含 Madrid 124/92、Paris 177/104、Bucharest 144/63、Bratislava 179/76、Warsaw 152/70、London 168/106，均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "italy-belgium-germany-intra-country-divide",
+   "basis": "输出 IT developed=117.333333、less developed=66.375、other=97.0；BE developed=116.8、less developed=88.6、other=196.0；DE developed=126.333333、less developed=93.0，与结论四舍五入一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "hungary-budapest-pest-split",
+   "basis": "输出 Budapest 139、Pest 53，与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "lithuania-vilnius-split",
+   "basis": "输出 Sostinės regionas 112、Vidurio ir vakarų Lietuvos regionas 65，与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "poland-warsaw-split",
+   "basis": "输出 PL91 Warszawski stołeczny 152、PL92 Mazowiecki regionalny 59，与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "country-ranges-large",
+   "basis": "输出中 UK 65-626、RO 39-144、FR 34-177、DE 83-202、IT 58-143，均与结论一致。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 8,
+ "skipped": 11
+}

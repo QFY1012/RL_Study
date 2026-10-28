@@ -1,0 +1,72 @@
+{
+ "id": "dress-codes",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 624,
+  "steps": 38,
+  "tools": 56,
+  "nudged": 0,
+  "usage": {
+   "input": 53685,
+   "output": 93380
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "body-parts-prohibited",
+   "basis": "body_schools row n=373; total_schools=481",
+   "verdict": "ok"
+  },
+  {
+   "id": "body-parts-ranked",
+   "basis": "midsection midriff 340/71; cleavage 106/22; back 74/15; breasts chest 69/14; buttocks 54/11; shoulders 38/8; torso 33/7",
+   "verdict": "ok"
+  },
+  {
+   "id": "genitals-rare",
+   "basis": "genitals schools=6; percent=1.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "average-prohibited-items",
+   "basis": "mean=31.484407; max=97.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "gender-specific-items",
+   "basis": "sum=70; count=481",
+   "verdict": "ok"
+  },
+  {
+   "id": "rationale-words",
+   "basis": "disruption/distraction 367/76; appropriate/inappropriate 330/69; safe/safety 315/65; health 184/38; interfere with learning 151/31; clean 146/30; neat 97/20; modest/modesty 90/19; respect/disrespect 61/13; good taste 48/10",
+   "verdict": "ok"
+  },
+  {
+   "id": "clothing-most-banned",
+   "basis": "short shorts n=334; visible n=332; short skirts n=290",
+   "verdict": "ok"
+  },
+  {
+   "id": "clothing-least-banned",
+   "basis": "spandex n=41; none n=32; athletic gym shorts n=24",
+   "verdict": "ok"
+  },
+  {
+   "id": "no-length-specified",
+   "basis": "entries=159.0; total_schools=481.0; percent=33.0",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 9,
+ "skipped": 6
+}

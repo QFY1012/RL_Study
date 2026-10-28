@@ -1,0 +1,18 @@
+[
+  {
+    "source": "Since 2017, Columbus, OH has set (or tied) records 36 times.",
+    "why": "The supplied CMHthr.csv yields 38 record-setting or record-tying events from 2017 through 2026 (35 current rank-0 records plus 3 records that were later broken), not the 36 in the story. The story's count comes from the separately pre-aggregated CMHthr-heat.csv, which is not in data/ and differs from the raw file for December 2022 and February 2023, so the stated count cannot be reproduced from the supplied file."
+  },
+  {
+    "source": "Number of times Columbus set (or tied) a daily heat record",
+    "why": "The final heatmap's per-month counts are computed from the pre-aggregated CMHthr-heat.csv, which is not supplied. Recomputing monthly counts from CMHthr.csv leaves the same two-month discrepancy (December 2022 and February 2023), so the chart's monthly values do not reproduce exactly."
+  },
+  {
+    "source": "The bars represent 148 years of recorded daily high temperatures from every October 23rd since 1878.",
+    "why": "This states the coverage of the dataset (1878-2026) rather than a finding drawn from its values."
+  },
+  {
+    "source": "The top bar is the hottest it has ever been for a particular day, across 148 years in Columbus, OH.",
+    "why": "This describes the length of the data series (148 years), not a quantitative finding about temperatures."
+  }
+]

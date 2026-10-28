@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sequential-number-products",
+    "source": "We found 130 products on Sephora ’s and Ulta ’s websites that use a sequential number system to label their shades.",
+    "claim": "130 products use a sequential number system to label their shades.",
+    "tables": {
+      "shades": "data/allShades.csv"
+    },
+    "code": "(lambda d: d.groupby(['brand','product']).filter(lambda g: len(g) > 1 and g['numbers'].is_unique and g['brand'].iloc[0] != 'Clinique').groupby(['brand','product']).ngroups)(shades.assign(numbers=shades['specific'].str.extract(r'(\\d+(?:\\.\\d+)?)')[0].astype(float)).dropna(subset=['numbers']))"
+  },
+  {
+    "id": "lighter-shades-first",
+    "source": "Of those, 97% put their lighter shades, and thus the customers that use those shades, first.",
+    "claim": "126 of the 130 numbered product lines (96.9%) put a lighter shade first in their number sequence.",
+    "tables": {
+      "shades": "data/allShades.csv"
+    },
+    "code": "(lambda d: (lambda e: e.groupby(['brand','product']).apply(lambda g: g.sort_values('numbers')['lightness'].iloc[0] > g.sort_values('numbers')['lightness'].iloc[-1]).agg(['sum','size','mean']))(d.groupby(['brand','product']).filter(lambda g: len(g) > 1 and g['numbers'].is_unique and g['brand'].iloc[0] != 'Clinique')))(shades.assign(numbers=shades['specific'].str.extract(r'(\\d+(?:\\.\\d+)?)')[0].astype(float)).dropna(subset=['numbers']))"
+  },
+  {
+    "id": "dark-to-light-products",
+    "source": "Yet only 4 out of those 130 products ordered their shades from dark to light.",
+    "claim": "Four numbered product lines order their shades from dark to light: Beauty Bakerie's InstaBake Aqua Glass Foundation, Exa's High Fidelity Foundation, Juvia's Place's I Am Magic Foundation and Pacifica's Alight Clean Foundation.",
+    "tables": {
+      "shades": "data/allShades.csv"
+    },
+    "code": "(lambda d: (lambda e: e.groupby(['brand','product']).apply(lambda g: g.sort_values('numbers')['lightness'].iloc[0] < g.sort_values('numbers')['lightness'].iloc[-1]).loc[lambda s: s].rename('darkToLight').reset_index())(d.groupby(['brand','product']).filter(lambda g: len(g) > 1 and g['numbers'].is_unique and g['brand'].iloc[0] != 'Clinique')))(shades.assign(numbers=shades['specific'].str.extract(r'(\\d+(?:\\.\\d+)?)')[0].astype(float)).dropna(subset=['numbers']))"
+  },
+  {
+    "id": "nudestix-every-shade-nude",
+    "source": "many can be attributed to a single brand, NudeStix , which labels every shade in its Tinted Cover Foundation product “nude”",
+    "claim": "All 14 shades in NUDESTIX's Tinted Cover Foundation are named 'Nude'.",
+    "tables": {
+      "shades": "data/allShades.csv"
+    },
+    "code": "shades[shades['brand'].eq('NUDESTIX') & shades['product'].eq('Tinted Cover Foundation')]['name'].value_counts()"
+  },
+  {
+    "id": "darkest-nude-shade-mocha",
+    "source": "The darkest shade that contains “nude” in its name isn’t simply called “nude”. It’s “nude mocha.”",
+    "claim": "Among shade names containing 'nude', Milani's Screen Queen Foundation 'Nude Mocha' is the darkest, with a lightness of 0.190.",
+    "tables": {
+      "shades": "data/allShades.csv"
+    },
+    "code": "shades[shades['name'].str.contains('nude', case=False, na=False)].nsmallest(1, 'lightness')[['brand','product','name','lightness']]"
+  }
+]

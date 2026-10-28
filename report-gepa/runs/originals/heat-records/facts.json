@@ -1,0 +1,101 @@
+[
+  {
+    "id": "yesterday-not-record",
+    "source": "Was yesterday a heat record in Columbus, OH? No, but let’s see where it ranks.",
+    "claim": "The most recent day in the data was not a daily record high for its calendar date.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).sort_values('date').tail(1).pipe(lambda d: d['rank'].iloc[0]==0)"
+  },
+  {
+    "id": "hottest-october-23",
+    "source": "The hottest October 23rd ever was 83°F in 1947. Yesterday ranked 47th at 67°F.",
+    "claim": "The hottest October 23rd on record reached 83°F in 1947.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).pipe(lambda d: d[(d.day==d.loc[d.date.idxmax(),'day']) & (d.temp==d[d.day==d.loc[d.date.idxmax(),'day']].temp.max())]).sort_values('date').tail(1)[['date','temp']]"
+  },
+  {
+    "id": "yesterday-ranked-47th",
+    "source": "The hottest October 23rd ever was 83°F in 1947. Yesterday ranked 47th at 67°F.",
+    "claim": "On October 23, 2026 the high of 67°F ranked 47th for that calendar date.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date']), rank=lambda d: d['rank']+1).sort_values('date').tail(1)[['date','rank','temp']]"
+  },
+  {
+    "id": "near-record-october-14",
+    "source": "Columbus, OH almost had a record on October 14, 2026. It was the 5th-hottest recorded temperature for that day, ever.",
+    "claim": "On October 14, 2026 the high was 84°F, the 5th-hottest recorded temperature for October 14th.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).sort_values('date',ascending=False).iloc[1:].pipe(lambda d: d[(d['rank']>0)&(d['rank']<5)].head(1)).assign(rank=lambda d: d['rank']+1)[['date','rank','temp']]"
+  },
+  {
+    "id": "all-time-high-106",
+    "source": "The temperature at the top is the hottest it’s ever been in Columbus, OH: 106°F, set in 1936.",
+    "claim": "The hottest temperature ever recorded is 106°F, on July 14, 1936.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).query('temp == temp.max()').sort_values('date').tail(1)[['date','temp']]"
+  },
+  {
+    "id": "most-recent-record-october-13",
+    "source": "October 13, 2026 was the hottest October 13th ever.",
+    "claim": "October 13, 2026 reached 88°F, the hottest October 13th on record.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).query('rank == 0').sort_values('date').tail(1)[['date','temp']]"
+  },
+  {
+    "id": "record-ten-days-ago",
+    "source": "Just 10 days ago, Columbus, OH experienced a daily record high of 88°F.",
+    "claim": "The most recent daily record high, 88°F on October 13, 2026, came 10 days before the data's last day.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).pipe(lambda d: d[d.date==d[d['rank']==0].date.max()].assign(days_before_latest=lambda x: (d.date.max()-x.date).dt.days))[['date','temp','days_before_latest']]"
+  },
+  {
+    "id": "five-record-highs-2026",
+    "source": "Five of these record highs were set in the past 10 months.",
+    "claim": "Five current daily record highs were set in 2026, spanning January 9 to October 13.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).query('rank == 0').sort_values('date', ascending=False).head(5).sort_values('date').assign(count=lambda d: len(d))[['date','temp','count']]"
+  },
+  {
+    "id": "hottest-march-22",
+    "source": "The hottest March 22nd was 86°F in 2026.",
+    "claim": "The hottest March 22nd on record reached 86°F in 2026.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).pipe(lambda d: d[(d.date.dt.month==3)&(d.date.dt.day==22)]).sort_values('temp',ascending=False).head(1)[['date','temp']]"
+  },
+  {
+    "id": "march-22-record-broken",
+    "source": "March 22, 2012 was the record high for 14 years before it was broken in 2026.",
+    "claim": "The previous March 22nd record, 85°F in 2012, stood for 14 years before 86°F broke it in 2026.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).pipe(lambda d: d[(d.date.dt.month==3)&(d.date.dt.day==22)&(d['rank']<2)].sort_values(['rank','date']).groupby('rank').tail(1)).assign(span_years=lambda d: (d.date.max()-d.date.min()).days/365.25)[['date','rank','temp','span_years']]"
+  },
+  {
+    "id": "average-every-13-weeks",
+    "source": "Put another way, there has been a new record (or tie) on average every 13 weeks since 2017.",
+    "claim": "Since 2017, a new daily record or tie has occurred on average every 13 weeks.",
+    "tables": {
+      "df": "data/CMHthr.csv"
+    },
+    "code": "df.assign(date=pd.to_datetime(df['date'])).sort_values(['day','date']).pipe(lambda d: d.assign(event=d.groupby('day')['temp'].transform(lambda s: s.ge(s.cummax())))).pipe(lambda d: d[d.event & (d.date.dt.year >= d.date.dt.year.max()-9)]).agg(year=('date', lambda s: s.dt.year.min()), weeks=('date', lambda s: np.ceil(((s.dt.year.max()-s.dt.year.min())*52)/len(s))))"
+  }
+]

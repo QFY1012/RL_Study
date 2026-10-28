@@ -1,0 +1,20 @@
+[
+  {
+    "id": "page-category-breakdown",
+    "source": "people - 1,005 pages, 41% of total\nrecordings - 859 pages, 35% of total\nplaces - 96 pages, 4% of total\nEverything Else - 492 pages, 20% of total, which includes everything from a beer named after Miles to the entry for the Space Music genre",
+    "claim": "People account for 1,005 pages (41%), recordings for 859 pages (35%), everything else for 492 pages (20%), and places for 96 pages (4%).",
+    "tables": {
+      "p": "data/pages13.csv"
+    },
+    "code": "p.assign(category=p.subjectRemapping.map(lambda s: 'People' if s in ('musicians','people') else ('Recordings' if s=='recording' else ('Places' if s=='places' else 'Everything Else')))).groupby('category').agg(pages=('id','size'), share=('id', lambda s: round(100*len(s)/len(p)))).sort_values('pages', ascending=False)"
+  },
+  {
+    "id": "pages-after-1991",
+    "source": "But references to Miles continue well after his death in 1991 (though Wikipedia certainly favors contemporary topics).",
+    "claim": "372 pages are dated after 1991.",
+    "tables": {
+      "p": "data/pages13.csv"
+    },
+    "code": "p.dropna(subset=['year']).assign(era=lambda d: np.where(d.year > 1991, 'After 1991', '1991 or earlier')).groupby('era').size()"
+  }
+]

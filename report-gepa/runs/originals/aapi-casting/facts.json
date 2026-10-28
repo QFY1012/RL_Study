@@ -1,0 +1,56 @@
+[
+  {
+    "id": "film-level-casting-accuracy",
+    "source": "Out of 80 movies we looked at, 64 were cast with complete accuracy. Meanwhile, 13 movies were cast with partial accuracy. And only 3 out of the 80 movies were cast completely inaccurately.",
+    "claim": "The film-level classifications are 64 complete accuracy, 13 partial accuracy and 3 complete inaccuracy.",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df.groupby('Movie ID')['Background Match?'].agg(lambda s: 'complete accuracy' if (s == 'Y').all() else ('complete inaccuracy' if (s == 'N').all() else 'partial accuracy')).value_counts()"
+  },
+  {
+    "id": "characters-ethnic-background-match",
+    "source": "On a character level, 207 out of 236 Asian main characters—88%—were portrayed by actors of the same ethnic background.",
+    "claim": "207 of the 236 characters (87.71%) matched their actor's ethnic background.",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df['Background Match?'].eq('Y').agg(['sum', 'count', lambda s: 100 * s.mean()])"
+  },
+  {
+    "id": "big-five-share-of-films",
+    "source": "But they were responsible for just 39% of the 80 movies.",
+    "claim": "31 of the 80 films (38.75%) came from the Big Five studios.",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df.drop_duplicates('Movie ID')['Studio'].isin(['Universal Pictures', 'Paramount Pictures', 'Warner Bros. Pictures', 'The Walt Disney Studios', 'Columbia Pictures']).agg(['sum', 'count', lambda s: 100 * s.mean()])"
+  },
+  {
+    "id": "big-five-casting-accuracy",
+    "source": "And they do a fairly accurate job of casting—about 84%, slightly below overall casting accuracy.",
+    "claim": "Films from the Big Five studios had an 84.09% character-level match rate (74 of 88 characters).",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df[df['Studio'].isin(['Universal Pictures', 'Paramount Pictures', 'Warner Bros. Pictures', 'The Walt Disney Studios', 'Columbia Pictures'])]['Background Match?'].eq('Y').agg(['sum', 'count', lambda s: 100 * s.mean()])"
+  },
+  {
+    "id": "asian-director-casting-accuracy",
+    "source": "Meanwhile, movies with Asian directors had a 94% accuracy rate, well above the 83% average for non-Asian directors.",
+    "claim": "Characters in films by Asian directors matched at 94.06%, versus 82.96% for non-Asian directors.",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df.groupby('Is the director asian?')['Background Match?'].apply(lambda s: 100 * (s == 'Y').mean())"
+  },
+  {
+    "id": "asian-representation-increased-by-decade",
+    "source": "The first thing we noticed in our data is that Asian representation really has increased in the past few decades!",
+    "claim": "Asian character counts increase across the decades, from 15 in the 1980s to 27 in the 1990s, 74 in the 2000s and 82 in the 2010s, with 38 in the partial 2020s.",
+    "tables": {
+      "df": "data/roles.csv"
+    },
+    "code": "df.groupby((df['Release Year'] // 10) * 10).size()"
+  }
+]

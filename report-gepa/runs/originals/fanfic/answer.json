@@ -1,0 +1,29 @@
+[
+ {
+  "id": "slash-canon-status-shares",
+  "source": "Non-canon 83% Canon 11% Semi-canon 6%",
+  "claim": "Of the slash ships in the data, 83% are non-canon, 11% are canon, and 6% are semi-canon.",
+  "tables": {
+   "d": "data/CANON_slashShips.csv"
+  },
+  "code": "(d.isCanon.value_counts(normalize=True) * 100).round().astype(int)"
+ },
+ {
+  "id": "slash-noncanon-share-of-works",
+  "source": "Slash ships have always been predominantly non-canon, making up about 78% written on AO3 each year.",
+  "claim": "Non-canon ships account for 78.1% of the fanfic works among the slash ships.",
+  "tables": {
+   "d": "data/CANON_slashShips.csv"
+  },
+  "code": "(pd.to_numeric(d.totalWorks, errors='coerce')[d.isCanon == 'No'].sum() / pd.to_numeric(d.totalWorks, errors='coerce').sum() * 100).round(1)"
+ },
+ {
+  "id": "top-slash-ships",
+  "source": "1 Castiel/Dean Winchester 105,320 2 Draco Malfoy/Harry Potter 64,660 3 Sherlock Holmes/John Watson 63,800 4 Derek Hale/Stiles Stilinski 63,570 5 James \"Bucky\" Barnes/Steve Rogers 58,510 6 Sirius Black/Remus Lupin 50,280 7 Bakugou Katsuki/Midoriya Izuku 42,850 8 Steve Rogers/Tony Stark 42,140 9 Lán Zhàn/Wèi Yīng 37,620 10 Merlin/Arthur Pendragon 33,360",
+  "claim": "The ten most-shipped M/M ships are Castiel/Dean Winchester (105,320 works), Draco Malfoy/Harry Potter (64,661), Sherlock Holmes/John Watson (63,802), Derek Hale/Stiles Stilinski (63,573), James \"Bucky\" Barnes/Steve Rogers (58,508), Sirius Black/Remus Lupin (50,280), Bakugou Katsuki/Midoriya Izuku (42,852), Steve Rogers/Tony Stark (42,143), Lán Zhàn/Wèi Yīng (37,617), and Merlin/Arthur Pendragon (33,355).",
+  "tables": {
+   "d": "data/CANON_slashShips.csv"
+  },
+  "code": "d.assign(works=pd.to_numeric(d.totalWorks, errors='coerce')).nlargest(10, 'works')[['ship', 'works']]"
+ }
+]

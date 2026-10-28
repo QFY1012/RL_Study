@@ -1,0 +1,29 @@
+[
+ {
+  "id": "bushy-mens-hair",
+  "source": "Take bushy. It’s much more likely to be applied to men’s hair than women’s.",
+  "claim": "Bushy is used for men’s hair 16 times and women’s hair 6 times, and its male-versus-female skew is 1.80.",
+  "tables": {
+   "d": "data/adj_3.csv"
+  },
+  "code": "d[(d.BodyPart == 'hair') & (d.adj == 'bushy')][['adj', 'totalM', 'totalF', 'pctM', 'pctF', 'diff']]"
+ },
+ {
+  "id": "bushy-rare-hair-adjective",
+  "source": "It’s also not a commonly occuring adjective, indicated by the smaller word size.",
+  "claim": "Bushy occurs only 22 times in hair descriptions, ranking 117th of the 121 hair adjectives by total frequency.",
+  "tables": {
+   "d": "data/adj_3.csv"
+  },
+  "code": "d[d.BodyPart == 'hair'].assign(freq_rank=lambda x: x.total.rank(ascending=False, method='min'), n_adjectives=lambda x: len(x)).query(\"adj == 'bushy'\")[['adj', 'total', 'freq_rank', 'n_adjectives']]"
+ },
+ {
+  "id": "most-skewed-hair-adjectives-less-frequent",
+  "source": "In fact, many of the adjectives that skew the most are infrequently used.",
+  "claim": "The ten hair adjectives with the largest gender skew have a median of 38 total mentions, against 49 for the other 111 hair adjectives.",
+  "tables": {
+   "d": "data/adj_3.csv"
+  },
+  "code": "d[d.BodyPart == 'hair'].assign(absdiff=lambda x: x['diff'].abs(), top10=lambda x: x['diff'].abs().rank(ascending=False, method='first') <= 10).groupby('top10').total.agg(['median', 'count'])"
+ }
+]

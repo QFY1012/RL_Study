@@ -1,0 +1,52 @@
+{
+ "id": "hamilton",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 676,
+  "steps": 65,
+  "tools": 110,
+  "nudged": 0,
+  "usage": {
+   "input": 90165,
+   "output": 54758
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "eliza-next-song-with-hamilton",
+   "basis": "输出中 song 列为 1,10,11,14,17,23,26,29,40,41,44，且 song 17 为 'That Would be Enough'，其后下一个为 song 23 'Non-Stop'。",
+   "verdict": "ok"
+  },
+  {
+   "id": "angelica-alexander-sing-together",
+   "basis": "输出中所有匹配行均为 song 26、title 'Take a Break'，lines 为 23-27, 74, 76, 85-86，仅涉及这一首歌。",
+   "verdict": "ok"
+  },
+  {
+   "id": "quiet-uptown-starts-angelica",
+   "basis": "输出中仅有一行：song 41、characters 8、title 'It's Quiet Uptown'。",
+   "verdict": "ok"
+  },
+  {
+   "id": "angelica-reappears-world-wide-enough",
+   "basis": "输出中 song 列为 1,10,11,14,23,26,37,41,45，且 song 41 之后下一个为 song 45 'The World Was Wide Enough'。",
+   "verdict": "ok"
+  },
+  {
+   "id": "eliza-one-line-quiet-uptown",
+   "basis": "输出中仅有一行：song 41、characters 7、n=1、line=55、title 'It's Quiet Uptown'。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 4
+}

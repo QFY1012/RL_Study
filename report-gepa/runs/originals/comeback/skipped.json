@@ -1,0 +1,30 @@
+[
+  {
+    "source": "We used Inpredictable.com's win-probability model to identify the most statistically unlikely comebacks this season.",
+    "why": "The file contains only the four games discussed, not all games of the season, so the season-wide selection of the most unlikely comebacks cannot be checked. The winners' minimum win probabilities (Boston 0.0014, LA Clippers 0.0042, Golden State 0.0208, Miami 0.0423) also do not reproduce the story's #1–#4 ordering, so the ranking itself is not reproducible from this file."
+  },
+  {
+    "source": "Golden State was down by 9 with 3 minutes left in the game.",
+    "why": "At Q4 3:00 the data has Golden State down 7 (89-96), not 9. The 9-point deficit occurs at Q4 3:45, which is the chart label reproduced in the low-point fact; the text's '3 minutes' version is not reproduced."
+  },
+  {
+    "source": "But OKC then goes 1 of 9 and commits three turnovers, blowing another game that they had in the bag.",
+    "why": "From the 14-point deficit at Q4 5:03 through the end of the game, OKC made 1 of 10 field goals (9 misses) and committed 3 turnovers. '1 of 9' appears only if the final 2-second attempt is excluded, a cutoff the story does not define, so the field-goal count is not reproduced; the 3 turnovers do match."
+  },
+  {
+    "source": "From 2006 - Today, Teams in Heat's Situation Tend to Lose 50% of the time; From 2006 - Today, Teams in GSW's Situation Tend to Lose 72% of the time; Teams in Boston's Situation Tend to Lose 92% of the time; Teams in LA's Situation Tend to Lose 50% of the time",
+    "why": "These are readouts of the interactive situation widget rather than findings tied to a particular play. The 50% values are the tip-off baseline, and the widget does not state the time/deficit/possession state at which the 72% and 92% values apply, so they cannot be tied to a single reproducible row."
+  },
+  {
+    "source": "64% down by 3, 13 minutes remaining, without the ball; 93% down by 11, 9 minutes remaining; 89% down by 19, 29 minutes remaining; up by 20, 0 minutes remaining; up by 1; up by 5 Q4 1:12",
+    "why": "These are scroll-driven tooltip/scrubber readouts at arbitrary positions, not authored findings; the displayed clock, deficit and possession combinations are rounded from nearby plays and do not uniquely identify a row in the data."
+  },
+  {
+    "source": "The Heat are down by 0 48 Minutes to go at tip-off",
+    "why": "This is the tip-off baseline (0-0 with a 50% win probability), not a finding about a comeback, and it is part of the interactive widget readout."
+  },
+  {
+    "source": "Reggie Miller's historic 8 points in 9 seconds.",
+    "why": "This is an aside about a different, earlier game; the file contains no data for it."
+  }
+]

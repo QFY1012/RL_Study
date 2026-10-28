@@ -1,0 +1,24 @@
+{
+ "id": "pubs",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 24,
+  "steps": 7,
+  "tools": 4,
+  "nudged": 3,
+  "usage": {
+   "input": 7103,
+   "output": 803
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 6e54db86-03c4-481a-9368-3b9c8712ac94)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/pubs/facts.json'"
+ ],
+ "skipped": null
+}

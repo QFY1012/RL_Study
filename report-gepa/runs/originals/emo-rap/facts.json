@@ -1,0 +1,58 @@
+[
+  {
+    "id": "album-emo-ranking",
+    "source": "Average of Album’s Track Lyrics that are EMO*",
+    "claim": "Averaging each album's track scores, black_parade has the highest average emo share at 19.16% and lilpump the lowest at 2.55%.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t.groupby('artist').pct_sad.mean().mul(100).round(2).sort_values(ascending=False)"
+  },
+  {
+    "id": "black-parade-most-emo",
+    "source": "My Chemical Romance’s The Black Parade comes out on top",
+    "claim": "black_parade has the highest album average, at 19.16% emo words, ahead of chemicalromance at 17.67%.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t.groupby('artist').pct_sad.mean().mul(100).round(2).sort_values(ascending=False).head(2)"
+  },
+  {
+    "id": "juice-xxx-follow",
+    "source": "Juice Wrld’s Goodbye & Good Riddance and XXXtentacion’s ? follow closely behind.",
+    "claim": "juicewrld averages 14.99% emo words and xxxtentacion 14.88%, behind black_parade's 19.16%.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t.groupby('artist').pct_sad.mean().mul(100).round(2).sort_values(ascending=False).head(8)"
+  },
+  {
+    "id": "emo-rap-ahead-of-emo-bands",
+    "source": "For what it’s worth, both emo-rap albums are far ahead of Dashboard, Fall Out Boy, and Jimmy Eat World.",
+    "claim": "juicewrld (14.99%) and xxxtentacion (14.88%) average more emo words than fall out boy (10.78%), dashboard (10.07%) and jimmyeatworld (7.64%).",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t[t.artist.isin(['juicewrld','xxxtentacion','dashboard','fall out boy','jimmyeatworld'])].groupby('artist').pct_sad.mean().mul(100).round(2).sort_values(ascending=False)"
+  },
+  {
+    "id": "lilpump-migos-low",
+    "source": "As expected, artists such as Lil Pump and Migos appear lower on the emo scale, which means the data is roughly measuring what it’s supposed to.",
+    "claim": "lilpump averages 2.55% emo words and migos 5.30%, putting both among the lowest album averages in the data.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t.groupby('artist').pct_sad.mean().mul(100).round(2).sort_values().head(5)"
+  },
+  {
+    "id": "kanye-albums-order",
+    "source": "We’ve also charted three of Kanye’s albums, from least to most emo: The College Dropout , 808s and the Heartbreaks , and Ye .",
+    "claim": "kanye college_dropout averages 4.12%, kanye heartbreak 9.87% and kanye ye 13.08% emo words, in that order from least to most emo.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t[t.artist.isin(['kanye college_dropout','kanye heartbreak','kanye ye'])].groupby('artist').pct_sad.mean().mul(100).round(2).sort_values()"
+  },
+  {
+    "id": "top-25-emo-songs",
+    "source": "songs, ranked by emo* words",
+    "claim": "The ranked songs run from xxxtentacion's 'Pain = BESTFRIEND (Ft. Travis Barker)' at 56.52% down to tripple_trip's 'BANG!' at 23.08%, with tripple_trip's 'How You Feel' second at 54.74% and xxxtentacion's 'SAD!' third at 48.48%.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t[~t.artist.isin(['nothing_ruiner','deathgrips','drake','chemicalromance','where_you','paramore'])].sort_values('pct_sad', ascending=False).head(25).assign(pct_sad=lambda d: d.pct_sad.mul(100).round(2))[['track_title','artist','pct_sad']]"
+  },
+  {
+    "id": "pain-top-song",
+    "source": "“Pain” by XXXTentacion is interesting as the top song.",
+    "claim": "xxxtentacion's 'Pain = BESTFRIEND (Ft. Travis Barker)' has the highest emo-word share at 56.52%, ahead of tripple_trip's 'How You Feel' at 54.74%.",
+    "tables": {"t": "data/tracks.csv"},
+    "code": "t[~t.artist.isin(['nothing_ruiner','deathgrips','drake','chemicalromance','where_you','paramore'])].sort_values('pct_sad', ascending=False).head(2).assign(pct_sad=lambda d: d.pct_sad.mul(100).round(2))[['track_title','artist','pct_sad']]"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "country-top-puma",
+    "source": "Countries, mapped to the US region with the largest percentage of its immigrants and expatriates among the total population.",
+    "claim": "For each of the 154 countries, the data identify the single US PUMA with the largest percentage of that country's foreign-born population, and the printed series lists the top PUMA country by country.",
+    "tables": {
+      "d": "data/coordinates - edited_final.csv"
+    },
+    "code": "d[d.non_specific.isna()].set_index('birthplace_edited')['Name'].str.replace(' PUMA', '', regex=False).sort_index()"
+  },
+  {
+    "id": "shared-pumas-four-countries",
+    "source": "Where International Communities Cluster",
+    "claim": "NYC-Brooklyn Community District 13--Brighton Beach & Coney Island is the top PUMA for four countries (Azerbaijan, Byelorussia, Republic of Georgia and Ukraine), and NYC-Brooklyn Community District 17--East Flatbush, Farragut & Rugby is the top PUMA for another four (Barbados, Grenada, St. Vincent and Trinidad and Tobago).",
+    "tables": {
+      "d": "data/coordinates - edited_final.csv"
+    },
+    "code": "d[d.non_specific.isna()].groupby('Name')['birthplace_edited'].agg(['count', ', '.join]).sort_values('count', ascending=False).head(2).to_string()"
+  }
+]

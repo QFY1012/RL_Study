@@ -1,0 +1,49 @@
+[
+ {
+  "finding": "项目性科目(设备维修、信息化建设)12月支出占其全年 37.1%,是其他科目12月平均占比(5.1%)的 7.3 倍;设备维修12月单笔中位数 30,906 元,为其余月份(8,733 元)的 3.5 倍,符合年终预算清零前突击执行的机制",
+  "numbers": {
+   "special_dec_share": 0.3713,
+   "other_dec_share": 0.0509,
+   "repair_dec_median": 30905.68,
+   "repair_rest_median": 8732.89,
+   "median_ratio": 3.539
+  },
+  "holds": true
+ },
+ {
+  "finding": "各部门月度支出节奏差异显著:市场营销部月支出变异系数 1.22(3-4月与9-10月展会季集中投放),安全环保部仅 0.08(检测检验与防护用品按月平稳计提),两者相差 14.6 倍",
+  "numbers": {
+   "mkt_monthly_cv": 1.221,
+   "ehs_monthly_cv": 0.083,
+   "cv_ratio": 14.63
+  },
+  "holds": true
+ },
+ {
+  "finding": "设备购置科目 90.1% 的金额集中在 8-11 月入账(资本预算年中审批后 Q3-Q4 集中到货验收),对照办公费同期仅占 25.9%",
+  "numbers": {
+   "capex_aug_nov_share": 0.9009,
+   "office_aug_nov_share": 0.2592
+  },
+  "holds": true
+ },
+ {
+  "finding": "劳务外包两极分化:生产制造部与仓储物流部的产线操作岗外包单笔均值 68,557 元、12 个月中有 12 个月连续发生;人力资源部/行政管理部的临时用工单笔均值仅 9,175 元(相差 7.5 倍),且只在 5 个月零星发生",
+  "numbers": {
+   "prod_outsource_mean": 68557.14,
+   "func_outsource_mean": 9175.4,
+   "mean_ratio": 7.47,
+   "prod_month_coverage": 12,
+   "func_month_coverage": 5
+  },
+  "holds": true
+ },
+ {
+  "finding": "培训费执行呈计划性双峰:3 月(年度培训计划启动)与 9 月(特种作业资质复审)合计占全年金额 72.9%、笔数 61.5%,其余月份仅为零星少量支出",
+  "numbers": {
+   "mar_sep_amount_share": 0.7289,
+   "mar_sep_count_share": 0.6154
+  },
+  "holds": true
+ }
+]

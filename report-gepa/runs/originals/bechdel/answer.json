@@ -1,0 +1,100 @@
+[
+ {
+  "id": "overall-bechdel-fail-rate",
+  "source": "37% of films fail - ... 1,494 fail and 2,506 pass",
+  "claim": "Of the 4,000 films, 1,494 fail the Bechdel test and 2,506 pass, a 37% failure rate.",
+  "tables": {
+   "m": "data/movies2.csv"
+  },
+  "code": "m.rating.agg(films=lambda s: s.size, fail=lambda s: (s < 3).sum(), pass_=lambda s: (s >= 3).sum(), fail_pct=lambda s: round((s < 3).mean() * 100))"
+ },
+ {
+  "id": "top200-writers-bechdel",
+  "source": "53% Fails Test 47% Passes Test ... 38% Fails Test 62% Passes Test ... 0% Fails 100% Passes",
+  "claim": "Among the highest-grossing films, all-male writing teams fail 53% and pass 47%; teams with at least one woman fail 38% and pass 62%; all-women writing teams fail 0% and pass 100%.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.eq('w') & p.movie_id.isin(m.nlargest(200, 'box_office').movie_id)]\n .assign(gender=lambda d: d.gender.fillna('u'))\n .pivot_table(index='movie_id', columns='gender', values='person_name', aggfunc='count', fill_value=0)\n .rename_axis(columns=None)\n .pipe(lambda d: d.assign(f=d.get('f', 0), m=d.get('m', 0), u=d.get('u', 0)))\n .join(m.set_index('movie_id').rating)\n .pipe(lambda d: pd.concat([\n   d[(d.f == 0) & (d.u == 0)].assign(cat='all men'),\n   d[d.f >= 1].assign(cat='at least one woman'),\n   d[(d.f > 0) & (d.m == 0) & (d.u == 0)].assign(cat='all women')\n ]))\n .groupby('cat').rating.agg(fail_pct=lambda s: (s < 3).mean() * 100, pass_pct=lambda s: (s >= 3).mean() * 100)\n .round(0).astype(int)\n)"
+ },
+ {
+  "id": "writers-composition-bechdel",
+  "source": "writers 46% 17% 11% 6%",
+  "claim": "For films grouped by writers' gender, 46% of all-male teams, 17% of teams with at least one woman, 11% of teams with 2+ women, and 6% of all-women teams fail.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.eq('w') & p.movie_id.isin(m.movie_id)]\n .assign(gender=lambda d: d.gender.fillna('u'))\n .pivot_table(index='movie_id', columns='gender', values='person_name', aggfunc='count', fill_value=0)\n .rename_axis(columns=None)\n .pipe(lambda d: d.assign(f=d.get('f', 0), m=d.get('m', 0), u=d.get('u', 0)))\n .join(m.set_index('movie_id').rating)\n .pipe(lambda d: pd.concat([\n   d[(d.f == 0) & (d.u == 0)].assign(cat='all men'),\n   d[d.f >= 1].assign(cat='at least one woman'),\n   d[d.f >= 2].assign(cat='2+ women'),\n   d[(d.f > 0) & (d.m == 0) & (d.u == 0)].assign(cat='all women')\n ]))\n .groupby('cat').rating.apply(lambda s: (s < 3).mean() * 100)\n .round(0).astype(int)\n)"
+ },
+ {
+  "id": "producers-composition-bechdel",
+  "source": "producers 43% 35% 32% 29%",
+  "claim": "For films grouped by producers' gender, 43% of all-male teams, 35% of teams with at least one woman, 32% of teams with 2+ women, and 29% of all-women teams fail.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.eq('p') & p.movie_id.isin(m.movie_id)]\n .assign(gender=lambda d: d.gender.fillna('u'))\n .pivot_table(index='movie_id', columns='gender', values='person_name', aggfunc='count', fill_value=0)\n .rename_axis(columns=None)\n .pipe(lambda d: d.assign(f=d.get('f', 0), m=d.get('m', 0), u=d.get('u', 0)))\n .join(m.set_index('movie_id').rating)\n .pipe(lambda d: pd.concat([\n   d[(d.f == 0) & (d.u == 0)].assign(cat='all men'),\n   d[d.f >= 1].assign(cat='at least one woman'),\n   d[d.f >= 2].assign(cat='2+ women'),\n   d[(d.f > 0) & (d.m == 0) & (d.u == 0)].assign(cat='all women')\n ]))\n .groupby('cat').rating.apply(lambda s: (s < 3).mean() * 100)\n .round(0).astype(int)\n)"
+ },
+ {
+  "id": "directors-composition-bechdel",
+  "source": "directors 41% ... 10%",
+  "claim": "All-male directing teams fail 41% of the time, while all-female directing teams fail 10% of the time.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.eq('d') & p.movie_id.isin(m.movie_id)]\n .assign(gender=lambda d: d.gender.fillna('u'))\n .pivot_table(index='movie_id', columns='gender', values='person_name', aggfunc='count', fill_value=0)\n .rename_axis(columns=None)\n .pipe(lambda d: d.assign(f=d.get('f', 0), m=d.get('m', 0), u=d.get('u', 0)))\n .join(m.set_index('movie_id').rating)\n .pipe(lambda d: pd.concat([\n   d[(d.f == 0) & (d.u == 0)].assign(cat='all men'),\n   d[(d.f > 0) & (d.m == 0) & (d.u == 0)].assign(cat='all women')\n ]))\n .groupby('cat').rating.apply(lambda s: (s < 3).mean() * 100)\n .round(0).astype(int)\n)"
+ },
+ {
+  "id": "writers-box-office-ratio",
+  "source": "Writers for 4,000 films, sorted by Box Office Revenue ... 4:1 Men 5:1 6:1 8:1 8:1 Men",
+  "claim": "In order from the lowest to the highest box-office bin, male writers outnumber female writers 4:1 (2,479 vs 696), 5:1 (913 vs 195), 6:1 (709 vs 128), 8:1 (1,760 vs 224) and 8:1 (608 vs 81).",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.eq('w') & p.gender.notna()]\n .merge(m[['movie_id', 'box_office']], on='movie_id')\n .assign(bin=lambda d: pd.cut(d.box_office, [-np.inf, 10e6, 50e6, 100e6, 500e6, np.inf], labels=['$0-$10M', '$11-$50M', '$51-$100M', '$101-$500M', '$500M+']))\n .groupby(['bin', 'gender'], observed=True).size().unstack()\n .assign(ratio=lambda d: (d['m'] / d['f']).round())\n)"
+ },
+ {
+  "id": "fail-rate-1995-vs-2015",
+  "source": "Films made in 1995, on average, failed the Bechdel Test 37% of the time. Today? 38%.",
+  "claim": "Films from 1995 fail 37% of the time; films from 2015 fail 38% of the time.",
+  "tables": {
+   "m": "data/movies2.csv"
+  },
+  "code": "m[m.year.isin([1995, 2015])].groupby('year').rating.apply(lambda s: (s < 3).mean() * 100).round(0).astype(int)"
+ },
+ {
+  "id": "women-share-1995-vs-2015",
+  "source": "Films made in 1995 had about 18% women in director, producer, and writing roles. Today? 17%.",
+  "claim": "On average, 18% of the director, producer and writer credits on a 1995 film were women, versus 17% in 2015.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "(p[p.role.isin(['w', 'p', 'd'])]\n .merge(m[['movie_id', 'year']], on='movie_id')\n .groupby(['year', 'movie_id']).gender.apply(lambda s: (s == 'f').mean())\n .groupby('year').mean().mul(100)\n .round(0).astype(int)\n .loc[[1995, 2015]]\n)"
+ },
+ {
+  "id": "director-credits-women",
+  "source": "Of the 4,500 directors, only 500 were women.",
+  "claim": "The dataset contains 4,507 director credits, 520 of them women.",
+  "tables": {
+   "m": "data/movies2.csv",
+   "p": "data/people2.csv"
+  },
+  "code": "p[p.role.eq('d') & p.movie_id.isin(m.movie_id)].gender.agg(size='size', women=lambda s: (s == 'f').sum())"
+ },
+ {
+  "id": "top-producers-bechdel",
+  "source": "Top Producers ... Harvey Weinstein 33% Bruce Berman 44% Scott Rudin 36% Tim Bevan 38% Eric Fellner 37% Toby Emmerich 38% Tessa Ross 56% Liza Chasin 29% Joel Silver 50% Laurie MacDonald 50% Debra Hayward 26% Judd Apatow 35%",
+  "claim": "Among the listed producers, the share of their films failing the Bechdel test is 33% for Harvey Weinstein, 44% for Bruce Berman, 36% for Scott Rudin, 38% for Tim Bevan, 37% for Eric Fellner, 38% for Toby Emmerich, 56% for Tessa Ross, 29% for Liza Chasin, 50% for Joel Silver, 50% for Laurie MacDonald, 26% for Debra Hayward, and 35% for Judd Apatow.",
+  "tables": {
+   "p": "data/people2.csv",
+   "m": "data/movies2.csv"
+  },
+  "code": "(p[p.role.eq('p') & p.person_name.isin(['Harvey Weinstein', 'Bruce Berman', 'Scott Rudin', 'Tim Bevan', 'Eric Fellner', 'Toby Emmerich', 'Tessa Ross', 'Liza Chasin', 'Joel Silver', 'Laurie MacDonald', 'Debra Hayward', 'Judd Apatow'])]\n .drop_duplicates(['movie_id', 'person_name'])\n .merge(m[['movie_id', 'rating']], on='movie_id')\n .groupby('person_name').rating.apply(lambda s: (s < 3).mean() * 100)\n .round(0).astype(int)\n .reindex(['Harvey Weinstein', 'Bruce Berman', 'Scott Rudin', 'Tim Bevan', 'Eric Fellner', 'Toby Emmerich', 'Tessa Ross', 'Liza Chasin', 'Joel Silver', 'Laurie MacDonald', 'Debra Hayward', 'Judd Apatow'])\n)"
+ }
+]

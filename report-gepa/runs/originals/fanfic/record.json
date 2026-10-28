@@ -1,0 +1,42 @@
+{
+ "id": "fanfic",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 478,
+  "steps": 37,
+  "tools": 45,
+  "nudged": 0,
+  "usage": {
+   "input": 73811,
+   "output": 62677
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "slash-canon-status-shares",
+   "basis": "No 83%, Yes 11%, Semi-Canon 6%",
+   "verdict": "ok"
+  },
+  {
+   "id": "slash-noncanon-share-of-works",
+   "basis": "78.1%",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-slash-ships",
+   "basis": "Top 10 works values: 105320, 64661, 63802, 63573, 58508, 50280, 42852, 42143, 37617, 33355; ship names match",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 41
+}

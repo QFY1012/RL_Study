@@ -1,0 +1,54 @@
+[
+  {
+    "source": "This is no mere coincidence as they added 16 new, mostly darker shades in May 2017 (just a few months before Fenty’s launch), which gave them a grand total of 40 shades.",
+    "why": "shades.csv records only the current 40 Fit Me shades, with no release dates or previous shade list, so the 16 new (mostly darker) shades added in May 2017 cannot be identified or counted."
+  },
+  {
+    "source": "The leftmost three brands are as good as Fenty on the darker end of the spectrum",
+    "why": "The three brands named elsewhere on the page (Estée Lauder, Maybelline and bareMinerals) do not all cover the darker shades as well as Fenty: bareMinerals' darkest shade is L 35 versus Fenty's L 25, and it has 5 shades below L 50 versus Fenty's 9 (Estée Lauder 12, Maybelline 10); only the 10-20 lightness band part of the sentence is reproduced as a fact."
+  },
+  {
+    "source": "Having 40 shades as a BIPOC-created brand really makes Fenty unique.",
+    "why": "Fenty is not in the BIPOC-founded group in shades.csv; the largest BIPOC-founded line (Beauty Bakerie) has 30 shades and MAC, a white-founded brand, has 42, so the statement does not hold as worded."
+  },
+  {
+    "source": "Many of the mainstream brands and Fenty have a wide assortment of shades for BIPOC.",
+    "why": "No definition or threshold for a 'wide assortment of shades for BIPOC' is given, so there is no computable measure."
+  },
+  {
+    "source": "In that regard, Fenty’s shade selection is no different than the most inclusive US mainstream brands in having a large number of shades across a wide range.",
+    "why": "No metric for 'no different' is given; shade counts and lightness ranges vary among the US brands, so the claim cannot be reduced to one checkable comparison."
+  },
+  {
+    "source": "Dior , CoverGirl and Tarte are all following along with their own 40 shades of foundation.",
+    "why": "These product lines are not in shades.csv (Tarte is absent, and the sampled Dior line in Japan has 6 shades), so the claim about other markets cannot be computed."
+  },
+  {
+    "source": "if Nigerian people want to use a shade from Fenty, the process of getting it is really complicated since Fenty doesn’t (yet) deliver to Nigeria.",
+    "why": "Distribution and retail availability are not recorded in shades.csv."
+  },
+  {
+    "source": "Its claim to fame: the foundation launched with 40 shades",
+    "why": "A per-product shade count is a count of the data's records (items), i.e. a description of the data rather than an analytical finding; the file does contain 40 Fenty rows."
+  },
+  {
+    "source": "Both Fenty’s Pro Filt’r and Make Up For Ever’s Ultra HD foundation offer 40 different shades.",
+    "why": "Same per-product record count; a description of the data rather than a finding, although the file shows 40 rows for each product."
+  },
+  {
+    "source": "But as it turns out, a few other brands had 40 or more shades too, including Make Up For Ever, who was not about to let that fact go unnoticed.",
+    "why": "A count of sampled products with at least 40 shade rows (Estée Lauder 42, Maybelline 40, MAC 42, Lancôme 40, Make Up For Ever 40); this is a description of the data set, not an analytical finding."
+  },
+  {
+    "source": "When the shade availability in Japan and India are taken together, you may notice that Indian beauty brands have very similar shade offerings to those in Japan.",
+    "why": "No measure of 'very similar' is given; the two groups differ in mean lightness (74.2 for India vs 77.0 for Japan) and India has one shade below L 50 while Japan has none, so similarity cannot be reduced to a checkable number."
+  },
+  {
+    "source": "As for Fenty, the breadth of their foundation product holds up abroad (at least in comparison to these three countries).",
+    "why": "A vague comparison with no stated metric; Fenty's 40 shades and 25-94 lightness range are described in other facts, but 'holds up abroad' is not a computable finding."
+  },
+  {
+    "source": "They might favor lighter skin tones, but they cover most of the shades across the spectrum.",
+    "why": "The first clause is hedged and gives no threshold, so it cannot be tested; the second clause (shades in nine consecutive 10-point lightness bands) is reproduced as a separate fact."
+  }
+]

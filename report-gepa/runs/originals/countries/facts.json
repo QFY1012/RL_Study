@@ -1,0 +1,56 @@
+[
+  {
+    "id": "wwi-germany-wwii-britain-russia",
+    "source": "Based on the headlines, World War I seemed to be much more focused on Germany while more focus was placed on Great Britain and Russia during World War II.",
+    "claim": "Germany is the top country in all 15 sample months of World War I but in only 6 of the World War II sample months, when the United Kingdom leads 7; Russia leads 1.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[h.year.between(1914, 1918) | h.year.between(1939, 1945)].assign(war=lambda d: np.where(d.year <= 1918, 'WWI', 'WWII')).groupby(['war', 'top']).size()"
+  },
+  {
+    "id": "cold-war-russia-until-vietnam",
+    "source": "Two years after the end of World War II, the Cold War consumed American attention, with Russia as the most-talked about country until the Vietnam War took precedence.",
+    "claim": "Russia is the top country in 39 sample months from 1947 through 1964, and from 1965 through 1973 Vietnam takes over as the top country, leading 18 sample months.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[h.year.between(1947, 1973)].assign(era=lambda d: np.where(d.year <= 1964, '1947-1964', '1965-1973')).groupby(['era', 'top']).size()"
+  },
+  {
+    "id": "vietnam-decade",
+    "source": "Marked by fervent opposition stateside, Vietnam was the singular focus in New York Times headlines for almost a decade.",
+    "claim": "From 1965 through 1973 Vietnam is the top country in 18 sample months, against 3 for Israel, 2 for Cambodia and 1 for Russia.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[h.year.between(1965, 1973)].top.value_counts()"
+  },
+  {
+    "id": "iraq-five-years",
+    "source": "By the start of 2003, attention shifted to Iraq. The 2003 invasion of Iraq occurred March 20, initiating the first stage of the Iraq War. The country overshadowed headlines for almost five years straight.",
+    "claim": "Iraq is the top country in 13 sample months from 2003 through 2007, against 1 for the United Kingdom and 1 for Israel.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[h.year.between(2003, 2007)].top.value_counts()"
+  },
+  {
+    "id": "haiti-january-2010",
+    "source": "Haiti was hit with disaster in January 2010 when a magnitude 7.0 earthquake ravaged the Caribbean nation. In the earthquake’s aftermath, the country was at the forefront of American headlines, especially in the wake of a series of powerful aftershocks throughout the month.",
+    "claim": "Haiti is the top country in the January 2010 sample, with 17 mentions.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[(h.year == 2010) & (h.month == 1)][['year', 'month', 'top', 'count']]"
+  },
+  {
+    "id": "russia-returns-2016",
+    "source": "Since the Cold War concluded in 1991, Russia dissipated from American headlines, until the most-recent presidential cycle, when collusion became a notable focus in the news.",
+    "claim": "Russia is the top country in 6 of the 72 sample months from 1992 through 2015, and in 3 of the 9 sample months from 2016 through 2018.",
+    "tables": {
+      "h": "data/headlines.csv"
+    },
+    "code": "h[h.year.between(1992, 2018)].assign(era=lambda d: np.where(d.year >= 2016, '2016-2018', '1992-2015')).groupby('era').agg(months=('top', 'size'), russia=('top', lambda s: s.eq('russia').sum()))"
+  }
+]

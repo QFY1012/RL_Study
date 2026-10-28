@@ -1,0 +1,87 @@
+{
+ "id": "comeback",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 824,
+  "steps": 54,
+  "tools": 56,
+  "nudged": 0,
+  "usage": {
+   "input": 90510,
+   "output": 130285
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "comeback-low-point-probabilities",
+   "basis": "gid1 home w=0.0423 lose=95.77 deficit=21 period=3 mmss=09:27; gid4 away w=0.0208 lose=97.92 deficit=9 period=4 mmss=03:45; gid5 away w=0.0014 lose=99.86 deficit=5 period=4 mmss=00:09; gid7 home w=0.0042 lose=99.58 deficit=14 period=4 mmss=05:04",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-lead-21-q3-948",
+   "basis": "a=67 h=46 margin=21 mmss=09:48",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-29-8-run-ties-third",
+   "basis": "hp=29 ap=8 h=75 a=75 secs=567",
+   "verdict": "ok"
+  },
+  {
+   "id": "houston-14-fourth-quarter",
+   "basis": "Q4 a=75, EG a=89, change=14.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-near-100-win-prob-3-min",
+   "basis": "wp=0.9993 left=182 mmss=03:02",
+   "verdict": "ok"
+  },
+  {
+   "id": "okc-up-4-14-seconds",
+   "basis": "a=99 h=103 margin=4 left=14 mmss=00:14",
+   "verdict": "ok"
+  },
+  {
+   "id": "celtics-down-4-7-seconds",
+   "basis": "a=99 h=103 deficit=4 left=7 mmss=00:07",
+   "verdict": "ok"
+  },
+  {
+   "id": "celtics-two-point-game-4-seconds",
+   "basis": "a=101 h=103 deficit=2 left=4 mmss=00:04 gst1=A",
+   "verdict": "ok"
+  },
+  {
+   "id": "celtics-5-points-4-seconds",
+   "basis": "dp=5.0 secs=4.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-tie-regulation",
+   "basis": "left=2 Durant Bad Pass Turnover; left=1 Durant S.FOUL; Iguodala Free Throw 1 of 2 a=102 h=103; Free Throw 2 of 2 a=103 h=103",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-curry-ot-winner",
+   "basis": "gt=3180 a=121 h=118 margin=3 d=Curry 32' 3PT Pullup Jump Shot",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "comeback-low-point-probabilities",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 10,
+ "skipped": 7
+}

@@ -1,0 +1,67 @@
+{
+ "id": "labels",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 521,
+  "steps": 53,
+  "tools": 65,
+  "nudged": 0,
+  "usage": {
+   "input": 66026,
+   "output": 65652
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 8,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "def-jam-ranks-first",
+   "basis": "Output top 3: Def Jam 63759, Young Money 52213, Roc-A-Fella 44799.",
+   "verdict": "ok"
+  },
+  {
+   "id": "young-money-second-six-years",
+   "basis": "Output top 2 by score: Def Jam 63759; Young Money 52213, first 2009-05-02, last 2015-04-18.",
+   "verdict": "ok"
+  },
+  {
+   "id": "young-money-top-label-2010-2015",
+   "basis": "Output idxmax for 2010, 2011, 2012, 2013, 2014, 2015 is Young Money in every year.",
+   "verdict": "ok"
+  },
+  {
+   "id": "success-concentrated-2015",
+   "basis": "Output: 2005 top5_share 33.918570, top10_share 55.773585; 2015 top5_share 58.486842, top10_share 79.394737.",
+   "verdict": "ok"
+  },
+  {
+   "id": "young-money-unprecedented-share",
+   "basis": "Output top 2: Young Money max_share 27.453947 in 2015; Shady max_share 13.042510 in 2003.",
+   "verdict": "ok"
+  },
+  {
+   "id": "def-jam-most-charting-tracks",
+   "basis": "Output top 4 distinct tracks: Def Jam 152, Jive 106, Roc-A-Fella 86, Young Money 83.",
+   "verdict": "ok"
+  },
+  {
+   "id": "def-jam-most-weeks-on-chart",
+   "basis": "Output top 4 row counts: Def Jam 1925, Young Money 1322, Roc-A-Fella 1293, Jive 1255.",
+   "verdict": "ok"
+  },
+  {
+   "id": "jive-tops-1989",
+   "basis": "Output 1989 top 3: Jive 3066.0, Capitol 2148.0, Ruthless 1793.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 8,
+ "skipped": 9
+}

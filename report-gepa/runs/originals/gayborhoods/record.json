@@ -1,0 +1,42 @@
+{
+ "id": "gayborhoods",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 591,
+  "steps": 59,
+  "tools": 67,
+  "nudged": 0,
+  "usage": {
+   "input": 60966,
+   "output": 71987
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "female-index-lower",
+   "basis": "female mean = 1.320646, male mean = 1.776146",
+   "verdict": "ok"
+  },
+  {
+   "id": "male-index-parade-bars",
+   "basis": "parade False = 1.582397, parade True = 12.180511; bar False = 1.412911, bar True = 9.867797",
+   "verdict": "ok"
+  },
+  {
+   "id": "male-map-nearly-identical",
+   "basis": "overall-male correlation = 0.922779, overall-female correlation = 0.549583",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 25
+}

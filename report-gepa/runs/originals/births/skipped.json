@@ -1,0 +1,30 @@
+[
+  {
+    "source": "we have monthly birth data for all 31 million babies born in the US between 1995 and 2015",
+    "why": "This describes the scope of the data rather than a finding; summing stateBirths over 1995-2015 in this file gives 84,784,489 births, not 31 million."
+  },
+  {
+    "source": "For comparison, the population in Wayne County (where Detroit is located) decreased about 15% in that same time, and the national birth count increased about 1%.",
+    "why": "Wayne County population is not in the data file. National births can be computed by summing stateBirths: 3,899,589 in 1995 and 3,978,497 in 2015, an increase of about 2.0%, not the stated 1%."
+  },
+  {
+    "source": "That places the highest conception time for Floridians around October through February.",
+    "why": "The file records births, not conceptions; this is an inference made by counting back nine months, so the conception months cannot be computed from the data."
+  },
+  {
+    "source": "This places the largest number of Maine conceptions in August to December.",
+    "why": "The file records births, not conceptions; conception months are inferred by counting back nine months and are not in the data."
+  },
+  {
+    "source": "Counting backwards 9 months, we can assume that northerners conceive more babies in the summer and fall than the rest of the year, whereas southerners conceive more in the fall and winter.",
+    "why": "The file records births, not conceptions; the conception comparison is an inference and is not measured in the data."
+  },
+  {
+    "source": "There doesn't seem to be a dramatic decrease in births immediately following the formal bankruptcy in Detroit.",
+    "why": "Qualitative claim with no threshold or comparison period specified; the only quantified Wayne County finding (the roughly 30% decline since 1995) is in facts.json."
+  },
+  {
+    "source": "While there does appear to be a small increase in births from June to July, that seems to be a consistent yearly trend in Suffolk County.",
+    "why": "The 2013 June-to-July increase itself is in facts.json; the additional claim that this is a consistent yearly trend does not hold in every year (July exceeds June in 18 of the 21 years) and no threshold for 'consistent' is given."
+  }
+]

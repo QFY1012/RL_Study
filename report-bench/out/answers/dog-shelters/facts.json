@@ -1,0 +1,85 @@
+[
+ {
+  "id": "import-origin-ranking",
+  "source": "1 Texas 635, 2 Alabama 268, 3 North Carolina 158, 4 South Carolina 139, 5 Georgia 137, 6 Puerto Rico 131, 7 California 130, 8 South Korea 76",
+  "claim": "Texas is the most common origin of dogs relocated to a new state (635), followed by Alabama (268), North Carolina (158), South Carolina (139) and Georgia (137).",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))['origin'].value_counts())({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "international-share",
+  "source": "Out of all of the dogs we identified as imports into a new state, 18% of them came from outside the US.",
+  "claim": "437 of the 2,460 dogs imported into a new state (17.8%) came from outside the US.",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: (~imp['origin'].isin(set(S.values()))).agg(['sum','count']).to_frame().T.assign(pct=lambda x: 100*x['sum']/x['count']))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "puerto-rico-south-korea-ranks",
+  "source": "According to our snapshot data review, the US imported 131 dogs from Puerto Rico (a US territory), and 76 from South Korea, making them the 6th and 8th most common imported sources for adoptable dogs nationwide.",
+  "claim": "Puerto Rico is the 6th most common origin of imported dogs with 131, and South Korea is the 8th with 76.",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: (lambda vc: pd.DataFrame({'count':vc,'rank':vc.rank(ascending=False,method='min').astype(int)}).loc[['Puerto Rico','South Korea']])(imp['origin'].value_counts()))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "still-in-origin-state",
+  "source": "In 238 (9.7% of) cases, the dogs were shown as available for adoption in one state, but they still resided in another.",
+  "claim": "238 of the 2,460 imported dogs (9.7%) were listed for adoption in one state while still residing in another.",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: imp['still_there'].notna().agg(['sum','count']).to_frame().T.assign(pct=lambda x: 100*x['sum']/x['count']))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "hurricane-displaced",
+  "source": "In fact, 54 of the animals (2%) in our dataset were described as displaced by recent storm activity.",
+  "claim": "54 of the 2,460 relocated dogs (2.2%) have descriptions that mention a hurricane.",
+  "tables": {
+   "d": "data/dogTravel.csv",
+   "a": "data/allDogDescriptions.csv"
+  },
+  "code": "(lambda S: (lambda imp, a: imp[['id']].merge(a[['id','description']], on='id')['description'].str.contains('hurricane', case=False, na=False).agg(['sum','count']).to_frame().T.assign(pct=lambda x: 100*x['sum']/x['count']))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found']))), a))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "non-importing-states",
+  "source": "out of those 13 states, Montana and Alaska are the only two states that also didn't export dogs elsewhere.",
+  "claim": "The states that imported no dogs are Alaska, Hawaii, Idaho, Louisiana, Mississippi, Montana, Nebraska, New Mexico, North Dakota, South Dakota, Texas, West Virginia and Wyoming, and of them only Alaska and Montana exported none.",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: pd.DataFrame({'imports': imp['contact_state'].map(S).value_counts(), 'exports': imp['origin'].value_counts()}).reindex(sorted(set(S.values()))).fillna(0).query('imports == 0').astype(int))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "new-york-import-share",
+  "source": "On the day that Scout was available, 10% of the adoptable dogs in New York came into the local rescues and shelters from out of state.",
+  "claim": "390 of New York's 4,002 adoptable dogs (9.7%) came from out of state.",
+  "tables": {
+   "d": "data/dogTravel.csv",
+   "a": "data/allDogDescriptions.csv"
+  },
+  "code": "(lambda S: (lambda imp, a: a.assign(imported=a['id'].isin(imp.loc[imp['contact_state'].map(S).eq('New York'),'id'])).query(\"contact_state == 'NY'\")['imported'].agg(['sum','count']).to_frame().T.assign(pct=lambda x: 100*x['sum']/x['count']))((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found']))), a))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "new-york-exports",
+  "source": "In fact, New York exported 17 adoptable pups to other states.",
+  "claim": "17 dogs described as originating in New York were listed for adoption in other states.",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: imp['origin'].eq('New York').sum())((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ },
+ {
+  "id": "new-york-import-origins",
+  "source": "Texas • 127, South Carolina • 49, Puerto Rico • 28, Georgia • 26, Tennessee • 22",
+  "claim": "For dogs available for adoption in New York, the leading out-of-state origins are Texas (127), South Carolina (49), Puerto Rico (28), Georgia (26) and Tennessee (22).",
+  "tables": {
+   "d": "data/dogTravel.csv"
+  },
+  "code": "(lambda S: (lambda imp: imp.loc[imp['contact_state'].map(S).eq('New York'),'origin'].value_counts())((lambda k: k[k['origin'] != k['contact_state'].map(S)].drop_duplicates('id'))(d[d['remove'].isna()].assign(origin=d['manual'].fillna(d['found'])))))({\"AL\": \"Alabama\", \"AK\": \"Alaska\", \"AZ\": \"Arizona\", \"AR\": \"Arkansas\", \"CA\": \"California\", \"CO\": \"Colorado\", \"CT\": \"Connecticut\", \"DE\": \"Delaware\", \"FL\": \"Florida\", \"GA\": \"Georgia\", \"HI\": \"Hawaii\", \"ID\": \"Idaho\", \"IL\": \"Illinois\", \"IN\": \"Indiana\", \"IA\": \"Iowa\", \"KS\": \"Kansas\", \"KY\": \"Kentucky\", \"LA\": \"Louisiana\", \"ME\": \"Maine\", \"MD\": \"Maryland\", \"MA\": \"Massachusetts\", \"MI\": \"Michigan\", \"MN\": \"Minnesota\", \"MS\": \"Mississippi\", \"MO\": \"Missouri\", \"MT\": \"Montana\", \"NE\": \"Nebraska\", \"NV\": \"Nevada\", \"NH\": \"New Hampshire\", \"NJ\": \"New Jersey\", \"NM\": \"New Mexico\", \"NY\": \"New York\", \"NC\": \"North Carolina\", \"ND\": \"North Dakota\", \"OH\": \"Ohio\", \"OK\": \"Oklahoma\", \"OR\": \"Oregon\", \"PA\": \"Pennsylvania\", \"RI\": \"Rhode Island\", \"SC\": \"South Carolina\", \"SD\": \"South Dakota\", \"TN\": \"Tennessee\", \"TX\": \"Texas\", \"UT\": \"Utah\", \"VT\": \"Vermont\", \"VA\": \"Virginia\", \"WA\": \"Washington\", \"WV\": \"West Virginia\", \"WI\": \"Wisconsin\", \"WY\": \"Wyoming\", \"DC\": \"Washington DC\"})"
+ }
+]

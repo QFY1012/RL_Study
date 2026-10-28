@@ -1,0 +1,24 @@
+{
+ "id": "music-history",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 651,
+  "steps": 96,
+  "tools": 171,
+  "nudged": 3,
+  "usage": {
+   "input": 109797,
+   "output": 41797
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: e748a3fa-a2ec-4da5-b3af-6aed1a5f23fb)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/music-history/facts.json'"
+ ],
+ "skipped": null
+}

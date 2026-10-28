@@ -1,0 +1,38 @@
+[
+  {
+    "id": "negative-song-trend-up",
+    "source": "Our analysis reveals a clear upward trend in the percentage of songs with a predominantly negative emotional sentiment, particularly since the mid-2010s.",
+    "claim": "The yearly share of top-10 songs classified as predominantly negative averaged 22.1% in 1960-2014 and 39.1% in 2015-2020.",
+    "tables": {
+      "b": "data/billboard.csv"
+    },
+    "code": "b.assign(year=pd.to_datetime(b.chart_week).dt.year).query('1960 <= year <= 2020 and peak_pos <= 10').groupby('year').Sentiment.apply(lambda s: s.eq('Negative').mean() * 100).groupby(lambda y: '2015-2020' if y >= 2015 else '1960-2014').mean().round(1)"
+  },
+  {
+    "id": "joy-share-declines",
+    "source": "Joy, while still the most common individual emotion, has been on a relative decline.",
+    "claim": "Joy was the largest share of emotion words in the average top-10 song in every year from 1960 to 2020, falling from 28.3% in 1960 to 16.4% in 2020.",
+    "tables": {
+      "b": "data/billboard.csv"
+    },
+    "code": "(lambda d: (lambda e: (lambda r: r.assign(top=r.idxmax(axis=1)))(e.div(e.sum(axis=1), axis=0).groupby(d.year).mean().mul(100).round(1)))(d.Emotions.apply(lambda s: pd.Series(__import__('ast').literal_eval(s))).fillna(0)))(b.assign(year=pd.to_datetime(b.chart_week).dt.year).query('1960 <= year <= 2020 and peak_pos <= 10')).to_string()"
+  },
+  {
+    "id": "negative-emotions-rise",
+    "source": "This rise in negativity is not attributable to any single emotion, but rather a confluence of increases in sadness, fear, disgust, and anger.",
+    "claim": "In the average top-10 song, anger's share of emotion words rose from 5.1% in 1960 to 12.0% in 2020, disgust's from 4.6% to 8.3%, fear's from 8.0% to 15.5% and sadness's from 9.8% to 15.2%.",
+    "tables": {
+      "b": "data/billboard.csv"
+    },
+    "code": "(lambda d: (lambda e: (lambda r: r.assign(top=r.idxmax(axis=1)))(e.div(e.sum(axis=1), axis=0).groupby(d.year).mean().mul(100).round(1)))(d.Emotions.apply(lambda s: pd.Series(__import__('ast').literal_eval(s))).fillna(0)))(b.assign(year=pd.to_datetime(b.chart_week).dt.year).query('1960 <= year <= 2020 and peak_pos <= 10')).to_string()"
+  },
+  {
+    "id": "taylor-swift-darker",
+    "source": "Taylor Swift, for example, started out with mostly positive, lovestruck anthems, but has increasingly explored darker, more introspective themes in her recent work.",
+    "claim": "The share of Taylor Swift's top-10 songs classified as negative was 0% in the 2000s, 12.5% in the 2010s and 33.3% in 2020.",
+    "tables": {
+      "b": "data/billboard.csv"
+    },
+    "code": "b.assign(year=pd.to_datetime(b.chart_week).dt.year).query(\"1960 <= year <= 2020 and peak_pos <= 10 and performer == 'Taylor Swift'\").assign(decade=lambda x: x.year // 10 * 10).groupby('decade').Sentiment.apply(lambda s: s.eq('Negative').mean() * 100).round(1)"
+  }
+]

@@ -1,0 +1,24 @@
+{
+ "id": "music-dna",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 648,
+  "steps": 61,
+  "tools": 65,
+  "nudged": 3,
+  "usage": {
+   "input": 71340,
+   "output": 90674
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 3bdff460-1538-4b63-aaa2-2367e310b317)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/music-dna/facts.json'"
+ ],
+ "skipped": null
+}

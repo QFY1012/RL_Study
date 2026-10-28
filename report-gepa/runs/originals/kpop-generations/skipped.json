@@ -1,0 +1,22 @@
+[
+  {
+    "source": "From 1992 to 2002, often referred to as K-pop's first generation, just 33 groups debuted.",
+    "why": "The debuts file has 35 rows with gen 1 (years 1992–2002), matching the story chart's '35 groups' label. Dropping the two solo artists BoA and PSY would give 33, but the file does not mark artist type and the story's debut methodology does not say solo artists are excluded."
+  },
+  {
+    "source": "Line chart of YouTube music video views over time, showing how “Gangnam Style” reached 1 billion views in 158 days",
+    "why": "Summing the daily views from the video's first row (2012-07-15), the cumulative total is 998,196,868 on 2012-12-20 (158 days later) and first passes 1 billion on 2012-12-21 (159 days later), so the data does not give 158 days to 1 billion."
+  },
+  {
+    "source": "Nine of the Top 10 Biggest 24 Hour Music Debuts on YouTube of All-Time are from K-Pop Artists",
+    "why": "The data files contain no 24-hour debut view counts or rankings of music videos; gangnam-style.csv has only daily views for 17 videos."
+  },
+  {
+    "source": "In the five years after the pandemic (2022–2026), there was a 270% increase in the number of K-pop shows on US soil compared to the five years before—among twice as many artists as well.",
+    "why": "The data files contain no U.S. concert counts or artist counts, so the 270% increase and the doubling of artists cannot be computed."
+  },
+  {
+    "source": "Emerging markets: +1,250% Seattle, +1,200% Oakland, +1,150% Washington DC, +900% Phoenix, +800% Boston, +600% Orlando",
+    "why": "The data files contain no city-level U.S. concert counts, so these growth rates cannot be computed."
+  }
+]

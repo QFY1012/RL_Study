@@ -1,0 +1,72 @@
+{
+ "id": "hello-stranger",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 639,
+  "steps": 61,
+  "tools": 71,
+  "nudged": 0,
+  "usage": {
+   "input": 138868,
+   "output": 68116
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "pre-conversation-average-band",
+   "basis": "output percentages: (-0.001,3.0]=4.9; (3.0,7.0]=79.5; (7.0,9.0]=15.5. These match the claimed negative up to 3, average 4-7 (integer bins), and positive above 7.",
+   "verdict": "ok"
+  },
+  {
+   "id": "begin-same-or-worse",
+   "basis": "output is 70.6, computed as percent with begin_affect - pre_affect <= 0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "begin-mostly-same",
+   "basis": "output: sign 0.0 = 41.8, sign 1.0 = 29.4, sign -1.0 = 28.7. Same is 41.8, greater than better 29.4 and worse 28.7.",
+   "verdict": "ok"
+  },
+  {
+   "id": "middle-better-than-start",
+   "basis": "output is 58.0, computed as percent with middle_affect - begin_affect > 0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "end-better-than-start",
+   "basis": "output is 66.1, computed as percent with end_affect - begin_affect > 0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "affect-rises-over-conversation",
+   "basis": "output means: pre_affect_avg=6.1, begin_affect_avg=6.2, middle_affect_avg=6.9, end_affect_avg=7.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "age-gap-positive-feeling",
+   "basis": "output end values: 0=7.37, 10=7.30, 20=7.44, 30=7.51, 40=7.55, within 7.30-7.55; begin values range from 6.06 to 6.48.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-difference-similar-feeling",
+   "basis": "output race_diff 0: begin=6.20, end=7.44; race_diff 1: begin=6.11, end=7.32.",
+   "verdict": "ok"
+  },
+  {
+   "id": "politics-difference-similar-feeling",
+   "basis": "output end values for politics_diff 0-5 range from 7.06 to 7.44; begin values range from 6.11 to 6.21.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 9,
+ "skipped": 14
+}

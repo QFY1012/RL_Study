@@ -1,0 +1,146 @@
+[
+ {
+  "id": "kcyy-first-day-women-vs-men-b2b",
+  "source": "If you listened to this station non-stop from midnight to 11:59pm today, you’d likely only hear 3 back-to-back songs by women, compared to 245 from men.",
+  "claim": "On KCYY-FM's 1/7/22 log, 3 songs are back-to-back women's plays and 245 are back-to-back men's plays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"station=='KCYY-FM' and date=='1/7/22'\").groupby(['station','date','b']).size()"
+ },
+ {
+  "id": "kcyy-19-day-b2b-shares",
+  "source": "We looked at 19 dates throughout 2022 for this same radio station and found that out of 6,474 songs, only 64 (0.99%) were back-to-back songs by women plays. For back-to-back songs by men, it was 4,231 (65.53%). Back-to-back mixed-gender ensembles and collaborations account for 36 (0.56%) songs.",
+  "claim": "Of KCYY-FM's 6,474 songs, 64 (0.99%) are back-to-back women's plays, 4,231 (65.35%) are back-to-back men's plays, and 36 (0.56%) are mixed-gender back-to-backs.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"station=='KCYY-FM'\").groupby(['station','b']).size().to_frame('n').assign(pct=lambda y: y.n/y.n.sum()*100, total=lambda y: y.n.sum())"
+ },
+ {
+  "id": "kcyy-release-vs-regular-days",
+  "source": "For this station on average, 4 back-to-back women’s songs are played on release days compared to 3 songs on “regular” Fridays.",
+  "claim": "KCYY-FM averages 4.14 back-to-back women's plays on release dates versus 2.92 on regular Fridays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"station=='KCYY-FM'\").assign(rel=lambda x: np.where(x.weekday.str.contains('regular'),'regular Fridays','release dates')).groupby(['station','rel','date']).b.agg(lambda s: s.eq('women').sum()).groupby(['station','rel']).mean()"
+ },
+ {
+  "id": "kcyy-recode-mixed-as-women",
+  "source": "When you recode mixed-gender collaborations and mixed-gender ensembles as songs by women artists, as some radio stations do, you get 200 (3.1%) women’s back-to-back plays, roughly 10 per day for this station.",
+  "claim": "Recoding mixed-gender songs as women's gives KCYY-FM 200 back-to-back women's plays, 3.09% of its songs and 10.53 per day.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[(d.gender.notna())&(d.station=='KCYY-FM')].assign(g2=lambda x: x.gender.replace('male-female','women')).assign(w2=lambda x: x.g2.eq('women') & x.g2.eq(x.groupby(['station','date'])['g2'].shift())).groupby('station').agg(n=('w2','sum'), pct=('w2', lambda s: s.mean()*100), days=('date','nunique')).assign(per_day=lambda y: y.n/y.days)"
+ },
+ {
+  "id": "station-women-b2b-shares",
+  "source": "Percentage of back-to-back women plays by station",
+  "claim": "Back-to-back women's plays as a share of each station's songs run from 0.03% at Cincinnati's WUBE-FM to 1.27% at Los Angeles's KKGO-FM, with San Antonio's KCYY-FM third at 0.99%.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).assign(w=lambda x: x.b.eq('women')).groupby(['city','station']).w.mean().mul(100).sort_values(ascending=False)"
+ },
+ {
+  "id": "zero-women-b2b-station-days",
+  "source": "For some of the stations, you could go a full day or more without hearing a song by women played back-to-back.",
+  "claim": "166 of the 551 station-days have no back-to-back women's play, and Cincinnati's WUBE-FM has 17 such days out of 19.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).groupby(['city','station','date']).b.agg(lambda s: s.eq('women').sum()).to_frame('n').assign(is_zero=lambda y: y.n.eq(0)).groupby(['city','station']).agg(days=('is_zero','size'), zero_days=('is_zero','sum')).assign(all_days=lambda y: y.days.sum(), all_zero=lambda y: y.zero_days.sum()).sort_values('zero_days', ascending=False)"
+ },
+ {
+  "id": "women-b2b-by-daypart",
+  "source": "Percentage of back-to-back spins for songs by women by time of day",
+  "claim": "Averaged across stations, 46.1% of women's back-to-back plays are overnight (OVN), 16.6% in morning drive (AMD), 9.7% midday (MID), 8.5% in afternoon drive (PMD) and 19.0% in the evening (EVE).",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"b=='women'\").pipe(lambda x: pd.crosstab(x.station, x.dayparts, normalize='index').mul(100).mean())"
+ },
+ {
+  "id": "women-b2b-overnight-evening-share",
+  "source": "On average, 65.1% percent of songs by women played back-to-back come during these hours",
+  "claim": "Averaged across stations, 65.1% of women's back-to-back plays air overnight or in the evening.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"b=='women'\").pipe(lambda x: pd.crosstab(x.station, x.dayparts, normalize='index').mul(100)[['OVN','EVE']].sum(axis=1).mean())"
+ },
+ {
+  "id": "women-b2b-by-record-type",
+  "source": "Percentage of back-to-back spins for songs by women by record type",
+  "claim": "Averaged across stations, 36.2% of women's back-to-back plays are gold (G), 43.7% recurrent (R) and 20.1% current (C).",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"b=='women'\").pipe(lambda x: pd.crosstab(x.station, x.grc, normalize='index').mul(100).mean())"
+ },
+ {
+  "id": "women-b2b-gold-recurrent-share",
+  "source": "Just under 80% of the songs by women played back-to-back are “gold” or “recurrent” songs.",
+  "claim": "Averaged across stations, 79.9% of women's back-to-back plays are gold or recurrent.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not')).query(\"b=='women'\").pipe(lambda x: pd.crosstab(x.station, x.grc, normalize='index').mul(100)[['G','R']].sum(axis=1).mean())"
+ },
+ {
+  "id": "top-overall-women-artists",
+  "source": "Plays for top overall women",
+  "claim": "Among women's plays, Carrie Underwood accounts for 14.3%, Miranda Lambert 10.3% and Maren Morris 9.5%, together 34.1% of 18,412 plays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender=='women'].pipe(lambda x: x.artist.value_counts().head(3).rename(index=lambda s: ' '.join(w.title() for w in s.split(', ')[::-1])).to_frame('n').assign(pct=lambda y: y.n/len(x)*100, top3_pct=lambda y: y.n.sum()/len(x)*100, plays=len(x), gender=x.gender.iloc[0]))"
+ },
+ {
+  "id": "top-current-women-artists",
+  "source": "The top 3 current women artists make up 52% of current airplay for women.",
+  "claim": "Among current (C) women's plays, Gabby Barrett accounts for 23.2%, Kelsea Ballerini 17.0% and Lainey Wilson 12.0%, together 52.2% of 3,254 plays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[(d.gender=='women')&(d.grc=='C')].pipe(lambda x: x.artist.value_counts().head(3).rename(index=lambda s: ' '.join(w.title() for w in s.split(', ')[::-1])).to_frame('n').assign(pct=lambda y: y.n/len(x)*100, top3_pct=lambda y: y.n.sum()/len(x)*100, plays=len(x), gender=x.gender.iloc[0], grc=x.grc.iloc[0]))"
+ },
+ {
+  "id": "top-overall-men-artists",
+  "source": "Plays for top overall men",
+  "claim": "Among men's plays, Luke Combs accounts for 5.4%, Morgan Wallen 4.1% and Luke Bryan 3.7%, together 13.3% of 149,068 plays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender=='men'].pipe(lambda x: x.artist.value_counts().head(3).rename(index=lambda s: ' '.join(w.title() for w in s.split(', ')[::-1])).to_frame('n').assign(pct=lambda y: y.n/len(x)*100, top3_pct=lambda y: y.n.sum()/len(x)*100, plays=len(x), gender=x.gender.iloc[0]))"
+ },
+ {
+  "id": "top-current-men-artists",
+  "source": "The top 3 men account for 20.3% of current airplay for men.",
+  "claim": "Among current (C) men's plays, Jelly Roll accounts for 8.7%, Jimmie Allen 6.4% and Zac Brown Band 5.3%, together 20.3% of 10,617 plays.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[(d.gender=='men')&(d.grc=='C')].pipe(lambda x: x.artist.value_counts().head(3).rename(index=lambda s: ' '.join(w.title() for w in s.split(', ')[::-1])).to_frame('n').assign(pct=lambda y: y.n/len(x)*100, top3_pct=lambda y: y.n.sum()/len(x)*100, plays=len(x), gender=x.gender.iloc[0], grc=x.grc.iloc[0]))"
+ },
+ {
+  "id": "race-b2b-rates",
+  "source": "Where back-to-back spins for songs by women were on average 0.5% of all airplay, back-to-back spins for songs by all artists of color averaged 0.38% and back-to-back spins for those by women artists of color were non-existent.",
+  "claim": "Averaged across stations, back-to-back women's plays are 0.50% of songs, back-to-back plays by artists of color (a song by an artist of color following a same-gender song by an artist of color) are 0.38%, and women artists of color have none.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[d.gender.notna()].assign(b=lambda x: np.where(x.gender.eq(x.groupby(['station','date'])['gender'].shift()), x.gender, 'not'), pg=lambda x: x.groupby(['station','date'])['gender'].shift(), pr=lambda x: x.groupby(['station','date'])['race'].shift()).assign(is_w=lambda x: x.b.eq('women'), is_poc=lambda x: ~x.race.isin(['white','na']) & ~x.pr.isin(['white','na']) & x.gender.eq(x.pg), is_woc=lambda x: x.b.eq('women') & ~x.race.isin(['white','na']) & ~x.pr.isin(['white','na'])).groupby('station').agg(women_pct=('is_w', lambda s: s.mean()*100), poc_pct=('is_poc', lambda s: s.mean()*100), woc_count=('is_woc','sum')).mean()"
+ },
+ {
+  "id": "kcyy-first-women-b2b-after-start",
+  "source": "It’ll be 9 hours and 16 minutes before you hear a rarity on country radio: back-to-back songs by women with Priscilla Block’s “Just About Over You” played right after the Carly Pearce and Ashley McBryde’s collaboration “Never Wanted To Be That Girl.”",
+  "claim": "On KCYY-FM's 1/7/22 log, the first women's back-to-back after the 8:35 a.m. song comes 9 hours 16 minutes later, at 5:51 p.m., when Priscilla Block's 'Just About Over You' follows Carly Pearce and Ashley McBryde's 'Never Wanted To Be That Girl'.",
+  "tables": {
+   "d": "data/plays.csv"
+  },
+  "code": "d[(d.gender.notna())&(d.station=='KCYY-FM')&(d.date=='1/7/22')].assign(t=lambda x: pd.to_datetime(x.time, format='%I:%M:%S %p'), pg=lambda x: x.gender.shift(), pa=lambda x: x.artist.shift(), pt=lambda x: x.title.shift()).assign(b=lambda x: np.where(x.gender.eq(x.pg), x.gender, 'not')).pipe(lambda x: x.loc[x.b.eq('women') & x.t.gt(x.loc[x.title.eq(\"That Ain't No Way To Go\"),'t'].iloc[0])].head(1).assign(start=lambda y: x.loc[x.title.eq(\"That Ain't No Way To Go\"),'t'].iloc[0]).assign(elapsed=lambda y: y.t-y.start).filter(['station','date','time','artist','title','pa','pt','b','start','elapsed'])).T"
+ }
+]

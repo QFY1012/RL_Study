@@ -1,0 +1,56 @@
+[
+  {
+    "id": "social-workers-low-automation",
+    "source": "If you’re in a career that involves a good deal of social perceptiveness, such as a healthcare social worker or a speech language pathologist (both at < 1% likelihood of automation), there's little need to worry about automation.",
+    "claim": "Healthcare social workers have an automation probability of 0.0035 and speech-language pathologists 0.0064, both below 0.01.",
+    "tables": {
+      "jobs": "data/all_jobs_updated_to_BLO.csv"
+    },
+    "code": "jobs.loc[jobs.Occupation.isin(['Healthcare Social Workers','Speech-Language Pathologists']), ['Occupation','Probability']]"
+  },
+  {
+    "id": "medical-assistants-601000",
+    "source": "Most of us fall somewhere in between those two extremes, and may be happy enough knowing that robots won’t be stealing our jobs quite yet (here’s looking at you, 601,000 medical assistants).",
+    "claim": "Medical assistants number 601,240 in the employment counts.",
+    "tables": {
+      "jobs": "data/all_jobs_updated_to_BLO.csv"
+    },
+    "code": "jobs.assign(emp=pd.to_numeric(jobs['number'].astype(str).str.replace(',',''), errors='coerce')).loc[lambda d: d.Occupation=='Medical Assistants', ['Occupation','emp']]"
+  },
+  {
+    "id": "top-automatable-jobs-50-million",
+    "source": "if only the top 15% of the most vulnerable occupations disappear, over 50 million people risk being out of work",
+    "claim": "Occupations with an automation likelihood of at least 85% employ 51,960,340 people.",
+    "tables": {
+      "jobs": "data/all_jobs_updated_to_BLO.csv"
+    },
+    "code": "jobs.assign(emp=pd.to_numeric(jobs['number'].astype(str).str.replace(',',''), errors='coerce')).query('Probability >= 0.85').emp.sum()"
+  },
+  {
+    "id": "truck-drivers-79-percent",
+    "source": "truck drivers — who have a 79% chance of becoming automated",
+    "claim": "Heavy and tractor-trailer truck drivers have an automation probability of 0.79.",
+    "tables": {
+      "jobs": "data/all_jobs_updated_to_BLO.csv"
+    },
+    "code": "jobs.loc[jobs.Occupation=='Heavy and Tractor-Trailer Truck Drivers', ['Occupation','Probability']]"
+  },
+  {
+    "id": "truckers-one-percent-workforce",
+    "source": "Truckers make up over 1% of the U.S. working population",
+    "claim": "Heavy and tractor-trailer truck drivers account for 1.3956% of total employment across the occupations in the data, more than 1%.",
+    "tables": {
+      "jobs": "data/all_jobs_updated_to_BLO.csv"
+    },
+    "code": "jobs.assign(emp=pd.to_numeric(jobs['number'].astype(str).str.replace(',',''), errors='coerce')).pipe(lambda d: d.loc[d.Occupation=='Heavy and Tractor-Trailer Truck Drivers','emp'].sum()/d.emp.sum()*100)"
+  },
+  {
+    "id": "nearly-every-county-job-loss",
+    "source": "Were jobs with a high risk of automation to vanish, a staggering number of people in nearly every county in America would be out of a job.",
+    "claim": "In 3,139 of the 3,143 county rows (99.87%), at least 10% of jobs are in occupations with an 85% or higher automation likelihood.",
+    "tables": {
+      "counties": "data/final_puma2county_minified_v2.csv"
+    },
+    "code": "counties.puma_jobslostat85.ge(0.10).agg(counties='sum', total='count', pct=lambda s: s.mean()*100)"
+  }
+]

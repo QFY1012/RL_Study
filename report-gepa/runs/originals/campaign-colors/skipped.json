@@ -1,0 +1,30 @@
+[
+  {
+    "source": "The number of candidates may have also played a part. We looked at 37 candidate logos from 2020, compared to 12 in 1984.",
+    "why": "This is a description of the sample size (record counts per year), not a finding drawn from the data under the task's rule that how many records the data has is not a finding."
+  },
+  {
+    "source": "32 candidates were dropped because an image of campaign material could not be found, leaving us with 271 total candidates.",
+    "why": "This describes how the dataset was collected and its total size; it is data documentation rather than a finding drawn from the color and demographic records."
+  },
+  {
+    "source": "After all, only one candidate (Jimmy Carter, Democratic, 1976) has won the presidency since 1968 using a non-RWB color scheme.",
+    "why": "The data contains candidate colors and demographics but no winner or electoral-outcome field, so which non-RWB candidates won the presidency cannot be computed from colors.csv."
+  },
+  {
+    "source": "This is precisely the strategy of third party campaigns, which are more likely to feature minority candidates, like Jo Jorgensen (Libertarian, 2020), Jill Stein (Green, 2012 and 2016), and Eldridge Cleaver (Peace and Freedom, 1968).",
+    "why": "The data does not reproduce the comparison: third-party candidates are not more likely to be minority candidates (8 of 54, 15%) than Democratic and Republican candidates (34 of 217, 16%)."
+  },
+  {
+    "source": "Many choose to lean on colors that are traditionally associated with femininity, such as purple and pink.",
+    "why": "The story defines no purple/pink category or count, and the hex-color columns do not supply the story's subjective categorization, so no share or comparison can be computed."
+  },
+  {
+    "source": "Overall, each candidate’s branding has become much more cohesive since the 1960s, when buttons, stickers, and signs for the same candidate could look vastly different.",
+    "why": "The data has one logo/color record per candidate and no measure of consistency across a campaign's materials, so this cohesion trend cannot be computed."
+  },
+  {
+    "source": "Campaigns are increasingly turning to agencies like Hyperakt (Pete Buttigieg), Wide Eye (Kamala Harris), Stoneridge Group (Marco Rubio), and Axiom Strategies (Ted Cruz) to do the heavy lifting.",
+    "why": "The data contains no design-agency field, so the claim about which campaigns used agencies cannot be computed."
+  }
+]

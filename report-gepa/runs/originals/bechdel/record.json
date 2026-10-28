@@ -1,0 +1,77 @@
+{
+ "id": "bechdel",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1060,
+  "steps": 85,
+  "tools": 97,
+  "nudged": 0,
+  "usage": {
+   "input": 110645,
+   "output": 135089
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "overall-bechdel-fail-rate",
+   "basis": "输出显示 films=4000, fail=1494, pass_=2506, fail_pct=37。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top200-writers-bechdel",
+   "basis": "输出显示 all men 失败53%通过47%，at least one woman 失败38%通过62%，all women 失败0%通过100%。",
+   "verdict": "ok"
+  },
+  {
+   "id": "writers-composition-bechdel",
+   "basis": "输出显示 2+ women=11，all men=46，all women=6，at least one woman=17。",
+   "verdict": "ok"
+  },
+  {
+   "id": "producers-composition-bechdel",
+   "basis": "输出显示 2+ women=32，all men=43，all women=29，at least one woman=35。",
+   "verdict": "ok"
+  },
+  {
+   "id": "directors-composition-bechdel",
+   "basis": "输出显示 all men=41，all women=10。",
+   "verdict": "ok"
+  },
+  {
+   "id": "writers-box-office-ratio",
+   "basis": "输出各箱为 $0-$10M f=696/m=2479/ratio=4，$11-$50M f=195/m=913/ratio=5，$51-$100M f=128/m=709/ratio=6，$101-$500M f=224/m=1760/ratio=8，$500M+ f=81/m=608/ratio=8。",
+   "verdict": "ok"
+  },
+  {
+   "id": "fail-rate-1995-vs-2015",
+   "basis": "输出显示 1995=37，2015=38。",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-share-1995-vs-2015",
+   "basis": "输出显示 1995=18，2015=17。",
+   "verdict": "ok"
+  },
+  {
+   "id": "director-credits-women",
+   "basis": "输出显示 size=4507，women=520。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-producers-bechdel",
+   "basis": "输出中 12 位制片人的失败比例依次为 Harvey Weinstein=33、Bruce Berman=44、Scott Rudin=36、Tim Bevan=38、Eric Fellner=37、Toby Emmerich=38、Tessa Ross=56、Liza Chasin=29、Joel Silver=50、Laurie MacDonald=50、Debra Hayward=26、Judd Apatow=35。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 14
+}

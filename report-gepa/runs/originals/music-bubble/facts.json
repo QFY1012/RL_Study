@@ -1,0 +1,65 @@
+[
+  {
+    "id": "north-charleston-top-song",
+    "source": "If you listen to pop music, you’ve likely heard BeatBox 2 (feat. Pooh Shiesty) by SpotemGottem, the most popular song in North Charleston.",
+    "claim": "BeatBox 2 (feat. Pooh Shiesty) by SpotemGottem is the most popular song in North Charleston, with 14,600 YouTube views.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "c[c.geo_name.eq('North Charleston')].set_index('geo_name')[['track_name','artist_name','views']]"
+  },
+  {
+    "id": "north-charleston-nearby-charleston",
+    "source": "But head over to Charleston, and good 4 u by Olivia Rodrigo has BeatBox 2 (feat. Pooh Shiesty)-level popularity.",
+    "claim": "Charleston is the nearest city to North Charleston with a different #1 song, and Charleston’s #1 song is good 4 u by Olivia Rodrigo.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(lambda d,g: d.assign(origin=g.geo_name, dist=2*6371*np.arcsin(np.sqrt(np.sin(np.radians(d.latitude-g.latitude)/2)**2 + np.cos(np.radians(g.latitude))*np.cos(np.radians(d.latitude))*np.sin(np.radians(d.longitude-g.longitude)/2)**2))).query('track_link != @g.track_link').nsmallest(1,'dist')[['origin','geo_name','track_name','artist_name','dist']])(c, c[c.geo_name.eq('North Charleston')].iloc[0])"
+  },
+  {
+    "id": "north-charleston-area-different-songs",
+    "source": "Generally, cities in the area around North Charleston have different #1 songs, a sort of pop music melting pot.",
+    "claim": "Around North Charleston, US cities have 3 different #1 songs: MONTERO (Call Me By Your Name) by Lil Nas X, BeatBox 2 (feat. Pooh Shiesty) by SpotemGottem, and good 4 u by Olivia Rodrigo.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(lambda d,g: d[(d.country_code.eq(g.country_code)) & (2*6371*np.arcsin(np.sqrt(np.sin(np.radians(d.latitude-g.latitude)/2)**2 + np.cos(np.radians(g.latitude))*np.cos(np.radians(d.latitude))*np.sin(np.radians(d.longitude-g.longitude)/2)**2)) <= 100)].assign(origin=g.geo_name, country_code=g.country_code).groupby(['origin','country_code','track_name','artist_name']).size().rename('cities').to_frame().assign(n_songs=lambda x: len(x)).sort_values('cities',ascending=False))(c, c[c.geo_name.eq('North Charleston')].iloc[0])"
+  },
+  {
+    "id": "usa-five-widespread-number-ones",
+    "source": "The #1 hit in a particular region reflects the broader cultural edges of the USA’s geography, which has 5 different #1 songs.",
+    "claim": "In the US, five #1 songs are the most widespread: good 4 u by Olivia Rodrigo (236 cities, 30.9%), Butter by BTS (217, 28.4%), RAPSTAR by Polo G (71, 9.3%), MONTERO (Call Me By Your Name) by Lil Nas X (67, 8.8%), and Outside (Better Days) by MO3, Og Bobby Billions (43, 5.6%).",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(lambda d: d.assign(country_code=d.country_code.iloc[0]).groupby(['country_code','track_name','artist_name']).size().to_frame('cities').assign(share=lambda x: x.cities/len(d)).query('cities > 4 and share > 0.04').sort_values('cities',ascending=False)[['cities','share']])(c[c.country_code.eq('US')])"
+  },
+  {
+    "id": "columbus-top-song",
+    "source": "If you listen to pop music, you’ve likely heard RAPSTAR by Polo G, the most popular song in Columbus.",
+    "claim": "RAPSTAR by Polo G is the most popular song in Columbus, with 200,000 YouTube views.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "c[c.geo_name.eq('Columbus')].nlargest(1,'views').set_index('geo_name')[['country_code','track_name','artist_name','views']]"
+  },
+  {
+    "id": "border-london-canada-body-remix",
+    "source": "The top song often changes when crossing international borders. 367 km away from Columbus is London, Canada, where “Body (Remix)” by Tion Wayne, Russ is a number one hit.",
+    "claim": "London is 367 km from Columbus, and London’s #1 song is Body (Remix) by Tion Wayne, Russ.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(lambda d,g,x: d.assign(origin=g.geo_name, dist=2*6371*np.arcsin(np.sqrt(np.sin(np.radians(d.latitude-g.latitude)/2)**2 + np.cos(np.radians(g.latitude))*np.cos(np.radians(d.latitude))*np.sin(np.radians(d.longitude-g.longitude)/2)**2))).query('country_code != @g.country_code and track_link != @g.track_link and track_link not in @x').nsmallest(1,'dist')[['origin','geo_name','track_name','artist_name','dist']])(c, c[c.geo_name.eq('Columbus')].nlargest(1,'views').iloc[0], c[c.country_code.eq('US')].track_link.value_counts().pipe(lambda s: s[(s > 4) & (s/len(c[c.country_code.eq('US')]) > 0.04)].index))"
+  },
+  {
+    "id": "bahamas-crocodile-teeth",
+    "source": "Crocodile Teeth by Skillibeng is the hit of Bahamas",
+    "claim": "Crocodile Teeth by Skillibeng is the #1 song in Nassau, BS, with 125,000 YouTube views.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "c[c.country_code.eq('BS')][['geo_name','country_code','track_name','artist_name','views']]"
+  }
+]

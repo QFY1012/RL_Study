@@ -1,0 +1,70 @@
+{
+ "id": "aapi-casting",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 389,
+  "steps": 30,
+  "tools": 36,
+  "nudged": 0,
+  "usage": {
+   "input": 33875,
+   "output": 40223
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "asian-representation-increased-by-decade",
+   "basis": "输出按年代统计的是总行数：1980=15、1990=27、2000=74、2010=82、2020=38；代码未筛选 Asian，不能支持这些是 Asian character counts。",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "film-level-casting-accuracy",
+   "basis": "输出显示 complete accuracy 64、partial accuracy 13、complete inaccuracy 3。",
+   "verdict": "ok"
+  },
+  {
+   "id": "characters-ethnic-background-match",
+   "basis": "输出显示 sum=207、count=236、百分比=87.711864，约为 87.71%。",
+   "verdict": "ok"
+  },
+  {
+   "id": "big-five-share-of-films",
+   "basis": "输出显示 sum=31、count=80、百分比=38.75。",
+   "verdict": "ok"
+  },
+  {
+   "id": "big-five-casting-accuracy",
+   "basis": "输出显示 sum=74、count=88、百分比=84.090909，约为 84.09%。",
+   "verdict": "ok"
+  },
+  {
+   "id": "asian-director-casting-accuracy",
+   "basis": "输出显示 N=82.962963%、Y=94.059406%，即非亚裔导演约 82.96%、亚裔导演约 94.06%。",
+   "verdict": "ok"
+  },
+  {
+   "id": "asian-representation-increased-by-decade",
+   "basis": "输出按年代统计的是总行数：1980=15、1990=27、2000=74、2010=82、2020=38；代码未筛选 Asian，不能支持这些是 Asian character counts。",
+   "verdict": "wrong"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 7,
+ "review": [
+  {
+   "id": "asian-representation-increased-by-decade",
+   "action": "restore",
+   "why": "1.3 judged it wrong because the printout does not say the rows are Asian characters; every row of the data is one (the decade counts sum to the story's 236). Quote is in the story."
+  }
+ ]
+}

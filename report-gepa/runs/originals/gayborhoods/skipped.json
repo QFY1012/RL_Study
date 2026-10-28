@@ -1,0 +1,102 @@
+[
+  {
+    "source": "A majority of New York’s gay bars overlap the march route and are clustered on the west side of Manhattan in the West Village, Chelsea, and Hell’s Kitchen.",
+    "why": "data.csv has one row per ZIP code with only a count of bars (CountBars) and a parade-route flag (ParadeFlag); it has no individual bar locations, no city or borough field, and no way to identify New York’s bars or measure their overlap with the route. Across all ZIP codes, 130 of the 275 bars (47%) fall in a parade-route ZIP, so the majority claim cannot be reproduced from this file."
+  },
+  {
+    "source": "After combining these metrics, it’s no surprise that the west side of Manhattan emerges as a dense gayborhood, but there are also darker areas that stretch into Brooklyn.",
+    "why": "This describes the shading of the story’s map. data.csv has only ZIP-code identifiers and no city, borough, or neighborhood field, so Manhattan’s west side and Brooklyn cannot be selected from the file."
+  },
+  {
+    "source": "Men dominate the west side, with the highest concentration in Chelsea.",
+    "why": "Chelsea is a neighborhood label on the story’s map image, not a field in data.csv; the file contains only ZIP codes and no ZIP-to-neighborhood mapping, so this geographic comparison cannot be computed from the file."
+  },
+  {
+    "source": "The strongest cluster appears in Park Slope, Brooklyn, New York’s “lesbian capital.”",
+    "why": "Park Slope is a neighborhood label on the story’s map image, not a field in data.csv. The file has ZIP-code identifiers only, so the neighborhood cannot be isolated and the smoothed-map cluster cannot be reproduced from the raw ZIP index."
+  },
+  {
+    "source": "For now, same-sex male couples are still concentrated in Midtown, but they are noticeably less visible on the map to the east of the city, especially in the lesbian enclaves of Kirkwood and Decatur, colloquially named “Dick hater.”",
+    "why": "Midtown, Kirkwood, and Decatur are neighborhood labels on the story’s map image; data.csv has only ZIP codes and no city or neighborhood field, so this subset cannot be defined from the file."
+  },
+  {
+    "source": "Boston has some distinct gender patterns, with same-sex male households heavily concentrated in the South End and same-sex female households a little farther out in Jamaica Plain.",
+    "why": "The South End and Jamaica Plain are neighborhood labels on the story’s map image; data.csv has only ZIP-code identifiers and no city or neighborhood field, so these areas cannot be selected from the file."
+  },
+  {
+    "source": "Chicago’s gayborhoods are noticeably split by gender on the map—they’re even split by name: Boystown (Lakeview) and Girlstown (Andersonville).",
+    "why": "Boystown/Lakeview and Girlstown/Andersonville are neighborhood labels on the story’s map image, not fields in data.csv; the file has only ZIP codes and no ZIP-to-neighborhood mapping."
+  },
+  {
+    "source": "as same-sex male couples are continuing their migration north across the Boystown/Girlstown divide.",
+    "why": "This is a change-over-time claim about two named neighborhoods. data.csv is a single 2015 cross-section with no earlier period and no neighborhood or city field, so the migration cannot be measured."
+  },
+  {
+    "source": "Same-sex male couples are concentrated in the center city in Uptown and Capitol Hill, while same-sex female couples are significantly less concentrated and tend to be east of the city.",
+    "why": "Uptown, Capitol Hill, and the city’s east side are neighborhood labels on the story’s map image; data.csv has only ZIP-code identifiers and no city or neighborhood field."
+  },
+  {
+    "source": "As Montrose evolves, Houston’s LGBTQ community has also started to settle in neighborhoods southeast of downtown like Third Ward and East Downtown and areas to the north like the Heights.",
+    "why": "Montrose, Third Ward, East Downtown, and the Heights are neighborhood labels on the story’s map image, not fields in data.csv; the file has only ZIP codes and no city or neighborhood field."
+  },
+  {
+    "source": "Noticeably absent from the LGBTQ community in Miami? Women. They tend to be a little farther north in Hollywood.",
+    "why": "Hollywood and Miami are city/neighborhood labels on the story’s map image; data.csv has only ZIP-code identifiers and no city or neighborhood field, so the gender comparison for these places cannot be defined from the file."
+  },
+  {
+    "source": "Same-sex male couples have spread east into Faubourg Marigny, Bywater and the Lower Ninth Ward, while same-sex female couples have moved northwest into Bayou St. John and Mid-City.",
+    "why": "These are named neighborhoods on the story’s map image, and “have spread/moved” is a change over time. data.csv is a single 2015 ZIP-level snapshot with no neighborhood or city field and no earlier period."
+  },
+  {
+    "source": "Today, the area is highly concentrated with same-sex male couples, but many say it’s a shadow of its former self.",
+    "why": "The area is the West Village, a neighborhood label on the story’s map image, not a field in data.csv; the file has only ZIP codes and no city or neighborhood field."
+  },
+  {
+    "source": "Newer queer enclaves are emerging in West Philly and to the north in Germantown and Mount Pleasant where there is a higher concentration of same-sex female couples.",
+    "why": "West Philly, Germantown, and Mount Pleasant are neighborhood labels on the story’s map image; data.csv has only ZIP-code identifiers and no city or neighborhood field."
+  },
+  {
+    "source": "The most noticeable difference between the two genders is that there is a higher concentration of same-sex male couples downtown in the Pearl District. Same-sex male couples also tend to live west of the city, and same-sex women couples to the east.",
+    "why": "The Pearl District and the city’s west and east sides are neighborhood labels on the story’s map image, not fields in data.csv; the file has only ZIP codes and no city or neighborhood field."
+  },
+  {
+    "source": "Today, the Castro is still a stronghold for LGBTQ nightlife and where there is a high concentration of same-sex male couples.",
+    "why": "The Castro is a neighborhood label on the story’s map image, not a field in data.csv; the file has only ZIP-code identifiers and no city or neighborhood field."
+  },
+  {
+    "source": "Same-sex male couples are still largely concentrated in Capitol Hill and to the southwest in the Central District and Madrona. Same-sex female couples are farther south across interstate 90 in Beacon Hill and Mount Baker.",
+    "why": "Capitol Hill, the Central District, Madrona, Beacon Hill, and Mount Baker are neighborhood labels on the story’s map image; data.csv has only ZIP codes and no city or neighborhood field."
+  },
+  {
+    "source": "Currently a large concentration of same-sex male couples call Dupont home and are spilling into Shaw, a traditionally black neighborhood. Same-sex female couples are clustered just north in Adams Morgan and Columbia Heights and have stretched across the northeast border into Maryland.",
+    "why": "Dupont, Shaw, Adams Morgan, Columbia Heights, and Maryland are neighborhood/state labels on the story’s map image; data.csv has only ZIP-code identifiers and no city, neighborhood, or state field."
+  },
+  {
+    "source": "A 2015 study from the University of Pennsylvania’s Population Studies Center had similar findings, stating “lesbians are less spatially concentrated than gay men.”",
+    "why": "This is a finding of an external study, not computed from data.csv."
+  },
+  {
+    "source": "The gender wage gap hits same-sex female households hard—they have less household income than both same-sex male and different-sex households.",
+    "why": "This is an external claim about household income; data.csv has no income variables."
+  },
+  {
+    "source": "Same-sex females couples are also more likely to have children than their male counterparts.",
+    "why": "This is an external claim about children; data.csv has no children or household-composition variables."
+  },
+  {
+    "source": "The earlier study from UPenn found that Census tracts that started the decade with more gay men experience significantly greater growth in household income and population.",
+    "why": "This is an external study finding; data.csv is a single 2015 ZIP-level cross-section with no tract-level income or population change variables."
+  },
+  {
+    "source": "Same-sex male households often follow, priced out of previous gayborhoods.",
+    "why": "This is a claim from cited research about household movement and housing prices; data.csv has no income, housing-price, or longitudinal migration variables."
+  },
+  {
+    "source": "The Seattle Times reported in 2014, that the city saw an increase of same-sex households between 2000-2014 in just about every neighborhood.",
+    "why": "This is an external Seattle Times analysis, not data.csv; the file is a single 2015 cross-section with no 2000–2014 change measure."
+  },
+  {
+    "source": "But Capitol Hill saw a 23 percent drop.",
+    "why": "The story attributes this figure to a 2014 Seattle Times analysis, not to data.csv; the file is a single 2015 snapshot and has no 2000–2014 change measure or neighborhood field."
+  }
+]

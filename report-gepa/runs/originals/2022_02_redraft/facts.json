@@ -1,0 +1,38 @@
+[
+  {
+    "id": "top-50-player-ratings",
+    "source": "Top 50 Players Since the 1989 Draft — A player’s rating is a blend of four advanced stats based on their top five seasons, then scaled to the 🐐who is #1 in every stat. Stats below are scaled, not raw values.",
+    "claim": "LeBron James ranks first with a rating of 100 and 100 in each of the four scaled stats, ahead of Kevin Garnett (86) and Chris Paul (85).",
+    "tables": {
+      "d": "data/redrafted.csv"
+    },
+    "code": "d.assign(\n    VORP_s=(d.VORP_top-d.VORP_top.min())/(d.VORP_top.max()-d.VORP_top.min())*100,\n    WS_s=(d.WS_top-d.WS_top.min())/(d.WS_top.max()-d.WS_top.min())*100,\n    WA_s=(d.WA_top-d.WA_top.min())/(d.WA_top.max()-d.WA_top.min())*100,\n    RWAR_s=(d.RWAR_top-d.RWAR_top.min())/(d.RWAR_top.max()-d.RWAR_top.min())*100\n).assign(rating=lambda x: x[['VORP_s','WS_s','WA_s','RWAR_s']].mean(axis=1)\n).nlargest(50,'rating')[['name','rating','VORP_s','WS_s','WA_s','RWAR_s']].set_index('name').round(0).astype(int)"
+  },
+  {
+    "id": "lebron-first-in-every-stat",
+    "source": "then scaled to the 🐐who is #1 in every stat.",
+    "claim": "LeBron James has the highest VORP (51.2), Win Shares (90.3), Wins Added (124.09) and RAPTOR WAR (98.61) of any player.",
+    "tables": {
+      "d": "data/redrafted.csv"
+    },
+    "code": "d.loc[d[['VORP_top','WS_top','WA_top','RWAR_top']].idxmax().unique(), ['name','VORP_top','WS_top','WA_top','RWAR_top']]"
+  },
+  {
+    "id": "best-player-available-top-teams",
+    "source": "Drafting is hard. Here is how often each team selects the best player available in the first round.",
+    "claim": "New Orleans (NOP) picks the best player available in the first round 27.3% of the time, the highest share of any team, ahead of the Lakers (LAL, 22.2%) and Cavaliers (CLE, 18.5%).",
+    "tables": {
+      "d": "data/redrafted.csv"
+    },
+    "code": "d.assign(rating=lambda x: sum((x[c]-x[c].min())/(x[c].max()-x[c].min())*100 for c in ['VORP_top','WS_top','WA_top','RWAR_top'])/4\n).sort_values(['year','pick']\n).assign(best=lambda x: x.groupby('year')['rating'].transform(lambda s: s[::-1].cummax()[::-1])\n).assign(isbest=lambda x: np.isclose(x.rating,x.best),\n         franch=lambda x: x.rookie_team.fillna(x.draft_team).replace({'NOH':'NOP','NOK':'NOP','NJN':'BRK','CHH':'CHA','CHO':'CHA','SEA':'OKC','VAN':'MEM','WSB':'WAS'})\n).query('pick<=30').groupby('franch').isbest.mean().mul(100).nlargest(3).round(1)"
+  },
+  {
+    "id": "knicks-could-have-beens",
+    "source": "-\nMike Sweetney\nPick #9\nTeam NYK\nRating 7\n2003\nDavid West\nPick #18\nTeam NOP\nRating 39\n-\nJordan Hill\nPick #8\nTeam NYK\nRating 10\n2009\nJrue Holiday\nPick #17\nTeam PHI\nRating 37\n-\nFrank Ntilikina\nPick #8\nTeam NYK\nRating 4\n2017\nDonovan Mitchell\nPick #13\nTeam UTA\nRating 25\n-\nDanilo Gallinari\nPick #6\nTeam NYK\nRating 34\n2008\nDeAndre Jordan\nPick #35\nTeam LAC\nRating 49\n-\nChanning Frye\nPick #8\nTeam NYK\nRating 26\n2005\nDanny Granger\nPick #17\nTeam IND\nRating 35",
+    "claim": "Among their top-10 picks, the Knicks' five biggest upgrades pair Mike Sweetney (pick 9, rating 7) with David West (pick 18, rating 39), Jordan Hill (pick 8, rating 10) with Jrue Holiday (pick 17, rating 37), Frank Ntilikina (pick 8, rating 4) with Donovan Mitchell (pick 13, rating 25), Danilo Gallinari (pick 6, rating 34) with DeAndre Jordan (pick 35, rating 49), and Channing Frye (pick 8, rating 26) with Danny Granger (pick 17, rating 35).",
+    "tables": {
+      "d": "data/redrafted.csv"
+    },
+    "code": "d.assign(rating=lambda x: sum((x[c]-x[c].min())/(x[c].max()-x[c].min())*100 for c in ['VORP_top','WS_top','WA_top','RWAR_top'])/4\n).query(\"team=='NYK' and pick<=10\"\n).merge(d.assign(rating=lambda x: sum((x[c]-x[c].min())/(x[c].max()-x[c].min())*100 for c in ['VORP_top','WS_top','WA_top','RWAR_top'])/4\n)[['year','pick','name','rating']], on='year', suffixes=('','_up')\n).query('pick_up>pick'\n).sort_values('rating_up').groupby(['name','pick']).tail(1\n).assign(gap=lambda x: x.rating_up-x.rating\n).nlargest(5,'gap')[['name','pick','rating','name_up','pick_up','rating_up']].set_index(['name','name_up']).round(0).astype(int)"
+  }
+]

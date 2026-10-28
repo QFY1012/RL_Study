@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Nouns Still Dominate Both Lists, Verbs Remained Steady, and Adjectives Grew Modestly.",
+    "why": "Under the chart note's stated definition — all changes reflect each category's share of its list, not raw counts — verbs are not steady: they fall from 3.1% of the 1953 list to 2.5% of the 2023 list. Verbs are steady only in raw counts (70 vs. 69), a definition the story says it is not using."
+  },
+  {
+    "source": "By 1957, four years after the original list was published, white-collar workers outnumbered blue-collar for the first time in US history.",
+    "why": "External historical statistic; the supplied files contain only the vocabulary lists, semantic tags, concreteness ratings and part-of-speech labels."
+  },
+  {
+    "source": "And by 2000, fewer than one in four workers did manual labor.",
+    "why": "External historical statistic; the supplied files contain only the vocabulary lists, semantic tags, concreteness ratings and part-of-speech labels."
+  },
+  {
+    "source": "That coverage is high, over 90% for the 2023 list and about 84% for the 1953 list.",
+    "why": "The coverage figures come from published corpus research cited by the story, not from the supplied word-level files."
+  },
+  {
+    "source": "Here I did intervene, but only when a word was clearly mislabeled (132 words, 3.8% of the list; mostly adjectives mislabeled as nouns).",
+    "why": "The files contain only the final part-of-speech labels, not the original NLTK output, so the number of manually corrected words cannot be recomputed."
+  }
+]

@@ -1,0 +1,77 @@
+{
+ "id": "births",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 669,
+  "steps": 45,
+  "tools": 46,
+  "nudged": 0,
+  "usage": {
+   "input": 30301,
+   "output": 96176
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "suffolk-june-july-2013-rise",
+   "basis": "Output: June=1313.0, July=1426.0; births rose from 1,313 to 1,426.",
+   "verdict": "ok"
+  },
+  {
+   "id": "suffolk-june-july-2013-low",
+   "basis": "Output sorted: 2012=2735.0, 2013=2739.0, 2015=2763.0; 2013 total 2,739 is second-lowest after 2012's 2,735.",
+   "verdict": "ok"
+  },
+  {
+   "id": "boston-july-2005-fewest",
+   "basis": "Output sorted July values: 2005=757.0, 1996=776.0, 2006=795.0; 2005 is lowest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oklahoma-january-1996-lowest",
+   "basis": "Output sorted January values: 1996=771.0, 1995=798.0, 1999=828.0; 1996 is lowest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wayne-annual-births-decline",
+   "basis": "Output: 1995=32915.0, 2015=23488.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "florida-late-summer-peak",
+   "basis": "Output top medians: September=18934.0, October=18911.0, August=18867.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "maine-spring-summer-consistent",
+   "basis": "Output March-August: 8.48, 8.37, 8.77, 8.67, 8.83, 8.91; all are between 8.37 and 8.91.",
+   "verdict": "ok"
+  },
+  {
+   "id": "south-north-spring-share",
+   "basis": "Output Spring: S=12 (Florida)=24.00, S=23 (Maine)=25.63.",
+   "verdict": "ok"
+  },
+  {
+   "id": "regions-summer-birth-share",
+   "basis": "Output Summer shares: Region 4=25.73, Region 1=26.42; all ten regions have Summer as their largest share.",
+   "verdict": "ok"
+  },
+  {
+   "id": "regions-spring-fall-north-south",
+   "basis": "Output Spring top: Region 8=25.62, Region 10=25.58, Region 1=25.43; Spring lowest: Region 6=23.96, Region 4=24.19. Fall top: Region 6=25.73, Region 9=25.61, Region 4=25.52.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 7
+}

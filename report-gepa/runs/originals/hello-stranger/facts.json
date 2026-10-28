@@ -1,0 +1,83 @@
+[
+  {
+    "id": "pre-conversation-average-band",
+    "source": "Most said they felt just average",
+    "claim": "79.5% of participants rated their mood before the conversation in the average band of 4 to 7, versus 4.9% in the negative band up to 3 and 15.5% in the positive band above 7.",
+    "tables": {
+      "p": "data/people.csv"
+    },
+    "code": "(p.pre_affect.value_counts(bins=[0, 3, 7, 9], normalize=True) * 100).round(1)"
+  },
+  {
+    "id": "begin-same-or-worse",
+    "source": "At the beginning of the conversation, many people said they felt the same or worse than before the call!",
+    "claim": "70.6% of participants rated their mood at the beginning of the conversation as the same as or worse than before the call.",
+    "tables": {
+      "p": "data/people.csv"
+    },
+    "code": "((p.begin_affect - p.pre_affect).dropna().le(0).mean() * 100).round(1)"
+  },
+  {
+    "id": "begin-mostly-same",
+    "source": "At the beginning of the conversation, most people felt the same as they did before the call.",
+    "claim": "41.8% of participants rated their mood at the beginning the same as before the call, more than the 29.4% who felt better and the 28.7% who felt worse.",
+    "tables": {
+      "p": "data/people.csv"
+    },
+    "code": "(np.sign(p.begin_affect - p.pre_affect).dropna().value_counts(normalize=True) * 100).round(1)"
+  },
+  {
+    "id": "middle-better-than-start",
+    "source": "By the middle of the conversation, a huge portion of people reported feeling better than at the start of the conversation.",
+    "claim": "58.0% of participants reported feeling better at the middle of the conversation than at its start.",
+    "tables": {
+      "p": "data/people.csv"
+    },
+    "code": "((p.middle_affect - p.begin_affect).dropna().gt(0).mean() * 100).round(1)"
+  },
+  {
+    "id": "end-better-than-start",
+    "source": "By the end of the call, the large majority of people said they felt better than when the conversation began.",
+    "claim": "66.1% of participants reported feeling better at the end of the call than when the conversation began.",
+    "tables": {
+      "p": "data/people.csv"
+    },
+    "code": "((p.end_affect - p.begin_affect).dropna().gt(0).mean() * 100).round(1)"
+  },
+  {
+    "id": "affect-rises-over-conversation",
+    "source": "Here’s how much positive feelings increased on average in all 1,700 conversations:",
+    "claim": "Average positive feeling rose from 6.1 before the conversation to 7.4 at the end, passing through 6.2 at the beginning and 6.9 in the middle.",
+    "tables": {
+      "c": "data/convos.csv"
+    },
+    "code": "c[['pre_affect_avg', 'begin_affect_avg', 'middle_affect_avg', 'end_affect_avg']].mean().round(1)"
+  },
+  {
+    "id": "age-gap-positive-feeling",
+    "source": "People enjoyed talking to people, young and old.",
+    "claim": "Average positive feeling at the end was between 7.30 and 7.55 for every age gap from 0 to 40 years (7.37 at 0, 7.30 at 10, 7.44 at 20, 7.51 at 30 and 7.55 at 40), while beginning scores ranged from 6.06 to 6.48.",
+    "tables": {
+      "c": "data/convos.csv"
+    },
+    "code": "c.groupby('age_diff')[['begin_affect_avg', 'end_affect_avg']].mean().round(2)"
+  },
+  {
+    "id": "race-difference-similar-feeling",
+    "source": "Interracial conversations tended to lead to positive experiences about as much as they did for people of the same race.",
+    "claim": "Average positive feeling at the end was 7.44 for same-race pairs and 7.32 for interracial pairs, and at the beginning 6.20 versus 6.11.",
+    "tables": {
+      "c": "data/convos.csv"
+    },
+    "code": "c.groupby('race_diff')[['begin_affect_avg', 'end_affect_avg']].mean().round(2)"
+  },
+  {
+    "id": "politics-difference-similar-feeling",
+    "source": "And most conversations between people with the ↑ same political ideology and ↓ differing political ideologies also had similar outcomes.",
+    "claim": "Average positive feeling at the end ranged from 7.06 to 7.44 across political differences of zero to five points, and at the beginning from 6.11 to 6.21.",
+    "tables": {
+      "c": "data/convos.csv"
+    },
+    "code": "c.groupby('politics_diff')[['begin_affect_avg', 'end_affect_avg']].mean().round(2)"
+  }
+]

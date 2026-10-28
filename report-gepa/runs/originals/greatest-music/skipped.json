@@ -1,0 +1,58 @@
+[
+  {
+    "source": "6% of the albums are also not currently available on Spotify.",
+    "why": "Among the 174 albums in the 2003 ranking that are absent from 2020, 14 have Spotify URI 'Not on Spotify' (8.0%), not 6%. No story filter yields 6% from these files."
+  },
+  {
+    "source": "Furthermore, 96% of albums were Billboard hits at some point.",
+    "why": "Using the story's own Billboard peak categories for the 2020 top 100, 94 of 100 albums charted at #200 or better and 6 never charted, so the share of hits is 94%, not 96%."
+  },
+  {
+    "source": "albums by women or mixed-gender groups jumped from 16% to 28%",
+    "why": "The 2020 share is 140/500 = 28.0%, which matches, but the 2003 share is 86/500 = 17.2% (Female plus Male/Female), not 16%."
+  },
+  {
+    "source": "In the 2003 album ranking, 74 of the 500 greatest albums of all-time (15%) were from the 1990s. ... Albums ranked in 2020 and released in the 1990s similarly increased from 15 to 21%.",
+    "why": "The corrected 2003 ranking used for the other facts contains 78 albums released in 1990-1999 (15.6%), not 74 (15%). The 2020 count of 104 (20.8%, about 21%) does match and appears in the decade-retention fact."
+  },
+  {
+    "source": "In 2020, the number of voters who grew up in the 1990s jumped from 11 (4%) to 90 (25%).",
+    "why": "The count of 90 voters with a 1990s teenage decade is correct, but 90/336 = 26.8%, not 25%. The 2003 count and share (11/269 = 4.1%) match and the counts are in a separate fact; only the 25% share is left out."
+  },
+  {
+    "source": "Billboard #1 Album: 21%\nBottom 400 Albums in the 2020 Ranking\nBillboard #2-100: 51%\n#101+: 9%\nNever charted: 18%",
+    "why": "The data give 85/400 = 21.25%, 204/400 = 51%, 39/400 = 9.75% and 72/400 = 18%. The #101+ share is 9.75%, which rounds to 10%, not 9%. The top-100 distribution and the 3x never-charted comparison are reproduced in separate facts."
+  },
+  {
+    "source": "Funkadelic’s genre-bending 1978 album “One Nation Under a Groove”, for example, fell from #176 to #360.",
+    "why": "In the corrected 2003 ranking used for the other facts the album is #177, not #176 (the book-version '2003 Rank Old' column has #176); its 2020 rank is #360 and the 2020-2003 differential is -183."
+  },
+  {
+    "source": "And Joy Division’s “Unknown Pleasures” (1979).",
+    "why": "The albums file gives Unknown Pleasures a release year of 1980, not 1979."
+  },
+  {
+    "source": "Billie Holiday’s “Lady in Satin” made the list in 2020 despite being unranked in 2003, 45 years after its release.",
+    "why": "Lady in Satin was released in 1958, so 2003 is 45 years after release, but 2020 is 62 years after; it was unranked in 2003 and is #317 in 2020."
+  },
+  {
+    "source": "Many of these albums were released over the past decade, such as Kanye West’s “My Beautiful Dark Twisted Fantasy” (#17). And Kendrick Lamar’s “To Pimp a Butterfly” (#19). And Beyoncé’s “Lemonade” (#32). And Frank Ocean’s “Blonde” (#79).",
+    "why": "These are individual illustrative album examples rather than aggregate findings. Their 2020 ranks match, but My Beautiful Dark Twisted Fantasy was #353 in the 2012 ranking, so it does not satisfy the 'never appearing in previous rankings' definition used for the new-albums fact (which counts 154 albums)."
+  },
+  {
+    "source": "But other additions had been out for a long time, like Kate Bush’s “Hounds of Love,” originally released in 1985.",
+    "why": "An individual illustrative example rather than an aggregate finding; its release year (1985) and 2020 rank (#68) do match the file."
+  },
+  {
+    "source": "Metallica’s James Hetfield only had men in his top 10 included. Green Day’s Billie Joe Armstrong was the same. The most gender diverse ballot, among those published, was Britney Spears’s, with Janet Jackson, Madonna, Whitney Houston, and TLC among her top 10 albums.",
+    "why": "The data folder contains no individual ballot data, only the albums and voters tables, so these ballot comparisons cannot be computed."
+  },
+  {
+    "source": "we’re confident that white men were overrepresented",
+    "why": "The voters file records gender, birth year, age and teenage decade but no racial identity."
+  },
+  {
+    "source": "Voters in 2003 and 2020 were spread out among similar age ranges.",
+    "why": "No numerical threshold or share is stated to reproduce; the age distributions are broadly similar in range but not the same (median age at vote 51 in 2003 versus 44 in 2020)."
+  }
+]

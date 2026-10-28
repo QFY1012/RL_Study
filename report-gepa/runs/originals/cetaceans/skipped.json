@@ -1,0 +1,82 @@
+[
+  {
+    "source": "there are 24 orcas still living in the US",
+    "why": "The file has 79 orca records: 20 Alive, 3 Unknown and 56 Died. Counting every orca not recorded as Died gives 23, not 24."
+  },
+  {
+    "source": "The 25 animals in our database that were transferred from non-US facilities to US facilities are not shown here.",
+    "why": "The file has 22 rows with transfer == 'Foreign', not 25. This is also a note about excluded records rather than a population finding."
+  },
+  {
+    "source": "these animals live for a long time",
+    "why": "This is a qualitative longevity claim; the story's 22- and 52-year values are external assumptions, and this file's oldest living orca is 51 years old rather than the cited 52."
+  },
+  {
+    "source": "The most recently-captured of those animals was captured in 1997, housed in Mexico for 7+ years and transferred to a US facility in 2005.",
+    "why": "The latest foreign capture in the file is Gasper, captured in 1997 and transferred in 2005, but the origin is the Sea of Okhotsk, Russia, not Mexico; no record matches the Mexico/7+ years detail."
+  },
+  {
+    "source": "average age at death",
+    "why": "Computed from this file, mean age at death (status year minus birth year) is about 13.3 years for all cetaceans and 13.3 years for bottlenose dolphins; using time since origin gives about 8.0 and 8.4. Neither definition reproduces the chart's 11 years overall and 9 years for bottlenose."
+  },
+  {
+    "source": "average age of living animals",
+    "why": "Mean age of living animals in this file is 17.9 years overall and 18.2 years for bottlenose dolphins, so the chart's bottlenose value of 15 is not reproduced (15 is the median for both, while the overall chart value is 18)."
+  },
+  {
+    "source": "Last Pacific White-Sided Dolphin Capture; Last Beluga Capture; Last Orca Capture; Last Bottlenose Dolphin Capture",
+    "why": "The latest capture years in this file are 1993 for Pacific white-sided, 1997 for beluga, 1983 for orca and 1989 for bottlenose; the chart labels 1993, 1992, 1978 and 1986."
+  },
+  {
+    "source": "In the 1930's, when cetaceans were first displayed in the US, they came from the waters around Florida.",
+    "why": "The earliest capture record in this file is 1949; there are no 1930s capture records from which to reproduce this."
+  },
+  {
+    "source": "For the next 20 years or so, a handful of animals were captured per year and displayed in a few marine parks.",
+    "why": "The file has only 17 captures from 1938 through 1962 (0.68 per year) and no records before 1949; the early period described in the story is not represented."
+  },
+  {
+    "source": "But in 1963 \u201cFlipper\u201d hit big screens nationwide and suddenly everyone wanted to see or own a dolphin. More animals were captured so that they could be displayed in aquariums, roadside attractions, restaurants, and even swimming pools.",
+    "why": "Captures do rise after 1963 in this file, but the pre-1963 period is incomplete (no records before 1949), so the story's pre-1963 baseline and its 'handful per year' characterization cannot be reproduced on the same period."
+  },
+  {
+    "source": "And so, without any law restricting it , aquariums in the US stopped capturing wild cetaceans completely.",
+    "why": "The file records captures through 1997 (13 captures in 1990-1997), so wild captures did not stop completely in this data."
+  },
+  {
+    "source": "Once wild-captures had ended, captive breeding became the primary method of gaining new animals in US facilities.",
+    "why": "Births dominate only after this file's last capture in 1997; the story's acquisition chart ends captures earlier, so the same period and threshold cannot be used."
+  },
+  {
+    "source": "The remaining new admissions were all rescued animals, like Winter, the fluke-less dolphin featured in the 2011 film \u201cDolphin Tale\u201d.",
+    "why": "After the last capture the file still records stillbirths, miscarriages and unknown acquisitions, so not all remaining admissions are rescues; the story's period also differs."
+  },
+  {
+    "source": "So, let\u2019s look at how the annual survival rate (ASR) has changed over time for the 4 most common captive cetacean species.",
+    "why": "The ASR values are not stated in the story text or chart labels, and reproducing the DeMaster-Drevenak annual survival rate requires definitions and chart values that are not present in this data file."
+  },
+  {
+    "source": "the 4 most common captive cetacean species",
+    "why": "Naming the four most common species is a description of the dataset's categories and record counts rather than a substantive finding about the animals; the file also splits several species across synonymous names."
+  },
+  {
+    "source": "If all animals live to minimum life expectancy (22 years); If all animals lived to max observed age (52 years); zero orcas by; 2039; 2070",
+    "why": "The 22- and 52-year lifespans are externally cited assumptions rather than values in this file, the high projection gives 2069 rather than the chart's 2070 endpoint, and the file has 23 not 24 non-dead orcas."
+  },
+  {
+    "source": "If all captive cetaceans live to 20; And breeding is banned in 2030; Captive cetaceans won\u2019t exist by 2049",
+    "why": "This is output from the story's interactive simulation, which uses hard-coded population and annual-addition assumptions not present in the data file; it is not a direct data finding."
+  },
+  {
+    "source": "if a breeding ban went into effect this year and all animals died young, we\u2019d still have captive cetaceans until the early 2030s",
+    "why": "This is also a simulation output dependent on slider assumptions, not a computation from the records alone."
+  },
+  {
+    "source": "the longest a human US citizen has ever lived is 119 years old",
+    "why": "External human-life-expectancy illustration, not derived from the cetacean data."
+  },
+  {
+    "source": "In the US, the average human can expect to live around 79 years.",
+    "why": "External human-life-expectancy illustration, not derived from the cetacean data."
+  }
+]

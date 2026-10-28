@@ -1,0 +1,39 @@
+{
+ "id": "covid-science",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 477,
+  "steps": 55,
+  "tools": 87,
+  "nudged": 0,
+  "usage": {
+   "input": 114811,
+   "output": 54446
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "vax-network-citation-orders",
+   "basis": "Output shows 1-9: 36 (7.2%), 10-99: 238 (47.4%), 100-999: 191 (38.0%), 1000+: 37 (7.4%); total 502, and at least 10 times = 466 (238+191+37).",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 1,
+ "skipped": 18,
+ "review": [
+  {
+   "id": "vax-network-citation-orders",
+   "action": "keep",
+   "why": "the quote is the story's own text from its repository (the-pudding/covid-science src/components); the counts match the data"
+  }
+ ]
+}

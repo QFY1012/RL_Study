@@ -1,0 +1,102 @@
+{
+ "id": "anthems",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 785,
+  "steps": 66,
+  "tools": 76,
+  "nudged": 0,
+  "usage": {
+   "input": 99714,
+   "output": 104907
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 15,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "event-type-basketball-highest",
+   "basis": "basketball 294.4; football 276.9; political 272.0; baseball 236.6; racing 200.3; hockey 192.4; basketball is first.",
+   "verdict": "ok"
+  },
+  {
+   "id": "genre-rnb-pop-above-country-rock",
+   "basis": "rnb 322.5; pop 252.6; country 204.2; rock 178.1; 322.5 > 252.6 > 204.2 > 178.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "aretha-phrase-eight-of-top-ten-rnb",
+   "basis": "Aretha 766.3 at top; top 10 rows have artistGenre=rnb for 8 rows (n_rnb=8).",
+   "verdict": "ok"
+  },
+  {
+   "id": "jazmine-rank-17-best-phrase-9",
+   "basis": "overall_diva 370.40625; overall_rank 17.0; best_phrase_rank 9.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "chaka-highest-average-phrase-diva",
+   "basis": "chaka-khan avg_phrase 734.25 is highest; next Patti 585.48125, Anthony 505.3875.",
+   "verdict": "ok"
+  },
+  {
+   "id": "seven-repeat-performers",
+   "basis": "billy-joel 4, carrie-underwood 4, jordin-sparks 4, demi-lovato 3, jewel 3, kelly-clarkson 3, mary-j-blige 3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mary-j-two-top-ten-13",
+   "basis": "mary-j-blige_world-series_2009 1304.4 rank 2; nba-allstar-game_2012 691.4 rank 8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "inauguration-top-two-11",
+   "basis": "lady-gaga_inauguration_2021 2173.0; beyonce_inauguration_2013 2016.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lowest-highest-keys",
+   "basis": "trace-adkins_rnc_2020 key D steps_from_C -10; jennifer-hudson_super-bowl_2009 key A steps_from_C 9; Patti and Renee also have A at 9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "last-half-higher-diva",
+   "basis": "first 8 155.2; last 8 352.6; 352.6 > 2*155.2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "taylor-2008-highest-phrase",
+   "basis": "taylor-swift_world-series_2008 max_phrase 353.5; taylor-swift_nfl-regular-season_2006 max_phrase 308.2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "average-diva-by-phrase",
+   "basis": "phrase15 601.7; phrase14 403.3; phrase11 399.0; phrase12 360.8; phrase13 346.7; phrase2 271.3; phrase9 245.7; phrase10 239.3; phrase8 224.5; phrase6 212.9; phrase5 149.8; phrase7 135.5; phrase3 132.2; phrase1 130.8; phrase4 112.1; phrase0 96.9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "closing-phrase-highest-average",
+   "basis": "phrase15 601.7; phrase14 403.3; phrase11 399.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "anthony-hamilton-top-second-phrase",
+   "basis": "anthony-hamilton_nba-allstar-game_2019 529.4; chris-stapleton_super-bowl_2023 353.3; lauren-alaina_world-series_2021 309.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "late-phrase-top-three-chaka-mary-patti",
+   "basis": "chaka-khan_nba-allstar-game_2020 2034.3; mary-j-blige_world-series_2009 1304.4; patti-labelle_world-series_2008 1289.2.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 15,
+ "skipped": 17
+}

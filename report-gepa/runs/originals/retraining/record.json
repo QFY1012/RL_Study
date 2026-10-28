@@ -1,0 +1,24 @@
+{
+ "id": "retraining",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 2,
+  "steps": 4,
+  "tools": 0,
+  "nudged": 3,
+  "usage": {
+   "input": 0,
+   "output": 0
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 13658b1f-7d85-46d3-89e4-c8d9ae8a4da8)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/retraining/facts.json'"
+ ],
+ "skipped": null
+}

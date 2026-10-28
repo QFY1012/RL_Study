@@ -1,0 +1,47 @@
+{
+ "id": "ai",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 718,
+  "steps": 75,
+  "tools": 92,
+  "nudged": 0,
+  "usage": {
+   "input": 129994,
+   "output": 80847
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "negative-song-trend-up",
+   "basis": "Output shows 1960-2014 mean = 22.1 and 2015-2020 mean = 39.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "joy-share-declines",
+   "basis": "Output shows joy as the top emotion in every year; joy = 28.3 in 1960 and 16.4 in 2020.",
+   "verdict": "ok"
+  },
+  {
+   "id": "negative-emotions-rise",
+   "basis": "Output shows 1960 to 2020: anger 5.1 to 12.0, disgust 4.6 to 8.3, fear 8.0 to 15.5, sadness 9.8 to 15.2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "taylor-swift-darker",
+   "basis": "Output shows Taylor Swift negative shares: 2000 decade = 0.0, 2010 decade = 12.5, 2020 decade = 33.3.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 7
+}

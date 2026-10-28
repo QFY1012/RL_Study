@@ -1,0 +1,109 @@
+{
+ "id": "lit-canon",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 558,
+  "steps": 55,
+  "tools": 77,
+  "nudged": 0,
+  "usage": {
+   "input": 90790,
+   "output": 72553
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "things-number-one-1990s",
+   "basis": "输出最高项为 The Things They Carried, count=2050。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-1990s-fiction-syllabi",
+   "basis": "输出依次为 2050, 891, 801, 788, 773, 593, 575, 508, 505, 405，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-1980s-fiction-syllabi",
+   "basis": "输出依次为 1836, 1255, 1208, 1153, 724, 567, 521, 493, 487, 485，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-1980s-nonfiction-syllabi",
+   "basis": "输出依次为 1046, 851, 669, 539, 460, 390, 382, 370, 345, 304，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-1990s-nonfiction-syllabi",
+   "basis": "输出依次为 1155, 869, 846, 795, 575, 562, 559, 493, 396, 370，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-2000s-fiction-syllabi",
+   "basis": "输出依次为 1279, 877, 873, 832, 694, 645, 577, 574, 501, 493，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-2000s-nonfiction-syllabi",
+   "basis": "输出依次为 1233, 870, 529, 476, 276, 204, 203, 180, 173, 126，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "woman-hollering-goodreads-lowest",
+   "basis": "输出 rank 为 52311, 38931, 29952, 16524, 12988, 8519, 5696, 5403, 763, 1；Woman Hollering Creek 的数值最大，对应最低排名。",
+   "verdict": "ok"
+  },
+  {
+   "id": "nyt-1990s-fiction-status",
+   "basis": "输出中 The God of Small Things 为 31 weeks/19，Harry Potter 为 77 weeks/10；其余八项均为 never，其中 Parable of the Sower 为 never (when published)。",
+   "verdict": "ok"
+  },
+  {
+   "id": "nyt-1980s-fiction-status",
+   "basis": "输出中 Beloved 为 31 weeks/45，The Handmaid's Tale 为 14 weeks，The Color Purple 为 3 weeks，The Joy Luck Club 为 35 weeks/53；其余六项均为 never。",
+   "verdict": "ok"
+  },
+  {
+   "id": "goodreads-1980s-fiction",
+   "basis": "输出 rank 依次为 4420, 913, 10059, 27939, 2899, 5377, 3043, 13325, 45545, 2612，标题与顺序均与结论一致。",
+   "verdict": "ok"
+  },
+  {
+   "id": "things-they-carried-context",
+   "basis": "输出包含 Never charted as a New York Times Best Seller、#5,403 most frequently rated book on Goodreads、Pulitzer Prize Finalist、National Book Critics Circle Award Finalist。",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 7,
+ "review": [
+  {
+   "id": "woman-hollering-goodreads-lowest",
+   "action": "restore",
+   "why": "every line of the quote is a label on the story page (book cards / category list); the quote joined them across the other text between"
+  },
+  {
+   "id": "nyt-1990s-fiction-status",
+   "action": "restore",
+   "why": "every line of the quote is a label on the story page (book cards / category list); the quote joined them across the other text between"
+  },
+  {
+   "id": "nyt-1980s-fiction-status",
+   "action": "restore",
+   "why": "every line of the quote is a label on the story page (book cards / category list); the quote joined them across the other text between"
+  },
+  {
+   "id": "goodreads-1980s-fiction",
+   "action": "restore",
+   "why": "every line of the quote is a label on the story page (book cards / category list); the quote joined them across the other text between"
+  }
+ ]
+}

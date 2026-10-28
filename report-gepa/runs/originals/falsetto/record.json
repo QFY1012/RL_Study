@@ -1,0 +1,77 @@
+{
+ "id": "falsetto",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 441,
+  "steps": 52,
+  "tools": 66,
+  "nudged": 0,
+  "usage": {
+   "input": 41872,
+   "output": 62750
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "2019-average-register",
+   "basis": "size=80.00, mean=5.95",
+   "verdict": "ok"
+  },
+  {
+   "id": "2019-below-1970s-1980s",
+   "basis": "2019=5.950000, 1970s=6.602124, 1980s=6.915113",
+   "verdict": "ok"
+  },
+  {
+   "id": "register-peaks-then-falls",
+   "basis": "idxmax=1990, max=7.080745; idxmin=2017, min=5.722581",
+   "verdict": "ok"
+  },
+  {
+   "id": "steady-rise-until-1980s",
+   "basis": "1950s=5.767313, 1960s=6.154069, 1970s=6.602124, 1980s=6.915113",
+   "verdict": "ok"
+  },
+  {
+   "id": "2017-lowest-average",
+   "basis": "2017=5.722581, 1959=5.744186, 1958=5.801370; sorted ascending, 2017 is lowest",
+   "verdict": "ok"
+  },
+  {
+   "id": "1984-vs-2017-high-register",
+   "basis": "1984 total=100 high=70; 2017 total=100 high=32",
+   "verdict": "ok"
+  },
+  {
+   "id": "2019-top10-highest-register",
+   "basis": "1991=7.119048, 1988=7.205479, 2019=7.600000; 2019 is highest in tail",
+   "verdict": "ok"
+  },
+  {
+   "id": "2019-top10-four-high",
+   "basis": "songs=5, high=4",
+   "verdict": "ok"
+  },
+  {
+   "id": "1970-largest-rise",
+   "basis": "1970=0.232756, 1963=0.188406; 1970 is largest among tail values up to 1970",
+   "verdict": "ok"
+  },
+  {
+   "id": "1962-local-low",
+   "basis": "1961=5.983607, 1962=5.837104, 1963=6.025510; 1962 lower than both",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 5
+}

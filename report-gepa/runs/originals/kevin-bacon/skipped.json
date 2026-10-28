@@ -1,0 +1,46 @@
+[
+  {
+    "source": "Philip Seymour Hoffman ranks #250. Keep going…",
+    "why": "actors.csv gives Philip Seymour Hoffman rank 102, not 250; no year-specific or alternative ranking in the file puts him at 250."
+  },
+  {
+    "source": "Women are underrepresented among the top 100, taking only 16 spots.",
+    "why": "actors.csv has no gender field, so the number of women among the top 100 cannot be computed."
+  },
+  {
+    "source": "Nicole Kidman is the highest-ranking woman at #21.",
+    "why": "actors.csv has no gender field, so being the highest-ranking woman cannot be established; Kidman's rank of 21 is present, but the comparison with all other women is not computable."
+  },
+  {
+    "source": "Let’s time travel to 2006, when Samuel L. Jackson took the crown.",
+    "why": "The file is a single current snapshot with no year-by-year rankings, so the 2006 leader cannot be reproduced."
+  },
+  {
+    "source": "Kevin Bacon still does not appear; his highest rank was #108 in 1996 after his role in “Sleepers.”",
+    "why": "There is no historical rank column by year in actors.csv; only the current rank is given."
+  },
+  {
+    "source": "Of the 250 most-connected actors, Natalie Portman has worked with almost three times as many as Anna Kendrick has.",
+    "why": "The file contains no co-star list or count of an actor's co-stars among the 250 most-connected actors; the aggregate top50 and conc columns do not produce a threefold ratio."
+  },
+  {
+    "source": "Our contenders are 99 actors born since 1997 (i.e., Gen Z) who have appeared in at least 5 films.",
+    "why": "actors.csv has no birth year (careerAge is years since debut, not age), so the 99-actor Gen Z subset cannot be reconstructed."
+  },
+  {
+    "source": "By the same point in his career, Robert De Niro also racked up 16 films, and he went on to have a brilliant career totalling 87. By contrast, Chevy Chase reached the same 16-film milestone, but ultimately only appeared in 27 total.",
+    "why": "The file records current career totals, not film counts at a matched career age, so the 16-films-at-15-years milestone for De Niro and Chevy Chase cannot be reproduced."
+  },
+  {
+    "source": "The most wins across the 10,000 simulations:\n- Chloë Grace Moretz 11.6%\n- Isabela Merced 5.3%\n- Ariana Greenblatt 9.4%\n- Maya Hawke 6.4%\n- Fred Hechinger 4.7%",
+    "why": "The simulation win shares are not in actors.csv; the file contains only per-actor current values."
+  },
+  {
+    "source": "Chloë Grace Moretz is the most likely Samuel L. Jackson for Gen Z, winning over 10% of simulations. It’s by no means a landslide: her median remoteness is 2.19 and median projected film count is 66, quite far from Samuel L. Jackson’s stratospheric numbers of 116 career films and a 2.09 remoteness score.",
+    "why": "The simulation's median remoteness and median projected film count are not in actors.csv; only current observed values are present."
+  },
+  {
+    "source": "You'll remember Gene Hackman from the time machine; Kevin Bacon could have been the center of Hollywood if he were born 20 years earlier.",
+    "why": "This is a counterfactual interpretation of the time-machine analysis, not a quantity stored or computable in actors.csv."
+  }
+]

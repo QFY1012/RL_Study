@@ -1,0 +1,14 @@
+[
+  {
+    "source": "BOER was mentioned 1.8x more often, including in the articles below:",
+    "why": "Using the story's edge-decade corpus (the 1900s and 1910s), the files give 1.891x (11.23 mentions per 100,000 in the 1900s against a 5.94 average), which rounds to 1.9x, not the story's 1.8x; matching 1.8 would require decade-level word totals or a slightly different frequency table that the provided files do not contain."
+  },
+  {
+    "source": "Roosevelt dominated press coverage in 1902",
+    "why": "The files give only decade-level term frequencies, and the article-pair file is a three-article example sample per term per decade (all three President Roosevelt examples happen to be from 1902); there is no yearly article count with which to compare 1902 coverage."
+  },
+  {
+    "source": "Noticeably absent from the mix? The first major-party female presidential candidate, Hillary Clinton (But her emails!)",
+    "why": "word_timelines.csv has a 'clinton' series, but it combines Bill and Hillary Clinton, and the story's displayed term vocabulary contains only 'president clinton' (for the 1990s); the files cannot isolate Hillary Clinton, so her claimed absence from the 2010s terms is not reproducibly defined."
+  }
+]

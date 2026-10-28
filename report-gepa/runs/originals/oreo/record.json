@@ -1,0 +1,24 @@
+{
+ "id": "oreo",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 148,
+  "steps": 19,
+  "tools": 22,
+  "nudged": 3,
+  "usage": {
+   "input": 26190,
+   "output": 14542
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 509f5fbe-8db7-4f68-8633-69c3b0520679)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/oreo/facts.json'"
+ ],
+ "skipped": null
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "source": "And the number of people who say they trust others has been decreasing for generations:",
+    "why": "The trust chart is drawn from General Social Survey 1972-2018 and Pew Research Center 2024 data (the story describes it as going from 47% in 1972 to 34% in 2024); those survey data are not in data/ and cannot be computed from convos.csv or people.csv."
+  },
+  {
+    "source": "Most of our friends are of the same race and class as we are. We have the same political views as most of our friends.",
+    "why": "These claims are supported by links to PRRI, Opportunity Insights and NPR surveys, not by the CANDOR conversation files in data/."
+  },
+  {
+    "source": "Some commuters were told to keep to themselves during their trip; these participants predicted the isolation would give them a positive experience .",
+    "why": "This comes from the external 2014 Illinois trains-and-buses experiments, not from convos.csv or people.csv."
+  },
+  {
+    "source": "Other commuters were told to talk to strangers ; these participants predicted they would have a negative experience .",
+    "why": "This comes from the external 2014 Illinois trains-and-buses experiments, not from convos.csv or people.csv."
+  },
+  {
+    "source": "What these participants reported back was almost no rejections, pleasant conversations, and an overall positive experience.",
+    "why": "This follow-up result comes from the external 2014 Illinois study, not from the CANDOR files in data/."
+  },
+  {
+    "source": "But after the interaction, participants tend to say it was a positive experience.",
+    "why": "This summary of external interaction experiments is not computed from convos.csv or people.csv."
+  },
+  {
+    "source": "This phenomenon has been replicated in several experiments. Whether it’s interacting with strangers in a scavenger hunt, meeting new people in a college dorm, or chatting up a barista, researchers have repeatedly found that people don’t think they’ll enjoy interacting with strangers.",
+    "why": "These replicated experiments are external studies cited by the story; the data files contain no experiment on predicted enjoyment."
+  },
+  {
+    "source": "We normally have between 11 and 16 interactions with weak ties each day",
+    "why": "The 11-16 daily weak-tie interactions come from an external study cited by the story, not from the CANDOR files in data/."
+  },
+  {
+    "source": "only 15% of Americans said they made a new acquaintance during the pandemic",
+    "why": "The 15% figure comes from an external survey cited by the story, not from the CANDOR files in data/."
+  },
+  {
+    "source": "In a 2021 study, researchers looked at why social trust has decreased on an individual level. What they found was that income dissatisfaction, our experience of losing a job, and our decreasing confidence in political institutions account for most of the decline in trust.",
+    "why": "This is a finding of an external 2021 study, not a computation from convos.csv or people.csv."
+  },
+  {
+    "source": "But those interactions were rare. In most conversations, people enjoyed hearing about their partner’s life and sharing their own lives—even when they had very little in common.",
+    "why": "This is a qualitative summary from the author watching conversation videos; the story states no numeric threshold or measure, and the video/transcript material is not in data/ (how_enjoyable and in_common are survey ratings, not a count of conversations that were derailed or of people enjoying their partner's life)."
+  },
+  {
+    "source": "Several conversations were derailed by a comment that turned off the other person, and caused the conversation to grind to a halt.",
+    "why": "This comes from the author watching the conversation videos, not from any variable in convos.csv or people.csv."
+  },
+  {
+    "source": "I was surprised how many of these conversations touched on intimate topics—things they might not even tell their friends or family.",
+    "why": "This is a qualitative observation from watching the videos; the files contain only survey ratings and demographics, not conversation content."
+  },
+  {
+    "source": "By the end of these conversations, several participants seemed to realize that they may never see their conversation partner again, and had to say their bittersweet goodbyes.",
+    "why": "This is a qualitative observation from watching the conversation videos, not a data computation available in convos.csv or people.csv."
+  }
+]

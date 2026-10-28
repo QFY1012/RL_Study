@@ -1,0 +1,42 @@
+[
+  {
+    "source": "Most Common Names*\nBy count of songs\n*Excluding “Baby” with 1,832 songs",
+    "why": "The chart labels a song count for each of the ten names. The ranks and nine of the ten counts reproduce from data/allNames.csv, but Heaven is credited with 61 songs in the chart and has 62 distinct songs (artist + song) in the file; the other counts match (Jesus 142, John 82, Mary 73, Joe 73, Michael 69, Jay 65, Bobby 62, Mike 62, Jack 58). The reproducible ranking is recorded as a fact, but the full per-item count finding is not reproduced exactly."
+  },
+  {
+    "source": "Only a handful of the most popular names over time have been typically women’s names.",
+    "why": "The data has no gender field for names, so the proportion of typically women's names among the decade leaders cannot be computed from data/allNames.csv."
+  },
+  {
+    "source": "The top 5 name-dropping artists are all hip hop or rap musicians",
+    "why": "The data has no genre field, so the claim that the five leading artists all belong to hip hop or rap cannot be checked from data/allNames.csv."
+  },
+  {
+    "source": "Names that start with A are much more common in society than in song lyrics",
+    "why": "This compares song-name shares with the share of names used in US society. The society baseline comes from the SSA/onlyNames.csv name-frequency data, which is not in this folder; data/allNames.csv alone cannot produce the comparison."
+  },
+  {
+    "source": "names that start with J show up with similar frequency in both situations.",
+    "why": "This compares song-name shares with the share of names used in US society. The society baseline comes from the SSA/onlyNames.csv name-frequency data, which is not in this folder; data/allNames.csv alone cannot produce the comparison."
+  },
+  {
+    "source": "names that end with A (e.g., Maria, Rhonda, Sara, Lisa etc.) are much less common in songs than society",
+    "why": "This compares song-name shares with the share of names used in US society. The society baseline comes from the SSA/onlyNames.csv name-frequency data, which is not in this folder; data/allNames.csv alone cannot produce the comparison."
+  },
+  {
+    "source": "names that end with Y (e.g., Mary, Johnny, Jimmy, Billy etc.) are much more common in songs",
+    "why": "This compares song-name shares with the share of names used in US society. The society baseline comes from the SSA/onlyNames.csv name-frequency data, which is not in this folder; data/allNames.csv alone cannot produce the comparison."
+  },
+  {
+    "source": "Apart from Jesus, these names have a long history of popularity in the US. While many of these names hit their peak popularity in the 1950s",
+    "why": "This is a claim about the year-by-year popularity of names in the US from Social Security Administration data, which is not in this folder; data/allNames.csv contains only names found in song lyrics."
+  },
+  {
+    "source": "with Michael and John still ranking as the 8th and 26th and most common boy’s names in the US in 2016, respectively.",
+    "why": "The US 2016 boy's-name rankings come from the Social Security Administration's baby-name data, not from data/allNames.csv."
+  },
+  {
+    "source": "Names that start with...\nNames that end with...\n0%\n4%\n8%\nMore common in society\nMore common in songs",
+    "why": "The chart plots, for every letter, the difference between the share of names used in songs and the share of names used in US society. The society baseline comes from the SSA/onlyNames.csv name-frequency data, which is not in this folder, so the per-letter values cannot be computed from data/allNames.csv alone."
+  }
+]

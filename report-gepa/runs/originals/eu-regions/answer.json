@@ -1,0 +1,77 @@
+[
+ {
+  "id": "inner-london-west-outlier",
+  "source": "The region of Inner London-West is an outlier: its GDP is more than 600% of the EU average and, consequently, receives little in EU catch-up funds.",
+  "claim": "Inner London - West (UKI3) tops the regional GDP index at 626, far above the next highest regions, Luxembourg (253) and Southern Ireland (220).",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r.sort_values('gdppps17', ascending=False).head(3)"
+ },
+ {
+  "id": "capital-regions-more-developed",
+  "source": "regions containing the country’s capital ⦿ are much more developed than others.",
+  "claim": "The 28 regions containing a country capital average 135.8 on the regional GDP index, against 91.2 for the other 253 regions.",
+  "tables": {
+   "r": "data/regions.csv",
+   "cap": "data/capitals.csv"
+  },
+  "code": "r.assign(capital=r.NUTS_ID.isin(cap.NUTS_ID)).groupby('capital').gdppps17.agg(['mean', 'count'])"
+ },
+ {
+  "id": "capital-regions-islands-of-development",
+  "source": "There are also islands of development in regions containing country capitals",
+  "claim": "In Spain, France, the UK, Poland, Romania and Slovakia the capital region scores well above its country on the GDP index: Madrid 124 vs 92, Paris 177 vs 104, London 168 vs 106, Warsaw 152 vs 70, Bucharest 144 vs 63 and Bratislava 179 vs 76.",
+  "tables": {
+   "cap": "data/capitals.csv",
+   "r": "data/regions.csv",
+   "c": "data/countries.csv"
+  },
+  "code": "cap[['capital', 'NUTS_ID', 'CNTR_CODE']].merge(r[['NUTS_ID', 'gdppps17']], on='NUTS_ID').merge(c[['CNTR_CODE', 'gdppps17']], on='CNTR_CODE', suffixes=('_region', '_country')).query(\"CNTR_CODE in ['ES', 'FR', 'UK', 'PL', 'RO', 'SK']\")[['capital', 'gdppps17_region', 'gdppps17_country']]"
+ },
+ {
+  "id": "italy-belgium-germany-intra-country-divide",
+  "source": "Notice the sub-country divisions: Italy (developed north, less developed south), Belgium (the same) and Germany (developed west, less developed east).",
+  "claim": "Northern Italian regions average 117.3 on the GDP index against 66.4 in the south (central Italy 97.0); Flemish Belgium averages 116.8 against 88.6 in Wallonia (Brussels 196.0); western Germany averages 126.3 against 93.0 in the east.",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r[r.CNTR_CODE.isin(['IT', 'BE', 'DE'])].assign(part=lambda d: np.where(d.NUTS_ID.str[:3].isin(['ITC', 'ITH', 'BE2', 'DE1', 'DE2', 'DE5', 'DE6', 'DE7', 'DE9', 'DEA', 'DEB', 'DEC', 'DEF']), 'developed', np.where(d.NUTS_ID.str[:3].isin(['ITF', 'ITG', 'BE3', 'DE3', 'DE4', 'DE8', 'DED', 'DEE', 'DEG']), 'less developed', 'other'))).groupby(['CNTR_CODE', 'part']).gdppps17.mean()"
+ },
+ {
+  "id": "hungary-budapest-pest-split",
+  "source": "The capital, Budapest, was lifting the surrounding area of Pest out of the \"less developed region\" category (< 75% EU average GDP).",
+  "claim": "Budapest's regional GDP index is 139 while the surrounding Pest region's is 53.",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r[r.NUTS_NAME.isin(['Budapest', 'Pest'])][['NUTS_NAME', 'gdppps17']]"
+ },
+ {
+  "id": "lithuania-vilnius-split",
+  "source": "Lithuania’s capital, Vilnius, is economically the most developed part of the country and is lifting the country’s GDP over the 75% threshold, jeopardizing the catch-up funds that would be allocated toward the less developed areas of the country.",
+  "claim": "Lithuania's capital region (Sostinės regionas) scores 112 on the GDP index against 65 for the rest of the country (Vidurio ir vakarų Lietuvos regionas).",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r[r.CNTR_CODE == 'LT'][['NUTS_NAME', 'gdppps17']]"
+ },
+ {
+  "id": "poland-warsaw-split",
+  "source": "Poland has done the same with its capital, Warsaw, which has now also been separated into its own region.",
+  "claim": "Warsaw's region (Warszawski stołeczny, PL91) scores 152 on the GDP index against 59 for the surrounding Mazowiecki regionalny (PL92).",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r[r.NUTS_ID.isin(['PL91', 'PL92'])][['NUTS_ID', 'NUTS_NAME', 'gdppps17']]"
+ },
+ {
+  "id": "country-ranges-large",
+  "source": "The range of regional economic development is quite high for many countries",
+  "claim": "Within-country spreads of the regional GDP index are wide: the UK's regions run from 65 to 626, Romania's from 39 to 144, France's from 34 to 177, Germany's from 83 to 202 and Italy's from 58 to 143.",
+  "tables": {
+   "r": "data/regions.csv"
+  },
+  "code": "r.groupby('CNTR_CODE').gdppps17.agg(['min', 'max'])"
+ }
+]

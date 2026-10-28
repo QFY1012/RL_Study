@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Let's look at 1988, when vocal register, as measured by our data, peaked.",
+    "why": "The unweighted yearly averages in songs.csv do not make 1988 the peak: 1987 is 7.0802, 1988 is 7.0782, and 1990 is 7.0807, so 1990 is the highest. 1988 comes out on top only under a different measure (for example the points-weighted average or the top-100 average), which the story does not use for this statement."
+  },
+  {
+    "source": "2010 seems to the last year with a register comparable to the 1970s.",
+    "why": "The story does not define 'comparable'. The 2010 average is 6.390, while every year in the 1970s is at least 6.438, so no story-defined threshold reproduces the claim."
+  },
+  {
+    "source": "So if Pony is a 10 on vocal register, most Barry White songs are a 2: the notes he sings are much lower.",
+    "why": "songs.csv has no artist field, so Barry White's songs cannot be identified, and 'most' has no defined threshold. The Pony part is a single-song illustration (register 10, peak 6, 1996) rather than an analytical finding."
+  },
+  {
+    "source": "Let's build a chart with the vocal register for 248 songs that first charted in 2019.",
+    "why": "This is a description of the dataset (the number of records), not a finding."
+  },
+  {
+    "source": "We're curious about men singing, so we'll filter for songs with a male vocal lead and exclude any that are primarily spoken/rapped, which brings us to 80 songs.",
+    "why": "This is a description of the filtering and the number of records retained, not an analytical finding. The 80-song figure is used as the denominator in the 2019 average fact."
+  }
+]

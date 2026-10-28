@@ -1,0 +1,115 @@
+[
+ {
+  "id": "five-ethical-champions",
+  "source": "I believe there have only been five truly ethical NBA champions in the last 25 years: teams that don’t need an asterisk by their title.",
+  "claim": "Exactly five champions have a positive net missing DPM (their own absences minus their opponents', counting players with DPM of at least +1): 2025 (+12.44), 2006 (+12.20), 2012 (+8.92), 2026 (+5.10) and 2005 (+3.78); every other champion's net is negative.",
+  "tables": {
+   "a": "data/web-affected-players.csv"
+  },
+  "code": "a[a.dpm>=1].assign(miss=lambda d: d.dpm*d.amount).pivot_table(index='season',columns='relation',values='miss',aggfunc='sum').fillna(0).assign(net=lambda t: t.winner-t.opponent).sort_values('net')"
+ },
+ {
+  "id": "warriors-2015-least-ethical",
+  "source": "Standing on their own are the 2015 Warriors, by far the least ethical champion of the century by my measure.",
+  "claim": "Summed over the playoffs, the 2015 Warriors' net missing DPM (6.69 of their own vs 49.51 for opponents, players with DPM of at least +1) is the lowest of any champion at -42.82, against -36.26 for the next-lowest, in 2013.",
+  "tables": {
+   "a": "data/web-affected-players.csv"
+  },
+  "code": "a[a.dpm>=1].assign(miss=lambda d: d.dpm*d.amount).pivot_table(index='season',columns='relation',values='miss',aggfunc='sum').fillna(0).assign(net=lambda t: t.winner-t.opponent).sort_values('net')"
+ },
+ {
+  "id": "thunder-2025-most-ethical-net",
+  "source": "Subtract what they were missing from what their opponents were missing, and it yields the most analytically ethical championship in our data.",
+  "claim": "Summed over the playoffs, the 2025 Thunder have the highest net missing DPM of any champion (+12.44), just ahead of the 2006 Heat (+12.20).",
+  "tables": {
+   "a": "data/web-affected-players.csv"
+  },
+  "code": "a[a.dpm>=1].assign(miss=lambda d: d.dpm*d.amount).pivot_table(index='season',columns='relation',values='miss',aggfunc='sum').fillna(0).assign(net=lambda t: t.winner-t.opponent).sort_values('net',ascending=False).head(3)"
+ },
+ {
+  "id": "heat-2006-fewest-opponent-absences",
+  "source": "But for me, the purest of the ethical champions has to be one of the teams that faced unblemished rosters, leaving no doubt that they outperformed full-strength competition.",
+  "claim": "The opponents of the 2006 Heat accumulated the least missing DPM of any champion's opponents (1.21 total, players with DPM of at least +1), followed by the 2026 Knicks (3.51) and the 2014 Spurs (6.19).",
+  "tables": {
+   "a": "data/web-affected-players.csv"
+  },
+  "code": "a[a.dpm>=1].assign(miss=lambda d: d.dpm*d.amount).pivot_table(index='season',columns='relation',values='miss',aggfunc='sum').fillna(0).opponent.sort_values().head(3)"
+ },
+ {
+  "id": "knicks-2026-second-fewest-opponent-absences",
+  "source": "Hot-off-the-press champions, the 2026 Knicks, had a historically ethical run. They almost had a near-perfect healthy opposition, missing a single game from Joel Embiid. On the flip side, they played two games without OG Anunoby, and one without Mitchell Robinson. Second place.",
+  "claim": "The 2026 Knicks' opponents accumulated the second-least missing DPM of any champion's opponents, 3.51, behind only the 2006 Heat's 1.21.",
+  "tables": {
+   "a": "data/web-affected-players.csv"
+  },
+  "code": "a[a.dpm>=1].assign(miss=lambda d: d.dpm*d.amount).pivot_table(index='season',columns='relation',values='miss',aggfunc='sum').fillna(0).opponent.sort_values().head(2)"
+ },
+ {
+  "id": "knicks-2026-absences",
+  "source": "They almost had a near-perfect healthy opposition, missing a single game from Joel Embiid. On the flip side, they played two games without OG Anunoby, and one without Mitchell Robinson.",
+  "claim": "Among players with DPM of at least +1, the 2026 Knicks' only opponent absence is Joel Embiid's single game, while New York itself missed OG Anunoby for two games and Mitchell Robinson for one.",
+  "tables": {
+   "a": "data/web-affected-players.csv",
+   "p": "data/web-players.csv"
+  },
+  "code": "a[(a.dpm>=1)&(a.season==2026)].merge(p,on=['bbrID','season'],suffixes=('','_player')).groupby(['name','relation','reason']).size()"
+ },
+ {
+  "id": "heat-2006-mourning-first-round",
+  "source": "The Heat played a couple games in the first round without Alonzo Mourning.",
+  "claim": "Alonzo Mourning is the only Heat player with DPM of at least +1 who missed time in the 2006 playoffs, including two full first-round games (Did Not Dress in Game 1, Inactive in Game 2) and a low-minute Game 6, before four more low-minute games in later rounds.",
+  "tables": {
+   "a": "data/web-affected-players.csv",
+   "p": "data/web-players.csv"
+  },
+  "code": "a[(a.dpm>=1)&(a.season==2006)&(a.relation=='winner')].merge(p,on=['bbrID','season'],suffixes=('','_player'))[['name','reason','round','game']]"
+ },
+ {
+  "id": "heat-2006-opponents-chandler-only",
+  "source": "There was no single full DNP game from opponents, and just a single low-minute game from Tyson Chandler on the Bulls in the first round.",
+  "claim": "Among 2006 opponents with DPM of at least +1 there is exactly one absence in the data: Tyson Chandler, Low Minutes, first round Game 5; no opponent has a full DNP game.",
+  "tables": {
+   "a": "data/web-affected-players.csv",
+   "p": "data/web-players.csv"
+  },
+  "code": "a[(a.dpm>=1)&(a.season==2006)&(a.relation=='opponent')].merge(p,on=['bbrID','season'],suffixes=('','_player'))[['name','team','reason','round','game','dpm']]"
+ },
+ {
+  "id": "thunder-2025-absences",
+  "source": "In 2025 the Thunder caught a couple breaks by dodging Ja Morant and Brandon Clarke on the Grizzlies, John Minott on the Timberwolves, and the infamous game 7 from Tyrese Haliburton. But the Thunder had their own setbacks, missing Kenrich Williams for nearly the whole run, Aaron Wiggins for a game, and Isaiah Joe for some pivotal Finals games.",
+  "claim": "Among players with DPM of at least +1 in 2025, the Thunder's opponents missed Brandon Clarke for 4 games, Josh Minott for 2, Ja Morant for 1 and Tyrese Haliburton for 1 low-minute game, while Oklahoma City missed Kenrich Williams for 7 games, Isaiah Joe for 2 full plus 8 low-minute games and Aaron Wiggins for 1 full plus 2 low-minute games.",
+  "tables": {
+   "a": "data/web-affected-players.csv",
+   "p": "data/web-players.csv"
+  },
+  "code": "a[(a.dpm>=1)&(a.season==2025)].merge(p,on=['bbrID','season'],suffixes=('','_player')).groupby(['name','relation','reason']).size()"
+ },
+ {
+  "id": "warriors-2015-opponents-across-rounds",
+  "source": "Jrue Holiday, Mike Conley, Tony Allen, Anderson Varejao, Kevin Love, and Kyrie Irving all missed games in three of the four rounds.",
+  "claim": "The 2015 Warriors' opponent absences among players with DPM of at least +1 came from seven players spanning three of the four rounds: Holiday and Evans in round 1, Conley and Allen in round 2, and Varejao, Love and Irving in round 4.",
+  "tables": {
+   "a": "data/web-affected-players.csv",
+   "p": "data/web-players.csv"
+  },
+  "code": "a[(a.dpm>=1)&(a.season==2015)&(a.relation=='opponent')].merge(p,on=['bbrID','season'],suffixes=('','_player')).groupby(['name','round']).size()"
+ },
+ {
+  "id": "top-10-dpm-2026",
+  "source": "Top 10 DPM of the 2026 regular season",
+  "claim": "The ten highest 2026 regular-season DPM values are Nikola Jokić 7.48, Victor Wembanyama 6.87, Kawhi Leonard 6.26, Shai Gilgeous-Alexander 6.09, Giannis Antetokounmpo 5.06, Anthony Edwards 4.94, Luka Dončić 4.74, Donovan Mitchell 4.62, Jayson Tatum 4.33 and Chet Holmgren 4.32.",
+  "tables": {
+   "p": "data/web-players.csv"
+  },
+  "code": "p[p.season==2026].nlargest(10,'dpm')[['name','dpm']]"
+ },
+ {
+  "id": "plus-one-dpm-cutoff-about-80",
+  "source": "I’ve chosen to limit to players of at least +1 DPM, which on average are the top ~80 players each year.",
+  "claim": "Each season has between 66 and 92 players with DPM of at least +1, an average of 78.85 per season.",
+  "tables": {
+   "p": "data/web-players.csv"
+  },
+  "code": "p.assign(qualifies=lambda d: d.dpm>=1).groupby('season').qualifies.sum().agg(['min','max','mean'])"
+ }
+]

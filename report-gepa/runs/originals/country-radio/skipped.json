@@ -1,0 +1,54 @@
+[
+ {
+  "source": "In 17 of the 29 stations, we saw actual observed rates of play for women’s back-to-backs (the blue line in the below charts) that were lower (to the left) than their expected range of plays (tan bars) if left up to chance. This hints that the low rate of women’s back-to-back plays at these stations is an active programming decision, not a random coincidence.",
+  "why": "The authors' 1,000-draw simulation result is not reproducible without their exact simulation code, random seed, and definition of the expected range. Reimplementing the stated method (1,000 binomial draws of each station's song count at its observed share of women's songs, counting adjacent women-women pairs) puts 24-25 of the 29 stations below a 2.5th-percentile lower bound; using the minimum of the 1,000 draws as the lower bound gives about 14-20 depending on the seed. The observed per-station women's back-to-back counts themselves are reproduced in the station-share fact."
+ },
+ {
+  "source": "For back-to-back songs by men, it was 4,231 (65.53%).",
+  "why": "The count is reproduced (4,231 of 6,474), but 4,231/6,474 = 65.35%, not 65.53%; the stated percentage appears to transpose the digits. The included KCYY fact uses the computed 65.35%."
+ },
+ {
+  "source": "Plays for top current women — Total 52.5%",
+  "why": "The individual shares are reproduced (Gabby Barrett 23.2%, Kelsea Ballerini 17.0%, Lainey Wilson 12.0%), but they sum to 52.2%, and the story text says 52%. The chart label’s 52.5% is not reproducible; the included fact reports the computed 52.2%."
+ },
+ {
+  "source": "Plays for top current men — Total 20.4%",
+  "why": "The individual shares are reproduced (Jelly Roll 8.7%, Jimmie Allen 6.4%, Zac Brown Band 5.3%), but they sum to 20.3%, which is also the figure in the story text. The chart label’s 20.4% is not reproducible; the included fact uses 20.3%."
+ },
+ {
+  "source": "in 2022 songs by Black women received just 0.03% of radio airplay — with spins almost entirely in the evenings and overnights.",
+  "why": "plays.csv covers 19 dates in 2022, not the full year, and gives only 14 spins by Black women (0.008% of its songs), not 0.03%. The 0.03% figure comes from broader 2022 airplay data not supplied in this folder."
+ },
+ {
+  "source": "The same dire statistics are true for LGBTQIA+ artists, who received 0.13% of the airplay in 2022.",
+  "why": "plays.csv has no sexual-orientation field, and the 0.13% figure comes from broader 2022 airplay data not supplied in this folder."
+ },
+ {
+  "source": "Out of 182,848 total songs from the 29 stations we surveyed, there was a single back-to-back song pair from out LGBTQ+ artists: On February 7, 2022 at 2:16pm Chicago WUSN-FM played the Brothers Osborne’s “Stay A Little Longer” followed by Hunter Hayes’ “Wanted.”",
+  "why": "The play pair can be located, but plays.csv has no sexual-orientation field, so the LGBTQ+ coding and the claim that it is the only such pair cannot be reproduced."
+ },
+ {
+  "source": "Non-binary and trans artists are completely absent on mainstream country radio.",
+  "why": "plays.csv's gender field has only men, women, male-female and a few 'na' codes; it has no transgender or non-binary category, so absence cannot be verified from the file."
+ },
+ {
+  "source": "songs by women increased gradually over four decades of the long-running Billboard Hot Country Songs chart from 6.5% in 1958 to a peak of 33.1% in 1999 ... reaching a low of 11.4% in 2015 ... and has averaged 15% over the last 7 years.",
+  "why": "These are historical Billboard/Mediabase chart statistics drawn from Jada Watson's separate studies, not from plays.csv."
+ },
+ {
+  "source": "Just 6 solo Black women and 1 group of Black women have charted since 1958.",
+  "why": "This is a chart-history count from a separate artist database, not from plays.csv."
+ },
+ {
+  "source": "1969 Linda Martell “Color Him Father” Highest charting Black woman; 2008 Crystal Shawanda “You Can Let Go” Last Indigenous woman to receive airplay or chart; 2013 Leah Turner “Take the Keys” Last solo Mexican-American woman to receive airplay or chart; 2016 Mickey Guyton “Heartbreak Song” Last charting Black woman; Asian women have not received any support from radio in country music history.",
+  "why": "These historical first/last chart milestones come from a separate chart-history database, not from the 2022 plays.csv logs."
+ },
+ {
+  "source": "the result of these experiments was a decades-long consultancy practice built around the idea that programming songs by women at 13-15% of radio playlists was good for business.",
+  "why": "This is a historical industry claim about consultant practice, not a statistic computed from plays.csv."
+ },
+ {
+  "source": "That means 333 songs, 270 of which are by women. The majority (roughly 65%) of songs included in this playlist are songs that were actually played on country radio between 2000–2022. For the remaining 35% we took DJ liberties and added in noteworthy classic hits, songs from unsigned artists, and a few sentimental favorites.",
+  "why": "These counts describe the authors' separately curated Spotify playlist, not the radio logs in plays.csv."
+ }
+]

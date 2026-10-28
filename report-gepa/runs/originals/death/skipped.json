@@ -1,0 +1,30 @@
+[
+  {
+    "source": "The following map shows in blue and green where countries have laws and guidelines regarding declaring brain death. In black stripes, we see countries that report no such rules. Wherever two differently colored countries touch, we’ve got a visible limbo line.",
+    "why": "The file gives each country's law, guideline and confirmatory-test status but contains no country-border geometry, so the map's limbo-line pattern (which depends on which countries touch) cannot be computed from it; the specific country contrasts the story names are reproduced in facts.json."
+  },
+  {
+    "source": "in theory, a brain dead person could be officially dead in Hungary, wheeled across the border into Slovakia, and declared alive again.",
+    "why": "Slovakia is not in data/countries_braindeath.csv, so this cross-border pair cannot be reproduced from the file."
+  },
+  {
+    "source": "until 2009, Japanese law did not accept brain death as death without individual written consent or for patients under 15 years old.",
+    "why": "The file has no year, consent, or patient-age fields; it only records Japan's current law, guideline, and testing criteria."
+  },
+  {
+    "source": "less than 1% of deaths in the United States are brain deaths (around 15,000 - 20,000 people per year).",
+    "why": "The file contains no US death totals or counts of brain deaths, so the share and yearly counts cannot be computed."
+  },
+  {
+    "source": "brain-dead donors provide more than 90% of donated organs in the United States.",
+    "why": "The file has no organ-donation or donor records, so the share of donated organs from brain-dead donors cannot be computed."
+  },
+  {
+    "source": "Let's take a look at the typical and maximum times that organs remain viable for transplant after death.",
+    "why": "The chart's organ preservation times (e.g., 3, 14, and 19 typical hours and maximum hours up to 36) come from organ-transplant data not present in data/countries_braindeath.csv."
+  },
+  {
+    "source": "With 20 people dying each day waiting for an organ transplant",
+    "why": "The file has no organ-transplant waiting-list or waiting-list death counts, so the daily figure cannot be computed."
+  }
+]

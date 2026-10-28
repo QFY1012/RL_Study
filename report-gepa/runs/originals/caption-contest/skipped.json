@@ -1,0 +1,46 @@
+[
+  {
+    "source": "2,064th",
+    "why": "The chart labels this 2,064th of 22,757 entries, but the file has 6,672 contest-757 captions. The 2,064th row position matches, but the top 9% share does not: 2,064 of 6,672 is about 31%."
+  },
+  {
+    "source": "Submission: ranked top 9% (2,064th)",
+    "why": "The 2,064th rank matches the file's row position, but the stated top 9% share is computed from 22,757 entries; the file has 6,672 entries, so the caption's position is about 31%, not 9%. Because the share does not reproduce, the finding is left out."
+  },
+  {
+    "source": "184th",
+    "why": "The chart labels the contest-762 caption 184th of 7,076 entries, but the file places it at row 182 (0-based), i.e. 183rd. The share is 183 of 7,076, about 2.6%, which rounds to 3%, not the story's top 2%."
+  },
+  {
+    "source": "Submission: ranked top 2% (184th)",
+    "why": "The data place the contest-762 submission at 183rd (dashboard rank 182 plus one), not 184th, and the share is about 2.6% rather than 2%."
+  },
+  {
+    "source": "Our captions, ranked by votes from the New Yorker’s Cartoon Caption Contest Survey",
+    "why": "The chart is one finding across ten contests, but its entry counts do not all reproduce: contests 764, 765 and 771 show 6,311, 6,933 and 6,862 entries, while the file has 6,310, 6,932 and 6,861. Because the chart finding as a whole does not reproduce, it is left out; the stated ranks for the other contests are included as separate text findings."
+  },
+  {
+    "source": "Finding a ring - 760 entries contained “ring,” 4th, 5th, and 7th most-funny were about “not buying a ring.”",
+    "why": "The file has 745 contest-771 captions containing 'ring', not 760. The three highest-ranked 'not buying a ring' captions are 4th, 6th and 8th by mean, not 4th, 5th and 7th."
+  },
+  {
+    "source": "Losing keys (310 entries), remote (264 entries) and phone (103 entries)",
+    "why": "The file gives 310 captions containing 'keys' and 103 containing 'phone', but only 262 containing 'remote', not 264."
+  },
+  {
+    "source": "References to (and double entendres) of change (287 entries)",
+    "why": "The file has 284 contest-771 captions containing 'change', not 287."
+  },
+  {
+    "source": "“I’m sorry about this whole climate change thing.” 25% of readers thought it was funny.",
+    "why": "The CSV's three-category counts give the contest-757 submission 4 'funny' votes out of 102 (3.9%), not 25%. The story's binary 'thought it was funny' percentages are not derivable from captions.csv, and several generated captions shown on the contest pages (such as 'I told you I had a magnetic personality.') are absent from the file."
+  },
+  {
+    "source": "Very rarely did the finalists use a unique joke angle",
+    "why": "captions.csv has no finalist or winner labels, so this pattern cannot be computed from the file."
+  },
+  {
+    "source": "the highest ranking were the best versions with the most pithy, oh-so-smoothly-rolls-off-the-tongue phrasing",
+    "why": "This is a qualitative judgment about phrasing; the file has no measure of pithiness and no finalist labels."
+  }
+]

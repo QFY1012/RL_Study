@@ -1,0 +1,169 @@
+{
+ "id": "banknotes",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 611,
+  "steps": 50,
+  "tools": 53,
+  "nudged": 0,
+  "usage": {
+   "input": 43307,
+   "output": 80949
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 21,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "four-activist-nine-revolutionary-countries",
+   "basis": "Output only gives Activist countries=4 and Revolutionary countries=9; it does not show the 9 revolutionary countries are other/disjoint from the 4 activist countries.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "mirabal-sisters-forty-seven-years",
+   "basis": "Output: sisters=3, death=1960, appeared=2007, diff=47; it does not include any indication that they were assassinated.",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "writers-45-from-23-countries",
+   "basis": "Output: Writer people=45, countries=23, share=0.186722 (18.7%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "writing-top-for-women-second-for-men",
+   "basis": "Output: Writer F=14 (highest female), M=31; Head of Gov't M=37 > 31, so Writer is second for men.",
+   "verdict": "ok"
+  },
+  {
+   "id": "head-of-government-second-one-woman",
+   "basis": "Output sorted top2: Writer people=45, Head of Gov't people=38 women=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "four-female-politicians-three-firsts",
+   "basis": "Output: name=4, knownForBeingFirst Yes count=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "no-woman-founders",
+   "basis": "Output: Founder name=25, gender F count=0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "twelve-monarchs-two-women",
+   "basis": "Output: Monarch name=12, gender F count=2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "governance-combined-42-percent",
+   "basis": "Output: governance True people=102, countries=34, share=0.423237 (42.3%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "writers-second-after-governance",
+   "basis": "Output head(2): Governance=102, Writer=45.",
+   "verdict": "ok"
+  },
+  {
+   "id": "firsts-share-29-percent",
+   "basis": "Output: knownForBeingFirst Yes people=69, share=0.286307 (28.6%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "firsts-appear-sooner",
+   "basis": "Output means: Yes=89.942029 (≈89.9), No=137.382353 (≈137.4).",
+   "verdict": "ok"
+  },
+  {
+   "id": "ten-people-alive-on-banknotes",
+   "basis": "Output: total=10; no_death_date False=9, True=1 Queen Elizabeth II.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ninety-six-percent-issued-after-death",
+   "basis": "Output: sum=230, count=239, mean=0.962343 (96.2%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "hannibal-oldest-person",
+   "basis": "Output nsmallest deathYear row: Hannibal deathDate=-183, firstAppearanceDate=2013, diff=2196.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hannibal-current-five-dinar-note",
+   "basis": "Output: Tunisia, Tunisian dinar, currentBillValue=5, firstAppearanceDate=2013.",
+   "verdict": "ok"
+  },
+  {
+   "id": "astrid-lindgren-twenty-krona",
+   "basis": "Output filtered by name contains Astrid: Sweden, Swedish krona, currentBillValue=20, firstAppearanceDate=2015.",
+   "verdict": "ok"
+  },
+  {
+   "id": "third-died-century-before-appearing",
+   "basis": "Output: sum=80, mean=0.33195 (33.2%) for appearanceDeathDiff>100.",
+   "verdict": "ok"
+  },
+  {
+   "id": "shortest-wait-one-year-four-people",
+   "basis": "Output: appearanceDeathDiff=1 rows with people=4; 1 is the minimum positive integer wait after death.",
+   "verdict": "ok"
+  },
+  {
+   "id": "shortest-wait-people-all-firsts",
+   "basis": "Output groupby knownForBeingFirst for diff==1: Yes=4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "four-activist-nine-revolutionary-countries",
+   "basis": "Output only gives Activist countries=4 and Revolutionary countries=9; it does not show the 9 revolutionary countries are other/disjoint from the 4 activist countries.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "mirabal-sisters-forty-seven-years",
+   "basis": "Output: sisters=3, death=1960, appeared=2007, diff=47; it does not include any indication that they were assassinated.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "bill-values-similar-by-gender",
+   "basis": "Output medians: F=0.600000, M=0.571429 (≈0.57).",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 21,
+ "skipped": 7,
+ "review": [
+  {
+   "id": "four-activist-nine-revolutionary-countries",
+   "action": "restore",
+   "changed": [
+    "code"
+   ],
+   "why": "the two country sets do not overlap, so 'nine others' holds; the code now prints both sets so the printout shows it"
+  },
+  {
+   "id": "mirabal-sisters-forty-seven-years",
+   "action": "restore",
+   "changed": [
+    "claim"
+   ],
+   "why": "'assassinated' is not in the data; the claim now says died"
+  },
+  {
+   "id": "hannibal-oldest-person",
+   "action": "edit",
+   "changed": [
+    "claim"
+   ],
+   "why": "the story says he first appeared on the dinar in 1993; 2013 is the current note, which is what the data's year is"
+  }
+ ]
+}

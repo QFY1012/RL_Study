@@ -1,0 +1,46 @@
+[
+  {
+    "source": "It looks like today in Hempstead, New York, the weather is rain until evening, and there’s a high of 58°F and a low of 45°F. That’s a difference of only 13°F between the warmest and coldest parts of your day.",
+    "why": "These are Earth weather values from the reader’s location; data/mars-weather.csv has no Earth cities, Earth temperatures or Earth weather summary. The Earth file (earthWeather.json) is not in the folder."
+  },
+  {
+    "source": "It looks like today in Hempstead, New York, you’re experiencing winds of about 17.28mph.",
+    "why": "Earth wind speed comes from the Earth weather dataset, which is not provided; the Mars CSV has no wind column."
+  },
+  {
+    "source": "Here is the typical range of wind speeds that I observed.",
+    "why": "The provided CSV has no wind_speed column, so the first and third quartiles of Gale Crater wind speeds (and their mph values) cannot be computed."
+  },
+  {
+    "source": "Unfortunately, I haven’t been able to send wind data back to Earth since sol 1485 (October 9, 2016 on Earth).",
+    "why": "The provided CSV has no wind_speed column; the wind coverage and the sol-1485 cutoff cannot be verified from it."
+  },
+  {
+    "source": "As of today*, I have been on Mars for 3,663 sols, or Martian days. Since sols are 38 minutes and 35.244 seconds longer than an Earth day, my trip has felt like 3,762 days, or 10.3 years on Earth.",
+    "why": "The CSV ends at sol 1,977 on 2018-02-27; the live page’s current sol count and Earth-day/year values come from later Mars data not in this folder. The equivalent values for the data snapshot are in facts.json."
+  },
+  {
+    "source": "The actual high on Mars today is -47.2°F, making the low a chilly -97.6°F.",
+    "why": "The live page uses a later Mars reading than the CSV; the snapshot’s latest high and low are in facts.json."
+  },
+  {
+    "source": "Today, the difference between the warmest and coldest parts of my sol is 50°F.",
+    "why": "The live page uses a later Mars reading than the CSV; the snapshot’s corresponding daily temperature difference is in facts.json."
+  },
+  {
+    "source": "Right now in the southern hemisphere of Mars, it’s summer.",
+    "why": "The live page uses a later sol than the CSV; at the snapshot’s last sol (ls 135), the story’s season rule gives winter, as recorded in facts.json."
+  },
+  {
+    "source": "Humans usually talk about the pressure at sea level (100 kPa or kiloPascals) as “typical” for Earth.",
+    "why": "100 kPa is a fixed Earth reference constant in the story, not a measurement in the Mars CSV; only the Mars pressure reading can be computed from the data, and that value is in facts.json."
+  },
+  {
+    "source": "Even I have a hard time working if it’s below -40°F or above 104°F",
+    "why": "These are rover engineering limits, not measurements in the weather data."
+  },
+  {
+    "source": "Minimum temperature values that exceeded 0°F (-17°C) were removed (at the time of this report’s writing, that included 1 value).",
+    "why": "This is a data-cleaning note rather than a finding; the provided CSV’s minimum temperatures never exceed 0°F, so the stated removal of one value cannot be reproduced."
+  }
+]

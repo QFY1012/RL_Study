@@ -1,0 +1,20 @@
+[
+ {
+  "id": "average-mathematical-cookie-ingredients",
+  "source": "That means we calculated the average amount of flour, and the average amount of butter, and so on.",
+  "claim": "Averaged over all the recipes, a batch contains 3.526 cups of all-purpose flour, 0.394 tsp of baking powder, 1.139 tsp of salt, 1.370 tsp of baking soda, 1.133 cups of butter, 1.025 cups of sugar, 1.194 cups of light brown sugar, 0.125 cups of dark brown sugar, 2.979 tsp of vanilla, 1.833 cups of semisweet chocolate chips, 0.291 cups of milk chocolate chips, 0.112 cups of dark chocolate chips, 0.049 cups of white chocolate chips, and 0.354 cups of bittersweet chocolate chips, among other ingredients.",
+  "tables": {
+   "d": "data/choc_chip_cookie_ingredients.csv"
+  },
+  "code": "d.groupby(['Ingredient', 'Unit']).Quantity.sum().div(d.Recipe_Index.nunique()).round(3).to_string()"
+ },
+ {
+  "id": "applesauce-watered-down",
+  "source": "We could pretend they’re not there, since who can taste 0.002 cups of applesauce in a batch of 48 cookies?",
+  "claim": "Applesauce appears in one of the recipes and averages 0.002 cups per batch.",
+  "tables": {
+   "d": "data/choc_chip_cookie_ingredients.csv"
+  },
+  "code": "d[d.Ingredient == 'applesauce'].groupby(['Ingredient', 'Unit']).agg(recipes=('Recipe_Index', 'nunique'), avg=('Quantity', lambda s: s.sum() / d.Recipe_Index.nunique())).round(3)"
+ }
+]

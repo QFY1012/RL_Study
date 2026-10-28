@@ -1,0 +1,132 @@
+{
+ "id": "makeup-shades",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 702,
+  "steps": 40,
+  "tools": 40,
+  "nudged": 0,
+  "usage": {
+   "input": 41038,
+   "output": 115846
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 21,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "mufe-shades-60-90",
+   "basis": "Make Up For Ever row: False 9, True 31, All 40.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fenty-wider-range-than-mufe",
+   "basis": "Fenty min 25 max 94 ptp 69 size 40; Make Up For Ever min 31 max 92 ptp 61 size 40.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fenty-extremes-vs-mufe",
+   "basis": "[20,30): Fenty 1, MUFE 0; [30,40): Fenty 4, MUFE 2; [90,100): Fenty 4, MUFE 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bestsellers-10-20-band",
+   "basis": "Fit Me 1; Infalliable 1; PRO FILT'R 0 for (L<20).sum.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fenty-lightest-among-bestsellers",
+   "basis": "Fenty max_L 94, shades_90_plus 4; US bestsellers max <=92 and shades_90_plus <=2 (Maybelline 92,2).",
+   "verdict": "ok"
+  },
+  {
+   "id": "bipoc-skew-darker",
+   "basis": "group3 mean 56.035294 size85; group0 65.625/40; group1 70.025/40; group2 65.766467/167; group4 66.401786/112.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bipoc-peak-50-60",
+   "basis": "group3 [50,60)=20 of 85; group0 peak [80,90)=8; group1 [70,80)=12; group2 [70,80)=57; group4 [70,80)=40.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bipoc-brands-darkest-10-30",
+   "basis": "group3 mins: Beauty Bakerie 22, Black Opal 23, Black Up 16, Iman 27, Laws of Nature 11.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fenty-most-shades-bipoc",
+   "basis": "Fenty PRO FILT'R 40; Beauty Bakerie #1 CAKE MIX 30; other BIPOC lines <=18.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nigeria-product-shade-max",
+   "basis": "Estée Lauder Double Wear 42; House of Tara Oil Free 11; Elsas Pro Full Coverage 11; other Nigeria group5 <=10.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nigeria-darker-than-bipoc",
+   "basis": "group5 mean 53.300000 size50; group3 mean 56.035294 size85; group5 is minimum mean.",
+   "verdict": "ok"
+  },
+  {
+   "id": "japan-no-dark-shades",
+   "basis": "group6 min 58 max 90 size 74.",
+   "verdict": "ok"
+  },
+  {
+   "id": "india-one-dark-shade",
+   "basis": "sorted head: L'Oréal True Match 29; Olivia Foundation 54; then 55,55,61.",
+   "verdict": "ok"
+  },
+  {
+   "id": "india-fewer-than-five",
+   "basis": "group==7: size 9 lines; (<5) count 5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "us-bestsellers-largest-total",
+   "basis": "group sizes: 2=167, 5=50, 6=74, 7=57.",
+   "verdict": "ok"
+  },
+  {
+   "id": "japan-india-lighter-than-us",
+   "basis": "group6 mean 76.959459 count74; group7 mean 74.228070 count57; group2 mean 65.766467 count167.",
+   "verdict": "ok"
+  },
+  {
+   "id": "few-brands-darkest-band",
+   "basis": "brands with L<20: Black Up shades2 darkest16; L'Oréal 1/19; Lancôme 1/14; Laws of Nature 1/11; Maybelline 1/16; Fenty absent.",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-founder-brand-ranges",
+   "basis": "MAC min36 max90 size42; Lancôme min14 max95 size40; Bobbi Brown min28 max90 size30.",
+   "verdict": "ok"
+  },
+  {
+   "id": "maybelline-breadth",
+   "basis": "Double Wear 42; PRO FILT'R 40; Fit Me 40; other US bestsellers <=29.",
+   "verdict": "ok"
+  },
+  {
+   "id": "us-bestsellers-spectrum-coverage",
+   "basis": "group2 min_L 16 max_L 92 bands 9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fenty-beautybakerie-lightest",
+   "basis": "PRO FILT'R max94; #1 CAKE MIX max94.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 21,
+ "skipped": 13
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Alternatively, the Desert Sun, a newspaper in Palm Springs, CA, has nearly reached ASNE’s 2025 goals, eight years ahead of schedule.",
+    "why": "The 2025 parity goal and the audience geography used for it are not in the data; the files reproduce the Desert Sun's and Palm Springs' race shares, but not whether those shares constitute having 'nearly reached' a 2025 target."
+  },
+  {
+    "source": "This publication is one of the many newsrooms closest to achieving racial parity in the US.",
+    "why": "The closest-parity ranking depends on hand-selected larger geographies; for example, the chart shows Minneapolis at city parity against a geography much whiter than Minneapolis. census_4.csv has only city-level percentages, so the city-only comparison does not reproduce the chart's set of closest newsrooms."
+  },
+  {
+    "source": "NEWSROOM STAFFS CLOSEST TO RACIAL PARITY\nCOMPARED TO THEIR HOME CITY",
+    "why": "The chart compares Minneapolis, Naples and the Desert Sun with geographies not identifiable in the city-level census file, so the named three-paper ranking cannot be reproduced."
+  },
+  {
+    "source": "LARGE NEWSROOM STAFFS FURTHEST FROM RACIAL PARITY\nCOMPARED TO THEIR HOME CITY",
+    "why": "The six named papers are not the top six by city-level white-share gap, and the authors' large-newsroom and alternative-geography choices are not in the data. Their individual values against the five cities are reproduced in facts.json, but the chart's ranking is not."
+  },
+  {
+    "source": "CHANGES IN NATIONAL NEWSROOM RACIAL DIVERSITY\n2001 - 2017 | COMPARED TO THE US POPULATION",
+    "why": "census_4.csv contains city-level percentages but no US population benchmark, so the chart's comparison of each paper to the US population cannot be computed. The underlying 2001-2017 non-white staff-share changes for the four papers are reproduced in facts.json."
+  },
+  {
+    "source": "This disparity is most extreme in large, racially diverse cities.",
+    "why": "The claim is a ranking of newsroom-versus-geography gaps, and the chart's large-newsroom selection and alternative geographies are not in the data; a city-only ranking puts smaller papers such as the Reading Eagle above the five-city examples. The five cities' values themselves are reproduced in facts.json."
+  },
+  {
+    "source": "Overall, most newsrooms have some catching up to do if they want to meet the 2025 goal.",
+    "why": "This is a qualitative conclusion drawn from the 45%/55% and national-paper findings; the 2025 goal itself is not in the data, so it adds no separately computable finding."
+  }
+]

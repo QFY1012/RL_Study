@@ -1,0 +1,47 @@
+{
+ "id": "death",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 404,
+  "steps": 30,
+  "tools": 35,
+  "nudged": 0,
+  "usage": {
+   "input": 21672,
+   "output": 46171
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "russia-china-brain-death-rules",
+   "basis": "China: law=A, guideline=A; Russia: law=P, guideline=P",
+   "verdict": "ok"
+  },
+  {
+   "id": "mexico-guatemala-brain-death-rules",
+   "basis": "Guatemala: law=A, guideline=A; Mexico: law=P, guideline=P",
+   "verdict": "ok"
+  },
+  {
+   "id": "sweden-norway-observation-time",
+   "basis": "Norway observation_time_h=24; Sweden observation_time_h=A",
+   "verdict": "ok"
+  },
+  {
+   "id": "countries-criteria-vary",
+   "basis": "no_of_physicians min=1.0, max=4.0; observation_time_h min=2.0, max=24.0",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 7
+}

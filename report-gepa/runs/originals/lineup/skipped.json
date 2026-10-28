@@ -1,0 +1,46 @@
+[
+  {
+    "source": "Today, teams prioritize better overall hitters in the leadoff spot, making Hall of Famer Alomar Toronto’s most likely No. 1 hitter.",
+    "why": "The hypothetical 2024 Toronto lineup comes from logistic regressions and an IPFP adjustment that are not in these files; the ratings themselves do not show better overall leadoff hitters (their average batting-average rating falls from 3.14 to 2.90 between the eras)."
+  },
+  {
+    "source": "Perhaps surprisingly, Henderson and White shift lower, as teams have become more willing to bat their stronger hitters deeper in the order.",
+    "why": "This is output of the slot-probability model for the hypothetical 2024 Toronto lineup; no model probabilities are in back-stats.csv or cards.csv."
+  },
+  {
+    "source": "Olerud and Molitor move up due to their all-around skills, and Tony Fernandez assumes an important role in the modern analytical lineup, manning the No. 2 hole.",
+    "why": "This is output of the slot-probability model for the hypothetical 2024 Toronto lineup; no model probabilities are in the files."
+  },
+  {
+    "source": "And Carter, who would likely be penciled in further down in the lineup, may never have gotten the chance to hit that iconic HR from the cleanup spot.",
+    "why": "This is output of the slot-probability model for the hypothetical 2024 lineup; Joe Carter's 1993 season is not in back-stats.csv either."
+  },
+  {
+    "source": "starting with the player who had the highest overall odds (John Olerud in the cleanup role, at 37.3%)",
+    "why": "The 37.3% odds are model probabilities, which the files do not contain."
+  },
+  {
+    "source": "(it’s also getting very slightly faster on average, weirdly enough)",
+    "why": "In back-stats.csv the cleanup spot's average speed rating falls from 1.45 in 1970-2009 to 1.22 in 2010-present (and from 1.67 in the 1990s to 1.22), so the data do not reproduce a slight gain in speed."
+  },
+  {
+    "source": "No lineup slot has seen a bigger decline in Weighted Runs Created Plus — a measure of batting effectiveness relative to league average — than the cleanup spot.",
+    "why": "wRC+ is not in the files; the only production measure available is win_shares, which is not the statistic the story names."
+  },
+  {
+    "source": "and AL No. 9 hitters walk more than ever",
+    "why": "The files have no league identifier, so an AL-only subset cannot be built; across all No. 9 hitters the walk rating rises from 1.23 to 2.09 only in the 1970-2009 vs 2010-present comparison and is highest in the 2000s by decade, so an AL trend 'more than ever' cannot be shown."
+  },
+  {
+    "source": "At the No. 2 spot, they will come to the plate more often, and less frequently with two outs.",
+    "why": "This needs within-game plate-appearance distributions by lineup slot, which are not in the files."
+  },
+  {
+    "source": "Izturis was a lifer in the No. 8 and 9 slots, recording 98.7% of his career PA there (73.7% in 9th and 25.0% in 8th).",
+    "why": "back-stats.csv contains only three of Cesar Izturis's seasons (2003, 2004, 2010); PA-weighting their slot shares gives about 49% of his PA in slots 8-9, not 98.7%."
+  },
+  {
+    "source": "This is the batting lineup of the ’93 Blue Jays, who beat the Philadelphia Phillies on Joe Carter’s famous game-winning home run in Game 6 of the World Series.",
+    "why": "The lineup chart labels each 1993 player's four ratings, but only Rickey Henderson and Paul Molitor of that lineup appear in back-stats.csv; the other players (Devon White, Roberto Alomar, Joe Carter, John Olerud, etc.) are absent, so the chart cannot be rebuilt."
+  }
+]

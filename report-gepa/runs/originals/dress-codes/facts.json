@@ -1,0 +1,90 @@
+[
+  {
+    "id": "body-parts-prohibited",
+    "source": "we found that 77% of schools’ policies specifically prohibit the visibility of certain body parts.",
+    "claim": "373 of the 481 schools prohibit the visibility of at least one body part.",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b[b.type.eq('body')].groupby('schoolName').size().to_frame('n').agg(body_schools=('n','size')).assign(total_schools=len(m))"
+  },
+  {
+    "id": "body-parts-ranked",
+    "source": "The Most Commonly Banned Visible Body Parts",
+    "claim": "The body parts most commonly banned are midsection midriff in 340 schools (71%), cleavage in 106 (22%), back in 74 (15%), breasts chest in 69 (14%), buttocks in 54 (11%), shoulders in 38 (8%) and torso in 33 (7%).",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b[b.type.eq('body')].groupby('item').schoolName.nunique().to_frame('n').assign(percent=lambda d: (d.n/len(m)*100).round()).query('percent >= 5').sort_values('n',ascending=False)"
+  },
+  {
+    "id": "genitals-rare",
+    "source": "I was expecting something like genitals to be number one, but only 6 schools (1%) explicitly ban them.",
+    "claim": "Six schools (1%) explicitly ban genitals.",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b[b.type.eq('body') & b.item.eq('genitals')].groupby('item').schoolName.nunique().to_frame('schools').assign(percent=lambda d: (d.schools/len(m)*100).round())"
+  },
+  {
+    "id": "average-prohibited-items",
+    "source": "The average dress code prohibits around 32 items (the maximum was 97).",
+    "claim": "Dress codes list an average of 31.48 rules per school, with a maximum of 97.",
+    "tables": {
+      "b": "data/banned_items.csv"
+    },
+    "code": "b.groupby(['state','schoolName']).size().agg(['mean','max'])"
+  },
+  {
+    "id": "gender-specific-items",
+    "source": "we found 15% of schools that prohibited items specifically for either “male” students or “female” students",
+    "claim": "70 of the 481 schools prohibit at least one item only for male or only for female students.",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b.assign(gender_specific=b.prohibited.isin(['female','male','boys'])).groupby(['state','schoolName']).gender_specific.max().agg(['sum','count'])"
+  },
+  {
+    "id": "rationale-words",
+    "source": "Most Common Words in the Rationale for Dress Codes",
+    "claim": "The ten most common rationale phrases appear in 367 schools (76%) for disruption/distraction, 330 (69%) for appropriate/inappropriate, 315 (65%) for safe/safety, 184 (38%) for health, 151 (31%) for interfere with learning, 146 (30%) for clean, 97 (20%) for neat, 90 (19%) for modest/modesty, 61 (13%) for respect/disrespect and 48 (10%) for good taste.",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b[b.type.eq('rationale')].groupby('item').schoolName.nunique().to_frame('n').assign(percent=lambda d: (d.n/len(m)*100).round()).query('percent >= 10').sort_values('n',ascending=False)"
+  },
+  {
+    "id": "clothing-most-banned",
+    "source": "You’ll find short shorts and skirts at the highest end alongside visible underwear.",
+    "claim": "The clothing items banned in the most schools are short shorts (334 schools), the undergarment item visible (332) and short skirts (290).",
+    "tables": {
+      "b": "data/banned_items.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "b[~b.type.isin(['promotion','rationale','body','footwear','headwear','grooming','accessories'])].groupby(['type','item']).schoolName.nunique().to_frame('n').assign(percent=lambda d: (d.n/len(m)*100).round()).query('percent >= 60').sort_values('n',ascending=False)"
+  },
+  {
+    "id": "clothing-least-banned",
+    "source": "On the opposite end, you’ll find items banned in fewer schools like spandex clothing, gym shorts, and the absence of underwear.",
+    "claim": "At the other end, spandex is banned in 41 schools, the undergarment item none in 32 and athletic gym shorts in 24.",
+    "tables": {
+      "b": "data/banned_items.csv"
+    },
+    "code": "b[b.item.isin(['spandex','none','athletic gym shorts'])].groupby(['type','item']).schoolName.nunique().sort_values(ascending=False)"
+  },
+  {
+    "id": "no-length-specified",
+    "source": "Another 33% didn’t specify a length, just prohibited “short” items of clothing.",
+    "claim": "The \"short\"/\"inappropriate length\" (no exact measurement given) category has 159 entries, equal to 33% of the 481 schools.",
+    "tables": {
+      "l": "data/length_restrictions.csv",
+      "m": "data/school_metadata.csv"
+    },
+    "code": "l.groupby('length').size().to_frame('entries').assign(total_schools=len(m), percent=lambda d: (d.entries/d.total_schools*100).round()).loc[['\"short\"/\"inappropriate length\" (no exact measurement given)']].iloc[0]"
+  }
+]

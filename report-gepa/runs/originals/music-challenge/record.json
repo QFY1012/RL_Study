@@ -1,0 +1,52 @@
+{
+ "id": "music-challenge",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 682,
+  "steps": 60,
+  "tools": 76,
+  "nudged": 0,
+  "usage": {
+   "input": 104272,
+   "output": 87439
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "songs-not-passed-to-gen-z",
+   "basis": "n=40; Gen Z 13–20, Millennials 50–71, Gen X 51–95, Boomers 22–98; every Gen Z value is below the other generation columns.",
+   "verdict": "ok"
+  },
+  {
+   "id": "boomer-gen-x-not-millennial",
+   "basis": "n=36; Millennials 6–20, Gen X 50–72, Boomers 50–94.",
+   "verdict": "ok"
+  },
+  {
+   "id": "universally-known",
+   "basis": "n=10; Gen Z 91–97, Millennials 98–99, Gen X 95–100, Boomers 92–99.",
+   "verdict": "ok"
+  },
+  {
+   "id": "millennial-only",
+   "basis": "n=1; single row has Gen Z=21, Millennials=43, Gen X=19, Boomers=7.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gen-x-only",
+   "basis": "n=26; Gen X 41–68; Gen Z 5–18, Millennials 9–25, Boomers 9–29; Gen X exceeds the other columns in every row.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 7
+}

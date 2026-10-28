@@ -1,0 +1,30 @@
+[
+  {
+    "source": "The Social Network wins 3 Oscar Awards.",
+    "why": "The files contain no Academy Award data, so the three Oscar wins cannot be reproduced."
+  },
+  {
+    "source": "X-rated Midnight Cowboy wins Best Picture",
+    "why": "The files contain no Academy Award or MPAA rating data; the reproduced fact uses only the film's rank and its drugs, nudity and heroin theme tags."
+  },
+  {
+    "source": "The Rocky Horror Picture Show is the first popular to release to feature a number of LGBT themes.",
+    "why": "The files have no release-width or popularity measure, so the claim that it was the first popular release with several LGBT themes cannot be tested; the #2 rank and the lgbt tag are reproduced."
+  },
+  {
+    "source": "Inspired by the success of The Passion of the Christ, faith-based films like God’s Not Dead rise and begin to break into the top 100 films.",
+    "why": "God's Not Dead's 55th-place rank is reproduced, but the files' broad christianity tag does not show a clean rise in faith-based top-100 films after 2004 and includes many films that are not faith-based."
+  },
+  {
+    "source": "overall tagging begins to decline in 2013",
+    "why": "The number of tagged films and keywords per film declines gradually from about 2010, not specifically from 2013; 2013 is higher than 2012."
+  },
+  {
+    "source": "Philadelphia dramatizes an AIDS discrimination case from 1986",
+    "why": "The files record the film's 1993 production year and its aids/lgbt/anti-lgbt tags, but not the 1986 case year; the AIDS tag and rank are reproduced."
+  },
+  {
+    "source": "The role of “Philadelphia” in public discourse is unmatched.",
+    "why": "This is an interpretive claim about public discourse, not a quantity measured in the files."
+  }
+]

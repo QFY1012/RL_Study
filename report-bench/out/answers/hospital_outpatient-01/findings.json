@@ -1,0 +1,50 @@
+[
+ {
+  "finding": "全院复诊与初诊的候诊中位数几乎相同(复诊28分钟 vs 初诊33分钟,比值0.85),但拆到『主任医师×上午时段』后,初诊中位数31分钟是复诊17分钟的1.8倍——主任医师号源紧张,复诊患者走优先加号通道",
+  "numbers": {
+   "overall_revisit_median_min": 28,
+   "overall_initial_median_min": 33,
+   "overall_ratio": 0.848,
+   "chief_morning_initial_median_min": 31.0,
+   "chief_morning_revisit_median_min": 17,
+   "chief_morning_ratio": 1.82,
+   "chief_morning_initial_n": 156,
+   "chief_morning_revisit_n": 113
+  },
+  "holds": true
+ },
+ {
+  "finding": "以2025-04-14为界,候诊分钟中位数从39分钟降至25分钟(降幅36%),且此后全程稳定在同一水平,是门诊流程改造造成的拐点",
+  "numbers": {
+   "before_median_min": 39.0,
+   "after_median_min": 25.0,
+   "after_over_before": 0.641,
+   "before_n": 910,
+   "after_n": 910
+  },
+  "holds": true
+ },
+ {
+  "finding": "下午13:30-14:30报到时段的候诊中位数61分钟,是其他下午时段(22分钟)的2.8倍——下午号源患者在开诊前集中签到,分诊台单队列放行",
+  "numbers": {
+   "slot_1330_median_min": 61,
+   "other_afternoon_median_min": 22,
+   "ratio": 2.77,
+   "slot_1330_n": 341,
+   "other_afternoon_n": 315
+  },
+  "holds": true
+ },
+ {
+  "finding": "『候诊时间过长』类投诉的候诊中位数90分钟,是『服务态度』类(42分钟)的2.2倍,而态度类投诉的候诊中位数与全院中位数(31分钟)接近——投诉类别由真实候诊时长驱动",
+  "numbers": {
+   "wait_complaint_median_min": 90.5,
+   "attitude_complaint_median_min": 42.0,
+   "overall_median_min": 31.0,
+   "ratio": 2.15,
+   "wait_complaint_n": 26,
+   "attitude_complaint_n": 32
+  },
+  "holds": true
+ }
+]

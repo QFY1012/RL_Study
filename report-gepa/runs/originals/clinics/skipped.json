@@ -1,0 +1,98 @@
+[
+  {
+    "source": "Twenty-seven US states specifically target clinics that provide abortions with laws called “Targeted Regulation of Abortion Providers,” also known as TRAP laws.",
+    "why": "External count of state laws; cities.csv contains city driving times and populations only, with no TRAP-law or state-policy data."
+  },
+  {
+    "source": "In 2013, Texas passed a TRAP law called House Bill 2 (HB2). Out of the 41 clinics open in Texas at the time, only five fully met the new requirements.",
+    "why": "External clinic-compliance counts from the HB2 period; cities.csv has no clinic-level records or compliance status."
+  },
+  {
+    "source": "As the number of operating clinics in Texas was cut in half",
+    "why": "External historical count of Texas clinics; cities.csv has no clinic-opening or clinic-closing records."
+  },
+  {
+    "source": "when nearby clinics close, pregnant patients experience an “undue burden” to travel upward of 150 miles to the nearest clinic.",
+    "why": "The 150-mile distance comes from the court case and is not in cities.csv, which reports round-trip driving hours rather than miles."
+  },
+  {
+    "source": "This drive would take about 5 hours round trip",
+    "why": "This is derived from the external 150-mile distance at 75 miles per hour, not from the driving-time columns in cities.csv."
+  },
+  {
+    "source": "it could have impacted the nearly 275,000 women of reproductive age living in Texas’ Rio Grande Valley.",
+    "why": "External population estimate for the Rio Grande Valley; cities.csv has city populations but no age breakdown or Rio Grande Valley aggregate."
+  },
+  {
+    "source": "Although 89% of abortions occur when the patient is less than 12 weeks pregnant",
+    "why": "External Guttmacher statistic; cities.csv has no abortion-incidence data by gestational age."
+  },
+  {
+    "source": "This same pattern of decreased access to abortion-providing clinics can be found in both rural and urban areas across the country.",
+    "why": "cities.csv contains only cities with population greater than 50,000 (the story's urban-area definition) and has no rural locations or rural/urban classification, so the claimed rural-and-urban pattern cannot be computed."
+  },
+  {
+    "source": "Utah requires that patients are present for two appointments spaced three days apart before abortion services can be provided.",
+    "why": "External state-law detail; cities.csv has no appointment, waiting-period or regulatory data."
+  },
+  {
+    "source": "In the first half of 2017, six states proposed TRAP laws to ban abortion entirely, and 28 states have proposed laws to ban abortion under some circumstances. Clinics in these 34 states are potentially in danger of drastic closures",
+    "why": "External legislative counts; cities.csv has no bill, state-policy or clinic-risk data."
+  },
+  {
+    "source": "Data for this story excluded hospitals and physicians because clinics account for about 95% of annual abortions in the US.",
+    "why": "External share of annual abortions; cities.csv has no hospital, physician or abortion-count records."
+  },
+  {
+    "source": "Frisco, TX POP: 154,407",
+    "why": "The map labels examples of cities without access with their populations; populations are data descriptions, and the analytical finding is the 151-city count already reproduced. No separate duration finding is stated for the example cities."
+  },
+  {
+    "source": "Lancaster, CA POP: 161,103",
+    "why": "Map example label; the population is a data description, and the 151-city count already reproduces the access finding. No separate duration finding is stated for the example city."
+  },
+  {
+    "source": "Newport News, VA POP: 182,385",
+    "why": "Map example label; the population is a data description, and the 151-city count already reproduces the access finding. No separate duration finding is stated for the example city."
+  },
+  {
+    "source": "Cities with the longest round-trip travel time in the US.",
+    "why": "The interactive chart's full set of displayed cities and their per-stage values is not recoverable from the published page, and cities.csv does not mark which rows the chart selected. The per-stage maximum is reproduced in an included fact, but the complete city list is not."
+  },
+  {
+    "source": "At 8 weeks, the nearest clinic is in South Dakota, which requires patients to receive counseling, then wait 72 hours for abortion services.",
+    "why": "The nearest clinic's state and the 72-hour waiting rule are clinic/law data not present in cities.csv, which has city locations and driving times but no clinic addresses or state rules."
+  },
+  {
+    "source": "Fargo is home to the only clinic in North Dakota.",
+    "why": "A clinic-location count; cities.csv has no clinic-level file, so it cannot show how many clinics operate in North Dakota or where they are."
+  },
+  {
+    "source": "Clinics in Louisiana must have an agreement with a nearby hospital and meet the same structural standards as surgical centers.",
+    "why": "State regulatory requirement; cities.csv has no regulatory or clinic-facility data."
+  },
+  {
+    "source": "Clinics in Arkansas must have an agreement with a hospital within 30 miles and meet the same structural standards as surgical centers.",
+    "why": "State regulatory requirement; cities.csv has no regulatory or clinic-facility data."
+  },
+  {
+    "source": "Clinicians in Utah must have admitting privileges at a hospital < 15 min. away. Clinics must meet the same structural standards as surgical centers.",
+    "why": "State regulatory requirement; cities.csv has no regulatory or clinic-facility data."
+  },
+  {
+    "source": "Clinics in Oklahoma must have an agreement with a nearby hospital and meet the same structural standards as surgical centers.",
+    "why": "State regulatory requirement; cities.csv has no regulatory or clinic-facility data."
+  },
+  {
+    "source": "Some clinics may only provide medication abortions, which are FDA-approved for patients 10 weeks pregnant or less.",
+    "why": "External medical-policy detail; cities.csv has no clinic service types or medication-abortion limits."
+  },
+  {
+    "source": "Let’s take a look at how accessibility changes for the residents of Boise, Idaho, at different stages of pregnancy, which is typically 40 weeks.",
+    "why": "The 40-week pregnancy length is external medical context; cities.csv contains only the four gestational cutoffs (8, 12, 16 and 20 weeks)."
+  },
+  {
+    "source": "State laws require clinicians to have admitting privileges to a hospital within 30 miles of the clinic.",
+    "why": "State regulatory requirement for North Dakota; cities.csv has no clinic-facility or admitting-privilege data."
+  }
+]

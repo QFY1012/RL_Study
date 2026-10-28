@@ -1,0 +1,62 @@
+{
+ "id": "lineup",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 334,
+  "steps": 27,
+  "tools": 31,
+  "nudged": 0,
+  "usage": {
+   "input": 45596,
+   "output": 37652
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "leadoff-more-power-less-speed",
+   "basis": "slot 1: power 1970-2009=1.46, 2010-present=1.97; speed 1970-2009=4.21, 2010-present=4.09",
+   "verdict": "ok"
+  },
+  {
+   "id": "second-slot-better-hitters",
+   "basis": "slot 2: average 1970-2009=2.84, 2010-present=3.34; power 1970-2009=1.48, 2010-present=2.52",
+   "verdict": "ok"
+  },
+  {
+   "id": "third-slot-loses-speed",
+   "basis": "slot 3: speed 1970-2009=2.57, 2010-present=2.16",
+   "verdict": "ok"
+  },
+  {
+   "id": "cleanup-less-power-and-walks",
+   "basis": "slot 4: power 1970-2009=4.04, 2010-present=3.52; walks 1970-2009=3.28, 2010-present=3.06",
+   "verdict": "ok"
+  },
+  {
+   "id": "middle-order-speedsters",
+   "basis": "slots 5-7: speed 1970-2009=1.50, 2010-present=2.03",
+   "verdict": "ok"
+  },
+  {
+   "id": "bottom-order-faster",
+   "basis": "slots 8-9: speed 1970-2009=2.40, 2010-present=3.05",
+   "verdict": "ok"
+  },
+  {
+   "id": "bottom-order-gaining-ground",
+   "basis": "1970-2009: 1-7=2.82, 8-9=1.52; 2010-present: 1-7=2.78, 8-9=1.84",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 11
+}

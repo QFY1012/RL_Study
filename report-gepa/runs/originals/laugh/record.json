@@ -1,0 +1,42 @@
+{
+ "id": "laugh",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 491,
+  "steps": 42,
+  "tools": 55,
+  "nudged": 0,
+  "usage": {
+   "input": 77344,
+   "output": 62349
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "lol-2019-laugh-share",
+   "basis": "Output shows lol count_2019=13,042,622 and share_pct=55.763800; haha=3,451,564 and 14.757180; lmao=3,033,063 and 12.967877. These round to 55.8%, 14.8%, and 13.0%, with lol ahead of haha and lmao.",
+   "verdict": "ok"
+  },
+  {
+   "id": "laugh-lowercase-uppercase-ratio",
+   "basis": "Output shows for the three most-used laughs: lol lower=94.025864 upper=5.974136; haha lower=98.892270 upper=1.107730; lmao lower=91.998748 upper=8.001252. These round to the claimed 94.0%/6.0%, 98.9%/1.1%, and 92.0%/8.0%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lol-usage-share-rise",
+   "basis": "Output shows lol count_2009=29.154942 and count_2018=56.024576 within the top 20 laughs, which rounds to 29.2% in 2009 and 56.0% in 2018, indicating an increase.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 2
+}

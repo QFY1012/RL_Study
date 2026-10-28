@@ -1,0 +1,101 @@
+[
+ {
+  "id": "no-access-151",
+  "source": "There are 151 urban areas in the US with no accessible abortion clinics within a 1 hour round-trip drive.",
+  "claim": "151 cities have an 8-week round-trip time of at least 1 hour to the nearest clinic.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[['gestation_8_duration']].ge(1).sum()"
+ },
+ {
+  "id": "boise-12-to-16-weeks",
+  "source": "In Boise, patients who are 12 weeks pregnant can make a round-trip journey to a clinic in under an hour. If those same patients try to access care when they are 16 weeks along, their round-trip travel time is nearly nine hours.",
+  "claim": "Boise City, Idaho has a 12-week round-trip time of 0 hours and a 16-week round-trip time that rounds down to 8 hours.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c.loc[c.id == 'boise-city-idaho', ['city', 'state', 'gestation_12_duration', 'gestation_16_duration']].T.to_string()"
+ },
+ {
+  "id": "meridian-20-weeks-10-hours",
+  "source": "For instance, residents of Meridian, Idaho, who are 20 weeks pregnant would need to make a 10 hour round-trip journey to Utah for services.",
+  "claim": "Meridian, Idaho has a 20-week round-trip time of 10 hours.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c.loc[c.id == 'meridian-idaho', ['city', 'state', 'gestation_20_duration']].T.to_string()"
+ },
+ {
+  "id": "big-metros-zero-all-stages",
+  "source": "Residents of big metropolitan cities, such as New York, Miami, and Seattle, will have access to nearby abortion services regardless of how many weeks pregnant they are.",
+  "claim": "New York, Miami and Seattle each have a round-trip time of 0 hours at 8, 12, 16 and 20 weeks.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.city.isin(['New York', 'Miami', 'Seattle'])].set_index(['city', 'state'])[['gestation_8_duration', 'gestation_12_duration', 'gestation_16_duration', 'gestation_20_duration']].T.to_string()"
+ },
+ {
+  "id": "el-paso-springfield-less-access",
+  "source": "But people living in cities such as El Paso, Texas, or Springfield, Missouri, have less access, particularly when they are further along in their pregnancy.",
+  "claim": "El Paso, Texas has round-trip times of 0 hours at 8 and 12 weeks and 7 hours at 16 and 20 weeks, while Springfield, Missouri has 4 hours at 8 weeks and 5 hours at 12, 16 and 20 weeks.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[((c.city == 'El Paso') & (c.state == 'Texas')) | ((c.city == 'Springfield') & (c.state == 'Missouri'))].set_index(['city', 'state'])[['gestation_8_duration', 'gestation_12_duration', 'gestation_16_duration', 'gestation_20_duration']].T.to_string()"
+ },
+ {
+  "id": "longest-travel-time-each-stage",
+  "source": "Cities with the longest round-trip travel time in the US.",
+  "claim": "Rapid City, South Dakota has the longest round-trip time at 8 weeks (9 hours), 12 weeks (9 hours) and 16 weeks (10 hours), and Bismarck, North Dakota has the longest at 20 weeks (11 hours).",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c.set_index(['city', 'state'])[['gestation_8_duration', 'gestation_12_duration', 'gestation_16_duration', 'gestation_20_duration']].agg(['idxmax', 'max']).T.to_string()"
+ },
+ {
+  "id": "north-dakota-closure-8-weeks",
+  "source": "Change in accessibility at 8 weeks if a clinic in North Dakota closes.",
+  "claim": "At 8 weeks, closing a clinic in North Dakota raises round-trip times from 2 to 9 hours in Grand Forks, from 5 to 11 hours in Bismarck, and from 0 to 6 hours in Fargo.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.state == 'North Dakota'].sort_values('population', ascending=False).set_index(['city', 'state'])[['population', 'gestation_8_duration', 'gestation_8_duration_closed']].T.to_string()"
+ },
+ {
+  "id": "louisiana-closure-12-weeks",
+  "source": "Change in accessibility at 12 weeks if a clinic in Louisiana closes.",
+  "claim": "At 12 weeks, closing a clinic in Louisiana raises round-trip times from 0 to 5 hours in Bossier City and Shreveport and from 2 to 3 hours in Longview, Texas.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.city.isin(['Bossier City', 'Shreveport', 'Longview'])].set_index(['city', 'state'])[['gestation_12_duration', 'gestation_12_duration_closed']].T.to_string()"
+ },
+ {
+  "id": "arkansas-closure-12-weeks",
+  "source": "Change in accessibility at 12 weeks if a clinic in Arkansas closes.",
+  "claim": "At 12 weeks, closing a clinic in Arkansas raises round-trip times from 0 to 4 hours in Little Rock and North Little Rock and from 1 to 4 hours in Conway.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.city.isin(['Little Rock', 'North Little Rock', 'Conway'])].set_index(['city', 'state'])[['gestation_12_duration', 'gestation_12_duration_closed']].T.to_string()"
+ },
+ {
+  "id": "utah-closure-16-weeks",
+  "source": "Change in accessibility at 16 weeks if a clinic in Utah closes.",
+  "claim": "At 16 weeks, closing a clinic in Utah raises round-trip times from 1 to 13 hours in Layton and Ogden, from 2 to 13 hours in Logan, and from 0 to 11 hours in Taylorsville and South Jordan.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.city.isin(['Layton', 'Ogden', 'Logan', 'Taylorsville', 'South Jordan'])].set_index(['city', 'state'])[['gestation_16_duration', 'gestation_16_duration_closed']].T.to_string()"
+ },
+ {
+  "id": "oklahoma-closure-16-weeks",
+  "source": "Change in accessibility at 16 weeks if a clinic in Oklahoma closes.",
+  "claim": "At 16 weeks, closing a clinic in Oklahoma raises round-trip times from 0 to 5 hours in Norman and from 0 to 4 hours in Oklahoma City, Midwest City, Moore and Edmond.",
+  "tables": {
+   "c": "data/cities.csv"
+  },
+  "code": "c[c.city.isin(['Norman', 'Midwest City', 'Moore', 'Edmond', 'Oklahoma City'])].set_index(['city', 'state'])[['gestation_16_duration', 'gestation_16_duration_closed']].T.to_string()"
+ }
+]

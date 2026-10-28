@@ -1,0 +1,22 @@
+[
+  {
+    "source": "It’s tough to know what “bad words” Kidz Bop will censor and when — censorship has gotten considerably more strict over the 19 years of albums.",
+    "why": "Showing that censorship became stricter requires the share of all badword/song pairs that were censored in each year (censored pairs divided by pairs present in the original songs). data/KB_censored-lyrics.csv contains only pairs that were censored: isCensored is 1 on every one of its rows, so it has no uncensored pairs and no denominators. The yearly proportions are in KB_proportions.csv, which is not in this folder."
+  },
+  {
+    "source": "“Champagne” was censored in the 2019 Kidz Bop version of Ed Sheeran and Khalid’s “Beautiful People,” but it was left in for the 2001 adaptation of Ricky Martin’s “Livin’ La Vida Loca” (along with “addiction” and a “bullet to the brain”).",
+    "why": "The file does contain the 2019 “beautiful people” champagne rows, but it records only censored lyrics. It has no “Livin’ La Vida Loca” rows at all, so it cannot show that champagne, addiction or bullet to the brain were left in; the cross-year comparison is therefore only half reproduced and the finding as stated is not reproducible from this file."
+  },
+  {
+    "source": "In songs with “bad words,” those “bad words” were censored 6.3 times more in Kidz Bop’s last 5 years of songs compared to the first 5 years.",
+    "why": "The 6.3-times ratio compares the proportion of all badword/song pairs censored in 2015–2019 with the proportion censored in 2001–2005. That needs the uncensored badwords as well as the censored ones. This file has only censored pairs (isCensored = 1 throughout), so the denominators are missing; counting censored items per song in this file gives about a 2.9-fold difference in censored occurrences per song and a 2.3-fold difference in distinct badword/song pairs, not 6.3."
+  },
+  {
+    "source": "But, those types of words are definitely censored more now then they were in Kidz Bop’s early years.",
+    "why": "This is a claim about the per-category censorship rate over time, which needs the number of songs in which each category’s words were present (the denominator for each year). The file has only censored badword/song pairs, so the category rates cannot be computed; raw counts of censored pairs rise partly because the later years have many more songs, and that is not the stated claim. The needed yearly proportions are in KB_proportions.csv, which is not in this folder."
+  },
+  {
+    "source": "Words classified as appear in X original songs and are censored in X Kidz Bop versions ( X %). Within this category, the word appears in X orignal songs and was censored in X Kidz Bop versions ( X %), including...",
+    "why": "The interactive chart reports, for every category and every badword, the number of original songs where the word appears and the percentage of those censored. Those denominators (inSongs) and rates (pctCensored) are in KB_group-overview.csv and KB_word-overview.csv, which are not in this folder; data/KB_censored-lyrics.csv has only the censored side, so every percentage would be 100% and the original-song counts cannot be recovered."
+  }
+]

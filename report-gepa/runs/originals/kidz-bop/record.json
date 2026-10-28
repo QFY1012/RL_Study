@@ -1,0 +1,32 @@
+{
+ "id": "kidz-bop",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 286,
+  "steps": 36,
+  "tools": 45,
+  "nudged": 0,
+  "usage": {
+   "input": 28902,
+   "output": 36484
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "culprit-categories-most-censored",
+   "basis": "sexual 190; profanity 177; alcohol & drugs 174; violence 89; other 84; identity 49",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 1,
+ "skipped": 5
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Speechiness 0.05 0.31 0.26",
+    "why": "The songlist file has no speechiness column or speechiness difference, so the chart's studio, live and difference values for speechiness cannot be computed."
+  },
+  {
+    "source": "Tempo 174.87 153.61 -21.27",
+    "why": "The songlist file has no tempo column or tempo difference, so the chart's studio, live and difference values for tempo cannot be computed."
+  },
+  {
+    "source": "STUDIO LIVE DIFFERENCE",
+    "why": "The songlist file contains only the live-minus-studio differences; the chart's absolute Studio and Live scores (for example valence 0.44 and 0.33, energy 0.10 and 0.98, and duration 165 and 272 seconds) are not in the files, so only the differences can be reproduced."
+  },
+  {
+    "source": "the live-recorded version of the song, off of Before the Flood, is, by contrast, a frenzied, five-minute celebration",
+    "why": "The files give only the live-minus-studio duration difference (106.76 seconds), not the live version's absolute length; the chart's 272-second live duration cannot be recomputed without the 165-second studio value, which is not in the files."
+  },
+  {
+    "source": "almost ten seconds of applause linger on as he shouts “Thank you, Goodnight!”",
+    "why": "The files contain audio-feature differences only; they have no applause-segment or audio-event data."
+  },
+  {
+    "source": "At the Filmore West in San Francisco in 1971, the jam starts out with some stage banter, and the tempo picks up way faster than the studio version.",
+    "why": "The files have no tempo or speechiness values, so the faster tempo and stage banter for Respect cannot be computed. The matched file also has seven possible live/studio pairings for 'Respect' and no explicit artist-name column, so the specific 1971 Fillmore West performance cannot be isolated."
+  },
+  {
+    "source": "Levels of speech and instrumentals often seesaw in live performance, too.",
+    "why": "Speechiness is absent from the files, and 'seesaw' is not a defined, quantifiable comparison, so no specific finding can be computed."
+  }
+]

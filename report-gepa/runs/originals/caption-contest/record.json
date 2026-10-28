@@ -1,0 +1,99 @@
+{
+ "id": "caption-contest",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1553,
+  "steps": 66,
+  "tools": 75,
+  "nudged": 0,
+  "usage": {
+   "input": 118750,
+   "output": 99282
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "magnetic-jokes-50",
+   "basis": "Output (771, 50): contest 771, 50 captions match 'magnetic'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "magnetic-caption-dashboard-rank-153",
+   "basis": "Output (771, 153): contest 771, matching row index/rank 153.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mettle-caption-dashboard-rank-51",
+   "basis": "Output (771, 51): contest 771, matching row index/rank 51.",
+   "verdict": "ok"
+  },
+  {
+   "id": "best-caption-top-200",
+   "basis": "Output (762, 183, 7076): contest 762, rank 183 of 7076.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-758-rank",
+   "basis": "Output (758, 957, 21): contest 758, rank 957, top 21%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-761-rank",
+   "basis": "Output (761, 1740, 16): contest 761, rank 1740, top 16%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-763-rank",
+   "basis": "Output (763, 4545, 50): contest 763, rank 4545, top 50%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-764-rank",
+   "basis": "Output (764, 3932, 62): contest 764, rank 3932, top 62%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-765-rank",
+   "basis": "Output (765, 1829, 26): contest 765, rank 1829, top 26%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-768-rank",
+   "basis": "Output (768, 6213, 5): contest 768, rank 6213, bottom 5%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-769-rank",
+   "basis": "Output (769, 2985, 37): contest 769, rank 2985, top 37%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "contest-771-rank",
+   "basis": "Output (771, 1934, 28): contest 771, rank 1934, top 28%.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 11,
+ "review": [
+  {
+   "id": "contest-769-rank",
+   "action": "restore",
+   "why": "the label is on the rendered story page, like the other contests' labels"
+  },
+  {
+   "id": "contest-771-rank",
+   "action": "restore",
+   "why": "the label is on the rendered story page, like the other contests' labels"
+  }
+ ]
+}

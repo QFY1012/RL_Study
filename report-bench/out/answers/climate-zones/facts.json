@@ -1,0 +1,65 @@
+[
+ {
+  "id": "los-angeles-warming",
+  "source": "In 2070, Los Angeles’s temperature will increase 3 degrees celsius.",
+  "claim": "Los Angeles's temperature rises from 15.44 in 2023 to 18.43 in 2070, an increase of 2.99 degrees Celsius.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df[df.name == 'Los Angeles'][['temp_2023', 'temp_2070']].assign(increase=lambda d: d.temp_2070 - d.temp_2023)"
+ },
+ {
+  "id": "los-angeles-zone-shift",
+  "source": "The city moves from a Temperate to Arid classification",
+  "claim": "Los Angeles's classification changes from 'Temperate, dry summer, hot summer' in 2023 to 'Arid, steppe, hot' in 2070.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df[df.name == 'Los Angeles'][['type_2023', 'type_2070']]"
+ },
+ {
+  "id": "los-angeles-resembles-new-delhi",
+  "source": "its climate will resemble how New Delhi feels today.",
+  "claim": "New Delhi is the only city whose present-day classification, 'Arid, steppe, hot', matches the classification Los Angeles moves into by 2070.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df[df.type_2023.isin(df.loc[df.name == 'Los Angeles', 'type_2070'])][['name', 'type_2023', 'type_2070']]"
+ },
+ {
+  "id": "cold-cities-turn-temperate",
+  "source": "Much of Scandinavia and Northern Europe change from Cold to Temperate climates.",
+  "claim": "Among cities in the Cold zone in 2023, 12 are in the Temperate zone in 2070, 3 are in the Arid zone and 1 remains Cold.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df.assign(z23=df.type_2023.str.split(',').str[0], z70=df.type_2070.str.split(',').str[0]).query(\"z23 == 'Cold'\").groupby('z70').size()"
+ },
+ {
+  "id": "temperate-cities-turn-arid-tropical",
+  "source": "The now Temperate cities, with hot or wet summers, become swallowed by the Tropical and Arid classifications.",
+  "claim": "Among cities in the Temperate zone in 2023, 9 move to the Arid zone, 6 to the Tropical zone and 20 remain Temperate in 2070.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df.assign(z23=df.type_2023.str.split(',').str[0], z70=df.type_2070.str.split(',').str[0]).query(\"z23 == 'Temperate'\").groupby('z70').size()"
+ },
+ {
+  "id": "moscow-only-cold-city",
+  "source": "Moscow will be a lonely place in 2070, as the only remaining of our cities to exist in the Cold classification.",
+  "claim": "In 2070 Moscow is the only city still in the Cold classification, in the 'Cold, no dry season, hot summer' class.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "df[df.type_2070.str.startswith('Cold')][['name', 'type_2023', 'type_2070']]"
+ },
+ {
+  "id": "zone-sizes-arid-tropical-grow-cold-shrinks",
+  "source": "Temperate climates shifting north Tropical and Arid climates growing Cold climates disappearing.",
+  "claim": "The Arid zone grows from 9 cities in 2023 to 22 in 2070 and the Tropical zone from 10 to 15, while the Cold zone shrinks from 16 to 1 and the Temperate zone from 35 to 32.",
+  "tables": {
+   "df": "data/cities.csv"
+  },
+  "code": "pd.crosstab(df.type_2023.str.split(',').str[0], df.type_2070.str.split(',').str[0], margins=True, margins_name='Total')"
+ }
+]

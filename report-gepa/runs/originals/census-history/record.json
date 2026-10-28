@@ -1,0 +1,244 @@
+{
+ "id": "census-history",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 671,
+  "steps": 58,
+  "tools": 73,
+  "nudged": 0,
+  "usage": {
+   "input": 85810,
+   "output": 101618
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 41,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "census-1790-six-questions",
+   "basis": "Year 1790 count = 6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "census-2020-eight-substantive",
+   "basis": "2020 non-Admin count = 8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "census-2010-ten-questions",
+   "basis": "2010=10; 1790=6, 1800=5, 1810=5; all 1820-2000 counts >10.",
+   "verdict": "ok"
+  },
+  {
+   "id": "immigration-first-naturalization-1820",
+   "basis": "Naturalization-containing years start at 1820, count 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-1820-industry-first",
+   "basis": "'People engaged in' rows include 1820 Agriculture, Commerce, Manufactures; earliest year 1820.",
+   "verdict": "ok"
+  },
+  {
+   "id": "immigration-birthplace-1850-2000",
+   "basis": "Question exact appears once in each year 1850 through 2000.",
+   "verdict": "ok"
+  },
+  {
+   "id": "immigration-parents-1870",
+   "basis": "1870 rows: Father of foreign birth, Mother of foreign birth; Answer Type BN.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-label-1890",
+   "basis": "Color min 1850; Race min 1890.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-1890-options",
+   "basis": "1890 Race options exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-1930-hindu-mexican",
+   "basis": "1930 Color or race options include Mexican and Hindu.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-1960-hawaiian-aleut-eskimo",
+   "basis": "1960 Race options include Hawaiian, Part Hawaiian, Aleut, Eskimo.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-1970-hispanic-origin",
+   "basis": "Hispanic origin min year = 1970.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-2020-specify-heritage",
+   "basis": "2020 Race options include White (specify), Black/African American (specify).",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-occupation-1850-1860",
+   "basis": "1850 Asked of='16 or over, male'; 1860 Asked of='16 or over'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-1950-occupation-14",
+   "basis": "All three 1950 questions Asked of='14 or over'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-carpool-first-1980",
+   "basis": "carpool-containing min year = 1980.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-commute-first-1960",
+   "basis": "Commute mode min year = 1960.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-commute-options-1990",
+   "basis": "1990 commute options include Bus, Streetcar, Ferry.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-income-six-sources-2000",
+   "basis": "2000 Income rows: 2 wages, 6 other named sources, plus total.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-income-first-1940",
+   "basis": "Income category min year = 1940.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-war-expedition-1930",
+   "basis": "war or expedition min year = 1930.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-women-veterans-1980",
+   "basis": "1970 Veteran status Asked of=Men; 1980 Asked of=15 or over.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-veteran-options-1990",
+   "basis": "1990 Armed services options: Yes (active), Yes (active in past), Yes (Reserves/NG), No.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-first-veteran-1840-then-1890",
+   "basis": "Veteran status years: first 1840, next 1890.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-two-veteran-questions-first-century",
+   "basis": "Year<=1890 rows: 1840 and 1890, total 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "housing-homeownership-1890",
+   "basis": "Rent or own min 1890; If owned, mortgaged min 1890.",
+   "verdict": "ok"
+  },
+  {
+   "id": "housing-residence-five-years-1940",
+   "basis": "1940 row Question='Residence in 1935'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "housing-solar-first-1990",
+   "basis": "Solar-containing options counts: 1990=1, 2000=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "housing-solar-coal-wood-2000",
+   "basis": "2000 Heating fuel options include Coal, Wood, Solar.",
+   "verdict": "ok"
+  },
+  {
+   "id": "housing-questionnaire-1940-2000",
+   "basis": "Housing+ category counts exist for every year 1940 through 2000.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-age-brackets-1800",
+   "basis": "1790 nb=2.0; 1800 nb=5.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "race-slave-age-sex-1820",
+   "basis": "1820 male/female slaves and free colored each have four age ranges; 1800/1810 Slaves Age range NaN.",
+   "verdict": "ok"
+  },
+  {
+   "id": "census-individual-level-1850",
+   "basis": "1850 Individual=11; 1840 Household=27, Individual=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "family-wife-not-husband-1970",
+   "basis": "1970 options include Wife; no Husband.",
+   "verdict": "ok"
+  },
+  {
+   "id": "family-husband-wife-1980",
+   "basis": "1980 options include Husband/wife.",
+   "verdict": "ok"
+  },
+  {
+   "id": "immigration-year-of-arrival-1970",
+   "basis": "Year of immigration years include 1900,1910,1920,1930,1970; no 1940-1960 rows.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-men-16-1790",
+   "basis": "1790 Free white males Age range='Under 16, 16 and over'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "economy-1930-work-day",
+   "basis": "1930 'At work last work day' Category='Occupation - Unemployment'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-civil-war-widows-1890",
+   "basis": "1890 Category contains Veteran status -> 'Soldier in Civil War or widow of one'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "war-veteran-widow-child-1940",
+   "basis": "1940 'Veteran, widow, or child of veteran' Unit='Sampled Individual'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "census-2000-seven-short-form",
+   "basis": "2000 non-Housing+ Individual/Household rows = 7.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "war-veteran-widow-child-1940",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 40,
+ "skipped": 69,
+ "review": [
+  {
+   "id": "*",
+   "action": "keep",
+   "why": "36 of the quotes are from the story's own topic texts (the-pudding/census-history src/assets/data/storyMenu.json), shown when a reader opens a topic; 4 are in the page text. Every claim matches its printout."
+  }
+ ]
+}

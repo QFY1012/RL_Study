@@ -1,0 +1,44 @@
+[
+ {
+  "finding": "交叉维度才可见:客户端版本 3.8.4 且主用「实时协作」的记录崩溃率为 30.1%,是整体崩溃率 1.9% 的 16.0 倍;同版本其他功能与其余版本的「实时协作」都接近整体水平",
+  "numbers": {
+   "crash_rate_384_collab": 0.3011,
+   "overall_crash_rate": 0.0188,
+   "ratio": 16.04,
+   "cell_n": 186
+  },
+  "holds": true
+ },
+ {
+  "finding": "时间拐点:2024-10-14 服务端下线旧同步协议,此前 3.x 旧版本记录占比 29.4%,之后降至 0.0%(0 条残留);下线前一周(10-07 至 10-13)仍活跃的 97 个 3.x 用户中,4 个升级到 4.x 后继续活跃,其余 93 个再无任何记录——没有任何 3.x 记录出现在下线之后",
+  "numbers": {
+   "share_3x_before_cutoff": 0.2936,
+   "share_3x_after_cutoff": 0.0,
+   "residual_3x_records_after_cutoff": 0,
+   "active_3x_users_last_week": 97,
+   "upgraded_users": 4,
+   "vanished_users": 93
+  },
+  "holds": true
+ },
+ {
+  "finding": "分组才可见:2024-06-03 团队版上线后注册的用户,主功能为「团队空间」的记录占 27.0%,而上线前注册的老用户仅占 6.3%,约为后者的 4.3 倍",
+  "numbers": {
+   "team_space_share_new_cohort": 0.2702,
+   "team_space_share_old_cohort": 0.0627,
+   "ratio": 4.31,
+   "n_new": 9182,
+   "n_old": 10212
+  },
+  "holds": true
+ },
+ {
+  "finding": "灰度放量节奏:11-11 起两周、11-25 起两周、12-09 之后三个窗口内 4.2.0 版本记录占比分别约 10%、50%、98%,对应灰度 10%、放量 50%、全量发布的台阶",
+  "numbers": {
+   "share_v420_w1": 0.099,
+   "share_v420_w2": 0.5047,
+   "share_v420_w3": 0.975
+  },
+  "holds": true
+ }
+]

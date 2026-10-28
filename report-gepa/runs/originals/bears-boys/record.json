@@ -1,0 +1,92 @@
+{
+ "id": "bears-boys",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 550,
+  "steps": 50,
+  "tools": 85,
+  "nudged": 0,
+  "usage": {
+   "input": 148107,
+   "output": 64321
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "kids-grid-gender-shares",
+   "basis": "value_counts(normalize=True) gives he/him=0.661118 (66.1%), she/her=0.312723 (31.3%), it=0.026159 (2.6%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "kids-male-twice-female",
+   "basis": "value_counts() gives he/him=556, she/her=263, it=22; 556 is more than twice 263.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kids-female-animals",
+   "basis": "Filtered output for books >= 10 shows duck she_share=0.571429, bird=0.542857, cat=0.481481, then mouse=0.385965, bear=0.378947, pig=0.377778, rabbit=0.318841, dog=0.195122, monkey=0.176471, elephant=0.166667, fox=0.105263, wolf=0.100000, frog=0.058824.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kids-neutral-it",
+   "basis": "Output shows it count=22 and share=0.026159; no they/them row appears, with he/him=556 and she/her=263.",
+   "verdict": "ok"
+  },
+  {
+   "id": "survey-no-female-majority",
+   "basis": "Output she_share values: cat=0.343750, bird=0.301587, pig=0.257732, rabbit=0.241071, mouse=0.234783, dog=0.224299, bear=0.196581; each has he count greater than she count.",
+   "verdict": "ok"
+  },
+  {
+   "id": "survey-male-pronouns",
+   "basis": "value_counts() gives he=529 and she=178; 529/178 is about 2.97, nearly three times.",
+   "verdict": "ok"
+  },
+  {
+   "id": "survey-more-women",
+   "basis": "gender value_counts() gives female=578 and male=413.",
+   "verdict": "ok"
+  },
+  {
+   "id": "survey-name-it-pronouns",
+   "basis": "normalized value_counts with NaN included gives he=0.398644, NaN=0.258478, it=0.172570, so about 39.9% he, 25.9% no pronoun, 17.3% it; he is most frequent.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ladybug-female-books",
+   "basis": "Filtering to ladybug and dropping duplicate titles yields pronoun counts she/her=3 and it=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pig-feminine-turn",
+   "basis": "Grouped output gives before 2000: n=35, she=11, she_share=0.314286; 2000 or later: n=10, she=6, she_share=0.600000.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kids-decade-male-majority",
+   "basis": "Decade she_share values range from 0.238532 in the 1950s to 0.410526 in the 1990s; all are below 0.5, so he/him remains majority.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 11,
+ "skipped": 3,
+ "review": [
+  {
+   "id": "kids-female-animals",
+   "action": "restore",
+   "changed": [
+    "claim"
+   ],
+   "why": "both sentences of the quote are in the rendered story; the old claim implied cats lean female, the data has them at 48.1%"
+  }
+ ]
+}

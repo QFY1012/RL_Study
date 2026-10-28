@@ -1,0 +1,119 @@
+[
+ {
+  "id": "space-no-post-apollo-surge",
+  "source": "For example, we hypothesized that the Apollo lunar landings in 1969-1972 would incite an immediate explosion of \"space-themed\" films (it didn't).",
+  "claim": "Space-tagged films did not surge during the 1969-1972 landings: the yearly count was 6, 3, 5 and 8 in 1969-1972, compared with 5, 12 and 9 in 1966-1968.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(th=m.theme.fillna('')).loc[lambda d: d['th'].str.contains('space')].groupby('production_year').size().loc[1966:1972]"
+ },
+ {
+  "id": "islam-representation-growth",
+  "source": "We also wondered whether media representation of Islam has grown with terrorism fears, war, and political unrest in the Middle East (it has).",
+  "claim": "Islam-tagged films rose from 3 in the 1960s to 43 in the 2000s, with 27 in the 2010s.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(th=m.theme.fillna(''), decade=(m.production_year//10)*10).loc[lambda d: d['th'].str.contains('islam')].groupby('decade').size()"
+ },
+ {
+  "id": "guess-who-interracial-1967",
+  "source": "One year after Loving v Virginia, Guess Who’s Coming to Dinner stars an interracial couple.",
+  "claim": "Guess Who's Coming to Dinner is a 1967 film ranked third in its year and tagged with the interracial relationships theme.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']==\"Guess Who's Coming to Dinner\", ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "2001-space-computer-1968",
+  "source": "2001: A Space Odyssey uses space exploration to reflect the growing cultural fears of Communism and technology outpacing humans.",
+  "claim": "2001: A Space Odyssey is the second-ranked film of 1968 and is tagged with both the space and computer themes.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='2001: A Space Odyssey', ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "midnight-cowboy-drugs-heroin-1969",
+  "source": "X-rated Midnight Cowboy wins Best Picture, featuring drugs, sex, nudity. It’s one of the first major films to feature heroin use.",
+  "claim": "Midnight Cowboy is the second-ranked film of 1969 and is tagged with drugs, nudity and heroin.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='Midnight Cowboy', ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "rocky-horror-second-1975",
+  "source": "The Rocky Horror Picture Show is the #2 film in 1975 and is the first popular to release to feature a number of LGBT themes.",
+  "claim": "The Rocky Horror Picture Show is the second-ranked film of 1975 and is tagged with the lgbt theme.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).query('production_year == 1975 and rank == 2')[['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "color-purple-first-top10-racism-slavery",
+  "source": "The Color Purple is the first top 10 film to feature strong themes on American racism and slavery",
+  "claim": "The Color Purple, ranked fourth in 1985, is the first top-10 film tagged with both racism and slavery.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: (d['rank']<=10) & d['theme'].fillna('').str.contains('racism') & d['theme'].fillna('').str.contains('slavery')].sort_values(['production_year','rank'])[['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "up-in-smoke-marijuana-1978",
+  "source": "Up In Smoke, the pioneer of stoner comedies, is credited for its countercultural take on the relatively harmless effects of pot.",
+  "claim": "Up in Smoke is a 1978 film ranked 15th and tagged with the marijuana theme.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='Up in Smoke', ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "animal-house-alcohol-1978",
+  "source": "Animal House popularizes the rowdy, party-driven fraternity lifestyle that is often imitated in greek life today.",
+  "claim": "Animal House is the second-ranked film of 1978 and is tagged with the alcohol theme.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='Animal House', ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "philadelphia-aids-1993",
+  "source": "Philadelphia dramatizes an AIDS discrimination case from 1986",
+  "claim": "Philadelphia is a 1993 film ranked 12th and tagged with the aids, lgbt and anti-lgbt themes.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='Philadelphia', ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "aids-films-before-philadelphia-rank",
+  "source": "many AIDS/HIV-related films preceded “Philadelphia,” but none of them broke into the top-grossing 20 films of the year.",
+  "claim": "Eight AIDS-tagged films were released before 1993 and none ranked better than 78th; Philadelphia ranked 12th in 1993.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['theme'].fillna('').str.contains('aids') & (d['production_year']<=1993)].assign(period=lambda d: np.where(d['production_year']<1993,'before 1993','1993')).groupby('period').apply(lambda g: g.nsmallest(1,'rank')[['production_year','title','rank']].assign(n=len(g)))"
+ },
+ {
+  "id": "gods-not-dead-top-100",
+  "source": "Inspired by the success of The Passion of the Christ, faith-based films like God’s Not Dead rise and begin to break into the top 100 films.",
+  "claim": "God's Not Dead ranked 55th among 2014 films and is tagged with the christianity theme.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']==\"God's Not Dead\", ['production_year','rank','title','theme']]"
+ },
+ {
+  "id": "social-network-internet-2010",
+  "source": "Inspired by the story of Facebook’s inception, The Social Network wins 3 Oscar Awards.",
+  "claim": "The Social Network is a 2010 film ranked 32nd and tagged with the internet and facebook themes.",
+  "tables": {
+   "m": "data/imdb_movie_final-new.csv"
+  },
+  "code": "m.assign(rank=m.groupby('production_year').cumcount()+1).loc[lambda d: d['title']=='The Social Network', ['production_year','rank','title','theme']]"
+ }
+]

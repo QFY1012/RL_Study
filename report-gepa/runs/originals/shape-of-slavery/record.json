@@ -1,0 +1,24 @@
+{
+ "id": "shape-of-slavery",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 2,
+  "steps": 4,
+  "tools": 0,
+  "nudged": 3,
+  "usage": {
+   "input": 0,
+   "output": 0
+  },
+  "stop": "error",
+  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 5c49c02c-2465-4404-80d7-01f6e401fe48)"
+ },
+ "facts": 0,
+ "problems": [
+  "facts.json: [Errno 2] No such file or directory: 'runs/originals/shape-of-slavery/facts.json'"
+ ],
+ "skipped": null
+}

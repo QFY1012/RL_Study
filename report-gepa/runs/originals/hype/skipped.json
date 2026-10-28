@@ -1,0 +1,30 @@
+[
+  {
+    "source": "27% of the 1,563 top-ranked high school players made it to the NBA",
+    "why": "The file has 1,535 ranked players, not 1,563, and no simple story-consistent filter reproduces 27%: at least one NBA season is 521/1,535 (33.9%), two or more seasons is 437/1,535 (28.5%), and drafted plus at least one season is 401/1,535 (26.1%)."
+  },
+  {
+    "source": "441 of the 900 draft picks in that 15 year span were top 100 recruits.",
+    "why": "The file contains only the cohort of top-100 and unranked high-school players, not all 900 draft picks in 1998-2013; it has 575 draft picks in those years and only 403 top-100 picks drafted in 1998-2013 (432 overall), so neither 441 nor 900 is reproduced."
+  },
+  {
+    "source": "Percentage of players that reach each level (out of 779 players) from 1998 - 2013",
+    "why": "The file has 432 ranked players with a draft pick plus 338 unranked players = 770, not 779; the story's 441 top-100 picks are 9 more than the 432 pick_overall records in this file."
+  },
+  {
+    "source": "Percentage of players that reach each level (out of 157 players) from 1998 - 2013",
+    "why": "The four named colleges total 147 top-100 recruits in the file (155 including unranked players after trimming college-name whitespace), not 157, so the Big 4 chart's denominator and level percentages are not reproduced."
+  },
+  {
+    "source": "Young, the #3 ranked high school player in 1998, ultimately fizzled out of the NBA having played only 15 minutes across 3 games.",
+    "why": "The file has no minutes or games-played fields; it only records total_seasons = 1 and valid_seasons = 0 for Korleone Young."
+  },
+  {
+    "source": "Despite being the #1 high school recruit in 2000—something that you think would indicate future NBA stardom—he put together a meager career in the league, averaging around 5 points per game over 5 years.",
+    "why": "The file has no points-per-game data, so Harvey's scoring average cannot be checked; only his five NBA seasons are present."
+  },
+  {
+    "source": "Below we widen the field to take a look at the biggest NBA-producing colleges and see how many yield NBA talent.",
+    "why": "The college chart's per-college numbers do not match the file as a whole (for example, Kentucky's chart row begins 23, 23, 22 for 38 players, while the file has 22 pick_overall records and 27 players with at least one NBA season), so the chart's six columns cannot be reproduced together. The total players per college and the composite-rank thresholds do match, but the chart's level labels do not map unambiguously to the file's columns."
+  }
+]

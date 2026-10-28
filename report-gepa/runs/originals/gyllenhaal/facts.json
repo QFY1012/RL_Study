@@ -1,0 +1,20 @@
+[
+  {
+    "id": "top-eight-spellings",
+    "source": "The charts below show the top 8 most common permutations for each celebrity in our test from 337,492 reader submissions.",
+    "claim": "For each of the 15 celebrities, the eight most common reader spellings and their counts are ranked 1 to 8; a misspelling ranks first for galifianakis ('galifinakis', 6,521), macaulay ('macauley', 8,451), mcgwire ('mcguire', 7,395), mclachlan ('mclaughlin', 5,167) and morissette ('morrisette', 9,043), while the correct spelling ranks first for deschanel, johansson, kaepernick, labeouf, mcconaughey, minaj, palahniuk, picabo, poehler and shyamalan.",
+    "tables": {
+      "s": "data/spellings.csv"
+    },
+    "code": "s.sort_values(['name', 'count'], ascending=[True, False]).assign(rank=lambda d: d.groupby('name').cumcount() + 1).query('rank <= 8').sort_values(['name', 'rank']).to_string(index=False)"
+  },
+  {
+    "id": "correct-count-of-top-eight",
+    "source": "CORRECT\n9.7K OF 19.6K",
+    "claim": "The correct count against the combined count of the eight displayed spellings is 9,666 of 19,648 for kaepernick, and across the 15 celebrities it ranges from 2,044 of 13,515 for mcgwire to 24,608 of 27,007 for minaj.",
+    "tables": {
+      "s": "data/spellings.csv"
+    },
+    "code": "(lambda t: t.assign(correct=t['count'].where(t.spelling == t.name, 0)).groupby('name').agg(correct=('correct', 'sum'), top8_total=('count', 'sum')))(s.sort_values(['name', 'count'], ascending=[True, False]).groupby('name').head(8))"
+  }
+]

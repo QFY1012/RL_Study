@@ -1,0 +1,50 @@
+[
+  {
+    "source": "The 2,452 Wikipedia Pages on Which Miles Davis Is Mentioned",
+    "why": "This is the size of the collected dataset (the number of pages found), a description of the data rather than a finding drawn from it."
+  },
+  {
+    "source": "To create this list, we combed Wikipedia for every English page that links to the Miles Davis entry, which is about 2,452 articles across hundreds of topics.",
+    "why": "This describes how the dataset was collected and how many articles it contains, not a data finding."
+  },
+  {
+    "source": "His Wikipedia page is an amazingly condense synopsis of Miles’ life, but it only links to about 10% of the dataset.",
+    "why": "The Miles Davis Wikipedia page itself is not a row in pages13.csv and no outbound-link list is provided, so the 'about 10% of the dataset' link count cannot be computed from these files."
+  },
+  {
+    "source": "life and career - 315 pages with at least one mention in this context\nhistory - 175 pages\nopening section - 408 pages\ncredits - 482 pages\ninfluence - 286 pages",
+    "why": "The five section categories are a semantic grouping of mentions that is not present in mentions6.csv; the raw sectionHeader values (for example, 'first paragraph' has 659 pages and 'influence' has 128 pages) do not reproduce 315/175/408/482/286 under any section-header grouping used by the story."
+  },
+  {
+    "source": "Let’s take a deeper look at the influence section, examining each of the individual 396 dots.",
+    "why": "The influence category is a curated semantic coding of individual mentions; mentions6.csv only records raw section headers, and its 178 rows with 'influence'-like headers (174 pages) do not yield 396 dots."
+  },
+  {
+    "source": "To simplify things, we'll focus on people and recordings, while also removing 50 obscure pages (under 50,000 visits last year).",
+    "why": "This is a description of a filter applied to the influence subset, not a finding; the underlying influence subset (and therefore the 50 removed pages) is not identifiable from the raw section headers in mentions6.csv."
+  },
+  {
+    "source": "Here are the exact quotes from each of the 57 Wikipedia entries of people and recordings that were influenced by Miles Davis.",
+    "why": "Restricting people/recording pages with a raw 'influence' section and at least 50,000 page views gives only 7 pages, not 57; the 57 entries come from an undocumented manual influence classification that is not in the data files."
+  },
+  {
+    "source": "Highlights include: Carlos Santana, Brian Eno, Flea, Rick James, Prince, Skyzoo, Kendrick Lamar, Radiohead, and Lana Del Ray.",
+    "why": "This is a list of example entries from the curated 57-entry influence chart; the influence subset cannot be reproduced from the raw section headers, and the sentence itself states no separately computable number or ranking."
+  },
+  {
+    "source": "We expected Wikipedia pages to increase in the years in which Miles released an album (Wikipedia pages are often created for each track and entries are added to collaborators’ career’s section).",
+    "why": "This is an expectation about album-release years, not a quantified finding; the files contain no album-release data with which to test it."
+  },
+  {
+    "source": "The People pages include typical jazz icons such as John Coltrane, Charlie Parker, and Herbie Hancock, but also contemporaries (James Baldwin, The Rolling Stones, Jimi Hendrix) and influencees (including Red Hot Chili Peppers, Radiohead, Joni Mitchell).",
+    "why": "This lists illustrative page examples and describes the category, rather than stating a number, comparison, ranking, share or trend."
+  },
+  {
+    "source": "Other is a catch-all category for everything else. We grouped references on pages for companies (Columbia Records), books (On the Road, which references Miles in the plot), TV shows (Miami Vice, Miles guest-starred), cultural references (Beatnik, cool), music theory (Harmonization, Coltrane Changes, Contrafact, Duophonic), genres (Bebop, Funk, Salsa) and other random pages (drug user, french horn).",
+    "why": "This defines the catch-all category and gives examples; it is not a quantified finding beyond the category total already reproduced."
+  },
+  {
+    "source": "Most of these are in Miles Davis’ discography or involve him in some way.",
+    "why": "The files do not contain discography membership or a flag for whether a recording involves Miles Davis, so the 'most of these' share cannot be computed from pages13.csv or mentions6.csv."
+  }
+]

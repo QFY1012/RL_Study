@@ -1,0 +1,137 @@
+[
+ {
+  "id": "birthday-excess-2000",
+  "source": "There are 17% excess birthday deaths compared to the average day difference.",
+  "claim": "In 2000, 183 of the 57,010 deaths occurred on birthdays, 17.2% above the 156.2 average deaths per day difference.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().to_frame('deaths').assign(total=lambda x: x.deaths.sum(), average=lambda x: x.deaths.mean(), excess_pct=lambda x: (x.deaths/x.deaths.mean()-1)*100).loc[[0]]"
+ },
+ {
+  "id": "twelve-days-after-2000",
+  "source": "Did you notice that just 12 days after birthday deaths is nearly as high?",
+  "claim": "In 2000, 12 days after the birthday had 181 deaths, nearly as many as the 183 on the birthday itself.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().loc[[0,12]]"
+ },
+ {
+  "id": "birthday-rank-2000",
+  "source": "You can see that birthdays (day difference = 0) have one of the highest death frequencies.",
+  "claim": "In 2000, the birthday's 183 deaths ranked eighth among the 365 day differences.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().sort_values(ascending=False).reset_index().assign(rank=lambda x: x.index+1).query('days_from_birthday == 0')"
+ },
+ {
+  "id": "eight-day-differences-180-185",
+  "source": "In the chart above, there are eight day differences with values between 180-185, including birthday deaths.",
+  "claim": "In 2000, eight day differences had between 180 and 185 deaths, including the birthday's 183.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().loc[lambda s: s.between(180,185)].to_frame('deaths').assign(n=lambda x: len(x)).sort_values('deaths', ascending=False)"
+ },
+ {
+  "id": "one-standard-deviation-2000",
+  "source": "If we measure the spread, we find that many values–about 68%–fall within a certain range (+/- 13) of the average (156 deaths). This range (143-169) is what statisticians call one standard deviation.",
+  "claim": "In 2000, the 365 daily death counts average 156.2 with a standard deviation of 12.8, so one standard deviation spans 143.4 to 169.0.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().to_frame('deaths').assign(average=lambda x: x.deaths.mean(), sd=lambda x: x.deaths.std(), low=lambda x: x.deaths.mean()-x.deaths.std(), high=lambda x: x.deaths.mean()+x.deaths.std()).loc[[0]].T"
+ },
+ {
+  "id": "two-standard-deviations-2000",
+  "source": "We expect most (95%) values to fall within two standard deviations. That means anything from 130-182 is normal variation–expected random noise in our data. Birthday deaths are a hair higher, at just over 2 standard deviations.",
+  "claim": "In 2000, 95.1% of daily death counts fall within two standard deviations, from 130.5 to 181.9, and the birthday's 183 deaths are 2.09 standard deviations above the 156.2 average.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().to_frame('deaths').assign(average=lambda x: x.deaths.mean(), sd=lambda x: x.deaths.std(), low2=lambda x: x.deaths.mean()-2*x.deaths.std(), high2=lambda x: x.deaths.mean()+2*x.deaths.std(), pct_2sd=lambda x: x.deaths.between(x.deaths.mean()-2*x.deaths.std(), x.deaths.mean()+2*x.deaths.std()).mean()*100, z0=lambda x: (x.loc[0,'deaths']-x.deaths.mean())/x.deaths.std()).loc[[0]].T"
+ },
+ {
+  "id": "1999-strong-birthday-effect",
+  "source": "Some years, like 1999, will show a strong birthday effect.",
+  "claim": "In 1999 there were 191 birthday deaths, 24.2% above the 153.7 average deaths per day difference.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('1999')].days_from_birthday.value_counts().to_frame('deaths').assign(total=lambda x: x.deaths.sum(), average=lambda x: x.deaths.mean(), excess_pct=lambda x: (x.deaths/x.deaths.mean()-1)*100).loc[[0]]"
+ },
+ {
+  "id": "2002-no-birthday-effect",
+  "source": "While other years, like 2002, might show nothing at all.",
+  "claim": "In 2002 there were 156 birthday deaths, 0.26% below the 156.4 average deaths per day difference.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2002')].days_from_birthday.value_counts().to_frame('deaths').assign(total=lambda x: x.deaths.sum(), average=lambda x: x.deaths.mean(), excess_pct=lambda x: (x.deaths/x.deaths.mean()-1)*100).loc[[0]]"
+ },
+ {
+  "id": "overall-birthday-excess",
+  "source": "Now we see 6.9% excess birthday deaths.",
+  "claim": "Across all 1,955,588 deaths, 5,728 occurred on birthdays, 6.9% above the 5,357.8 average deaths per day difference.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d.days_from_birthday.value_counts().to_frame('deaths').assign(total=lambda x: x.deaths.sum(), average=lambda x: x.deaths.mean(), excess_pct=lambda x: (x.deaths/x.deaths.mean()-1)*100).loc[[0]]"
+ },
+ {
+  "id": "z-score-five",
+  "source": "(5,728 - 5,358) / 74 = 5",
+  "claim": "With 5,728 birthday deaths against a 5,357.8 average and a 74.2 standard deviation, the z-score is 5.0.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d.days_from_birthday.value_counts().to_frame('deaths').assign(average=lambda x: x.deaths.mean(), sd=lambda x: x.deaths.std(), z=lambda x: (x.deaths-x.deaths.mean())/x.deaths.std()).loc[[0]]"
+ },
+ {
+  "id": "p-value-one-in-a-million",
+  "source": "Our p-value is ~0.000001, meaning there’s less than a 0.0001% chance we’d see this birthday effect if deaths were actually random.",
+  "claim": "The normal-approximation two-sided p-value is 0.00000061.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d.days_from_birthday.value_counts().pipe(lambda c: __import__('math').erfc(abs((c[0]-c.mean())/c.std())/np.sqrt(2)))"
+ },
+ {
+  "id": "january-birth-death-shares",
+  "source": "Take January in Massachusetts: 8.5% of people are born then, but 9.6% of all deaths happen in January. This means January-born people would naturally show 13% more birthday deaths just because January is a high-mortality month–regardless of some birthday effect.",
+  "claim": "January accounts for 165,570 births (8.5%) and 187,356 deaths (9.6%), so its death share is 1.13 times its birth share.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "pd.DataFrame({'births': d.birth.str[5:7].value_counts(), 'deaths': d.death.str[5:7].value_counts()}).assign(birth_pct=lambda x: x.births/x.births.sum()*100, death_pct=lambda x: x.deaths/x.deaths.sum()*100, ratio=lambda x: x.death_pct/x.birth_pct).loc[['01']].T"
+ },
+ {
+  "id": "seasonally-adjusted-excess",
+  "source": "After plugging in the numbers, we get an expected value of 5,355 birthday deaths, and observation of 5,728 deaths. There are 7.0% excess birthday deaths in Massachusetts.",
+  "claim": "Accounting for each day's birth and death shares gives 5,354.9 expected birthday deaths against 5,728 observed, a 7.0% excess.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "(d.assign(bday=pd.to_datetime(d.birth.str[5:], format='%m-%d', errors='coerce').dt.dayofyear, dday=pd.to_datetime(d.death.str[5:], format='%m-%d', errors='coerce').dt.dayofyear).pipe(lambda x: pd.crosstab(x.bday,x.dday)).pipe(lambda m: pd.DataFrame({'expected': m.sum(axis=1)*m.sum(axis=0)/m.values.sum(), 'observed': np.diag(m)}).sum().to_frame().T.assign(excess_pct=lambda y: (y.observed/y.expected-1)*100)))"
+ },
+ {
+  "id": "accidental-deaths-excess",
+  "source": "The only additional noteworthy finding after stratification was that accidental deaths showed 35% excess deaths on birthdays in Massachusetts, supporting a theory around celebratory behavior.",
+  "claim": "Among the 77,770 accidental deaths, 288 occurred on birthdays, 35.2% above the 213.1 average deaths per day difference.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.manner=='a'].days_from_birthday.value_counts().to_frame('deaths').assign(total=lambda x: x.deaths.sum(), average=lambda x: x.deaths.mean(), excess_pct=lambda x: (x.deaths/x.deaths.mean()-1)*100).loc[[0]]"
+ },
+ {
+  "id": "histogram-peak-58",
+  "source": "The middle bucket highest frequency is labeled 58. The 180-185 bucket is highlighted in red labeled as “8”, and includes a cake icon pointing at it with “183 deaths.”",
+  "claim": "Binned in groups of five, the 2000 daily death counts peak at 58 day differences in the 155-160 bucket, and the 180-185 bucket has 8.",
+  "tables": {
+   "d": "data/birthdays.csv"
+  },
+  "code": "d[d.death.str.startswith('2000')].days_from_birthday.value_counts().pipe(lambda s: pd.cut(s, bins=np.arange(115,200,5), right=False)).value_counts().sort_index()"
+ }
+]

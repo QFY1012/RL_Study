@@ -1,0 +1,40 @@
+[
+ {
+  "finding": "支付与账单类工单首次响应超过120分钟(触发账单专组升级)后,平均解决时长14.2小时,仅为未升级组(38.8小时)的37%;其他分类中高响应组是低响应组的97%,未出现反转",
+  "numbers": {
+   "billing_high_frt_mean_resolved_hours": 14.24,
+   "billing_low_frt_mean_resolved_hours": 38.8,
+   "billing_high_over_low": 0.367,
+   "others_high_over_low": 0.975
+  },
+  "holds": true
+ },
+ {
+  "finding": "2024-04-08(智能分单上线)之后,功能异常类工单平均解决时长从30.7小时降到12.2小时,降幅60%;同期其他分类平均解决时长变化仅5%",
+  "numbers": {
+   "bug_mean_resolved_before_launch_hours": 30.74,
+   "bug_mean_resolved_after_launch_hours": 12.24,
+   "bug_after_over_before": 0.398,
+   "others_after_over_before": 0.955
+  },
+  "holds": true
+ },
+ {
+  "finding": "每月最后3天(账期出账)支付与账单类工单占比58.9%,其他日期仅16.4%,比值为3.60",
+  "numbers": {
+   "billing_share_month_end_days": 0.5888,
+   "billing_share_other_days": 0.1637,
+   "share_ratio": 3.597
+  },
+  "holds": true
+ },
+ {
+  "finding": "邮件渠道首次响应中位数为256分钟,是在线客服(4分钟)的64倍,对应邮件渠道8小时内响应的服务水平约定",
+  "numbers": {
+   "email_median_frt_minutes": 255.5,
+   "online_median_frt_minutes": 4.0,
+   "ratio": 63.88
+  },
+  "holds": true
+ }
+]

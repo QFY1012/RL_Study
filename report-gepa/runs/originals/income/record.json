@@ -1,0 +1,37 @@
+{
+ "id": "income",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 456,
+  "steps": 34,
+  "tools": 43,
+  "nudged": 0,
+  "usage": {
+   "input": 59399,
+   "output": 61101
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "furthest-quintiles-moved",
+   "basis": "Output percentages by number of quintiles moved: 0=0.1, 1=5.4, 2=41.8, 3=34.4, 4=18.3; matches none=0.1, one=5.4, two=41.8, three=34.4, four=18.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cumulative-years-in-each-quintile",
+   "basis": "Output by quintile: 1=23163, 2=35140, 3=42720, 4=40583, 5=29464; all match the claim.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 6
+}

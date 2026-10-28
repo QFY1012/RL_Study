@@ -1,0 +1,18 @@
+[
+  {
+    "source": "In return, Eliza sings only one word: helpless. It is the last time she sings",
+    "why": "The data has no lyric text or word-level column; characters.csv records only line ranges and characters.csv/themes.csv do not identify the word 'helpless' or the last song in which it is sung."
+  },
+  {
+    "source": "The songs are filtered by two recurring phrases of Contentment: \"that would be enough\" and \"look around at how lucky we are to be alive right now\".",
+    "why": "themes.csv stores numeric theme IDs, notes, line ranges and songs, but no phrase text, so the two named phrases cannot be tied to theme IDs or songs from the files."
+  },
+  {
+    "source": "Many of the themes are blank",
+    "why": "The story gives no definition or count for 'blank', and themes.csv cannot distinguish an intentionally blank theme from an unlabelled one, so no checkable number or pattern follows."
+  },
+  {
+    "source": "Some characters, conversations, or themes will disappear as you filter down; their co-appearances and co-occurrences are often times just as interesting as the songs that are left.",
+    "why": "This describes interactive filtering behavior without a specific number, comparison, ranking, share, trend or named pattern to test against the data."
+  }
+]

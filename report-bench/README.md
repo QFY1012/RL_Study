@@ -33,7 +33,7 @@ cd report-bench && PYTHONPATH=src ../report-gepa/.venv/bin/python -m report_benc
 
 - `out/tasks/<id>/`:`data/<表>.csv`(tsv 转成 csv,utf-8,文件名里的 `%20` 之类还原;源数据里 utf-8 被当成 latin-1 或 cp1252 读过一遍的乱码用 `ftfy` 改回来,比如 `fiancÃ©` → `fiancé`,本来就对的文字不动,字节已经丢了的 `�` 改不回来;每一行都是空(空白、NA、NaN、null、None)的列去掉,没有列名、只是行号的列也去掉,是表格软件和 pandas 导出时留下的)和 `task.json`(`id`、`title`、`files`、`instruction`)。这是发给参赛者的全部东西。一共 1.1 GB,最大的是 caption-contest(269 MB)。
 - `out/tasks.jsonl`:每题的来源、题目、每张表的行列数和大小;Pudding 题另有 `original`,数据出自的那篇文章的网址。
-- `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照。
+- `out/answers/<id>/`:打分用,不发给参赛者。mock 题是 `findings.json`(预埋的规律);Pudding 题是 `original.json`(原文的网址、标题、发表年月),原文就是这份数据的人工可视化,可以拿来对照;写完的 Pudding 题另有 `facts.json`:原文作者从这份数据得出的发现,和页面交的 `facts.json` 同一个格式,由 `report_gepa.originals` 写出,逐条对照原文和数据复核过(见 report-gepa 的 README)。
 
 `instruction` 是 `TASK.md` 的全文,每题一样。
 
@@ -131,18 +131,13 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 
 ## 数据
 
-`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench-10-28.7z`](https://drive.google.com/file/d/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA/view),只有本人账号能打开。题目是 2026-10-25 从原料重建、修过乱码和空列的 196 题,`task.json` 的 `instruction` 是现在的 `TASK.md`(交 `index.html` 和 `facts.json`)。包里最外层是一个 `report-bench/` 目录,下面:
+`out/` 里除了数据表都在仓库里:`tasks.jsonl`、每题的 `task.json`、`answers/`。数据表(`out/tasks/<id>/data/` 下的 csv,共 1.2 GB)在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench-10-28.7z`](https://drive.google.com/file/d/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA/view),只有本人账号能打开。题目是 2026-10-25 从原料重建、修过乱码和空列的 196 题。包里最外层是一个 `report-bench/` 目录,`report-bench/report-bench/out/tasks/<id>/data/` 是数据表;包里的其他文件仓库里都有,而且是更新的版本(包里的 `task.json` 还是旧的 `instruction`),不取。
 
-- `report-bench/out/`:196 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、148 份 `original.json`),解压后 1.2 GB;
-- `report-gepa/runs/evidence/`:雅的典型案例用到的 8 帧截图,judge 打分要用;
-- `report-bench/` 的代码和文档,打包时和仓库一样,解压时不取,免得盖掉后来的改动。
-
-要 7z(`apt-get install -y p7zip-full`)。解压到一个空的临时目录,再把数据移进仓库:
+要 7z(`apt-get install -y p7zip-full`)。只解出 csv(312 个)到一个空的临时目录,再拷进仓库:
 
 ```sh
-7z x report-bench-10-28.7z -o<临时目录>
-mv <临时目录>/report-bench/report-bench/out <仓库根目录>/report-bench/out
-mkdir -p <仓库根目录>/report-gepa/runs && mv <临时目录>/report-bench/report-gepa/runs/evidence <仓库根目录>/report-gepa/runs/evidence
+7z x report-bench-10-28.7z -o<临时目录> '*.csv' -r
+cp -r <临时目录>/report-bench/report-bench/out/tasks <仓库根目录>/report-bench/out/
 ```
 
 在云端容器里取:`gcloud auth login --no-launch-browser --enable-gdrive-access` 登录(要用户在浏览器里授权,把验证码贴回来),环境变量 `CLOUDSDK_AUTH_ACCESS_TOKEN` 盖着登录的账号,取令牌时去掉它:

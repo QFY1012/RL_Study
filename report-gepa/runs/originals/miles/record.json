@@ -1,0 +1,44 @@
+{
+ "id": "miles",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 633,
+  "steps": 73,
+  "tools": 155,
+  "nudged": 0,
+  "usage": {
+   "input": 128796,
+   "output": 59522
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "page-category-breakdown",
+   "basis": "Output shows People 1005 pages/41%, Recordings 859/35%, Everything Else 492/20%, Places 96/4%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pages-after-1991",
+   "basis": "Output shows After 1991 = 372 pages.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 12,
+ "review": [
+  {
+   "id": "page-category-breakdown",
+   "action": "restore",
+   "why": "every line of the quote is a label on the story page (book cards / category list); the quote joined them across the other text between"
+  }
+ ]
+}

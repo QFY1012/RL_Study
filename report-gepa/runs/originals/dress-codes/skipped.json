@@ -1,0 +1,26 @@
+[
+  {
+    "source": "The most common lengths for shorts, skirts, and dresses were “to the students fingertips” (53%), “longer than mid-thigh” (36%), and “longer than the knee” (11%).",
+    "why": "In length_restrictions.csv, counting entries whose length mentions fingertips gives 256 of 481 schools (53%), entries mentioning mid-thigh give 170 (35%), and entries mentioning the knee or kneecap but not 'x inches from knee' give 51 (11%). The mid-thigh share is 35%, not the story's 36%; the 36% only appears if the two 'mid-hand' entries are folded into mid-thigh, a definition the story does not use. Using only the three exact length labels gives 50%, 34% and 9%."
+  },
+  {
+    "source": "Fifty percent of the schools we investigated state that the final determination of whether or not a student is violating the dress code will be subjective.",
+    "why": "No field in the provided data records whether a dress code makes the final determination subjective. Keyword counts in full_text.csv (for example administration/principal combined with judgment/discretion/determine) do not produce 50% under any definition the story states."
+  },
+  {
+    "source": "In fact, there are only 4 (pajamas, loose clothing, very long shirts, and cutoff pants) that don’t. Of the remaining 37 items that accentuate the body, 57% are primarily marketed in stores to girls, 38% to any gender, and only 5% are marketed primarily to boys.",
+    "why": "The market (girls/boys/any) and reveal_body classifications are in clothesDetails.csv, which is not among the files in data/. banned_items.csv has no column identifying the gender an item is marketed to or whether an item accentuates the body, so neither the 4/37 item split nor the 57%/38%/5% shares can be computed from the provided files."
+  },
+  {
+    "source": "Percentage of High Schools Which Prohibit Clothing Items",
+    "why": "The full per-item percentage chart depends on the exact item list, slugs and market/reveal_body classifications in clothesDetails.csv, which is not in data/. The text's highest-end and low-end examples are reproduced, but the complete chart of item percentages cannot be reconstructed exactly from banned_items.csv alone."
+  },
+  {
+    "source": "In a study of clothes available for girls (sizes 8-14) in online stores, 41% of girls clothing in “tween” stores like Abercrombie Kids, were considered sexualized.",
+    "why": "This is a result of an external study cited by the story, not a statistic computed from the provided dress-code data."
+  },
+  {
+    "source": "The dress code section, present in about 55% of US public high schools, contains a set of hotly debated policies.",
+    "why": "This is an external national statistic, not computed from the 481-school dataset in data/."
+  }
+]

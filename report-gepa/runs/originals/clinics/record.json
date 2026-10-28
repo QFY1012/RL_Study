@@ -1,0 +1,82 @@
+{
+ "id": "clinics",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 608,
+  "steps": 53,
+  "tools": 63,
+  "nudged": 0,
+  "usage": {
+   "input": 63732,
+   "output": 80705
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "no-access-151",
+   "basis": "gestation_8_duration ge(1) sum = 151",
+   "verdict": "ok"
+  },
+  {
+   "id": "boise-12-to-16-weeks",
+   "basis": "Boise City, Idaho gestation_12_duration = 0; gestation_16_duration = 8",
+   "verdict": "ok"
+  },
+  {
+   "id": "meridian-20-weeks-10-hours",
+   "basis": "Meridian, Idaho gestation_20_duration = 10",
+   "verdict": "ok"
+  },
+  {
+   "id": "big-metros-zero-all-stages",
+   "basis": "New York, Seattle, and Miami all have gestation_8/12/16/20_duration = 0",
+   "verdict": "ok"
+  },
+  {
+   "id": "el-paso-springfield-less-access",
+   "basis": "El Paso, Texas = 0,0,7,7; Springfield, Missouri = 4,5,5,5 for 8/12/16/20 weeks",
+   "verdict": "ok"
+  },
+  {
+   "id": "longest-travel-time-each-stage",
+   "basis": "8w: Rapid City, SD max 9; 12w: Rapid City, SD max 9; 16w: Rapid City, SD max 10; 20w: Bismarck, ND max 11",
+   "verdict": "ok"
+  },
+  {
+   "id": "north-dakota-closure-8-weeks",
+   "basis": "Fargo 0->6; Bismarck 5->11; Grand Forks 2->9 at 8 weeks",
+   "verdict": "ok"
+  },
+  {
+   "id": "louisiana-closure-12-weeks",
+   "basis": "Shreveport 0->5; Bossier City 0->5; Longview, Texas 2->3 at 12 weeks",
+   "verdict": "ok"
+  },
+  {
+   "id": "arkansas-closure-12-weeks",
+   "basis": "Little Rock 0->4; North Little Rock 0->4; Conway 1->4 at 12 weeks",
+   "verdict": "ok"
+  },
+  {
+   "id": "utah-closure-16-weeks",
+   "basis": "Ogden 1->13; Layton 1->13; Logan 2->13; Taylorsville 0->11; South Jordan 0->11 at 16 weeks",
+   "verdict": "ok"
+  },
+  {
+   "id": "oklahoma-closure-16-weeks",
+   "basis": "Norman 0->5; Oklahoma City 0->4; Midwest City 0->4; Moore 0->4; Edmond 0->4 at 16 weeks",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 11,
+ "skipped": 24
+}

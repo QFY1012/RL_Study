@@ -1,0 +1,52 @@
+{
+ "id": "hyphens",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 309,
+  "steps": 27,
+  "tools": 30,
+  "nudged": 0,
+  "usage": {
+   "input": 26850,
+   "output": 47602
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "nba-first-hyphen-1960s",
+   "basis": "Output min: startDate=1969.0, decade=1960.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nfl-first-hyphen-mul-key",
+   "basis": "Output: name=Herb Mul-Key, startDate=1972, decade=1970.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nhl-first-hyphen-grand-pierre",
+   "basis": "Output: name=Jean-Luc Grand-Pierre, startDate=1999, decade=1990.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mlb-first-hyphen-rowland-smith",
+   "basis": "Output sorted: Ryan Rowland-Smith 2007; Austin Bibens-Dirkx 2017; Isiah Kiner-Falefa 2018; Sean Reid-Foley 2018.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hyphen-share-by-league-decade",
+   "basis": "2010s: MLB 0.15, NBA 2.17, NFL 1.13, NHL 0.51, MLS 1.38, WNBA 5.26, NWSL 0.55; 1950s MLB/NBA/NFL/NHL all 0.00; 1990s WNBA 5.53 vs NBA 0.46, NFL 0.22, NHL 0.09, MLB 0.00; WNBA 2000s 4.55.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 4
+}

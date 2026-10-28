@@ -1,0 +1,72 @@
+[
+  {
+    "id": "blowin-energy-difference",
+    "source": "Energy 0.10 0.98 0.88",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in energy is 0.8777.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_energy"
+  },
+  {
+    "id": "blowin-valence-difference",
+    "source": "Valence 0.44 0.33 -0.11",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in valence is -0.112.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_valence"
+  },
+  {
+    "id": "blowin-acousticness-difference",
+    "source": "Acousticness 0.91 0.13 -0.79",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in acousticness is -0.788.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_acousticness"
+  },
+  {
+    "id": "blowin-instrumentalness-difference",
+    "source": "Instrumentalness 0.00 0.00 0.00",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in instrumentalness is 0.0.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_instrumentalness"
+  },
+  {
+    "id": "blowin-liveness-difference",
+    "source": "Liveness 0.06 0.98 0.92",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in liveness is 0.9245.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_liveness"
+  },
+  {
+    "id": "blowin-duration-difference",
+    "source": "Duration 165 272 107 seconds",
+    "claim": "For Blowin' in the Wind, the live-minus-studio difference in duration is 106.76 seconds.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "pd.to_timedelta(d[d.track_name_studio == \"Blowin' in the Wind\"].merge(s, on='track_name_id').set_index('track_name_studio').difference_duration, unit='ms').dt.total_seconds()"
+  },
+  {
+    "id": "heaven-acoustic-stripped-live",
+    "source": "You can hear this change in songs like “Heaven,” an acoustic, stripped-down version of the original studio recording.",
+    "claim": "For the track 'Heaven - 2003 Remaster', the live-minus-studio difference is 0.769 in acousticness and -0.304 in energy.",
+    "tables": {
+      "s": "data/songlist_wide_optimized.csv",
+      "d": "data/track_name_dictionary.csv"
+    },
+    "code": "d[d.track_name_studio == 'Heaven - 2003 Remaster'].merge(s, on='track_name_id').set_index('track_name_studio')[['difference_acousticness', 'difference_energy']]"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "leadoff-more-power-less-speed",
+    "source": "But nowadays, managers want slightly more power out of their leadoff hitters, and they’re willing to trade some speed for it.",
+    "claim": "Among player-seasons whose most frequent lineup slot was No. 1, the average power rating rose from 1.46 in 1970-2009 to 1.97 in 2010-present, while the average speed rating fell from 4.21 to 4.09.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('slot == 1').groupby('era')[['power', 'speed']].mean().round(2)"
+  },
+  {
+    "id": "second-slot-better-hitters",
+    "source": "This is why better overall hitters — and especially better power hitters, like Trout, Seager, and Ohtani, hit in the 2-hole more than they ever did in the past.",
+    "claim": "No. 2 hitters' average batting-average rating rose from 2.84 in 1970-2009 to 3.34 in 2010-present, and their average power rating from 1.48 to 2.52.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('slot == 2').groupby('era')[['average', 'power']].mean().round(2)"
+  },
+  {
+    "id": "third-slot-loses-speed",
+    "source": "But as more players with a mix of elite skills get moved elsewhere, teams now tend to place greater focus on one particular attribute here, asking less of the role in terms of speed and other facets of the game.",
+    "claim": "No. 3 hitters' average speed rating fell from 2.57 in 1970-2009 to 2.16 in 2010-present.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('slot == 3').groupby('era')[['speed']].mean().round(2)"
+  },
+  {
+    "id": "cleanup-less-power-and-walks",
+    "source": "It’s still a place for some teams to put burly sluggers, but the typical No. 4 hitter is now less powerful — and patient — than in the 1990s",
+    "claim": "Between 1970-2009 and 2010-present, player-seasons whose most frequent slot was No. 4 saw their average power rating fall from 4.04 to 3.52 and their average walk rating from 3.28 to 3.06.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('slot == 4').groupby('era')[['power', 'walks']].mean().round(2)"
+  },
+  {
+    "id": "middle-order-speedsters",
+    "source": "In the modern game, these slots have undergone a surprising evolution, from a place for plodding sluggers to a spot to stash speedsters!",
+    "claim": "No. 5-7 hitters' average speed rating rose from 1.50 in 1970-2009 to 2.03 in 2010-present.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('5 <= slot <= 7').groupby('era')[['speed']].mean().round(2)"
+  },
+  {
+    "id": "bottom-order-faster",
+    "source": "Already speedy, the 8th and 9th spots have gotten faster",
+    "claim": "No. 8-9 hitters' average speed rating rose from 2.40 in 1970-2009 to 3.05 in 2010-present.",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).query('8 <= slot <= 9').groupby('era')[['speed']].mean().round(2)"
+  },
+  {
+    "id": "bottom-order-gaining-ground",
+    "source": "In the modern analytics era, these spots are gaining ground on the rest of the lineup, even after accounting for the absence of hitting pitchers.",
+    "claim": "Averaged across the four skill ratings, No. 8-9 hitters rose from 1.52 in 1970-2009 to 1.84 in 2010-present, while Nos. 1-7 hitters held roughly steady (2.82 and 2.78).",
+    "tables": {"b": "data/back-stats.csv"},
+    "code": "b.assign(slot=b[[c for c in b.columns if c.startswith('pct_appearances')]].values.argmax(axis=1) + 1).assign(grp=lambda d: np.where(d['slot'] >= 8, '8-9', '1-7')).groupby(['era', 'grp'])[['average', 'power', 'walks', 'speed']].mean().mean(axis=1).round(2)"
+  }
+]

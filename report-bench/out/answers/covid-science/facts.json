@@ -1,0 +1,11 @@
+[
+ {
+  "id": "vax-network-citation-orders",
+  "source": "Most of these articles went on to be cited by tens (or hundreds, or thousands) of subsequent articles",
+  "claim": "Of the 502 articles in the citation network, 466 were cited at least 10 times: 238 (47.4%) were cited 10-99 times, 191 (38.0%) 100-999 times, and 37 (7.4%) 1,000 or more times; the remaining 36 (7.2%) were cited 1-9 times.",
+  "tables": {
+   "vaxNodes": "data/vaxNodes.csv"
+  },
+  "code": "pd.cut(vaxNodes.nCitedBy, bins=[0, 9, 99, 999, np.inf], labels=['1-9', '10-99', '100-999', '1000+']).value_counts().sort_index().to_frame('n').assign(share=lambda d: (d['n'] / d['n'].sum() * 100).round(1), at_least=lambda d: d['n'][::-1].cumsum()[::-1])"
+ }
+]

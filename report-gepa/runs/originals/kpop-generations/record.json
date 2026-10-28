@@ -1,0 +1,47 @@
+{
+ "id": "kpop-generations",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 426,
+  "steps": 30,
+  "tools": 35,
+  "nudged": 0,
+  "usage": {
+   "input": 35347,
+   "output": 62335
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "debuts-by-generation",
+   "basis": "Output shows gen 1=35, gen 2=81, gen 3=327, gen 4=348, gen 5=203.",
+   "verdict": "ok"
+  },
+  {
+   "id": "annual-debuts-2012-2014-2017",
+   "basis": "Output shows year 2012=40, 2014=60, 2017=86.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gangnam-first-to-one-billion",
+   "basis": "Output shows Gangam Style at dt 2012-12-21 with cum=1013121166, the earliest row after sorting by dt.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gangnam-peak-daily-views",
+   "basis": "Output shows Gangam Style max views=14924298 on dt 2012-12-21.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 5
+}

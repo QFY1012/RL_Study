@@ -1,0 +1,30 @@
+[
+  {
+    "source": "The majority of the individuals depicted on banknotes are male: Female - 51 (21%) Male - 190 (79%)",
+    "why": "The 241 unique individuals in the file are 53 women (22.0%) and 188 men (78.0%), not 51 women (21%) and 190 men (79%). The counts differ by two people beyond rounding."
+  },
+  {
+    "source": "Doing so would yield 103 unique individuals in this category (on 34 out of the 38 currencies).",
+    "why": "Combining Head of Gov't, Politician, Founder and Monarch gives 102 unique individuals in the file (on 34 of the 38 currencies), not 103; only the 42% share and the 34 currencies match."
+  },
+  {
+    "source": "South Korea, on average, featured the oldest historical figures: all four of them lived in the 13th and 14th centuries.",
+    "why": "The four South Korean individuals in the file died in 1450, 1551, 1570 and 1584 (15th-16th centuries), not the 13th-14th. Tunisia also has an earlier mean death year because of Hannibal, so South Korea is not the oldest on a straight average."
+  },
+  {
+    "source": "Hannibal first appeared on the dinar in 1993.",
+    "why": "The file records Hannibal's firstAppearanceDate as 2013, not 1993."
+  },
+  {
+    "source": "Eighty-one people died more than 100 years before their faces appeared on the current legal-tender.",
+    "why": "The file has 80 unique individuals with appearanceDeathDiff greater than 100, not 81 (80 of 241, 33.2%, is the 'third' reported separately)."
+  },
+  {
+    "source": "Similarly, there is no significant relationship between profession and bill value in this dataset.",
+    "why": "The story does not name a test, model or normalized measure of bill value, so a significance claim cannot be reproduced from the file; any within-country normalization would be an assumption not stated by the authors."
+  },
+  {
+    "source": "Instead, women who were involved in independence wars are often called “National Heroes” or revolutionaries.",
+    "why": "The statement is qualitative ('often') and gives no count or threshold; the file classifies 9 women as revolutionaries (and none as founders), but this is not a specific number the story states."
+  }
+]

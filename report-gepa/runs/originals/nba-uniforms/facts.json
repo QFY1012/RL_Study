@@ -1,0 +1,72 @@
+[
+  {
+    "id": "gsw-2013-home-white",
+    "source": "For example, Golden State exclusively wore white at home (minus the special sleeved Christmas jerseys) during the 2013-14 season.",
+    "claim": "Golden State wore white at home in 2013-14 — 34 games in the Home edition and 6 in Alternate — and the only other home jersey was the gold Christmas one (#FFC72D, 1 game).",
+    "tables": {"d2013": "data/2013data.csv"},
+    "code": "d2013[d2013.homeTeam=='Golden State Warriors'].groupby(['homeTeamEdition','homeTeamBGColor']).size()"
+  },
+  {
+    "id": "gsw-2023-four-home-jerseys",
+    "source": "Now if you were to watch the Warriors at home, you’d see a rotation of four jerseys, with only one being the traditional white.",
+    "claim": "Golden State used four home editions in 2023-24: City (18 games, black), Statement (11, darkslategray), Association (7, the only white one), and Icon (5, darkslateblue).",
+    "tables": {"out": "data/output.csv"},
+    "code": "out[out.homeTeam=='Golden State Warriors'].groupby(['homeTeamEdition','homeTeamColor']).size()"
+  },
+  {
+    "id": "home-white-327",
+    "source": "Including last season’s off-white City Edition jerseys for Boston and San Antonio, home teams wore white in just 327 games, or 27% of the time.",
+    "claim": "Home teams wore white or off-white in 327 games, 26.6% of all games.",
+    "tables": {"out": "data/output.csv"},
+    "code": "out.homeTeamColor.isin(['white','linen']).agg(['sum','mean'])"
+  },
+  {
+    "id": "road-white-640",
+    "source": "On average, teams wore their white Association jerseys in nearly half of their road games — 640, to be exact — but only a quarter of their home games, an inversion of the classic “home whites” concept.",
+    "claim": "Teams wore white on the road in 640 games, 52.0% of road games, versus 327 home games (26.6%).",
+    "tables": {"out": "data/output.csv"},
+    "code": "out[['homeTeamColor','awayTeamColor']].apply(lambda s: s.isin(['white','linen']).agg(['sum','mean']))"
+  },
+  {
+    "id": "color-vs-color-264",
+    "source": "The rest of the time, fans were treated to a color vs. color matchup. These were once almost exclusively the domain of Lakers-in-gold home games, but this season made up 264 games, or 21% of all games this year.",
+    "claim": "264 games, 21.4% of all games, featured color against color (neither team in white or off-white).",
+    "tables": {"out": "data/output.csv"},
+    "code": "(~out.homeTeamColor.isin(['white','linen']) & ~out.awayTeamColor.isin(['white','linen'])).agg(['sum','mean'])"
+  },
+  {
+    "id": "black-vs-red-81",
+    "source": "Owing to the popularity of both colors, the most common dual-color matchup was a black jersey against a red one; this occurred in 81 games total.",
+    "claim": "The most common color-vs-color matchup was black against red (counting crimson and tomato as red), in 81 games — ahead of black against gold, 27.",
+    "tables": {"out": "data/output.csv"},
+    "code": "out[~out.homeTeamColor.isin(['white','linen']) & ~out.awayTeamColor.isin(['white','linen'])].apply(lambda r: tuple(sorted('red' if c in ['crimson','tomato'] else c for c in (r.homeTeamColor, r.awayTeamColor))), axis=1).value_counts()"
+  },
+  {
+    "id": "neither-black-nor-white-105",
+    "source": "True aficionados of the crayon box might take a particularly keen interest in the 105 games in which neither team wore black or white; these were most frequently blue vs. red matchups.",
+    "claim": "105 color-vs-color games had neither team in black or white, and the most frequent pairing in them was crimson against darkslateblue (red vs. blue), 23 games.",
+    "tables": {"out": "data/output.csv"},
+    "code": "out[~out.homeTeamColor.isin(['white','linen']) & ~out.awayTeamColor.isin(['white','linen']) & (out.homeTeamColor!='black') & (out.awayTeamColor!='black')].pipe(lambda nb: (len(nb), nb.apply(lambda r: tuple(sorted((r.homeTeamColor, r.awayTeamColor))), axis=1).value_counts()))"
+  },
+  {
+    "id": "bulls-white-home-away",
+    "source": "Not only have their core uniforms barely changed, but they keep up with a relatively classic schedule of wearing them, wearing their white Association uniforms for 68% of home games and only 10% of their away games.",
+    "claim": "Chicago wore its white Association uniform in 28 home games (68.3%) and only 4 road games (9.8%).",
+    "tables": {"out": "data/output.csv"},
+    "code": "pd.concat([out.loc[out.homeTeam=='Chicago Bulls',['homeTeamEdition']].rename(columns={'homeTeamEdition':'edition'}).assign(side='home'), out.loc[out.awayTeam=='Chicago Bulls',['awayTeamEdition']].rename(columns={'awayTeamEdition':'edition'}).assign(side='away')]).groupby('side').edition.apply(lambda s: (s=='Association Edition').agg(['sum','mean']))"
+  },
+  {
+    "id": "magic-white-home-away",
+    "source": "By contrast, the Orlando Magic wore white at home for just two games all season, preferring instead to wear one of their many blue or black options. But their white uniforms did get play on the road — worn in nearly 60% of their road games.",
+    "claim": "Orlando wore white in only 2 home games (4.9%) but in 24 road games (58.5%, nearly 60%).",
+    "tables": {"out": "data/output.csv"},
+    "code": "pd.concat([out.loc[out.homeTeam=='Orlando Magic',['homeTeamColor']].rename(columns={'homeTeamColor':'color'}).assign(side='home'), out.loc[out.awayTeam=='Orlando Magic',['awayTeamColor']].rename(columns={'awayTeamColor':'color'}).assign(side='away')]).groupby('side').color.apply(lambda s: s.isin(['white','linen']).agg(['sum','mean']))"
+  },
+  {
+    "id": "edition-usage-by-team",
+    "source": "All teams by edition usage",
+    "claim": "Every team's edition shares match the chart — e.g., Atlanta 30% Association, 28% Icon, 29% Statement, 12% City and 0% Classic — ranging from 23% (Minnesota) to 54% (New York) for Association, 6% (Utah) to 48% (Los Angeles) for Icon, 12% (Orlando) to 37% (Utah) for Statement, 7% (Cleveland and LA Clippers) to 28% (Golden State) for City, and 0% to 32% (Minnesota) for Classic.",
+    "tables": {"out": "data/output.csv"},
+    "code": "pd.concat([out[['homeTeam','homeTeamEdition']].rename(columns={'homeTeam':'team','homeTeamEdition':'edition'}).assign(side='home'), out[['awayTeam','awayTeamEdition']].rename(columns={'awayTeam':'team','awayTeamEdition':'edition'}).assign(side='away')]).loc[lambda x: x.edition != 'City 2 Edition'].groupby(['team','edition']).size().unstack(fill_value=0).pipe(lambda t: (t.div(t.sum(axis=1),axis=0)*100).round(0))"
+  }
+]

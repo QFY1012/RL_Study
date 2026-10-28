@@ -1,0 +1,29 @@
+[
+  {
+    "id": "most-viewed-play",
+    "source": "1M views",
+    "claim": "The play with the most views is 'LeBron hits the game-winner against the Pacers', at 989,208 views.",
+    "tables": {
+      "w": "data/web.csv"
+    },
+    "code": "w.loc[w.views.idxmax(), ['custom_title', 'views']]"
+  },
+  {
+    "id": "displayed-view-labels",
+    "source": "500k views",
+    "claim": "The chart labels the plays' views in rounded figures from 300,000 to 1,000,000: 22 plays at 300,000, 21 at 400,000, 7 at 500,000, 4 at 600,000, 5 at 700,000, 3 at 800,000, 1 at 900,000 and 1 at 1,000,000.",
+    "tables": {
+      "w": "data/web.csv"
+    },
+    "code": "w.assign(display_views=(10**np.floor(np.log10(w.views)) * (w.views / 10**np.floor(np.log10(w.views))).round()).astype(int)).display_views.value_counts().sort_index()"
+  },
+  {
+    "id": "lebron-most-featured",
+    "source": "Warning: this video contains a high dosage of LeBron 🐐 footage.",
+    "claim": "LeBron James is the featured player in 18 plays, more than four times Stephen Curry's next-best 4.",
+    "tables": {
+      "w": "data/web.csv"
+    },
+    "code": "w.player.str.split(',').explode().str.strip().value_counts().head(3)"
+  }
+]

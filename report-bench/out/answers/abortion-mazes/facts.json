@@ -1,0 +1,56 @@
+[
+ {
+  "id": "complete-abortion-bans",
+  "source": "13 states completely outlawed abortion",
+  "claim": "Thirteen states have a complete abortion ban: Alabama, Arkansas, Idaho, Indiana, Kentucky, Louisiana, Mississippi, Missouri, Oklahoma, South Dakota, Tennessee, Texas and West Virginia.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['ban'].eq('banned')].groupby('ban')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ },
+ {
+  "id": "complexity-most-states",
+  "source": "… is one of the most complex states for navigating abortion access.",
+  "claim": "Thirteen states are in the most-complex group: Alabama, Arkansas, Idaho, Indiana, Kentucky, Louisiana, Mississippi, Missouri, Oklahoma, South Dakota, Tennessee, Texas and West Virginia.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['complexity'].eq('most')].groupby('complexity')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ },
+ {
+  "id": "complexity-very-states",
+  "source": "… is a very complex state for navigating abortion access.",
+  "claim": "Nine states are in the very-complex group: Arizona, Florida, Georgia, Iowa, Kansas, Nebraska, North Carolina, South Carolina and Utah.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['complexity'].eq('very')].groupby('complexity')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ },
+ {
+  "id": "complexity-moderately-states",
+  "source": "… is a moderately complex state for navigating abortion access.",
+  "claim": "Eight states are in the moderately-complex group: Michigan, New Hampshire, North Dakota, Ohio, Pennsylvania, Virginia, Wisconsin and Wyoming.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['complexity'].eq('moderately')].groupby('complexity')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ },
+ {
+  "id": "complexity-somewhat-states",
+  "source": "… is a somewhat complex state for navigating abortion access.",
+  "claim": "Ten states are in the somewhat-complex group: Alaska, Connecticut, Delaware, Hawaii, Illinois, Maine, Montana, Nevada, New Mexico and Rhode Island.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['complexity'].eq('somewhat')].groupby('complexity')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ },
+ {
+  "id": "complexity-least-states",
+  "source": "… is one of the least complex states for navigating abortion access.",
+  "claim": "Eleven states are in the least-complex group: California, Colorado, District Of Columbia, Maryland, Massachusetts, Minnesota, New Jersey, New York, Oregon, Vermont and Washington.",
+  "tables": {
+   "states": "data/states.csv"
+  },
+  "code": "states[states['complexity'].eq('least')].groupby('complexity')['name'].agg(['count', lambda x: ', '.join(x.str.title())]).to_string()"
+ }
+]

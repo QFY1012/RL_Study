@@ -1,2 +1,6 @@
 research_notes/
 reports/
+
+# data tables stay in Google Drive (CLAUDE.md)
+*.csv
+*.tsv

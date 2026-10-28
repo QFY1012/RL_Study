@@ -1,0 +1,47 @@
+{
+ "id": "2022_02_redraft",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 891,
+  "steps": 58,
+  "tools": 65,
+  "nudged": 0,
+  "usage": {
+   "input": 79587,
+   "output": 126346
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top-50-player-ratings",
+   "basis": "Output shows LeBron James rating 100 with VORP_s 100, WS_s 100, WA_s 100, RWAR_s 100; Kevin Garnett rating 86; Chris Paul rating 85.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lebron-first-in-every-stat",
+   "basis": "Output shows the max row is LeBron James with VORP_top 51.2, WS_top 90.3, WA_top 124.09, RWAR_top 98.61.",
+   "verdict": "ok"
+  },
+  {
+   "id": "best-player-available-top-teams",
+   "basis": "Output nlargest(3) is NOP 27.3, LAL 22.2, CLE 18.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "knicks-could-have-beens",
+   "basis": "Output rows match: Mike Sweetney/David West pick 9 rating 7 to pick 18 rating 39; Jordan Hill/Jrue Holiday 8/10 to 17/37; Frank Ntilikina/Donovan Mitchell 8/4 to 13/25; Danilo Gallinari/DeAndre Jordan 6/34 to 35/49; Channing Frye/Danny Granger 8/26 to 17/35.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 8
+}

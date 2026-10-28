@@ -1,0 +1,50 @@
+[
+  {
+    "source": "how do you measure 2.85 eggs?",
+    "why": "The story's chart label is \"2.855 whole eggs\", but the file gives 2.896 eggs per recipe when total egg quantity is divided by the number of recipes, the averaging rule that reproduces the story's other ingredient averages. The 2.855 value is the mean egg quantity per egg listing (total egg quantity divided by the 212 egg rows), a different definition, so it is not reproduced under the story's stated rule."
+  },
+  {
+    "source": "0.1019 tsp espresso powder",
+    "why": "The chart label is 0.1019 tsp, but the story's own recipe list gives 0.019 tsp espresso, which is also what the file gives (4 tsp over 209 recipes); the chart label 0.1019 is not reproduced."
+  },
+  {
+    "source": "0.128 cups cookie mix",
+    "why": "The file contains one cookie-mix entry (2.667 cups) among 209 recipes, an average of 0.013 cups over all recipes, not 0.128."
+  },
+  {
+    "source": "0.49 cups white chocolate chip",
+    "why": "This recipe-list line conflicts with the story's own chart label (\"0.049 cups white chocolate chips\") and with the file, which gives 0.049 cups over all recipes; 0.49 is not reproduced."
+  },
+  {
+    "source": "Using this method, we found about 9 distinct clusters of sentences and by picking the sentence closest to the center of each one, we ended up with recipe instructions that actually work pretty well.",
+    "why": "The file contains ingredient quantities only, not recipe instruction sentences or their word/sentence vectors, so the number of sentence clusters cannot be computed from it."
+  },
+  {
+    "source": "Although, we did have to decide when to add the 50+ ingredients that didn’t end up in our sentence vectors.",
+    "why": "The count of ingredients absent from the sentence vectors requires the sentence-vector/clustering output, which is not in the ingredient file."
+  },
+  {
+    "source": "But for science, we decided to keep all 60 ingredients.",
+    "why": "This is a count of ingredient categories, a description of the data rather than a finding; the file has 68 distinct ingredient names, so 60 is not reproduced."
+  },
+  {
+    "source": "Our search returned 915 recipes.",
+    "why": "This is a count from the data-collection process, a description of the data rather than a finding; the file contains 209 recipes, so 915 cannot be computed from it."
+  },
+  {
+    "source": "This brought our sample of traditional chocolate chip cookie recipes down to 221.",
+    "why": "This is a sample-size count from data collection, a description of the data rather than a finding; the file contains 209 recipes, so 221 cannot be computed from it."
+  },
+  {
+    "source": "4.0 cups butter flavored shortening",
+    "why": "This quantity is from the predictive-text algorithm's generated recipe, a model output, not a statistic computed from the ingredient file."
+  },
+  {
+    "source": "4.0 cups all purpose flour",
+    "why": "This quantity is from the neural-network algorithm's generated recipe, a model output, not a statistic computed from the ingredient file."
+  },
+  {
+    "source": "...sifted 2.4 cup canned white cannelini beans , and the baking soda and 1 teaspoon salt in a large microwave safe mixing bowl...",
+    "why": "This is an illustrative snippet from the cannelini recipe that was removed from the dataset, not a statistic of the ingredient file; the file contains no bean rows or instruction text."
+  }
+]

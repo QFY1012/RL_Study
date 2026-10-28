@@ -1,0 +1,34 @@
+[
+  {
+    "source": "Drafting is hard. Here is how often each team selects the best player available in the first round.",
+    "why": "The complete 30-team series does not reproduce from these ratings: the share of a team's first-round picks with no higher-rated player drafted later matches 28 of the chart labels but gives Utah 10.3% (chart 17.2%, i.e. 5/29) and the Clippers 3.2% (chart 6.5%, i.e. 2/31). The story's report cards grade Andrei Kirilenko, Scott Padgett and Quentin Richardson A+ even though exactly one later-drafted player (Manu Ginóbili for the two Jazz players, Michael Redd for Richardson) has a higher rating, so the chart's per-team A+ shares cannot be reproduced exactly. Only the three highest teams are stated in facts.json."
+  },
+  {
+    "source": "A player’s grade is based on the size of the gap between their rating and the best player available.",
+    "why": "The letter grades come from the app's grade-distribution rule (a uniform number of players per grade), which the data alone does not determine, and several displayed 'Better Players' counts differ from the rating gaps computed here (Cedric Simmons 23 on the card vs 41 computed; Hilton Armstrong 20 vs 22). The grades and the better-player counts per pick are therefore not reproduced."
+  },
+  {
+    "source": "Take Markelle Fultz who gets a “B”.",
+    "why": "The letter grade depends on the app's grade thresholds, not on a quantity reproducible from the ratings; Fultz's rating and his gap to the best available player can be computed, but the B itself cannot."
+  },
+  {
+    "source": "The 2010 draft class was perhaps the least exciting (or most accurate), with the most players of any class drafted close to their correct spot.",
+    "why": "No rating-based redraft reproduces this: at a ±5-spot window 2012 has 21 players to 2010's 19, at ±10 1998 has 35 to 2010's 30, and the story does not define 'close', so the comparison cannot be reproduced."
+  },
+  {
+    "source": "It was also the only class the data suggests had no players that should have dropped 20+ spots.",
+    "why": "Under a redraft by rating, the 2010 class has nine players who should drop 20+ spots (for example Xavier Henry from pick 12 to 59 and Craig Brackins from 21 to 57); 2010 is not uniquely the class with no such player under any natural variant, since a first-round-only ranking leaves several other classes with none as well."
+  },
+  {
+    "source": "an average NBA career is 4.5 years",
+    "why": "The seasons column in the data averages 6.97 years across the 1,682 players, not 4.5; the 4.5-year figure is a general NBA fact cited from outside this dataset."
+  },
+  {
+    "source": "More recent players will have less extreme ratings since their best producing seasons are still ahead of them.",
+    "why": "A qualitative caution about seasons not yet played, with no computed number or comparison to check against the data."
+  },
+  {
+    "source": "The upgrade pick is a player that was drafted lower but has a higher rating. Squads are made up of the biggest rating upgrades.",
+    "why": "The squads are a client-side interactive. The Knicks panel shown by default is reproduced in facts.json, but the same 'biggest upgrades among top-10 picks' rule does not reproduce other teams' panels (for example Minnesota's displayed squad omits Jonny Flynn to Stephen Curry and Randy Foye to Kyle Lowry even though those rating gaps are larger than the Longley to Brandon and Richardson to Blaylock pairs shown), so the complete per-team squad finding is left out."
+  }
+]

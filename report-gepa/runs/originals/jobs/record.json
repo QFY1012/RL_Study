@@ -1,0 +1,57 @@
+{
+ "id": "jobs",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 344,
+  "steps": 26,
+  "tools": 31,
+  "nudged": 0,
+  "usage": {
+   "input": 36555,
+   "output": 52365
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "social-workers-low-automation",
+   "basis": "Output shows Healthcare Social Workers Probability 0.0035 and Speech-Language Pathologists 0.0064; both are below 0.01.",
+   "verdict": "ok"
+  },
+  {
+   "id": "medical-assistants-601000",
+   "basis": "Output shows Medical Assistants emp = 601240.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-automatable-jobs-50-million",
+   "basis": "Output sum for Probability >= 0.85 is 51960340.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "truck-drivers-79-percent",
+   "basis": "Output shows Heavy and Tractor-Trailer Truck Drivers Probability = 0.79.",
+   "verdict": "ok"
+  },
+  {
+   "id": "truckers-one-percent-workforce",
+   "basis": "Output is 1.3955607451184104 percent, which rounds to 1.3956% and is more than 1%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nearly-every-county-job-loss",
+   "basis": "Output shows counties = 3139.0, total = 3143.0, pct = 99.872733.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 8
+}

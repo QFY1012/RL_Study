@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Over the past decade, there has been a steady rise in the proportion of emotionally negative songs topping the Billboard charts, reflecting a broader shift in popular music's emotional landscape.",
+    "why": "The year-by-year share does not rise steadily: it falls from 30.2% in 2015 to 27.3% in 2016 and from 55.6% in 2018 to 37.8% in 2019 before reaching 49.2% in 2020. The broader upward trend is captured in the negative-song-trend-up fact using the story's other wording ('clear upward trend ... particularly since the mid-2010s')."
+  },
+  {
+    "source": "In 2020, for the first time in the history of our dataset, negative songs outnumbered positive ones in the year-end top 10.",
+    "why": "The file has 31 negative and 32 positive top-10 songs in 2020 (49.2% negative, 50.8% positive). The only year from 1960-2020 with a negative majority is 2018 (35 negative, 28 positive, 55.6%), so 2020 is neither a negative majority nor the first. The file contains no Billboard year-end-chart rank with which to apply a 'year-end top 10' definition."
+  },
+  {
+    "source": "Interestingly, this shift coincides with the rise of Hip hop/Rap as the dominant genre in popular music, overtaking the more traditionally upbeat Pop.",
+    "why": "billboard.csv has no genre column, so the claimed genre ranking and its coincidence with the sentiment trend cannot be computed."
+  },
+  {
+    "source": "Hip hop songs, on average, tend to have a much higher proportion of negative emotions compared to other genres.",
+    "why": "billboard.csv has no genre column, so songs cannot be grouped into Hip hop versus other genres."
+  },
+  {
+    "source": "But this is not to say that negativity is confined to Hip hop. Across the board, from Pop to Rock to R&B, songs with darker themes have been on the ascent.",
+    "why": "billboard.csv has no genre column, so the cross-genre claim cannot be checked."
+  },
+  {
+    "source": "Some, like Billie Eilish or Juice WRLD, are known for their consistently dark and moody lyrics, while others, like Ariana Grande or BTS, tend towards a more positive, uplifting tone.",
+    "why": "Using the performer field as the story does (multi-artist strings are not split among the named artists), the 1960-2020 shares of songs classified as negative are: Juice WRLD 100% (3 songs), Billie Eilish 50% (4), Ariana Grande 44.4% (9) and BTS 25% (4). Billie Eilish and Ariana Grande are nearly identical, so the stated pairing of Eilish/Juice WRLD as dark against Ariana Grande/BTS as positive is not reproduced; the text also gives no numeric artist scores to check against the 'Artist Sentiment Scores' chart."
+  },
+  {
+    "source": "What's fascinating is how an artist's emotional fingerprint can evolve over their career, often reflecting their personal growth and struggles.",
+    "why": "This is a general qualitative claim with no named artist, period, or number to compute; the specific Taylor Swift case is covered by the taylor-swift-darker fact."
+  }
+]

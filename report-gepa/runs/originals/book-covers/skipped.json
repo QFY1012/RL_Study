@@ -1,0 +1,6 @@
+[
+  {
+    "source": "The covers were arranged by visual similarity using the t-distributed stochastic neighbor embedding (t-SNE) algorithm, and then placed in a grid using Mario Klingemann’s RasterFairy library.",
+    "why": "The story's substantive pattern is the visual clustering of cover images. data/books.csv contains only title, author, ISBN, genre, fiction flag, author gender and Google Vision motif labels; it has no cover images or t-SNE/grid coordinates, so the visual-similarity arrangement cannot be reproduced from this file."
+  }
+]

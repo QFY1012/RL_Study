@@ -1,0 +1,67 @@
+{
+ "id": "emo-rap",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 365,
+  "steps": 32,
+  "tools": 38,
+  "nudged": 0,
+  "usage": {
+   "input": 56114,
+   "output": 51835
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 8,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "album-emo-ranking",
+   "basis": "Sorted artist means show black_parade at 19.16 as highest and lilpump at 2.55 as lowest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "black-parade-most-emo",
+   "basis": "Top two are black_parade 19.16 and chemicalromance 17.67.",
+   "verdict": "ok"
+  },
+  {
+   "id": "juice-xxx-follow",
+   "basis": "juicewrld is 14.99 and xxxtentacion is 14.88, both below black_parade at 19.16.",
+   "verdict": "ok"
+  },
+  {
+   "id": "emo-rap-ahead-of-emo-bands",
+   "basis": "juicewrld 14.99 and xxxtentacion 14.88 exceed fall out boy 10.78, dashboard 10.07, and jimmyeatworld 7.64.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lilpump-migos-low",
+   "basis": "Ascending bottom-five output shows lilpump 2.55 first and migos 5.30 fourth, so both are among the lowest shown.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kanye-albums-order",
+   "basis": "Ascending order is kanye college_dropout 4.12, kanye heartbreak 9.87, kanye ye 13.08.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-25-emo-songs",
+   "basis": "Top three are Pain = BESTFRIEND 56.52, How You Feel 54.74, SAD! 48.48; 25th is BANG! 23.08.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pain-top-song",
+   "basis": "Top two are Pain = BESTFRIEND 56.52 and How You Feel 54.74.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 8,
+ "skipped": 3
+}

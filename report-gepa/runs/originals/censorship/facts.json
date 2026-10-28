@@ -1,0 +1,44 @@
+[
+  {
+    "id": "removed-scenes-total",
+    "source": "amounting to 206 removed scenes",
+    "claim": "The Youku version of the first 100 episodes is missing 206 scenes.",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "len(cuts)"
+  },
+  {
+    "id": "category-scene-counts",
+    "source": "I categorized these scenes, among which sex, LGBTQ+ (and atypical heterosexual relationships), as well as disrespect toward China or the country’s allies are the most common ones. The four other topics account for a rather small portion but are still worth mentioning: illegal actions, religion, unhealthy addictions, and miscellaneous.",
+    "claim": "Sex is the largest category with 139 scenes, followed by non-heteronormative relationships (22) and disrespect (20), while illegal actions has 12, miscellaneous 8, religion 3 and unhealthy addictions 2.",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "cuts['type'].value_counts()"
+  },
+  {
+    "id": "sex-scenes-and-minutes",
+    "source": "Sex is the most frequently censored topic in this TV-14 show, meaning that it is appropriate for audiences aged 14 and older, with 139 scenes and 43.1 minutes removed.",
+    "claim": "Sex is the most frequently censored category, with 139 scenes and 43.1 minutes removed.",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "cuts.groupby('type')['cut_seconds'].agg(n='size', minutes=lambda s: s.sum() / 60).sort_values('n', ascending=False)"
+  },
+  {
+    "id": "total-deleted-duration",
+    "source": "This added up to over one hour of deleted scenes, or nearly three full episodes of purely censored content.",
+    "claim": "The deleted scenes add up to 3,700 seconds, or 61.7 minutes, of cut footage.",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "cuts['cut_seconds'].agg(['sum', lambda s: s.sum() / 60])"
+  },
+  {
+    "id": "lgbtq-mostly-homosexual",
+    "source": "Most instances are related to homosexuality, even though there are no actual homosexual couples in these episodes of The Big Bang Theory.",
+    "claim": "Within the non-heteronormative-relationship category, homosexuality is the most common subtype with 14 scenes, ahead of cousin (4) and mother-issue (2).",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "cuts[cuts['type'] == 'non-heteronormative-relationship']['subtype'].value_counts()"
+  },
+  {
+    "id": "disrespect-targets",
+    "source": "Cases in the category of disrespect usually involve a joke at the expense of China or its peers North Korea and Russia.",
+    "claim": "Within the disrespect category, the most common targets are China (8 scenes tagged 'china' and 3 tagged 'China'), North Korea (7) and Russia (1).",
+    "tables": {"cuts": "data/cuts.csv"},
+    "code": "cuts[cuts['type'] == 'disrespect']['subtype'].value_counts()"
+  }
+]

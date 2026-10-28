@@ -1,0 +1,102 @@
+{
+ "id": "birthday-effect",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1026,
+  "steps": 52,
+  "tools": 63,
+  "nudged": 0,
+  "usage": {
+   "input": 54207,
+   "output": 78006
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 15,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "birthday-excess-2000",
+   "basis": "deaths=183, total=57010, average=156.191781, excess_pct=17.163655% approx 17.2%",
+   "verdict": "ok"
+  },
+  {
+   "id": "twelve-days-after-2000",
+   "basis": "days_from_birthday 0=183, 12=181",
+   "verdict": "ok"
+  },
+  {
+   "id": "birthday-rank-2000",
+   "basis": "days_from_birthday=0: count=183, rank=8",
+   "verdict": "ok"
+  },
+  {
+   "id": "eight-day-differences-180-185",
+   "basis": "n=8; rows include 0:183 and death counts 180,181,182,183",
+   "verdict": "ok"
+  },
+  {
+   "id": "one-standard-deviation-2000",
+   "basis": "average=156.191781, sd=12.832884, low=143.358897, high=169.024664",
+   "verdict": "ok"
+  },
+  {
+   "id": "two-standard-deviations-2000",
+   "basis": "pct_2sd=95.068493%, low2=130.526014, high2=181.857548, z0=2.089025",
+   "verdict": "ok"
+  },
+  {
+   "id": "1999-strong-birthday-effect",
+   "basis": "deaths=191, average=153.745205, excess_pct=24.231516%",
+   "verdict": "ok"
+  },
+  {
+   "id": "2002-no-birthday-effect",
+   "basis": "deaths=156, average=156.408219, excess_pct=-0.260996%",
+   "verdict": "ok"
+  },
+  {
+   "id": "overall-birthday-excess",
+   "basis": "deaths=5728, total=1955588, average=5357.775342, excess_pct=6.910044%",
+   "verdict": "ok"
+  },
+  {
+   "id": "z-score-five",
+   "basis": "deaths=5728, average=5357.775342, sd=74.211081, z=4.988806",
+   "verdict": "ok"
+  },
+  {
+   "id": "p-value-one-in-a-million",
+   "basis": "p=6.075374209810179e-07 approx 0.00000061",
+   "verdict": "ok"
+  },
+  {
+   "id": "january-birth-death-shares",
+   "basis": "births=165570, deaths=187356, birth_pct=8.466507%, death_pct=9.580546%, ratio=1.131582",
+   "verdict": "ok"
+  },
+  {
+   "id": "seasonally-adjusted-excess",
+   "basis": "expected=5354.936882, observed=5728.0, excess_pct=6.966714%",
+   "verdict": "ok"
+  },
+  {
+   "id": "accidental-deaths-excess",
+   "basis": "deaths=288, total=77770, average=213.068493, excess_pct=35.167802%",
+   "verdict": "ok"
+  },
+  {
+   "id": "histogram-peak-58",
+   "basis": "[155,160)=58, [180,185)=8",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 15,
+ "skipped": 7
+}

@@ -1,0 +1,57 @@
+{
+ "id": "authors",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 287,
+  "steps": 20,
+  "tools": 21,
+  "nudged": 0,
+  "usage": {
+   "input": 18598,
+   "output": 40812
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "books-set-in-authors-home",
+   "basis": "sum = 61, count = 100",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-distance-other-books",
+   "basis": "count = 39, median = 73.72",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-teeth-zero-miles",
+   "basis": "White Teeth minimum distance = 0.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "2666-farthest",
+   "basis": "nlargest(1) = 2666 with distance 961.52",
+   "verdict": "ok"
+  },
+  {
+   "id": "rabbit-at-rest-outlier",
+   "basis": "Rabbit at Rest = 932.00, Rabbit is Rich = 86.52, Rabbit, Run = 86.52",
+   "verdict": "ok"
+  },
+  {
+   "id": "rabbit-at-rest-second-farthest",
+   "basis": "nlargest(2): 2666 = 961.52, Rabbit at Rest = 932.00",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 36
+}

@@ -1,0 +1,47 @@
+{
+ "id": "lenna",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 804,
+  "steps": 86,
+  "tools": 106,
+  "nudged": 0,
+  "usage": {
+   "input": 131007,
+   "output": 84258
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "languages-last-decade",
+   "basis": "nunique after replacing zh-Hant with zh = 30",
+   "verdict": "ok"
+  },
+  {
+   "id": "org-domains-before-1990",
+   "basis": "year<1990: instances=59, org=43, endings=11; 43 of 59 and org is most common among 11 endings since remaining total is 16",
+   "verdict": "ok"
+  },
+  {
+   "id": "over-100-domains",
+   "basis": "year>=1972: domain=928, domain_end=109; both are over 100",
+   "verdict": "ok"
+  },
+  {
+   "id": "scholar-use-declines",
+   "basis": "scholar dataset groupby year: 2012=294 (peak/year of max), 2019=165",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 5
+}

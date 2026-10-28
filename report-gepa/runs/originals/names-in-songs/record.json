@@ -1,0 +1,77 @@
+{
+ "id": "names-in-songs",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 577,
+  "steps": 59,
+  "tools": 61,
+  "nudged": 0,
+  "usage": {
+   "input": 52309,
+   "output": 75075
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "baby-most-songs",
+   "basis": "Output top two: Baby 1832, Jesus 142.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-names-excluding-baby",
+   "basis": "Output top 10 after excluding Baby: Jesus 142, John 82, Joe 73, Mary 73, Michael 69, Jay 65, Bobby 62, Heaven 62, Mike 62, Jack 58.",
+   "verdict": "ok"
+  },
+  {
+   "id": "repeat-name-songs",
+   "basis": "Output top 11: Mickey 61 (Toni Basil), Baby 56 (Justin Bieber), Scotty 55 (Lustra), Rhonda 51 (The Beach Boys), Marco 49 (Bow Wow Featuring Soulja Boy Tell'em), Kitty 43 (Avril Lavigne), Mary 39 (Run-D.M.C.), Bennie 38 (Elton John), Annie 36 (Alien Ant Farm), Floy 35 (The Supremes), Barbara Ann 35 (The Beach Boys).",
+   "verdict": "ok"
+  },
+  {
+   "id": "unique-names-songs",
+   "basis": "Output top 4 distinct-name song counts: We Didn't Start The Fire 27, I Do The Rock 22, Wild, Wild West 21, Dreams 19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mambo-no5-not-top-ten",
+   "basis": "Output: Mambo No. 5 (A Little Bit Of...) n=9 rank=26; top-10 rows have n values 27, 22, 21, 19, 17, 15, 14, 14, 14, 14, all at least 14.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-name-dropping-artists",
+   "basis": "Output top 5 artists by distinct names/songs: Drake 111/49, Eminem 95/31, Lil Wayne 52/21, Kanye West 43/20, Future 39/16.",
+   "verdict": "ok"
+  },
+  {
+   "id": "artists-own-names",
+   "basis": "Output top name per artist: Eminem Marshall 9; Drake Drake 9; Lil Wayne Wayne 7.",
+   "verdict": "ok"
+  },
+  {
+   "id": "baby-most-common-each-decade",
+   "basis": "Output per decade top name Baby: 1970 198, 1980 230, 1990 273, 2000 413, 2010 521.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wayne-drake-nicki-2010s",
+   "basis": "Output 2010 counts/ranks: Nicki 48 rank 4, Wayne 34 rank 5, Drake 33 rank 6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-ten-names-per-decade",
+   "basis": "Output per decade top ten: 1970 Baby 198 plus Jesus, John, Joe, Mary, Bobby, Heaven, Jack, Jane, Jim; 1980 Baby 230 plus Heaven, Johnny, Bobby, Tom, Romeo, Jack, Jesse, Jesus, Joe; 1990 Baby 273 plus Jesus, Heaven, Joe, John, Jay, Johnny, Billy, Jack, Mary; 2000 Baby 413 plus Jesus, Jay, Joe, Mike, Chris, Kelly, Mary, Wayne, John; 2010 Baby 521 plus Jesus, Michael, Nicki, Wayne, Drake, Mike, John, Jay, Tom.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 10
+}

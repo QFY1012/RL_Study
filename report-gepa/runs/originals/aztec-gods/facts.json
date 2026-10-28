@@ -1,0 +1,29 @@
+[
+  {
+    "id": "gods-multiple-thematic-categories",
+    "source": "But, as we’ve seen with Tlaltecuhtli and Tezcatlipoca, Aztec Gods rarely fit into a single category, and most are both creative and destructive, spiritual and material, especially the 13 major Gods.",
+    "claim": "85 of the 124 non-major gods and 10 of the 13 major gods carry more than one of the four thematic categories (life, death, spiritual expansion, material expansion); 39 and 3 respectively carry only one.",
+    "tables": {
+      "g": "data/light-db.csv"
+    },
+    "code": "g[g['ID']!='cihuateteo'].assign(major=lambda x: x['type']!='secondary', ncat=lambda x: x['Field (4 thematics)'].fillna('').str.count(',')+1).groupby('major')['ncat'].agg(single=lambda s:(s==1).sum(), multi=lambda s:(s>1).sum(), total='size')"
+  },
+  {
+    "id": "gods-single-domain-rare",
+    "source": "But Aztec Gods are rarely associated with a single domain.",
+    "claim": "In the detailed Field (13 gods) classification, 19 of the 124 non-major gods have a single domain, while all 13 major gods have more than one.",
+    "tables": {
+      "g": "data/light-db.csv"
+    },
+    "code": "g[g['ID']!='cihuateteo'].assign(major=lambda x: x['type']!='secondary', single=lambda x: x['Field (13 gods)'].fillna('').str.count(',')==0, multi=lambda x: x['Field (13 gods)'].fillna('').str.count(',')>0).groupby('major')[['single','multi']].agg(['sum','count'])"
+  },
+  {
+    "id": "life-death-same-deity",
+    "source": "On the contrary, seemingly contradictory domains, like life and death, are often embodied by the same deity.",
+    "claim": "In the four thematic categories, 30 of the 46 gods tagged with death are also tagged with life.",
+    "tables": {
+      "g": "data/light-db.csv"
+    },
+    "code": "g[g['ID']!='cihuateteo'].assign(life=lambda x: x['Field (4 thematics)'].fillna('').str.contains('life'), death=lambda x: x['Field (4 thematics)'].fillna('').str.contains('death')).groupby('death')['life'].agg(['sum','count'])"
+  }
+]

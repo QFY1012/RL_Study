@@ -1,0 +1,47 @@
+[
+  {
+    "id": "songs-not-passed-to-gen-z",
+    "source": "First, here are songs that did not get passed down to gen z, recognized by everyone except them.",
+    "claim": "The chart's 40 songs all have Gen Z recognition below every other generation: Gen Z shares run 13–20%, against 50–71% for Millennials, 51–95% for Gen X and 22–98% for Boomers.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(z_pct=lambda t: 100*t.z.str.split('|').str[0].astype(float)/t.z.str.split('|').str[1].astype(float), m_pct=lambda t: 100*t.m.str.split('|').str[0].astype(float)/t.m.str.split('|').str[1].astype(float), x_pct=lambda t: 100*t.x.str.split('|').str[0].astype(float)/t.x.str.split('|').str[1].astype(float), b_pct=lambda t: 100*t.b.str.split('|').str[0].astype(float)/t.b.str.split('|').str[1].astype(float)).query('z_pct < 20 and m_pct > 50 and x_pct > 50').assign(n=lambda t: t.shape[0]).set_index('key')[['z_pct','m_pct','x_pct','b_pct','n']].rename(columns={'z_pct':'Gen Z','m_pct':'Millennials','x_pct':'Gen X','b_pct':'Boomers'}).round(0).astype(int)"
+  },
+  {
+    "id": "boomer-gen-x-not-millennial",
+    "source": "Here are songs recognized by boomers and gen x, but not millennials.",
+    "claim": "The chart's 36 songs all have Millennial recognition at 20% or less (6–20%), while Gen X recognition is 50–72% and Boomer recognition is 50–94%.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(z_pct=lambda t: 100*t.z.str.split('|').str[0].astype(float)/t.z.str.split('|').str[1].astype(float), m_pct=lambda t: 100*t.m.str.split('|').str[0].astype(float)/t.m.str.split('|').str[1].astype(float), x_pct=lambda t: 100*t.x.str.split('|').str[0].astype(float)/t.x.str.split('|').str[1].astype(float), b_pct=lambda t: 100*t.b.str.split('|').str[0].astype(float)/t.b.str.split('|').str[1].astype(float)).query('m_pct < 20 and x_pct > 50 and b_pct > 50').assign(n=lambda t: t.shape[0]).set_index('key')[['z_pct','m_pct','x_pct','b_pct','n']].rename(columns={'z_pct':'Gen Z','m_pct':'Millennials','x_pct':'Gen X','b_pct':'Boomers'}).round(0).astype(int)"
+  },
+  {
+    "id": "universally-known",
+    "source": "Here is what is universally known, making for a great cross-generational wedding playlist.",
+    "claim": "The chart's 10 songs are each recognized by 91–97% of Gen Z, 98–99% of Millennials, 95–100% of Gen X and 92–99% of Boomers.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(z_pct=lambda t: 100*t.z.str.split('|').str[0].astype(float)/t.z.str.split('|').str[1].astype(float), m_pct=lambda t: 100*t.m.str.split('|').str[0].astype(float)/t.m.str.split('|').str[1].astype(float), x_pct=lambda t: 100*t.x.str.split('|').str[0].astype(float)/t.x.str.split('|').str[1].astype(float), b_pct=lambda t: 100*t.b.str.split('|').str[0].astype(float)/t.b.str.split('|').str[1].astype(float)).query('z_pct > 90 and m_pct > 90 and x_pct > 90 and b_pct > 90').assign(n=lambda t: t.shape[0]).set_index('key')[['z_pct','m_pct','x_pct','b_pct','n']].rename(columns={'z_pct':'Gen Z','m_pct':'Millennials','x_pct':'Gen X','b_pct':'Boomers'}).round(0).astype(int)"
+  },
+  {
+    "id": "millennial-only",
+    "source": "Here are songs that are uniquely known by millennials, important cultural touchstones for the generation.",
+    "claim": "The chart's single song is recognized by 43% of Millennials, more than any other generation, with Gen Z at 21%, Gen X at 19% and Boomers at 7%.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(z_pct=lambda t: 100*t.z.str.split('|').str[0].astype(float)/t.z.str.split('|').str[1].astype(float), m_pct=lambda t: 100*t.m.str.split('|').str[0].astype(float)/t.m.str.split('|').str[1].astype(float), x_pct=lambda t: 100*t.x.str.split('|').str[0].astype(float)/t.x.str.split('|').str[1].astype(float), b_pct=lambda t: 100*t.b.str.split('|').str[0].astype(float)/t.b.str.split('|').str[1].astype(float)).assign(max_other=lambda t: t[['z_pct','x_pct','b_pct']].max(axis=1)).query('m_pct > 40 and m_pct > 2 * max_other and max_other < 30').assign(n=lambda t: t.shape[0]).set_index('key')[['z_pct','m_pct','x_pct','b_pct','n']].rename(columns={'z_pct':'Gen Z','m_pct':'Millennials','x_pct':'Gen X','b_pct':'Boomers'}).round(0).astype(int)"
+  },
+  {
+    "id": "gen-x-only",
+    "source": "Here is the same thing for gen x, songs uniquely known by only the generation.",
+    "claim": "The chart's 26 songs all have Gen X recognition of 41–68%, higher than every other generation, whose shares run 5–18% for Gen Z, 9–25% for Millennials and 9–29% for Boomers.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(z_pct=lambda t: 100*t.z.str.split('|').str[0].astype(float)/t.z.str.split('|').str[1].astype(float), m_pct=lambda t: 100*t.m.str.split('|').str[0].astype(float)/t.m.str.split('|').str[1].astype(float), x_pct=lambda t: 100*t.x.str.split('|').str[0].astype(float)/t.x.str.split('|').str[1].astype(float), b_pct=lambda t: 100*t.b.str.split('|').str[0].astype(float)/t.b.str.split('|').str[1].astype(float)).assign(max_other=lambda t: t[['z_pct','m_pct','b_pct']].max(axis=1)).query('x_pct > 40 and x_pct > 2 * max_other and max_other < 30').assign(n=lambda t: t.shape[0]).set_index('key')[['z_pct','m_pct','x_pct','b_pct','n']].rename(columns={'z_pct':'Gen Z','m_pct':'Millennials','x_pct':'Gen X','b_pct':'Boomers'}).round(0).astype(int)"
+  }
+]

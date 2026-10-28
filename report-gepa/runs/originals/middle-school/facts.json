@@ -1,0 +1,56 @@
+[
+  {
+    "id": "belonging-share-by-grade",
+    "source": "Belonging",
+    "claim": "From 4th through 12th grade, the share of students reporting favorable school belonging is 72.8%, 67.8%, 46.4%, 38.2%, 35.2%, 33.4%, 32.4%, 33.8% and 36.4%.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.between(4,12)].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  },
+  {
+    "id": "sixth-grade-belonging-drop",
+    "source": "Sixth-graders feel way less school belonging",
+    "claim": "The share of students reporting favorable school belonging is 67.8% in 5th grade but 46.4% in 6th grade.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.isin([5,6])].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  },
+  {
+    "id": "seventh-grade-belonging-lower",
+    "source": "Oh. Things don’t get better for seventh graders.",
+    "claim": "The share of students reporting favorable school belonging falls from 46.4% in 6th grade to 38.2% in 7th grade.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.isin([6,7])].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  },
+  {
+    "id": "belonging-low-through-high-school",
+    "source": "Sorry to break it to you. But your sense of belonging stays low through eighth grade and then high school.",
+    "claim": "The share of students reporting favorable school belonging is 35.2% in 8th grade and 33.4%, 32.4%, 33.8% and 36.4% in 9th through 12th grade, down from 67.8% in 5th grade.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.isin([5,8,9,10,11,12])].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  },
+  {
+    "id": "belonging-improves-late-high-school",
+    "source": "I mean, it actually does improve a bit, especially later in high school.",
+    "claim": "The share of students reporting favorable school belonging rises from 32.4% in 10th grade to 33.8% in 11th grade and 36.4% in 12th grade.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.isin([10,11,12])].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  },
+  {
+    "id": "belonging-only-slightly-better",
+    "source": "It only gets a little better, though.",
+    "claim": "By 12th grade, the share of students reporting favorable school belonging is 36.4%, still far below the 67.8% in 5th grade.",
+    "tables": {
+      "df": "data/survey.csv"
+    },
+    "code": "df[df.respondent_grade_level.isin([5,12])].groupby('respondent_grade_level')['School Belonging'].apply(lambda s: (s>=4).mean()*100).round(1)"
+  }
+]

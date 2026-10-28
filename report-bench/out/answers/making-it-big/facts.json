@@ -1,0 +1,41 @@
+[
+ {
+  "id": "bands-reach-medium-tier",
+  "source": "Of the bands that did play again, only 400 of them headlined a show at a venue with a capacity greater than 700 people.",
+  "claim": "398 bands reached the data's medium tier, headlining at least one medium-sized venue.",
+  "tables": {
+   "d": "data/web_data.csv"
+  },
+  "code": "d.tier.eq(1).sum()"
+ },
+ {
+  "id": "twenty-one-made-bands",
+  "source": "The following list shows some of the 21 bands who made it, and when and where they hit it big.",
+  "claim": "Twenty-one bands on the story's made-it list are in the data's big tier: 5 Seconds of Summer, A Great Big World, Bastille, Chance the Rapper, Chase Rice, Chet Faker, Disclosure, Gorgon City, Houndmouth, Lake Street Dive, London Grammar, Lucius, Mac DeMarco, Mayer Hawthorne, Misterwives, Rudimental, Sam Smith, Shakey Graves, Sturgill Simpson, Sylvan Esso and X Ambassadors.",
+  "tables": {
+   "d": "data/web_data.csv",
+   "made": "data/web_made.csv"
+  },
+  "code": "made.loc[made.id.isin(d.loc[d.tier.eq(2), 'id']), ['name']].sort_values('name').reset_index(drop=True).assign(made_bands=lambda x: len(x))"
+ },
+ {
+  "id": "sylvan-esso-under-two-years",
+  "source": "with less than two years between their first NYC show and headlining a big venue.",
+  "claim": "Sylvan Esso's first show in the data and their first big-venue headlining show are 1.52 years apart.",
+  "tables": {
+   "d": "data/web_data.csv",
+   "v": "data/web_venues.csv"
+  },
+  "code": "(lambda e: ((e.query(\"name == 'Sylvan Esso' and order == 0 and capacity >= 3000\").date.min() - e.query(\"name == 'Sylvan Esso'\").date.min()) / pd.Timedelta(days=365.25)))(d.assign(order=d.order.str.split('|'), venue=d.venue.str.split('|'), date=d.date.str.split('|')).explode(['order','venue','date']).astype({'order': int, 'venue': int}).merge(v.rename(columns={'id':'venue','venue':'vname'}), on='venue').assign(date=lambda x: pd.to_datetime(x.date)))"
+ },
+ {
+  "id": "sylvan-esso-mercury-lounge",
+  "source": "On July 17, 2013, the band Sylvan Esso headlined the 250 person capacity Mercury Lounge.",
+  "claim": "Sylvan Esso's first show in the data was a headlining set at the Mercury Lounge, capacity 250, on 2013-07-17.",
+  "tables": {
+   "d": "data/web_data.csv",
+   "v": "data/web_venues.csv"
+  },
+  "code": "(lambda e: e[e.name.eq('Sylvan Esso')].sort_values('date').head(1)[['vname','capacity','date','order']])(d.assign(order=d.order.str.split('|'), venue=d.venue.str.split('|'), date=d.date.str.split('|')).explode(['order','venue','date']).astype({'order': int, 'venue': int}).merge(v.rename(columns={'id':'venue','venue':'vname'}), on='venue').assign(date=lambda x: pd.to_datetime(x.date)))"
+ }
+]

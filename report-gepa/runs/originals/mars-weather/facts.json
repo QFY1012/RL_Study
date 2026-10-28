@@ -1,0 +1,83 @@
+[
+  {
+    "id": "latest-transmission-sol-date",
+    "source": "My most recent transmission was on sol 1,977 or on February 27, 2018.",
+    "claim": "The most recent Mars weather record in the data is sol 1977 on 2018-02-27.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d.loc[d.sol.idxmax(), ['sol', 'terrestrial_date']]"
+  },
+  {
+    "id": "sols-on-mars",
+    "source": "As of today*, I have been on Mars for 1,977 sols, or Martian days.",
+    "claim": "The rover has been on Mars for 1,977 sols, the highest elapsed-sol count in the data.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d.sol.max()"
+  },
+  {
+    "id": "sols-to-earth-days",
+    "source": "Since sols are 38 minutes and 35.244 seconds longer than an Earth day, my trip has felt like 2,030 days, or 5.6 years on Earth.",
+    "claim": "The time between the first and most recent records is 2,030 Earth days.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "(pd.to_datetime(d.terrestrial_date).max() - pd.to_datetime(d.terrestrial_date).min()).days"
+  },
+  {
+    "id": "sols-to-earth-years",
+    "source": "Since sols are 38 minutes and 35.244 seconds longer than an Earth day, my trip has felt like 2,030 days, or 5.6 years on Earth.",
+    "claim": "That span is about 5.6 Earth years.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "round((pd.to_datetime(d.terrestrial_date).max() - pd.to_datetime(d.terrestrial_date).min()).days / 365, 1)"
+  },
+  {
+    "id": "mars-high-low-latest",
+    "source": "The actual high on Mars today is 14°F, making the low a chilly -106.6°F.",
+    "claim": "On the most recent sol, the high was 14°F and the low was -106.6°F.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d.sort_values('sol').tail(1)[['max_temp', 'min_temp']].mul(9 / 5).add(32).round(1)"
+  },
+  {
+    "id": "mars-daily-temperature-swing",
+    "source": "Today, the difference between the warmest and coldest parts of my sol is 121°F.",
+    "claim": "The difference between the high and the low on the most recent sol was 121°F.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "((d.sort_values('sol').tail(1).max_temp - d.sort_values('sol').tail(1).min_temp) * 9 / 5).round(0).iloc[0]"
+  },
+  {
+    "id": "mars-season-latest",
+    "source": "Mars has seasons too! Right now in the southern hemisphere of Mars, it’s winter.",
+    "claim": "The most recent sol, at solar longitude 135, is in southern-hemisphere winter.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d.sort_values('sol').tail(1).assign(season=lambda x: np.select([x.ls < 90, x.ls.between(90, 179), x.ls.between(180, 269), x.ls >= 270], ['autumn', 'winter', 'spring', 'summer'], default='autumn'))[['ls', 'season']]"
+  },
+  {
+    "id": "mars-pressure-latest",
+    "source": "On Mars, there are a lot fewer molecules in the atmosphere pushing down on the planet.",
+    "claim": "The latest atmospheric pressure reading at Gale Crater is 0.727 kPa.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d.sort_values('sol').tail(1).pressure.iloc[0] / 1000"
+  },
+  {
+    "id": "past-martian-year-temperature-range",
+    "source": "Here are the high and low temperatures in my corner of Mars for the past Martian year (that is, the past 687 Earth days).",
+    "claim": "In the past Martian year shown, daily highs reached 51.8°F and daily lows fell to -124.6°F.",
+    "tables": {
+      "d": "data/mars-weather.csv"
+    },
+    "code": "d[d.sol >= d.sol.max() - 668].assign(low_f=lambda x: x.min_temp * 9 / 5 + 32, high_f=lambda x: x.max_temp * 9 / 5 + 32).query('low_f < 0')[['low_f', 'high_f']].agg({'low_f': 'min', 'high_f': 'max'})"
+  }
+]

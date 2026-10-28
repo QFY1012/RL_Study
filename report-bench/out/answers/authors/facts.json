@@ -1,0 +1,56 @@
+[
+ {
+  "id": "books-set-in-authors-home",
+  "source": "We found that 61 of the 100 books on the list are at least partly set in a place an author lived in.",
+  "claim": "61 of the 100 books have a minimum setting-residence distance of zero.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.groupby('book_title').distance.min().eq(0).agg(['sum', 'count'])"
+ },
+ {
+  "id": "median-distance-other-books",
+  "source": "For the other 39 books, the median minimum distance between a setting and an author residence is only 73.7 miles.",
+  "claim": "For the 39 books whose minimum setting-residence distance is above zero, the median minimum distance is 73.72 miles.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.groupby('book_title').distance.min().loc[lambda s: s > 0].agg(['count', 'median'])"
+ },
+ {
+  "id": "white-teeth-zero-miles",
+  "source": "Here is Smith’s debut novel, White Teeth. The nearest book setting/author residence combo is a distance of 0 miles.",
+  "claim": "White Teeth has a minimum setting-residence distance of 0 miles.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.groupby('book_title').distance.min().loc[['White Teeth']]"
+ },
+ {
+  "id": "2666-farthest",
+  "source": "On the other end of the spectrum is Roberto Bolaño’s 2666.",
+  "claim": "2666 has the largest minimum setting-residence distance, 961.52 miles.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.groupby('book_title').distance.min().nlargest(1)"
+ },
+ {
+  "id": "rabbit-at-rest-outlier",
+  "source": "The other notable outlier is John Updike’s Rabbit at Rest, the fourth and final book in a series that follows one man through 30 years. In the novel, protagonist Harry “Rabbit” Angstrom retires to Florida, having spent the first three books of the series in the fictional city of Brewer, Pennsylvania.",
+  "claim": "Rabbit at Rest has a minimum setting-residence distance of 932.00 miles, compared with 86.52 miles for Rabbit, Run and Rabbit is Rich.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.loc[d.author_name.eq('John Updike')].groupby('book_title').distance.min()"
+ },
+ {
+  "id": "rabbit-at-rest-second-farthest",
+  "source": "The other notable outlier is John Updike’s Rabbit at Rest, the fourth and final book in a series that follows one man through 30 years.",
+  "claim": "Rabbit at Rest has the second-largest minimum setting-residence distance, 932.00 miles, behind 2666's 961.52 miles.",
+  "tables": {
+   "d": "data/top-100.csv"
+  },
+  "code": "d.groupby('book_title').distance.min().nlargest(2)"
+ }
+]

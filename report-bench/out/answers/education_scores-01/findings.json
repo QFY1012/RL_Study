@@ -1,0 +1,53 @@
+[
+ {
+  "finding": "教学干预只落在单科和后半段:初二3班、初二6班的数学,后两次考试比前两次平均提高12.9分,其余四个班只提高0.2分,两组相差12.7分;而两班语文同期提高-0.1分,与其余班(1.2分)仅差1.3分,进步集中在数学一科。",
+  "numbers": {
+   "trained_math_gain": 12.91,
+   "others_math_gain": 0.18,
+   "math_gain_gap": 12.74,
+   "trained_chinese_gain": -0.12,
+   "others_chinese_gain": 1.2,
+   "chinese_gain_gap": 1.32
+  },
+  "holds": true
+ },
+ {
+  "finding": "新开学科的适应曲线:年级物理均分从第一次月考54.6分逐次升到期末71.3分,每次考试均分都不低于前一次,线性斜率4.23分/次;同期语文、英语斜率仅0.26和0.23分/次,基本持平。",
+  "numbers": {
+   "physics_means": [
+    54.65,
+    58.08,
+    63.46,
+    67.19,
+    71.26
+   ],
+   "physics_slope_per_exam": 4.23,
+   "chinese_slope_per_exam": 0.26,
+   "english_slope_per_exam": 0.23
+  },
+  "holds": true
+ },
+ {
+  "finding": "成绩惯性按学科分化:全年级本次与上次得分的相关系数,语文0.76、数学0.74、英语0.66、物理0.37,语文比物理高0.38;老学科(语文)成绩稳定可预测,新开的物理波动大、前后成绩关联弱。",
+  "numbers": {
+   "corr_chinese": 0.756,
+   "corr_math": 0.739,
+   "corr_english": 0.659,
+   "corr_physics": 0.372,
+   "chinese_minus_physics": 0.384
+  },
+  "holds": true
+ },
+ {
+  "finding": "教师个体效应只体现在任教科目:由同一位骨干教师教数学的初二2班、初二4班,数学均分96.1分,比其余四班(88.8分)高7.3分;但两班语文均分86.2分,与其余四班(88.1分)只差-1.9分,优势并不外溢到其他科目。",
+  "numbers": {
+   "teacher_class_math_mean": 96.08,
+   "others_math_mean": 88.75,
+   "math_gap": 7.33,
+   "teacher_class_chinese_mean": 86.19,
+   "others_chinese_mean": 88.07,
+   "chinese_gap": -1.88
+  },
+  "holds": true
+ }
+]

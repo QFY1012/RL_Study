@@ -1,0 +1,62 @@
+[
+  {
+    "source": "We researched nearly every possible popular YouTuber with a documented controversy in the past few years and found 34 with a vlogpology.",
+    "why": "This is a count of the people in the dataset (the 34 rows with remove_flag False), not a data-derived finding under the task's definition."
+  },
+  {
+    "source": "We analyzed about 20,000 popular accounts and cross-referenced with Wikipedia and Wikitubia to look for channels with controversy or apology details. We joined this with manual Google searches. From this list, we then manually vetted the results for false positives and reduced to channels with at least 90 days of subscriber data on both sides of the apology.",
+    "why": "This describes data collection and vetting. The files do not contain the 20,000-account list or the vetting decisions, so the collection claim cannot be recomputed."
+  },
+  {
+    "source": "We got the daily subscriber count data from subscribercounter.com and weekly subscriber count data from socialblade.com .",
+    "why": "Data-source description; the files contain the resulting series but nothing that can verify these sources."
+  },
+  {
+    "source": "So nearly everyone’s max occured on their last day before their controversy since in general, subscriber counts go up.",
+    "why": "The pre-apology data put each channel's maximum on day 1 (the last day before the controversy) for only 26 of the 34 channels; 30 of 34 peak within the first 5 days. That is not 'nearly everyone,' so the story's pattern is not reproduced as stated."
+  },
+  {
+    "source": "We used k-means clustering to classify the growth trends, then manually joined similar clusters to reduce them to accessible terms.",
+    "why": "The files contain only the resulting A–D growth labels, not the k-means inputs, parameters or cluster assignments, so the clustering itself cannot be reproduced. The resulting labels are used in the growth facts."
+  },
+  {
+    "source": "We ignored showing the period between the controversy and apology because it can be anywhere from a day to a year.",
+    "why": "The files' controversy-to-apology dates give gaps of 0 to 277 days among the 34 analyzed (median 5), not 'a day to a year' (five people apologized the same day). The sentence is also mainly a visualization/method note."
+  },
+  {
+    "source": "We counted the frequency of words like “apologize”, “sorry” and “mistake” and divided that by the length of the video.",
+    "why": "The files contain a phrase-count-like `len` field but no video-duration field, so apology phrases per minute cannot be computed. `len` is not a duration (for example, James Charles's 41:35 video has len 96)."
+  },
+  {
+    "source": "Apology phrases per minute",
+    "why": "The chart requires a per-minute rate, but no per-video duration is available to turn the phrase counts into rates."
+  },
+  {
+    "source": "For cuts, we used a program to detect when the video changed drastically from one frame to the other in conjunction with some manual threshold setting.",
+    "why": "Only `avg_shot_length` is present, and only for 4 of the 34 videos; the raw frame-change detections and the manual threshold are not in the files. Cuts per minute for those 4 are reported in the cuts-per-minute fact."
+  },
+  {
+    "source": "Gabriel Zamora produced an authentic and heartfelt apology in a 40-minute, one-take video!",
+    "why": "The one-take part is reproduced by the average-shot-length/cuts facts, but the 40-minute duration is not: there is no video-duration field, `avg_shot_length` for Gabriel is 2,936 seconds (about 49 minutes, matching the actual 48:57 video), and `len` is 138, not a duration."
+  },
+  {
+    "source": "Another equally “successful” approach was Jeffree Star’s methodically planned and moderately apologetic video.",
+    "why": "Reproducing the phrase-rate and cut characterization needs video duration, which is absent, and Jeffree has no `avg_shot_length`. His 88.6% like share is in the likes fact, but 'moderately apologetic' is not computable."
+  },
+  {
+    "source": "James Charles’ response to the takedown attempt by Tati had a similar fingerprint.",
+    "why": "The fingerprint comparison needs per-minute phrase and cut metrics. James Charles has no `avg_shot_length` and no video duration is available, so the comparison cannot be computed. His 80.1% like share is in the likes fact."
+  },
+  {
+    "source": "On the other hand, fans saw through the strategically planned video by Jaclyn Hill which was a defense of her new lipstick product.",
+    "why": "The negative-reception part is reproduced by Jaclyn Hill's 48.1% like share in the likes fact, but 'strategically planned' depends on phrase-rate/cut data; the files have no duration and only `avg_shot_length`, so that characterization is not reproducible."
+  },
+  {
+    "source": "The ratio of likes and dislikes was from the vlogpologies themselves. Ratio data was not available for all people.",
+    "why": "This describes the source and completeness of the ratio data. The ratios themselves are reproduced for the 23 analyzed videos that have them in the likes fact."
+  },
+  {
+    "source": "Beauty vloggers dominated the headlines, so we’ll focus on these noteworthy nine YouTubers to breakdown what we found.",
+    "why": "Headline dominance cannot be measured from the files. The count of nine beauty YouTubers and their share are reproduced in the beauty fact."
+  }
+]

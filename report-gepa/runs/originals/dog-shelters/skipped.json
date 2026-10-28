@@ -1,0 +1,46 @@
+[
+  {
+    "source": "On the day that Bleu was available, 27% of the adoptable dogs in Washington came into the local rescues and shelters from out of state.",
+    "why": "With these files Washington has 1,277 adoptable dogs, not the 1,265 in the text, and 334 of them (26.2%, which rounds to 26%) have an out-of-state origin, so neither the count nor the 27% share reproduces."
+  },
+  {
+    "source": "But Washington is one of only 13 states that didn't import adoptable dogs from other states or countries.",
+    "why": "Washington has 334 dogs with an out-of-state origin in the data; the 13 states with no imports are Alaska, Hawaii, Idaho, Louisiana, Mississippi, Montana, Nebraska, New Mexico, North Dakota, South Dakota, Texas, West Virginia and Wyoming."
+  },
+  {
+    "source": "In fact, Washington exported 55 adoptable pups to other states.",
+    "why": "Only 2 dogs originating in Washington are listed for adoption in another state, and the story's own export chart lists Washington with 2, not 55."
+  },
+  {
+    "source": "I looked at the PetFinder profiles of all 58,000 dogs available for adoption across the US on a single day and found 2,460 dogs whose travel was described in enough detail to follow.",
+    "why": "A count of records in the analytic subset (the travel file yields exactly 2,460 imported dogs), i.e. a description of the data rather than a finding; the number is used as a denominator in the claims."
+  },
+  {
+    "source": "In all, over 3,000 dogs were described as having originated in places different from where they were listed for adoption.",
+    "why": "A count of records (3,269 distinct dogs in the travel file have an origin different from their listing state), i.e. a description of the data rather than a finding."
+  },
+  {
+    "source": "Using the PetFinder API, details about all 58,180 dogs available for adoption in the 50 US states and Washington DC on September 20, 2019 were collected.",
+    "why": "The size of the dataset (the descriptions file has 58,180 rows), not a finding."
+  },
+  {
+    "source": "In 2018, the ASPCA reports that they relocated over 40,000 animals from areas of \u201chigh homeless pet overpopulation\u201d to \u201careas with a higher demand for adoptable dogs\u201d.",
+    "why": "Cited from an external ASPCA report, not computed from these files."
+  },
+  {
+    "source": "An estimated 250,000 animals were left behind. Around 15,000 of those animals were saved during the aftermath of the storm by Louisiana\u2019s SPCA and other rescue organizations from across the country.",
+    "why": "Historical figures cited from external sources, not computed from these files."
+  },
+  {
+    "source": "A 2017 study estimates that out of the 5.5 million dogs brought into shelters in the US annually, 780,000 (15%) are euthanized.",
+    "why": "External study estimate, not computed from these files."
+  },
+  {
+    "source": "Heartworm rates in Seattle-dwelling dogs have skyrocketed over 300% between 2012 and 2017.",
+    "why": "External statistic reported by SeattleDogSpot, not computed from these files."
+  },
+  {
+    "source": "After Rhode Island\u2019s incidence rate for the deadly (and contagious) canine parvovirus went from two incidents per year to two per week in 2012, they have a right to be worried.",
+    "why": "External statistic cited from a news report, not computed from these files."
+  }
+]

@@ -1,0 +1,140 @@
+{
+ "id": "heat-records",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 540,
+  "steps": 51,
+  "tools": 66,
+  "nudged": 0,
+  "usage": {
+   "input": 167484,
+   "output": 62708
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "five-record-highs-2026",
+   "basis": "Output lists exactly five rows because the code applies head(5); count=5 is just len of those selected rows, not a count of all 2026 record highs.",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "yesterday-not-record",
+   "basis": "tail row rank==0 evaluates to False, so the latest day is not rank 0 (not a daily record high).",
+   "verdict": "ok"
+  },
+  {
+   "id": "hottest-october-23",
+   "basis": "Output row: 1947-10-23, temp 83; code selects the max temp for the latest date's day key.",
+   "verdict": "ok"
+  },
+  {
+   "id": "yesterday-ranked-47th",
+   "basis": "Output row: 2026-10-23, rank 47, temp 67.",
+   "verdict": "ok"
+  },
+  {
+   "id": "near-record-october-14",
+   "basis": "Output row: 2026-10-14, rank 5, temp 84.",
+   "verdict": "ok"
+  },
+  {
+   "id": "all-time-high-106",
+   "basis": "Output row: 1936-07-14, temp 106, which is the global max selected by the code.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-recent-record-october-13",
+   "basis": "Output row: 2026-10-13, temp 88, selected as the latest rank==0 record.",
+   "verdict": "ok"
+  },
+  {
+   "id": "record-ten-days-ago",
+   "basis": "Output row: 2026-10-13, temp 88, days_before_latest 10.",
+   "verdict": "ok"
+  },
+  {
+   "id": "five-record-highs-2026",
+   "basis": "Output lists exactly five rows because the code applies head(5); count=5 is just len of those selected rows, not a count of all 2026 record highs.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "hottest-march-22",
+   "basis": "Output row: 2026-03-22, temp 86, the maximum among March 22 rows.",
+   "verdict": "ok"
+  },
+  {
+   "id": "march-22-record-broken",
+   "basis": "Output rows: 2026-03-22 rank 0 temp 86; 2012-03-22 rank 1 temp 85; span_years about 14 (13.998631).",
+   "verdict": "ok"
+  },
+  {
+   "id": "average-every-13-weeks",
+   "basis": "Output: year 2017.0, weeks 13.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "five-record-highs-2026",
+   "why": "claim does not agree with its printout"
+  },
+  {
+   "id": "yesterday-not-record",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "hottest-october-23",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "yesterday-ranked-47th",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "near-record-october-14",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "all-time-high-106",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "most-recent-record-october-13",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "record-ten-days-ago",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "hottest-march-22",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "march-22-record-broken",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "average-every-13-weeks",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 0,
+ "skipped": 4,
+ "review": [
+  {
+   "id": "*",
+   "action": "keep empty",
+   "why": "the story is a live page about yesterday's temperature at the reader's location, so its sentences change every day and the task's data is a 2026-10-25 snapshot; none of its statements is a lasting finding"
+  }
+ ]
+}

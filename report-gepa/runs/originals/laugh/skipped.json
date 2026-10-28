@@ -1,0 +1,10 @@
+[
+  {
+    "source": "Today, lol is prodigious. It can be found once every 54 comments on Reddit.",
+    "why": "The file contains counts of laugh comments but not the total number of Reddit comments (the story's 700 million comments from January to June 2019 are not in the file), so the one-comment-in-54 rate cannot be computed from reddit-laughs.csv."
+  },
+  {
+    "source": "Help us do some casual science to get a sense of how you use some of the most common laughs compared to other internet people.",
+    "why": "The reader-poll vote counts and funniness rankings in this section come from the interactive survey, not from reddit-laughs.csv."
+  }
+]

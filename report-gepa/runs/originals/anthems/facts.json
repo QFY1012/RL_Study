@@ -1,0 +1,137 @@
+[
+  {
+    "id": "event-type-basketball-highest",
+    "source": "Overall, basketball games yielded higher Diva Scores than other sporting events and political events.",
+    "claim": "Basketball performances average 294.4 in overall Diva Score, the highest of the six event types, ahead of football (276.9), political events (272.0), baseball (236.6), racing (200.3) and hockey (192.4).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'].groupby('eventType')['overall_diva'].mean().sort_values(ascending=False).round(1)"
+  },
+  {
+    "id": "genre-rnb-pop-above-country-rock",
+    "source": "Average Diva Scores by music genre match intuition, with R&B and pop divas adding more flourishes than country or rock divas.",
+    "claim": "R&B performances average 322.5 and pop 252.6 in overall Diva Score, above country (204.2) and rock (178.1).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'].groupby('artistGenre')['overall_diva'].mean().sort_values(ascending=False).round(1)"
+  },
+  {
+    "id": "aretha-phrase-eight-of-top-ten-rnb",
+    "source": "Two words: Aretha Franklin. The “Queen of Soul” shows out on this phrase, and she’s in good company: 8 of the top 10 Diva Scores for this phrase are from fellow R&B artists.",
+    "claim": "In the phrase where Aretha Franklin has the highest Diva Score (766.3), 8 of the top 10 scores are by R&B artists.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.nlargest(10,'phrase4_diva').assign(is_rnb=lambda d: d.artistGenre.eq('rnb'), n_rnb=lambda d: d.artistGenre.eq('rnb').sum())[['id','phrase4_diva','artistGenre','n_rnb']]"
+  },
+  {
+    "id": "jazmine-rank-17-best-phrase-9",
+    "source": "Case in point: Jazmine Sullivan rarely has a top 3 Diva Score (although she ranks as the #17 overall diva), but we think she consistently sings some of the most beautiful and creative vocal runs.",
+    "claim": "Jazmine Sullivan ranks 17th overall with an overall Diva Score of 370.4, and her best phrase Diva Score ranks 9th.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'].assign(overall_rank=lambda d: d.overall_diva.rank(ascending=False), best_phrase_rank=lambda d: d[[f'phrase{p}_diva' for p in range(16)]].rank(ascending=False).min(axis=1))[lambda d: d['id'].str.startswith('jazmine')][['overall_diva','overall_rank','best_phrase_rank']].T"
+  },
+  {
+    "id": "chaka-highest-average-phrase-diva",
+    "source": "She has the highest average Diva Score per phrase, making her our #1 Diva.",
+    "claim": "Chaka Khan's average phrase Diva Score is 734.3, the highest of all performances.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.assign(avg_phrase=ids[[f'phrase{p}_diva' for p in range(16)]].mean(axis=1)).nlargest(3,'avg_phrase')[['id','avg_phrase']]"
+  },
+  {
+    "id": "seven-repeat-performers",
+    "source": "There are 7 performers in our dataset who have performed the National Anthem 3 or more times.",
+    "claim": "Seven artists have at least three performances: Billy Joel (4), Carrie Underwood (4), Jordin Sparks (4), Demi Lovato (3), Jewel (3), Kelly Clarkson (3) and Mary J. Blige (3).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'].assign(artist=ids.id.str.split('_').str[0]).artist.value_counts().loc[lambda s: s >= 3]"
+  },
+  {
+    "id": "mary-j-two-top-ten-13",
+    "source": "Mary J. Blige, in particular, holds down two of the top 10 Diva Score spots for this phrase: her performances at the 2009 World Series and 2012 NBA All-Star Game.",
+    "claim": "Mary J. Blige's 2009 World Series and 2012 NBA All-Star performances rank 2nd (1304.4) and 8th (691.4) among the top 10 Diva Scores for the phrase.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.assign(rank=ids.phrase13_diva.rank(ascending=False, method='first')).query('rank <= 10')[['id','phrase13_diva','rank']]"
+  },
+  {
+    "id": "inauguration-top-two-11",
+    "source": "Two inauguration performances, where “flag” is emphasized, rise to the top for this phrase: Beyoncé (2013) and Lady Gaga (2021).",
+    "claim": "Lady Gaga's 2021 inauguration performance has the phrase's top Diva Score (2173.0), followed by Beyoncé's 2013 inauguration (2016.5).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.nlargest(2,'phrase11_diva')[['id','phrase11_diva']]"
+  },
+  {
+    "id": "lowest-highest-keys",
+    "source": "Trace Adkins sings in the lowest key among our dataset (D); Jennifer Hudson (and others) are in the highest (A)",
+    "claim": "Trace Adkins's D is the lowest key in the dataset (steps_from_C -10), while Jennifer Hudson's A is the highest (9).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.loc[(ids.eventType != 'standard') & ids.steps_from_C.isin([ids[ids.eventType != 'standard'].steps_from_C.min(), ids[ids.eventType != 'standard'].steps_from_C.max()]), ['id','key','steps_from_C']]"
+  },
+  {
+    "id": "last-half-higher-diva",
+    "source": "Most performers don’t really get going until the last half of the song so these first few phrases are comparatively tame.",
+    "claim": "The last eight phrases average 352.6 in Diva Score, more than twice the 155.2 average of the first eight.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'][[f'phrase{p}_diva' for p in range(16)]].mean().groupby(lambda c: 'first 8' if int(c[len('phrase'):].split('_')[0]) < 8 else 'last 8').mean().round(1)"
+  },
+  {
+    "id": "taylor-2008-highest-phrase",
+    "source": "For slightly more mellow, but still noteworthy performances, check out H.E.R. at the 2023 World Series and Taylor Swift at the 2008 World Series, T-Swift's highest recorded Diva Score for a phrase.",
+    "claim": "Taylor Swift's highest phrase Diva Score is 353.5 at the 2008 World Series, above her 2006 maximum of 308.2.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.id.str.startswith('taylor-swift')].assign(max_phrase=lambda d: d[[f'phrase{p}_diva' for p in range(16)]].max(axis=1))[['id','max_phrase']]"
+  },
+  {
+    "id": "average-diva-by-phrase",
+    "source": "Average Diva Score by Phrase",
+    "claim": "Average Diva Scores by phrase, highest first: phrase 15 601.7, phrase 14 403.3, phrase 11 399.0, phrase 12 360.8, phrase 13 346.7, phrase 2 271.3, phrase 9 245.7, phrase 10 239.3, phrase 8 224.5, phrase 6 212.9, phrase 5 149.8, phrase 7 135.5, phrase 3 132.2, phrase 1 130.8, phrase 4 112.1 and phrase 0 96.9.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'][[f'phrase{p}_diva' for p in range(16)]].mean().sort_values(ascending=False).round(1)"
+  },
+  {
+    "id": "closing-phrase-highest-average",
+    "source": "The true divas shine for the anthem’s closing phrase.",
+    "claim": "The closing phrase (phrase 15) has the highest average Diva Score at 601.7, ahead of phrase 14 at 403.3.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids[ids.eventType != 'standard'][[f'phrase{p}_diva' for p in range(16)]].mean().sort_values(ascending=False).head(3).round(1)"
+  },
+  {
+    "id": "anthony-hamilton-top-second-phrase",
+    "source": "But Anthony Hamilton — he’s basically singing a different melody at the 2019 NBA All-Star Game.",
+    "claim": "Anthony Hamilton's 2019 NBA All-Star performance has the highest Diva Score on the phrase (529.4), ahead of Chris Stapleton (353.3) and Lauren Alaina (309.6).",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.nlargest(3,'phrase1_diva')[['id','phrase1_diva']]"
+  },
+  {
+    "id": "late-phrase-top-three-chaka-mary-patti",
+    "source": "Towards the end of the anthem, you’re not making the top diva list unless you have a well-deserved royalty nickname: “The Queen of Funk” Chaka Khan, “Queen of Hip-Hop Soul” Mary J. Blige, and the “Godmother of Soul” Patti Labelle.",
+    "claim": "Chaka Khan (2034.3), Mary J. Blige (1304.4) and Patti Labelle (1289.2) have the phrase's top three Diva Scores.",
+    "tables": {
+      "ids": "data/src__data__ids.csv"
+    },
+    "code": "ids.nlargest(3,'phrase13_diva')[['id','phrase13_diva']]"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "source": "82% of products, including some that also use a sequential numbering system, name their shades with words or phrases, many of which have wildly different associations.",
+    "why": "In allShades.csv, 1,861 of 6,816 shades have no word name ('NA'), leaving 4,955 word-named shades, and 264 of the 328 products (80.5%) contain at least one word-named shade. The story's count is based on the 5,307-shade word-name file (allCategories.csv), which is not one of the provided files."
+  },
+  {
+    "source": "Roughly 40% of beauty brands use a sequential numbering system to organize their foundation shades.",
+    "why": "Counting brands rather than products, 61 of the 107 brands (57%) have at least one sequential-number product, not roughly 40%. The 40% figure only comes out as 130 of 328 products (39.6%), a product-level definition the sentence does not use."
+  },
+  {
+    "source": "We identified 110 shades from 73 products that contained the word “nude” in the name.",
+    "why": "allShades.csv has 98 word-named shades containing 'nude' from 65 products; adding matches in the description text gives 115 shades from 72 products. Neither reproduces 110 shades from 73 products, which depends on the manually completed names in allCategories.csv, a file not provided."
+  },
+  {
+    "source": "The majority of shades named “nude” are clustered in the light to middle end of the shade spectrum. 80% of shades fall in this range",
+    "why": "The chart's highlighted lightness range is not specified in the text or the data, so the 80% share cannot be recomputed without the chart's band boundaries; the underlying 110-shade nude set also comes from allCategories.csv, which is not provided."
+  },
+  {
+    "source": "there are only 2 other shades with food modifiers: “nude vanilla” and “nude bisque.”",
+    "why": "Determining which modifiers are food requires the story's manually assigned category labels (allCategories.csv), which is not provided. In allShades.csv, 'Nude Bisque' has a word name, but 'Nude Vanilla' appears only in a description, so the set of two cannot be reconstructed from the name column alone."
+  },
+  {
+    "source": "We see the same naming trends in shades called “natural.” Once again, most of the shades in this group are light, with one of the darkest shades paired with a food modifier.",
+    "why": "The food/color categories used to identify a food modifier are manual labels from allCategories.csv, not present in the provided files; names alone do not identify which 'natural' modifiers the authors counted as food."
+  },
+  {
+    "source": "Natural toffee is the only “natural” shade paired with a food name.",
+    "why": "Testing 'only' requires the manually assigned food category, which is absent from allShades.csv; the name list also contains 'Natural Bisque', so the claim cannot be checked from names alone."
+  },
+  {
+    "source": "159 shades with \"natural\" in the name",
+    "why": "allShades.csv has 135 word-named shades containing 'natural' (151 if descriptions are included), not 159; the story's count uses the 5,307-shade word-name file allCategories.csv, which is not provided."
+  },
+  {
+    "source": "278 shades with drink items in the name",
+    "why": "Drink is a manually assigned category in allCategories.csv; allShades.csv contains only the shade name and no category labels, so the 278 count cannot be reproduced from the provided file."
+  },
+  {
+    "source": "1024 shades with food items in the name",
+    "why": "Food is a manually assigned category in allCategories.csv; allShades.csv contains only the shade name and no category labels, so the 1,024 count cannot be reproduced from the provided file."
+  },
+  {
+    "source": "in the “compliment” category, which includes words like “perfect” or “classic,” 15 brands include compliment words in their naming, but only 2 - ZOEVA and BLK/OPL - use these words for the deepest shades.",
+    "why": "The compliment category and the 'deepest shades' grouping are manual assignments in allCategories.csv, which is not provided; allShades.csv has no category column, so the 15-brand and 2-brand counts cannot be verified."
+  },
+  {
+    "source": "if those 110 shades were distributed in the same way as all 5,307 swatches with word names in our dataset",
+    "why": "The comparison uses the 5,307 word-named shades in allCategories.csv; allShades.csv has 4,955 non-missing word names, and the 110-shade nude set also differs, so the overlay distribution cannot be reproduced as published."
+  }
+]

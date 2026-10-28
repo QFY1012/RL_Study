@@ -1,0 +1,38 @@
+[
+ {
+  "id": "hiv-aids-1980s-presence",
+  "source": "The AIDS epidemic in the 1980s, which disproportionately affected the LGBTQ community, made itself thoroughly felt in the pages of Dear Abby.",
+  "claim": "Questions mentioning HIV or AIDS (excluding hearing aids) number 5 in 1985, 9 in 1986, 15 in 1987, 16 in 1988 and 15 in 1989.",
+  "tables": {
+   "d": "data/raw_da_qs.csv"
+  },
+  "code": "d.assign(h=d.question_only.str.lower().str.contains(r'\\b(?:hiv|aids)\\b') & ~d.question_only.str.lower().str.contains('hearing aids')).groupby('year').h.sum().loc[1985:1989]"
+ },
+ {
+  "id": "hiv-aids-decline",
+  "source": "The topic of HIV/AIDS receives much less attention than it did three decades ago, when the disease first cut through the LGBTQ community.",
+  "claim": "Questions mentioning HIV or AIDS (excluding hearing aids) number between 5 and 16 per year from 1985 to 1993, peaking at 16 in 1988, and at most 2 per year from 2008 to 2017.",
+  "tables": {
+   "d": "data/raw_da_qs.csv"
+  },
+  "code": "d.assign(h=d.question_only.str.lower().str.contains(r'\\b(?:hiv|aids)\\b') & ~d.question_only.str.lower().str.contains('hearing aids')).groupby('year').h.sum()"
+ },
+ {
+  "id": "internet-mentions-late-90s",
+  "source": "To be sure, our worries will continue to reflect the times: mentions of the internet and new technology in questions notably increased throughout the late ‘90s.",
+  "claim": "Questions mentioning the internet are absent in every year through 1994, then appear 2 times in 1995, 1 in 1996, 3 in 1997, 6 in 1998 and 2 in 1999, reaching 12 in 2003.",
+  "tables": {
+   "d": "data/raw_da_qs.csv"
+  },
+  "code": "d.assign(h=d.question_only.str.lower().str.contains(r'\\binternet\\b')).groupby('year').h.sum()"
+ },
+ {
+  "id": "transgender-mentions-2010s",
+  "source": "Along with greater representation in mainstream media (Orange Is The New Black, Transparent), questions surrounding transgender issues—such as readers expressing their desire to transition or trying to cope with falling in love with transgender individuals—began to grow in popularity in the 2010s.",
+  "claim": "No question mentions transgender before 2000, when there is one mention, and after a single mention in 2009 the term appears 3 times in 2013, 4 in 2014, 1 in 2016 and 4 in 2017.",
+  "tables": {
+   "d": "data/raw_da_qs.csv"
+  },
+  "code": "d.assign(h=d.question_only.str.lower().str.contains('transgender')).groupby('year').h.sum()"
+ }
+]

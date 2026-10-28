@@ -1,0 +1,126 @@
+[
+  {
+    "source": "While it is difficult to gauge the demographic breakdown of Abby's readers, our best guess is that it skews about two-thirds women.",
+    "why": "A statement about the column's readership, not computed from the letters; the file has no reader-demographic field."
+  },
+  {
+    "source": "In the late 1980s, as part of a survey on infidelity, Abby reported that about 70% of her respondents were female.",
+    "why": "A figure from an external 1987 reader survey, not present in the letters data."
+  },
+  {
+    "source": "Indeed, two of the top three concerns pertain to husbands who have lost that lovin' feeling and losing one's virginity.",
+    "why": "Depends on the story's manually tagged sex categories (low libido husbands, no sex virginity, lgbtq); the file contains only raw question text with no category labels or keyword lists."
+  },
+  {
+    "source": "low libido husbands 14 posts; lgbtq 13; no sex virginity 11; odd 10; internet 8; aids 6",
+    "why": "Chart counts of questions per sex-related subcategory produced by the authors' keyword lists plus manual tagging; that assignment is not in the data, and direct word counts (e.g. 'libido' 7, 'porn' 64, 'aids' 149) do not reproduce the chart's counts."
+  },
+  {
+    "source": "Husbands who have lost interest in sleeping with their wives were especially common in the 2010s.",
+    "why": "The 'low libido husbands' category is manually tagged; a plain word search for libido/sexless/no interest in sex is spread evenly (2-3 hits in 1985, 2003 and 2008, none in 2009-2012) and does not concentrate in the 2010s."
+  },
+  {
+    "source": "Whether it's because they're \u201caddicted to adult porn movies\u201d or have simply lost interest, sexually frigid husbands were the most common sex-related concern.",
+    "why": "A ranking of the story's manually tagged sex categories; the ranking cannot be rebuilt from the raw letters."
+  },
+  {
+    "source": "readers frequently wrote questions pertaining to sex and homosexuality.",
+    "why": "No stated measure, keyword list or threshold; 'frequently' cannot be checked against the data without the authors' broad sex/LGBTQ groupings."
+  },
+  {
+    "source": "In earlier years, readers were somewhat more likely to write in to ask advice about abstaining from sex before marriage, particularly on how best to date.",
+    "why": "A word search for premarital/before marriage/until marriage shows no consistent early-years excess (e.g. 35 hits in 1985-1989 versus 51 in 2007-2017); the story's category is manually tagged."
+  },
+  {
+    "source": "In what is perhaps a result of greater societal openness, more and more letters in recent years stemmed from people seeking help in coping with sexual abuse.",
+    "why": "The 'sex abuse' category is manually tagged, and a word search for sexual abuse/molestation shows a mid-2000s spike (12 and 14 in 2005-2006) rather than a steady rise into recent years."
+  },
+  {
+    "source": "As the internet began to grow in popularity, questions about pornographic content increased, particularly surrounding significant others' questionable browsing habits.",
+    "why": "The 'internet' sex subcategory is manually tagged; a plain 'porn' search is flat and noisy (0-3 a year before 2002, a 2002-2006 and 2012-2013 bump, single digits after), so no rise can be shown without an arbitrary cut-off."
+  },
+  {
+    "source": "Every so often, teenagers (or their parents) write in with concerns about being too young for sex.",
+    "why": "Vague frequency claim with no category, keywords or threshold in the story."
+  },
+  {
+    "source": "Although sex among the elderly hasn't commonly been a topic for discussion, several Dear Abby readers have boasted about the benefits of amorous activity in their later years.",
+    "why": "No category or definition of 'elderly' is given; the data has no ages."
+  },
+  {
+    "source": "A perennially popular theme among Abby's readers was anxiety surrounding coming out.",
+    "why": "No measure or keyword set given; a plain 'coming out' search yields 0-3 questions a year, too thin to establish 'perennially popular'."
+  },
+  {
+    "source": "Readers' broad curiosity about others' homosexuality was a dominant theme: What were homosexual men and women like? What made someone a homosexual? Were they, themselves, gay?",
+    "why": "Requires the authors' manual tagging of LGBTQ subcategories; no such labels are in the file."
+  },
+  {
+    "source": "Conflicts between conservative religious upbringings and questioners' sexual orientations have been commonplace in Abby's column for many years, with many of the respondents having been disowned or ostracized by their families.",
+    "why": "A manually tagged theme with no definition or keyword list in the story."
+  },
+  {
+    "source": "Women frequently asked for advice on how to best deal with husbands they either suspected or found out to be gay.",
+    "why": "No explicit measure; identifying 'women' writing about gay husbands would require the authors' tagging, and the letters carry no reliable gender field."
+  },
+  {
+    "source": "Abby's column frequently published letters from parents who were either struggling to accept their children, change their childrens' romantic inclinations, or seeking the best way to communicate with them.",
+    "why": "A manually tagged 'parent coping' theme; no category labels or keyword lists are included in the data."
+  },
+  {
+    "source": "interfaith marriage 44 posts; 38; church etiquette 34; adultery 28; doubting faith 25; premarital sex 24; marriage 20; godparent 19",
+    "why": "Chart counts of religion subcategories built from the authors' keyword lists and manual tagging; they are not reproducible from the raw text (e.g. 'interfaith' appears in no question, while 'church' appears in 671)."
+  },
+  {
+    "source": "Despite the popular narrative of a decline in religious adherence in the US, nearly 9 out of 10 Americans still believe in god",
+    "why": "An external survey statistic, not derived from the letters data."
+  },
+  {
+    "source": "Each religion has its particularities, and respondents often wrote in regarding religious rules in the context of modern life",
+    "why": "Qualitative description of a manually tagged theme; no measure in the story."
+  },
+  {
+    "source": "Should babies be allowed in church (a surprisingly contentious question)? Should congregations be tolerant of dogs? And what of their owners, if they happen to smell like their pets? Such questions, and others surrounding the proper ways to behave in places of worship, were common.",
+    "why": "The 'church etiquette' theme is manually tagged; 'common' is not quantified in a way that can be recomputed."
+  },
+  {
+    "source": "Dealing with infidelity is difficult enough without adding the watchful eye of god to the equation, and many Abby readers wrestled with having committed adultery from both a personal, and religious standpoint.",
+    "why": "No quantified measure or religion-restricted definition; the story's 'adultery' count (28) comes from its tagged religion subset."
+  },
+  {
+    "source": "There are few things more heartbreaking than a religious lesbian, gay, transgender, or queer person asking why God has made them sick and commanded them to be well. These anxieties have been relatively common over recent years.",
+    "why": "A manually tagged intersection of religion and LGBTQ themes; no labels in the data."
+  },
+  {
+    "source": "With faith comes doubt, and in an era that predated the internet, many of Abby's readers had few resources other than America's leading advice columnist when facing crises of religion.",
+    "why": "Qualitative historical claim, not a measurement from the letters."
+  },
+  {
+    "source": "Although the taboo attached to premarital sex has dissipated in urban America, Abby's readers, particularly older ones, continue to struggle with religious views to the contrary.",
+    "why": "Requires age information the letters do not carry and the authors' tagged religion/premarital-sex subset."
+  },
+  {
+    "source": "Few religiously-rooted institutions receive quite so much attention as marriage, and Abby's readers continue to struggle with the best way to balance their wants with the dictates of their faiths.",
+    "why": "A ranking within the authors' manually tagged religion categories; not reproducible from raw text."
+  },
+  {
+    "source": "Concerns surrounding being a godparent have been consistently popular, from whether an atheist is fit for the role to the precise obligations associated with it.",
+    "why": "The 'godparent' theme is manually tagged and its 19 charted posts are a tiny, erratic trickle by year in a plain word search, so 'consistently popular' cannot be measured."
+  },
+  {
+    "source": "wedding 71 letters; Neighbors; gifts 61 letters; 53 letters; Babies 39 letters; sleep 23 letters; thank you notes 22 letters; guests 20 letters; 19 letters",
+    "why": "Counts of the most characteristic terms among t-SNE clusters of letters about husbands; the clustering and manual labelling are not in the data and word counts on 'husband' letters are far larger (e.g. 'wedding' 477)."
+  },
+  {
+    "source": "our battery of concerns about husbands revolves around weddings and neighbours, but changes when it comes to, say, sons and daughters.",
+    "why": "Describes the t-SNE cluster labels for each relative; the clusters and their labels are not present in the file."
+  },
+  {
+    "source": "Some anxieties, such as concerns about dating and virginity, questioning sexuality, or worries about marrying someone of a different religion, appear steadily across recent decades \u2014 they're evergreen, and are likely to persist.",
+    "why": "Combines several manually tagged themes ('questioning sexuality', 'interfaith marriage') with a vague 'steady' criterion; those categories are not in the data."
+  },
+  {
+    "source": "Others, like fears of HIV/AIDS, or a growing openness about sexual abuse, are likely a function of their time: either because of national-scale events, or because of society's beginning to embrace heretofore taboo topics.",
+    "why": "An interpretation of the time trends; the HIV/AIDS portion is covered by the included facts, while the sexual-abuse rise depends on the authors' manual tagging and is not reproduced by word searches."
+  }
+]

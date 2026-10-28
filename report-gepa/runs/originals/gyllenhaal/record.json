@@ -1,0 +1,42 @@
+{
+ "id": "gyllenhaal",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 761,
+  "steps": 110,
+  "tools": 165,
+  "nudged": 0,
+  "usage": {
+   "input": 128747,
+   "output": 70847
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top-eight-spellings",
+   "basis": "Output has ranks 1-8 for each of 15 names. First-ranked spellings/counts include galifinakis 6521, macauley 8451, mcguire 7395, mclaughlin 5167, morrisette 9043; correct spelling is first for deschanel 18338, johansson 8599, kaepernick 9666, labeouf 4805, mcconaughey 6505, minaj 24608, palahniuk 4120, picabo 4386, poehler 16244, shyamalan 6836.",
+   "verdict": "ok"
+  },
+  {
+   "id": "correct-count-of-top-eight",
+   "basis": "For kaepernick correct=9666 and top8_total=19648. Across names, minimum correct is mcgwire 2044 of 13515; maximum correct is minaj 24608 of 27007.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "correct-count-of-top-eight",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 1,
+ "skipped": 6
+}

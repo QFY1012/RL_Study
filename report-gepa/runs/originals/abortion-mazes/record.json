@@ -1,0 +1,57 @@
+{
+ "id": "abortion-mazes",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 644,
+  "steps": 49,
+  "tools": 107,
+  "nudged": 0,
+  "usage": {
+   "input": 185137,
+   "output": 45824
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "complete-abortion-bans",
+   "basis": "count=13; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "complexity-most-states",
+   "basis": "count=13; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "complexity-very-states",
+   "basis": "count=9; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "complexity-moderately-states",
+   "basis": "count=8; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "complexity-somewhat-states",
+   "basis": "count=10; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "complexity-least-states",
+   "basis": "count=11; the listed state names exactly match the claim.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 10
+}

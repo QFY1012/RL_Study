@@ -1,0 +1,12 @@
+[
+ {
+  "id": "decade-distinctive-terms",
+  "source": "For every decade, we’ve summarized the words that most frequently appear in NYT headlines, sizing each word relative to its disproportionate popularity.",
+  "claim": "Ranked by the ratio of a term's frequency in a decade to its mean frequency across that decade and its neighbouring decade(s), the ten highest-scoring of the story's candidate terms are president roosevelt, odell, jerome, boer, platt, pittsburg, harriman, bishop, vanderbilt and trolley for the 1900s; u-boat, teuton, petrograd, trench, huerta, lansing, villa, carranza, president wilson and austrian for the 1910s; president coolidge, harding, governor smith, kellogg, dawes, hylan, mellon, byrd, reparation and transit for the 1920s; nra, seabury, wpa, landon, governor lehman, madrid, laguardia, unemployment, farley and president hoover for the 1930s; opa, cio, willkie, red army, axis, byrnes, sunk, palestine, mayor o dwyer and meat for the 1940s; impellitteri, korean war, dulles, formosa, president eisenhower, harriman, peiping, stevenson, suez and mccarthy for the 1950s; katanga, president johnson, congo, rusk, president kennedy, thant, dominican, vietcong, negro and lindsay for the 1960s; president ford, mcgovern, kissinger, watergate, beame, sadat, cambodian, president nixon, egypt and carey for the 1970s; reagan administration, haig, poland, salvador, iranian, recession, hostage, koch, saudi and president carter for the 1980s; whitman, president clinton, dole, giuliani, welfare, microsoft, dow, computer, hospital and police for the 1990s; president bush, enron, sept 11, iraqi, bloomberg, terrorist, chief executive, mets, euro and energy for the 2000s; trump, facebook, romney, greece, president obama, syria, amazon, apple, google and crisis for the 2010s.",
+  "tables": {
+   "a": "data/term_article_pairs_overall.csv",
+   "b": "data/word_timelines.csv"
+  },
+  "code": "b[b.word.isin(a.term.unique())].pivot_table(index='word',columns='year',values='frequency').pipe(lambda p: p.apply(lambda c: c/p[[y for y in p.columns if abs(y-c.name)<=10]].mean(axis=1)).where(p>=1e-4)).stack().dropna().rename('ratio').reset_index().sort_values(['year','ratio'],ascending=[True,False]).groupby('year').head(10)"
+ }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "over-500-cetaceans-alive",
+    "source": "There are still over 500 cetaceans living in human care throughout the US.",
+    "claim": "509 cetaceans in the inventory are recorded as alive or with unknown status.",
+    "tables": {
+      "d": "data/allCetaceanData.csv"
+    },
+    "code": "d.status.isin(['Alive', 'Unknown']).sum()"
+  },
+  {
+    "id": "max-age-at-death-61",
+    "source": "maximum age at death in captivity",
+    "claim": "The oldest recorded age at death is 61 years, reached by a bottlenose dolphin.",
+    "tables": {
+      "d": "data/allCetaceanData.csv"
+    },
+    "code": "d.assign(age=pd.to_datetime(d.statusDate, errors='coerce').dt.year - pd.to_numeric(d.birthYear, errors='coerce')).query(\"status == 'Died'\").dropna(subset=['age']).groupby('species').age.max().sort_values(ascending=False)"
+  },
+  {
+    "id": "annual-captures-tripled",
+    "source": "In the months leading up to the increased regulation, the number of annual captures more than tripled.",
+    "claim": "Annual captures more than tripled, rising from 41 in 1971 to 165 in 1972.",
+    "tables": {
+      "d": "data/allCetaceanData.csv"
+    },
+    "code": "d[(d.acquisition == 'Capture') & (d.transfer == 'US')].assign(year=pd.to_datetime(d.originDate, errors='coerce').dt.year).query('year in [1971, 1972]').groupby('year').size()"
+  }
+]

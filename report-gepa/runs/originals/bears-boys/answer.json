@@ -1,0 +1,101 @@
+[
+ {
+  "id": "kids-grid-gender-shares",
+  "source": "He/him : 66.1%\nShe/her : 31.3%\nOther : 2.6%",
+  "claim": "Across the children's-book grid, 66.1% of animal characters are he/him, 31.3% are she/her, and 2.6% are it (the Other category).",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k.pronoun.value_counts(normalize=True)"
+ },
+ {
+  "id": "kids-male-twice-female",
+  "source": "In the children’s books, male animal characters appeared twice as often as female characters.",
+  "claim": "The children's-book grid has 556 he/him characters and 263 she/her characters, more than twice as many male as female.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k.pronoun.value_counts()"
+ },
+ {
+  "id": "kids-female-animals",
+  "source": "After filtering the data to focus on animals who were explicitly gendered (she/her or he/him) and appeared in at least 10 different books, only a few animals were more consistently gendered female: birds, ducks, and cats. The rest—frog, wolf, fox, elephant, dog, monkey, bear, rabbit, mouse, and pig—skew male.",
+  "claim": "Among animals in at least 10 books, the highest she/her shares of explicitly gendered characters are duck (57.1%), bird (54.3%) and cat (48.1%); every other animal is below 40%: mouse 38.6%, bear 37.9%, pig 37.8%, rabbit 31.9%, dog 19.5%, monkey 17.6%, elephant 16.7%, fox 10.5%, wolf 10.0% and frog 5.9%.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k[k.pronoun.isin(['he/him','she/her']) & k.animal_group.isin(['bird','duck','cat','pig','mouse','rabbit','bear','monkey','dog','elephant','fox','wolf','frog'])].groupby('animal_group').agg(books=('title','nunique'), n=('pronoun','size'), she=('pronoun',lambda x:(x=='she/her').sum())).assign(she_share=lambda d:d.she/d.n).query('books >= 10').sort_values('she_share',ascending=False)"
+ },
+ {
+  "id": "kids-neutral-it",
+  "source": "Only two percent of the animals were described as it. They/them was almost never used.",
+  "claim": "The children's-book data contains 22 characters described as it (2.6% of all characters) and no characters described as they/them.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k.pronoun.value_counts().to_frame('count').assign(share=lambda d:d['count']/len(k))"
+ },
+ {
+  "id": "survey-no-female-majority",
+  "source": "In the survey responses to our experiment, no animal tilted more female than male.",
+  "claim": "For every survey animal, he/him outnumbers she/her among explicitly gendered responses: she/her is 34.4% for cat, 30.2% for bird, 25.8% for pig, 24.1% for rabbit, 23.5% for mouse, 22.4% for dog, and 19.7% for bear.",
+  "tables": {
+   "s": "data/survey-animal-stories.csv"
+  },
+  "code": "s[s.pronoun.isin(['he','she'])].groupby('animal').pronoun.value_counts().unstack().assign(she_share=lambda d:d['she']/(d['he']+d['she'])).sort_values('she_share',ascending=False)"
+ },
+ {
+  "id": "survey-male-pronouns",
+  "source": "Male pronouns appeared nearly three times as often in the survey results—particularly striking because there were more women respondents.",
+  "claim": "In the survey data, he appears 529 times and she 178 times, nearly three times as many male pronouns.",
+  "tables": {
+   "s": "data/survey-animal-stories.csv"
+  },
+  "code": "s.pronoun.value_counts()"
+ },
+ {
+  "id": "survey-more-women",
+  "source": "particularly striking because there were more women respondents",
+  "claim": "There were more female survey respondents (578) than male respondents (413).",
+  "tables": {
+   "s": "data/survey-animal-stories.csv"
+  },
+  "code": "s.gender.value_counts()"
+ },
+ {
+  "id": "survey-name-it-pronouns",
+  "source": "While he/him was still the most frequently used pronoun in the survey results, many respondents referred to the animal by name (26%), by it (17%)",
+  "claim": "In the survey responses, 25.9% have no pronoun (the animal is referred to by name) and 17.3% use it, while he is the most frequent pronoun at 39.9%.",
+  "tables": {
+   "s": "data/survey-animal-stories.csv"
+  },
+  "code": "s.pronoun.value_counts(dropna=False, normalize=True)"
+ },
+ {
+  "id": "ladybug-female-books",
+  "source": "Ladybugs are gendered as female in three of the four different books where they appear in our dataset.",
+  "claim": "In the children's-book data, three ladybug characters are she/her and one is it.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k[k.animal_group=='ladybug'].drop_duplicates('title').pronoun.value_counts()"
+ },
+ {
+  "id": "pig-feminine-turn",
+  "source": "While pigs were coded as male for a long time—hello, Three Little Pigs and the Big Bad Wolf—they took a strong feminine turn around the new millennium.",
+  "claim": "Before 2000, 11 of 35 pig characters (31.4%) are she/her; from 2000 onward, 6 of 10 (60.0%) are she/her.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k[k.animal_group=='pig'].assign(period=lambda d: np.where(d.pub_year>=2000,'2000 or later','before 2000')).groupby('period').agg(n=('pronoun','size'), she=('pronoun',lambda x:(x=='she/her').sum())).assign(she_share=lambda d:d.she/d.n)"
+ },
+ {
+  "id": "kids-decade-male-majority",
+  "source": "While broad patterns haven’t shifted over time, we did find plenty of meaningful exceptions.",
+  "claim": "The share of she/her children's-book characters never exceeds 41.1% in any decade category (ranging from 23.9% in the 1950s to 41.1% in the 1990s), so he/him remains the majority throughout.",
+  "tables": {
+   "k": "data/kids-book-animals.csv"
+  },
+  "code": "k[k.pronoun.isin(['he/him','she/her'])].groupby('decade_category').agg(n=('pronoun','size'), she=('pronoun',lambda x:(x=='she/her').sum())).assign(she_share=lambda d:d.she/d.n).sort_index()"
+ }
+]

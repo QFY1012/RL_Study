@@ -1,0 +1,90 @@
+[
+  {
+    "source": "You’re among people who believe there is life after death. This is the most populous part of the room.",
+    "why": "Requires respondent-level belief data (AFTER_DEATH_Y1/AFTER_DEATH_Y2 in the survey file); data/height26.csv contains only country-level average heights, which the app uses to scale the 3D figures, and has no belief responses."
+  },
+  {
+    "source": "Young people are most likely to have malleable beliefs about the afterlife. Between the two rounds of surveys, 18 months apart, lots of people in this part of the room changed their answer.",
+    "why": "Requires the respondent-level Global Flourishing Study file with both waves (people.json: AFTER_DEATH_Y1, AFTER_DEATH_Y2, AGE_Y1, AGE_Y2); the only file provided is data/height26.csv, which has no survey responses."
+  },
+  {
+    "source": "The most entrenched 20-somethings are people who believe in an afterlife—but even a quarter of that group moved.",
+    "why": "Requires respondent-level survey answers by age and wave; data/height26.csv has only country-level average heights."
+  },
+  {
+    "source": "As expected, belief in an afterlife is closely correlated to whether they’re affiliated with a religion.",
+    "why": "Requires respondent-level belief and religious-affiliation columns from people.json; data/height26.csv has no religion or belief data."
+  },
+  {
+    "source": "Just as strong of a predictor is whether people say religion is important in their lives. But in Europe and the U.S., it’s quite common for young people to believe in an afterlife but say that religion is not important.",
+    "why": "Requires respondent-level belief, religion-importance, age and country/region data from people.json; data/height26.csv contains none of these variables."
+  },
+  {
+    "source": "From the 1980s to mid-2000s, religion exploded—particularly in former Soviet countries, as well as China, Mexico, Brazil, and the U.S.",
+    "why": "The story attributes this historical trend to the Integrated Values Surveys time series; data/height26.csv is a single 2019 country-level height table and cannot reproduce it."
+  },
+  {
+    "source": "Since then, religious belief has fallen in most countries—especially in the U.S., but also other wealthier countries.",
+    "why": "This trend comes from the Integrated Values Surveys, not from the provided height table; data/height26.csv contains no religious-belief measures over time."
+  },
+  {
+    "source": "Still today, people who have faced a life-threatening situation are more likely to change their afterlife belief. To no one’s surprise, afterlife belief helps some people cope with the anxiety of death.",
+    "why": "Requires respondent-level AFTER_DEATH_Y1/Y2 and THREAT_LIFE_Y1 data from people.json; data/height26.csv has no respondent records."
+  },
+  {
+    "source": "When people hit their 50s, their afterlife beliefs start to solidify, especially for people who regularly attend religious services.",
+    "why": "Requires respondent-level age, belief and religious-service attendance data from people.json; data/height26.csv contains only country average heights."
+  },
+  {
+    "source": "People in their 50s who believe in an afterlife rarely change their answer and cross into the “no” part of the room. This includes people who have never set foot in a religious service.",
+    "why": "Requires respondent-level belief changes by age and attendance from people.json; data/height26.csv has no survey variables."
+  },
+  {
+    "source": "There are some regional differences. In sub-Saharan Africa and South Asia, belief stays high at every age group. But in the U.S. and Europe, older believers get less and less likely to move.",
+    "why": "Requires respondent-level belief, age and country/region data from people.json; data/height26.csv only has country-level average heights and no belief measures."
+  },
+  {
+    "source": "People in their 60s who are unsure are more likely to move toward the belief that everyone around them holds. In fact, if they’re skeptics but a regular church attender, they are far more likely to move toward belief.",
+    "why": "Requires respondent-level belief transitions, age and attendance data from people.json; data/height26.csv cannot compute these transitions."
+  },
+  {
+    "source": "But people who are frequently depressed continue to change their answers at a higher rate, even late in their lives.",
+    "why": "Requires respondent-level AFTER_DEATH_Y1/Y2 and DEPRESSED_Y1/Y2 data from people.json; data/height26.csv has no depression or belief variables."
+  },
+  {
+    "source": "In younger cohorts, being unsure is a sort of “still exploring” signal. But people in their 70s will likely hold this uncertainty for the rest of their life.",
+    "why": "Requires respondent-level belief waves and ages from people.json; data/height26.csv contains only average heights by country."
+  },
+  {
+    "source": "At this age, if unsure people change their mind, they are slightly more likely to settle on no afterlife.",
+    "why": "Requires respondent-level belief transitions for unsure respondents from people.json; data/height26.csv has no belief data."
+  },
+  {
+    "source": "The share of adults who changed their answer falls steadily with age, from 34% of adults under 30 to 23% of those 70 and older.",
+    "why": "The 'People who changed their beliefs about the afterlife' chart is computed from respondent-level survey data (AFTER_DEATH_Y1/Y2 by AGE_Y1/Y2 in people.json); data/height26.csv contains only country-level average heights."
+  },
+  {
+    "source": "The two lines move in opposite directions with age: in Western countries the share falls from 46% of adults under 30 to 24% of those 70 and older, while in non-Western countries it rises from 13% to 27%.",
+    "why": "The 'People who believe in an afterlife but say religion isn't important in their lives' chart requires respondent-level belief, religion-importance and region/age data from people.json; data/height26.csv contains no belief or religion variables."
+  },
+  {
+    "source": "Both groups change their answers less as they age, but people still bothered a lot by the worst threat to their life change more at every age — falling from 36% of adults under 30 to 26% at 70 and older, versus 33% to 22% for those not bothered at all.",
+    "why": "The 'Who changed their afterlife belief, by how much life-threatening experiences bothered them' chart requires respondent-level AFTER_DEATH_Y1/Y2 and THREAT_LIFE_Y1 data by age from people.json; data/height26.csv cannot produce these shares."
+  },
+  {
+    "source": "Among weekly attenders, changing answers falls sharply with age, from 34% of adults under 30 to 16% of those 70 and older. Among less-frequent attenders it declines more slowly, from 34% to 25%.",
+    "why": "The 'Changing afterlife belief, by regular church attendance' chart requires respondent-level belief transitions, age and ATTEND_SVCS data from people.json; data/height26.csv has no attendance or belief variables."
+  },
+  {
+    "source": "People with frequent depression keep changing their answers late into life, staying near 30-38% at every age, while everyone else declines steadily from 33% of adults under 30 to 22% of those 70 and older.",
+    "why": "The 'Changing afterlife belief, by depression levels' chart requires respondent-level belief transitions by depression level and age from people.json; data/height26.csv contains only country average heights."
+  },
+  {
+    "source": "With age, unsure people increasingly stay unsure — rising from 56% of adults under 30 to 69% of those 70 and older. Moves toward belief fall from 25% to 14%, while moves toward disbelief hold near 17-20%.",
+    "why": "The 'Where unsure people move' chart requires respondent-level AFTER_DEATH_Y1/Y2 transitions for unsure respondents by age from people.json; data/height26.csv has no respondent-level belief data."
+  },
+  {
+    "source": "One thing that isn’t included in this piece is that the worldwide belief and religiosity numbers have stayed relatively steady.",
+    "why": "The story attributes this finding to Pippa Norris and Ronald Inglehart and says it is not included in the piece; it is not computed from the story’s data, and data/height26.csv has no belief or religiosity measures."
+  }
+]

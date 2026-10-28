@@ -1,0 +1,147 @@
+{
+ "id": "essential-words",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 703,
+  "steps": 46,
+  "tools": 52,
+  "nudged": 0,
+  "usage": {
+   "input": 69018,
+   "output": 107310
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 24,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "abstract-category-largest-and-growing",
+   "basis": "General and Abstract Terms: 1953=17.425569, 2023=22.285511, growth_pct=27.889716; it is the top category in both lists by value.",
+   "verdict": "ok"
+  },
+  {
+   "id": "tangible-categories-largest-drops",
+   "basis": "Sorted selected categories: Life and Living Things=-52.569123, Substances/Materials/Objects/Equipment=-36.758831, Food and Farming=-33.252924, The Body and the Individual=-29.905108, then World=-22.859673 and Architecture=-14.994013.",
+   "verdict": "ok"
+  },
+  {
+   "id": "emotion-shrinks-psychological-grows",
+   "basis": "Emotion: 1953=5.429072, 2023=3.666785, pp=-1.762286. Psychological Actions, States and Processes: 1953=7.005254, 2023=8.757565, pp=1.752311.",
+   "verdict": "ok"
+  },
+  {
+   "id": "social-domain-churn",
+   "basis": "1953 removed=23.102867%; 2023 added=39.361702%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "self-domain-shrinks",
+   "basis": "Self: 1953=10.507881, 2023=7.226771, pp=-3.28111.",
+   "verdict": "ok"
+  },
+  {
+   "id": "local-domain-shrinks",
+   "basis": "Local: 1953=16.549912, 2023=10.893556, pp=-5.656356.",
+   "verdict": "ok"
+  },
+  {
+   "id": "social-domain-size-stable",
+   "basis": "Social: 1953=25.963222, 2023=26.771093, pp=0.80787.",
+   "verdict": "ok"
+  },
+  {
+   "id": "universal-domain-grows-most",
+   "basis": "Universal: 1953=39.404553, 2023=46.030616, pp=6.626062. Next-largest pp is Institutional=1.503533.",
+   "verdict": "ok"
+  },
+  {
+   "id": "highly-concrete-share-falls",
+   "basis": "Highly concrete: 1953=21.403509%, 2023=14.102564%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-concrete-removed-vs-added",
+   "basis": "Most concrete: removed=28.365385%, added=7.378472%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "middle-concreteness-band",
+   "basis": "Middle band: added=23.611111%, removed=13.141026%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lowest-concreteness-bands",
+   "basis": "[1.0,1.5): removed=1.282051%, added=2.256944%. [1.5,2.0): removed=14.262821%, added=15.625%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nouns-dominate",
+   "basis": "noun: 1953=78.064799%, 2023=74.795301%; noun is the largest POS in both lists.",
+   "verdict": "ok"
+  },
+  {
+   "id": "adjectives-grow-modestly",
+   "basis": "adjective: 1953=10.901926%, 2023=12.210751%, pp=1.308825.",
+   "verdict": "ok"
+  },
+  {
+   "id": "adverbs-nearly-double",
+   "basis": "adverb: 1953=3.633975%, 2023=6.763973%, growth_pct=86.131496.",
+   "verdict": "ok"
+  },
+  {
+   "id": "intro-word-swaps",
+   "basis": "telegraph=removed, computer=added, website=added, blog=added, tobacco=removed, cigarette=added, motherhood=removed, mom=added, dad=added, fatherhood=NaN.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hands-on-words-removed",
+   "basis": "apple=removed, fork=removed, soap=removed, umbrella=removed, leaf=removed.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bread-survives-ingredients-drop",
+   "basis": "dog=remained, bread=remained, cook=remained; goat, donkey, flour, wheat, boil, bake, fry=removed.",
+   "verdict": "ok"
+  },
+  {
+   "id": "concrete-word-examples",
+   "basis": "rust, brick, silk, screw, cage=removed; magazine, jail, apartment, bomb, guitar=added.",
+   "verdict": "ok"
+  },
+  {
+   "id": "abstract-word-examples",
+   "basis": "courage, wisdom, mercy, loyalty, greed, fate, revenge, honesty=removed; interpretation, involvement, theoretical, somewhat, evaluate, justify=added.",
+   "verdict": "ok"
+  },
+  {
+   "id": "middle-band-word-examples",
+   "basis": "regulation, reform, cooperation, obligation, initiative, negotiate, perception=added; shame, convenience, spite, fellowship, companionship=removed.",
+   "verdict": "ok"
+  },
+  {
+   "id": "abstract-additions-examples",
+   "basis": "mortgage, corporation, appropriate, analysis, fairly, despite=added.",
+   "verdict": "ok"
+  },
+  {
+   "id": "tangible-word-examples",
+   "basis": "clay, corn, hammer, beard, towel, weave=removed.",
+   "verdict": "ok"
+  },
+  {
+   "id": "inner-life-word-examples",
+   "basis": "happy, sad, afraid, angry=remained; patience, pity, despair, sorrow=removed; focus, judgment, investigate, logic=added.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 24,
+ "skipped": 5
+}

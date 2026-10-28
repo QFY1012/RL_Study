@@ -1,0 +1,62 @@
+{
+ "id": "climate-zones",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 204,
+  "steps": 13,
+  "tools": 15,
+  "nudged": 0,
+  "usage": {
+   "input": 14498,
+   "output": 22855
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "los-angeles-warming",
+   "basis": "temp_2023=15.44, temp_2070=18.43, increase=2.99",
+   "verdict": "ok"
+  },
+  {
+   "id": "los-angeles-zone-shift",
+   "basis": "type_2023='Temperate, dry summer, hot summer'; type_2070='Arid, steppe, hot'",
+   "verdict": "ok"
+  },
+  {
+   "id": "los-angeles-resembles-new-delhi",
+   "basis": "Only output row is New Delhi with type_2023='Arid, steppe, hot', matching Los Angeles type_2070",
+   "verdict": "ok"
+  },
+  {
+   "id": "cold-cities-turn-temperate",
+   "basis": "z70 counts: Arid=3, Cold=1, Temperate=12",
+   "verdict": "ok"
+  },
+  {
+   "id": "temperate-cities-turn-arid-tropical",
+   "basis": "z70 counts: Arid=9, Temperate=20, Tropical=6",
+   "verdict": "ok"
+  },
+  {
+   "id": "moscow-only-cold-city",
+   "basis": "Only cold-starting type_2070 row is Moscow, type_2070='Cold, no dry season, hot summer'",
+   "verdict": "ok"
+  },
+  {
+   "id": "zone-sizes-arid-tropical-grow-cold-shrinks",
+   "basis": "2023 row totals: Arid=9, Cold=16, Temperate=35, Tropical=10; 2070 column totals: Arid=22, Cold=1, Temperate=32, Tropical=15",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 4
+}

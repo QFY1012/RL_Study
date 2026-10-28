@@ -1,0 +1,97 @@
+{
+ "id": "greatest-music",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 643,
+  "steps": 47,
+  "tools": 49,
+  "nudged": 0,
+  "usage": {
+   "input": 46744,
+   "output": 98154
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 14,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top-10-unchanged-2012",
+   "basis": "10 rows; ranks 1-10 match in both years; Sgt. Pepper's Lonely Hearts Club Band is 2003 Rank 1.0 and 2012 Rank 1.0; all same_rank are True.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-10-changed-2020",
+   "basis": "2020 top 10 has in_2003_top10=True only for What's Going On (2003 #6, 2020 #1) and Pet Sounds (2003 #2, 2020 #2); all others False.",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-albums-nearly-third",
+   "basis": "sum=154, count=500, mean=0.308.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2003-albums-dropped",
+   "basis": "sum=174, count=500, mean=0.348.",
+   "verdict": "ok"
+  },
+  {
+   "id": "dropped-compilations-share",
+   "basis": "sum=31, count=174, mean=0.178161.",
+   "verdict": "ok"
+  },
+  {
+   "id": "spotify-albums-ranking-decline",
+   "basis": "sum=10, count=22, mean=0.454545.",
+   "verdict": "ok"
+  },
+  {
+   "id": "billboard-top-100-distribution",
+   "basis": "#1=30.0, #2-100=60.0, #101+=4.0, Never charted=6.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bottom-400-never-charted-3x",
+   "basis": "bottom400: sum=72, count=400, mean=0.18; top100: sum=6, count=100, mean=0.06; ratio=3.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2003-voters-men-share",
+   "basis": "sum=242, count=269, mean=0.899628.",
+   "verdict": "ok"
+  },
+  {
+   "id": "albums-by-men-share",
+   "basis": "sum=410, count=500, mean=0.82.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-voters-representation",
+   "basis": "2003: sum=26, count=269, mean=0.096654; 2020: sum=73, count=336, mean=0.217262.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2020-judges-teenage-decades",
+   "basis": "sum=191, count=336, mean=0.568452.",
+   "verdict": "ok"
+  },
+  {
+   "id": "voters-teenagers-1990s",
+   "basis": "2003: sum=11, count=269, mean=0.040892; 2020: sum=90, count=336, mean=0.267857.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2020-list-retention-by-decade",
+   "basis": "1950: 8/10=80.0%; 1960: 65/71=91.549296%; 1970: 128/155=82.580645%; 1980: 56/73=76.712329%; 1990: 55/104=52.884615%.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 14,
+ "skipped": 14
+}

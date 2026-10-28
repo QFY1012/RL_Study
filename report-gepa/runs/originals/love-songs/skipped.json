@@ -1,0 +1,62 @@
+[
+  {
+    "source": "Here are all 5,100 Billboard Top 10 hits from 1958 to September 2023.",
+    "why": "This is a description of the data (how many records it contains), not a finding. The file has 5,141 rows / unique song-artist credits."
+  },
+  {
+    "source": "There are 5,141 unique songs.",
+    "why": "A methods/data description of record count, not a finding."
+  },
+  {
+    "source": "These are the 1,040 Top 10 hits we think Boomer Bob would definitely consider love songs.",
+    "why": "A count of items in a category, not a finding; the file contains 1,042 Serenade rows."
+  },
+  {
+    "source": "All eight hundred and thirty Heartache category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 827 Heartache rows."
+  },
+  {
+    "source": "All four hundred and forty Pursuit category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 445 Pursuit rows."
+  },
+  {
+    "source": "All four hundred and eighty It’s Complicated category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 484 It's Complicated rows."
+  },
+  {
+    "source": "All one hundred and twenty five Good Riddance category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 125 Good Riddance rows."
+  },
+  {
+    "source": "All three hundred and ten Sexual Confidence category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 315 Sexual Confidence rows."
+  },
+  {
+    "source": "All one hundred and ten Love Song for the Self category love songs",
+    "why": "A count of items in a category, not a finding; the file contains 105 Love Song for the Self rows."
+  },
+  {
+    "source": "appearing to remain fairly constant in popularity over time.",
+    "why": "Not reproduced as a stable pattern: Heartache's share of Top 10 weeks falls from 21.9% in 1958–1968 to 12.1% in 2010–2018 and is 15.1% in 2020–2023, so the series is not fairly constant."
+  },
+  {
+    "source": "steadily increasing in popularity over time.",
+    "why": "Not reproduced as a steady increase: It’s Complicated’s share of Top 10 weeks rises from 6.4% in 1958–1968 to 13.4% in 2020–2023 but falls in 1990–1998 (9.3%) and 2010–2018 (9.8%) after higher values in the preceding periods, so the series is not steadily increasing."
+  },
+  {
+    "source": "Sexual Confidence is the second most popular love song category in the 1990s, but is otherwise one of the least popular categories.",
+    "why": "Not reproduced: in 1990–1998 Sexual Confidence is fourth among the seven love-song types by total weeks in the Top 10 (behind Serenade, Heartache and It's Complicated), not second."
+  },
+  {
+    "source": "The love song didn’t die; it evolved.",
+    "why": "A qualitative interpretation, not a separate data finding; the measured version is the change in love songs' share of Top 10 weeks."
+  },
+  {
+    "source": "People are loving, losing, and connecting in more ways than ever before.",
+    "why": "A qualitative interpretation, not a data finding."
+  },
+  {
+    "source": "This women-pioneered Love Song for the Self is the most modern of all the genres.",
+    "why": "A qualitative/interpretive claim about genre history, not a number, comparison, ranking, share or trend computed from this file."
+  }
+]

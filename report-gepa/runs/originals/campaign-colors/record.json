@@ -1,0 +1,104 @@
+{
+ "id": "campaign-colors",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 471,
+  "steps": 31,
+  "tools": 31,
+  "nudged": 0,
+  "usage": {
+   "input": 29635,
+   "output": 75130
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "2020-majority-rwb",
+   "basis": "Output: RWB Y=59.5%, N=40.5%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "non-rwb-share-by-year",
+   "basis": "Output non-RWB shares: 1968=35.7, 1972=34.8, 1976=23.8, 1980=38.9, 1984=41.7, 1988=17.6, 1992=15.4, 1996=25.0, 2000=12.5, 2004=20.0, 2008=12.0, 2012=5.9, 2016=7.4, 2020=40.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2020-highest-since-1984",
+   "basis": "Top two non-RWB shares: 1984=41.7%, 2020=40.5%; 2020 is second highest and highest after 1984.",
+   "verdict": "ok"
+  },
+  {
+   "id": "three-years-below-20",
+   "basis": "Output rows: 2008=12.0%, 2012=5.9%, 2016=7.4%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "minority-non-rwb-vs-white-men",
+   "basis": "Minority total=42, nonRWB=17, pct=40; White male total=229, nonRWB=48, pct=21.",
+   "verdict": "ok"
+  },
+  {
+   "id": "candidates-of-color-non-rwb",
+   "basis": "Candidates of color total=28, nonRWB=8, pct=29; White male total=229, nonRWB=48, pct=21.",
+   "verdict": "ok"
+  },
+  {
+   "id": "female-non-rwb",
+   "basis": "Female candidates total=21, nonRWB=13, pct=62; White male total=229, nonRWB=48, pct=21.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-of-color-non-rwb",
+   "basis": "Women of color candidates total=6, nonRWB=4, pct=67; White male total=229, nonRWB=48, pct=21.",
+   "verdict": "ok"
+  },
+  {
+   "id": "major-party-rwb",
+   "basis": "Output: total=217, RWB=180, pctRWB=83.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2020-most-minority-candidates",
+   "basis": "2020 total=37, minority=13, pct=35.1; this is the highest minority count and share in the year table.",
+   "verdict": "ok"
+  },
+  {
+   "id": "candidates-of-color-vs-white-candidates",
+   "basis": "Candidates of color total=28, nonRWB=8, pct=29; White candidates total=243, nonRWB=57, pct=23.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2020-democratic-diversity",
+   "basis": "2020 Democratic total=29, minority=11, pct=37.9; Republican total=5, minority=1, pct=20.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 7,
+ "review": [
+  {
+   "id": "candidates-of-color-non-rwb",
+   "action": "restore",
+   "why": "quote is the story's text followed by its chart labels, both on pudding.cool, with candidate logos between them; counts match the labels"
+  },
+  {
+   "id": "female-non-rwb",
+   "action": "restore",
+   "why": "quote is the story's text followed by its chart labels, both on pudding.cool, with candidate logos between them; counts match the labels"
+  },
+  {
+   "id": "women-of-color-non-rwb",
+   "action": "restore",
+   "why": "quote is the story's text followed by its chart labels, both on pudding.cool, with candidate logos between them; counts match the labels"
+  }
+ ]
+}

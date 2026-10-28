@@ -1,0 +1,164 @@
+[
+  {
+    "id": "yearly-digital-stabilizes",
+    "source": "Yet the shift has recently stabilized, and it could even reverse.",
+    "claim": "Among non-animated films with a known medium, the digital-only share rose from 74.5% in 2014 to 83.0% in 2016, then dipped slightly to 82.4% in 2017.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.film_type.isin(['D','F','D|F']) & ~m.genres.fillna('').str.contains('Animation')].groupby('production_year').film_type.value_counts(normalize=True).unstack().mul(100).round(1)"
+  },
+  {
+    "id": "scifi-film-only",
+    "source": "Between 2015 and 2017, only 4% of sci-fi movies were shot purely in film, lower than the rate among all genres (11% of movies were still shot purely in film).",
+    "claim": "Among non-animated 2015-2017 films with a known medium, 3.6% of sci-fi films were shot on film only, against 11.2% of all films.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.film_type.isin(['D','F','D|F']) & m.production_year.between(2015,2017) & ~m.genres.fillna('').str.contains('Animation')].assign(scope=lambda k: k.genres.fillna('').apply(lambda g: ['all genres','sci-fi'] if 'Sci-Fi' in g else ['all genres'])).explode('scope').groupby('scope').film_type.value_counts(normalize=True).unstack().mul(100).round(1)"
+  },
+  {
+    "id": "scifi-more-digital",
+    "source": "Compared to the average across all genres, sci-fi movies are more likely to be shot using digital cameras, either as the only medium or in tandem with film cameras.",
+    "claim": "In 2015-2017, 96.4% of non-animated sci-fi films with a known medium used digital (digital only or both), against 88.8% of all such films.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.film_type.isin(['D','F','D|F']) & m.production_year.between(2015,2017) & ~m.genres.fillna('').str.contains('Animation')].assign(scope=lambda k: k.genres.fillna('').apply(lambda g: ['all genres','sci-fi'] if 'Sci-Fi' in g else ['all genres'])).explode('scope').groupby('scope').film_type.apply(lambda s: (s!='F').mean()*100).round(1)"
+  },
+  {
+    "id": "horror-digital-recent",
+    "source": "Horror is another genre with a high digital adoption rate. But unlike science fiction, the dominance of digital has occurred in more recent years.",
+    "claim": "The digital share of horror films (digital only or both) was 21.2% in 2006-2008, 29.6% in 2009-2011, 75.0% in 2012-2014 and 100.0% in 2015-2017, while sci-fi's had already reached 52.3% in 2009-2011.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.film_type.isin(['D','F','D|F']) & ~m.genres.fillna('').str.contains('Animation')].assign(period=lambda k: pd.cut(k.production_year,[2005,2008,2011,2014,2017],labels=['2006-2008','2009-2011','2012-2014','2015-2017']), genres=lambda k: k.genres.str.split('|')).explode('genres').query(\"genres in ['Sci-Fi','Horror']\").groupby(['genres','period'],observed=True).film_type.apply(lambda s: (s!='F').mean()*100).unstack().round(1)"
+  },
+  {
+    "id": "drama-film-only",
+    "source": "Between 2015 and 2017, 17% of drama movies were still shot on film.",
+    "claim": "Among non-animated 2015-2017 films with a known medium, 17.0% of drama films were shot on film only.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.film_type.isin(['D','F','D|F']) & m.production_year.between(2015,2017) & ~m.genres.fillna('').str.contains('Animation') & m.genres.fillna('').str.contains('Drama')].film_type.value_counts(normalize=True).mul(100).round(1)"
+  },
+  {
+    "id": "low-budget-more-digital",
+    "source": "Movies with lower budget ranges ($20M or less) are more likely to use digital than movies in higher budget ranges—perhaps the digital camera is a more appealing budget choice after all.",
+    "claim": "The digital-only share was highest in the under-$20M range in every period: 13.3% in 2006-2008, 24.3% in 2009-2011, 74.6% in 2012-2014 and 92.3% in 2015-2017.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "(lambda k: k.groupby([pd.cut(k.production_year,[2005,2008,2011,2014,2017],labels=['2006-2008','2009-2011','2012-2014','2015-2017']),pd.cut(k.budget,[0,2e7,4e7,8e7,1.6e8,np.inf],right=False,labels=['<$20M','$20-40M','$40-80M','$80-160M','>$160M'])],observed=True).film_type.value_counts(normalize=True).unstack().mul(100).round(1).fillna(0)['D'].unstack())(m[m.film_type.isin(['D','F','D|F']) & (m.budget>0) & ~m.genres.fillna('').str.contains('Animation')])"
+  },
+  {
+    "id": "both-highest-budget",
+    "source": "Interestingly, budget limits are more apparent for movies shot using both film and digital, where its most common in the highest budget range (more than $160M).",
+    "claim": "In 2015-2017, 23.5% of non-animated films budgeted over $160M with a known medium were shot on both film and digital, against 1.9%, 6.5%, 2.2% and 7.1% in the lower budget ranges.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "(lambda k: k.groupby([pd.cut(k.production_year,[2005,2008,2011,2014,2017],labels=['2006-2008','2009-2011','2012-2014','2015-2017']),pd.cut(k.budget,[0,2e7,4e7,8e7,1.6e8,np.inf],right=False,labels=['<$20M','$20-40M','$40-80M','$80-160M','>$160M'])],observed=True).film_type.value_counts(normalize=True).unstack().mul(100).round(1).fillna(0)['D|F'].unstack())(m[m.film_type.isin(['D','F','D|F']) & (m.budget>0) & ~m.genres.fillna('').str.contains('Animation')])"
+  },
+  {
+    "id": "low-budget-film-only",
+    "source": "Between 2015-2017, 6% of movies in lower budget ranges still shot on film, similar in proportion to movies in the highest budget range.",
+    "claim": "In 2015-2017, 5.8% of non-animated films budgeted under $20M with a known medium were shot on film only, close to 5.9% of films over $160M.",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "(lambda k: k.groupby([pd.cut(k.production_year,[2005,2008,2011,2014,2017],labels=['2006-2008','2009-2011','2012-2014','2015-2017']),pd.cut(k.budget,[0,2e7,4e7,8e7,1.6e8,np.inf],right=False,labels=['<$20M','$20-40M','$40-80M','$80-160M','>$160M'])],observed=True).film_type.value_counts(normalize=True).unstack().mul(100).round(1).fillna(0)['F'].unstack())(m[m.film_type.isin(['D','F','D|F']) & (m.budget>0) & ~m.genres.fillna('').str.contains('Animation')])"
+  },
+  {
+    "id": "film-spans-budgets",
+    "source": "Beside big budget movies such as Star Wars: Force Awakens (2015) and Dunkirk (2017), lower budget movies such as Gifted (2017) and The Beguiled (2017) still manage to shoot on film in the last three years.",
+    "claim": "Among 2015-2017 films shot on film are Star Wars: Episode VII - The Force Awakens (2015, $306M), Dunkirk (2017, $150M), Gifted (2017, $7M) and The Beguiled (2017, $10.5M).",
+    "tables": {
+      "m": "data/top_movies_data.csv"
+    },
+    "code": "m[m.production_year.between(2015,2017) & m.title.str.contains('Force Awakens|Dunkirk|Gifted|The Beguiled',regex=True)][['production_year','title','budget','film_type']].assign(budget_m=lambda k: k.budget/1e6).sort_values('budget')[['production_year','title','budget_m','film_type']].to_string()"
+  },
+  {
+    "id": "directors-film-then-digital",
+    "source": "A decade ago, the majority of directors still chose to shoot on film, but around 2012 more directors began to prefer digital.",
+    "claim": "Among directors with at least one known-format film in a period, 74.0% in 2006-2008 shot only on film, while in 2012-2014 62.4% shot only digitally and 23.6% only on film.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.film_type.isin(['D','F','D|F'])].assign(period=lambda k: pd.cut(k.production_year,[2005,2008,2011,2014,2017],labels=['2006-2008','2009-2011','2012-2014','2015-2017'])).groupby(['period','director'],observed=True).film_type.agg(lambda s: 'F' if set(s)=={'F'} else ('D' if set(s)=={'D'} else 'both')).groupby(level=0).value_counts(normalize=True).unstack().mul(100).round(1)"
+  },
+  {
+    "id": "nolan-all-film",
+    "source": "Christopher Nolan shot all of his movies on film, including his latest movie Dunkirk (2017).",
+    "claim": "All of Christopher Nolan's films in the data, from The Prestige (2006) to Dunkirk (2017), are recorded with film as the medium.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.director=='Nolan, Christopher'][['production_year','title','film_type']]"
+  },
+  {
+    "id": "tarantino-all-film",
+    "source": "Quentin Tarantino is another example of a film loyalist; he even states that he would stop making movies if he cannot shoot on film anymore.",
+    "claim": "All of Quentin Tarantino's films in the data, from Death Proof (2007) to The Hateful Eight (2015), are recorded with film as the medium.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.director=='Tarantino, Quentin'][['production_year','title','film_type']]"
+  },
+  {
+    "id": "rodriguez-all-digital",
+    "source": "On the other side, we also have early adopters who jumped to digital in 2006-2008 and have been using it ever since, such as Robert Rodriguez. He started to shoot on digital in 2002 with Spy Kids 2 and shot all of his later films in the same medium.",
+    "claim": "Every Robert Rodriguez film in the data with a known medium (2007-2014) is recorded as digital, while three titles have an unknown medium.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.director=='Rodriguez, Robert'][['production_year','title','film_type']]"
+  },
+  {
+    "id": "apatow-back-to-film",
+    "source": "Judd Apatow returned to film on his latest movie Trainwreck (2015) after previously using digital on This is 40 (2012).",
+    "claim": "Judd Apatow's This Is 40 (2012) is recorded as digital and his later Trainwreck (2015) as film.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.director=='Apatow, Judd'][['production_year','title','film_type']]"
+  },
+  {
+    "id": "boyle-steve-jobs-both",
+    "source": "Some directors such as Danny Boyle use both technologies. In Steve Jobs (2015), he used both digital and film formats to cover Apple’s product launch on different timelines.",
+    "claim": "Danny Boyle's Steve Jobs (2015) is recorded as shot on both film and digital.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[(d.director=='Boyle, Danny') & (d.title=='Steve Jobs')][['production_year','title','film_type']]"
+  },
+  {
+    "id": "prieto-passengers-digital",
+    "source": "As a cinematographer who has worked with both film and digital camera, Rodrigo Prieto has his own reason to choose digital for Passengers",
+    "claim": "Passengers (2016) is recorded as shot on digital.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[(d.title=='Passengers') & (d.production_year==2016)][['production_year','title','director','film_type']]"
+  },
+  {
+    "id": "prieto-silence-both",
+    "source": "While in Silence, he used both medium but had different use cases for each one",
+    "claim": "Silence (2016) is recorded as shot on both film and digital.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[(d.title=='Silence') & (d.production_year==2016)][['production_year','title','director','film_type']]"
+  },
+  {
+    "id": "washington-melfi-film",
+    "source": "Denzel Washington and Theodore Melfi are among the ones to choose film for this specific reason.",
+    "claim": "Denzel Washington's two films in the data and Theodore Melfi's two films with a known medium are all shot on film.",
+    "tables": {
+      "d": "data/top_directors_data.csv"
+    },
+    "code": "d[d.director.isin(['Washington, Denzel','Melfi, Theodore'])][['production_year','title','director','film_type']]"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "routes-one-two-films",
+    "source": "Robert De Niro : one movie away from Kevin Bacon.\nCillian Murphy : two movies away from Kevin Bacon.\nRyan Gosling : one movie away from Kevin Bacon.\nTom Hanks : one movie away from Kevin Bacon.\nBenedict Cumberbatch : one movie away from Kevin Bacon.\nMeryl Streep : one movie away from Kevin Bacon.\nTimothée Chalamet : two movies away from Kevin Bacon.\nSaoirse Ronan : two movies away from Kevin Bacon.\nAnya Taylor-Joy : two movies away from Kevin Bacon.\nJessie Buckley : two movies away from Kevin Bacon.\nAustin Butler : two movies away from Kevin Bacon.\nMargot Robbie : two movies away from Kevin Bacon.\nEmma Stone : one movie away from Kevin Bacon.\nZendaya : two movies away from Kevin Bacon.",
+    "claim": "The traced actors are one or two movies from Kevin Bacon: Robert De Niro, Ryan Gosling, Tom Hanks, Benedict Cumberbatch, Meryl Streep and Emma Stone at one hop, and Cillian Murphy, Timothée Chalamet, Saoirse Ronan, Anya Taylor-Joy, Jessie Buckley, Austin Butler, Margot Robbie and Zendaya at two.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'].isin(['Robert De Niro', 'Cillian Murphy', 'Ryan Gosling', 'Tom Hanks', 'Benedict Cumberbatch', 'Meryl Streep', 'Timothée Chalamet', 'Saoirse Ronan', 'Anya Taylor-Joy', 'Jessie Buckley', 'Austin Butler', 'Margot Robbie', 'Emma Stone', 'Zendaya'])][['name', 'hop']]"
+  },
+  {
+    "id": "bacon-remoteness-rank",
+    "source": "For example, Kevin Bacon’s remoteness is 2.28: so an actor is, on average, 2.28 degrees from Kevin Bacon. But 2.28 degrees is not the best remoteness score. Kevin Bacon ranks 175th among all Hollywood actors.",
+    "claim": "Kevin Bacon's average distance is 2.2823 and he ranks 175th.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'] == 'Kevin Bacon'][['name', 'avgDistance', 'rank']]"
+  },
+  {
+    "id": "top-three-remoteness",
+    "source": "Samuel L. Jackson is the center of Hollywood, with a remoteness of just 2.09. Willem Dafoe is second at 2.13, and Robert De Niro follows at 2.14.",
+    "claim": "Samuel L. Jackson ranks first with an average distance of 2.0872, Willem Dafoe second at 2.1284, and Robert De Niro third at 2.1427.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a.sort_values('rank')[['name', 'rank', 'avgDistance']].head(3)"
+  },
+  {
+    "id": "most-films-jackson-cage",
+    "source": "Indeed, Samuel L. Jackson appeared in far more films than anyone else in our 169,000 actor dataset. Nicolas Cage, who’s the next closest, appeared in 96 films.",
+    "claim": "Samuel L. Jackson has 116 films and the next highest is Nicolas Cage with 96.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a.sort_values('films', ascending=False)[['name', 'films']].head(2)"
+  },
+  {
+    "id": "portman-kendrick-same-films",
+    "source": "For example, Natalie Portman and Anna Kendrick differ significantly in their remoteness, despite appearing in the same number of films.",
+    "claim": "Natalie Portman and Anna Kendrick have both appeared in 40 films, but their average distances are 2.2312 and 2.3990 respectively.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'].isin(['Natalie Portman', 'Anna Kendrick'])][['name', 'films', 'avgDistance']]"
+  },
+  {
+    "id": "portman-kendrick-co-star-prolificacy",
+    "source": "The difference between Natalie Portman and Anna Kendrick lies in their co-stars: Natalie Portman is cast in films with more prolific actors than Anna Kendrick.",
+    "claim": "Natalie Portman's top-50 co-star average is 4.0524, higher than Anna Kendrick's 3.8651, indicating her co-stars are more prolific.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'].isin(['Natalie Portman', 'Anna Kendrick'])][['name', 'top50']]"
+  },
+  {
+    "id": "sweeney-16-films-15-years",
+    "source": "When predicting film count, consider Sydney Sweeney, who has appeared in 16 films since her debut 15 years ago.",
+    "claim": "Sydney Sweeney has appeared in 16 films over a 15-year career.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'] == 'Sydney Sweeney'][['name', 'films', 'careerAge']]"
+  },
+  {
+    "id": "deniro-chevy-career-totals",
+    "source": "he went on to have a brilliant career totalling 87 … ultimately only appeared in 27 total",
+    "claim": "Robert De Niro's career totalled 87 films, while Chevy Chase's totalled 27.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'].isin(['Robert De Niro', 'Chevy Chase'])][['name', 'films']]"
+  },
+  {
+    "id": "bacon-mirren-hackman-film-count",
+    "source": "Conversely, after 47 years in Hollywood, Kevin Bacon has a similar film count to Helen Mirren and Gene Hackman.",
+    "claim": "After 47 years in Hollywood, Kevin Bacon has 47 films, similar to Gene Hackman's 47 and Helen Mirren's 55.",
+    "tables": {"a": "data/actors.csv"},
+    "code": "a[a['name'].isin(['Kevin Bacon', 'Helen Mirren', 'Gene Hackman'])][['name', 'careerAge', 'films']]"
+  }
+]

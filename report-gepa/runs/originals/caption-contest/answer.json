@@ -1,0 +1,110 @@
+[
+ {
+  "id": "magnetic-jokes-50",
+  "source": "We didn’t submit this caption, but 50 other people entered a “magnetic” joke",
+  "claim": "In contest 771, 50 captions contain the word 'magnetic'.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (d.contest.iloc[0].item(), d.caption.str.contains('magnetic', case=False, regex=False).sum().item()))(df.query('contest == 771'))"
+ },
+ {
+  "id": "magnetic-caption-dashboard-rank-153",
+  "source": "with “I asked them to try to find your magnetic personality.” ranking at #153.",
+  "claim": "In contest 771, the caption 'I asked them to try to find your magnetic personality.' sits at dashboard rank 153.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (d.contest.iloc[0].item(), d.index[d.caption.str.contains('I asked them to try', regex=False)][0]))(df.query('contest == 771').reset_index(drop=True))"
+ },
+ {
+  "id": "mettle-caption-dashboard-rank-51",
+  "source": "“No, I said you've lost your mettle” ranked at #51 in the above cartoon",
+  "claim": "In contest 771, the caption 'No, I said you've lost your mettle.' sits at dashboard rank 51.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (d.contest.iloc[0].item(), d.index[d.caption.str.contains('lost your mettle', regex=False)][0]))(df.query('contest == 771').reset_index(drop=True))"
+ },
+ {
+  "id": "best-caption-top-200",
+  "source": "One caption ranked in the top 200.",
+  "claim": "The contest-762 submission placed 183rd of 7,076 entries.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (d.contest.iloc[0].item(), d.index[d.caption.str.contains('line for the rat race', regex=False)][0] + 1, len(d)))(df.query('contest == 762').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-758-rank",
+  "source": "Submission: ranked top 21% (957th)",
+  "claim": "The contest-758 submission placed 957th, in the top 21%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('living outside of my comfort', regex=False)][0] + 1))(df.query('contest == 758').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-761-rank",
+  "source": "Submission: ranked top 16% (1,740th)",
+  "claim": "The contest-761 submission placed 1740th, in the top 16%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('lemons are a small price', regex=False)][0] + 1))(df.query('contest == 761').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-763-rank",
+  "source": "Submission: ranked top 50% (4,545th)",
+  "claim": "The contest-763 submission placed 4545th, in the top 50%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('never seen a car this hot', regex=False)][0] + 1))(df.query('contest == 763').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-764-rank",
+  "source": "Submission: ranked top 62% (3,932nd)",
+  "claim": "The contest-764 submission placed 3932nd, in the top 62%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('not *that* kind of a fish', regex=False)][0] + 1))(df.query('contest == 764').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-765-rank",
+  "source": "Submission: ranked top 26% (1,829th)",
+  "claim": "The contest-765 submission placed 1829th, in the top 26%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('Refugees welcome', regex=False)][0] + 1))(df.query('contest == 765').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-768-rank",
+  "source": "Submission: ranked in bottom 5% (6,213th)",
+  "claim": "The contest-768 submission placed 6213th, in the bottom 5%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * (1 - r / len(d)))))(d.index[d.caption.str.contains('play when he gets close', regex=False)][0] + 1))(df.query('contest == 768').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-769-rank",
+  "source": "Submission: ranked top 37% (2,985th)",
+  "claim": "The contest-769 submission placed 2985th, in the top 37%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('eats this stuff up', regex=False)][0] + 1))(df.query('contest == 769').reset_index(drop=True))"
+ },
+ {
+  "id": "contest-771-rank",
+  "source": "Submission: ranked top 28% (1,934th)",
+  "claim": "The contest-771 submission placed 1934th, in the top 28%.",
+  "tables": {
+   "df": "data/captions.csv"
+  },
+  "code": "(lambda d: (lambda r: (d.contest.iloc[0].item(), r, round(100 * r / len(d))))(d.index[d.caption.str.contains('*“If I didn’t know better', regex=False)][0] + 1))(df.query('contest == 771').reset_index(drop=True))"
+ }
+]

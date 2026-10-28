@@ -1,0 +1,128 @@
+[
+  {
+    "id": "top-10-unchanged-2012",
+    "source": "When the publication updated the list in 2012 to include the first decade of the new millennium, not only did the Beatles’ classic remain at #1 but the entire top 10 was unchanged.",
+    "claim": "The 2003 and 2012 top 10s contain the same ten albums in the same order, with Sgt. Pepper's Lonely Hearts Club Band #1 in both.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2003 Rank'].le(10) | a['2012 Rank'].le(10)].assign(same_rank=lambda d: d['2003 Rank'].eq(d['2012 Rank']))[['Album', '2003 Rank', '2012 Rank', 'same_rank']].sort_values('2003 Rank')"
+  },
+  {
+    "id": "top-10-changed-2020",
+    "source": "Beyond “What’s Going On” jumping from #6 to #1 and “Pet Sounds” remaining locked in at #2, the entire top 10 was changed, some albums jumping scores of spots.",
+    "claim": "Only two albums in the 2020 top 10—What's Going On, up from #6 to #1, and Pet Sounds, still #2—were also in the 2003 top 10.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2020 Rank'].le(10)].assign(in_2003_top10=lambda d: d['2003 Rank'].le(10))[['Album', '2003 Rank', '2020 Rank', 'in_2003_top10']].sort_values('2020 Rank')"
+  },
+  {
+    "id": "new-albums-nearly-third",
+    "source": "Here is the complete ranking from 2020, and nearly a third of the albums were new, never appearing in previous rankings.",
+    "claim": "154 of the 500 albums in the 2020 ranking (30.8%) had not appeared in either the 2003 or the 2012 ranking.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2020 Rank'].notna()].assign(new=lambda d: d['2003 Rank'].isna() & d['2012 Rank'].isna())['new'].agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "2003-albums-dropped",
+    "source": "Here are the 174 albums from the 2003 ranking that failed to rank twenty years later.",
+    "claim": "174 of the 500 albums in the 2003 ranking (34.8%) are absent from the 2020 ranking.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2003 Rank'].notna()].assign(dropped=lambda d: d['2020 Rank'].isna())['dropped'].agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "dropped-compilations-share",
+    "source": "18% are compilations or greatest hits albums.",
+    "claim": "31 of the 174 albums that dropped out (17.8%) are compilations or greatest hits albums.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a.loc[a['2003 Rank'].notna() & a['2020 Rank'].isna(), 'Album Type'].isin(['Compilation', 'Greatest Hits']).agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "spotify-albums-ranking-decline",
+    "source": "Here we add in albums unavailable on Spotify that still made Rolling Stone’s 2020 list. About half of these albums (in red) saw their ranking decline.",
+    "claim": "Of the 22 albums not on Spotify that made the 2020 list, 10 (45.5%) had a worse 2020 rank than 2003 rank.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[(a['Spotify URI'] == 'Not on Spotify') & a['2020 Rank'].notna()].assign(declined=lambda d: d['2020 Rank'] > d['2003 Rank'])['declined'].agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "billboard-top-100-distribution",
+    "source": "Billboard #1 Album: 30% of albums\nTop 100 Albums in the 2020 Ranking\nBillboard #2-100: 60%\n#101+: 4%\nNever charted: 6%",
+    "claim": "Among the 100 albums in the 2020 top 100, 30% peaked at Billboard #1, 60% between #2 and #100, 4% between #101 and #200, and 6% never charted.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "pd.cut(a.loc[a['2020 Rank'].le(100), 'Peak Billboard Position'], [0, 1, 100, 200, 1000], labels=['#1', '#2-100', '#101+', 'Never charted']).value_counts(normalize=True).mul(100).sort_index()"
+  },
+  {
+    "id": "bottom-400-never-charted-3x",
+    "source": "If we look at Rolling Stone’s lower ranked albums, meaning those among the bottom 400, they are 3x more likely to have never charted on Billboard.",
+    "claim": "72 of the 400 albums in the 2020 bottom 400 (18%) never charted on Billboard, against 6 of the 100 top-100 albums (6%), three times the rate.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2020 Rank'].notna()].assign(never=lambda d: d['Peak Billboard Position'].eq(201), group=lambda d: np.where(d['2020 Rank'].le(100), 'top100', 'bottom400')).groupby('group')['never'].agg(['sum', 'count', 'mean']).assign(ratio=lambda d: d.loc['bottom400', 'mean'] / d.loc['top100', 'mean'])"
+  },
+  {
+    "id": "2003-voters-men-share",
+    "source": "In 2003, 90% of voters were men.",
+    "claim": "242 of the 269 voters in 2003 (90%) were men.",
+    "tables": {
+      "v": "data/voters.csv"
+    },
+    "code": "v.loc[v['Year'].eq(2003), 'Gender'].eq('man').agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "albums-by-men-share",
+    "source": "Not surprisingly, voters selected predominantly male performers—nearly 82% of the 500 albums selected were by men.",
+    "claim": "410 of the 500 albums in the 2003 ranking (82%) are by male artists.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a.loc[a['2003 Rank'].notna(), 'Artist Gender'].eq('Male').agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "women-voters-representation",
+    "source": "For the 2020 ranking, Rolling Stone – perhaps in an effort to poll beyond the musical tastes of white men – expanded the voting group from 269 to 336 and doubled the representation of women voters.",
+    "claim": "Women voters rose from 26 of 269 voters in 2003 (9.7%) to 73 of 336 in 2020 (21.7%).",
+    "tables": {
+      "v": "data/voters.csv"
+    },
+    "code": "v.assign(woman=v['Gender'].eq('woman')).groupby('Year')['woman'].agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "2020-judges-teenage-decades",
+    "source": "In 2020, over half of the judges were teenagers in the 1990s, 2000s, and 2010s.",
+    "claim": "191 of the 336 judges in 2020 (56.8%) were teenagers in the 1990s, 2000s or 2010s.",
+    "tables": {
+      "v": "data/voters.csv"
+    },
+    "code": "v.loc[v['Year'].eq(2020), 'Teenage Decade'].isin(['1990s', '2000s', '2010s']).agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "voters-teenagers-1990s",
+    "source": "In 2003, for example, only 11 voters (4%) were teens in the 1990s. ... In 2020, the number of voters who grew up in the 1990s jumped from 11 (4%) to 90 (25%).",
+    "claim": "The number of voters who were teenagers in the 1990s rose from 11 of 269 (4.1%) in 2003 to 90 of 336 in 2020.",
+    "tables": {
+      "v": "data/voters.csv"
+    },
+    "code": "v.assign(n90=v['Teenage Decade'].eq('1990s')).groupby('Year')['n90'].agg(['sum', 'count', 'mean'])"
+  },
+  {
+    "id": "2020-list-retention-by-decade",
+    "source": "’90s Albums\nOf the 104 albums from the 1990s on the 2020 list, 55 (53%) were on the list in 2003.\n’80s Albums\nOf the 73 albums from the 1980s on the 2020 list, 56 (76%) were on the list in 2003.\n’70s Albums\nOf the 155 albums from the 1970s on the 2020 list, 128 (83%) were on the list in 2003.\n’60s Albums\nOf the 71 albums from the 1960s on 2020 list, 65 (92%) were on the list in 2003.\n’50s Albums\nOf the 10 albums from the 1950s on the 2020 list, 8 (80%) were on the in 2003.",
+    "claim": "By release decade, 55 of 104 albums from the 1990s (52.9%), 56 of 73 from the 1980s (76.7%), 128 of 155 from the 1970s (82.6%), 65 of 71 from the 1960s (91.5%) and 8 of 10 from the 1950s (80%) on the 2020 list were also on the 2003 list.",
+    "tables": {
+      "a": "data/albums.csv"
+    },
+    "code": "a[a['2020 Rank'].notna()].assign(decade=lambda d: d['Release Year'] // 10 * 10).query('1950 <= decade <= 1990').groupby('decade').agg(n=('Album', 'size'), on_2003=('2003 Rank', lambda s: s.notna().sum())).assign(share=lambda d: d['on_2003'] / d['n'] * 100)"
+  }
+]

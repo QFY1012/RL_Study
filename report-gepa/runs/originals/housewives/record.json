@@ -1,0 +1,37 @@
+{
+ "id": "housewives",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 284,
+  "steps": 32,
+  "tools": 39,
+  "nudged": 0,
+  "usage": {
+   "input": 36453,
+   "output": 41635
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "good-vs-bad-apology-share",
+   "basis": "Output shows total=187; True n=91 share=0.486631 (~49%); False n=96 share=0.513369 (~51%). This matches the claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "episodes-with-at-least-one-apology",
+   "basis": "Output shows sum=80 and count=94, matching 80 of the 94 episodes.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 7
+}

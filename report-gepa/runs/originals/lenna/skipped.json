@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Image hits on the internet rose to a peak number in 1995.",
+    "why": "In data/all_final.csv the highest annual found-instance count is 319 in 2012, not 1995 (287), so the 1995 peak is not reproduced; the story's cleaned chart data is not in this folder."
+  },
+  {
+    "source": "including 10+ languages in 2021",
+    "why": "The 65 instances dated 2021 in data/all_final.csv have 8 distinct title_lang values and 6 distinct descrip_lang values (9 across both), so 10+ languages in 2021 is not reproduced; the September 2021 additions used for the story are not in this file."
+  },
+  {
+    "source": "the use of Lenna continues",
+    "why": "Qualitative statement with no number or threshold; the 2021 data are partial-year and cannot establish continuation."
+  },
+  {
+    "source": "Within the .edu world, the Lenna image continues to appear in homework questions, class slides and to be hosted on educational and research sites",
+    "why": "No number, ranking or defined subset; 'homework questions' and 'class slides' are not fields computable from the data."
+  },
+  {
+    "source": "The image’s spread across digital geographies has mirrored this geographical growth",
+    "why": "Qualitative framing; its measurable domain claims are covered by the two domain facts."
+  }
+]
