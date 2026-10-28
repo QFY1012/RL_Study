@@ -25,6 +25,7 @@ report-bench/out/answers/<id>/facts.json.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import os
 import re
@@ -79,7 +80,8 @@ def task_text(task_id: str) -> str:
 
 
 def _norm(s: str) -> str:
-    return re.sub(r"[\W_]+", " ", s.replace("\u2019", "'")).lower().strip()
+    # web_fetch leaves entities such as &lsquo; undecoded, so both sides are unescaped first
+    return re.sub(r"[\W_]+", " ", html.unescape(s)).lower().strip()
 
 
 def quoted(source: str, read: str) -> bool:
