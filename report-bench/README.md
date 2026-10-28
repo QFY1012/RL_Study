@@ -131,20 +131,24 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 
 ## 数据
 
-`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench.tar.xz`](https://drive.google.com/file/d/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd/view)(186 MB,md5 `8effb42850da220c7761281ba514d52f`,2026-10-25,全部题目从原料重建、修过乱码和空列;文件的「管理版本」里永久保留着之前三版:2026-10-24 的 170 题,md5 `40707a7ba193629ee509129035c1aab3`;2026-10-25 的 185 题,md5 `c046fd4b97eae6349a000e421afff260`;2026-10-25 修乱码前的 196 题,md5 `4e75a96d3b12ecb6bd54b732ad69d48e`),只有本人账号能打开。包里的路径从仓库根目录起:
+`out/` 不进仓库,在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench-10-28.7z`](https://drive.google.com/file/d/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA/view),只有本人账号能打开。题目是 2026-10-25 从原料重建、修过乱码和空列的 196 题,`task.json` 的 `instruction` 是现在的 `TASK.md`(交 `index.html` 和 `facts.json`)。包里最外层是一个 `report-bench/` 目录,下面:
 
-- `report-bench/out/`:196 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、148 份 `original.json`),解压后 1.1 GB;
+- `report-bench/out/`:196 题的 `tasks/`、`tasks.jsonl` 和 `answers/`(48 份 `findings.json`、148 份 `original.json`),解压后 1.2 GB;
 - `report-gepa/runs/evidence/`:雅的典型案例用到的 8 帧截图,judge 打分要用;
-- `report-bench/` 的代码,打包时和仓库一样,解压时不取,免得盖掉后来的改动。
+- `report-bench/` 的代码和文档,打包时和仓库一样,解压时不取,免得盖掉后来的改动。
+
+要 7z(`apt-get install -y p7zip-full`)。解压到一个空的临时目录,再把数据移进仓库:
 
 ```sh
-tar -xJvf report-bench.tar.xz -C <仓库根目录> report-bench/out report-gepa/runs/evidence
+7z x report-bench-10-28.7z -o<临时目录>
+mv <临时目录>/report-bench/report-bench/out <仓库根目录>/report-bench/out
+mkdir -p <仓库根目录>/report-gepa/runs && mv <临时目录>/report-bench/report-gepa/runs/evidence <仓库根目录>/report-gepa/runs/evidence
 ```
 
 在云端容器里取:`gcloud auth login --no-launch-browser --enable-gdrive-access` 登录(要用户在浏览器里授权,把验证码贴回来),环境变量 `CLOUDSDK_AUTH_ACCESS_TOKEN` 盖着登录的账号,取令牌时去掉它:
 
 ```sh
-curl -fL --progress-bar -o report-bench.tar.xz \
+curl -fL --progress-bar -o report-bench-10-28.7z \
   -H "Authorization: Bearer $(env -u CLOUDSDK_AUTH_ACCESS_TOKEN gcloud auth print-access-token)" \
-  "https://www.googleapis.com/drive/v3/files/1JJJ1mUBmY8jTcvAA_61F3A3UzRjQ_MRd?alt=media"
+  "https://www.googleapis.com/drive/v3/files/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA?alt=media"
 ```
