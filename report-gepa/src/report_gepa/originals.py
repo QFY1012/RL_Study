@@ -13,8 +13,12 @@ run outside the sandbox), lists every finding the authors state or label, and
 writes the ones the data reproduces as facts, each quoting the story's words in
 `source`; the rest go to skipped.json with the reason. Then every fact is run
 again and its claim read against its printout, as trust.py does for a page (1.2,
-1.3). Each task lives in <out_dir>/<id>/: facts.json, skipped.json, record.json
-and session.jsonl; the copied data is removed afterwards.
+1.3), and its source looked up in the text the agent's web tools returned. The
+facts that pass are the answer, answer.json; the others are listed in
+record.json under `dropped`. Each task lives in <out_dir>/<id>/: facts.json (the
+agent's), answer.json, skipped.json, record.json and session.jsonl; the copied
+data is removed afterwards. With --answers, answer.json is also copied to
+report-bench/out/answers/<id>/facts.json.
 """
 
 from __future__ import annotations
@@ -22,6 +26,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -41,7 +46,7 @@ The files: {files}
 Write down the story's findings that this data reproduces.
 
 1. Read the story on the web. web_fetch returns the page as the server sends it. web_view opens it in a browser and scrolls it like a reader, so it also gets text drawn by scripts, chart labels and the text of scrolling steps: use it when web_fetch returns little of the story, and to read what the charts label. Follow links to the story's methods or data notes when they say how a number was computed.
-2. List every finding the authors draw from data: each number, comparison, ranking, share, trend or pattern the text states or a chart labels.
+2. List every finding the authors draw from data: each number, comparison, ranking, share, trend or pattern the text states or a chart labels. A description of the data itself is not a finding: how many records, people, items, categories or sources it has, and how it was collected.
 3. Write each finding the files in data/ can reproduce as a fact in `facts.json`:
 
 ```json
@@ -72,6 +77,20 @@ def task_text(task_id: str) -> str:
     return TASK.format(title=original["title"], url=original["url"], files=", ".join(task["files"]))
 
 
+def _norm(s: str) -> str:
+    return re.sub(r"[\W_]+", " ", s.replace("\u2019", "'")).lower().strip()
+
+
+def read_on_web(session: Path) -> str:
+    """Everything the agent's web tools returned, normalised for looking quotes up."""
+    text = []
+    for line in session.read_text(encoding="utf-8").splitlines():
+        m = json.loads(line).get("message", {})
+        if m.get("role") == "toolResult" and m.get("toolName") in ("web_fetch", "web_view"):
+            text += [c.get("text", "") for c in m.get("content", []) if c.get("type") == "text"]
+    return _norm(" ".join(text))
+
+
 def extract(task_id: str, out_dir: Path, model: str, effort: str = "high") -> dict:
     ws = out_dir / task_id
     shutil.rmtree(ws, ignore_errors=True)
@@ -92,6 +111,17 @@ def extract(task_id: str, out_dir: Path, model: str, effort: str = "high") -> di
         check = claims_hold(facts, results, model)
         record["wrong"] = check["wrong"]
         record["verdicts"] = check["verdicts"]
+        if check["wrong"] is not None:
+            read = read_on_web(ws / "session.jsonl") if (ws / "session.jsonl").exists() else ""
+            wrong = {v["id"] for v in check["wrong"]}
+            dropped = [{"id": f["id"], "why": "claim does not agree with its printout"} for f in facts if f["id"] in wrong]
+            dropped += [{"id": f["id"], "why": "source not in the story as read"} for f in facts
+                        if f["id"] not in wrong and _norm(str(f.get("source", ""))) not in read]
+            gone = {d["id"] for d in dropped}
+            answer = [f for f in facts if f["id"] not in gone]
+            record["dropped"] = dropped
+            record["answer"] = len(answer)
+            (ws / "answer.json").write_text(json.dumps(answer, ensure_ascii=False, indent=1), encoding="utf-8")
     skipped = ws / "skipped.json"
     try:
         record["skipped"] = len(json.loads(skipped.read_text(encoding="utf-8")))
@@ -108,6 +138,7 @@ def main():
     ap.add_argument("ids", nargs="*")
     ap.add_argument("--model", default=GEN_MODEL)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--answers", action="store_true", help="copy each answer.json to report-bench/out/answers/<id>/facts.json")
     args = ap.parse_args()
     ids = args.ids or sorted(p.parent.name for p in (BENCH / "answers").glob("*/original.json"))
     args.out.mkdir(parents=True, exist_ok=True)
@@ -116,10 +147,12 @@ def main():
 
     def one(task_id):
         r = extract(task_id, args.out, args.model)
-        wrong = r.get("wrong")
-        print(f"{task_id}: facts={r['facts']} skipped={r['skipped']} problems={len(r['problems'])} "
-              f"wrong={'?' if wrong is None and r['facts'] and not r['problems'] else len(wrong or [])} "
-              f"{r['run'].get('seconds')}s steps={r['run'].get('steps')}", flush=True)
+        answer = args.out / task_id / "answer.json"
+        if args.answers and answer.exists():
+            shutil.copy2(answer, BENCH / "answers" / task_id / "facts.json")
+        print(f"{task_id}: facts={r['facts']} answer={r.get('answer')} dropped={len(r.get('dropped', []))} "
+              f"skipped={r['skipped']} problems={len(r['problems'])} {r['run'].get('seconds')}s steps={r['run'].get('steps')}",
+              flush=True)
 
     with ThreadPoolExecutor(args.workers) as pool:
         list(pool.map(one, ids))
