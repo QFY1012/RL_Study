@@ -1,0 +1,24 @@
+{
+ "task": "ab_test-01",
+ "model": "deepseek-v4.1-flash",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "deepseek-v4.1-flash",
+   "effort": "high",
+   "seconds": 1107,
+   "steps": 56,
+   "tools": 55,
+   "nudged": 0,
+   "usage": {
+    "input": 649853,
+    "output": 42219
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 1107
+}

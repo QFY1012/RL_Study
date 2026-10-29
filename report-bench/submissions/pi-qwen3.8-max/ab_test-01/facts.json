@@ -1,0 +1,146 @@
+[
+  {
+    "id": "run-window",
+    "claim": "The log covers 18,000 consultation sessions over 42 days, from 2024-11-18 to 2024-12-29.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'sessions': len(consults), 'distinct_days': pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False)).dt.date.nunique(), 'first_day': pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False)).min().date(), 'last_day': pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False)).max().date()})"
+  },
+  {
+    "id": "balanced-arms",
+    "claim": "The split is even: 8,987 sessions landed in the Treatment arm and 9,013 in the Control arm.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).group.value_counts().rename('sessions')"
+  },
+  {
+    "id": "wait-median-cut",
+    "claim": "Median time to first doctor response is 88 seconds in Treatment against 110 seconds in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').first_response_seconds.median()"
+  },
+  {
+    "id": "wait-tail-cut",
+    "claim": "The long tail of waits shrank hardest: 1.0% of Treatment sessions waited more than 300 seconds for a first reply, against 4.3% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'}), slow=consults.first_response_seconds > 300).groupby('group').slow.mean()"
+  },
+  {
+    "id": "wait-percentiles",
+    "claim": "The speed-up holds across the whole distribution: the 90th percentile of wait falls from 234 seconds in Control to 177 in Treatment, and the 95th from 290 to 213.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').first_response_seconds.quantile([0.25, 0.5, 0.75, 0.9, 0.95]).unstack()"
+  },
+  {
+    "id": "completion-flat",
+    "claim": "Completion did not move: 87.9% of Treatment sessions completed the consultation against 88.0% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').is_completed.mean()"
+  },
+  {
+    "id": "completion-z-test",
+    "claim": "A pooled two-proportion z-test on completion returns z = -0.16, so the gap between the arms is indistinguishable from zero.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "(lambda x: (x.is_completed[x.group == 'Treatment'].mean() - x.is_completed[x.group == 'Control'].mean()) / np.sqrt(x.is_completed.mean() * (1 - x.is_completed.mean()) * (1 / (x.group == 'Treatment').sum() + 1 / (x.group == 'Control').sum())))(consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})))"
+  },
+  {
+    "id": "followup-flat",
+    "claim": "Seven-day follow-up is flat too: 12.1% of Treatment sessions came back within 7 days versus 12.3% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').followup_7d.mean()"
+  },
+  {
+    "id": "completion-insensitive-to-wait",
+    "claim": "Among sessions that did get a reply, completion barely depends on how long the reply took: 92.8% for waits up to 60 seconds, 92.8% for 60-120, 93.1% for 120-180, 91.4% for 180-300 and 90.7% above 300 seconds.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults[consults.first_response_seconds.notna()].groupby(pd.cut(consults.first_response_seconds, [0, 60, 120, 180, 300, np.inf]), observed=True).is_completed.agg(['size', 'mean'])"
+  },
+  {
+    "id": "dermatology-completion-drop",
+    "claim": "Dermatology is where the change backfires: 80.5% of Treatment sessions there complete, against 85.0% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults[consults.department == '皮肤科'].assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').is_completed.mean()"
+  },
+  {
+    "id": "dermatology-abandonment",
+    "claim": "The dermatology loss happens before a doctor is reached: 12.7% of Treatment sessions in that department abandon pre-doctor, against 7.7% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults[consults.department == '皮肤科'].assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').lost_before_doctor.mean()"
+  },
+  {
+    "id": "ex-dermatology-positive",
+    "claim": "Outside dermatology the change is mildly positive: completion is 89.4% in Treatment against 88.7% in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults[consults.department != '皮肤科'].assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').is_completed.mean()"
+  },
+  {
+    "id": "department-completion-table",
+    "claim": "Dermatology is the only department where Treatment finishes below Control: Pediatrics is 90.4% vs 88.9%, Internal medicine 89.1% vs 88.6%, Gynecology 89.3% vs 89.0% and ENT 88.1% vs 87.5%.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'}), dept=consults.department.map({'内科': 'Internal medicine', '儿科': 'Pediatrics', '皮肤科': 'Dermatology', '妇科': 'Gynecology', '五官科': 'ENT'})).pivot_table(index='dept', columns='group', values='is_completed', aggfunc='mean')"
+  },
+  {
+    "id": "load-shift-widens-gap",
+    "claim": "Median wait rose in the second period, from Dec 9 onward: Control went from 86 to 132 seconds and Treatment from 77 to 96, widening the gap from 9 seconds to 36.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'}), d=pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False))).assign(period=lambda x: np.where(x.d < pd.Timestamp('2024-12-09'), 'Nov 18 - Dec 8', 'Dec 9 - Dec 29')).pivot_table(index='period', columns='group', values='first_response_seconds', aggfunc='median')"
+  },
+  {
+    "id": "completion-by-period",
+    "claim": "Completion slipped in both arms in the second period, Control from 89.0% to 87.2% and Treatment from 88.7% to 87.3%, leaving the two arms level again.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'}), d=pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False))).assign(period=lambda x: np.where(x.d < pd.Timestamp('2024-12-09'), 'Nov 18 - Dec 8', 'Dec 9 - Dec 29')).pivot_table(index='period', columns='group', values='is_completed', aggfunc='mean')"
+  },
+  {
+    "id": "speed-up-on-every-platform",
+    "claim": "The faster first reply shows up on every platform: median 87 seconds in Treatment vs 110 in Control on Android, 86 vs 110 on iOS, and 90.5 vs 108 on the WeChat mini-program.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'}), plat=consults.platform.map({'iOS': 'iOS', 'Android': 'Android', '微信小程序': 'WeChat mini-program'})).pivot_table(index='plat', columns='group', values='first_response_seconds', aggfunc='median')"
+  },
+  {
+    "id": "consults-run-shorter",
+    "claim": "Consultations that do happen run a little shorter in Treatment: median 10.4 minutes against 11.2 in Control.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.assign(group=consults.group.str.strip().map({'对照组': 'Control', '实验组': 'Treatment'})).groupby('group').consult_minutes.median()"
+  },
+  {
+    "id": "two-failure-modes",
+    "claim": "Of 18,000 sessions, 15,836 completed; of the 2,164 that did not, 903 abandoned before any doctor replied and 1,261 dropped out after the first reply.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'sessions': len(consults), 'completed': int(consults.is_completed.sum()), 'not_completed': int((consults.is_completed == 0).sum()), 'abandoned_before_doctor': int(((consults.is_completed == 0) & (consults.lost_before_doctor == 1)).sum()), 'dropped_after_reply': int(((consults.is_completed == 0) & (consults.lost_before_doctor == 0)).sum())})"
+  },
+  {
+    "id": "complaint-spread",
+    "claim": "Across the 25 distinct chief complaints, completion ranges from 81.0% on the weakest to 91.1% on the strongest.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults.groupby('chief_complaint').is_completed.mean().agg(['min', 'max', 'size'])"
+  },
+  {
+    "id": "structural-missingness",
+    "claim": "Missing values are structural rather than random: all 903 missing wait times sit on the 903 rows flagged as abandoned before a doctor, and all 2,164 missing consult durations sit on the 2,164 non-completed sessions.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'wait_missing': int(consults.first_response_seconds.isna().sum()), 'abandoned_rows': int((consults.lost_before_doctor == 1).sum()), 'minutes_missing': int(consults.consult_minutes.isna().sum()), 'not_completed_rows': int((consults.is_completed == 0).sum())})"
+  },
+  {
+    "id": "padded-group-labels",
+    "claim": "The group column holds 4 distinct values instead of 2 because 19 rows carry a trailing space on the label, so every figure here strips it first.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'distinct_group_values': consults.group.nunique(), 'rows_with_padded_label': int(consults.group.ne(consults.group.str.strip()).sum())})"
+  },
+  {
+    "id": "mixed-date-formats",
+    "claim": "enter_date stores 45 distinct strings for 42 real days, because 3 rows use a slash format instead of dashes.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'distinct_date_strings': consults.enter_date.nunique(), 'distinct_dates_normalised': pd.to_datetime(consults.enter_date.str.replace('/', '-', regex=False)).dt.date.nunique(), 'slash_format_rows': int(consults.enter_date.str.contains('/').sum())})"
+  },
+  {
+    "id": "outliers-and-caps",
+    "claim": "Nine waits exceed 900 seconds, the longest being 71,396 seconds, and 7 consult durations are pinned at exactly 640 minutes, which is why this report leans on medians.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "pd.Series({'waits_over_900s': int((consults.first_response_seconds > 900).sum()), 'longest_wait_seconds': consults.first_response_seconds.max(), 'consults_at_640_minutes': int((consults.consult_minutes == 640).sum())})"
+  },
+  {
+    "id": "sparse-fields",
+    "claim": "Three fields are sparse: platform is blank on 6 rows, chief_complaint on 36 and followup_7d on 186.",
+    "tables": {"consults": "data/data.csv"},
+    "code": "consults[['platform', 'chief_complaint', 'followup_7d']].isna().sum()"
+  }
+]

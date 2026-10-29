@@ -2,103 +2,137 @@
   {
     "id": "scale-and-split",
     "claim": "The file holds 18,000 consultations between 18 Nov 2024 and 29 Dec 2024, split into 8,987 experiment-group and 9,013 control-group users.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "pd.Series({'consultations': len(consult), 'first_day': pd.to_datetime(consult.enter_date.str.replace('/', '-')).min().strftime('%d %b %Y'), 'last_day': pd.to_datetime(consult.enter_date.str.replace('/', '-')).max().strftime('%d %b %Y'), 'experiment': (consult.group.str.strip() == '实验组').sum(), 'control': (consult.group.str.strip() == '对照组').sum()})"
   },
   {
     "id": "weekly-volume",
     "claim": "Weekly volume grew from 2,409 consultations in the first week (1,245 experiment, 1,164 control) to 3,546 in the last (1,772 experiment, 1,774 control), with the two groups balanced in every week.",
-    "tables": {"consult": "data/data.csv"},
-    "code": "consult.assign(g=consult.group.str.strip(), week=pd.to_datetime(consult.enter_date.str.replace('/', '-')).dt.to_period('W').astype(str)).groupby(['week', 'g']).size().unstack()"
+    "tables": {
+      "consult": "data/data.csv"
+    },
+    "code": "consult.assign(g=consult.group.str.strip(), week=pd.to_datetime(consult.enter_date.str.replace('/', '-')).dt.to_period('W').astype(str)).groupby(['week', 'g']).size().unstack().assign(total=lambda d: d.sum(axis=1))"
   },
   {
     "id": "wait-time-improved",
     "claim": "The experiment cut the median wait for a doctor's first response from 110 seconds to 88, and raised the share answered within two minutes from 53.8% to 68.6%.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').first_response_seconds.agg(median='median', mean='mean', share_under_2min=lambda s: (s <= 120).mean())"
   },
   {
     "id": "long-waits-gone",
     "claim": "Long waits nearly vanished: 90 experiment consultations waited over five minutes for a doctor against 385 in control, and the longest wait fell from 71,396 seconds to 18,669.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').first_response_seconds.agg(over_5min=lambda s: (s > 300).sum(), over_10min=lambda s: (s > 600).sum(), longest='max')"
   },
   {
     "id": "wait-improved-everywhere",
     "claim": "The median wait fell in every department, from 105 to 82 seconds in 五官科 and from 107 to 86 in 皮肤科, so the wait gain is broad rather than concentrated.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby(['department', 'g']).first_response_seconds.median().unstack()"
   },
   {
     "id": "completion-flat-overall",
     "claim": "Overall completion did not move: 87.94% in the experiment against 88.02% in control, that is 7,903 of 8,987 versus 7,933 of 9,013.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').is_completed.agg(['mean', 'sum', 'size'])"
   },
   {
     "id": "abandonment-up-slightly",
     "claim": "Abandonment before reaching a doctor rose slightly overall, from 4.74% (427 users) in control to 5.30% (476) in the experiment.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').lost_before_doctor.agg(['mean', 'sum'])"
   },
   {
     "id": "dermatology-completion-drop",
     "claim": "皮肤科 (dermatology) is the exception: completion fell to 80.51% in the experiment against 85.04% in control, while the best other department, 儿科, moved the other way at 90.37% against 88.94%.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby(['department', 'g']).is_completed.agg(['mean', 'size'])"
   },
   {
     "id": "dermatology-abandonment-doubles",
     "claim": "Dermatology abandonment doubled, from 7.66% (124 of 1,618 users) in control to 12.71% (191 of 1,503) in the experiment.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby(['department', 'g']).lost_before_doctor.agg(['mean', 'sum', 'size'])"
   },
   {
     "id": "dermatology-gap-every-week",
     "claim": "The dermatology gap appears in all six weeks, from 83.6% against 84.0% in the first week to 79.4% against 83.7% in the last.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult[consult.department == '皮肤科'].assign(g=consult.group.str.strip(), week=pd.to_datetime(consult.enter_date.str.replace('/', '-')).dt.to_period('W').astype(str)).groupby(['week', 'g']).is_completed.mean().unstack()"
   },
   {
     "id": "dermatology-all-complaints",
     "claim": "Every skin complaint lost ground: back rash 79.4% against 86.9%, hives 78.7% against 85.5%, and acne 82.2% against 86.1%.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult[consult.department == '皮肤科'].assign(g=consult.group.str.strip()).groupby(['chief_complaint', 'g']).is_completed.mean().unstack()"
   },
   {
     "id": "dermatology-all-platforms",
     "claim": "The dermatology drop is not a platform artefact: abandonment is higher in the experiment on Android (13.3% vs 7.2%), iOS (12.0% vs 8.2%) and 微信小程序 (12.7% vs 7.5%).",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult[consult.department == '皮肤科'].assign(g=consult.group.str.strip()).groupby(['platform', 'g']).lost_before_doctor.mean().unstack()"
   },
   {
     "id": "department-mix-balanced",
     "claim": "The department mix was balanced, so the gap is not a mix shift: dermatology was 16.7% of experiment traffic against 17.9% of control.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').department.value_counts(normalize=True).unstack()"
   },
   {
     "id": "followup-unchanged",
     "claim": "Seven-day follow-up was unchanged: 12.15% in the experiment against 12.31% in control, on 8,891 and 8,923 recorded users.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult.assign(g=consult.group.str.strip()).groupby('g').followup_7d.agg(['mean', 'count'])"
   },
   {
     "id": "consults-shorter",
     "claim": "Completed consultations were shorter, with a median of 10.4 minutes in the experiment against 11.2 in control.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "consult[consult.is_completed == 1].assign(g=consult.group.str.strip()).groupby('g').consult_minutes.agg(['median', 'mean'])"
   },
   {
     "id": "missing-is-structural",
     "claim": "Missing values are structural rather than random: the 903 blank response times are exactly the 903 users lost before reaching a doctor, and the 2,164 blank consultation lengths are exactly the 2,164 consultations that never completed.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "pd.Series({'blank_response_times': consult.first_response_seconds.isna().sum(), 'lost_before_doctor': (consult.lost_before_doctor == 1).sum(), 'response_blank_iff_lost': bool((consult.first_response_seconds.isna() == (consult.lost_before_doctor == 1)).all()), 'blank_consult_lengths': consult.consult_minutes.isna().sum(), 'not_completed': (consult.is_completed == 0).sum(), 'length_blank_iff_incomplete': bool((consult.consult_minutes.isna() == (consult.is_completed == 0)).all()), 'blank_platform': consult.platform.isna().sum(), 'blank_complaint': consult.chief_complaint.isna().sum()})"
   },
   {
     "id": "dirty-group-labels",
     "claim": "Group labels arrive with stray whitespace: 19 rows carry a padded variant, 10 spelled 实验组 and 9 spelled 对照组, so the raw column shows four values instead of two.",
-    "tables": {"consult": "data/data.csv"},
+    "tables": {
+      "consult": "data/data.csv"
+    },
     "code": "pd.Series({'raw_label_variants': consult.group.nunique(), 'padded_rows': (consult.group != consult.group.str.strip()).sum(), 'padded_experiment': ((consult.group != consult.group.str.strip()) & (consult.group.str.strip() == '实验组')).sum(), 'padded_control': ((consult.group != consult.group.str.strip()) & (consult.group.str.strip() == '对照组')).sum()})"
   }
 ]

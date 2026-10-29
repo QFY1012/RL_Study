@@ -1,0 +1,151 @@
+[
+  {"id": "dataset-shape",
+   "claim": "The person file holds 3,312 person-conversation records covering 1,656 conversations among 1,456 distinct people.",
+   "tables": {"people": "data/people.csv"},
+   "code": "pd.Series({'person-conversation rows': len(people), 'distinct people': people.user_id.nunique(), 'conversations': people.convo_id.nunique()})"},
+
+  {"id": "conversations-per-person",
+   "claim": "702 participants had exactly one conversation, 266 had two, 187 had three and 3 people had eight.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.user_id.value_counts().value_counts().sort_index()"},
+
+  {"id": "records-with-ratings",
+   "claim": "All 3,312 records carry the pre-conversation mood rating, and 3,257 of them also carry the in-conversation and post-conversation ratings.",
+   "tables": {"people": "data/people.csv"},
+   "code": "pd.Series({'pre-conversation mood recorded': people.pre_affect.notna().sum(), 'in-conversation and post ratings recorded': people.end_affect.notna().sum()})"},
+
+  {"id": "mood-and-enjoyment-scale",
+   "claim": "The mood items and the enjoyment item all run from 1 to 9.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['pre_affect','begin_affect','middle_affect','end_affect','worst_affect','how_enjoyable']].agg(['min','max'])"},
+
+  {"id": "liking-scale",
+   "claim": "The liking items and the shared-reality item all run from 1 to 7.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['i_like_you','you_like_me','shared_reality']].agg(['min','max'])"},
+
+  {"id": "participants-age",
+   "claim": "Participants were 19 to 66 years old, with a mean of 34.3 and a median of 32.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.age.describe().round(1)"},
+
+  {"id": "participants-sex-race",
+   "claim": "1,740 records are from women, 1,463 from men, 53 from people who answered other or prefer not to answer, and 56 records have no sex recorded; 2,110 records are from white participants, 485 Asian, 248 Black or African American, 220 Hispanic or Latino and 128 mixed.",
+   "tables": {"people": "data/people.csv"},
+   "code": "pd.Series({'women': (people.sex=='female').sum(), 'men': (people.sex=='male').sum(), 'other or prefer not to answer': (people.sex=='other_or_prefer_not_to_answer').sum(), 'sex not recorded': people.sex.isna().sum(), 'white': (people.race=='white').sum(), 'asian': (people.race=='asian').sum(), 'black or African American': (people.race=='black_or_african_american').sum(), 'Hispanic or Latino': (people.race=='hispanic_or_latino').sum(), 'mixed': (people.race=='mixed').sum()})"},
+
+  {"id": "mood-climbs",
+   "claim": "Average mood on the 1-9 scale rises at every probe: 6.10 before the conversation, 6.16 at the start, 6.93 in the middle and 7.38 at the end.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['pre_affect','begin_affect','middle_affect','end_affect']].mean().round(2)"},
+
+  {"id": "mood-gain",
+   "claim": "On average people finished 1.288 points higher in mood than they started (median 1.000); 68.1% ended higher, 20.2% unchanged and 10.1% lower.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.assign(gain=people.end_affect - people.pre_affect).gain.agg(mean='mean', median='median', ended_higher=lambda s: (s>0).mean(), ended_unchanged=lambda s: (s==0).mean(), ended_lower=lambda s: (s<0).mean()).round(3)"},
+
+  {"id": "arousal-climbs",
+   "claim": "Average arousal on the 1-9 scale rises from 5.32 before the conversation to 5.67 at the start, 6.40 in the middle and 6.70 at the end.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos[['pre_arousal_avg','begin_arousal_avg','middle_arousal_avg','end_arousal_avg']].mean().round(2)"},
+
+  {"id": "enjoyment-high",
+   "claim": "Conversations were rated enjoyable: mean 7.411 and median 8.000 on the 1-9 scale, with 76.7% choosing 7 or more, 28.1% giving the top score of 9 and 2.4% rating it 3 or less.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.how_enjoyable.agg(mean='mean', median='median', rated_7_or_more=lambda s: (s>=7).mean(), top_score_9=lambda s: (s==9).mean(), rated_3_or_less=lambda s: (s<=3).mean()).round(3)"},
+
+  {"id": "enjoyment-distribution",
+   "claim": "Ratings of 1 to 9 were given 19, 15, 44, 86, 181, 373, 772, 837 and 930 times respectively.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.how_enjoyable.value_counts().sort_index()"},
+
+  {"id": "liking-means",
+   "claim": "On the 1-7 liking scale people rated how much they liked their partner at 5.995 on average, but believed their partner liked them at only 5.351.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['i_like_you','you_like_me']].mean().round(3)"},
+
+  {"id": "liking-gap-spread",
+   "claim": "The gap between liking and believed liking averaged 0.64: 51% of people liked their partner more than they thought they were liked and 5% the reverse.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.assign(gap=people.i_like_you - people.you_like_me).gap.agg(mean='mean', liked_more_than_they_believed=lambda s: (s>0).mean(), liked_less_than_they_believed=lambda s: (s<0).mean()).round(2)"},
+
+  {"id": "liking-actual-vs-believed",
+   "claim": "Across the 3,257 matched records the partner doing the judging was in fact liked at 5.995 on average, while they believed they were liked at 5.351.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.merge(people, on='convo_id', suffixes=('_me','_other')).query('user_id_me != user_id_other')[['i_like_you_other','you_like_me_me']].agg(['mean','count']).round(3)"},
+
+  {"id": "belief-accuracy",
+   "claim": "How much one person actually liked their partner correlated only 0.189 with how much that partner believed they were liked.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.merge(people, on='convo_id', suffixes=('_me','_other')).query('user_id_me != user_id_other')[['i_like_you_me','you_like_me_other']].corr().round(3)"},
+
+  {"id": "partner-agreement",
+   "claim": "The two members of a pair barely agree: their end moods correlate 0.177, their enjoyment ratings 0.174, their liking of each other 0.191, their felt shared reality 0.197 and their mood change during the conversation 0.062.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.merge(people, on='convo_id', suffixes=('_me','_other')).query('user_id_me != user_id_other').pipe(lambda d: pd.Series({'end mood': d.end_affect_me.corr(d.end_affect_other), 'enjoyment': d.how_enjoyable_me.corr(d.how_enjoyable_other), 'liking of partner': d.i_like_you_me.corr(d.i_like_you_other), 'felt shared reality': d.shared_reality_me.corr(d.shared_reality_other), 'mood change': (d.end_affect_me - d.begin_affect_me).corr(d.end_affect_other - d.begin_affect_other)})).round(3)"},
+
+  {"id": "race-diff-enjoyment",
+   "claim": "Same-race pairs rated the conversation 7.462 on average and mixed-race pairs 7.345, across 935 and 721 conversations.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos.groupby('race_diff').how_enjoyable_avg.agg(['size','mean']).round(3)"},
+
+  {"id": "edu-diff-enjoyment",
+   "claim": "Pairs with different education levels enjoyed it slightly more, 7.503 against 7.304 for same-level pairs, across 871 and 785 conversations.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos.groupby('edu_diff').how_enjoyable_avg.agg(['size','mean']).round(3)"},
+
+  {"id": "sex-diff-enjoyment",
+   "claim": "Same-sex pairs rated the conversation 7.378 and mixed-sex pairs 7.443, across 889 and 767 conversations.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos.groupby('sex_diff').how_enjoyable_avg.agg(['size','mean']).round(3)"},
+
+  {"id": "politics-diff-enjoyment",
+   "claim": "Enjoyment slides with political distance on the 1-6 politics scale, from 7.478 in the 408 conversations where the two people sat at the same point to 7.065 in the 23 with the widest gap, while the average mood gain falls from 1.303 to 1.022.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos.groupby('politics_diff').agg(n=('how_enjoyable_avg','size'), enjoyment=('how_enjoyable_avg','mean'), mood_gain=('affect_diff_avg','mean')).round(3)"},
+
+  {"id": "age-diff-enjoyment",
+   "claim": "Age gaps of up to four decades do not reduce enjoyment: 7.427 for the 464 pairs in the same age band, 7.572 for the 152 pairs three bands apart and 7.630 for the 50 pairs four bands apart.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos.groupby('age_diff').how_enjoyable_avg.agg(['size','mean']).round(3)"},
+
+  {"id": "shared-reality-correlations",
+   "claim": "How much shared reality a person felt correlates 0.577 with how enjoyable they found the conversation, 0.533 with how much they liked their partner, 0.522 with how liked they believed they were and 0.519 with the mood they ended in.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['shared_reality','how_enjoyable','i_like_you','you_like_me','end_affect']].corr()['shared_reality'].round(3)"},
+
+  {"id": "stranger-traits",
+   "claim": "After the conversation partners were rated kind at 7.98, polite 7.93, agreeable 7.75, intelligent 7.68 and trustworthy 7.51, but funny at only 4.72.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos[['you_are_kind_avg','you_are_polite_avg','you_are_agreeable_avg','you_are_intelligent_avg','you_are_trustworthy_avg','you_are_funny_avg']].mean().round(2)"},
+
+  {"id": "status-ratings",
+   "claim": "People rated their partner's status at 5.91 but their own at 5.53, and assumed their partner rated them at 5.74.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos[['i_think_my_status_avg','i_think_your_status_avg','you_think_my_status_avg']].mean().round(2)"},
+
+  {"id": "turn-length-asymmetry",
+   "claim": "People rated their own turns as longer than their partner's: 5.40 against 5.03.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos[['my_turn_length_avg','your_turn_length_avg']].mean().round(2)"},
+
+  {"id": "worst-best-moments",
+   "claim": "Averaged over pairs, mood was 6.10 before the conversation, 5.80 at the worst moment during it, 7.83 at the best moment and 7.38 at the end.",
+   "tables": {"convos": "data/convos.csv"},
+   "code": "convos[['pre_affect_avg','worst_affect_avg','best_affect_avg','end_affect_avg']].mean().round(2)"},
+
+  {"id": "low-mood-gains-most",
+   "claim": "The lower the starting mood, the more it rose: starting mood correlates -0.63 with mood change, with an average gain of 3.20 for the people who started at 4 or below and -0.16 for those who started at 8 or 9.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.assign(gain=people.end_affect - people.pre_affect).pipe(lambda d: pd.Series({'correlation of starting mood with mood change': d.pre_affect.corr(d.gain), 'mean change when starting at 4 or below': d.gain[d.pre_affect<=4].mean(), 'mean change when starting at 8 or 9': d.gain[d.pre_affect>=8].mean()})).round(2)"},
+
+  {"id": "loneliness-scale",
+   "claim": "Both loneliness items run from 1 to 3: the self item was answered 1,172 times and the item about the partner 2,952 times.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people[['my_loneliness','your_loneliness']].agg(['min','max','count'])"},
+
+  {"id": "loneliness-underestimated",
+   "claim": "People rated their own loneliness 1.802 on average but guessed their partner's at 1.524, across 1,146 records where both answers exist.",
+   "tables": {"people": "data/people.csv"},
+   "code": "people.merge(people, on='convo_id', suffixes=('_me','_other')).query('user_id_me != user_id_other')[['my_loneliness_me','your_loneliness_other']].dropna().agg(['mean','count']).round(3)"}
+]

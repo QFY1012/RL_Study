@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Faster Answers, One Department Left Behind — Online Consultation A/B Test</title>
+<title>Faster Answers, Flat Completion — and One Department Left Behind</title>
 <style>
   :root{
     --ink:#13211d;
@@ -151,7 +151,7 @@
 <header class="top">
   <div class="wrap">
     <p class="eyebrow">A/B test report &middot; online medical consultation</p>
-    <h1>Faster answers, no more completed visits — and one department left behind</h1>
+    <h1>Faster answers, flat completion — and one department left behind</h1>
     <p class="standfirst">
       Over six weeks, 18,000 users of an online consultation service were split into an experiment
       group and a control group. The experiment cut the wait for a doctor's first reply by about a
@@ -507,7 +507,7 @@ const D = {
     wait_ctl: [117,107,107,106,105]
   },
   derm: {
-    labels: ["18–24 Nov","25 Nov–1 Dec","2–8 Dec","9–15 Dec","16–22 Dec","23–29 Dec"],
+    labels: ["18 Nov","25 Nov","2 Dec","9 Dec","16 Dec","23 Dec"],
     exp: [83.6,77.1,82.5,80.1,80.3,79.4],
     ctl: [84.0,86.0,86.3,83.8,86.3,83.7]
   }
@@ -620,7 +620,7 @@ dumbbell('chart-dept-lost', D.dept.lost_exp, D.dept.lost_ctl, 0, 14, [0,4,8,12],
   s+=txt(x(data.labels.length-1)+11,y(data.exp[data.exp.length-1])+4,'79.4%',{size:10.5,fill:C.exp,weight:700});
   s+=txt(x(data.labels.length-1)+11,y(data.ctl[data.ctl.length-1])+4,'83.7%',{size:10.5,fill:C.soft,weight:700});
   data.labels.forEach((lab,i)=>{
-    s+=txt(x(i),H-16,lab,{anchor:i===0?'start':(i===data.labels.length-1?'end':'middle'),size:9.2});
+    s+=txt(x(i),H-16,lab,{anchor:i===0?'start':(i===data.labels.length-1?'end':'middle'),size:10});
   });
   document.getElementById('chart-derm').innerHTML=svgEl(W,H,s);
 })();

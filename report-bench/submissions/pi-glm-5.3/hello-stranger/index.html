@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, stranger — 1,656 video conversations between strangers</title>
+<style>
+  :root{
+    --paper:#faf8f5;
+    --card:#ffffff;
+    --ink:#1b2027;
+    --muted:#6d7480;
+    --faint:#9aa1ab;
+    --line:#e8e2d8;
+    --accent:#c2410c;
+    --teal:#0e7c6b;
+    --indigo:#3f4bb0;
+    --grey:#d5cec3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:1180px;margin:0 auto;padding:0 36px 90px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:64px 0 8px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-family:Iowan Old Style,"Palatino Linotype",Palatino,Georgia,serif;font-size:58px;line-height:1.05;margin:14px 0 0;letter-spacing:-.01em}
+  .dek{font-family:Iowan Old Style,"Palatino Linotype",Palatino,Georgia,serif;font-size:21px;line-height:1.5;color:#3c434d;max-width:850px;margin:20px 0 0}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:34px 0 0}
+  .strip div{background:var(--card);padding:16px 20px}
+  .strip b{display:block;font-size:27px;font-weight:700;letter-spacing:-.01em}
+  .strip span{font-size:12.5px;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
+
+  /* ---------- sections ---------- */
+  section{margin-top:78px}
+  .sec-head{display:flex;gap:18px;align-items:baseline;margin-bottom:8px}
+  .num{font-family:Iowan Old Style,Palatino,Georgia,serif;font-size:15px;color:var(--faint);min-width:34px}
+  h2{font-family:Iowan Old Style,"Palatino Linotype",Palatino,Georgia,serif;font-size:33px;line-height:1.15;margin:0;letter-spacing:-.01em}
+  .lede{font-size:17.5px;color:#3c434d;max-width:860px;margin:12px 0 0}
+  .cols{display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:start;margin-top:26px}
+  .cols.rev .chartbox{order:2}
+  p.body{margin:0 0 14px;color:#2c333c}
+  p.body:last-child{margin-bottom:0}
+  .note{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .hl{color:var(--accent);font-weight:600}
+  .hl2{color:var(--teal);font-weight:600}
+  .hl3{color:var(--indigo);font-weight:600}
+
+  /* ---------- cards / charts ---------- */
+  .chartbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 14px}
+  .chartbox h3{margin:0 0 2px;font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink);font-weight:700}
+  .chartbox .sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+  .chart{width:100%;height:auto;display:block}
+  .tick{font-size:11px;fill:var(--faint)}
+  .tick2{font-size:12px;fill:var(--muted)}
+  .lab{font-size:12.5px;fill:#3c434d}
+  .val{font-size:12px;font-weight:600}
+  .val2{font-size:12px;font-weight:700}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat b{display:block;font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+  .stat span{font-size:12.5px;color:var(--muted);display:block;margin-top:4px;line-height:1.35}
+
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  /* ---------- method ---------- */
+  .method{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .mcard h4{margin:0 0 6px;font-size:14px;font-weight:700}
+  .mcard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:#f2eee7;border-radius:4px;padding:1px 5px}
+  .mcard ul{margin:8px 0 0;padding-left:18px;font-size:14px;color:#3c434d}
+  .mcard li{margin-bottom:5px}
+
+  footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="kicker">Data report</div>
+    <h1>Hello, stranger</h1>
+    <p class="dek">Strangers were paired for 30-minute video conversations. Each person rated their own mood before the call, at its start, in its middle and at its end, then judged their partner and the conversation. This page follows one row per person per conversation — and the pair-level file that lines the two halves of every call up against each other.</p>
+    <div class="strip">
+      <div><b>1,656</b><span>conversations</span></div>
+      <div><b>1,456</b><span>distinct people</span></div>
+      <div><b>3,312</b><span>person-conversation records</span></div>
+      <div><b>1 – 9</b><span>mood &amp; enjoyment scale</span></div>
+    </div>
+  </header>
+
+  <!-- ============ 01 mood ============ -->
+  <section id="s1">
+    <div class="sec-head"><span class="num">01</span><h2>Mood climbs, and is still climbing at the end</h2></div>
+    <p class="lede">Everyone rated how they felt on a 1–9 scale at four moments. The average moves up at every single probe, and the biggest step comes between the start and the middle of the call.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Average mood and arousal through the conversation</h3>
+        <p class="sub">1–9 scale · means over all person-conversation records (mood) and over pairs (arousal)</p>
+        <div id="c-mood"></div>
+        <div class="legend">
+          <span><i style="background:#c2410c"></i>mood (affect)</span>
+          <span><i style="background:#0e7c6b"></i>arousal (energy)</span>
+        </div>
+      </div>
+      <div>
+        <p class="body">The average person walked into the call at <span class="hl">6.10</span> and finished it at <span class="hl">7.38</span> — a gain of <span class="hl">1.288</span> points (median 1.000). <span class="hl">68.1%</span> of people ended the conversation in a better mood than they started in, 20.2% exactly the same, and only 10.1% ended lower.</p>
+        <p class="body">It is not just calm contentment. Arousal — how energised people felt — travels the same path, from <span class="hl2">5.32</span> before the call to <span class="hl2">6.70</span> at the end. Thirty minutes with someone new leaves people feeling both better and more awake than they did before it began.</p>
+        <p class="body">The gain is biggest for those who needed it most: starting mood correlates <span class="hl">−0.63</span> with mood change, so people who began at 4 or below gained <span class="hl">3.20</span> points on average, while those who began at 8 or 9 ended slightly lower, at −0.16.</p>
+        <div class="stats">
+          <div class="stat"><b>+1.288</b><span>average mood change from before the call to its end</span></div>
+          <div class="stat"><b>68.1%</b><span>ended the conversation in a better mood than they started</span></div>
+          <div class="stat"><b>10.1%</b><span>ended the conversation in a worse mood</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 enjoyment ============ -->
+  <section id="s2">
+    <div class="sec-head"><span class="num">02</span><h2>It was, overwhelmingly, enjoyable</h2></div>
+    <p class="lede">Asked afterwards how enjoyable the conversation was, on the same 1–9 scale, people piled up at the top of the scale. The single most common answer was 9.</p>
+    <div class="cols rev">
+      <div class="chartbox">
+        <h3>How enjoyable was the conversation?</h3>
+        <p class="sub">Number of person-conversation records giving each rating, 1–9</p>
+        <div id="c-enjoy"></div>
+      </div>
+      <div>
+        <p class="body">The mean is <span class="hl">7.411</span> and the median <span class="hl">8.000</span>. <span class="hl">76.7%</span> of people chose 7 or more, and <span class="hl">28.1%</span> — 930 of them — went straight to the top score. Only <span class="hl">2.4%</span> rated the conversation 3 or below, and just 19 people in the whole file chose 1.</p>
+        <p class="body">That is the backdrop for everything else on this page: whatever else varies in this data, the conversation itself is almost always a pleasant half hour.</p>
+        <div class="stats">
+          <div class="stat"><b>7.411</b><span>mean rating of enjoyment, 1–9</span></div>
+          <div class="stat"><b>76.7%</b><span>rated the conversation 7 or more</span></div>
+          <div class="stat"><b>2.4%</b><span>rated it 3 or less</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 liking gap ============ -->
+  <section id="s3">
+    <div class="sec-head"><span class="num">03</span><h2>The liking gap</h2></div>
+    <p class="lede">After the call each person answered two questions on a 1–7 scale: how much do you like this person, and how much do you think they like you. The two answers are not the same size.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Liking, and believed liking</h3>
+        <p class="sub">Means on the 1–7 scale</p>
+        <div id="c-liking"></div>
+        <div class="legend">
+          <span><i style="background:#3f4bb0"></i>how much I like you</span>
+          <span><i style="background:#d5cec3"></i>how much I think you like me</span>
+        </div>
+      </div>
+      <div>
+        <p class="body">People liked their partner at <span class="hl3">5.995</span> but believed their partner liked them at only <span class="hl3">5.351</span>. The gap averages <span class="hl3">0.64</span> of a point on a 7-point scale: <span class="hl3">51%</span> of people liked their partner more than they believed they were liked, and only 5% the reverse.</p>
+        <p class="body">This is a mis-reading of the other person, not a difference between the two people in a pair. Across the <span class="hl3">3,257</span> records with both answers, the person being judged did in fact like their partner at <span class="hl3">5.995</span> — while the person doing the judging believed they were liked at <span class="hl3">5.351</span>.</p>
+        <p class="body">And the belief barely tracks the truth: how much one person actually liked their partner correlates only <span class="hl3">0.189</span> with how much that partner believed they were liked. Two strangers spend half an hour together, both come away liking the other more than they guess.</p>
+        <div class="stats">
+          <div class="stat"><b>5.995</b><span>how much people liked their partner, 1–7</span></div>
+          <div class="stat"><b>5.351</b><span>how much they believed their partner liked them</span></div>
+          <div class="stat"><b>0.189</b><span>correlation between actual liking and believed liking</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 two sides ============ -->
+  <section id="s4">
+    <div class="sec-head"><span class="num">04</span><h2>Two people, one conversation, two experiences</h2></div>
+    <p class="lede">The pair file lines up the two halves of every call. Matching the two people's answers to each other shows how little the same 30 minutes is shared.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Correlation between the two partners' answers</h3>
+        <p class="sub">Same conversation, both people's ratings · 1.0 would mean they answered identically</p>
+        <div id="c-agree"></div>
+      </div>
+      <div>
+        <p class="body">End moods correlate <span class="hl">0.177</span>, enjoyment ratings <span class="hl">0.174</span>, how much each person liked the other <span class="hl">0.191</span>, and how much shared reality each of them felt <span class="hl">0.197</span>. Mood change — how much each person's feelings moved during the call — correlates at just <span class="hl">0.062</span>, which is to say not at all.</p>
+        <p class="body">Both people are describing the same event, and they mostly describe different ones. Whatever makes one half of a pair enjoy a conversation, the other half is largely having a separate experience of it.</p>
+        <div class="stats">
+          <div class="stat"><b>0.174</b><span>partners' agreement on how enjoyable it was</span></div>
+          <div class="stat"><b>0.197</b><span>partners' agreement on felt shared reality — the highest of the five</span></div>
+          <div class="stat"><b>0.062</b><span>partners' agreement on how much their mood changed</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 matching ============ -->
+  <section id="s5">
+    <div class="sec-head"><span class="num">05</span><h2>Who you get matched with barely matters</h2></div>
+    <p class="lede">Pairs differed in sex, race, education, age and politics. Each of those differences can be measured against how enjoyable the conversation was, and almost none of them shows up.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Enjoyment by whether the pair matched</h3>
+        <p class="sub">Mean rating on the 1–9 scale, by pair type</p>
+        <div id="c-pairs"></div>
+      </div>
+      <div>
+        <p class="body">Same-race pairs rated the conversation <span class="hl">7.462</span>, mixed-race pairs <span class="hl">7.345</span> — a difference of 0.12 on a 9-point scale. Same-sex pairs <span class="hl">7.378</span> against mixed-sex pairs <span class="hl">7.443</span>. Education runs the "wrong" way entirely: pairs with different education levels enjoyed it more, <span class="hl">7.503</span> against <span class="hl">7.304</span>.</p>
+        <p class="body">Age does nothing at all. Pairs sitting in the same age band rated the conversation <span class="hl">7.427</span>, and the 50 pairs four decades apart rated it highest of all, <span class="hl">7.630</span>.</p>
+        <p class="body">The only visible gradient is politics. On the 1–6 politics scale, enjoyment slides from <span class="hl">7.478</span> in the 408 calls where both people sat at the same point, to <span class="hl">7.065</span> in the 23 calls with the widest possible gap, and the average mood gain falls from 1.303 to 1.022. Even that is a 0.4-point slide on a scale whose mean is 7.411 — noticeable, but nothing like a ruined conversation.</p>
+      </div>
+    </div>
+    <div class="cols rev" style="margin-top:22px">
+      <div class="chartbox">
+        <h3>Enjoyment by political distance between the pair</h3>
+        <p class="sub">Mean rating, pairs grouped by their gap on the 1–6 politics scale · axis truncated to 7.0–7.6</p>
+        <div id="c-politics"></div>
+      </div>
+      <div class="chartbox">
+        <h3>Enjoyment by age gap between the pair</h3>
+        <p class="sub">Mean rating, pairs grouped by age bands apart · axis truncated to 7.0–7.6</p>
+        <div id="c-age"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 shared reality ============ -->
+  <section id="s6">
+    <div class="sec-head"><span class="num">06</span><h2>What does track it: feeling on the same page</h2></div>
+    <p class="lede">Each person also rated how much shared reality they felt with their partner, on a 1–7 scale. That subjective sense predicts everything else about how the conversation went — far better than any matching variable does.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Correlations with felt shared reality</h3>
+        <p class="sub">Within one person's own answers · scale 0 to 0.6</p>
+        <div id="c-within"></div>
+      </div>
+      <div>
+        <p class="body">How much shared reality a person felt correlates <span class="hl3">0.577</span> with how enjoyable they found the conversation, <span class="hl3">0.533</span> with how much they liked their partner, <span class="hl3">0.522</span> with how liked they believed they were, and <span class="hl3">0.519</span> with the mood they ended the call in.</p>
+        <p class="body">Compare that with the previous section: race, education, age and sex differences moved enjoyment by roughly 0.1 to 0.2 points, and the two partners' own accounts of the same call correlate at under 0.2. Feeling understood is the one thing in this data that moves with everything else.</p>
+        <p class="body">These are correlations in observational data, not effects of an intervention — a person who is enjoying the conversation may also report more shared reality. But the ordering is stark: the conversation is carried by what happens inside it, not by who was matched with whom.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 judging a stranger ============ -->
+  <section id="s7">
+    <div class="sec-head"><span class="num">07</span><h2>Judging a stranger in half an hour</h2></div>
+    <p class="lede">People also rated their partner's traits. Half an hour is enough to reach a generous verdict on almost everything — except being funny.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>How the partner was rated</h3>
+        <p class="sub">Average rating of the partner on each trait</p>
+        <div id="c-traits"></div>
+      </div>
+      <div>
+        <p class="body">Kind <span class="hl3">7.98</span>, polite <span class="hl3">7.93</span>, agreeable <span class="hl3">7.75</span>, intelligent <span class="hl3">7.68</span>, trustworthy <span class="hl3">7.51</span> — and then, a long way down, funny at <span class="hl3">4.72</span>. Warmth and competence are freely granted to a stranger; wit is not.</p>
+        <p class="body">The generosity runs in a specific direction. People rated their partner's status at <span class="hl3">5.91</span> and their own at <span class="hl3">5.53</span>, and assumed their partner placed them at <span class="hl3">5.74</span> — the stranger across the table is credited with a better position than the person rating them claims for themselves.</p>
+        <p class="body">It even reaches the mechanics of the talk: people rated their own turns as longer than their partner's, <span class="hl3">5.40</span> against <span class="hl3">5.03</span>, in a setting where the two judgements describe exactly the same conversation.</p>
+      </div>
+    </div>
+    <div class="cols rev" style="margin-top:22px">
+      <div class="chartbox">
+        <h3>Status: mine, yours, and where I think you put me</h3>
+        <p class="sub">Average ratings</p>
+        <div id="c-status"></div>
+      </div>
+      <div class="chartbox">
+        <h3>Whose turns were longer?</h3>
+        <p class="sub">Average self-rating and average rating of the partner</p>
+        <div id="c-turn"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 blind spot ============ -->
+  <section id="s8">
+    <div class="sec-head"><span class="num">08</span><h2>Best and worst moments, and a quieter blind spot</h2></div>
+    <p class="lede">People named the worst and best moments of the conversation as well as their mood at each probe — and, in a subset of the file, rated their own and their partner's loneliness.</p>
+    <div class="cols">
+      <div class="chartbox">
+        <h3>Mood: before, worst moment, best moment, end</h3>
+        <p class="sub">Averages over pairs, 1–9 scale</p>
+        <div id="c-moments"></div>
+      </div>
+      <div>
+        <p class="body">The worst moment of the conversation averaged <span class="hl">5.80</span> — only 0.3 points below where people started — and the best moment averaged <span class="hl">7.83</span>. Even a stranger's dull stretch does not take you far below where you began.</p>
+        <p class="body">The last blind spot is about loneliness, rated on a 1–3 scale. People rated their own loneliness at <span class="hl2">1.802</span> on average but guessed their partner's at <span class="hl2">1.524</span>, across the 1,146 records where both answers exist. Each of us looks less lonely to the person talking to us than we actually feel — an illusion that needs only 30 minutes to establish.</p>
+        <div class="stats">
+          <div class="stat"><b>5.80</b><span>mood at the worst moment of the conversation</span></div>
+          <div class="stat"><b>7.83</b><span>mood at the best moment</span></div>
+          <div class="stat"><b>1.802 vs 1.524</b><span>own loneliness, and the guess at a partner's</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cols rev" style="margin-top:22px">
+      <div class="chartbox">
+        <h3>Own loneliness vs. the guess at a partner's</h3>
+        <p class="sub">Means on the 1–3 scale, 1,146 matched records</p>
+        <div id="c-lonely"></div>
+      </div>
+      <div class="chartbox">
+        <h3>Who took part</h3>
+        <p class="sub">Person-conversation records</p>
+        <div id="c-people"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ method ============ -->
+  <section id="s9">
+    <div class="sec-head"><span class="num">09</span><h2>The two files</h2></div>
+    <div class="method">
+      <div class="mcard">
+        <h4><code>data/people.csv</code> — one row per person per conversation</h4>
+        <ul>
+          <li>3,312 records: 1,656 conversations among 1,456 distinct people, each conversation a fresh pairing.</li>
+          <li>702 people appear once; 266 appear twice, 187 three times, and 3 people appear eight times.</li>
+          <li>Mood and arousal probes (<code>pre</code>, <code>begin</code>, <code>middle</code>, <code>end</code>), the worst and best moment, enjoyment, liking, shared reality, demographics and the two loneliness items.</li>
+          <li>All 3,312 records carry the pre-conversation mood rating; 3,257 carry the in-conversation and post-conversation ratings. 56 records have no sex recorded.</li>
+          <li>Participants were 19 to 66 years old (mean 34.3, median 32); 1,740 records from women, 1,463 from men, 53 from people who answered other or prefer not to answer.</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <h4><code>data/convos.csv</code> — one row per conversation</h4>
+        <ul>
+          <li>Pair averages of the two people's answers (<code>*_avg</code>) and the differences between the partners (<code>sex_diff</code>, <code>race_diff</code>, <code>edu_diff</code>, <code>politics_diff</code>, <code>age_diff</code> in 10-year bands, <code>shared_reality_diff</code>).</li>
+          <li><code>affect_diff_avg</code> and <code>arousal_diff_avg</code> are within-conversation changes: the pair's average move from the first probe to the last.</li>
+          <li>Also carries the partner-trait ratings, the status items, turn-length ratings and a 0–100 "good conversationalist" rating.</li>
+          <li>Age differences are recorded in 10-year bands, so a pair 40 apart means four bands apart.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Scales: mood, arousal and enjoyment items run 1–9; the liking and shared-reality items run 1–7; the loneliness items run 1–3. Every number on this page is a mean or a correlation computed from these two files. Pair-level comparisons join the person file to itself on <code>convo_id</code>. Correlations are associations in observational data and are not causal estimates.</p>
+  </section>
+
+  <footer>
+    Data report · strangers paired for 30-minute video conversations · 1,656 conversations, 1,456 people, 3,312 person-conversation records.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var C = {accent:'#c2410c', teal:'#0e7c6b', indigo:'#3f4bb0', grey:'#d5cec3', track:'#efeadf', ink:'#1b2027'};
+
+  function put(id, svg){ document.getElementById(id).innerHTML = svg; }
+
+  function open(w,h){ return '<svg class="chart" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet" role="img">'; }
+  function txt(x,y,s,cls,fill,anchor){ return '<text x="'+x+'" y="'+y+'" class="'+(cls||'tick')+'"'+(fill?' fill="'+fill+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+'>'+s+'</text>'; }
+
+  /* ---------- line chart ---------- */
+  function lineChart(cfg){
+    var w=620,h=330,pl=50,pr=16,pt=24,pb=42,n=cfg.xlabels.length;
+    var X=function(i){ return pl + (n===1?0:(i/(n-1))*(w-pl-pr)); };
+    var Y=function(v){ return pt + (1-(v-cfg.ymin)/(cfg.ymax-cfg.ymin))*(h-pt-pb); };
+    var s=open(w,h);
+    for(var g=cfg.ymin; g<=cfg.ymax+1e-9; g+=cfg.gstep){
+      var yy=Y(g);
+      s+='<line x1="'+pl+'" y1="'+yy+'" x2="'+(w-pr)+'" y2="'+yy+'" stroke="#ece6db" stroke-width="1"/>';
+      s+=txt(pl-10, yy+4, g.toFixed(0), 'tick', null, 'end');
+    }
+    s+='<line x1="'+pl+'" y1="'+(h-pb)+'" x2="'+(w-pr)+'" y2="'+(h-pb)+'" stroke="#d8d1c4" stroke-width="1"/>';
+    cfg.xlabels.forEach(function(lb,i){ s+=txt(X(i), h-pb+24, lb, 'tick2', null, 'middle'); });
+    cfg.series.forEach(function(sr){
+      var d='';
+      sr.values.forEach(function(v,i){ d+=(i?' L':'M')+X(i)+' '+Y(v); });
+      s+='<path d="'+d+'" fill="none" stroke="'+sr.color+'" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>';
+      sr.values.forEach(function(v,i){
+        s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="5.2" fill="'+sr.color+'" stroke="#ffffff" stroke-width="2"/>';
+        s+=txt(X(i), Y(v)-14, v.toFixed(2), 'val', sr.color, 'middle');
+      });
+    });
+    return s+'</svg>';
+  }
+
+  /* ---------- vertical bars ---------- */
+  function barsChart(cfg){
+    var w=620,h=cfg.h||300,pl=54,pr=16,pt=28,pb=cfg.sub?66:50,n=cfg.labels.length;
+    var bw=(w-pl-pr)/n, ymin=cfg.ymin||0, ymax=cfg.ymax;
+    var Y=function(v){ return pt + (1-(v-ymin)/(ymax-ymin))*(h-pt-pb); };
+    var s=open(w,h), g;
+    for(g=ymin; g<=ymax+1e-9; g+=cfg.gstep){
+      var yy=Y(g);
+      s+='<line x1="'+pl+'" y1="'+yy+'" x2="'+(w-pr)+'" y2="'+yy+'" stroke="#ece6db" stroke-width="1"/>';
+      s+=txt(pl-10, yy+4, (cfg.dec!==undefined?g.toFixed(cfg.dec):g), 'tick', null, 'end');
+    }
+    s+='<line x1="'+pl+'" y1="'+(h-pb)+'" x2="'+(w-pr)+'" y2="'+(h-pb)+'" stroke="#d8d1c4" stroke-width="1"/>';
+    cfg.labels.forEach(function(lb,i){
+      var v=cfg.values[i], y=Y(v), x=pl+i*bw, hh=(h-pb)-y;
+      if(hh<0){hh=0;y=h-pb;}
+      s+='<rect x="'+(x+bw*0.2)+'" y="'+y+'" width="'+(bw*0.6)+'" height="'+hh+'" rx="3" fill="'+(cfg.colors?cfg.colors[i]:cfg.color)+'"/>';
+      s+=txt(x+bw/2, y-8, (cfg.dec!==undefined?v.toFixed(cfg.dec):v), 'val', cfg.colors?cfg.colors[i]:cfg.color, 'middle');
+      s+=txt(x+bw/2, h-pb+22, lb, 'tick2', null, 'middle');
+      if(cfg.sub){ s+=txt(x+bw/2, h-pb+38, cfg.sub[i], 'tick', null, 'middle'); }
+    });
+    return s+'</svg>';
+  }
+
+  /* ---------- horizontal bars ---------- */
+  function hbars(cfg){
+    var w=620, rowH=cfg.rowH||34, pl=cfg.pl||250, pr=cfg.pr||90, pt=10, pb=6, n=cfg.items.length;
+    var h=pt+pb+n*rowH, max=cfg.max;
+    var s=open(w,h);
+    cfg.items.forEach(function(it,i){
+      var y=pt+i*rowH+rowH/2, x1=pl+((it.value-cfg.min||0)/max)*(w-pl-pr);
+      s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(w-pl-pr>0?w-pr:w-pr)+'" y2="'+y+'" stroke="'+C.track+'" stroke-width="11" stroke-linecap="round"/>';
+      s+='<line x1="'+pl+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="'+(it.color||cfg.color)+'" stroke-width="11" stroke-linecap="round"/>';
+      s+=txt(pl-14, y+4, it.label, 'lab', null, 'end');
+      s+=txt(x1+12, y+4, (cfg.dec!==undefined?it.value.toFixed(cfg.dec):it.value)+(it.note||''), 'val2', it.color||cfg.color, 'start');
+    });
+    return s+'</svg>';
+  }
+
+  /* ---------- two-dot comparison ---------- */
+  function dots2(cfg){
+    var w=620, rowH=88, pl=180, pr=150, pt=26, pb=34, n=cfg.rows.length;
+    var h=pt+pb+n*rowH;
+    var X=function(v){ return pl + ((v-cfg.min)/(cfg.max-cfg.min))*(w-pl-pr); };
+    var s=open(w,h), g;
+    for(g=cfg.min; g<=cfg.max+1e-9; g+=cfg.gstep){
+      s+='<line x1="'+X(g)+'" y1="'+pt+'" x2="'+X(g)+'" y2="'+(h-pb)+'" stroke="#ece6db" stroke-width="1"/>';
+      s+=txt(X(g), h-pb+18, g.toFixed(cfg.gdec!==undefined?cfg.gdec:1), 'tick', null, 'middle');
+    }
+    cfg.rows.forEach(function(r,i){
+      var y=pt+i*rowH+rowH/2;
+      s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(w-pr)+'" y2="'+y+'" stroke="#e3dcd0" stroke-width="2"/>';
+      var lo=r.a.value<=r.b.value?r.a:r.b, hi=r.a.value<=r.b.value?r.b:r.a;
+      s+='<line x1="'+X(lo.value)+'" y1="'+y+'" x2="'+X(hi.value)+'" y2="'+y+'" stroke="#c9c1b4" stroke-width="3"/>';
+      [r.a,r.b].forEach(function(p){
+        s+='<circle cx="'+X(p.value)+'" cy="'+y+'" r="7" fill="'+p.color+'" stroke="#ffffff" stroke-width="2"/>';
+        s+=txt(X(p.value), y-16, p.value.toFixed(3), 'val', p.color, 'middle');
+      });
+      s+=txt(pl-16, y-2, r.label, 'lab', null, 'end');
+      s+=txt(X(lo.value)-12, y+5, lo.name, 'tick2', lo.color, 'end');
+      s+=txt(X(hi.value)+12, y+5, hi.name, 'tick2', hi.color, 'start');
+    });
+    return s+'</svg>';
+  }
+
+  /* ---------- 01 mood + arousal ---------- */
+  put('c-mood', lineChart({
+    xlabels:['before','start','middle','end'],
+    ymin:5, ymax:8, gstep:1,
+    series:[
+      {color:C.accent, values:[6.10,6.16,6.93,7.38]},
+      {color:C.teal,   values:[5.32,5.67,6.40,6.70]}
+    ]
+  }));
+
+  /* ---------- 02 enjoyment distribution ---------- */
+  put('c-enjoy', barsChart({
+    labels:['1','2','3','4','5','6','7','8','9'],
+    values:[19,15,44,86,181,373,772,837,930],
+    sub:['','','','','','','','',''],
+    color:C.accent, ymax:1000, gstep:200, dec:0, h:300
+  }));
+
+  /* ---------- 03 liking ---------- */
+  put('c-liking', hbars({
+    min:0, max:7, dec:3, pl:280, pr:80, rowH:40, color:C.indigo,
+    items:[
+      {label:'how much I like you', value:5.995, color:C.indigo},
+      {label:'how much I think you like me', value:5.351, color:C.grey}
+    ]
+  }));
+
+  /* ---------- 04 partner agreement ---------- */
+  put('c-agree', hbars({
+    min:0, max:0.6, dec:3, pl:210, pr:70, rowH:38, color:C.accent,
+    items:[
+      {label:'felt shared reality', value:0.197},
+      {label:'liking of partner', value:0.191},
+      {label:'end mood', value:0.177},
+      {label:'enjoyment', value:0.174},
+      {label:'mood change', value:0.062, color:C.grey}
+    ]
+  }));
+
+  /* ---------- 05 matching ---------- */
+  put('c-pairs', dots2({
+    min:7.2, max:7.6, gstep:0.1, gdec:1,
+    rows:[
+      {label:'race', a:{name:'same race', value:7.462, color:C.indigo}, b:{name:'mixed race', value:7.345, color:C.teal}},
+      {label:'education', a:{name:'same level', value:7.304, color:C.indigo}, b:{name:'different', value:7.503, color:C.teal}},
+      {label:'sex', a:{name:'same sex', value:7.378, color:C.indigo}, b:{name:'mixed sex', value:7.443, color:C.teal}}
+    ]
+  }));
+
+  put('c-politics', barsChart({
+    labels:['0','1','2','3','4','5'],
+    values:[7.478,7.450,7.414,7.385,7.152,7.065],
+    sub:['408','319','494','243','115','23'],
+    color:C.accent, ymin:7.0, ymax:7.6, gstep:0.1, dec:3, h:280
+  }));
+
+  put('c-age', barsChart({
+    labels:['0','10','20','30','40'],
+    values:[7.427,7.313,7.428,7.572,7.630],
+    sub:['464','538','398','152','50'],
+    color:C.teal, ymin:7.0, ymax:7.6, gstep:0.1, dec:3, h:280
+  }));
+
+  /* ---------- 06 shared reality ---------- */
+  put('c-within', hbars({
+    min:0, max:0.6, dec:3, pl:250, pr:70, rowH:38, color:C.indigo,
+    items:[
+      {label:'how enjoyable it was', value:0.577},
+      {label:'how much I liked them', value:0.533},
+      {label:'how liked I believed I was', value:0.522},
+      {label:'the mood I ended in', value:0.519}
+    ]
+  }));
+
+  /* ---------- 07 traits ---------- */
+  put('c-traits', hbars({
+    min:0, max:9, dec:2, pl:180, pr:70, rowH:36, color:C.indigo,
+    items:[
+      {label:'kind', value:7.98},
+      {label:'polite', value:7.93},
+      {label:'agreeable', value:7.75},
+      {label:'intelligent', value:7.68},
+      {label:'trustworthy', value:7.51},
+      {label:'funny', value:4.72, color:C.grey}
+    ]
+  }));
+
+  put('c-status', hbars({
+    min:0, max:9, dec:2, pl:300, pr:70, rowH:38, color:C.accent,
+    items:[
+      {label:'status I give my partner', value:5.91, color:C.accent},
+      {label:'status I think they give me', value:5.74, color:C.teal},
+      {label:'status I claim for myself', value:5.53, color:C.grey}
+    ]
+  }));
+
+  put('c-turn', hbars({
+    min:0, max:9, dec:2, pl:280, pr:70, rowH:40, color:C.indigo,
+    items:[
+      {label:'my own turn length', value:5.40, color:C.indigo},
+      {label:"my partner's turn length", value:5.03, color:C.grey}
+    ]
+  }));
+
+  /* ---------- 08 moments, loneliness, participants ---------- */
+  put('c-moments', hbars({
+    min:0, max:9, dec:2, pl:300, pr:70, rowH:38, color:C.accent,
+    items:[
+      {label:'mood before the call', value:6.10, color:C.grey},
+      {label:'worst moment during', value:5.80, color:C.teal},
+      {label:'best moment during', value:7.83, color:C.accent},
+      {label:'mood at the end', value:7.38, color:C.indigo}
+    ]
+  }));
+
+  put('c-lonely', hbars({
+    min:0, max:3, dec:3, pl:300, pr:70, rowH:40, color:C.teal,
+    items:[
+      {label:'my own loneliness', value:1.802, color:C.teal},
+      {label:"my guess at my partner's", value:1.524, color:C.grey}
+    ]
+  }));
+
+  put('c-people', hbars({
+    min:0, max:2200, dec:0, pl:250, pr:70, rowH:34, color:C.indigo,
+    items:[
+      {label:'women', value:1740},
+      {label:'men', value:1463},
+      {label:'white', value:2110, color:C.teal},
+      {label:'Asian', value:485, color:C.teal},
+      {label:'Black or African American', value:248, color:C.teal},
+      {label:'Hispanic or Latino', value:220, color:C.teal},
+      {label:'mixed', value:128, color:C.teal}
+    ]
+  }));
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1189 @@
+{
+ "capture_version": "capture-8",
+ "target": "index.html",
+ "data": [],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [
+  "Invalid left-hand side expression in postfix operation"
+ ],
+ "syntax_errors": [
+  "script 0: SyntaxError: Invalid left-hand side expression in postfix operation"
+ ],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 4050,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/10.jpg",
+   "scroll_y": 4240,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [],
+ "text": [
+  {
+   "tag": "div",
+   "y": 117,
+   "x": 230,
+   "w": 980,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A data report · 80 pairs of jeans · 20 brands · measured in centimetres"
+  },
+  {
+   "tag": "h1",
+   "y": 152,
+   "x": 230,
+   "w": 980,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's jeans pockets are smaller . The measurements leave no doubt."
+  },
+  {
+   "tag": "p",
+   "y": 298,
+   "x": 230,
+   "w": 730,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front and back pockets of 40 women's and 40 men's jeans from popular brands were measured to the centimetre — deepest point, shallowest point, widest and narrowest width. The front pockets are where the sexes part ways: 23.13 cm of depth for men on average against 14.33 cm for women, a ratio of 0.619 ."
+  },
+  {
+   "tag": "div",
+   "y": 504,
+   "x": 230,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.13"
+  },
+  {
+   "tag": "div",
+   "y": 504,
+   "x": 475,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.33"
+  },
+  {
+   "tag": "div",
+   "y": 504,
+   "x": 720,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.619"
+  },
+  {
+   "tag": "div",
+   "y": 504,
+   "x": 965,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18"
+  },
+  {
+   "tag": "small",
+   "y": 520,
+   "x": 314,
+   "w": 26,
+   "in_svg": false,
+   "hidden": false,
+   "text": "cmcm"
+  },
+  {
+   "tag": "small",
+   "y": 520,
+   "x": 1000,
+   "w": 33,
+   "in_svg": false,
+   "hidden": false,
+   "text": "/ 40"
+  },
+  {
+   "tag": "div",
+   "y": 547,
+   "x": 230,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average depth, men's front pockets"
+  },
+  {
+   "tag": "div",
+   "y": 547,
+   "x": 475,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average depth, women's front pockets"
+  },
+  {
+   "tag": "div",
+   "y": 547,
+   "x": 720,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's depth as a share of men's"
+  },
+  {
+   "tag": "div",
+   "y": 547,
+   "x": 965,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's pockets deep enough for a 14.5 cm phone"
+  },
+  {
+   "tag": "div",
+   "y": 635,
+   "x": 230,
+   "w": 958,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20"
+  },
+  {
+   "tag": "small",
+   "y": 651,
+   "x": 273,
+   "w": 32,
+   "in_svg": false,
+   "hidden": false,
+   "text": "/ 20"
+  },
+  {
+   "tag": "div",
+   "y": 677,
+   "x": 230,
+   "w": 958,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brands whose men's pockets are deeper"
+  },
+  {
+   "tag": "div",
+   "y": 740,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front pockets, drawn to scale (1 cm = 11 px). Each pocket's box is the deepest vertical measurement × the widest horizontal measurement, measured on the pocket itself. The phone stands 14.5 cm tall."
+  },
+  {
+   "tag": "span",
+   "y": 872,
+   "x": 230,
+   "w": 20,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "span",
+   "y": 873,
+   "x": 268,
+   "w": 180,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What was measured"
+  },
+  {
+   "tag": "h2",
+   "y": 904,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Eighty pairs of jeans, twenty brands, one ruler"
+  },
+  {
+   "tag": "p",
+   "y": 958,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The sample splits exactly down the middle: 40 women's jeans and 40 men's jeans , drawn from 20 brands on each side. Women's prices run from $9.99 to $249 , men's from $39.99 to $209 — the two groups cost about the same on average ($80.32 vs $81.18), so this is a fair fight."
+  },
+  {
+   "tag": "div",
+   "y": 1095,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Measured on each pair"
+  },
+  {
+   "tag": "div",
+   "y": 1095,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "div",
+   "y": 1095,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "div",
+   "y": 1133,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front pocket — depth at deepest point"
+  },
+  {
+   "tag": "div",
+   "y": 1133,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.13 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1133,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.33 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1175,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front pocket — depth at shallowest point"
+  },
+  {
+   "tag": "div",
+   "y": 1175,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18.08 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1175,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.23 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1217,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front pocket — width at widest / narrowest"
+  },
+  {
+   "tag": "div",
+   "y": 1217,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.37 / 13.36 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1217,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.18 / 12.26 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1259,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pocket — depth at deepest point"
+  },
+  {
+   "tag": "div",
+   "y": 1259,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.01 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1259,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.12 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1301,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pocket — width at widest / narrowest"
+  },
+  {
+   "tag": "div",
+   "y": 1301,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.70 / 12.16 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1301,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.34 / 11.74 cm"
+  },
+  {
+   "tag": "div",
+   "y": 1343,
+   "x": 231,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pocket with cutout styling"
+  },
+  {
+   "tag": "div",
+   "y": 1343,
+   "x": 602,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6 pairs"
+  },
+  {
+   "tag": "div",
+   "y": 1343,
+   "x": 846,
+   "w": 243,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3 pairs"
+  },
+  {
+   "tag": "p",
+   "y": 1399,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Styles cover the full range of the rack: skinny (32 jeans) , straight (28) , boot-cut (11) , slim (8) and regular (1) . Every brand below appears twice in the men's column and twice in the women's."
+  },
+  {
+   "tag": "div",
+   "y": 1474,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The 20 brands in the sample, in the men's and women's columns alike."
+  },
+  {
+   "tag": "span",
+   "y": 1584,
+   "x": 230,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "span",
+   "y": 1585,
+   "x": 270,
+   "w": 183,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Where the gap lives"
+  },
+  {
+   "tag": "h2",
+   "y": 1615,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One measurement stands apart from the other seven"
+  },
+  {
+   "tag": "p",
+   "y": 1670,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Line up all eight measurements and the culprit is obvious. Women's front pockets are 0.619 times as deep as men's and 0.732 times as deep at their shallowest point. Everything else — front pocket width ( 0.928 ), back pocket depth ( 0.945 ), back pocket width ( 0.974 ) — sits within a few per cent of the men's version."
+  },
+  {
+   "tag": "div",
+   "y": 1811,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average measurement by sex, in centimetres, with women's value as a share of men's. Rows are sorted by that share, smallest first. Front-pocket measurements are marked with a pocket icon."
+  },
+  {
+   "tag": "div",
+   "y": 1873,
+   "x": 230,
+   "w": 780,
+   "in_svg": false,
+   "hidden": false,
+   "text": "In plain centimetres: men's front pockets are and 1.18 cm wider than women's, while the back pockets differ by just 0.89 cm in depth and 0.36 cm in width."
+  },
+  {
+   "tag": "b",
+   "y": 1880,
+   "x": 603,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8.80 cm deeper"
+  },
+  {
+   "tag": "span",
+   "y": 1938,
+   "x": 251,
+   "w": 759,
+   "in_svg": false,
+   "hidden": false,
+   "text": "measurement: maxHeightFront / maxWidthFront / maxHeightBack / maxWidthBack, mean difference by menWomen"
+  },
+  {
+   "tag": "span",
+   "y": 2052,
+   "x": 230,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "span",
+   "y": 2053,
+   "x": 270,
+   "w": 125,
+   "in_svg": false,
+   "hidden": false,
+   "text": "In area terms"
+  },
+  {
+   "tag": "h2",
+   "y": 2084,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A front pocket, halved; a back pocket, untouched"
+  },
+  {
+   "tag": "p",
+   "y": 2138,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Multiply deepest point by widest point and the front-pocket difference becomes brutal: 378.4 cm² of room in the average men's front pocket against 218.0 cm² in the average women's — women get 0.576 of the area. The back pockets, drawn at the same scale, are nearly identical: 219.7 cm² vs 201.8 cm² , a ratio of 0.919 ."
+  },
+  {
+   "tag": "div",
+   "y": 2280,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pocket boxes drawn to a common scale (1 cm = 11 px): depth at the deepest point × width at the widest point. Labels show the average area in cm²."
+  },
+  {
+   "tag": "span",
+   "y": 2408,
+   "x": 230,
+   "w": 23,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04"
+  },
+  {
+   "tag": "span",
+   "y": 2409,
+   "x": 271,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every single pair"
+  },
+  {
+   "tag": "h2",
+   "y": 2440,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The deepest women's pocket is a below-average men's pocket"
+  },
+  {
+   "tag": "p",
+   "y": 2533,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Plot all 80 front-pocket depths and the two ranges barely touch. Men's pockets run from 20.0 to 28.0 cm (median 22.5 ); women's run from 11.5 to 21.5 cm (median 14.0 ). The single deepest women's pocket — Abercrombie's Simone High Rise Slim at 21.5 cm — exactly matches the men's 25th-percentile depth, and no women's pocket in the sample reaches the men's median."
+  },
+  {
+   "tag": "span",
+   "y": 2703,
+   "x": 230,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's jeans (40)"
+  },
+  {
+   "tag": "span",
+   "y": 2703,
+   "x": 374,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's jeans (40)"
+  },
+  {
+   "tag": "span",
+   "y": 2703,
+   "x": 537,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median"
+  },
+  {
+   "tag": "span",
+   "y": 2703,
+   "x": 624,
+   "w": 115,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5 cm phone"
+  },
+  {
+   "tag": "div",
+   "y": 2734,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each dot is one pair of jeans, positioned by its front pocket's deepest point. Hover any dot for the brand, style, price and measurement."
+  },
+  {
+   "tag": "p",
+   "y": 2766,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Set a phone on the ruler and the picture sharpens: a phone 14.5 cm tall drops into 40 of 40 men's front pockets but only 18 of 40 women's — 45% . Only three women's pockets reach 19 cm at all: Abercrombie's Simone High Rise Slim (21.5 cm), H&M's Skinny Ankle High Waist (19.0 cm) and American Eagle's Ne(x)t Level Stretch Skinny (19.0 cm)."
+  },
+  {
+   "tag": "span",
+   "y": 2955,
+   "x": 230,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05"
+  },
+  {
+   "tag": "span",
+   "y": 2956,
+   "x": 270,
+   "w": 142,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand by brand"
+  },
+  {
+   "tag": "h2",
+   "y": 2986,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Twenty out of twenty brands, no exceptions"
+  },
+  {
+   "tag": "p",
+   "y": 3041,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Averaged within each brand, men's front pockets beat the same brand's women's every single time. The gap runs from 2.50 cm at Abercrombie and 4.00 cm at American Eagle and H&M up to 13.25 cm at Wrangler and 13.40 cm at Levi's — the brand whose women's pockets average just 12.35 cm ."
+  },
+  {
+   "tag": "span",
+   "y": 3182,
+   "x": 230,
+   "w": 239,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's average front-pocket depth"
+  },
+  {
+   "tag": "span",
+   "y": 3182,
+   "x": 495,
+   "w": 220,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's average front-pocket depth"
+  },
+  {
+   "tag": "div",
+   "y": 3213,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each row is one brand: the average front-pocket depth of its women's jeans (rose) and its men's jeans (blue), with the distance between them in centimetres. Sorted by that distance, largest first."
+  },
+  {
+   "tag": "div",
+   "y": 3274,
+   "x": 230,
+   "w": 780,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Among women's jeans, has the deepest front pockets at on average and the shallowest at , with Levi's (12.35 cm) and J. Crew (12.75 cm) close behind — the shallowest women's pockets in the sample sit at the same labels as some of the deepest men's."
+  },
+  {
+   "tag": "b",
+   "y": 3281,
+   "x": 437,
+   "w": 105,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "b",
+   "y": 3281,
+   "x": 804,
+   "w": 71,
+   "in_svg": false,
+   "hidden": false,
+   "text": "19.75 cm"
+  },
+  {
+   "tag": "b",
+   "y": 3308,
+   "x": 251,
+   "w": 51,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "b",
+   "y": 3308,
+   "x": 442,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.00 cm"
+  },
+  {
+   "tag": "span",
+   "y": 3392,
+   "x": 251,
+   "w": 759,
+   "in_svg": false,
+   "hidden": false,
+   "text": "measurement: mean maxHeightFront by brand, women's jeans"
+  },
+  {
+   "tag": "span",
+   "y": 3506,
+   "x": 230,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "06"
+  },
+  {
+   "tag": "span",
+   "y": 3507,
+   "x": 270,
+   "w": 181,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The usual suspects"
+  },
+  {
+   "tag": "h2",
+   "y": 3538,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "It isn't the cut of the jeans"
+  },
+  {
+   "tag": "p",
+   "y": 3593,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Maybe women's pockets are small because skinny jeans are slim by design? No. Within the women's column the cut barely moves the needle: boot-cut 14.25 cm , skinny 14.27 cm , straight 14.42 cm . Men's skinny jeans average 22.71 cm — deeper than every women's style, and than every women's pocket in the sample."
+  },
+  {
+   "tag": "div",
+   "y": 3734,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front-pocket depth by style, separately for men's and women's jeans. The number after each label is how many jeans of that style and sex are in the sample."
+  },
+  {
+   "tag": "span",
+   "y": 3862,
+   "x": 230,
+   "w": 21,
+   "in_svg": false,
+   "hidden": false,
+   "text": "07"
+  },
+  {
+   "tag": "span",
+   "y": 3863,
+   "x": 269,
+   "w": 58,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Money"
+  },
+  {
+   "tag": "h2",
+   "y": 3894,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "It isn't the price tag either"
+  },
+  {
+   "tag": "p",
+   "y": 3949,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's and men's jeans in the sample cost about the same on average ( $80.32 vs $81.18 ), and paying more buys nothing: the correlation between price and front-pocket depth is −0.151 for women's jeans and −0.262 for men's — slightly negative in both cases."
+  },
+  {
+   "tag": "span",
+   "y": 4062,
+   "x": 230,
+   "w": 89,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's jeans"
+  },
+  {
+   "tag": "span",
+   "y": 4062,
+   "x": 345,
+   "w": 108,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's jeans"
+  },
+  {
+   "tag": "span",
+   "y": 4062,
+   "x": 479,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5 cm phone height"
+  },
+  {
+   "tag": "div",
+   "y": 4092,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each dot is one pair of jeans: price (x) against front-pocket depth (y). The lines are the least-squares trend within each sex — both slope gently downward. Hover any dot for details."
+  },
+  {
+   "tag": "p",
+   "y": 4144,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The extremes make the point on their own: the smallest front pocket in the sample is Gap's women's True Skinny Mid-Rise at 13.0 cm deep × 12.5 cm wide (162.50 cm²) , while the largest is Wrangler's men's Slim Fit at 27.5 cm × 17.5 cm (481.25 cm²) . The Gap pair cost $69.95; the Wrangler pair, $58.00."
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 567,
+   "w": 61,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sample"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 648,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The gap"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 733,
+   "w": 41,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Area"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 794,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every pair"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 898,
+   "w": 61,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brands"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 979,
+   "w": 34,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Cut"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 1033,
+   "w": 45,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Price"
+  },
+  {
+   "tag": "a",
+   "y": 4251,
+   "x": 1098,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pockets"
+  },
+  {
+   "tag": "div",
+   "y": 4254,
+   "x": 230,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Gap"
+  },
+  {
+   "tag": "b",
+   "y": 4256,
+   "x": 272,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pocket"
+  },
+  {
+   "tag": "span",
+   "y": 4308,
+   "x": 230,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "08"
+  },
+  {
+   "tag": "span",
+   "y": 4309,
+   "x": 270,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The exception"
+  },
+  {
+   "tag": "h2",
+   "y": 4339,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pockets are where the sexes agree"
+  },
+  {
+   "tag": "p",
+   "y": 4394,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Depth at the deepest point: 16.01 cm for men, 15.12 cm for women. Width at the widest: 13.70 cm against 13.34 cm . By area, 219.7 cm² against 201.8 cm² — a ratio of 0.919, against 0.576 in front. Whatever shrinks the front pocket, it stops at the back."
+  },
+  {
+   "tag": "div",
+   "y": 4507,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average back-pocket depth and width for men's and women's jeans, drawn to scale with the front-pocket averages of section 02 for comparison."
+  },
+  {
+   "tag": "p",
+   "y": 4559,
+   "x": 230,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One detail does separate the back pockets: cutout styling, where part of the pocket is cut away. It appears on 9 of the 80 jeans — 6 men's and 3 women's — and those pairs are the pricier ones, averaging $133.10 against $74.11 for the other 71."
+  },
+  {
+   "tag": "div",
+   "y": 4660,
+   "x": 230,
+   "w": 820,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average price by cutout status; the number above each bar is how many jeans it covers."
+  },
+  {
+   "tag": "h3",
+   "y": 4761,
+   "x": 230,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "About the data"
+  },
+  {
+   "tag": "h3",
+   "y": 4761,
+   "x": 748,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How the numbers were computed"
+  },
+  {
+   "tag": "li",
+   "y": 4795,
+   "x": 230,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80 pairs of jeans — 40 women's, 40 men's — from 20 popular brands."
+  },
+  {
+   "tag": "li",
+   "y": 4795,
+   "x": 748,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front-pocket depth = maxHeightFront ; back-pocket depth = maxHeightBack ."
+  },
+  {
+   "tag": "li",
+   "y": 4824,
+   "x": 230,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pockets measured in centimetres at the deepest and shallowest vertical points and the widest and narrowest horizontal points, front and back."
+  },
+  {
+   "tag": "li",
+   "y": 4847,
+   "x": 748,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Areas = deepest × widest point ( maxHeight×maxWidth ), a bounding-box estimate."
+  },
+  {
+   "tag": "li",
+   "y": 4899,
+   "x": 230,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each record also carries style, fabric, price, and a flag for cutout back pockets."
+  },
+  {
+   "tag": "li",
+   "y": 4899,
+   "x": 748,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Phone test: a pocket counts as fitting a phone 14.5 cm tall when its depth is at least 14.5 cm."
+  },
+  {
+   "tag": "li",
+   "y": 4951,
+   "x": 230,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Averages quoted in this report are means over each sex's 40 pairs."
+  },
+  {
+   "tag": "li",
+   "y": 4951,
+   "x": 748,
+   "w": 462,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand names were normalised for spacing and capitalisation before grouping."
+  },
+  {
+   "tag": "p",
+   "y": 5037,
+   "x": 230,
+   "w": 980,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data report · all figures read directly from the measurements table · charts drawn to scale from the same numbers."
+  }
+ ],
+ "charts": [],
+ "thumb": "thumb.jpg",
+ "page_height": 5140
+}
