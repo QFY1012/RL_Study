@@ -1,0 +1,54 @@
+{
+ "id": "science_etc_2",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 766,
+  "steps": 74,
+  "tools": 107,
+  "nudged": 0,
+  "usage": {
+   "input": 110255,
+   "output": 69872
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 4,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "nyt-mentions-increased",
+   "basis": "1991=1, 1998=1, 1999=1; post-2000 counts are higher; maximum is 2015=39.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nyt-link-spread-after-2000",
+   "basis": "2000=2, 2001=5, 2002=20.",
+   "verdict": "ok"
+  },
+  {
+   "id": "twenty-nine-no-link-studies",
+   "basis": "orig=False: 29; orig=True: 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "aap-list-twice-cochrane",
+   "basis": "aap=29; cochrane=14; 29 is roughly twice 14.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 4,
+ "skipped": 11,
+ "review": [
+  {
+   "id": "nyt-link-spread-after-2000",
+   "action": "keep",
+   "why": "the quote is the story's own text from its repository (the-pudding/scienceweekly_2)"
+  }
+ ]
+}

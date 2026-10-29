@@ -1,0 +1,38 @@
+[
+  {
+    "id": "nyt-mentions-increased",
+    "source": "We use these articles not to cast aspersions on the Times, but to demonstrate the fact that these beliefs have grown sufficiently popular for the paper of record to mention them with increased frequency.",
+    "claim": "New York Times articles mentioning a vaccine-autism link were sparse before 2000 (1 each in 1991, 1998 and 1999) and much more frequent afterward, peaking at 39 in 2015.",
+    "tables": {
+      "n": "data/nyt_vaccine_autism_monthly_v2.csv"
+    },
+    "code": "n[(n['keywords']!='[]')&(n['type_of_material']!='Correction')&(n['source']!='International Herald Tribune')&(n['type']=='article')]['formatted_pub_date'].str[:4].astype(int).value_counts().sort_index()"
+  },
+  {
+    "id": "nyt-link-spread-after-2000",
+    "source": "Meanwhile, the idea of a vaccine/autism link begins to spread. In the US, lawmakers began to call for a study to investigate the vaccine/autism link.",
+    "claim": "Annual New York Times articles mentioning the link rose from 2 in 2000 to 5 in 2001 and 20 in 2002.",
+    "tables": {
+      "n": "data/nyt_vaccine_autism_monthly_v2.csv"
+    },
+    "code": "n[(n['keywords']!='[]')&(n['type_of_material']!='Correction')&(n['source']!='International Herald Tribune')&(n['type']=='article')]['formatted_pub_date'].str[:4].astype(int).value_counts().sort_index()"
+  },
+  {
+    "id": "twenty-nine-no-link-studies",
+    "source": "Some 30 studies have found no relationship between autism and the MMR vaccine; the original study, its data misrepresented, has been retracted, and its lead researcher is now barred from practicing medicine in the UK.",
+    "claim": "29 of the MMR studies in the file found no link, leaving one original study claiming a link.",
+    "tables": {
+      "s": "data/science_track_combined.csv"
+    },
+    "code": "s[s['specific_topic'].eq('mmr')].assign(orig=lambda d: d['grouping'].eq('original')).groupby('orig').size()"
+  },
+  {
+    "id": "aap-list-twice-cochrane",
+    "source": "the American Association of Pediatrics, for example, has created their own list of creditable research, which twice as many sources",
+    "claim": "The American Association of Pediatrics' list contains 29 of the listed studies, against 14 on the Cochrane Collaboration's list, roughly twice as many.",
+    "tables": {
+      "s": "data/science_track_combined.csv"
+    },
+    "code": "s[s['specific_topic'].eq('mmr')].assign(aap=lambda d: d['grouping'].isin(['aap','aap_cochrane']), cochrane=lambda d: d['grouping'].eq('aap_cochrane')).agg({'aap':'sum','cochrane':'sum'})"
+  }
+]

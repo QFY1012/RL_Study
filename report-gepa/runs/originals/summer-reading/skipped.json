@@ -1,0 +1,38 @@
+[
+  {
+    "source": "We (programmatically) sifted through over 100 million checkout records from the Seattle Public Library to find fiction books that haven’t been checked out in over a decade.",
+    "why": "This describes how the source data was collected (the size of the external Seattle Public Library checkout dataset); no checkout records are in data/hipster.csv, so the number cannot be computed from the files."
+  },
+  {
+    "source": "All books discussed in this article are fiction books that have appeared in the Seattle Public Library’s physical book inventory for the entire span of time between September 2017 and May 2019 (the earliest and latest dates available for these data) and are still available, but have not been checked out any time between September 2005 and May 2019.",
+    "why": "This is the inclusion method, not a computed finding, and it relies on inventory and checkout history that is not present in data/hipster.csv (the file has no checkout or inventory-status columns)."
+  },
+  {
+    "source": "We excluded any books that were published after 2005 to minimize this likelihood.",
+    "why": "This states the filtering rule used to build the list, not a finding drawn from the data; the CSV only marks removed books in the Remove column and cannot independently verify the 2005 cutoff. (Note the kept books happen to run only to 2000.)"
+  },
+  {
+    "source": "Vintage Range 1880 2005",
+    "why": "These are the fixed default bounds of the interactive year slider (the code hard-codes 1880 as the minimum and 2010 minus five as the default maximum), not values computed from the books; the actual publication years of the books in the list run from 1884 to 2000, so the labels 1880 and 2005 are not reproduced by the data."
+  },
+  {
+    "source": "Books over 100 years old with no Goodreads reviews.",
+    "why": "This is the description of a filter preset rather than a stated result; the story gives no count for it, and the preset's code does not match the wording (it keeps books published up to 1918 with review counts below the first quartile of positive counts, not strictly zero reviews)."
+  },
+  {
+    "source": "Books that take place in the Pacific Northwest.",
+    "why": "This is the description of a filter preset (Locally Sourced), not a result with a number, comparison, ranking or share; the story reports no count or statistic for this subset."
+  },
+  {
+    "source": "Books under 200 pages long.",
+    "why": "This is the description of a filter preset (Back-Pocket Fit) rather than a finding; the story states no count or share of books meeting the threshold."
+  },
+  {
+    "source": "Books over 400 pages long.",
+    "why": "This is the description of a filter preset (Binge Mode) rather than a finding; the story states no count or share of books meeting the threshold."
+  },
+  {
+    "source": "Books with no ratings on Goodreads.",
+    "why": "This is the description of a filter preset (Off the Grid) rather than a stated result; the story gives no count of such books."
+  }
+]

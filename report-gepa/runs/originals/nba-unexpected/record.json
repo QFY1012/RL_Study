@@ -1,0 +1,37 @@
+{
+ "id": "nba-unexpected",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1335,
+  "steps": 153,
+  "tools": 288,
+  "nudged": 0,
+  "usage": {
+   "input": 238097,
+   "output": 74767
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "nba-top-six-z-scores",
+   "basis": "Output values are 6.75, 6.48, 6.29, 6.22, 6.08, 6.01; all are greater than 5, and the range is 6.75 down to 6.01.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "nba-top-six-z-scores",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 0,
+ "skipped": 3
+}

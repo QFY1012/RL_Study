@@ -4,8 +4,8 @@
     "why": "The top-5 songs in the supplied data for 1998 average 3.08 credited writers, not 2.9; no story-specified filter (top-5 songs, 1985-2017) brings the 1998 average down to 2.9."
   },
   {
-    "source": "In the late 80s, the most-common songwriting team consisted of two people, and only 7 songs had more than 3 writers.",
-    "why": "The two-writer mode reproduces, but for 1985-1989 the data has 19 top-5 song-years with more than three credited writers, not 7."
+    "source": "only 7 songs had more than 3 writers",
+    "why": "The two-writer mode reproduces, but for 1985-1989 the data has 19 top-5 songs with more than three credited writers, not 7."
   },
   {
     "source": "The result is a trend toward similarity, with smaller distances among songs. To date, songs that charted between 2012 and 2016 were the most similar, according to EchoNest data.",

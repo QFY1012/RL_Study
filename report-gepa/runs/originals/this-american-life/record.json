@@ -1,0 +1,52 @@
+{
+ "id": "this-american-life",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 456,
+  "steps": 43,
+  "tools": 55,
+  "nudged": 0,
+  "usage": {
+   "input": 50999,
+   "output": 59164
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "men-two-thirds-words",
+   "basis": "mean = 63.780781 over count = 622 episodes, so 63.8% matches.",
+   "verdict": "ok"
+  },
+  {
+   "id": "episodes-male-majority",
+   "basis": "sum = 436, count = 622, mean = 0.700965 (≈70.1%), matching 436/622 and more than half.",
+   "verdict": "ok"
+  },
+  {
+   "id": "exclusive-gender-episodes",
+   "basis": "value counts: malePercent 0.0 = 1 and 100.0 = 18, matching one female-only and 18 male-only.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fathers-mothers-day-episodes",
+   "basis": "Extracted title counts: Father = 5, Mother = 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-reporters-fewer-male-interviewees",
+   "basis": "For percentMaleProducers 0.0: mean = 64.855799 (≈64.9%); for 100.0: mean = 68.635493 (≈68.6%); both >50%.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 11
+}

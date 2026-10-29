@@ -119,11 +119,11 @@
   {
     "id": "best-class-1999",
     "source": "Picking today, the 1999 draft class appears to have the best case for top draft class.",
-    "claim": "Among players who played at least 1,000 career minutes, the 1999 class has the highest average VORP (11.75), ahead of 1996 (11.34) and 2003 (10.34).",
+    "claim": "The 1999 class ranks first among all draft classes by average VORP, with 1996 second and 2003 third.",
     "tables": {
       "d": "data/data.csv"
     },
-    "code": "d[d.MP.ge(1000)].groupby('Year').VORP.mean().nlargest(3).rename('mean VORP (MP>=1000)')"
+    "code": "d[d.MP.ge(1000)].groupby('Year').VORP.mean().rank(ascending=False).nsmallest(3)"
   },
   {
     "id": "1999-no-stars-vs-2003",

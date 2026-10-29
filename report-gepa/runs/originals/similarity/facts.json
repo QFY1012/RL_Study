@@ -26,11 +26,11 @@
       "g": "data/pandora_genes.csv",
       "s": "data/pandora_songs.csv"
     },
-    "code": "g.merge(s,on='songID').query('geneID == 129 and year_song == 2001').groupby('geneID').score.agg(['count','mean',lambda x:(x>=0.5).sum(),lambda x:(x==1.0).sum()])"
+    "code": "g.merge(s,on='songID').query('geneID == 129 and year_song == 2001').groupby(['geneID','year_song']).score.agg(['count','mean',lambda x:(x>=0.5).sum(),lambda x:(x==1.0).sum()])"
   },
   {
     "id": "late-eighties-writer-team-mode",
-    "source": "In the late 80s, the most-common songwriting team consisted of two people, and only 7 songs had more than 3 writers.",
+    "source": "In the late 80s, the most-common songwriting team consisted of two people",
     "claim": "For top-5 songs from 1985 to 1989, the most common number of credited writers per song is 2.",
     "tables": {
       "w": "data/writers_info.csv"
@@ -44,7 +44,7 @@
     "tables": {
       "w": "data/writers_info.csv"
     },
-    "code": "w.groupby(['title_id','year_song']).writer_id.nunique().reset_index(name='n').loc[lambda x: x.year_song==2017,'n'].agg(['count',lambda x:(x>=4).sum(),lambda x:(x>=4).mean()])"
+    "code": "w.groupby(['year_song','title_id']).writer_id.nunique().reset_index(name='n').loc[lambda x:x.year_song==2017].groupby('year_song').n.agg(['count',lambda x:(x>=4).sum(),lambda x:(x>=4).mean()])"
   },
   {
     "id": "average-writers-2017",
@@ -53,7 +53,7 @@
     "tables": {
       "w": "data/writers_info.csv"
     },
-    "code": "w.groupby(['title_id','year_song']).writer_id.nunique().reset_index(name='n').loc[lambda x: x.year_song==2017,'n'].mean()"
+    "code": "w.groupby(['year_song','title_id']).writer_id.nunique().reset_index(name='n').loc[lambda x:x.year_song==2017].groupby('year_song').n.mean()"
   },
   {
     "id": "uptown-funk-havana-eleven-writers",
@@ -92,7 +92,7 @@
     "tables": {
       "p": "data/producers_info.csv"
     },
-    "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017])).apply(lambda d: d[d.producer_id.isin(d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().sort_values(ascending=False).head(10).index)].title_id.nunique()/d.title_id.nunique())"
+    "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017],labels=['1985-1989','1990-1994','1995-1999','2000-2004','2005-2009','2010-2014','2015-2017'])).apply(lambda d: d[d.producer_id.isin(d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().sort_values(ascending=False).head(10).index)].title_id.nunique()/d.title_id.nunique())"
   },
   {
     "id": "top-producer-per-period",
@@ -102,6 +102,6 @@
       "p": "data/producers_info.csv",
       "n": "data/producer_names.csv"
     },
-    "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017])).apply(lambda d: d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().pipe(lambda x: x[x==x.max()]).rename(index=lambda i: n.set_index('producer_id').loc[i,'name']))"
+    "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017],labels=['1985-1989','1990-1994','1995-1999','2000-2004','2005-2009','2010-2014','2015-2017'])).apply(lambda d: d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().pipe(lambda x: x[x==x.max()]).rename(index=lambda i: n.set_index('producer_id').loc[i,'name']))"
   }
 ]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "nba-top-six-z-scores",
+    "source": "TOP 6 Z-SCORE OVER 5",
+    "claim": "The six highest moving z-scores for NBA games are all over 5, ranging from 6.75 down to 6.01.",
+    "tables": {
+      "n": "data/nba.csv"
+    },
+    "code": "n.nlargest(6,'GmScMovingZ').GmScMovingZ"
+  }
+]

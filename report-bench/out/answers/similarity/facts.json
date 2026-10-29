@@ -1,0 +1,107 @@
+[
+ {
+  "id": "most-similar-pair-2007-2011",
+  "source": "The two most similar songs from 2007 to 2011 were Katy Perry’s “Teenage Dream” and Kesha’s “We R Who We R”, and they indeed sound alike.",
+  "claim": "For 2007-2011, the closest pair is Katy Perry's “Teenage Dream” and Ke$ha's “We R Who We R”, with a normalized EchoNest distance of 0.0515.",
+  "tables": {
+   "e": "data/songs_echo_4.csv"
+  },
+  "code": "(lambda d: (lambda p: p.assign(dist=np.sqrt(sum(((p[c+'_a']-p[c+'_b'])/(e[c].max()-e[c].min()))**2 for c in ['danceability','energy','speechiness','liveness','loudness','acousticness','valence','instrumentalness']))).nsmallest(1,'dist')[['artist_a','track_a','artist_b','track_b','dist']])(d.assign(k=1).merge(d.assign(k=1),on='k',suffixes=('_a','_b')).query('track_a < track_b')))(e[e.year_song.between(2007,2011)])"
+ },
+ {
+  "id": "synth-every-1984-number-one",
+  "source": "1984 was peak synth—every #1 song prominently featured synthesizers, a strong case for music homogeneity in the mid-’80s.",
+  "claim": "For the synthesizer attribute (geneID 77), 1984 has the highest mean score of 1979-1986 (0.716), and all 19 #1 hits that year score at least 0.5 (minimum 0.5).",
+  "tables": {
+   "g": "data/pandora_genes.csv",
+   "s": "data/pandora_songs.csv"
+  },
+  "code": "g.merge(s,on='songID').query('geneID == 77 and 1979 <= year_song <= 1986').groupby(['geneID','year_song']).score.agg(['count','min','mean'])"
+ },
+ {
+  "id": "rnb-soul-2001-number-ones",
+  "source": "For example, #1 songs in 2001 were overwhelmingly in the R&B/Soul genre.",
+  "claim": "Among the 13 #1 hits in 2001, 11 score at least 0.5 on the R&B/Soul attribute (geneID 129), 9 score 1.0, and the mean score is 0.815.",
+  "tables": {
+   "g": "data/pandora_genes.csv",
+   "s": "data/pandora_songs.csv"
+  },
+  "code": "g.merge(s,on='songID').query('geneID == 129 and year_song == 2001').groupby(['geneID','year_song']).score.agg(['count','mean',lambda x:(x>=0.5).sum(),lambda x:(x==1.0).sum()])"
+ },
+ {
+  "id": "late-eighties-writer-team-mode",
+  "source": "In the late 80s, the most-common songwriting team consisted of two people",
+  "claim": "For top-5 songs from 1985 to 1989, the most common number of credited writers per song is 2.",
+  "tables": {
+   "w": "data/writers_info.csv"
+  },
+  "code": "w.groupby(['title_id','year_song']).writer_id.nunique().reset_index(name='n').loc[lambda x: x.year_song.between(1985,1989),'n'].mode()"
+ },
+ {
+  "id": "four-plus-writers-2017",
+  "source": "Today, well over half of songs are written by 4 or more people.",
+  "claim": "In 2017, 28 of 38 top-5 songs (73.7%) had four or more credited writers.",
+  "tables": {
+   "w": "data/writers_info.csv"
+  },
+  "code": "w.groupby(['year_song','title_id']).writer_id.nunique().reset_index(name='n').loc[lambda x:x.year_song==2017].groupby('year_song').n.agg(['count',lambda x:(x>=4).sum(),lambda x:(x>=4).mean()])"
+ },
+ {
+  "id": "average-writers-2017",
+  "source": "2017: 5.1 writers",
+  "claim": "Top-5 songs in 2017 averaged 5.13 credited songwriters.",
+  "tables": {
+   "w": "data/writers_info.csv"
+  },
+  "code": "w.groupby(['year_song','title_id']).writer_id.nunique().reset_index(name='n').loc[lambda x:x.year_song==2017].groupby('year_song').n.mean()"
+ },
+ {
+  "id": "uptown-funk-havana-eleven-writers",
+  "source": "“Uptown Funk” and “Havana” had 11 songwriters each.",
+  "claim": "“Uptown Funk!” and “Havana” each have 11 credited songwriters.",
+  "tables": {
+   "w": "data/writers_info.csv",
+   "s": "data/song_names.csv"
+  },
+  "code": "w.groupby(['title_id','year_song']).writer_id.nunique().reset_index(name='n').merge(s,on='title_id').drop_duplicates('title_id').query(\"title in ['Uptown Funk!','Havana']\").set_index('title').n"
+ },
+ {
+  "id": "max-martin-top-writer",
+  "source": "Since 1985, he’s the #1 writer and producer by songs that charted in the top 5",
+  "claim": "Since 1985, the writer with the most top-5 songs is Martin Karl \"Max Martin\" Sandberg, with 42 songs.",
+  "tables": {
+   "w": "data/writers_info.csv",
+   "n": "data/writers_names.csv"
+  },
+  "code": "w.drop_duplicates(['writer_id','title_id']).groupby('writer_id').size().sort_values(ascending=False).head(1).rename(index=lambda i: n.set_index('writer_id').loc[i,'name'])"
+ },
+ {
+  "id": "max-martin-top-producer",
+  "source": "Since 1985, he’s the #1 writer and producer by songs that charted in the top 5",
+  "claim": "Since 1985, the producer with the most top-5 songs is Martin Karl \"Max Martin\" Sandberg, with 37 songs.",
+  "tables": {
+   "p": "data/producers_info.csv",
+   "n": "data/producer_names.csv"
+  },
+  "code": "p.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().sort_values(ascending=False).head(1).rename(index=lambda i: n.set_index('producer_id').loc[i,'name'])"
+ },
+ {
+  "id": "top-ten-producer-share-by-period",
+  "source": "From 2010-2014, the top ten producers (by number of hits) wrote about 40% of songs that achieved #1 - #5 ranking on the Billboard Hot 100. In the late-80s, the top ten producers were credited with half as many hits, about 19%.",
+  "claim": "The top-ten producers' share of top-5 hits is 19.4% in 1985-1989, 23.2% in 1990-1994, 30.8% in 1995-1999, 25.7% in 2000-2004, 35.6% in 2005-2009, 42.6% in 2010-2014, and 31.5% in 2015-2017.",
+  "tables": {
+   "p": "data/producers_info.csv"
+  },
+  "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017],labels=['1985-1989','1990-1994','1995-1999','2000-2004','2005-2009','2010-2014','2015-2017'])).apply(lambda d: d[d.producer_id.isin(d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().sort_values(ascending=False).head(10).index)].title_id.nunique()/d.title_id.nunique())"
+ },
+ {
+  "id": "top-producer-per-period",
+  "source": "The 10 Producers with the Most Hits that peaked on the Billboard Hot 100 #1 through #5.",
+  "claim": "The most top-5 hits by a producer in each period are G.Michael's 11 (1985-1989); a tie of 13 between James Samuel \"Jimmy Jam\" Harris III and Terry Steven Lewis (1990-1994); Sean \"Puffy/Puff Daddy/P. Diddy/Diddy\" Combs's 12 (1995-1999); Beyonce Giselle Knowles Carter's 9 (2000-2004); Floyd Nathaniel \"Danja/Danjahandz\" Hills's 11 (2005-2009); and Martin Karl \"Max Martin\" Sandberg's 22 (2010-2014) and 10 (2015-2017).",
+  "tables": {
+   "p": "data/producers_info.csv",
+   "n": "data/producer_names.csv"
+  },
+  "code": "p.groupby(pd.cut(p.year_song,[1984,1989,1994,1999,2004,2009,2014,2017],labels=['1985-1989','1990-1994','1995-1999','2000-2004','2005-2009','2010-2014','2015-2017'])).apply(lambda d: d.drop_duplicates(['producer_id','title_id']).groupby('producer_id').size().pipe(lambda x: x[x==x.max()]).rename(index=lambda i: n.set_index('producer_id').loc[i,'name']))"
+ }
+]

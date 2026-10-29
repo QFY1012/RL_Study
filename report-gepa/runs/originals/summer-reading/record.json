@@ -1,0 +1,32 @@
+{
+ "id": "summer-reading",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 191,
+  "steps": 23,
+  "tools": 33,
+  "nudged": 0,
+  "usage": {
+   "input": 41274,
+   "output": 14429
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "books-in-stack",
+   "basis": "df['Remove'].isna().sum() = 276, matching the claimed 276 books not flagged in Remove.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 1,
+ "skipped": 9
+}

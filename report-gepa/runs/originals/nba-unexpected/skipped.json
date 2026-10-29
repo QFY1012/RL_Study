@@ -1,0 +1,14 @@
+[
+  {
+    "source": "MJ's AVERAGE game score was almost 99th percentile",
+    "why": "This wording is from a viewer comment, not the story itself, and nba.csv holds only one row per player (their top unexpected game), not every game, so an average Game Score and its percentile cannot be computed from the supplied files."
+  },
+  {
+    "source": "explosive games from Terance Mann and Patty Mills made the cut",
+    "why": "This promotional text states no number or ranking that the supplied files can reproduce, and it is not the story's own claim about the data."
+  },
+  {
+    "source": "+2 - DAN MAJERLE",
+    "why": "The retrieved on-screen chart fragment has no context or checkable claim, and the '53' shown alongside it is not a value the supplied tables compute."
+  }
+]

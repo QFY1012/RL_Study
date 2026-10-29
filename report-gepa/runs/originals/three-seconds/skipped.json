@@ -1,0 +1,14 @@
+[
+  {
+    "source": "No other common foul had more than 53% of its calls in the first half.",
+    "why": "The data file contains only defensive three seconds calls; it has no play-by-play records for other foul types, so the comparison with other common fouls cannot be computed."
+  },
+  {
+    "source": "Between 2015 and 2018, NBA officials reviewed over 1,400 games and identified 141 instances of defensive three seconds in the last 2 minutes of close games. It was called only once.",
+    "why": "This finding comes from the NBA's Last Two Minute Report data, which is not included in three-seconds.csv; the file only covers called defensive three seconds fouls, not reviewed missed calls."
+  },
+  {
+    "source": "a close examination of the NBA's play-by-play data reveals that defensive three seconds is the NBA's least consistently called rule",
+    "why": "Establishing that defensive three seconds is the least consistently called rule requires call records for all other rules to compare against; the data file contains only defensive three seconds calls."
+  }
+]

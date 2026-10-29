@@ -1,0 +1,37 @@
+{
+ "id": "song-repetition",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 566,
+  "steps": 45,
+  "tools": 58,
+  "nudged": 0,
+  "usage": {
+   "input": 58239,
+   "output": 77254
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "taylor-swift-1989-top-songs",
+   "basis": "Top 5 by rscore include Out Of The Woods (2014), Shake It Off (2014), Untouchable (2009), Bad Blood (2014), Welcome To New York (2014); four are 2014 and Untouchable is 2009.",
+   "verdict": "ok"
+  },
+  {
+   "id": "madonna-evita-least-repetitive",
+   "basis": "The two smallest rscore rows are Don't Cry For Me Argentina (From \"Evita\") with 0.519220 and You Must Love Me (From \"Evita\") with 0.697279.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 19
+}

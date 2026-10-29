@@ -46,7 +46,19 @@
    "verdict": "ok"
   }
  ],
- "dropped": [],
- "answer": 5,
- "skipped": 3
+ "dropped": [
+  {
+   "id": "carmelo-2018-lowest-vorp-high-pay",
+   "why": "the quote 'The worst contract ever' is from a YouTube page the agent read, not from the story"
+  }
+ ],
+ "answer": 4,
+ "skipped": 3,
+ "review": [
+  {
+   "id": "carmelo-2018-lowest-vorp-high-pay",
+   "action": "drop",
+   "why": "the quote 'The worst contract ever' is from a YouTube page the agent read, not from the story"
+  }
+ ]
 }

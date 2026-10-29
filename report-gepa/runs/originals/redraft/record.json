@@ -1,0 +1,159 @@
+{
+ "id": "redraft",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 952,
+  "steps": 82,
+  "tools": 102,
+  "nudged": 0,
+  "usage": {
+   "input": 136208,
+   "output": 134709
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 24,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "darko-drafted-second",
+   "basis": "2003 picks: LeBron James Pk 1, Darko Milicic Pk 2, Carmelo Anthony Pk 3, Chris Bosh Pk 4, Dwyane Wade Pk 5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "darko-redraft-24",
+   "basis": "Pk_redraft_vorp: LeBron James 1, Darko Milicic 24, Carmelo Anthony 3, Chris Bosh 4, Dwyane Wade 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "darko-22-better-choices",
+   "basis": "Count = 22 players in 2003 with Pk > Darko's and VORP > Darko's.",
+   "verdict": "ok"
+  },
+  {
+   "id": "darko-vorp-vs-lebron",
+   "basis": "VORP: LeBron James 108.6, Darko Milicic 0.8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "luke-walton-better-choice",
+   "basis": "Luke Walton: Year 2003, Pk 32, VORP 1.9, Pk_redraft_vorp 22.",
+   "verdict": "ok"
+  },
+  {
+   "id": "drafted-players-make-it",
+   "basis": "sum 730, count 1142, mean 0.639229.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top20-picks-minutes",
+   "basis": "sum 27, count 400 for top-20 picks with MP<1000.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kobe-move-plus-12",
+   "basis": "Kobe Bryant: Pk 13, Pk_redraft_vorp 1, move 12.",
+   "verdict": "ok"
+  },
+  {
+   "id": "kobe-bust-steal-value",
+   "basis": "Kobe VORP 72.1; Zydrunas Ilgauskas VORP 13.0 and Pk_redraft_vorp 13; Kobe Bust_steal 59.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "garnett-smith-biggest-steal-bust",
+   "basis": "Kevin Garnett Bust_steal 77.6 (1995); Joe Smith Bust_steal -88.1 (1995), selected as max/min.",
+   "verdict": "ok"
+  },
+  {
+   "id": "smith-garnett-vorp",
+   "basis": "Joe Smith: 1995, Pk 1, VORP 5.9; Kevin Garnett: 1995, Pk 5, VORP 94.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "darko-fourth-worst-bust",
+   "basis": "Bust_steal: Joe Smith -88.1 rank 1, Michael Olowokandi -74.0 rank 2, Glenn Robinson -67.9 rank 3, Darko Milicic -55.6 rank 4, Kwame Brown -52.2 rank 5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "manu-ginobili-57th",
+   "basis": "Manu Ginobili: Year 1999, Pk 57, Pk_redraft_vorp 2, Bust_steal 48.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "best-class-1999",
+   "basis": "Rank by mean VORP among MP>=1000: 1999 rank 1.0, 1996 rank 2.0, 2003 rank 3.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "1999-no-stars-vs-2003",
+   "basis": "Best VORP rows: LeBron James 2003 VORP 108.6, Shawn Marion 1999 VORP 52.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "1999-depth-vs-2003",
+   "basis": "10th-highest VORP: 1999 28.2, 2003 10.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "redraft-moves-close",
+   "basis": "Absolute redraft move: median 7.000000, mean 10.015762.",
+   "verdict": "ok"
+  },
+  {
+   "id": "higher-picks-drop-more",
+   "basis": "Correlation between Pk and move = -0.4159465.",
+   "verdict": "ok"
+  },
+  {
+   "id": "second-round-picks-belong",
+   "basis": "Pk mean 44.142066, Pk_redraft_vorp mean 38.926199, move mean -5.215867.",
+   "verdict": "ok"
+  },
+  {
+   "id": "players-redrafted-differently",
+   "basis": "sum 1029, count 1142, mean 0.901051.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-five-steal-values",
+   "basis": "Top Bust_steal: Kevin Garnett 77.6, Kobe Bryant 59.1, Dirk Nowitzki 53.9, Paul Pierce 50.7, Manu Ginobili 48.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-ten-class-1999",
+   "basis": "Mean of top 10 VORP: 1999 37.93, 1996 35.05, 2003 32.03.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-five-class-2003",
+   "basis": "Mean of top 5 VORP: 2003 48.94, 1996 48.22, 1998 47.18.",
+   "verdict": "ok"
+  },
+  {
+   "id": "class-top-ten-vorp-ranges",
+   "basis": "Top-10 VORP ranges: 1996 max 72.1 min 16.9; 1998 max 65.7 min 11.0; 1999 max 52.1 min 28.2; 2003 max 108.6 min 10.3.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "drafted-players-make-it",
+   "why": "the story's own cut (at least 1,000 career minutes) gives 63.9% (730 of 1,142), not the story's 'just barely over half'"
+  }
+ ],
+ "answer": 23,
+ "skipped": 14,
+ "review": [
+  {
+   "id": "drafted-players-make-it",
+   "action": "drop",
+   "why": "the story's own cut (at least 1,000 career minutes) gives 63.9% (730 of 1,142), not the story's 'just barely over half'"
+  }
+ ]
+}

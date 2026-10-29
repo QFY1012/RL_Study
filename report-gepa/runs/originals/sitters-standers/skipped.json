@@ -1,0 +1,38 @@
+[
+  {
+    "source": "Over the past few generations, work in America has become far less physical. A lot of farming and factory work was replaced by desk jobs. In turn, work became less backbreaking—and less dangerous.",
+    "why": "The file is a current cross-section of occupations; it has no historical time series on the physical demands or composition of work."
+  },
+  {
+    "source": "Workplace safety since 1970",
+    "why": "data.csv contains one current injury rate per occupation, not the 1970–2022 national fatality and injury series shown in the chart."
+  },
+  {
+    "source": "For most of American history, people worked until their bodies gave out. In 1900, most men older than 65 still worked to be self-sufficient, including 84% of Black Americans.",
+    "why": "The file has no historical labor-force participation data by age or race."
+  },
+  {
+    "source": "Percentage of men older than 65 who are still working",
+    "why": "The file has no historical labor-force participation series for older men by race."
+  },
+  {
+    "source": "Percentage of workers excluded from Social Security, by race",
+    "why": "The race columns in data.csv are current workforce shares, not Social Security coverage or exclusion rates."
+  },
+  {
+    "source": "about 6 million people",
+    "why": "The file contains no count of workers excluded from Social Security."
+  },
+  {
+    "source": "about 11.5 million people",
+    "why": "The file contains no count of excluded white workers."
+  },
+  {
+    "source": "Since the mid-1990s, undocumented immigrants haven't received Social Security benefits, even though they pay taxes to fund the system. Many will never be able to retire.",
+    "why": "data.csv has a noncitizen workforce share but no immigration-status, benefit-eligibility or retirement data."
+  },
+  {
+    "source": "The history of labor in America is defined by the least privileged people doing the least desirable work—sometimes by force.",
+    "why": "Qualitative historical claim; the file contains no historical evidence on privilege, coercion or labor history."
+  }
+]

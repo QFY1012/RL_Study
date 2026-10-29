@@ -1,0 +1,20 @@
+[
+  {
+    "id": "taylor-swift-1989-top-songs",
+    "source": "4 of her 5 most repetitive songs are from 1989 .",
+    "claim": "Four of Taylor Swift's five most repetitive songs—Out Of The Woods, Shake It Off, Bad Blood and Welcome To New York—have year 2014; Untouchable has year 2009.",
+    "tables": {
+      "t": "data/taylor_swift_discog.json.csv"
+    },
+    "code": "t.assign(year=t.yearf.astype(int)).nlargest(5, 'rscore').assign(n=lambda d: d.groupby('year')['title'].transform('size'))[['title', 'year', 'n']]"
+  },
+  {
+    "id": "madonna-evita-least-repetitive",
+    "source": "Interestingly, her two least repetitive songs are arguably the only two that don't belong to the pop genre: they're both from the musical Evita , and written by Tim Rice and Andrew Lloyd Weber.",
+    "claim": "Madonna's two least repetitive songs by rscore are both from Evita: Don't Cry For Me Argentina (From \"Evita\") and You Must Love Me (From \"Evita\").",
+    "tables": {
+      "m": "data/madonna_discog.json.csv"
+    },
+    "code": "m.nsmallest(2, 'rscore')[['title', 'rscore']]"
+  }
+]

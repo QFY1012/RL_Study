@@ -1,0 +1,37 @@
+{
+ "id": "three-seconds",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 140,
+  "steps": 21,
+  "tools": 37,
+  "nudged": 0,
+  "usage": {
+   "input": 37460,
+   "output": 10586
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "first-half-share",
+   "basis": "count=1492, sum=1000, mean=0.670241 (67.0%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "before-fourth-quarter-share",
+   "basis": "count=1492, sum=1348, mean=0.903485 (90.3%)",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 3
+}

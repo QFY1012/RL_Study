@@ -1,0 +1,11 @@
+[
+ {
+  "id": "books-in-stack",
+  "source": "There are 276 books in this stack",
+  "claim": "The final list contains 276 books, i.e. all rows not flagged in the Remove column.",
+  "tables": {
+   "df": "data/hipster.csv"
+  },
+  "code": "df['Remove'].isna().sum()"
+ }
+]

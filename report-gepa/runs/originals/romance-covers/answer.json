@@ -54,6 +54,15 @@
   "code": "l[l['year'] >= 2016].assign(undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('year')['undressed'].mean().mul(100).round(1)"
  },
  {
+  "id": "raunchiness-lows-2021-2023",
+  "source": "From 2021 to this year, the percentage of covers with someone partially unclothed was smaller than any previous years, with only three of these covers featured in 2023.",
+  "claim": "The shares of covers showing someone partially unclothed in 2021, 2022 and 2023 (5.9%, 6.7% and 2.6%) are each lower than in any year from 2011 to 2020, the lowest of which is 9.0% in 2019; in 2023 only 3 covers did.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.assign(undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('year')['undressed'].agg(['sum', 'mean']).assign(pct=lambda d: d['mean'] * 100).drop(columns='mean').round(1)"
+ },
+ {
   "id": "illustration-2011-to-2023",
   "source": "Illustration 7% 72% 2011 2023",
   "claim": "The share of illustrated covers rose from 7.0% in 2011 to 71.8% in 2023.",

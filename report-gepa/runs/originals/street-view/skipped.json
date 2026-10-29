@@ -1,0 +1,70 @@
+[
+  {
+    "source": "here's all 111,290 matches for “pizza,” on a map.",
+    "why": "terms.csv gives “pizza” a term count of 74,178 (79,449 across all terms containing “pizza”), not 111,290; the map total is a search-engine match count that this file does not contain."
+  },
+  {
+    "source": "Broadway 62,424 matches",
+    "why": "terms.csv gives “broadway” a count of 53,846 (57,750 across terms containing it), not 62,424; the map's search-match total and geography are not in this file."
+  },
+  {
+    "source": "Luxury 16,731 matches",
+    "why": "terms.csv gives “luxury” a count of 7,369 (11,398 across terms containing it), not 16,731; the map's search-match total and geography are not in this file."
+  },
+  {
+    "source": "Beware 10,419 matches",
+    "why": "terms.csv gives “beware” a count of 11,192, which differs from the map's 10,419 search matches; the search-engine total and the Manhattan-absence geography are not in this file."
+  },
+  {
+    "source": "Gold 51,353 matches",
+    "why": "terms.csv gives “gold” a count of 20,076 (36,306 across terms containing it), not 51,353; the map's search-match total and Diamond District geography are not in this file."
+  },
+  {
+    "source": "Iglesia 16,967 matches",
+    "why": "terms.csv gives “iglesia” a count of 2,654 (5,712 across terms containing it), not 16,967; the map's search-match total and geography are not in this file."
+  },
+  {
+    "source": "Jerk 4,900 matches",
+    "why": "terms.csv gives “jerk” a count of 1,203, not 4,900; the map's search-match total and geography are not in this file."
+  },
+  {
+    "source": "???32,825 matches",
+    "why": "The term behind the “???” card is not named in the story (the card's image is unisex.jpg); terms.csv gives “unisex” a count of 18,455, so the search-match total cannot be reproduced."
+  },
+  {
+    "source": "Apparently in 2021, the Staten Island District Attorney arrested at least one of the men behind the Cash4Cars operation and issued 62 summonses.",
+    "why": "This count comes from a linked news report, not from the terms data."
+  },
+  {
+    "source": "NYC is home to largest Muslim community in the United States",
+    "why": "A demographic claim from outside sources, not computed from terms.csv."
+  },
+  {
+    "source": "Matches for “Broadway” identify street signs, of course. The resulting map is oddly satisfying, illuminating each of the five boroughs’ Broadway.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "Every new residential building calls itself “luxury,” but only Hudson Yards has applied the label to an entire neighborhood.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "There's a simple answer to why “beware” has such a clear geographic footprint, oddly completely absent from Manhattan.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "The map of “gold” depicts Manhattan’s Diamond District, as well as streets lined with “we buy gold” jewelry and pawn shops.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "Coordinates for “iglesia” (church, in Spanish) point to Spanish-speaking communities.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "Similarly, “jerk” (the cooking style, not the personality) points to Jamaican enclaves in Flatbush, Brooklyn and Jamaica (the neighborhood), Queens.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  },
+  {
+    "source": "See if you can guess this one, based on the geography: this adjective denotes that it’s not just a barbershop and not just a salon.",
+    "why": "A geographic pattern read from the map; terms.csv contains term counts only, with no locations or coordinates."
+  }
+]

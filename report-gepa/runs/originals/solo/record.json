@@ -1,0 +1,57 @@
+{
+ "id": "solo",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 510,
+  "steps": 43,
+  "tools": 50,
+  "nudged": 0,
+  "usage": {
+   "input": 50177,
+   "output": 67838
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "eleven-soloists-more-followers",
+   "basis": "Output has n=11 for 11 rows: Beyoncé, Justin Timberlake, Camila Cabello, Romeo Santos, Ricky Martin, Nick Jonas, SUNMI, Omarion, Robbie Williams, HyunA, Marques Houston, all with positive gap.",
+   "verdict": "ok"
+  },
+  {
+   "id": "beyonce-outdoes-destinys-child",
+   "basis": "solo_followers=26199288.0, band_followers=4629097, solo_hits=51, band_hits=13.",
+   "verdict": "ok"
+  },
+  {
+   "id": "harry-styles-fewer-followers",
+   "basis": "Harry Styles followers_member=12813873.0; One Direction followers_band=20067462; gap=-7253589.0, so Harry has fewer.",
+   "verdict": "ok"
+  },
+  {
+   "id": "beyonce-most-hot100-hits",
+   "basis": "Top two by hits: Beyoncé Knowles=51 and One Direction=29.",
+   "verdict": "ok"
+  },
+  {
+   "id": "billboard-hot100-counts-per-artist",
+   "basis": "Counts include min 1 and max 51; Beyoncé=51, One Direction=29, Justin Timberlake=22, Jonas Brothers=21, BTS=17, Boyz II Men=17.",
+   "verdict": "ok"
+  },
+  {
+   "id": "billboard-number-one-counts-per-artist",
+   "basis": "Output has Beyoncé=5; Boyz II Men=4, TLC=4, Justin Timberlake=4, Destiny's Child=4; other rows include 0, so range is 0 to 5.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 6,
+ "skipped": 2
+}

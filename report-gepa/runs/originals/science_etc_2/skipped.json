@@ -1,0 +1,46 @@
+[
+  {
+    "source": "This is a story about the pernicious claims borne out of a single, discredited scientific paper in 1998. But it’s also a story of how this belief has persisted among a growing number of Americans, despite its scientific foundations crumbling in the years following its origin.",
+    "why": "The provided files contain New York Times article metadata and a list of studies, not survey or public-opinion data on the number of Americans holding the belief, so the growth in the number of believers cannot be computed."
+  },
+  {
+    "source": "Although chatter linking the two occasionally emerged, it was limited to a single study that found no link between autism and another, older vaccine (diptheria, whooping cough, and tetanus).",
+    "why": "The files have one pre-1998 New York Times article (from 1991), but no data on studies of other, older vaccines, so the 'single study' claim cannot be checked."
+  },
+  {
+    "source": "In February of 1998, however, London doctor Andrew Wakefield publishes a study of 12 infants in a respected medical journal, The Lancet, purporting an association between autism and the mumps measles and rubella (MMR) vaccine.",
+    "why": "The number of infants in Wakefield's study is not a field in the data; the CSV only contains the study's title, date, citation count and abstract, not a computable sample size."
+  },
+  {
+    "source": "A year later, the same scientific jounal publishes a study that finds no relationship between the MMR vaccine and autism among a sample of 498 children.",
+    "why": "The data have no sample-size column, so the 498 children cannot be computed from the files."
+  },
+  {
+    "source": "3 studies over the course of the next 3 years, with over 1 million children assessed, find no link between the MMR vaccine and autism.",
+    "why": "The files record study dates and list membership but no numbers of children assessed, and they do not define the three-study period used here, so neither the three studies nor the million children can be reproduced."
+  },
+  {
+    "source": "In February 2004, journalist Brian Deer reveals that the Wakefield had accepted £55,000 from lawyers seeking evidence against vaccine manufacturers.",
+    "why": "There is no payment or conflict-of-interest field in the data, so the £55,000 cannot be computed."
+  },
+  {
+    "source": "Of his 12 co-authors, 10 repudiated the final conclusion of their paper.",
+    "why": "The data have no co-author records or repudiation information."
+  },
+  {
+    "source": "In 2006, reporting emerges that the £55K that Wakefield received from trial lawyers was actually £435,643, plus expenses.",
+    "why": "There is no payment field in the data, so the £435,643 cannot be computed."
+  },
+  {
+    "source": "More reporting emerges, revealing that data for 12 of the 12 children that Wakefield included in his study was misrepresented to make vaccines appear responsible.",
+    "why": "The data contain no per-child records or assessments of misrepresentation."
+  },
+  {
+    "source": "Britain experiences an outbreak of measles as a result of all the non-vaccinated children; it thereby slides behind Rwanda and Cambodia in the fight against the disease.",
+    "why": "The files contain no measles case or country-ranking data."
+  },
+  {
+    "source": "14 states struggle to contain a measles outbreak.",
+    "why": "The files contain no state-level measles outbreak data, so the number of states cannot be computed."
+  }
+]

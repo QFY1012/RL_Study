@@ -1,0 +1,82 @@
+{
+ "id": "similarity",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 704,
+  "steps": 75,
+  "tools": 101,
+  "nudged": 0,
+  "usage": {
+   "input": 93394,
+   "output": 86860
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "most-similar-pair-2007-2011",
+   "basis": "Output row: Katy Perry 'Teenage Dream' and Ke$ha 'We R Who We R' with dist=0.051516, which rounds to 0.0515.",
+   "verdict": "ok"
+  },
+  {
+   "id": "synth-every-1984-number-one",
+   "basis": "Output for geneID 77: 1984 has count=19, min=0.5, mean=0.715789; its mean is highest among 1979-1986.",
+   "verdict": "ok"
+  },
+  {
+   "id": "rnb-soul-2001-number-ones",
+   "basis": "Output for geneID 129 in 2001: count=13, mean=0.815385, >=0.5 count=11, ==1.0 count=9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "late-eighties-writer-team-mode",
+   "basis": "Output mode of credited writers per song for 1985-1989 is 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "four-plus-writers-2017",
+   "basis": "Output for 2017: count=38, >=4 writers count=28, proportion=0.736842, i.e. 73.7%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "average-writers-2017",
+   "basis": "Output mean credited writers for 2017 is 5.131579, which rounds to 5.13.",
+   "verdict": "ok"
+  },
+  {
+   "id": "uptown-funk-havana-eleven-writers",
+   "basis": "Output gives n=11 for both Uptown Funk! and Havana.",
+   "verdict": "ok"
+  },
+  {
+   "id": "max-martin-top-writer",
+   "basis": "Output top writer is Martin Karl \"Max Martin\" Sandberg with 42 songs.",
+   "verdict": "ok"
+  },
+  {
+   "id": "max-martin-top-producer",
+   "basis": "Output top producer is Martin Karl \"Max Martin\" Sandberg with 37 songs.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-ten-producer-share-by-period",
+   "basis": "Output shares are 0.193846, 0.232227, 0.308140, 0.256684, 0.355932, 0.425926, 0.315217, matching 19.4%, 23.2%, 30.8%, 25.7%, 35.6%, 42.6%, 31.5%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-producer-per-period",
+   "basis": "Output maxima match: G.Michael 11; Jimmy Jam and Terry Lewis tie at 13; Sean Combs 12; Beyonce 9; Danja 11; Max Martin 22 and 10.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 11,
+ "skipped": 12
+}

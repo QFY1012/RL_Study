@@ -1,0 +1,61 @@
+[
+ {
+  "id": "eleven-soloists-more-followers",
+  "source": "Solo artists with more and less Spotify followers compared to their band",
+  "claim": "Eleven solo artists have more Spotify followers than their band: Beyoncé, Justin Timberlake, Camila Cabello, Romeo Santos, Ricky Martin, Nick Jonas, SUNMI, Omarion, Robbie Williams, HyunA and Marques Houston.",
+  "tables": {
+   "b": "data/bands.csv",
+   "m": "data/members.csv"
+  },
+  "code": "(m.dropna(subset=['followers'])\n .merge(b[['name','followers']], left_on='band', right_on='name', suffixes=('_member','_band'))\n .assign(gap=lambda d: d.followers_member-d.followers_band)\n .query('gap > 0')\n .sort_values('gap', ascending=False)\n .assign(n=lambda d: len(d))\n [['n','spotifyName','band','gap']])"
+ },
+ {
+  "id": "beyonce-outdoes-destinys-child",
+  "source": "⚠️ Spoiler alert: Beyoncé did alright without her posse.",
+  "claim": "Beyoncé has 26,199,288 Spotify followers and 51 Hot 100 hits, against Destiny's Child's 4,629,097 followers and 13 hits.",
+  "tables": {
+   "b": "data/bands.csv",
+   "m": "data/members.csv"
+  },
+  "code": "(m[m.name.str.startswith('Beyoncé')]\n .merge(b[b.name == \"Destiny's Child\"], left_on='band', right_on='name', suffixes=('_member','_band'))\n .assign(artist=lambda d: d.spotifyName_member,\n         solo_followers=lambda d: d.followers_member,\n         band_followers=lambda d: d.followers_band,\n         solo_hits=lambda d: d.ranks_member.str.count(r'\\d+'),\n         band_hits=lambda d: d.ranks_band.str.count(r'\\d+'))\n [['artist','band','solo_followers','band_followers','solo_hits','band_hits']].T)"
+ },
+ {
+  "id": "harry-styles-fewer-followers",
+  "source": "A solo act like Harry Styles—who at present has fewer followers than One Direction—is clearly in the midst of his ascent, and is likely to make up some of that ground.",
+  "claim": "Harry Styles has 12,813,873 Spotify followers, fewer than One Direction's 20,067,462.",
+  "tables": {
+   "b": "data/bands.csv",
+   "m": "data/members.csv"
+  },
+  "code": "(m.merge(b[['name','followers']], left_on='band', right_on='name', suffixes=('_member','_band'))\n .query(\"name_member == 'Harry Styles'\")\n .assign(gap=lambda d: d.followers_member-d.followers_band)\n [['name_member','band','followers_member','followers_band','gap']])"
+ },
+ {
+  "id": "beyonce-most-hot100-hits",
+  "source": "But the real takeaway is and always has been Beyoncé. She remains head and shoulders above the rest, with her 51 top 100 hits.",
+  "claim": "Beyoncé Knowles has 51 Billboard Hot 100 hits, more than any other band or solo artist; One Direction is next with 29.",
+  "tables": {
+   "b": "data/bands.csv",
+   "m": "data/members.csv"
+  },
+  "code": "(pd.concat([b[['name','ranks']], m[['name','ranks']]])\n .assign(hits=lambda d: d.ranks.fillna('').str.count(r'\\d+'))\n .groupby('name', as_index=False).hits.sum()\n .sort_values('hits', ascending=False).head(2))"
+ },
+ {
+  "id": "billboard-hot100-counts-per-artist",
+  "source": "How many times every band and its members charted on the Billboard Hot 100",
+  "claim": "Billboard Hot 100 hit counts per band and solo artist range from 1 to 51, with Beyoncé at 51, One Direction at 29, Justin Timberlake at 22, Jonas Brothers at 21, and BTS and Boyz II Men at 17 each.",
+  "tables": {
+   "t": "data/tracks.csv"
+  },
+  "code": "t.name.value_counts().sort_values(ascending=False)"
+ },
+ {
+  "id": "billboard-number-one-counts-per-artist",
+  "source": "#1 Hits",
+  "claim": "No. 1 Hot 100 hit counts per band and solo artist range from 0 to 5, with Beyoncé at 5, and Boyz II Men, Destiny's Child, TLC and Justin Timberlake each at 4.",
+  "tables": {
+   "b": "data/bands.csv",
+   "m": "data/members.csv"
+  },
+  "code": "(pd.concat([b[b.name.isin(m.loc[m.ranks.notna(), 'band'])].assign(role='band'),\n            m[m.ranks.notna()].assign(role='member')])\n .assign(artist=lambda d: d.spotifyName.fillna(d.name),\n         ones=lambda d: d.ranks.fillna('').str.split('|').apply(lambda xs: sum(x.strip()=='1' for x in xs)))\n .sort_values('ones', ascending=False)\n [['artist','role','ones']])"
+ }
+]

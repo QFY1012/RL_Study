@@ -1,0 +1,87 @@
+{
+ "id": "street-view",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 428,
+  "steps": 37,
+  "tools": 37,
+  "nudged": 0,
+  "usage": {
+   "input": 66334,
+   "output": 51707
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "stop-top-word",
+   "basis": "Output shows rank 1 stop count 1,304,417 and rank 2 one way count 1,145,477.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-common-fifty-terms",
+   "basis": "Output head 50 shows stop 1st/1,304,417, one way 2nd/1,145,477, truck 49th/80,566, and for rent 50th/79,880.",
+   "verdict": "ok"
+  },
+  {
+   "id": "street-words-in-top-fifty",
+   "basis": "Output sum = 32 and size = 50.",
+   "verdict": "ok"
+  },
+  {
+   "id": "filtered-ranking-top-1500",
+   "basis": "Output starts no 1st/482,811, open 2nd/228,737, atm 3rd/211,704 and ends no fee 1,500th/4,251.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fedders-rank-25",
+   "basis": "Output shows fedders count 70,687 and filtered_rank 25.",
+   "verdict": "ok"
+  },
+  {
+   "id": "yodock-rank-102",
+   "basis": "Output shows yodock count 29,791 and filtered_rank 102.",
+   "verdict": "ok"
+  },
+  {
+   "id": "acars-rank-253",
+   "basis": "Output shows acars count 16,049 and filtered_rank 253.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sabrett-rank-293",
+   "basis": "Output shows sabrett count 14,194 and filtered_rank 293.",
+   "verdict": "ok"
+  },
+  {
+   "id": "halal-rank-304",
+   "basis": "Output shows halal count 13,646 and filtered_rank 304.",
+   "verdict": "ok"
+  },
+  {
+   "id": "siamese-rank-350",
+   "basis": "Output shows siamese count 12,134 and filtered_rank 350.",
+   "verdict": "ok"
+  },
+  {
+   "id": "beware-rank-383",
+   "basis": "Output shows beware count 11,192 and filtered_rank 383.",
+   "verdict": "ok"
+  },
+  {
+   "id": "surveillance-rank-492",
+   "basis": "Output shows surveillance count 9,650 and filtered_rank 492.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 17
+}

@@ -1,0 +1,188 @@
+{
+ "id": "sitters-standers",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 704,
+  "steps": 88,
+  "tools": 163,
+  "nudged": 0,
+  "usage": {
+   "input": 146596,
+   "output": 70572
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 20,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "sitters-more-choice",
+   "basis": "sitters 78.686538, standers 19.593567",
+   "verdict": "ok"
+  },
+  {
+   "id": "sitters-bachelors",
+   "basis": "sitters 41.093289, standers 8.177273",
+   "verdict": "ok"
+  },
+  {
+   "id": "sitters-higher-income",
+   "basis": "sitters 87490.566038, standers 55989.623656",
+   "verdict": "ok"
+  },
+  {
+   "id": "sitters-problem-daily",
+   "basis": "sitters 16.688406, standers 7.183041",
+   "verdict": "ok"
+  },
+  {
+   "id": "sitters-pause-autonomy",
+   "basis": "sitters can_pause 82.575484, cannot_pause 17.424516; standers can_pause 44.605660, cannot_pause 55.394340",
+   "verdict": "ok"
+  },
+  {
+   "id": "sitters-telework",
+   "basis": "sitters 25.802000, standers 1.622283",
+   "verdict": "ok"
+  },
+  {
+   "id": "telework-overall-share",
+   "basis": "12.637678765864921",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-rarely-problem-solve",
+   "basis": "sitters 33.766423, standers 70.052071",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-crouch",
+   "basis": "sitters 3.422222, standers 13.790260",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-climb",
+   "basis": "sitters 5.935032, standers 20.099429",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-wetness",
+   "basis": "sitters 7.939869, standers 44.061783",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-heat",
+   "basis": "sitters 1.810759, standers 9.234807",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-outdoors",
+   "basis": "sitters 20.172903, standers 39.518966",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-hazardous",
+   "basis": "sitters 3.411538, standers 15.604762",
+   "verdict": "ok"
+  },
+  {
+   "id": "standers-injury",
+   "basis": "sitters 50.660811, standers 163.519890",
+   "verdict": "ok"
+  },
+  {
+   "id": "black-more-standers",
+   "basis": "sitters 10.067677, standers 11.356014",
+   "verdict": "ok"
+  },
+  {
+   "id": "asian-more-sitters",
+   "basis": "sitters 7.259181, standers 4.737294",
+   "verdict": "ok"
+  },
+  {
+   "id": "hispanic-more-standers",
+   "basis": "sitters 12.509078, standers 19.474596",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-more-sitters",
+   "basis": "sitters white 75.313573, standers white 74.146778; standers black 11.356014, hisp 19.474596, asian 4.737294",
+   "verdict": "ok"
+  },
+  {
+   "id": "workers-color-more-standers",
+   "basis": "sitters 24.686427, standers 25.853222",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "sitters-higher-income",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sitters-problem-daily",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sitters-pause-autonomy",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sitters-telework",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "telework-overall-share",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-rarely-problem-solve",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-crouch",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-climb",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-wetness",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-heat",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-outdoors",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-hazardous",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "standers-injury",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "hispanic-more-standers",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "white-more-sitters",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 5,
+ "skipped": 9
+}

@@ -1,0 +1,47 @@
+[
+ {
+  "id": "sitters-more-choice",
+  "source": "More choice of sit/stand",
+  "claim": "Across sitter occupations, a mean of 78.7% of workers are allowed to choose whether to sit or stand, against 19.6% across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(choice=lambda x: pd.to_numeric(x['Percent of workers, choice of sitting or standing is allowed'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['choice'].mean()"
+ },
+ {
+  "id": "sitters-bachelors",
+  "source": "Sitters often have jobs that require a bachelor's degree.",
+  "claim": "Across sitter occupations, the mean share of workers whose minimum education level is a bachelor's degree is 41.1%, against 8.2% across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(ba=lambda x: pd.to_numeric(x[\"Percent of workers, minimum education level is a bachelor's degree\"].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['ba'].mean()"
+ },
+ {
+  "id": "black-more-standers",
+  "source": "Black workers are more likely to be Standers.",
+  "claim": "Across stander occupations, the mean Black share of workers is 11.4%, against 10.1% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['black_pct']].mean()"
+ },
+ {
+  "id": "asian-more-sitters",
+  "source": "Asian workers are more likely to be Sitters",
+  "claim": "Across sitter occupations, the mean Asian share of workers is 7.3%, against 4.7% across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['asian_pct']].mean()"
+ },
+ {
+  "id": "workers-color-more-standers",
+  "source": "More workers of color",
+  "claim": "Across stander occupations, the mean nonwhite share of workers is 25.9%, against 24.7% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['nonwhite_pct']].mean()"
+ }
+]

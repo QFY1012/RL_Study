@@ -1,0 +1,78 @@
+[
+  {
+    "source": "It turns out, for example, that the entire lyrics of Cheap Thrills reduce in size 76% when compressed.",
+    "why": "The provided files contain only title, yearf and rscore for seven artists' songs; there are no Cheap Thrills lyrics or character counts from which to compute the 76% reduction."
+  },
+  {
+    "source": "The jumbled version shrinks less than the original (29.5% vs. 46%). ... A mere 8% reduction. Random prose doesn't compress nearly as well as song lyrics.",
+    "why": "These walkthrough percentages are computed from two constructed lyric excerpts and the essay's opening paragraph, not from the 15,000-song dataset; no text files for those passages are provided."
+  },
+  {
+    "source": "Distribution of compressibility of 15,000 songs from 1958 to 2017, excluding 20 outliers.",
+    "why": "The distribution and its 'Avg. song' marker require the full 15,000-song dataset and its 20 most-repetitive outliers; the provided files are only seven artists' discographies."
+  },
+  {
+    "source": "Around The World by Daft Punk gets reduced a whopping 98% . It goes from 2,610 characters to 61.",
+    "why": "Daft Punk's song and its character counts are not in the seven provided artist files."
+  },
+  {
+    "source": "The Most Repetitive Songs — Of 15,000 songs from the Billboard Hot 100",
+    "why": "The chart's top-10 ranking (Daft Punk 98%, The Rockafeller Skank 95%, Chain Of Fools 92%, Get Low 90%, Barbra Streisand 89%, Let's All Chant 88%, Keep It Comin' Love 87%, Turn Down For What 87%, Who'd She Coo? 86%, Watch Me 86%) requires the full 15,000-song dataset; none of the seven provided discographies contains the chart's top-10 songs."
+  },
+  {
+    "source": "The current decade is pretty well-represented in the top 10 above, but it's also a bit overrepresented in my dataset (it's easier to find lyrics for recent songs).",
+    "why": "This requires decade counts over the full dataset and the top-10 list; the seven files are individual artist discographies, not the full chart population."
+  },
+  {
+    "source": "In 1960, the average song is 45.7% compressible. The most repetitive song of the year is Dee Clark's At My Front Door (78% compressible).",
+    "why": "Requires all songs charting in 1960 and their compression values; the files contain only seven artists' songs, and neither Dee Clark nor At My Front Door is present."
+  },
+  {
+    "source": "By 1980, disco has reached the peak of its popularity. The year's most repetitive song is Funkytown (85% compressible), which spends 4 weeks at #1.",
+    "why": "Requires all 1980 charting songs and chart-run data; Funkytown and weeks-at-#1 are not in the provided files."
+  },
+  {
+    "source": "2014 is the most repetitive year on record. An average song from this year compresses 22% more efficiently than one from 1960.",
+    "why": "Requires yearly averages over the full 15,000-song dataset; the seven files do not contain all songs or all years."
+  },
+  {
+    "source": "The songs that reached the top 10 were, on average, more repetitive than the rest in every year from 1960 to 2015!",
+    "why": "Requires chart position and the full yearly dataset; there is no chart-position field in the seven files."
+  },
+  {
+    "source": "There does seem to be a significant jump in repetition from the mid-70's to the early 80's that coincides with the rise of disco. This could also explain the slump from the mid-80's to the early 90's, coinciding with the Golden age of hip hop.",
+    "why": "Requires the full yearly trend across all charting songs; the seven artist discographies are not a complete yearly series."
+  },
+  {
+    "source": "Repetitiveness Per Artist — Avg. Size Reduction 38% 46% 53% 59%",
+    "why": "The chart's per-artist averages use the full dataset's prolific artists (at least 15 charting songs as solo artists in the 2000s); the provided files cover seven different artists, and the story does not state these seven artists' averages."
+  },
+  {
+    "source": "Genre does seem like a differentiating factor here. In the 00's, our artists actually separate pretty cleanly into two clusters, with country music and hip-hop (and whatever John Mayer does) on the left, and pop and rock on the right.",
+    "why": "Requires the chart's artist list and genre labels; the files have no genre field and are not the chart's 2000s artist set."
+  },
+  {
+    "source": "The variation between artists is considerable. The Backstreet Boys have an average compression ratio of 60%, to Brad Paisley's 38%. In other words, if we asked the Backstreet Boys and Brad Paisley to each write a 400 word song, and compressed them both, we'd expect Brad's compressed song to be 50% bigger than BSB's.",
+    "why": "No Backstreet Boys or Brad Paisley discography is provided, so neither average nor the 50% comparison can be computed."
+  },
+  {
+    "source": "On average, Gwen's music is extremely repetitive, but there's a wide spread between the incessantly repetitive \"Hollaback Girl\", and the laid-back ballad \"Cool\", which is far less repetitive than the median song in the dataset.",
+    "why": "No Gwen Stefani discography is provided, and the full-dataset median needed for the 'Cool' comparison is not in the files."
+  },
+  {
+    "source": "Artist Discography — Gwen Stefani — random median — 69%",
+    "why": "The Gwen Stefani song-level chart and its 69% label require her discography and the full-dataset distribution; only seven other artists' files are provided."
+  },
+  {
+    "source": "Madonna has a long, consistent legacy of highly repetitive music.",
+    "why": "This qualitative claim compares Madonna with the full dataset's distribution; her file gives her songs' rscore values but no full-dataset benchmark."
+  },
+  {
+    "source": "Rappers like J. Cole and Eminem tend to be consistently non-repetitive.",
+    "why": "No J. Cole or Eminem discography is provided; Eminem appears only as an artist name on the chart, with no song scores in the files."
+  },
+  {
+    "source": "Is it any wonder Rihanna won the title of most repetitive artist in the dataset? Over half a dozen of her songs sit on the far right of the distribution (including, appropriately, Pon de Replay ).",
+    "why": "No Rihanna discography is provided, and naming the most repetitive artist requires all artists' averages over the full dataset."
+  }
+]

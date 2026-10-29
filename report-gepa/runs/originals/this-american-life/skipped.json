@@ -1,0 +1,46 @@
+[
+  {
+    "source": "Despite women making up 57% of the current internal production staff, the gender gap is apparent in other roles on the show.",
+    "why": "The production-staff counts (12 women and 9 men) were provided by Ira Glass in the story's note, not recorded in the data files."
+  },
+  {
+    "source": "Women make up 41% of the show's contributors, which include both the staff and freelance writers and producers that pitch and contribute stories and monologues.",
+    "why": "Contributor names are present in contributorForEachActFinal.csv, but the files contain no gender labels for them. act3.csv's producer counts give 63.1% male / 36.9% female contributor credits across acts, not the story's 59% male / 41% female; the name-to-gender lookup used by the authors is not in this folder."
+  },
+  {
+    "source": "Additionally, women make up 35% of the interviewees, which are the people interviewed by staff and contributors.",
+    "why": "The 35% is a share of distinct interviewee people by gender. act3.csv only has interviewee word counts; its overall subject dialogue is 68.8% male / 31.2% female, so the 65%/35% person-count split is not reproducible."
+  },
+  {
+    "source": "451 words for a woman / 455 words for a man",
+    "why": "Requires per-speaker word counts per episode. act1.csv has only each episode's male percentage, and act3.csv has only aggregate interviewee word counts."
+  },
+  {
+    "source": "On average, acts produced by women reporters have interviewee dialogue that is 64.5% male.",
+    "why": "Under the story's all-female/all-male contributor grouping with mixed groups omitted, act3.csv computes 64.9% male for acts by women and 68.6% for acts by men, not the published 64.5%/68.5%. The broader comparison is included in facts.json with the computed values."
+  },
+  {
+    "source": "Acts by male contributors 68.5% average; Acts by female contributors 64.5% average",
+    "why": "The same published chart labels are not reproduced exactly: act3.csv gives 68.6% and 64.9% for these two groups."
+  },
+  {
+    "source": "37% female 63% male",
+    "why": "This chart label is a count of distinct speakers by gender. The provided files have no speaker-level gender counts; averaging act1.csv's per-episode dialogue shares gives 36.2% female and 63.8% male. The overall male majority is included in facts.json."
+  },
+  {
+    "source": "Interestingly, the gender gap has slowly been closing over the two decades that This American Life has been on air.",
+    "why": "The chart uses yearly word counts by role from the full speaker-level dialogue data. The provided files only have per-episode male percentages (act1.csv) and act-level producer/subject aggregates (act3.csv), so the chart's yearly series cannot be recomputed; act1's yearly episode means are noisy and not the story's word-weighted measure."
+  },
+  {
+    "source": "Women have been speaking slightly more.",
+    "why": "Same missing data: a yearly word-weighted series by gender cannot be built from the provided aggregate files."
+  },
+  {
+    "source": "This improvement is largely because women contributors as a group have been given more airtime.",
+    "why": "Requires male and female contributor word counts by year; act3.csv has producer gender shares but no contributor dialogue word counts."
+  },
+  {
+    "source": "Curiously, the percentage of airtime held by female interviewees has not followed that upward trend and instead has remained stagnant.",
+    "why": "Requires yearly interviewee word shares from the full dialogue data. act3.csv's subject-dialogue male share varies from 58.6% to 82.3% by year and rises slightly, so it does not reproduce the chart's stagnant female-interviewee line."
+  }
+]

@@ -1,0 +1,110 @@
+[
+ {
+  "id": "stop-top-word",
+  "source": "When we look at the most common words in the dataset, it’s what you’d expect: “Stop” is the #1 word in the dataset, appearing 1,304,417 times, followed by “One way.”",
+  "claim": "The most common term is “stop” with 1,304,417 mentions, followed by “one way” with 1,145,477.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d.sort_values('count', ascending=False).head(2)[['rank', 'term', 'count']]"
+ },
+ {
+  "id": "most-common-fifty-terms",
+  "source": "First, here are the most common words, as well as phrases in our data (the algorithm identified phrases if they appeared as a single line of text).",
+  "claim": "The 50 most common terms rank from “stop” (1st, 1,304,417) and “one way” (2nd, 1,145,477) down to “truck” (49th, 80,566) and “for rent” (50th, 79,880).",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d.sort_values('count', ascending=False).head(50)[['rank', 'term', 'count']]"
+ },
+ {
+  "id": "street-words-in-top-fifty",
+  "source": "As expected, many of these are related to driving, traffic, and street signs, words that you’d find on any streetscape in the US.",
+  "claim": "32 of the 50 most common terms are flagged as street-sign words.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d.sort_values('count', ascending=False).head(50)['street'].eq('1').agg(['sum', 'size'])"
+ },
+ {
+  "id": "filtered-ranking-top-1500",
+  "source": "Let’s filter these out, as well as common filler words (as, the, is, of, etc.), so we can explore the more surprising terms that appear in NYC.",
+  "claim": "After excluding street-sign terms, the ranking runs from “no” (1st, 482,811), “open” (2nd, 228,737) and “atm” (3rd, 211,704) to “no fee” (1,500th, 4,251).",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).head(1500)[['filtered_rank', 'term', 'count']]"
+ },
+ {
+  "id": "fedders-rank-25",
+  "source": "Fedders, at #25, is the logo of an A/C brand that had their units built into the exterior of buildings, from the 1950s to the 1990s, as through-the-wall slots.",
+  "claim": "After excluding street-sign terms, “fedders” ranks 25th with 70,687 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'fedders'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "yodock-rank-102",
+  "source": "At #102 is Yodock, a brand of orange and white plastic barriers, often seen in make-shift sidewalks around construction areas.",
+  "claim": "After excluding street-sign terms, “yodock” ranks 102nd with 29,791 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'yodock'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "acars-rank-253",
+  "source": "Acars (at #253) is actually “4cars,” misread by the algorithm for translating text in images.",
+  "claim": "After excluding street-sign terms, “acars” ranks 253rd with 16,049 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'acars'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "sabrett-rank-293",
+  "source": "Nathan’s might have the hot dog brand cachet, but Sabrett (ranking 293rd) has the territory, with carts in most NYC tourist traps.",
+  "claim": "After excluding street-sign terms, “sabrett” ranks 293rd with 14,194 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'sabrett'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "halal-rank-304",
+  "source": "NYC is home to largest Muslim community in the United States, so it’s no surprise to see halal— food prepared according to Islamic dietary law—ranked at #304.",
+  "claim": "After excluding street-sign terms, “halal” ranks 304th with 13,646 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'halal'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "siamese-rank-350",
+  "source": "Siamese (#350) refers to a type of hose connection for firefighters.",
+  "claim": "After excluding street-sign terms, “siamese” ranks 350th with 12,134 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'siamese'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "beware-rank-383",
+  "source": "Earlier, we depicted the geography of beware (#383), which is concentrated in residential areas fortunate enough to have lawns and fencing. Here we see how popular the phrase is, ranking in the top 1,000.",
+  "claim": "After excluding street-sign terms, “beware” ranks 383rd with 11,192 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'beware'\")[['term', 'count', 'filtered_rank']]"
+ },
+ {
+  "id": "surveillance-rank-492",
+  "source": "In case you didn’t already know (as evidenced by this project), you’re always under surveillance (#492) in NYC.",
+  "claim": "After excluding street-sign terms, “surveillance” ranks 492nd with 9,650 mentions.",
+  "tables": {
+   "d": "data/terms.csv"
+  },
+  "code": "d[d.street != '1'].sort_values(['count', 'rank'], ascending=[False, True]).reset_index(drop=True).assign(filtered_rank=lambda x: x.index + 1).query(\"term == 'surveillance'\")[['term', 'count', 'filtered_rank']]"
+ }
+]

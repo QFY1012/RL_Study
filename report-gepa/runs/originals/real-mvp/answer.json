@@ -34,15 +34,5 @@
    "s": "data/nba-seasons--2019_1.csv"
   },
   "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce')).query('year == 2019 and G*MP >= 1300 and sal >= 20000000')[['name','sal','VORP']].sort_values('VORP').head(3)"
- },
- {
-  "id": "carmelo-2018-lowest-vorp-high-pay",
-  "source": "The worst contract ever",
-  "claim": "Carmelo Anthony's 2017-18 season with the Oklahoma City Thunder had a VORP of -1.1 on a salary of $26,243,760 ($26.7 million in 2019 dollars), the lowest VORP of any player paid at least $20 million in 2019 dollars since 1988.",
-  "tables": {
-   "s": "data/nba-seasons--2019_1.csv",
-   "inf": "data/inflation-2019.csv"
-  },
-  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce'), sal19=pd.to_numeric(s.Salary, errors='coerce')*inf.set_index('Year').Avg.loc[2019]/(s.Season.str[:4].astype(int)+1).map(inf.set_index('Year').Avg)).query('year >= 1988 and G*MP >= 1300 and sal19 >= 20000000').sort_values('VORP').head(3)[['name','Season','Team','VORP','Salary','sal19']]"
  }
 ]

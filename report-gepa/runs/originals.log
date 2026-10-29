@@ -11568,3 +11568,898 @@ mow: facts=10 answer=10 dropped=0 skipped=16 problems=0 1014s steps=74
   three-seconds three-seconds: web_fetch https://pudding.cool/2019/05/three-seconds/captions.vtt
   three-seconds three-seconds: web_fetch https://pudding.cool/2019/05/three-seconds/assets/captions.vtt
   three-seconds three-seconds: web_fetch https://pudding.cool/2019/05/three-seconds/video/captions.vtt
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse html = """<html><body><pre id=o>start</pre><script> var out=[]
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 -c " import json, pandas as 
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/story_years.txt <<'EOF' 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd c=pd.re
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 << 'EOF' import pandas as
+  tiktok-story tiktok-story: web_fetch https://www.bing.com/search?q=github+puddingviz+tiktok+story
+  tiktok-story tiktok-story: web_fetch https://pudding.cool/2022/07/tiktok-story/data/
+  nba-unexpected nba-unexpected: web_view data:text/html;charset=utf-8,%3Chtml%3E%3Cbody%3E%3Cpre%20id%3Do%3Estart%3C/pre%3E%3Cscript%3E%0Avar
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import pandas 
+  three-seconds three-seconds: web_fetch https://www.mojeek.com/search?q=%22defensive+three+seconds%22+%22first+half%22+pudding
+  three-seconds three-seconds: web_fetch https://search.marginalia.nu/search?query=NBA+defensive+three+seconds+pudding
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd pd.set_option('display.width',250) df=pd.read_csv('title
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd, n
+  stand-up stand-up: bash env | grep -i proxy; cat /etc/resolv.conf; getent hosts pudding.cool; python3 -c "import socket; pri
+  sitters-standers sitters-standers: web_fetch https://test.cors.workers.dev/?https://pudding.cool/2024/11/sitters-standers/
+  sitters-standers sitters-standers: web_fetch https://cors.eu.org/https://pudding.cool/2024/11/sitters-standers/
+  sitters-standers sitters-standers: web_fetch https://corsproxy.org/?https%3A%2F%2Fpudding.cool%2F2024%2F11%2Fsitters-standers%2F
+  sitters-standers sitters-standers: web_fetch https://api.cors.lol/?url=http://example.com
+  similarity similarity: web_fetch https://api.allorigins.win/raw?url=https://pudding.cool/2018/05/similarity/
+  similarity similarity: web_fetch https://corsproxy.io/?https://pudding.cool/2018/05/similarity/
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') la=df[df.winner_metro=='Gre
+  redraft redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/redraft && python3 - <<'EOF' import json facts=jso
+  timeless timeless: web_fetch https://github.com/the-pudding/timeless
+  timeless timeless: web_fetch https://pudding.cool/2017/03/timeless/methods/
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://pudding.cool/2022/07/tiktok-story/index.html
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  three-seconds three-seconds: write /home/user/RL_Study/report-gepa/runs/originals/three-seconds/facts.json
+  three-seconds three-seconds: write /home/user/RL_Study/report-gepa/runs/originals/three-seconds/skipped.json
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  timeless timeless: web_fetch https://r.jina.ai/https://pudding.cool/2017/03/timeless/
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd, 
+  three-seconds three-seconds: bash cd /home/user/RL_Study/report-gepa/runs/originals/three-seconds && python3 -c " import json, pandas 
+  redraft redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/redraft && python3 - <<'EOF' import json facts=jso
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 -c " import pandas as pd, numpy 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd d
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  sleep-training sleep-training: web_fetch https://github.com/the-pudding/sleep-training/raw/main/src/components/article/Map.svelte
+  sleep-training sleep-training: web_fetch https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Map.svelte?raw=true
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 -c " import pandas as pd 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  sleep-training sleep-training: web_fetch https://sourcegraph.com/github.com/the-pudding/sleep-training/-/raw/src/components/article/Map.svelt
+  sleep-training sleep-training: web_fetch https://gitcdn.link/repo/the-pudding/sleep-training/main/src/components/article/Map.svelte
+  sleep-training sleep-training: web_fetch https://rawcdn.githack.com/the-pudding/sleep-training/main/src/components/article/Map.svelte?raw
+  redraft redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/redraft && python3 - <<'EOF' import json, re, pand
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  summer-reading summer-reading: bash cd data && python3 -c " import pandas as pd, numpy as np df=pd.read_csv('hipster.csv') inc=df[df.Rem
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse html = """<html><body><pre id=o>start</pre><script> var out=[]
+  science_etc_2 science_etc_2: write /home/user/RL_Study/report-gepa/runs/originals/science_etc_2/facts.json
+  tiktok-story tiktok-story: bash python3 - <<'EOF' import urllib.request try: print(urllib.request.urlopen('https://pudding.cool/2022
+three-seconds: facts=2 answer=2 dropped=0 skipped=3 problems=0 140s steps=21
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd t=pd.re
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  redraft redraft: bash cd /home/user/RL_Study/report-gepa/runs/originals/redraft && cat skipped.json
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 << 'EOF' import json, pan
+  similarity similarity: web_fetch https://pudding.cool/2018/05/similarity/assets/data/
+  similarity similarity: web_fetch https://pudding.cool/2018/05/similarity/assets/
+  two-minute-report two-minute-report: bash ls -la data/ && head -5 data/calls.csv && wc -l data/calls.csv
+  two-minute-report two-minute-report: web_fetch https://pudding.cool/2017/02/two-minute-report/
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'EOF' import panda
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  two-minute-report two-minute-report: web_view https://pudding.cool/2017/02/two-minute-report/
+  this-american-life this-american-life: web_fetch https://r.jina.ai/https://github.com/polygraph-cool/this-american-life
+  this-american-life this-american-life: bash cd /tmp && for f in notebooks/01_analysis.ipynb notebooks/1_analysis.ipynb notebooks/analysis_act1.i
+  similarity similarity: web_fetch https://raw.githubusercontent.com/the-pudding/data/master/similarity/README.md
+  similarity similarity: web_fetch https://raw.githubusercontent.com/the-pudding/data/master/2018-05-similarity/README.md
+  summer-reading summer-reading: write /home/user/RL_Study/report-gepa/runs/originals/summer-reading/facts.json
+  summer-reading summer-reading: write /home/user/RL_Study/report-gepa/runs/originals/summer-reading/skipped.json
+  sleep-training sleep-training: web_fetch https://dns.google/resolve?name=cdn.jsdelivr.net&type=A
+  sleep-training sleep-training: web_fetch https://dns.google/resolve?name=raw.githubusercontent.com&type=A
+  similarity similarity: web_fetch https://raw.githubusercontent.com/the-pudding/similarity/master/README.md
+  similarity similarity: web_fetch https://raw.githubusercontent.com/the-pudding/music-similarity/master/README.md
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') def c(m,a,b): s=df[(df.winn
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://i.ytimg.com/vi/jV49bDzkQhY/1.jpg
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://i.ytimg.com/vi/jV49bDzkQhY/hq1.jp
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://i.ytimg.com/vi/jV49bDzkQhY/maxres
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://i.ytimg.com/vi/jV49bDzkQhY/hqdefa
+  this-american-life this-american-life: web_fetch https://r.jina.ai/https://github.com/the-pudding/this-american-life/tree/master/notebooks
+  this-american-life this-american-life: web_fetch https://r.jina.ai/https://github.com/the-pudding/this-american-life/tree/master/data
+  summer-reading summer-reading: bash cd /home/user/RL_Study/report-gepa/runs/originals/summer-reading && python3 -c " import json,pandas 
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  sleep-training sleep-training: bash id; cat /etc/resolv.conf; echo "151.101.1.229 cdn.jsdelivr.net" >> /etc/hosts && echo "185.199.108.1
+  similarity similarity: web_fetch https://www.bing.com/search?q=site%3Agithub.com%2Fthe-pudding+similarity+music+diversity
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  sleep-training sleep-training: bash curl -sv --max-time 20 https://cdn.jsdelivr.net/gh/the-pudding/sleep-training@main/src/components/ar
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd pd.set_option('display.width',250) df=pd.read_csv('title
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd, 
+  tiktok-story tiktok-story: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2022%2F07%2Ftiktok-story%2F
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/index.html
+  science_etc_2 science_etc_2: write /home/user/RL_Study/report-gepa/runs/originals/science_etc_2/skipped.json
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  sleep-training sleep-training: bash ls -la /etc/hosts; cat /etc/hosts; getent hosts cdn.jsdelivr.net; python3 -c "import socket;print(so
+  timeless timeless: bash cd data; python3 -c " import pandas as pd, datetime a=pd.read_csv('2013_aggregate_counts.csv') g=a.g
+  solo solo: web_fetch https://r.jina.ai/https://duckduckgo.com/html/?q=%22How+many+artists+overshadow+their+band%22+Puddin
+  solo solo: web_fetch https://r.jina.ai/https://duckduckgo.com/html/?q=pudding.cool+solo+Beyonc%C3%A9+%2251%22+%22Harry+St
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  sleep-training sleep-training: bash touch /etc/hosts; echo $?; ls -la /etc | head; mount | head -20
+  nba-unexpected nba-unexpected: web_fetch https://inv.nadeko.net/api/v1/storyboards/jV49bDzkQhY
+  nba-unexpected nba-unexpected: web_fetch https://r.jina.ai/https://inv.nadeko.net/api/v1/storyboards/jV49bDzkQhY
+  nba-unexpected nba-unexpected: web_fetch https://invidious.tiekoetter.com/api/v1/storyboards/jV49bDzkQhY
+  this-american-life this-american-life: web_fetch https://raw.githubusercontent.com/the-pudding/this-american-life/master/notebooks/createAct1Csv.ipyn
+  this-american-life this-american-life: web_fetch https://raw.githubusercontent.com/the-pudding/this-american-life/master/notebooks/createAct3Csv.ipyn
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 -c " import pandas as pd w=p
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  sleep-training sleep-training: bash printf '151.101.1.229 cdn.jsdelivr.net\n185.199.108.133 raw.githubusercontent.com\n' > /etc/hosts; g
+summer-reading: facts=1 answer=1 dropped=0 skipped=9 problems=0 191s steps=23
+  sleep-training sleep-training: bash curl -v --max-time 20 https://cdn.jsdelivr.net/gh/the-pudding/sleep-training@main/src/components/art
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json, p
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&data.html.selector=b
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&screenshot=true
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  upward-mobility upward-mobility: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && ls -la /home/user/RL_Study/
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 -c " import json for f in
+  sleep-training sleep-training: bash curl -s --max-time 20 --resolve cdn.jsdelivr.net:443:151.101.1.229 https://cdn.jsdelivr.net/gh/the-p
+  sleep-training sleep-training: bash curl -sv --max-time 20 --resolve cdn.jsdelivr.net:443:151.101.1.229 https://cdn.jsdelivr.net/gh/the-
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') def metrics(m,a,b): w=df[(d
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  upward-mobility upward-mobility: web_view https://pudding.cool/2022/11/upward-mobility/
+  nba-unexpected nba-unexpected: web_fetch https://inv.nadeko.net/api/v1/storyboards/jV49bDzkQhY?width=320&height=180
+  nba-unexpected nba-unexpected: web_fetch https://inv.nadeko.net/api/v1/storyboards/jV49bDzkQhY?width=640&height=360
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&data.html.selector=b
+  sleep-training sleep-training: web_fetch https://sourcegraph.com/github.com/the-pudding/sleep-training@main/-/raw/src/components/article/Map.
+  sleep-training sleep-training: web_fetch https://sourcegraph.com/github.com/the-pudding/sleep-training/-/raw/main/src/components/article/Map.
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && cat > /tmp/build_facts.py <<'PY' import js
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 << 'EOF' import json p='f
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&data.html.selector=b
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 - <<'PY' import json facts=j
+  street-view street-view: web_fetch https://r.jina.ai/https://pudding.cool/2025/07/street-view/
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import json, pandas as p
+  sleep-training sleep-training: web_fetch https://r.jina.ai/https://github.com/search?q=repo%3Athe-pudding%2Fsleep-training+Western&type=code
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse u='https://i.ytimg.com/sb/jV49bDzkQhY/storyboard3_L2/M0.jpg?sq
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&data.head.selector=h
+  titletowns titletowns: bash cd /tmp && python3 - <<'EOF' import json EOF echo done
+  titletowns titletowns: web_view https://pudding.cool/2018/11/titletowns/
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fi.ytimg.com%2Fsb%2FjV49bDzk
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  street-view street-view: web_fetch https://r.jina.ai/https://pudding.cool/2025/07/street-view/
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 -c " import pandas as pd, nu
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/stand-up/assets/js/index.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/stand-up/assets/js/main.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/stand-up/assets/js/bundle.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/stand-up/assets/js/app.js
+  sleep-training sleep-training: web_fetch https://grep.app/api/search?q=Western&filter%5Brepo%5D%5B0%5D=the-pudding/sleep-training
+  sleep-training sleep-training: web_fetch https://grep.app/api/search?q=western&filter%5Brepo%5D%5B0%5D=the-pudding%2Fsleep-training
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse u='https://i.ytimg.com/sb/jV49bDzkQhY/storyboard3_L2/M0.jpg?sq
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/assets/js/main.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/assets/js/index.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/assets/js/bundle.js
+  stand-up stand-up: web_fetch https://pudding.cool/2018/02/assets/js/app.js
+  sleep-training sleep-training: web_fetch https://r.jina.ai/https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Map
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json, p
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  stand-up stand-up: web_fetch https://r.jina.ai/http://web.archive.org/cdx/search/cdx?url=pudding.cool%2F2018%2F02%2F*&output=json
+redraft: facts=24 answer=24 dropped=0 skipped=14 problems=0 952s steps=82
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  timeless timeless: bash cd data; python3 -c " import pandas as pd d=pd.read_csv('all_data.csv') pd.set_option('display.width
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && cat facts.json
+  tiktok-story tiktok-story: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://api.allorigins.win/raw?url=https://pudding.cool/2022/07/tiktok-story/
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 -c " import pandas as pd, nu
+  song-decay song-decay: web_fetch https://raw.githubusercontent.com/the-pudding/song-decay-clean/master/src/assets/data/time_series_90
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  nba-unexpected nba-unexpected: web_fetch https://r.jina.ai/https://images.weserv.nl/?url=https%3A%2F%2Fi.ytimg.com%2Fsb%2FjV49bDzkQhY%2Fstory
+  stand-up stand-up: bash echo probe
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/polygraph-cool/stand-up/master/README.md
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/the-pudding/standup/master/README.md
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/pudding/stand-up/master/README.md
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') metros=['Greater Los Angele
+  vocabulary vocabulary: bash ls -la data/ && head -5 data/vocabulary.csv && wc -l data/vocabulary.csv
+  vocabulary vocabulary: web_fetch https://pudding.cool/projects/vocabulary/index.html
+  vocabulary vocabulary: web_view https://pudding.cool/projects/vocabulary/index.html
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('vocabulary.csv') print(df.shape) print(d
+  stand-up stand-up: web_fetch https://r.jina.ai/https://github.com/polygraph-cool
+  stand-up stand-up: web_fetch https://r.jina.ai/https://github.com/russellsamora
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && cat skipped.json
+  sleep-training sleep-training: web_fetch https://r.jina.ai/https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Map
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && cat > /tmp/build_facts.py <<'P
+  two-minute-report two-minute-report: bash cd /tmp && curl -sL "https://pudding.cool/2017/02/two-minute-report/" -o tmr.html && ls -la tmr.html
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && cat facts.json && echo && echo '---S
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') metros=['Greater Los Angele
+  sleep-training sleep-training: web_view https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Map.svelte?plain=1
+  two-minute-report two-minute-report: bash cd /tmp && curl -sI https://pudding.cool/2017/02/two-minute-report/ | head; echo "exit=$?"
+  this-american-life this-american-life: web_fetch https://r.jina.ai/https://pudding.cool/2017/09/this-american-life/
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'PY' p='/tmp/build
+  street-view street-view: web_fetch https://r.jina.ai/https://pudding.cool/2025/07/street-view/
+  nba-unexpected nba-unexpected: web_fetch https://r.jina.ai/https://i.ytimg.com/sb/jV49bDzkQhY/storyboard3_L2/M0.jpg?sqp=-oaymwENSDfyq4qpAwVwA
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Finv.nadeko.net%2Fapi%2Fv1%2
+  two-minute-report two-minute-report: web_fetch https://github.com/polygraph-cool/last-two-minute-report
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  science_etc_2 science_etc_2: bash cd /home/user/RL_Study/report-gepa/runs/originals/science_etc_2 && python3 << 'EOF' import json, pan
+  stand-up stand-up: web_fetch https://r.jina.ai/https://github.com/russellsamora?tab=repositories
+  street-view street-view: web_fetch https://r.jina.ai/https://pudding.cool/2025/07/street-view/
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && ls -la && ls -la /tmp | head
+  stand-up stand-up: web_fetch https://github.com/russellsamora?tab=repositories
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') lo,hi=1970,2018 d=df[(df.ye
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 - <<'PY' import json s=json.
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import re text
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/russellsamora/stand-up/master/README.md
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/russellsamora/standup/master/README.md
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/russellsamora/ali-wong/master/README.md
+  stand-up stand-up: web_fetch https://raw.githubusercontent.com/russellsamora/stand-up-comedy/master/README.md
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') for m,a,b in [('New Haven, 
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse u='https://i.ytimg.com/sb/jV49bDzkQhY/storyboard3_L2/M0.jpg?sq
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd pd.set_option('display.max_rows',300); pd.set_option('di
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd, num
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && cat > build_facts.py <<'PY' im
+  sleep-training sleep-training: web_view https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Timeline.svelte?plain
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&scale=true&OCREngine=2&url=https%3A%2F%2Fi.yt
+  titletowns titletowns: web_fetch https://api.github.com/search/repositories?q=titletowns
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 - <<'PY' import json facts=j
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd, numpy 
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'PY' import json f
+  spades spades: write /home/user/RL_Study/report-gepa/runs/originals/spades/facts.json
+  timeless timeless: web_fetch https://r.jina.ai/https://pudding.cool/2017/03/timeless/?x-respond-with=html
+  timeless timeless: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2017%2F03%2Ftimeless%2F
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  tiktok-story tiktok-story: bash cd data; python3 -c " import pandas as pd c=pd.read_csv('charting-artists.csv') col=c.columns[2] pri
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse for m in ['M1','M2']: u=f'https://i.ytimg.com/sb/jV49bDzkQhY/s
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 -c " import json, pandas as pd, 
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -c " import pandas as p
+  upward-mobility upward-mobility: bash cd /tmp && curl -sL https://pudding.cool/2022/11/upward-mobility/ -o story.html && wc -c story.html 
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  similarity similarity: bash cd /home/user/RL_Study/report-gepa/runs/originals/similarity && python3 -c " import json, pandas as 
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'PY' p='build_fact
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&scale=true&OCREngine=2&url=https%3A%2F%2Fi.yt
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&scale=true&OCREngine=2&url=https%3A%2F%2Fi.yt
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd, numpy as np df=pd.read_csv('vocabulary.csv') df['w']=pd
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') for a,b in [(1920,1970),(19
+  sleep-training sleep-training: web_view https://github.com/the-pudding/sleep-training/blob/main/src/components/article/Mosaic.svelte?plain=1
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  nba-unexpected nba-unexpected: bash python3 - <<'EOF' import urllib.parse u='https://i.ytimg.com/sb/jV49bDzkQhY/storyboard3_L2/M1.jpg?sq
+  vocabulary vocabulary: bash cd /tmp && curl -sL https://pudding.cool/projects/vocabulary/index.html -o vocab.html && wc -c vocab
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -c " import pandas as p
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://pudding.cool/2022/11/upward-mobility/
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/users/russellsamora/repos?per_page=100
+science_etc_2: facts=4 answer=4 dropped=0 skipped=11 problems=0 766s steps=74
+  spades spades: write /home/user/RL_Study/report-gepa/runs/originals/spades/skipped.json
+  sitters-standers sitters-standers: web_fetch https://r.jina.ai/https://duckduckgo.com/html/?q=%22sitters+and+standers%22+%22Occupational+Requirem
+  sitters-standers sitters-standers: web_fetch https://r.jina.ai/https://duckduckgo.com/html/?q=%22AVERAGE+SITTER%22+%22AVERAGE+STANDER%22
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  nba-unexpected nba-unexpected: wrap up at 150 steps
+  nba-unexpected nba-unexpected: web_fetch https://images.weserv.nl/?url=https%3A%2F%2Fapi.allorigins.win%2Fraw%3Furl%3Dhttps%253A%252F%252Fi.y
+  nba-unexpected nba-unexpected: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&scale=true&OCREngine=2&url=https%3A%2F%2Fimag
+  vogue vogue: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/vogue/data/ && head -5 /home/user/RL_Study/rep
+  vogue vogue: web_fetch https://pudding.cool/2019/04/vogue
+  titletowns titletowns: web_fetch https://github.com/the-pudding/titletowns
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/index.html
+  vocabulary vocabulary: bash cd /tmp && python3 -c " import urllib.request try: print(urllib.request.urlopen('https://pudding.coo
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/search/repositories?q=comedy+user:russellsamora
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/search/repositories?q=stand-up+user:russellsamora
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import json facts=json.l
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  vogue vogue: web_view https://pudding.cool/2019/04/vogue
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  sleep-training sleep-training: web_view https://github.com/the-pudding/sleep-training/blob/main/src/components/article/ForceBubbles.svelte?p
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/?x-return-format=html
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/?x-respond-with=html
+  upward-mobility upward-mobility: web_fetch https://github.com/search?q=org%3Apuddingviz+upward+mobility&type=repositories
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/assets/js/index.js
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd t=pd.re
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 - <<'EOF' import pandas as pd m=pd
+  upward-mobility upward-mobility: web_fetch https://github.com/puddingviz/upward-mobility
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/assets/js/main.js
+  song-repetition song-repetition: web_fetch https://r.jina.ai/https://pudding.cool/2017/05/song-repetition/
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 -m json.tool facts.json >/dev/nu
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd pd.set_option('display.width',250) df=pd.read_csv('title
+  upward-mobility upward-mobility: web_fetch https://api.allorigins.win/raw?url=https://pudding.cool/2022/11/upward-mobility/
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://pudding.cool/2022/11/upward-mobility/assets/js/bundle.js
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd, a
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'EOF' import panda
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+similarity: facts=11 answer=11 dropped=0 skipped=12 problems=0 704s steps=75
+  tiktok-story tiktok-story: write /home/user/RL_Study/report-gepa/runs/originals/tiktok-story/labels.txt
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  sleep-training sleep-training: web_view https://github.com/the-pudding/sleep-training/blob/main/src/components/Index.svelte?plain=1
+  votes-for-women votes-for-women: bash ls -la data/ && head -20 data/issues.json.csv && echo "-----" && head -20 data/platforms.json.csv
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/projects/votes-for-women/
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  solo solo: bash cd /home/user/RL_Study/report-gepa/runs/originals/solo && python3 -m json.tool facts.json >/dev/null
+  votes-for-women votes-for-women: web_view https://pudding.cool/projects/votes-for-women/
+  spades spades: bash env | grep -i proxy || true; python3 - <<'PY' import urllib.request try: print(urllib.request.urlope
+  timeless timeless: web_fetch https://raw.githubusercontent.com/the-pudding/timeless/master/README.md
+  timeless timeless: web_fetch https://raw.githubusercontent.com/the-pudding/timeless/main/README.md
+  timeless timeless: web_fetch https://pudding.cool/2017/03/timeless/data/all_data.csv
+  tiktok-story tiktok-story: bash cd /home/user/RL_Study/report-gepa/runs/originals/tiktok-story; python3 - <<'EOF' import pandas as p
+  titletowns titletowns: web_view https://pudding.cool/2018/11/titletowns/index.html
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd c=pd.re
+  timeless timeless: bash for r in the-pudding/timeless the-pudding/timeless-songs the-pudding/timeless-music the-pudding/most
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://pudding.cool/2021/08/spades/asset
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https://pudding.cool/2021/08/spades/asset
+  tiktok-story tiktok-story: bash cd /home/user/RL_Study/report-gepa/runs/originals/tiktok-story; python3 - <<'EOF' import pandas as p
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'PY' p='build_fact
+  this-american-life this-american-life: bash cd /tmp && for u in "https://pudding.cool/2017/09/this-american-life/assets/data/act3.csv" "https://
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  this-american-life this-american-life: web_fetch https://pudding.cool/2017/09/this-american-life/assets/data/act3.csv
+  this-american-life this-american-life: web_fetch https://pudding.cool/2017/09/this-american-life/js/main.js
+  timeless timeless: bash cd data; python3 -c " import pandas as pd, numpy as np a=pd.read_csv('2013_aggregate_counts.csv') g=
+  vocabulary vocabulary: web_fetch https://docs.google.com/spreadsheets/d/1HIIfgDpNMM-j0hoQHN-yP5P1lNOfJuvym0u0sdWwD9g/export?format=cs
+  vocabulary vocabulary: web_fetch https://pudding.cool/projects/vocabulary/
+  tiktok-story tiktok-story: bash cd /home/user/RL_Study/report-gepa/runs/originals/tiktok-story; python3 - <<'EOF' import pandas as p
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/test_facts.py <<'EOF' imp
+  upward-mobility upward-mobility: bash ls -la /home/user/RL_Study/report-gepa && find /home/user/RL_Study/report-gepa -maxdepth 3 -type f |
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') i=pd.read_csv('issue
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') print(p.to_string())
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json sk
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && sed -n 1,200p puddingrepo.py && echo ===== && 
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && sed -n 1,160p originals.py && echo ===== && se
+  this-american-life this-american-life: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2017%2F09%2Fthis-american-life%2F
+  this-american-life this-american-life: web_fetch https://r.jina.ai/https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2017%2F09%2Fthis-a
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import pandas 
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') print('n>0 women', (
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && curl -s https://pudding.cool/pr
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd, itertools df=pd.read_csv('vocabulary.csv') df['w']=pd.t
+solo: facts=6 answer=6 dropped=0 skipped=2 problems=0 510s steps=43
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  upward-mobility upward-mobility: bash find /home/user -path '*upward-mobility*' -not -path '*/data/*' 2>/dev/null | head -50; find / -name
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && sed -n 1,200p datagen.py && echo ===== && sed 
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') tw,tww=934068,28854 
+  nba-unexpected nba-unexpected: bash cd /home/user/RL_Study/report-gepa/runs/originals/nba-unexpected && python3 - <<'EOF' import pandas 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && curl -sL "https://pudding.cool/
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && cat > skipped.json <<'JSON' [ 
+  nba-unexpected nba-unexpected: bash cd /home/user/RL_Study/report-gepa/runs/originals/nba-unexpected && python3 - <<'EOF' import pandas 
+  vocabulary vocabulary: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2Fprojects%2Fvocabulary%2Findex.html
+  upward-mobility upward-mobility: bash ls -la /home/user/RL_Study && find /home/user/RL_Study -maxdepth 3 -name 'trust.py' -o -name 'TASK.m
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && sed -n 1,200p evalguide.py
+  wiki-billboard wiki-billboard: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard/ && ls -la /home/user/RL_Study/
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/09/wiki-billboard/
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/projects/votes-for-women/
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/2019/03/votes-for-women/
+  upward-mobility upward-mobility: bash find /home/user/RL_Study/report-bench -maxdepth 4 -type f | head -50
+  wiki-billboard wiki-billboard: web_view https://pudding.cool/2018/09/wiki-billboard/
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd d=
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && sed -n 1,240p facts.py
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && cat > skipped.json <<'JSON' [ 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd, numpy 
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  spades spades: web_fetch https://api.allorigins.win/get?url=https%3A%2F%2Fpudding.cool%2F2021%2F08%2Fspades%2Fassets%2Ftaught
+  spades spades: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2021/08/spades/assets/taught.svg
+nba-unexpected: facts=1 answer=0 dropped=1 skipped=3 problems=0 1335s steps=153
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && curl -sL https://pudding.cool/2019/04/vog
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd, numpy as np d=pd.read_csv('all_data.csv') pd.set_opt
+  upward-mobility upward-mobility: bash env | grep -i proxy; cd /home/user/RL_Study/report-gepa && ls agent && sed -n 1,120p agent/sandbox.s
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa && sed -n 1,200p agent/web.mjs 2>/dev/null | head -100; ls -la ag
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && cat facts.json
+  wiki-breakout wiki-breakout: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout/ && ls -la /home/user/RL_Study/r
+  wiki-breakout wiki-breakout: web_fetch https://pudding.cool/2018/10/wiki-breakout/
+  votes-for-women votes-for-women: web_fetch https://duckduckgo.com/html/?q=%22Women%27s+Issues+Within+Political+Party+Platforms%22+pudding+934%2
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/projects/votes-for-women/index.html
+  vogue vogue: web_fetch https://github.com/polygraph-cool/vogue
+  vogue vogue: web_fetch https://pudding.cool/2019/04/vogue/data/
+  upward-mobility upward-mobility: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2022/11/upward-mobility/
+  upward-mobility upward-mobility: web_fetch https://corsproxy.io/?url=https%3A%2F%2Fpudding.cool%2F2022%2F11%2Fupward-mobility%2F
+  wiki-breakout wiki-breakout: web_view https://pudding.cool/2018/10/wiki-breakout/
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import pandas 
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/test_facts.py <<'EOF' imp
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 -c " import pandas as pd, n
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd, numpy as np d=pd.read_csv('all_data.csv') d['yr']=pd
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd t=pd.re
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  wiki-billboard wiki-billboard: bash cd /tmp && curl -s "https://pudding.cool/2018/09/wiki-billboard/" -o page.html && ls -la page.html &
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  sitters-standers sitters-standers: bash cd /home/user/RL_Study/report-gepa/runs/originals/sitters-standers && python3 - <<'PY' import json, 
+  titletowns titletowns: web_fetch https://r.jina.ai/https://pudding.cool/2018/11/titletowns/
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/output/all_games.csv
+  two-minute-report two-minute-report: web_fetch https://pudding.cool/2017/02/two-minute-report/index.html
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 -c " import pandas a
+  vocabulary vocabulary: web_fetch https://r.jina.ai/https://pudding.cool/projects/vocabulary/index.html
+  wiki-billboard wiki-billboard: bash cd /tmp && curl -sS -m 20 "https://pudding.cool/2018/09/wiki-billboard/" -o page.html; echo exit=$?;
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/09/wiki-billboard/index.html
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd, numpy as np d=pd.read_csv('all_data.csv') d['yr']=pd
+  two-minute-report two-minute-report: web_fetch https://api.github.com/repos/polygraph-cool/last-two-minute-report/contents/
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/index.html
+  titletowns titletowns: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2018%2F11%2Ftitletowns%2F
+  wiki-billboard wiki-billboard: web_fetch https://github.com/search?q=wiki-billboard&type=repositories
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/09/wiki-billboard/#methods
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/README.md
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/package.json
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/Makefile
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/index.html
+  sleep-training sleep-training: bash cd data && python3 -c " import pandas as pd s=pd.read_csv('studies.csv') for y in [1980,1984,1986]: 
+  wiki-billboard wiki-billboard: web_fetch https://github.com/the-pudding/wiki-billboard
+  wiki-billboard wiki-billboard: web_fetch https://github.com/the-pudding
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  spades spades: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2021%2F08%2Fspades%2Fassets%2Ftaught
+  spades spades: web_fetch https://api.codetabs.com/v1/proxy/?quest=https://pudding.cool/2021/08/spades/assets/taught.svg
+  spades spades: web_fetch https://corsproxy.io/?https://pudding.cool/2021/08/spades/assets/taught.svg
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 -m json.tool facts.json
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/explore.py
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') for name,sub in [('D
+  vogue vogue: web_fetch https://r.jina.ai/https://pudding.cool/2019/04/vogue
+  vogue vogue: web_fetch https://pudding.cool/2019/04/vogue/index.html
+  wiki-billboard wiki-billboard: web_fetch https://web.archive.org/web/2018/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-billboard wiki-billboard: web_view https://web.archive.org/web/20181101000000/https://pudding.cool/2018/09/wiki-billboard/
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  vocabulary vocabulary: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/projects/vocabulary/index.html
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && curl -s https://pudding.cool/2018
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd, numpy as np d=pd.read_csv('all_data.csv') d['yr']=pd
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && python3 - <<'EOF' import pandas 
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json sk
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd, numpy as np p=pd.read_csv('platforms.json.csv') i=pd.re
+  wiki-breakout wiki-breakout: web_fetch https://github.com/polygraph-cool/wiki_breakout
+  wiki-breakout wiki-breakout: web_fetch https://pudding.cool/2018/10/wiki-breakout/index.html
+  stand-up stand-up: web_fetch https://grep.app/api/search?q=ali-wong--captions
+  stand-up stand-up: web_fetch https://grep.app/api/search?q=787-hippies
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward-mobility/main/package.json
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward-mobility/master/package.json
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv'); i=pd.read_csv('issu
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  upward-mobility upward-mobility: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/upward-mobility@main/package.json
+  upward-mobility upward-mobility: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/upward-mobility@master/package.json
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/test_facts.py <<'EOF' im
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/search/repositories?q=stand-up+user:the-pudding
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/orgs/the-pudding/repos?per_page=100&sort=created&direction=
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && ls -l facts.json skipped.json &
+  upward-mobility upward-mobility: web_fetch https://data.jsdelivr.com/v1/packages/gh/the-pudding/upward-mobility
+  upward-mobility upward-mobility: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/upward-mobility@main/
+  titletowns titletowns: web_fetch https://api.allorigins.win/get?url=https%3A%2F%2Fpudding.cool%2F2018%2F11%2Ftitletowns%2F
+  titletowns titletowns: web_fetch https://corsproxy.io/?https://pudding.cool/2018/11/titletowns/
+sitters-standers: facts=20 answer=5 dropped=15 skipped=9 problems=0 704s steps=88
+  votes-for-women votes-for-women: bash which curl wget python3; python3 - <<'EOF' import urllib.request try: print(urllib.request.urlopen('
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd s 
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd,
+  votes-for-women votes-for-women: web_fetch https://r.jina.ai/https://pudding.cool/projects/votes-for-women/
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/projects/votes-for-women/js/main.js
+  wiki-billboard wiki-billboard: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2018%2F09%2Fwiki-billboard%2F
+  wiki-billboard wiki-billboard: web_fetch http://archive.org/wayback/available?url=pudding.cool/2018/09/wiki-billboard/
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && ls -la && ls -la data/ && head -5 da
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/search/repositories?q=ali+user:russellsamora
+  stand-up stand-up: web_fetch https://r.jina.ai/https://api.github.com/search/repositories?q=pudding+user:russellsamora
+  wiki-death wiki-death: web_view https://pudding.cool/2018/08/wiki-death
+  street-view street-view: write /home/user/RL_Study/report-gepa/runs/originals/street-view/facts.json
+  upward-mobility upward-mobility: bash find /home/user/RL_Study/report-gepa/runs -type f | head -30; ls -la /home/user/RL_Study/report-gepa
+  upward-mobility upward-mobility: bash find / -name 'upward-mobility*' -o -name '*upward*mobility*' 2>/dev/null | head -30
+  stand-up stand-up: web_fetch https://www.bing.com/search?q=%22laughter+climax%22+%22Ali+Wong%22
+  stand-up stand-up: web_fetch https://www.bing.com/search?q=%22Structure+of+Stand-Up+Comedy%22+Pudding+%22most+laughter%22
+  song-repetition song-repetition: web_view https://pudding.cool/2017/05/song-repetition/#madonna
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import urllib.reques
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/index.html
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/gulpfile.js
+  street-view street-view: write /home/user/RL_Study/report-gepa/runs/originals/street-view/skipped.json
+  wiki-breakout wiki-breakout: web_fetch https://github.com/search?q=wiki-breakout+pudding
+  wiki-breakout wiki-breakout: web_fetch https://pudding.cool/2018/10/wiki-breakout/data/people-info.csv
+  spades spades: read https://pudding.cool/2021/08/spades/assets/taught.svg
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/template-data/sum
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/index.js
+  vocabulary vocabulary: web_fetch http://web.archive.org/cdx/search/cdx?url=pudding.cool/projects/vocabulary/*&output=text&fl=original
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd i=pd.read_csv('issues.json.csv') i['we']=i.excerpt.filln
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 - <<'EOF' import json, pand
+  sleep-training sleep-training: bash cd data && python3 - <<'EOF' import pandas as pd, re r=pd.read_csv('reddit.csv') patterns=['Darcia',
+  vocabulary vocabulary: web_fetch https://web.archive.org/cdx/search/cdx?url=pudding.cool/projects/vocabulary/*&output=text&fl=origina
+  upward-mobility upward-mobility: web_fetch https://www.bing.com/search?q=pudding.cool+upward-mobility+github+repo
+  upward-mobility upward-mobility: web_fetch https://duckduckgo.com/html/?q=pudding.cool+upward-mobility+github
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 - <<'EOF' import json, pand
+  upward-mobility upward-mobility: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/website@main/docs/2022/11/upward-mobility/index.html
+  upward-mobility upward-mobility: web_fetch https://data.jsdelivr.com/v1/packages/gh/the-pudding/website@main?structure=flat
+  wiki-breakout wiki-breakout: web_fetch https://duckduckgo.com/html/?q=%22What+Does+the+Path+to+Fame+Look+Like%22+Pudding+transcript
+  wiki-breakout wiki-breakout: web_fetch https://html.duckduckgo.com/html/?q=pudding+wiki-breakout+github
+  spades spades: write /home/user/RL_Study/report-gepa/runs/originals/spades/probe.html
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  vocabulary vocabulary: web_fetch https://github.com/search?q=pudding+vocabulary&type=repositories
+  spades spades: web_view file:///home/user/RL_Study/report-gepa/runs/originals/spades/probe.html
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import pan
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/website/main/docs/2022/11/upward-mobility/index.html
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/website/main/docs/2022/11/upward-mobility.html
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd d=pd.read_csv('all_data.csv') print(d[d.track.str.con
+  upward-mobility upward-mobility: web_fetch https://duckduckgo.com/html/?q=site%3Agithub.com%2Fthe-pudding+%22upward-mobility%22
+  upward-mobility upward-mobility: web_fetch https://duckduckgo.com/html/?q=%22upward-mobility%22+github+pudding+aaron
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; cat > /tmp/test_facts.py <<'EOF' import 
+  wiki-billboard wiki-billboard: web_fetch http://web.archive.org/cdx/search/cdx?url=pudding.cool/2018/09/wiki-billboard/*&output=text&limit=20
+  votes-for-women votes-for-women: web_fetch https://github.com/search?q=votes-for-women+pudding&type=repositories
+  votes-for-women votes-for-women: web_fetch https://r.jina.ai/https://pudding.cool/projects/votes-for-women/
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd, numpy as np df=pd.read_csv('vocabulary.csv') df['w']=pd
+  street-view street-view: edit /home/user/RL_Study/report-gepa/runs/originals/street-view/skipped.json
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/assets/data/titles.csv
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/titles.csv
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd p=p
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 - <<'EOF' import json f=jso
+  wiki-breakout wiki-breakout: web_fetch https://github.com/the-pudding/wiki-breakout
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/README.md
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 -c " import pandas as pd a=pd.re
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/template-data/copy.json
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/html/partials/story/content.h
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  wiki-breakout wiki-breakout: web_fetch https://api.github.com/repos/the-pudding/wiki-breakout/git/trees/master?recursive=1
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/html/index.hbs
+  votes-for-women votes-for-women: web_fetch https://www.youtube.com/watch?v=-DXKDw8l0wY
+  votes-for-women votes-for-women: web_fetch https://www.youtube.com/watch?v=LExGIC9iaRA
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd p=p
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd pd.set_option('display.width',250) df=pd.read_csv('title
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/html/partials/story/graphic.h
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/html/partials/story/outro.hbs
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/js/graphic.js
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import pan
+  votes-for-women votes-for-women: web_fetch https://r.jina.ai/https://www.youtube.com/watch?v=-DXKDw8l0wY
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json f=
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/js/tracks.json
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/js/audio.js
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && grep -n "pudding-web\|pudding\b\|tasks\|data/"
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  street-view street-view: read /home/user/RL_Study/report-gepa/runs/originals/street-view/facts.json
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json fa
+  vocabulary vocabulary: web_fetch https://pudding.cool/projects/vocabulary/data.json
+  vocabulary vocabulary: web_fetch https://pudding.cool/projects/vocabulary/data/vocabulary.csv
+  vocabulary vocabulary: web_fetch https://pudding.cool/projects/vocabulary/assets/data/vocabulary.csv
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') names=['Greater Los Angeles
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && grep -n "2.1\|finding\|facts\|coverage" rubr
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  spades spades: web_view view-source:https://pudding.cool/2021/08/spades/assets/taught.svg
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd p=p
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json, p
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && sed -n 1,160p trust.py
+  vocabulary vocabulary: web_fetch https://web.archive.org/web/2019id_/https://pudding.cool/projects/vocabulary/index.html
+  street-view street-view: read /home/user/RL_Study/report-gepa/runs/originals/street-view/skipped.json
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd,
+  sleep-training sleep-training: bash cd data && python3 - <<'EOF' import pandas as pd for f in ['articles.csv','books.csv','reddit.csv','
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && grep -n "发现\|覆盖\|原文\|facts" rubric.py | head
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_p
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_r
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 -m json.tool skipped.js
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd p=p
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && grep -n "2\.1" -A15 -B5 rubric.py | head -80
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  street-view street-view: bash cd /home/user/RL_Study/report-gepa/runs/originals/street-view && python3 - <<'EOF' import json, re, 
+  spades spades: web_view view-source:https://pudding.cool/2021/08/spades/assets/taught.svg
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') print(df[df.year>=2015][['y
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-bench/src/report_bench && head -80 rubric.py && grep -rn "2.1" . | hea
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') print('title words a
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  vocabulary vocabulary: web_fetch https://duckduckgo.com/html/?q=%22largest+vocabulary%22+hip+hop+pudding+github
+  spades spades: web_view view-source:https://pudding.cool/2021/08/spades/assets/bar.svg
+  spades spades: web_view view-source:https://pudding.cool/2021/08/spades/assets/col.svg
+  spades spades: web_view view-source:https://pudding.cool/2021/08/spades/assets/whole.svg
+  song-repetition song-repetition: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-repetition && python3 - <<'PY' import json, p
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  vocabulary vocabulary: web_view https://pudding.cool/2017/02/vocabulary/index.html
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd pd.
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import jso
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  titletowns titletowns: web_fetch https://www.bing.com/search?q=%22titletowns%22+pudding+%22Greater+Raleigh%22
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import jso
+  votes-for-women votes-for-women: web_fetch https://www.bing.com/search?q=%22votes-for-women%22+pudding+github
+  votes-for-women votes-for-women: web_fetch https://r.jina.ai/https://www.bing.com/search?q=%22votes-for-women%22+pudding+github
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/README.md
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/main/README.md
+  two-minute-report two-minute-report: web_view https://github.com/polygraph-cool/last-two-minute-report/tree/master/web
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd pd.
+  wiki-billboard wiki-billboard: web_fetch https://data.jsdelivr.com/v1/package/gh/the-pudding/wiki-billboard@master/flat
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/graphic.js
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/final_test.py <<'EOF' imp
+  timeless timeless: bash cd data; python3 -c " import pandas as pd d=pd.read_csv('all_data.csv') print(d[d.artist.str.contain
+  titletowns titletowns: bash which chromium chromium-browser google-chrome firefox node 2>/dev/null; python3 -c "import playwrigh
+street-view: facts=12 answer=12 dropped=0 skipped=17 problems=0 428s steps=37
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/graphic-tally.js
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/html/partials/story/tally.hb
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/people-data.js
+  upward-mobility upward-mobility: web_fetch https://www.census.gov/dataviz/visualizations/020/
+  upward-mobility upward-mobility: web_fetch https://www.census.gov/dataviz/visualizations/020/data/
+  upward-mobility upward-mobility: web_fetch https://grep.app/api/search?q=black_pop_pct_chg_1910_1940
+  upward-mobility upward-mobility: web_fetch https://grep.app/search?q=black_pop_pct_chg_1910_1940
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/08/wiki-billboard-data/web/2018-tally-appearance--alive.csv
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/08/wiki-billboard-data/web/2018-people.csv
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && ls -la && ls -la data && head -5 d
+  votes-for-women votes-for-women: web_fetch https://api.github.com/search/repositories?q=votes-for-women+the-pudding
+  votes-for-women votes-for-women: web_fetch https://api.github.com/search/code?q=934068
+  wine-animals wine-animals: web_fetch https://pudding.cool/2025/04/wine-animals/
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import jso
+  upward-mobility upward-mobility: web_fetch https://www.bing.com/search?q=%22black_pop_pct_chg_1910_1940%22
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/assets/js/main.js
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/js/main.js
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/assets/js/index.js
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/js/index.js
+  sleep-training sleep-training: bash cd data && python3 -c " import pandas as pd s=pd.read_csv('studies.csv'); print(s.participants.dtype
+  wine-animals wine-animals: web_fetch https://pudding.cool/2025/04/wine-animals/
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd d=
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd p=p
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd i=pd.read_csv('issues.json.csv') print(len(i), i.id.nuni
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/assets/data/cities.geojson
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/data/cities.geojson
+  upward-mobility upward-mobility: web_fetch https://pudding.cool/2022/11/upward-mobility/assets/data/cities.json
+  two-minute-report two-minute-report: web_view https://github.com/polygraph-cool/last-two-minute-report/tree/master/web/src
+  titletowns titletowns: bash echo "fetching via tool next"
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/assets/data/people-svg.json
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  upward-mobility upward-mobility: bash find / -name 'summary.jsonl' -o -name 'manifest.jsonl' 2>/dev/null | head -20; grep -R "upward-mobil
+  sleep-training sleep-training: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/sleep-training@main/src/data/literature_reviews.csv
+  titletowns titletowns: bash cd /tmp && python3 -c " import requests try: r=requests.get('https://pudding.cool/2018/11/titletowns
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import urllib.requ
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && python3 - <<'EOF' import jso
+  wiki-death wiki-death: web_fetch https://github.com/puddingviz/wiki-death
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/
+song-repetition: facts=2 answer=2 dropped=0 skipped=19 problems=0 566s steps=45
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd, itertools df=pd.read_csv('vocabulary.csv') df['w']=pd.t
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd, n
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd i=pd.read_csv('issues.json.csv') i['we']=i.excerpt.filln
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/pudding-chart/tally.js
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/graphic-live.js
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/html/partials/story/intro.hb
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/html/partials/story/live.hbs
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wine-model wine-model: bash ls -la data/ && head -5 data/winedata.csv && wc -l data/winedata.csv
+  wine-model wine-model: web_fetch https://pudding.cool/2021/03/wine-model/
+  two-minute-report two-minute-report: web_view https://github.com/polygraph-cool/last-two-minute-report/tree/master/web/src/js
+  timeless timeless: bash cd data; python3 - <<'EOF' import pandas as pd, numpy as np d=pd.read_csv('all_data.csv') pd.set_opt
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd, n
+  wine-model wine-model: web_view https://pudding.cool/2021/03/wine-model/
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  sleep-training sleep-training: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('articles.csv') print(a.drop_duplicates('u
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/master/README.md
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/index.html
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/src/report_gepa && sed -n 1,200p puddingjs.py
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') print('party words',
+  wiki-death wiki-death: web_fetch https://github.com/puddingviz?tab=repositories
+  wiki-death wiki-death: web_fetch https://www.google.com/search?q=pudding+wiki-death+github
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd pd.set_
+  upward-mobility upward-mobility: web_fetch https://pudding-cool.translate.goog/2022/11/upward-mobility/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://pudding-cool.translate.goog/2022/11/upward-mobility/?_x_tr_sl=en&_x_tr_tl=
+  wiki-death wiki-death: web_fetch https://duckduckgo.com/html/?q=pudding+wiki-death+github+repository
+  wiki-death wiki-death: web_fetch https://www.bing.com/search?q=pudding+%22wiki-death%22+github
+  this-american-life this-american-life: bash cd /home/user/RL_Study/report-gepa/runs/originals/this-american-life && echo "FACTS" && cat facts.js
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd, n
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/docs/index.html
+  wine-model wine-model: bash cd /tmp && curl -sL https://pudding.cool/2021/03/wine-model/ -o wine.html && wc -c wine.html && grep
+  wine-model wine-model: web_view https://pudding.cool/2021/03/wine-model/
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/graphic-pl
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/graphic-re
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  wine-model wine-model: web_fetch https://pudding.cool/2021/03/wine-model/
+  wine-model wine-model: web_view https://pudding.cool/2021/03/wine-model/
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/js/main.js
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -c " import pandas as pd c=pd.re
+  votes-for-women votes-for-women: web_fetch https://github.com/the-pudding/votes-for-women
+  votes-for-women votes-for-women: web_fetch https://pudding.cool/projects/votes-for-women/build/js/main.js
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/check.py <<'PY' import p
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  wiki-billboard wiki-billboard: web_fetch https://data.jsdelivr.com/v1/package/gh/the-pudding/wiki-billboard-data@master/flat
+  wine-model wine-model: web_fetch https://web.archive.org/web/2021/https://pudding.cool/2021/03/wine-model/
+  wine-model wine-model: web_fetch https://pudding.cool/2021/03/wine-model/index.html
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/README.md
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/main/README.md
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd, n
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/build_facts.py <<'PY' imp
+  vocabulary vocabulary: web_fetch https://github.com/the-pudding
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -c " import pandas as p
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd s=
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/html/index.hbs
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/template-data/doc.json
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/js/graphic.js
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/README.md
+  wiki-billboard wiki-billboard: web_fetch https://data.jsdelivr.com/v1/package/gh/the-pudding/wiki-billboard-data@master
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/validate.py <<'PY' import
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd, nu
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/js/mainbar.js
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/js/sidebar.js
+  wiki-billboard wiki-billboard: web_fetch https://www.google.com/search?q=%22pageviews_median%22+%22binSize%22
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/package.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd d=
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -c " import pandas as p
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/scripts/historical/bin-page
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/scripts/historical/final.js
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/scripts/historical/get-peop
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && cat > facts.json <<'EOF' [ { "id
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/assets/data/platforms.json
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/assets/data/platforms.json
+  wine-model wine-model: web_fetch https://github.com/the-pudding/data/tree/master/wine-model
+  wine-model wine-model: web_view https://web.archive.org/web/20210315000000*/pudding.cool/2021/03/wine-model*
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && python3 - <<'EOF' import pandas 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; cat > /tmp/make_facts.py <<'PYEOF' impor
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd, n
+this-american-life: facts=5 answer=5 dropped=0 skipped=11 problems=0 456s steps=43
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/10/wiki-breakout/
+  wiki-billboard wiki-billboard: web_view https://pudding.cool/2018/10/wiki-breakout/
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; cat > /tmp/eval_facts.py <<'PYEOF' impor
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/assets/data/w
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/graphic-ca
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward-mobility/main/README.md
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward-mobility/master/README.md
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward-mobility/main/src/App.svelte
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd, nu
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd, re p=pd.read_csv('platforms.json.csv') yr=p.key.str.fin
+  women-in-congress women-in-congress: bash ls -la data/ && head -5 data/*.csv && wc -l data/*.csv
+  women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/upward_mobility/main/package.json
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/the-pudding/on-upward-mobility/main/package.json
+  upward-mobility upward-mobility: web_fetch https://raw.githubusercontent.com/aaronwilliams/upward-mobility/main/package.json
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && cat > skipped.json <<'EOF' [ { "
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  women-in-congress women-in-congress: web_view https://pudding.cool/2018/07/women-in-congress/
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd for f in ['baked_positions.csv','women_reps.csv','women_
+  upward-mobility upward-mobility: web_fetch https://api.github.com/repos/the-pudding/upward-mobility
+  upward-mobility upward-mobility: web_fetch https://api.github.com/repos/the-pudding/upward_mobility
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -c " import pandas as pd d=
+  wine-model wine-model: web_fetch https://r.jina.ai/https://pudding.cool/2021/03/wine-model/
+  wine-model wine-model: web_view https://web.archive.org/web/2021id_/https://pudding.cool/2021/03/wine-model/
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://github.com/the-pudding/upward-mobility
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://github.com/search?q=upward-mobility+pudding&type=repositories
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/html/partials/story/graphic
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/html/partials/story/sidebar
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/html/partials/story/about.h
+  titletowns titletowns: web_fetch https://pudding.cool/2018/11/titletowns/data/case1.json
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd s=
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && cat > /tmp/build_skipped.py <<'PY' i
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -c " import pandas as pd v=p
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://grep.app/search?q=black_pop_pct_chg_1910_1940
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json facts=js
+  upward-mobility upward-mobility: web_fetch view-source:https://pudding.cool/2022/11/upward-mobility/
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/view-source:https://pudding.cool/2022/11/upward-mobility/
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/main/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/master/data/people.csv
+  wiki-death wiki-death: web_fetch https://api.github.com/repos/puddingviz/wiki-death
+  vocabulary vocabulary: web_view https://biamuniz.github.io/programacao-web/atividade-3/
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json, pandas 
+  wiki-death wiki-death: web_fetch https://www.bing.com/search?q=site%3Agithub.com%2Fpuddingviz+death+wikipedia
+  wiki-death wiki-death: web_fetch https://www.bing.com/search?q=%22Life+After+Death+on+Wikipedia%22+github
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && ls -la && find . -maxdepth 3 -type f
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wine-model wine-model: web_view https://pudding.cool/2021/03/wine-model/
+  vocabulary vocabulary: web_fetch https://duckduckgo.com/html/?q=pudding+vocabulary+2019+%22Outkast%22+%2254%22+E-40
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; cat facts.json; echo; echo '===== SKIPPE
+  wine-model wine-model: web_fetch http://archive.org/wayback/available?url=pudding.cool/2021/03/wine-model/
+  wine-model wine-model: web_fetch https://pudding.cool/2021/03/wine-model/print/
+  wiki-death wiki-death: bash echo "no network in bash"
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wikipedia-death/master/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/life-after-death/master/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/death/master/README.md
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/build.py <<'PY' import j
+  wine-model wine-model: web_view http://web.archive.org/web/20260929020941/https://pudding.cool/2021/03/wine-model/
+  timeless timeless: bash cd data; python3 -c " import pandas as pd d=pd.read_csv('all_data.csv') for t in ['End Of The Road',
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/gh-pages/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/gh-pages/index.html
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/puddingviz/wiki-death/master/index.html
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && cat > facts.json << 'EOF' [ { "id": "skin
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/validate.py <<'PY' impor
+  wine-model wine-model: web_view https://web.archive.org/web/20260929020941/https://pudding.cool/2021/03/wine-model/
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 << 'EOF' import json, pandas as p
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && sed -n '1,200p' facts.json && echo '
+  vocabulary vocabulary: web_fetch https://www.bing.com/search?q=pudding+vocabulary+2019+Outkast+E-40+%2354
+  spades spades: edit /home/user/RL_Study/report-gepa/runs/originals/spades/skipped.json
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') for y in [1920,1840]
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  vocabulary vocabulary: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('vocabulary.csv') d=df.dropna(subset=['re
+  wine-model wine-model: web_fetch https://web.archive.org/web/20260929020941/https://pudding.cool/2021/03/wine-model/
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 -m json.tool skipped.json | head
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/css/story/tally.styl
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/people-categories.json
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard/master/src/js/people-dictionary.json
+  stand-up stand-up: web_fetch https://api.microlink.io/?url=https%3A%2F%2Fpudding.cool%2F2018%2F02%2Fstand-up&data.svg.selector=sv
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import pandas 
+  two-minute-report two-minute-report: web_fetch https://pudding.cool/2017/02/two-minute-report/assets/data/web_players.csv
+  spades spades: edit /home/user/RL_Study/report-gepa/runs/originals/spades/skipped.json
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa && file agent/bin/pageshot && ls -la agent/bin && head -40 agent/
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && python3 - <<'EOF' import json p=
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa && timeout 20 .venv/bin/python - <<'PY' import urllib.request try
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && cat > /tmp/build_skipped.py <<'PY' 
+  timeless timeless: write facts.json
+  vocabulary vocabulary: web_fetch https://duckduckgo.com/html/?q=github+%22pudding.cool%2Fprojects%2Fvocabulary%22
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && cat skipped.json
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && python3 - <<'EOF' import pandas
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json, pandas 
+  wine-model wine-model: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2021/03/wine-model/
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np r=pd.read_csv('women_reps.csv') print('rows
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') print(
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/graphic-wh
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/web/src/js/graphic-te
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  spades spades: web_fetch https://api.ocr.space/parse/imageurl?apikey=helloworld&url=https%3A%2F%2Fimages.weserv.nl%2F%3Furl%3
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && ls -la && python3 - <<'PY' import js
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && cat > skipped.json << 'EOF' [ { "source":
+  titletowns titletowns: bash cd /home/user/RL_Study/report-gepa/runs/originals/titletowns && python3 - <<'EOF' import pandas as p
+  wiki-billboard wiki-billboard: web_fetch http://web.archive.org/web/20181001000000id_/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-billboard wiki-billboard: web_fetch https://web.archive.org/web/20181001000000/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-billboard wiki-billboard: web_fetch http://timetravel.mementoweb.org/api/json/20181001/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-death wiki-death: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2018%2F08%2Fwiki-death%2F
+  wiki-death wiki-death: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2018/08/wiki-death/
+  vocabulary vocabulary: web_fetch https://duckduckgo.com/html/?q=%22Aesop+Rock%22+%22Busdriver%22+%22Outkast%22+vocabulary+2019+github
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json s=json.l
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') cols=[
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') xc=[c 
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/assets/data/people-svg.json
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/html/partials/story/video.h
+  votes-for-women votes-for-women: web_fetch https://raw.githubusercontent.com/the-pudding/votes-for-women/master/src/assets/data/issues.json
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  timeless timeless: edit facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json, re, pan
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 

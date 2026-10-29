@@ -1,0 +1,20 @@
+[
+ {
+  "id": "first-half-share",
+  "source": "67% of defensive three seconds calls occurred in the first half.",
+  "claim": "Of 1,492 defensive three seconds calls, 1,000 (67.0%) occurred in the first half.",
+  "tables": {
+   "df": "data/three-seconds.csv"
+  },
+  "code": "df.quarter.le(2).agg(['count', 'sum', 'mean'])"
+ },
+ {
+  "id": "before-fourth-quarter-share",
+  "source": "90% of defensive three seconds calls occurred before the fourth quarter.",
+  "claim": "Of 1,492 defensive three seconds calls, 1,348 (90.3%) occurred before the fourth quarter.",
+  "tables": {
+   "df": "data/three-seconds.csv"
+  },
+  "code": "df.quarter.lt(4).agg(['count', 'sum', 'mean'])"
+ }
+]

@@ -1,0 +1,47 @@
+[
+ {
+  "id": "men-two-thirds-words",
+  "source": "Men account for nearly two-thirds of the words spoken over the history of the show.",
+  "claim": "Averaged across the 622 episodes, men speak 63.8% of the dialogue.",
+  "tables": {
+   "a": "data/act1.csv"
+  },
+  "code": "a.malePercent.agg(['mean', 'count'])"
+ },
+ {
+  "id": "episodes-male-majority",
+  "source": "And 70% of the episodes have men speaking more than half the time.",
+  "claim": "436 of the 622 episodes (70.1%) have men speaking more than half the time.",
+  "tables": {
+   "a": "data/act1.csv"
+  },
+  "code": "a.malePercent.gt(50).agg(['sum', 'mean', 'count'])"
+ },
+ {
+  "id": "exclusive-gender-episodes",
+  "source": "There is only one episode with exclusively female voice versus 18 episodes with exclusively male voices",
+  "claim": "One episode has exclusively female dialogue (0% male) and 18 have exclusively male dialogue (100% male).",
+  "tables": {
+   "a": "data/act1.csv"
+  },
+  "code": "a.malePercent[a.malePercent.isin([0, 100])].value_counts()"
+ },
+ {
+  "id": "fathers-mothers-day-episodes",
+  "source": "Yet in this case, there have been five episodes devoted to Father's Day and only one episode devoted to Mother's Day.",
+  "claim": "Five episode titles refer to Father's Day and one to Mother's Day.",
+  "tables": {
+   "e": "data/episodes.csv"
+  },
+  "code": "e.title.str.extract(r\"(Father|Mother)'s Day\")[0].value_counts()"
+ },
+ {
+  "id": "women-reporters-fewer-male-interviewees",
+  "source": "Women reporters tend to produce acts with slightly more female interviewees than male reporters.",
+  "claim": "Omitting mixed-gender contributor groups, acts with all-female contributor groups average 64.9% male interviewee dialogue, versus 68.6% for acts with all-male contributor groups; both remain majority male.",
+  "tables": {
+   "a3": "data/act3.csv"
+  },
+  "code": "a3[a3.percentMaleProducers.isin([0, 100])].groupby('percentMaleProducers').percentMaleSubjectDialogue.mean()"
+ }
+]

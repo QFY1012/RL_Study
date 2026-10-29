@@ -33,5 +33,12 @@
  ],
  "dropped": [],
  "answer": 2,
- "skipped": 4
+ "skipped": 4,
+ "review": [
+  {
+   "id": "us-places-share-name",
+   "action": "keep",
+   "why": "the quote is the story's own copy from its repository (the-pudding/same-name src/data)"
+  }
+ ]
 }
