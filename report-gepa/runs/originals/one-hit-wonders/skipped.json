@@ -1,0 +1,62 @@
+[
+  {
+    "source": "Since the WNBA began in 1997, with an average player career of three seasons, Reid was the only one-hit wonder to make our list.",
+    "why": "The file contains only WNBA players with a top-20 season; their mean career length in the file is 8.7 seasons, so the stated three-season average is not reproduced."
+  },
+  {
+    "source": "He put up 20 ppg, seven points higher than his next best season.",
+    "why": "The NBA measure in the file is VORP (stat_val), not points per game, so 20 ppg and the seven-point gap cannot be computed."
+  },
+  {
+    "source": "Had her best season as a rookie, averaging 13.8 ppg",
+    "why": "The WNBA measure is win shares, not points per game; 13.8 ppg is absent. Reid's best rank year (1998) is covered by the highest-rank fact, but the scoring average is not."
+  },
+  {
+    "source": "Shot a 67 to Tiger Woods’ 68 to claim the PGA Championship",
+    "why": "The file has prize money and rank, not stroke scores, so the 67 and 68 cannot be reproduced."
+  },
+  {
+    "source": "Rich Beem finished one stroke ahead of Woods at the 2002 PGA Championship to record his first and only major title.",
+    "why": "The file has no stroke scores or major-title records; the one-stroke margin and major title cannot be computed."
+  },
+  {
+    "source": "failed to win a WTA tournament during her career—earning only three runner-up finishes",
+    "why": "The file has rankings, not tournament wins or runner-up finishes."
+  },
+  {
+    "source": "In his best season, he scored a career high in points, with 76 points in 78 games",
+    "why": "played_val gives 78 games in 2015, but stat_val is 10.2 point shares, not 76 points; no points total is in the file."
+  },
+  {
+    "source": "Traded to the Detroit Tigers, where he would play just 24 games over three seasons",
+    "why": "The file has no games-played value for Willis (played_val is missing), and the team rows do not yield 24 games."
+  },
+  {
+    "source": "retired at the end of the 2008 season",
+    "why": "Lunke's last season in the file is 2007, so the 2008 retirement is not reproduced."
+  },
+  {
+    "source": "Hilary Lunke had never won an LPGA event before winning the 2003 U.S. Women’s Open in an 18-hole playoff. And she never won again.",
+    "why": "The file has rankings and prize money, not tournament wins, so the never-won/never-won-again claim cannot be computed."
+  },
+  {
+    "source": "Injuries limited her playing time the following season",
+    "why": "The file shows Reid's games falling from 30 in 1998 to 10 in 1999 but contains no injury data."
+  },
+  {
+    "source": "Ankle injuries and mononucleosis kept him off the court for two seasons.",
+    "why": "The file records one non-playing season for Verkerk (2005), not two, and contains no injury data."
+  },
+  {
+    "source": "Dana Barros 1990-2004",
+    "why": "Career-range labels were not written as facts because they are descriptive; most match the file, but Rich Beem's label 1988-2017 does not match the file's 1998-2017 range."
+  },
+  {
+    "source": "His last season in the majors was 2011",
+    "why": "The file also ends Willis in 2011, but this career-end label was not written as a separate fact because it is descriptive."
+  },
+  {
+    "source": "Sprem hasn’t played since suffering a wrist injury in 2011.",
+    "why": "The file's last Sprem season is 2011, but the injury cause is not in the data and the career-end label was not written as a separate fact."
+  }
+]

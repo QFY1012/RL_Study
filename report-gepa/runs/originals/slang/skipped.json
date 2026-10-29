@@ -1,0 +1,26 @@
+[
+  {
+    "source": "164 Historic Usages of the Word \"Dog\"",
+    "why": "The dog data file has 163 rows/senses, not the 164 the story reports, so the count does not reproduce from the supplied data (the other three word counts do match exactly)."
+  },
+  {
+    "source": "Throughout the bit, Ismo uses “ass” 34 times, in a variety of contexts. By doing so, he conveys ten unique meanings with the same word.",
+    "why": "The data files contain dictionary senses and citations, not a transcript of Ismo's comedy routine, so neither the 34 uses nor the ten unique meanings can be counted."
+  },
+  {
+    "source": "Ismo’s nine other usages are below, which operate as a noun, an adjective, a suffix, to form a compound word, and as part of a phrase.",
+    "why": "This counts and classifies usages from Ismo's routine, which is not part of the supplied data (the files hold Green's dictionary entries, not the routine's transcript)."
+  },
+  {
+    "source": "Green’s Dictionary of Slang, the most comprehensive collection of English slang in the world, contains over 140,000 words",
+    "why": "The supplied files cover only four headwords (ass, dog, fuck, shit), not the whole dictionary, so the 140,000-word total is not in the data."
+  },
+  {
+    "source": "this 2018 set on Conan about his “ass” struggles has over 4 million views on YouTube",
+    "why": "No YouTube or view-count data is supplied."
+  },
+  {
+    "source": "A “piece of shit” is bad, but “the shit?” That’s good!",
+    "why": "A qualitative illustration of two senses of 'shit', not a number, ranking or computed comparison that the supplied citation files can reproduce."
+  }
+]

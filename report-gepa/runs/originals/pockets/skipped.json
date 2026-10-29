@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Only 40 percent of women's front pockets can completely fit one of the three leading smartphone brands.",
+    "why": "Reproducing this needs each phone's dimensions and the d3plus largestRect() fit of a rectangle inside the curved pocket shape. data/measurements.csv contains only pocket measurements, with no item dimensions, fit result, or curve geometry, so the 40 percent share cannot be computed from the supplied file."
+  },
+  {
+    "source": "Less than half of women's front pockets can fit a wallet specifically designed to fit in front pockets.",
+    "why": "This is an item-fit share from the same largestRect() calculation. The wallet's dimensions and the fitted curved-pocket geometry are not in data/measurements.csv, so the share cannot be computed from the supplied file."
+  },
+  {
+    "source": "And you can't even cram an average woman's hand beyond the knuckles into the majority of women's front pockets.",
+    "why": "This is an item-fit share based on average hand dimensions and the largestRect() fit inside the curved pocket shape. Neither the hand dimensions nor a fit column/geometry is present in data/measurements.csv."
+  },
+  {
+    "source": "of women's pockets and of men's pockets can fit this item.",
+    "why": "The chart's per-item fit shares (iPhone X, Samsung Galaxy, Google Pixel, front wallet, pen, woman's hand, man's hand) all depend on the largestRect() item-fit calculation and item dimensions that are absent from data/measurements.csv."
+  },
+  {
+    "source": "Predictably, skinny jeans, which more closely hug the hips, have smaller front pockets for both men and women.",
+    "why": "The story does not define what 'smaller' means. On the recorded measures the claim holds for width for both genders, but men's skinny front pockets are marginally taller on average (23.2 cm) than men's straight front pockets (23.1 cm), so a direct height or width comparison does not reproduce 'smaller' for both men and women; computing area instead would use a measure the story does not define."
+  }
+]

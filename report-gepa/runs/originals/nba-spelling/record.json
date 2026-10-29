@@ -1,0 +1,42 @@
+{
+ "id": "nba-spelling",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 470,
+  "steps": 57,
+  "tools": 80,
+  "nudged": 0,
+  "usage": {
+   "input": 73033,
+   "output": 35196
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top-eight-spellings-per-player",
+   "basis": "antetokounmpo rows run from 669 for 'antetokounmpo' through 41 for 'antetekounpo'; doncic rows run from 1491 for 'doncic' through 6 for 'djoncic'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "correct-responses-of-top-eight-per-player",
+   "basis": "mykhailiuk is 76 correct out of 224; doncic is 1491 out of 1593; antetokounmpo is 669 out of 1334; dwyane is 892 out of 1786.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "correct-responses-of-top-eight-per-player",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 1,
+ "skipped": 4
+}

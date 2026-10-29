@@ -5,20 +5,48 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 444,
+  "steps": 30,
+  "tools": 33,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 29296,
+   "output": 62226
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: cd5e9b50-735b-4155-9014-88bb781176bc)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/similes/facts.json'"
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "dry-top-three-share",
+   "basis": "输出显示 dry 下 bone=174, desert=169, dust=135；noun_total=1119，前三 cum_share=0.427167，约 42.7%。",
+   "verdict": "ok"
+  },
+  {
+   "id": "cucumber-no-other-top-ten",
+   "basis": "输出显示 cucumber 在 cool=298 rank1，calm=4 rank15，green=3 rank17，另有 cold=3 rank65；只有 cool 为 rank1，其他均不在前十。",
+   "verdict": "ok"
+  },
+  {
+   "id": "child-most-used-for-helpless",
+   "basis": "输出按 count 降序显示 child 的前三项：helpless=112，innocent=95，weak=75，helpless 最高。",
+   "verdict": "ok"
+  },
+  {
+   "id": "child-second-behind-baby",
+   "basis": "输出显示 helpless: baby=153 rank1，child=112 rank2；innocent: baby=143 rank1，child=95 rank2。",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-used-noun-per-adjective",
+   "basis": "输出中 rank1 行包含 white-snow=924、good-death=912、cold-ice=855、hard-stone=771、still-statue=728、cool-cucumber=298、broad-ox=12、real-memory=8，均与 claim 中列出的数值/名称一致。",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 5,
+ "skipped": 20
 }

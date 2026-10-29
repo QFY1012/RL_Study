@@ -1,0 +1,66 @@
+[
+  {
+    "source": "While those within two moves of optimal, including the 17% who were perfect, chose to mow the right side first so they could end their run on the left, having anticipated the dead-end trap.",
+    "why": "The data give 16.22% perfect overall (16.87% on desktop alone, but the story does not restrict to desktop), and the right-side-first/end-on-left pattern has no numeric definition in the files."
+  },
+  {
+    "source": "People three or more moves from optimal finished scattered across the lawn.",
+    "why": "This is a qualitative spatial pattern; the story gives no numeric definition of 'scattered', so it cannot be checked against the path coordinates."
+  },
+  {
+    "source": "Before Bones even made a move, they paused for 2.9 seconds. They were perfectly average here as well.",
+    "why": "The median first pause in round2 is 2.685 seconds and the mean is 16.1 seconds because of outliers; 2.9 seconds appears only with an unstated trim of long pauses, and Bones's nickname is not in the data."
+  },
+  {
+    "source": "Bones barely hesitated (0.7s) and decided to go down",
+    "why": "This is specific to the unidentified Bones path because nicknames are not in the data; the median hesitation at that fork is about 0.90 seconds, not 0.7."
+  },
+  {
+    "source": "Their first notable pause (2.4s) came when they realized they hit a dead end and had to retrace their steps.",
+    "why": "This is specific to the unidentified Bones path; the data do not include nicknames, so the individual pause cannot be located."
+  },
+  {
+    "source": "To get to the other open section they had to backtrack through two more squares.",
+    "why": "This is specific to the unidentified Bones path; the data do not include nicknames, so the individual backtrack count cannot be located."
+  },
+  {
+    "source": "The best mowers (90th percentile) spent time thinking early as they traveled down the first column, then thought more at the juncture between the two rock clusters on the bottom left: go toward the cluttered middle section, or clear the open space to the right first.",
+    "why": "This is a qualitative spatial pause pattern; the story gives no pause threshold or spatial aggregation rule to compute it."
+  },
+  {
+    "source": "Meanwhile, the worst mowers (10th percentile) sped through the beginning and barely paused to think until a corner or edge forced them to, implying reacting, not planning.",
+    "why": "This is a qualitative spatial pause pattern; no pause threshold or spatial aggregation rule is defined."
+  },
+  {
+    "source": "The best mowers moved at about the same speed as everyone else, but they revisited far fewer squares.",
+    "why": "No numeric definition of 'about the same speed' or 'revisited' is given; in the data the top optimality decile is slower per square than everyone else, so the statement as a whole is not reproduced."
+  },
+  {
+    "source": "We isolated just extended pause times (i.e., thinking) and the same trend held, but where they paused is a different story.",
+    "why": "The story does not define the extended-pause threshold, and it gives no R2 or other number for this analysis."
+  },
+  {
+    "source": "Below are two people who finished at the exact same time with different results. Sarah (0% optimal) Cheesepuff (0%)",
+    "why": "Participant names and nicknames are not in the files, so these two people cannot be identified; the meaning of the '0% optimal' labels is not defined."
+  },
+  {
+    "source": "humans come impressively close to computer-calculated optimal solutions to this problem with fewer stops, and even do pretty good — just 11% less efficient than optimal — for 70+ stops.",
+    "why": "This is a finding from the external Traveling Salesman study; the story says its chart was approximated from the study image and its data were not provided."
+  },
+  {
+    "source": "As the stops increase, humans’ ability decreases.",
+    "why": "This is from the external Traveling Salesman study, whose data were not provided."
+  },
+  {
+    "source": "If a salesperson had to visit just 10 cities and every possible route has to be checked, we’d surprisingly need to test 3.6 million of them. 15 cities and we’re at 1.3 trillion possible routes. 20 cities balloons to 2.4 quintillion possible routes.",
+    "why": "These are combinatorial calculations rather than results computed from the data files."
+  },
+  {
+    "source": "Below, the 7,235 people who finished every lawn, plotted by pace (seconds spent per square, which normalizes time across lawn sizes) against how close to optimal they got.",
+    "why": "The data contain 8,912 people who completed every lawn (the bonus3 file), not 7,235. The R2 finding itself is included using all finishers."
+  },
+  {
+    "source": "The 4.8% R 2 value comes from a linear fit of pace percentile against optimality percentile among people who finished every lawn.",
+    "why": "The data reproduce the body's 4.9% (0.04896), but not 4.8% to one decimal; the same finding is included with the 4.9% quote."
+  }
+]

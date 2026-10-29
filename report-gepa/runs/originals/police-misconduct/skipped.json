@@ -1,0 +1,14 @@
+[
+  {
+    "source": "Like many other cities, a small group of officers in Philadelphia account for a disproportionate number of complaints. More than a dozen officers, who have been recently identified, have been involved in ten or more publicly disclosed complaints.",
+    "why": "The files carry no reliable officer identifier: officer_id is null for 3,822 rows and only initials plus race/sex remain, and officer_prior_complaints is null for 3,822 rows and capped at 15. Grouping the identifiable officers by initials/race/sex yields only 3 officers whose prior-complaint count reaches 10, not the 'more than a dozen' the story reports, so the claim cannot be reproduced from these tables."
+  },
+  {
+    "source": "This aligns with findings from other police departments, where the sustained rate can range from 5 to 20 percent.",
+    "why": "The 5 to 20 percent range describes other departments' published research, not these Philadelphia complaint records."
+  },
+  {
+    "source": "You can explore the approximately 11,000 complaints from 2013 to 2020.",
+    "why": "A description of the dataset's size and period (the files hold 11,313 investigation rows for 2013-2020), not a finding drawn from it."
+  }
+]

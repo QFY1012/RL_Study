@@ -1,0 +1,47 @@
+[
+ {
+  "id": "dry-top-three-share",
+  "source": "You’ll notice that the top 3—bone, desert, and dust—make up 43% of all usage, and there is a pretty quick drop-off after that with a long tail of rarer choices.",
+  "claim": "For \"dry\", the three most-used nouns — bone (174 occurrences), desert (169) and dust (135) — make up 42.7% of the 1,119 occurrences summed across the 30 nouns shown in its chart.",
+  "tables": {
+   "pairs": "data/pairs.csv"
+  },
+  "code": "pairs[pairs.ground=='dry'].sort_values('count',ascending=False).head(30).assign(noun_total=lambda d: d['count'].sum(), cum_share=lambda d: d['count'].cumsum()/d['count'].sum()).head(3)"
+ },
+ {
+  "id": "cucumber-no-other-top-ten",
+  "source": "“Cucumber” (or as I learned that it sometimes was referred to as cowcumber) doesn’t even crack the top ten in usage for any other adjective.",
+  "claim": "Cucumber is the most-used noun only for \"cool\" (298 occurrences); in its other adjectives it ranks 15th (calm, 4) and 17th (green, 3), never inside the top ten.",
+  "tables": {
+   "pairs": "data/pairs.csv"
+  },
+  "code": "pairs[pairs.vehicle=='cucumber'].sort_values('rank')"
+ },
+ {
+  "id": "child-most-used-for-helpless",
+  "source": "The scale tips towards the defenseless side with the highest usage coming with “as helpless as a child”",
+  "claim": "\"Helpless\" is the adjective that \"child\" is most used with: 112 occurrences, ahead of innocent (95) and weak (75).",
+  "tables": {
+   "pairs": "data/pairs.csv"
+  },
+  "code": "pairs[pairs.vehicle=='child'].sort_values('count',ascending=False).head(3)"
+ },
+ {
+  "id": "child-second-behind-baby",
+  "source": "But child is only the second most-used noun for both of these adjectives, trailing the less evolved form: baby",
+  "claim": "For both helpless and innocent, baby is the most-used noun (153 and 143 occurrences, rank 1) and child the second most-used (112 and 95, rank 2).",
+  "tables": {
+   "pairs": "data/pairs.csv"
+  },
+  "code": "pairs[pairs.ground.isin(['helpless','innocent'])&pairs.vehicle.isin(['baby','child'])].sort_values(['ground','rank'])"
+ },
+ {
+  "id": "most-used-noun-per-adjective",
+  "source": "ox: 12 (most-used noun)",
+  "claim": "Each adjective's chart labels its most-used noun and that noun's count, which is the adjective's highest-count vehicle in the data: white–snow 924, good–death 912, cold–ice 855, hard–stone 771, still–statue 728, cool–cucumber 298, broad–ox 12 and real–memory 8 among them.",
+  "tables": {
+   "pairs": "data/pairs.csv"
+  },
+  "code": "pairs[pairs['rank']==1].sort_values('count',ascending=False)"
+ }
+]

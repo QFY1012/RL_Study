@@ -1,0 +1,44 @@
+[
+  {
+    "id": "punk-most-popular-fugazi",
+    "source": "Fugazi leads punk as the most popular artist of the genre and has been paired with some of skateboarding's most iconic skateboarders.",
+    "claim": "Punk's most-used artist is Fugazi, with 43 uses, ahead of Devo (30) and Joy Division (24).",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d[d[\"genre\"] == \"Punk\"].nlargest(3, \"tote\").set_index(\"artist\")[\"tote\"]"
+  },
+  {
+    "id": "jazz-most-used-tommy-guerrero",
+    "source": "The most used artist from jazz, Tommy Guerrero, is himself a professional skateboarder-turned-musician.",
+    "claim": "Tommy Guerrero is the most-used jazz/soul artist, with 21 uses, ahead of Curtis Mayfield and Nina Simone (18 each).",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d[d[\"genre\"] == \"Jazz/Soul\"].nlargest(3, \"tote\").set_index(\"artist\")[\"tote\"]"
+  },
+  {
+    "id": "electronic-most-popular-sol",
+    "source": "Sol, the most popular electronic artist ... Baron and Odd Nosdam, the second and third most popular artists of the genre",
+    "claim": "Sol is the most-used electronic artist, with 35 uses, followed by Odd Nosdam (26) and Baron (20).",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d[d[\"genre\"] == \"Electronic\"].nlargest(3, \"tote\").set_index(\"artist\")[\"tote\"]"
+  },
+  {
+    "id": "classic-rock-most-popular-beatles-stones",
+    "source": "The most popular classic rock artists during this time were the Beatles and the Rolling Stones.",
+    "claim": "The two most-used classic rock artists are the Beatles (46 uses) and the Rolling Stones (40), ahead of David Bowie (39).",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d[d[\"genre\"] == \"Classic Rock\"].nlargest(3, \"tote\").set_index(\"artist\")[\"tote\"]"
+  },
+  {
+    "id": "indie-most-popular-genre",
+    "source": "Appropriately, indie music, itself a broad categorization of music, is the most popular genre.",
+    "claim": "Indie/Alternative is the most-used genre, with 889 uses, ahead of Classic Rock (727) and Hip Hop (666).",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d.groupby(\"genre\")[\"tote\"].sum().sort_values(ascending=False).head(3)"
+  },
+  {
+    "id": "hiphop-most-popular-gang-starr",
+    "source": "When it comes to hip hop, skaters favor pre-2000s artists, with the most popular including Gang Starr, Mobb Deep, and Public Enemy.",
+    "claim": "Hip hop's most-used artist is Gang Starr, with 28 uses, ahead of DJ Krush and Mobb Deep (19 each); Public Enemy has 16.",
+    "tables": {"d": "data/soundtrack_data.csv"},
+    "code": "d[d[\"genre\"] == \"Hip Hop\"].nlargest(6, \"tote\").set_index(\"artist\")[\"tote\"]"
+  }
+]

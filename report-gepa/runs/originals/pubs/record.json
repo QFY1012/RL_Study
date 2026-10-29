@@ -1,0 +1,47 @@
+{
+ "id": "pubs",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 238,
+  "steps": 12,
+  "tools": 13,
+  "nudged": 0,
+  "usage": {
+   "input": 13962,
+   "output": 30368
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "red-lion-most-popular",
+   "basis": "Output shows red lion with 339 as the top value_counts entry.",
+   "verdict": "ok"
+  },
+  {
+   "id": "three-most-common-names",
+   "basis": "Output shows red lion 339, royal oak 258, crown inn 176 as the top three.",
+   "verdict": "ok"
+  },
+  {
+   "id": "color-noun-name-counts",
+   "basis": "Output shows red lion 339, white hart 166, white horse 157, black horse 105, and the bottom listed entries brass monkey, white swan inn, golden ball, golden lion hotel each with 10.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "color-noun-name-counts",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 2,
+ "skipped": 4
+}

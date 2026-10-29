@@ -5,20 +5,38 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 321,
+  "steps": 17,
+  "tools": 21,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 17316,
+   "output": 47904
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 5c49c02c-2465-4404-80d7-01f6e401fe48)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/shape-of-slavery/facts.json'"
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "louisiana-2010-highest-rate",
+   "basis": "inc_2010=868.0, rank=1.0, pct=0.868; Louisiana top-ranked.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nine-of-top-ten-1910-south",
+   "basis": "Top 10 output shows n_south=9 and Louisiana inc_1910=121.0 with rank=4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "south-outpaces-north-2010",
+   "basis": "South mean=570.666667 with count=15; North mean=344.5 with count=22.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 3,
+ "skipped": 10
 }

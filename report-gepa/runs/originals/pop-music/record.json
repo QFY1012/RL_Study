@@ -1,0 +1,52 @@
+{
+ "id": "pop-music",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 170,
+  "steps": 12,
+  "tools": 13,
+  "nudged": 0,
+  "usage": {
+   "input": 18520,
+   "output": 21090
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "venue-seats-ranking",
+   "basis": "Output shows Dave Matthews Band 1,058,504 first; Jason Aldean 983,540 second; Bruno Mars 666,380 third; Twenty One Pilots 534,071 tenth.",
+   "verdict": "ok"
+  },
+  {
+   "id": "giphy-gif-count-ranking",
+   "basis": "Output shows 2 Chainz 96,701 first; 5 Seconds Of Summer 89,325 second; Sam Hunt 86,805 third; Portugal The Man 35,646 tenth.",
+   "verdict": "ok"
+  },
+  {
+   "id": "reddit-comment-ranking",
+   "basis": "Output shows kanye 419,904 first; drake 307,441 second; eminem 151,676 third; bts 110,852 fourth.",
+   "verdict": "ok"
+  },
+  {
+   "id": "social-follower-ranking",
+   "basis": "Output shows Justin Bieber total 330,754,555 first; Taylor Swift 302,219,455 second; Selena Gomez 285,258,218 third; Katy Perry 282,762,630 fourth.",
+   "verdict": "ok"
+  },
+  {
+   "id": "twenty-one-pilots-two-top-tens",
+   "basis": "The merge output has exactly one row: Twenty One Pilots / twenty one pilots, confirming it is the only artist in both top-10 lists.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 5
+}

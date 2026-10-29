@@ -1,0 +1,11 @@
+[
+ {
+  "id": "usa-five-number-one-songs",
+  "source": "The #1 hit in a particular region reflects the broader cultural edges of the USA’s geography, which has 5 different #1 songs.",
+  "claim": "Using the story's cut of more than 4 cities and more than 4% of US cities, five songs qualify as US #1 songs: good 4 u (236 cities, 30.9%), Butter (217, 28.4%), RAPSTAR (71, 9.3%), MONTERO (Call Me By Your Name) (67, 8.8%) and Outside (Better Days) (43, 5.6%).",
+  "tables": {
+   "c": "data/city_data.csv"
+  },
+  "code": "(c.loc[c.country_code=='US'].groupby('track_name').size().to_frame('cities').assign(share=lambda d: 100*d.cities/c.loc[c.country_code=='US'].shape[0]).loc[lambda d: (d.cities>4)&(d.share>4)].sort_values('cities',ascending=False))"
+ }
+]

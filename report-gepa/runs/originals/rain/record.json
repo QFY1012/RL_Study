@@ -5,20 +5,33 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 331,
+  "steps": 34,
+  "tools": 40,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 72590,
+   "output": 41088
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: a9d91a3b-5fea-4adb-9d3d-306c0295fe11)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/rain/facts.json'"
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "annual-precip-2019-cities",
+   "basis": "New York 52.6, Orlando 47.8, Seattle 30.7; New York is greater than both.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wet-days-2019-cities",
+   "basis": "Hilo 218, Grand Rapids 124, Seattle 112, New York 109, Orlando 96, Baton Rouge 96, Atlanta 94, Houston 74, Los Angeles 32, Phoenix 26.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 2,
+ "skipped": 7
 }

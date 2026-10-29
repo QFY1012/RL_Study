@@ -1,0 +1,82 @@
+[
+  {
+    "source": "Emerging* slang, by the year it rose into popularity",
+    "why": "The chart ranks words within each year and lists 2013 and 2014 words that are not in the file. The file is normalized word by word (every column peaks at exactly 1.0), so cross-word search volume, rank, and the year-of-rise threshold cannot be computed from it."
+  },
+  {
+    "source": "Props to rapper D.R.A.M.: he single-handedly transformed “broccoli” into popular slang (#4 on 2016’s list). … That said, it’s #3 on 2016’s list",
+    "why": "The #4 and #3 rankings are cross-word rankings; the file has no common search-volume scale because each word is scaled separately to its own peak, so the ranks cannot be reproduced."
+  },
+  {
+    "source": "searches for the word’s definition have climbed to about 75% of where “Netflix and chill” peaked in 2015",
+    "why": "The story’s line chart is indexed against the maximum search interest for “fleek,” which is not in the file. In the file every word is normalized to its own maximum, so broccoli and Netflix and chill both peak at 1.0 and their cross-word ratio is not recoverable."
+  },
+  {
+    "source": "“Woke” has been growing organically since 2013",
+    "why": "The file begins on 11/30/14, so a 2013 starting point cannot be checked; “growing organically” is also a qualitative description."
+  },
+  {
+    "source": "Since 2014, SJW has grown organically (no major spike due to an event) in just three years",
+    "why": "The file covers only late 2014 through 2016, and “organically / no major spike” is qualitative rather than a numeric finding that the file can compute."
+  },
+  {
+    "source": "It’s worth noting that D.R.A.M. did not coin “broccoli” as slang; E-40 used it at least 10 years prior",
+    "why": "This is an external etymology/history claim, not a result computed from the search data."
+  },
+  {
+    "source": "“Juju On That Beat” by Zay Hilfigerrr has over 100 million streams on Spotify.",
+    "why": "The Spotify stream count is external data not present in the file."
+  },
+  {
+    "source": "Three of 2016’s top words are rooted in hip hop.",
+    "why": "This is a classification of words by their musical/etymological origin, not a numeric pattern in the search data."
+  },
+  {
+    "source": "In the US, last year’s political circus tipped five of 2016’s top slang into the mainstream.",
+    "why": "This counts words by their political meaning/context; the file has search interest only and no political classification."
+  },
+  {
+    "source": "Among political words, it’s also one of the youngest terms on 2016’s list.",
+    "why": "The file has no independent measure of a term’s age or first use, so this comparison cannot be computed."
+  },
+  {
+    "source": "What’s interesting is that the word’s recent growth is firmly rooted in the south.",
+    "why": "The file has state abbreviations but no region column or named Southern states. On a literal growth definition (2016 vs 2015), the largest increases in “boolin” are in Illinois, Massachusetts, Michigan and New Hampshire, not Southern states, so the story’s growth claim is not reproduced."
+  },
+  {
+    "source": "All signals suggest that Ty Dolla $ign’s track “Wavy” was the cause, which dropped in early 2016, coinciding with the subsequent growth of the word",
+    "why": "In the file “wavy” peaks in the week of 1/24/16 and then declines, so the claimed subsequent growth is not present; the causal attribution to the song is also external."
+  },
+  {
+    "source": "If 2015 was the year of “Netflix and chill” and 2014 was “on fleek”",
+    "why": "“Fleek” and the 2014 word list are not in the file, so the 2014 comparison cannot be computed."
+  },
+  {
+    "source": "And because of its liberal nature, we can see it growing in left-leaning states such as Oregon and Vermont.",
+    "why": "The file reproduces the chart's prevalence ranking for SJW in Vermont and Oregon, but not this separate growth claim: from 2015 to 2016, Oregon has the largest increase in SJW search interest while Vermont's average falls. The text names both states as growing, which the state series do not support."
+  },
+  {
+    "source": "Similar to “woke,” it’s been slowly growing organically, and the 2016 election cycle likely tipped it over the threshold for mainstream use.",
+    "why": "The threshold and the causal role of the election are not specified in numeric terms in the file; the data have only search interest."
+  },
+  {
+    "source": "“Woke” is the one term on 2016’s list that’s been growing organically for at least a decade.",
+    "why": "The file begins on 11/30/14, so a decade-long history cannot be checked, and the claim is qualitative."
+  },
+  {
+    "source": "The etymology of “dank meme” is complex, though Reddit is where it initially found momentum. What’s important is that it spread beyond the underbelly of Reddit sometime last year.",
+    "why": "This is an external platform/origin history, not a pattern computed from the search file."
+  },
+  {
+    "source": "“Holo” and “Holosexual” took off last year, largely due to YouTuber Simply Nailogical’s obsession with holographic nail art.",
+    "why": "The causal attribution to a YouTube channel is external and not measurable in the search file."
+  },
+  {
+    "source": "The origin of “boolin” is the Bloods’ habit of replacing c’s with b’s (cool becomes bool). It is at least four years old",
+    "why": "This is an external etymology and age claim, not a result computed from the search data."
+  },
+  {
+    "source": "Boolin emerged from the south",
+    "why": "The file has state abbreviations but no census-region column, so the Southern grouping shown in the chart must be supplied from outside the data. Early-2015 regional differences also depend on the summary used (state-week mean, median, or 4-week moving average), so the chart's qualitative label is not reproduced as a single data fact."
+  }
+]

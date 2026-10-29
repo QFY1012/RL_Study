@@ -1,0 +1,72 @@
+import json
+
+skipped = [
+ {
+  "source": "Altogether, “Hit ’Em Up” is the descendent of a larger history, a culmination of an 82-song family tree (the branches we’ve already explored are highlighted).",
+  "why": "The hit-em-up tree in data/songs.csv contains 93 distinct songs (80 after dropping the 13 songs flagged remove), and no story-consistent filter yields 82."
+ },
+ {
+  "source": "To build this project, we used the dataset of hundreds of thousands of songs on Genius.com accessible through their API, over 200,000 of which were “connected” in some way by sample, interpolation, cover, or remix.",
+  "why": "The two CSV files are a small curated subset of the project data, not the full Genius dataset; they contain 1,819 song rows and 2,714 sample rows, so the 200,000 figure cannot be computed."
+ },
+ {
+  "source": "And once you hear it, you’ll hear it everywhere; the “Funky Drummer” has been used in thousands of songs and has the most “descendants” in music history.",
+  "why": "The files hold only a curated Funky Drummer subset (765 distinct node ids across funky_1, funky_2 and funky_3), not thousands of songs and not a ranking against music history. In these files the In the Hall of the Mountain King tree is larger."
+ },
+ {
+  "source": "Some songs have introduced beats that have directly been sampled by hundreds, or even thousands, of other songs.",
+  "why": "The Funky Drummer tree in the files has 243 direct sample edges, which shows hundreds but not thousands; the files cannot support the upper end of the range."
+ },
+ {
+  "source": "“Jenny From the Block” is only one of a whole second generation of songs that originate from Clyde Stubblefield’s improvised drum break 5 minutes and 35 seconds into “Funky Drummer.”",
+  "why": "The files contain only song and edge metadata, with no audio timestamps or durations, so the 5 minutes and 35 seconds position cannot be reproduced."
+ },
+ {
+  "source": "Some musical inheritance is pretty obvious, because it shares iconic sounds, such as the bass from “Under Pressure,” which was transformed into “Ice Ice Baby.”",
+  "why": "Under Pressure and Ice Ice Baby are both listed in songs.csv under the intro tree, but samples.csv has no edge connecting them, so the claimed transformation is not in the files."
+ },
+ {
+  "source": "A Tribe Called Quest released “Can I Kick It?” in 1990, itself a song built on Lou Reed’s “Walk on the Wild Side” from 1972.",
+  "why": "Walk on the Wild Side is absent from both files. The downstream Rock DJ and Solar Power links are present and are reported separately, but the Walk on the Wild Side link cannot be reproduced."
+ },
+ {
+  "source": "While Rihanna’s “Cheers (Drink to That)” from 2010, in addition to heavily sampling Avril Lavigne’s “I’m With You,” abandons the parallel format entirely…",
+  "why": "Avril Lavigne’s I’m With You is absent from both files. The links from Cheers to Gin and Juice and Gotta Get Mine are present and are reported separately."
+ },
+ {
+  "source": "That’s four branches building up to this one song.",
+  "why": "The four branches are an editorial grouping of highlighted paths; the sample graph in the files has many roots, so a count of exactly four cannot be computed from the data."
+ },
+ {
+  "source": "The vertical chain continues through Conspiracy by Junior M.A.F.I.A. and ends with How Do U Want It by 2Pac.",
+  "why": "Neither Conspiracy nor How Do U Want It is present in songs.csv or samples.csv, so this part of the lineage cannot be reproduced."
+ },
+ {
+  "source": "The vertical chain branches from Go Stetsa I by Stetsasonic to Top Billin’ by Audio Two and Lyte as a Rock by MC Lyte, forming a beat-driven path that loops back to 2Pac’s Hit ’Em Up.",
+  "why": "Lyte as a Rock by MC Lyte is not in the files. The reproducible hip-hop path instead runs Hit ’Em Up -> 10% Dis -> Top Billin’ -> Go Stetsa I -> Looking Out My Window."
+ },
+ {
+  "source": "Orchestral music for a play in 1875 becomes electronic music for a cartoon in 1983.",
+  "why": "songs.csv dates In the Hall of the Mountain King to 1876-02-24 and Inspector Gadget to 1982-12-04, one year off the story’s 1875 and 1983. The sample link between the songs is reproduced, but the two stated years are not."
+ },
+ {
+  "source": "Ludacris then samples Chuck D’s voice from “Bring the Noise” and alters the tempo and quality to kick off his 2010 song “How Low,” where he’s talking about “booty.”",
+  "why": "songs.csv dates How Low to 2009-12-08, not 2010. The sample links in the How Low chain are reproduced, but the stated year is not."
+ },
+ {
+  "source": "Tupac also used the phrase “I keep my mind on my money, money on my mind” in a verse on MC Breed’s 1993 Gotta Get Mine Gotta Get Mine, but it blew up when Snoop Dogg quoted it in the chorus of “Gin and Juice” later that year.",
+  "why": "The files record sample edges, not lyrics. Gin and Juice and Gotta Get Mine are both present and dated 1993, but no edge or lyric field links the two songs to each other."
+ },
+ {
+  "source": "This sample heavy song took off on TikTok before it was even released, and then was one of the New York Times’ top songs of 2022.",
+  "why": "The files contain no TikTok or New York Times ranking data."
+ },
+ {
+  "source": "His YouTube channel has drill beats built around everything from “Hips Don’t Lie” to “Just Dance” to “I Want it That Way” or “Gangnam Style.”",
+  "why": "The files contain no YouTube or producer-channel data."
+ }
+]
+
+with open('skipped.json','w') as f:
+    json.dump(skipped,f,ensure_ascii=False,indent=2)
+print(len(skipped))

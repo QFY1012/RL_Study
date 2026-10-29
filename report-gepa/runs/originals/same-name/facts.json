@@ -1,0 +1,20 @@
+[
+  {
+    "id": "us-places-share-name",
+    "source": "There are thousands of cities and towns in the US that share their name with another place.",
+    "claim": "20,961 US city and town entries share their exact name with at least one other place in the data, across 5,411 distinct names.",
+    "tables": {
+      "d": "data/places.csv"
+    },
+    "code": "d.loc[d.level.eq('city-us') & d.name.map(d.name.value_counts()).gt(1), 'name'].agg(['count','nunique'])"
+  },
+  {
+    "id": "oxford-uk-largest-population-wiki",
+    "source": "Every place named Oxford, ranked",
+    "claim": "Among the places named Oxford, Oxford in the United Kingdom has the highest population (152,000) and the longest Wikipedia article (40,813).",
+    "tables": {
+      "d": "data/places.csv"
+    },
+    "code": "d[d.name.eq('Oxford')].sort_values('population', ascending=False)[['name','state','country','population','wiki']]"
+  }
+]

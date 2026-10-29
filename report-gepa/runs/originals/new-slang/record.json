@@ -1,0 +1,61 @@
+{
+ "id": "new-slang",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 875,
+  "steps": 103,
+  "tools": 133,
+  "nudged": 0,
+  "usage": {
+   "input": 128363,
+   "output": 95833
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "woke-blue-states-south-behind",
+   "basis": "Output ranks: VT=2, CA=3, NY=4, MA=5, RI=12, SC=45, AR=51.",
+   "verdict": "ok"
+  },
+  {
+   "id": "woke-present-day-blue-states",
+   "basis": "Output ranks: VT=2, MA=4, NY=5, CT=6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sjw-liberal-states",
+   "basis": "Output ranks: VT=3, OR=5, WA=7, NH=8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "shook-california-hawaii-summer",
+   "basis": "Output ranks: HI=1, CA=2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bough-mississippi",
+   "basis": "Output rank: MS=1.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "woke-present-day-blue-states",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "sjw-liberal-states",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 3,
+ "skipped": 20
+}

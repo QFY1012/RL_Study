@@ -1,0 +1,37 @@
+{
+ "id": "photo-history",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 420,
+  "steps": 40,
+  "tools": 70,
+  "nudged": 0,
+  "usage": {
+   "input": 77482,
+   "output": 36719
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "bw-versions-dated-older",
+   "basis": "Output rows show actual/color_avg/bw_avg/years_bw_older: 2008: 1999/1989/10; 1963: 1978/1973/5; 1969: 1970/1957/13; 1990: 1986/1984/2; 1940: 1952/1945/7; 1977: 1975/1967/8; 1976: 1967/1966/1; 1987: 1987/1980/7; 1970: 1985/1981/4; 1946: 1954/1952/2. All bw_avg values are lower than color_avg, so the black-and-white version is dated older in every case by the stated years.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "bw-versions-dated-older",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 0,
+ "skipped": 5
+}

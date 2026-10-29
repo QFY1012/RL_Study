@@ -1,0 +1,18 @@
+[
+  {
+    "source": "royalty + noun (39 unique pub names): Royal Oak 258, Kings Head 160, Kings Arms 154, Queens Head 148, Prince Of Wales 114",
+    "why": "The CSV has no naming-pattern column, and the royalty group is an editorial assignment that cannot be derived from the file. The chart's Kings Head (160) and Queens Head (148) counts also require merging apostrophe variants that the story never describes: the file has 'kings head' 150 plus 'king's head' 10, and 'queens head' 137 plus 'queen's head' 11. The 39-name total is not reproducible."
+  },
+  {
+    "source": "noun + inn (124 unique pub names): New Inn 162, Ship Inn 140, Plough Inn 121",
+    "why": "The CSV has no naming-pattern column. A plain suffix rule (names ending in 'inn' or 'hotel') yields 122 names, not the chart's 124; reaching 124 requires also assigning 'Inn' and 'Inn On Green' to the group, a choice the story does not define."
+  },
+  {
+    "source": "noun & noun (20 unique pub names): Fox & Hounds 89, Coach & Horses 88, Hare & Hounds 72",
+    "why": "The chart lists a name absent from the CSV ('Frankie & Benny's 16') and labels 'Miller & Carter 25' where the CSV has 50 pubs with that stripped name; the pattern grouping is not encoded in the file, so the chart's list and counts are not reproducible."
+  },
+  {
+    "source": "there are 352 pubs named Red Lion and 258 pubs named Royal Oak",
+    "why": "The CSV gives 339 pubs named Red Lion (and 258 named Royal Oak); the story's own headline and chart also use 339, so the 352 figure is not reproduced by this data."
+  }
+]

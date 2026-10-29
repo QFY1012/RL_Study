@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Here are the 10 rainiest places in 2019, with Seattle and XXX for comparison.",
+    "why": "The ten-station set is largely the same, but summing the daily file's values, which are already rounded to 0.1 inch per day, does not reproduce the story's annual totals beyond rounding: North Palm Beach is 89.4 in here versus 90 in the chart, Monteagle 81.4 versus 82, and Memphis 75.7 versus 77; the Sautee Nacoochee and Reno order also reverses. The story's amounts come from unrounded GHCN values in its annual precipitation file, which is not in this folder."
+  },
+  {
+    "source": "XXX was ranked as the XXX rainiest place in 2019, whereas Seattle was ranked the XXX.",
+    "why": "Ranking the 640 stations by 2019 precipitation summed from the rounded daily file gives New York about 132nd and Seattle's Sand Point station about 434th (or Seattle Tacoma about 409th), not the story's 124th and 429th; the ranks depend on the unrounded annual totals that are not in this folder."
+  },
+  {
+    "source": "And just to dispel any feelings that 2019 was an unusually dry year for Seattle, let’s look at the rainiest places (on average) over the past 10 years.",
+    "why": "The 2010-2019 average annual precipitation values and ranks, including New York at 51 in (112th) and Seattle at 40 in (289th), require the ten-year annual data; the daily file contains only 2019."
+  },
+  {
+    "source": "Although the Pacific northwest is well represented on this list of the wettest places, Seattle itself isn’t even in the top 250 out of 640!",
+    "why": "The Pacific Northwest representation and Seattle's position both come from the 2010-2019 average annual list, where Seattle is 289th; the average values cannot be computed from the 2019-only daily file."
+  },
+  {
+    "source": "Interestingly, it seems that there is some precipitation in Seattle for about 42% (152 days) of the year, but, at least for 2019, that’s only a few days more than cities like New York (148 days).",
+    "why": "The daily file gives 112 wet days for Seattle and 109 for New York using the story's >0.1 mm definition; 152 and 148 days cannot be produced from the rounded daily values, which do not preserve trace-precipitation records or a ten-year average."
+  },
+  {
+    "source": "Places like Hilo, Hawaii racked up an impressive 268 wet days last year.",
+    "why": "The daily file gives Hilo 218 days above 0.1 mm of precipitation, not 268; 268 is not reproducible from these records."
+  },
+  {
+    "source": "I’m looking at you, 30 days of rain in January 2020",
+    "why": "January 2020 is outside the data's 2019 coverage, and the 30-day figure comes from an external news link rather than this dataset."
+  }
+]

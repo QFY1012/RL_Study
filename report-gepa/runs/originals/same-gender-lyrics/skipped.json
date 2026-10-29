@@ -1,0 +1,26 @@
+[
+  {
+    "source": "if we look at the Top 10 songs from the last 2 years, 19/20 include lyrics about relationships and 9/20 of those were about opposite-gender relationships.",
+    "why": "The file only codes relationshipType for songs flagged as featuring an openly queer artist (queerFlag = 1); 18 of the 20 top-10 songs from 2019–2020 have no relationship coding, so 19/20 and 9/20 cannot be computed from this file."
+  },
+  {
+    "source": "Lil Nas X’s queer anthem has already spent 12 weeks on the charts.",
+    "why": "The file has no weeks-on-chart field; it contains only year-end rank, year, artist, song and lyric/artist tags."
+  },
+  {
+    "source": "The No. 1 songs from the last 3 years average about 20 weeks in the Hot 100.",
+    "why": "The file has no weeks-on-chart field, so the average chart run of No. 1 songs cannot be computed."
+  },
+  {
+    "source": "it would take another 13 years for a man explicitly singing about being with another man to appear on the charts",
+    "why": "The data cover 2008–2020 only and contain no song flagged with a man singing explicit same-gender lyrics; the 2021 song that ends the wait (MONTERO) is not in the file, so the 13-year gap cannot be computed."
+  },
+  {
+    "source": "Out queer artists like Janelle Monáe, Frank Ocean, Kelani, Hayley Kiyoko, Troye Sivan, Kim Petras, Big Freedia, and JoJo Siwa (I could go on) haven’t cracked the year-end Billboard Hot 100 with solo songs yet",
+    "why": "This is a negative, external chart-history claim about the named artists; the file contains only Janelle Monáe and Frank Ocean, both as featured artists, and has no entries for most of the others, so their lack of solo hits cannot be computed from the file."
+  },
+  {
+    "source": "explicitly singing feminine-coded words like “she”, “her”, and “girl.”",
+    "why": "The file supplies only one sample lyric per flagged song rather than its full lyrics, so a count or verification of feminine-coded words across the songs cannot be computed from the file; the artist-gender part of the sentence is reproduced in facts.json."
+  }
+]

@@ -1,0 +1,121 @@
+[
+ {
+  "id": "truckers-automation-79",
+  "source": "According to Frey and Osborne, the likelihood that heavy truck drivers will become automated is 79%.",
+  "claim": "Heavy and Tractor-Trailer Truck Drivers have an automation likelihood of 0.79, or 79%.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Heavy and Tractor-Trailer Truck Drivers'), ['job_name','auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "truckers-nearly-2-million",
+  "source": "There are nearly 2 million heavy truck drivers in the U.S.",
+  "claim": "Heavy and Tractor-Trailer Truck Drivers number 1,871,700.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Heavy and Tractor-Trailer Truck Drivers'), ['job_name','number']].assign(number=lambda d: d.number.astype(int)).to_string()"
+ },
+ {
+  "id": "truckers-earn-about-44000",
+  "source": "Truck drivers earn around $44,000 a year, so an alternative job should have a similar income.",
+  "claim": "Heavy and Tractor-Trailer Truck Drivers earn an average annual wage of $43,590.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Heavy and Tractor-Trailer Truck Drivers'), ['job_name','wage']].to_string()"
+ },
+ {
+  "id": "software-developers-low-automation",
+  "source": "For people whose jobs are at risk, the transition to software development makes ostensible sense: it’s a job that’s highly unlikely to become automated, and affords a good income.",
+  "claim": "Software Developers, Applications have an automation likelihood of 0.042, or 4.2%.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Software Developers, Applications'), ['job_name','auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "software-developers-good-income",
+  "source": "For people whose jobs are at risk, the transition to software development makes ostensible sense: it’s a job that’s highly unlikely to become automated, and affords a good income.",
+  "claim": "Software Developers, Applications earn an average annual wage of $104,300.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Software Developers, Applications'), ['job_name','wage']].to_string()"
+ },
+ {
+  "id": "elementary-teachers-unlikely-automation",
+  "source": "Jobs with a high social component and a high number of non-routine tasks, like elementary school teachers, are unlikely to become automated.",
+  "claim": "Elementary School Teachers, Except Special Education have an automation likelihood of 0.0044, or 0.44%.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Elementary School Teachers, Except Special Education'), ['job_name','auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "telemarketers-likely-automation",
+  "source": "Jobs with many monotonous tasks and a low requirement for complex social skills, like telemarketers, are likely to be replaced by machines.",
+  "claim": "Telemarketers have an automation likelihood of 0.99, or 99%.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c.loc[c.job_name.eq('Telemarketers'), ['job_name','auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "truckers-developers-few-skill-similarities",
+  "source": "Unsurprisingly, truckers and developers have relatively few similarities in terms of the competencies necessary for their respective jobs.",
+  "claim": "Software Developers, Applications have a skill similarity of 0.218 to Heavy and Tractor-Trailer Truck Drivers, below the 0.345 median across the other jobs.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv",
+   "sim": "data/similarity.csv"
+  },
+  "code": "c[['id','job_name']].merge(sim, left_on='id', right_on='id_compared').merge(c[['id','job_name']].rename(columns={'id':'sid','job_name':'selected_name'}), left_on='id_selected', right_on='sid').query(\"selected_name == 'Heavy and Tractor-Trailer Truck Drivers' and job_name != selected_name\").assign(all_median=lambda d: d.similarity.median()).query(\"job_name == 'Software Developers, Applications'\")[['selected_name','job_name','similarity','all_median']].round(3).to_string()"
+ },
+ {
+  "id": "psychologists-septic-skill-extremes",
+  "source": "Of nearly 700 jobs, psychologists are most distinct from truck drivers, while septic tank servicers and sewer pipe cleaners have the greatest skills overlap.",
+  "claim": "Psychologists, All Other have the lowest skill similarity to Heavy and Tractor-Trailer Truck Drivers (0.1091), and Septic Tank Servicers and Sewer Pipe Cleaners the highest (0.7238).",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv",
+   "sim": "data/similarity.csv"
+  },
+  "code": "c[['id','job_name']].merge(sim, left_on='id', right_on='id_compared').merge(c[['id','job_name']].rename(columns={'id':'sid','job_name':'selected_name'}), left_on='id_selected', right_on='sid').query(\"selected_name == 'Heavy and Tractor-Trailer Truck Drivers' and job_name != selected_name\").sort_values('similarity')[['job_name','similarity']].iloc[[0,-1]].round(4).to_string()"
+ },
+ {
+  "id": "sailors-more-automatable-than-truckers",
+  "source": "Some career alternatives based on skills alone, like becoming a sailor, may first seem viable, but are, in fact, more susceptible to automation than truckers.",
+  "claim": "Sailors and Marine Oilers have an automation likelihood of 0.83, or 83%, against 0.79, or 79%, for Heavy and Tractor-Trailer Truck Drivers.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c[c.job_name.isin(['Heavy and Tractor-Trailer Truck Drivers','Sailors and Marine Oilers'])].set_index('job_name')[['auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "ambulance-drivers-low-automation",
+  "source": "In this case, ambulance driving, which is unlikely to be automated, seem like a viable alternative.",
+  "claim": "Ambulance Drivers and Attendants, Except Emergency Medical Technicians have an automation likelihood of 0.25, or 25%, against 0.79, or 79%, for Heavy and Tractor-Trailer Truck Drivers.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c[c.job_name.isin(['Heavy and Tractor-Trailer Truck Drivers','Ambulance Drivers and Attendants, Except Emergency Medical Technicians'])].set_index('job_name')[['auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ },
+ {
+  "id": "ambulance-drivers-lower-income",
+  "source": "Many alternative jobs for truckers, including ambulance drivers, have a much lower income.",
+  "claim": "Ambulance Drivers and Attendants, Except Emergency Medical Technicians earn $25,600 a year, against $43,590 for Heavy and Tractor-Trailer Truck Drivers.",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c[c.job_name.isin(['Heavy and Tractor-Trailer Truck Drivers','Ambulance Drivers and Attendants, Except Emergency Medical Technicians'])].set_index('job_name')[['wage']].to_string()"
+ },
+ {
+  "id": "electricians-and-supervisors-safer-alternatives",
+  "source": "Two examples are electricians and supervisors of extraction/construction workers. These jobs have similar levels of employment and offer modest income increases, while being much safer from automation than truck driving.",
+  "claim": "Electricians (666,900 jobs) and First-Line Supervisors of Construction Trades and Extraction Workers (602,500 jobs) have comparable employment and modest wage increases over truck drivers ($56,650 and $68,040 versus $43,590), while being much safer from automation (15% and 17% versus 79%).",
+  "tables": {
+   "c": "data/crosswalk_jobs.csv"
+  },
+  "code": "c[c.job_name.isin(['Electricians','First-Line Supervisors of Construction Trades and Extraction Workers','Heavy and Tractor-Trailer Truck Drivers'])].set_index('job_name')[['number','wage','auto']].assign(percent=lambda d: d.auto.mul(100)).to_string()"
+ }
+]

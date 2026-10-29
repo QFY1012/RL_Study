@@ -5,20 +5,33 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 516,
+  "steps": 62,
+  "tools": 90,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 114516,
+   "output": 50444
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 39c564b1-9dc1-4955-b505-cc86f6a4eb98)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/same-name/facts.json'"
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "us-places-share-name",
+   "basis": "Output count=20961 and nunique=5411, matching the claimed 20,961 entries across 5,411 distinct names.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oxford-uk-largest-population-wiki",
+   "basis": "Output shows Oxford in the United Kingdom has population=152000, the largest among the listed Oxford rows, and wiki=40813, also the largest listed wiki value.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 2,
+ "skipped": 4
 }

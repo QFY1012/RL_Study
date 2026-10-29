@@ -1,0 +1,110 @@
+[
+  {
+    "id": "nba-one-hit-wonders",
+    "source": "In the last 30 years, the NBA produced just a few one-hit wonders that fit our criteria. The results include surprises such as Jerry Stackhouse, who was once billed as the “next Jordan”, and Ryan Anderson, who like Barros, was named the league’s Most Improved Player in his breakout 2011–12 season.",
+    "claim": "Under the one-hit-wonder rule, the NBA has 4 qualifiers: Ryan Anderson, Dana Barros, James Posey and Jerry Stackhouse.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'nba'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "wnba-one-hit-wonder",
+    "source": "Since the WNBA began in 1997, with an average player career of three seasons, Reid was the only one-hit wonder to make our list.",
+    "claim": "Tracy Reid is the only WNBA player who meets the one-hit-wonder criteria; the WNBA list has 1 player.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'wnba'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "mlb-one-hit-wonders",
+    "source": "Willis is joined by 31 other MLBers who made our one-hit wonder list including: pitcher Mark Prior, shortstop Edgar Renteria, and outfielders Yasiel Puig and Yoenis Cespedes.",
+    "claim": "The MLB one-hit-wonder list has 32 players — Dontrelle Willis plus 31 others — including Mark Prior, Edgar Renteria, Yasiel Puig and Yoenis Cespedes.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'mlb'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "atp-one-hit-wonders",
+    "source": "Like Verkerk, the other two ATP one-hit wonders, Joachim Johansson and Franco Squillari, each had a single run deep into a major tournament that elevated their ranking.",
+    "claim": "The ATP one-hit-wonder list has 3 players — Martin Verkerk plus 2 others, Joachim Johansson and Franco Squillari.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'atp'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "pga-one-hit-wonders",
+    "source": "Rich Beem finished one stroke ahead of Woods at the 2002 PGA Championship to record his first and only major title.",
+    "claim": "The PGA one-hit-wonder list has 11 players: Adam Hadwin, Brett Quigley, Danny Lee, Jeff Overton, Len Mattiace, Mark Hensby, Rich Beem, Robert Garrigus, Robert Streb, Ryuji Imada and William McGirt.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'pga'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "lpga-one-hit-wonders",
+    "source": "Hilary Lunke had never won an LPGA event before winning the 2003 U.S. Women’s Open in an 18-hole playoff. And she never won again.",
+    "claim": "The LPGA one-hit-wonder list has 4 players: Beth Bauer, Hilary Lunke, Mardi Lunn and Trish Johnson.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'lpga'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "wta-one-hit-wonders",
+    "source": "She was never able to duplicate that success and failed to win a WTA tournament during her career—earning only three runner-up finishes.",
+    "claim": "The WTA one-hit-wonder list has 2 players: Ashleigh Barty and Karolina Sprem.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'wta'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "nhl-one-hit-wonders",
+    "source": "Despite winning the Stanley Cup with the Detroit Red Wings in 2008, Jiri Hudler didn’t break into the top 20 until 2015 with the Calgary Flames.",
+    "claim": "The NHL one-hit-wonder list has 21 players: Rob Brown, Craig Conroy, John Cullen, Eric Daze, Pascal Dupuis, Jordan Eberle, Nick Foligno, Brian Gionta, Alex Goligoski, Adam Graves, Dougie Hamilton, Scott Hartnell, Jiri Hudler, Tyler Johnson, Nazem Kadri, Ryan Kesler, Matt Niskanen, Derek Stepan, Cory Stillman, Alex Zhamnov and Alexei Zhitnik.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[~d.dnp].dropna(subset=['rank']).groupby(['league','id','name']).agg(n=('year','size'), best=('rank','min'), top50=('rank', lambda s: (s <= 50).sum())).query('best <= 20 and top50 == 1 and n >= 5').reset_index().loc[lambda x: x['league'] == 'nhl'][['name','n','best']].assign(total=lambda x: x['name'].count(), others=lambda x: x['name'].count() - 1)"
+  },
+  {
+    "id": "featured-highest-ranks",
+    "source": "Highest rank: 8th",
+    "claim": "Among the eight featured one-hit wonders, the highest ranks are 8th for Dana Barros (1995), 15th for Tracy Reid (1998), 7th for Rich Beem (2002), 16th for Hilary Lunke (2003), 8th for Dontrelle Willis (2005), 19th for Martin Verkerk (2003), 18th for Karolina Sprem (2004) and 13th for Jiri Hudler (2015).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[(~d.dnp) & (d.name.isin(['Dana Barros', 'Tracy Reid', 'Rich Beem', 'Hilary Lunke', 'Dontrelle Willis', 'Martin Verkerk', 'Karolina Sprem', 'Jiri Hudler']))].dropna(subset=['rank']).sort_values('rank').groupby('name').first()[['year','rank']]"
+  },
+  {
+    "id": "featured-median-ranks",
+    "source": "MEDIAN: 153rd",
+    "claim": "Among the eight featured one-hit wonders, the median non-peak ranks are 153.0 for Dana Barros, 160.0 for Tracy Reid, 134.0 for Rich Beem, 113.0 for Hilary Lunke, 384.5 for Dontrelle Willis, 263.0 for Martin Verkerk, 94.0 for Karolina Sprem and 220.0 for Jiri Hudler.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[(~d.dnp) & (d.name.isin(['Dana Barros', 'Tracy Reid', 'Rich Beem', 'Hilary Lunke', 'Dontrelle Willis', 'Martin Verkerk', 'Karolina Sprem', 'Jiri Hudler']))].dropna(subset=['rank']).groupby('name')['rank'].apply(lambda s: s[s != s.min()].median())"
+  },
+  {
+    "id": "beem-top100-drop",
+    "source": "Beem dropped out of the top 100 in 2004 and never returned.",
+    "claim": "Rich Beem's rank was 189th in 2004, and from 2004 through 2016 his best rank was 116th (in 2005).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[(d.name == 'Rich Beem') & (~d.dnp)].dropna(subset=['rank']).query('year >= 2004')[['year','rank']].sort_values('year')"
+  },
+  {
+    "id": "verkerk-top100-seventh-year",
+    "source": "Finally broke into the Top 100 in his seventh year",
+    "claim": "Martin Verkerk first ranked 86th or better in 2002, his seventh season.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[(d.name == 'Martin Verkerk') & (~d.dnp)].dropna(subset=['rank']).sort_values('year').assign(season=lambda x: range(1, len(x) + 1)).query('rank <= 100').head(1)[['year','rank','season']]"
+  }
+]

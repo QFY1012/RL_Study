@@ -1,0 +1,18 @@
+[
+  {
+    "source": "from 25,123 reader submissions",
+    "why": "This is a description of the dataset's size (the total number of responses), not a finding drawn from the data; the instruction excludes counts of records or items."
+  },
+  {
+    "source": "1.3k",
+    "why": "The letter-by-letter tallies inside each flow diagram (such as 1.3k, 303, or 892) are intermediate branch counts derived from the top-eight spellings, not a standalone finding the story states; the methods also say the modified scale means branch sizes do not represent response proportions."
+  },
+  {
+    "source": "13 names left",
+    "why": "A quiz interface counter showing how many names remain, not a data finding."
+  },
+  {
+    "source": "Jake Gyllenhaal, along with other celebrities, were atop the list.",
+    "why": "Refers to the earlier celebrity spelling story cited in the introduction, not to the NBA spelling data."
+  }
+]

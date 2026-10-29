@@ -5,20 +5,48 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 271,
+  "steps": 27,
+  "tools": 34,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 37825,
+   "output": 31507
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: de468cf6-d8c2-448d-b283-d92986b0b8dc)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/slang/facts.json'"
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "ass-historic-usages",
+   "basis": "len(a)=201",
+   "verdict": "ok"
+  },
+  {
+   "id": "fuck-historic-usages",
+   "basis": "len(f)=146",
+   "verdict": "ok"
+  },
+  {
+   "id": "shit-historic-usages",
+   "basis": "len(s)=295",
+   "verdict": "ok"
+  },
+  {
+   "id": "shit-more-senses-than-ass",
+   "basis": "value_counts output: shit=295, ass=201; 295>201",
+   "verdict": "ok"
+  },
+  {
+   "id": "ass-buttocks-first-citation-1761",
+   "basis": "Row 186 for definition 'the buttocks, the anus' has first_cite=1761",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 5,
+ "skipped": 6
 }

@@ -1,0 +1,87 @@
+{
+ "id": "nba-carry",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 445,
+  "steps": 23,
+  "tools": 27,
+  "nudged": 0,
+  "usage": {
+   "input": 23786,
+   "output": 71520
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "war-share-top3-ranking",
+   "basis": "Output top row: 2018 CLE LeBron James share 68.1, rank 1; bottom row: 1979 WSB Wes Unseld share 36.1, rank 90.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lebron-2018-reigns-supreme",
+   "basis": "Output top row: 2018 CLE LeBron James share 68.1, winner False, rank 1; next is 2006 MIA Dwyane Wade at 63.8, rank 2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wade-tops-winners",
+   "basis": "Among winner=True rows, output first two are 2006 MIA Dwyane Wade 63.8 rank 2 and 1984 BOS Larry Bird 61.4 rank 3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hakeem-1994-first-title-26th",
+   "basis": "Output row: 1994 HOU Hakeem Olajuwon share 48.9, winner True, rank 26.",
+   "verdict": "ok"
+  },
+  {
+   "id": "dirk-2006-vs-2011",
+   "basis": "Output rows: 2006 DAL Dirk Nowitzki 51.5 rank 15; 2011 DAL Dirk Nowitzki 39.9 rank 72.",
+   "verdict": "ok"
+  },
+  {
+   "id": "giannis-2021-near-bottom",
+   "basis": "Output rows: 2021 MIL Giannis Antetokounmpo mp 800, share 36.2, rank 89; 1979 WSB Wes Unseld share 36.1, rank 90.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pistons-2005-balanced",
+   "basis": "Output rows: 2005 DET Chauncey Billups 37.1, Ben Wallace 34.3, Tayshaun Prince 28.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bulls-lakers-dynamic-duo",
+   "basis": "Output rows: 1998 CHI Michael Jordan 38.8, Scottie Pippen 38.1; 2020 LAL Anthony Davis 46.5, LeBron James 39.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "duncan-2003-8th",
+   "basis": "Output row: 2003 SAS Tim Duncan share 55.9, winner True, rank 8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heat-2013-lebron-5th",
+   "basis": "Output row: 2013 MIA LeBron James share 59.8, winner True, rank 5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bulls-mj-sometimes",
+   "basis": "Output CHI rows: 1993 share 52.9 rank 12; 1991 49.8 rank 23; 1997 44.5 rank 43; 1996 Scottie Pippen 43.0 rank 53; 1992 39.2 rank 76; 1998 38.8 rank 79.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lebron-finals-teams-ranks",
+   "basis": "Output ranks: 2018 CLE 1; 2007 CLE 4; 2013 MIA 5; 2014 MIA 6; 2017 CLE 11; 2012 MIA 13; 2016 CLE 16; 2020 LAL 35; 2011 MIA 61; 2015 CLE 75.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 2
+}

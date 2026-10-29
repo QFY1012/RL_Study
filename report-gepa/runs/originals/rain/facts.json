@@ -1,0 +1,20 @@
+[
+  {
+    "id": "annual-precip-2019-cities",
+    "source": "2019 Annual Precipitation (in)",
+    "claim": "In 2019, New York recorded 52.6 inches of precipitation, more than Orlando's 47.8 inches and Seattle's 30.7 inches.",
+    "tables": {
+      "d": "data/daily_precipitation.csv"
+    },
+    "code": "d[d.id.isin(['USW00012815', 'USW00094290', 'USW00094728'])].groupby('city').value.sum().round(1)"
+  },
+  {
+    "id": "wet-days-2019-cities",
+    "source": "Wet Days by City in 2019",
+    "claim": "Counting days with more than 0.1 mm (0.004 in) of precipitation as wet, the 2019 wet-day counts were: Hilo 218, Grand Rapids 124, Seattle 112, New York 109, Orlando 96, Baton Rouge 96, Atlanta 94, Houston 74, Los Angeles 32 and Phoenix 26.",
+    "tables": {
+      "d": "data/daily_precipitation.csv"
+    },
+    "code": "d[d.id.isin(['USW00094290', 'USW00094728', 'USW00021504', 'USW00094860', 'USW00012815', 'USC00160558', 'USW00013874', 'USW00012918', 'USW00093134', 'USW00023183'])].assign(wet=lambda x: x.value > 0.1 / 25.4).groupby('city').wet.sum()"
+  }
+]

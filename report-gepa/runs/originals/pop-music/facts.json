@@ -1,0 +1,48 @@
+[
+  {
+    "id": "venue-seats-ranking",
+    "source": "Seats booked in 2018",
+    "claim": "Dave Matthews Band booked the most seats (1,058,504), ahead of Jason Aldean (983,540) and Bruno Mars (666,380); Twenty One Pilots ranks tenth with 534,071.",
+    "tables": {
+      "v": "data/venues.csv"
+    },
+    "code": "v.sort_values('capacities', ascending=False)"
+  },
+  {
+    "id": "giphy-gif-count-ranking",
+    "source": "Artists, ranked by GIF count on Giphy",
+    "claim": "2 Chainz ranks first in GIPHY GIF count with 96,701, followed by 5 Seconds Of Summer (89,325) and Sam Hunt (86,805); Portugal The Man is tenth with 35,646.",
+    "tables": {
+      "g": "data/giphyCounts.csv"
+    },
+    "code": "g[g.name.str.lower() != 'pink'].sort_values('count', ascending=False).head(10)"
+  },
+  {
+    "id": "reddit-comment-ranking",
+    "source": "Top Artists on Reddit, Sized by number of comments",
+    "claim": "kanye leads Reddit mentions with 419,904 comments, ahead of drake (307,441), eminem (151,676) and bts (110,852).",
+    "tables": {
+      "r": "data/reddit.csv"
+    },
+    "code": "r.sort_values('count', ascending=False)"
+  },
+  {
+    "id": "social-follower-ranking",
+    "source": "Artists, ranked by followers on social channels",
+    "claim": "Justin Bieber has the most total social-media followers (330,754,555), ahead of Taylor Swift (302,219,455), Selena Gomez (285,258,218) and Katy Perry (282,762,630).",
+    "tables": {
+      "s": "data/social.csv"
+    },
+    "code": "s.sort_values('total', ascending=False)"
+  },
+  {
+    "id": "twenty-one-pilots-two-top-tens",
+    "source": "Also, shout out to twenty one pilots for appearing in two Top 10s so far.",
+    "claim": "Twenty One Pilots is the only artist to appear in both the top 10 by seats booked and the top 10 by GIPHY GIF count.",
+    "tables": {
+      "v": "data/venues.csv",
+      "g": "data/giphyCounts.csv"
+    },
+    "code": "pd.merge(v.nlargest(10, 'capacities').assign(key=lambda d: d.artist.str.lower()), g[g.name.str.lower() != 'pink'].nlargest(10, 'count').assign(key=lambda d: d.name.str.lower()), on='key')[['artist', 'name']]"
+  }
+]

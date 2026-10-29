@@ -1,0 +1,54 @@
+[
+  {
+    "source": "Of all the romance books chosen from 2011–2019, only 5.5% had a non-white person on the cover.",
+    "why": "The listings give 55 of 962 covers (5.7%) for 2011–2019. The 5.5% only appears for 2011–2018 (47 of 851), a period the story does not use, so the stated 2011–2019 number does not reproduce."
+  },
+  {
+    "source": "In 2022, about 14% of the full set of submissions they received for consideration — and 39% of the ones the magazine featured — had characters of color on the cover.",
+    "why": "The 14% is a share of all submissions, not of the featured listings in data/listings.csv; the raw submissions dataset is not in this folder. The 39% featured share is in facts.json."
+  },
+  {
+    "source": "The rate rose to 12% in 2020, up from 7.8% when they began the survey in 2016, and has remained relatively flat since then.",
+    "why": "External data from The Ripped Bodice's survey of BIPOC authors; listings.csv has no author race field."
+  },
+  {
+    "source": "In the same year, 12.3% of authors self-identified as BIPOC per The Ripped Bodice, the highest number of their survey yet.",
+    "why": "External Ripped Bodice survey data; listings.csv records cover characteristics, not authors' self-identified race."
+  },
+  {
+    "source": "The Romance Writers of America, the primary association for most romance authors, estimates that 27% of romance readers identify as non-white.",
+    "why": "External RWA estimate about readers; not in listings.csv."
+  },
+  {
+    "source": "Despite making up almost a quarter of the adult fiction market, the genre’s perception in the broader public imagination has often been negative",
+    "why": "External market-size statistic; listings.csv covers only Publishers Weekly's featured romance titles, not the whole adult fiction market."
+  },
+  {
+    "source": "The long haired Fabio — who has graced over 400 covers — holding his tragic maiden might be the image of the romance novel that is held in the popular imagination to this day.",
+    "why": "External historical count of Fabio's covers; listings.csv has no cover-model field."
+  },
+  {
+    "source": "Teal, pink, yellow, and purple make up the primary shades of romance in this style.",
+    "why": "listings.csv has no cover-color field; the colors would have to be derived from the cover images, which are not provided."
+  },
+  {
+    "source": "Books in the historical, gothic, and fantasy subgenres hold out as rare stalwarts of their original style.",
+    "why": "listings.csv has no subgenre field."
+  },
+  {
+    "source": "This was known as “the clinch”, which had its peak in the 1970s and 1980s.",
+    "why": "Historical claim about decades before the 2011–2023 listings; the dataset cannot show the 1970s–1980s peak."
+  },
+  {
+    "source": "In the 50s and 60s, when many more women joined the workforce, corporate romance and doctor-nurse covers were popular.",
+    "why": "Historical claim about the 1950s–1960s; the dataset begins in 2011."
+  },
+  {
+    "source": "In the 70s and 80s, clinch covers represented an era of more feminist openness in women’s sexual desire, challenging puritan social forces, and juxtaposing the two in the social eye.",
+    "why": "Historical interpretation of 1970s–1980s covers; the dataset begins in 2011 and has no measure of feminist openness."
+  },
+  {
+    "source": "with the rise of commercial plane travel, women appeared in scenes abroad, often with highly exoticized supporting characters.",
+    "why": "Historical claim about mid-20th-century covers; not measurable in the 2011–2023 listings."
+  }
+]

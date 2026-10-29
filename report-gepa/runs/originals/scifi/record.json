@@ -5,20 +5,88 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 425,
+  "steps": 34,
+  "tools": 40,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 45447,
+   "output": 43536
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: e79d5463-3dcd-48a7-810a-c59c1b200a0e)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/scifi/facts.json'"
+ "facts": 13,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "1950s-era-of-setting",
+   "basis": "Output for 1950: future=12.0, multiple/other=2.5, past=7.5, present=78.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "1950s-existential-threat",
+   "basis": "Output for 1950: 72.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "1950s-world-left-better",
+   "basis": "Output for 1950: 76.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "future-setting-rise",
+   "basis": "Output future shares: 1950=12.0, 2010=29.5, 2020=27.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "existential-threat-persists",
+   "basis": "Output: 1990=65.0, 2020=77.0, 1950=72.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "dystopian-setting-rise",
+   "basis": "Output: 1950=10.5, 2020=45.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "inequality-rise",
+   "basis": "Output: 1950=14.5, 2020=62.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "suffering-rise",
+   "basis": "Output: 1950=18.5, 2020=66.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "militarized-society-rise-and-turnaround",
+   "basis": "Output: 1950=19.5, 2010=52.0, 2020=40.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "societal-conflict-rise",
+   "basis": "Output: 1950=19.5, 2010=68.5, 2020=68.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "inner-conflict-rise",
+   "basis": "Output: 1950=26.0, 2010=82.0, 2020=82.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "social-commentary-rise",
+   "basis": "Output: 1950=67.5, 2010=93.0, 2020=90.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "characters-make-world-better",
+   "basis": "Output: 1950=76.5, 2010=86.5, 2020=84.5.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 13,
+ "skipped": 4
 }

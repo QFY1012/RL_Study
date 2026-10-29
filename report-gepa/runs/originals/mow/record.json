@@ -1,0 +1,77 @@
+{
+ "id": "mow",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1014,
+  "steps": 74,
+  "tools": 82,
+  "nudged": 0,
+  "usage": {
+   "input": 72984,
+   "output": 104993
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "within-five-moves-52",
+   "basis": "output = 52.29372617432318; rounded to 52.29%, matching within five moves of the minimum",
+   "verdict": "ok"
+  },
+  {
+   "id": "perfect-16",
+   "basis": "output = 16.220843832784134; rounded to 16.22% for exactly optimal moves",
+   "verdict": "ok"
+  },
+  {
+   "id": "distinct-paths-14589",
+   "basis": "output = 14589 distinct paths",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-efficiency-91",
+   "basis": "output = 90.74074074074075; rounded to 90.74%",
+   "verdict": "ok"
+  },
+  {
+   "id": "twelve-perfect-solutions",
+   "basis": "output = 12 distinct optimal paths",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-moves-54",
+   "basis": "output min = 49.0, median = 54.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "fork-down-20",
+   "basis": "output = 20.578923563998192; rounded to 20.58%",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-optimality-by-lawn",
+   "basis": "output: tutorial 100.0, level 1 92.9, level 2 90.7, level 3 88.8, level 4 89.0, level 5 91.2",
+   "verdict": "ok"
+  },
+  {
+   "id": "largest-lawn-better",
+   "basis": "output: level 3 88.8, level 4 89.0, level 5 91.2",
+   "verdict": "ok"
+  },
+  {
+   "id": "pace-r2-4-9",
+   "basis": "output = 0.04896334266643804; rounded to 0.049",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 16
+}

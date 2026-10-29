@@ -5,20 +5,53 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 3,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 311,
+  "steps": 20,
+  "tools": 21,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 16164,
+   "output": 45810
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: f6597a24-996d-4a7b-8306-73f6b07418b1)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/skate-music/facts.json'"
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "punk-most-popular-fugazi",
+   "basis": "Output: Fugazi 43, Devo 30, Joy Division 24.",
+   "verdict": "ok"
+  },
+  {
+   "id": "jazz-most-used-tommy-guerrero",
+   "basis": "Output: Tommy Guerrero 21, Curtis Mayfield 18, Nina Simone 18.",
+   "verdict": "ok"
+  },
+  {
+   "id": "electronic-most-popular-sol",
+   "basis": "Output: Sol 35, Odd Nosdam 26, Baron 20.",
+   "verdict": "ok"
+  },
+  {
+   "id": "classic-rock-most-popular-beatles-stones",
+   "basis": "Output: The Beatles 46, The Rolling Stones 40, David Bowie 39.",
+   "verdict": "ok"
+  },
+  {
+   "id": "indie-most-popular-genre",
+   "basis": "Output: Indie/Alternative 889, Classic Rock 727, Hip Hop 666.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hiphop-most-popular-gang-starr",
+   "basis": "Output: Gang Starr 28, DJ Krush 19, Mobb Deep 19, Mr. E 18, Nas 16, Public Enemy 16.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 6,
+ "skipped": 29
 }

@@ -1,0 +1,29 @@
+[
+ {
+  "id": "woke-blue-states-south-behind",
+  "source": "Geographically, you’ll find early signs of “woke” in liberal-leaning blue states, such as Vermont, Massachusetts, Rhode Island, New York, and California. Relative to other states, folks in the south (specifically South Carolina and Arkansas) are falling behind on the “woke” trend.",
+  "claim": "Across 2016, Vermont, California, New York, Massachusetts and Rhode Island ranked 2nd, 3rd, 4th, 5th and 12th among all regions by 4-week-average “woke” search interest, while South Carolina and Arkansas ranked 45th and 51st.",
+  "tables": {
+   "d": "data/state-weekly-searches.csv"
+  },
+  "code": "d.assign(date=pd.to_datetime(d['date'], format='%m/%d/%y')).pivot(index='date', columns='region', values='woke').rolling(4, min_periods=1).mean().loc['2016'].mean().rank(ascending=False).astype(int).loc[['VT','CA','NY','MA','RI','SC','AR']]"
+ },
+ {
+  "id": "shook-california-hawaii-summer",
+  "source": "Yet for some reason, the word blew up in California this summer.",
+  "claim": "In summer 2016 (June–August), Hawaii and California ranked 1st and 2nd among all regions by 4-week-average “shook” search interest.",
+  "tables": {
+   "d": "data/state-weekly-searches.csv"
+  },
+  "code": "d.assign(date=pd.to_datetime(d['date'], format='%m/%d/%y')).pivot(index='date', columns='region', values='shook').rolling(4, min_periods=1).mean().loc['2016-06-01':'2016-08-31'].mean().rank(ascending=False).astype(int).loc[['HI','CA']]"
+ },
+ {
+  "id": "bough-mississippi",
+  "source": "It’s a thing in Mississippi though.",
+  "claim": "In September–December 2016, Mississippi ranked 1st among all regions by 4-week-average “bough” search interest.",
+  "tables": {
+   "d": "data/state-weekly-searches.csv"
+  },
+  "code": "d.assign(date=pd.to_datetime(d['date'], format='%m/%d/%y')).pivot(index='date', columns='region', values='bough').rolling(4, min_periods=1).mean().loc['2016-09-04':].mean().rank(ascending=False).astype(int).loc[['MS']]"
+ }
+]

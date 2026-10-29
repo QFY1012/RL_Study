@@ -1,0 +1,48 @@
+[
+ {
+  "id": "ass-historic-usages",
+  "source": "201 Historic Usages of the Word \"Ass\"",
+  "claim": "The data contains 201 entries for the word 'ass'.",
+  "tables": {
+   "a": "data/ass_long_data.json.csv"
+  },
+  "code": "len(a)"
+ },
+ {
+  "id": "fuck-historic-usages",
+  "source": "146 Historic Usages of the Word \"Fuck\"",
+  "claim": "The data contains 146 entries for the word 'fuck'.",
+  "tables": {
+   "f": "data/fuck_long_data.json.csv"
+  },
+  "code": "len(f)"
+ },
+ {
+  "id": "shit-historic-usages",
+  "source": "295 Historic Usages of the Word \"Shit\"",
+  "claim": "The data contains 295 entries for the word 'shit'.",
+  "tables": {
+   "s": "data/shit_long_data.json.csv"
+  },
+  "code": "len(s)"
+ },
+ {
+  "id": "shit-more-senses-than-ass",
+  "source": "That dubious honor goes to the word “shit,” which boasts 295 senses",
+  "claim": "The word 'shit' has 295 documented senses, more than the 201 documented for 'ass'.",
+  "tables": {
+   "s": "data/shit_long_data.json.csv",
+   "a": "data/ass_long_data.json.csv"
+  },
+  "code": "pd.concat([s, a], keys=['shit', 'ass']).index.get_level_values(0).value_counts()"
+ },
+ {
+  "id": "ass-buttocks-first-citation-1761",
+  "source": "Green’s first recorded usage of this sense (lexicographer speak for “definition”) comes from a collection of British song lyrics published in 1761.",
+  "claim": "The citation flagged as first for the 'buttocks, the anus' sense of 'ass' is dated 1761.",
+  "tables": {
+   "a": "data/ass_long_data.json.csv"
+  },
+  "code": "a.assign(first_cite=a.citations.str.extract(r'\"@first\": \"yes\", \"date\": \"(\\d{4})\"')[0]).query(\"definition == 'the buttocks, the anus'\")[['word', 'definition', 'first_cite']]"
+ }
+]

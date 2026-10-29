@@ -1,0 +1,42 @@
+[
+  {
+    "source": "I’ve always been facinated by the tree line of BBQ: as one moves north, at what latitude does BBQ consumption plummet? The answer: roughly between the 36th parallel north and 37th.",
+    "why": "The file has county FIPS GEOID and county name only, with no latitude/longitude or any other geographic coordinate, so the latitude at which BBQ share drops cannot be computed."
+  },
+  {
+    "source": "Pizza must have more competition as you move south and west (i.e., better BBQ and Mexican options).",
+    "why": "The file records cuisine shares by county but no coordinates or region/state labels beyond the FIPS state prefix, so a south/west trend in pizza share cannot be computed from it."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nPizza\nDetroit, MI\nBoston, MA\nPhiladelphia, PA\nCleveland, OH\nBaltimore, MD\nChicago, IL\nPittsburgh, PA\nMinneapolis, MN\nPhoenix, AZ\nRaleigh, NC\n\nBut as a Michigander, I was delighted to see Detroit take #1 for pizza.",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nMexican\nSan Antonio, TX\nDallas, TX\nLos Angeles, CA\nHouston, TX\nPhoenix, AZ\nAustin, TX\nDenver, CO\nSan Diego, CA\nSacramento, CA\nLas Vegas, NV",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nChinese\nNew York, NY\nSan Francisco, CA\nPhiladelphia, PA\nOklahoma City, OK\nBoston, MA\nLas Vegas, NV\nSan Jose, CA\nSalt Lake City, UT\nOrlando, FL\nCharlotte, NC",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nBBQ\nMemphis, TN\nNashville, TN\nAtlanta, GA\nSt. Louis, MO\nDetroit, MI\nCharlotte, NC\nCleveland, OH\nAustin, TX\nDallas, TX\nTampa, FL",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nBurgers\nWashington DC\nMinneapolis, MN\nPortland, OR\nBoston, MA\nPittsburgh, PA\nOklahoma City, OK\nBaltimore, MD\nIndianapolis, IN\nSalt Lake City, UT\nDetroit, MI",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nSandwiches\nOrlando, FL\nTampa, FL\nRaleigh, NC\nMilwaukee, WI\nPhiladelphia, PA\nWashington, DC\nSan Jose, CA\nSaint Louis, MO\nMiami, FL\nMemphis, TN\n\nI was hoping to see Philly take #1 for sandwiches, but that honor goes to Orlando (with Tampa taking silver).",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nSeafood\nNew Orleans, NO\nMiami, FL\nBaltimore, MD\nAtlanta, GA\nBoston, MA\nDetroit, MI\nHouston, TX\nSeattle, WA\nSan Francisco, CA\nMemphis, TN\n\nSame with NOLA for seafood.",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  },
+  {
+    "source": "Cities ranked by cuisine’s share of total restaurant visits\nCoffee\nSeattle, WA\nPortland, OR\nSan Diego, CA\nSacramento, CA\nLos Angeles, CA\nSan Francisco, CA\nSan Jose, CA\nMinneapolis, MN\nAustin, TX\nDenver, CO\n\nSeattle, #1 in coffee, surprises no one.",
+    "why": "The file is one row per county (FIPS GEOID and county NAME) with cuisine shares; it has no metropolitan-area identifier and no county-to-metro crosswalk or visit/population weights, so the story's city rankings cannot be rebuilt. Ranking counties instead gives different leaders (for example, the highest pizza county is Costilla County, CO at 100%, not Detroit)."
+  }
+]

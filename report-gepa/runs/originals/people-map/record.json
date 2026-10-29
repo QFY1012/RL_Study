@@ -1,0 +1,37 @@
+{
+ "id": "people-map",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 472,
+  "steps": 43,
+  "tools": 66,
+  "nudged": 0,
+  "usage": {
+   "input": 64438,
+   "output": 46073
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "biggest-label-donald-trump",
+   "basis": "views_median: Donald Trump/Bedminster 53319.0; Donald Trump/New York City 53181.0; Cardi B/Edgewater 31791.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-repeated-resident",
+   "basis": "unique places: Wyatt Earp 9; Steve Jobs 7; Shaquille O'Neal 6; Stephen King 6",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 6
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "source": "There’s almost always a “bad guy” – a human antagonist who tries to kill the world or at least gets in the way of saving the world.",
+    "why": "The chart “Protagonists fight another human” has no matching measure in the file: the `human` column is an exact duplicate of the `unknown` column, explanations included, so it does not record human-vs-human conflict, and the chart’s labelled shares (92, 84, 83, 78, 75, 81) cannot be computed from these data."
+  },
+  {
+    "source": "Today’s sci-fi is more likely to depict a world that is worse than our reality.",
+    "why": "The file records whether the characters leave the world better (APP_World After), not whether the setting is worse than the viewer’s reality; no column measures a world worse than our reality."
+  },
+  {
+    "source": "it’s usually the near future, like the 2013 film Her – a world where a man falls in love with an artificial intelligence.",
+    "why": "The Era column distinguishes only future, present, past and multiple/other; it has no near-future versus distant-future distinction, so “usually the near future” cannot be computed."
+  },
+  {
+    "source": "Even plots that take place in the present could be interpreted as the near-future.",
+    "why": "This is an interpretive reading of present-day settings; the file has no measure of whether a present-day plot reads as near-future."
+  }
+]

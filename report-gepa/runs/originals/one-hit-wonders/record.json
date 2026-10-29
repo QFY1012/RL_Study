@@ -1,0 +1,87 @@
+{
+ "id": "one-hit-wonders",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 665,
+  "steps": 46,
+  "tools": 46,
+  "nudged": 0,
+  "usage": {
+   "input": 42732,
+   "output": 97628
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "nba-one-hit-wonders",
+   "basis": "Output has 4 rows: Ryan Anderson, Dana Barros, James Posey, Jerry Stackhouse; total=4 and others=3 for each.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wnba-one-hit-wonders",
+   "basis": "Output has 1 row: Tracy Reid; total=1 and others=0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mlb-one-hit-wonders",
+   "basis": "Output has 32 rows; total=32 and others=31. It includes Dontrelle Willis, Mark Prior, Edgar Renteria, Yasiel Puig, and Yoenis Cespedes.",
+   "verdict": "ok"
+  },
+  {
+   "id": "atp-one-hit-wonders",
+   "basis": "Output has 3 rows: Joachim Johansson, Franco Squillari, Martin Verkerk; total=3 and others=2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pga-one-hit-wonders",
+   "basis": "Output has 11 rows and includes all 11 named players: Adam Hadwin, Brett Quigley, Danny Lee, Jeff Overton, Len Mattiace, Mark Hensby, Rich Beem, Robert Garrigus, Robert Streb, Ryuji Imada, William McGirt.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lpga-one-hit-wonders",
+   "basis": "Output has 4 rows: Beth Bauer, Hilary Lunke, Mardi Lunn, Trish Johnson; total=4 and others=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wta-one-hit-wonders",
+   "basis": "Output has 2 rows: Karolina Sprem and Ashleigh Barty; total=2 and others=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nhl-one-hit-wonders",
+   "basis": "Output has 21 rows; total=21 and others=20. The rows match the 21 listed players, including Rob Brown through Alexei Zhitnik.",
+   "verdict": "ok"
+  },
+  {
+   "id": "featured-highest-ranks",
+   "basis": "Output gives Dana Barros 1995 rank 8.0; Tracy Reid 1998 rank 15.0; Rich Beem 2002 rank 7.0; Hilary Lunke 2003 rank 16.0; Dontrelle Willis 2005 rank 8.0; Martin Verkerk 2003 rank 19.0; Karolina Sprem 2004 rank 18.0; Jiri Hudler 2015 rank 13.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "featured-median-ranks",
+   "basis": "Output medians: Dana Barros 153.0, Tracy Reid 160.0, Rich Beem 134.0, Hilary Lunke 113.0, Dontrelle Willis 384.5, Martin Verkerk 263.0, Karolina Sprem 94.0, Jiri Hudler 220.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "beem-top100-drop",
+   "basis": "Output shows 2004 rank=189.0; from 2004-2016 the minimum rank shown is 116.0 in 2005.",
+   "verdict": "ok"
+  },
+  {
+   "id": "verkerk-top100-seventh-year",
+   "basis": "Output shows year=2002, rank=86.0, season=7 as the first season with rank <=100.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 15
+}

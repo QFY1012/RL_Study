@@ -5,20 +5,88 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 547,
+  "steps": 38,
+  "tools": 44,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 77434,
+   "output": 82140
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 13658b1f-7d85-46d3-89e4-c8d9ae8a4da8)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/retraining/facts.json'"
+ "facts": 13,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "truckers-automation-79",
+   "basis": "Output shows auto 0.79 and percent 79.0 for Heavy and Tractor-Trailer Truck Drivers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "truckers-nearly-2-million",
+   "basis": "Output shows number 1871700 for Heavy and Tractor-Trailer Truck Drivers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "truckers-earn-about-44000",
+   "basis": "Output shows wage 43590 for Heavy and Tractor-Trailer Truck Drivers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "software-developers-low-automation",
+   "basis": "Output shows auto 0.042 and percent 4.2 for Software Developers, Applications.",
+   "verdict": "ok"
+  },
+  {
+   "id": "software-developers-good-income",
+   "basis": "Output shows wage 104300 for Software Developers, Applications.",
+   "verdict": "ok"
+  },
+  {
+   "id": "elementary-teachers-unlikely-automation",
+   "basis": "Output shows auto 0.0044 and percent 0.44 for Elementary School Teachers, Except Special Education.",
+   "verdict": "ok"
+  },
+  {
+   "id": "telemarketers-likely-automation",
+   "basis": "Output shows auto 0.99 and percent 99.0 for Telemarketers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "truckers-developers-few-skill-similarities",
+   "basis": "Output shows similarity 0.218 for Software Developers, Applications to Heavy and Tractor-Trailer Truck Drivers, with all_median 0.345; 0.218 is below 0.345.",
+   "verdict": "ok"
+  },
+  {
+   "id": "psychologists-septic-skill-extremes",
+   "basis": "Output shows Psychologists, All Other similarity 0.1091 and Septic Tank Servicers and Sewer Pipe Cleaners similarity 0.7238 as the lowest and highest rows.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sailors-more-automatable-than-truckers",
+   "basis": "Output shows Sailors and Marine Oilers auto 0.83/percent 83.0 and Heavy and Tractor-Trailer Truck Drivers auto 0.79/percent 79.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ambulance-drivers-low-automation",
+   "basis": "Output shows Ambulance Drivers and Attendants, Except Emergency Medical Technicians auto 0.25/percent 25.0 and Heavy and Tractor-Trailer Truck Drivers auto 0.79/percent 79.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ambulance-drivers-lower-income",
+   "basis": "Output shows Ambulance Drivers and Attendants, Except Emergency Medical Technicians wage 25600 and Heavy and Tractor-Trailer Truck Drivers wage 43590.",
+   "verdict": "ok"
+  },
+  {
+   "id": "electricians-and-supervisors-safer-alternatives",
+   "basis": "Output shows Electricians number 666900, wage 56650, auto 0.15/15.0%; First-Line Supervisors of Construction Trades and Extraction Workers number 602500, wage 68040, auto 0.17/17.0%; Heavy and Tractor-Trailer Truck Drivers number 1871700, wage 43590, auto 0.79/79.0%.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 13,
+ "skipped": 7
 }

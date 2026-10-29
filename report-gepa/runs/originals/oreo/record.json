@@ -1,0 +1,87 @@
+{
+ "id": "oreo",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 587,
+  "steps": 59,
+  "tools": 74,
+  "nudged": 0,
+  "usage": {
+   "input": 92568,
+   "output": 77500
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "oreo-seventh-four-letter-answer",
+   "basis": "head(7) shows AREA 4600, ERIE 3779, ALOE 3674, ARIA 3547, ELSE 3141, ANTE 2947, OREO 2912 at rank 7 with percent 0.19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oreo-top-five-letters",
+   "basis": "top five letters output E 13.7, A 11.5, S 8.8, O 7.5, R 7.2; OREO contains E, O, R.",
+   "verdict": "ok"
+  },
+  {
+   "id": "four-letter-even-vs-oreo-share",
+   "basis": "size 9608, sum 1572230, even_share_pct 0.010408, oreo_share_pct 0.185215.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-used-and-most-probable-answers",
+   "basis": "AREA has count 4600 and is count max; EEEE has prob 0.000357 and is prob max.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pattern-eo-seventeen-answers",
+   "basis": "n_unique 17 and random_share 0.058824, i.e. about 5.88%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pattern-eo-oreo-usage-share",
+   "basis": "OREO count share among _ _ E O matches is 0.4765177548682703, about 47.7%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pattern-eo-third-probable",
+   "basis": "top three by prob are AREO 0.000086, ATEO 0.000085, OREO 0.000056.",
+   "verdict": "ok"
+  },
+  {
+   "id": "weighted-probability-one-in-18000",
+   "basis": "prob 0.000056, percent 0.005568, one_in 17959.512076, about 1 in 17960.",
+   "verdict": "ok"
+  },
+  {
+   "id": "chart-excludes-eeee-eees",
+   "basis": "EEEE percent 0.035680 and EEES percent 0.022974, rounding to 0.036% and 0.023%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ten-most-similar-clues",
+   "basis": "nlargest(10) outputs the same ten clues and counts, from Sandwich cookie 122 down to Two-tone treat 31.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sandwich-cookie-over-100",
+   "basis": "Sandwich cookie row count is 122.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oreo-usage-vs-probability-rank",
+   "basis": "rank output for OREO is count 7.0 and prob 386.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 7
+}

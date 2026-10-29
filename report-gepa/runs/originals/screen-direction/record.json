@@ -5,20 +5,53 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 103,
+  "steps": 13,
+  "tools": 13,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 15575,
+   "output": 12914
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: b331d2dc-2cd6-4f8a-b967-73e9119bd28e)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/screen-direction/facts.json'"
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "wall-top-she-words",
+   "basis": "nlargest(10) returns snuggles, giggles, squeals, sobs, weeps, blushes, clings, rocks, shrieks, hugs; logratio range 1.531348 to 2.891018, freq range 2.890558 to 7.417938.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wall-top-he-words",
+   "basis": "nsmallest(10) returns straps, gallops, shot, howls, kills, vaults, rears, pitches, figures, drains; logratio range -2.845947 to -1.752838, freq range 0.139086 to 0.296718.",
+   "verdict": "ok"
+  },
+  {
+   "id": "writer-women-direction-both-genders",
+   "basis": "All five words have positive female_logratio and male_logratio; female_logratio range 0.270823 to 1.438438, male_logratio range 0.805953 to 1.568001.",
+   "verdict": "ok"
+  },
+  {
+   "id": "writer-men-direction-both-genders",
+   "basis": "All seven words have negative female_logratio and male_logratio; female_logratio range -1.533548 to -0.581740, male_logratio range -1.484901 to -0.412814.",
+   "verdict": "ok"
+  },
+  {
+   "id": "writer-opposite-gender-romance",
+   "basis": "kisses -0.773922/0.767401, strokes -0.518493/0.585488, responds -0.661098/1.051751, embraces -0.146524/1.415563; female range -0.773922 to -0.146524, male range 0.585488 to 1.415563.",
+   "verdict": "ok"
+  },
+  {
+   "id": "writer-parity-change-direction",
+   "basis": "cries -0.883490/0.758068, kisses -0.773922/0.767401, responds -0.661098/1.051751; spies 1.268513/-1.296091, finds 0.332872/-0.278898, writes 0.573368/-0.909532.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 6,
+ "skipped": 2
 }

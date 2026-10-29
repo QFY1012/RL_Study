@@ -1,0 +1,22 @@
+[
+  {
+    "source": "It’s worth watching #8 Wade’s Dunk on Varejao and #10 Nate Robinson blocks Yao",
+    "why": "In data/curated_merged_by_decade.csv the 2000s rows rank Wade dunks on Anderson Varejao 9th (4,938,565 views) and Nate Robinson blocks Yao Ming 11th (4,122,823), both one place lower than the story says (a play such as Shaq finger wags Mutumbo, Jordan scores 51 at age 38 or Derrick Rose crosses up Andre Miller, all between 4.9M and 6.0M views, must have been absent or ranked differently in the authors' snapshot). The stated ranks 8 and 10 cannot be reproduced from these files."
+  },
+  {
+    "source": "Jordan has 65 of the top 100 from the 1990s, including his “Flu Game”",
+    "why": "Counting rows of the 100 most-viewed 1990s moments whose players field contains Michael Jordan gives 66, not 65 (a one-row difference from the story's snapshot); the count does not match even though the same plays are present."
+  },
+  {
+    "source": "Kobe leads the 2010s, with 14 million views for his final NBA game. It’s only slightly higher than one of the most-viewed game-winners on YouTube: Curry’s last shot vs. Thunder on February 27, 2016, a regular season game!",
+    "why": "The files put Jeremy Lin's game-winner first in the 2010s (13,711,244 views) ahead of Kobe's final game (13,660,719) and Curry's game-winner (13,546,991), so Kobe does not lead the decade as the text states; the ranked claim cannot be reproduced."
+  },
+  {
+    "source": "Jeremy Lin hits game-winner\nFeb 14, 2012 - 14M views",
+    "why": "This 2010s chart label is the decade's top play in the files (13,711,244 views, ranking 1st), but the story's own text attributes the 2010s top spot to Kobe's final game at 14M views, so the two statements conflict and it cannot be recorded as the authors' finding."
+  },
+  {
+    "source": "Also noteworthy: Pierce’s farewell 3 in Boston and Durant and Westbrook meeting for the first time.",
+    "why": "The story states no number, rank or comparison for these moments (in the files Paul Pierce's farewell in Boston is 20th and the Durant-Westbrook meetings 10th and 13th in the 2016-17 season); there is no checkable finding beyond the mention."
+  }
+]

@@ -1,0 +1,56 @@
+[
+ {
+  "id": "eight-explicit-same-gender-songs",
+  "source": "Songs with explicit same-gender lyrics in the Billboard year-end Hot 100",
+  "claim": "Eight songs carry the explicit same-gender flag: “I Kissed A Girl” (2008, #14), “Poker Face” (2009, #2), “If U Seek Amy” (2009, #74), “Same Love” (2013, #43), “Girl Crush” (2015, #63), “Bad At Love” (2018, #27), “Bartier Cardi” (2018, #61) and “Money” (2019, #38).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.lyricFlag==1].sort_values(['year','rank'])[['year','rank','song']].assign(n_same_gender=d.lyricFlag.sum())"
+ },
+ {
+  "id": "same-gender-share-of-unique-hits",
+  "source": "That’s 0.7% — 8 songs, not even one a year, out of 1,170 unique hits.",
+  "claim": "Eight of the 1,170 unique artist-song chart hits carry the explicit same-gender flag, a proportion of 0.00684.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d.assign(hit=d.artist + ' - ' + d.song).groupby('hit').lyricFlag.max().agg(['sum','size','mean'])"
+ },
+ {
+  "id": "same-gender-songs-per-year",
+  "source": "That’s 0.7% — 8 songs, not even one a year, out of 1,170 unique hits.",
+  "claim": "The eight explicit same-gender songs average 0.62 per year across the 13 chart years.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d.groupby('year').agg(songs=('lyricFlag','sum')).agg({'songs':['sum','size','mean']})"
+ },
+ {
+  "id": "queer-artist-songs",
+  "source": "Between 2008–2020, we identified 134 songs featuring an openly queer artist in the year-end Billboard Top 100.",
+  "claim": "134 unique songs are flagged as featuring an openly queer artist.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.queerFlag==1].song.nunique()"
+ },
+ {
+  "id": "same-gender-songs-woman-mixed",
+  "source": "all 8 of the songs we identified feature a woman or non-binary artists",
+  "claim": "All eight explicit same-gender songs are tagged woman (5) or mixed (3), with none tagged man.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.lyricFlag==1].gender.value_counts().reindex(['man','mixed','nb','woman'], fill_value=0)"
+ },
+ {
+  "id": "queer-artists-relationship-breakdown",
+  "source": "Here’s how openly queer artists with more than 5 chart appearances sing about relationships:",
+  "claim": "Among openly queer artists with more than five chart appearances, the relationship-type counts per artist are: Cardi B 14 Opposite and 2 Both; Demi Lovato 5 Unspecified and 1 Non-Binary-Masc; Halsey 4 Non-Binary-Masc, 1 Non-Binary-Both and 4 Unspecified; Kesha 6 Opposite, 3 Unspecified and 1 X; Lady Gaga 10 Opposite, 1 Both, 2 Unspecified and 2 X; Miley Cyrus 5 Unspecified, 1 Non-Binary-Masc and 5 X; Sam Smith 9 Unspecified and 1 Non-Binary-Masc; Sia 1 Opposite, 3 Unspecified and 2 X; The Black Eyed Peas/Fergie 8 Opposite and 2 Unspecified.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.queerFlag==1].groupby('artistID').filter(lambda x: len(x) > 5).groupby(['artistID','relationshipType']).size()"
+ }
+]

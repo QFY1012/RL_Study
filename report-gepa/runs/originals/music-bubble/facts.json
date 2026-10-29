@@ -1,0 +1,29 @@
+[
+  {
+    "id": "usa-five-number-one-songs",
+    "source": "The #1 hit in a particular region reflects the broader cultural edges of the USA’s geography, which has 5 different #1 songs.",
+    "claim": "Using the story's cut of more than 4 cities and more than 4% of US cities, five songs qualify as US #1 songs: good 4 u (236 cities, 30.9%), Butter (217, 28.4%), RAPSTAR (71, 9.3%), MONTERO (Call Me By Your Name) (67, 8.8%) and Outside (Better Days) (43, 5.6%).",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(c.loc[c.country_code=='US'].groupby('track_name').size().to_frame('cities').assign(share=lambda d: 100*d.cities/c.loc[c.country_code=='US'].shape[0]).loc[lambda d: (d.cities>4)&(d.share>4)].sort_values('cities',ascending=False))"
+  },
+  {
+    "id": "columbus-rapstar-number-one",
+    "source": "If you listen to pop music, you’ve likely heard RAPSTAR by Polo G, the most popular song in Columbus.",
+    "claim": "RAPSTAR by Polo G is the most popular song in Columbus, with 200,000 YouTube views.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "c.loc[c.geo_name.eq('Columbus')].nlargest(1,'views')[['geo_name','country_code','track_name','artist_name','views']]"
+  },
+  {
+    "id": "london-canada-body-remix-367km",
+    "source": "The top song often changes when crossing international borders. 367 km away from Columbus is London, Canada, where \"Body (Remix)\" by Tion Wayne, Russ is a number one hit.",
+    "claim": "The nearest city outside the USA whose #1 song is not one of the USA's five most common #1 songs is London, Canada, 366.8 km (367 km rounded) from Columbus, where \"Body (Remix)\" by Tion Wayne, Russ is the #1 song with 3,700,000 views.",
+    "tables": {
+      "c": "data/city_data.csv"
+    },
+    "code": "(c.loc[(c.country_code!='US') & (~c.track_name.isin(c.loc[c.country_code.eq('US')].groupby('track_name').size().loc[lambda s: (s>4)&(s/c.loc[c.country_code.eq('US')].shape[0]>.04)].index))].assign(dist=lambda d: 2*6371*np.arcsin(np.sqrt(np.sin(np.radians(d.latitude-c.loc[c.geo_name.eq('Columbus') & c.track_name.eq('RAPSTAR'),'latitude'].iloc[0])/2)**2 + np.cos(np.radians(c.loc[c.geo_name.eq('Columbus') & c.track_name.eq('RAPSTAR'),'latitude'].iloc[0]))*np.cos(np.radians(d.latitude))*np.sin(np.radians(d.longitude-c.loc[c.geo_name.eq('Columbus') & c.track_name.eq('RAPSTAR'),'longitude'].iloc[0])/2)**2))).nsmallest(1,'dist')[['geo_name','country_code','track_name','artist_name','dist','views']])"
+  }
+]

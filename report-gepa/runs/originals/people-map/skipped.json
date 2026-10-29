@@ -1,0 +1,26 @@
+[
+  {
+    "source": "where city names are replaced by their most Wikipedia’ed resident",
+    "why": "The file contains only the already-selected top person for each place and no candidate pageview lists, so the per-city selection itself cannot be recomputed; checking that each place has one name would only restate how the file was built (a data description), and four place-state pairs (e.g. Harlem, Mission Hills) carry two names."
+  },
+  {
+    "source": "The top person from each city was determined by using median pageviews (with a minimum of 1 year of traffic).",
+    "why": "This is a statement of method, not a finding; the file holds only the winners, so the median-pageview ranking of candidates and the one-year minimum cannot be tested."
+  },
+  {
+    "source": "Data for this story were collected and processed using the Wikipedia API. The period of collection was from July, 2015–May, 2019, from English Wikipedia.",
+    "why": "Data description (collection tool and period), not a finding drawn from the data."
+  },
+  {
+    "source": "Person/city associations were based on the thousands of “People from X city” pages on Wikipedia.",
+    "why": "Data description of how person-place associations were collected, not a finding."
+  },
+  {
+    "source": "Note: any person on Wikipedia is considered, including those connected to and victims of criminal acts.",
+    "why": "An inclusion note about who is in the data; it states no number, comparison or story-defined filter that could be computed."
+  },
+  {
+    "source": "Note: This map was updated on May 31 to account for missing data.",
+    "why": "A note about a map update, not a finding drawn from the data."
+  }
+]

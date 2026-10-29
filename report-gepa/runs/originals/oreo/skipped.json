@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Here are the most recurring words in clues, and some examples for context.\nCommon Words\ncookie 1,438\ntreat 379\nsnack 337\nsandwich 294\nwhite 257\nblack 226\nnabisco 213\ncreme 163\ncream 131\nfilled 131",
+    "why": "The chart's precomputed common-words table is not among the supplied files, and recounting whole words in data/xd-oreo-clues-freq-1993.csv (weighted by each clue's count) does not reproduce the chart's numbers: cookie is 1,445 (1,446 if tokenized on non-letters), sandwich is 292 (296 tokenized), and creme is 165, versus 1,438, 294 and 163 in the chart. The remaining displayed counts match, so the chart appears to come from a different snapshot of the clue data."
+  },
+  {
+    "source": "Unsurprisingly, mustard didn’t appear in a clue until 2020.",
+    "why": "The clue file contains 'Cookie that some people eat with mustard' but has no publication or year column, so it cannot establish the first year of use."
+  },
+  {
+    "source": "In the iconic New York Times puzzle, OREO wasn’t used to reference the cookie until 1993, despite its invention in 1912.",
+    "why": "The supplied files contain answer frequencies and OREO clue texts but no newspaper or date fields; recreating the New York Times first-use history would require data that is not in this folder."
+  },
+  {
+    "source": "Did you know despite having more usable letters, AOC has appeared just five times to LBJ’s 14 since 2018?",
+    "why": "The given files hold only four-letter answers and OREO clues with no dates; they contain no AOC or LBJ counts for the period since 2018."
+  },
+  {
+    "source": "I bet you can’t name all 26 types of African antelope that crossword puzzle makers expect you to know about (the number is how many times it’s been used).",
+    "why": "The antelope answers and their usage counts (162, 99, 65, ...) are not identified in the supplied files, which contain only four-letter answer frequencies and OREO clues."
+  },
+  {
+    "source": "If we assumed an evenly distributed weighting, where each letter has a 1 in 26 chance, each four-letter word has a .0002% probability (about 1 in 500,000).",
+    "why": "This is a hypothetical uniform 1-in-26 calculation rather than a value derived from the supplied data files; the analogous observed-frequency probability is covered by a separate fact."
+  },
+  {
+    "source": "Top 8 Examples (times used)",
+    "why": "This chart's rows change with the selected common word, and the heading becomes 'Top 10 Examples' on wider screens; for the default word 'cookie' its values repeat the clue table and are already covered by the ten-most-similar-clues fact."
+  }
+]

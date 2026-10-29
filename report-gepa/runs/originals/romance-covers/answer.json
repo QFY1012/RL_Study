@@ -1,0 +1,173 @@
+[
+ {
+  "id": "raunchiness-2011-to-2023",
+  "source": "Raunchiness 30% 3 2011 2023",
+  "claim": "The share of covers showing someone at least partially unclothed fell from 29.8% in 2011 to 2.6% in 2023.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.assign(undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('year')['undressed'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "raunchiness-third-2011-2012",
+  "source": "In 2011 and 2012, about a third of the covers still had someone who was at least partially unclothed — almost always the man, alone or with a clothed lover.",
+  "claim": "Across 2011 and 2012, 34.1% of covers showed someone at least partially unclothed.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'].isin([2011, 2012])].assign(period='2011-2012', undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('period')['undressed'].mean() * 100"
+ },
+ {
+  "id": "raunchiness-mostly-men-2011-2012",
+  "source": "In 2011 and 2012, about a third of the covers still had someone who was at least partially unclothed — almost always the man, alone or with a clothed lover.",
+  "claim": "In 2011 and 2012, 60 covers showed someone partially unclothed; 53 showed a partially unclothed man and 9 a partially unclothed woman.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'].isin([2011, 2012])].assign(period='2011-2012', any_undressed=lambda d: d['Man partially unclothed'] | d['Woman partially unclothed']).groupby('period')[['Man partially unclothed', 'Woman partially unclothed', 'any_undressed']].sum()"
+ },
+ {
+  "id": "raunchiness-over-quarter-mid-2010s",
+  "source": "While the overall rate for covers featuring some state of undress remained over a quarter of titles, the rate for unclothed women peaked in 2015 at 11%.",
+  "claim": "From 2013 to 2015, the share of covers with someone at least partially unclothed stayed above a quarter of titles each year (27.7%, 27.5%, 27.3%).",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[(l['year'] >= 2013) & (l['year'] <= 2015)].assign(undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('year')['undressed'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "unclothed-women-peak-2015",
+  "source": "the rate for unclothed women peaked in 2015 at 11%",
+  "claim": "The share of covers with a partially unclothed woman was highest in 2015, at 10.9%.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.groupby('year')['Woman partially unclothed'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "raunchiness-decline-2016-on",
+  "source": "By 2016, only 18% of covers had someone unclothed, falling consistently over the next few years to 10% or less from 2019 on.",
+  "claim": "In 2016, 17.6% of covers showed someone partially unclothed; the shares for 2019 through 2023 were 9.0%, 10.2%, 5.9%, 6.7% and 2.6%.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'] >= 2016].assign(undressed=l['Man partially unclothed'] | l['Woman partially unclothed']).groupby('year')['undressed'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "illustration-2011-to-2023",
+  "source": "Illustration 7% 72% 2011 2023",
+  "claim": "The share of illustrated covers rose from 7.0% in 2011 to 71.8% in 2023.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.groupby('year')['Style'].apply(lambda s: (s == 'Illustrated').mean() * 100).round(1)"
+ },
+ {
+  "id": "illustrated-2011-2012-seven",
+  "source": "In 2011 and 2012, there were just 7 illustrated covers of the 169 that made Publishers Weekly’s list.",
+  "claim": "In 2011 and 2012, 7 covers were illustrated.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'].isin([2011, 2012])].assign(period='2011-2012').groupby('period')['Style'].apply(lambda s: (s == 'Illustrated').sum())"
+ },
+ {
+  "id": "photorealistic-through-2017",
+  "source": "In these years and through 2017, most covers remained photorealistic.",
+  "claim": "From 2011 through 2017, 93.3% of covers were photorealistic.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'] <= 2017].assign(period='2011-2017').groupby('period')['Style'].apply(lambda s: (s == 'Photorealistic').mean() * 100)"
+ },
+ {
+  "id": "illustrated-2018-to-2022",
+  "source": "from 18% of covers featuring that style in 2018 to 61% in 2022",
+  "claim": "The share of illustrated covers rose from 17.5% in 2018 to 61.3% in 2022.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'].isin([2018, 2022])].groupby('year')['Style'].apply(lambda s: (s == 'Illustrated').mean() * 100).round(1)"
+ },
+ {
+  "id": "racial-diversity-2011-to-2023",
+  "source": "Racial Diversity 5% 22% 2011 2023",
+  "claim": "The share of covers featuring at least one person of color rose from 5.3% in 2011 to 22.2% in 2023.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.groupby('year')['Has POC'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "poc-2010s-vs-2020s",
+  "source": "from less than 10% of covers featuring people of color in the 2010s, doubled to over 20% in the 2020s",
+  "claim": "Covers with at least one person of color made up 5.7% of the 2010s covers and 26.8% of the 2020s covers.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l.assign(decade=np.where(l['year'] <= 2019, '2010s', '2020s')).groupby('decade')['Has POC'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "poc-2016-2019-under-tenth",
+  "source": "Annually between 2016 and 2019, covers with people of color accounted for less than a tenth of all featured covers.",
+  "claim": "From 2016 to 2019, the yearly share of covers with a person of color was 5.6%, 4.1%, 5.0% and 7.2%.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[(l['year'] >= 2016) & (l['year'] <= 2019)].groupby('year')['Has POC'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "poc-2020-jump",
+  "source": "In 2020, something drastically changed. That year, 20% of romance novels featured by Publishers Weekly had characters of color on the cover.",
+  "claim": "In 2020, 20.3% of covers featured a person of color.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'] == 2020].groupby('year')['Has POC'].mean() * 100"
+ },
+ {
+  "id": "poc-2022-featured-39",
+  "source": "39% of the ones the magazine featured — had characters of color on the cover",
+  "claim": "In 2022, 38.7% of the featured covers had a person of color.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'] == 2022].groupby('year')['Has POC'].mean() * 100"
+ },
+ {
+  "id": "poc-2022-to-2023-decline",
+  "source": "The share of racially diverse covers declined back down to 22% in 2023.",
+  "claim": "The share of covers with a person of color fell from 38.7% in 2022 to 22.2% in 2023.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[l['year'].isin([2022, 2023])].groupby('year')['Has POC'].mean().mul(100).round(1)"
+ },
+ {
+  "id": "kimani-2012-seven-of-eight",
+  "source": "In 2012 in particular, 7 of 8 books that had Black protagonists on the cover were published by Kimani Romance.",
+  "claim": "In 2012, 7 of the 8 covers with a person of color were published by Kimani Romance.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[(l['year'] == 2012) & (l['Has POC'] == True)].groupby('year')['publisher'].agg(total='size', kimani=lambda s: s.str.contains('Kimani').sum())"
+ },
+ {
+  "id": "kimani-many-poc-2011-2019",
+  "source": "Many of those that did had covers with the signature red banner of Kimani Romance, an imprint of Harlequin that specifically published African-American romance stories, a first for a major publishing house.",
+  "claim": "Among the 55 covers with a person of color from 2011 to 2019, 16 were published by Kimani.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "l[(l['year'] <= 2019) & (l['Has POC'] == True)].assign(period='2011-2019').groupby('period')['publisher'].agg(total='size', kimani=lambda s: s.str.contains('Kimani', case=False).sum())"
+ },
+ {
+  "id": "poc-covers-illustrated",
+  "source": "The contemporaneity of the trends mean that people of color tend to be depicted in illustrated pop art rather than seen realistically or sexually.",
+  "claim": "Covers with a person of color were illustrated 52.7% of the time, versus 22.3% of covers without a person of color.",
+  "tables": {
+   "l": "data/listings.csv"
+  },
+  "code": "pd.crosstab(l['Has POC'], l['Style'], normalize='index').mul(100).round(1)"
+ }
+]

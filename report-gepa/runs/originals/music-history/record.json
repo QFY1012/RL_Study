@@ -1,0 +1,24 @@
+{
+ "id": "music-history",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 800,
+  "steps": 106,
+  "tools": 189,
+  "nudged": 0,
+  "usage": {
+   "input": 233706,
+   "output": 75894
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 0,
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 7
+}

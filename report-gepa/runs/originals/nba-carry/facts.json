@@ -1,0 +1,110 @@
+[
+  {
+    "id": "war-share-top3-ranking",
+    "source": "To rank the biggest carry jobs, I decided to look at the WAR share among the top three players on a team.",
+    "claim": "The top player's share of his team's top-three WAR is highest for the 2018 CLE team's LeBron James (68.1%, rank 1) and lowest for the 1979 WSB team's Wes Unseld (36.1%, rank 90).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1))[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "lebron-2018-reigns-supreme",
+    "source": "The data say that LeBron’s (losing) effort with the 2018 Cavaliers reigns supreme.",
+    "claim": "The losing 2018 CLE team's LeBron James has the highest top-player WAR share of any Finals team, 68.1%.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).head(2)[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "wade-tops-winners",
+    "source": "Wade tops the list for finals winners, carrying the load with an aging Shaq",
+    "claim": "Among Finals winners, the 2006 MIA team's Dwyane Wade has the highest top-player WAR share at 63.8%, ahead of the 1984 BOS team's Larry Bird at 61.4%.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query('winner').head(2)[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "hakeem-1994-first-title-26th",
+    "source": "The biggest surprise here as Hakeem’s first title usually sits atop most lists",
+    "claim": "Hakeem Olajuwon's 1994 HOU team, his first title, ranks 26th with a 48.9% top-player WAR share.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query(\"season == 1994 and team == 'HOU'\")[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "dirk-2006-vs-2011",
+    "source": "Dirk’s final run is often cited as a carry job, but the data prefer his first appearance",
+    "claim": "Dirk Nowitzki's 2006 DAL team ranks 15th at 51.5%, while his title-winning 2011 DAL team ranks 72nd at 39.9%.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query(\"team == 'DAL' and season in [2006, 2011]\")[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "giannis-2021-near-bottom",
+    "source": "Less minutes for Giannis and some stellar support put this in the bottom",
+    "claim": "Giannis Antetokounmpo played 800 minutes and holds a 36.2% top-player WAR share for the 2021 MIL team, which ranks 89th, with only the 1979 WSB team (Wes Unseld, 36.1%) lower.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).tail(2)[['season','team','player_name','mp','share','winner','rank']]"
+  },
+  {
+    "id": "pistons-2005-balanced",
+    "source": "The 2005 Pistons represents the “no ‘I’ in team” philosophy.",
+    "claim": "The 2005 DET team's top three—Chauncey Billups (37.1%), Ben Wallace (34.3%) and Tayshaun Prince (28.6%)—have nearly equal WAR shares.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).query(\"season == 2005 and team == 'DET'\").assign(share=lambda d: d.share.round(1))[['season','team','player_name','share']]"
+  },
+  {
+    "id": "bulls-lakers-dynamic-duo",
+    "source": "1998 Bulls and the 2020 Lakers are prime examples of a dynamic duo.",
+    "claim": "For the 1998 CHI team, Michael Jordan (38.8%) and Scottie Pippen (38.1%) have nearly equal WAR shares, while the 2020 LAL team's two leading shares are Anthony Davis (46.5%) and LeBron James (39.3%).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).query(\"(team == 'CHI' and season == 1998) or (team == 'LAL' and season == 2020)\").sort_values(['season','share'],ascending=[True,False]).assign(share=lambda d: d.share.round(1))[['season','team','player_name','share']]"
+  },
+  {
+    "id": "duncan-2003-8th",
+    "source": "And finally we have Duncan leading the 2003 Spurs, Wade with 2006 Heat, and LeBron basically every year, but notably with the 2018 Cavs representing the single-handed carry jobs.",
+    "claim": "Tim Duncan's 2003 SAS team ranks 8th with a 55.9% top-player WAR share.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query(\"season == 2003 and team == 'SAS'\")[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "heat-2013-lebron-5th",
+    "source": "LeBron was just so good in Miami that even with other stars his numbers were crazy",
+    "claim": "The 2013 MIA team's LeBron James ranks 5th with a 59.8% top-player WAR share.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query(\"season == 2013 and team == 'MIA'\")[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "bulls-mj-sometimes",
+    "source": "Did MJ carry Pippen? Sometimes.",
+    "claim": "Michael Jordan's CHI teams have top-player WAR shares of 52.9% in 1993 (12th), 49.8% in 1991 (23rd), 44.5% in 1997 (43rd), 43.0% in 1996 (53rd), 39.2% in 1992 (76th) and 38.8% in 1998 (79th).",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).query(\"team == 'CHI'\")[['season','team','player_name','share','winner','rank']]"
+  },
+  {
+    "id": "lebron-finals-teams-ranks",
+    "source": "LeBron basically every year, but notably with the 2018 Cavs representing the single-handed carry jobs.",
+    "claim": "The Finals teams of LeBron James rank 1st in 2018, 4th in 2007, 5th in 2013, 6th in 2014, 11th in 2017, 13th in 2012, 16th in 2016, 35th in 2020, 61st in 2011 and 75th in 2015 in top-player WAR share.",
+    "tables": {
+      "p": "data/players.csv"
+    },
+    "code": "p[p.mp>=150].sort_values('war',ascending=False).groupby(['season','team']).head(3).assign(share=lambda d: d.war/d.groupby(['season','team']).war.transform('sum')*100).sort_values('share',ascending=False).groupby(['season','team']).head(1).reset_index(drop=True).assign(rank=lambda d: d.index+1).assign(share=lambda d: d.share.round(1)).assign(lebron=lambda d: d.set_index(['season','team']).index.isin(p[p.player_name == 'LeBron James'].set_index(['season','team']).index)).query('lebron')[['season','team','player_name','share','winner','rank','lebron']]"
+  }
+]

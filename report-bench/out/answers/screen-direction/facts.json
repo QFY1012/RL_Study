@@ -1,0 +1,56 @@
+[
+ {
+  "id": "wall-top-she-words",
+  "source": "These are the most extreme examples. There is a high likelihood that women will snuggle, giggle, squeal, and sob, relative to men.",
+  "claim": "The ten screen-direction words most skewed toward \"she\" are snuggles, giggles, squeals, sobs, weeps, blushes, clings, rocks, shrieks and hugs, each following \"she\" between 2.89 and 7.42 times as often as it follows \"he\" (log2 she/he ratio 1.53 to 2.89).",
+  "tables": {
+   "w": "data/wall.csv"
+  },
+  "code": "w.nlargest(10, 'logratio')[['word', 'freq', 'logratio']]"
+ },
+ {
+  "id": "wall-top-he-words",
+  "source": "Conversely, men are more likely to strap, gallop, shoot, howl, and kill.",
+  "claim": "The ten screen-direction words most skewed toward \"he\" are straps, gallops, shot, howls, kills, vaults, rears, pitches, figures and drains, each following \"she\" only 0.14 to 0.30 times as often as it follows \"he\" (log2 she/he ratio -2.85 to -1.75).",
+  "tables": {
+   "w": "data/wall.csv"
+  },
+  "code": "w.nsmallest(10, 'logratio')[['word', 'freq', 'logratio']]"
+ },
+ {
+  "id": "writer-women-direction-both-genders",
+  "source": "There are some directions where the writer's gender makes no difference. Relative to men, women gasp, hurry, smile, hesitate, and stir (mostly while cooking), regardless of whether the writer is a man or a woman.",
+  "claim": "The words gasps, hurries, smiles, hesitates and stirs are used more often after \"she\" than after \"he\" in both female-writer and male-writer scripts, with log2 she/he ratios from 0.27 to 1.44 for women writers and from 0.81 to 1.57 for men writers.",
+  "tables": {
+   "wr": "data/writer.csv"
+  },
+  "code": "wr[wr.word.isin(['gasps', 'hurries', 'smiles', 'hesitates', 'stirs'])][['word', 'total', 'female_logratio', 'male_logratio']].sort_values('female_logratio', ascending=False)"
+ },
+ {
+  "id": "writer-men-direction-both-genders",
+  "source": "Men are consistently more likely to smash things, draw their weapons, grin, wink, point, talk, and speak.",
+  "claim": "The words smashes, draws, grins, winks, points, talks and speaks are used more often after \"he\" than after \"she\" in both female-writer and male-writer scripts, with log2 she/he ratios from -0.58 to -1.53 for women writers and from -0.41 to -1.48 for men writers.",
+  "tables": {
+   "wr": "data/writer.csv"
+  },
+  "code": "wr[wr.word.isin(['smashes', 'draws', 'grins', 'winks', 'points', 'talks', 'speaks'])][['word', 'total', 'female_logratio', 'male_logratio']].sort_values('female_logratio')"
+ },
+ {
+  "id": "writer-opposite-gender-romance",
+  "source": "When describing the opposite gender, both men and women use some overtly romantic and sexual words, such as “kiss” and “stroke,” as well as more subtle words including “respond” and “embrace.”",
+  "claim": "The words kisses, strokes, responds and embraces all fall in the opposite-gender quadrant: their log2 she/he ratio is negative for women writers (-0.15 to -0.77, so they are used more for male characters) and positive for men writers (0.59 to 1.42, used more for female characters), with individual ratios of -0.15/1.42 for embraces, -0.52/0.59 for strokes, -0.66/1.05 for responds and -0.77/0.77 for kisses.",
+  "tables": {
+   "wr": "data/writer.csv"
+  },
+  "code": "wr[wr.word.isin(['kisses', 'strokes', 'responds', 'embraces'])][['word', 'total', 'female_logratio', 'male_logratio']].sort_values('female_logratio')"
+ },
+ {
+  "id": "writer-parity-change-direction",
+  "source": "Should Hollywood reach gender parity, we’d expect fewer women characters to respond, kiss, and cry. The increase in female writers would also mean women would be more likely to spy, find things, and, perhaps most remarkably, write on-screen.",
+  "claim": "Women writers use responds, kisses and cries less for female characters than men writers do (female log2 she/he ratios -0.66, -0.77, -0.88 against male ratios 1.05, 0.77, 0.76), while women writers use spies, finds and writes more for female characters than men writers do (1.27, 0.33, 0.57 against -1.30, -0.28, -0.91).",
+  "tables": {
+   "wr": "data/writer.csv"
+  },
+  "code": "wr[wr.word.isin(['responds', 'kisses', 'cries', 'spies', 'finds', 'writes'])][['word', 'total', 'female_logratio', 'male_logratio']].sort_values('female_logratio')"
+ }
+]

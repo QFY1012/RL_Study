@@ -1,0 +1,87 @@
+{
+ "id": "punk",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 544,
+  "steps": 51,
+  "tools": 59,
+  "nudged": 0,
+  "usage": {
+   "input": 35499,
+   "output": 77583
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "punk-blink-182-most",
+   "basis": "punk: blink-182 1481, Green Day 1479; blink-182 is first in the top-2 output",
+   "verdict": "ok"
+  },
+  {
+   "id": "punk-top-bands",
+   "basis": "punk top 11: blink-182 1481, Green Day 1479, The Offspring 1302, Sum 41 1149, Rise Against 1126, Fall Out Boy 1115, My Chemical Romance 1037, Bad Religion 893, NOFX 829, All Time Low 798, Panic! At The Disco 786",
+   "verdict": "ok"
+  },
+  {
+   "id": "metalcore-bring-me-horizon",
+   "basis": "metalcore: Bring Me The Horizon 1009, Parkway Drive 805; Bring Me The Horizon is first in the top-2 output",
+   "verdict": "ok"
+  },
+  {
+   "id": "hardcore-agnostic-front",
+   "basis": "hardcore: Agnostic Front 371, Dead Kennedys 365; Agnostic Front is first in the top-2 output",
+   "verdict": "ok"
+  },
+  {
+   "id": "post-punk-joy-division",
+   "basis": "post punk: Joy Division 1032, The Cure 787; Joy Division is first in the top-2 output",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-wave-the-cure",
+   "basis": "new wave: The Cure 863, New Order 789; The Cure is first in the top-2 output",
+   "verdict": "ok"
+  },
+  {
+   "id": "bring-me-horizon-three-genres",
+   "basis": "metalcore: Bring Me The Horizon 1009 vs Parkway Drive 805; post hardcore: Bring Me The Horizon 786 vs Pierce The Veil 733; screamo: Bring Me The Horizon 760 vs Asking Alexandria 680",
+   "verdict": "ok"
+  },
+  {
+   "id": "fall-out-boy-top-genres",
+   "basis": "Fall Out Boy: punk 1115, pop punk 939, emo 819",
+   "verdict": "ok"
+  },
+  {
+   "id": "fugazi-punk-hardcore-over-posthardcore",
+   "basis": "Fugazi: punk 205, hardcore 130, post hardcore 54",
+   "verdict": "ok"
+  },
+  {
+   "id": "ramones-top-genre-punk",
+   "basis": "Ramones: punk 745, ska punk 257, hardcore 243",
+   "verdict": "ok"
+  },
+  {
+   "id": "post-punk-coined-1977",
+   "basis": "post punk year 1977.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "joy-division-formed-1976",
+   "basis": "Joy Division start_year 1976.0",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 17
+}

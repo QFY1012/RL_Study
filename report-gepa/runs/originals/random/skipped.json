@@ -1,0 +1,34 @@
+[
+  {
+    "source": "The headline: A person’s ability to be random peaks around 25 years old and declines after 60.",
+    "why": "This is a finding of the original 2015 study. trials.csv contains only the Pudding's own three-task reader experiment (toss, roll, spot sequences plus age); the original study's task-level dataset and complexity scores are not in data/."
+  },
+  {
+    "source": "One 2015 attempt to reproduce 100 psychology studies was able to replicate only 39 of them.",
+    "why": "This number comes from the cited Vox article about the replication crisis, not from any file in data/."
+  },
+  {
+    "source": "When we add a trend line, we can see the age drop-off finding take shape.",
+    "why": "The chart's trend is a LOESS fit to the original study's CTM algorithmic-complexity scores. Neither the original study's data nor complexity scores are in trials.csv, so the age drop-off cannot be computed from this folder."
+  },
+  {
+    "source": "At the bottom are the questionable responses. We even took a conservative approach to defining questionable; just the sequences that were uniformly heads or uniformly tails.",
+    "why": "This describes the placement of uniform responses in the original study's coin-toss complexity chart. It needs the study's complexity scores to identify the bottom of the chart; trials.csv has only the Pudding readers' raw sequences."
+  },
+  {
+    "source": "When we exclude the questionable responses, the declining trend line disappears.",
+    "why": "This is a result for the original study's coin-toss data after removing uniform sequences, and requires its CTM complexity scores and LOESS trend. The original study data and the complexity scores are not present in data/."
+  },
+  {
+    "source": "That breakdown was just for the coin toss, but the downward curve looks the same for the aggregate results across all three tasks.",
+    "why": "This is a result for the original study's aggregate task data, which is not in data/; trials.csv is the Pudding's reader experiment, not the study's five-task dataset."
+  },
+  {
+    "source": "It looks like our hypothesis was right; the trend line is basically flat, regardless of filtering out the uniform responses. In our experiment, we aren’t seeing evidence supporting a correlation between age and randomness.",
+    "why": "The flat trend is a LOESS fit to each reader's combined score from the CTM/acss algorithmic-complexity lookup. trials.csv has the raw toss, roll and spot sequences and age but no complexity scores, and the CTM score table is not in data/, so neither the score nor the trend can be computed from the given files."
+  },
+  {
+    "source": "As for our initial idea to make an age-guessing game, we have guessed right 0% of the time.",
+    "why": "The percentage is computed from the guesses the story's age-guessing model made and stored alongside reader responses. trials.csv has no guessed age, guess correctness, or complexity scores needed to construct the model's guesses, so the 0% cannot be reproduced from data/."
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "source": "Indie/Alternative 39% Hip Hop 10% Punk 8% Classic Rock 13% Jazz/Soul 4% Electronic 6% Metal 7% Rock 5% (time-series chart labels)",
+    "why": "These are per-year shares from the genre time series. The file has one aggregate row per artist with a single usage count, and its year values are only 2008, 2009 and 2010, each corresponding exactly to the artist's usage tier (high/medium/low), so no year-by-year shares or trends can be computed. The chart's 'Rock' bin is also absent from the file."
+  },
+  {
+    "source": "Early skate videos, borrowing from skateboarding's countercultural origins, were overwhelmingly dominated by punk rock music.",
+    "why": "There is no video-level or year-level data with which to identify early videos or compute a genre share for them."
+  },
+  {
+    "source": "early punk icons, such as Black Flag, the Faction, and Descendents, saw prominent use, often well before their eventual rise in popularity",
+    "why": "No video years or artist-career data are present, and two of the three named artists (the Faction, the Descendents) do not appear in the file at all."
+  },
+  {
+    "source": "the iconic noise rock duo Sonic Youth, an artist heavily featured across skateboarding videos, was first featured in a skate video in 1989",
+    "why": "The file has no video dates, so a first appearance year cannot be computed."
+  },
+  {
+    "source": "Punk and classic rock saw large declines in use, and hip hop, the defining genre of the decade, quickly took their place.",
+    "why": "Requires genre shares by year; the file's year column is a synthetic usage tier (2008/2009/2010 = high/medium/low), not chronology."
+  },
+  {
+    "source": "with artists such as Gang Starr, Mobb Deep, and Nas seeing finding their way into skate videos",
+    "why": "The claim is about 1990s videos; the file cannot place any artist in a decade, only total uses over all videos."
+  },
+  {
+    "source": "This was also a popular decade for jazz/funk/soul artists",
+    "why": "A decade-level comparison cannot be computed because the file has no usable dates."
+  },
+  {
+    "source": "Over the 2000s, hip hop's popularity gradually decreased, and indie and classic rock steadily rose to prominence.",
+    "why": "Requires a time series of genre shares; no valid year information exists in the file."
+  },
+  {
+    "source": "For indie music, MGMT and Modest Mouse held the throne.",
+    "why": "The file contradicts this: indie/alternative's most-used artist is The Black Keys (28 uses), while MGMT has 7 and Modest Mouse 14."
+  },
+  {
+    "source": "Hip hop, the second most popular genre for much of this time frame, ultimately finishes at its lowest point since 1990.",
+    "why": "Requires per-year ranks; with all uses pooled, hip hop (666) is third behind Indie/Alternative (889) and Classic Rock (727), so neither the time-frame statement nor the end point can be reproduced."
+  },
+  {
+    "source": "The most popular artist of the current decade is Joy Division.",
+    "why": "The file cannot identify a decade (the year values are usage tiers), and pooled over all videos Joy Division has 24 uses, far from the top."
+  },
+  {
+    "source": "Sonic Youth, who appeared in some of skateboarding's first videos, breaks the top-five most popular artists.",
+    "why": "The file's overall top five are The Beatles (46), Fugazi (43), The Rolling Stones (40), David Bowie (39) and Black Sabbath (36); Sonic Youth has 22 uses."
+  },
+  {
+    "source": "When it comes to hip hop, skaters favor pre-2000s artists",
+    "why": "The file records only each artist's all-video usage count and genre; it has no release dates, career dates or video dates, so the preference for pre-2000s artists cannot be tested. The named artists' pooled counts are used in the hip hop fact."
+  },
+  {
+    "source": "for every year after 1999, the most popular hip hop artist is from the ‘90s",
+    "why": "Requires per-year artist rankings and artist-era information; the file has no usable years or artist dates."
+  },
+  {
+    "source": "The popularity of classic rock artists such as the Beatles and Pink Floyd is surprising",
+    "why": "No rank or number is stated; the file can only show that the Beatles lead the genre (46 uses) while Pink Floyd has 26 uses and ranks sixth within Classic Rock, which is not a checkable statement the story makes."
+  },
+  {
+    "source": "Indie music in skate videos isn't dominated by a select few artists. Rather, skate videos feature many artists at similar rates",
+    "why": "A qualitative pattern with no threshold or number in the story; quantifying 'a select few' (for example the top five artists' share, 10.7% for Indie/Alternative) would require a metric the story never defines."
+  },
+  {
+    "source": "Arguably, this genre is responsible for the largest number of artists most strongly associated with skateboarding, including New Order, Modest Mouse, Dinosaur Jr., and Sonic Youth.",
+    "why": "'Most strongly associated' is undefined, and the file's genre bins place Dinosaur Jr. (17 uses) and Sonic Youth (22 uses) in Punk, not Indie/Alternative, so the named set is not reproduced."
+  },
+  {
+    "source": "The same is true of Ray Barbee, another popular jazz musician.",
+    "why": "No number or rank is given; Ray Barbee has 12 uses and ranks sixth in Jazz/Soul, so 'popular' cannot be checked against a stated claim."
+  },
+  {
+    "source": "Other highly used punk artists, such as Bad Brains, Devo, and Black Flag",
+    "why": "No rank or number is stated for these artists; the file shows Devo second (30 uses), Bad Brains sixth (18) and Black Flag tenth (10) in Punk, which does not establish a checkable 'highly used' set."
+  },
+  {
+    "source": "Sol, the most popular electronic artist, was heavily used in 411VM , a video magazine from the early 2000s.",
+    "why": "The file has no video titles, so the 411VM usage cannot be isolated; only the all-video total (35 uses) is available, which is used in the electronic fact."
+  },
+  {
+    "source": "They are the source of the two spikes for electronic music in the time series shown earlier in this essay.",
+    "why": "Requires electronic-music counts by year; the file's year column is not chronological."
+  },
+  {
+    "source": "Many of the displayed artists are themselves skateboarders. Bad Shit, Grindline the Band, and CKY are composed entirely of skateboarders.",
+    "why": "The file has no band-member or skating metadata, only artist names, genres and usage counts."
+  },
+  {
+    "source": "The most dominant example of genre loyalty is DGK's whopping 92% use of hip hop.",
+    "why": "The file has no company or video column, so company genre shares cannot be computed."
+  },
+  {
+    "source": "Other companies, namely SK8MAFIA and Zoo York, also employ hip hop as their predominant choice of genre.",
+    "why": "No company-level data in the file."
+  },
+  {
+    "source": "Metal music is most often associated with transition skating. Transition-focused companies, such as Blood Wizard, Bacon, and Creature, feature the genre the most.",
+    "why": "No company-level data in the file."
+  },
+  {
+    "source": "This is reflected in the high use of the genre among companies such as $lave, Vox, Lurkville, and Zero.",
+    "why": "No company-level data in the file."
+  },
+  {
+    "source": "Indie music, something of a music-for-the-masses in skateboarding, proves true to its name, with almost every company featuring indie music in at least 10% of songs.",
+    "why": "No company-level data in the file, so per-company indie shares cannot be computed."
+  },
+  {
+    "source": "all of the companies that use jazz 20% or more in their videos sponsor skaters who were featured in Spike Jonze's classic 1993 video \"Video Days,\" one of the first videos to pair jazz with skateboarding.",
+    "why": "No company, video or sponsored-skater data in the file."
+  },
+  {
+    "source": "The Most Popular Musicians, by Genre (chart labels: The Beatles, Fugazi, The Rolling Stones, David Bowie, Black Sabbath, Sol, Jimi Hendrix, Devo, CKY, Gang Starr, The Black Keys, The Doors, Odd Nosdam, Pink Floyd, AC/DC, Joy Division, The Kinks, Iron Maiden, Sonic Youth, Led Zeppelin, Metallica, Slayer, Tommy Guerrero, Baron, Arcade Fire, Bad Religion, DJ Krush, Mobb Deep)",
+    "why": "The bubble chart labels artist names only and encodes usage as circle size without printing counts or a ranking; the per-genre leaders and their counts that the story does state in words are written as facts, and the chart's other leaders (for example Black Sabbath in metal, The Black Keys in indie) are not stated in the story's text."
+  }
+]

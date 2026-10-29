@@ -1,0 +1,62 @@
+{
+ "id": "pockets",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 444,
+  "steps": 32,
+  "tools": 33,
+  "nudged": 0,
+  "usage": {
+   "input": 32453,
+   "output": 61606
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "women-front-pockets-shorter-narrower",
+   "basis": "men: 23.1300 height, 16.370 width; women: 14.3275 height, 15.185 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-skinny-front-pockets-smaller",
+   "basis": "men: 23.185 height, 16.070 width; women: 14.270 height, 15.075 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-straight-front-pockets-smaller",
+   "basis": "men: 23.075 height, 16.670 width; women: 14.385 height, 15.295 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-skinny-back-pockets-smaller",
+   "basis": "men: 15.935 height, 13.560 width; women: 15.110 height, 13.195 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-straight-back-pockets-smaller",
+   "basis": "men: 16.080 height, 13.845 width; women: 15.135 height, 13.485 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "back-pocket-gap-less-egregious",
+   "basis": "front gap: 8.8025 height, 1.1850 width; back gap: 0.8850 height, 0.3625 width",
+   "verdict": "ok"
+  },
+  {
+   "id": "men-back-pockets-deeper-same-width",
+   "basis": "men: 16.0075 height, 13.7025 width; women: 15.1225 height, 13.3400 width",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 5
+}

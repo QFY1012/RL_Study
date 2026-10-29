@@ -1,0 +1,65 @@
+[
+  {
+    "id": "women-front-pockets-shorter-narrower",
+    "source": "On average, the pockets in women's jeans are 48% shorter and 6.5% narrower than men's pockets.",
+    "claim": "Women's front pockets average 14.3 cm of maximum height and 15.2 cm of maximum width, against 23.1 cm and 16.4 cm for men's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  },
+  {
+    "id": "women-skinny-front-pockets-smaller",
+    "source": "On average, women's skinny jean pockets were 3.5 inches (48%) shorter and 0.3 inches (6%) narrower than men's skinny jeans.",
+    "claim": "Women's skinny-jean front pockets average 14.3 cm of maximum height and 15.1 cm of maximum width, against 23.2 cm and 16.1 cm for men's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  },
+  {
+    "id": "women-straight-front-pockets-smaller",
+    "source": "Women's straight jean pockets were 3.4 inches (46%) shorter and 0.6 inches (10%) narrower.",
+    "claim": "Women's straight-jean front pockets average 14.4 cm of maximum height and 15.3 cm of maximum width, against 23.1 cm and 16.7 cm for men's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  },
+  {
+    "id": "women-skinny-back-pockets-smaller",
+    "source": "women's skinny jean pockets were 0.3 inches (5%) shorter and 0.1 inches (2%) narrower",
+    "claim": "Women's skinny-jean back pockets average 15.1 cm of maximum height and 13.2 cm of maximum width, against 15.9 cm and 13.6 cm for men's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  },
+  {
+    "id": "women-straight-back-pockets-smaller",
+    "source": "women's straight jean pockets were 0.4 inches (7%) shorter and 0.1 inches (2%) narrower",
+    "claim": "Women's straight-jean back pockets average 15.1 cm of maximum height and 13.5 cm of maximum width, against 16.1 cm and 13.8 cm for men's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  },
+  {
+    "id": "back-pocket-gap-less-egregious",
+    "source": "The gap between women's and men's back pockets was less egregious.",
+    "claim": "The men-women gap averages 8.8 cm in maximum height and 1.2 cm in maximum width for front pockets, against 0.9 cm and 0.4 cm for back pockets.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack']].mean().T.eval('men - women')"
+  },
+  {
+    "id": "men-back-pockets-deeper-same-width",
+    "source": "Ultimately, men's back pockets were a bit deeper but just about the same width as women's.",
+    "claim": "Men's back pockets average 16.0 cm of maximum height and 13.7 cm of maximum width, against 15.1 cm and 13.3 cm for women's.",
+    "tables": {
+      "m": "data/measurements.csv"
+    },
+    "code": "m.groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  }
+]

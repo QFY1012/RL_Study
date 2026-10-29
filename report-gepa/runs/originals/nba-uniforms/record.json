@@ -1,0 +1,107 @@
+{
+ "id": "nba-uniforms",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 494,
+  "steps": 44,
+  "tools": 46,
+  "nudged": 0,
+  "usage": {
+   "input": 36310,
+   "output": 67442
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 16,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "home-white-327",
+   "basis": "sum=327.000000, mean=26.563769%",
+   "verdict": "ok"
+  },
+  {
+   "id": "road-white-640",
+   "basis": "home sum=327.0 mean=26.563769%; away sum=640.0 mean=51.990252%",
+   "verdict": "ok"
+  },
+  {
+   "id": "hawks-association-home-road",
+   "basis": "h=9, a=16",
+   "verdict": "ok"
+  },
+  {
+   "id": "color-vs-color-264",
+   "basis": "sum=264.000000, mean=21.445979%",
+   "verdict": "ok"
+  },
+  {
+   "id": "black-vs-red-81",
+   "basis": "top pair black vs red count=81",
+   "verdict": "ok"
+  },
+  {
+   "id": "neither-black-nor-white-105",
+   "basis": "sum=105",
+   "verdict": "ok"
+  },
+  {
+   "id": "blue-vs-red-most-common",
+   "basis": "top pairs: blue vs red=49, blue vs gold=23, blue vs brown=11",
+   "verdict": "ok"
+  },
+  {
+   "id": "bulls-white-home-road",
+   "basis": "home sum=28.0 mean=68.292683%; away sum=4.0 mean=9.756098%",
+   "verdict": "ok"
+  },
+  {
+   "id": "magic-white-home-road",
+   "basis": "home sum=2.0 mean=4.878049%; away sum=24.0 mean=58.536585%",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-2013-white-home",
+   "basis": "sum=40.0, mean=97.560976%, size=41.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "warriors-2023-four-home-jerseys",
+   "basis": "City Edition black=18; Statement Edition darkslategray=11; Association Edition white=7; Icon Edition darkslateblue=5",
+   "verdict": "ok"
+  },
+  {
+   "id": "hawks-2023-home-edition-shares",
+   "basis": "Icon=29.268293%, Statement=24.390244%, City=24.390244%, Association=21.951220%",
+   "verdict": "ok"
+  },
+  {
+   "id": "hawks-2013-home-white-95",
+   "basis": "sum=39.0, mean=95.121951%, size=41.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "edition-usage-hawks",
+   "basis": "Atlanta: Association 30.0, City 12.0, Classic 0.0, Icon 28.0, Statement 29.0; Lakers: Association 26.0, City 11.0, Classic 0.0, Icon 48.0, Statement 16.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "hawks-city-edition-10-games",
+   "basis": "h=10, a=0",
+   "verdict": "ok"
+  },
+  {
+   "id": "hawks-2023-away-colors",
+   "basis": "white=39.024390%, black=34.146341%, crimson=26.829268%",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 16,
+ "skipped": 9
+}

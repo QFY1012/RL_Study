@@ -1,0 +1,30 @@
+[
+  {
+    "source": "A Journey through every Billboard top 5 hit to find music’s greatest era",
+    "why": "This states the project's goal, not a finding. The supplied files contain only chart dates, ranks, and song/artist metadata; they have no measure of musical quality or 'greatness', so no finding about the greatest era can be computed from them."
+  },
+  {
+    "source": "(Starting with our case for 1997)",
+    "why": "The page names 1997 as its opening case but never states a metric or result. The files only record chart dates, ranks, and song metadata; no chart-position summary is specified, and the obvious summaries do not put 1997 first (for example, it is not the year with the most top-5 hits, the most #1 songs, or the longest average #1 run). Choosing one summary to make 1997 rank first would be a definition the story does not use."
+  },
+  {
+    "source": "#1 for 2 weeks",
+    "why": "This loading-screen counter is a static placeholder that the JavaScript replaces from the data. In the files, the opening #1 (Wannabe) had a four-week run at #1 and MMMbop had a three-week run, so the displayed '2' is not reproduced."
+  },
+  {
+    "source": "MMM BOP, Hanson",
+    "why": "This is a placeholder song label, not a finding. In the files MMMbop by Hanson reached #1 in 1997, not on the 1966 date shown beside it."
+  },
+  {
+    "source": "August 21, 1966",
+    "why": "The files contain no chart date of 1966-08-21 (the chart weeks are Saturdays; the nearest is 1966-08-20), and the placeholder song beside it, MMMbop, charted in 1997. This label cannot be reproduced from the data."
+  },
+  {
+    "source": "The Billboard Top 100",
+    "why": "This is a description of the source chart, not a finding. The supplied files contain positions only up to 19, not a full Top 100."
+  },
+  {
+    "source": "1958 - 2016, 22,000 Songs",
+    "why": "This is a description of the source data, not a finding. The supplied 2019 files cover chart dates from 1956 to 2019 and contain 3,034 unique song records (3,026 distinct track IDs in the weekly file), not 22,000 songs."
+  }
+]

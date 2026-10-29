@@ -1,0 +1,72 @@
+{
+ "id": "police-misconduct",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 188,
+  "steps": 19,
+  "tools": 19,
+  "nudged": 0,
+  "usage": {
+   "input": 15791,
+   "output": 22789
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "sustained-share-overall",
+   "basis": "sum=1842, count=11110, mean=16.579658% (rounds to 16.6%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "guilty-findings-share-overall",
+   "basis": "sum=218, count=11110, mean=1.962196% (rounds to 2.0%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-complainant-guilty-increase",
+   "basis": "overall: sum=218, count=11110, mean=1.962196%; white_complainants: sum=59, count=1951, mean=3.02409%",
+   "verdict": "ok"
+  },
+  {
+   "id": "black-vs-white-complainant-guilty-rates",
+   "basis": "black: sum=85, count=6535, mean=1.300689%; white: sum=59, count=1951, mean=3.024090%",
+   "verdict": "ok"
+  },
+  {
+   "id": "black-complainant-white-officer-guilty",
+   "basis": "sum=22, count=3699, mean=0.594755% (rounds to 0.6%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-complainant-black-officer-guilty",
+   "basis": "sum=18, count=469, mean=3.837953% (rounds to 3.8%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "white-officers-lower-guilty-rate",
+   "basis": "white: sum=92, count=6467, mean=1.422607%; black: sum=81, count=3340, mean=2.425150%; latino: sum=35, count=951, mean=3.680336%",
+   "verdict": "ok"
+  },
+  {
+   "id": "physical-abuse-guilty-findings",
+   "basis": "sum=5, count=1493, mean=0.334896% (rounds to 0.3%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "physical-abuse-sustained-findings",
+   "basis": "sum=23, count=1493, mean=1.540522% (rounds to 1.5%)",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 9,
+ "skipped": 3
+}

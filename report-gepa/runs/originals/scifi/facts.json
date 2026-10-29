@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1950s-era-of-setting",
+    "source": "In the 1950s, only a few sci-fi films and shows took place in the future, like the Fire Maidens of Outer Space (1956) which is a film about astronauts landing on one of Jupiter’s moons. For the most part, these stories were set in the audience’s present day – so, the 1950s.",
+    "claim": "Among 1950s stories, 12.0% are set in the future, 78.0% in the present, 7.5% in the past and 2.5% in multiple/other settings.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "pd.crosstab(d['decade'], d['Era'], normalize='index').mul(100).round(1).loc[[1950]]"
+  },
+  {
+    "id": "1950s-existential-threat",
+    "source": "In these 1950s stories, the world is often upended by an existential threat .",
+    "claim": "In the 1950s, 72.5% of stories present an existential threat (answered “yes” or “somewhat”).",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Existential Threat'].apply(lambda s: (s>0).mean()*100).round(1).loc[[1950]]"
+  },
+  {
+    "id": "1950s-world-left-better",
+    "source": "But in the majority of films, the protagonists figure it out – and leave the world better than the beginning of the story.",
+    "claim": "In the 1950s, 76.5% of stories leave the world in a better place.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['APP_World After'].apply(lambda s: (s>0).mean()*100).round(1).loc[[1950]]"
+  },
+  {
+    "id": "future-setting-rise",
+    "source": "There’s been a steady increase in sci-fi stories that take place in the future",
+    "claim": "The share of stories set in the future rises from 12.0% in the 1950s to 27.5% in the 2020s, reaching 29.5% in the 2010s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Era'].apply(lambda s: (s=='future').mean()*100).round(1)"
+  },
+  {
+    "id": "existential-threat-persists",
+    "source": "The stakes are still the same as before; these sci-fi stories still present existential threats .",
+    "claim": "The share presenting an existential threat ranges from 65.0% in the 1990s to 77.0% in the 2020s, and is 72.5% in the 1950s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Existential Threat'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "dystopian-setting-rise",
+    "source": "But we’re now more likely to face these existential threats in a dystopian or post-apocalyptic world",
+    "claim": "The share of stories set in a dystopian or post-apocalyptic world rises from 10.5% in the 1950s to 45.5% in the 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Dystopian/Post-Apoc'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "inequality-rise",
+    "source": "This dystopian society is more likely to be marked by inequality – gaps in opportunity, wealth, and basic rights.",
+    "claim": "The share of settings marked by inequality rises from 14.5% in the 1950s to 62.0% in the 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Inequality'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "suffering-rise",
+    "source": "This often leads to a world marked by great amounts of suffering .",
+    "claim": "The share of settings marked by suffering rises from 18.5% in the 1950s to 66.5% in the 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Suffering'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "militarized-society-rise-and-turnaround",
+    "source": "And increasingly, sci-fi stories depict militarized societies – although we might be seeing that trend turn around this decade.",
+    "claim": "The share marked by a militarized society rises from 19.5% in the 1950s to 52.0% in the 2010s, then falls to 40.5% in the 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['A militarized society'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "societal-conflict-rise",
+    "source": "But these days, it’s much more likely that protagonists also have to overcome societal forces – political movements, systemic inequality, rampant capitalism.",
+    "claim": "The share of stories where protagonists fight society rises from 19.5% in the 1950s to 68.5% in the 2010s and 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['society'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "inner-conflict-rise",
+    "source": "It’s also far more likely that the narrative explores inner conflicts – moral dilemmas, identity crises, and wrestling with our understanding of what it means to be human.",
+    "claim": "The share of stories where protagonists battle with themselves rises from 26.0% in the 1950s to 82.0% in the 2010s and 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['self'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "social-commentary-rise",
+    "source": "Ultimately, today’s sci-fi stories are far more likely to be a commentary on current social issues .",
+    "claim": "The share of stories seen as a commentary on current social issues rises from 67.5% in the 1950s to 90.5% in the 2020s, peaking at 93.0% in the 2010s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['Social Issues'].apply(lambda s: (s>0).mean()*100).round(1)"
+  },
+  {
+    "id": "characters-make-world-better",
+    "source": "But even though the narrative arc starts us off in a terrible place, the protagonists make the world better over the course of the story.",
+    "claim": "The share of stories whose characters make the world better is 76.5% in the 1950s, 86.5% in the 2010s and 84.5% in the 2020s.",
+    "tables": {
+      "d": "data/films.csv"
+    },
+    "code": "d.groupby('decade')['APP_World After'].apply(lambda s: (s>0).mean()*100).round(1)"
+  }
+]

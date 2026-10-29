@@ -1,0 +1,38 @@
+[
+  {
+    "source": "The 183 different #1 songs in the world, by location",
+    "why": "The chart title counts distinct track_links in the union of city_data.csv and country_data.csv. country_data.csv is not in data/, city_data.csv has only 169 distinct #1 songs, and track_info.csv is just a name/link/artist list without country-level #1 views. So the 183 cannot be computed from the provided files."
+  },
+  {
+    "source": "Contrast that with the area surrounding [place], where there are [N] different #1 songs in a 100 km radius.",
+    "why": "The place and count come from a randomly selected deck.gl 100 km hexagon far from the reader's city. The rendered page did not fill in the place or the count, and the selection is random, so no fixed place/count can be reproduced."
+  },
+  {
+    "source": "Generally, cities in the area around [city] have the same #1 song, a sort of pop music monoculture.",
+    "why": "The sentence is generated from the number of distinct #1 songs among same-country cities within 60 km of the reader's coordinates, and those coordinates are not in the data. The captured page's 'same #1 song' version cannot be reproduced from the provided city data: for Columbus there are two different #1 songs (RAPSTAR and good 4 u) within 60 km."
+  },
+  {
+    "source": "But head over to Dublin, and good 4 u by Olivia Rodrigo has RAPSTAR-level popularity.",
+    "why": "The comparison does not reproduce: Dublin, Ohio has good 4 u at 10,000 views against RAPSTAR's 200,000 views in Columbus. Only the fact that good 4 u is Dublin's #1 song is supported, not the 'RAPSTAR-level' comparison."
+  },
+  {
+    "source": "Crocodile Teeth by Skillibeng is the hit of Bahamas, a place where musical taste looks nothing like [city].",
+    "why": "The country-level 'hit of Bahamas' comes from country_data.csv, which is not in data/. The provided city_data.csv contains only Nassau (Crocodile Teeth, 125,000 views), so the country-level finding needs the missing file."
+  },
+  {
+    "source": "Same with Žilina, Slovakia, with a number of hits you've likely never heard of.",
+    "why": "The story names no song and gives no number or comparison. The data has four #1 songs in Slovakia and Zatmenie by Ego, Stylko in Žilina, but the specific claim is not stated in the story."
+  },
+  {
+    "source": "Or zoom over to Argentina for another unique pop music pattern.",
+    "why": "The story does not specify what the pattern is. The data shows that all 58 Argentine cities share the same #1 song (Miénteme by TINI, Maria Becerra), but that specific pattern is not stated in the text or a chart label, so it is a description of the data rather than a finding the authors state."
+  },
+  {
+    "source": "[city]'s musical bubble is mirrored in other parts of the world. In [place], [distance] km away, is the same top song as [city].",
+    "why": "This sister-city sentence is generated from country_data.csv or from a non-US city with the same #1 song. In city_data.csv no city outside the USA has RAPSTAR, so the sentence cannot be reproduced from the provided files."
+  },
+  {
+    "source": "The world is a musical cornucopia of ‘hits.’ Some songs are national exports, crossing cultural and linguistic boundaries. Others conform to their native country's borders.",
+    "why": "Qualitative statement with no number, ranking, share or specific comparison that the provided files can check."
+  }
+]

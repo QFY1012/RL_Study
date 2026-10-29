@@ -1,0 +1,42 @@
+[
+  {
+    "source": "Today, the overall US rate of imprisonment is ten times higher.",
+    "why": "The files contain state prisoners per 100,000 for 1910 and 2010, whose unweighted state averages rise only about six-fold (71.6 to 436.2, ratio 6.1). A tenfold national increase would require national prison/jail totals or population-weighted rates that the files do not provide."
+  },
+  {
+    "source": "Some had a far greater proportion of slaves, and in some places (including much of rural Louisiana), they formed a majority.",
+    "why": "The point table has slaves_1860 and total_1860 and does show majority-enslaved places, but it has no state or place identifiers, so the claim about rural Louisiana (and the comparison among Southern states) cannot be checked from the tables."
+  },
+  {
+    "source": "Another interesting feature is the bright curve that stretches from Louisiana to South Carolina, colloquially known as the Black Belt (take note – this will appear later).",
+    "why": "This is a geographic pattern on the map; the tables have coordinates but no state or Black Belt classification that would let the curve be computed as a stated fact."
+  },
+  {
+    "source": "Today, the distribution of the black population in the South still shows many similarities with 1860.",
+    "why": "A qualitative comparison of geographic distributions; the point table has black population counts by point but no state/region labels or a similarity measure defined by the story."
+  },
+  {
+    "source": "While the Great Migration saw a huge exodus of the black population out of the South, the Black Belt has yet to fade, and the rural South still bears the imprint of plantation agriculture.",
+    "why": "Needs regional black-population totals over time and a geographic definition of the South/Black Belt, neither of which is encoded in the tables."
+  },
+  {
+    "source": "today, 7.7% of the black population age 18 and over has lost their right to vote due to a conviction (Sentencing project).",
+    "why": "External Sentencing Project figure; the files contain no felony-disenfranchisement data."
+  },
+  {
+    "source": "In Florida and Alabama, nearly a third of black men cannot vote (Human Rights Watch).",
+    "why": "External Human Rights Watch figure; the files contain no voting-rights data."
+  },
+  {
+    "source": "Jail Incarceration was much lower in 1980. We've changed the color scale (see top legend) so that you can see the difference among states.",
+    "why": "The files include jail_2010 and jail_black_2010 only; there is no 1980 jail-incarceration series to compare with 2010."
+  },
+  {
+    "source": "Again we see a similar pattern, with some of the highest levels of incarceration in Southern states, especially along the Black Belt. And this pattern is visible without filtering the data by race.",
+    "why": "The point table has local jail counts and coordinates, but no state/Black Belt labels or a numeric threshold the story uses, so the geographic claim cannot be computed as a checkable fact."
+  },
+  {
+    "source": "The “tough on crime” stance of the 1980s and 1990s swelled a historically rigged criminal justice system.",
+    "why": "This is an interpretive causal statement with no stated measure or comparison; the table also has two different 1980 rate columns (inc_1980 and inc_1980_2), so the story's series is ambiguous."
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "red-lion-most-popular",
+    "source": "And if you were looking to take in a pint at each Red Lion, well good luck, there are 339 and that's one hell of a pub crawl.",
+    "claim": "Red Lion is the most common pub name, with 339 pubs.",
+    "tables": {"d": "data/pub-addresses-v2.csv"},
+    "code": "d.stripped.value_counts().head(1)"
+  },
+  {
+    "id": "three-most-common-names",
+    "source": "That means 339 pints at Red Lions, or 258 pints at Royal Oaks, or 176 pints at Crown Inns — the three most common pub names.",
+    "claim": "The three most common pub names are Red Lion (339 pubs), Royal Oak (258 pubs) and Crown Inn (176 pubs).",
+    "tables": {"d": "data/pub-addresses-v2.csv"},
+    "code": "d.stripped.value_counts().head(3)"
+  },
+  {
+    "id": "color-noun-name-counts",
+    "source": "color + noun (41 unique pub names) — Red Lion 339, White Hart 166, White Horse 157, Black Horse 105",
+    "claim": "Among color + noun names, Red Lion has the most pubs (339), followed by White Hart (166), White Horse (157) and Black Horse (105), down to 10 pubs each for Brass Monkey, White Swan Inn, Golden Ball and Golden Lion Hotel.",
+    "tables": {"d": "data/pub-addresses-v2.csv"},
+    "code": "d[d.stripped.str.split().str[0].isin(['red', 'white', 'black', 'golden', 'green', 'blue', 'grey', 'orange', 'brass'])].stripped.value_counts()"
+  }
+]

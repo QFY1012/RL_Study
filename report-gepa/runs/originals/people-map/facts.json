@@ -1,0 +1,20 @@
+[
+  {
+    "id": "biggest-label-donald-trump",
+    "source": "Sized by Wikipedia page traffic",
+    "claim": "The map's biggest label is Donald Trump at Bedminster, New Jersey, with 53,319 median pageviews, just above his New York City label (53,181); the next largest is Cardi B at Edgewater with 31,791.",
+    "tables": {
+      "pm": "data/people-map.csv"
+    },
+    "code": "pm.sort_values('views_median', ascending=False)[['name_clean', 'place', 'state', 'views_median']].head(3)"
+  },
+  {
+    "id": "most-repeated-resident",
+    "source": "We chose to include multiple occurrences for a single person because there is both no way to determine which is more accurate and people can “be from” multiple places.",
+    "claim": "Wyatt Earp is the most repeated label on the map, the most-Wikipedia'ed resident of nine places, ahead of Steve Jobs with seven.",
+    "tables": {
+      "pm": "data/people-map.csv"
+    },
+    "code": "pm.groupby('name')['place'].nunique().sort_values(ascending=False).head(4)"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "source": "Billboard claims the most popular musicians of 2018 were Drake, Post Malone, Ed Sheeran, Taylor Swift, and Cardi B.",
+    "why": "No Billboard ranking data is provided; the four files contain venue seat totals, GIPHY counts, Reddit comment counts, and social follower totals only."
+  },
+  {
+    "source": "neither Sheeran nor Swift released an album in 2018",
+    "why": "The files contain no album-release data."
+  },
+  {
+    "source": "That’s why the #1 artist on YouTube, Ozuna, had more streams in 2018 (10.7 billion) than Drake, the #1 artist on Spotify (8.2 billion).",
+    "why": "The files contain no YouTube or Spotify stream counts, so this comparison cannot be computed."
+  },
+  {
+    "source": "Top Artists in 2018",
+    "why": "The YouTube and Spotify rankings and stream totals shown in this chart (such as YoungBoy at 2.49B streams, Ozuna at 10.7B, and Drake at 8.2B on Spotify) are not present in any provided table."
+  },
+  {
+    "source": "It’s also biased towards places where Spotify exists, which excludes India (#2 country in the world, 17% of the world’s population).",
+    "why": "The files contain no country population or Spotify-availability data."
+  }
+]

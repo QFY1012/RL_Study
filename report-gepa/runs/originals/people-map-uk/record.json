@@ -1,0 +1,32 @@
+{
+ "id": "people-map-uk",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 446,
+  "steps": 41,
+  "tools": 54,
+  "nudged": 0,
+  "usage": {
+   "input": 70089,
+   "output": 42109
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 1,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "map-city-resident-labels",
+   "basis": "Output lists the top resident by views_median for each city: Mayfair–Elizabeth II 32467.0, Edinburgh–Mary, Queen of Scots 16092.0, Aberdeen–Winston Churchill 15029.0, Halifax–Ed Sheeran 12654.0, Consett–Rowan Atkinson 9086.5, Ballymena–Liam Neeson 8838.0, Haverfordwest–Christian Bale 7683.0, Blickling–Anne Boleyn 6479.0, Birmingham–Ozzy Osbourne 6274.5, Plymouth–Tim Curry 4685.5, matching the claim in order and values.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 1,
+ "skipped": 0
+}

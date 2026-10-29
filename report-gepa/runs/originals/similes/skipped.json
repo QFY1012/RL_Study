@@ -1,0 +1,82 @@
+[
+  {
+    "source": "And cat is the most used noun for four different adjectives: nervous, active, agile, nimble.",
+    "why": "In pairs.csv cat is the most-used noun for only one adjective (nervous); the adjectives active, agile and nimble do not appear in the file (it holds 129 adjectives), so cat's four first-place appearances cannot be computed."
+  },
+  {
+    "source": "On the other hand, you have the noun “hell,” which is a top-10 noun for 17 different adjectives.",
+    "why": "Ranking hell within each adjective gives 11 adjectives where it is in the top ten (14 if ranks are recomputed over only nouns with 100+ occurrences, the filter the methods note mentions), not 17."
+  },
+  {
+    "source": "For example, if you were to randomly look at two sentences with “as ___ as a cucumber,” there is a 92% chance they are both “cool.”",
+    "why": "The Simpson index for cucumber in pairs.csv is 0.936 (298 of its 308 occurrences are 'cool', plus calm 4, green 3, cold 3), i.e. about 94%, not 92%; the low-count pairs that would move it to 92% are not in the file."
+  },
+  {
+    "source": "Although stone has one dominant physical quality where it tops seven adjectives (hard/solid/impenetrable, etc.,)",
+    "why": "In pairs.csv stone is the most-used noun for eight adjectives (hard, steady, solid, heavy, firm, dumb, blank, dense); dropping adjectives with fewer than 100 occurrences (dense, 57) leaves seven, but the story's seven include 'impenetrable', which is not in the file, so the stated set of seven cannot be pinned down."
+  },
+  {
+    "source": "Animal Unique adjectives Top-5 appearances #1 appearances — 33 12 4",
+    "why": "Computing the animal table from pairs.csv gives, for cat, 25 adjectives, 5 top-5 appearances and 1 first-place appearance (and 8/1/0 for dog, 8/4/2 for owl, etc.); the chart's counts (cat 33/12/4) cannot be obtained from the file."
+  },
+  {
+    "source": "no expression: impassive #1, expressionless #3; no life: lifeless #2; no sound: mute #4, ignorant #7, bare #9",
+    "why": "The adjectives labeled in the stone chart (impassive, expressionless, lifeless, immovable, deaf, mute, ignorant, bare) are not among the 129 adjectives in pairs.csv, so their ranks for stone cannot be computed."
+  },
+  {
+    "source": "defenseless … #16 … tender #11 (rank labels on the child chart)",
+    "why": "The adjectives labeled on the child chart (defenseless, vulnerable, wholesome, excited, docile, sensitive, harmless, frail, timid, shy, tiny, open, gay, honest, merry, tender) are not among the 129 adjectives in pairs.csv, so the ranks cannot be computed."
+  },
+  {
+    "source": "Nothing exemplifies the specialist better than the cucumber. “As cool as a cucumber” is the paragon specialist.",
+    "why": "Cucumber is not the most predictable noun in pairs.csv: beet, peacock, mile, hatter, flash, fate, play and new all score 1.0 on the Simpson index, and brass (0.937) is slightly above cucumber (0.936) even among nouns with 100+ occurrences."
+  },
+  {
+    "source": "In fiction, a child has become shorthand for two things; being defenseless and wholesome. … On the wholesome side, the top usage is “as innocent as a child.”",
+    "why": "The 'defenseless' and 'wholesome' buckets are the authors' editorial grouping and are not a field in the data; pairs.csv shows only that for child, helpless (112) is the most-used adjective and innocent (95) the second, which is captured by the separate child facts."
+  },
+  {
+    "source": "Cat is a noun that is used to represent all sorts of different qualities. Writers use it to mean everything from graceful to weak.",
+    "why": "Qualitative description of cat's range with no number or ranking; pairs.csv only shows the individual pairs (graceful–cat 22, weak–cat 39)."
+  },
+  {
+    "source": "Most nouns are closer to being generalists, sometimes because they have some reliable pairings because of distinct qualities (e.g., glass is smooth, fragile, transparent) or because of conceptually similar adjectives (e.g., the sun is bright, brilliant, radiant).",
+    "why": "This is a qualitative reading of the scatter plot and no value is stated or labeled; pairs.csv does not label which nouns count as generalists, so there is no stated number to reproduce."
+  },
+  {
+    "source": "Plenty of these idioms have endured the test of time, like “as busy as a bee” or “as fit as a fiddle,” though many have fallen out of fashion in recent decades, like “as drunk as a lord” or “as rich as Croesus.”",
+    "why": "The finding is about change over time, but pairs.csv has no time dimension; it only confirms the pairs exist (busy–bee 112, fit–fiddle 156, drunk–lord 76, rich–croesus 40)."
+  },
+  {
+    "source": "According to Google Books Ngram Viewer, the first use of “sexy as hell” that I could verify was from the 1948 novel Innocent Villa … the first use with the exact structure (“as _ as _”) was from the 1954 novel The Refuge",
+    "why": "The claim comes from Google Books Ngram Viewer and book texts, not from the two data files; irony.csv has no dates or n-gram counts."
+  },
+  {
+    "source": "This makes hell pretty unique in the dataset. Most nouns earn their place by embodying something, whereas hell just became another way to say “very.”",
+    "why": "Qualitative interpretation with no numeric claim to reproduce; pairs.csv only shows the pair counts (hell appears with 22 adjectives)."
+  },
+  {
+    "source": "Hell is one of the most versatile nouns in the dataset.",
+    "why": "No number or threshold is given for 'most versatile'; pairs.csv supports only a raw count of adjectives hell appears with, not a ranking the story states."
+  },
+  {
+    "source": "But like most things, the interesting stuff lies at the extremes. Certain nouns are so tightly coupled with a single adjective that they’ve become idioms. While others are so versatile or overused they’ve become generic.",
+    "why": "Qualitative description of the specialist/generalist scatter; the chart labels positions but no per-noun predictability values, and the story states no number."
+  },
+  {
+    "source": "An analysis of 200,000 similes from popular fiction.",
+    "why": "Description of the dataset's size, not a finding, and pairs.csv holds 75,299 pair occurrences in total."
+  },
+  {
+    "source": "I’ve included every adjective with at least 200 occurrences.",
+    "why": "Method statement rather than a finding, and the chart itself labels adjectives far below 200 occurrences (e.g. bad 117, lovely 76, real 75, dense 57)."
+  },
+  {
+    "source": "While these are a small subset of the dataset, a kind of plamigerent counterculture of the simile world, they often paint more vivid and memorable pictures. They tend to work best with positive-sentiment adjectives, setting up the noun as the punch line.",
+    "why": "No number or ranking is stated, and irony.csv carries no sentiment scores, so the 'positive-sentiment adjectives' claim cannot be computed from the files."
+  },
+  {
+    "source": "That’s about earwax — Second Helpings by Megan McCafferty",
+    "why": "The irony chart's labels are example vehicles from irony.csv (earwax, a biscuit, a mankini, a cucumber …); they are illustrative sentences, not a numeric finding to reproduce."
+  }
+]

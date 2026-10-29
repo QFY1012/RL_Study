@@ -1,0 +1,130 @@
+[
+  {
+    "id": "punk-blink-182-most",
+    "source": "Of the thousands of playlists that I found titled “punk” on Spotify, Blink-182 is on half of them.",
+    "claim": "blink-182 appears on 1,481 punk playlists, the most of any band, ahead of Green Day with 1,479.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'punk'\").nlargest(2, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "punk-top-bands",
+    "source": "Playlists with Titles including the Word 'Punk' and the Bands that Appear Most Often",
+    "claim": "The eleven bands with the most punk-playlist appearances are blink-182 (1,481), Green Day (1,479), The Offspring (1,302), Sum 41 (1,149), Rise Against (1,126), Fall Out Boy (1,115), My Chemical Romance (1,037), Bad Religion (893), NOFX (829), All Time Low (798) and Panic! At The Disco (786).",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'punk'\").nlargest(11, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "metalcore-bring-me-horizon",
+    "source": "Not sure what metalcore sounds like? Bring Me The Horizon, who’s on a third of metalcore playlists, is a good candidate.",
+    "claim": "Bring Me The Horizon appears on 1,009 metalcore playlists, the most of any band, ahead of Parkway Drive with 805.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'metalcore'\").nlargest(2, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "hardcore-agnostic-front",
+    "source": "While Agnostic Front appears most often, it’s only at 12% of “hardcore” playlists.",
+    "claim": "Agnostic Front appears on 371 hardcore playlists, the most of any band, ahead of Dead Kennedys with 365.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'hardcore'\").nlargest(2, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "post-punk-joy-division",
+    "source": "For playlists titled with \"post-punk,\" there’s remarkable agreement: Joy Division is synonymous with the genre (>30% of playlists).",
+    "claim": "Joy Division appears on 1,032 'post punk' playlists, the most of any band, ahead of The Cure with 787.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'post punk'\").nlargest(2, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "new-wave-the-cure",
+    "source": "There’s nothing intrinsically “new wave” about The Cure (the most common band on “new wave” playlists), except a contrived marketing campaign.",
+    "claim": "The Cure appears on 863 new wave playlists, the most of any band, ahead of New Order with 789.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name == 'new wave'\").nlargest(2, 'count')[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "bring-me-horizon-three-genres",
+    "source": "They appear more often on post-hardcore, metalcore, and screamo playlists than any other band. That’s three, seemingly distinct genres.",
+    "claim": "Bring Me The Horizon leads post hardcore (786 vs. Pierce The Veil's 733), metalcore (1,009 vs. Parkway Drive's 805) and screamo (760 vs. Asking Alexandria's 680).",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"primary_name in ['post hardcore', 'metalcore', 'screamo']\").sort_values(['primary_name', 'count'], ascending=[True, False]).groupby('primary_name').head(2)[['primary_name', 'spotify_artist_name', 'count']]"
+  },
+  {
+    "id": "fall-out-boy-top-genres",
+    "source": "In 2015, the data suggests that Fall Out Boy’s genre is a spectrum of emo, punk, and pop-punk.",
+    "claim": "Fall Out Boy’s three most frequent genre labels are punk (1,115 playlists), pop punk (939) and emo (819).",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"spotify_artist_name == 'Fall Out Boy'\").nlargest(3, 'count')[['spotify_artist_name', 'primary_name', 'count']]"
+  },
+  {
+    "id": "fugazi-punk-hardcore-over-posthardcore",
+    "source": "Fugazi appears more often on “punk” and “hardcore” playlists than “post-hardcore,” the genre that they arguably defined.",
+    "claim": "Fugazi appears on 205 punk, 130 hardcore and 54 post hardcore playlists.",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"spotify_artist_name == 'Fugazi' and primary_name in ['punk', 'hardcore', 'post hardcore']\").sort_values('count', ascending=False)[['spotify_artist_name', 'primary_name', 'count']]"
+  },
+  {
+    "id": "ramones-top-genre-punk",
+    "source": "Finally, the Ramones are labeled as “punk,” above anything else.",
+    "claim": "Ramones’ most frequent genre label is punk, with 745 playlists, ahead of ska punk (257) and hardcore (243).",
+    "tables": {
+      "c": "data/artist_counts5.csv",
+      "a": "data/artist_list3.csv",
+      "g": "data/genre_list.csv"
+    },
+    "code": "c.merge(g, left_on='genre_id', right_on='id').merge(a, left_on='spotify_artist_id', right_on='echonest_id').query(\"spotify_artist_name == 'Ramones'\").nlargest(3, 'count')[['spotify_artist_name', 'primary_name', 'count']]"
+  },
+  {
+    "id": "post-punk-coined-1977",
+    "source": "Coined almost forty years ago in 1977, the identity behind post-punk has stayed consistent (Joy Division formed in 1976).",
+    "claim": "The genre list dates post punk to 1977.",
+    "tables": {
+      "g": "data/genre_list.csv"
+    },
+    "code": "g.loc[g.primary_name == 'post punk', ['primary_name', 'year']]"
+  },
+  {
+    "id": "joy-division-formed-1976",
+    "source": "(Joy Division formed in 1976)",
+    "claim": "The artist list gives Joy Division a start year of 1976.",
+    "tables": {
+      "a": "data/artist_list3.csv"
+    },
+    "code": "a.loc[a.spotify_artist_name == 'Joy Division', ['spotify_artist_name', 'start_year']]"
+  }
+]

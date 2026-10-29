@@ -1,0 +1,12 @@
+[
+  {
+    "id": "bw-versions-dated-older",
+    "source": "On average, people who saw this photo in black and white dated it 13 years older than people who saw it in color.",
+    "claim": "The ten photos' average guessed years, in color then black and white, were 1999 and 1989 for the 2008 photo, 1978 and 1973 for 1963, 1970 and 1957 for 1969, 1986 and 1984 for 1990, 1952 and 1945 for 1940, 1975 and 1967 for 1977, 1967 and 1966 for 1976, 1987 and 1980 for 1987, 1985 and 1981 for 1970, and 1954 and 1952 for 1946, so the black-and-white version was dated older in every case, by 10, 5, 13, 2, 7, 8, 1, 7, 4 and 2 years respectively.",
+    "tables": {
+      "o": "data/output.csv",
+      "p": "data/photos.csv"
+    },
+    "code": "o.assign(year=np.where(o.selected < 20, o.selected + 2000, o.selected + 1900)).groupby(['id','color']).year.mean().unstack().rename(columns={0:'bw_avg',1:'color_avg'}).apply(np.floor).astype(int).assign(years_bw_older=lambda d: d.color_avg - d.bw_avg).join(p.set_index('key').year.rename('actual')).loc[:,['actual','color_avg','bw_avg','years_bw_older']]"
+  }
+]

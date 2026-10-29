@@ -1,0 +1,18 @@
+[
+  {
+    "source": "In most US counties, Oxford usually refers to Oxford (United Kingdom).",
+    "why": "This depends on the county-level scores computed from proximity, population and Wikipedia length for every place across all US counties. data/places.csv has one row per place and no county-level scores or county geography, so neither the set of counties nor their top-ranked Oxford can be computed. The same county-level computation produces the 'most commonly referred to place' statement shown with each selected place (Oxford, Auburn, Clinton, Hayward, etc.)."
+  },
+  {
+    "source": "# of Counties",
+    "why": "The chart's # of Counties column ranks each Oxford by how many counties it is the top-ranked place in (1,009 for Oxford, United Kingdom, versus 234 for the next Oxford). That county-level count is not in places.csv; the table's reproducible population and Wikipedia-length columns are reported in the separate Oxford fact."
+  },
+  {
+    "source": "Each county’s most likely Oxford reference",
+    "why": "The Rank #1, Rank #2 and Share Margin columns are outputs of the county-level scoring model over all US counties; places.csv has no county scores or county geometry from which to compute them."
+  },
+  {
+    "source": "If you want a good example of the results not “working” with our presets, check out Cambridge, where we would’ve expected Cambridge, Massachusetts to have more influence.",
+    "why": "The claim concerns how much influence Cambridge, Massachusetts has in the county-level scoring model; places.csv alone cannot reproduce the model's county results."
+  }
+]

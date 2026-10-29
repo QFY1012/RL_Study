@@ -1,0 +1,146 @@
+[
+  {
+    "id": "home-white-327",
+    "source": "Including last season’s off-white City Edition jerseys for Boston and San Antonio, home teams wore white in just 327 games, or 27% of the time.",
+    "claim": "Home teams wore white, counting the off-white City Edition jerseys as white, in 327 games — 26.6% of the time.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o.homeTeamColor.isin(['white','linen']).agg(['sum','mean'])*[1,100]"
+  },
+  {
+    "id": "road-white-640",
+    "source": "On average, teams wore their white Association jerseys in nearly half of their road games — 640, to be exact — but only a quarter of their home games, an inversion of the classic “home whites” concept.",
+    "claim": "Road teams wore white in 640 games (52.0%), against 327 home white games (26.6%).",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o[['homeTeamColor','awayTeamColor']].isin(['white','linen']).agg(['sum','mean']).T*[1,100]"
+  },
+  {
+    "id": "hawks-association-home-road",
+    "source": "wore their Association jerseys as “home whites” in 9 games, and wore them on the road for 16 games.",
+    "claim": "Atlanta wore its Association jersey as home whites in 9 games and on the road in 16 games.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o.assign(h=(o.homeTeam=='Atlanta Hawks')&(o.homeTeamEdition=='Association Edition'), a=(o.awayTeam=='Atlanta Hawks')&(o.awayTeamEdition=='Association Edition'))[['h','a']].sum()"
+  },
+  {
+    "id": "color-vs-color-264",
+    "source": "The rest of the time, fans were treated to a color vs. color matchup. These were once almost exclusively the domain of Lakers-in-gold home games, but this season made up 264 games, or 21% of all games this year.",
+    "claim": "Neither team wore white in 264 games, or 21.4% of the season — the color vs. color matchups.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "(~o.homeTeamColor.isin(['white','linen']) & ~o.awayTeamColor.isin(['white','linen'])).agg(['sum','mean'])*[1,100]"
+  },
+  {
+    "id": "black-vs-red-81",
+    "source": "Owing to the popularity of both colors, the most common dual-color matchup was a black jersey against a red one; this occurred in 81 games total.",
+    "claim": "The most common color-vs-color matchup was a black jersey against a red one, which occurred in 81 games.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o.assign(h=o.homeTeamColor.replace({'crimson':'red','tomato':'red','linen':'white'}), a=o.awayTeamColor.replace({'crimson':'red','tomato':'red','linen':'white'})).query(\"h != 'white' and a != 'white'\").assign(pair=lambda d: d[['h','a']].apply(lambda r: ' vs '.join(sorted(r)), axis=1)).pair.value_counts().head(5)"
+  },
+  {
+    "id": "neither-black-nor-white-105",
+    "source": "True aficionados of the crayon box might take a particularly keen interest in the 105 games in which neither team wore black or white",
+    "claim": "In 105 games neither team wore black or white.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "(~o.homeTeamColor.isin(['black','white','linen']) & ~o.awayTeamColor.isin(['black','white','linen'])).sum()"
+  },
+  {
+    "id": "blue-vs-red-most-common",
+    "source": "these were most frequently blue vs. red matchups.",
+    "claim": "Among the games in which neither team wore black or white, blue against red was the most frequent matchup, with 49 games.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o.assign(h=o.homeTeamColor.replace({'crimson':'red','tomato':'red','midnightblue':'blue','darkslateblue':'blue','dodgerblue':'blue','darkcyan':'blue','teal':'blue','lightslategray':'blue','linen':'white'}), a=o.awayTeamColor.replace({'crimson':'red','tomato':'red','midnightblue':'blue','darkslateblue':'blue','dodgerblue':'blue','darkcyan':'blue','teal':'blue','lightslategray':'blue','linen':'white'})).query(\"h != 'black' and a != 'black' and h != 'white' and a != 'white'\").assign(pair=lambda d: d[['h','a']].apply(lambda r: ' vs '.join(sorted(r)), axis=1)).pair.value_counts().head(3)"
+  },
+  {
+    "id": "bulls-white-home-road",
+    "source": "Not only have their core uniforms barely changed, but they keep up with a relatively classic schedule of wearing them, wearing their white Association uniforms for 68% of home games and only 10% of their away games.",
+    "claim": "The Chicago Bulls wore white uniforms in 68.3% of home games (28) and only 9.8% of road games (4).",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "pd.concat([o[o.homeTeam=='Chicago Bulls'].homeTeamColor.isin(['white','linen']).agg(['sum','mean']), o[o.awayTeam=='Chicago Bulls'].awayTeamColor.isin(['white','linen']).agg(['sum','mean'])], axis=1, keys=['home','away']).T*[1,100]"
+  },
+  {
+    "id": "magic-white-home-road",
+    "source": "By contrast, the Orlando Magic wore white at home for just two games all season, preferring instead to wear one of their many blue or black options. But their white uniforms did get play on the road — worn in nearly 60% of their road games.",
+    "claim": "The Orlando Magic wore white at home in just 2 games (4.9%) but in 24 road games (58.5%).",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "pd.concat([o[o.homeTeam=='Orlando Magic'].homeTeamColor.isin(['white','linen']).agg(['sum','mean']), o[o.awayTeam=='Orlando Magic'].awayTeamColor.isin(['white','linen']).agg(['sum','mean'])], axis=1, keys=['home','away']).T*[1,100]"
+  },
+  {
+    "id": "warriors-2013-white-home",
+    "source": "For example, Golden State exclusively wore white at home (minus the special sleeved Christmas jerseys) during the 2013-14 season.",
+    "claim": "Golden State wore white in 40 of its 41 home games in 2013-14, 97.6% of them.",
+    "tables": {
+      "t": "data/2013data.csv"
+    },
+    "code": "t[t.homeTeam=='Golden State Warriors'].homeTeamBGColor.str.upper().eq('#FFFFFF').agg(['sum','mean','size'])*[1,100,1]"
+  },
+  {
+    "id": "warriors-2023-four-home-jerseys",
+    "source": "Now if you were to watch the Warriors at home, you’d see a rotation of four jerseys, with only one being the traditional white.",
+    "claim": "At home in 2023-24 the Warriors wore four editions — City 18 games, Statement 11, Association 7 and Icon 5 — and only the Association jersey was white.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "pd.crosstab(o[o.homeTeam=='Golden State Warriors'].homeTeamEdition, o[o.homeTeam=='Golden State Warriors'].homeTeamColor)"
+  },
+  {
+    "id": "hawks-2023-home-edition-shares",
+    "source": "2023-24 Season at Home",
+    "claim": "In its 2023-24 home games Atlanta wore the Icon jersey 29% of the time, the Statement 24%, the City 24% and the Association 22%.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o[o.homeTeam=='Atlanta Hawks'].homeTeamEdition.value_counts(normalize=True)*100"
+  },
+  {
+    "id": "hawks-2013-home-white-95",
+    "source": "2013-14 Season at Home",
+    "claim": "In 2013-14 at home Atlanta wore white in 39 of 41 games, 95.1% of the time.",
+    "tables": {
+      "t": "data/2013data.csv"
+    },
+    "code": "t[t.homeTeam=='Atlanta Hawks'].homeTeamBGColor.str.upper().eq('#FFFFFF').agg(['sum','mean','size'])*[1,100,1]"
+  },
+  {
+    "id": "edition-usage-hawks",
+    "source": "All teams by edition usage",
+    "claim": "Each team's share of its games by edition matches the chart: Atlanta 30% Association, 28% Icon, 29% Statement, 12% City and 0% Classic; the Lakers 26%, 48%, 16%, 11% and 0%.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "(pd.crosstab(o.homeTeam,o.homeTeamEdition)+pd.crosstab(o.awayTeam,o.awayTeamEdition)).pipe(lambda d: d.div(d.sum(axis=1),axis=0)*100).round(0).to_string()"
+  },
+  {
+    "id": "hawks-city-edition-10-games",
+    "source": "wore their City Edition jerseys in 10 games during the 2023-24 season — below the league average.",
+    "claim": "Atlanta wore its City Edition jersey in 10 games in 2023-24, all of them at home.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o.assign(h=(o.homeTeam=='Atlanta Hawks')&o.homeTeamEdition.str.startswith('City'), a=(o.awayTeam=='Atlanta Hawks')&o.awayTeamEdition.str.startswith('City'))[['h','a']].sum()"
+  },
+  {
+    "id": "hawks-2023-away-colors",
+    "source": "2023-24 Away",
+    "claim": "In its 2023-24 road games Atlanta wore white 39% of the time, black 34% and crimson (red) 27%.",
+    "tables": {
+      "o": "data/output.csv"
+    },
+    "code": "o[o.awayTeam=='Atlanta Hawks'].awayTeamColor.value_counts(normalize=True)*100"
+  }
+]

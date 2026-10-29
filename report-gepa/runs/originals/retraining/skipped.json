@@ -1,0 +1,30 @@
+[
+  {
+    "source": "5% of America’s employees may be replaced by robots, and transitioning them to become software developers seems to be a popular solution.",
+    "why": "The files have job-level automatability and employment counts but the story gives no employment-weighted definition or automatability threshold for this 5%, so it cannot be computed without choosing a cutoff that makes the number come out."
+  },
+  {
+    "source": "Which jobs should 1,789,094 truckers earning $43,590 yearly, transition to?",
+    "why": "The crosswalk's Heavy and Tractor-Trailer Truck Drivers row has number = 1,871,700, not 1,789,094, and no row or combination in the files gives 1,789,094. The story elsewhere uses the 1,871,700 figure, which is reproduced."
+  },
+  {
+    "source": "When comparing the skills among these professions, pipelayers are most similar to truck drivers, while CEOs are most different.",
+    "why": "The chart uses a 39-job subset and separate per-job skill files that are not in data/. In the supplied similarity matrix Pipelayers (0.469) is not the most similar job to truck drivers (Ship Engineers is 0.488) and Chief Executives (0.148) is not the least similar (Psychologists, All Other is 0.109), so this subset ranking cannot be reproduced."
+  },
+  {
+    "source": "Among these jobs, CEOs and truck drivers have the greatest gap between their skills",
+    "why": "The chart's 39-job subset and per-job skill-difference files are not supplied; in similarity.csv Chief Executives is not the least similar job to truck drivers."
+  },
+  {
+    "source": "One of the largest skill overlaps for truck drivers occurs with pipelayers",
+    "why": "The chart's per-job skill-difference files and 39-job subset are not supplied; in similarity.csv Pipelayers ranks 129th of 681 jobs by similarity to truck drivers, so the chart's skill-overlap measure cannot be reproduced."
+  },
+  {
+    "source": "As expected, it is crucial that software developers excel at programming — a skill that’s largely irrelevant to truckers.",
+    "why": "skills.csv contains only the five highest-importance skills per job and has no skill names. Programming (skill_id 35) is 75 for Software Developers, Applications, but the corresponding trucker value (shown as 3 in the chart) is missing from the five rows, so the comparison cannot be computed."
+  },
+  {
+    "source": "Yet ship engineers bring in a similar income, have closely related skills, and are less at risk of automation than truck drivers.",
+    "why": "Ship Engineers earn $74,120 against $43,590 for truck drivers, a 70% increase, so the 'similar income' part of the composite claim does not reproduce. Their skill similarity (0.488) and automation likelihood (0.041) do fit the rest of the sentence, but the finding as stated does not."
+  }
+]

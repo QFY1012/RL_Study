@@ -1,0 +1,103 @@
+[
+ {
+  "id": "within-five-moves-52",
+  "source": "52% of people came within five moves of the best possible path",
+  "claim": "52.29% of players finished within five moves of the best possible path.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(lambda m: (m <= m.min() + 5).mean() * 100)(round2.result.map(lambda s: len(__import__('json').loads(s))))"
+ },
+ {
+  "id": "perfect-16",
+  "source": "16% did it perfectly.",
+  "claim": "16.22% of players finished in exactly the optimal number of moves.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(lambda m: (m == m.min()).mean() * 100)(round2.result.map(lambda s: len(__import__('json').loads(s))))"
+ },
+ {
+  "id": "distinct-paths-14589",
+  "source": "people found 14,589 different ways to do it.",
+  "claim": "Players took 14,589 distinct paths.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "round2.result.map(lambda s: tuple((q['x'], q['y']) for q in __import__('json').loads(s))).nunique()"
+ },
+ {
+  "id": "median-efficiency-91",
+  "source": "the median person still hit 91% efficiency (within 5 moves)",
+  "claim": "The median player's efficiency was 90.74% of optimal.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(lambda m: (m.min() / m).median() * 100)(round2.result.map(lambda s: len(__import__('json').loads(s))))"
+ },
+ {
+  "id": "twelve-perfect-solutions",
+  "source": "For this small lawn, there are 12 different perfect solutions and people found them all.",
+  "claim": "Perfect players took 12 distinct optimal paths.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(lambda m: round2.result[m == m.min()].map(lambda s: tuple((q['x'], q['y']) for q in __import__('json').loads(s))).nunique())(round2.result.map(lambda s: len(__import__('json').loads(s))))"
+ },
+ {
+  "id": "median-moves-54",
+  "source": "It took them 54 moves–five more than optimal.",
+  "claim": "The median path has 54 moves, against a 49-move optimum.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(lambda m: m.agg(['min', 'median']))(round2.result.map(lambda s: len(__import__('json').loads(s))))"
+ },
+ {
+  "id": "fork-down-20",
+  "source": "decided to go down, like 20% of other people",
+  "claim": "20.58% of players turned down at the first fork of the opening stretch.",
+  "tables": {
+   "round2": "data/round2.csv"
+  },
+  "code": "(round2.result.map(lambda s: next(q['x'] for q in __import__('json').loads(s) if q['y'] > 0)) == 4).mean() * 100"
+ },
+ {
+  "id": "median-optimality-by-lawn",
+  "source": "The green lines show the median optimality for each lawn.",
+  "claim": "Median optimality was 92.9% on level 1, 90.7% on level 2, 88.8% on level 3, 89.0% on level 4, and 91.2% on level 5, with 100.0% on the tutorial.",
+  "tables": {
+   "tutorial": "data/tutorial.csv",
+   "round1": "data/round1.csv",
+   "round2": "data/round2.csv",
+   "bonus1": "data/bonus1.csv",
+   "bonus2": "data/bonus2.csv",
+   "bonus3": "data/bonus3.csv"
+  },
+  "code": "pd.concat([tutorial.assign(level='tutorial', moves=tutorial.result.map(lambda s: len(__import__('json').loads(s)))), round1.assign(level='level 1', moves=round1.result.map(lambda s: len(__import__('json').loads(s)))), round2.assign(level='level 2', moves=round2.result.map(lambda s: len(__import__('json').loads(s)))), bonus1.assign(level='level 3', moves=bonus1.result.map(lambda s: len(__import__('json').loads(s)))), bonus2.assign(level='level 4', moves=bonus2.result.map(lambda s: len(__import__('json').loads(s)))), bonus3.assign(level='level 5', moves=bonus3.result.map(lambda s: len(__import__('json').loads(s))))]).groupby('level', sort=False).moves.apply(lambda s: round((s.min() / s).median() * 100, 1))"
+ },
+ {
+  "id": "largest-lawn-better",
+  "source": "Performance was actually slightly better on the largest lawn than the previous two",
+  "claim": "Median optimality was 91.2% on level 5, compared with 88.8% on level 3 and 89.0% on level 4.",
+  "tables": {
+   "bonus1": "data/bonus1.csv",
+   "bonus2": "data/bonus2.csv",
+   "bonus3": "data/bonus3.csv"
+  },
+  "code": "pd.concat([bonus1.assign(level='level 3', moves=bonus1.result.map(lambda s: len(__import__('json').loads(s)))), bonus2.assign(level='level 4', moves=bonus2.result.map(lambda s: len(__import__('json').loads(s)))), bonus3.assign(level='level 5', moves=bonus3.result.map(lambda s: len(__import__('json').loads(s))))]).groupby('level', sort=False).moves.apply(lambda s: round((s.min() / s).median() * 100, 1))"
+ },
+ {
+  "id": "pace-r2-4-9",
+  "source": "Technically speaking, time alone explains less than 5% of the variation in how people did (R 2 of 4.9%).",
+  "claim": "A linear fit of pace percentile against optimality percentile among people who finished every lawn has an R² of 0.049.",
+  "tables": {
+   "round1": "data/round1.csv",
+   "round2": "data/round2.csv",
+   "bonus1": "data/bonus1.csv",
+   "bonus2": "data/bonus2.csv",
+   "bonus3": "data/bonus3.csv"
+  },
+  "code": "(lambda d: np.corrcoef(d.groupby('user_id').pace.mean().rank(pct=True), d.groupby('user_id').eff.mean().rank(pct=True))[0,1]**2)(pd.concat([round1, round2, bonus1, bonus2, bonus3], keys=['level 1', 'level 2', 'level 3', 'level 4', 'level 5'], names=['level']).loc[lambda d: d.user_id.isin(bonus3.user_id)].assign(moves=lambda d: d.result.map(lambda s: len(__import__('json').loads(s))), ncov=lambda d: d.result.map(lambda s: len(set((q['x'], q['y']) for q in __import__('json').loads(s)))), secs=lambda d: d.result.map(lambda s: (__import__('json').loads(s)[-1]['t'] - __import__('json').loads(s)[0]['t']) / 1000)).assign(req=lambda d: d.groupby('level').ncov.transform('max'), opt=lambda d: d.groupby('level').moves.transform('min')).assign(pace=lambda d: d.secs / d.req, eff=lambda d: d.opt / d.moves))"
+ }
+]

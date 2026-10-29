@@ -1,0 +1,29 @@
+[
+  {
+    "id": "louisiana-2010-highest-rate",
+    "source": "Of all the stats about US prisons, Louisiana’s incarceration rate is among the most shocking. For every 100,000 residents, 868 are in state prison. That's 0.86% of Louisiana’s population, or nearly 1 in 100 (the worst among all states).",
+    "claim": "In 2010 Louisiana's state-prison rate was 868 per 100,000 residents, or 0.868% of its population, the highest of any state.",
+    "tables": {
+      "d": "data/incarceration_2.csv"
+    },
+    "code": "d.assign(rank=d.inc_2010.rank(ascending=False), pct=d.inc_2010/1000).loc[lambda x: x.inc_2010.idxmax(), ['state','inc_2010','rank','pct']]"
+  },
+  {
+    "id": "nine-of-top-ten-1910-south",
+    "source": "Fifty years after the abolishment of slavery, notice how nine of the top 10 incarceration states were in the South (Louisiana is fourth).",
+    "claim": "In 1910 nine of the ten states with the highest state-prison rates were former slave states, and Louisiana, at 121 per 100,000, ranked fourth.",
+    "tables": {
+      "d": "data/incarceration_2.csv"
+    },
+    "code": "d.assign(south=d.state.isin(['Alabama','Arkansas','Delaware','Florida','Georgia','Kentucky','Louisiana','Maryland','Mississippi','Missouri','North Carolina','South Carolina','Tennessee','Texas','Virginia'])).sort_values('inc_1910', ascending=False).head(10).assign(rank=lambda x: x.inc_1910.rank(ascending=False, method='min'), n_south=lambda x: x.south.sum())[['state','inc_1910','rank','south','n_south']]"
+  },
+  {
+    "id": "south-outpaces-north-2010",
+    "source": "Yet the South still outpaces the North.",
+    "claim": "In 2010 the 15 former slave states averaged 570.7 state prisoners per 100,000 residents, against 344.5 in the other 22 states.",
+    "tables": {
+      "d": "data/incarceration_2.csv"
+    },
+    "code": "d.assign(region=np.where(d.state.isin(['Alabama','Arkansas','Delaware','Florida','Georgia','Kentucky','Louisiana','Maryland','Mississippi','Missouri','North Carolina','South Carolina','Tennessee','Texas','Virginia']), 'South', 'North')).groupby('region').inc_2010.agg(['mean','count'])"
+  }
+]

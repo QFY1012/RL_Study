@@ -1,0 +1,38 @@
+[
+  {
+    "source": "We cooked up a “flair score” to measure how much each NBA team departed from the classic uniform format — the higher the score, the more often that team wore colors at home or wore white on the road. (Teams further received extra flair points for any time they busted out a City Edition uniform.)",
+    "why": "The story gives the scoring method (2 points for a colored jersey at home or a white jersey on the road, 3 for a City jersey) but never states a flair score value or a numeric ranking in its text or chart labels, so there is no number in the story for the data to reproduce."
+  },
+  {
+    "source": "The first chart below compares to what extent each team has added “flair” to their rotation, while the second chart visualizes the increase in jersey diversity compared with 10 seasons earlier.",
+    "why": "The flair chart and the change-in-flair chart show only a “Less flair / More flair” axis and team names; no numeric flair values or differences are printed in the page text, so no checkable number is stated."
+  },
+  {
+    "source": "SBNation ranked the Cavaliers’ 2023–24 City Edition a “A Tier (would buy without much hesitation), while the Clippers got an “F Tier (kill it with fire)” ranking.",
+    "why": "This is an external publication's ranking, not a computation from the jersey-wearing data in these files."
+  },
+  {
+    "source": "This year SBNation ranked Toronto’s Vince Carter-inspired dino dunking jersey as the top City Edition kit, with the Celtics, Lakers, Knicks, Thunder, and Heat at the bottom.",
+    "why": "This is an external publication's ranking, not a computation from the jersey-wearing data in these files."
+  },
+  {
+    "source": "Nike’s tenure as league outfitter has reduced the raw number of jerseys teams have",
+    "why": "No jersey count, period or definition is given in the story, and the two files only record which jersey was worn, not how many jerseys each team had."
+  },
+  {
+    "source": "having four (and sometimes 5 editions) per team",
+    "why": "This is a description of how many edition categories the data contains, not a data finding."
+  },
+  {
+    "source": "Some teams were happy to set tradition aside and wear their City jerseys quite often, as with the popular Spurs World’s Fair-inspired set or the Rockets’ “H-Town” design. Other teams, like the Cavaliers and Clippers, rolled out new City designs only to keep them in storage for most of the year.",
+    "why": "The story states no numbers here; the per-team City Edition game counts it alludes to are already reported by the edition-usage chart finding."
+  },
+  {
+    "source": "2023-24 Home",
+    "why": "The home colour-breakdown chart's percentages were not rendered in the page text I could read (only the away chart's 39%, 27% and 34% were), so the chart's own numbers could not be quoted and checked."
+  },
+  {
+    "source": "These were once almost exclusively the domain of Lakers-in-gold home games",
+    "why": "This is a claim about league history and the Lakers' jersey tradition, not a number computed from the 2023-24 or 2013-14 game files."
+  }
+]

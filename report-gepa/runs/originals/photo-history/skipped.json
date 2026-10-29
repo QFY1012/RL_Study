@@ -1,0 +1,22 @@
+[
+  {
+    "source": "The Milwaukee Journal first used color in its pages in 1891, but it took nearly another century for The New York Times to report in 1993 that \u201cnewspapers' adoption of color nearly complete\u201d with more than 97 percent of North American newspapers printing color on some of their pages.",
+    "why": "Historical background taken from external sources; the data files contain only quiz answers and photo dates, so none of these numbers can be computed from them."
+  },
+  {
+    "source": "Color photography has actually existed in some form or another since the mid 1800s",
+    "why": "Historical background from external sources, not a finding computed from the data files."
+  },
+  {
+    "source": "Can black and white photos really make us think that events that happened 50 years ago actually took place 100+ years ago?",
+    "why": "This is the authors' rhetorical framing question, not a quantitative result; the data files contain no measurement stated as a 50-year or 100-year error."
+  },
+  {
+    "source": "Dots for the last 100 people to date each photo are shown in light gray.",
+    "why": "The data files have no timestamp or response order, so the last 100 people to date each photo cannot be identified."
+  },
+  {
+    "source": "This results page shows you how your answers compare to how everyone else dated the photos.",
+    "why": "The personalized comparison requires an individual reader's quiz answers, which are not in the aggregate data files."
+  }
+]

@@ -1,0 +1,48 @@
+[
+ {
+  "id": "curry-2019-highest-paid",
+  "source": "S. Curry",
+  "claim": "Stephen Curry was the highest-paid player in 2019, with a salary of $37,457,154 and a VORP of 4.9.",
+  "tables": {
+   "s": "data/nba-seasons--2019_1.csv"
+  },
+  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce')).query('year == 2019 and G * MP >= 1300 and sal > 0').sort_values('sal').tail(1)[['name','sal','VORP']]"
+ },
+ {
+  "id": "harden-2019-highest-vorp",
+  "source": "J. Harden",
+  "claim": "James Harden had the highest VORP in 2019, 9.9, on a salary of $30,431,854.",
+  "tables": {
+   "s": "data/nba-seasons--2019_1.csv"
+  },
+  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce')).query('year == 2019 and G * MP >= 1300 and sal > 0').sort_values('VORP').tail(1)[['name','VORP','sal']]"
+ },
+ {
+  "id": "giannis-2019-mvp-value",
+  "source": "Giannis",
+  "claim": "Giannis Antetokounmpo posted a VORP of 7.6 in 2019 while earning $24,157,304.",
+  "tables": {
+   "s": "data/nba-seasons--2019_1.csv"
+  },
+  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce')).query(\"year == 2019 and name == 'Giannis Antetokounmpo' and G*MP >= 1300\")[['name','sal','VORP','G','MP']]"
+ },
+ {
+  "id": "wiggins-2019-lowest-vorp-high-pay",
+  "source": "A. Wiggins",
+  "claim": "Among 2019 players paid at least $20 million, Andrew Wiggins had the lowest VORP, -0.6, on a salary of $25,467,250.",
+  "tables": {
+   "s": "data/nba-seasons--2019_1.csv"
+  },
+  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce')).query('year == 2019 and G*MP >= 1300 and sal >= 20000000')[['name','sal','VORP']].sort_values('VORP').head(3)"
+ },
+ {
+  "id": "carmelo-2018-lowest-vorp-high-pay",
+  "source": "The worst contract ever",
+  "claim": "Carmelo Anthony's 2017-18 season with the Oklahoma City Thunder had a VORP of -1.1 on a salary of $26,243,760 ($26.7 million in 2019 dollars), the lowest VORP of any player paid at least $20 million in 2019 dollars since 1988.",
+  "tables": {
+   "s": "data/nba-seasons--2019_1.csv",
+   "inf": "data/inflation-2019.csv"
+  },
+  "code": "s.assign(year=s.Season.str[:4].astype(int)+1, sal=pd.to_numeric(s.Salary, errors='coerce'), sal19=pd.to_numeric(s.Salary, errors='coerce')*inf.set_index('Year').Avg.loc[2019]/(s.Season.str[:4].astype(int)+1).map(inf.set_index('Year').Avg)).query('year >= 1988 and G*MP >= 1300 and sal19 >= 20000000').sort_values('VORP').head(3)[['name','Season','Team','VORP','Salary','sal19']]"
+ }
+]

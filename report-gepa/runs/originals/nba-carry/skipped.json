@@ -1,0 +1,10 @@
+[
+  {
+    "source": "some of the most epic carry jobs were done by finals losers, who maybe just needed one more piece to the puzzle to win it all.",
+    "why": "This is qualitative ('some of the most epic') and the story defines no cutoff for 'most epic'; any top-N count would impose a threshold the story does not use."
+  },
+  {
+    "source": "Players with more uniform impact are clustered closer together, and those with standout performances are higher and more separated.",
+    "why": "A qualitative description of the scatter chart's shape, with no numeric value, ranking, share or threshold to compute."
+  }
+]

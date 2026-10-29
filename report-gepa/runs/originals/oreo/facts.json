@@ -1,0 +1,110 @@
+[
+  {
+    "id": "oreo-seventh-four-letter-answer",
+    "source": "OREO is the seventh most used four-letter answer since 1993",
+    "claim": "OREO is seventh by count among four-letter answers, with 2,912 appearances (0.19%); the six ahead are AREA (4,600), ERIE (3,779), ALOE (3,674), ARIA (3,547), ELSE (3,141) and ANTE (2,947).",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.sort_values('count',ascending=False).head(7)[['answer','count','percent']]"
+  },
+  {
+    "id": "oreo-top-five-letters",
+    "source": "It has three of the five most used letters in crosswords, making it an easy word for puzzle constructors to fit with other words.",
+    "claim": "The five most-used letters in crossword answers are E (13.7%), A (11.5%), S (8.8%), O (7.5%) and R (7.2%), so OREO's E, O and R are three of them.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "pd.Series(np.exp(np.linalg.lstsq(np.array([[a.count(ch) for ch in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'] for a in s.loc[s['answer'].notna() & (s['prob']>0),'answer']],dtype=float), np.log(s.loc[s['answer'].notna() & (s['prob']>0),'prob'].astype(float)),rcond=None)[0]),index=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')).mul(100).sort_values(ascending=False).round(1).head(5)"
+  },
+  {
+    "id": "four-letter-even-vs-oreo-share",
+    "source": "Possible words 9,608\nEven share 0.01%\nOREO share 0.19%",
+    "claim": "Among 9,608 possible four-letter answers, an even share is 0.0104% each while OREO's share is 0.185%.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s['count'].agg(['size','sum']).to_frame().T.assign(even_share_pct=lambda d: 100/d['size'], oreo_share_pct=lambda d: 100*s.loc[s['answer'].eq('OREO'),'count'].sum()/d['sum'])"
+  },
+  {
+    "id": "most-used-and-most-probable-answers",
+    "source": "Most used AREA\nMost probable EEEE",
+    "claim": "AREA is the most-used four-letter answer, with 4,600 appearances, and EEEE is the most probable under the letter-frequency weighting, with probability 0.000357.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.loc[[s['count'].idxmax(), s['prob'].idxmax()], ['answer','count','prob']]"
+  },
+  {
+    "id": "pattern-eo-seventeen-answers",
+    "source": "There have been 17 different answers in this scenario, which would mean picking one at random you would get OREO about 6% of the time.",
+    "claim": "Seventeen different four-letter answers match the pattern _ _ E O, so a random pick among them would be OREO about 5.88% of the time.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.loc[(s['answer'].fillna('').str[2:4]=='EO'),'answer'].agg(['nunique']).rename('n_unique').to_frame().assign(random_share=lambda d: 1/d['n_unique'])"
+  },
+  {
+    "id": "pattern-eo-oreo-usage-share",
+    "source": "However, OREO accounts for 48% of the usage.",
+    "claim": "OREO accounts for 47.7% of all appearances among the answers matching _ _ E O.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.loc[(s['answer'].fillna('').str[2:4]=='EO') & s['answer'].eq('OREO'),'count'].sum()/s.loc[s['answer'].fillna('').str[2:4]=='EO','count'].sum()"
+  },
+  {
+    "id": "pattern-eo-third-probable",
+    "source": "Even if you consider the frequency of letters, OREO is only the third most statistically probable, behind words like AREO (Mars prefix) and ATEO (Polynesian god).",
+    "claim": "Among answers matching _ _ E O, OREO has the third-highest weighted probability (0.000056), behind AREO (0.000086) and ATEO (0.000085).",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.loc[s['answer'].fillna('').str[2:4]=='EO'].sort_values('prob',ascending=False)[['answer','prob']].head(3)"
+  },
+  {
+    "id": "weighted-probability-one-in-18000",
+    "source": "But when we use the observed letter frequency to weight letter selection, it jumps to .0055% (about 1 in 18,000).",
+    "claim": "OREO's letter-frequency-weighted probability is 0.005568%, about 1 in 17,960.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s.loc[s['answer'].eq('OREO'), ['prob']].assign(percent=lambda d: d['prob']*100, one_in=lambda d: 1/d['prob'])"
+  },
+  {
+    "id": "chart-excludes-eeee-eees",
+    "source": "Note: this chart excludes \"EEEE\" and \"EEES\" which have probabilities of 0.036% and 0.023%",
+    "claim": "EEEE and EEES have weighted probabilities of 0.03568% and 0.02297% (0.036% and 0.023% when rounded).",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s[s['answer'].isin(['EEEE','EEES'])][['answer','prob']].assign(percent=lambda d: d['prob']*100)"
+  },
+  {
+    "id": "ten-most-similar-clues",
+    "source": "The ten most similar clues (times used)",
+    "claim": "The ten most similar OREO clues, by times used, are Sandwich cookie (122), Black-and-white cookie (95), Popular cookie (75), Sweet sandwich (60), Creme-filled cookie (60), Nabisco cookie (57), Cookie favorite (39), Layered cookie (37), Black-and-white treat (35) and Two-tone treat (31).",
+    "tables": {
+      "c": "data/xd-oreo-clues-freq-1993.csv"
+    },
+    "code": "c.nlargest(10,'count')[['clue','count']]"
+  },
+  {
+    "id": "sandwich-cookie-over-100",
+    "source": "\"Sandwich cookie\" has appeared verbatim over 100 times.",
+    "claim": "The clue 'Sandwich cookie' appears 122 times.",
+    "tables": {
+      "c": "data/xd-oreo-clues-freq-1993.csv"
+    },
+    "code": "c.loc[c['clue'].eq('Sandwich cookie'),'count']"
+  },
+  {
+    "id": "oreo-usage-vs-probability-rank",
+    "source": "OREO is quite overused compared to most of the other 9,607 words.",
+    "claim": "OREO ranks 7th by number of appearances but 386th by weighted probability among the four-letter answers.",
+    "tables": {
+      "s": "data/xd-four-letter-score-1993.csv"
+    },
+    "code": "s[['count','prob']].rank(ascending=False,method='min').loc[s['answer'].eq('OREO')]"
+  }
+]

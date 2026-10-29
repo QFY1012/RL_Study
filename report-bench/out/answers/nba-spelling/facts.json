@@ -1,0 +1,11 @@
+[
+ {
+  "id": "top-eight-spellings-per-player",
+  "source": "The charts below show the top 8 most common permutations for each NBA player in our test from 25,123 reader submissions.",
+  "claim": "Sorting each player's reader spellings by response count and keeping the top eight gives the permutations in the charts: antetokounmpo's eight run from 'antetokounmpo' (669) through 'antetekounpo' (41), and doncic's run from 'doncic' (1491) through 'djoncic' (6).",
+  "tables": {
+   "spellings": "data/spellings.csv"
+  },
+  "code": "spellings.sort_values(['name', 'count'], ascending=[True, False], kind='mergesort').groupby('name').head(8).to_string()"
+ }
+]

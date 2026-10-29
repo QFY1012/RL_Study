@@ -1,0 +1,70 @@
+[
+  {
+    "source": "Of the thousands of playlists that I found titled “punk” on Spotify, Blink-182 is on half of them.",
+    "why": "The files give blink-182's punk-playlist count (1,481) but not the total number of punk playlists, so the 45%/half share cannot be computed. The count and top rank are in facts.json."
+  },
+  {
+    "source": "Percent of Genre-titled Playlists on which Band Appears at Least Once",
+    "why": "The files contain artist counts per genre but not the total number of playlists in each genre, so the chart's per-genre percentage shares (45%, 39%, 35%, 34%, 31%, 27%, 25%, 24%, ... down to 10%, and the Fall Out Boy labels 27%, 31%, 34%, 6% and 1%) cannot be computed. The underlying counts and rankings are in facts.json."
+  },
+  {
+    "source": "Bring Me The Horizon, who’s on a third of metalcore playlists, is a good candidate.",
+    "why": "The total number of metalcore playlists is absent, so the one-third share cannot be computed. Bring Me The Horizon's count (1,009) and top rank are in facts.json."
+  },
+  {
+    "source": "While Agnostic Front appears most often, it’s only at 12% of “hardcore” playlists.",
+    "why": "The total number of hardcore playlists is absent, so the 12% share cannot be computed. Agnostic Front's count (371) and top rank are in facts.json."
+  },
+  {
+    "source": "For playlists titled with \"post-punk,\" there’s remarkable agreement: Joy Division is synonymous with the genre (>30% of playlists).",
+    "why": "The total number of post-punk playlists is absent, so the >30% share cannot be computed. Joy Division's count (1,032) and top rank are in facts.json."
+  },
+  {
+    "source": "For hardcore, it’s the complete opposite: no one band dominates.",
+    "why": "The supporting 12% share cannot be computed because the hardcore playlist total is absent; the top artist's count (371) is in facts.json but the dominance comparison to the genre total is not reproducible."
+  },
+  {
+    "source": "Punk is the most frequent label for Blink-182, followed by pop-punk and skate-punk.",
+    "why": "The artist-count file has blink-182 with 1,481 punk and 1,232 pop-punk appearances, but emo (453) is its third most frequent label and skate-punk (122) is sixth, so the stated skate-punk ranking is not reproduced."
+  },
+  {
+    "source": "No Doubt, once a breakthrough success for ska punk in the 90s, is barely referenced on punk playlists today.",
+    "why": "There is no total number of punk playlists to turn No Doubt's 140 punk appearances into a 'barely' share, and its 140 punk appearances are almost the same as its 142 ska-punk appearances, so the claim is not reproduced."
+  },
+  {
+    "source": "While the sample size is smaller than I’d like, the two genres are pretty similar by generation. In fact, punk playlists with Blink-182 actually skew older than pop-punk playlists.",
+    "why": "No playlist-creator age or birth-decade data is present in the files."
+  },
+  {
+    "source": "So in 2015, older and younger generations can at least agree on Blink-182.",
+    "why": "No playlist-creator age or birth-decade data is present in the files."
+  },
+  {
+    "source": "Blink-182: Number of \"Punk\" and \"Pop-punk\" Playlists, by Playlist Creator's Decade of Birth",
+    "why": "No playlist-creator age or birth-decade data is present in the files."
+  },
+  {
+    "source": "“Riot Grrrl” denotes an underground feminist movement in hardcore punk during the early 90s, but only 2 playlists exist for Riot Grrrl on Spotify.",
+    "why": "There are no per-genre total playlist counts, and riot grrrl does not appear in the artist-count file, so the count of 2 cannot be computed."
+  },
+  {
+    "source": "“Cowpunk” was coined to denote country + punk fusion. But it’s very difficult to find in modern usage.",
+    "why": "There are no playlist counts for cowpunk in the files; it is absent from artist_counts5, so its modern usage cannot be computed."
+  },
+  {
+    "source": "“Emo” has changed from emotional-core to emocore to emo (and now other derivatives, such as screamo). That’s 25 years for the label to be rejected, embraced, and reshaped by both bands and fans.",
+    "why": "The genre list gives emo as 1993, emocore as 1985 and screamo as 1991, but no endpoint that yields a 25-year span, so the 25 years cannot be computed."
+  },
+  {
+    "source": "Some genres are stuck in time.",
+    "why": "This is a qualitative characterization; the supporting per-genre share (>30%) cannot be computed because genre playlist totals are absent."
+  },
+  {
+    "source": "Unlike post-punk, post-hardcore’s identity has evolved to contemporary bands.",
+    "why": "This is a qualitative characterization; the data gives top artists and counts but no metric for an identity changing over time."
+  },
+  {
+    "source": "It also suggests that the lines among these genres are blurring.",
+    "why": "This is a qualitative interpretation of Fall Out Boy's genre counts; the files do not measure blurring, and the per-genre share labels lack denominators."
+  }
+]

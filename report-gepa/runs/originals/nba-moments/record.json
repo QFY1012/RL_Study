@@ -1,0 +1,136 @@
+{
+ "id": "nba-moments",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 209,
+  "steps": 18,
+  "tools": 19,
+  "nudged": 0,
+  "usage": {
+   "input": 18069,
+   "output": 28137
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 14,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "top5-2000s",
+   "basis": "Output rows show 5 titles with views 27,179,256; 21,625,200; 9,377,700; 7,822,632; 6,029,208, matching the claimed order and numbers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top5-1990s",
+   "basis": "Output rows show 5 titles with views 34,843,786; 11,990,355; 10,604,507; 6,491,582; 6,475,361, matching the claimed order and numbers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top5-1980s",
+   "basis": "Output rows show 5 titles with views 5,756,462; 3,178,044; 1,958,433; 1,780,790; 1,186,732, matching the claimed order and numbers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "most-viewed-all-time",
+   "basis": "Output top row is Jordan's last 3 minutes as a Bull with 34,843,786 views.",
+   "verdict": "ok"
+  },
+  {
+   "id": "second-third-all-time",
+   "basis": "Output top 3 rows are 34,843,786; 27,179,256; 21,625,200, matching the claimed ranks and numbers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "reggie-miller-sixth",
+   "basis": "Output 6th 1990s row is Reggie Miller scores 8 points in 9 seconds with 5,155,258 views.",
+   "verdict": "ok"
+  },
+  {
+   "id": "one-ewing-highlight",
+   "basis": "Output has one matching row in the top 100 1990s moments: Jordan dunks on Ewing, players include Patrick Ewing, with 1,305,645 views.",
+   "verdict": "ok"
+  },
+  {
+   "id": "three-of-top5-jordan-1980s",
+   "basis": "Output is sum=3 and count=5 for Michael Jordan in the top 5 1980s moments.",
+   "verdict": "ok"
+  },
+  {
+   "id": "experts-list-1980s-ranks",
+   "basis": "Output ranks and views: Ralph Sampson hits game-winner rank 26 with 215,365; Tree Bites Man rank 31 with 160,278; The Sleepy Floyd Game rank 42 with 102,835.",
+   "verdict": "ok"
+  },
+  {
+   "id": "jordan-share-1990s-top100",
+   "basis": "Output is sum=66.00 and mean=0.66 for Michael Jordan among the top 100 1990s moments.",
+   "verdict": "ok"
+  },
+  {
+   "id": "curry-21-of-top100-season",
+   "basis": "Output is sum=21 and count=100 for Stephen Curry among the top 100 moments in decade 2017.",
+   "verdict": "ok"
+  },
+  {
+   "id": "booker-number-one-season",
+   "basis": "Output top 2017 row is Booker scores 70 points with 5,107,020 views.",
+   "verdict": "ok"
+  },
+  {
+   "id": "westbrook-number-two-season",
+   "basis": "Output top 2 2017 rows are Booker scores 70 points with 5,107,020 and Westbrook scores record 42nd triple-double with 3,913,351.",
+   "verdict": "ok"
+  },
+  {
+   "id": "no-pre-1985-in-top100",
+   "basis": "Output for dates <=1984 in the top 100 is sum=0 and count=100, so none are dated 1980-1984.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "second-third-all-time",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "curry-21-of-top100-season",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "booker-number-one-season",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "westbrook-number-two-season",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  }
+ ],
+ "answer": 10,
+ "skipped": 5,
+ "review": [
+  {
+   "id": "second-third-all-time",
+   "action": "drop",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "curry-21-of-top100-season",
+   "action": "drop",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "booker-number-one-season",
+   "action": "drop",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  },
+  {
+   "id": "westbrook-number-two-season",
+   "action": "drop",
+   "why": "the quote is from the companion piece on googletrends.github.io/google_nba ('The Most-Watched NBA Moments, by Decade'), made from the same data, not from the story at pudding.cool/2017/05/nba-moments/"
+  }
+ ]
+}

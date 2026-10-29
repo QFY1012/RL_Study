@@ -5,20 +5,48 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 3,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 833,
+  "steps": 100,
+  "tools": 160,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 136409,
+   "output": 51933
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: d9768955-7478-4283-85a0-3fe394f33769)"
+  "stop": "stop",
+  "error": null
  },
- "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/real-mvp/facts.json'"
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "curry-2019-highest-paid",
+   "basis": "Output row: name Stephen Curry, sal 37457154.0, VORP 4.9.",
+   "verdict": "ok"
+  },
+  {
+   "id": "harden-2019-highest-vorp",
+   "basis": "Output row: name James Harden, VORP 9.9, sal 30431854.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "giannis-2019-mvp-value",
+   "basis": "Output row: name Giannis Antetokounmpo, sal 24157304.0, VORP 7.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wiggins-2019-lowest-vorp-high-pay",
+   "basis": "Output sorted by VORP: Andrew Wiggins -0.6 with sal 25467250.0, followed by Harrison Barnes -0.2 and Jabari Parker 0.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "carmelo-2018-lowest-vorp-high-pay",
+   "basis": "Output row: Carmelo Anthony, Season 2017-18, Team OKC, VORP -1.1, Salary 26243760, sal19 2.666641e+07; next lowest shown are -0.8 and -0.7.",
+   "verdict": "ok"
+  }
  ],
- "skipped": null
+ "dropped": [],
+ "answer": 5,
+ "skipped": 3
 }

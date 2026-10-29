@@ -1,0 +1,58 @@
+{
+ "id": "music-bubble",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 784,
+  "steps": 73,
+  "tools": 92,
+  "nudged": 0,
+  "usage": {
+   "input": 131194,
+   "output": 90277
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "usa-five-number-one-songs",
+   "basis": "Output lists five songs: good 4 u 236 cities/30.930537%, Butter 217/28.440367%, RAPSTAR 71/9.305374%, MONTERO 67/8.781127%, Outside 43/5.635649%. These match the claimed rounded counts/shares and the >4 cities/>4% cut.",
+   "verdict": "ok"
+  },
+  {
+   "id": "columbus-rapstar-number-one",
+   "basis": "Output has one row for Columbus: RAPSTAR by Polo G with views=200000. Since the code used nlargest(1,'views') within Columbus, this supports RAPSTAR as the top song by views and the 200,000 views claim.",
+   "verdict": "ok"
+  },
+  {
+   "id": "london-canada-body-remix-367km",
+   "basis": "Output gives London, CA, track_name=Body (Remix), artist_name=Tion Wayne, Russ, dist=366.821179 km, views=3700000. The code selects the nsmallest(1,'dist') outside the US and not among the US top-five songs, supporting the claim.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "columbus-rapstar-number-one",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "london-canada-body-remix-367km",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 1,
+ "skipped": 9,
+ "review": [
+  {
+   "id": "*",
+   "action": "keep",
+   "why": "the page names the song of the reader's own city (it placed the agent's browser in Columbus); the two dropped Columbus facts depend on where the reader is, not on the story"
+  }
+ ]
+}

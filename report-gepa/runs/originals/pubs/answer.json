@@ -1,0 +1,20 @@
+[
+ {
+  "id": "red-lion-most-popular",
+  "source": "And if you were looking to take in a pint at each Red Lion, well good luck, there are 339 and that's one hell of a pub crawl.",
+  "claim": "Red Lion is the most common pub name, with 339 pubs.",
+  "tables": {
+   "d": "data/pub-addresses-v2.csv"
+  },
+  "code": "d.stripped.value_counts().head(1)"
+ },
+ {
+  "id": "three-most-common-names",
+  "source": "That means 339 pints at Red Lions, or 258 pints at Royal Oaks, or 176 pints at Crown Inns — the three most common pub names.",
+  "claim": "The three most common pub names are Red Lion (339 pubs), Royal Oak (258 pubs) and Crown Inn (176 pubs).",
+  "tables": {
+   "d": "data/pub-addresses-v2.csv"
+  },
+  "code": "d.stripped.value_counts().head(3)"
+ }
+]

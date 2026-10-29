@@ -1,0 +1,10 @@
+[
+  {
+    "source": "In our data set, 15% of film writers were women; 85% were men.",
+    "why": "The files hold per-word rates only (word-level counts and rates for female- and male-written scripts; wall.csv for all scripts). None of them records writers or scripts, so a share of writers by gender cannot be computed from these tables."
+  },
+  {
+    "source": "In April 2016, we broke down film dialogue by gender. The essay presented an imbalance in which men delivered more lines than women across 2,000 screenplays.",
+    "why": "This finding comes from the authors' earlier dialogue study, not from this screen-direction data: the methodology here states that dialogue was excluded from the analysis, and the three files contain only word counts/rates for screen-direction bigrams beginning with \"he\" or \"she\"."
+  }
+]

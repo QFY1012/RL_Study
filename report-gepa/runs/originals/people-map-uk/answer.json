@@ -1,0 +1,11 @@
+[
+ {
+  "id": "map-city-resident-labels",
+  "source": "A People Map of the UK, where city names are replaced by their most Wikipedia’ed resident: people born in, lived in, or connected to a place.",
+  "claim": "For the ten labelled cities, the resident with the highest median pageviews and that median are Mayfair–Elizabeth II (32467.0), Edinburgh–Mary, Queen of Scots (16092.0), Aberdeen–Winston Churchill (15029.0), Halifax–Ed Sheeran (12654.0), Consett–Rowan Atkinson (9086.5), Ballymena–Liam Neeson (8838.0), Haverfordwest–Christian Bale (7683.0), Blickling–Anne Boleyn (6479.0), Birmingham–Ozzy Osbourne (6274.5) and Plymouth–Tim Curry (4685.5).",
+  "tables": {
+   "d": "data/people-map-uk.csv"
+  },
+  "code": "d[d.city_clean.isin(['Aberdeen','Ballymena','Edinburgh','Consett','Halifax','Blickling','Haverfordwest','Birmingham','Mayfair','Plymouth'])].assign(resident=lambda x: x.link.str.replace('_', ' ')).sort_values('views_median', ascending=False).drop_duplicates('city', keep='first')[['city_clean','resident','views_median']]"
+ }
+]

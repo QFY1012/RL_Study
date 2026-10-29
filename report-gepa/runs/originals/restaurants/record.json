@@ -5,20 +5,20 @@
  "run": {
   "model": "deepseek-flash",
   "effort": "high",
-  "seconds": 2,
-  "steps": 4,
-  "tools": 0,
-  "nudged": 3,
+  "seconds": 301,
+  "steps": 27,
+  "tools": 36,
+  "nudged": 0,
   "usage": {
-   "input": 0,
-   "output": 0
+   "input": 40491,
+   "output": 37648
   },
-  "stop": "error",
-  "error": "401 Authentication Fails, Your api key: ****7ed3 is invalid (request_id: 10dc4685-63e9-451a-99dd-9ed023efbea2)"
+  "stop": "stop",
+  "error": null
  },
  "facts": 0,
- "problems": [
-  "facts.json: [Errno 2] No such file or directory: 'runs/originals/restaurants/facts.json'"
- ],
- "skipped": null
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 10
 }

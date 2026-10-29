@@ -1,0 +1,165 @@
+{
+ "id": "music-dna",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 989,
+  "steps": 101,
+  "tools": 126,
+  "nudged": 0,
+  "usage": {
+   "input": 79909,
+   "output": 123164
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 25,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "monk-higgins-covers-ray-charles",
+   "basis": "Output row: I Believe to My Soul by Monk Higgins 1968-01-01 samples I Believe to My Soul by Ray Charles 1961-01-01.",
+   "verdict": "ok"
+  },
+  {
+   "id": "not-like-us-samples-i-believe",
+   "basis": "Output row: Not Like Us by Kendrick Lamar 2024-01-01 samples I Believe to My Soul by Monk Higgins 1968-01-01.",
+   "verdict": "ok"
+  },
+  {
+   "id": "inspector-gadget-samples-in-the-hall",
+   "basis": "Output row: Inspector Gadget by Haim Saban 1982-12-04 samples In the Hall of the Mountain King by Edvard Grieg 1876-02-24.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hit-em-up-orchestral-lineage",
+   "basis": "Output has 5 rows forming the chain Hit ’Em Up -> Player’s Anthem -> Big Poppa -> Bad Boys -> Inspector Gadget -> In the Hall of the Mountain King; links=5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "isaac-hayes-samples-dionne-warwick",
+   "basis": "Output row: Walk on By by Isaac Hayes 1969-09-23 samples Walk on By by Dionne Warwick 1964-08-31.",
+   "verdict": "ok"
+  },
+  {
+   "id": "warning-samples-isaac-hayes",
+   "basis": "Output row: Warning by The Notorious B.I.G. 1994-09-13 samples Walk on By by Isaac Hayes 1969-09-23.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hit-em-up-descends-from-warning",
+   "basis": "Output rows form Hit ’Em Up -> Gettin’ Money (Get Money Remix) -> Get Money -> Warning; links=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hit-em-up-hiphop-lineage",
+   "basis": "Output rows form Hit ’Em Up -> 10% Dis -> Top Billin’ -> Go Stetsa I -> Looking Out My Window; links=4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hit-em-up-funk-lineage",
+   "basis": "Output rows: Hit ’Em Up -> Don’t Look Any Further and Don’t Look Any Further -> Blind Man Can See It; links=2.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hit-em-up-released-120-years-later",
+   "basis": "Output shows In the Hall of the Mountain King 1876-02-24 and Hit ’Em Up 1996-06-04 with years=120.273785.",
+   "verdict": "ok"
+  },
+  {
+   "id": "in-the-hall-tree-has-833-songs",
+   "basis": "Output value is 833 distinct songs.",
+   "verdict": "ok"
+  },
+  {
+   "id": "in-the-hall-tree-spans-five-generations",
+   "basis": "Output value is 5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "the-worst-great-great-great-grandchild",
+   "basis": "Output rows form The Worst -> Excuse Me Miss -> Big Poppa -> Bad Boys -> Inspector Gadget -> In the Hall of the Mountain King; links=5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "what-if-reaches-in-the-hall",
+   "basis": "Output rows form What if… -> Shimmy Shimmy Ya -> Show & Prove -> The Show -> Inspector Gadget -> In the Hall of the Mountain King; links=5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "funky-drummer-second-generation",
+   "basis": "Output shows Let the Words Flow, Mama Said Knock You Out, South Bronx, and Pump Up the Bass each sample Funky Drummer; and The Power, Jenny from the Block, Wild Wild West, and Rub You The Right Way sample those respective parents.",
+   "verdict": "ok"
+  },
+  {
+   "id": "murder-she-wrote-sources-four-modern-songs",
+   "basis": "Output has 4 rows: Shaky Shaky 2016-04-08, Freaks 2013-02-14, Post to Be 2014-11-11, and Labios Mordidos 2023-01-01 all sample Murder She Wrote; songs=4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "stalag-17-sources-murder-she-wrote-and-bam-bam",
+   "basis": "Output rows: Murder She Wrote 1992-01-01 -> Stalag 17 1973-01-01 and Bam Bam 1982-01-01 -> Stalag 17 1973-01-01.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bam-bam-sources-three-songs",
+   "basis": "Output has 3 rows: Do to Me 2020-07-08, Bam 2017-06-30, and Lost Ones 1998-08-25 all sample Bam Bam by Sister Nancy 1982-01-01; songs=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "shake-it-three-source-tracks",
+   "basis": "Output has 3 rows: Shake It samples Temperature by Sean Paul, Bananza (Belly Dancer) by Akon, and Is Ya Ready by Kay Flock; sources=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "shake-it-also-samples-buffalo-springfield-and-fun-boy-three",
+   "basis": "Output rows: Shake It samples For What It's Worth by Buffalo Springfield and The Lunatics by Fun Boy Three.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cool-for-the-summer-and-cheers-sample-gin-and-juice-and-gotta-get-mine",
+   "basis": "Output has 4 rows: Cheers (Drink to That) 2010 and Cool for the Summer 2015 each sample both Gin and Juice and Gotta Get Mine.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bops-goin-brazy-samples-ice-ice-baby",
+   "basis": "Output row: Bops Goin Brazy by Tyga 2023-01-01 samples Ice Ice Baby by Vanilla Ice 1990-08-22.",
+   "verdict": "ok"
+  },
+  {
+   "id": "solar-power-samples-rock-dj",
+   "basis": "Output rows: Solar Power by Lorde 2021-06-10 -> Rock DJ by Robbie Williams 2000-07-31 -> Can I Kick It? by A Tribe Called Quest 1990-04-17.",
+   "verdict": "ok"
+  },
+  {
+   "id": "how-low-can-you-go-chain",
+   "basis": "Output rows form How Low Can You Go -> How Low -> Bring the Noise -> Limbo Rock; links=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "chubby-checker-limbo-rock-samples-the-champs",
+   "basis": "Output row: Limbo Rock by Chubby Checker 1962-08-01 samples Limbo Rock by The Champs 1961-01-01.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "hit-em-up-funk-lineage",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "murder-she-wrote-sources-four-modern-songs",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "solar-power-samples-rock-dj",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 22,
+ "skipped": 16
+}
