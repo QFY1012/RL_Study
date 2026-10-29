@@ -1,0 +1,230 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.897,
+  "where": "「Median consultation length is 10.4 minutes in the test arm a」;「Volume was not stable across the six weeks: sessions per wee」;「The file is usable, but it needs cleaning before it can be t」",
+  "reason": "29 节里 3 节不为前面的观点或问题服务:报告测试组咨询时长中位数和均值都短于对照组。;说明六周内每周会话量从2,409增至3,546（+47.2%），并描述12月9日后对照组的等待跳升而测试组保持较低。;说明数据可用但需清洗，标签需去空格、日期需规范化，否则分组和窗口会错。",
+  "opening": 2,
+  "sections": [
+   {
+    "start": "The test arm cut the median wait for a doctor's first reply from 110 to 88 seconds — a fifth less waiting, across the whole distribution.",
+    "serves": null,
+    "how": "总述测试组首回复中位等待从110秒降到88秒，但完成率和7天回访不变，平均掩盖新用户回访增加与皮肤科放弃增加两个相反效应。",
+    "holds": false
+   },
+   {
+    "start": "One row per user session on an online medical consultation service.",
+    "serves": null,
+    "how": "说明数据表每行是一次用户会话，包含用户类型、主诉与科室、是否放弃、是否完成、等待和咨询时长、7天回访等字段。",
+    "holds": false
+   },
+   {
+    "start": "Whatever the change was, it worked on its own terms.",
+    "serves": "The test arm cut the median wait for a doctor's first reply from 110 to 88 seconds — a fifth less waiting, across the whole distribution.",
+    "how": "用中位数从110.0秒降到88.0秒以及第10到95百分位同比例左移，证明等待确实下降。",
+    "holds": true
+   },
+   {
+    "start": "Twenty-two seconds saved per patient, 17,000 times over, and the three metrics that matter commercially did not budge.",
+    "serves": "Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.",
+    "how": "给出完成率87.94%对88.02%、放弃率5.30%对4.74%、7天回访12.15%对12.31%，说明下游指标基本没动、放弃率名义变差。",
+    "holds": true
+   },
+   {
+    "start": "The +0.56 point abandonment gap gives z = 1.72, short of 1.96.",
+    "serves": "Abandonment before a doctor replies is 5.30% against 4.74% — nominally worse.",
+    "how": "用两比例z检验说明总体放弃差距不显著（z=1.72），但分科室后皮肤科z=4.67，显示平均掩盖分段效应。",
+    "holds": true
+   },
+   {
+    "start": "Once a doctor has replied, the consultation almost always finishes: completion among the 17,097 users who reached a doctor is between 90.5% and 93.1% across every wait bucket from under a minute to ten minutes.",
+    "serves": "Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.",
+    "how": "用各等待桶中到达医生后的完成率稳定在90.5%–93.1%，解释等待90秒还是150秒不会改变后续完成。",
+    "holds": true
+   },
+   {
+    "start": "first_response_seconds is blank on exactly the 903 rows flagged lost_before_doctor.",
+    "serves": "Abandonment before a doctor replies is 5.30% against 4.74% — nominally worse.",
+    "how": "说明放弃者没有记录等待时间，时钟在离开时停止，因此数据无法把测得等待与放弃行为链接起来，放弃率只能作为独立结果解读。",
+    "holds": true
+   },
+   {
+    "start": "Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.",
+    "serves": null,
+    "how": "报告测试组咨询时长中位数和均值都短于对照组。",
+    "holds": false
+   },
+   {
+    "start": "Part of the mean gap is artefact: six of the seven consultations recorded at exactly 640 minutes are in the control arm, and excluding them the means are 11.59 vs 12.61 .",
+    "serves": "Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.",
+    "how": "排除集中在对照组的640分钟异常值后均值差缩小，说明部分均值差距是伪影。",
+    "holds": true
+   },
+   {
+    "start": "The residual shortening is consistent with a faster, more transactional exchange — which sits oddly with a retention goal, and matches what §6 finds for returning users.",
+    "serves": "Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.",
+    "how": "把残余缩短解释为更快速交易化的交流，并指出这与留存目标矛盾、与后文老用户回访下降相符。",
+    "holds": true
+   },
+   {
+    "start": "Split the arms by department and the null result falls apart.",
+    "serves": "The flat average hides two opposite effects: new users came back 3.0 points more often , while dermatology patients gave up before a doctor ever replied 5.1 points more often .",
+    "how": "分科室显示五个科室中四个在完成率和放弃率上都更好，唯独皮肤科放弃率升至12.71%、完成率降至80.51%。",
+    "holds": true
+   },
+   {
+    "start": "All five dermatology complaints regress, and none of them marginally: the test arm loses 11.7%–13.9% of users before a doctor replies against 6.0%–9.7% in control.",
+    "serves": "In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .",
+    "how": "展示皮肤科五个主诉全部明显退步，说明不是单一主诉问题。",
+    "holds": true
+   },
+   {
+    "start": "The dermatology gap is not sampling noise: 191 of 1,503 test users were lost against 124 of 1,618 control users, a two-proportion z of 4.67 .",
+    "serves": "In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .",
+    "how": "用z=4.67说明皮肤科差距不是抽样噪声。",
+    "holds": true
+   },
+   {
+    "start": "Strip dermatology out and the test arm completes 89.43% of sessions (6,693 of 7,484) against 88.67% in control (6,557 of 7,395) — a +0.76 point lift that the pooled average was cancelling out.",
+    "serves": "Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.",
+    "how": "排除皮肤科后完成率出现+0.76点提升，说明总体完成率不变被皮肤科的下降抵消了。",
+    "holds": true
+   },
+   {
+    "start": "Even in control, 皮肤科 has the lowest completion (85.04%), the highest abandonment (7.66%) and the lowest follow-up (8.30%) of the five departments, and its five complaints occupy the bottom five rows of the complaint ladder in §8.",
+    "serves": "In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .",
+    "how": "用控制组皮肤科基线最差、五个主诉位于投诉阶梯底部，说明该科室最无余量，路由变化先在这里显现。",
+    "holds": true
+   },
+   {
+    "start": "Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.",
+    "serves": "The flat average hides two opposite effects: new users came back 3.0 points more often , while dermatology patients gave up before a doctor ever replied 5.1 points more often .",
+    "how": "分用户类型显示新用户7天回访升3.00点（z=4.1）、老用户降1.71点（z=-2.7），两者都显著，证明总体持平是相反效应抵消。",
+    "holds": true
+   },
+   {
+    "start": "New users are the group whose baseline follow-up is lowest — 8.32% against 14.07% for returning users — so they have the most to gain from a first contact that feels responsive.",
+    "serves": "Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.",
+    "how": "用新用户基线回访最低解释其受益最大，用老用户已有关系且咨询变短解释其回访略降。",
+    "holds": true
+   },
+   {
+    "start": "Completion does not show this split — new users complete 88.52% in test versus 88.12% in control and returning users 87.67% versus 87.97% — so the effect is on return behaviour, not on finishing the visit .",
+    "serves": "Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.",
+    "how": "用完成率分用户类型几乎无差，说明新老用户分化发生在回访行为而非完成就诊。",
+    "holds": true
+   },
+   {
+    "start": "If the change ships only to new users , it captures the +3.00 pp follow-up gain with no dermatology exposure to speak of in that segment, and it avoids the returning-user regression entirely.",
+    "serves": "Among 新用户 new users the test arm lifts 7-day follow-up from 6.84% to 9.84% (+3.00 pp, z = 4.1). Among 老用户 returning users it drops from 14.93% to 13.22% (−1.71 pp, z = −2.7).",
+    "how": "由新用户增益、老用户回归和皮肤科风险推出只对新用户上线是更小更安全的方案。",
+    "holds": true
+   },
+   {
+    "start": "Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.",
+    "serves": null,
+    "how": "说明六周内每周会话量从2,409增至3,546（+47.2%），并描述12月9日后对照组的等待跳升而测试组保持较低。",
+    "holds": false
+   },
+   {
+    "start": "Because the first three weeks and the last three weeks are effectively different experiments (light load vs heavy load), the pooled comparison in §3 mixes two regimes.",
+    "serves": "Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.",
+    "how": "说明前后三周负荷不同，合并中位数混合轻/重负荷两种状态，且两臂差距扩大意味着20%标题低估当前负荷下的收益。",
+    "holds": true
+   },
+   {
+    "start": "Completion varies from 81.0% for 手臂上起红疹,特别痒 (arm rash, 612 users) to 91.1% for 鼻子不通,黄鼻涕多 (blocked nose, 403) and 经期量突然变多 (heavy periods, 505).",
+    "serves": "Even in control, 皮肤科 has the lowest completion (85.04%), the highest abandonment (7.66%) and the lowest follow-up (8.30%) of the five departments, and its five complaints occupy the bottom five rows of the complaint ladder in §8.",
+    "how": "用主诉完成率81.0%–91.1%的10点差距且最差五个均为皮肤科，说明科室效应远大于实验效应。",
+    "holds": true
+   },
+   {
+    "start": "The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.",
+    "serves": null,
+    "how": "说明数据可用但需清洗，标签需去空格、日期需规范化，否则分组和窗口会错。",
+    "holds": false
+   },
+   {
+    "start": "Wait time is unobservable exactly where it matters.",
+    "serves": "The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.",
+    "how": "详述903个放弃者没有first_response_seconds，导致“等待是否导致离开”的核心因果问题无法用此表回答，需记录time-to-abandon。",
+    "holds": true
+   },
+   {
+    "start": "Do not ship the change as tested.",
+    "serves": "One is a reason to ship; the other is a reason to fix the rollout first.",
+    "how": "基于完成率总体null、放弃率名义回归和皮肤科显著回归，建议不要按测试原样上线。",
+    "holds": true
+   },
+   {
+    "start": "Fix dermatology routing before anything else.",
+    "serves": "In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .",
+    "how": "建议先查皮肤科路由，因五个皮肤科主诉全部退步，指向容量/路由问题而非单一症状。",
+    "holds": true
+   },
+   {
+    "start": "Re-run scoped to new users.",
+    "serves": "Among 新用户 new users the test arm lifts 7-day follow-up from 6.84% to 9.84% (+3.00 pp, z = 4.1). Among 老用户 returning users it drops from 14.93% to 13.22% (−1.71 pp, z = −2.7).",
+    "how": "建议只对新用户重跑并测30天，因新用户增益明确而老用户有损失。",
+    "holds": true
+   },
+   {
+    "start": "Stop reporting raw means for wait time.",
+    "serves": "The median first reply drops from 110.0 s in control to 88.0 s in the test arm, a 20% cut, and it is not a median-only trick: every percentile from the 10th to the 95th moves left by a similar proportion.",
+    "how": "用控制组均值被19.8小时异常值抬高说明应报p50/p90/p95，而非受异常值影响的原始均值。",
+    "holds": true
+   },
+   {
+    "start": "Instrument abandonment.",
+    "serves": "first_response_seconds is blank on exactly the 903 rows flagged lost_before_doctor.",
+    "how": "建议记录离开时间和队列状态，否则核心假设不可测、皮肤科回归只能观察不能解释。",
+    "holds": true
+   },
+   {
+    "start": "Clean the pipeline at the source.",
+    "serves": "The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.",
+    "how": "建议源头清洗分组标签和日期，并调查640分钟上限及九个>900秒等待，因上限疑似会话超时被写成咨询时长。",
+    "holds": true
+   },
+   {
+    "start": "Re-read the test against current load.",
+    "serves": "Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.",
+    "how": "建议按重负荷周单独分析，因流量增长47%且第4周后两臂分化，当前负荷下收益可能大于合并20%。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"The test arm cut the median wait for a doctor's first reply from 110 to 88 seconds — a fifth less waiting, across the whole distribution.\",\"serves\":null,\"how\":\"总述测试组首回复中位等待从110秒降到88秒，但完成率和7天回访不变，平均掩盖新用户回访增加与皮肤科放弃增加两个相反效应。\"},{\"start\":\"One row per user session on an online medical consultation service.\",\"serves\":null,\"how\":\"说明数据表每行是一次用户会话，包含用户类型、主诉与科室、是否放弃、是否完成、等待和咨询时长、7天回访等字段。\"},{\"start\":\"Whatever the change was, it worked on its own terms.\",\"serves\":\"The test arm cut the median wait for a doctor's first reply from 110 to 88 seconds — a fifth less waiting, across the whole distribution.\",\"how\":\"用中位数从110.0秒降到88.0秒以及第10到95百分位同比例左移，证明等待确实下降。\"},{\"start\":\"Twenty-two seconds saved per patient, 17,000 times over, and the three metrics that matter commercially did not budge.\",\"serves\":\"Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.\",\"how\":\"给出完成率87.94%对88.02%、放弃率5.30%对4.74%、7天回访12.15%对12.31%，说明下游指标基本没动、放弃率名义变差。\"},{\"start\":\"The +0.56 point abandonment gap gives z = 1.72, short of 1.96.\",\"serves\":\"Abandonment before a doctor replies is 5.30% against 4.74% — nominally worse.\",\"how\":\"用两比例z检验说明总体放弃差距不显著（z=1.72），但分科室后皮肤科z=4.67，显示平均掩盖分段效应。\"},{\"start\":\"Once a doctor has replied, the consultation almost always finishes: completion among the 17,097 users who reached a doctor is between 90.5% and 93.1% across every wait bucket from under a minute to ten minutes.\",\"serves\":\"Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.\",\"how\":\"用各等待桶中到达医生后的完成率稳定在90.5%–93.1%，解释等待90秒还是150秒不会改变后续完成。\"},{\"start\":\"first_response_seconds is blank on exactly the 903 rows flagged lost_before_doctor.\",\"serves\":\"Abandonment before a doctor replies is 5.30% against 4.74% — nominally worse.\",\"how\":\"说明放弃者没有记录等待时间，时钟在离开时停止，因此数据无法把测得等待与放弃行为链接起来，放弃率只能作为独立结果解读。\"},{\"start\":\"Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.\",\"serves\":null,\"how\":\"报告测试组咨询时长中位数和均值都短于对照组。\"},{\"start\":\"Part of the mean gap is artefact: six of the seven consultations recorded at exactly 640 minutes are in the control arm, and excluding them the means are 11.59 vs 12.61 .\",\"serves\":\"Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.\",\"how\":\"排除集中在对照组的640分钟异常值后均值差缩小，说明部分均值差距是伪影。\"},{\"start\":\"The residual shortening is consistent with a faster, more transactional exchange — which sits oddly with a retention goal, and matches what §6 finds for returning users.\",\"serves\":\"Median consultation length is 10.4 minutes in the test arm against 11.2 in control, and the mean is 11.67 vs 13.09 minutes.\",\"how\":\"把残余缩短解释为更快速交易化的交流，并指出这与留存目标矛盾、与后文老用户回访下降相符。\"},{\"start\":\"Split the arms by department and the null result falls apart.\",\"serves\":\"The flat average hides two opposite effects: new users came back 3.0 points more often , while dermatology patients gave up before a doctor ever replied 5.1 points more often .\",\"how\":\"分科室显示五个科室中四个在完成率和放弃率上都更好，唯独皮肤科放弃率升至12.71%、完成率降至80.51%。\"},{\"start\":\"All five dermatology complaints regress, and none of them marginally: the test arm loses 11.7%–13.9% of users before a doctor replies against 6.0%–9.7% in control.\",\"serves\":\"In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .\",\"how\":\"展示皮肤科五个主诉全部明显退步，说明不是单一主诉问题。\"},{\"start\":\"The dermatology gap is not sampling noise: 191 of 1,503 test users were lost against 124 of 1,618 control users, a two-proportion z of 4.67 .\",\"serves\":\"In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .\",\"how\":\"用z=4.67说明皮肤科差距不是抽样噪声。\"},{\"start\":\"Strip dermatology out and the test arm completes 89.43% of sessions (6,693 of 7,484) against 88.67% in control (6,557 of 7,395) — a +0.76 point lift that the pooled average was cancelling out.\",\"serves\":\"Yet completion did not move at all (87.94% versus 88.02%), and neither did 7-day follow-up.\",\"how\":\"排除皮肤科后完成率出现+0.76点提升，说明总体完成率不变被皮肤科的下降抵消了。\"},{\"start\":\"Even in control, 皮肤科 has the lowest completion (85.04%), the highest abandonment (7.66%) and the lowest follow-up (8.30%) of the five departments, and its five complaints occupy the bottom five rows of the complaint ladder in §8.\",\"serves\":\"In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .\",\"how\":\"用控制组皮肤科基线最差、五个主诉位于投诉阶梯底部，说明该科室最无余量，路由变化先在这里显现。\"},{\"start\":\"Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.\",\"serves\":\"The flat average hides two opposite effects: new users came back 3.0 points more often , while dermatology patients gave up before a doctor ever replied 5.1 points more often .\",\"how\":\"分用户类型显示新用户7天回访升3.00点（z=4.1）、老用户降1.71点（z=-2.7），两者都显著，证明总体持平是相反效应抵消。\"},{\"start\":\"New users are the group whose baseline follow-up is lowest — 8.32% against 14.07% for returning users — so they have the most to gain from a first contact that feels responsive.\",\"serves\":\"Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.\",\"how\":\"用新用户基线回访最低解释其受益最大，用老用户已有关系且咨询变短解释其回访略降。\"},{\"start\":\"Completion does not show this split — new users complete 88.52% in test versus 88.12% in control and returning users 87.67% versus 87.97% — so the effect is on return behaviour, not on finishing the visit .\",\"serves\":\"Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.\",\"how\":\"用完成率分用户类型几乎无差，说明新老用户分化发生在回访行为而非完成就诊。\"},{\"start\":\"If the change ships only to new users , it captures the +3.00 pp follow-up gain with no dermatology exposure to speak of in that segment, and it avoids the returning-user regression entirely.\",\"serves\":\"Among 新用户 new users the test arm lifts 7-day follow-up from 6.84% to 9.84% (+3.00 pp, z = 4.1). Among 老用户 returning users it drops from 14.93% to 13.22% (−1.71 pp, z = −2.7).\",\"how\":\"由新用户增益、老用户回归和皮肤科风险推出只对新用户上线是更小更安全的方案。\"},{\"start\":\"Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.\",\"serves\":null,\"how\":\"说明六周内每周会话量从2,409增至3,546（+47.2%），并描述12月9日后对照组的等待跳升而测试组保持较低。\"},{\"start\":\"Because the first three weeks and the last three weeks are effectively different experiments (light load vs heavy load), the pooled comparison in §3 mixes two regimes.\",\"serves\":\"Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.\",\"how\":\"说明前后三周负荷不同，合并中位数混合轻/重负荷两种状态，且两臂差距扩大意味着20%标题低估当前负荷下的收益。\"},{\"start\":\"Completion varies from 81.0% for 手臂上起红疹,特别痒 (arm rash, 612 users) to 91.1% for 鼻子不通,黄鼻涕多 (blocked nose, 403) and 经期量突然变多 (heavy periods, 505).\",\"serves\":\"Even in control, 皮肤科 has the lowest completion (85.04%), the highest abandonment (7.66%) and the lowest follow-up (8.30%) of the five departments, and its five complaints occupy the bottom five rows of the complaint ladder in §8.\",\"how\":\"用主诉完成率81.0%–91.1%的10点差距且最差五个均为皮肤科，说明科室效应远大于实验效应。\"},{\"start\":\"The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.\",\"serves\":null,\"how\":\"说明数据可用但需清洗，标签需去空格、日期需规范化，否则分组和窗口会错。\"},{\"start\":\"Wait time is unobservable exactly where it matters.\",\"serves\":\"The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.\",\"how\":\"详述903个放弃者没有first_response_seconds，导致“等待是否导致离开”的核心因果问题无法用此表回答，需记录time-to-abandon。\"},{\"start\":\"Do not ship the change as tested.\",\"serves\":\"One is a reason to ship; the other is a reason to fix the rollout first.\",\"how\":\"基于完成率总体null、放弃率名义回归和皮肤科显著回归，建议不要按测试原样上线。\"},{\"start\":\"Fix dermatology routing before anything else.\",\"serves\":\"In 皮肤科 dermatology it is sharply worse: 12.71% of test users are lost before a doctor replies against 7.66% in control, and completion falls from 85.04% to 80.51% .\",\"how\":\"建议先查皮肤科路由，因五个皮肤科主诉全部退步，指向容量/路由问题而非单一症状。\"},{\"start\":\"Re-run scoped to new users.\",\"serves\":\"Among 新用户 new users the test arm lifts 7-day follow-up from 6.84% to 9.84% (+3.00 pp, z = 4.1). Among 老用户 returning users it drops from 14.93% to 13.22% (−1.71 pp, z = −2.7).\",\"how\":\"建议只对新用户重跑并测30天，因新用户增益明确而老用户有损失。\"},{\"start\":\"Stop reporting raw means for wait time.\",\"serves\":\"The median first reply drops from 110.0 s in control to 88.0 s in the test arm, a 20% cut, and it is not a median-only trick: every percentile from the 10th to the 95th moves left by a similar proportion.\",\"how\":\"用控制组均值被19.8小时异常值抬高说明应报p50/p90/p95，而非受异常值影响的原始均值。\"},{\"start\":\"Instrument abandonment.\",\"serves\":\"first_response_seconds is blank on exactly the 903 rows flagged lost_before_doctor.\",\"how\":\"建议记录离开时间和队列状态，否则核心假设不可测、皮肤科回归只能观察不能解释。\"},{\"start\":\"Clean the pipeline at the source.\",\"serves\":\"The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.\",\"how\":\"建议源头清洗分组标签和日期，并调查640分钟上限及九个>900秒等待，因上限疑似会话超时被写成咨询时长。\"},{\"start\":\"Re-read the test against current load.\",\"serves\":\"Volume was not stable across the six weeks: sessions per week climb from 2,409 to 3,546 , a 47.2% increase.\",\"how\":\"建议按重负荷周单独分析，因流量增长47%且第4周后两臂分化，当前负荷下收益可能大于合并20%。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 3202,
+   "completion_tokens": 15630,
+   "seconds": 75.8
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "文章没有写出任何有名字或可辨认的具体个体；新用户、老用户、皮肤科患者、手臂红疹主诉等都是类别或数据行，不是有意图、会面对处境并经历后续的个体。全文以汇总比例、z 值、分部门/分用户类型统计和行动建议为主，没有按个体故事展开，也没有让读者透过具体个体看到数据整体。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"文章没有写出任何有名字或可辨认的具体个体；新用户、老用户、皮肤科患者、手臂红疹主诉等都是类别或数据行，不是有意图、会面对处境并经历后续的个体。全文以汇总比例、z 值、分部门/分用户类型统计和行动建议为主，没有按个体故事展开，也没有让读者透过具体个体看到数据整体。\"}",
+   "finish": "stop",
+   "prompt_tokens": 3336,
+   "completion_tokens": 396,
+   "seconds": 6.6
+  }
+ }
+}

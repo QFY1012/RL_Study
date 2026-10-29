@@ -1,0 +1,10651 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/pockets/data/measurements.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 531,
+     "left": 217,
+     "w": 1006,
+     "h": 346,
+     "sig": "993bb3b1"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 81,
+     "left": 217,
+     "w": 1006,
+     "h": 346,
+     "sig": "993bb3b1"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 838,
+     "left": 217,
+     "w": 1006,
+     "h": 365,
+     "sig": "924bd4f1"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 388,
+     "left": 217,
+     "w": 1006,
+     "h": 365,
+     "sig": "924bd4f1"
+    },
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 854,
+     "left": 217,
+     "w": 1006,
+     "h": 262,
+     "sig": "1d595a39"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -62,
+     "left": 217,
+     "w": 1006,
+     "h": 365,
+     "sig": "924bd4f1"
+    },
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 404,
+     "left": 217,
+     "w": 1006,
+     "h": 262,
+     "sig": "1d595a39"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": -46,
+     "left": 217,
+     "w": 1006,
+     "h": 262,
+     "sig": "1d595a39"
+    }
+   ]
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 490,
+     "left": 217,
+     "w": 1006,
+     "h": 628,
+     "sig": "e2f04683"
+    }
+   ]
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 40,
+     "left": 217,
+     "w": 1006,
+     "h": 628,
+     "sig": "e2f04683"
+    }
+   ]
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": -410,
+     "left": 217,
+     "w": 1006,
+     "h": 628,
+     "sig": "e2f04683"
+    },
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": 620,
+     "left": 217,
+     "w": 1006,
+     "h": 325,
+     "sig": "7de70f65"
+    }
+   ]
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 4050,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": 170,
+     "left": 217,
+     "w": 1006,
+     "h": 325,
+     "sig": "7de70f65"
+    }
+   ]
+  },
+  {
+   "file": "frames/10.jpg",
+   "scroll_y": 4500,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": -280,
+     "left": 217,
+     "w": 1006,
+     "h": 325,
+     "sig": "7de70f65"
+    },
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": 501,
+     "left": 217,
+     "w": 1006,
+     "h": 451,
+     "sig": "fc7f5384"
+    }
+   ]
+  },
+  {
+   "file": "frames/11.jpg",
+   "scroll_y": 4950,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": 51,
+     "left": 217,
+     "w": 1006,
+     "h": 451,
+     "sig": "fc7f5384"
+    }
+   ]
+  },
+  {
+   "file": "frames/12.jpg",
+   "scroll_y": 5400,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": -399,
+     "left": 217,
+     "w": 1006,
+     "h": 451,
+     "sig": "fc7f5384"
+    },
+    {
+     "id": 7,
+     "kind": "svg",
+     "top": 490,
+     "left": 217,
+     "w": 1006,
+     "h": 220,
+     "sig": "be2c125e"
+    }
+   ]
+  },
+  {
+   "file": "frames/13.jpg",
+   "scroll_y": 5850,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 7,
+     "kind": "svg",
+     "top": 40,
+     "left": 217,
+     "w": 1006,
+     "h": 220,
+     "sig": "be2c125e"
+    }
+   ]
+  },
+  {
+   "file": "frames/14.jpg",
+   "scroll_y": 6300,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/15.jpg",
+   "scroll_y": 6750,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/16.jpg",
+   "scroll_y": 6785,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    1006,
+    346
+   ],
+   "frames": [
+    1,
+    2
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    1006,
+    365
+   ],
+   "frames": [
+    2,
+    4
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 3,
+   "kind": "svg",
+   "size": [
+    1006,
+    262
+   ],
+   "frames": [
+    3,
+    5
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 4,
+   "kind": "svg",
+   "size": [
+    1006,
+    628
+   ],
+   "frames": [
+    6,
+    8
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 5,
+   "kind": "svg",
+   "size": [
+    1006,
+    325
+   ],
+   "frames": [
+    8,
+    10
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 6,
+   "kind": "svg",
+   "size": [
+    1006,
+    451
+   ],
+   "frames": [
+    10,
+    12
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 7,
+   "kind": "svg",
+   "size": [
+    1006,
+    220
+   ],
+   "frames": [
+    12,
+    13
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "p",
+   "y": 64,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data report · 80 pairs of jeans"
+  },
+  {
+   "tag": "h1",
+   "y": 102,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pocket gap"
+  },
+  {
+   "tag": "p",
+   "y": 186,
+   "x": 198,
+   "w": 651,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front and back pocket measurements of men’s and women’s jeans from popular brands. Measured with the same tape on both departments, the average women’s front pocket is about 58% the size of the average men’s — and price, cut and brand explain none of it."
+  },
+  {
+   "tag": "p",
+   "y": 338,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80 pairs · 40 women’s · 40 men’s · 21 brand labels · 5 styles · prices $9.99–$249.00 · 10 measurements per pair"
+  },
+  {
+   "tag": "div",
+   "y": 463,
+   "x": 215,
+   "w": 186,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.13 vs 14.33 cm"
+  },
+  {
+   "tag": "div",
+   "y": 463,
+   "x": 449,
+   "w": 202,
+   "in_svg": false,
+   "hidden": false,
+   "text": "378.4 vs 218.0 cm²"
+  },
+  {
+   "tag": "div",
+   "y": 463,
+   "x": 699,
+   "w": 209,
+   "in_svg": false,
+   "hidden": false,
+   "text": "40 of 40 vs 12 of 40"
+  },
+  {
+   "tag": "div",
+   "y": 463,
+   "x": 956,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.919"
+  },
+  {
+   "tag": "div",
+   "y": 463,
+   "x": 1115,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−0.07"
+  },
+  {
+   "tag": "div",
+   "y": 505,
+   "x": 215,
+   "w": 186,
+   "in_svg": false,
+   "hidden": false,
+   "text": "average front-pocket depth, men’s vs women’s"
+  },
+  {
+   "tag": "div",
+   "y": 505,
+   "x": 449,
+   "w": 202,
+   "in_svg": false,
+   "hidden": false,
+   "text": "average front-pocket area (depth × widest width)"
+  },
+  {
+   "tag": "div",
+   "y": 505,
+   "x": 699,
+   "w": 209,
+   "in_svg": false,
+   "hidden": false,
+   "text": "front pockets deep enough for a 15 cm phone"
+  },
+  {
+   "tag": "div",
+   "y": 505,
+   "x": 956,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "back-pocket area, women’s as a share of men’s"
+  },
+  {
+   "tag": "div",
+   "y": 505,
+   "x": 1115,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "correlation of price with front-pocket area"
+  },
+  {
+   "tag": "div",
+   "y": 563,
+   "x": 215,
+   "w": 186,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women’s are 0.62× as deep"
+  },
+  {
+   "tag": "div",
+   "y": 563,
+   "x": 449,
+   "w": 202,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women’s get 58% of the room"
+  },
+  {
+   "tag": "div",
+   "y": 563,
+   "x": 699,
+   "w": 209,
+   "in_svg": false,
+   "hidden": false,
+   "text": "all 80 clear the width test"
+  },
+  {
+   "tag": "div",
+   "y": 563,
+   "x": 956,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "back pockets are nearly equal"
+  },
+  {
+   "tag": "div",
+   "y": 563,
+   "x": 1115,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "money does not buy room"
+  },
+  {
+   "tag": "h2",
+   "y": 694,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 The gap is real, and it is huge"
+  },
+  {
+   "tag": "p",
+   "y": 745,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every pair in the file was measured the same way: the deepest point of the front pocket, the widest and narrowest points of its opening, and the same four numbers for the back pocket. Plot the front-pocket depth of all 80 pairs and the two departments barely overlap. Women’s pockets run from 11.5 to 21.5 cm with a median of 14 cm; men’s run from 20 to 28 cm with a median of 22.5 cm. The deepest women’s pocket in the whole dataset is shallower than the median men’s pocket, and 39 of the 40 women’s pairs are shallower than the single shallowest men’s pair."
+  },
+  {
+   "tag": "text",
+   "y": 999,
+   "x": 571,
+   "w": 162,
+   "in_svg": true,
+   "hidden": false,
+   "text": "a large phone is 15 cm tall"
+  },
+  {
+   "tag": "text",
+   "y": 1049,
+   "x": 680,
+   "w": 172,
+   "in_svg": true,
+   "hidden": false,
+   "text": "deepest women’s pocket 21.5"
+  },
+  {
+   "tag": "text",
+   "y": 1072,
+   "x": 234,
+   "w": 189,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Women's jeans — 40 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 1094,
+   "x": 234,
+   "w": 109,
+   "in_svg": true,
+   "hidden": false,
+   "text": "average 14.33 cm"
+  },
+  {
+   "tag": "text",
+   "y": 1143,
+   "x": 488,
+   "w": 62,
+   "in_svg": true,
+   "hidden": false,
+   "text": "median 14"
+  },
+  {
+   "tag": "text",
+   "y": 1204,
+   "x": 234,
+   "w": 166,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Men's jeans — 40 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 1226,
+   "x": 234,
+   "w": 108,
+   "in_svg": true,
+   "hidden": false,
+   "text": "average 23.13 cm"
+  },
+  {
+   "tag": "text",
+   "y": 1244,
+   "x": 613,
+   "w": 172,
+   "in_svg": true,
+   "hidden": false,
+   "text": "shallowest men’s pocket 20.0"
+  },
+  {
+   "tag": "text",
+   "y": 1275,
+   "x": 859,
+   "w": 75,
+   "in_svg": true,
+   "hidden": false,
+   "text": "median 22.5"
+  },
+  {
+   "tag": "text",
+   "y": 1290,
+   "x": 334,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10121416182022242628"
+  },
+  {
+   "tag": "text",
+   "y": 1309,
+   "x": 642,
+   "w": 242,
+   "in_svg": true,
+   "hidden": false,
+   "text": "deepest point of the front pocket (cm)"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1337,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each dot is one pair of jeans. Hover for the brand, cut and price."
+  },
+  {
+   "tag": "h2",
+   "y": 1478,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 It is depth, not width"
+  },
+  {
+   "tag": "p",
+   "y": 1530,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women’s front pockets are almost as wide as men’s — 15.18 cm against 16.37 cm, or 0.928 of the men’s width. It is the vertical measurement that collapses: 14.33 cm against 23.13 cm, only 0.619 of the men’s depth. Multiply depth by width and the average men’s front pocket holds 378.4 cm² while the average women’s holds 218.0 cm² — 0.576 of it, a shortfall of 160.4 cm². Width is never what stops a phone going in: the narrowest point of the opening is at least 11.0 cm on all 80 pairs."
+  },
+  {
+   "tag": "text",
+   "y": 1748,
+   "x": 374,
+   "w": 209,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Men’s average front pocket"
+  },
+  {
+   "tag": "text",
+   "y": 1748,
+   "x": 823,
+   "w": 234,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Women’s average front pocket"
+  },
+  {
+   "tag": "text",
+   "y": 1771,
+   "x": 432,
+   "w": 94,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16.37 cm wide"
+  },
+  {
+   "tag": "text",
+   "y": 1771,
+   "x": 894,
+   "w": 91,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15.18 cm wide"
+  },
+  {
+   "tag": "text",
+   "y": 1794,
+   "x": 1022,
+   "w": 150,
+   "in_svg": true,
+   "hidden": false,
+   "text": "phone sticks out 0.7 cm"
+  },
+  {
+   "tag": "text",
+   "y": 1855,
+   "x": 784,
+   "w": 60,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.33 cm"
+  },
+  {
+   "tag": "text",
+   "y": 1872,
+   "x": 566,
+   "w": 191,
+   "in_svg": true,
+   "hidden": false,
+   "text": "phone fits with 8.1 cm to spare"
+  },
+  {
+   "tag": "text",
+   "y": 1894,
+   "x": 319,
+   "w": 59,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.13 cm"
+  },
+  {
+   "tag": "text",
+   "y": 1945,
+   "x": 801,
+   "w": 278,
+   "in_svg": true,
+   "hidden": false,
+   "text": "218.0 cm² of pocket · the phone will not go in"
+  },
+  {
+   "tag": "text",
+   "y": 2023,
+   "x": 353,
+   "w": 253,
+   "in_svg": true,
+   "hidden": false,
+   "text": "378.4 cm² of pocket · the phone drops in"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2112,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Both pockets and the phone are drawn to the same scale. The phone is 15 cm tall and 7.5 cm wide — the size of a large modern handset, used here as a fixed yardstick."
+  },
+  {
+   "tag": "text",
+   "y": 2213,
+   "x": 252,
+   "w": 214,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women’s pocket as a share of men’s"
+  },
+  {
+   "tag": "text",
+   "y": 2230,
+   "x": 337,
+   "w": 129,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Front pocket depth"
+  },
+  {
+   "tag": "text",
+   "y": 2230,
+   "x": 652,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.619"
+  },
+  {
+   "tag": "text",
+   "y": 2231,
+   "x": 707,
+   "w": 118,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(14.33 vs 23.13 cm)"
+  },
+  {
+   "tag": "text",
+   "y": 2268,
+   "x": 339,
+   "w": 128,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Front pocket width"
+  },
+  {
+   "tag": "text",
+   "y": 2268,
+   "x": 949,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.928"
+  },
+  {
+   "tag": "text",
+   "y": 2269,
+   "x": 1003,
+   "w": 115,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(15.18 vs 16.37 cm)"
+  },
+  {
+   "tag": "text",
+   "y": 2306,
+   "x": 347,
+   "w": 119,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Front pocket area"
+  },
+  {
+   "tag": "text",
+   "y": 2306,
+   "x": 611,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.576"
+  },
+  {
+   "tag": "text",
+   "y": 2307,
+   "x": 665,
+   "w": 128,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(218.0 vs 378.4 cm²)"
+  },
+  {
+   "tag": "text",
+   "y": 2344,
+   "x": 339,
+   "w": 127,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Back pocket depth"
+  },
+  {
+   "tag": "text",
+   "y": 2344,
+   "x": 965,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.945"
+  },
+  {
+   "tag": "text",
+   "y": 2345,
+   "x": 1020,
+   "w": 113,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(15.12 vs 16.01 cm)"
+  },
+  {
+   "tag": "text",
+   "y": 2381,
+   "x": 341,
+   "w": 126,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Back pocket width"
+  },
+  {
+   "tag": "text",
+   "y": 2381,
+   "x": 993,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.974"
+  },
+  {
+   "tag": "text",
+   "y": 2382,
+   "x": 1048,
+   "w": 119,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(13.34 vs 13.70 cm)"
+  },
+  {
+   "tag": "text",
+   "y": 2419,
+   "x": 349,
+   "w": 118,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Back pocket area"
+  },
+  {
+   "tag": "text",
+   "y": 2419,
+   "x": 940,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.919"
+  },
+  {
+   "tag": "text",
+   "y": 2420,
+   "x": 995,
+   "w": 125,
+   "in_svg": true,
+   "hidden": false,
+   "text": "(201.8 vs 219.7 cm²)"
+  },
+  {
+   "tag": "text",
+   "y": 2439,
+   "x": 954,
+   "w": 108,
+   "in_svg": true,
+   "hidden": false,
+   "text": "men’s level = 1.00"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2476,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women’s average as a share of men’s, measure by measure. Front measurements in rust, back measurements in clay."
+  },
+  {
+   "tag": "h2",
+   "y": 2617,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 Back pockets tell a different story"
+  },
+  {
+   "tag": "p",
+   "y": 2668,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The same tape measure on the back pockets finds two departments that are practically even: men’s average 16.01 × 13.70 cm for 219.7 cm², women’s 15.12 × 13.34 cm for 201.8 cm². That is 0.919 of the men’s area and a depth gap of only 0.89 cm, against the 8.80 cm chasm in front. Whatever constrains women’s front pockets, it is not the amount of fabric the brand is willing to spend on a pocket."
+  },
+  {
+   "tag": "h2",
+   "y": 2903,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04 Every brand does it"
+  },
+  {
+   "tag": "p",
+   "y": 2955,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Split the file by brand and the pattern never breaks: in all 19 brands measured in both departments, the men’s front pockets average deeper than the women’s. The most even-handed brand is Abercrombie , whose women’s pairs still lose 2.5 cm of depth (19.75 vs 22.25 cm); on area that is a ratio of 1.10×. The widest gap belongs to Levi’s at 13.4 cm (12.35 vs 25.75 cm), with Gap the worst on area at 2.38× (165.2 vs 393.8 cm²). Wrangler gives men the deepest front pockets of any brand, 27.75 cm on average, while its women’s pairs get 14.5 cm."
+  },
+  {
+   "tag": "text",
+   "y": 3197,
+   "x": 577,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3201,
+   "x": 367,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "brand"
+  },
+  {
+   "tag": "text",
+   "y": 3201,
+   "x": 1141,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "gap"
+  },
+  {
+   "tag": "text",
+   "y": 3231,
+   "x": 361,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "text",
+   "y": 3232,
+   "x": 1141,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+13.4 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3260,
+   "x": 339,
+   "w": 63,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "text",
+   "y": 3261,
+   "x": 1141,
+   "w": 60,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+13.2 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3288,
+   "x": 358,
+   "w": 43,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "text",
+   "y": 3289,
+   "x": 1141,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+12.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3316,
+   "x": 377,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "text",
+   "y": 3317,
+   "x": 1141,
+   "w": 58,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+11.4 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3345,
+   "x": 339,
+   "w": 63,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "text",
+   "y": 3346,
+   "x": 1141,
+   "w": 58,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+11.2 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3373,
+   "x": 350,
+   "w": 51,
+   "in_svg": true,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "text",
+   "y": 3374,
+   "x": 1141,
+   "w": 58,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+11.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3401,
+   "x": 349,
+   "w": 53,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "text",
+   "y": 3402,
+   "x": 1141,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+10.8 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3429,
+   "x": 312,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "text",
+   "y": 3430,
+   "x": 1141,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+10.5 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3458,
+   "x": 298,
+   "w": 104,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "text",
+   "y": 3459,
+   "x": 1141,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+10.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3486,
+   "x": 312,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "text",
+   "y": 3487,
+   "x": 1141,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+9.4 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3514,
+   "x": 374,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "text",
+   "y": 3515,
+   "x": 1141,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+9.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3543,
+   "x": 321,
+   "w": 81,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "text",
+   "y": 3544,
+   "x": 1141,
+   "w": 54,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+8.8 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3571,
+   "x": 360,
+   "w": 42,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "text",
+   "y": 3572,
+   "x": 1141,
+   "w": 52,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+7.8 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3599,
+   "x": 358,
+   "w": 44,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "text",
+   "y": 3600,
+   "x": 1141,
+   "w": 52,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+7.8 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3627,
+   "x": 314,
+   "w": 87,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "text",
+   "y": 3628,
+   "x": 1141,
+   "w": 54,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+6.2 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3656,
+   "x": 347,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "text",
+   "y": 3657,
+   "x": 1141,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+5.4 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3684,
+   "x": 294,
+   "w": 107,
+   "in_svg": true,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "text",
+   "y": 3685,
+   "x": 1141,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+4.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3712,
+   "x": 369,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "text",
+   "y": 3713,
+   "x": 1141,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+4.0 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3741,
+   "x": 313,
+   "w": 88,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "text",
+   "y": 3742,
+   "x": 1141,
+   "w": 54,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+2.5 cm"
+  },
+  {
+   "tag": "text",
+   "y": 3785,
+   "x": 410,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10121416182022242628"
+  },
+  {
+   "tag": "text",
+   "y": 3802,
+   "x": 668,
+   "w": 207,
+   "in_svg": true,
+   "hidden": false,
+   "text": "average front-pocket depth (cm)"
+  },
+  {
+   "tag": "figcaption",
+   "y": 3828,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front-pocket depth per brand, women’s (rust) against men’s (blue), sorted by the size of the gap. Seven for All Mankind appears once per department, so it is left out of this chart."
+  },
+  {
+   "tag": "h2",
+   "y": 3987,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05 The cut is not the explanation"
+  },
+  {
+   "tag": "p",
+   "y": 4039,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny jeans are the usual suspect, but the measurements do not support it. Within the women’s pairs the three cuts — boot-cut, skinny, straight — average 14.2, 14.3 and 14.4 cm of front-pocket depth: a spread of about 0.2 cm. Across the men’s five cuts the spread is 2.4 cm. The tightest men’s cut — skinny, 22.7 cm — is still 8.3 cm deeper than the roomiest women’s cut. Cut moves pocket depth by a centimetre or so; department moves it by 8.8."
+  },
+  {
+   "tag": "text",
+   "y": 4230,
+   "x": 978,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women's"
+  },
+  {
+   "tag": "text",
+   "y": 4230,
+   "x": 1114,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "men's"
+  },
+  {
+   "tag": "text",
+   "y": 4232,
+   "x": 232,
+   "w": 149,
+   "in_svg": true,
+   "hidden": false,
+   "text": "front-pocket depth (cm)"
+  },
+  {
+   "tag": "text",
+   "y": 4268,
+   "x": 252,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "26"
+  },
+  {
+   "tag": "text",
+   "y": 4282,
+   "x": 932,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.9"
+  },
+  {
+   "tag": "text",
+   "y": 4286,
+   "x": 381,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.6"
+  },
+  {
+   "tag": "text",
+   "y": 4293,
+   "x": 252,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "24"
+  },
+  {
+   "tag": "text",
+   "y": 4294,
+   "x": 748,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22.9"
+  },
+  {
+   "tag": "text",
+   "y": 4297,
+   "x": 565,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22.7"
+  },
+  {
+   "tag": "text",
+   "y": 4312,
+   "x": 1117,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "text",
+   "y": 4318,
+   "x": 252,
+   "w": 15,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22"
+  },
+  {
+   "tag": "text",
+   "y": 4343,
+   "x": 252,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "20"
+  },
+  {
+   "tag": "text",
+   "y": 4368,
+   "x": 254,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "18"
+  },
+  {
+   "tag": "text",
+   "y": 4393,
+   "x": 254,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "text",
+   "y": 4400,
+   "x": 701,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.4"
+  },
+  {
+   "tag": "text",
+   "y": 4402,
+   "x": 334,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.2"
+  },
+  {
+   "tag": "text",
+   "y": 4402,
+   "x": 518,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.3"
+  },
+  {
+   "tag": "text",
+   "y": 4418,
+   "x": 254,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "text",
+   "y": 4443,
+   "x": 255,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12"
+  },
+  {
+   "tag": "text",
+   "y": 4467,
+   "x": 254,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10"
+  },
+  {
+   "tag": "text",
+   "y": 4484,
+   "x": 342,
+   "w": 59,
+   "in_svg": true,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "text",
+   "y": 4484,
+   "x": 533,
+   "w": 46,
+   "in_svg": true,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "text",
+   "y": 4484,
+   "x": 713,
+   "w": 53,
+   "in_svg": true,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "text",
+   "y": 4484,
+   "x": 909,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "text",
+   "y": 4484,
+   "x": 1082,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "regular"
+  },
+  {
+   "tag": "text",
+   "y": 4505,
+   "x": 307,
+   "w": 129,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women 4 · men 7 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 4505,
+   "x": 484,
+   "w": 142,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women 20 · men 12 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 4505,
+   "x": 669,
+   "w": 139,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women 16 · men 12 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 4505,
+   "x": 870,
+   "w": 106,
+   "in_svg": true,
+   "hidden": false,
+   "text": "none · men 8 pairs"
+  },
+  {
+   "tag": "text",
+   "y": 4505,
+   "x": 1054,
+   "w": 103,
+   "in_svg": true,
+   "hidden": false,
+   "text": "none · men 1 pairs"
+  },
+  {
+   "tag": "figcaption",
+   "y": 4554,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front-pocket depth by cut and department. Pair counts underneath: women’s/women’s and men’s counts per cut (no women’s slim or regular pairs were measured)."
+  },
+  {
+   "tag": "h2",
+   "y": 4714,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "06 The price is not the explanation either"
+  },
+  {
+   "tag": "p",
+   "y": 4765,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The two halves of the sample cost the same: men’s pairs average $81.18 (from $39.99 to $209.00) and women’s $80.32 (from $9.99 to $249.00). And price buys no pocket room: front-pocket area correlates with price at −0.073 across all 80 pairs, −0.177 within the men’s and −0.182 within the women’s — if anything, slightly negative. The priciest pair in the data, True Religion’s $249.00 women’s Slim Straight, has 203.0 cm² of front pocket. The cheapest, H&M’s $9.99 women’s Skinny Ankle, has 275.5 cm². Both are smaller than the smallest men’s front pocket in the data — H&M’s own men’s Skinny, $39.99 at 290.0 cm²."
+  },
+  {
+   "tag": "text",
+   "y": 5043,
+   "x": 307,
+   "w": 75,
+   "in_svg": true,
+   "hidden": false,
+   "text": "men’s range"
+  },
+  {
+   "tag": "text",
+   "y": 5085,
+   "x": 262,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "450"
+  },
+  {
+   "tag": "text",
+   "y": 5135,
+   "x": 262,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "400"
+  },
+  {
+   "tag": "text",
+   "y": 5160,
+   "x": 644,
+   "w": 181,
+   "in_svg": true,
+   "hidden": false,
+   "text": "H&M men’s, $39.99 · 290 cm²"
+  },
+  {
+   "tag": "text",
+   "y": 5184,
+   "x": 263,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "350"
+  },
+  {
+   "tag": "text",
+   "y": 5204,
+   "x": 234,
+   "w": 144,
+   "in_svg": true,
+   "hidden": false,
+   "text": "front pocket area (cm²)"
+  },
+  {
+   "tag": "text",
+   "y": 5234,
+   "x": 263,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "300"
+  },
+  {
+   "tag": "text",
+   "y": 5281,
+   "x": 375,
+   "w": 141,
+   "in_svg": true,
+   "hidden": false,
+   "text": "H&M $9.99 · 275.5 cm²"
+  },
+  {
+   "tag": "text",
+   "y": 5284,
+   "x": 263,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "250"
+  },
+  {
+   "tag": "text",
+   "y": 5291,
+   "x": 893,
+   "w": 177,
+   "in_svg": true,
+   "hidden": false,
+   "text": "True Religion $249 · 203 cm²"
+  },
+  {
+   "tag": "text",
+   "y": 5333,
+   "x": 263,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "200"
+  },
+  {
+   "tag": "text",
+   "y": 5383,
+   "x": 266,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "150"
+  },
+  {
+   "tag": "text",
+   "y": 5383,
+   "x": 307,
+   "w": 94,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women’s range"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 291,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$0"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 459,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$50"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 628,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$100"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 799,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$150"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 970,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$200"
+  },
+  {
+   "tag": "text",
+   "y": 5400,
+   "x": 1142,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$250"
+  },
+  {
+   "tag": "text",
+   "y": 5431,
+   "x": 674,
+   "w": 143,
+   "in_svg": true,
+   "hidden": false,
+   "text": "price of the pair (USD)"
+  },
+  {
+   "tag": "figcaption",
+   "y": 5462,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front-pocket area against price. The shaded bands show each department’s full range; they overlap only between 290 and 333.25 cm²."
+  },
+  {
+   "tag": "h2",
+   "y": 5603,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "07 What actually fits"
+  },
+  {
+   "tag": "p",
+   "y": 5654,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Take the phone seriously as a yardstick and the counts are stark. At 15 cm tall — a large modern handset — all 40 men’s front pockets take it and 12 of the 40 women’s do. At 16 cm only 5 women’s pockets still fit it, at 17 cm only 4. Every one of the 80 pockets is wide enough at its narrowest point; depth is the only barrier. The roomiest women’s front pockets in the data are Abercrombie’s two Simone pairs at 333.25 and 333.00 cm², and the third-best is H&M’s $9.99 Skinny Ankle at 275.5 cm² — roomier than plenty of pricier pairs, and still smaller than every men’s pair measured."
+  },
+  {
+   "tag": "text",
+   "y": 5901,
+   "x": 304,
+   "w": 212,
+   "in_svg": true,
+   "hidden": false,
+   "text": "pockets deep enough for the phone"
+  },
+  {
+   "tag": "text",
+   "y": 5908,
+   "x": 1085,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "women's"
+  },
+  {
+   "tag": "text",
+   "y": 5908,
+   "x": 1181,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "men's"
+  },
+  {
+   "tag": "text",
+   "y": 5938,
+   "x": 708,
+   "w": 53,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12 of 40"
+  },
+  {
+   "tag": "text",
+   "y": 5939,
+   "x": 431,
+   "w": 86,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15 cm phone"
+  },
+  {
+   "tag": "text",
+   "y": 5960,
+   "x": 1097,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "40 of 40"
+  },
+  {
+   "tag": "text",
+   "y": 5992,
+   "x": 611,
+   "w": 47,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5 of 40"
+  },
+  {
+   "tag": "text",
+   "y": 5993,
+   "x": 431,
+   "w": 86,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16 cm phone"
+  },
+  {
+   "tag": "text",
+   "y": 6014,
+   "x": 1097,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "40 of 40"
+  },
+  {
+   "tag": "text",
+   "y": 6047,
+   "x": 597,
+   "w": 48,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4 of 40"
+  },
+  {
+   "tag": "text",
+   "y": 6048,
+   "x": 431,
+   "w": 85,
+   "in_svg": true,
+   "hidden": false,
+   "text": "17 cm phone"
+  },
+  {
+   "tag": "text",
+   "y": 6069,
+   "x": 1097,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "40 of 40"
+  },
+  {
+   "tag": "figcaption",
+   "y": 6120,
+   "x": 217,
+   "w": 1006,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How many of each department’s 40 pairs have a front pocket deep enough for a phone of the height shown. The grey block is the share that fails."
+  },
+  {
+   "tag": "h2",
+   "y": 6261,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "08 The whole measurement"
+  },
+  {
+   "tag": "p",
+   "y": 6313,
+   "x": 198,
+   "w": 629,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All 80 pairs, every number in the file. Front area is depth × widest width, back area likewise. The rivet height — the height of the rivet at the top of the front pocket — averages 7.06 cm on men’s jeans (4.5–9.2) and 6.25 cm on women’s (4.5–7.5), so women’s pockets start marginally higher and stop far sooner. Only 9 of the 80 pairs carry the cutout flag — 6 men’s and 3 women’s, all from True Religion, Guess, J. Crew and Uniqlo."
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Style"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dept"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Name"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Price"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front depth"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front width"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front area"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back depth"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back width"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back area"
+  },
+  {
+   "tag": "th",
+   "y": 6474,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Cutout"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 for All Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Ankle Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$199.00"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1315"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "206.2"
+  },
+  {
+   "tag": "td",
+   "y": 6514,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 for All Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$159.00"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1415"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "193.8"
+  },
+  {
+   "tag": "td",
+   "y": 6550,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 for all Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Paxtyn"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$209.00"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "346.5"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224.8"
+  },
+  {
+   "tag": "td",
+   "y": 6586,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 for all Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Straight"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$179.00"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "354.8"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1614"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224"
+  },
+  {
+   "tag": "td",
+   "y": 6622,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Kennan Straight"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$78.00"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "360"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1613"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "208"
+  },
+  {
+   "tag": "td",
+   "y": 6658,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Langdon Slim"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$78.00"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2217"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "374"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "245"
+  },
+  {
+   "tag": "td",
+   "y": 6694,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Simone High Rise Slim"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$88.00"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "333.2"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "200"
+  },
+  {
+   "tag": "td",
+   "y": 6730,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Simone High Rise Ankle Straight"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$78.00"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18.5"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "333"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1614"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224"
+  },
+  {
+   "tag": "td",
+   "y": 6766,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "NE(X)T Level Flex Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.95"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "304.5"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.5"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "172.5"
+  },
+  {
+   "tag": "td",
+   "y": 6803,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Straight"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.95"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "363"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "229.5"
+  },
+  {
+   "tag": "td",
+   "y": 6839,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ne(x)t Level Stretch Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.95"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1914"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "266"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "187.5"
+  },
+  {
+   "tag": "td",
+   "y": 6875,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Super Stretch Kick Boot"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.95"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "216"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1513"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195"
+  },
+  {
+   "tag": "td",
+   "y": 6911,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Fit"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$50.00"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2617"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "442"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1714"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "238"
+  },
+  {
+   "tag": "td",
+   "y": 6947,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Original Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$50.00"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24.5"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "441"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.2"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "243.2"
+  },
+  {
+   "tag": "td",
+   "y": 6983,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fave Super Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$42.00"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "239.2"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.7"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "205.5"
+  },
+  {
+   "tag": "td",
+   "y": 7019,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Perfect Boot"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$42.00"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "201.5"
+  },
+  {
+   "tag": "td",
+   "y": 7055,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fit No. 9 Bootleg"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$94.95"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18.5"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "388.5"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1613"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "208"
+  },
+  {
+   "tag": "td",
+   "y": 7091,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "h3",
+   "y": 7120,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "About the data"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fit No. 3 Straight Leg Slim Fit"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$94.95"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2119"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "399"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1614"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224"
+  },
+  {
+   "tag": "td",
+   "y": 7127,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "li",
+   "y": 7155,
+   "x": 218,
+   "w": 643,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One row per pair of jeans: 80 pairs, 40 women’s and 40 men’s, from 21 brand labels in 5 styles, priced from $9.99 to $249.00. Two spellings of “7 for All Mankind” appear in the brand column; merged, the 80 pairs come from 20 brands, 19 of them measured in both departments."
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fit No. 76 Bootcut Mid-Rise Curvy"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.95"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1516"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "240"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195.8"
+  },
+  {
+   "tag": "td",
+   "y": 7163,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fit No. 53 Straight Mid-Rise Slim"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$92.95"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1414"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "196"
+  },
+  {
+   "tag": "td",
+   "y": 7199,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "li",
+   "y": 7232,
+   "x": 218,
+   "w": 643,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All measurements are in centimetres, taken with the same method on both departments: maxHeightFront / minHeightFront are the deepest and shallowest points of the front pocket (the opening is angled, so the two differ), maxWidthFront / minWidthFront the widest and narrowest points of the opening, the same four for the back pocket, rivetHeightFront the height of the rivet at the top of the front pocket."
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2215"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "330"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.2"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "234.3"
+  },
+  {
+   "tag": "td",
+   "y": 7235,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Straight"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "387"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "263.5"
+  },
+  {
+   "tag": "td",
+   "y": 7271,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Midrise Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$79.50"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "174"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "214.5"
+  },
+  {
+   "tag": "td",
+   "y": 7307,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Straight"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1514"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210"
+  },
+  {
+   "tag": "td",
+   "y": 7343,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "li",
+   "y": 7354,
+   "x": 218,
+   "w": 643,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Area is computed here as depth × widest width, which is an upper bound on capacity: real pocket bags taper and corners round off."
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Super Skinny Stretch"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$88.00"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.5"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "317.8"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1614"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224"
+  },
+  {
+   "tag": "td",
+   "y": 7379,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "li",
+   "y": 7409,
+   "x": 218,
+   "w": 643,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The phone is a yardstick, not a measurement: 15 cm tall × 7.5 cm wide, roughly a large modern handset, tested against pocket depth and the narrowest width of the opening."
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Classic Boot Stretch"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$79.90"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "344"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.2"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "218.7"
+  },
+  {
+   "tag": "td",
+   "y": 7415,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Midrise"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$79.90"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.7"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "251.2"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "231"
+  },
+  {
+   "tag": "td",
+   "y": 7451,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "li",
+   "y": 7464,
+   "x": 218,
+   "w": 643,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two pairs per brand per department were measured, so brand averages rest on two pairs each; treat the brand ranking as indicative, not definitive."
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Barely Boot Midrise"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$79.90"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.2"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "235.6"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232.5"
+  },
+  {
+   "tag": "td",
+   "y": 7487,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Original Boot"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$59.95"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "402.5"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217"
+  },
+  {
+   "tag": "td",
+   "y": 7523,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.95"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "385"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "209.2"
+  },
+  {
+   "tag": "td",
+   "y": 7560,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "p",
+   "y": 7583,
+   "x": 198,
+   "w": 1044,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How this was made. Every number on this page is computed from data/measurements.csv (80 rows, no other source). Each finding is paired with the one-line pandas expression that produces it, listed in facts.json alongside this page. Charts are inline SVG generated from the same file; nothing is loaded from the network."
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Perfect Boot"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.95"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1412"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "168"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "202.5"
+  },
+  {
+   "tag": "td",
+   "y": 7596,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Skinny Mid-Rise"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.95"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "162.5"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "201.5"
+  },
+  {
+   "tag": "td",
+   "y": 7632,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$98.00"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "315"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "246.5"
+  },
+  {
+   "tag": "td",
+   "y": 7668,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Regular Straight"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$98.00"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "25.5"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "446.2"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1614"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "224"
+  },
+  {
+   "tag": "td",
+   "y": 7704,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Power Stretch Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$98.00"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.5"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "166.8"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.7"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "183.8"
+  },
+  {
+   "tag": "td",
+   "y": 7740,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tailored Mini Boot"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.00"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "175"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195.8"
+  },
+  {
+   "tag": "td",
+   "y": 7776,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.99"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "290"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "222.8"
+  },
+  {
+   "tag": "td",
+   "y": 7812,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Straight"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.99"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "354.8"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232"
+  },
+  {
+   "tag": "td",
+   "y": 7848,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Vintage Fit High Waist"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.99"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "203"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1613"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "208"
+  },
+  {
+   "tag": "td",
+   "y": 7884,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Ankle High Waist"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$9.99"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "19"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "275.5"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "187.5"
+  },
+  {
+   "tag": "td",
+   "y": 7920,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "484 Slim"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$98.00"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2517"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "425"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "187.5"
+  },
+  {
+   "tag": "td",
+   "y": 7956,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "770 Straight"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$98.00"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "326.2"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "209.2"
+  },
+  {
+   "tag": "td",
+   "y": 7992,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Vintage Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$125.00"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217.5"
+  },
+  {
+   "tag": "td",
+   "y": 8028,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8\" Tooth Pick"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$110.00"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.5"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "172.5"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195.8"
+  },
+  {
+   "tag": "td",
+   "y": 8064,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Modern Series Slim Tapered Leg"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$48.00"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "25.5"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "420.8"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "231"
+  },
+  {
+   "tag": "td",
+   "y": 8100,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Modern Series Straight Leg"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$48.00"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24.5"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.2"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "396.9"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "262.5"
+  },
+  {
+   "tag": "td",
+   "y": 8136,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Riders Midrise Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$19.94"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.7"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18.5"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "253.4"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "203"
+  },
+  {
+   "tag": "td",
+   "y": 8172,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Riders Midrise Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$19.94"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "229.5"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217.5"
+  },
+  {
+   "tag": "td",
+   "y": 8208,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "510 Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "25.5"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "369.8"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "214.5"
+  },
+  {
+   "tag": "td",
+   "y": 8244,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "569 Loose Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$59.50"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "26"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "429"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.2"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "198"
+  },
+  {
+   "tag": "td",
+   "y": 8280,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "711 Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$54.50"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "187.5"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "174"
+  },
+  {
+   "tag": "td",
+   "y": 8317,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Classic Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$54.50"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.2"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "207.4"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "193.8"
+  },
+  {
+   "tag": "td",
+   "y": 8353,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "121 Slim"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$99.00"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.7"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "350.7"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.2"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "220.4"
+  },
+  {
+   "tag": "td",
+   "y": 8389,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "363 New Vintage Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$129.00"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "382.5"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.2"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210.6"
+  },
+  {
+   "tag": "td",
+   "y": 8425,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ava Mid Rise Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$99.00"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "175.5"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232"
+  },
+  {
+   "tag": "td",
+   "y": 8461,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sweet Boot"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$79.50"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232.5"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "188.5"
+  },
+  {
+   "tag": "td",
+   "y": 8497,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.99"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24.5"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "379.8"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "201.5"
+  },
+  {
+   "tag": "td",
+   "y": 8533,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.99"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24.5"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "416.5"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1412"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "168"
+  },
+  {
+   "tag": "td",
+   "y": 8569,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Original Boot Cut"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$29.99"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "174"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "202.5"
+  },
+  {
+   "tag": "td",
+   "y": 8605,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Original Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$29.99"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "203"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "214.5"
+  },
+  {
+   "tag": "td",
+   "y": 8641,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Varick Slim Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "356.5"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1615"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "240"
+  },
+  {
+   "tag": "td",
+   "y": 8677,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Hampton Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "420"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1715"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "255"
+  },
+  {
+   "tag": "td",
+   "y": 8713,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Modern Skinny Slimming Fit"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "188.5"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "209.2"
+  },
+  {
+   "tag": "td",
+   "y": 8749,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Premier Straight Slimming Fit"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "188.5"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "188.5"
+  },
+  {
+   "tag": "td",
+   "y": 8785,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Slim"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$59.50"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2517"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "425"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "187.5"
+  },
+  {
+   "tag": "td",
+   "y": 8821,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$59.50"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18.2"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "409.5"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1713"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "221"
+  },
+  {
+   "tag": "td",
+   "y": 8857,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Greenwich Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "200"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1413"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "182"
+  },
+  {
+   "tag": "td",
+   "y": 8893,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tribeca Straight"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.7"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "250.5"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "232.5"
+  },
+  {
+   "tag": "td",
+   "y": 8929,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Geno Slim"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$159.00"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "26.2"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.2"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "398.2"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1513"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "195"
+  },
+  {
+   "tag": "td",
+   "y": 8965,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ricky Relaxed Straight"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$179.00"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "346.5"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "216"
+  },
+  {
+   "tag": "td",
+   "y": 9001,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Stella"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$179.00"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1415"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.5"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "149.5"
+  },
+  {
+   "tag": "td",
+   "y": 9037,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Slim Straight"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$249.00"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "203"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.7"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "191.1"
+  },
+  {
+   "tag": "td",
+   "y": 9073,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Ultra Stretch"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.90"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "348.8"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "188.5"
+  },
+  {
+   "tag": "td",
+   "y": 9110,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "regular"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Regular"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.90"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.5"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "344"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1514"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210"
+  },
+  {
+   "tag": "td",
+   "y": 9146,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Fit"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.90"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1314"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "182"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.2"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "198.8"
+  },
+  {
+   "tag": "td",
+   "y": 9182,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "High-Rise Straight"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.90"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.5"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.5"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "255.8"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.5"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "181.2"
+  },
+  {
+   "tag": "td",
+   "y": 9218,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "✓"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Slim Fit"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$58.00"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "27.5"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 864,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.5"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "481.2"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1713"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "221"
+  },
+  {
+   "tag": "td",
+   "y": 9254,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Regular Fit"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$48.00"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2813"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "364"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.7"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "242.1"
+  },
+  {
+   "tag": "td",
+   "y": 9290,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Born Ready Skinny Jean"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$99.00"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1417"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "238"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.5"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "217.5"
+  },
+  {
+   "tag": "td",
+   "y": 9326,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 201,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 328,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 401,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 467,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Acid Wash Fringe Hem Crop"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 696,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$99.00"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 770,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1515"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 956,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "225"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 1040,
+   "w": 91,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 1131,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.2"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 1222,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "211.2"
+  },
+  {
+   "tag": "td",
+   "y": 9362,
+   "x": 1304,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "—"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 981,
+   "x": 217,
+   "w": 1006,
+   "h": 346,
+   "marks": 95,
+   "labels": 20
+  },
+  {
+   "kind": "svg",
+   "y": 1738,
+   "x": 217,
+   "w": 1006,
+   "h": 365,
+   "marks": 22,
+   "labels": 10
+  },
+  {
+   "kind": "svg",
+   "y": 2204,
+   "x": 217,
+   "w": 1006,
+   "h": 262,
+   "marks": 7,
+   "labels": 20
+  },
+  {
+   "kind": "svg",
+   "y": 3190,
+   "x": 217,
+   "w": 1006,
+   "h": 628,
+   "marks": 73,
+   "labels": 52
+  },
+  {
+   "kind": "svg",
+   "y": 4220,
+   "x": 217,
+   "w": 1006,
+   "h": 325,
+   "marks": 21,
+   "labels": 30
+  },
+  {
+   "kind": "svg",
+   "y": 5001,
+   "x": 217,
+   "w": 1006,
+   "h": 451,
+   "marks": 101,
+   "labels": 20
+  },
+  {
+   "kind": "svg",
+   "y": 5890,
+   "x": 217,
+   "w": 1006,
+   "h": 220,
+   "marks": 14,
+   "labels": 12
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 7685
+}

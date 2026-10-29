@@ -1,0 +1,24 @@
+{
+ "task": "pockets",
+ "model": "glm-5.3",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "glm-5.3",
+   "effort": "high",
+   "seconds": 4400,
+   "steps": 61,
+   "tools": 67,
+   "nudged": 0,
+   "usage": {
+    "input": 973943,
+    "output": 72591
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 4400
+}

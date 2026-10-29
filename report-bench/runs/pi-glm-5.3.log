@@ -1,1 +1,5 @@
 == pi-glm-5.3: 2 tasks, judge deepseek-v4.1-flash, out /home/user/RL_Study/report-bench/runs/pi-glm-5.3
+== pi-glm-5.3: 1 tasks, judge deepseek-v4.1-flash, out /home/user/RL_Study/report-bench/runs/pi-glm-5.3
+pockets                  0.557  2.2=0.88 2.3=0.00 2.4=0.75 2.5=0.90 2.6=0.35 2.7=0.30 2.8=0.55 3.1=0.72 3.2=0.45
+pudding          1 tasks  mean 0.557
+all              1 tasks  mean 0.557

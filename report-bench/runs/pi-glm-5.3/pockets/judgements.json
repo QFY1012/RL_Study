@@ -1,0 +1,83 @@
+{
+ "tries": {
+  "2.x": 1,
+  "3.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.75,
+  "where": "第13–15帧/08 The whole measurement 大表格，以及各节主图",
+  "reason": "散点、示意、条形、哑铃图都配色分明、标注直接、要点一眼可见；仅表格列距偏紧，个别相邻数字如1315、1614容易读成连写，属个别小字难认。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.9,
+  "where": "全篇各图",
+  "reason": "women 一律锈红、men 一律藏蓝，从第1帧散点到第12帧条形图始终不变；后袋另用陶土棕并在图注说明，属细节维度差异，不算矛盾。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.35,
+  "where": "01散点→02示意图/比例条→04哑铃→05柱状→06散点→07条形→08表格",
+  "reason": "每一节换一种完全不同的图形和坐标，同一批数据的不同切面却看不出是从上一张变来的，读者每节都要重新学怎么读。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "全篇，如第1–2帧散点图被01节整段文字讲、第6–7帧品牌图配04节整段",
+  "reason": "滚动记录显示没有任何图随滚动改变；文字与图同屏但图始终静止，讲到的下一个点要读者自己在同一张图上找。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.55,
+  "where": "第3帧口袋示意、第10–11帧价格图 vs 第6–7帧品牌图、第12–13帧适配条形图",
+  "reason": "口袋示意的大数字贴在对应口袋旁、价格图用引线指向文字点名的三双，属挨在一起/连线，一眼对上；但品牌图、cut柱状图、12 of 40 条形图都要读品牌名、轴标签或条上数字才能定位，算没对上，约一半对得上。"
+ },
+ "3.1": {
+  "item": "3.1",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.72,
+  "where": "第 3–4 帧（02 It is depth, not width 一节）的口袋+手机同比例示意图",
+  "reason": "口袋矩形本身就是话题物件且严格按真实比例承载数据（16.37×23.13 vs 15.18×14.33 cm），手机作标尺，是全页最强具象点；但主数据图（第 1–2 帧散点、第 6–7 帧哑铃图、第 8–9 帧柱、第 10–11 帧散点、第 12–13 帧条形）仍是普通圆点与柱子，未达到「主要数据标记本身是话题里的东西」，故不给到 0.8 以上。"
+ },
+ "3.2": {
+  "item": "3.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.45,
+  "where": "全篇；第 0 帧标题与整体配色/字体",
+  "reason": "米白底 + 深藏青衬线大标题 + 细线分隔，是通用的严肃数据编辑风；锈红/靛蓝双色仅隐约对应牛仔布与缝线，页面没有丹宁纹理、缝线或铆钉等任何衣物视觉线索（正文提到 rivet height 也未可视化），普通读者一眼看不出在讲牛仔裤，属于中性不出错但和话题联系弱。"
+ }
+}
