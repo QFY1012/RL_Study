@@ -1,0 +1,60 @@
+{
+ "tries": {
+  "2.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.82,
+  "where": "第5、6、10、12、15、17帧的主图",
+  "reason": "点阵图有色块标出重叠区和均值虚线、哑铃图右列直标倍率、散点图拉线标最便宜最贵，图例和轴都在；扣分在轴刻度和部分品牌名偏小、第12-13帧散点较密、第6帧柱偏细。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.85,
+  "where": "全篇各图（第1、5、6、8、10、12、15、17帧）",
+  "reason": "女=锈橙、男=蓝全篇一致，表格数字也按此上色；小出入仅第7帧比率条形图用橙色强调单一条目，橙色多了一层含义，但有测量名标注不误导。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "第5帧点阵图→第6帧分组柱状图→第7帧比率条形图→第10帧哑铃图→第12帧散点图→第15帧条形图→第17帧点阵图",
+  "reason": "每进一节就换一种图形，读者要重新学怎么读；但配色、卡片、标题层级同一套，节内多为换数据/换指标，接得上。整体处在换画法偏多与部分连续之间。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.4,
+  "where": "全篇；如第5-6帧点阵图配均值段落、第10帧哑铃图配品牌段落、第12帧散点图配价格段落",
+  "reason": "滚动记录显示没有任何图固定或改变状态，图从头到尾静态；文字多在图的同屏下文，但一张图只被反复解读，图不随文字推进而变。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第5、6、7、10、14、17帧多为读标签；第13帧最便宜/最贵拉线、第5帧重叠阴影区可直指",
+  "reason": "大多数对要靠文字里的数与图上印的数相同才对上，属读标签；只有最便宜/最贵拉线和重叠区等少数几处能一眼指到。"
+ }
+}

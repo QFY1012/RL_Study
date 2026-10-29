@@ -1,0 +1,175 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets/index.html",
+ "facts": "submissions/pi-qwen3.8-max/pockets/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-size",
+     "basis": "measurements.shape = (80, 16)",
+     "verdict": "ok"
+    },
+    {
+     "id": "twenty-brands-each-side",
+     "basis": "men = 20; women = 20",
+     "verdict": "ok"
+    },
+    {
+     "id": "two-jeans-per-brand-per-gender",
+     "basis": "unstacked counts: min men=2, women=2; max men=2, women=2",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-pocket-means",
+     "basis": "men maxHeightFront=23.13, minHeightFront=18.08, maxWidthFront=16.37, minWidthFront=13.36; women 14.33, 13.23, 15.18, 12.26",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-height-ratio",
+     "basis": "ratio = 1.61; pct_taller = 61.44",
+     "verdict": "ok"
+    },
+    {
+     "id": "gap-is-front-and-vertical",
+     "basis": "ratios: maxHeightFront 1.61, maxWidthFront 1.08, maxHeightBack 1.06, maxWidthBack 1.03",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-pocket-area",
+     "basis": "men = 378.41; women = 217.97; ratio = 1.74",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-height-ranges",
+     "basis": "men min=20.0 max=28.0 mean=23.13 std=2.06; women min=11.5 max=21.5 mean=14.33 std=2.10",
+     "verdict": "ok"
+    },
+    {
+     "id": "smallest-mens-beats-39-womens",
+     "basis": "men_min = 20.0; women_below = 39; women_total = 40",
+     "verdict": "ok"
+    },
+    {
+     "id": "shallow-front-pockets",
+     "basis": "men below_15 sum=5 count=40; women below_15 sum=34 count=40",
+     "verdict": "ok"
+    },
+    {
+     "id": "price-parity",
+     "basis": "men mean=81.18 median=69.72 min=39.99 max=209.0; women mean=80.32 median=78.75 min=9.99 max=249.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "price-does-not-buy-pocket",
+     "basis": "men correlation = -0.262; women correlation = -0.151",
+     "verdict": "ok"
+    },
+    {
+     "id": "cheapest-jeans-deep-pocket",
+     "basis": "row: H&M, women, Skinny Ankle High Waist, price=9.99, maxHeightFront=19.0, minHeightFront=13.5",
+     "verdict": "ok"
+    },
+    {
+     "id": "priciest-jeans-shallow-pocket",
+     "basis": "row: True Religion, women, Slim Straight, price=249.0, maxHeightFront=14.5",
+     "verdict": "ok"
+    },
+    {
+     "id": "cost-per-pocket-area",
+     "basis": "men mean=0.219 median=0.185; women mean=0.386 median=0.341",
+     "verdict": "ok"
+    },
+    {
+     "id": "style-labels-flat-women",
+     "basis": "boot-cut mean=14.25 size=4; skinny mean=14.27 size=20; straight mean=14.42 size=16",
+     "verdict": "ok"
+    },
+    {
+     "id": "style-labels-flat-men",
+     "basis": "boot-cut mean=23.57 size=7; regular mean=21.50 size=1; skinny mean=22.71 size=12; slim mean=23.90 size=8; straight mean=22.92 size=12",
+     "verdict": "ok"
+    },
+    {
+     "id": "brand-gap-ranking",
+     "basis": "Abercrombie ratio=1.13 (22.25 vs 19.75); Wrangler=1.91 (27.75 vs 14.50); Guess=2.00 (24.00 vs 12.00); Levi's=2.09 (25.75 vs 12.35)",
+     "verdict": "ok"
+    },
+    {
+     "id": "fifteen-brands-wide-gap",
+     "basis": "count of ratios >= 1.5 is 15",
+     "verdict": "ok"
+    },
+    {
+     "id": "no-missing-values",
+     "basis": "total NaN cells = 0",
+     "verdict": "ok"
+    },
+    {
+     "id": "back-pocket-parity",
+     "basis": "men maxHeightBack=16.01, minHeightBack=13.47, maxWidthBack=13.70, minWidthBack=12.16; women 15.12, 12.58, 13.34, 11.74",
+     "verdict": "ok"
+    },
+    {
+     "id": "rivet-height",
+     "basis": "men mean=7.06 min=4.5 max=9.2; women mean=6.25 min=4.5 max=7.5",
+     "verdict": "ok"
+    },
+    {
+     "id": "cotton-share",
+     "basis": "men mean=93.3 min=53.0 max=100.0; women mean=80.8 min=30.0 max=99.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "all-rigid-denim-is-mens",
+     "basis": "100% cotton count: men=8; women=0",
+     "verdict": "ok"
+    },
+    {
+     "id": "cutout-jeans-cost-more",
+     "basis": "cutout False n=71 mean_price=74.11; True n=9 mean_price=133.10",
+     "verdict": "ok"
+    },
+    {
+     "id": "cutout-mostly-mens",
+     "basis": "False: men=34, women=37; True: men=6, women=3",
+     "verdict": "ok"
+    },
+    {
+     "id": "brand-spelling-variants",
+     "basis": "raw_spellings=22; normalised_brands=20",
+     "verdict": "ok"
+    },
+    {
+     "id": "min-above-max-rows",
+     "basis": "rows=14; women=12; men=2",
+     "verdict": "ok"
+    },
+    {
+     "id": "boot-named-straight",
+     "basis": "6 rows, all women/style straight: Arizona Perfect Boot; Lucky Sweet Boot; Levi's Classic Bootcut; 7 for All Mankind Bootcut; Guess Tailored Mini Boot; Express Barely Boot Midrise",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"sample-size\",\"basis\":\"measurements.shape = (80, 16)\",\"verdict\":\"ok\"},{\"id\":\"twenty-brands-each-side\",\"basis\":\"men = 20; women = 20\",\"verdict\":\"ok\"},{\"id\":\"two-jeans-per-brand-per-gender\",\"basis\":\"unstacked counts: min men=2, women=2; max men=2, women=2\",\"verdict\":\"ok\"},{\"id\":\"front-pocket-means\",\"basis\":\"men maxHeightFront=23.13, minHeightFront=18.08, maxWidthFront=16.37, minWidthFront=13.36; women 14.33, 13.23, 15.18, 12.26\",\"verdict\":\"ok\"},{\"id\":\"front-height-ratio\",\"basis\":\"ratio = 1.61; pct_taller = 61.44\",\"verdict\":\"ok\"},{\"id\":\"gap-is-front-and-vertical\",\"basis\":\"ratios: maxHeightFront 1.61, maxWidthFront 1.08, maxHeightBack 1.06, maxWidthBack 1.03\",\"verdict\":\"ok\"},{\"id\":\"front-pocket-area\",\"basis\":\"men = 378.41; women = 217.97; ratio = 1.74\",\"verdict\":\"ok\"},{\"id\":\"front-height-ranges\",\"basis\":\"men min=20.0 max=28.0 mean=23.13 std=2.06; women min=11.5 max=21.5 mean=14.33 std=2.10\",\"verdict\":\"ok\"},{\"id\":\"smallest-mens-beats-39-womens\",\"basis\":\"men_min = 20.0; women_below = 39; women_total = 40\",\"verdict\":\"ok\"},{\"id\":\"shallow-front-pockets\",\"basis\":\"men below_15 sum=5 count=40; women below_15 sum=34 count=40\",\"verdict\":\"ok\"},{\"id\":\"price-parity\",\"basis\":\"men mean=81.18 median=69.72 min=39.99 max=209.0; women mean=80.32 median=78.75 min=9.99 max=249.0\",\"verdict\":\"ok\"},{\"id\":\"price-does-not-buy-pocket\",\"basis\":\"men correlation = -0.262; women correlation = -0.151\",\"verdict\":\"ok\"},{\"id\":\"cheapest-jeans-deep-pocket\",\"basis\":\"row: H&M, women, Skinny Ankle High Waist, price=9.99, maxHeightFront=19.0, minHeightFront=13.5\",\"verdict\":\"ok\"},{\"id\":\"priciest-jeans-shallow-pocket\",\"basis\":\"row: True Religion, women, Slim Straight, price=249.0, maxHeightFront=14.5\",\"verdict\":\"ok\"},{\"id\":\"cost-per-pocket-area\",\"basis\":\"men mean=0.219 median=0.185; women mean=0.386 median=0.341\",\"verdict\":\"ok\"},{\"id\":\"style-labels-flat-women\",\"basis\":\"boot-cut mean=14.25 size=4; skinny mean=14.27 size=20; straight mean=14.42 size=16\",\"verdict\":\"ok\"},{\"id\":\"style-labels-flat-men\",\"basis\":\"boot-cut mean=23.57 size=7; regular mean=21.50 size=1; skinny mean=22.71 size=12; slim mean=23.90 size=8; straight mean=22.92 size=12\",\"verdict\":\"ok\"},{\"id\":\"brand-gap-ranking\",\"basis\":\"Abercrombie ratio=1.13 (22.25 vs 19.75); Wrangler=1.91 (27.75 vs 14.50); Guess=2.00 (24.00 vs 12.00); Levi's=2.09 (25.75 vs 12.35)\",\"verdict\":\"ok\"},{\"id\":\"fifteen-brands-wide-gap\",\"basis\":\"count of ratios >= 1.5 is 15\",\"verdict\":\"ok\"},{\"id\":\"no-missing-values\",\"basis\":\"total NaN cells = 0\",\"verdict\":\"ok\"},{\"id\":\"back-pocket-parity\",\"basis\":\"men maxHeightBack=16.01, minHeightBack=13.47, maxWidthBack=13.70, minWidthBack=12.16; women 15.12, 12.58, 13.34, 11.74\",\"verdict\":\"ok\"},{\"id\":\"rivet-height\",\"basis\":\"men mean=7.06 min=4.5 max=9.2; women mean=6.25 min=4.5 max=7.5\",\"verdict\":\"ok\"},{\"id\":\"cotton-share\",\"basis\":\"men mean=93.3 min=53.0 max=100.0; women mean=80.8 min=30.0 max=99.0\",\"verdict\":\"ok\"},{\"id\":\"all-rigid-denim-is-mens\",\"basis\":\"100% cotton count: men=8; women=0\",\"verdict\":\"ok\"},{\"id\":\"cutout-jeans-cost-more\",\"basis\":\"cutout False n=71 mean_price=74.11; True n=9 mean_price=133.10\",\"verdict\":\"ok\"},{\"id\":\"cutout-mostly-mens\",\"basis\":\"False: men=34, women=37; True: men=6, women=3\",\"verdict\":\"ok\"},{\"id\":\"brand-spelling-variants\",\"basis\":\"raw_spellings=22; normalised_brands=20\",\"verdict\":\"ok\"},{\"id\":\"min-above-max-rows\",\"basis\":\"rows=14; women=12; men=2\",\"verdict\":\"ok\"},{\"id\":\"boot-named-straight\",\"basis\":\"6 rows, all women/style straight: Arizona Perfect Boot; Lucky Sweet Boot; Levi's Classic Bootcut; 7 for All Mankind Bootcut; Guess Tailored Mini Boot; Express Barely Boot Midrise\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 4535,
+    "completion_tokens": 6118,
+    "seconds": 149.7
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

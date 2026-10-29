@@ -81,11 +81,11 @@
     "id": "sex-profile",
     "claim": "Of 3,256 person-records with sex recorded, 1,740 are female (53.4%), 1,463 are male (44.9%) and 53 are other or prefer not to answer (1.6%).",
     "tables": {"people": "data/people.csv"},
-    "code": "people.sex.value_counts().to_frame('n').assign(percent=lambda d: (100 * d.n / d.n.sum()).round(1)).pipe(lambda d: pd.concat([d, pd.DataFrame({'n': [d.n.sum()], 'percent': [d.percent.sum()]}, index=['total_recorded'])]))"
+    "code": "people.sex.value_counts().to_frame('n').assign(percent=lambda d: (100 * d.n / d.n.sum()).round(1)).pipe(lambda d: pd.concat([d, pd.DataFrame({'n': [d.n.sum()], 'percent': [100 * d.n.sum() / d.n.sum()]}, index=['total_recorded'])]))"
   },
   {
     "id": "rating-ranges",
-    "claim": "Observed affect, arousal, enjoyment and liking ratings span 1–9, while shared reality spans 1–7.",
+    "claim": "Observed affect, arousal and enjoyment ratings span 1–9, while liking and shared reality ratings span 1–7.",
     "tables": {"people": "data/people.csv"},
     "code": "people[['pre_affect', 'begin_affect', 'middle_affect', 'end_affect', 'pre_arousal', 'arousal', 'how_enjoyable', 'i_like_you', 'you_like_me', 'shared_reality']].agg(['min', 'max']).T"
   }

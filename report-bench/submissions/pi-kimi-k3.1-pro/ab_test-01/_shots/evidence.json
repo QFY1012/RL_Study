@@ -338,11 +338,11 @@
   {
    "tag": "strong",
    "y": 471,
-   "x": 1205,
-   "w": 60,
+   "x": 1219,
+   "w": 46,
    "in_svg": false,
    "hidden": false,
-   "text": "20.0%%"
+   "text": "20.0%"
   },
   {
    "tag": "p",
@@ -2061,7 +2061,7 @@
    "w": 80,
    "in_svg": false,
    "hidden": false,
-   "text": "04 / RETENTION"
+   "text": "04 / FOLLOW-UP"
   },
   {
    "tag": "h2",
@@ -2112,7 +2112,7 @@
    "tag": "span",
    "y": 3395,
    "x": 145,
-   "w": 170,
+   "w": 172,
    "in_svg": false,
    "hidden": false,
    "text": "New users"
@@ -2121,7 +2121,7 @@
    "tag": "span",
    "y": 3395,
    "x": 756,
-   "w": 166,
+   "w": 178,
    "in_svg": false,
    "hidden": false,
    "text": "Returning users"
@@ -2148,19 +2148,19 @@
    "tag": "h3",
    "y": 3416,
    "x": 145,
-   "w": 170,
+   "w": 172,
    "in_svg": false,
    "hidden": false,
-   "text": "More likely to return"
+   "text": "Follow-up increases"
   },
   {
    "tag": "h3",
    "y": 3416,
    "x": 756,
-   "w": 166,
+   "w": 178,
    "in_svg": false,
    "hidden": false,
-   "text": "Less likely to return"
+   "text": "Follow-up decreases"
   },
   {
    "tag": "strong",
@@ -2367,7 +2367,7 @@
    "w": 380,
    "in_svg": false,
    "hidden": false,
-   "text": "The operational improvement is credible in the descriptive data. A completion or retention claim is not."
+   "text": "The response-time improvement is consistent across the observed cuts. A single completion or retention story is not."
   },
   {
    "tag": "span",

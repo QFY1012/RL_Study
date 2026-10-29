@@ -1,0 +1,22 @@
+  pi-claude-opus-5-5/pockets pockets: bash cd data && ls -la && head -5 *.csv && wc -l *.csv
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd ~ 2>/dev/null; pwd; ls -la data/; for f in data/*.csv; do echo "== $f"; wc -l $f; head -5 $f; don
+  pi-claude-opus-5-5/pockets pockets: bash cd data && python3 -c " import pandas as pd d=pd.read_csv('measurements.csv') print(d.describe().T) 
+  pi-claude-opus-5-5/hello-stranger hello-stranger: bash cd data && ls -la && head -c 1500 *.csv && wc -l *.csv
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd -; pwd; ls
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash find / -type d -name data -not -path '/proc/*' -not -path '/usr/*' 2>/dev/null | head; ls /home/*
+  pi-claude-opus-5-5/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np p=pd.read_csv('people.csv'); c=pd.read_csv(
+  pi-claude-opus-5-5/pockets pockets: bash cd data && python3 -c " import pandas as pd d=pd.read_csv('measurements.csv') d['b']=d.brand.str.str
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && ls -la . data; for
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np p=pd.read_csv('people.csv'); c=pd.read_csv(
+  pi-claude-opus-5-5/pockets pockets: bash cd data && python3 -c " import pandas as pd d=pd.read_csv('measurements.csv') w=d[d.menWomen=='women
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np p=pd.read_csv('people.csv'); c=pd.read_csv(
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/pockets pockets: bash cat > facts.json <<'EOF' [ {"id": "sample-size-and-brands", "claim": "The data covers 80 pairs of je
+  pi-claude-opus-5-5/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np p=pd.read_csv('people.csv'); c=pd.read_csv(
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/pockets pockets: bash python3 - <<'EOF' import json,pandas as pd,numpy as np F=json.load(open('facts.json')) for f in F: i
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor
+  pi-claude-opus-5-5/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/ && python3 -c " impor

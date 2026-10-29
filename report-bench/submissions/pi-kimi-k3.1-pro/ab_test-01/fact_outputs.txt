@@ -1,11 +1,12 @@
 
 ====================================================================================================
 1 cohort-scope
-The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.
+The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—across 5 departments over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.
 users                                      18000
 unique_users                               18000
 Control_users                               9013
 Treatment_users                             8987
+departments                                    5
 dates                                         42
 first_date                            2024-11-18
 last_date                             2024-12-29
@@ -14,13 +15,14 @@ dtype: object
 
 ====================================================================================================
 2 median-response-gain
-Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively.
+Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively, a 57.0-second reduction.
 Control_median_seconds      110.0
 Treatment_median_seconds     88.0
 seconds_saved                22.0
 reduction_pct                20.0
 Control_p90_seconds         234.0
 Treatment_p90_seconds       177.0
+p90_seconds_saved            57.0
 dtype: float64
 
 ====================================================================================================

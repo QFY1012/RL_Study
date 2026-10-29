@@ -171,7 +171,7 @@ def follow_panel(kind, badge_class):
     cn=int(follow.loc[kind,('n','Control')]); tn=int(follow.loc[kind,('n','Treatment')])
     se=np.sqrt(c*(1-c)/cn+t*(1-t)/tn)
     title='New users' if kind=='New users' else 'Returning users'
-    kicker='More likely to return' if diff>0 else 'Less likely to return'
+    kicker='Follow-up increases' if diff>0 else 'Follow-up decreases'
     return f'''<article class="follow-panel">
       <div class="follow-title"><div><span class="eyebrow">{title}</span><h3>{kicker}</h3></div><span class="delta-badge {badge_class}">{100*diff:+.2f} pp</span></div>
       <div class="follow-bars">
@@ -250,7 +250,7 @@ page = Template(r'''<!DOCTYPE html>
       <h2>median time to first response</h2>
       <div class="wait-compare"><div class="wait-label"><span>Control</span><strong>$control_response_median s</strong></div><div class="hero-wait-track"><i style="width:$control_wait_width%;background:#7a8791"></i></div></div>
       <div class="wait-compare"><div class="wait-label"><span>Treatment</span><strong>$treatment_response_median s</strong></div><div class="hero-wait-track"><i style="width:$treatment_wait_width%;background:#36b99d"></i></div></div>
-      <div class="reduction-line"><span>Relative reduction</span><strong>$response_reduction_pct%</strong></div>
+      <div class="reduction-line"><span>Relative reduction</span><strong>$response_reduction_pct</strong></div>
       <p class="hero-source">Median of observed first_response_seconds. The p90 also improves: $control_p90 s → $treatment_p90 s.</p>
     </div>
   </section>
@@ -266,7 +266,7 @@ page = Template(r'''<!DOCTYPE html>
       <article class="card response-dept-card">
         <div class="card-head"><div><span class="eyebrow">Department check</span><h3>Every department waits less</h3><p>Median Control → Treatment</p></div><span class="evidence-pill">$daily_faster / 42 days</span></div>
         $department_response_rows
-        <div class="response-foot">Savings range from <strong>20 to 26 seconds</strong>. The overall 90th percentile falls <strong>57 seconds</strong>.</div>
+        <div class="response-foot">Savings range from <strong>20 to 26 seconds</strong>. The overall 90th percentile falls <strong>$p90_saved seconds</strong>.</div>
       </article>
     </div>
   </section>
@@ -295,12 +295,12 @@ page = Template(r'''<!DOCTYPE html>
   </section>
 
   <section id="followup" class="section">
-    <div class="section-heading"><span class="section-no">04 / RETENTION</span><h2>Follow-up tells two different stories.</h2><p>New and returning users move in opposite directions. Report these segments separately rather than treating 7-day follow-up as one uniform win or loss.</p></div>
+    <div class="section-heading"><span class="section-no">04 / FOLLOW-UP</span><h2>Follow-up tells two different stories.</h2><p>New and returning users move in opposite directions. Report these segments separately rather than treating 7-day follow-up as one uniform win or loss.</p></div>
     <div class="follow-shell"><div class="follow-intro"><div><span class="eyebrow">7-day follow-up</span><h3>Tenure changes the direction.</h3></div><p>Rates use non-missing follow-up values only. Confidence intervals are for Treatment − Control, in percentage points.</p></div><div class="follow-grid">$follow_new$follow_returning</div></div>
   </section>
 
   <section class="readout" aria-labelledby="readout-title">
-    <div class="readout-copy"><span class="eyebrow">Decision readout</span><h2 id="readout-title">Roll forward on speed. Gate the rollout on Dermatology.</h2><p>The operational improvement is credible in the descriptive data. A completion or retention claim is not.</p><span class="readout-tag">Speed ≠ completed care</span></div>
+    <div class="readout-copy"><span class="eyebrow">Decision readout</span><h2 id="readout-title">Roll forward on speed. Gate the rollout on Dermatology.</h2><p>The response-time improvement is consistent across the observed cuts. A single completion or retention story is not.</p><span class="readout-tag">Speed ≠ completed care</span></div>
     <div class="action-list">
       <article class="action"><span class="action-no">01</span><div><h3>Keep measuring the response-time win.</h3><p>Treatment is faster on $daily_faster of 42 days and in all five departments; the within-two-minute share rises $within_120_diff_pp pp.</p></div></article>
       <article class="action"><span class="action-no">02</span><div><h3>Do not call overall completion a win.</h3><p>The observed difference is $completion_diff_pp pp, with a 95% CI from $completion_ci_low to $completion_ci_high pp. Investigate whether shorter consults affect any downstream quality measure.</p></div></article>
@@ -329,7 +329,7 @@ values = {
  'control_n_label': f'{control_n:,}', 'treatment_n_label': f'{treatment_n:,}',
  'control_response_median': f'{response.loc["Control","median"]:.0f}', 'treatment_response_median': f'{response.loc["Treatment","median"]:.0f}',
  'control_wait_width': f'{response.loc["Control","median"]/120*100:.2f}', 'treatment_wait_width': f'{response.loc["Treatment","median"]/120*100:.2f}',
- 'response_reduction_pct': f'{100*response_reduction:.1f}%', 'control_p90': f'{response.loc["Control","p90"]:.0f}', 'treatment_p90': f'{response.loc["Treatment","p90"]:.0f}',
+ 'response_reduction_pct': f'{100*response_reduction:.1f}%', 'p90_saved': f'{response.loc["Control","p90"]-response.loc["Treatment","p90"]:.0f}', 'control_p90': f'{response.loc["Control","p90"]:.0f}', 'treatment_p90': f'{response.loc["Treatment","p90"]:.0f}',
  'kpi_cards': kpi_cards, 'daily_chart': daily_chart(daily), 'daily_faster': str(daily_faster), 'department_response_rows': department_response_rows(),
  'completion_delta_rows': delta_rows('completion'), 'loss_delta_rows': delta_rows('loss'),
  'completion_diff_pp': f'{100*completion_diff:+.2f}', 'completion_ci_low': f'{100*(completion_diff-completion_moe):+.2f}', 'completion_ci_high': f'{100*(completion_diff+completion_moe):+.2f}',

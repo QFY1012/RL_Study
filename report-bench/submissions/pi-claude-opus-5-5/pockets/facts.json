@@ -1,0 +1,82 @@
+[
+ {
+  "id": "sample-size-and-brands",
+  "claim": "The data covers 80 pairs of jeans, 40 men's and 40 women's, from 20 brands once inconsistent brand spellings are merged.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "pd.Series({'jeans': len(d), 'men': (d.menWomen == 'men').sum(), 'women': (d.menWomen == 'women').sum(), 'brands': d.brand.str.strip().str.lower().nunique()})"
+ },
+ {
+  "id": "front-pocket-depth-gap",
+  "claim": "Women's front pockets average 14.3 deep at their deepest point, against 23.1 for men's.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.groupby('menWomen').maxHeightFront.mean().round(1)"
+ },
+ {
+  "id": "front-depth-ranges-barely-overlap",
+  "claim": "Men's front pockets range from 20.0 to 28.0 deep and women's from 11.5 to 21.5, so the ranges barely overlap.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.groupby('menWomen').maxHeightFront.agg(['min', 'max'])"
+ },
+ {
+  "id": "only-one-womens-pocket-reaches-mens",
+  "claim": "Only one women's front pocket, Abercrombie's Simone High Rise Slim at 21.5, is at least as deep as the shallowest men's front pocket (20.0).",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d[(d.menWomen == 'women') & (d.maxHeightFront >= d[d.menWomen == 'men'].maxHeightFront.min())][['brand', 'name', 'maxHeightFront']]"
+ },
+ {
+  "id": "front-width-gap",
+  "claim": "Women's front pockets are also narrower: 15.2 wide at the opening on average, against 16.4 for men's.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.groupby('menWomen').maxWidthFront.mean().round(1)"
+ },
+ {
+  "id": "back-pockets-similar",
+  "claim": "Back pockets are close in size: men's average 16.0 high and 13.7 wide, women's 15.1 high and 13.3 wide.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean().round(1)"
+ },
+ {
+  "id": "womens-front-shallower-than-back",
+  "claim": "In 29 of the 40 women's jeans the front pocket is shallower than the back pocket; this happens in none of the 40 men's jeans.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "(d.maxHeightFront < d.maxHeightBack).groupby(d.menWomen).agg(['sum', 'count'])"
+ },
+ {
+  "id": "every-brand-gap",
+  "claim": "In all 20 brands the men's jeans have deeper front pockets on average than the women's; the gap is smallest at Abercrombie (2.5) and largest at Levi's (13.4).",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.assign(b=d.brand.str.strip().replace({'7 for all Mankind': '7 for All Mankind'})).pivot_table(index='b', columns='menWomen', values='maxHeightFront', aggfunc='mean').pipe(lambda t: (t.men - t.women).round(2).sort_values())"
+ },
+ {
+  "id": "style-does-not-matter-women",
+  "claim": "Cut makes little difference for women: average front pocket depth is 14.3 for skinny, 14.4 for straight and 14.2 for boot-cut jeans.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d[d.menWomen == 'women'].groupby('style').maxHeightFront.mean().round(1)"
+ },
+ {
+  "id": "price-does-not-buy-depth",
+  "claim": "Paying more does not buy deeper front pockets: the correlation between price and front pocket depth is -0.15 for women's jeans and -0.26 for men's.",
+  "tables": {
+   "d": "data/measurements.csv"
+  },
+  "code": "d.groupby('menWomen').apply(lambda g: round(g.price.corr(g.maxHeightFront), 2))"
+ }
+]

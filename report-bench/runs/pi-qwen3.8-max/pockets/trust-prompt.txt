@@ -1,0 +1,299 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[sample-size]
+claim: The table holds 80 jeans described by 16 columns of brand, style, fabric, price and pocket measurements.
+tables: measurements = data/measurements.csv
+code: measurements.shape
+output:
+(80, 16)
+
+[twenty-brands-each-side]
+claim: Each half of the sample spans 20 brands once spellings are normalised for case and whitespace: 20 distinct brands among the men's jeans and 20 among the women's.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen').brand.apply(lambda s: s.str.strip().str.lower().nunique())
+output:
+menWomen
+men      20
+women    20
+
+[two-jeans-per-brand-per-gender]
+claim: The design is balanced: for every brand the number of men's jeans and the number of women's jeans both have a minimum of 2 and a maximum of 2.
+tables: measurements = data/measurements.csv
+code: measurements.groupby([measurements.brand.str.strip().str.lower(), 'menWomen']).size().unstack().agg(['min', 'max'])
+output:
+menWomen  men  women
+min         2      2
+max         2      2
+
+[front-pocket-means]
+claim: Men's jeans average a maximum front pocket height of 23.13 and a minimum front height of 18.08, against 14.33 and 13.23 for women's; front widths are much closer, 16.37 vs 15.18 at the maximum and 13.36 vs 12.26 at the minimum.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen')[['maxHeightFront', 'minHeightFront', 'maxWidthFront', 'minWidthFront']].mean().round(2)
+output:
+          maxHeightFront  minHeightFront  maxWidthFront  minWidthFront
+menWomen                                                              
+men                23.13           18.08          16.37          13.36
+women              14.33           13.23          15.18          12.26
+
+[front-height-ratio]
+claim: The average men's front pocket is 1.61 times as tall as the average women's front pocket, 61.44% taller.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen').maxHeightFront.mean().pipe(lambda s: pd.Series({'ratio': s['men'] / s['women'], 'pct_taller': 100 * (s['men'] / s['women'] - 1)})).round(2)
+output:
+ratio          1.61
+pct_taller    61.44
+
+[gap-is-front-and-vertical]
+claim: The gap lives in front pocket height and almost nowhere else: the men's-to-women's ratio of means is 1.61 for maximum front height, 1.08 for maximum front width, 1.06 for maximum back height and 1.03 for maximum back width.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack']].mean().pipe(lambda g: pd.Series({c: g.loc['men', c] / g.loc['women', c] for c in g.columns})).round(2)
+output:
+maxHeightFront    1.61
+maxWidthFront     1.08
+maxHeightBack     1.06
+maxWidthBack      1.03
+
+[front-pocket-area]
+claim: Taking maximum height times maximum width as a rough pocket area, men's front pockets average 378.41 and women's 217.97, a ratio of 1.74.
+tables: measurements = data/measurements.csv
+code: measurements.assign(front_area=measurements.maxHeightFront * measurements.maxWidthFront).groupby('menWomen').front_area.mean().pipe(lambda s: pd.Series({'men': s['men'], 'women': s['women'], 'ratio': s['men'] / s['women']})).round(2)
+output:
+men      378.41
+women    217.97
+ratio      1.74
+
+[front-height-ranges]
+claim: Maximum front pocket height runs from 20.0 to 28.0 in men's jeans (mean 23.13, standard deviation 2.06) and from 11.5 to 21.5 in women's jeans (mean 14.33, standard deviation 2.10).
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen').maxHeightFront.agg(['min', 'max', 'mean', 'std']).round(2)
+output:
+           min   max   mean   std
+menWomen                         
+men       20.0  28.0  23.13  2.06
+women     11.5  21.5  14.33  2.10
+
+[smallest-mens-beats-39-womens]
+claim: The smallest maximum front pocket height among the men's jeans is 20.0, and 39 of the 40 women's jeans fall below it.
+tables: measurements = data/measurements.csv
+code: pd.Series({'men_min': measurements.query("menWomen == 'men'").maxHeightFront.min(), 'women_below': (measurements.query("menWomen == 'women'").maxHeightFront < measurements.query("menWomen == 'men'").maxHeightFront.min()).sum(), 'women_total': (measurements.menWomen == 'women').sum()}, dtype=object)
+output:
+men_min        20.0
+women_below      39
+women_total      40
+
+[shallow-front-pockets]
+claim: On the minimum front pocket height, 34 of the 40 women's jeans are below 15, against 5 of the 40 men's jeans.
+tables: measurements = data/measurements.csv
+code: measurements.assign(below_15=measurements.minHeightFront < 15).groupby('menWomen').below_15.agg(['sum', 'count'])
+output:
+          sum  count
+menWomen            
+men         5     40
+women      34     40
+
+[price-parity]
+claim: Mean price is nearly the same on both sides of the gap, 81.18 for men's jeans and 80.32 for women's, while the medians go the other way, 69.72 for men's and 78.75 for women's; prices span 39.99 to 209.0 for men's jeans and 9.99 to 249.0 for women's.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen').price.agg(['mean', 'median', 'min', 'max']).round(2)
+output:
+           mean  median    min    max
+menWomen                             
+men       81.18   69.72  39.99  209.0
+women     80.32   78.75   9.99  249.0
+
+[price-does-not-buy-pocket]
+claim: Paying more does not buy a taller front pocket: within each group the correlation between price and maximum front pocket height is -0.262 for men's jeans and -0.151 for women's.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen')[['price', 'maxHeightFront']].apply(lambda g: np.corrcoef(g.price, g.maxHeightFront)[0, 1]).round(3)
+output:
+menWomen
+men     -0.262
+women   -0.151
+
+[cheapest-jeans-deep-pocket]
+claim: The cheapest jeans in the sample, H&M's women's Skinny Ankle High Waist at 9.99, record a maximum front pocket height of 19.0 and a minimum front height of 13.5.
+tables: measurements = data/measurements.csv
+code: measurements.nsmallest(1, 'price')[['brand', 'menWomen', 'name', 'price', 'maxHeightFront', 'minHeightFront']]
+output:
+   brand menWomen                     name  price  maxHeightFront  minHeightFront
+25   H&M    women  Skinny Ankle High Waist   9.99            19.0            13.5
+
+[priciest-jeans-shallow-pocket]
+claim: The most expensive pair in the sample, True Religion's women's Slim Straight at 249.0, has a maximum front pocket height of 14.5.
+tables: measurements = data/measurements.csv
+code: measurements.nlargest(1, 'price')[['brand', 'menWomen', 'name', 'price', 'maxHeightFront']]
+output:
+            brand menWomen           name  price  maxHeightFront
+17  True Religion    women  Slim Straight  249.0            14.5
+
+[cost-per-pocket-area]
+claim: Per unit of front pocket area, price divided by maximum front height times maximum front width, women's jeans cost more: mean 0.386 and median 0.341, against mean 0.219 and median 0.185 for men's.
+tables: measurements = data/measurements.csv
+code: measurements.assign(cost_per_area=measurements.price / (measurements.maxHeightFront * measurements.maxWidthFront)).groupby('menWomen').cost_per_area.agg(['mean', 'median']).round(3)
+output:
+           mean  median
+menWomen               
+men       0.219   0.185
+women     0.386   0.341
+
+[style-labels-flat-women]
+claim: Style labels say almost nothing about women's pocket size: mean maximum front pocket height is 14.25 for the 4 boot-cut jeans, 14.27 for the 20 skinny jeans and 14.42 for the 16 straight jeans.
+tables: measurements = data/measurements.csv
+code: measurements[measurements.menWomen == 'women'].groupby('style').maxHeightFront.agg(['mean', 'size']).round(2)
+output:
+           mean  size
+style                
+boot-cut  14.25     4
+skinny    14.27    20
+straight  14.42    16
+
+[style-labels-flat-men]
+claim: Men's style labels are similarly flat: mean maximum front pocket height is 23.57 for the 7 boot-cut jeans, 21.50 for the 1 regular jean, 22.71 for the 12 skinny, 23.90 for the 8 slim and 22.92 for the 12 straight.
+tables: measurements = data/measurements.csv
+code: measurements[measurements.menWomen == 'men'].groupby('style').maxHeightFront.agg(['mean', 'size']).round(2)
+output:
+           mean  size
+style                
+boot-cut  23.57     7
+regular   21.50     1
+skinny    22.71    12
+slim      23.90     8
+straight  22.92    12
+
+[brand-gap-ranking]
+claim: Ranked by the men's-to-women's ratio of mean maximum front pocket height, Levi's is widest at 2.09 (25.75 vs 12.35), then Guess at 2.00 (24.00 vs 12.00) and Wrangler at 1.91 (27.75 vs 14.50); Abercrombie is narrowest at 1.13 (22.25 vs 19.75).
+tables: measurements = data/measurements.csv
+code: measurements.assign(b=measurements.brand.str.strip().str.lower()).pivot_table(index='b', columns='menWomen', values='maxHeightFront', aggfunc='mean').assign(ratio=lambda x: x['men'] / x['women']).round(2).sort_values('ratio')
+output:
+menWomen             men  women  ratio
+b                                     
+abercrombie        22.25  19.75   1.13
+american eagle     21.50  17.50   1.23
+h&m                20.75  16.75   1.24
+express            21.00  15.60   1.35
+buckle black       21.00  14.75   1.42
+uniqlo             22.00  14.25   1.54
+lucky              21.75  14.00   1.55
+7 for all mankind  21.25  13.50   1.57
+true religion      23.60  14.25   1.66
+calvin klein       21.75  13.00   1.67
+gap                22.50  13.50   1.67
+tommy hilfiger     23.75  13.75   1.73
+arizona            25.25  14.50   1.74
+ralph lauren       23.50  13.00   1.81
+lee                25.00  13.60   1.84
+old navy           24.50  13.25   1.85
+j. crew            23.75  12.75   1.86
+wrangler           27.75  14.50   1.91
+guess              24.00  12.00   2.00
+levi's             25.75  12.35   2.09
+
+[fifteen-brands-wide-gap]
+claim: 15 brands give their men's jeans a mean maximum front pocket height at least 1.5 times that of their women's jeans.
+tables: measurements = data/measurements.csv
+code: measurements.assign(b=measurements.brand.str.strip().str.lower()).pivot_table(index='b', columns='menWomen', values='maxHeightFront', aggfunc='mean').assign(ratio=lambda x: x['men'] / x['women']).query('ratio >= 1.5').shape[0]
+output:
+15
+
+[no-missing-values]
+claim: There are no missing values in the file: the total number of NaN cells across the whole table is 0.
+tables: measurements = data/measurements.csv
+code: measurements.isna().sum().sum()
+output:
+0
+
+[back-pocket-parity]
+claim: Back pockets are close to parity: men's jeans average 16.01 maximum height and 13.70 maximum width against 15.12 and 13.34 for women's, with minimums of 13.47 vs 12.58 for height and 12.16 vs 11.74 for width.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen')[['maxHeightBack', 'minHeightBack', 'maxWidthBack', 'minWidthBack']].mean().round(2)
+output:
+          maxHeightBack  minHeightBack  maxWidthBack  minWidthBack
+menWomen                                                          
+men               16.01          13.47         13.70         12.16
+women             15.12          12.58         13.34         11.74
+
+[rivet-height]
+claim: The front rivet sits higher on men's jeans on average, 7.06 against 6.25, and the men's range is wider, 4.5 to 9.2 versus 4.5 to 7.5.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('menWomen').rivetHeightFront.agg(['mean', 'min', 'max']).round(2)
+output:
+          mean  min  max
+menWomen                
+men       7.06  4.5  9.2
+women     6.25  4.5  7.5
+
+[cotton-share]
+claim: Cotton percentages parsed from the fabric strings average 93.3 for men's jeans (range 53.0 to 100.0) and 80.8 for women's jeans (range 30.0 to 99.0).
+tables: measurements = data/measurements.csv
+code: measurements.assign(cotton=measurements.fabric.str.lower().str.extract(r'(\d+)%\s*cott+on')[0].astype(float)).groupby('menWomen').cotton.agg(['mean', 'min', 'max']).round(1)
+output:
+          mean   min    max
+menWomen                   
+men       93.3  53.0  100.0
+women     80.8  30.0   99.0
+
+[all-rigid-denim-is-mens]
+claim: Every 100% cotton jean in the sample is men's: 8 among the men's jeans and 0 among the women's.
+tables: measurements = data/measurements.csv
+code: measurements.assign(cotton=measurements.fabric.str.lower().str.extract(r'(\d+)%\s*cott+on')[0].astype(float)).groupby('menWomen').apply(lambda g: int((g.cotton == 100).sum()))
+output:
+menWomen
+men      8
+women    0
+
+[cutout-jeans-cost-more]
+claim: Nine jeans carry the cutout flag and they are the expensive ones: their mean price is 133.10 against 74.11 for the 71 without it.
+tables: measurements = data/measurements.csv
+code: measurements.groupby('cutout').agg(n=('name', 'size'), mean_price=('price', 'mean')).round(2)
+output:
+         n  mean_price
+cutout                
+False   71       74.11
+True     9      133.10
+
+[cutout-mostly-mens]
+claim: Among the jeans flagged with a cutout, 6 are men's and 3 are women's; among those not flagged, 34 are men's and 37 are women's.
+tables: measurements = data/measurements.csv
+code: measurements.groupby(['cutout', 'menWomen']).size()
+output:
+cutout  menWomen
+False   men         34
+        women       37
+True    men          6
+        women        3
+
+[brand-spelling-variants]
+claim: The brand column holds 22 distinct raw spellings that reduce to 20 brands once case and surrounding whitespace are normalised.
+tables: measurements = data/measurements.csv
+code: pd.Series({'raw_spellings': measurements.brand.nunique(), 'normalised_brands': measurements.brand.str.strip().str.lower().nunique()})
+output:
+raw_spellings        22
+normalised_brands    20
+
+[min-above-max-rows]
+claim: In 14 rows the recorded minimum front height is larger than the recorded maximum front height, 12 of them women's jeans and 2 men's.
+tables: measurements = data/measurements.csv
+code: pd.Series({'rows': int((measurements.minHeightFront > measurements.maxHeightFront).sum()), 'women': int(((measurements.minHeightFront > measurements.maxHeightFront) & (measurements.menWomen == 'women')).sum()), 'men': int(((measurements.minHeightFront > measurements.maxHeightFront) & (measurements.menWomen == 'men')).sum())})
+output:
+rows     14
+women    12
+men       2
+
+[boot-named-straight]
+claim: Six women's jeans are labelled style 'straight' although their product names contain 'boot': Arizona Perfect Boot, Lucky Sweet Boot, Levi's Classic Bootcut, 7 for All Mankind Bootcut, Guess Tailored Mini Boot and Express Barely Boot Midrise.
+tables: measurements = data/measurements.csv
+code: measurements[measurements.style.eq('straight') & measurements.name.str.lower().str.contains('boot')][['brand', 'menWomen', 'name', 'style']]
+output:
+                brand menWomen                 name     style
+1             Arizona    women         Perfect Boot  straight
+9               Lucky    women           Sweet Boot  straight
+11             Levi's    women      Classic Bootcut  straight
+15  7 for All Mankind    women              Bootcut  straight
+19              Guess    women   Tailored Mini Boot  straight
+23            Express    women  Barely Boot Midrise  straight

@@ -123,7 +123,7 @@ figcaption b{color:var(--ink-2)}
 .figtitle{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:.01em;margin-bottom:3px}
 .figsub{font-size:12.5px;color:var(--ink-3);margin-bottom:14px}
 .chart{width:100%}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
 .grid2 figure{margin-top:0}
 
 /* tables */
@@ -134,10 +134,11 @@ th{
 }
 td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
 tr:last-child td{border-bottom:none}
-td.num,th.num{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding-right:0}
-td.numl,th.numl{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding:10px 0 10px 18px}
+td.numl,th.numl{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding:10px 0 10px 18px}
 td.zh{color:var(--ink);font-weight:500}
 td .en{display:block;font-size:12.5px;color:var(--ink-3);font-weight:400;line-height:1.4}
+td.mono{background:none;padding-left:0;font-size:12.5px;color:#33404c;white-space:nowrap}
 tr.hl td{background:#fdf6ef}
 tbody tr:hover td{background:#faf8f4}
 tbody tr.hl:hover td{background:#fbf1e6}
@@ -751,13 +752,14 @@ function dumbbell(box,cfg){
       const t=el('title',{},c); t.textContent=r.zh+' · '+p[3]+': '+fmt(p[2],2)+'%';
     });
     txt(svg,Math.max(x1,x2)+14,y+4,(worse?'+':'−')+fmt(Math.abs(r.test-r.control),2)+' pp','val',worse?'start':'end');
+    if(!worse) svg.lastChild.setAttribute('x',Math.min(x1,x2)-14);
   });
 }
 
 /* ---------------- horizontal bars ---------------- */
 function hbars(box,cfg){
   const W=box.clientWidth||880, rowH=cfg.rowH||26;
-  const m={t:14,r:78,b:26,l:cfg.left||300};
+  const m={t:14,r:118,b:26,l:cfg.left||300};
   const H=m.t+m.b+rowH*cfg.rows.length;
   const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
   const iw=W-m.l-m.r;
@@ -773,7 +775,8 @@ function hbars(box,cfg){
     txt(svg,m.l-12,y+13,r.sub,'tick','end');
     const rect=el('rect',{x:m.l,y:y-7,width:Math.max(1,w),height:14,fill:r.color,rx:2},svg);
     const t=el('title',{},rect); t.textContent=r.label+' — '+r.sub+': '+fmt(r.value,1)+'% (n='+r.n+')';
-    txt(svg,m.l+w+8,y+4,fmt(r.value,1)+'%  ·  n='+r.n,'val','start');
+    txt(svg,m.l+w+8,y+4,fmt(r.value,1)+'%','val','start');
+    txt(svg,W-4,y+4,'n='+r.n.toLocaleString('en-US'),'val','end');
   });
 }
 
@@ -802,13 +805,13 @@ function funnel(box){
   });
   const drop=[{y:m.t+rowH,l:'− '+DATA.funnel.lost.toLocaleString('en-US')+' lost before a doctor ('+fmt(DATA.funnel.lost/DATA.funnel.users*100,1)+'%)'},
               {y:m.t+rowH*2,l:'− '+DATA.funnel.dropped.toLocaleString('en-US')+' dropped after the first reply ('+fmt(DATA.funnel.dropped/DATA.funnel.users*100,1)+'%)'}];
-  drop.forEach(d=>txt(svg,m.l+iw*0.60,d.y+rowH/2+6,d.l,'tick','start'));
+  drop.forEach(d=>txt(svg,m.l+iw,d.y-3,d.l,'tick','end'));
 }
 
 /* ---------------- weekly combo ---------------- */
 function weeklyChart(box){
   const W=box.clientWidth||880,H=330;
-  const m={t:22,r:56,b:44,l:52};
+  const m={t:26,r:64,b:44,l:52};
   const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
   const iw=W-m.l-m.r, ih=H-m.t-m.b;
   const wk=DATA.weekly, n=wk.weeks.length;
@@ -819,8 +822,8 @@ function weeklyChart(box){
     txt(svg,m.l-9,y+4,(yMax*i/4)+'s','tick','end');
     txt(svg,m.l+iw+9,y+4,Math.round(vMax*i/4).toLocaleString('en-US'),'tick','start');
   }
-  txt(svg,m.l-9,m.t-8,'median wait','alab','end');
-  txt(svg,m.l+iw+9,m.t-8,'sessions','alab','start');
+  txt(svg,m.l-9,m.t-10,'median wait','alab','end');
+  txt(svg,W-2,m.t-10,'sessions / arm / week','alab','end');
   const gw=iw/n;
   const bw=Math.min(26,gw*0.28);
   wk.weeks.forEach((w,i)=>{
@@ -914,7 +917,7 @@ function buildKPIs(){
   const k=DATA.kpi;
   const cards=[
     {lab:'Median first reply',cls:'good',from:k.wait_median.control,to:k.wait_median.test,unit:'s',
-     delta:'−20.0% · −22.0 s',dcls:'good',sub:'p90 234 → 177 s · p95 290 → 213 s',d:2},
+     delta:'−20.0% · −22.0 s',dcls:'good',sub:'p90 234 → 177 s · p95 290 → 213 s',d:1},
     {lab:'Consultation completed',cls:'flat',from:k.completion.control,to:k.completion.test,unit:'%',
      delta:'−0.08 pp · z = −0.16',dcls:'flat',sub:'7,933 / 9,013 vs 7,903 / 8,987',d:2},
     {lab:'Lost before a doctor',cls:'bad',from:k.loss.control,to:k.loss.test,unit:'%',
@@ -1059,8 +1062,8 @@ register({id:'fuChart',draw:box=>groupedBars(box,{
 })});
 register({id:'weeklyChart',draw:weeklyChart});
 register({id:'complaintChart',draw:box=>hbars(box,{
-  xMin:78,xMax:93,gridVals:[80,82,84,86,88,90,92],fmtX:v=>v+'%',rowH:34,left:320,
-  rows:DATA.complaints.map(c=>({label:c.zh,sub:c.en+' · '+c.dept,value:c.comp,n:c.n,color:DEPT_COLOR[c.dept]}))
+  xMin:78,xMax:93,gridVals:[80,82,84,86,88,90,92],fmtX:v=>v+'%',rowH:34,left:352,
+  rows:DATA.complaints.map(c=>({label:c.zh,sub:c.en,value:c.comp,n:c.n,color:DEPT_COLOR[c.dept]}))
 })});
 
 /* ---------------- boot ---------------- */
