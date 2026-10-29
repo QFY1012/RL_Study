@@ -54,7 +54,7 @@
      "left": 217,
      "w": 1006,
      "h": 365,
-     "sig": "2748ed51"
+     "sig": "924bd4f1"
     }
    ]
   },
@@ -70,7 +70,7 @@
      "left": 217,
      "w": 1006,
      "h": 365,
-     "sig": "2748ed51"
+     "sig": "924bd4f1"
     },
     {
      "id": 3,
@@ -95,7 +95,7 @@
      "left": 217,
      "w": 1006,
      "h": 365,
-     "sig": "2748ed51"
+     "sig": "924bd4f1"
     },
     {
      "id": 3,
@@ -259,7 +259,7 @@
      "left": 217,
      "w": 1006,
      "h": 220,
-     "sig": "8e017f10"
+     "sig": "be2c125e"
     }
    ]
   },
@@ -275,7 +275,7 @@
      "left": 217,
      "w": 1006,
      "h": 220,
-     "sig": "8e017f10"
+     "sig": "be2c125e"
     }
    ]
   },
@@ -716,7 +716,7 @@
   },
   {
    "tag": "text",
-   "y": 1754,
+   "y": 1748,
    "x": 374,
    "w": 209,
    "in_svg": true,
@@ -725,7 +725,7 @@
   },
   {
    "tag": "text",
-   "y": 1754,
+   "y": 1748,
    "x": 823,
    "w": 234,
    "in_svg": true,
@@ -734,7 +734,7 @@
   },
   {
    "tag": "text",
-   "y": 1767,
+   "y": 1771,
    "x": 432,
    "w": 94,
    "in_svg": true,
@@ -743,7 +743,7 @@
   },
   {
    "tag": "text",
-   "y": 1767,
+   "y": 1771,
    "x": 894,
    "w": 91,
    "in_svg": true,
@@ -1959,16 +1959,16 @@
   {
    "tag": "text",
    "y": 5901,
-   "x": 220,
-   "w": 244,
+   "x": 304,
+   "w": 212,
    "in_svg": true,
    "hidden": false,
-   "text": "front pockets deep enough for the phone"
+   "text": "pockets deep enough for the phone"
   },
   {
    "tag": "text",
    "y": 5908,
-   "x": 1118,
+   "x": 1085,
    "w": 57,
    "in_svg": true,
    "hidden": false,
@@ -1977,7 +1977,7 @@
   {
    "tag": "text",
    "y": 5908,
-   "x": 1196,
+   "x": 1181,
    "w": 39,
    "in_svg": true,
    "hidden": false,
@@ -1986,7 +1986,7 @@
   {
    "tag": "text",
    "y": 5938,
-   "x": 672,
+   "x": 708,
    "w": 53,
    "in_svg": true,
    "hidden": false,
@@ -1995,7 +1995,7 @@
   {
    "tag": "text",
    "y": 5939,
-   "x": 378,
+   "x": 431,
    "w": 86,
    "in_svg": true,
    "hidden": false,
@@ -2013,7 +2013,7 @@
   {
    "tag": "text",
    "y": 5992,
-   "x": 565,
+   "x": 611,
    "w": 47,
    "in_svg": true,
    "hidden": false,
@@ -2022,7 +2022,7 @@
   {
    "tag": "text",
    "y": 5993,
-   "x": 378,
+   "x": 431,
    "w": 86,
    "in_svg": true,
    "hidden": false,
@@ -2040,7 +2040,7 @@
   {
    "tag": "text",
    "y": 6047,
-   "x": 550,
+   "x": 597,
    "w": 48,
    "in_svg": true,
    "hidden": false,
@@ -2049,7 +2049,7 @@
   {
    "tag": "text",
    "y": 6048,
-   "x": 379,
+   "x": 431,
    "w": 85,
    "in_svg": true,
    "hidden": false,

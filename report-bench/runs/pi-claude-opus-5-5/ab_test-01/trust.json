@@ -1,0 +1,143 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/index.html",
+ "facts": "submissions/pi-claude-opus-5-5/ab_test-01/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": true,
+   "verdicts": [
+    {
+     "id": "groups-balanced",
+     "basis": "control 9013, treatment 8987; total 18000",
+     "verdict": "ok"
+    },
+    {
+     "id": "group-label-spaces",
+     "basis": "endswith(' ') count is 19",
+     "verdict": "ok"
+    },
+    {
+     "id": "date-format-mixed",
+     "basis": "slash-containing dates are ['2024/12/02', '2024/12/19', '2024/12/27'], 3 rows",
+     "verdict": "ok"
+    },
+    {
+     "id": "funnel",
+     "basis": "left before doctor 903, reached doctor not completed 1261, completed 15836; sum 18000",
+     "verdict": "ok"
+    },
+    {
+     "id": "dept-sizes",
+     "basis": "Pediatrics 5246, Internal medicine 5083, Dermatology 3121, Gynecology 2490, ENT & eye 2060",
+     "verdict": "ok"
+    },
+    {
+     "id": "median-response",
+     "basis": "control median 110.0, treatment median 88.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "daily-response",
+     "basis": "days 42, treatment lower 39",
+     "verdict": "ok"
+    },
+    {
+     "id": "response-by-period",
+     "basis": "Nov 18-Dec 8: control 86.0, treatment 77.0 (gap 9); Dec 9-29: control 132.0, treatment 96.0 (gap 36)",
+     "verdict": "ok"
+    },
+    {
+     "id": "volume-by-period",
+     "basis": "Nov 18-Dec 8 users 8091 over 21 days; Dec 9-29 users 9909 over 21 days",
+     "verdict": "ok"
+    },
+    {
+     "id": "overall-outcomes",
+     "basis": "control lost 4.7%, completed 88.0%; treatment lost 5.3%, completed 87.9%",
+     "verdict": "ok"
+    },
+    {
+     "id": "dept-lost",
+     "basis": "Dermatology control 7.7%, treatment 12.7%; other departments differ by at most 0.9 points, e.g. Pediatrics control 3.1%, treatment 2.5%",
+     "verdict": "ok"
+    },
+    {
+     "id": "derm-completion",
+     "basis": "Dermatology control 85.0%, treatment 80.5%; all other departments treatment >= control",
+     "verdict": "ok"
+    },
+    {
+     "id": "derm-all-complaints",
+     "basis": "all five complaints have treatment_higher True; red spots on the back 6.9% vs 13.9%, toe-web peeling 6.0% vs 11.7%",
+     "verdict": "ok"
+    },
+    {
+     "id": "derm-weekly",
+     "basis": "6 weeks; treatment values 11.0% to 15.9%, control values 6.3% to 8.7%, treatment_higher True each week",
+     "verdict": "ok"
+    },
+    {
+     "id": "derm-z",
+     "basis": "dermatology z-score 4.65, all departments z-score 1.72",
+     "verdict": "ok"
+    },
+    {
+     "id": "non-derm-outcomes",
+     "basis": "all other departments control lost 4.1%, completed 88.7%; treatment lost 3.8%, completed 89.4%",
+     "verdict": "ok"
+    },
+    {
+     "id": "consult-length",
+     "basis": "Output gives control median 11.2 and treatment median 10.4 for consult_minutes by group, but the code does not filter to completed consultations, so the completed-only claim is not supported",
+     "verdict": "wrong"
+    },
+    {
+     "id": "followup-by-usertype",
+     "basis": "new: control 6.8%, treatment 9.8%; returning: control 14.9%, treatment 13.2%",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-overall",
+     "basis": "control 12.3%, treatment 12.1%",
+     "verdict": "ok"
+    },
+    {
+     "id": "consult-640",
+     "basis": "640.0 appears 7 times; next values are 76.7 and 67.9 with count 1",
+     "verdict": "ok"
+    },
+    {
+     "id": "response-outliers",
+     "basis": "top 7 values are 71396, 40753, 26811, 21424, 18669, 15709, 15543; next value is 922",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [
+    {
+     "id": "consult-length",
+     "basis": "Output gives control median 11.2 and treatment median 10.4 for consult_minutes by group, but the code does not filter to completed consultations, so the completed-only claim is not supported",
+     "verdict": "wrong"
+    }
+   ],
+   "reply": "{\"facts\":[{\"id\":\"groups-balanced\",\"basis\":\"control 9013, treatment 8987; total 18000\",\"verdict\":\"ok\"},{\"id\":\"group-label-spaces\",\"basis\":\"endswith(' ') count is 19\",\"verdict\":\"ok\"},{\"id\":\"date-format-mixed\",\"basis\":\"slash-containing dates are ['2024/12/02', '2024/12/19', '2024/12/27'], 3 rows\",\"verdict\":\"ok\"},{\"id\":\"funnel\",\"basis\":\"left before doctor 903, reached doctor not completed 1261, completed 15836; sum 18000\",\"verdict\":\"ok\"},{\"id\":\"dept-sizes\",\"basis\":\"Pediatrics 5246, Internal medicine 5083, Dermatology 3121, Gynecology 2490, ENT & eye 2060\",\"verdict\":\"ok\"},{\"id\":\"median-response\",\"basis\":\"control median 110.0, treatment median 88.0\",\"verdict\":\"ok\"},{\"id\":\"daily-response\",\"basis\":\"days 42, treatment lower 39\",\"verdict\":\"ok\"},{\"id\":\"response-by-period\",\"basis\":\"Nov 18-Dec 8: control 86.0, treatment 77.0 (gap 9); Dec 9-29: control 132.0, treatment 96.0 (gap 36)\",\"verdict\":\"ok\"},{\"id\":\"volume-by-period\",\"basis\":\"Nov 18-Dec 8 users 8091 over 21 days; Dec 9-29 users 9909 over 21 days\",\"verdict\":\"ok\"},{\"id\":\"overall-outcomes\",\"basis\":\"control lost 4.7%, completed 88.0%; treatment lost 5.3%, completed 87.9%\",\"verdict\":\"ok\"},{\"id\":\"dept-lost\",\"basis\":\"Dermatology control 7.7%, treatment 12.7%; other departments differ by at most 0.9 points, e.g. Pediatrics control 3.1%, treatment 2.5%\",\"verdict\":\"ok\"},{\"id\":\"derm-completion\",\"basis\":\"Dermatology control 85.0%, treatment 80.5%; all other departments treatment >= control\",\"verdict\":\"ok\"},{\"id\":\"derm-all-complaints\",\"basis\":\"all five complaints have treatment_higher True; red spots on the back 6.9% vs 13.9%, toe-web peeling 6.0% vs 11.7%\",\"verdict\":\"ok\"},{\"id\":\"derm-weekly\",\"basis\":\"6 weeks; treatment values 11.0% to 15.9%, control values 6.3% to 8.7%, treatment_higher True each week\",\"verdict\":\"ok\"},{\"id\":\"derm-z\",\"basis\":\"dermatology z-score 4.65, all departments z-score 1.72\",\"verdict\":\"ok\"},{\"id\":\"non-derm-outcomes\",\"basis\":\"all other departments control lost 4.1%, completed 88.7%; treatment lost 3.8%, completed 89.4%\",\"verdict\":\"ok\"},{\"id\":\"consult-length\",\"basis\":\"Output gives control median 11.2 and treatment median 10.4 for consult_minutes by group, but the code does not filter to completed consultations, so the completed-only claim is not supported\",\"verdict\":\"wrong\"},{\"id\":\"followup-by-usertype\",\"basis\":\"new: control 6.8%, treatment 9.8%; returning: control 14.9%, treatment 13.2%\",\"verdict\":\"ok\"},{\"id\":\"followup-overall\",\"basis\":\"control 12.3%, treatment 12.1%\",\"verdict\":\"ok\"},{\"id\":\"consult-640\",\"basis\":\"640.0 appears 7 times; next values are 76.7 and 67.9 with count 1\",\"verdict\":\"ok\"},{\"id\":\"response-outliers\",\"basis\":\"top 7 values are 71396, 40753, 26811, 21424, 18669, 15709, 15543; next value is 922\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 3362,
+    "completion_tokens": 4908,
+    "seconds": 29.4
+   }
+  }
+ },
+ "vetoed": [
+  "1.3"
+ ],
+ "tries": 1
+}

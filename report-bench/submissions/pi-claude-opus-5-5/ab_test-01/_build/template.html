@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Faster doctors, except in dermatology — an online consultation A/B test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--ink:#1d2329;--muted:#5b6670;--tr:#d9480f;--ct:#9aa3ad;--line:#e6e8eb}
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf8;color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:56px 20px 80px}
+.kicker{text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--muted);font-weight:600}
+h1{font-size:40px;line-height:1.15;margin:8px 0 16px;letter-spacing:-.01em}
+h2{font-size:24px;margin:56px 0 8px;line-height:1.25}
+.lede{font-size:20px;color:#333;margin:0 0 28px}
+p{margin:0 0 14px}
+.tr{color:var(--tr)} .ct{color:#6f7a85}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 8px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kpi .v{font-size:26px;font-weight:700;line-height:1.1}
+.kpi .v small{font-size:15px;color:var(--muted);font-weight:500}
+.kpi .l{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.35}
+figure{margin:20px 0 8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 18px 10px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.funnel{display:flex;height:26px;border-radius:4px;overflow:hidden;margin:6px 0 10px}
+.flegend{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:#333}
+.flegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+table.t{border-collapse:collapse;width:100%;font-size:15px}
+.t th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid #ccd;padding:6px 8px}
+.t td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t .num{text-align:right;font-variant-numeric:tabular-nums}
+.t td.tr{font-weight:700}
+.t .cn{display:block;font-size:12px;color:#8a949d}
+.bar{display:inline-block;height:10px;background:var(--tr);border-radius:2px;vertical-align:middle;margin-right:6px}
+.two{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:center}
+.two figure{margin:0}
+.note{background:#f2f0ec;border-left:3px solid #c9bfae;padding:14px 18px;border-radius:0 6px 6px 0;font-size:15px}
+.note ul{margin:6px 0 0;padding-left:18px}
+.callout{font-size:19px;border-left:4px solid var(--tr);padding:4px 0 4px 16px;margin:22px 0}
+footer{margin-top:56px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<main>
+<div class="kicker">A/B test report · online medical consultation · 18 Nov – 29 Dec 2024</div>
+<h1>The new flow gets patients a doctor faster everywhere, but drives dermatology patients away</h1>
+<p class="lede">18,000 users of an online consultation service were split into a control group and a treatment group. In the treatment group, doctors answered 22 seconds sooner at the median (88 vs 110), but the overall completion rate did not move. The reason is a single department: in dermatology, the share of treatment users who left before seeing a doctor went from 7.7% to 12.7%, which cancelled out small gains everywhere else.</p>
+
+<div class="kpis">
+ <div class="kpi"><div class="v"><span class="tr">88s</span> <small>vs 110s</small></div><div class="l">median time to first doctor response, treatment vs control</div></div>
+ <div class="kpi"><div class="v"><span class="tr">87.9%</span> <small>vs 88.0%</small></div><div class="l">consultations completed: no overall change</div></div>
+ <div class="kpi"><div class="v"><span class="tr">12.7%</span> <small>vs 7.7%</small></div><div class="l">dermatology users who left before reaching a doctor</div></div>
+ <div class="kpi"><div class="v"><span class="tr">9.8%</span> <small>vs 6.8%</small></div><div class="l">new users who came back within 7 days</div></div>
+</div>
+
+<h2>The setup: a clean split across five departments</h2>
+<p>The groups are well balanced: 9,013 users in control and 8,987 in treatment, entering over the same 42 days. Pediatrics (5,246 users) and internal medicine (5,083) are the busiest departments, followed by dermatology (3,121), gynecology (2,490) and ENT &amp; eye (2,060). Each user's journey can end in one of three ways:</p>
+{{FUNNEL}}
+<p style="font-size:14px;color:var(--muted);margin-top:10px">Every user who left before a doctor has no response time recorded, and every user who did not complete has no consultation length, so the three outcomes don't overlap.</p>
+
+<h2>Doctors answered faster in the treatment group almost every day</h2>
+<p>The median wait for a first doctor response was <b class="tr">88 seconds</b> in treatment against <b class="ct">110 seconds</b> in control. Treatment had the lower daily median on 39 of the 42 days. The advantage grew under load: from 9 December traffic rose (9,909 users in the last 21 days against 8,091 in the first 21) and the control median jumped from 86 to 132 seconds, while treatment rose only from 77 to 96. The gap widened from 9 to 36 seconds.</p>
+<figure>
+{{DAILY}}
+<figcaption>Daily median seconds until a doctor first responds, by group. Users who left before a doctor have no response time and are not included.</figcaption>
+</figure>
+<p>Completed consultations were also a little shorter in treatment, with a median of 10.4 minutes against 11.2.</p>
+
+<h2>Yet completion did not move, because dermatology went the other way</h2>
+<p>Overall, 5.3% of treatment users left before a doctor against 4.7% of control, and completion was flat at 87.9% versus 88.0%. Splitting by department shows why the faster responses did not pay off. In four departments the groups are within one point of each other, and treatment is slightly better in most of them. Dermatology stands apart.</p>
+<figure>
+{{DEPT}}
+<figcaption>Share of users who left before reaching a doctor, control (grey) vs treatment (orange), by department.</figcaption>
+</figure>
+<p class="callout">In dermatology, <b class="tr">12.7%</b> of treatment users gave up before reaching a doctor, against <b class="ct">7.7%</b> in control, and completion fell from 85.0% to 80.5%. Dermatology is the only department where treatment completed less often than control.</p>
+<p>The difference is not noise. Its z-score is 4.65, compared with 1.72 for the overall loss gap. It also shows up in every dermatology complaint and in each of the 6 weeks of the test: weekly treatment loss ranged from 11.0% to 15.9%, while control ranged from 6.3% to 8.7%.</p>
+<figure>
+{{DERM}}
+<figcaption>Share leaving before a doctor, by dermatology chief complaint (original complaint text in grey).</figcaption>
+</figure>
+<p>Outside dermatology the treatment was mildly positive: 3.8% of users left before a doctor against 4.1% in control, and 89.4% completed against 88.7%. The data does not say what the treatment changed in the flow. Because the loss happens <i>before</i> a doctor responds, though, the likely suspect is a pre-consultation step, such as an intake form or a photo upload, that dermatology patients find harder to finish.</p>
+
+<h2>New users came back more; returning users less</h2>
+<div class="two">
+<figure>
+{{FU}}
+<figcaption>Share who had a follow-up within 7 days, control (grey) vs treatment (orange).</figcaption>
+</figure>
+<div>
+<p>Across all users, the 7-day follow-up rate was unchanged: 12.1% in treatment against 12.3% in control. Underneath, it moved in opposite directions. Among <b>new users</b> it rose from 6.8% to <b class="tr">9.8%</b>, and among <b>returning users</b> it fell from 14.9% to <b class="tr">13.2%</b>.</p>
+<p>Returning users make up about two-thirds of each group, so the two shifts almost cancel. Whether more follow-ups is good depends on what a follow-up means here. It could be repeat engagement, or it could mean the first consultation did not resolve the problem.</p>
+</div>
+</div>
+
+<h2>What to do with this</h2>
+<p>Before rolling out, find the step in the treatment flow that dermatology patients abandon, and fix or exempt it. If dermatology performed as well under treatment as it does under control, the faster responses and slightly better completion seen elsewhere would be a clear win.</p>
+
+<div class="note" style="margin-top:36px">
+<b>Data notes.</b> The file has one row per user (18,000 rows, no duplicate IDs). Some cleaning was needed:
+<ul>
+<li>19 rows had a group label with a trailing space. These were trimmed and kept in their groups.</li>
+<li>3 rows wrote the entry date with slashes (2024/12/02, 2024/12/19, 2024/12/27). These were normalised.</li>
+<li>7 users have a first-response time over an hour, from 15,543 to 71,396 seconds, while the next-largest value is 922 seconds. 7 consultations last exactly 640 minutes, while the next-longest is 76.7. These look like logging errors. Medians are used throughout, so they don't affect the results.</li>
+<li>Chief complaints are missing for 36 users, platform for 6, and 7-day follow-up for 186. Platform split (Android, iOS, WeChat mini-program) and user type are balanced across groups.</li>
+</ul>
+</div>
+<footer>Source: data/data.csv, users of an online medical consultation service, 18 Nov – 29 Dec 2024. Group, department and complaint labels are translated from Chinese.</footer>
+</main>
+</body>
+</html>

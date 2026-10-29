@@ -1,0 +1,2348 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/hello-stranger/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/convos.csv",
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/people.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 443,
+     "left": 864,
+     "w": 444,
+     "h": 122,
+     "sig": "c5bb262"
+    }
+   ]
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -7,
+     "left": 864,
+     "w": 444,
+     "h": 122,
+     "sig": "c5bb262"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 766,
+     "left": 100,
+     "w": 952,
+     "h": 390,
+     "sig": "8f4209c4"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 316,
+     "left": 100,
+     "w": 952,
+     "h": 390,
+     "sig": "8f4209c4"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -134,
+     "left": 100,
+     "w": 952,
+     "h": 390,
+     "sig": "8f4209c4"
+    },
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 746,
+     "left": 763,
+     "w": 546,
+     "h": 283,
+     "sig": "cd058c91"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 296,
+     "left": 763,
+     "w": 546,
+     "h": 283,
+     "sig": "cd058c91"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": -154,
+     "left": 763,
+     "w": 546,
+     "h": 283,
+     "sig": "cd058c91"
+    }
+   ]
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 3841,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    444,
+    122
+   ],
+   "frames": [
+    0,
+    1
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    952,
+    390
+   ],
+   "frames": [
+    1,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 3,
+   "kind": "svg",
+   "size": [
+    546,
+    283
+   ],
+   "frames": [
+    3,
+    5
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "a",
+   "y": -60,
+   "x": 16,
+   "w": 163,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skip to the report"
+  },
+  {
+   "tag": "span",
+   "y": 26,
+   "x": 153,
+   "w": 206,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Stranger Sessions"
+  },
+  {
+   "tag": "a",
+   "y": 35,
+   "x": 884,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The arc"
+  },
+  {
+   "tag": "a",
+   "y": 35,
+   "x": 993,
+   "w": 111,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Connection"
+  },
+  {
+   "tag": "a",
+   "y": 35,
+   "x": 1134,
+   "w": 98,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Similarity"
+  },
+  {
+   "tag": "a",
+   "y": 35,
+   "x": 1262,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Method"
+  },
+  {
+   "tag": "span",
+   "y": 37,
+   "x": 884,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01030405"
+  },
+  {
+   "tag": "span",
+   "y": 47,
+   "x": 153,
+   "w": 206,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A conversation data report"
+  },
+  {
+   "tag": "span",
+   "y": 206,
+   "x": 868,
+   "w": 185,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Headline finding / affect"
+  },
+  {
+   "tag": "span",
+   "y": 206,
+   "x": 1224,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre → end"
+  },
+  {
+   "tag": "div",
+   "y": 211,
+   "x": 100,
+   "w": 660,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Thirty minutes, two strangers"
+  },
+  {
+   "tag": "h1",
+   "y": 254,
+   "x": 100,
+   "w": 660,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Half an hour. A warmer goodbye."
+  },
+  {
+   "tag": "sup",
+   "y": 260,
+   "x": 1079,
+   "w": 21,
+   "in_svg": false,
+   "hidden": false,
+   "text": "↗"
+  },
+  {
+   "tag": "div",
+   "y": 266,
+   "x": 868,
+   "w": 436,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.29"
+  },
+  {
+   "tag": "div",
+   "y": 374,
+   "x": 868,
+   "w": 436,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean within-person affect gain"
+  },
+  {
+   "tag": "div",
+   "y": 402,
+   "x": 868,
+   "w": 436,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median gain +1.00 · 3,257 matched person-records"
+  },
+  {
+   "tag": "p",
+   "y": 452,
+   "x": 100,
+   "w": 610,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Across 1,656 paired video conversations , affect barely moves at the hello—then climbs. By the end, 69.2% of matched person-records rate their affect higher than they did before."
+  },
+  {
+   "tag": "text",
+   "y": 553,
+   "x": 895,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "BEFORE"
+  },
+  {
+   "tag": "text",
+   "y": 553,
+   "x": 1004,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "HELLO"
+  },
+  {
+   "tag": "text",
+   "y": 553,
+   "x": 1123,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "MIDPOINT"
+  },
+  {
+   "tag": "text",
+   "y": 553,
+   "x": 1256,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "END"
+  },
+  {
+   "tag": "span",
+   "y": 576,
+   "x": 100,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "video calls"
+  },
+  {
+   "tag": "span",
+   "y": 576,
+   "x": 247,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "conversations"
+  },
+  {
+   "tag": "span",
+   "y": 576,
+   "x": 407,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "person-records"
+  },
+  {
+   "tag": "span",
+   "y": 584,
+   "x": 868,
+   "w": 108,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pair-average affect"
+  },
+  {
+   "tag": "span",
+   "y": 584,
+   "x": 1166,
+   "w": 138,
+   "in_svg": false,
+   "hidden": false,
+   "text": "before → end"
+  },
+  {
+   "tag": "b",
+   "y": 585,
+   "x": 1166,
+   "w": 23,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.10"
+  },
+  {
+   "tag": "b",
+   "y": 585,
+   "x": 1255,
+   "w": 24,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.38"
+  },
+  {
+   "tag": "b",
+   "y": 586,
+   "x": 115,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "30 min"
+  },
+  {
+   "tag": "b",
+   "y": 586,
+   "x": 262,
+   "w": 34,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,656"
+  },
+  {
+   "tag": "b",
+   "y": 586,
+   "x": 422,
+   "w": 33,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,312"
+  },
+  {
+   "tag": "div",
+   "y": 761,
+   "x": 129,
+   "w": 252,
+   "in_svg": false,
+   "hidden": false,
+   "text": "69.20"
+  },
+  {
+   "tag": "div",
+   "y": 761,
+   "x": 438,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.41"
+  },
+  {
+   "tag": "div",
+   "y": 761,
+   "x": 748,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "77.96"
+  },
+  {
+   "tag": "div",
+   "y": 761,
+   "x": 1058,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1.31"
+  },
+  {
+   "tag": "small",
+   "y": 780,
+   "x": 214,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "%"
+  },
+  {
+   "tag": "small",
+   "y": 780,
+   "x": 504,
+   "w": 22,
+   "in_svg": false,
+   "hidden": false,
+   "text": "/ 9"
+  },
+  {
+   "tag": "small",
+   "y": 780,
+   "x": 833,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "%"
+  },
+  {
+   "tag": "div",
+   "y": 813,
+   "x": 129,
+   "w": 252,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End affect increased"
+  },
+  {
+   "tag": "div",
+   "y": 813,
+   "x": 438,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean enjoyment"
+  },
+  {
+   "tag": "div",
+   "y": 813,
+   "x": 748,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Rated enjoyment 7 or higher"
+  },
+  {
+   "tag": "div",
+   "y": 813,
+   "x": 1058,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Final within-pair affect gap"
+  },
+  {
+   "tag": "div",
+   "y": 835,
+   "x": 129,
+   "w": 252,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,254 of 3,257 matched records"
+  },
+  {
+   "tag": "div",
+   "y": 835,
+   "x": 438,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median 8.00 · 3,257 ratings"
+  },
+  {
+   "tag": "div",
+   "y": 835,
+   "x": 748,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed response range 1–9"
+  },
+  {
+   "tag": "div",
+   "y": 835,
+   "x": 1058,
+   "w": 253,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean absolute gap · 1.67 before"
+  },
+  {
+   "tag": "div",
+   "y": 981,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "div",
+   "y": 981,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The emotional arc"
+  },
+  {
+   "tag": "p",
+   "y": 986,
+   "x": 789,
+   "w": 460,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect and arousal both climb over the call. The first in-conversation reading looks much like the baseline; the decisive shift appears by the midpoint."
+  },
+  {
+   "tag": "h2",
+   "y": 1006,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The lift begins after the hello."
+  },
+  {
+   "tag": "h3",
+   "y": 1170,
+   "x": 100,
+   "w": 360,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pair-average ratings through the conversation"
+  },
+  {
+   "tag": "button",
+   "y": 1170,
+   "x": 869,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect"
+  },
+  {
+   "tag": "button",
+   "y": 1170,
+   "x": 960,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arousal"
+  },
+  {
+   "tag": "p",
+   "y": 1172,
+   "x": 1111,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "“Small talk” ends with a measurable lift."
+  },
+  {
+   "tag": "p",
+   "y": 1197,
+   "x": 100,
+   "w": 360,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed scale 1–9 · select a series to show or hide it"
+  },
+  {
+   "tag": "text",
+   "y": 1225,
+   "x": 155,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "RATING"
+  },
+  {
+   "tag": "text",
+   "y": 1249,
+   "x": 135,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9"
+  },
+  {
+   "tag": "p",
+   "y": 1259,
+   "x": 1111,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The average affect rating reaches 7.38 at the end, compared with 6.10 before the call. Arousal follows the same upward shape, ending at 6.70 ."
+  },
+  {
+   "tag": "text",
+   "y": 1289,
+   "x": 1014,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.38"
+  },
+  {
+   "tag": "text",
+   "y": 1305,
+   "x": 724,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.93"
+  },
+  {
+   "tag": "text",
+   "y": 1323,
+   "x": 135,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7"
+  },
+  {
+   "tag": "text",
+   "y": 1334,
+   "x": 434,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.16"
+  },
+  {
+   "tag": "text",
+   "y": 1336,
+   "x": 144,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.10"
+  },
+  {
+   "tag": "text",
+   "y": 1356,
+   "x": 1014,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.70"
+  },
+  {
+   "tag": "text",
+   "y": 1368,
+   "x": 724,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.40"
+  },
+  {
+   "tag": "text",
+   "y": 1394,
+   "x": 434,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.67"
+  },
+  {
+   "tag": "text",
+   "y": 1396,
+   "x": 135,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5"
+  },
+  {
+   "tag": "p",
+   "y": 1399,
+   "x": 1111,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "These are averages, not a promise that every conversation improves. The next section shows the variation."
+  },
+  {
+   "tag": "text",
+   "y": 1407,
+   "x": 144,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.32"
+  },
+  {
+   "tag": "text",
+   "y": 1470,
+   "x": 135,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "3"
+  },
+  {
+   "tag": "text",
+   "y": 1544,
+   "x": 135,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1"
+  },
+  {
+   "tag": "text",
+   "y": 1573,
+   "x": 137,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Before"
+  },
+  {
+   "tag": "text",
+   "y": 1573,
+   "x": 417,
+   "w": 56,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Beginning"
+  },
+  {
+   "tag": "text",
+   "y": 1573,
+   "x": 712,
+   "w": 48,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Midpoint"
+  },
+  {
+   "tag": "text",
+   "y": 1573,
+   "x": 1015,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "End"
+  },
+  {
+   "tag": "span",
+   "y": 1621,
+   "x": 100,
+   "w": 240,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: conversation-level averages in convos.csv"
+  },
+  {
+   "tag": "span",
+   "y": 1621,
+   "x": 821,
+   "w": 231,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Post-baseline n = 1,603 pairs · baseline n = 1,656"
+  },
+  {
+   "tag": "div",
+   "y": 1769,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "div",
+   "y": 1769,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The lived experience"
+  },
+  {
+   "tag": "p",
+   "y": 1774,
+   "x": 789,
+   "w": 460,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The aggregate curve hides three individual paths: improvement, no change and decline. It also hides a second shift—the space between partners’ ratings gets smaller."
+  },
+  {
+   "tag": "h2",
+   "y": 1794,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Most rise. Partners draw closer."
+  },
+  {
+   "tag": "h3",
+   "y": 1958,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How each person’s affect changed"
+  },
+  {
+   "tag": "h3",
+   "y": 1958,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The absolute affect gap within each pair"
+  },
+  {
+   "tag": "p",
+   "y": 1985,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End rating versus pre-conversation rating · matched records only"
+  },
+  {
+   "tag": "p",
+   "y": 1985,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean of |person A − person B| at each stage"
+  },
+  {
+   "tag": "p",
+   "y": 2027,
+   "x": 763,
+   "w": 410,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two strangers do not start in sync. On average, they end closer together."
+  },
+  {
+   "tag": "div",
+   "y": 2032,
+   "x": 131,
+   "w": 203,
+   "in_svg": false,
+   "hidden": false,
+   "text": "69.20%"
+  },
+  {
+   "tag": "b",
+   "y": 2057,
+   "x": 348,
+   "w": 125,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ended higher"
+  },
+  {
+   "tag": "div",
+   "y": 2057,
+   "x": 348,
+   "w": 125,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,254 person-records"
+  },
+  {
+   "tag": "text",
+   "y": 2119,
+   "x": 782,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "2"
+  },
+  {
+   "tag": "text",
+   "y": 2137,
+   "x": 847,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.67"
+  },
+  {
+   "tag": "text",
+   "y": 2139,
+   "x": 972,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.65"
+  },
+  {
+   "tag": "span",
+   "y": 2169,
+   "x": 153,
+   "w": 394,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Increased"
+  },
+  {
+   "tag": "span",
+   "y": 2169,
+   "x": 557,
+   "w": 56,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 2,254"
+  },
+  {
+   "tag": "span",
+   "y": 2169,
+   "x": 623,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "69.20%"
+  },
+  {
+   "tag": "text",
+   "y": 2171,
+   "x": 1097,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.35"
+  },
+  {
+   "tag": "text",
+   "y": 2175,
+   "x": 1222,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.31"
+  },
+  {
+   "tag": "span",
+   "y": 2198,
+   "x": 153,
+   "w": 405,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Unchanged"
+  },
+  {
+   "tag": "span",
+   "y": 2198,
+   "x": 568,
+   "w": 45,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 668"
+  },
+  {
+   "tag": "span",
+   "y": 2198,
+   "x": 623,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.51%"
+  },
+  {
+   "tag": "text",
+   "y": 2225,
+   "x": 782,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1"
+  },
+  {
+   "tag": "span",
+   "y": 2228,
+   "x": 153,
+   "w": 405,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Decreased"
+  },
+  {
+   "tag": "span",
+   "y": 2228,
+   "x": 568,
+   "w": 45,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 335"
+  },
+  {
+   "tag": "span",
+   "y": 2228,
+   "x": 623,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "10.29%"
+  },
+  {
+   "tag": "div",
+   "y": 2269,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean gain +1.29 points · median gain +1.00 · n = 3,257"
+  },
+  {
+   "tag": "text",
+   "y": 2330,
+   "x": 782,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0"
+  },
+  {
+   "tag": "text",
+   "y": 2353,
+   "x": 845,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Before"
+  },
+  {
+   "tag": "text",
+   "y": 2353,
+   "x": 962,
+   "w": 45,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Beginning"
+  },
+  {
+   "tag": "text",
+   "y": 2353,
+   "x": 1090,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Midpoint"
+  },
+  {
+   "tag": "text",
+   "y": 2353,
+   "x": 1225,
+   "w": 18,
+   "in_svg": true,
+   "hidden": false,
+   "text": "End"
+  },
+  {
+   "tag": "div",
+   "y": 2401,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lower means more similar ratings · recomputed from the two person rows in each conversation"
+  },
+  {
+   "tag": "div",
+   "y": 2573,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "div",
+   "y": 2573,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Connection & perception"
+  },
+  {
+   "tag": "p",
+   "y": 2578,
+   "x": 789,
+   "w": 460,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Enjoyment is most closely associated with liking the other person. Yet one asymmetry persists: people tend to like their partner more than they think their partner likes them."
+  },
+  {
+   "tag": "h2",
+   "y": 2598,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Enjoyment travels with connection."
+  },
+  {
+   "tag": "h3",
+   "y": 2762,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What moves with enjoyment?"
+  },
+  {
+   "tag": "h3",
+   "y": 2762,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The liking perception gap"
+  },
+  {
+   "tag": "p",
+   "y": 2789,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pearson correlation with “how enjoyable” · person-record level"
+  },
+  {
+   "tag": "p",
+   "y": 2789,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two mean ratings on the observed 1–7 response range"
+  },
+  {
+   "tag": "span",
+   "y": 2834,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "I like you"
+  },
+  {
+   "tag": "span",
+   "y": 2834,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.84"
+  },
+  {
+   "tag": "span",
+   "y": 2848,
+   "x": 1257,
+   "w": 53,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.00"
+  },
+  {
+   "tag": "span",
+   "y": 2866,
+   "x": 763,
+   "w": 66,
+   "in_svg": false,
+   "hidden": false,
+   "text": "“I like you”"
+  },
+  {
+   "tag": "span",
+   "y": 2867,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Overall affect"
+  },
+  {
+   "tag": "span",
+   "y": 2867,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.78"
+  },
+  {
+   "tag": "span",
+   "y": 2899,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End affect"
+  },
+  {
+   "tag": "span",
+   "y": 2899,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.78"
+  },
+  {
+   "tag": "span",
+   "y": 2932,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "You like me"
+  },
+  {
+   "tag": "span",
+   "y": 2932,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.70"
+  },
+  {
+   "tag": "span",
+   "y": 2951,
+   "x": 1257,
+   "w": 53,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.35"
+  },
+  {
+   "tag": "span",
+   "y": 2964,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Shared reality"
+  },
+  {
+   "tag": "span",
+   "y": 2964,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.58"
+  },
+  {
+   "tag": "span",
+   "y": 2969,
+   "x": 763,
+   "w": 81,
+   "in_svg": false,
+   "hidden": false,
+   "text": "“You like me”"
+  },
+  {
+   "tag": "span",
+   "y": 2997,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre-affect"
+  },
+  {
+   "tag": "span",
+   "y": 2997,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.22"
+  },
+  {
+   "tag": "span",
+   "y": 3029,
+   "x": 131,
+   "w": 150,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre-arousal"
+  },
+  {
+   "tag": "span",
+   "y": 3029,
+   "x": 635,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.19"
+  },
+  {
+   "tag": "span",
+   "y": 3058,
+   "x": 293,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.0"
+  },
+  {
+   "tag": "span",
+   "y": 3058,
+   "x": 452,
+   "w": 13,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0.5"
+  },
+  {
+   "tag": "span",
+   "y": 3058,
+   "x": 611,
+   "w": 12,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1.0"
+  },
+  {
+   "tag": "span",
+   "y": 3081,
+   "x": 763,
+   "w": 97,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.64"
+  },
+  {
+   "tag": "div",
+   "y": 3094,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Positive Pearson r · pairwise complete records · association does not imply causation"
+  },
+  {
+   "tag": "b",
+   "y": 3096,
+   "x": 876,
+   "w": 284,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Own liking minus perceived liking"
+  },
+  {
+   "tag": "span",
+   "y": 3096,
+   "x": 876,
+   "w": 284,
+   "in_svg": false,
+   "hidden": false,
+   "text": "People extend more liking than they think they receive."
+  },
+  {
+   "tag": "div",
+   "y": 3188,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,257 nonmissing ratings for each measure · mean values rounded to two decimals"
+  },
+  {
+   "tag": "div",
+   "y": 3360,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04"
+  },
+  {
+   "tag": "div",
+   "y": 3360,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pair differences"
+  },
+  {
+   "tag": "p",
+   "y": 3365,
+   "x": 789,
+   "w": 460,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Raw pair averages vary only modestly across exact sex, race and education matches. Larger political-score gaps coincide with lower enjoyment, but these descriptive splits do not estimate an effect of similarity."
+  },
+  {
+   "tag": "h2",
+   "y": 3385,
+   "x": 214,
+   "w": 551,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Difference is not destiny."
+  },
+  {
+   "tag": "h3",
+   "y": 3549,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Enjoyment by politics-score gap"
+  },
+  {
+   "tag": "h3",
+   "y": 3549,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Enjoyment by exact category match"
+  },
+  {
+   "tag": "p",
+   "y": 3576,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean pair enjoyment · bars use the full 0–9 scale"
+  },
+  {
+   "tag": "p",
+   "y": 3576,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean pair enjoyment and number of pairs"
+  },
+  {
+   "tag": "span",
+   "y": 3619,
+   "x": 775,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Recorded category"
+  },
+  {
+   "tag": "span",
+   "y": 3619,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Different"
+  },
+  {
+   "tag": "span",
+   "y": 3619,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Same"
+  },
+  {
+   "tag": "span",
+   "y": 3623,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Match"
+  },
+  {
+   "tag": "span",
+   "y": 3623,
+   "x": 629,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.48"
+  },
+  {
+   "tag": "small",
+   "y": 3641,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 408"
+  },
+  {
+   "tag": "span",
+   "y": 3662,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.38"
+  },
+  {
+   "tag": "span",
+   "y": 3662,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.44"
+  },
+  {
+   "tag": "span",
+   "y": 3673,
+   "x": 775,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sex"
+  },
+  {
+   "tag": "span",
+   "y": 3674,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap of 1"
+  },
+  {
+   "tag": "span",
+   "y": 3674,
+   "x": 629,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.45"
+  },
+  {
+   "tag": "small",
+   "y": 3693,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 319"
+  },
+  {
+   "tag": "small",
+   "y": 3695,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 835"
+  },
+  {
+   "tag": "small",
+   "y": 3695,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 767"
+  },
+  {
+   "tag": "span",
+   "y": 3726,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap of 2"
+  },
+  {
+   "tag": "span",
+   "y": 3726,
+   "x": 629,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.41"
+  },
+  {
+   "tag": "span",
+   "y": 3741,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.46"
+  },
+  {
+   "tag": "span",
+   "y": 3741,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.34"
+  },
+  {
+   "tag": "small",
+   "y": 3744,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 494"
+  },
+  {
+   "tag": "span",
+   "y": 3752,
+   "x": 775,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Race"
+  },
+  {
+   "tag": "small",
+   "y": 3774,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 881"
+  },
+  {
+   "tag": "small",
+   "y": 3774,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 721"
+  },
+  {
+   "tag": "span",
+   "y": 3777,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap 3–5"
+  },
+  {
+   "tag": "span",
+   "y": 3777,
+   "x": 629,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.30"
+  },
+  {
+   "tag": "small",
+   "y": 3796,
+   "x": 131,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 381"
+  },
+  {
+   "tag": "span",
+   "y": 3818,
+   "x": 211,
+   "w": 6,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0369"
+  },
+  {
+   "tag": "span",
+   "y": 3820,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.35"
+  },
+  {
+   "tag": "span",
+   "y": 3820,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.60"
+  },
+  {
+   "tag": "span",
+   "y": 3831,
+   "x": 775,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Education"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Affect and arousal through the conversation"
+  },
+  {
+   "tag": "desc",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Affect rises from 6.10 to 7.38. Arousal rises from 5.32 to 6.70."
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "affect, Before: 6.10"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "affect, Beginning: 6.16"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "affect, Midpoint: 6.93"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "affect, End: 7.38"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "arousal, Before: 5.32"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "arousal, Beginning: 5.67"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "arousal, Midpoint: 6.40"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "arousal, End: 6.70"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Mean absolute within-pair affect gap"
+  },
+  {
+   "tag": "desc",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "The gap is 1.67 before, 1.65 at the beginning, 1.35 at midpoint and 1.31 at end."
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Before: 1.67"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Beginning: 1.65"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Midpoint: 1.35"
+  },
+  {
+   "tag": "title",
+   "y": 3841,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "End: 1.31"
+  },
+  {
+   "tag": "small",
+   "y": 3853,
+   "x": 963,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 1,195"
+  },
+  {
+   "tag": "small",
+   "y": 3853,
+   "x": 1135,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 407"
+  },
+  {
+   "tag": "div",
+   "y": 3854,
+   "x": 131,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Complete outcome pairs with both politics scores recorded · gap = absolute difference"
+  },
+  {
+   "tag": "div",
+   "y": 3902,
+   "x": 763,
+   "w": 546,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Complete outcome pairs with both category values recorded · raw, unadjusted means"
+  },
+  {
+   "tag": "div",
+   "y": 4138,
+   "x": 100,
+   "w": 493,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Study profile"
+  },
+  {
+   "tag": "div",
+   "y": 4138,
+   "x": 673,
+   "w": 667,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reading notes"
+  },
+  {
+   "tag": "h2",
+   "y": 4164,
+   "x": 100,
+   "w": 493,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Who is behind the numbers?"
+  },
+  {
+   "tag": "h2",
+   "y": 4164,
+   "x": 673,
+   "w": 667,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What the report does—and does not—say."
+  },
+  {
+   "tag": "p",
+   "y": 4256,
+   "x": 100,
+   "w": 493,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The unit is a person–conversation record , not necessarily a unique individual. The 3,312 rows contain 1,456 unique user IDs, so some IDs contribute to more than one call."
+  },
+  {
+   "tag": "b",
+   "y": 4283,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two complementary tables"
+  },
+  {
+   "tag": "b",
+   "y": 4283,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Available-case denominators"
+  },
+  {
+   "tag": "p",
+   "y": 4306,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The people table supplies person-level ratings and demographics. The conversation table supplies pair averages. Every conversation has exactly two person rows."
+  },
+  {
+   "tag": "p",
+   "y": 4306,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End-affect pair averages are present for 1,603 of 1,656 conversations. Person-level change and enjoyment analyses use 3,257 nonmissing post-conversation records."
+  },
+  {
+   "tag": "b",
+   "y": 4366,
+   "x": 115,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "32"
+  },
+  {
+   "tag": "b",
+   "y": 4366,
+   "x": 279,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "25–41"
+  },
+  {
+   "tag": "b",
+   "y": 4366,
+   "x": 443,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "19–66"
+  },
+  {
+   "tag": "b",
+   "y": 4399,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gaps recomputed transparently"
+  },
+  {
+   "tag": "b",
+   "y": 4399,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed response ranges"
+  },
+  {
+   "tag": "span",
+   "y": 4420,
+   "x": 115,
+   "w": 64,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median age"
+  },
+  {
+   "tag": "span",
+   "y": 4420,
+   "x": 279,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Middle 50%"
+  },
+  {
+   "tag": "span",
+   "y": 4420,
+   "x": 443,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed range"
+  },
+  {
+   "tag": "p",
+   "y": 4422,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Within-pair affect gaps are absolute differences between the two raw person rows. Politics gaps are absolute score differences; sex, race and education matches require exact category equality."
+  },
+  {
+   "tag": "p",
+   "y": 4422,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect, arousal and enjoyment span 1–9 in these data. Shared reality spans 1–7. Correlations are Pearson’s r and use pairwise complete observations."
+  },
+  {
+   "tag": "div",
+   "y": 4481,
+   "x": 100,
+   "w": 493,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Recorded sex · % of 3,256 nonmissing"
+  },
+  {
+   "tag": "span",
+   "y": 4529,
+   "x": 100,
+   "w": 61,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Female 53.4%"
+  },
+  {
+   "tag": "span",
+   "y": 4529,
+   "x": 303,
+   "w": 51,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Male 44.9%"
+  },
+  {
+   "tag": "span",
+   "y": 4529,
+   "x": 496,
+   "w": 97,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Other / prefer not 1.6%"
+  },
+  {
+   "tag": "b",
+   "y": 4534,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "No causal or independence claim"
+  },
+  {
+   "tag": "b",
+   "y": 4534,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reproducible calculations"
+  },
+  {
+   "tag": "p",
+   "y": 4557,
+   "x": 673,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Similarity splits are unadjusted descriptions. Repeated user IDs also mean person-records should not automatically be treated as independent individuals."
+  },
+  {
+   "tag": "p",
+   "y": 4557,
+   "x": 1021,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every headline finding is paired with executable pandas code in facts.json . All page assets and charts are contained in this offline HTML file."
+  },
+  {
+   "tag": "span",
+   "y": 4697,
+   "x": 100,
+   "w": 287,
+   "in_svg": false,
+   "hidden": false,
+   "text": "· 30-minute video conversations"
+  },
+  {
+   "tag": "span",
+   "y": 4697,
+   "x": 1031,
+   "w": 309,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: + ·"
+  },
+  {
+   "tag": "strong",
+   "y": 4698,
+   "x": 100,
+   "w": 119,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Stranger Sessions"
+  },
+  {
+   "tag": "strong",
+   "y": 4698,
+   "x": 1073,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "data/people.csv"
+  },
+  {
+   "tag": "strong",
+   "y": 4698,
+   "x": 1173,
+   "w": 88,
+   "in_svg": false,
+   "hidden": false,
+   "text": "data/convos.csv"
+  },
+  {
+   "tag": "a",
+   "y": 4698,
+   "x": 1270,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back to top ↑"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 443,
+   "x": 864,
+   "w": 444,
+   "h": 122,
+   "marks": 6,
+   "labels": 4
+  },
+  {
+   "kind": "svg",
+   "y": 1216,
+   "x": 100,
+   "w": 952,
+   "h": 390,
+   "marks": 28,
+   "labels": 18
+  },
+  {
+   "kind": "svg",
+   "y": 2096,
+   "x": 763,
+   "w": 546,
+   "h": 283,
+   "marks": 7,
+   "labels": 11
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 4741
+}

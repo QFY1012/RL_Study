@@ -1,0 +1,26 @@
+{
+ "task": "ab_test-01",
+ "model": "claude-opus-5-5",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "claude-opus-5-5",
+   "effort": "high",
+   "seconds": 449,
+   "steps": 25,
+   "tools": 31,
+   "nudged": 0,
+   "usage": {
+    "input": 43750,
+    "cacheRead": 569213,
+    "cacheWrite": 105011,
+    "output": 27842
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 449
+}

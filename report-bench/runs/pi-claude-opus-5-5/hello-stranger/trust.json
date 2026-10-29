@@ -1,0 +1,120 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/hello-stranger/index.html",
+ "facts": "submissions/pi-claude-opus-5-5/hello-stranger/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "dataset-size",
+     "basis": "conversations=1656, people_rows=3312, convos_in_people=1656, distinct_participants=1456",
+     "verdict": "ok"
+    },
+    {
+     "id": "repeat-participants",
+     "basis": "more_than_one=754, participants=1456, in_eight=3",
+     "verdict": "ok"
+    },
+    {
+     "id": "mood-rises",
+     "basis": "means 6.1, 6.16, 6.93, 7.38; count=3257",
+     "verdict": "ok"
+    },
+    {
+     "id": "end-vs-pre",
+     "basis": "better=69.2, same=20.5, worse=10.3",
+     "verdict": "ok"
+    },
+    {
+     "id": "arousal-rises",
+     "basis": "pre_arousal=5.32, arousal=6.41",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-gap-means",
+     "basis": "i_like_you=6.00, you_like_me=5.35",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-gap-share",
+     "basis": "underestimated=1761 (54.9%), exact=859 (26.8%), overestimated=586 (18.3%), total=3206",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-mode",
+     "basis": "gave_7=0.43, guessed_7=0.17",
+     "verdict": "ok"
+    },
+    {
+     "id": "guess-tracks-own",
+     "basis": "corr with i_like_you=0.69; with i_like_you_partner=0.19",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-weak-agreement",
+     "basis": "corr=0.17",
+     "verdict": "ok"
+    },
+    {
+     "id": "intelligence-kindness-gap",
+     "basis": "intelligence rated=7.68, guessed=7.06; kindness rated=7.98, guessed=7.43",
+     "verdict": "ok"
+    },
+    {
+     "id": "gap-share-pairs",
+     "basis": "liking above=73.4, below=5.3; intelligence above=67.6, below=13.4",
+     "verdict": "ok"
+    },
+    {
+     "id": "turn-length",
+     "basis": "my_turn=5.40, your_turn=5.03, pct_my_higher=51.47, pct_my_lower=23.89",
+     "verdict": "ok"
+    },
+    {
+     "id": "shared-reality-bins",
+     "basis": "means/counts: (0,3]=5.25/293, (3,4]=6.71/546, (4,5]=7.46/1112, (5,6]=7.98/929, (6,7]=8.55/376",
+     "verdict": "ok"
+    },
+    {
+     "id": "shared-reality-corr",
+     "basis": "corr with how_enjoyable=0.58, with i_like_you=0.53",
+     "verdict": "ok"
+    },
+    {
+     "id": "demographics-flat",
+     "basis": "sex_diff 0=7.38,1=7.44; race_diff 0=7.46,1=7.34; edu_diff 0=7.3,1=7.5",
+     "verdict": "ok"
+    },
+    {
+     "id": "politics-gap",
+     "basis": "0.0=7.48 (408), 4.0=7.15 (115), 5.0=7.07 (23)",
+     "verdict": "ok"
+    },
+    {
+     "id": "shared-reality-diff",
+     "basis": "0.0=7.52 (454), 4.0=6.44 (31)",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"dataset-size\", \"basis\": \"conversations=1656, people_rows=3312, convos_in_people=1656, distinct_participants=1456\", \"verdict\": \"ok\"}, {\"id\": \"repeat-participants\", \"basis\": \"more_than_one=754, participants=1456, in_eight=3\", \"verdict\": \"ok\"}, {\"id\": \"mood-rises\", \"basis\": \"means 6.1, 6.16, 6.93, 7.38; count=3257\", \"verdict\": \"ok\"}, {\"id\": \"end-vs-pre\", \"basis\": \"better=69.2, same=20.5, worse=10.3\", \"verdict\": \"ok\"}, {\"id\": \"arousal-rises\", \"basis\": \"pre_arousal=5.32, arousal=6.41\", \"verdict\": \"ok\"}, {\"id\": \"liking-gap-means\", \"basis\": \"i_like_you=6.00, you_like_me=5.35\", \"verdict\": \"ok\"}, {\"id\": \"liking-gap-share\", \"basis\": \"underestimated=1761 (54.9%), exact=859 (26.8%), overestimated=586 (18.3%), total=3206\", \"verdict\": \"ok\"}, {\"id\": \"liking-mode\", \"basis\": \"gave_7=0.43, guessed_7=0.17\", \"verdict\": \"ok\"}, {\"id\": \"guess-tracks-own\", \"basis\": \"corr with i_like_you=0.69; with i_like_you_partner=0.19\", \"verdict\": \"ok\"}, {\"id\": \"enjoyment-weak-agreement\", \"basis\": \"corr=0.17\", \"verdict\": \"ok\"}, {\"id\": \"intelligence-kindness-gap\", \"basis\": \"intelligence rated=7.68, guessed=7.06; kindness rated=7.98, guessed=7.43\", \"verdict\": \"ok\"}, {\"id\": \"gap-share-pairs\", \"basis\": \"liking above=73.4, below=5.3; intelligence above=67.6, below=13.4\", \"verdict\": \"ok\"}, {\"id\": \"turn-length\", \"basis\": \"my_turn=5.40, your_turn=5.03, pct_my_higher=51.47, pct_my_lower=23.89\", \"verdict\": \"ok\"}, {\"id\": \"shared-reality-bins\", \"basis\": \"means/counts: (0,3]=5.25/293, (3,4]=6.71/546, (4,5]=7.46/1112, (5,6]=7.98/929, (6,7]=8.55/376\", \"verdict\": \"ok\"}, {\"id\": \"shared-reality-corr\", \"basis\": \"corr with how_enjoyable=0.58, with i_like_you=0.53\", \"verdict\": \"ok\"}, {\"id\": \"demographics-flat\", \"basis\": \"sex_diff 0=7.38,1=7.44; race_diff 0=7.46,1=7.34; edu_diff 0=7.3,1=7.5\", \"verdict\": \"ok\"}, {\"id\": \"politics-gap\", \"basis\": \"0.0=7.48 (408), 4.0=7.15 (115), 5.0=7.07 (23)\", \"verdict\": \"ok\"}, {\"id\": \"shared-reality-diff\", \"basis\": \"0.0=7.52 (454), 4.0=6.44 (31)\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 3105,
+    "completion_tokens": 4276,
+    "seconds": 26.9
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

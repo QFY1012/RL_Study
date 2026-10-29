@@ -2061,7 +2061,7 @@
    "w": 80,
    "in_svg": false,
    "hidden": false,
-   "text": "04 / FOLLOW-UP"
+   "text": "04 / 7 DAYS"
   },
   {
    "tag": "h2",
@@ -2367,7 +2367,7 @@
    "w": 380,
    "in_svg": false,
    "hidden": false,
-   "text": "The response-time improvement is consistent across the observed cuts. A single completion or retention story is not."
+   "text": "The response-time improvement is consistent across observed cuts. Completion and follow-up need a segmented readout."
   },
   {
    "tag": "span",
@@ -2388,15 +2388,6 @@
    "text": "Audit Dermatology routing and the pre-doctor queue."
   },
   {
-   "tag": "span",
-   "y": 4024,
-   "x": 128,
-   "w": 140,
-   "in_svg": false,
-   "hidden": false,
-   "text": "Speed ≠ completed care"
-  },
-  {
    "tag": "p",
    "y": 4032,
    "x": 640,
@@ -2404,6 +2395,15 @@
    "in_svg": false,
    "hidden": false,
    "text": "Early loss rises +5.04 pp, and every Dermatology complaint group moves in the wrong direction. Review this segment before a broad rollout."
+  },
+  {
+   "tag": "span",
+   "y": 4044,
+   "x": 128,
+   "w": 140,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Speed ≠ completed care"
   },
   {
    "tag": "span",

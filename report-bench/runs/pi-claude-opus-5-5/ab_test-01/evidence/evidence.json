@@ -1,0 +1,1301 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/ab_test-01/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/ab_test-01/data/data.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 664,
+     "left": 299,
+     "w": 842,
+     "h": 306,
+     "sig": "d6248d2b"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 214,
+     "left": 299,
+     "w": 842,
+     "h": 306,
+     "sig": "d6248d2b"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 837,
+     "left": 299,
+     "w": 842,
+     "h": 276,
+     "sig": "9aa701fc"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -236,
+     "left": 299,
+     "w": 842,
+     "h": 306,
+     "sig": "d6248d2b"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 387,
+     "left": 299,
+     "w": 842,
+     "h": 276,
+     "sig": "9aa701fc"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -63,
+     "left": 299,
+     "w": 842,
+     "h": 276,
+     "sig": "9aa701fc"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 684,
+     "left": 299,
+     "w": 382,
+     "h": 236,
+     "sig": "d32c7746"
+    }
+   ]
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 234,
+     "left": 299,
+     "w": 382,
+     "h": 236,
+     "sig": "d32c7746"
+    }
+   ]
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 2969,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": -35,
+     "left": 299,
+     "w": 382,
+     "h": 236,
+     "sig": "d32c7746"
+    }
+   ]
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    842,
+    306
+   ],
+   "frames": [
+    1,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    842,
+    276
+   ],
+   "frames": [
+    2,
+    4
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 3,
+   "kind": "svg",
+   "size": [
+    382,
+    236
+   ],
+   "frames": [
+    5,
+    7
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 56,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A/B test report · online medical consultation · 18 Nov – 29 Dec 2024"
+  },
+  {
+   "tag": "h1",
+   "y": 83,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The new flow gets patients a doctor faster everywhere, but drives dermatology patients away"
+  },
+  {
+   "tag": "p",
+   "y": 237,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18,000 users of an online consultation service were split into a control group and a treatment group. In the treatment group, doctors answered 22 seconds sooner at the median (88 vs 110), but the overall completion rate did not move. The reason is a single department: in dermatology, the share of treatment users who left before seeing a doctor went from 7.7% to 12.7%, which cancelled out small gains everywhere else."
+  },
+  {
+   "tag": "span",
+   "y": 438,
+   "x": 297,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88s"
+  },
+  {
+   "tag": "span",
+   "y": 438,
+   "x": 521,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.9%"
+  },
+  {
+   "tag": "span",
+   "y": 438,
+   "x": 744,
+   "w": 77,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.7%"
+  },
+  {
+   "tag": "span",
+   "y": 438,
+   "x": 968,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.8%"
+  },
+  {
+   "tag": "small",
+   "y": 448,
+   "x": 352,
+   "w": 51,
+   "in_svg": false,
+   "hidden": false,
+   "text": "vs 110s"
+  },
+  {
+   "tag": "small",
+   "y": 448,
+   "x": 607,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "vs 88.0%"
+  },
+  {
+   "tag": "small",
+   "y": 448,
+   "x": 827,
+   "w": 55,
+   "in_svg": false,
+   "hidden": false,
+   "text": "vs 7.7%"
+  },
+  {
+   "tag": "small",
+   "y": 448,
+   "x": 1041,
+   "w": 58,
+   "in_svg": false,
+   "hidden": false,
+   "text": "vs 6.8%"
+  },
+  {
+   "tag": "div",
+   "y": 475,
+   "x": 297,
+   "w": 176,
+   "in_svg": false,
+   "hidden": false,
+   "text": "median time to first doctor response, treatment vs control"
+  },
+  {
+   "tag": "div",
+   "y": 475,
+   "x": 521,
+   "w": 176,
+   "in_svg": false,
+   "hidden": false,
+   "text": "consultations completed: no overall change"
+  },
+  {
+   "tag": "div",
+   "y": 475,
+   "x": 744,
+   "w": 176,
+   "in_svg": false,
+   "hidden": false,
+   "text": "dermatology users who left before reaching a doctor"
+  },
+  {
+   "tag": "div",
+   "y": 475,
+   "x": 968,
+   "w": 176,
+   "in_svg": false,
+   "hidden": false,
+   "text": "new users who came back within 7 days"
+  },
+  {
+   "tag": "h2",
+   "y": 598,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The setup: a clean split across five departments"
+  },
+  {
+   "tag": "p",
+   "y": 636,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The groups are well balanced: 9,013 users in control and 8,987 in treatment, entering over the same 42 days. Pediatrics (5,246 users) and internal medicine (5,083) are the busiest departments, followed by dermatology (3,121), gynecology (2,490) and ENT & eye (2,060). Each user's journey can end in one of three ways:"
+  },
+  {
+   "tag": "span",
+   "y": 768,
+   "x": 280,
+   "w": 200,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completed: (88.0%)"
+  },
+  {
+   "tag": "span",
+   "y": 768,
+   "x": 502,
+   "w": 324,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reached a doctor, not completed: (7.0%)"
+  },
+  {
+   "tag": "span",
+   "y": 768,
+   "x": 848,
+   "w": 231,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Left before a doctor: (5.0%)"
+  },
+  {
+   "tag": "b",
+   "y": 770,
+   "x": 376,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15,836"
+  },
+  {
+   "tag": "b",
+   "y": 770,
+   "x": 745,
+   "w": 35,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,261"
+  },
+  {
+   "tag": "b",
+   "y": 770,
+   "x": 1003,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "903"
+  },
+  {
+   "tag": "p",
+   "y": 800,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every user who left before a doctor has no response time recorded, and every user who did not complete has no consultation length, so the three outcomes don't overlap."
+  },
+  {
+   "tag": "h2",
+   "y": 901,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Doctors answered faster in the treatment group almost every day"
+  },
+  {
+   "tag": "p",
+   "y": 939,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The median wait for a first doctor response was 88 seconds in treatment against 110 seconds in control. Treatment had the lower daily median on 39 of the 42 days. The advantage grew under load: from 9 December traffic rose (9,909 users in the last 21 days against 8,091 in the first 21) and the control median jumped from 86 to 132 seconds, while treatment rose only from 77 to 96. The gap widened from 9 to 36 seconds."
+  },
+  {
+   "tag": "text",
+   "y": 1126,
+   "x": 316,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "160s"
+  },
+  {
+   "tag": "text",
+   "y": 1136,
+   "x": 706,
+   "w": 209,
+   "in_svg": true,
+   "hidden": false,
+   "text": "from 9 Dec: higher traffic, longer waits"
+  },
+  {
+   "tag": "text",
+   "y": 1166,
+   "x": 1043,
+   "w": 68,
+   "in_svg": true,
+   "hidden": false,
+   "text": "control 134s"
+  },
+  {
+   "tag": "text",
+   "y": 1188,
+   "x": 316,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "120s"
+  },
+  {
+   "tag": "text",
+   "y": 1224,
+   "x": 1043,
+   "w": 77,
+   "in_svg": true,
+   "hidden": false,
+   "text": "treatment 97s"
+  },
+  {
+   "tag": "text",
+   "y": 1250,
+   "x": 321,
+   "w": 20,
+   "in_svg": true,
+   "hidden": false,
+   "text": "80s"
+  },
+  {
+   "tag": "text",
+   "y": 1313,
+   "x": 320,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "40s"
+  },
+  {
+   "tag": "text",
+   "y": 1375,
+   "x": 328,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0s"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 330,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Nov 18"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 447,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Nov 25"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 567,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 2"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 685,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 9"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 800,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 16"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 916,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 23"
+  },
+  {
+   "tag": "text",
+   "y": 1388,
+   "x": 1016,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 29"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1428,
+   "x": 299,
+   "w": 842,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Daily median seconds until a doctor first responds, by group. Users who left before a doctor have no response time and are not included."
+  },
+  {
+   "tag": "p",
+   "y": 1468,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completed consultations were also a little shorter in treatment, with a median of 10.4 minutes against 11.2."
+  },
+  {
+   "tag": "h2",
+   "y": 1551,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Yet completion did not move, because dermatology went the other way"
+  },
+  {
+   "tag": "p",
+   "y": 1589,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Overall, 5.3% of treatment users left before a doctor against 4.7% of control, and completion was flat at 87.9% versus 88.0%. Splitting by department shows why the faster responses did not pay off. In four departments the groups are within one point of each other, and treatment is slightly better in most of them. Dermatology stands apart."
+  },
+  {
+   "tag": "text",
+   "y": 1738,
+   "x": 471,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "control"
+  },
+  {
+   "tag": "text",
+   "y": 1738,
+   "x": 548,
+   "w": 56,
+   "in_svg": true,
+   "hidden": false,
+   "text": "treatment"
+  },
+  {
+   "tag": "text",
+   "y": 1778,
+   "x": 390,
+   "w": 58,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "text",
+   "y": 1779,
+   "x": 610,
+   "w": 71,
+   "in_svg": true,
+   "hidden": false,
+   "text": "3.1% → 2.5%"
+  },
+  {
+   "tag": "text",
+   "y": 1822,
+   "x": 347,
+   "w": 101,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "text",
+   "y": 1823,
+   "x": 663,
+   "w": 75,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4.4% → 4.0%"
+  },
+  {
+   "tag": "text",
+   "y": 1866,
+   "x": 378,
+   "w": 70,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "text",
+   "y": 1867,
+   "x": 698,
+   "w": 74,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.2% → 4.8%"
+  },
+  {
+   "tag": "text",
+   "y": 1910,
+   "x": 387,
+   "w": 61,
+   "in_svg": true,
+   "hidden": false,
+   "text": "ENT & eye"
+  },
+  {
+   "tag": "text",
+   "y": 1911,
+   "x": 707,
+   "w": 74,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4.5% → 5.4%"
+  },
+  {
+   "tag": "text",
+   "y": 1954,
+   "x": 370,
+   "w": 79,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "text",
+   "y": 1955,
+   "x": 1021,
+   "w": 76,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.7% → 12.7%"
+  },
+  {
+   "tag": "text",
+   "y": 1994,
+   "x": 452,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0%2%4%6%8%"
+  },
+  {
+   "tag": "text",
+   "y": 1994,
+   "x": 881,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10%"
+  },
+  {
+   "tag": "text",
+   "y": 1994,
+   "x": 967,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12%"
+  },
+  {
+   "tag": "text",
+   "y": 1994,
+   "x": 1053,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14%"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2021,
+   "x": 299,
+   "w": 842,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Share of users who left before reaching a doctor, control (grey) vs treatment (orange), by department."
+  },
+  {
+   "tag": "p",
+   "y": 2074,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "In dermatology, 12.7% of treatment users gave up before reaching a doctor, against 7.7% in control, and completion fell from 85.0% to 80.5%. Dermatology is the only department where treatment completed less often than control."
+  },
+  {
+   "tag": "p",
+   "y": 2196,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The difference is not noise. Its z-score is 4.65, compared with 1.72 for the overall loss gap. It also shows up in every dermatology complaint and in each of the 6 weeks of the test: weekly treatment loss ranged from 11.0% to 15.9%, while control ranged from 6.3% to 8.7%."
+  },
+  {
+   "tag": "th",
+   "y": 2316,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology complaint"
+  },
+  {
+   "tag": "th",
+   "y": 2316,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Users"
+  },
+  {
+   "tag": "th",
+   "y": 2316,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "th",
+   "y": 2316,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "th",
+   "y": 2316,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "td",
+   "y": 2348,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Red spots on the back 后背长了不少小红点"
+  },
+  {
+   "tag": "td",
+   "y": 2348,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "636"
+  },
+  {
+   "tag": "td",
+   "y": 2348,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.9%"
+  },
+  {
+   "tag": "td",
+   "y": 2348,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.9%"
+  },
+  {
+   "tag": "td",
+   "y": 2348,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+7.0 pts"
+  },
+  {
+   "tag": "td",
+   "y": 2410,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Peeling, itchy skin between toes 脚趾缝脱皮发痒"
+  },
+  {
+   "tag": "td",
+   "y": 2410,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "634"
+  },
+  {
+   "tag": "td",
+   "y": 2410,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.0%"
+  },
+  {
+   "tag": "td",
+   "y": 2410,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.7%"
+  },
+  {
+   "tag": "td",
+   "y": 2410,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.7 pts"
+  },
+  {
+   "tag": "td",
+   "y": 2472,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Facial acne, worst on the chin 脸上爆痘,下巴最严重"
+  },
+  {
+   "tag": "td",
+   "y": 2472,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "630"
+  },
+  {
+   "tag": "td",
+   "y": 2472,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.9%"
+  },
+  {
+   "tag": "td",
+   "y": 2472,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.1%"
+  },
+  {
+   "tag": "td",
+   "y": 2472,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.2 pts"
+  },
+  {
+   "tag": "td",
+   "y": 2534,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Hives coming back for two weeks 荨麻疹反反复复两个星期"
+  },
+  {
+   "tag": "td",
+   "y": 2534,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "599"
+  },
+  {
+   "tag": "td",
+   "y": 2534,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.0%"
+  },
+  {
+   "tag": "td",
+   "y": 2534,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.5%"
+  },
+  {
+   "tag": "td",
+   "y": 2534,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+4.6 pts"
+  },
+  {
+   "tag": "td",
+   "y": 2597,
+   "x": 299,
+   "w": 321,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Itchy red rash on the arm 手臂上起红疹,特别痒"
+  },
+  {
+   "tag": "td",
+   "y": 2597,
+   "x": 620,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "612"
+  },
+  {
+   "tag": "td",
+   "y": 2597,
+   "x": 693,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.7%"
+  },
+  {
+   "tag": "td",
+   "y": 2597,
+   "x": 793,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.9%"
+  },
+  {
+   "tag": "td",
+   "y": 2597,
+   "x": 914,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+2.2 pts"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2667,
+   "x": 299,
+   "w": 842,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Share leaving before a doctor, by dermatology chief complaint (original complaint text in grey)."
+  },
+  {
+   "tag": "p",
+   "y": 2707,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Outside dermatology the treatment was mildly positive: 3.8% of users left before a doctor against 4.1% in control, and 89.4% completed against 88.7%. The data does not say what the treatment changed in the flow. Because the loss happens before a doctor responds, though, the likely suspect is a pre-consultation step, such as an intake form or a photo upload, that dermatology patients find harder to finish."
+  },
+  {
+   "tag": "h2",
+   "y": 2872,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "New users came back more; returning users less"
+  },
+  {
+   "tag": "p",
+   "y": 2910,
+   "x": 728,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Across all users, the 7-day follow-up rate was unchanged: 12.1% in treatment against 12.3% in control. Underneath, it moved in opposite directions. Among new users it rose from 6.8% to 9.8% , and among returning users it fell from 14.9% to 13.2% ."
+  },
+  {
+   "tag": "text",
+   "y": 2949,
+   "x": 308,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "18%"
+  },
+  {
+   "tag": "text",
+   "y": 2970,
+   "x": 534,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.9%"
+  },
+  {
+   "tag": "text",
+   "y": 2987,
+   "x": 590,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.2%"
+  },
+  {
+   "tag": "text",
+   "y": 3008,
+   "x": 308,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12%"
+  },
+  {
+   "tag": "text",
+   "y": 3020,
+   "x": 429,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9.8%"
+  },
+  {
+   "tag": "text",
+   "y": 3050,
+   "x": 372,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.8%"
+  },
+  {
+   "tag": "p",
+   "y": 3060,
+   "x": 728,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Returning users make up about two-thirds of each group, so the two shifts almost cancel. Whether more follow-ups is good depends on what a follow-up means here. It could be repeat engagement, or it could mean the first consultation did not resolve the problem."
+  },
+  {
+   "tag": "text",
+   "y": 3068,
+   "x": 312,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6%"
+  },
+  {
+   "tag": "text",
+   "y": 3127,
+   "x": 312,
+   "w": 18,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0%"
+  },
+  {
+   "tag": "text",
+   "y": 3147,
+   "x": 385,
+   "w": 59,
+   "in_svg": true,
+   "hidden": false,
+   "text": "New users"
+  },
+  {
+   "tag": "text",
+   "y": 3147,
+   "x": 534,
+   "w": 88,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Returning users"
+  },
+  {
+   "tag": "figcaption",
+   "y": 3179,
+   "x": 299,
+   "w": 382,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Share who had a follow-up within 7 days, control (grey) vs treatment (orange)."
+  },
+  {
+   "tag": "h2",
+   "y": 3293,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What to do with this"
+  },
+  {
+   "tag": "p",
+   "y": 3331,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Before rolling out, find the step in the treatment flow that dermatology patients abandon, and fix or exempt it. If dermatology performed as well under treatment as it does under control, the faster responses and slightly better completion seen elsewhere would be a clear win."
+  },
+  {
+   "tag": "div",
+   "y": 3448,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The file has one row per user (18,000 rows, no duplicate IDs). Some cleaning was needed:"
+  },
+  {
+   "tag": "b",
+   "y": 3464,
+   "x": 301,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data notes."
+  },
+  {
+   "tag": "li",
+   "y": 3492,
+   "x": 319,
+   "w": 823,
+   "in_svg": false,
+   "hidden": false,
+   "text": "19 rows had a group label with a trailing space. These were trimmed and kept in their groups."
+  },
+  {
+   "tag": "li",
+   "y": 3516,
+   "x": 319,
+   "w": 823,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3 rows wrote the entry date with slashes (2024/12/02, 2024/12/19, 2024/12/27). These were normalised."
+  },
+  {
+   "tag": "li",
+   "y": 3540,
+   "x": 319,
+   "w": 823,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 users have a first-response time over an hour, from 15,543 to 71,396 seconds, while the next-largest value is 922 seconds. 7 consultations last exactly 640 minutes, while the next-longest is 76.7. These look like logging errors. Medians are used throughout, so they don't affect the results."
+  },
+  {
+   "tag": "li",
+   "y": 3612,
+   "x": 319,
+   "w": 823,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Chief complaints are missing for 36 users, platform for 6, and 7-day follow-up for 186. Platform split (Android, iOS, WeChat mini-program) and user type are balanced across groups."
+  },
+  {
+   "tag": "footer",
+   "y": 3730,
+   "x": 280,
+   "w": 880,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: data/data.csv, users of an online medical consultation service, 18 Nov – 29 Dec 2024. Group, department and complaint labels are translated from Chinese."
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 1114,
+   "x": 299,
+   "w": 842,
+   "h": 306,
+   "marks": 13,
+   "labels": 15
+  },
+  {
+   "kind": "svg",
+   "y": 1737,
+   "x": 299,
+   "w": 842,
+   "h": 276,
+   "marks": 25,
+   "labels": 20
+  },
+  {
+   "kind": "svg",
+   "y": 2934,
+   "x": 299,
+   "w": 382,
+   "h": 236,
+   "marks": 8,
+   "labels": 10
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 3869
+}

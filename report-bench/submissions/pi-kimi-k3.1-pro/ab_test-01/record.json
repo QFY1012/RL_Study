@@ -1,0 +1,24 @@
+{
+ "task": "ab_test-01",
+ "model": "kimi-k3.1-pro",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "kimi-k3.1-pro",
+   "effort": "high",
+   "seconds": 2051,
+   "steps": 23,
+   "tools": 32,
+   "nudged": 0,
+   "usage": {
+    "input": 88719,
+    "output": 38083
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 2051
+}

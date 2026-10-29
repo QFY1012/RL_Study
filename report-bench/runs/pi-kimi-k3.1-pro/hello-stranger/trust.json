@@ -1,0 +1,105 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/hello-stranger/index.html",
+ "facts": "submissions/pi-kimi-k3.1-pro/hello-stranger/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-scope",
+     "basis": "Output: conversations=1656, person_records=3312, unique_user_ids=1456, min_records_per_conversation=2, max_records_per_conversation=2.",
+     "verdict": "ok"
+    },
+    {
+     "id": "pair-outcome-coverage",
+     "basis": "Output: conversation_rows=1656, available=1603, missing=53.",
+     "verdict": "ok"
+    },
+    {
+     "id": "affect-trajectory",
+     "basis": "Output means: pre=6.10, begin=6.16, middle=6.93, end=7.38.",
+     "verdict": "ok"
+    },
+    {
+     "id": "affect-gain-size",
+     "basis": "Output: n=3257.00, mean gain=1.29, median gain=1.00.",
+     "verdict": "ok"
+    },
+    {
+     "id": "affect-change-direction",
+     "basis": "Output: increased=2254 (69.20%), unchanged=668 (20.51%), decreased=335 (10.29%).",
+     "verdict": "ok"
+    },
+    {
+     "id": "arousal-trajectory",
+     "basis": "Output means: pre=5.32, begin=5.67, middle=6.40, end=6.70.",
+     "verdict": "ok"
+    },
+    {
+     "id": "within-pair-affect-gap",
+     "basis": "Output mean absolute gaps: pre=1.67, begin=1.65, middle=1.35, end=1.31.",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-high",
+     "basis": "Output: n=3257.00, mean=7.41, median=8.00, percent_7_or_higher=77.96.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-perception-gap",
+     "basis": "Output: own_liking=6.00, perceived_liking=5.35, own_minus_perceived=0.64.",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-correlations",
+     "basis": "Output correlations: i_like_you=0.84, overall_affect=0.78, end_affect=0.78, you_like_me=0.70, shared_reality=0.58, pre_affect=0.22, pre_arousal=0.19.",
+     "verdict": "ok"
+    },
+    {
+     "id": "politics-gap-enjoyment",
+     "basis": "Output: gap 0 n=408 mean=7.48; gap 1 n=319 mean=7.45; gap 2 n=494 mean=7.41; gap 3-5 n=381 mean=7.30.",
+     "verdict": "ok"
+    },
+    {
+     "id": "demographic-match-enjoyment",
+     "basis": "Output: sex same n=767 mean=7.44, different n=835 mean=7.38; race same n=721 mean=7.34, different n=881 mean=7.46; education same n=407 mean=7.60, different n=1195 mean=7.35.",
+     "verdict": "ok"
+    },
+    {
+     "id": "age-profile",
+     "basis": "Output: n=3256.0, min=19.0, q1=25.0, median=32.0, q3=41.0, max=66.0.",
+     "verdict": "ok"
+    },
+    {
+     "id": "sex-profile",
+     "basis": "Output: female=1740 (53.4%), male=1463 (44.9%), other_or_prefer_not_to_answer=53 (1.6%), total_recorded=3256.",
+     "verdict": "ok"
+    },
+    {
+     "id": "rating-ranges",
+     "basis": "Output min/max: affect and arousal and enjoyment variables min=1 max=9; i_like_you, you_like_me, shared_reality min=1 max=7.",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"sample-scope\",\"basis\":\"Output: conversations=1656, person_records=3312, unique_user_ids=1456, min_records_per_conversation=2, max_records_per_conversation=2.\",\"verdict\":\"ok\"},{\"id\":\"pair-outcome-coverage\",\"basis\":\"Output: conversation_rows=1656, available=1603, missing=53.\",\"verdict\":\"ok\"},{\"id\":\"affect-trajectory\",\"basis\":\"Output means: pre=6.10, begin=6.16, middle=6.93, end=7.38.\",\"verdict\":\"ok\"},{\"id\":\"affect-gain-size\",\"basis\":\"Output: n=3257.00, mean gain=1.29, median gain=1.00.\",\"verdict\":\"ok\"},{\"id\":\"affect-change-direction\",\"basis\":\"Output: increased=2254 (69.20%), unchanged=668 (20.51%), decreased=335 (10.29%).\",\"verdict\":\"ok\"},{\"id\":\"arousal-trajectory\",\"basis\":\"Output means: pre=5.32, begin=5.67, middle=6.40, end=6.70.\",\"verdict\":\"ok\"},{\"id\":\"within-pair-affect-gap\",\"basis\":\"Output mean absolute gaps: pre=1.67, begin=1.65, middle=1.35, end=1.31.\",\"verdict\":\"ok\"},{\"id\":\"enjoyment-high\",\"basis\":\"Output: n=3257.00, mean=7.41, median=8.00, percent_7_or_higher=77.96.\",\"verdict\":\"ok\"},{\"id\":\"liking-perception-gap\",\"basis\":\"Output: own_liking=6.00, perceived_liking=5.35, own_minus_perceived=0.64.\",\"verdict\":\"ok\"},{\"id\":\"enjoyment-correlations\",\"basis\":\"Output correlations: i_like_you=0.84, overall_affect=0.78, end_affect=0.78, you_like_me=0.70, shared_reality=0.58, pre_affect=0.22, pre_arousal=0.19.\",\"verdict\":\"ok\"},{\"id\":\"politics-gap-enjoyment\",\"basis\":\"Output: gap 0 n=408 mean=7.48; gap 1 n=319 mean=7.45; gap 2 n=494 mean=7.41; gap 3-5 n=381 mean=7.30.\",\"verdict\":\"ok\"},{\"id\":\"demographic-match-enjoyment\",\"basis\":\"Output: sex same n=767 mean=7.44, different n=835 mean=7.38; race same n=721 mean=7.34, different n=881 mean=7.46; education same n=407 mean=7.60, different n=1195 mean=7.35.\",\"verdict\":\"ok\"},{\"id\":\"age-profile\",\"basis\":\"Output: n=3256.0, min=19.0, q1=25.0, median=32.0, q3=41.0, max=66.0.\",\"verdict\":\"ok\"},{\"id\":\"sex-profile\",\"basis\":\"Output: female=1740 (53.4%), male=1463 (44.9%), other_or_prefer_not_to_answer=53 (1.6%), total_recorded=3256.\",\"verdict\":\"ok\"},{\"id\":\"rating-ranges\",\"basis\":\"Output min/max: affect and arousal and enjoyment variables min=1 max=9; i_like_you, you_like_me, shared_reality min=1 max=7.\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 3150,
+    "completion_tokens": 2501,
+    "seconds": 13.3
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

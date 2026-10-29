@@ -1,0 +1,13 @@
+{
+ "score": 0.0,
+ "vetoed": [
+  "1.3"
+ ],
+ "parts": {},
+ "complete": true,
+ "summary": "vetoed by 1.3",
+ "feedback": [
+  "1.3 结论和数据一致:[consult-length] Output gives control median 11.2 and treatment median 10.4 for consult_minutes by group, but the code does not filter to completed consultations, so the completed-only claim is not supported",
+  "页面高 3869px,滚动截了 8 帧,滚动时固定在屏幕上的图 0 张。"
+ ]
+}

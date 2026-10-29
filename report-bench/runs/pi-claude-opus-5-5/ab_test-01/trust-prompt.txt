@@ -1,0 +1,214 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[groups-balanced]
+claim: The 18,000 users split almost evenly: 9,013 in the control group and 8,987 in the treatment group.
+tables: d = data/data.csv
+code: d.group.str.strip().map({'实验组':'treatment','对照组':'control'}).value_counts()
+output:
+group
+control      9013
+treatment    8987
+
+[group-label-spaces]
+claim: 19 rows carry a group label with a trailing space and must be trimmed before grouping.
+tables: d = data/data.csv
+code: d.group.str.endswith(' ').sum()
+output:
+19
+
+[date-format-mixed]
+claim: 3 rows write the entry date with slashes (2024/12/02, 2024/12/19, 2024/12/27) instead of dashes.
+tables: d = data/data.csv
+code: d.enter_date[d.enter_date.str.contains('/')].tolist()
+output:
+['2024/12/02', '2024/12/19', '2024/12/27']
+
+[funnel]
+claim: Of 18,000 users, 903 left before reaching a doctor, 1,261 reached a doctor but did not complete, and 15,836 completed the consultation.
+tables: d = data/data.csv
+code: pd.Series({'left before doctor': d.lost_before_doctor.sum(), 'reached doctor, not completed': ((d.lost_before_doctor == 0) & (d.is_completed == 0)).sum(), 'completed': d.is_completed.sum()})
+output:
+left before doctor                 903
+reached doctor, not completed     1261
+completed                        15836
+
+[dept-sizes]
+claim: Pediatrics (5,246 users) and internal medicine (5,083) are the largest departments, ahead of dermatology (3,121), gynecology (2,490) and ENT & eye (2,060).
+tables: d = data/data.csv
+code: d.department.map({'儿科':'Pediatrics','内科':'Internal medicine','皮肤科':'Dermatology','妇科':'Gynecology','五官科':'ENT & eye'}).value_counts()
+output:
+department
+Pediatrics           5246
+Internal medicine    5083
+Dermatology          3121
+Gynecology           2490
+ENT & eye            2060
+
+[median-response]
+claim: The treatment group got a first doctor response in a median of 88 seconds, against 110 seconds in the control group.
+tables: d = data/data.csv
+code: d.groupby(d.group.str.strip().map({'实验组':'treatment','对照组':'control'})).first_response_seconds.median()
+output:
+group
+control      110.0
+treatment     88.0
+
+[daily-response]
+claim: The treatment group had the lower median first-response time on 39 of the 42 days.
+tables: d = data/data.csv
+code: d.groupby([pd.to_datetime(d.enter_date.str.replace('/','-')), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).first_response_seconds.median().unstack().pipe(lambda t: pd.Series({'days': len(t), 'treatment lower': (t.treatment < t.control).sum()}))
+output:
+days               42
+treatment lower    39
+
+[response-by-period]
+claim: From 9 December waits rose in both groups: the control median went from 86 to 132 seconds, the treatment median from 77 to 96, so the gap widened from 9 to 36 seconds.
+tables: d = data/data.csv
+code: d.groupby([np.where(pd.to_datetime(d.enter_date.str.replace('/','-')) >= '2024-12-09', 'b: Dec 9-29', 'a: Nov 18-Dec 8'), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).first_response_seconds.median().unstack()
+output:
+group            control  treatment
+a: Nov 18-Dec 8     86.0       77.0
+b: Dec 9-29        132.0       96.0
+
+[volume-by-period]
+claim: Traffic grew: 9,909 users entered in the 21 days from 9 December against 8,091 in the 21 days before.
+tables: d = data/data.csv
+code: d.groupby(np.where(pd.to_datetime(d.enter_date.str.replace('/','-')) >= '2024-12-09', 'b: Dec 9-29', 'a: Nov 18-Dec 8')).agg(users=('user_id', 'size'), days=('enter_date', lambda s: s.str.replace('/', '-').nunique()))
+output:
+                 users  days
+a: Nov 18-Dec 8   8091    21
+b: Dec 9-29       9909    21
+
+[overall-outcomes]
+claim: Overall the test barely moved outcomes: 5.3% of treatment users left before a doctor versus 4.7% of control, and 87.9% versus 88.0% completed.
+tables: d = data/data.csv
+code: d.groupby(d.group.str.strip().map({'实验组':'treatment','对照组':'control'}))[['lost_before_doctor', 'is_completed']].mean().mul(100).round(1)
+output:
+           lost_before_doctor  is_completed
+group                                      
+control                   4.7          88.0
+treatment                 5.3          87.9
+
+[dept-lost]
+claim: Dermatology is the outlier: 12.7% of treatment users left before reaching a doctor versus 7.7% in control, while in every other department the two groups are within 1 point (e.g. pediatrics 2.5% vs 3.1%).
+tables: d = data/data.csv
+code: d.groupby([d.department.map({'儿科':'Pediatrics','内科':'Internal medicine','皮肤科':'Dermatology','妇科':'Gynecology','五官科':'ENT & eye'}), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).lost_before_doctor.mean().mul(100).round(1).unstack()
+output:
+group              control  treatment
+department                           
+Dermatology            7.7       12.7
+ENT & eye              4.5        5.4
+Gynecology             5.2        4.8
+Internal medicine      4.4        4.0
+Pediatrics             3.1        2.5
+
+[derm-completion]
+claim: In dermatology, completion fell to 80.5% in the treatment group from 85.0% in control; in every other department treatment completed at least as often as control.
+tables: d = data/data.csv
+code: d.groupby([d.department.map({'儿科':'Pediatrics','内科':'Internal medicine','皮肤科':'Dermatology','妇科':'Gynecology','五官科':'ENT & eye'}), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).is_completed.mean().mul(100).round(1).unstack()
+output:
+group              control  treatment
+department                           
+Dermatology           85.0       80.5
+ENT & eye             87.5       88.1
+Gynecology            89.0       89.3
+Internal medicine     88.6       89.1
+Pediatrics            88.9       90.4
+
+[derm-all-complaints]
+claim: All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, for example 13.9% vs 6.9% for red spots on the back and 11.7% vs 6.0% for toe-web peeling.
+tables: d = data/data.csv
+code: d[d.department == '皮肤科'].groupby([d.chief_complaint.map({'后背长了不少小红点':'red spots on the back','手臂上起红疹,特别痒':'itchy red rash on arm','脚趾缝脱皮发痒':'toe-web peeling','脸上爆痘,下巴最严重':'facial acne','荨麻疹反反复复两个星期':'recurring hives'}), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).lost_before_doctor.mean().unstack().mul(100).round(1).assign(treatment_higher=lambda t: t.treatment > t.control)
+output:
+group                  control  treatment  treatment_higher
+chief_complaint                                            
+facial acne                6.9       12.1              True
+itchy red rash on arm      9.7       11.9              True
+recurring hives            9.0       13.5              True
+red spots on the back      6.9       13.9              True
+toe-web peeling            6.0       11.7              True
+
+[derm-weekly]
+claim: The dermatology gap held in each of the 6 weeks of the test, with treatment losing between 11.0% and 15.9% of users before a doctor against 6.3% to 8.7% in control.
+tables: d = data/data.csv
+code: d[d.department == '皮肤科'].groupby([pd.to_datetime(d.enter_date.str.replace('/','-')).dt.to_period('W'), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).lost_before_doctor.mean().mul(100).round(1).unstack().assign(treatment_higher=lambda t: t.treatment > t.control)
+output:
+group                  control  treatment  treatment_higher
+enter_date                                                 
+2024-11-18/2024-11-24      8.7       12.7              True
+2024-11-25/2024-12-01      7.7       15.9              True
+2024-12-02/2024-12-08      7.8       12.2              True
+2024-12-09/2024-12-15      7.6       11.0              True
+2024-12-16/2024-12-22      6.3       12.6              True
+2024-12-23/2024-12-29      8.2       11.9              True
+
+[derm-z]
+claim: The dermatology loss gap has a z-score of 4.65, while the overall loss gap across all departments has a z-score of 1.72.
+tables: d = data/data.csv
+code: pd.Series({k: (lambda a, b: (a.mean() - b.mean()) / np.sqrt(a.var() / len(a) + b.var() / len(b)))(s[s.group.str.strip() == '实验组'].lost_before_doctor, s[s.group.str.strip() == '对照组'].lost_before_doctor) for k, s in {'dermatology': d[d.department == '皮肤科'], 'all departments': d}.items()}).round(2)
+output:
+dermatology        4.65
+all departments    1.72
+
+[non-derm-outcomes]
+claim: Outside dermatology, treatment users did slightly better: 3.8% left before a doctor versus 4.1% in control, and 89.4% completed versus 88.7%.
+tables: d = data/data.csv
+code: d.groupby([np.where(d.department == '皮肤科', 'dermatology', 'all other departments'), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})])[['lost_before_doctor', 'is_completed']].mean().mul(100).round(1)
+output:
+                                 lost_before_doctor  is_completed
+                      group                                      
+all other departments control                   4.1          88.7
+                      treatment                 3.8          89.4
+dermatology           control                   7.7          85.0
+                      treatment                12.7          80.5
+
+[consult-length]
+claim: Completed consultations were slightly shorter in the treatment group, a median of 10.4 minutes against 11.2 in control.
+tables: d = data/data.csv
+code: d.groupby(d.group.str.strip().map({'实验组':'treatment','对照组':'control'})).consult_minutes.median()
+output:
+group
+control      11.2
+treatment    10.4
+
+[followup-by-usertype]
+claim: The 7-day follow-up rate rose for new users, 9.8% in treatment versus 6.8% in control, but fell for returning users, 13.2% versus 14.9%.
+tables: d = data/data.csv
+code: d.groupby([d.user_type.map({'新用户':'new','老用户':'returning'}), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).followup_7d.mean().mul(100).round(1).unstack()
+output:
+group      control  treatment
+user_type                    
+new            6.8        9.8
+returning     14.9       13.2
+
+[followup-overall]
+claim: Across all users, 7-day follow-up was essentially unchanged: 12.1% in treatment versus 12.3% in control.
+tables: d = data/data.csv
+code: d.groupby(d.group.str.strip().map({'实验组':'treatment','对照组':'control'})).followup_7d.mean().mul(100).round(1)
+output:
+group
+control      12.3
+treatment    12.1
+
+[consult-640]
+claim: 7 consultations record a length of exactly 640 minutes, far above the next-longest value of 76.7 minutes.
+tables: d = data/data.csv
+code: d.consult_minutes.value_counts().sort_index(ascending=False).head(3)
+output:
+consult_minutes
+640.0    7
+76.7     1
+67.9     1
+
+[response-outliers]
+claim: 7 users have a first-response time over one hour, all between 15,543 and 71,396 seconds, while the next-largest value is 922 seconds.
+tables: d = data/data.csv
+code: d.first_response_seconds.sort_values(ascending=False).head(8).tolist()
+output:
+[71396.0, 40753.0, 26811.0, 21424.0, 18669.0, 15709.0, 15543.0, 922.0]

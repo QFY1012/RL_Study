@@ -1,0 +1,24 @@
+{
+ "task": "hello-stranger",
+ "model": "kimi-k3.1-pro",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "kimi-k3.1-pro",
+   "effort": "high",
+   "seconds": 1933,
+   "steps": 23,
+   "tools": 31,
+   "nudged": 0,
+   "usage": {
+    "input": 79496,
+    "output": 38611
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 1933
+}

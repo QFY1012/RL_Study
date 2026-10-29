@@ -1,0 +1,2622 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/ab_test-01/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/ab_test-01/data/data.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 686,
+     "left": 111,
+     "w": 771,
+     "h": 296,
+     "sig": "b9f60080"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 236,
+     "left": 111,
+     "w": 771,
+     "h": 296,
+     "sig": "b9f60080"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -214,
+     "left": 111,
+     "w": 771,
+     "h": 296,
+     "sig": "b9f60080"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 3799,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    771,
+    296
+   ],
+   "frames": [
+    1,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "span",
+   "y": 18,
+   "x": 122,
+   "w": 257,
+   "in_svg": false,
+   "hidden": false,
+   "text": "CARE / READOUT"
+  },
+  {
+   "tag": "a",
+   "y": 28,
+   "x": 805,
+   "w": 40,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Speed"
+  },
+  {
+   "tag": "a",
+   "y": 28,
+   "x": 873,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Departments"
+  },
+  {
+   "tag": "a",
+   "y": 28,
+   "x": 983,
+   "w": 71,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Complaints"
+  },
+  {
+   "tag": "a",
+   "y": 28,
+   "x": 1082,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Follow-up"
+  },
+  {
+   "tag": "a",
+   "y": 28,
+   "x": 1173,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Method"
+  },
+  {
+   "tag": "span",
+   "y": 28,
+   "x": 1249,
+   "w": 111,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18,000 users"
+  },
+  {
+   "tag": "small",
+   "y": 42,
+   "x": 122,
+   "w": 257,
+   "in_svg": false,
+   "hidden": false,
+   "text": "EXPERIMENT 01 · ONLINE CONSULTATION"
+  },
+  {
+   "tag": "span",
+   "y": 138,
+   "x": 144,
+   "w": 668,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A/B experiment · 18 Nov–29 Dec 2024"
+  },
+  {
+   "tag": "span",
+   "y": 169,
+   "x": 907,
+   "w": 358,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Primary speed outcome"
+  },
+  {
+   "tag": "h1",
+   "y": 176,
+   "x": 144,
+   "w": 668,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Faster replies. The same finish line."
+  },
+  {
+   "tag": "div",
+   "y": 192,
+   "x": 907,
+   "w": 358,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−22"
+  },
+  {
+   "tag": "small",
+   "y": 237,
+   "x": 1057,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "sec"
+  },
+  {
+   "tag": "h2",
+   "y": 284,
+   "x": 907,
+   "w": 358,
+   "in_svg": false,
+   "hidden": false,
+   "text": "median time to first response"
+  },
+  {
+   "tag": "p",
+   "y": 329,
+   "x": 144,
+   "w": 650,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment cut median first response by 22 seconds . Yet completion stayed flat overall—and Dermatology shows a clear abandonment warning beneath the average."
+  },
+  {
+   "tag": "span",
+   "y": 337,
+   "x": 907,
+   "w": 41,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "strong",
+   "y": 337,
+   "x": 1229,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "110 s"
+  },
+  {
+   "tag": "span",
+   "y": 390,
+   "x": 907,
+   "w": 58,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "strong",
+   "y": 390,
+   "x": 1237,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88 s"
+  },
+  {
+   "tag": "span",
+   "y": 453,
+   "x": 144,
+   "w": 97,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9,013 Control"
+  },
+  {
+   "tag": "span",
+   "y": 453,
+   "x": 253,
+   "w": 114,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8,987 Treatment"
+  },
+  {
+   "tag": "span",
+   "y": 453,
+   "x": 380,
+   "w": 69,
+   "in_svg": false,
+   "hidden": false,
+   "text": "42 days"
+  },
+  {
+   "tag": "span",
+   "y": 453,
+   "x": 461,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5 departments"
+  },
+  {
+   "tag": "span",
+   "y": 471,
+   "x": 907,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Relative reduction"
+  },
+  {
+   "tag": "strong",
+   "y": 471,
+   "x": 1219,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.0%"
+  },
+  {
+   "tag": "p",
+   "y": 511,
+   "x": 907,
+   "w": 358,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median of observed first_response_seconds. The p90 also improves: 234 s → 177 s."
+  },
+  {
+   "tag": "span",
+   "y": 671,
+   "x": 131,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Response ≤ 2 min"
+  },
+  {
+   "tag": "span",
+   "y": 671,
+   "x": 455,
+   "w": 138,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consult completion"
+  },
+  {
+   "tag": "span",
+   "y": 671,
+   "x": 778,
+   "w": 132,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lost before doctor"
+  },
+  {
+   "tag": "span",
+   "y": 671,
+   "x": 1102,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median consult"
+  },
+  {
+   "tag": "div",
+   "y": 705,
+   "x": 104,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "72.41%"
+  },
+  {
+   "tag": "div",
+   "y": 705,
+   "x": 428,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.94%"
+  },
+  {
+   "tag": "div",
+   "y": 705,
+   "x": 751,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.30%"
+  },
+  {
+   "tag": "div",
+   "y": 705,
+   "x": 1075,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "10.4"
+  },
+  {
+   "tag": "small",
+   "y": 716,
+   "x": 1142,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "min"
+  },
+  {
+   "tag": "span",
+   "y": 718,
+   "x": 228,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+15.95 pp"
+  },
+  {
+   "tag": "span",
+   "y": 718,
+   "x": 551,
+   "w": 66,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-0.08 pp"
+  },
+  {
+   "tag": "span",
+   "y": 718,
+   "x": 856,
+   "w": 66,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.56 pp"
+  },
+  {
+   "tag": "span",
+   "y": 718,
+   "x": 1182,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−0.8 min"
+  },
+  {
+   "tag": "div",
+   "y": 755,
+   "x": 104,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment Control 56.46%"
+  },
+  {
+   "tag": "div",
+   "y": 755,
+   "x": 428,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment Control 88.02%"
+  },
+  {
+   "tag": "div",
+   "y": 755,
+   "x": 751,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment Control 4.74%"
+  },
+  {
+   "tag": "div",
+   "y": 755,
+   "x": 1075,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment Control 11.2 min"
+  },
+  {
+   "tag": "b",
+   "y": 756,
+   "x": 169,
+   "w": 4,
+   "in_svg": false,
+   "hidden": false,
+   "text": "····"
+  },
+  {
+   "tag": "p",
+   "y": 786,
+   "x": 104,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Among users with an observed first response."
+  },
+  {
+   "tag": "p",
+   "y": 786,
+   "x": 428,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "95% CI -1.03 to +0.87 pp."
+  },
+  {
+   "tag": "p",
+   "y": 786,
+   "x": 751,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "95% CI -0.08 to +1.20 pp."
+  },
+  {
+   "tag": "p",
+   "y": 786,
+   "x": 1075,
+   "w": 262,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completed consultations with observed duration."
+  },
+  {
+   "tag": "span",
+   "y": 918,
+   "x": 80,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 / SPEED"
+  },
+  {
+   "tag": "h2",
+   "y": 918,
+   "x": 180,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The speed advantage is persistent."
+  },
+  {
+   "tag": "p",
+   "y": 923,
+   "x": 780,
+   "w": 500,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment responds faster across days and departments. The gain is visible in the typical wait and at the slower tail—not just in an average distorted by outliers."
+  },
+  {
+   "tag": "span",
+   "y": 1050,
+   "x": 111,
+   "w": 231,
+   "in_svg": false,
+   "hidden": false,
+   "text": "42-day view"
+  },
+  {
+   "tag": "span",
+   "y": 1050,
+   "x": 958,
+   "w": 240,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department check"
+  },
+  {
+   "tag": "span",
+   "y": 1050,
+   "x": 1244,
+   "w": 89,
+   "in_svg": false,
+   "hidden": false,
+   "text": "39 / 42 days"
+  },
+  {
+   "tag": "span",
+   "y": 1057,
+   "x": 724,
+   "w": 63,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 1057,
+   "x": 804,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "h3",
+   "y": 1070,
+   "x": 111,
+   "w": 231,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Daily median first response"
+  },
+  {
+   "tag": "h3",
+   "y": 1070,
+   "x": 958,
+   "w": 240,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every department waits less"
+  },
+  {
+   "tag": "p",
+   "y": 1099,
+   "x": 111,
+   "w": 231,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lower is better · seconds"
+  },
+  {
+   "tag": "p",
+   "y": 1099,
+   "x": 958,
+   "w": 240,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median Control → Treatment"
+  },
+  {
+   "tag": "text",
+   "y": 1141,
+   "x": 124,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "seconds"
+  },
+  {
+   "tag": "span",
+   "y": 1149,
+   "x": 958,
+   "w": 59,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "strong",
+   "y": 1149,
+   "x": 1302,
+   "w": 31,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−26s"
+  },
+  {
+   "tag": "text",
+   "y": 1151,
+   "x": 133,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "150"
+  },
+  {
+   "tag": "text",
+   "y": 1162,
+   "x": 521,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 9"
+  },
+  {
+   "tag": "text",
+   "y": 1176,
+   "x": 825,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "134s"
+  },
+  {
+   "tag": "span",
+   "y": 1176,
+   "x": 958,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "117s"
+  },
+  {
+   "tag": "span",
+   "y": 1176,
+   "x": 1297,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "91s"
+  },
+  {
+   "tag": "span",
+   "y": 1218,
+   "x": 958,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "strong",
+   "y": 1218,
+   "x": 1301,
+   "w": 32,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−20s"
+  },
+  {
+   "tag": "text",
+   "y": 1224,
+   "x": 133,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "120"
+  },
+  {
+   "tag": "span",
+   "y": 1245,
+   "x": 958,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "107s"
+  },
+  {
+   "tag": "span",
+   "y": 1245,
+   "x": 1297,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87s"
+  },
+  {
+   "tag": "text",
+   "y": 1266,
+   "x": 831,
+   "w": 18,
+   "in_svg": true,
+   "hidden": false,
+   "text": "97s"
+  },
+  {
+   "tag": "span",
+   "y": 1287,
+   "x": 958,
+   "w": 71,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "strong",
+   "y": 1287,
+   "x": 1301,
+   "w": 32,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−20s"
+  },
+  {
+   "tag": "text",
+   "y": 1296,
+   "x": 137,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "90"
+  },
+  {
+   "tag": "span",
+   "y": 1314,
+   "x": 958,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "106s"
+  },
+  {
+   "tag": "span",
+   "y": 1314,
+   "x": 1297,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "86s"
+  },
+  {
+   "tag": "span",
+   "y": 1356,
+   "x": 958,
+   "w": 126,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT & ophthalmology"
+  },
+  {
+   "tag": "strong",
+   "y": 1356,
+   "x": 1302,
+   "w": 31,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−23s"
+  },
+  {
+   "tag": "text",
+   "y": 1369,
+   "x": 137,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "60"
+  },
+  {
+   "tag": "span",
+   "y": 1383,
+   "x": 958,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "105s"
+  },
+  {
+   "tag": "span",
+   "y": 1383,
+   "x": 1297,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "82s"
+  },
+  {
+   "tag": "text",
+   "y": 1396,
+   "x": 145,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Nov 18"
+  },
+  {
+   "tag": "text",
+   "y": 1396,
+   "x": 364,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 01"
+  },
+  {
+   "tag": "text",
+   "y": 1396,
+   "x": 599,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 15"
+  },
+  {
+   "tag": "text",
+   "y": 1396,
+   "x": 833,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 29"
+  },
+  {
+   "tag": "text",
+   "y": 1419,
+   "x": 161,
+   "w": 182,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Daily median · users with an observed response"
+  },
+  {
+   "tag": "span",
+   "y": 1425,
+   "x": 958,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "strong",
+   "y": 1425,
+   "x": 1305,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−21s"
+  },
+  {
+   "tag": "span",
+   "y": 1453,
+   "x": 958,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "107s"
+  },
+  {
+   "tag": "span",
+   "y": 1453,
+   "x": 1297,
+   "w": 36,
+   "in_svg": false,
+   "hidden": false,
+   "text": "86s"
+  },
+  {
+   "tag": "div",
+   "y": 1498,
+   "x": 958,
+   "w": 375,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Savings range from . The overall 90th percentile falls ."
+  },
+  {
+   "tag": "strong",
+   "y": 1513,
+   "x": 1077,
+   "w": 93,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20 to 26 seconds"
+  },
+  {
+   "tag": "strong",
+   "y": 1530,
+   "x": 997,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "57 seconds"
+  },
+  {
+   "tag": "span",
+   "y": 1673,
+   "x": 80,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 / OUTCOMES"
+  },
+  {
+   "tag": "h2",
+   "y": 1673,
+   "x": 180,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The average hides a Dermatology warning."
+  },
+  {
+   "tag": "p",
+   "y": 1678,
+   "x": 780,
+   "w": 500,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Overall completion moves just -0.08 pp. Department deltas show why a single top-line rate is not enough: most movement is small, but skin consultations break away."
+  },
+  {
+   "tag": "span",
+   "y": 1813,
+   "x": 106,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Outcome 01"
+  },
+  {
+   "tag": "span",
+   "y": 1813,
+   "x": 553,
+   "w": 221,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Outcome 02"
+  },
+  {
+   "tag": "span",
+   "y": 1814,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Priority segment · Dermatology"
+  },
+  {
+   "tag": "h3",
+   "y": 1832,
+   "x": 106,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion difference"
+  },
+  {
+   "tag": "h3",
+   "y": 1832,
+   "x": 553,
+   "w": 221,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre-doctor loss difference"
+  },
+  {
+   "tag": "h3",
+   "y": 1838,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Faster replies, more early exits."
+  },
+  {
+   "tag": "p",
+   "y": 1861,
+   "x": 106,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment − Control"
+  },
+  {
+   "tag": "p",
+   "y": 1861,
+   "x": 553,
+   "w": 221,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment − Control"
+  },
+  {
+   "tag": "div",
+   "y": 1891,
+   "x": 106,
+   "w": 377,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Percentage points · positive is better"
+  },
+  {
+   "tag": "div",
+   "y": 1891,
+   "x": 553,
+   "w": 377,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Percentage points · negative is better"
+  },
+  {
+   "tag": "p",
+   "y": 1903,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The largest department-level reversal appears despite a 21-second faster median response."
+  },
+  {
+   "tag": "strong",
+   "y": 1942,
+   "x": 435,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.44"
+  },
+  {
+   "tag": "strong",
+   "y": 1942,
+   "x": 882,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-0.69"
+  },
+  {
+   "tag": "div",
+   "y": 1944,
+   "x": 106,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "div",
+   "y": 1944,
+   "x": 553,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "div",
+   "y": 1964,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.04 pp"
+  },
+  {
+   "tag": "strong",
+   "y": 1987,
+   "x": 435,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.47"
+  },
+  {
+   "tag": "strong",
+   "y": 1987,
+   "x": 882,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-0.37"
+  },
+  {
+   "tag": "div",
+   "y": 1988,
+   "x": 106,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "div",
+   "y": 1988,
+   "x": 553,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "div",
+   "y": 2020,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "increase in lost before doctor"
+  },
+  {
+   "tag": "strong",
+   "y": 2031,
+   "x": 435,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.24"
+  },
+  {
+   "tag": "strong",
+   "y": 2031,
+   "x": 882,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-0.38"
+  },
+  {
+   "tag": "div",
+   "y": 2032,
+   "x": 106,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "div",
+   "y": 2032,
+   "x": 553,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "div",
+   "y": 2075,
+   "x": 106,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT & ophthalmology"
+  },
+  {
+   "tag": "div",
+   "y": 2075,
+   "x": 553,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT & ophthalmology"
+  },
+  {
+   "tag": "span",
+   "y": 2076,
+   "x": 1002,
+   "w": 81,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 2076,
+   "x": 1232,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "span",
+   "y": 2077,
+   "x": 1152,
+   "w": 11,
+   "in_svg": false,
+   "hidden": false,
+   "text": "→"
+  },
+  {
+   "tag": "strong",
+   "y": 2078,
+   "x": 1043,
+   "w": 40,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.66%"
+  },
+  {
+   "tag": "strong",
+   "y": 2078,
+   "x": 1288,
+   "w": 44,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.71%"
+  },
+  {
+   "tag": "strong",
+   "y": 2080,
+   "x": 435,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.53"
+  },
+  {
+   "tag": "strong",
+   "y": 2080,
+   "x": 882,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.95"
+  },
+  {
+   "tag": "strong",
+   "y": 2130,
+   "x": 435,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-4.54"
+  },
+  {
+   "tag": "strong",
+   "y": 2130,
+   "x": 882,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.04"
+  },
+  {
+   "tag": "div",
+   "y": 2132,
+   "x": 106,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "div",
+   "y": 2132,
+   "x": 553,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "span",
+   "y": 2144,
+   "x": 1014,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Loss Δ · 95% CI"
+  },
+  {
+   "tag": "span",
+   "y": 2144,
+   "x": 1184,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion Δ"
+  },
+  {
+   "tag": "strong",
+   "y": 2163,
+   "x": 1014,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+2.92 to +7.17"
+  },
+  {
+   "tag": "strong",
+   "y": 2163,
+   "x": 1184,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-4.54 pp"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 228,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−5 pp"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 353,
+   "w": 6,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 458,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5 pp"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 675,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−5 pp"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 800,
+   "w": 6,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0"
+  },
+  {
+   "tag": "span",
+   "y": 2175,
+   "x": 905,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5 pp"
+  },
+  {
+   "tag": "small",
+   "y": 2186,
+   "x": 1014,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "percentage points"
+  },
+  {
+   "tag": "small",
+   "y": 2186,
+   "x": 1184,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "95% CI -7.19 to -1.89"
+  },
+  {
+   "tag": "p",
+   "y": 2231,
+   "x": 1002,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology sample: 1,618 Control · 1,503 Treatment."
+  },
+  {
+   "tag": "span",
+   "y": 2359,
+   "x": 80,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 / COMPLAINTS"
+  },
+  {
+   "tag": "h2",
+   "y": 2359,
+   "x": 180,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The skin signal is broad, not isolated."
+  },
+  {
+   "tag": "p",
+   "y": 2364,
+   "x": 780,
+   "w": 500,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatric and internal-medicine complaints dominate volume. Within Dermatology, however, all five complaint groups show higher pre-doctor loss under Treatment."
+  },
+  {
+   "tag": "span",
+   "y": 2500,
+   "x": 110,
+   "w": 257,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Demand mix"
+  },
+  {
+   "tag": "span",
+   "y": 2500,
+   "x": 723,
+   "w": 244,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology drill-down"
+  },
+  {
+   "tag": "span",
+   "y": 2500,
+   "x": 1236,
+   "w": 94,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5 / 5 increase"
+  },
+  {
+   "tag": "h3",
+   "y": 2519,
+   "x": 110,
+   "w": 257,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Five most frequent complaints"
+  },
+  {
+   "tag": "h3",
+   "y": 2519,
+   "x": 723,
+   "w": 244,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre-doctor loss by complaint"
+  },
+  {
+   "tag": "p",
+   "y": 2548,
+   "x": 110,
+   "w": 257,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Users · both arms combined"
+  },
+  {
+   "tag": "p",
+   "y": 2548,
+   "x": 723,
+   "w": 244,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control and Treatment · observed rates"
+  },
+  {
+   "tag": "span",
+   "y": 2595,
+   "x": 723,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Small red spots on back"
+  },
+  {
+   "tag": "strong",
+   "y": 2595,
+   "x": 1282,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+7.05 pp"
+  },
+  {
+   "tag": "div",
+   "y": 2598,
+   "x": 110,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "span",
+   "y": 2598,
+   "x": 152,
+   "w": 168,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ear pain; frequent ear pulling"
+  },
+  {
+   "tag": "strong",
+   "y": 2598,
+   "x": 608,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,082"
+  },
+  {
+   "tag": "small",
+   "y": 2619,
+   "x": 152,
+   "w": 168,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 2619,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "C"
+  },
+  {
+   "tag": "b",
+   "y": 2619,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.88%"
+  },
+  {
+   "tag": "span",
+   "y": 2637,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "T"
+  },
+  {
+   "tag": "b",
+   "y": 2637,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.92%"
+  },
+  {
+   "tag": "div",
+   "y": 2674,
+   "x": 110,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "span",
+   "y": 2674,
+   "x": 152,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Cough for 3 days; worse at night"
+  },
+  {
+   "tag": "strong",
+   "y": 2674,
+   "x": 608,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,072"
+  },
+  {
+   "tag": "span",
+   "y": 2677,
+   "x": 723,
+   "w": 123,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Peeling, itchy toe webs"
+  },
+  {
+   "tag": "strong",
+   "y": 2677,
+   "x": 1280,
+   "w": 50,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.68 pp"
+  },
+  {
+   "tag": "small",
+   "y": 2694,
+   "x": 152,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 2701,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "C"
+  },
+  {
+   "tag": "b",
+   "y": 2701,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.98%"
+  },
+  {
+   "tag": "span",
+   "y": 2719,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "T"
+  },
+  {
+   "tag": "b",
+   "y": 2719,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.66%"
+  },
+  {
+   "tag": "div",
+   "y": 2749,
+   "x": 110,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "span",
+   "y": 2749,
+   "x": 152,
+   "w": 173,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Diarrhea with low-grade fever"
+  },
+  {
+   "tag": "strong",
+   "y": 2749,
+   "x": 608,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,048"
+  },
+  {
+   "tag": "span",
+   "y": 2759,
+   "x": 723,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Acne; worst on chin"
+  },
+  {
+   "tag": "strong",
+   "y": 2759,
+   "x": 1283,
+   "w": 47,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.15 pp"
+  },
+  {
+   "tag": "small",
+   "y": 2770,
+   "x": 152,
+   "w": 173,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "span",
+   "y": 2783,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "C"
+  },
+  {
+   "tag": "b",
+   "y": 2783,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.93%"
+  },
+  {
+   "tag": "span",
+   "y": 2801,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "T"
+  },
+  {
+   "tag": "b",
+   "y": 2801,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.08%"
+  },
+  {
+   "tag": "div",
+   "y": 2825,
+   "x": 110,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04"
+  },
+  {
+   "tag": "span",
+   "y": 2825,
+   "x": 152,
+   "w": 172,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bloating and reflux for a week"
+  },
+  {
+   "tag": "strong",
+   "y": 2825,
+   "x": 608,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,037"
+  },
+  {
+   "tag": "span",
+   "y": 2841,
+   "x": 723,
+   "w": 164,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Recurrent urticaria for 2 weeks"
+  },
+  {
+   "tag": "strong",
+   "y": 2841,
+   "x": 1280,
+   "w": 50,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+4.55 pp"
+  },
+  {
+   "tag": "small",
+   "y": 2845,
+   "x": 152,
+   "w": 172,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "span",
+   "y": 2865,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "C"
+  },
+  {
+   "tag": "b",
+   "y": 2865,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.00%"
+  },
+  {
+   "tag": "span",
+   "y": 2883,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "T"
+  },
+  {
+   "tag": "b",
+   "y": 2883,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.55%"
+  },
+  {
+   "tag": "div",
+   "y": 2900,
+   "x": 110,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05"
+  },
+  {
+   "tag": "span",
+   "y": 2900,
+   "x": 152,
+   "w": 154,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Watery diarrhea for 2 days"
+  },
+  {
+   "tag": "strong",
+   "y": 2900,
+   "x": 608,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,034"
+  },
+  {
+   "tag": "small",
+   "y": 2921,
+   "x": 152,
+   "w": 154,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 2923,
+   "x": 723,
+   "w": 112,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Itchy red rash on arm"
+  },
+  {
+   "tag": "strong",
+   "y": 2923,
+   "x": 1280,
+   "w": 50,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+2.23 pp"
+  },
+  {
+   "tag": "span",
+   "y": 2947,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "C"
+  },
+  {
+   "tag": "b",
+   "y": 2947,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.72%"
+  },
+  {
+   "tag": "span",
+   "y": 2965,
+   "x": 723,
+   "w": 14,
+   "in_svg": false,
+   "hidden": false,
+   "text": "T"
+  },
+  {
+   "tag": "b",
+   "y": 2965,
+   "x": 1284,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.95%"
+  },
+  {
+   "tag": "p",
+   "y": 2981,
+   "x": 110,
+   "w": 535,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Complaint names translated from the source field; 36 missing values are not ranked."
+  },
+  {
+   "tag": "span",
+   "y": 3010,
+   "x": 723,
+   "w": 40,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 3010,
+   "x": 778,
+   "w": 52,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "span",
+   "y": 3010,
+   "x": 843,
+   "w": 73,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bar scale: 0–15%"
+  },
+  {
+   "tag": "b",
+   "y": 3011,
+   "x": 723,
+   "w": 7,
+   "in_svg": false,
+   "hidden": false,
+   "text": "CT"
+  },
+  {
+   "tag": "span",
+   "y": 3137,
+   "x": 80,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04 / 7 DAYS"
+  },
+  {
+   "tag": "h2",
+   "y": 3137,
+   "x": 180,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Follow-up tells two different stories."
+  },
+  {
+   "tag": "p",
+   "y": 3142,
+   "x": 780,
+   "w": 500,
+   "in_svg": false,
+   "hidden": false,
+   "text": "New and returning users move in opposite directions. Report these segments separately rather than treating 7-day follow-up as one uniform win or loss."
+  },
+  {
+   "tag": "span",
+   "y": 3285,
+   "x": 117,
+   "w": 341,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7-day follow-up"
+  },
+  {
+   "tag": "h3",
+   "y": 3306,
+   "x": 117,
+   "w": 341,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tenure changes the direction."
+  },
+  {
+   "tag": "p",
+   "y": 3307,
+   "x": 883,
+   "w": 440,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Rates use non-missing follow-up values only. Confidence intervals are for Treatment − Control, in percentage points."
+  },
+  {
+   "tag": "span",
+   "y": 3395,
+   "x": 145,
+   "w": 172,
+   "in_svg": false,
+   "hidden": false,
+   "text": "New users"
+  },
+  {
+   "tag": "span",
+   "y": 3395,
+   "x": 756,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Returning users"
+  },
+  {
+   "tag": "span",
+   "y": 3409,
+   "x": 617,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+3.00 pp"
+  },
+  {
+   "tag": "span",
+   "y": 3409,
+   "x": 1236,
+   "w": 59,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-1.71 pp"
+  },
+  {
+   "tag": "h3",
+   "y": 3416,
+   "x": 145,
+   "w": 172,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Follow-up increases"
+  },
+  {
+   "tag": "h3",
+   "y": 3416,
+   "x": 756,
+   "w": 178,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Follow-up decreases"
+  },
+  {
+   "tag": "strong",
+   "y": 3469,
+   "x": 630,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.84%"
+  },
+  {
+   "tag": "strong",
+   "y": 3469,
+   "x": 1241,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.93%"
+  },
+  {
+   "tag": "span",
+   "y": 3470,
+   "x": 145,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 3470,
+   "x": 756,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "strong",
+   "y": 3500,
+   "x": 630,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.84%"
+  },
+  {
+   "tag": "strong",
+   "y": 3500,
+   "x": 1241,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.22%"
+  },
+  {
+   "tag": "span",
+   "y": 3501,
+   "x": 145,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "span",
+   "y": 3501,
+   "x": 756,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment"
+  },
+  {
+   "tag": "span",
+   "y": 3554,
+   "x": 145,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "95% CI for difference"
+  },
+  {
+   "tag": "strong",
+   "y": 3554,
+   "x": 590,
+   "w": 94,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.57 to +4.43 pp"
+  },
+  {
+   "tag": "span",
+   "y": 3554,
+   "x": 756,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "95% CI for difference"
+  },
+  {
+   "tag": "strong",
+   "y": 3554,
+   "x": 1203,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-2.95 to -0.47 pp"
+  },
+  {
+   "tag": "p",
+   "y": 3579,
+   "x": 145,
+   "w": 539,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed follow-up values: 2,895 Control · 2,826 Treatment."
+  },
+  {
+   "tag": "p",
+   "y": 3579,
+   "x": 756,
+   "w": 539,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed follow-up values: 6,028 Control · 6,065 Treatment."
+  },
+  {
+   "tag": "span",
+   "y": 3786,
+   "x": 128,
+   "w": 392,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Decision readout"
+  },
+  {
+   "tag": "span",
+   "y": 3804,
+   "x": 594,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "h3",
+   "y": 3805,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Keep measuring the response-time win."
+  },
+  {
+   "tag": "h2",
+   "y": 3814,
+   "x": 128,
+   "w": 392,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Roll forward on speed. Gate the rollout on Dermatology."
+  },
+  {
+   "tag": "p",
+   "y": 3831,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Treatment is faster on 39 of 42 days and in all five departments; the within-two-minute share rises +15.95 pp."
+  },
+  {
+   "tag": "span",
+   "y": 3896,
+   "x": 594,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "h3",
+   "y": 3897,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Do not call overall completion a win."
+  },
+  {
+   "tag": "p",
+   "y": 3923,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The observed difference is -0.08 pp, with a 95% CI from -1.03 to +0.87 pp. Investigate whether shorter consults affect any downstream quality measure."
+  },
+  {
+   "tag": "p",
+   "y": 3954,
+   "x": 128,
+   "w": 380,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The response-time improvement is consistent across observed cuts. Completion and follow-up need a segmented readout."
+  },
+  {
+   "tag": "span",
+   "y": 4005,
+   "x": 594,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "h3",
+   "y": 4006,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Audit Dermatology routing and the pre-doctor queue."
+  },
+  {
+   "tag": "p",
+   "y": 4032,
+   "x": 640,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Early loss rises +5.04 pp, and every Dermatology complaint group moves in the wrong direction. Review this segment before a broad rollout."
+  },
+  {
+   "tag": "span",
+   "y": 4044,
+   "x": 128,
+   "w": 140,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Speed ≠ completed care"
+  },
+  {
+   "tag": "span",
+   "y": 4213,
+   "x": 80,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05 / METHOD"
+  },
+  {
+   "tag": "h2",
+   "y": 4213,
+   "x": 180,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What was cleaned—and what was not assumed."
+  },
+  {
+   "tag": "p",
+   "y": 4218,
+   "x": 780,
+   "w": 500,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The page is a descriptive readout of the supplied user-level table. All metrics are reproducible with the expressions in facts.json ."
+  },
+  {
+   "tag": "span",
+   "y": 4351,
+   "x": 80,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 · COHORT"
+  },
+  {
+   "tag": "span",
+   "y": 4351,
+   "x": 406,
+   "w": 110,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 · DENOMINATORS"
+  },
+  {
+   "tag": "span",
+   "y": 4351,
+   "x": 733,
+   "w": 96,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 · ROBUSTNESS"
+  },
+  {
+   "tag": "span",
+   "y": 4351,
+   "x": 1059,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04 · UNCERTAINTY"
+  },
+  {
+   "tag": "h3",
+   "y": 4374,
+   "x": 80,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One row per unique user"
+  },
+  {
+   "tag": "h3",
+   "y": 4374,
+   "x": 406,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Missing is not zero"
+  },
+  {
+   "tag": "h3",
+   "y": 4374,
+   "x": 733,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Medians lead the time readout"
+  },
+  {
+   "tag": "h3",
+   "y": 4374,
+   "x": 1059,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Intervals, not causal proof"
+  },
+  {
+   "tag": "p",
+   "y": 4404,
+   "x": 80,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18,000 rows and user IDs. Group labels are trimmed before comparison, consolidating 19 labels with trailing whitespace. Mixed date formats are parsed into 42 daily periods."
+  },
+  {
+   "tag": "p",
+   "y": 4404,
+   "x": 406,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Response and duration summaries skip missing values. All 903 missing responses align with pre-doctor loss; all 2,164 missing durations align with incomplete consultations. Follow-up excludes 186 missing values."
+  },
+  {
+   "tag": "p",
+   "y": 4404,
+   "x": 733,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Seven response times exceed one hour and seven consultation durations equal 640 minutes. Medians and p90s are emphasized so these extremes do not define the headline."
+  },
+  {
+   "tag": "p",
+   "y": 4404,
+   "x": 1059,
+   "w": 301,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Rate intervals use a two-proportion normal approximation with a 1.96 critical value, unadjusted for multiple comparisons. Assignment and randomization details are not supplied."
+  },
+  {
+   "tag": "strong",
+   "y": 4521,
+   "x": 99,
+   "w": 124,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Interpretation guardrail"
+  },
+  {
+   "tag": "span",
+   "y": 4521,
+   "x": 237,
+   "w": 1047,
+   "in_svg": false,
+   "hidden": false,
+   "text": "“Control” and “Treatment” are English labels for the two cleaned source groups. Complaint and department names are translated for readability. No missing outcome is imputed, and no outlier is deleted."
+  },
+  {
+   "tag": "span",
+   "y": 4650,
+   "x": 80,
+   "w": 280,
+   "in_svg": false,
+   "hidden": false,
+   "text": "· Online medical consultation experiment"
+  },
+  {
+   "tag": "span",
+   "y": 4650,
+   "x": 1054,
+   "w": 306,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: · 14 executable findings in"
+  },
+  {
+   "tag": "strong",
+   "y": 4651,
+   "x": 80,
+   "w": 85,
+   "in_svg": false,
+   "hidden": false,
+   "text": "CARE / READOUT"
+  },
+  {
+   "tag": "span",
+   "y": 4652,
+   "x": 1093,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "data/data.csv"
+  },
+  {
+   "tag": "span",
+   "y": 4652,
+   "x": 1300,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "facts.json"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 1136,
+   "x": 111,
+   "w": 771,
+   "h": 296,
+   "marks": 11,
+   "labels": 13
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 4699
+}

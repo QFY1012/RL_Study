@@ -1,0 +1,99 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "5 节都在为前面写出的观点或问题服务",
+  "opening": 0,
+  "sections": [
+   {
+    "start": "This data has front and back pocket measurements for 80 pairs of jeans, 40 men's and 40 women's , from 20 popular brands.",
+    "serves": "Women's jeans come with shallower front pockets",
+    "how": "It introduces the dataset and states the main comparison that women's front pockets are much shallower than men's, with back pockets about the same.",
+    "holds": true
+   },
+   {
+    "start": "Men's front pockets run from 20.0 to 28.0 deep; women's run from 11.5 to 21.5.",
+    "serves": "Front pockets: two groups that barely overlap",
+    "how": "It gives the two ranges, shows only one women's pair reaches the shallowest men's pocket, and reports lower average depth and width for women's front pockets.",
+    "holds": true
+   },
+   {
+    "start": "Back pockets are close in size: men's average 16.0 high and 13.7 wide, women's 15.1 high and 13.3 wide.",
+    "serves": "The gap is in the front, not the back",
+    "how": "It shows back-pocket averages are close and that women's front pockets are often shallower than their back pockets, while men's never are, locating the gap in front.",
+    "holds": true
+   },
+   {
+    "start": "Each brand in the data sells two men's and two women's pairs.",
+    "serves": "Every brand does it",
+    "how": "It reports that in all 20 brands men's front pockets are deeper on average, with the gap ranging from 2.5 to 13.4 cm.",
+    "holds": true
+   },
+   {
+    "start": "For women, cut makes little difference: average front pocket depth is 14.3 for skinny, 14.4 for straight and 14.2 for boot-cut jeans.",
+    "serves": "Neither cut nor price fixes it",
+    "how": "It shows cut changes average front-pocket depth little and price correlates negatively or near zero with depth, so neither raises women's pocket depth.",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"This data has front and back pocket measurements for 80 pairs of jeans, 40 men's and 40 women's , from 20 popular brands.\",\"serves\":\"Women's jeans come with shallower front pockets\",\"how\":\"It introduces the dataset and states the main comparison that women's front pockets are much shallower than men's, with back pockets about the same.\"},{\"start\":\"Men's front pockets run from 20.0 to 28.0 deep; women's run from 11.5 to 21.5.\",\"serves\":\"Front pockets: two groups that barely overlap\",\"how\":\"It gives the two ranges, shows only one women's pair reaches the shallowest men's pocket, and reports lower average depth and width for women's front pockets.\"},{\"start\":\"Back pockets are close in size: men's average 16.0 high and 13.7 wide, women's 15.1 high and 13.3 wide.\",\"serves\":\"The gap is in the front, not the back\",\"how\":\"It shows back-pocket averages are close and that women's front pockets are often shallower than their back pockets, while men's never are, locating the gap in front.\"},{\"start\":\"Each brand in the data sells two men's and two women's pairs.\",\"serves\":\"Every brand does it\",\"how\":\"It reports that in all 20 brands men's front pockets are deeper on average, with the gap ranging from 2.5 to 13.4 cm.\"},{\"start\":\"For women, cut makes little difference: average front pocket depth is 14.3 for skinny, 14.4 for straight and 14.2 for boot-cut jeans.\",\"serves\":\"Neither cut nor price fixes it\",\"how\":\"It shows cut changes average front-pocket depth little and price correlates negatively or near zero with depth, so neither raises women's pocket depth.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 971,
+   "completion_tokens": 8582,
+   "seconds": 57.6
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.1,
+  "where": "Abercrombie's Simone High Rise Slim、Levi's、Abercrombie",
+  "reason": "文章通篇是数据报道，按品牌、性别、款式和价格罗列测量结果；出现的品牌和单条牛仔裤只是统计类别或极值，没有被写成想要什么、面对什么、打破预期并有所应对的个体，也没有个体经历与整体数据相接的叙事。",
+  "individuals": [
+   {
+    "who": "Abercrombie's Simone High Rise Slim",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只是女性牛仔裤中唯一达到男性最浅口袋深度的单条数据/极值，未展开成有意图的个体。"
+   },
+   {
+    "who": "Levi's",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "作为品牌平均值中男女前袋差距最大的例子被点名，属于类别/统计结果，不是叙事个体。"
+   },
+   {
+    "who": "Abercrombie",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "作为差距最小的品牌被点名，属于类别/统计结果，不是叙事个体。"
+   }
+  ],
+  "answer": {
+   "text": "{\"individuals\":[{\"who\":\"Abercrombie's Simone High Rise Slim\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只是女性牛仔裤中唯一达到男性最浅口袋深度的单条数据/极值，未展开成有意图的个体。\"},{\"who\":\"Levi's\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"作为品牌平均值中男女前袋差距最大的例子被点名，属于类别/统计结果，不是叙事个体。\"},{\"who\":\"Abercrombie\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"作为差距最小的品牌被点名，属于类别/统计结果，不是叙事个体。\"}],\"score\":0.1,\"reason\":\"文章通篇是数据报道，按品牌、性别、款式和价格罗列测量结果；出现的品牌和单条牛仔裤只是统计类别或极值，没有被写成想要什么、面对什么、打破预期并有所应对的个体，也没有个体经历与整体数据相接的叙事。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1096,
+   "completion_tokens": 1688,
+   "seconds": 12.5
+  }
+ }
+}

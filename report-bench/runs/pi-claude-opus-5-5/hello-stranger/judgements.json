@@ -1,0 +1,83 @@
+{
+ "tries": {
+  "2.x": 1,
+  "3.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.78,
+  "where": "第3–5帧 热力图；第8帧 政治距离小柱图",
+  "reason": "热力图格子计数数字很小、第7–5行高值区挤在一起，左侧竖排轴名也小，蓝色深浅无说明、橙描边靠图下注释；第8帧半宽柱图与表格字号偏小。其余折线、分组柱、哑铃图、共享现实柱图均清晰。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.7,
+  "where": "第2–3帧分组柱 vs 第5–6帧哑铃图 vs 第8帧政治距离柱图",
+  "reason": "蓝＝实际评分、橙＝猜测在分组柱和哑铃图里保持一致，但第8帧政距柱图把橙色改用来突出 gap 4/5 的小样本组，与前面橙色含义不同且无说明，读者需靠正文倒推。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "全篇：折线→分组柱→热力图→哑铃图→柱图→表格+柱图",
+  "reason": "几乎每个现象换一种画法，没有原地变化或同画法一步步变的段落，读者每节都要重新学怎么读；只有柱形在各节反复出现略微缓解。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.35,
+  "where": "滚动记录（无图固定、无图变状态）；第0–1帧情绪段、第2–3帧喜欢差距段",
+  "reason": "一节一张静态图，滚动时图从头到尾不变；情绪段还讲了图上没有的唤醒度和69.2%比较，喜欢差距两段共用一张分组柱，图都不动，读者要自己去图上找后面几段讲的内容。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第1–2帧折线、第2–3帧分组柱、第5–6帧哑铃图、第6–7帧共享现实柱图、第8帧政距柱图",
+  "reason": "文字讲图几乎都靠读图上相同的数字（6.1/7.38、43%/17%、7.68/7.06、5.25/8.55、7.15/7.07）或查蓝橙图例才对得上；只有热力图注释“orange outline”直接点名橙色描边一处算一眼对上。"
+ },
+ "3.1": {
+  "item": "3.1",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.08,
+  "where": "全页（第 1–8 帧所有图表）",
+  "reason": "折线图、分组柱状图、热力矩阵、哑铃图、表格全部是抽象标记，页面上没有任何与「陌生人对话/好感」相关的插画、图标或地图，连零星装饰都没有；话题本有大量具象语言可用却一个未用，比 gayborhoods 第 5 帧更「裸」。"
+ },
+ "3.2": {
+  "item": "3.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.45,
+  "where": "全页（第 0 帧标题区、各帧图表卡片）",
+  "reason": "米白底加中性无衬线字体、蓝橙配色的标准数据新闻模板，干净但中性，配色和字体都看不出与「人与人对话、好感度」这类温暖社交话题的联系，属于不出错但无关联的中性档，未达到至少配色或字体有一项能联想话题的程度。"
+ }
+}

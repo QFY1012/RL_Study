@@ -1,0 +1,92 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.714,
+  "where": "「Enjoyment is most closely associated with liking the other p」;「Raw pair averages vary only modestly across exact sex, race 」",
+  "reason": "7 节里 2 节不为前面的观点或问题服务:讲享受度与喜欢对方关系最密切，并存在人更喜欢对方、却低估对方喜欢自己的不对称。;讲性别、种族、教育完全匹配时享受度均值差异不大，政治分数差距较大时享受度较低，但这些都是未调整的描述性差异。",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Across 1,656 paired video conversations , affect barely moves at the hello—then climbs.",
+    "serves": null,
+    "how": "报告1656对视频对话中 affect 的变化：开头几乎不变，随后上升；结尾69.2%的匹配个人记录高于会前。",
+    "holds": false
+   },
+   {
+    "start": "Affect and arousal both climb over the call.",
+    "serves": "Across 1,656 paired video conversations , affect barely moves at the hello—then climbs.",
+    "how": "用对话中首次读数接近基线、到中点才明显变化，说明 affect 先平后升，并补充 arousal 同样上升。",
+    "holds": true
+   },
+   {
+    "start": "The average affect rating reaches 7.38 at the end, compared with 6.10 before the call.",
+    "serves": "Affect and arousal both climb over the call.",
+    "how": "给出 affect 从会前6.10升到会后7.38、arousal 收于6.70的均值，量化上升。",
+    "holds": true
+   },
+   {
+    "start": "These are averages, not a promise that every conversation improves.",
+    "serves": "The average affect rating reaches 7.38 at the end, compared with 6.10 before the call.",
+    "how": "提醒上述是平均值，不等于每场对话都改善，并转向个体差异。",
+    "holds": true
+   },
+   {
+    "start": "The aggregate curve hides three individual paths: improvement, no change and decline.",
+    "serves": "These are averages, not a promise that every conversation improves.",
+    "how": "说明总平均曲线掩盖了改善、不变、下降三种个体路径，以及伴侣间评分差距缩小。",
+    "holds": true
+   },
+   {
+    "start": "Two strangers do not start in sync.",
+    "serves": "It also hides a second shift—the space between partners’ ratings gets smaller.",
+    "how": "用配对内 affect 差距的均值说明两人起初不同步，平均而言结束时更接近。",
+    "holds": true
+   },
+   {
+    "start": "Enjoyment is most closely associated with liking the other person.",
+    "serves": null,
+    "how": "讲享受度与喜欢对方关系最密切，并存在人更喜欢对方、却低估对方喜欢自己的不对称。",
+    "holds": false
+   },
+   {
+    "start": "Raw pair averages vary only modestly across exact sex, race and education matches.",
+    "serves": null,
+    "how": "讲性别、种族、教育完全匹配时享受度均值差异不大，政治分数差距较大时享受度较低，但这些都是未调整的描述性差异。",
+    "holds": false
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\": [{\"start\": \"Across 1,656 paired video conversations , affect barely moves at the hello—then climbs.\", \"serves\": null, \"how\": \"报告1656对视频对话中 affect 的变化：开头几乎不变，随后上升；结尾69.2%的匹配个人记录高于会前。\"}, {\"start\": \"Affect and arousal both climb over the call.\", \"serves\": \"Across 1,656 paired video conversations , affect barely moves at the hello—then climbs.\", \"how\": \"用对话中首次读数接近基线、到中点才明显变化，说明 affect 先平后升，并补充 arousal 同样上升。\"}, {\"start\": \"The average affect rating reaches 7.38 at the end, compared with 6.10 before the call.\", \"serves\": \"Affect and arousal both climb over the call.\", \"how\": \"给出 affect 从会前6.10升到会后7.38、arousal 收于6.70的均值，量化上升。\"}, {\"start\": \"These are averages, not a promise that every conversation improves.\", \"serves\": \"The average affect rating reaches 7.38 at the end, compared with 6.10 before the call.\", \"how\": \"提醒上述是平均值，不等于每场对话都改善，并转向个体差异。\"}, {\"start\": \"The aggregate curve hides three individual paths: improvement, no change and decline.\", \"serves\": \"These are averages, not a promise that every conversation improves.\", \"how\": \"说明总平均曲线掩盖了改善、不变、下降三种个体路径，以及伴侣间评分差距缩小。\"}, {\"start\": \"Two strangers do not start in sync.\", \"serves\": \"It also hides a second shift—the space between partners’ ratings gets smaller.\", \"how\": \"用配对内 affect 差距的均值说明两人起初不同步，平均而言结束时更接近。\"}, {\"start\": \"Enjoyment is most closely associated with liking the other person.\", \"serves\": null, \"how\": \"讲享受度与喜欢对方关系最密切，并存在人更喜欢对方、却低估对方喜欢自己的不对称。\"}, {\"start\": \"Raw pair averages vary only modestly across exact sex, race and education matches.\", \"serves\": null, \"how\": \"讲性别、种族、教育完全匹配时享受度均值差异不大，政治分数差距较大时享受度较低，但这些都是未调整的描述性差异。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 1105,
+   "completion_tokens": 16608,
+   "seconds": 104.5
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "文章没有写出任何有名字或认得出来的具体个体，只有“Two strangers”“person A − person B”“1,456 unique user IDs”等类别和数字；没有个体的愿望、面对的东西，没有先写默认预期再打破，也没有个体的应对与后来，因此三样都没有，属于只有类别和数字。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"文章没有写出任何有名字或认得出来的具体个体，只有“Two strangers”“person A − person B”“1,456 unique user IDs”等类别和数字；没有个体的愿望、面对的东西，没有先写默认预期再打破，也没有个体的应对与后来，因此三样都没有，属于只有类别和数字。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1230,
+   "completion_tokens": 403,
+   "seconds": 5.5
+  }
+ }
+}

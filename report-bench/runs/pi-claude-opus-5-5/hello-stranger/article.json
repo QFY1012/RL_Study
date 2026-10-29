@@ -1,0 +1,92 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "8 节都在为前面写出的观点或问题服务",
+  "opening": 0,
+  "sections": [
+   {
+    "start": "A study paired strangers for 30-minute video calls: 1,656 conversations, 3,312 sets of ratings, from 1,456 people (754 of them took part more than once).",
+    "serves": "Thirty minutes with a stranger lifts people's mood, yet most leave thinking they were liked less than they were",
+    "how": "用30分钟视频通话的样本设计概述研究，并点出情绪上升和低估被喜欢两项主要结果，为标题结论提供依据。",
+    "holds": true
+   },
+   {
+    "start": "On a 1–9 scale, average mood was 6.1 just before the call and 6.16 at the start, so the first moments of meeting were neutral.",
+    "serves": "Mood climbs steadily through the conversation.",
+    "how": "列出通话前、开始、中段和结束的平均情绪分数，并用个体前后对比显示多数人结束后情绪更高，从而证明情绪逐步上升。",
+    "holds": true
+   },
+   {
+    "start": "After the call each person said how much they liked their partner and guessed how much the partner liked them, both on a 1–7 scale.",
+    "serves": "And people consistently guess that their partner thinks less of them than the partner actually does.",
+    "how": "报告平均给出6.00却只预期5.35，且给出最高分7的人远多于猜测收到7的人，显示人们系统性低估对方喜欢自己的程度。",
+    "holds": true
+   },
+   {
+    "start": "Matching each guess to what the partner actually reported (3,206 people with both ratings), 54.9% guessed too low, 26.8% guessed exactly and 18.3% guessed too high.",
+    "serves": "And people consistently guess that their partner thinks less of them than the partner actually does.",
+    "how": "把猜测与对方实际评分匹配后发现过半人低估，且猜测与自身喜欢对方程度的相关性远高于与对方实际喜欢程度的相关性，进一步支持低估判断。",
+    "holds": true
+   },
+   {
+    "start": "People rated their partner as more intelligent (7.68 on a 1–9 scale) than they guessed their partner rated them (7.06), and kinder (7.98) than they guessed they had come across (7.43).",
+    "serves": "The same gap shows up for traits, and reverses for talking time",
+    "how": "比较伴侣实际评分与猜测评分，显示智力、善良和喜欢都出现实际高于猜测的同一缺口，且多数对话中喜欢评分高于猜测。",
+    "holds": true
+   },
+   {
+    "start": "Talking time went the other way.",
+    "serves": "The same gap shows up for traits, and reverses for talking time",
+    "how": "用自评说话回合长度高于对方评分的数据，显示人们在说话时长上反向高估自己，并由此觉得自己说得更多、被欣赏更少。",
+    "holds": true
+   },
+   {
+    "start": "Each person also has a \"shared reality\" score, which by its name measures how far they felt they and their partner saw things the same way (the data doesn't define it).",
+    "serves": "What makes a good conversation: feeling on the same wavelength, not demographics",
+    "how": "显示共享现实感与通话享受度和喜欢程度的相关性较高，且低分者与高分者的通话评分差距大，证明同频感比人口特征更能解释好对话。",
+    "holds": true
+   },
+   {
+    "start": "Demographic mismatch hardly changes anything.",
+    "serves": "It tracks enjoyment far more closely than any of the demographic differences between partners.",
+    "how": "用不同性别、种族、教育配对的平均差异不足0.2分、政治距离仅极端处有小效应，以及共享现实差距带来的更大评分差，证明人口特征影响很小。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"A study paired strangers for 30-minute video calls: 1,656 conversations, 3,312 sets of ratings, from 1,456 people (754 of them took part more than once).\",\"serves\":\"Thirty minutes with a stranger lifts people's mood, yet most leave thinking they were liked less than they were\",\"how\":\"用30分钟视频通话的样本设计概述研究，并点出情绪上升和低估被喜欢两项主要结果，为标题结论提供依据。\"},{\"start\":\"On a 1–9 scale, average mood was 6.1 just before the call and 6.16 at the start, so the first moments of meeting were neutral.\",\"serves\":\"Mood climbs steadily through the conversation.\",\"how\":\"列出通话前、开始、中段和结束的平均情绪分数，并用个体前后对比显示多数人结束后情绪更高，从而证明情绪逐步上升。\"},{\"start\":\"After the call each person said how much they liked their partner and guessed how much the partner liked them, both on a 1–7 scale.\",\"serves\":\"And people consistently guess that their partner thinks less of them than the partner actually does.\",\"how\":\"报告平均给出6.00却只预期5.35，且给出最高分7的人远多于猜测收到7的人，显示人们系统性低估对方喜欢自己的程度。\"},{\"start\":\"Matching each guess to what the partner actually reported (3,206 people with both ratings), 54.9% guessed too low, 26.8% guessed exactly and 18.3% guessed too high.\",\"serves\":\"And people consistently guess that their partner thinks less of them than the partner actually does.\",\"how\":\"把猜测与对方实际评分匹配后发现过半人低估，且猜测与自身喜欢对方程度的相关性远高于与对方实际喜欢程度的相关性，进一步支持低估判断。\"},{\"start\":\"People rated their partner as more intelligent (7.68 on a 1–9 scale) than they guessed their partner rated them (7.06), and kinder (7.98) than they guessed they had come across (7.43).\",\"serves\":\"The same gap shows up for traits, and reverses for talking time\",\"how\":\"比较伴侣实际评分与猜测评分，显示智力、善良和喜欢都出现实际高于猜测的同一缺口，且多数对话中喜欢评分高于猜测。\"},{\"start\":\"Talking time went the other way.\",\"serves\":\"The same gap shows up for traits, and reverses for talking time\",\"how\":\"用自评说话回合长度高于对方评分的数据，显示人们在说话时长上反向高估自己，并由此觉得自己说得更多、被欣赏更少。\"},{\"start\":\"Each person also has a \\\"shared reality\\\" score, which by its name measures how far they felt they and their partner saw things the same way (the data doesn't define it).\",\"serves\":\"What makes a good conversation: feeling on the same wavelength, not demographics\",\"how\":\"显示共享现实感与通话享受度和喜欢程度的相关性较高，且低分者与高分者的通话评分差距大，证明同频感比人口特征更能解释好对话。\"},{\"start\":\"Demographic mismatch hardly changes anything.\",\"serves\":\"It tracks enjoyment far more closely than any of the demographic differences between partners.\",\"how\":\"用不同性别、种族、教育配对的平均差异不足0.2分、政治距离仅极端处有小效应，以及共享现实差距带来的更大评分差，证明人口特征影响很小。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 1494,
+   "completion_tokens": 14740,
+   "seconds": 92.1
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-claude-opus-5-5/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文没有出现有名字或可辨认的具体个体（人、动物、地方或东西），也没有写出某个个体想要什么、面对什么、预期被打破以及后来怎样；只有类别、平均值和统计数字，因此三样都没有。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"全文没有出现有名字或可辨认的具体个体（人、动物、地方或东西），也没有写出某个个体想要什么、面对什么、预期被打破以及后来怎样；只有类别、平均值和统计数字，因此三样都没有。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1619,
+   "completion_tokens": 288,
+   "seconds": 5.0
+  }
+ }
+}

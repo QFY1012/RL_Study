@@ -1,0 +1,100 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/ab_test-01/index.html",
+ "facts": "submissions/pi-kimi-k3.1-pro/ab_test-01/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "cohort-scope",
+     "basis": "users=18000, unique_users=18000, Control_users=9013, Treatment_users=8987, departments=5, dates=42, first_date=2024-11-18, last_date=2024-12-29, group_labels_with_extra_whitespace=19",
+     "verdict": "ok"
+    },
+    {
+     "id": "median-response-gain",
+     "basis": "Control median=110.0, Treatment median=88.0, seconds_saved=22.0, reduction_pct=20.0, Control p90=234.0, Treatment p90=177.0, p90_saved=57.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "two-minute-response-share",
+     "basis": "Control_within_120_pct=56.46, Treatment_within_120_pct=72.41, increase_pp=15.95; response_n Control=8586, Treatment=8511",
+     "verdict": "ok"
+    },
+    {
+     "id": "daily-response-consistency",
+     "basis": "days=42, Treatment_faster_days=39, median_daily_gap_seconds=22.25, minimum_daily_gap_seconds=-4.00, maximum_daily_gap_seconds=53.50",
+     "verdict": "ok"
+    },
+    {
+     "id": "overall-completion-flat",
+     "basis": "Control 7933/9013=88.02%, Treatment 7903/8987=87.94%, difference_pp=-0.08, CI95=-1.03 to 0.87",
+     "verdict": "ok"
+    },
+    {
+     "id": "overall-predoctor-loss",
+     "basis": "Control_lost=427, Control_loss_pct=4.74, Treatment_lost=476, Treatment_loss_pct=5.30, increase_pp=0.56, CI95=-0.08 to 1.20",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-outcomes",
+     "basis": "Dermatology completion 85.04→80.51, delta=-4.54; Dermatology loss 7.66→12.71, delta=5.04; Pediatrics completion 88.94→90.37, delta=1.44",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-confidence",
+     "basis": "loss_difference_pp=5.04, loss CI95=2.92 to 7.17; completion_difference_pp=-4.54, completion CI95=-7.19 to -1.89",
+     "verdict": "ok"
+    },
+    {
+     "id": "response-by-department",
+     "basis": "seconds_saved: Dermatology=21.0, ENT & ophthalmology=23.0, Gynecology=20.0, Internal medicine=20.0, Pediatrics=26.0; all Treatment medians lower",
+     "verdict": "ok"
+    },
+    {
+     "id": "consultation-duration",
+     "basis": "Control_completed_n=7933, Treatment_completed_n=7903; Control_median_minutes=11.20, Treatment_median_minutes=10.40, minutes_saved=0.80",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-by-user-type",
+     "basis": "New users 6.84→9.84, difference=3.00, CI95=1.57 to 4.43; Returning users 14.93→13.22, difference=-1.71, CI95=-2.95 to -0.47",
+     "verdict": "ok"
+    },
+    {
+     "id": "top-complaints",
+     "basis": "Ear pain=1082, Cough=1072, Diarrhea=1048, Bloating/reflux=1037, Watery diarrhea=1034; all top five >=1034",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-complaint-loss",
+     "basis": "All five Dermatology complaints have positive increase_pp; Small red spots on back 6.88→13.92, increase_pp=7.05 largest",
+     "verdict": "ok"
+    },
+    {
+     "id": "data-quality-and-missingness",
+     "basis": "missing_followup=186, missing_complaint=36, missing_platform=6, missing_response=903, response_loss_mismatches=0, missing_consult_duration=2164, consult_incomplete_mismatches=0, response_times_over_1_hour=7, consult_durations_at_640_minutes=7",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"cohort-scope\",\"basis\":\"users=18000, unique_users=18000, Control_users=9013, Treatment_users=8987, departments=5, dates=42, first_date=2024-11-18, last_date=2024-12-29, group_labels_with_extra_whitespace=19\",\"verdict\":\"ok\"},{\"id\":\"median-response-gain\",\"basis\":\"Control median=110.0, Treatment median=88.0, seconds_saved=22.0, reduction_pct=20.0, Control p90=234.0, Treatment p90=177.0, p90_saved=57.0\",\"verdict\":\"ok\"},{\"id\":\"two-minute-response-share\",\"basis\":\"Control_within_120_pct=56.46, Treatment_within_120_pct=72.41, increase_pp=15.95; response_n Control=8586, Treatment=8511\",\"verdict\":\"ok\"},{\"id\":\"daily-response-consistency\",\"basis\":\"days=42, Treatment_faster_days=39, median_daily_gap_seconds=22.25, minimum_daily_gap_seconds=-4.00, maximum_daily_gap_seconds=53.50\",\"verdict\":\"ok\"},{\"id\":\"overall-completion-flat\",\"basis\":\"Control 7933/9013=88.02%, Treatment 7903/8987=87.94%, difference_pp=-0.08, CI95=-1.03 to 0.87\",\"verdict\":\"ok\"},{\"id\":\"overall-predoctor-loss\",\"basis\":\"Control_lost=427, Control_loss_pct=4.74, Treatment_lost=476, Treatment_loss_pct=5.30, increase_pp=0.56, CI95=-0.08 to 1.20\",\"verdict\":\"ok\"},{\"id\":\"department-outcomes\",\"basis\":\"Dermatology completion 85.04→80.51, delta=-4.54; Dermatology loss 7.66→12.71, delta=5.04; Pediatrics completion 88.94→90.37, delta=1.44\",\"verdict\":\"ok\"},{\"id\":\"dermatology-confidence\",\"basis\":\"loss_difference_pp=5.04, loss CI95=2.92 to 7.17; completion_difference_pp=-4.54, completion CI95=-7.19 to -1.89\",\"verdict\":\"ok\"},{\"id\":\"response-by-department\",\"basis\":\"seconds_saved: Dermatology=21.0, ENT & ophthalmology=23.0, Gynecology=20.0, Internal medicine=20.0, Pediatrics=26.0; all Treatment medians lower\",\"verdict\":\"ok\"},{\"id\":\"consultation-duration\",\"basis\":\"Control_completed_n=7933, Treatment_completed_n=7903; Control_median_minutes=11.20, Treatment_median_minutes=10.40, minutes_saved=0.80\",\"verdict\":\"ok\"},{\"id\":\"followup-by-user-type\",\"basis\":\"New users 6.84→9.84, difference=3.00, CI95=1.57 to 4.43; Returning users 14.93→13.22, difference=-1.71, CI95=-2.95 to -0.47\",\"verdict\":\"ok\"},{\"id\":\"top-complaints\",\"basis\":\"Ear pain=1082, Cough=1072, Diarrhea=1048, Bloating/reflux=1037, Watery diarrhea=1034; all top five >=1034\",\"verdict\":\"ok\"},{\"id\":\"dermatology-complaint-loss\",\"basis\":\"All five Dermatology complaints have positive increase_pp; Small red spots on back 6.88→13.92, increase_pp=7.05 largest\",\"verdict\":\"ok\"},{\"id\":\"data-quality-and-missingness\",\"basis\":\"missing_followup=186, missing_complaint=36, missing_platform=6, missing_response=903, response_loss_mismatches=0, missing_consult_duration=2164, consult_incomplete_mismatches=0, response_times_over_1_hour=7, consult_durations_at_640_minutes=7\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 5752,
+    "completion_tokens": 3597,
+    "seconds": 21.4
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

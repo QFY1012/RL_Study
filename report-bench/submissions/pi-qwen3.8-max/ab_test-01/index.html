@@ -130,12 +130,16 @@ figcaption b{color:var(--ink-2)}
 table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 4px}
 th{
   text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:500;padding:0 12px 9px 0;border-bottom:1px solid var(--line);white-space:nowrap;
+  color:var(--ink-3);font-weight:500;padding:0 12px 9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;
 }
-td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+th:first-child{padding-left:0}
+td{padding:10px 12px 10px 12px;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+td:first-child{padding-left:0}
 tr:last-child td{border-bottom:none}
 td.num,th.num{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding:10px 0 10px 18px}
+th.num{padding:0 0 9px 18px}
 td.numl,th.numl{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding:10px 0 10px 18px}
+th.numl{padding:0 0 9px 18px}
 td.zh{color:var(--ink);font-weight:500}
 td .en{display:block;font-size:12.5px;color:var(--ink-3);font-weight:400;line-height:1.4}
 td.mono{background:none;padding-left:0;font-size:12.5px;color:#33404c;white-space:nowrap}
@@ -1043,8 +1047,8 @@ register({id:'outcomeChart',draw:box=>groupedBars(box,{
   labels:['Completed the consultation','Lost before a doctor replied','Back within 7 days'],
   height:320, yMax:100, ticks:5, barWidth:52, left:52, fmtY:v=>v+'%',
   series:[
-    {name:'Control 对照组',color:C_CTRL,values:[DATA.kpi.completion.control,DATA.kpi.loss.control,DATA.kpi.followup.control],fmt:v=>fmt(v,2)+'%'},
-    {name:'Test 实验组',color:C_TEST,values:[DATA.kpi.completion.test,DATA.kpi.loss.test,DATA.kpi.followup.test],fmt:v=>fmt(v,2)+'%'}
+    {name:'Test 实验组',color:C_TEST,values:[DATA.kpi.completion.test,DATA.kpi.loss.test,DATA.kpi.followup.test],fmt:v=>fmt(v,2)+'%'},
+    {name:'Control 对照组',color:C_CTRL,values:[DATA.kpi.completion.control,DATA.kpi.loss.control,DATA.kpi.followup.control],fmt:v=>fmt(v,2)+'%'}
   ]
 })});
 register({id:'waitCompChart',draw:waitCompChart});
@@ -1056,8 +1060,8 @@ register({id:'fuChart',draw:box=>groupedBars(box,{
   labels:DATA.followup_ut.map(u=>[u.zh,u.en]), twoLineLabels:true,
   height:300, yMax:16, ticks:4, barWidth:56, left:48, fmtY:v=>v+'%',
   series:[
-    {name:'Control 对照组',color:C_CTRL,values:DATA.followup_ut.map(u=>u.control),fmt:v=>fmt(v,2)+'%'},
-    {name:'Test 实验组',color:C_TEST,values:DATA.followup_ut.map(u=>u.test),fmt:v=>fmt(v,2)+'%'}
+    {name:'Test 实验组',color:C_TEST,values:DATA.followup_ut.map(u=>u.test),fmt:v=>fmt(v,2)+'%'},
+    {name:'Control 对照组',color:C_CTRL,values:DATA.followup_ut.map(u=>u.control),fmt:v=>fmt(v,2)+'%'}
   ]
 })});
 register({id:'weeklyChart',draw:weeklyChart});

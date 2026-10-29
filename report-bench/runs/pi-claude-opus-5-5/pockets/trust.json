@@ -1,0 +1,80 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-claude-opus-5-5/pockets/index.html",
+ "facts": "submissions/pi-claude-opus-5-5/pockets/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-size-and-brands",
+     "basis": "jeans=80, men=40, women=40, brands=20",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-pocket-depth-gap",
+     "basis": "men=23.1, women=14.3",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-depth-ranges-barely-overlap",
+     "basis": "men min/max=20.0/28.0, women min/max=11.5/21.5",
+     "verdict": "ok"
+    },
+    {
+     "id": "only-one-womens-pocket-reaches-mens",
+     "basis": "one women's row: Abercrombie Simone High Rise Slim, maxHeightFront=21.5; men's minimum=20.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-width-gap",
+     "basis": "men=16.4, women=15.2",
+     "verdict": "ok"
+    },
+    {
+     "id": "back-pockets-similar",
+     "basis": "men maxHeightBack/maxWidthBack=16.0/13.7; women=15.1/13.3",
+     "verdict": "ok"
+    },
+    {
+     "id": "womens-front-shallower-than-back",
+     "basis": "men sum=0 count=40; women sum=29 count=40",
+     "verdict": "ok"
+    },
+    {
+     "id": "every-brand-gap",
+     "basis": "20 brands all positive; smallest Abercrombie=2.50, largest Levi's=13.40",
+     "verdict": "ok"
+    },
+    {
+     "id": "style-does-not-matter-women",
+     "basis": "boot-cut=14.2, skinny=14.3, straight=14.4",
+     "verdict": "ok"
+    },
+    {
+     "id": "price-does-not-buy-depth",
+     "basis": "men=-0.26, women=-0.15",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"sample-size-and-brands\",\"basis\":\"jeans=80, men=40, women=40, brands=20\",\"verdict\":\"ok\"},{\"id\":\"front-pocket-depth-gap\",\"basis\":\"men=23.1, women=14.3\",\"verdict\":\"ok\"},{\"id\":\"front-depth-ranges-barely-overlap\",\"basis\":\"men min/max=20.0/28.0, women min/max=11.5/21.5\",\"verdict\":\"ok\"},{\"id\":\"only-one-womens-pocket-reaches-mens\",\"basis\":\"one women's row: Abercrombie Simone High Rise Slim, maxHeightFront=21.5; men's minimum=20.0\",\"verdict\":\"ok\"},{\"id\":\"front-width-gap\",\"basis\":\"men=16.4, women=15.2\",\"verdict\":\"ok\"},{\"id\":\"back-pockets-similar\",\"basis\":\"men maxHeightBack/maxWidthBack=16.0/13.7; women=15.1/13.3\",\"verdict\":\"ok\"},{\"id\":\"womens-front-shallower-than-back\",\"basis\":\"men sum=0 count=40; women sum=29 count=40\",\"verdict\":\"ok\"},{\"id\":\"every-brand-gap\",\"basis\":\"20 brands all positive; smallest Abercrombie=2.50, largest Levi's=13.40\",\"verdict\":\"ok\"},{\"id\":\"style-does-not-matter-women\",\"basis\":\"boot-cut=14.2, skinny=14.3, straight=14.4\",\"verdict\":\"ok\"},{\"id\":\"price-does-not-buy-depth\",\"basis\":\"men=-0.26, women=-0.15\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 1455,
+    "completion_tokens": 1877,
+    "seconds": 12.1
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}
