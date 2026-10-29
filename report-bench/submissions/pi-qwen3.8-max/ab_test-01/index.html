@@ -275,7 +275,7 @@ svg .alab{font-size:11px;fill:#9aa4ae;font-family:var(--mono);letter-spacing:.06
         <thead><tr><th>Segment</th><th class="num">Test 实验组</th><th class="num">Control 对照组</th><th class="num">Test share</th></tr></thead>
         <tbody id="balanceBody"></tbody>
       </table>
-      <figcaption>No segment is materially skewed between arms: the split stays within a point of 50/50 for new and returning users, for all three platforms and for four of five departments. Volume is <b>not</b> flat over time, though — see <a href="#load" style="color:var(--test)">§7</a>.</figcaption>
+      <figcaption>The split stays within a point of 50/50 for new and returning users and for all three platforms. The two exceptions are the smaller departments — <span class="zh">五官科</span> at 52.09% test and <span class="zh">皮肤科</span> at 48.16% — which at n ≈ 2,060 and n ≈ 3,121 are about 2 standard errors from even, so plausible chance but worth remembering when reading §5. Volume is <b>not</b> flat over time; see <a href="#load" style="color:var(--test)">§7</a>.</figcaption>
     </figure>
   </div>
 
@@ -675,7 +675,7 @@ svg .alab{font-size:11px;fill:#9aa4ae;font-family:var(--mono);letter-spacing:.06
 </div>
 
 <script>
-const DATA = __DATA__;
+const DATA = {"meta": {"users": 18000, "test": 8987, "control": 9013, "days": 42, "start": "2024-11-18", "end": "2024-12-29", "departments": 5, "complaints": 25}, "kpi": {"wait_median": {"test": 88.0, "control": 110.0}, "wait_mean": {"test": 103.5, "control": 152.0}, "wait_p90": {"test": 177.0, "control": 234.0}, "wait_p95": {"test": 213.0, "control": 290.0}, "under90": {"test": 49.7, "control": 35.7}, "completion": {"test": 87.94, "control": 88.02}, "loss": {"test": 5.3, "control": 4.74}, "followup": {"test": 12.15, "control": 12.31}, "consult_median": {"test": 10.4, "control": 11.2}, "wait_mean_trim": {"test": 101.3, "control": 129.6}, "z": {"completion": -0.16, "loss": 1.72, "followup": -0.32}}, "funnel": {"users": 18000, "lost": 903, "reached": 17097, "dropped": 1261, "completed": 15836}, "wait_hist": {"labels": ["<30", "30-60", "60-90", "90-120", "120-180", "180-300", "300-600", "600+"], "test": [3.0, 21.9, 27.59, 19.93, 18.06, 8.47, 1.03, 0.02], "control": [1.57, 14.03, 21.83, 19.03, 23.75, 15.3, 4.23, 0.26], "n_test": [255, 1864, 2348, 1696, 1537, 721, 88, 2], "n_control": [135, 1205, 1874, 1634, 2039, 1314, 363, 22]}, "wait_completion": {"labels": ["0-60", "60-90", "90-120", "120-180", "180-300", "300-600", "600+"], "n": [3459, 4222, 3330, 3576, 2035, 451, 24], "comp": [92.8, 92.8, 92.7, 93.1, 91.4, 90.5, 95.8]}, "departments": [{"zh": "儿科", "en": "Paediatrics", "comp_test": 90.37, "comp_control": 88.94, "lost_test": 2.45, "lost_control": 3.15, "fu_test": 13.8, "fu_control": 13.81, "n_test": 2607, "n_control": 2639}, {"zh": "内科", "en": "Internal medicine", "comp_test": 89.12, "comp_control": 88.64, "lost_test": 4.03, "lost_control": 4.4, "fu_test": 12.72, "fu_control": 12.83, "n_test": 2582, "n_control": 2501}, {"zh": "妇科", "en": "Gynaecology", "comp_test": 89.28, "comp_control": 89.04, "lost_test": 4.83, "lost_control": 5.21, "fu_test": 12.32, "fu_control": 13.89, "n_test": 1222, "n_control": 1268}, {"zh": "五官科", "en": "ENT / eyes-ears-nose-throat", "comp_test": 88.07, "comp_control": 87.54, "lost_test": 5.41, "lost_control": 4.46, "fu_test": 11.58, "fu_control": 11.52, "n_test": 1073, "n_control": 987}, {"zh": "皮肤科", "en": "Dermatology", "comp_test": 80.51, "comp_control": 85.04, "lost_test": 12.71, "lost_control": 7.66, "fu_test": 8.55, "fu_control": 8.3, "n_test": 1503, "n_control": 1618}], "derm_complaints": [{"zh": "后背长了不少小红点", "en": "Many small red spots on the back", "test": 13.9, "control": 6.9, "n_test": 316, "n_control": 320}, {"zh": "荨麻疹反反复复两个星期", "en": "Hives on and off for two weeks", "test": 13.5, "control": 9.0, "n_test": 310, "n_control": 289}, {"zh": "脸上爆痘,下巴最严重", "en": "Facial breakout, worst on the chin", "test": 12.1, "control": 6.9, "n_test": 298, "n_control": 332}, {"zh": "手臂上起红疹,特别痒", "en": "Red rash on the arm, very itchy", "test": 11.9, "control": 9.7, "n_test": 293, "n_control": 319}, {"zh": "脚趾缝脱皮发痒", "en": "Peeling and itching between the toes", "test": 11.7, "control": 6.0, "n_test": 283, "n_control": 351}], "followup_ut": [{"zh": "新用户", "en": "New user", "test": 9.84, "control": 6.84, "n_test": 2826, "n_control": 2895}, {"zh": "老用户", "en": "Returning user", "test": 13.22, "control": 14.93, "n_test": 6065, "n_control": 6028}], "followup_ut_z": {"新用户": 4.1, "老用户": -2.7}, "completion_ut": [{"zh": "新用户", "en": "New user", "test": 88.52, "control": 88.12}, {"zh": "老用户", "en": "Returning user", "test": 87.67, "control": 87.97}], "platform": [{"name": "Android", "test": 87.96, "control": 88.3, "n": 7514}, {"name": "iOS", "test": 87.89, "control": 87.89, "n": 6870}, {"name": "微信小程序", "test": 87.97, "control": 87.71, "n": 3610}], "weekly": {"weeks": ["11-18", "11-25", "12-02", "12-09", "12-16", "12-23"], "vol_test": [1245, 1350, 1463, 1513, 1644, 1772], "vol_control": [1164, 1407, 1462, 1609, 1597, 1774], "wait_test": [80.0, 76.0, 77.0, 95.0, 96.0, 95.0], "wait_control": [86.0, 84.5, 87.0, 133.5, 130.0, 134.0]}, "complaints": [{"zh": "手臂上起红疹,特别痒", "en": "Red rash on the arm, very itchy", "dept": "皮肤科", "dept_en": "Dermatology", "n": 612, "comp": 81.0}, {"zh": "荨麻疹反反复复两个星期", "en": "Hives on and off for two weeks", "dept": "皮肤科", "dept_en": "Dermatology", "n": 599, "comp": 82.0}, {"zh": "后背长了不少小红点", "en": "Many small red spots on the back", "dept": "皮肤科", "dept_en": "Dermatology", "n": 636, "comp": 83.2}, {"zh": "脚趾缝脱皮发痒", "en": "Peeling and itching between the toes", "dept": "皮肤科", "dept_en": "Dermatology", "n": 634, "comp": 83.8}, {"zh": "脸上爆痘,下巴最严重", "en": "Facial breakout, worst on the chin", "dept": "皮肤科", "dept_en": "Dermatology", "n": 630, "comp": 84.3}, {"zh": "眼睛红痒分泌物多", "en": "Red itchy eyes with heavy discharge", "dept": "五官科", "dept_en": "ENT / eyes-ears-nose-throat", "n": 460, "comp": 86.5}, {"zh": "咽喉肿痛,咽口水都疼", "en": "Sore swollen throat, hurts to swallow", "dept": "五官科", "dept_en": "ENT / eyes-ears-nose-throat", "n": 377, "comp": 86.7}, {"zh": "智齿发炎半边脸都肿了", "en": "Wisdom tooth inflamed, half the face swollen", "dept": "五官科", "dept_en": "ENT / eyes-ears-nose-throat", "n": 402, "comp": 86.8}, {"zh": "失眠多梦快一个月了", "en": "Insomnia and vivid dreams for a month", "dept": "内科", "dept_en": "Internal medicine", "n": 1008, "comp": 87.4}, {"zh": "耳鸣嗡嗡响三天", "en": "Buzzing tinnitus for three days", "dept": "五官科", "dept_en": "ENT / eyes-ears-nose-throat", "n": 413, "comp": 87.9}, {"zh": "白带异常有异味", "en": "Abnormal vaginal discharge with odour", "dept": "妇科", "dept_en": "Gynaecology", "n": 471, "comp": 88.3}, {"zh": "小腹坠胀隐隐作痛", "en": "Heavy, dull lower-abdominal pain", "dept": "妇科", "dept_en": "Gynaecology", "n": 499, "comp": 88.4}, {"zh": "胃胀反酸一个星期", "en": "Bloating and acid reflux for a week", "dept": "内科", "dept_en": "Internal medicine", "n": 1037, "comp": 88.5}, {"zh": "非经期少量出血", "en": "Light bleeding between periods", "dept": "妇科", "dept_en": "Gynaecology", "n": 498, "comp": 88.8}, {"zh": "月经推迟了十来天", "en": "Period roughly ten days late", "dept": "妇科", "dept_en": "Gynaecology", "n": 511, "comp": 89.0}, {"zh": "耳朵疼,总用手去抓", "en": "Ear pain, keeps tugging at the ear", "dept": "儿科", "dept_en": "Paediatrics", "n": 1082, "comp": 89.1}, {"zh": "胸闷气短,爬两层楼就加重", "en": "Chest tightness, worse after two flights", "dept": "内科", "dept_en": "Internal medicine", "n": 1007, "comp": 89.1}, {"zh": "孩子发热38.5度两天了", "en": "Child with 38.5 C fever for two days", "dept": "儿科", "dept_en": "Paediatrics", "n": 1025, "comp": 89.3}, {"zh": "咳嗽三天,夜里咳得更厉害", "en": "Cough for three days, worse at night", "dept": "儿科", "dept_en": "Paediatrics", "n": 1072, "comp": 89.4}, {"zh": "腹泻伴低烧一天", "en": "Diarrhoea with low fever for a day", "dept": "内科", "dept_en": "Internal medicine", "n": 1048, "comp": 89.4}, {"zh": "幼儿园有流感,孩子开始打喷嚏流鼻涕", "en": "Flu at nursery, child sneezing and runny", "dept": "儿科", "dept_en": "Paediatrics", "n": 1024, "comp": 89.9}, {"zh": "头晕乏力,在家测血压偏高", "en": "Dizzy and tired, home BP high", "dept": "内科", "dept_en": "Internal medicine", "n": 977, "comp": 90.1}, {"zh": "拉肚子两天,大便水样", "en": "Watery diarrhoea for two days", "dept": "儿科", "dept_en": "Paediatrics", "n": 1034, "comp": 90.7}, {"zh": "经期量突然变多", "en": "Suddenly much heavier periods", "dept": "妇科", "dept_en": "Gynaecology", "n": 505, "comp": 91.1}, {"zh": "鼻子不通,黄鼻涕多", "en": "Blocked nose, lots of yellow mucus", "dept": "五官科", "dept_en": "ENT / eyes-ears-nose-throat", "n": 403, "comp": 91.1}], "balance": [{"label": "All sessions 全部", "test": 8987, "control": 9013, "share": 49.93}, {"label": "New users 新用户", "test": 2857, "control": 2922, "share": 49.44}, {"label": "Returning users 老用户", "test": 6130, "control": 6091, "share": 50.16}, {"label": "Android", "test": 3779, "control": 3735, "share": 50.29}, {"label": "iOS", "test": 3410, "control": 3460, "share": 49.64}, {"label": "WeChat mini-program 微信小程序", "test": 1795, "control": 1815, "share": 49.72}, {"label": "Paediatrics 儿科", "test": 2607, "control": 2639, "share": 49.7}, {"label": "Internal medicine 内科", "test": 2582, "control": 2501, "share": 50.8}, {"label": "Gynaecology 妇科", "test": 1222, "control": 1268, "share": 49.08}, {"label": "ENT / eyes-ears-nose-throat 五官科", "test": 1073, "control": 987, "share": 52.09}, {"label": "Dermatology 皮肤科", "test": 1503, "control": 1618, "share": 48.16}], "quality": [{"field": "group", "issue": "Padded labels", "detail": "4 distinct raw values for 2 arms: 19 rows carry a trailing space, so an untrimmed groupby would report four arms.", "rows": 19}, {"field": "enter_date", "issue": "Mixed date formats", "detail": "3 values written with slashes, so the 45 distinct date strings cover only 42 calendar days.", "rows": 3}, {"field": "first_response_seconds", "issue": "Missing by construction", "detail": "903 blanks — exactly the rows flagged lost_before_doctor = 1. The wait of an abandoned user is never recorded, so wait time cannot be tested as a cause of abandonment.", "rows": 903}, {"field": "consult_minutes", "issue": "Missing by construction", "detail": "2,164 blanks — exactly the rows with is_completed = 0.", "rows": 2164}, {"field": "consult_minutes", "issue": "Capped or impossible", "detail": "7 consultations record exactly 640.0 minutes (10.7 h); the next largest value is 76.7.", "rows": 7}, {"field": "first_response_seconds", "issue": "Impossible waits", "detail": "9 waits exceed 900 s; the largest is 71,396 s = 19.8 hours. 8 of the 9 are in the control arm.", "rows": 9}, {"field": "followup_7d", "issue": "Missing", "detail": "186 blanks (1.0%), spread evenly across the two arms.", "rows": 186}, {"field": "chief_complaint", "issue": "Missing", "detail": "36 blanks; 10 of them in dermatology.", "rows": 36}, {"field": "platform", "issue": "Missing", "detail": "6 blanks, 3 in each arm.", "rows": 6}], "totals": {"followup_yes": 2178, "followup_rate": 12.2, "completed_rate": 88.0, "lost_rate": 5.0}};
 
 /* ---------------- helpers ---------------- */
 const NS='http://www.w3.org/2000/svg';
@@ -750,8 +750,7 @@ function dumbbell(box,cfg){
       const c=el('circle',{cx:p[0],cy:y,r:6.5,fill:p[1],stroke:'#fff','stroke-width':2},svg);
       const t=el('title',{},c); t.textContent=r.zh+' · '+p[3]+': '+fmt(p[2],2)+'%';
     });
-    txt(svg,Math.max(x1,x2)+14,y+4,(worse?'+':'−')+fmt(Math.abs(r.test-r.control),2)+' pp',worse?'val':'val',worse?'start':'end');
-    if(worse) txt(svg,Math.min(x1,x2)-14,y+4,'','val','end');
+    txt(svg,Math.max(x1,x2)+14,y+4,(worse?'+':'−')+fmt(Math.abs(r.test-r.control),2)+' pp','val',worse?'start':'end');
   });
 }
 
@@ -930,32 +929,20 @@ function buildKPIs(){
 }
 
 function buildStrip(){
+  const F=DATA.funnel, M=DATA.meta, TT=DATA.totals;
   const s=[
-    {n:'18,000',l:'sessions in the file, one per user'},
-    {n:'42',l:'days, 2024-11-18 to 2024-12-29'},
-    {n:'903',l:'lost before any doctor replied (5.0%)'},
-    {n:'15,836',l:'consultations completed (88.0%)'},
-    {n:'2,178',l:'users back within 7 days (12.2%)'}
+    {n:F.users.toLocaleString('en-US'),l:'sessions in the file, one per user'},
+    {n:String(M.days),l:'days, '+M.start+' to '+M.end},
+    {n:F.lost.toLocaleString('en-US'),l:'lost before any doctor replied ('+fmt(F.lost/F.users*100,1)+'%)'},
+    {n:F.completed.toLocaleString('en-US'),l:'consultations completed ('+fmt(F.completed/F.users*100,1)+'%)'},
+    {n:TT.followup_yes.toLocaleString('en-US'),l:'users back within 7 days ('+fmt(TT.followup_rate,1)+'%)'}
   ];
   document.getElementById('strip').innerHTML=s.map(x=>'<div><div class="n">'+x.n+'</div><div class="l">'+x.l+'</div></div>').join('');
 }
 
 function buildBalance(){
-  const rows=[
-    ['All sessions 全部','8,987','9,013','49.93%'],
-    ['New users 新用户','2,857','2,922','49.43%'],
-    ['Returning users 老用户','6,130','6,091','50.12%'],
-    ['Android','3,762','3,752','50.07%'],
-    ['iOS','3,412','3,458','49.66%'],
-    ['WeChat mini-program 微信小程序','1,807','1,803','50.06%'],
-    ['Paediatrics 儿科','2,607','2,639','49.70%'],
-    ['Internal medicine 内科','2,582','2,501','50.80%'],
-    ['Gynaecology 妇科','1,222','1,268','49.08%'],
-    ['ENT / eyes-ears-nose-throat 五官科','1,073','987','52.09%'],
-    ['Dermatology 皮肤科','1,503','1,618','48.16%']
-  ];
-  document.getElementById('balanceBody').innerHTML=rows.map(r=>
-    '<tr><td class="zh">'+r[0]+'</td><td class="numl">'+r[1]+'</td><td class="numl">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>').join('');
+  document.getElementById('balanceBody').innerHTML=DATA.balance.map(r=>
+    '<tr><td class="zh">'+r.label+'</td><td class="numl">'+r.test.toLocaleString('en-US')+'</td><td class="numl">'+r.control.toLocaleString('en-US')+'</td><td class="num">'+fmt(r.share,2)+'%</td></tr>').join('');
 }
 
 function buildPct(){
@@ -1050,11 +1037,11 @@ register({id:'histChart',draw:box=>groupedBars(box,{
 })});
 register({id:'outlierChart',draw:outlierChart});
 register({id:'outcomeChart',draw:box=>groupedBars(box,{
-  labels:['Completed the consultation','Lost before a doctor replied','Back within 7 days','Median consult (min)'],
-  height:320, yMax:100, ticks:5, barWidth:44, left:52, fmtY:v=>v+'%',
+  labels:['Completed the consultation','Lost before a doctor replied','Back within 7 days'],
+  height:320, yMax:100, ticks:5, barWidth:52, left:52, fmtY:v=>v+'%',
   series:[
-    {name:'Control 对照组',color:C_CTRL,values:[DATA.kpi.completion.control,DATA.kpi.loss.control,DATA.kpi.followup.control,DATA.kpi.consult_median.control/11.2*100*0+DATA.kpi.consult_median.control],fmt:v=>fmt(v,2)},
-    {name:'Test 实验组',color:C_TEST,values:[DATA.kpi.completion.test,DATA.kpi.loss.test,DATA.kpi.followup.test,DATA.kpi.consult_median.test],fmt:v=>fmt(v,2)}
+    {name:'Control 对照组',color:C_CTRL,values:[DATA.kpi.completion.control,DATA.kpi.loss.control,DATA.kpi.followup.control],fmt:v=>fmt(v,2)+'%'},
+    {name:'Test 实验组',color:C_TEST,values:[DATA.kpi.completion.test,DATA.kpi.loss.test,DATA.kpi.followup.test],fmt:v=>fmt(v,2)+'%'}
   ]
 })});
 register({id:'waitCompChart',draw:waitCompChart});

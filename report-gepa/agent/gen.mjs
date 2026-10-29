@@ -144,7 +144,9 @@ while (!fs.existsSync(path.join(ws, output)) && nudged < MAX_NUDGES && steps < M
   await session.prompt(NUDGE)
 }
 const assistant = session.messages.filter((m) => m.role === "assistant")
-const usage = assistant.reduce((u, m) => ({ input: u.input + (m.usage?.input ?? 0), output: u.output + (m.usage?.output ?? 0) }), { input: 0, output: 0 })
+// input counts only the uncached part of the prompt; cacheRead and cacheWrite are the rest
+const TOKENS = ["input", "cacheRead", "cacheWrite", "output"]
+const usage = Object.fromEntries(TOKENS.map((k) => [k, assistant.reduce((n, m) => n + (m.usage?.[k] ?? 0), 0)]))
 // dispose first: the session file may still be being written, and a file moved mid-write was read with a cut-off line
 const sessionFile = session.sessionFile
 session.dispose()
