@@ -1,0 +1,90 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-gpt-6-astra/ab_test-01/index.html",
+ "facts": "submissions/pi-gpt-6-astra/ab_test-01/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "study-scope",
+     "basis": "rows=18000, unique_users=18000, min=2024-11-18, max=2024-12-29, Control=9013, Test=8987",
+     "verdict": "ok"
+    },
+    {
+     "id": "completion-flat",
+     "basis": "Control users=9013 completed=7933 completion_pct=88.02; Test users=8987 completed=7903 completion_pct=87.94",
+     "verdict": "ok"
+    },
+    {
+     "id": "response-faster",
+     "basis": "Control recorded=8586 median=110.0 p90=234.0; Test recorded=8511 median=88.0 p90=177.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "early-loss",
+     "basis": "Control users_lost=427 loss_pct=4.74; Test users_lost=476 loss_pct=5.30",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-completion",
+     "basis": "Dermatology Control=85.04 Test=80.51; ENT/eye/oral Control=87.54 Test=88.07; Gynecology Control=89.04 Test=89.28; Internal medicine Control=88.64 Test=89.12; Pediatrics Control=88.94 Test=90.37",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-differences",
+     "basis": "Dermatology=-4.54; ENT/eye/oral=0.53; Gynecology=0.24; Internal medicine=0.47; Pediatrics=1.44",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-loss",
+     "basis": "Control users=1618 lost=124 loss_pct=7.66; Test users=1503 lost=191 loss_pct=12.71",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-mix",
+     "basis": "Pediatrics users=5246 share=29.14; Internal medicine users=5083 share=28.24; Dermatology users=3121 share=17.34; Gynecology users=2490 share=13.83; ENT/eye/oral users=2060 share=11.44",
+     "verdict": "ok"
+    },
+    {
+     "id": "other-outcomes",
+     "basis": "Control mean_consult_minutes=13.09 followup_observed=8923 followup_pct=12.31; Test mean_consult_minutes=11.67 followup_observed=8891 followup_pct=12.15",
+     "verdict": "ok"
+    },
+    {
+     "id": "data-quality",
+     "basis": "group_labels_with_whitespace=19; first_response_seconds=903; consult_minutes=2164; followup_7d=186; chief_complaint=36; platform=6",
+     "verdict": "ok"
+    },
+    {
+     "id": "timing-coverage",
+     "basis": "missing_response=903 and missing_response_and_lost=903; missing_duration=2164 and missing_duration_and_incomplete=2164",
+     "verdict": "ok"
+    },
+    {
+     "id": "common-complaints",
+     "basis": "Ear pain with repeated touching=1082; Three-day cough, worse at night=1072; Diarrhea with low fever for one day=1048",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"study-scope\", \"basis\": \"rows=18000, unique_users=18000, min=2024-11-18, max=2024-12-29, Control=9013, Test=8987\", \"verdict\": \"ok\"}, {\"id\": \"completion-flat\", \"basis\": \"Control users=9013 completed=7933 completion_pct=88.02; Test users=8987 completed=7903 completion_pct=87.94\", \"verdict\": \"ok\"}, {\"id\": \"response-faster\", \"basis\": \"Control recorded=8586 median=110.0 p90=234.0; Test recorded=8511 median=88.0 p90=177.0\", \"verdict\": \"ok\"}, {\"id\": \"early-loss\", \"basis\": \"Control users_lost=427 loss_pct=4.74; Test users_lost=476 loss_pct=5.30\", \"verdict\": \"ok\"}, {\"id\": \"department-completion\", \"basis\": \"Dermatology Control=85.04 Test=80.51; ENT/eye/oral Control=87.54 Test=88.07; Gynecology Control=89.04 Test=89.28; Internal medicine Control=88.64 Test=89.12; Pediatrics Control=88.94 Test=90.37\", \"verdict\": \"ok\"}, {\"id\": \"department-differences\", \"basis\": \"Dermatology=-4.54; ENT/eye/oral=0.53; Gynecology=0.24; Internal medicine=0.47; Pediatrics=1.44\", \"verdict\": \"ok\"}, {\"id\": \"dermatology-loss\", \"basis\": \"Control users=1618 lost=124 loss_pct=7.66; Test users=1503 lost=191 loss_pct=12.71\", \"verdict\": \"ok\"}, {\"id\": \"department-mix\", \"basis\": \"Pediatrics users=5246 share=29.14; Internal medicine users=5083 share=28.24; Dermatology users=3121 share=17.34; Gynecology users=2490 share=13.83; ENT/eye/oral users=2060 share=11.44\", \"verdict\": \"ok\"}, {\"id\": \"other-outcomes\", \"basis\": \"Control mean_consult_minutes=13.09 followup_observed=8923 followup_pct=12.31; Test mean_consult_minutes=11.67 followup_observed=8891 followup_pct=12.15\", \"verdict\": \"ok\"}, {\"id\": \"data-quality\", \"basis\": \"group_labels_with_whitespace=19; first_response_seconds=903; consult_minutes=2164; followup_7d=186; chief_complaint=36; platform=6\", \"verdict\": \"ok\"}, {\"id\": \"timing-coverage\", \"basis\": \"missing_response=903 and missing_response_and_lost=903; missing_duration=2164 and missing_duration_and_incomplete=2164\", \"verdict\": \"ok\"}, {\"id\": \"common-complaints\", \"basis\": \"Ear pain with repeated touching=1082; Three-day cough, worse at night=1072; Diarrhea with low fever for one day=1048\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 2443,
+    "completion_tokens": 6356,
+    "seconds": 38.9
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}
