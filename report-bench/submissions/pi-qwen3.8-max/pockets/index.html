@@ -79,8 +79,8 @@ strong{color:var(--ink)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px 16px;box-shadow:0 3px 12px rgba(26,29,33,.05);margin-bottom:22px}
 .card h3{margin:0 0 4px;font-size:19px}
 .card .sub{font-size:13px;color:var(--mut);margin:0 0 14px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.grid32{display:grid;grid-template-columns:1.55fr 1fr;gap:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.grid32{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:start}
 figure{margin:0}
 figcaption{font-size:12.5px;color:var(--mut);margin-top:10px;line-height:1.5;border-top:1px dotted var(--line);padding-top:9px}
 svg{display:block;width:100%;height:auto}
@@ -110,13 +110,14 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 input.search,select.sel{font:14px/1 ui-sans-serif,system-ui,sans-serif;padding:9px 12px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
 input.search{width:250px}
 .count{font-size:12.5px;color:var(--mut);margin-left:auto}
+#table .card{margin-left:-56px;margin-right:-56px;padding:20px 26px 16px}
 .tablewrap{max-height:640px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
-table.data{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-table.data th{position:sticky;top:0;background:#f3efe6;text-align:left;font:600 11px/1.25 ui-sans-serif,system-ui,sans-serif;letter-spacing:.04em;color:var(--ink-soft);padding:9px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;z-index:2}
+table.data{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+table.data th{position:sticky;top:0;background:#f3efe6;text-align:left;font:600 10.5px/1.25 ui-sans-serif,system-ui,sans-serif;letter-spacing:.03em;color:var(--ink-soft);padding:8px 6px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;z-index:2}
 table.data th:hover{background:#eae4d5}
 table.data th .ar{color:var(--women);font-size:9px}
-table.data td{padding:6px 8px;border-bottom:1px solid #f2eee4;white-space:nowrap}
-table.data td.txt{white-space:normal;min-width:150px}
+table.data td{padding:5px 6px;border-bottom:1px solid #f2eee4;white-space:nowrap}
+table.data td.txt{white-space:nowrap}
 table.data tbody tr:hover td{background:#fdf8ee}
 .tag{display:inline-block;font:600 10px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;padding:3px 6px;border-radius:4px}
 .tag.men{background:#e6ecf8;color:var(--men)}
@@ -469,11 +470,13 @@ const f2 = v => (+v).toFixed(2);
 const f1 = v => (+v).toFixed(1);
 const money = v => '$' + (+v).toFixed(2);
 const brandKey = b => b.trim().toLowerCase();
-const nice = k => k.split(' ').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ');
+const niceMap={'h&m':'H&M','j. crew':'J. Crew','7 for all mankind':'7 for All Mankind'};
+const nice = k => niceMap[k] || k.split(' ').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ');
 const cotton = d => { const m = d.fabric.toLowerCase().match(/(\d+)%\s*cott+on/); return m ? +m[1] : null; };
 const area = d => d.maxHeightFront * d.maxWidthFront;
 const jit = i => { const x = Math.sin(i*127.1+311.7)*43758.5453; return ((x-Math.floor(x))-0.5)*2; };
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const trunc = (s,n) => s.length>n ? s.slice(0,n-1)+'…' : s;
 function tt(html){ return 'data-tip="'+esc(html)+'"'; }
 function rowTip(d, extra){
   return `<b>${esc(d.brand)}</b> — ${esc(d.name)}<br><span class="r">${d.menWomen==='men'?"men's":"women's"} ${esc(d.style)}</span> &middot; ${money(d.price)}<br>${extra}`;
@@ -735,8 +738,8 @@ const svgOpen = (w,h)=>`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYM
   });
   // annotations
   const hm=DATA.find(d=>d.price===9.99), tr=DATA.find(d=>d.price===249);
-  s+=annot(hm, 'cheapest in the file', -6, 46, C.women);
-  s+=annot(tr, 'dearest in the file', -118, -34, C.women);
+  s+=annot(hm, 'cheapest in the file', 34, -52, C.women);
+  s+=annot(tr, 'dearest in the file', -128, -62, C.women);
   s+=`</svg>`; mount('chart-scatter', s);
   function annot(d,txt,dx,dy,c){
     const x=X(d.price), y=Y(area(d));
@@ -890,7 +893,8 @@ function render(){
         if(c.bar){ const w = (v/(c.k==='maxHeightFront'?maxFH:maxBH))*100; return `<td class="num bar-cell"><span class="b" style="width:${w.toFixed(0)}%;background:${r.menWomen==='men'?'#e8edf8':'#f9eae3'}"></span><span class="t">${t}</span></td>`; }
         return `<td class="num">${t}</td>`;
       }
-      return `<td class="txt${c.wide?' wide':''}">${esc(v)}</td>`;
+      const lim = c.k==='name' ? 26 : (c.k==='brand' ? 18 : 12);
+      return `<td class="txt${c.wide?' wide':''}">${esc(trunc(v,lim))}</td>`;
     }).join('')}</tr>`;
   }).join('');
   document.getElementById('rowCount').textContent = `showing ${rows.length} of ${ROWS.length} jeans`;

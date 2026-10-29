@@ -1,0 +1,2480 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/ab_test-01/data/data.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 459,
+     "left": 756,
+     "w": 484,
+     "h": 183,
+     "sig": "e687f861"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 9,
+     "left": 756,
+     "w": 484,
+     "h": 183,
+     "sig": "e687f861"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 4050,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/10.jpg",
+   "scroll_y": 4500,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/11.jpg",
+   "scroll_y": 4810,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    484,
+    183
+   ],
+   "frames": [
+    3,
+    4
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 64,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A/B test read-out · online medical consultation · 18,000 sessions"
+  },
+  {
+   "tag": "h1",
+   "y": 104,
+   "x": 200,
+   "w": 520,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Faster answers, same completions — except in dermatology"
+  },
+  {
+   "tag": "p",
+   "y": 298,
+   "x": 200,
+   "w": 782,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits. It did not move the completion rate overall, but it did reshape who drops out, and it hurt one department badly: dermatology lost 4.5 points of completion ."
+  },
+  {
+   "tag": "div",
+   "y": 471,
+   "x": 200,
+   "w": 131,
+   "in_svg": false,
+   "hidden": false,
+   "text": "consultations"
+  },
+  {
+   "tag": "div",
+   "y": 471,
+   "x": 357,
+   "w": 187,
+   "in_svg": false,
+   "hidden": false,
+   "text": "to"
+  },
+  {
+   "tag": "div",
+   "y": 471,
+   "x": 570,
+   "w": 166,
+   "in_svg": false,
+   "hidden": false,
+   "text": "control / test"
+  },
+  {
+   "tag": "div",
+   "y": 471,
+   "x": 762,
+   "w": 299,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5 departments · 25 complaint types · 3 platforms"
+  },
+  {
+   "tag": "b",
+   "y": 473,
+   "x": 200,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18,000"
+  },
+  {
+   "tag": "b",
+   "y": 473,
+   "x": 357,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2024-11-18"
+  },
+  {
+   "tag": "b",
+   "y": 473,
+   "x": 460,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2024-12-29"
+  },
+  {
+   "tag": "b",
+   "y": 473,
+   "x": 570,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9,013"
+  },
+  {
+   "tag": "b",
+   "y": 473,
+   "x": 672,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8,987"
+  },
+  {
+   "tag": "span",
+   "y": 574,
+   "x": 223,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "103.5"
+  },
+  {
+   "tag": "span",
+   "y": 574,
+   "x": 483,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1.06"
+  },
+  {
+   "tag": "span",
+   "y": 574,
+   "x": 743,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.9"
+  },
+  {
+   "tag": "span",
+   "y": 574,
+   "x": 1002,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80.5"
+  },
+  {
+   "tag": "small",
+   "y": 589,
+   "x": 300,
+   "w": 11,
+   "in_svg": false,
+   "hidden": false,
+   "text": "s%%%"
+  },
+  {
+   "tag": "span",
+   "y": 619,
+   "x": 223,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean time to first doctor reply, test arm"
+  },
+  {
+   "tag": "span",
+   "y": 619,
+   "x": 483,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "of test users waited more than 5 minutes"
+  },
+  {
+   "tag": "span",
+   "y": 619,
+   "x": 743,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "consultations completed, test arm"
+  },
+  {
+   "tag": "span",
+   "y": 619,
+   "x": 1002,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "dermatology completion, test arm"
+  },
+  {
+   "tag": "span",
+   "y": 643,
+   "x": 743,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "≈ 88.0% in control — no change"
+  },
+  {
+   "tag": "span",
+   "y": 643,
+   "x": 1002,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "▼ from 85.0% in control"
+  },
+  {
+   "tag": "span",
+   "y": 660,
+   "x": 223,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "▼ from 152.0 s in control"
+  },
+  {
+   "tag": "span",
+   "y": 660,
+   "x": 483,
+   "w": 215,
+   "in_svg": false,
+   "hidden": false,
+   "text": "▼ from 4.48% in control"
+  },
+  {
+   "tag": "h2",
+   "y": 793,
+   "x": 234,
+   "w": 131,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The setup"
+  },
+  {
+   "tag": "span",
+   "y": 809,
+   "x": 200,
+   "w": 16,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "p",
+   "y": 842,
+   "x": 200,
+   "w": 773,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Users of an online consultation service were split into a control arm and a test arm and followed for six weeks. Each row is one consultation: who the user was, which department and complaint, when they entered the queue, whether they were lost before a doctor answered, whether the consultation completed, how long the doctor took to respond, how long the consultation ran, and whether the user came back within seven days."
+  },
+  {
+   "tag": "h3",
+   "y": 1025,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two arms, evenly split"
+  },
+  {
+   "tag": "h3",
+   "y": 1025,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Who is consulting"
+  },
+  {
+   "tag": "div",
+   "y": 1066,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultations per arm"
+  },
+  {
+   "tag": "div",
+   "y": 1066,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Returning vs new users"
+  },
+  {
+   "tag": "span",
+   "y": 1093,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 1093,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Returning"
+  },
+  {
+   "tag": "span",
+   "y": 1097,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9,013"
+  },
+  {
+   "tag": "span",
+   "y": 1097,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12,221"
+  },
+  {
+   "tag": "em",
+   "y": 1109,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "对照组"
+  },
+  {
+   "tag": "em",
+   "y": 1109,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "老用户"
+  },
+  {
+   "tag": "span",
+   "y": 1131,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 1131,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "New"
+  },
+  {
+   "tag": "span",
+   "y": 1135,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8,987"
+  },
+  {
+   "tag": "span",
+   "y": 1135,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5,779"
+  },
+  {
+   "tag": "em",
+   "y": 1147,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "实验组"
+  },
+  {
+   "tag": "em",
+   "y": 1147,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "新用户"
+  },
+  {
+   "tag": "div",
+   "y": 1177,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Platform"
+  },
+  {
+   "tag": "h3",
+   "y": 1195,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Case mix"
+  },
+  {
+   "tag": "span",
+   "y": 1204,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7,514"
+  },
+  {
+   "tag": "span",
+   "y": 1207,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Android"
+  },
+  {
+   "tag": "div",
+   "y": 1235,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultations by department"
+  },
+  {
+   "tag": "span",
+   "y": 1235,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6,870"
+  },
+  {
+   "tag": "span",
+   "y": 1238,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "iOS"
+  },
+  {
+   "tag": "span",
+   "y": 1263,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 1265,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "WeChat mini-app"
+  },
+  {
+   "tag": "span",
+   "y": 1266,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5,246"
+  },
+  {
+   "tag": "span",
+   "y": 1277,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,610"
+  },
+  {
+   "tag": "em",
+   "y": 1278,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "儿科"
+  },
+  {
+   "tag": "em",
+   "y": 1297,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "微信小程序"
+  },
+  {
+   "tag": "span",
+   "y": 1301,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal med."
+  },
+  {
+   "tag": "span",
+   "y": 1305,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5,083"
+  },
+  {
+   "tag": "em",
+   "y": 1317,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "内科"
+  },
+  {
+   "tag": "span",
+   "y": 1319,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6"
+  },
+  {
+   "tag": "span",
+   "y": 1322,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Not recorded"
+  },
+  {
+   "tag": "span",
+   "y": 1339,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "span",
+   "y": 1343,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,121"
+  },
+  {
+   "tag": "em",
+   "y": 1355,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "皮肤科"
+  },
+  {
+   "tag": "p",
+   "y": 1359,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The two arms are close to equal in size and run over the same 42 days, so arm-to-arm differences are not driven by who was routed where or by the calendar."
+  },
+  {
+   "tag": "span",
+   "y": 1378,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "span",
+   "y": 1382,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,490"
+  },
+  {
+   "tag": "em",
+   "y": 1393,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "妇科"
+  },
+  {
+   "tag": "span",
+   "y": 1416,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT"
+  },
+  {
+   "tag": "span",
+   "y": 1420,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,060"
+  },
+  {
+   "tag": "em",
+   "y": 1432,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "五官科"
+  },
+  {
+   "tag": "h2",
+   "y": 1570,
+   "x": 234,
+   "w": 676,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Speed: the change works, and it works everywhere"
+  },
+  {
+   "tag": "span",
+   "y": 1586,
+   "x": 200,
+   "w": 16,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "p",
+   "y": 1619,
+   "x": 200,
+   "w": 773,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Time to a doctor's first reply falls by about 48 seconds on average and by 22 seconds at the median. More importantly, the slow end of the distribution is compressed: the 90th percentile drops from 234 s to 177 s and the 95th from 290 s to 213 s. Waits over five minutes — the ones users notice and abandon over — fall from 4.48% of measured sessions to 1.06%."
+  },
+  {
+   "tag": "span",
+   "y": 1774,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Time to first doctor reply, seconds"
+  },
+  {
+   "tag": "span",
+   "y": 1774,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean seconds to first reply, by week of entry"
+  },
+  {
+   "tag": "span",
+   "y": 1809,
+   "x": 200,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 1809,
+   "x": 282,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "text",
+   "y": 1830,
+   "x": 1113,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "228 s"
+  },
+  {
+   "tag": "text",
+   "y": 1837,
+   "x": 774,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "240"
+  },
+  {
+   "tag": "div",
+   "y": 1847,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean"
+  },
+  {
+   "tag": "text",
+   "y": 1866,
+   "x": 774,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "180"
+  },
+  {
+   "tag": "span",
+   "y": 1874,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "152.0 s"
+  },
+  {
+   "tag": "span",
+   "y": 1877,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "text",
+   "y": 1883,
+   "x": 1184,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "167 s"
+  },
+  {
+   "tag": "text",
+   "y": 1896,
+   "x": 774,
+   "w": 16,
+   "in_svg": true,
+   "hidden": false,
+   "text": "120"
+  },
+  {
+   "tag": "span",
+   "y": 1905,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "103.5 s"
+  },
+  {
+   "tag": "span",
+   "y": 1908,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "text",
+   "y": 1925,
+   "x": 779,
+   "w": 10,
+   "in_svg": true,
+   "hidden": false,
+   "text": "60"
+  },
+  {
+   "tag": "div",
+   "y": 1943,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median"
+  },
+  {
+   "tag": "text",
+   "y": 1954,
+   "x": 785,
+   "w": 5,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 782,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Nov 18"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 864,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Nov 25"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 949,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 2"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 1031,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 9"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 1110,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 16"
+  },
+  {
+   "tag": "text",
+   "y": 1968,
+   "x": 1192,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Dec 23"
+  },
+  {
+   "tag": "span",
+   "y": 1970,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "110 s"
+  },
+  {
+   "tag": "span",
+   "y": 1973,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 771,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,164 · 1,245"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 853,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,407 · 1,350"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 935,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,462 · 1,463"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 1017,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,609 · 1,513"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 1099,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,597 · 1,644"
+  },
+  {
+   "tag": "text",
+   "y": 1980,
+   "x": 1181,
+   "w": 50,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1,774 · 1,772"
+  },
+  {
+   "tag": "span",
+   "y": 2001,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88 s"
+  },
+  {
+   "tag": "span",
+   "y": 2004,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 2004,
+   "x": 756,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 2004,
+   "x": 838,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2042,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Grey line is control, teal is test. Numbers under the axis are weekly sessions in each arm (control · test). Volume grows by about half over the run; the control arm's response time drifts up with it, the test arm's does not."
+  },
+  {
+   "tag": "div",
+   "y": 2044,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Share waiting over 5 minutes"
+  },
+  {
+   "tag": "span",
+   "y": 2072,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.48%"
+  },
+  {
+   "tag": "span",
+   "y": 2075,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 2102,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1.06%"
+  },
+  {
+   "tag": "span",
+   "y": 2105,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2140,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Means over 8,586 (control) and 8,511 (test) sessions with a recorded response; sessions lost before a doctor answered have no response time and are excluded."
+  },
+  {
+   "tag": "h3",
+   "y": 2221,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The gain is not concentrated in one place"
+  },
+  {
+   "tag": "p",
+   "y": 2262,
+   "x": 200,
+   "w": 729,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every department, platform and complaint improves, but by very different amounts. Gynecology shows the largest fall — from 210.4 s to 97.2 s — because its control-arm queue was the slowest. The WeChat mini-program arm falls from 198.2 s to 104.3 s, and the 25 complaint types go from a 12.6 s gain (chest tightness) up to a 315.6 s gain (heavy periods)."
+  },
+  {
+   "tag": "caption",
+   "y": 2412,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean seconds to first reply, by department"
+  },
+  {
+   "tag": "th",
+   "y": 2442,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department"
+  },
+  {
+   "tag": "th",
+   "y": 2442,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "th",
+   "y": 2442,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "th",
+   "y": 2442,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Change"
+  },
+  {
+   "tag": "td",
+   "y": 2481,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology 妇科"
+  },
+  {
+   "tag": "td",
+   "y": 2481,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "210.4"
+  },
+  {
+   "tag": "td",
+   "y": 2481,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "97.2"
+  },
+  {
+   "tag": "td",
+   "y": 2481,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−113.2"
+  },
+  {
+   "tag": "td",
+   "y": 2542,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology 皮肤科"
+  },
+  {
+   "tag": "td",
+   "y": 2542,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "153.0"
+  },
+  {
+   "tag": "td",
+   "y": 2542,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "99.9"
+  },
+  {
+   "tag": "td",
+   "y": 2542,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−53.1"
+  },
+  {
+   "tag": "td",
+   "y": 2603,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics 儿科"
+  },
+  {
+   "tag": "td",
+   "y": 2603,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "149.2"
+  },
+  {
+   "tag": "td",
+   "y": 2603,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "103.6"
+  },
+  {
+   "tag": "td",
+   "y": 2603,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−45.6"
+  },
+  {
+   "tag": "td",
+   "y": 2664,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine 内科"
+  },
+  {
+   "tag": "td",
+   "y": 2664,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "134.8"
+  },
+  {
+   "tag": "td",
+   "y": 2664,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "110.2"
+  },
+  {
+   "tag": "td",
+   "y": 2664,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−24.6"
+  },
+  {
+   "tag": "td",
+   "y": 2725,
+   "x": 200,
+   "w": 389,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT 五官科"
+  },
+  {
+   "tag": "td",
+   "y": 2725,
+   "x": 589,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "127.1"
+  },
+  {
+   "tag": "td",
+   "y": 2725,
+   "x": 834,
+   "w": 182,
+   "in_svg": false,
+   "hidden": false,
+   "text": "98.8"
+  },
+  {
+   "tag": "td",
+   "y": 2725,
+   "x": 1016,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−28.3"
+  },
+  {
+   "tag": "p",
+   "y": 2794,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One complaint goes the other way: diarrhoea with mild fever (腹泻伴低烧一天) is the only one of the 25 that is slower in the test arm, at 141.8 s against 125.3 s."
+  },
+  {
+   "tag": "h2",
+   "y": 2937,
+   "x": 234,
+   "w": 584,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion: flat overall, but the mix moved"
+  },
+  {
+   "tag": "span",
+   "y": 2953,
+   "x": 200,
+   "w": 16,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "p",
+   "y": 2986,
+   "x": 200,
+   "w": 773,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Headline completion is unchanged: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of 9,013 in control (88.0%). Underneath that flat total, users lost before a doctor ever answered rise from 427 (4.74%) to 476 (5.30%) — and that increase is not spread evenly."
+  },
+  {
+   "tag": "p",
+   "y": 3087,
+   "x": 732,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology is the exception to an otherwise benign read-out. Completion there falls from 85.0% (1,376 of 1,618) to 80.5% (1,210 of 1,503), a 4.5-point drop with a two-proportion z of −3.35 — far outside what sampling noise would produce at this sample size."
+  },
+  {
+   "tag": "span",
+   "y": 3113,
+   "x": 200,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion rate by department, control vs test"
+  },
+  {
+   "tag": "span",
+   "y": 3148,
+   "x": 200,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 3148,
+   "x": 282,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 3189,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT"
+  },
+  {
+   "tag": "span",
+   "y": 3198,
+   "x": 566,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.5 →"
+  },
+  {
+   "tag": "b",
+   "y": 3200,
+   "x": 656,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.1"
+  },
+  {
+   "tag": "em",
+   "y": 3210,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "五官科"
+  },
+  {
+   "tag": "p",
+   "y": 3231,
+   "x": 732,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The mechanism is visible one column over: the share of dermatology users who leave the queue before a doctor answers doubles, from 7.7% to 12.7%. Pediatrics moves the other way, from 3.1% to 2.5%, and its completion rate rises from 88.9% to 90.4%."
+  },
+  {
+   "tag": "span",
+   "y": 3233,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 3242,
+   "x": 566,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.9 →"
+  },
+  {
+   "tag": "b",
+   "y": 3244,
+   "x": 656,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "90.4"
+  },
+  {
+   "tag": "em",
+   "y": 3254,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "儿科"
+  },
+  {
+   "tag": "span",
+   "y": 3274,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal med."
+  },
+  {
+   "tag": "span",
+   "y": 3294,
+   "x": 566,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.6 →"
+  },
+  {
+   "tag": "b",
+   "y": 3296,
+   "x": 656,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.1"
+  },
+  {
+   "tag": "em",
+   "y": 3316,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "内科"
+  },
+  {
+   "tag": "span",
+   "y": 3321,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "span",
+   "y": 3330,
+   "x": 566,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.0 →"
+  },
+  {
+   "tag": "b",
+   "y": 3332,
+   "x": 656,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.3"
+  },
+  {
+   "tag": "em",
+   "y": 3342,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "妇科"
+  },
+  {
+   "tag": "span",
+   "y": 3365,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "span",
+   "y": 3374,
+   "x": 566,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "85.0 →"
+  },
+  {
+   "tag": "b",
+   "y": 3376,
+   "x": 656,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80.5"
+  },
+  {
+   "tag": "em",
+   "y": 3386,
+   "x": 200,
+   "w": 78,
+   "in_svg": false,
+   "hidden": false,
+   "text": "皮肤科"
+  },
+  {
+   "tag": "p",
+   "y": 3405,
+   "x": 759,
+   "w": 457,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pattern holds across every skin complaint. All five lose more users before the doctor in the test arm:"
+  },
+  {
+   "tag": "span",
+   "y": 3408,
+   "x": 281,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "78%"
+  },
+  {
+   "tag": "span",
+   "y": 3408,
+   "x": 355,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "82%"
+  },
+  {
+   "tag": "span",
+   "y": 3408,
+   "x": 428,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "86%"
+  },
+  {
+   "tag": "span",
+   "y": 3408,
+   "x": 501,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "90%"
+  },
+  {
+   "tag": "figcaption",
+   "y": 3440,
+   "x": 200,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dots are the two arms; the bar joins them. Dermatology moves down while every other department moves up, and it is the only change of more than 1.5 points."
+  },
+  {
+   "tag": "p",
+   "y": 3470,
+   "x": 759,
+   "w": 457,
+   "in_svg": false,
+   "hidden": false,
+   "text": "back spots (后背长了不少小红点) 6.9% → 13.9% hives (荨麻疹反反复复两个星期) 9.0% → 13.5% acne (脸上爆痘,下巴最严重) 6.9% → 12.1% itchy rash (手臂上起红疹,特别痒) 9.7% → 11.9% athlete's foot (脚趾缝脱皮发痒) 6.0% → 11.7%"
+  },
+  {
+   "tag": "p",
+   "y": 3630,
+   "x": 732,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology was also the slowest department to complete in control (85.0%) and the fastest to improve its response time (153.0 s → 99.9 s), so faster triage did not translate into more finished skin consultations. Skin complaints are the most visual and the most likely to be ones a user abandons if the first answer feels like a form reply — a plausible but untested explanation, since the data records no reason for the exit."
+  },
+  {
+   "tag": "caption",
+   "y": 3790,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department scorecard"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion, control"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion, test"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Change"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lost before doctor, control"
+  },
+  {
+   "tag": "th",
+   "y": 3821,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lost before doctor, test"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT 五官科"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.5%"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.1%"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.5 pp"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.5%"
+  },
+  {
+   "tag": "td",
+   "y": 3859,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.4%"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics 儿科"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.9%"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "90.4%"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.4 pp"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3.1%"
+  },
+  {
+   "tag": "td",
+   "y": 3920,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2.5%"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine 内科"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.6%"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.1%"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.5 pp"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.4%"
+  },
+  {
+   "tag": "td",
+   "y": 3981,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.0%"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology 妇科"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.0%"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.3%"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.2 pp"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.2%"
+  },
+  {
+   "tag": "td",
+   "y": 4042,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.8%"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 200,
+   "w": 144,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology 皮肤科"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 344,
+   "w": 188,
+   "in_svg": false,
+   "hidden": false,
+   "text": "85.0%"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 531,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80.5%"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 688,
+   "w": 83,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−4.5 pp"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 771,
+   "w": 250,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.7%"
+  },
+  {
+   "tag": "td",
+   "y": 4103,
+   "x": 1021,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.7%"
+  },
+  {
+   "tag": "h2",
+   "y": 4281,
+   "x": 234,
+   "w": 771,
+   "in_svg": false,
+   "hidden": false,
+   "text": "After the consultation: shorter visits, and a follow-up shift"
+  },
+  {
+   "tag": "span",
+   "y": 4297,
+   "x": 200,
+   "w": 16,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04"
+  },
+  {
+   "tag": "p",
+   "y": 4330,
+   "x": 200,
+   "w": 773,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completed consultations run about a minute and a half shorter in the test arm — 11.7 minutes against 13.1 on average, 10.4 against 11.2 at the median — so the time saved at the front of the queue is not spent back at the end."
+  },
+  {
+   "tag": "span",
+   "y": 4457,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultation length, completed cases (minutes)"
+  },
+  {
+   "tag": "span",
+   "y": 4457,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Seven-day follow-up rate"
+  },
+  {
+   "tag": "div",
+   "y": 4492,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean"
+  },
+  {
+   "tag": "span",
+   "y": 4492,
+   "x": 756,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 4492,
+   "x": 838,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 4519,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.1"
+  },
+  {
+   "tag": "span",
+   "y": 4522,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "div",
+   "y": 4530,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "New users"
+  },
+  {
+   "tag": "span",
+   "y": 4550,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.7"
+  },
+  {
+   "tag": "span",
+   "y": 4553,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 4557,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.8%"
+  },
+  {
+   "tag": "span",
+   "y": 4560,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "div",
+   "y": 4588,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median"
+  },
+  {
+   "tag": "span",
+   "y": 4588,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9.8%"
+  },
+  {
+   "tag": "span",
+   "y": 4591,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 4615,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "11.2"
+  },
+  {
+   "tag": "span",
+   "y": 4618,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "div",
+   "y": 4626,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Returning users"
+  },
+  {
+   "tag": "span",
+   "y": 4646,
+   "x": 624,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "10.4"
+  },
+  {
+   "tag": "span",
+   "y": 4649,
+   "x": 200,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 4653,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.9%"
+  },
+  {
+   "tag": "span",
+   "y": 4656,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "figcaption",
+   "y": 4683,
+   "x": 200,
+   "w": 508,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7,933 completed control consultations and 7,903 completed test consultations."
+  },
+  {
+   "tag": "span",
+   "y": 4684,
+   "x": 1156,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.2%"
+  },
+  {
+   "tag": "span",
+   "y": 4687,
+   "x": 756,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "figcaption",
+   "y": 4721,
+   "x": 756,
+   "w": 484,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Overall follow-up barely moves (12.1% test vs 12.3% control), but it moves in opposite directions for the two user types: 198 → 278 returns among new users, 900 → 802 among returning users."
+  },
+  {
+   "tag": "p",
+   "y": 4787,
+   "x": 200,
+   "w": 574,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The swap is the most useful commercial detail in the read-out: the test converts more first-time users into a second visit, and slightly fewer loyal ones. If the goal is acquisition, that is a win; if lifetime value sits with returning users, it is a trade rather than a gain."
+  },
+  {
+   "tag": "title",
+   "y": 4810,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Mean first response time by week"
+  },
+  {
+   "tag": "h2",
+   "y": 4974,
+   "x": 234,
+   "w": 406,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reading the numbers honestly"
+  },
+  {
+   "tag": "span",
+   "y": 4990,
+   "x": 200,
+   "w": 16,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05"
+  },
+  {
+   "tag": "p",
+   "y": 5022,
+   "x": 200,
+   "w": 773,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Five things a reader should know before quoting any figure above."
+  },
+  {
+   "tag": "li",
+   "y": 5072,
+   "x": 220,
+   "w": 478,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two labels needed cleaning. Ten rows read '实验组 ' and nine read '对照组 ' with a trailing space, so an untrimmed value count returns four groups — 9,004, 8,977, 10 and 9 — instead of the two real arms. Every figure here trims the label first."
+  },
+  {
+   "tag": "li",
+   "y": 5072,
+   "x": 762,
+   "w": 478,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Effects are reported at face value. The 4.5-point dermatology drop carries a two-proportion z of −3.35 and the schedule-wide completion difference is 0.08 points; only the former is large relative to its standard error. The other department moves are within roughly one point and should be read as directional."
+  },
+  {
+   "tag": "li",
+   "y": 5170,
+   "x": 220,
+   "w": 478,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Response time is missing exactly where it should be. All 903 sessions lost before a doctor answered have no response time; all 17,097 others have one. Averages over response time therefore describe people who got an answer, not everyone who arrived."
+  },
+  {
+   "tag": "li",
+   "y": 5191,
+   "x": 762,
+   "w": 478,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This is an observational split, not a controlled trial. Groups were assigned at entry with no record of the assignment rule in the data, so a department-level difference could reflect routing, staffing or case mix rather than the new queue alone."
+  },
+  {
+   "tag": "li",
+   "y": 5267,
+   "x": 220,
+   "w": 478,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultation length only exists for completed cases. All 2,164 incomplete consultations are blank, so the length figures describe completed work only."
+  },
+  {
+   "tag": "p",
+   "y": 5382,
+   "x": 227,
+   "w": 989,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What the data supports: the new queue design halves long waits and cuts average response time by about a third without changing overall completion. What it warns: dermatology loses completions in a way that repeats across all five skin complaints, and returning users come back less often. A dermatology-specific fix — or excluding skin cases from the new routing — is the obvious next test."
+  },
+  {
+   "tag": "p",
+   "y": 5604,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: data/data.csv — 18,000 rows, 12 columns, 2024-11-18 to 2024-12-29. Figures are unweighted arm-level statistics computed with pandas."
+  },
+  {
+   "tag": "p",
+   "y": 5630,
+   "x": 200,
+   "w": 1040,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control = 对照组, Test = 实验组. Percentages are rounded to one decimal; counts are exact. Two-proportion z-scores use the normal approximation."
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 1809,
+   "x": 756,
+   "w": 484,
+   "h": 183,
+   "marks": 19,
+   "labels": 19
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 5710
+}

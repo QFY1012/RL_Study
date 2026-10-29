@@ -1,0 +1,92 @@
+[
+  {
+    "id": "sample-scope",
+    "claim": "The people table contains 1,656 conversations and 3,312 person–conversation records representing 1,456 unique user IDs, with exactly two records per conversation (minimum 2 and maximum 2).",
+    "tables": {"people": "data/people.csv"},
+    "code": "pd.Series({'conversations': people.convo_id.nunique(), 'person_records': len(people), 'unique_user_ids': people.user_id.nunique(), 'minimum_records_per_conversation': people.groupby('convo_id').size().min(), 'maximum_records_per_conversation': people.groupby('convo_id').size().max()})"
+  },
+  {
+    "id": "pair-outcome-coverage",
+    "claim": "End-affect pair averages are available for 1,603 of the 1,656 conversation rows, leaving 53 missing.",
+    "tables": {"convos": "data/convos.csv"},
+    "code": "convos.end_affect_avg.agg(conversation_rows='size', available='count', missing=lambda s: s.isna().sum())"
+  },
+  {
+    "id": "affect-trajectory",
+    "claim": "Pair-average affect is 6.10 before the conversation, 6.16 at the beginning, 6.93 at the midpoint and 7.38 at the end.",
+    "tables": {"convos": "data/convos.csv"},
+    "code": "convos[['pre_affect_avg', 'begin_affect_avg', 'middle_affect_avg', 'end_affect_avg']].mean().round(2)"
+  },
+  {
+    "id": "affect-gain-size",
+    "claim": "Among 3,257 person-records with both ratings, end affect averages 1.29 points above pre-conversation affect and the median gain is 1.00 point.",
+    "tables": {"people": "data/people.csv"},
+    "code": "people.assign(gain=people.end_affect - people.pre_affect).gain.agg(n='count', mean='mean', median='median').round(2)"
+  },
+  {
+    "id": "affect-change-direction",
+    "claim": "End affect rises for 2,254 person-records (69.20%), is unchanged for 668 (20.51%) and falls for 335 (10.29%).",
+    "tables": {"people": "data/people.csv"},
+    "code": "people.assign(change=np.sign(people.end_affect - people.pre_affect)).change.value_counts().rename(index={1.0: 'increased', 0.0: 'unchanged', -1.0: 'decreased'}).to_frame('n').assign(percent=lambda d: (100 * d.n / d.n.sum()).round(2))"
+  },
+  {
+    "id": "arousal-trajectory",
+    "claim": "Pair-average arousal rises from 5.32 before the conversation to 5.67 at the beginning, 6.40 at the midpoint and 6.70 at the end.",
+    "tables": {"convos": "data/convos.csv"},
+    "code": "convos[['pre_arousal_avg', 'begin_arousal_avg', 'middle_arousal_avg', 'end_arousal_avg']].mean().round(2)"
+  },
+  {
+    "id": "within-pair-affect-gap",
+    "claim": "The mean absolute within-pair affect gap narrows from 1.67 before and 1.65 at the beginning to 1.35 at the midpoint and 1.31 at the end.",
+    "tables": {"people": "data/people.csv"},
+    "code": "(lambda w: pd.DataFrame({stage: (w[stage][0] - w[stage][1]).abs() for stage in ['pre_affect', 'begin_affect', 'middle_affect', 'end_affect']}).mean().round(2))(people.assign(_member=people.groupby('convo_id').cumcount()).pivot(index='convo_id', columns='_member', values=['pre_affect', 'begin_affect', 'middle_affect', 'end_affect']))"
+  },
+  {
+    "id": "enjoyment-high",
+    "claim": "Among 3,257 enjoyment ratings, the mean is 7.41, the median is 8.00 and 77.96% are 7 or higher.",
+    "tables": {"people": "data/people.csv"},
+    "code": "people.how_enjoyable.agg(n='count', mean='mean', median='median', percent_7_or_higher=lambda s: 100 * s.dropna().ge(7).mean()).round(2)"
+  },
+  {
+    "id": "liking-perception-gap",
+    "claim": "Mean liking for the partner is 6.00, while mean perceived liking from the partner is 5.35, a 0.64-point own-minus-perceived gap.",
+    "tables": {"people": "data/people.csv"},
+    "code": "(lambda d: pd.Series({'own_liking': d.i_like_you.mean(), 'perceived_liking': d.you_like_me.mean(), 'own_minus_perceived': d.i_like_you.mean() - d.you_like_me.mean()}).round(2))(people)"
+  },
+  {
+    "id": "enjoyment-correlations",
+    "claim": "Participant-record correlations with enjoyment are 0.84 for liking the partner, 0.78 for overall affect, 0.78 for end affect, 0.70 for perceived liking, 0.58 for shared reality, 0.22 for pre-affect and 0.19 for pre-arousal.",
+    "tables": {"people": "data/people.csv"},
+    "code": "people[['i_like_you', 'overall_affect', 'end_affect', 'you_like_me', 'shared_reality', 'pre_affect', 'pre_arousal', 'how_enjoyable']].corr().how_enjoyable.drop('how_enjoyable').round(2)"
+  },
+  {
+    "id": "politics-gap-enjoyment",
+    "claim": "Mean pair enjoyment is 7.48 when politics scores match (408 pairs), 7.45 for a gap of 1 (319), 7.41 for a gap of 2 (494) and 7.30 for a gap of 3–5 (381).",
+    "tables": {"people": "data/people.csv"},
+    "code": "(lambda d: d[(d.post_n == 2) & (d.politics_n == 2)].assign(politics_gap_group=lambda x: pd.cut(x.politics_gap, [-0.1, 0, 1, 2, 5], labels=['0', '1', '2', '3–5'])).groupby('politics_gap_group', observed=False).enjoyment.agg(['count', 'mean']).round(2))(people.groupby('convo_id').agg(post_n=('end_affect', 'count'), politics_n=('politics', 'count'), politics_gap=('politics', lambda s: s.max() - s.min()), enjoyment=('how_enjoyable', 'mean')))"
+  },
+  {
+    "id": "demographic-match-enjoyment",
+    "claim": "Across complete pairs with both categories recorded, mean enjoyment is 7.44 for same-sex versus 7.38 for different-sex pairs, 7.34 for same-race versus 7.46 for different-race pairs, and 7.60 for same-education versus 7.35 for different-education pairs.",
+    "tables": {"people": "data/people.csv"},
+    "code": "(lambda d: pd.concat({'sex': d[d.sex_n == 2].assign(match=lambda x: np.where(x.sex_unique == 1, 'same', 'different')).groupby('match').enjoyment.agg(['count', 'mean']), 'race': d[d.race_n == 2].assign(match=lambda x: np.where(x.race_unique == 1, 'same', 'different')).groupby('match').enjoyment.agg(['count', 'mean']), 'education': d[d.education_n == 2].assign(match=lambda x: np.where(x.education_unique == 1, 'same', 'different')).groupby('match').enjoyment.agg(['count', 'mean'])}).round(2))(people.groupby('convo_id').agg(post_n=('end_affect', 'count'), sex_n=('sex', 'count'), sex_unique=('sex', 'nunique'), race_n=('race', 'count'), race_unique=('race', 'nunique'), education_n=('edu', 'count'), education_unique=('edu', 'nunique'), enjoyment=('how_enjoyable', 'mean')).query('post_n == 2'))"
+  },
+  {
+    "id": "age-profile",
+    "claim": "Age is available for 3,256 person-records; the median is 32, the interquartile range is 25–41 and the observed range is 19–66.",
+    "tables": {"people": "data/people.csv"},
+    "code": "people.age.agg(n='count', minimum='min', q1=lambda s: s.quantile(0.25), median='median', q3=lambda s: s.quantile(0.75), maximum='max')"
+  },
+  {
+    "id": "sex-profile",
+    "claim": "Of 3,256 person-records with sex recorded, 1,740 are female (53.4%), 1,463 are male (44.9%) and 53 are other or prefer not to answer (1.6%).",
+    "tables": {"people": "data/people.csv"},
+    "code": "people.sex.value_counts().to_frame('n').assign(percent=lambda d: (100 * d.n / d.n.sum()).round(1))"
+  },
+  {
+    "id": "rating-ranges",
+    "claim": "Observed affect, arousal and enjoyment ratings span 1–9, while shared reality spans 1–7.",
+    "tables": {"people": "data/people.csv"},
+    "code": "people[['pre_affect', 'begin_affect', 'middle_affect', 'end_affect', 'pre_arousal', 'arousal', 'how_enjoyable', 'shared_reality']].agg(['min', 'max']).T"
+  }
+]

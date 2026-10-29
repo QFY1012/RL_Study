@@ -1,0 +1,65 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/pockets/index.html",
+ "facts": "submissions/pi-kimi-k3.1-pro/pockets/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-coverage",
+     "basis": "men: jeans=40, brands=20, min_rows_per_brand=2, max_rows_per_brand=2; women: jeans=40, brands=20, min_rows_per_brand=2, max_rows_per_brand=2",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-dimensions",
+     "basis": "frontDepth: men=20.605, women=13.778, gap_cm=6.828, men_vs_women_pct=49.555; frontWidth: men=14.866, women=13.721, gap_cm=1.145, men_vs_women_pct=8.345",
+     "verdict": "ok"
+    },
+    {
+     "id": "back-dimensions",
+     "basis": "backDepth: men=14.739, women=13.853, gap_cm=0.886, men_vs_women_pct=6.398; backWidth: men=12.931, women=12.539, gap_cm=0.393, men_vs_women_pct=3.130",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-back-within-gender",
+     "basis": "men: frontDepth=20.605, backDepth=14.739, front_minus_back=5.866; women: frontDepth=13.778, backDepth=13.853, front_minus_back=-0.075",
+     "verdict": "ok"
+    },
+    {
+     "id": "phone-height-clearance",
+     "basis": "men: jeans=40, tallest>=14.4cm=40, shortest>=14.4cm=37; women: jeans=40, tallest>=14.4cm=18, shortest>=14.4cm=9",
+     "verdict": "ok"
+    },
+    {
+     "id": "brand-depth-gaps",
+     "basis": "all gap_cm values are positive; minimum gap_cm=1.500 at Abercrombie; maximum gap_cm=10.250 at Ralph Lauren",
+     "verdict": "ok"
+    },
+    {
+     "id": "price-depth-relationship",
+     "basis": "men: mean_price=81.184, price_depth_spearman=-0.269; women: mean_price=80.316, price_depth_spearman=-0.196",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"sample-coverage\", \"basis\": \"men: jeans=40, brands=20, min_rows_per_brand=2, max_rows_per_brand=2; women: jeans=40, brands=20, min_rows_per_brand=2, max_rows_per_brand=2\", \"verdict\": \"ok\"}, {\"id\": \"front-dimensions\", \"basis\": \"frontDepth: men=20.605, women=13.778, gap_cm=6.828, men_vs_women_pct=49.555; frontWidth: men=14.866, women=13.721, gap_cm=1.145, men_vs_women_pct=8.345\", \"verdict\": \"ok\"}, {\"id\": \"back-dimensions\", \"basis\": \"backDepth: men=14.739, women=13.853, gap_cm=0.886, men_vs_women_pct=6.398; backWidth: men=12.931, women=12.539, gap_cm=0.393, men_vs_women_pct=3.130\", \"verdict\": \"ok\"}, {\"id\": \"front-back-within-gender\", \"basis\": \"men: frontDepth=20.605, backDepth=14.739, front_minus_back=5.866; women: frontDepth=13.778, backDepth=13.853, front_minus_back=-0.075\", \"verdict\": \"ok\"}, {\"id\": \"phone-height-clearance\", \"basis\": \"men: jeans=40, tallest>=14.4cm=40, shortest>=14.4cm=37; women: jeans=40, tallest>=14.4cm=18, shortest>=14.4cm=9\", \"verdict\": \"ok\"}, {\"id\": \"brand-depth-gaps\", \"basis\": \"all gap_cm values are positive; minimum gap_cm=1.500 at Abercrombie; maximum gap_cm=10.250 at Ralph Lauren\", \"verdict\": \"ok\"}, {\"id\": \"price-depth-relationship\", \"basis\": \"men: mean_price=81.184, price_depth_spearman=-0.269; women: mean_price=80.316, price_depth_spearman=-0.196\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 1978,
+    "completion_tokens": 1063,
+    "seconds": 7.1
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

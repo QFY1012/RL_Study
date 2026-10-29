@@ -1,0 +1,283 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[study-scale]
+claim: The experiment logs 18,000 consultations over 42 distinct days, from 2024-11-18 to 2024-12-29, split into 9,013 control-group and 8,987 test-group users.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).pipe(lambda x: pd.Series({'rows': len(x), 'control': (x.g=='对照组').sum(), 'test': (x.g=='实验组').sum(), 'first_day': str(pd.to_datetime(x.enter_date, format='mixed').min().date()), 'last_day': str(pd.to_datetime(x.enter_date, format='mixed').max().date()), 'distinct_days': pd.to_datetime(x.enter_date, format='mixed').nunique()}))
+output:
+rows                  18000
+control                9013
+test                   8987
+first_day        2024-11-18
+last_day         2024-12-29
+distinct_days            42
+
+[first-response-faster]
+claim: Mean time to a doctor's first reply falls from 152.0 s in the control arm to 103.5 s in the test arm, and the median from 110 s to 88 s, across 8,586 and 8,511 users with a recorded response.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby('g').first_response_seconds.agg(['count','mean','median'])
+output:
+     count        mean  median
+g                             
+实验组   8511  103.511103    88.0
+对照组   8586  151.995341   110.0
+
+[long-waits-collapse]
+claim: Waits of more than five minutes become rare in the test arm: 90 of 8,511 measured users (1.06%) versus 385 of 8,586 in control (4.48%).
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).dropna(subset=['first_response_seconds']).assign(long=lambda x: x.first_response_seconds > 300).groupby('g').long.agg(['size','sum','mean'])
+output:
+     size  sum      mean
+g                       
+实验组  8511   90  0.010575
+对照组  8586  385  0.044840
+
+[response-tail-shrinks]
+claim: The slow tail shrinks: the 90th percentile of first response drops from 234 s to 177 s and the 95th from 290 s to 213 s, while the median moves from 110 s to 88 s.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).dropna(subset=['first_response_seconds']).groupby('g').first_response_seconds.quantile([0.5,0.9,0.95]).unstack()
+output:
+      0.50   0.90   0.95
+g                       
+实验组   88.0  177.0  213.0
+对照组  110.0  234.0  290.0
+
+[completion-flat]
+claim: Completion is flat overall: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of 9,013 in control (88.0%).
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby('g').is_completed.agg(['size','sum','mean'])
+output:
+     size   sum      mean
+g                        
+实验组  8987  7903  0.879381
+对照组  9013  7933  0.880173
+
+[queue-dropout-rises]
+claim: Users who drop out before any doctor answers rise from 427 in control (4.74%) to 476 in test (5.30%), out of 9,013 and 8,987.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby('g').lost_before_doctor.agg(['size','sum','mean'])
+output:
+     size  sum      mean
+g                       
+实验组  8987  476  0.052965
+对照组  9013  427  0.047376
+
+[dermatology-completion-falls]
+claim: Dermatology (皮肤科) is the only department to lose completions, falling from 85.0% (1,376 of 1,618) to 80.5% (1,210 of 1,503), while pediatrics (儿科) rises from 88.9% (2,347 of 2,639) to 90.4% (2,356 of 2,607).
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['department','g']).is_completed.agg(['size','sum','mean']).unstack()
+output:
+            size         sum            mean          
+g            实验组   对照组   实验组   对照组       实验组       对照组
+department                                            
+五官科         1073   987   945   864  0.880708  0.875380
+儿科          2607  2639  2356  2347  0.903721  0.889352
+内科          2582  2501  2301  2217  0.891170  0.886445
+妇科          1222  1268  1091  1129  0.892799  0.890379
+皮肤科         1503  1618  1210  1376  0.805057  0.850433
+
+[dermatology-drop-significant]
+claim: The dermatology completion drop is 4.5 percentage points, from 0.850 to 0.805, with a two-proportion z of -3.35.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).query("department == '皮肤科'").groupby('g').is_completed.agg(['size','sum','mean']).pipe(lambda t: t.assign(diff=t['mean'].loc['实验组']-t['mean'].loc['对照组'], z=(t['mean'].loc['实验组']-t['mean'].loc['对照组'])/np.sqrt(t['mean'].loc['实验组']*(1-t['mean'].loc['实验组'])/t['size'].loc['实验组'] + t['mean'].loc['对照组']*(1-t['mean'].loc['对照组'])/t['size'].loc['对照组'])))
+output:
+     size   sum      mean      diff         z
+g                                            
+实验组  1503  1210  0.805057 -0.045376 -3.354004
+对照组  1618  1376  0.850433 -0.045376 -3.354004
+
+[department-dropout-split]
+claim: Drop-off before the doctor splits by department: dermatology goes from 7.7% of users lost in control to 12.7% in test, while pediatrics goes from 3.1% to 2.5%.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['department','g']).lost_before_doctor.mean().unstack()
+output:
+g                实验组       对照组
+department                    
+五官科         0.054054  0.044580
+儿科          0.024549  0.031451
+内科          0.040279  0.043982
+妇科          0.048282  0.052050
+皮肤科         0.127079  0.076638
+
+[dermatology-complaints-all-worse]
+claim: All five dermatology complaints lose more users before the doctor in the test arm, from 手臂上起红疹,特别痒 at 9.7% to 11.9%, up to 后背长了不少小红点 at 6.9% to 13.9%.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).query("department == '皮肤科'").groupby(['chief_complaint','g']).lost_before_doctor.agg(['size','sum','mean']).unstack()
+output:
+                size      sum          mean          
+g                实验组  对照组 实验组 对照组       实验组       对照组
+chief_complaint                                      
+后背长了不少小红点        316  320  44  22  0.139241  0.068750
+手臂上起红疹,特别痒       293  319  35  31  0.119454  0.097179
+脚趾缝脱皮发痒          283  351  33  21  0.116608  0.059829
+脸上爆痘,下巴最严重       298  332  36  23  0.120805  0.069277
+荨麻疹反反复复两个星期      310  289  42  26  0.135484  0.089965
+
+[new-users-followup-up]
+claim: Seven-day follow-up rises for new users from 198 of 2,922 (6.8%) to 278 of 2,857 (9.8%), but falls for returning users from 900 of 6,091 (14.9%) to 802 of 6,130 (13.2%).
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['user_type','g']).followup_7d.agg(['size','sum','mean'])
+output:
+               size    sum      mean
+user_type g                         
+新用户       实验组  2857  278.0  0.098372
+          对照组  2922  198.0  0.068394
+老用户       实验组  6130  802.0  0.132234
+          对照组  6091  900.0  0.149303
+
+[consults-shorter]
+claim: Completed consultations are shorter in the test arm: mean 11.7 minutes against 13.1, median 10.4 against 11.2, over 7,903 and 7,933 completed cases.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby('g').consult_minutes.agg(['count','mean','median'])
+output:
+     count       mean  median
+g                            
+实验组   7903  11.666266    10.4
+对照组   7933  13.085277    11.2
+
+[gynecology-fastest-gain]
+claim: Gynecology gains most from the change: mean first response falls from 210.4 s to 97.2 s, ahead of dermatology (153.0 s to 99.9 s) and pediatrics (149.2 s to 103.6 s).
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['department','g']).first_response_seconds.agg(['count','mean']).unstack()
+output:
+           count              mean            
+g            实验组   对照组         实验组         对照组
+department                                    
+五官科         1015   943   98.799015  127.147402
+儿科          2543  2556  103.596933  149.155712
+内科          2478  2391  110.227603  134.834797
+妇科          1163  1202   97.239897  210.433444
+皮肤科         1312  1494   99.863567  152.984605
+
+[wechat-slowest-control]
+claim: The WeChat mini-program arm is slowest at 198.2 s in control and falls to 104.3 s, while Android goes from 140.7 s to 106.3 s and iOS from 140.0 s to 100.1 s.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['platform','g']).first_response_seconds.mean().unstack()
+output:
+g                实验组         对照组
+platform                        
+Android   106.294200  140.732303
+iOS       100.070170  139.984238
+微信小程序     104.326878  198.150232
+
+[complaint-extremes]
+claim: Per complaint, 经期量突然变多 (heavy periods) shows the widest gap at 415.2 s in control against 99.6 s in test, and 腹泻伴低烧一天 is the only complaint where the test arm is slower, 141.8 s against 125.3 s.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).groupby(['chief_complaint','g']).first_response_seconds.mean().unstack()
+output:
+g                         实验组         对照组
+chief_complaint                          
+后背长了不少小红点          100.970588  122.520134
+咳嗽三天,夜里咳得更厉害       106.488462  138.769231
+咽喉肿痛,咽口水都疼          98.835294  122.690608
+失眠多梦快一个月了           99.954071  124.173913
+头晕乏力,在家测血压偏高        98.907975  174.598684
+孩子发热38.5度两天了       102.801603  140.255061
+小腹坠胀隐隐作痛            98.987448  121.149573
+幼儿园有流感,孩子开始打喷嚏流鼻涕  101.942000  136.082996
+手臂上起红疹,特别痒          97.321705  127.763889
+拉肚子两天,大便水样         103.279835  138.524904
+智齿发炎半边脸都肿了         101.482759  130.662857
+月经推迟了十来天            97.897638  262.079832
+白带异常有异味             95.023041  128.446429
+眼睛红痒分泌物多            95.662037  129.791855
+经期量突然变多             99.596708  415.180672
+耳朵疼,总用手去抓          102.800377  191.064885
+耳鸣嗡嗡响三天            103.605769  126.946237
+胃胀反酸一个星期           102.232558  131.383648
+胸闷气短,爬两层楼就加重       108.391919  120.942797
+脚趾缝脱皮发痒            102.176000  248.775758
+脸上爆痘,下巴最严重          93.893130  122.190939
+腹泻伴低烧一天            141.762677  125.332008
+荨麻疹反反复复两个星期        104.817164  132.406844
+非经期少量出血             93.927885  129.439394
+鼻子不通,黄鼻涕多           94.827103  125.290503
+
+[weekly-volume-and-waits]
+claim: Weekly volume per arm grows from 1,164 control and 1,245 test in the first week to 1,774 and 1,772 in the last, while control's weekly mean response time swings from 96.9 s to 228.3 s and the test arm stays between 90.4 s and 119.7 s.
+tables: d = data/data.csv
+code: d.assign(g=d.group.str.strip()).assign(w=pd.to_datetime(d.enter_date, format='mixed').dt.to_period('W').astype(str)).groupby(['w','g']).agg(n=('user_id','size'), frs=('first_response_seconds','mean'))
+output:
+                              n         frs
+w                     g                    
+2024-11-18/2024-11-24 实验组  1245   93.851757
+                      对照组  1164  121.949045
+2024-11-25/2024-12-01 实验组  1350   90.384736
+                      对照组  1407   96.885075
+2024-12-02/2024-12-08 实验组  1463   90.702020
+                      对照组  1462  123.256688
+2024-12-09/2024-12-15 实验组  1513  110.197368
+                      对照组  1609  154.654700
+2024-12-16/2024-12-22 实验组  1644  109.111753
+                      对照组  1597  228.272787
+2024-12-23/2024-12-29 实验组  1772  119.723606
+                      对照组  1774  167.353837
+
+[dirty-group-labels]
+claim: The group column needs trimming: 10 rows read '实验组 ' and 9 read '对照组 ' with a trailing space, so an untrimmed value count returns four labels (9,004, 8,977, 10, 9) instead of two.
+tables: d = data/data.csv
+code: d.group.value_counts()
+output:
+group
+对照组     9004
+实验组     8977
+实验组       10
+对照组        9
+
+[missing-response-time]
+claim: Response time is blank for exactly the 903 users who were lost before a doctor answered, and present for all 17,097 others.
+tables: d = data/data.csv
+code: d.groupby('lost_before_doctor').first_response_seconds.agg(['size','count'])
+output:
+                     size  count
+lost_before_doctor              
+0                   17097  17097
+1                     903      0
+
+[missing-consult-length]
+claim: Consultation length is recorded only for the 15,836 completed consultations; all 2,164 incomplete ones are blank.
+tables: d = data/data.csv
+code: d.groupby('is_completed').consult_minutes.agg(['size','count'])
+output:
+               size  count
+is_completed              
+0              2164      0
+1             15836  15836
+
+[platform-mix]
+claim: Traffic splits Android 7,514, iOS 6,870 and WeChat mini-program 3,610, with 6 rows missing a platform.
+tables: d = data/data.csv
+code: d.platform.value_counts(dropna=False)
+output:
+platform
+Android    7514
+iOS        6870
+微信小程序      3610
+NaN           6
+
+[department-mix]
+claim: Pediatrics (5,246) and internal medicine (5,083) dominate the case mix, ahead of dermatology (3,121), gynecology (2,490) and ENT (五官科, 2,060).
+tables: d = data/data.csv
+code: d.department.value_counts()
+output:
+department
+儿科     5246
+内科     5083
+皮肤科    3121
+妇科     2490
+五官科    2060
+
+[returning-users-mix]
+claim: Returning users (老用户) outnumber new users more than two to one: 12,221 against 5,779.
+tables: d = data/data.csv
+code: d.user_type.value_counts()
+output:
+user_type
+老用户    12221
+新用户     5779

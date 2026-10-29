@@ -18,7 +18,7 @@ facts = [
   },
   {
     "id": "two-minute-response-share",
-    "claim": "Among observed response times, 68.58% of Treatment users receive a first response within 120 seconds versus 53.79% of Control users, a 14.79 percentage-point increase.",
+    "claim": "Among observed response times, 72.41% of Treatment users receive a first response within 120 seconds versus 56.46% of Control users, a 15.95 percentage-point increase.",
     "tables": {"data": "data/data.csv"},
     "code": "(lambda x: pd.Series({'Control_response_n': x.loc['Control','response_n'], 'Treatment_response_n': x.loc['Treatment','response_n'], 'Control_within_120_pct': x.loc['Control','within_120_pct'], 'Treatment_within_120_pct': x.loc['Treatment','within_120_pct'], 'increase_pp': x.loc['Treatment','within_120_pct']-x.loc['Control','within_120_pct']}))(data.assign(arm=" + ARM + ").groupby('arm').first_response_seconds.agg(response_n='count', within_120_pct=lambda s: 100*s.dropna().le(120).mean())).round(2)"
   },
@@ -78,7 +78,7 @@ facts = [
   },
   {
     "id": "dermatology-complaint-loss",
-    "claim": "All five Dermatology complaints have higher pre-doctor loss in Treatment; the largest increase is for small red spots on the back, from 6.88% to 13.92% (7.04 points).",
+    "claim": "All five Dermatology complaints have higher pre-doctor loss in Treatment; the largest increase is for small red spots on the back, from 6.88% to 13.92% (7.05 points).",
     "tables": {"data": "data/data.csv"},
     "code": "(lambda x: pd.DataFrame({'Control_n': x[('n','Control')], 'Treatment_n': x[('n','Treatment')], 'Control_loss_pct': 100*x[('loss','Control')], 'Treatment_loss_pct': 100*x[('loss','Treatment')], 'increase_pp': 100*(x[('loss','Treatment')]-x[('loss','Control')])}, index=x.index))(data[data.department.eq('皮肤科')].assign(arm=" + ARM + ", complaint=data.chief_complaint.map({'后背长了不少小红点':'Small red spots on back', '手臂上起红疹,特别痒':'Itchy red rash on arm', '脚趾缝脱皮发痒':'Peeling, itchy toe webs', '脸上爆痘,下巴最严重':'Acne; worst on chin', '荨麻疹反反复复两个星期':'Recurrent urticaria for 2 weeks'})).groupby(['complaint','arm']).agg(n=('user_id','size'), loss=('lost_before_doctor','mean')).unstack('arm')).round(2)"
   },

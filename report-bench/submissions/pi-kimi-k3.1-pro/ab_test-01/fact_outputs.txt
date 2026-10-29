@@ -1,0 +1,167 @@
+
+====================================================================================================
+1 cohort-scope
+The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.
+users                                      18000
+unique_users                               18000
+Control_users                               9013
+Treatment_users                             8987
+dates                                         42
+first_date                            2024-11-18
+last_date                             2024-12-29
+group_labels_with_extra_whitespace            19
+dtype: object
+
+====================================================================================================
+2 median-response-gain
+Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively.
+Control_median_seconds      110.0
+Treatment_median_seconds     88.0
+seconds_saved                22.0
+reduction_pct                20.0
+Control_p90_seconds         234.0
+Treatment_p90_seconds       177.0
+dtype: float64
+
+====================================================================================================
+3 two-minute-response-share
+Among observed response times, 72.41% of Treatment users receive a first response within 120 seconds versus 56.46% of Control users, a 15.95 percentage-point increase.
+Control_response_n          8586.00
+Treatment_response_n        8511.00
+Control_within_120_pct        56.46
+Treatment_within_120_pct      72.41
+increase_pp                   15.95
+dtype: float64
+
+====================================================================================================
+4 daily-response-consistency
+Treatment has the lower daily median response on 39 of 42 days; the median daily Control-minus-Treatment gap is 22.25 seconds, ranging from -4.0 to 53.5 seconds.
+days                         42.00
+Treatment_faster_days        39.00
+median_daily_gap_seconds     22.25
+minimum_daily_gap_seconds    -4.00
+maximum_daily_gap_seconds    53.50
+dtype: float64
+
+====================================================================================================
+5 overall-completion-flat
+Overall completion is 87.94% in Treatment (7,903 of 8,987) versus 88.02% in Control (7,933 of 9,013), a -0.08 percentage-point difference with a 95% confidence interval of -1.03 to 0.87 points.
+Control_n                   9013.00
+Treatment_n                 8987.00
+Control_completed           7933.00
+Treatment_completed         7903.00
+Control_completion_pct        88.02
+Treatment_completion_pct      87.94
+difference_pp                 -0.08
+ci95_low_pp                   -1.03
+ci95_high_pp                   0.87
+dtype: float64
+
+====================================================================================================
+6 overall-predoctor-loss
+Pre-doctor loss is 5.30% in Treatment (476 users) versus 4.74% in Control (427), a 0.56 percentage-point increase whose 95% confidence interval runs from -0.08 to 1.20 points.
+Control_lost          427.00
+Treatment_lost        476.00
+Control_loss_pct        4.74
+Treatment_loss_pct      5.30
+increase_pp             0.56
+ci95_low_pp            -0.08
+ci95_high_pp            1.20
+dtype: float64
+
+====================================================================================================
+7 department-outcomes
+Department results diverge: Dermatology completion changes from 85.04% to 80.51% (-4.54 points) and pre-doctor loss from 7.66% to 12.71% (5.04 points), while Pediatrics completion changes from 88.94% to 90.37% (1.44 points).
+                     Control_n  Treatment_n  ...  Treatment_loss_pct  loss_delta_pp
+dept                                         ...                                   
+Dermatology               1618         1503  ...               12.71           5.04
+ENT & ophthalmology        987         1073  ...                5.41           0.95
+Gynecology                1268         1222  ...                4.83          -0.38
+Internal medicine         2501         2582  ...                4.03          -0.37
+Pediatrics                2639         2607  ...                2.45          -0.69
+
+[5 rows x 8 columns]
+
+====================================================================================================
+8 dermatology-confidence
+In Dermatology, the Treatment-minus-Control pre-doctor loss difference is 5.04 points (95% CI 2.92 to 7.17), and the completion difference is -4.54 points (95% CI -7.19 to -1.89).
+loss_difference_pp          5.04
+loss_ci95_low_pp            2.92
+loss_ci95_high_pp           7.17
+completion_difference_pp   -4.54
+completion_ci95_low_pp     -7.19
+completion_ci95_high_pp    -1.89
+dtype: float64
+
+====================================================================================================
+9 response-by-department
+Median first response is faster in Treatment in every department, with Control-minus-Treatment savings ranging from 20 seconds in Internal medicine and Gynecology to 26 seconds in Pediatrics.
+                     Control_median_seconds  ...  seconds_saved
+dept                                         ...               
+Dermatology                           107.0  ...           21.0
+ENT & ophthalmology                   105.0  ...           23.0
+Gynecology                            106.0  ...           20.0
+Internal medicine                     107.0  ...           20.0
+Pediatrics                            117.0  ...           26.0
+
+[5 rows x 3 columns]
+
+====================================================================================================
+10 consultation-duration
+Among completed consultations, median duration is 10.4 minutes in Treatment versus 11.2 in Control, a 0.8-minute reduction, based on 7,903 and 7,933 observed durations respectively.
+Control_completed_n         7933.00
+Treatment_completed_n       7903.00
+Control_median_minutes        11.20
+Treatment_median_minutes      10.40
+minutes_saved                  0.80
+Control_p90_minutes           20.88
+Treatment_p90_minutes         19.30
+dtype: float64
+
+====================================================================================================
+11 followup-by-user-type
+Among non-missing follow-up values, Treatment raises new-user 7-day follow-up from 6.84% to 9.84% (3.00 points; 95% CI 1.57 to 4.43), but lowers returning-user follow-up from 14.93% to 13.22% (-1.71 points; 95% CI -2.95 to -0.47).
+                 Control_n  Treatment_n  ...  ci95_low_pp  ci95_high_pp
+user_kind                                ...                           
+New users             2895         2826  ...         1.57          4.43
+Returning users       6028         6065  ...        -2.95         -0.47
+
+[2 rows x 7 columns]
+
+====================================================================================================
+12 top-complaints
+Ear pain with frequent ear pulling is the most common complaint (1,082 users), narrowly ahead of cough that is worse at night (1,072); the five most frequent complaints each have at least 1,034 users.
+complaint
+Ear pain; frequent ear pulling      1082
+Cough for 3 days; worse at night    1072
+Diarrhea with low-grade fever       1048
+Bloating and reflux for a week      1037
+Watery diarrhea for 2 days          1034
+Name: users, dtype: int64
+
+====================================================================================================
+13 dermatology-complaint-loss
+All five Dermatology complaints have higher pre-doctor loss in Treatment; the largest increase is for small red spots on the back, from 6.88% to 13.92% (7.05 points).
+                                 Control_n  ...  increase_pp
+complaint                                   ...             
+Acne; worst on chin                    332  ...         5.15
+Itchy red rash on arm                  319  ...         2.23
+Peeling, itchy toe webs                351  ...         5.68
+Recurrent urticaria for 2 weeks        289  ...         4.55
+Small red spots on back                320  ...         7.05
+
+[5 rows x 5 columns]
+
+====================================================================================================
+14 data-quality-and-missingness
+The file has 186 missing follow-up values, 36 missing complaints and 6 missing platforms; all 903 missing response times align with pre-doctor loss and all 2,164 missing consultation durations align with incomplete consultations, while 7 response times exceed one hour and 7 durations equal 640 minutes.
+missing_followup                     186
+missing_complaint                     36
+missing_platform                       6
+missing_response                     903
+response_loss_mismatches               0
+missing_consult_duration            2164
+consult_incomplete_mismatches          0
+response_times_over_1_hour             7
+consult_durations_at_640_minutes       7
+dtype: int64

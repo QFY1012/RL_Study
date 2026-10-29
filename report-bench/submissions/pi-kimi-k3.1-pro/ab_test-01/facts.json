@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cohort-scope",
+    "claim": "The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda d: pd.Series({'users': d.user_id.size, 'unique_users': d.user_id.nunique(), 'Control_users': d.group.str.strip().eq('对照组').sum(), 'Treatment_users': d.group.str.strip().eq('实验组').sum(), 'dates': pd.to_datetime(d.enter_date, format='mixed').nunique(), 'first_date': str(pd.to_datetime(d.enter_date, format='mixed').min().date()), 'last_date': str(pd.to_datetime(d.enter_date, format='mixed').max().date()), 'group_labels_with_extra_whitespace': d.group.ne(d.group.str.strip()).sum()}))(data)"
+  },
+  {
+    "id": "median-response-gain",
+    "claim": "Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'Control_median_seconds': x.loc['Control','median'], 'Treatment_median_seconds': x.loc['Treatment','median'], 'seconds_saved': x.loc['Control','median']-x.loc['Treatment','median'], 'reduction_pct': 100*(x.loc['Control','median']-x.loc['Treatment','median'])/x.loc['Control','median'], 'Control_p90_seconds': x.loc['Control','p90'], 'Treatment_p90_seconds': x.loc['Treatment','p90']}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').first_response_seconds.agg(median='median', p90=lambda s: s.quantile(.9))).round(1)"
+  },
+  {
+    "id": "two-minute-response-share",
+    "claim": "Among observed response times, 72.41% of Treatment users receive a first response within 120 seconds versus 56.46% of Control users, a 15.95 percentage-point increase.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'Control_response_n': x.loc['Control','response_n'], 'Treatment_response_n': x.loc['Treatment','response_n'], 'Control_within_120_pct': x.loc['Control','within_120_pct'], 'Treatment_within_120_pct': x.loc['Treatment','within_120_pct'], 'increase_pp': x.loc['Treatment','within_120_pct']-x.loc['Control','within_120_pct']}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').first_response_seconds.agg(response_n='count', within_120_pct=lambda s: 100*s.dropna().le(120).mean())).round(2)"
+  },
+  {
+    "id": "daily-response-consistency",
+    "claim": "Treatment has the lower daily median response on 39 of 42 days; the median daily Control-minus-Treatment gap is 22.25 seconds, ranging from -4.0 to 53.5 seconds.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'days': len(x), 'Treatment_faster_days': x.Treatment.lt(x.Control).sum(), 'median_daily_gap_seconds': x.Control.sub(x.Treatment).median(), 'minimum_daily_gap_seconds': x.Control.sub(x.Treatment).min(), 'maximum_daily_gap_seconds': x.Control.sub(x.Treatment).max()}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'}), date=pd.to_datetime(data.enter_date, format='mixed')).groupby(['date','arm']).first_response_seconds.median().unstack('arm'))"
+  },
+  {
+    "id": "overall-completion-flat",
+    "claim": "Overall completion is 87.94% in Treatment (7,903 of 8,987) versus 88.02% in Control (7,933 of 9,013), a -0.08 percentage-point difference with a 95% confidence interval of -1.03 to 0.87 points.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'Control_n': x.loc['Control','count'], 'Treatment_n': x.loc['Treatment','count'], 'Control_completed': x.loc['Control','sum'], 'Treatment_completed': x.loc['Treatment','sum'], 'Control_completion_pct': 100*x.loc['Control','mean'], 'Treatment_completion_pct': 100*x.loc['Treatment','mean'], 'difference_pp': 100*(x.loc['Treatment','mean']-x.loc['Control','mean']), 'ci95_low_pp': 100*((x.loc['Treatment','mean']-x.loc['Control','mean'])-1.96*np.sqrt(x.loc['Control','mean']*(1-x.loc['Control','mean'])/x.loc['Control','count']+x.loc['Treatment','mean']*(1-x.loc['Treatment','mean'])/x.loc['Treatment','count'])), 'ci95_high_pp': 100*((x.loc['Treatment','mean']-x.loc['Control','mean'])+1.96*np.sqrt(x.loc['Control','mean']*(1-x.loc['Control','mean'])/x.loc['Control','count']+x.loc['Treatment','mean']*(1-x.loc['Treatment','mean'])/x.loc['Treatment','count']))}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').is_completed.agg(['count','sum','mean'])).round(2)"
+  },
+  {
+    "id": "overall-predoctor-loss",
+    "claim": "Pre-doctor loss is 5.30% in Treatment (476 users) versus 4.74% in Control (427), a 0.56 percentage-point increase whose 95% confidence interval runs from -0.08 to 1.20 points.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'Control_lost': x.loc['Control','sum'], 'Treatment_lost': x.loc['Treatment','sum'], 'Control_loss_pct': 100*x.loc['Control','mean'], 'Treatment_loss_pct': 100*x.loc['Treatment','mean'], 'increase_pp': 100*(x.loc['Treatment','mean']-x.loc['Control','mean']), 'ci95_low_pp': 100*((x.loc['Treatment','mean']-x.loc['Control','mean'])-1.96*np.sqrt(x.loc['Control','mean']*(1-x.loc['Control','mean'])/x.loc['Control','count']+x.loc['Treatment','mean']*(1-x.loc['Treatment','mean'])/x.loc['Treatment','count'])), 'ci95_high_pp': 100*((x.loc['Treatment','mean']-x.loc['Control','mean'])+1.96*np.sqrt(x.loc['Control','mean']*(1-x.loc['Control','mean'])/x.loc['Control','count']+x.loc['Treatment','mean']*(1-x.loc['Treatment','mean'])/x.loc['Treatment','count']))}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').lost_before_doctor.agg(['count','sum','mean'])).round(2)"
+  },
+  {
+    "id": "department-outcomes",
+    "claim": "Department results diverge: Dermatology completion changes from 85.04% to 80.51% (-4.54 points) and pre-doctor loss from 7.66% to 12.71% (5.04 points), while Pediatrics completion changes from 88.94% to 90.37% (1.44 points).",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.DataFrame({'Control_n': x[('n','Control')], 'Treatment_n': x[('n','Treatment')], 'Control_completion_pct': 100*x[('completion','Control')], 'Treatment_completion_pct': 100*x[('completion','Treatment')], 'completion_delta_pp': 100*(x[('completion','Treatment')]-x[('completion','Control')]), 'Control_loss_pct': 100*x[('loss','Control')], 'Treatment_loss_pct': 100*x[('loss','Treatment')], 'loss_delta_pp': 100*(x[('loss','Treatment')]-x[('loss','Control')])}, index=x.index))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'}), dept=data.department.map({'内科':'Internal medicine','儿科':'Pediatrics','皮肤科':'Dermatology','妇科':'Gynecology','五官科':'ENT & ophthalmology'})).groupby(['dept','arm']).agg(n=('user_id','size'), completion=('is_completed','mean'), loss=('lost_before_doctor','mean')).unstack('arm')).round(2)"
+  },
+  {
+    "id": "dermatology-confidence",
+    "claim": "In Dermatology, the Treatment-minus-Control pre-doctor loss difference is 5.04 points (95% CI 2.92 to 7.17), and the completion difference is -4.54 points (95% CI -7.19 to -1.89).",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'loss_difference_pp': 100*(x.loc['Treatment','loss']-x.loc['Control','loss']), 'loss_ci95_low_pp': 100*((x.loc['Treatment','loss']-x.loc['Control','loss'])-1.96*np.sqrt(x.loc['Control','loss']*(1-x.loc['Control','loss'])/x.loc['Control','n']+x.loc['Treatment','loss']*(1-x.loc['Treatment','loss'])/x.loc['Treatment','n'])), 'loss_ci95_high_pp': 100*((x.loc['Treatment','loss']-x.loc['Control','loss'])+1.96*np.sqrt(x.loc['Control','loss']*(1-x.loc['Control','loss'])/x.loc['Control','n']+x.loc['Treatment','loss']*(1-x.loc['Treatment','loss'])/x.loc['Treatment','n'])), 'completion_difference_pp': 100*(x.loc['Treatment','completion']-x.loc['Control','completion']), 'completion_ci95_low_pp': 100*((x.loc['Treatment','completion']-x.loc['Control','completion'])-1.96*np.sqrt(x.loc['Control','completion']*(1-x.loc['Control','completion'])/x.loc['Control','n']+x.loc['Treatment','completion']*(1-x.loc['Treatment','completion'])/x.loc['Treatment','n'])), 'completion_ci95_high_pp': 100*((x.loc['Treatment','completion']-x.loc['Control','completion'])+1.96*np.sqrt(x.loc['Control','completion']*(1-x.loc['Control','completion'])/x.loc['Control','n']+x.loc['Treatment','completion']*(1-x.loc['Treatment','completion'])/x.loc['Treatment','n']))}))(data[data.department.eq('皮肤科')].assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').agg(n=('user_id','size'), loss=('lost_before_doctor','mean'), completion=('is_completed','mean'))).round(2)"
+  },
+  {
+    "id": "response-by-department",
+    "claim": "Median first response is faster in Treatment in every department, with Control-minus-Treatment savings ranging from 20 seconds in Internal medicine and Gynecology to 26 seconds in Pediatrics.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.DataFrame({'Control_median_seconds': x['Control'], 'Treatment_median_seconds': x['Treatment'], 'seconds_saved': x['Control']-x['Treatment']}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'}), dept=data.department.map({'内科':'Internal medicine','儿科':'Pediatrics','皮肤科':'Dermatology','妇科':'Gynecology','五官科':'ENT & ophthalmology'})).groupby(['dept','arm']).first_response_seconds.median().unstack('arm'))"
+  },
+  {
+    "id": "consultation-duration",
+    "claim": "Among completed consultations, median duration is 10.4 minutes in Treatment versus 11.2 in Control, a 0.8-minute reduction, based on 7,903 and 7,933 observed durations respectively.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.Series({'Control_completed_n': x.loc['Control','n'], 'Treatment_completed_n': x.loc['Treatment','n'], 'Control_median_minutes': x.loc['Control','median'], 'Treatment_median_minutes': x.loc['Treatment','median'], 'minutes_saved': x.loc['Control','median']-x.loc['Treatment','median'], 'Control_p90_minutes': x.loc['Control','p90'], 'Treatment_p90_minutes': x.loc['Treatment','p90']}))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'})).groupby('arm').consult_minutes.agg(n='count', median='median', p90=lambda s: s.quantile(.9))).round(2)"
+  },
+  {
+    "id": "followup-by-user-type",
+    "claim": "Among non-missing follow-up values, Treatment raises new-user 7-day follow-up from 6.84% to 9.84% (3.00 points; 95% CI 1.57 to 4.43), but lowers returning-user follow-up from 14.93% to 13.22% (-1.71 points; 95% CI -2.95 to -0.47).",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.DataFrame({'Control_n': x[('n','Control')], 'Treatment_n': x[('n','Treatment')], 'Control_followup_pct': 100*x[('rate','Control')], 'Treatment_followup_pct': 100*x[('rate','Treatment')], 'difference_pp': 100*(x[('rate','Treatment')]-x[('rate','Control')]), 'ci95_low_pp': 100*((x[('rate','Treatment')]-x[('rate','Control')])-1.96*np.sqrt(x[('rate','Control')]*(1-x[('rate','Control')])/x[('n','Control')]+x[('rate','Treatment')]*(1-x[('rate','Treatment')])/x[('n','Treatment')])), 'ci95_high_pp': 100*((x[('rate','Treatment')]-x[('rate','Control')])+1.96*np.sqrt(x[('rate','Control')]*(1-x[('rate','Control')])/x[('n','Control')]+x[('rate','Treatment')]*(1-x[('rate','Treatment')])/x[('n','Treatment')]))}, index=x.index))(data.assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'}), user_kind=data.user_type.map({'新用户':'New users','老用户':'Returning users'})).groupby(['user_kind','arm']).followup_7d.agg(n='count', rate='mean').unstack('arm')).round(2)"
+  },
+  {
+    "id": "top-complaints",
+    "claim": "Ear pain with frequent ear pulling is the most common complaint (1,082 users), narrowly ahead of cough that is worse at night (1,072); the five most frequent complaints each have at least 1,034 users.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "data.chief_complaint.replace({'耳朵疼,总用手去抓':'Ear pain; frequent ear pulling', '咳嗽三天,夜里咳得更厉害':'Cough for 3 days; worse at night', '腹泻伴低烧一天':'Diarrhea with low-grade fever', '胃胀反酸一个星期':'Bloating and reflux for a week', '拉肚子两天,大便水样':'Watery diarrhea for 2 days'}).value_counts().head(5).rename_axis('complaint').rename('users')"
+  },
+  {
+    "id": "dermatology-complaint-loss",
+    "claim": "All five Dermatology complaints have higher pre-doctor loss in Treatment; the largest increase is for small red spots on the back, from 6.88% to 13.92% (7.05 points).",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda x: pd.DataFrame({'Control_n': x[('n','Control')], 'Treatment_n': x[('n','Treatment')], 'Control_loss_pct': 100*x[('loss','Control')], 'Treatment_loss_pct': 100*x[('loss','Treatment')], 'increase_pp': 100*(x[('loss','Treatment')]-x[('loss','Control')])}, index=x.index))(data[data.department.eq('皮肤科')].assign(arm=data.group.str.strip().map({'对照组':'Control','实验组':'Treatment'}), complaint=data.chief_complaint.map({'后背长了不少小红点':'Small red spots on back', '手臂上起红疹,特别痒':'Itchy red rash on arm', '脚趾缝脱皮发痒':'Peeling, itchy toe webs', '脸上爆痘,下巴最严重':'Acne; worst on chin', '荨麻疹反反复复两个星期':'Recurrent urticaria for 2 weeks'})).groupby(['complaint','arm']).agg(n=('user_id','size'), loss=('lost_before_doctor','mean')).unstack('arm')).round(2)"
+  },
+  {
+    "id": "data-quality-and-missingness",
+    "claim": "The file has 186 missing follow-up values, 36 missing complaints and 6 missing platforms; all 903 missing response times align with pre-doctor loss and all 2,164 missing consultation durations align with incomplete consultations, while 7 response times exceed one hour and 7 durations equal 640 minutes.",
+    "tables": {
+      "data": "data/data.csv"
+    },
+    "code": "(lambda d: pd.Series({'missing_followup': d.followup_7d.isna().sum(), 'missing_complaint': d.chief_complaint.isna().sum(), 'missing_platform': d.platform.isna().sum(), 'missing_response': d.first_response_seconds.isna().sum(), 'response_loss_mismatches': d.first_response_seconds.isna().ne(d.lost_before_doctor.astype(bool)).sum(), 'missing_consult_duration': d.consult_minutes.isna().sum(), 'consult_incomplete_mismatches': d.consult_minutes.isna().ne(d.is_completed.eq(0)).sum(), 'response_times_over_1_hour': d.first_response_seconds.gt(3600).sum(), 'consult_durations_at_640_minutes': d.consult_minutes.eq(640).sum()}))(data)"
+  }
+]

@@ -1,0 +1,4168 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-kimi-k3.1-pro/pockets/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/pockets/data/measurements.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 200,
+     "left": 769,
+     "w": 570,
+     "h": 362,
+     "sig": "3fd9d1b7"
+    }
+   ]
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -250,
+     "left": 769,
+     "w": 570,
+     "h": 362,
+     "sig": "3fd9d1b7"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 617,
+     "left": 128,
+     "w": 783,
+     "h": 417,
+     "sig": "bf463096"
+    }
+   ]
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 4050,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 167,
+     "left": 128,
+     "w": 783,
+     "h": 417,
+     "sig": "bf463096"
+    }
+   ]
+  },
+  {
+   "file": "frames/10.jpg",
+   "scroll_y": 4500,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -283,
+     "left": 128,
+     "w": 783,
+     "h": 417,
+     "sig": "bf463096"
+    }
+   ]
+  },
+  {
+   "file": "frames/11.jpg",
+   "scroll_y": 4950,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/12.jpg",
+   "scroll_y": 5330,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    570,
+    362
+   ],
+   "frames": [
+    0,
+    1
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    783,
+    417
+   ],
+   "frames": [
+    8,
+    10
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 159,
+   "x": 792,
+   "w": 163,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front pocket Same scale · centimetres"
+  },
+  {
+   "tag": "div",
+   "y": 159,
+   "x": 1224,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean depth gap"
+  },
+  {
+   "tag": "div",
+   "y": 164,
+   "x": 100,
+   "w": 608,
+   "in_svg": false,
+   "hidden": false,
+   "text": "An 80-jean measurement report"
+  },
+  {
+   "tag": "strong",
+   "y": 170,
+   "x": 1224,
+   "w": 92,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.83 cm"
+  },
+  {
+   "tag": "h1",
+   "y": 204,
+   "x": 100,
+   "w": 608,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pocket gap, measured."
+  },
+  {
+   "tag": "text",
+   "y": 221,
+   "x": 845,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "MEN"
+  },
+  {
+   "tag": "text",
+   "y": 221,
+   "x": 1109,
+   "w": 44,
+   "in_svg": true,
+   "hidden": false,
+   "text": "WOMEN"
+  },
+  {
+   "tag": "p",
+   "y": 408,
+   "x": 100,
+   "w": 550,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Across 20 popular brands, men’s front pockets average 6.8 cm deeper than women’s. The back pockets? Nearly the same size."
+  },
+  {
+   "tag": "text",
+   "y": 509,
+   "x": 845,
+   "w": 80,
+   "in_svg": true,
+   "hidden": false,
+   "text": "20.61 cm"
+  },
+  {
+   "tag": "text",
+   "y": 509,
+   "x": 1109,
+   "w": 80,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.78 cm"
+  },
+  {
+   "tag": "a",
+   "y": 533,
+   "x": 100,
+   "w": 236,
+   "in_svg": false,
+   "hidden": false,
+   "text": "See the measurements"
+  },
+  {
+   "tag": "text",
+   "y": 541,
+   "x": 845,
+   "w": 77,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.87 cm wide"
+  },
+  {
+   "tag": "text",
+   "y": 541,
+   "x": 1109,
+   "w": 77,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.72 cm wide"
+  },
+  {
+   "tag": "a",
+   "y": 548,
+   "x": 360,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How we measured"
+  },
+  {
+   "tag": "span",
+   "y": 549,
+   "x": 304,
+   "w": 11,
+   "in_svg": false,
+   "hidden": false,
+   "text": "↓"
+  },
+  {
+   "tag": "span",
+   "y": 576,
+   "x": 791,
+   "w": 246,
+   "in_svg": false,
+   "hidden": false,
+   "text": "DEPTH = MEAN OF LONGEST + SHORTEST POINTS"
+  },
+  {
+   "tag": "span",
+   "y": 576,
+   "x": 1275,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 / 80"
+  },
+  {
+   "tag": "strong",
+   "y": 690,
+   "x": 236,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Deeper in front"
+  },
+  {
+   "tag": "span",
+   "y": 690,
+   "x": 236,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men’s mean depth versus women’s"
+  },
+  {
+   "tag": "strong",
+   "y": 690,
+   "x": 1075,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back-depth gap"
+  },
+  {
+   "tag": "span",
+   "y": 690,
+   "x": 1075,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The divide is mostly up front"
+  },
+  {
+   "tag": "span",
+   "y": 691,
+   "x": 100,
+   "w": 118,
+   "in_svg": false,
+   "hidden": false,
+   "text": "49.6%"
+  },
+  {
+   "tag": "span",
+   "y": 691,
+   "x": 548,
+   "w": 94,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8.3%"
+  },
+  {
+   "tag": "span",
+   "y": 691,
+   "x": 962,
+   "w": 95,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.4%"
+  },
+  {
+   "tag": "strong",
+   "y": 698,
+   "x": 660,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wider in front"
+  },
+  {
+   "tag": "span",
+   "y": 698,
+   "x": 660,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A much smaller width gap"
+  },
+  {
+   "tag": "div",
+   "y": 864,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "h2",
+   "y": 864,
+   "x": 198,
+   "w": 840,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The front is where the gap lives."
+  },
+  {
+   "tag": "p",
+   "y": 994,
+   "x": 198,
+   "w": 740,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Averaging the longest and shortest measurements gives one depth and one width per pocket. On front depth, the sexes are far apart; on back width, they are nearly together."
+  },
+  {
+   "tag": "span",
+   "y": 1116,
+   "x": 130,
+   "w": 198,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average dimensions · cm"
+  },
+  {
+   "tag": "span",
+   "y": 1117,
+   "x": 748,
+   "w": 38,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 1117,
+   "x": 802,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 1117,
+   "x": 940,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front minus back"
+  },
+  {
+   "tag": "div",
+   "y": 1151,
+   "x": 940,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.87 cm"
+  },
+  {
+   "tag": "span",
+   "y": 1156,
+   "x": 274,
+   "w": 5,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0510152025"
+  },
+  {
+   "tag": "span",
+   "y": 1195,
+   "x": 535,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.78"
+  },
+  {
+   "tag": "div",
+   "y": 1205,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front depth"
+  },
+  {
+   "tag": "div",
+   "y": 1208,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+6.83"
+  },
+  {
+   "tag": "div",
+   "y": 1210,
+   "x": 940,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Extra front-pocket depth on men’s jeans, compared with their own back pockets."
+  },
+  {
+   "tag": "small",
+   "y": 1225,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean of max + min"
+  },
+  {
+   "tag": "small",
+   "y": 1225,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "cm"
+  },
+  {
+   "tag": "span",
+   "y": 1236,
+   "x": 672,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.61"
+  },
+  {
+   "tag": "span",
+   "y": 1269,
+   "x": 534,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.72"
+  },
+  {
+   "tag": "div",
+   "y": 1279,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front width"
+  },
+  {
+   "tag": "div",
+   "y": 1282,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.15"
+  },
+  {
+   "tag": "span",
+   "y": 1291,
+   "x": 940,
+   "w": 44,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 1292,
+   "x": 1249,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.87 cm"
+  },
+  {
+   "tag": "small",
+   "y": 1299,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean of max + min"
+  },
+  {
+   "tag": "small",
+   "y": 1299,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "cm"
+  },
+  {
+   "tag": "span",
+   "y": 1310,
+   "x": 557,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.87"
+  },
+  {
+   "tag": "span",
+   "y": 1317,
+   "x": 940,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front"
+  },
+  {
+   "tag": "span",
+   "y": 1318,
+   "x": 1269,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.61"
+  },
+  {
+   "tag": "span",
+   "y": 1337,
+   "x": 940,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back"
+  },
+  {
+   "tag": "span",
+   "y": 1338,
+   "x": 1269,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.74"
+  },
+  {
+   "tag": "span",
+   "y": 1343,
+   "x": 536,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.85"
+  },
+  {
+   "tag": "div",
+   "y": 1353,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back depth"
+  },
+  {
+   "tag": "div",
+   "y": 1356,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.89"
+  },
+  {
+   "tag": "small",
+   "y": 1373,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean of max + min"
+  },
+  {
+   "tag": "small",
+   "y": 1373,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "cm"
+  },
+  {
+   "tag": "span",
+   "y": 1384,
+   "x": 554,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.74"
+  },
+  {
+   "tag": "span",
+   "y": 1394,
+   "x": 940,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 1395,
+   "x": 1249,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "-0.08 cm"
+  },
+  {
+   "tag": "span",
+   "y": 1417,
+   "x": 510,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.54"
+  },
+  {
+   "tag": "span",
+   "y": 1420,
+   "x": 940,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front"
+  },
+  {
+   "tag": "span",
+   "y": 1421,
+   "x": 1269,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.78"
+  },
+  {
+   "tag": "div",
+   "y": 1427,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back width"
+  },
+  {
+   "tag": "div",
+   "y": 1430,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.39"
+  },
+  {
+   "tag": "span",
+   "y": 1440,
+   "x": 940,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back"
+  },
+  {
+   "tag": "span",
+   "y": 1441,
+   "x": 1269,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.85"
+  },
+  {
+   "tag": "small",
+   "y": 1447,
+   "x": 130,
+   "w": 128,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean of max + min"
+  },
+  {
+   "tag": "small",
+   "y": 1447,
+   "x": 792,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "cm"
+  },
+  {
+   "tag": "span",
+   "y": 1458,
+   "x": 518,
+   "w": 30,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.93"
+  },
+  {
+   "tag": "p",
+   "y": 1478,
+   "x": 940,
+   "w": 371,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women’s front and back depths are effectively equal: 13.78 cm versus 13.85 cm, a difference of just −0.08 cm."
+  },
+  {
+   "tag": "div",
+   "y": 1749,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "h2",
+   "y": 1749,
+   "x": 198,
+   "w": 840,
+   "in_svg": false,
+   "hidden": false,
+   "text": "No brand reverses the pattern."
+  },
+  {
+   "tag": "p",
+   "y": 1879,
+   "x": 198,
+   "w": 740,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each brand contributes two men’s and two women’s designs. Men’s average front depth is higher in every one of the 20 brand groups—though the size of the gap varies considerably."
+  },
+  {
+   "tag": "strong",
+   "y": 1991,
+   "x": 219,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20 / 20"
+  },
+  {
+   "tag": "strong",
+   "y": 1991,
+   "x": 604,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+10.25 cm"
+  },
+  {
+   "tag": "strong",
+   "y": 1991,
+   "x": 988,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.50 cm"
+  },
+  {
+   "tag": "span",
+   "y": 2022,
+   "x": 219,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brands with deeper men’s front pockets"
+  },
+  {
+   "tag": "span",
+   "y": 2022,
+   "x": 604,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Largest gap · Ralph Lauren"
+  },
+  {
+   "tag": "span",
+   "y": 2022,
+   "x": 988,
+   "w": 331,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Smallest gap · Abercrombie"
+  },
+  {
+   "tag": "span",
+   "y": 2105,
+   "x": 130,
+   "w": 248,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average front depth by brand"
+  },
+  {
+   "tag": "button",
+   "y": 2108,
+   "x": 1099,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Largest gap"
+  },
+  {
+   "tag": "button",
+   "y": 2108,
+   "x": 1183,
+   "w": 82,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men’s depth"
+  },
+  {
+   "tag": "button",
+   "y": 2108,
+   "x": 1269,
+   "w": 41,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A–Z"
+  },
+  {
+   "tag": "span",
+   "y": 2116,
+   "x": 1062,
+   "w": 27,
+   "in_svg": false,
+   "hidden": false,
+   "text": "SORT"
+  },
+  {
+   "tag": "span",
+   "y": 2129,
+   "x": 130,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 2129,
+   "x": 200,
+   "w": 38,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 2168,
+   "x": 305,
+   "w": 5,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0510152025"
+  },
+  {
+   "tag": "span",
+   "y": 2173,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand"
+  },
+  {
+   "tag": "span",
+   "y": 2173,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap · cm"
+  },
+  {
+   "tag": "div",
+   "y": 2206,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "div",
+   "y": 2208,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+10.25"
+  },
+  {
+   "tag": "div",
+   "y": 2237,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "div",
+   "y": 2239,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+9.32"
+  },
+  {
+   "tag": "div",
+   "y": 2268,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "div",
+   "y": 2270,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+9.25"
+  },
+  {
+   "tag": "div",
+   "y": 2299,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "div",
+   "y": 2301,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.88"
+  },
+  {
+   "tag": "div",
+   "y": 2330,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi’s"
+  },
+  {
+   "tag": "div",
+   "y": 2332,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.70"
+  },
+  {
+   "tag": "div",
+   "y": 2361,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "div",
+   "y": 2363,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.63"
+  },
+  {
+   "tag": "div",
+   "y": 2392,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "div",
+   "y": 2394,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.63"
+  },
+  {
+   "tag": "div",
+   "y": 2423,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 For All Mankind"
+  },
+  {
+   "tag": "div",
+   "y": 2425,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.63"
+  },
+  {
+   "tag": "div",
+   "y": 2454,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "div",
+   "y": 2456,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+8.50"
+  },
+  {
+   "tag": "div",
+   "y": 2485,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "div",
+   "y": 2487,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+7.75"
+  },
+  {
+   "tag": "div",
+   "y": 2516,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "div",
+   "y": 2518,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+7.43"
+  },
+  {
+   "tag": "div",
+   "y": 2547,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "div",
+   "y": 2549,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+7.32"
+  },
+  {
+   "tag": "div",
+   "y": 2578,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "div",
+   "y": 2580,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+6.38"
+  },
+  {
+   "tag": "div",
+   "y": 2609,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "div",
+   "y": 2611,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+5.88"
+  },
+  {
+   "tag": "div",
+   "y": 2640,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "div",
+   "y": 2642,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+4.75"
+  },
+  {
+   "tag": "div",
+   "y": 2671,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "div",
+   "y": 2673,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+4.50"
+  },
+  {
+   "tag": "div",
+   "y": 2702,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "div",
+   "y": 2704,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+4.40"
+  },
+  {
+   "tag": "div",
+   "y": 2733,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "div",
+   "y": 2735,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+3.63"
+  },
+  {
+   "tag": "div",
+   "y": 2764,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "div",
+   "y": 2766,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+2.25"
+  },
+  {
+   "tag": "div",
+   "y": 2795,
+   "x": 130,
+   "w": 155,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "div",
+   "y": 2797,
+   "x": 1234,
+   "w": 76,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.50"
+  },
+  {
+   "tag": "span",
+   "y": 2835,
+   "x": 130,
+   "w": 346,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Connected dots show the women’s and men’s means for the same brand."
+  },
+  {
+   "tag": "span",
+   "y": 2835,
+   "x": 1116,
+   "w": 194,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap = men’s mean − women’s mean · cm"
+  },
+  {
+   "tag": "div",
+   "y": 3063,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "h2",
+   "y": 3063,
+   "x": 198,
+   "w": 840,
+   "in_svg": false,
+   "hidden": false,
+   "text": "One phone height. Four different answers."
+  },
+  {
+   "tag": "p",
+   "y": 3193,
+   "x": 198,
+   "w": 740,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Use a 14.4 cm-tall phone as a simple benchmark. The tallest-point test is generous; the shortest-point test is strict. Both expose a substantial gap."
+  },
+  {
+   "tag": "div",
+   "y": 3309,
+   "x": 523,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tallest point · generous"
+  },
+  {
+   "tag": "div",
+   "y": 3309,
+   "x": 948,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tallest point · generous"
+  },
+  {
+   "tag": "span",
+   "y": 3331,
+   "x": 523,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "100%"
+  },
+  {
+   "tag": "span",
+   "y": 3331,
+   "x": 948,
+   "w": 84,
+   "in_svg": false,
+   "hidden": false,
+   "text": "45%"
+  },
+  {
+   "tag": "span",
+   "y": 3355,
+   "x": 807,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "40 / 40 clear"
+  },
+  {
+   "tag": "span",
+   "y": 3355,
+   "x": 1232,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18 / 40 clear"
+  },
+  {
+   "tag": "div",
+   "y": 3387,
+   "x": 523,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "div",
+   "y": 3387,
+   "x": 948,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "strong",
+   "y": 3390,
+   "x": 238,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.4 cm"
+  },
+  {
+   "tag": "span",
+   "y": 3441,
+   "x": 238,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Benchmark phone height"
+  },
+  {
+   "tag": "div",
+   "y": 3532,
+   "x": 523,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Shortest point · strict"
+  },
+  {
+   "tag": "div",
+   "y": 3532,
+   "x": 948,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Shortest point · strict"
+  },
+  {
+   "tag": "p",
+   "y": 3539,
+   "x": 130,
+   "w": 326,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pass means the pocket’s height measurement meets or exceeds 14.4 cm. Each square represents one pair of jeans."
+  },
+  {
+   "tag": "span",
+   "y": 3554,
+   "x": 523,
+   "w": 116,
+   "in_svg": false,
+   "hidden": false,
+   "text": "92.5%"
+  },
+  {
+   "tag": "span",
+   "y": 3554,
+   "x": 948,
+   "w": 116,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.5%"
+  },
+  {
+   "tag": "span",
+   "y": 3578,
+   "x": 807,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "37 / 40 clear"
+  },
+  {
+   "tag": "span",
+   "y": 3578,
+   "x": 1239,
+   "w": 79,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9 / 40 clear"
+  },
+  {
+   "tag": "div",
+   "y": 3610,
+   "x": 523,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "div",
+   "y": 3610,
+   "x": 948,
+   "w": 370,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "p",
+   "y": 3612,
+   "x": 130,
+   "w": 326,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This is a height-clearance screen, not a guarantee of real-world fit. It does not model bulk, stretch, or three-dimensional pocket shape."
+  },
+  {
+   "tag": "span",
+   "y": 3737,
+   "x": 503,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "■ clears 14.4 cm"
+  },
+  {
+   "tag": "span",
+   "y": 3737,
+   "x": 1144,
+   "w": 194,
+   "in_svg": false,
+   "hidden": false,
+   "text": "□ does not clear · 1 square = 1 pair"
+  },
+  {
+   "tag": "div",
+   "y": 3935,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04"
+  },
+  {
+   "tag": "h2",
+   "y": 3935,
+   "x": 198,
+   "w": 840,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Price is not the pocket upgrade."
+  },
+  {
+   "tag": "p",
+   "y": 4064,
+   "x": 198,
+   "w": 740,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The average listed prices are nearly identical across the two groups. Within each group, higher prices do not line up with deeper front pockets."
+  },
+  {
+   "tag": "button",
+   "y": 4185,
+   "x": 765,
+   "w": 35,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All"
+  },
+  {
+   "tag": "button",
+   "y": 4185,
+   "x": 804,
+   "w": 44,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "button",
+   "y": 4185,
+   "x": 851,
+   "w": 59,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "h3",
+   "y": 4185,
+   "x": 989,
+   "w": 325,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean listed price"
+  },
+  {
+   "tag": "span",
+   "y": 4191,
+   "x": 128,
+   "w": 261,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Listed price versus front depth"
+  },
+  {
+   "tag": "strong",
+   "y": 4234,
+   "x": 1246,
+   "w": 68,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$81.18"
+  },
+  {
+   "tag": "span",
+   "y": 4241,
+   "x": 989,
+   "w": 41,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "strong",
+   "y": 4286,
+   "x": 1235,
+   "w": 79,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$80.32"
+  },
+  {
+   "tag": "span",
+   "y": 4293,
+   "x": 989,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "text",
+   "y": 4297,
+   "x": 160,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "25"
+  },
+  {
+   "tag": "p",
+   "y": 4346,
+   "x": 989,
+   "w": 325,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A difference of less than one dollar in the group means."
+  },
+  {
+   "tag": "text",
+   "y": 4365,
+   "x": 133,
+   "w": 11,
+   "in_svg": true,
+   "hidden": false,
+   "text": "FRONT DEPTH · CM"
+  },
+  {
+   "tag": "text",
+   "y": 4389,
+   "x": 160,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "20"
+  },
+  {
+   "tag": "h3",
+   "y": 4456,
+   "x": 989,
+   "w": 325,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Price ↔ depth · Spearman ρ"
+  },
+  {
+   "tag": "text",
+   "y": 4482,
+   "x": 160,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "strong",
+   "y": 4505,
+   "x": 1250,
+   "w": 64,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−0.27"
+  },
+  {
+   "tag": "span",
+   "y": 4512,
+   "x": 989,
+   "w": 41,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "strong",
+   "y": 4557,
+   "x": 1248,
+   "w": 66,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−0.20"
+  },
+  {
+   "tag": "span",
+   "y": 4564,
+   "x": 989,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "text",
+   "y": 4574,
+   "x": 160,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10"
+  },
+  {
+   "tag": "text",
+   "y": 4593,
+   "x": 314,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "50"
+  },
+  {
+   "tag": "text",
+   "y": 4593,
+   "x": 446,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "100"
+  },
+  {
+   "tag": "text",
+   "y": 4593,
+   "x": 581,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "150"
+  },
+  {
+   "tag": "text",
+   "y": 4593,
+   "x": 716,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "200"
+  },
+  {
+   "tag": "text",
+   "y": 4593,
+   "x": 852,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "250"
+  },
+  {
+   "tag": "p",
+   "y": 4601,
+   "x": 989,
+   "w": 325,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Both rank correlations are slightly negative. These 80 rows describe the sample, not the entire jeans market."
+  },
+  {
+   "tag": "text",
+   "y": 4620,
+   "x": 494,
+   "w": 85,
+   "in_svg": true,
+   "hidden": false,
+   "text": "LISTED PRICE · $"
+  },
+  {
+   "tag": "div",
+   "y": 4634,
+   "x": 128,
+   "w": 783,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each dot is one pair of jeans. Hover a point for its brand and design. Depth is the mean of the tallest and shortest front measurements."
+  },
+  {
+   "tag": "div",
+   "y": 4860,
+   "x": 100,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05"
+  },
+  {
+   "tag": "h2",
+   "y": 4860,
+   "x": 198,
+   "w": 840,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Look up your next pair."
+  },
+  {
+   "tag": "p",
+   "y": 4933,
+   "x": 198,
+   "w": 740,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Search all 80 rows by brand or design. Dimensions below are the averaged pocket measurements in centimetres."
+  },
+  {
+   "tag": "label",
+   "y": 5051,
+   "x": 125,
+   "w": 434,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand or design"
+  },
+  {
+   "tag": "label",
+   "y": 5051,
+   "x": 569,
+   "w": 217,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gender"
+  },
+  {
+   "tag": "label",
+   "y": 5051,
+   "x": 797,
+   "w": 217,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand"
+  },
+  {
+   "tag": "label",
+   "y": 5051,
+   "x": 1024,
+   "w": 217,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sort by"
+  },
+  {
+   "tag": "button",
+   "y": 5066,
+   "x": 1251,
+   "w": 64,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reset"
+  },
+  {
+   "tag": "span",
+   "y": 5142,
+   "x": 125,
+   "w": 146,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80 matching rows · showing 12"
+  },
+  {
+   "tag": "span",
+   "y": 5142,
+   "x": 1113,
+   "w": 202,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front / back depth = average of max + min"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brand"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Design"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gender"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Style"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Listed price"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front depth · cm"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front width · cm"
+  },
+  {
+   "tag": "th",
+   "y": 5168,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back depth · cm"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Modern Series Slim Tapered Leg"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$48.00"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "25.25"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.25"
+  },
+  {
+   "tag": "td",
+   "y": 5203,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.10"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Hampton Straight"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "24.00"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.00"
+  },
+  {
+   "tag": "td",
+   "y": 5241,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.00"
+  },
+  {
+   "tag": "a",
+   "y": 5250,
+   "x": 16,
+   "w": 138,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skip to report"
+  },
+  {
+   "tag": "caption",
+   "y": 5250,
+   "x": 16,
+   "w": 237,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Item-level jeans pocket measurements"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Fit"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$50.00"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.25"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.50"
+  },
+  {
+   "tag": "td",
+   "y": 5280,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.85"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Slim Fit"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$58.00"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.25"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.25"
+  },
+  {
+   "tag": "td",
+   "y": 5319,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.50"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Arizona — Fave Super Skinny Women · $42.00 · 14.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Arizona — Perfect Boot Women · $42.00 · 14.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Ralph Lauren — Modern Skinny Slimming Fit Women · $89.50 · 13.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Ralph Lauren — Premier Straight Slimming Fit Women · $89.50 · 13.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Uniqlo — Skinny Fit Women · $39.90 · 13.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Uniqlo — High-Rise Straight Women · $39.90 · 13.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Calvin Klein — Midrise Skinny Women · $79.50 · 12.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Calvin Klein — Straight Women · $69.50 · 12.60 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lucky — Ava Mid Rise Skinny Women · $99.00 · 13.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lucky — Sweet Boot Women · $79.50 · 15.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Levi’s — 711 Skinny Women · $54.50 · 13.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Levi’s — Classic Bootcut Women · $54.50 · 13.35 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lee — Riders Midrise Skinny Women · $19.94 · 13.35 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lee — Riders Midrise Straight Women · $19.94 · 13.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "7 For All Mankind — The Ankle Skinny Women · $199.00 · 13.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "7 For All Mankind — Bootcut Women · $159.00 · 13.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "True Religion — Stella Women · $179.00 · 12.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "True Religion — Slim Straight Women · $249.00 · 13.10 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Guess — Power Stretch Skinny Women · $98.00 · 11.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Guess — Tailored Mini Boot Women · $89.00 · 12.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Tommy Hilfiger — Greenwich Skinny Women · $69.50 · 12.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Tommy Hilfiger — Tribeca Straight Women · $69.50 · 15.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Express — Skinny Midrise Women · $79.90 · 13.85 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Express — Barely Boot Midrise Women · $79.90 · 14.85 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "H&M — Vintage Fit High Waist Women · $49.99 · 13.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "H&M — Skinny Ankle High Waist Women · $9.99 · 16.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Old Navy — Original Boot Cut Women · $29.99 · 12.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Old Navy — Original Skinny Women · $29.99 · 13.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "J. Crew — Vintage Straight Women · $125.00 · 14.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "J. Crew — 8\" Tooth Pick Women · $110.00 · 11.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Gap — Perfect Boot Women · $69.95 · 11.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Gap — True Skinny Mid-Rise Women · $69.95 · 12.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "American Eagle — Ne(x)t Level Stretch Skinny Women · $39.95 · 18.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "American Eagle — Super Stretch Kick Boot Women · $39.95 · 15.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Abercrombie — Simone High Rise Slim Women · $88.00 · 19.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Abercrombie — Simone High Rise Ankle Straight Women · $78.00 · 15.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Wrangler — Born Ready Skinny Jean Women · $99.00 · 12.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Wrangler — Acid Wash Fringe Hem Crop Women · $99.00 · 13.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Arizona — Skinny Fit Men · $50.00 · 23.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Arizona — Original Bootcut Men · $50.00 · 23.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Ralph Lauren — Varick Slim Straight Men · $89.50 · 23.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Ralph Lauren — Hampton Straight Men · $89.50 · 24.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Guess — Skinny Men · $98.00 · 19.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Guess — Regular Straight Men · $98.00 · 21.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Calvin Klein — Skinny Men · $89.50 · 18.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Calvin Klein — Straight Men · $69.50 · 21.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Levi’s — 510 Skinny Men · $69.50 · 22.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Levi’s — 569 Loose Straight Men · $59.50 · 21.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Uniqlo — Skinny Ultra Stretch Men · $49.90 · 22.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Uniqlo — Regular Men · $49.90 · 21.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Express — Super Skinny Stretch Men · $88.00 · 18.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Express — Classic Boot Stretch Men · $79.90 · 18.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lucky — 121 Slim Men · $99.00 · 18.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lucky — 363 New Vintage Straight Men · $129.00 · 20.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "7 For All Mankind — Paxtyn Men · $209.00 · 22.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "7 For All Mankind — The Straight Men · $179.00 · 22.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "True Religion — Geno Slim Men · $159.00 · 19.85 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "True Religion — Ricky Relaxed Straight Men · $179.00 · 17.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "J. Crew — 484 Slim Men · $98.00 · 20.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "J. Crew — 770 Straight Men · $98.00 · 18.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Old Navy — Skinny Men · $39.99 · 20.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Old Navy — boot-cut Men · $39.99 · 23.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Gap — Original Boot Men · $59.95 · 19.85 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Gap — Skinny Men · $69.95 · 19.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "H&M — Skinny Men · $39.99 · 18.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "H&M — Straight Men · $49.99 · 19.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "American Eagle — NE(X)T Level Flex Skinny Men · $49.95 · 18.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "American Eagle — Straight Men · $49.95 · 20.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Abercrombie — Kennan Straight Men · $78.00 · 18.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Abercrombie — Langdon Slim Men · $78.00 · 18.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Tommy Hilfiger — Slim Men · $59.50 · 20.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Tommy Hilfiger — Bootcut Men · $59.50 · 22.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lee — Modern Series Slim Tapered Leg Men · $48.00 · 25.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lee — Modern Series Straight Leg Men · $48.00 · 20.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Wrangler — Slim Fit Men · $58.00 · 23.25 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Wrangler — Regular Fit Men · $48.00 · 21.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Buckle Black — Fit No. 76 Bootcut Mid-Rise Curvy Women · $89.95 · 14.50 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Buckle Black — Fit No. 53 Straight Mid-Rise Slim Women · $92.95 · 14.00 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Buckle Black — Fit No. 9 Bootleg Men · $94.95 · 19.75 cm front depth"
+  },
+  {
+   "tag": "title",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Buckle Black — Fit No. 3 Straight Leg Slim Fit Men · $94.95 · 17.75 cm front depth"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "All 80"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Women"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Men"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "All brands"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "7 For All Mankind"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Arizona"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Express"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Gap"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Guess"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "H&M"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Lee"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Levi’s"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Lucky"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "True Religion"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Deepest front"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Shallowest front"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Price: low to high"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Price: high to low"
+  },
+  {
+   "tag": "option",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Brand A–Z"
+  },
+  {
+   "tag": "div",
+   "y": 5330,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "No jeans match those filters. Try a broader search."
+  },
+  {
+   "tag": "a",
+   "y": 5350,
+   "x": 100,
+   "w": 160,
+   "in_svg": false,
+   "hidden": false,
+   "text": "POCKET / DATA"
+  },
+  {
+   "tag": "a",
+   "y": 5357,
+   "x": 934,
+   "w": 121,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The measurements"
+  },
+  {
+   "tag": "a",
+   "y": 5357,
+   "x": 1083,
+   "w": 44,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Brands"
+  },
+  {
+   "tag": "a",
+   "y": 5357,
+   "x": 1155,
+   "w": 44,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fit test"
+  },
+  {
+   "tag": "a",
+   "y": 5357,
+   "x": 1227,
+   "w": 113,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Explore the data"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Original Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$50.00"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.00"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.75"
+  },
+  {
+   "tag": "td",
+   "y": 5358,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.75"
+  },
+  {
+   "tag": "span",
+   "y": 5360,
+   "x": 1333,
+   "w": 7,
+   "in_svg": false,
+   "hidden": false,
+   "text": "↘"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Varick Slim Straight"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "slim"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$89.50"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.00"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.00"
+  },
+  {
+   "tag": "td",
+   "y": 5397,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.10"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$39.99"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.00"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.75"
+  },
+  {
+   "tag": "td",
+   "y": 5436,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.00"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny Ultra Stretch"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$49.90"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.50"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.25"
+  },
+  {
+   "tag": "td",
+   "y": 5475,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.25"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bootcut"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "boot-cut"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$59.50"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.50"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.35"
+  },
+  {
+   "tag": "td",
+   "y": 5514,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.50"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Levi’s"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "510 Skinny"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$69.50"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.25"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.75"
+  },
+  {
+   "tag": "td",
+   "y": 5553,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.75"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 For All Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The Straight"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "straight"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$179.00"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.25"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.50"
+  },
+  {
+   "tag": "td",
+   "y": 5592,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.50"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 101,
+   "w": 174,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7 For All Mankind"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 275,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Paxtyn"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 550,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 640,
+   "w": 101,
+   "in_svg": false,
+   "hidden": false,
+   "text": "skinny"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 741,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "$209.00"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 863,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "22.00"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 1020,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.00"
+  },
+  {
+   "tag": "td",
+   "y": 5631,
+   "x": 1177,
+   "w": 162,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.75"
+  },
+  {
+   "tag": "button",
+   "y": 5690,
+   "x": 647,
+   "w": 146,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Show all 80 rows"
+  },
+  {
+   "tag": "h3",
+   "y": 5904,
+   "x": 100,
+   "w": 299,
+   "in_svg": false,
+   "hidden": false,
+   "text": "About this report"
+  },
+  {
+   "tag": "h3",
+   "y": 5904,
+   "x": 459,
+   "w": 448,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Definitions & calculations"
+  },
+  {
+   "tag": "h3",
+   "y": 5904,
+   "x": 967,
+   "w": 373,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sample & caveats"
+  },
+  {
+   "tag": "h2",
+   "y": 5931,
+   "x": 100,
+   "w": 299,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Small pockets. Measurable difference."
+  },
+  {
+   "tag": "div",
+   "y": 5931,
+   "x": 459,
+   "w": 448,
+   "in_svg": false,
+   "hidden": false,
+   "text": "front depth = (maxHeightFront + minHeightFront) / 2"
+  },
+  {
+   "tag": "li",
+   "y": 5931,
+   "x": 984,
+   "w": 356,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80 rows: 40 men’s and 40 women’s jeans."
+  },
+  {
+   "tag": "li",
+   "y": 5949,
+   "x": 984,
+   "w": 356,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20 brands after trimming whitespace and normalizing capitalization in brand labels."
+  },
+  {
+   "tag": "div",
+   "y": 5969,
+   "x": 459,
+   "w": 448,
+   "in_svg": false,
+   "hidden": false,
+   "text": "front width = (maxWidthFront + minWidthFront) / 2"
+  },
+  {
+   "tag": "li",
+   "y": 5987,
+   "x": 984,
+   "w": 356,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dimensions are presented in centimetres; prices reproduce the listed price values."
+  },
+  {
+   "tag": "p",
+   "y": 6007,
+   "x": 459,
+   "w": 448,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back depth and width use the equivalent back fields. Percentage gaps use the women’s mean as the denominator. Brand means use two rows per gender."
+  },
+  {
+   "tag": "li",
+   "y": 6024,
+   "x": 984,
+   "w": 356,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This is a small brand-and-style sample, not a representative survey of all jeans."
+  },
+  {
+   "tag": "p",
+   "y": 6052,
+   "x": 100,
+   "w": 299,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A descriptive analysis of Front and back pocket measurements of men’s and women’s jeans from popular brands ."
+  },
+  {
+   "tag": "p",
+   "y": 6055,
+   "x": 459,
+   "w": 448,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The phone test compares 14.4 cm with the raw tallest and shortest front-height fields; it does not use averaged depth."
+  },
+  {
+   "tag": "li",
+   "y": 6061,
+   "x": 984,
+   "w": 356,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Group differences are descriptive; no causal claim is made."
+  },
+  {
+   "tag": "span",
+   "y": 6190,
+   "x": 100,
+   "w": 286,
+   "in_svg": false,
+   "hidden": false,
+   "text": "SOURCE · data/measurements.csv · 80 ROWS / 16 COLUMNS"
+  },
+  {
+   "tag": "span",
+   "y": 6190,
+   "x": 1108,
+   "w": 232,
+   "in_svg": false,
+   "hidden": false,
+   "text": "CALCULATIONS · ·"
+  },
+  {
+   "tag": "a",
+   "y": 6190,
+   "x": 1189,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "facts.json"
+  },
+  {
+   "tag": "a",
+   "y": 6190,
+   "x": 1270,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "BACK TO TOP ↑"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 200,
+   "x": 769,
+   "w": 570,
+   "h": 362,
+   "marks": 12,
+   "labels": 6
+  },
+  {
+   "kind": "svg",
+   "y": 4217,
+   "x": 128,
+   "w": 783,
+   "h": 417,
+   "marks": 92,
+   "labels": 12
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 6230
+}

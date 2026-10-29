@@ -19,6 +19,14 @@ def num(x, nd=1):
     return s
 
 
+def f1(x):
+    return f'{x:.1f}'
+
+
+def f2(x):
+    return f'{x:.2f}'
+
+
 def money(x):
     return f'${x:,.2f}'
 
@@ -249,57 +257,63 @@ def ratio_bars():
         s.rect(L, y - 9, X(r) - L, 18, col, rx=4)
         s.text(X(r) + 10, y + 5, f'{r:.3f}', size=13.5, fill=INK, family='var(--sans)',
                weight=700)
-        s.text(X(r) + 62, y + 5, f'({num(women_m[key], 2)} vs {num(men_m[key], 2)} '
-               f'{"cm" if "cm2" not in key else "cm\u00b2"})', size=12.5, fill=MUTED,
-               family='var(--sans)')
+        if 'cm2' in key:
+            s.text(X(r) + 62, y + 5, f'({f1(women_m[key])} vs {f1(men_m[key])} cm\u00b2)',
+                   size=12.5, fill=MUTED, family='var(--sans)')
+        else:
+            s.text(X(r) + 62, y + 5, f'({f2(women_m[key])} vs {f2(men_m[key])} cm)',
+                   size=12.5, fill=MUTED, family='var(--sans)')
     return str(s)
 
 
 # ================================================================ 3. pocket + phone to scale
 def pocket_figure():
     SC = 8.4                     # px per cm
-    W, H = 960, 300
+    W, H = 960, 348
     s = SVG(W, H)
     pocket_w_m, pocket_h_m = men_m.maxWidthFront, men_m.maxHeightFront
     pocket_w_w, pocket_h_w = women_m.maxWidthFront, women_m.maxHeightFront
 
-    def draw(cx, pw, ph, col, title, sub):
+    def draw(cx, pw, ph, col, title, sub, fits):
         x = cx - pw * SC / 2
-        y = 58
+        y = 64
         s.rect(x, y, pw * SC, ph * SC, 'none', stroke=col, sw=2.5, rx=6)
         s.rect(x, y, pw * SC, ph * SC, col, opacity=.10, rx=6)
         # phone, sitting on the pocket floor
         phx = cx - PHONE_W * SC / 2
         phy = y + ph * SC - PHONE_H * SC
         s.rect(phx, phy, PHONE_W * SC, PHONE_H * SC, '#1c2230', rx=4, opacity=.9)
-        s.add(f'<circle cx="{cx:.1f}" cy="{phy + PHONE_H*SC - 14:.1f}" r="4" fill="#f6f3ec" '
-              f'fill-opacity=".8"/>')
+        s.add(f'<circle cx="{cx:.1f}" cy="{phy + PHONE_H*SC - 12:.1f}" r="3.5" '
+              f'fill="#f6f3ec" fill-opacity=".8"/>')
         # dimension ticks
-        s.line(x - 14, y, x - 14, y + ph * SC, stroke=MUTED, w=1)
-        s.line(x - 19, y, x - 9, y, stroke=MUTED, w=1)
-        s.line(x - 19, y + ph * SC, x - 9, y + ph * SC, stroke=MUTED, w=1)
-        s.text(x - 26, y + ph * SC / 2, num(ph, 2) + ' cm', size=13, fill=INK, anchor='end',
+        s.line(x - 16, y, x - 16, y + ph * SC, stroke=MUTED, w=1)
+        s.line(x - 21, y, x - 11, y, stroke=MUTED, w=1)
+        s.line(x - 21, y + ph * SC, x - 11, y + ph * SC, stroke=MUTED, w=1)
+        s.text(x - 28, y + ph * SC / 2, f'{ph:.2f} cm', size=13, fill=INK, anchor='end',
                family='var(--sans)', weight=700)
-        s.line(x, y - 12, x + pw * SC, y - 12, stroke=MUTED, w=1)
-        s.text(cx, y - 20, num(pw, 2) + ' cm wide', size=13, fill=INK, anchor='middle',
+        s.line(x, y - 14, x + pw * SC, y - 14, stroke=MUTED, w=1)
+        s.line(x, y - 19, x, y - 9, stroke=MUTED, w=1)
+        s.line(x + pw * SC, y - 19, x + pw * SC, y - 9, stroke=MUTED, w=1)
+        s.text(cx, y - 24, f'{pw:.2f} cm wide', size=13, fill=INK, anchor='middle',
                family='var(--sans)', weight=700)
-        s.text(cx, 34, title, size=15, fill=col, anchor='middle', family='var(--sans)',
+        s.text(cx, 30, title, size=15, fill=col, anchor='middle', family='var(--sans)',
                weight=700)
         s.text(cx, y + ph * SC + 26, sub, size=12.5, fill=MUTED, anchor='middle',
                family='var(--sans)')
-        if phy < y:
-            # phone sticking out of the pocket
-            s.line(x - 4, y, x + pw * SC + 4, y, stroke=col, w=2, dash='4 3', opacity=.8)
-            s.text(cx, phy - 10, 'phone sticks out %.1f cm' % ((y - phy) / SC), size=12.5,
-                   fill=INK, anchor='middle', family='var(--sans)', weight=600)
+        # phone-fit annotation, to the right of the pocket with a leader line
+        ax = x + pw * SC + 14
+        s.line(x + pw * SC + (2 if fits else 2), phy + 4, ax - 4, phy + 4, stroke=MUTED, w=1)
+        if fits:
+            s.text(ax, phy + 8, 'phone fits with\n%.1f cm to spare' % ((phy - y) / SC),
+                   size=12.5, fill=INK, family='var(--sans)', weight=600)
         else:
-            s.text(cx, phy - 10, '%.1f cm of room to spare' % ((phy - y) / SC), size=12.5,
-                   fill=INK, anchor='middle', family='var(--sans)', weight=600)
+            s.text(ax, phy + 8, 'phone sticks out\n%.1f cm' % ((y - phy) / SC), size=12.5,
+                   fill=INK, family='var(--sans)', weight=600)
 
     draw(250, pocket_w_m, pocket_h_m, MEN, "Men\u2019s average front pocket",
-         f'{num(men_m.front_cm2)} cm\u00b2 of pocket \u00b7 phone fits easily')
+         f'{men_m.front_cm2:.1f} cm\u00b2 of pocket \u00b7 the phone drops in', True)
     draw(690, pocket_w_w, pocket_h_w, WOMEN, "Women\u2019s average front pocket",
-         f'{num(women_m.front_cm2)} cm\u00b2 of pocket \u00b7 phone will not go in')
+         f'{women_m.front_cm2:.1f} cm\u00b2 of pocket \u00b7 the phone will not go in', False)
     return str(s)
 
 
@@ -342,15 +356,14 @@ def dumbbells():
 
 # ================================================================ 5. style bars
 def style_bars():
-    W, H = 960, 300
+    W, H = 960, 310
     s = SVG(W, H)
-    L, R, B = 60, 24, 62
-    top = 40
+    L, R, B = 60, 24, 66
+    top = 48
     x1 = 26.5
     cats = ['boot-cut', 'skinny', 'straight', 'slim', 'regular']
-    labels = ['boot-cut', 'skinny', 'straight', 'slim', 'regular']
     step = (W - L - R) / len(cats)
-    bw = 46
+    bw = 34
 
     def Y(v):
         return top + (x1 - v) / (x1 - 10) * (H - top - B)
@@ -358,33 +371,32 @@ def style_bars():
     for v in range(10, 27, 2):
         s.line(L, Y(v), W - R, Y(v), stroke=LINE, w=1, opacity=.7)
         s.text(L - 12, Y(v) + 4, str(v), size=12, fill=MUTED, anchor='end')
-    s.text(14, (top + H - B) / 2, 'front-pocket depth (cm)', size=12.5, fill=MUTED,
-           family='var(--sans)')
+    s.text(14, 24, 'front-pocket depth (cm)', size=12.5, fill=MUTED, family='var(--sans)')
 
     for gi, (g, col) in enumerate([('women', WOMEN), ('men', MEN)]):
-        s.rect(W - 250 + gi * 130, 12, 11, 11, col, rx=2)
-        s.text(W - 250 + gi * 130 + 18, 22, "women's" if g == 'women' else "men's", size=12.5,
+        s.rect(W - 252 + gi * 130, 12, 11, 11, col, rx=2)
+        s.text(W - 252 + gi * 130 + 18, 22, "women's" if g == 'women' else "men's", size=12.5,
                fill=INK, family='var(--sans)', weight=600)
 
     for ci, cat in enumerate(cats):
         cx = L + step * (ci + 0.5)
+        counts = []
         for gi, (g, col) in enumerate([('women', WOMEN), ('men', MEN)]):
+            x = cx - 40 + gi * 46
             if (g, cat) not in style.index:
+                s.line(x, Y(12) - 3, x + bw, Y(12) - 3, stroke=MUTED, w=2, dash='3 3')
+                counts.append('none' if g == 'women' else '0')
                 continue
             v = style.loc[(g, cat), 'depth_cm']
             n = int(style.loc[(g, cat), 'pairs'])
-            x = cx - bw / 2 + gi * (bw / 2 + 6)
-            s.rect(x, Y(v), bw / 2, Y(10) - Y(v), col, rx=3, opacity=.92)
-            s.text(x + bw / 4, Y(v) - 7, num(v, 1), size=12.5, fill=col, anchor='middle',
+            s.rect(x, Y(v), bw, Y(10) - Y(v), col, rx=3, opacity=.92)
+            s.text(x + bw / 2, Y(v) - 7, f'{v:.1f}', size=12.5, fill=col, anchor='middle',
                    family='var(--sans)', weight=700)
-        s.text(cx, H - B + 22, labels[ci], size=13.5, fill=INK, anchor='middle',
+            counts.append(f"{'women' if g == 'women' else 'men'} {n}")
+        s.text(cx, H - B + 22, cat, size=13.5, fill=INK, anchor='middle',
                family='var(--sans)', weight=600)
-        pairs = []
-        for g in ('women', 'men'):
-            if (g, cat) in style.index:
-                pairs.append(f"{style.loc[(g, cat), 'pairs']:.0f}")
-        s.text(cx, H - B + 40, '/'.join(pairs) + ' pairs', size=11.5, fill=MUTED,
-               anchor='middle', family='var(--sans)')
+        s.text(cx, H - B + 40, ' \u00b7 '.join(counts) + (' pairs' if len(counts) > 1 else ''),
+               size=11.5, fill=MUTED, anchor='middle', family='var(--sans)')
     return str(s)
 
 

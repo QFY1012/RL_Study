@@ -1,0 +1,93 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[sample-coverage]
+claim: The data has 40 men's and 40 women's rows, with 20 brands and exactly 2 rows per brand in each gender group after trimming and case-normalizing brand labels.
+tables: measurements = data/measurements.csv
+code: measurements.assign(brand=measurements.brand.str.strip().str.lower()).groupby('menWomen').apply(lambda g: pd.Series({'jeans': len(g), 'brands': g.brand.nunique(), 'min_rows_per_brand': g.groupby('brand').size().min(), 'max_rows_per_brand': g.groupby('brand').size().max()}), include_groups=False)
+output:
+          jeans  brands  min_rows_per_brand  max_rows_per_brand
+menWomen                                                       
+men          40      20                   2                   2
+women        40      20                   2                   2
+
+[front-dimensions]
+claim: Men's front pockets average 20.605 cm deep and 14.866 cm wide versus 13.778 cm and 13.721 cm for women, gaps of 6.828 cm (49.555%) and 1.145 cm (8.345%).
+tables: measurements = data/measurements.csv
+code: measurements.assign(frontDepth=measurements[['maxHeightFront','minHeightFront']].mean(axis=1), frontWidth=measurements[['maxWidthFront','minWidthFront']].mean(axis=1)).groupby('menWomen')[['frontDepth','frontWidth']].mean().T.assign(gap_cm=lambda t: t.men-t.women, men_vs_women_pct=lambda t: (t.men/t.women-1)*100).round(3)
+output:
+menWomen       men   women  gap_cm  men_vs_women_pct
+frontDepth  20.605  13.778   6.828            49.555
+frontWidth  14.866  13.721   1.145             8.345
+
+[back-dimensions]
+claim: Men's back pockets average 14.739 cm deep and 12.931 cm wide versus 13.853 cm and 12.539 cm for women, gaps of 0.886 cm (6.398%) and 0.393 cm (3.130%).
+tables: measurements = data/measurements.csv
+code: measurements.assign(backDepth=measurements[['maxHeightBack','minHeightBack']].mean(axis=1), backWidth=measurements[['maxWidthBack','minWidthBack']].mean(axis=1)).groupby('menWomen')[['backDepth','backWidth']].mean().T.assign(gap_cm=lambda t: t.men-t.women, men_vs_women_pct=lambda t: (t.men/t.women-1)*100).round(3)
+output:
+menWomen      men   women  gap_cm  men_vs_women_pct
+backDepth  14.739  13.853   0.886             6.398
+backWidth  12.931  12.539   0.393             3.130
+
+[front-back-within-gender]
+claim: Men's front pockets average 5.866 cm deeper than their back pockets (20.605 versus 14.739 cm), while women's front pockets average 0.075 cm shallower than their back pockets (13.778 versus 13.853 cm).
+tables: measurements = data/measurements.csv
+code: measurements.assign(frontDepth=measurements[['maxHeightFront','minHeightFront']].mean(axis=1), backDepth=measurements[['maxHeightBack','minHeightBack']].mean(axis=1)).groupby('menWomen')[['frontDepth','backDepth']].mean().assign(front_minus_back=lambda t: t.frontDepth-t.backDepth).round(3)
+output:
+          frontDepth  backDepth  front_minus_back
+menWomen                                         
+men           20.605     14.739             5.866
+women         13.778     13.853            -0.075
+
+[phone-height-clearance]
+claim: For a 14.4 cm height benchmark, 40 of 40 men's and 18 of 40 women's pockets clear it at the tallest point, while 37 of 40 men's and 9 of 40 women's clear it at the shortest point.
+tables: measurements = data/measurements.csv
+code: measurements.assign(tallest_clear=measurements.maxHeightFront.ge(14.4), shortest_clear=measurements.minHeightFront.ge(14.4)).groupby('menWomen').agg(**{'jeans': ('name','size'), 'tallest>=14.4cm': ('tallest_clear','sum'), 'shortest>=14.4cm': ('shortest_clear','sum')})
+output:
+          jeans  tallest>=14.4cm  shortest>=14.4cm
+menWomen                                          
+men          40               40                37
+women        40               18                 9
+
+[brand-depth-gaps]
+claim: Men's average front depth exceeds women's for every brand shown; the gap ranges from 1.500 cm at Abercrombie to 10.250 cm at Ralph Lauren.
+tables: measurements = data/measurements.csv
+code: measurements.assign(brand=measurements.brand.str.strip().str.title().str.replace("Levi'S", "Levi's"), frontDepth=measurements[['maxHeightFront','minHeightFront']].mean(axis=1)).groupby(['brand','menWomen']).frontDepth.mean().unstack().assign(gap_cm=lambda t: t.men-t.women).sort_values('gap_cm')[['women','men','gap_cm']].round(3)
+output:
+menWomen            women     men  gap_cm
+brand                                    
+Abercrombie        17.125  18.625   1.500
+American Eagle     16.750  19.000   2.250
+H&M                15.000  18.625   3.625
+Express            14.350  18.750   4.400
+Buckle Black       14.250  18.750   4.500
+Lucky              14.750  19.500   4.750
+True Religion      12.800  18.675   5.875
+J. Crew            13.000  19.375   6.375
+Calvin Klein       12.300  19.625   7.325
+Gap                12.125  19.550   7.425
+Tommy Hilfiger     13.875  21.625   7.750
+Guess              11.875  20.375   8.500
+7 For All Mankind  13.500  22.125   8.625
+Uniqlo             13.375  22.000   8.625
+Arizona            14.500  23.125   8.625
+Levi's             13.300  22.000   8.700
+Old Navy           12.875  21.750   8.875
+Wrangler           13.250  22.500   9.250
+Lee                13.300  22.625   9.325
+Ralph Lauren       13.250  23.500  10.250
+
+[price-depth-relationship]
+claim: Mean listed prices are 81.184 for men and 80.316 for women, while the within-group Spearman correlations of price with front depth are -0.269 for men and -0.196 for women.
+tables: measurements = data/measurements.csv
+code: measurements.assign(frontDepth=measurements[['maxHeightFront','minHeightFront']].mean(axis=1)).groupby('menWomen').apply(lambda g: pd.Series({'jeans': len(g), 'mean_price': g.price.mean(), 'mean_front_depth_cm': g.frontDepth.mean(), 'price_depth_spearman': g.price.rank().corr(g.frontDepth.rank())}), include_groups=False).round(3)
+output:
+          jeans  mean_price  mean_front_depth_cm  price_depth_spearman
+menWomen                                                              
+men        40.0      81.184               20.605                -0.269
+women      40.0      80.316               13.777                -0.196
