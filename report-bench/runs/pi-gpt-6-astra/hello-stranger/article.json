@@ -1,0 +1,92 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "7 节都在为前面写出的观点或问题服务",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Affect ratings rise as conversations unfold.",
+    "serves": null,
+    "how": "提出两个核心判断：对话中情感评分上升，但双方对同一场对话的感受未必一致。",
+    "holds": false
+   },
+   {
+    "start": "End-of-conversation affect exceeds pre-conversation affect in 69.2% of complete records.",
+    "serves": "Affect ratings rise as conversations unfold.",
+    "how": "用69.2%的完整记录后测情感高于前测来证明平均情感上升。",
+    "holds": true
+   },
+   {
+    "start": "Yet a shared conversation can still produce two different experiences.",
+    "serves": "Partners grow closer in how they feel, but don’t always see the encounter the same way.",
+    "how": "把双方体验不一致具体化为同一场对话可产生两种不同体验。",
+    "holds": true
+   },
+   {
+    "start": "Little changes between the pre and beginning ratings.",
+    "serves": "Affect ratings rise as conversations unfold.",
+    "how": "通过前测到开始变化很小、上升主要发生在对话展开中，并总结平均体验改善。",
+    "holds": true
+   },
+   {
+    "start": "Enjoyment isn’t always mutual to the same degree.",
+    "serves": "Partners grow closer in how they feel, but don’t always see the encounter the same way.",
+    "how": "把双方体验不一致具体化为享受程度不对等，并进一步指出人们常低估伴侣对自己的喜欢。",
+    "holds": true
+   },
+   {
+    "start": "Partners report identical enjoyment in 26.5% of complete pairs.",
+    "serves": "Enjoyment isn’t always mutual to the same degree.",
+    "how": "用仅26.5%配对完全一致、17.2%差至少三分来证明享受程度并不总是对等。",
+    "holds": true
+   },
+   {
+    "start": "Matching each person’s estimate to their partner’s actual rating reveals a mean gap of 0.64 points.",
+    "serves": "People tend to be liked more than they think.",
+    "how": "用估计值与伴侣实际评分平均差0.64分说明人们的估计与伴侣实际喜欢程度存在差距。",
+    "holds": true
+   },
+   {
+    "start": "underestimate their partner’s liking.",
+    "serves": "People tend to be liked more than they think.",
+    "how": "用26.8%准确、18.3%高估反推其余多数人低估伴侣的喜欢。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"Affect ratings rise as conversations unfold.\",\"serves\":null,\"how\":\"提出两个核心判断：对话中情感评分上升，但双方对同一场对话的感受未必一致。\"},{\"start\":\"End-of-conversation affect exceeds pre-conversation affect in 69.2% of complete records.\",\"serves\":\"Affect ratings rise as conversations unfold.\",\"how\":\"用69.2%的完整记录后测情感高于前测来证明平均情感上升。\"},{\"start\":\"Yet a shared conversation can still produce two different experiences.\",\"serves\":\"Partners grow closer in how they feel, but don’t always see the encounter the same way.\",\"how\":\"把双方体验不一致具体化为同一场对话可产生两种不同体验。\"},{\"start\":\"Little changes between the pre and beginning ratings.\",\"serves\":\"Affect ratings rise as conversations unfold.\",\"how\":\"通过前测到开始变化很小、上升主要发生在对话展开中，并总结平均体验改善。\"},{\"start\":\"Enjoyment isn’t always mutual to the same degree.\",\"serves\":\"Partners grow closer in how they feel, but don’t always see the encounter the same way.\",\"how\":\"把双方体验不一致具体化为享受程度不对等，并进一步指出人们常低估伴侣对自己的喜欢。\"},{\"start\":\"Partners report identical enjoyment in 26.5% of complete pairs.\",\"serves\":\"Enjoyment isn’t always mutual to the same degree.\",\"how\":\"用仅26.5%配对完全一致、17.2%差至少三分来证明享受程度并不总是对等。\"},{\"start\":\"Matching each person’s estimate to their partner’s actual rating reveals a mean gap of 0.64 points.\",\"serves\":\"People tend to be liked more than they think.\",\"how\":\"用估计值与伴侣实际评分平均差0.64分说明人们的估计与伴侣实际喜欢程度存在差距。\"},{\"start\":\"underestimate their partner’s liking.\",\"serves\":\"People tend to be liked more than they think.\",\"how\":\"用26.8%准确、18.3%高估反推其余多数人低估伴侣的喜欢。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 894,
+   "completion_tokens": 14392,
+   "seconds": 77.1
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文只有“people”“partners”“stranger”等类别和汇总数字，没有写出一个有名字或可辨认的个体，也没有任何个体想要什么、面对什么、预期被打破及后来如何的具体叙事，因此没有三样要素，无法与数据整体形成个体故事连接。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\":[],\"score\":0.0,\"reason\":\"全文只有“people”“partners”“stranger”等类别和汇总数字，没有写出一个有名字或可辨认的个体，也没有任何个体想要什么、面对什么、预期被打破及后来如何的具体叙事，因此没有三样要素，无法与数据整体形成个体故事连接。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1037,
+   "completion_tokens": 392,
+   "seconds": 5.4
+  }
+ }
+}

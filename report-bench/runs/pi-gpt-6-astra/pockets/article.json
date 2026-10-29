@@ -1,0 +1,68 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "3 节都在为前面写出的观点或问题服务",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "The biggest difference is in the front.",
+    "serves": null,
+    "how": "It introduces the main sample finding: front pockets differ most, with women’s front pockets much shorter on average and back measurements closer.",
+    "holds": false
+   },
+   {
+    "start": "Women’s mean maximum front height is 38.1% lower; front width is only 7.2% lower.",
+    "serves": "The biggest difference is in the front.",
+    "how": "It gives percentage differences showing the front height gap is much larger than the front width gap, while back differences are smaller.",
+    "holds": true
+   },
+   {
+    "start": "The size varies.",
+    "serves": "Across this sample, women’s jeans have much shorter front pockets on average.",
+    "how": "It quantifies brand-level variation in the front-pocket gap, naming Levi’s as the largest and Abercrombie as the smallest difference.",
+    "holds": true
+   },
+   {
+    "start": "Among jeans labeled skinny, women’s mean maximum front height is 14.27 across 20 entries, compared with 22.71 across 12 men’s entries.",
+    "serves": "Across this sample, women’s jeans have much shorter front pockets on average.",
+    "how": "It checks the same front-height gap within skinny jeans and notes that the comparison narrows by style but does not control size, fabric, or construction.",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"The biggest difference is in the front.\",\"serves\":null,\"how\":\"It introduces the main sample finding: front pockets differ most, with women’s front pockets much shorter on average and back measurements closer.\"},{\"start\":\"Women’s mean maximum front height is 38.1% lower; front width is only 7.2% lower.\",\"serves\":\"The biggest difference is in the front.\",\"how\":\"It gives percentage differences showing the front height gap is much larger than the front width gap, while back differences are smaller.\"},{\"start\":\"The size varies.\",\"serves\":\"Across this sample, women’s jeans have much shorter front pockets on average.\",\"how\":\"It quantifies brand-level variation in the front-pocket gap, naming Levi’s as the largest and Abercrombie as the smallest difference.\"},{\"start\":\"Among jeans labeled skinny, women’s mean maximum front height is 14.27 across 20 entries, compared with 22.71 across 12 men’s entries.\",\"serves\":\"Across this sample, women’s jeans have much shorter front pockets on average.\",\"how\":\"It checks the same front-height gap within skinny jeans and notes that the comparison narrows by style but does not control size, fabric, or construction.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 994,
+   "completion_tokens": 10506,
+   "seconds": 67.9
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "文章没有叙事主体：只有女性/男性牛仔裤、品牌和测量值的类别与数字。Levi’s、Abercrombie仅作为数据极值例子出现，未写出其想要什么、面对什么；也没有先设默认预期再打破，更没有个体的应对与后续。因此三样都没有，属于只有类别和数字。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"文章没有叙事主体：只有女性/男性牛仔裤、品牌和测量值的类别与数字。Levi’s、Abercrombie仅作为数据极值例子出现，未写出其想要什么、面对什么；也没有先设默认预期再打破，更没有个体的应对与后续。因此三样都没有，属于只有类别和数字。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1128,
+   "completion_tokens": 1474,
+   "seconds": 12.8
+  }
+ }
+}

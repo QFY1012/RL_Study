@@ -214,5 +214,53 @@
    "df": "data/data.csv"
   },
   "code": "df.groupby('chief_complaint').is_completed.agg(users='size', completion_pct=lambda s: round(s.mean() * 100, 1)).sort_values('completion_pct')"
+ },
+ {
+  "id": "wait-outliers-in-control",
+  "claim": "Of the waits longer than 900 seconds, 8 sit in the control arm and 1 in the test arm; dropping them leaves mean waits of 101.3 seconds in the test arm and 129.6 in control.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pipe(lambda t: pd.DataFrame({'waits_over_900s': t[t.first_response_seconds > 900].groupby('g').size(), 'mean_seconds_trimmed': t[t.first_response_seconds <= 900].groupby('g').first_response_seconds.mean().round(1)}))"
+ },
+ {
+  "id": "wait-histogram-shift",
+  "claim": "Share of measured waits by bucket, test versus control: under 30 s 3.00% vs 1.57%, 30–60 s 21.90% vs 14.03%, 60–90 s 27.59% vs 21.83%, 90–120 s 19.93% vs 19.03%, 120–180 s 18.06% vs 23.75%, 180–300 s 8.47% vs 15.30%, 300–600 s 1.03% vs 4.23% and above 600 s 0.02% vs 0.26%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip(), bucket=pd.cut(df.first_response_seconds, [0, 30, 60, 90, 120, 180, 300, 600, np.inf])).groupby(['bucket', 'g'], observed=False).size().unstack().pipe(lambda t: (t / t.sum() * 100).round(2))"
+ },
+ {
+  "id": "consult-outliers",
+  "claim": "Six of the seven consultations recorded at exactly 640 minutes are in the control arm; excluding them the mean consultation runs 11.59 minutes in the test arm against 12.61 in control.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pipe(lambda t: pd.DataFrame({'consults_at_640': t[t.consult_minutes == 640].groupby('g').size(), 'mean_minutes_trimmed': t[t.consult_minutes < 640].groupby('g').consult_minutes.mean().round(2)}))"
+ },
+ {
+  "id": "complaint-to-department",
+  "claim": "Each of the 25 chief complaints maps to exactly one department: the largest number of distinct departments seen for any single complaint is 1.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'chief_complaints': df.chief_complaint.nunique(), 'max_departments_per_complaint': int(df.groupby('chief_complaint').department.nunique().max())})"
+ },
+ {
+  "id": "department-volume",
+  "claim": "Sessions by department: 儿科 5,246, 内科 5,083, 皮肤科 3,121, 妇科 2,490 and 五官科 2,060.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.department.value_counts()"
+ },
+ {
+  "id": "platform-volume",
+  "claim": "Sessions by platform: Android 7,514, iOS 6,870 and 微信小程序 3,610, with 6 rows missing a platform.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.platform.value_counts(dropna=False)"
  }
 ]

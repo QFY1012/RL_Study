@@ -1,0 +1,62 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "2 节都在为前面写出的观点或问题服务",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "The test group reaches a recorded first response sooner, but overall completion barely changes.",
+    "serves": null,
+    "how": "概括主要发现：测试组记录到的首次响应更快，但总体完成率变化不大，并点出皮肤科最值得调查。",
+    "holds": false
+   },
+   {
+    "start": "Response speed is only part of the journey.",
+    "serves": "The test group reaches a recorded first response sooner, but overall completion barely changes.",
+    "how": "用中位数和尾部等待更低、但就诊前流失比例更高，以及缺失响应时间只属于流失用户，说明首响应更快只是流程的一部分且时间统计有覆盖局限。",
+    "holds": true
+   },
+   {
+    "start": "Dermatology loses more users before care.",
+    "serves": "Dermatology is the clearest area to investigate.",
+    "how": "指出皮肤科在就诊前流失更多用户，完成率下降与就诊前流失增加同时出现，建议先审查该科入口和交接体验。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"The test group reaches a recorded first response sooner, but overall completion barely changes.\",\"serves\":null,\"how\":\"概括主要发现：测试组记录到的首次响应更快，但总体完成率变化不大，并点出皮肤科最值得调查。\"},{\"start\":\"Response speed is only part of the journey.\",\"serves\":\"The test group reaches a recorded first response sooner, but overall completion barely changes.\",\"how\":\"用中位数和尾部等待更低、但就诊前流失比例更高，以及缺失响应时间只属于流失用户，说明首响应更快只是流程的一部分且时间统计有覆盖局限。\"},{\"start\":\"Dermatology loses more users before care.\",\"serves\":\"Dermatology is the clearest area to investigate.\",\"how\":\"指出皮肤科在就诊前流失更多用户，完成率下降与就诊前流失增加同时出现，建议先审查该科入口和交接体验。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 997,
+   "completion_tokens": 15318,
+   "seconds": 97.6
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-gpt-6-astra/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文只有分组、部门、投诉类别和统计数字，没有写出任何有名字或可辨认的具体个体，也没有个体的欲望、预期被打破、应对与后续经历；因此三样都不存在，属于只有类别和数字的数据报道。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"全文只有分组、部门、投诉类别和统计数字，没有写出任何有名字或可辨认的具体个体，也没有个体的欲望、预期被打破、应对与后续经历；因此三样都不存在，属于只有类别和数字的数据报道。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1137,
+   "completion_tokens": 1392,
+   "seconds": 9.5
+  }
+ }
+}
