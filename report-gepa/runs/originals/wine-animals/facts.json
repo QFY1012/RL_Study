@@ -249,7 +249,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'bug' and type in ['White','Red']\").assign(below4=lambda x: x.rating < 4).groupby('type').below4.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'bug' and type in ['White','Red']\").assign(below4=lambda x: x.rating < 4).groupby('type').below4.agg(['mean','sum','count']).assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "canine-human-pairing",
@@ -258,7 +258,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'canine'\").assign(human=lambda x: x.finalAnimal.str.lower().str.contains('human')).human.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'canine'\").assign(human=lambda x: x.finalAnimal.str.lower().str.contains('human')).human.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "canine-three-under-20",
@@ -303,7 +303,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle' and type == 'Red'\").assign(spanish=lambda x: x.country.isin(['Spain','Chile','Argentina'])).spanish.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle' and type == 'Red'\").assign(spanish=lambda x: x.country.isin(['Spain','Chile','Argentina'])).spanish.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "cattle-price-rating-outliers",
@@ -339,7 +339,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'fish'\").assign(four=lambda x: x.rating >= 4).four.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'fish'\").assign(four=lambda x: x.rating >= 4).four.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "fish-mostly-white",
@@ -348,7 +348,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'fish'\").type.value_counts(normalize=True)"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'fish'\").type.value_counts(normalize=True)*100"
   },
   {
     "id": "dashe-late-harvest",
@@ -384,7 +384,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate'\").type.value_counts(normalize=True)"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate'\").type.value_counts(normalize=True)*100"
   },
   {
     "id": "nautilus-most-common-invertebrate",
@@ -434,11 +434,11 @@
   {
     "id": "pig-wines-25-percent-rose",
     "source": "but they were also statistically more likely to be rosé (25% of pig wines, compared to 8% of all wines).",
-    "claim": "25.0% of pig wines are rosé (7 of 28), versus 8.0% of all animal wines.",
+    "claim": "25.0% of pig wines are rosé (7 of 28).",
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'pig'\").assign(rose=lambda x: x.type == 'Rose').groupby('g').rose.agg(['mean','sum','count']).assign(all_rose=d.type.eq('Rose').mean())"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'pig'\").assign(rose=lambda x: x.type == 'Rose').groupby('g').rose.agg(['mean','sum','count']).assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "spy-pig-lowest-rating",
@@ -528,7 +528,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle'\").assign(fr=lambda x: x.country == 'France').fr.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle'\").assign(fr=lambda x: x.country == 'France').fr.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "sheep-42-percent-10-to-20",
@@ -537,7 +537,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'sheep'\").assign(bucket=lambda x: x.p.between(10, 19.99)).bucket.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'sheep'\").assign(bucket=lambda x: x.p.between(10, 19.99)).bucket.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "mythical-30-percent-italian",
@@ -546,7 +546,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'mythical creature'\").assign(it=lambda x: x.country == 'Italy').it.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'mythical creature'\").assign(it=lambda x: x.country == 'Italy').it.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "marine-invertebrates-mediterranean-nz",
@@ -555,7 +555,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate'\").assign(region=lambda x: x.country.isin(['France','Italy','Spain','New Zealand'])).region.agg(['mean','sum','count'])"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate'\").assign(region=lambda x: x.country.isin(['France','Italy','Spain','New Zealand'])).region.agg(['mean','sum','count']).to_frame().T.assign(mean=lambda x: x['mean']*100)"
   },
   {
     "id": "log-price-rating-trend",
@@ -569,10 +569,19 @@
   {
     "id": "new-zealand-price-flat-with-quality",
     "source": "Across all categories and variables, the only dataset that maintained its price as the quality increased was New Zealand wines.",
-    "claim": "New Zealand is the only country whose animal wines have a negative least-squares price-on-rating slope (-7.42 dollars per star); every other country has a positive slope.",
+    "claim": "Among countries with more than one animal wine, New Zealand is the only one with a negative least-squares price-on-rating slope (-7.42 dollars per star); every other such country has a positive slope.",
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).groupby('country').apply(lambda x: np.polyfit(x.rating, x.p, 1)[0]).sort_values()"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).groupby('country').filter(lambda x: len(x) > 1).groupby('country').apply(lambda x: x.rating.cov(x.p)/x.rating.var()).sort_values()"
+  },
+  {
+    "id": "birds-highest-good-deals-so-far",
+    "source": "Birds had the highest percentage of good deals that we’ve seen so far",
+    "claim": "Among amphibian/reptile, pig, cat and bird wines, birds have the highest good-deal share (17.5%), ahead of pigs and cats (10.7%) and amphibians/reptiles (5.3%).",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g in ['amphibian/reptile','pig','cat','bird']\").assign(gd=lambda x: 100*((x.p < 29.99) & (x.rating >= 4))).groupby('g').gd.mean().sort_values(ascending=False)"
   }
 ]

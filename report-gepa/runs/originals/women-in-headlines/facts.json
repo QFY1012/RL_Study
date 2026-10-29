@@ -2,7 +2,7 @@
   {
     "id": "sue-most-in-us",
     "source": "US headlines use the word sue significantly more than those from India, South Africa, or the UK, where suing may be a less common practice.",
-    "claim": "The word 'sue' appears in 170 United States headlines, 109 UK headlines, 75 Indian headlines and 21 South African headlines.",
+    "claim": "The word 'sue' appears in 170 headlines from the USA, more than in the UK (109), India (75) or South Africa (21).",
     "tables": {
       "d": "data/headlines.csv"
     },
@@ -11,7 +11,7 @@
   {
     "id": "muslim-most-in-india",
     "source": "Muslim appears more frequently in Indian headlines, compared to the UK, the US, and South Africa, as local news in India often reports the religion of the story’s subject.",
-    "claim": "The word 'Muslim' appears in 1,293 Indian headlines, 489 UK headlines, 340 United States headlines and 22 South African headlines.",
+    "claim": "The word 'Muslim' appears in 1,293 headlines from India, more than in the UK (489), the USA (340) or South Africa (22).",
     "tables": {
       "d": "data/headlines.csv"
     },
@@ -38,7 +38,7 @@
   {
     "id": "death-hurt-drama-stable",
     "source": "Other words (e.g. “death,” “hurt,” and “drama”) have instead stood the test of time, as their use has remained consistent since 2005.",
-    "claim": "The share of headlines containing 'death' ranges from 1.68% in 2011 to 3.51% in 2007 and is 2.16% in 2021, while 'hurt' and 'drama' stay below 0.2% in every year from 2005 to 2021.",
+    "claim": "The share of headlines containing 'death' ranges from 1.68% in 2011 to 3.51% in 2007 and is 2.16% in 2021, while 'hurt' peaks at 0.18% in 2011 and 'drama' at 0.18% in 2009.",
     "tables": {
       "d": "data/headlines.csv"
     },

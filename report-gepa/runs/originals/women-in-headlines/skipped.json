@@ -1,0 +1,82 @@
+[
+  {
+    "source": "women were found to make up just 24% of news subjects and sources reported. According to this report, this number has not changed since 2010.",
+    "why": "Both figures are from the Global Media Monitoring Project report cited in the story, not from the headline data in data/headlines.csv."
+  },
+  {
+    "source": "In our dataset, the word Black most often appeared in headlines speaking about Black women.",
+    "why": "The file has no topic or subject labels, and every row is already a headline collected with a women-associated keyword, so the claim that 'Black' appears mostly in stories about Black women cannot be tested from these records."
+  },
+  {
+    "source": "Black women may be part of a marginalized group in the US, the UK, and South Africa, but they appear quite frequently in the news in these countries nonetheless.",
+    "why": "No frequency threshold or comparison is stated, so 'quite frequently' cannot be tested; raw counts of headlines containing 'black' (2,382 US, 1,417 UK, 1,293 India, 329 South Africa) do not establish the claim about Black women as news subjects."
+  },
+  {
+    "source": "There are thousands of mentions, nearly 8,000 to be precise, of trailblazing women that shattered glass ceilings.",
+    "why": "Counting the word 'first' in data/headlines.csv gives 14,413 occurrences (14,376 headlines), not nearly 8,000; the separate per-word count table used for the treemap is not in this folder."
+  },
+  {
+    "source": "the most mentioned word is “man.” Man appears more than 30,000 times.",
+    "why": "Counting the word 'man' in data/headlines.csv gives 10,317 occurrences (10,822 headlines; 18,752 if 'men' is included), not more than 30,000, and 'first' occurs more often than 'man'; the separate per-word count table used for the treemap is not in this folder."
+  },
+  {
+    "source": "There are nearly 4,000 mentions of “death,” 6,000 mentions of rape, and more than 10,000 mentions of killing.",
+    "why": "The word 'death' occurs 7,585 times in data/headlines.csv (7,716 headlines), not nearly 4,000; the counts may come from the story's separate word-count/theme tables, but with data/headlines.csv alone no single rule reproduces all three (the rape and killing figures fit only by adding selected inflected forms)."
+  },
+  {
+    "source": "the majority of these mentions are found in headlines where women are subjected to violence.",
+    "why": "This requires classifying each headline into the story's crime & violence theme; the theme dictionaries are not in data/headlines.csv."
+  },
+  {
+    "source": "When reporting these stories, many headlines refer to a woman in their capacity as a daughter, mother or wife.",
+    "why": "The claim is scoped to crime & violence stories, and the file has no theme labels with which to select those headlines."
+  },
+  {
+    "source": "we found words associated with gender stereotypes, like body, child, and marry repeatedly becoming the topics of conversation in women-centered headlines.",
+    "why": "This is a qualitative observation with no stated number or comparison; counting headlines containing the words does not reproduce the authors' classification of them as stereotype topics, and the stereotype dictionary is not in the file."
+  },
+  {
+    "source": "for every occurrence of an empowering word, we read two words of crime and violence.",
+    "why": "The 2:1 ratio requires the story's curated empowerment and crime & violence dictionaries, which are not in data/headlines.csv."
+  },
+  {
+    "source": "not only is sensationalism on the rise, but it has also been consistently higher in headlines with keywords associated with women, as opposed to headlines about other topics.",
+    "why": "data/headlines.csv has no polarity/sentiment scores and no baseline headlines about other topics, so the trend and the comparison cannot be computed."
+  },
+  {
+    "source": "Most outlets sensationalize headlines about women more than other topics",
+    "why": "The chart's outlet-level absolute and percent polarity differences require polarity scores for women's headlines and for other headlines, neither of which is in data/headlines.csv."
+  },
+  {
+    "source": "Outlets that sensationalize headlines about women less, like Nature and FiveThirtyEight do not regularly deal with everyday news but go deeper into significant topical trends.",
+    "why": "Identifying which outlets are less sensational requires the polarity scores, which are absent from data/headlines.csv."
+  },
+  {
+    "source": "Nature, a predominantly scientific publication, is the least sensational but it also has a more limited reach.",
+    "why": "The polarity ranking and the SimilarWeb viewership data are not in data/headlines.csv."
+  },
+  {
+    "source": "BBC and The New York Times are the largest publications with the least sensational headlines compared to the Daily Mail, Huffington Post, Fox News or Aaj Tak who publish more shock value headlines.",
+    "why": "This requires polarity scores and monthly viewership data; only headline text, site, date, country and the bias score are in data/headlines.csv."
+  },
+  {
+    "source": "The Daily Mail scores the highest while the BBC and ESPN are among those who score the lowest.",
+    "why": "Averaging the bias column by outlet does not reproduce this ranking: Daily Mail averages 0.212 (10th of 186 outlets, below The Sun 0.226, Wales Online 0.222, Mirror 0.220 and Daily Record 0.217), while ESPN's outlets average 0.145-0.158 (113th-148th), not among the lowest (BBC is 174th-176th). The outlet subset or weighting used for the chart is not in the file."
+  },
+  {
+    "source": "In contrast to our results for polarity, there is a greater variance in bias scores across publications.",
+    "why": "The comparison to polarity variance requires polarity scores, which are absent from data/headlines.csv."
+  },
+  {
+    "source": "the sharp rise of the word “equality” in recent years.",
+    "why": "The share of headlines containing 'equality' rises to 0.23% in 2018 and 0.22% in 2019 but falls back to 0.16% in 2020 and 0.15% in 2021, so the data show a 2018-2019 peak rather than a sharp rise in the most recent years."
+  },
+  {
+    "source": "In India, the racial divide is not as likely to make headlines as the religious one.",
+    "why": "The story gives no explicit comparison or number here; in the file 'Muslim' appears in 1,293 Indian headlines and 'black' in 1,293, so the data do not show the religious word outranking the racial one."
+  },
+  {
+    "source": "This visual essay suggests that headlines used to report women-centered news can be biased and can reinforce existing stereotypes.",
+    "why": "This is a qualitative conclusion with no stated number or comparison; the file's bias column is nonzero for 85% of headlines, but the story gives no threshold, and the stereotype dictionary that defines the score is not in the folder."
+  }
+]

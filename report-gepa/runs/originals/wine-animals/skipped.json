@@ -326,5 +326,9 @@
   {
     "source": "All the animals in this category were statistically more likely to be found on American, Australian, or Chilean wines than all wines",
     "why": "This statistical more-likely-than-all-wines claim needs the all-wines baseline and z-scores; the file contains only animal wines. The separate raw-count claim about the United States is reported in facts.json."
+  },
+  {
+    "source": "New Zealand wines are delicious and, ultimately, a better predictor of quality than any of the animals we looked at.",
+    "why": "The ‘better predictor of quality’ comparison requires a predictive model across animal categories; the file only supports the simple country price-on-rating slope reported in facts.json."
   }
 ]

@@ -1,0 +1,87 @@
+{
+ "id": "women-in-congress",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 788,
+  "steps": 67,
+  "tools": 98,
+  "nudged": 0,
+  "usage": {
+   "input": 132470,
+   "output": 114168
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "women-total-289",
+   "basis": "output is 289",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-serving-publication",
+   "basis": "output is 89",
+   "verdict": "ok"
+  },
+  {
+   "id": "longest-serving-kaptur",
+   "basis": "idxmax output is Marcy Kaptur",
+   "verdict": "ok"
+  },
+  {
+   "id": "rankin-only-montana-woman",
+   "basis": "output has one unique name: Jeannette Rankin",
+   "verdict": "ok"
+  },
+  {
+   "id": "oecd-no-country-at-parity",
+   "basis": "g.women_parliament.max() output is 47.6, which is below 50",
+   "verdict": "ok"
+  },
+  {
+   "id": "nordic-countries-top-ten",
+   "basis": "top-ten output lists Sweden 43.6, Mexico 42.6, Finland 42.0, Norway 41.4, Spain 39.1, France 39.0, New Zealand 38.3, Iceland 38.1, Belgium 38.0, Denmark 37.4; all five Nordic countries are present with claimed shares",
+   "verdict": "ok"
+  },
+  {
+   "id": "mexico-share-rise",
+   "basis": "output: 1990-01-01 12.0; 2018-01-01 42.6",
+   "verdict": "ok"
+  },
+  {
+   "id": "energy-nearly-identical",
+   "basis": "gender 0 median 0.9160, gender 1 median 0.9335; women (1) about 0.93%, men (0) about 0.92%",
+   "verdict": "ok"
+  },
+  {
+   "id": "healthcare-more-than-twice",
+   "basis": "ratio gender1/gender0 is 2.1608066870107474",
+   "verdict": "ok"
+  },
+  {
+   "id": "healthcare-gap-by-party",
+   "basis": "Democrat gender0 8.167, gender1 16.929, ratio 2.072854; Republican gender0 7.309, gender1 14.357, ratio 1.964291",
+   "verdict": "ok"
+  },
+  {
+   "id": "government-budget-men-more",
+   "basis": "gender 0 median 3.8160, gender 1 median 3.0615; men (0) about 3.8%, women (1) about 3.1%",
+   "verdict": "ok"
+  },
+  {
+   "id": "men-focus-military-agriculture-budget",
+   "basis": "medians gender0: military 3.0560, agriculture 0.661, government budget 3.8160; gender1: military 2.8005, agriculture 0.588, government budget 3.0615; women (1) lower than men (0) and values round to claim",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 12,
+ "skipped": 22
+}

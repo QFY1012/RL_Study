@@ -13115,3 +13115,44 @@ wiki-death: facts=8 answer=7 dropped=1 skipped=7 problems=0 848s steps=80
   women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json,
   wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
   women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 -c " import json for 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat > build_skipped.py <<'PYEO
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && ls -la && python -c " import json 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/README.md
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/data/words.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/processed/words.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/words-by-country.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/words_by_country.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/all-words.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/word-counts.csv
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat skipped.json
+women-in-congress: facts=12 answer=12 dropped=0 skipped=22 problems=0 788s steps=67
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && grep -c "logarithmic trend" skippe
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; rm -f build_facts.py build_ski
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+wine-animals: facts=65 answer=65 dropped=0 skipped=83 problems=0 911s steps=66
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat facts.json; echo; echo '--
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso

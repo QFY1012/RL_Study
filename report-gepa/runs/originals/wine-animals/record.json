@@ -1,0 +1,352 @@
+{
+ "id": "wine-animals",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 911,
+  "steps": 66,
+  "tools": 67,
+  "nudged": 0,
+  "usage": {
+   "input": 93174,
+   "output": 135573
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 65,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "group-median-ratings",
+   "basis": "Output medians: bear/cat/mythical 4.10; bird/canine/deer/horse/rabbit 4.00; amphibian/reptile 3.95; bug/cattle/fish/marine invertebrate/pachyderm/sheep 3.90; pig 3.80.",
+   "verdict": "ok"
+  },
+  {
+   "id": "animal-wines-median-price-rating",
+   "basis": "Output p=26.99, rating=4.00.",
+   "verdict": "ok"
+  },
+  {
+   "id": "amphibian-panel",
+   "basis": "Output p=30.965000, gd=5.263158 (about 5.3%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "bear-panel",
+   "basis": "Output p=31.550000, gd=13.043478 (about 13.0%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "bug-panel",
+   "basis": "Output p=22.655000, gd=21.428571 (about 21.4%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "deer-panel",
+   "basis": "Output p=30.49, gd=6.00.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fish-panel",
+   "basis": "Output p=24.990000, gd=24.193548 (about 24.2%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "marine-invertebrate-panel",
+   "basis": "Output p=22.670000, gd=18.181818 (about 18.2%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "mythical-creature-panel",
+   "basis": "Output p=34.990000, gd=15.447154 (about 15.4%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "pig-panel",
+   "basis": "Output p=23.220000, gd=10.714286 (about 10.7%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "rabbit-panel",
+   "basis": "Output p=29.99, gd=12.00.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bird-median-price",
+   "basis": "Output median p=25.99.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cattle-median-price",
+   "basis": "Output median p approx 22.495 (22.494999999999997).",
+   "verdict": "ok"
+  },
+  {
+   "id": "horse-median-price",
+   "basis": "Output median p approx 25.245 (25.244999999999997).",
+   "verdict": "ok"
+  },
+  {
+   "id": "sheep-median-price",
+   "basis": "Output median p=21.74.",
+   "verdict": "ok"
+  },
+  {
+   "id": "canine-good-deals",
+   "basis": "Output gd=10.434782608695652 (about 10.4%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "pachyderm-good-deals",
+   "basis": "Output gd=8.695652173913043 (about 8.7%).",
+   "verdict": "ok"
+  },
+  {
+   "id": "farm-animals-cheaper-lower",
+   "basis": "Output medp/medr: cattle 22.495/3.9, pig 23.220/3.8, sheep 21.740/3.9; all_medp 26.99, all_medr 4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heraldic-animals-pricier-higher",
+   "basis": "Output medp/medr: bear 31.55/4.1, cat 38.99/4.1, mythical creature 34.99/4.1; all_medp 26.99, all_medr 4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "amphibians-overvalued",
+   "basis": "Output amphibian/reptile medp 30.965, medr 3.95; all_medp 26.99, all_medr 4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cats-high-ratings-high-price",
+   "basis": "Output cat medp 38.99 price_rank 1.0; medr 4.10 rating_rank 1.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pigs-cheap-low-rated",
+   "basis": "Output pig medr 3.8 rating_rank 16.0; medp 23.220; all_medp 26.99.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mythical-second-price",
+   "basis": "Output top medians: cat 38.99, mythical creature 34.99, bear 31.55.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bugs-second-good-deals",
+   "basis": "Output gd: fish 24.193548, bug 21.428571, sheep 21.052632.",
+   "verdict": "ok"
+  },
+  {
+   "id": "amphibian-no-good-deals-beyond-4",
+   "basis": "Output max=4.0, count=19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "amphibian-expensive-outliers",
+   "basis": "Output rows: Réserve des Célestins p=790.0 rating=4.6; Bionic Frog p=610.0 rating=4.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "more-songbirds-than-raptors-high-rated",
+   "basis": "Output sums: songbird 93, raptor 55.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bug-white-red-below-4",
+   "basis": "Output red mean=36.666667, sum=11, count=30; white mean=65.306122, sum=32, count=49.",
+   "verdict": "ok"
+  },
+  {
+   "id": "canine-human-pairing",
+   "basis": "Output mean=20.0, sum=23, count=115.",
+   "verdict": "ok"
+  },
+  {
+   "id": "canine-three-under-20",
+   "basis": "Output exactly three rows: Tecnica del Salasso Tre di Tre 18.02/4.1; Rosé Bubbles 17.99/4.0; Two Dogs, A Peacock & A Horse Sauvignon Blanc 19.99/4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "heraldic-lion-median-price",
+   "basis": "Output median p=39.99.",
+   "verdict": "ok"
+  },
+  {
+   "id": "house-cat-median-price",
+   "basis": "Output median p=35.465.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lynx-rose-bottle",
+   "basis": "Output row: Blanc de Noir Merlot, Lynx, South Africa, p=12.99, rating=4.0, finalAnimal=lynx.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cattle-red-spanish-speaking",
+   "basis": "Output mean=50.0, sum=13, count=26.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cattle-price-rating-outliers",
+   "basis": "Output rows: Kukeri Cabernet Sauvignon 94.99/4.4; Teso La Monja Victorino 99.99/4.4; Egervin Egri Bikavér Bulls Blood 11.99/3.4; Osborne Manzanilla Sherry Fina 16.24/3.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "deer-pricier-than-cattle",
+   "basis": "Output medp cattle 22.495, deer 30.490; medr cattle 3.9, deer 4.0; diff=7.995.",
+   "verdict": "ok"
+  },
+  {
+   "id": "angels-cowboys-deer-rose",
+   "basis": "Output row: Rosé, Angels & Cowboys, p=17.99, rating=4.0, under deer filter.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fish-nearly-half-4-plus",
+   "basis": "Output mean=48.387097, sum=30, count=62.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fish-mostly-white",
+   "basis": "Output White=61.290323.",
+   "verdict": "ok"
+  },
+  {
+   "id": "dashe-late-harvest",
+   "basis": "Output row: Late Harvest Zinfandel, Dashe, p=26.99, rating=4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "three-under-10-over-4-stars",
+   "basis": "Output three rows: Pink Moscato 8.74/4.1; Hugues de Beauvignac (HB) Picpoul de Pinet 9.95/4.1; Beauvignac Le Moelleux 9.99/4.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pera-manca-second-highest-under-150",
+   "basis": "Output Pêra-Manca Branco 60.00/4.6 rank 2; two other 4.6 wines rank 2; one 4.7 wine rank 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "marine-invertebrates-70-percent-white",
+   "basis": "Output White=69.696970.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nautilus-most-common-invertebrate",
+   "basis": "Output counts: nautilus 17; mussel 4; lobster 4; others <=3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "butter-block-chardonnay",
+   "basis": "Output row: Chardonnay, Butter Block, p=19.99, rating=4.1, finalAnimal=lobster.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mythical-only-one-below-3-5",
+   "basis": "Output one row: Egri Bikavér Bulls Blood, rating=3.4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "el-enemigo-two-prices",
+   "basis": "Output rows: Chardonnay p=24.94 rating=4.2; Gran Enemigo Single Vineyard Gualtallary Cabernet Franc p=129.99 rating=4.7.",
+   "verdict": "ok"
+  },
+  {
+   "id": "soldera-brunello-2730",
+   "basis": "Output p=2730.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pig-wines-25-percent-rose",
+   "basis": "Output mean=25.0, sum=7, count=28.",
+   "verdict": "ok"
+  },
+  {
+   "id": "spy-pig-lowest-rating",
+   "basis": "Output two min-rating rows: Spy Pig Rosé 3.0 and Broke Ass Red Blend 3.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "pachyderm-two-good-deals",
+   "basis": "Output exactly two rows: Chardonnay/We The People 20.83/4.0; Grüi/Kollektiv Peternell 24.99/4.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hasenhaide-rabbit-rose",
+   "basis": "Output row: Hasenhaide Rosé, Austria, p=23.0, rating=4.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "under-20-highest-are-dessert-sparkling",
+   "basis": "Output three rows: Serena Sweet Red Dessert 14.95/4.3; Moscato d'Asti Lodali Sparkling 15.95/4.3; Moscato d'Asti Vino dei Fratelli Sparkling 17.00/4.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mount-fishtail-best-dinner-wine",
+   "basis": "Output first row: Mount Fishtail Sauvignon Blanc p=15.99 rating=4.2; remaining max-rating wines cost >=18.67.",
+   "verdict": "ok"
+  },
+  {
+   "id": "brancott-4-1-stars",
+   "basis": "Output row: Sauvignon Blanc, Brancott Estate, p=13.99, rating=4.1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "antelope-all-south-africa",
+   "basis": "Output four antelope rows, all country South Africa.",
+   "verdict": "ok"
+  },
+  {
+   "id": "fat-pig-cape-vintage",
+   "basis": "Output row: Fat Pig Cape Vintage, p=23.45, rating=4.3.",
+   "verdict": "ok"
+  },
+  {
+   "id": "amphibian-us-dominates-count",
+   "basis": "Output country counts: United States 15, Spain 5, Italy 5, France 4, Australia 4.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cattle-six-percent-french",
+   "basis": "Output mean=6.521739, sum=3, count=46.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sheep-42-percent-10-to-20",
+   "basis": "Output mean=42.105263, sum=24, count=57.",
+   "verdict": "ok"
+  },
+  {
+   "id": "mythical-30-percent-italian",
+   "basis": "Output mean=30.081301, sum=37, count=123.",
+   "verdict": "ok"
+  },
+  {
+   "id": "marine-invertebrates-mediterranean-nz",
+   "basis": "Output mean=81.818182, sum=27, count=33.",
+   "verdict": "ok"
+  },
+  {
+   "id": "log-price-rating-trend",
+   "basis": "Output polyfit slope=0.29303306 (intercept=2.96579576).",
+   "verdict": "ok"
+  },
+  {
+   "id": "new-zealand-price-flat-with-quality",
+   "basis": "Output slopes: New Zealand -7.424882; all other listed countries positive.",
+   "verdict": "ok"
+  },
+  {
+   "id": "birds-highest-good-deals-so-far",
+   "basis": "Output gd: bird 17.532468, cat 10.727969, pig 10.714286, amphibian/reptile 5.263158.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 65,
+ "skipped": 83
+}
