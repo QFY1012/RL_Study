@@ -2,38 +2,38 @@
   {
     "id": "no-diggity-fifth-most-played-90s",
     "source": "And No Diggity isn’t just anecdotally timeless, it’s the fifth most-played song from the 90s.",
-    "claim": "No Diggity is the fifth most-played 1990s song, with 30,911,317 Spotify plays.",
+    "claim": "No Diggity is the fifth most-played song from the 90s, with 30,911,317 Spotify plays.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'date', 'decade', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
   },
   {
     "id": "smells-like-teen-spirit-top-90s",
     "source": "Smells Like Teen Spirit, a track that never reached the Billboard Top 5 when it was released in 1992, is now the most-played song from the 90s.",
-    "claim": "Smells Like Teen Spirit is the most-played 1990s song, with 50,657,282 Spotify plays and a Billboard peak of 6.",
+    "claim": "Smells Like Teen Spirit is the most-played song from the 90s, with 50,657,282 Spotify plays and a Billboard peak of 6.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(1, 'count')[['artist', 'track', 'bill', 'count']]"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'bill', 'count']]"
   },
   {
     "id": "top-five-90s-playcounts",
     "source": "1. Smells Like Teen Spirit — Nirvana, 1991 50,657,282 2. Iris — Goo Goo Dolls, 1998 35,669,952 3. Wonderwall — Oasis, 1996 34,352,877 4. Under The Bridge — Red Hot Chili Peppers, 1992 33,625,240 5. No Diggity — BLACKstreet, 1996 30,911,317",
-    "claim": "The five most-played 1990s hits are Smells Like Teen Spirit with 50,657,282 plays, Iris with 35,669,952, Wonderwall with 34,352,877, Under The Bridge with 33,625,240 and No Diggity with 30,911,317.",
+    "claim": "The five most-played 90s hits are Smells Like Teen Spirit with 50,657,282 plays, Iris with 35,669,952, Wonderwall with 34,352,877, Under The Bridge with 33,625,240 and No Diggity with 30,911,317.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'date', 'decade', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
   },
   {
     "id": "top-five-90s-billboard-yearly-ranks",
     "source": "Billboard Performance for the Top 5 Most-played 90s Hits ... BILLBOARD YEARLY RANK*",
-    "claim": "The Billboard yearly ranks of the five most-played 1990s hits are 42 for Smells Like Teen Spirit, 57 for Iris, 45 for Wonderwall, 20 for Under The Bridge and 5 for No Diggity.",
+    "claim": "The Billboard yearly ranks of the five most-played 90s hits are 42 for Smells Like Teen Spirit, 57 for Iris, 45 for Wonderwall, 20 for Under The Bridge and 5 for No Diggity.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'rank']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'date', 'decade', 'rank']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
   },
   {
     "id": "forty-one-songs-ahead-of-smells-like-teen-spirit",
@@ -42,25 +42,25 @@
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d.loc[d.track.eq('Smells Like Teen Spirit'), ['artist', 'track', 'rank']].assign(ahead=lambda x: pd.to_numeric(x['rank'], errors='coerce').astype(int) - 1)"
+    "code": "d.loc[d.track.eq('Smells Like Teen Spirit'), ['artist', 'track', 'date', 'rank']].assign(ahead=lambda x: pd.to_numeric(x['rank'], errors='coerce').astype(int) - 1)"
   },
   {
     "id": "dont-stop-believin-top-80s",
     "source": "For the entire 1980s, Don’t Stop Believin’ is the most-played song on Spotify.",
-    "claim": "Don't Stop Believin' is the most-played 1980s song, with 50,855,135 Spotify plays.",
+    "claim": "Don't Stop Believin' is the most-played 80s song, with 50,855,135 Spotify plays.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1980, 1989)].nlargest(1, 'count')[['artist', 'track', 'count']]"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1980, 1989)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'count']]"
   },
   {
     "id": "bohemian-rhapsody-top-70s",
     "source": "From the 70’s: Bohemian Rhapsody.",
-    "claim": "Bohemian Rhapsody is the most-played 1970s song, with 32,298,690 Spotify plays.",
+    "claim": "Bohemian Rhapsody is the most-played 70s song, with 32,298,690 Spotify plays.",
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1970, 1979)].nlargest(1, 'count')[['artist', 'track', 'count']]"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1970, 1979)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'count']]"
   },
   {
     "id": "top-fifty-one-overall-ranking",

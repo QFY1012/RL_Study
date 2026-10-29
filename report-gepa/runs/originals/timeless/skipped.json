@@ -66,5 +66,9 @@
   {
     "source": "when it was released in 1992",
     "why": "The data dates Smells Like Teen Spirit to 12/07/1991 and the story's own chart labels it 1991; the 1992 release year does not reproduce, so the top-90s finding is kept without that year."
+  },
+  {
+    "source": "20 years have passed since No Diggity's release.",
+    "why": "The data dates No Diggity to 10/12/1996; the elapsed time depends on the story's publication date rather than on a value in the data files, so it is not a data finding that the files reproduce."
   }
 ]

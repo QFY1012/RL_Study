@@ -14,5 +14,9 @@
   {
     "source": "In 1999, “Wild Wild West” was the song of the summer. Yet it is fading far faster than any other ’90s hit with comparable starting popularity.",
     "why": "No single data-derived comparison reproduces the 'any other' superlative. Among the 58 songs recognized by more than 90% at age 13, Wild Wild West has the largest drop by age 10 but is only third at the release-year cohort (behind You’re Still The One and If You Had My Love) and is not the fastest over its full available age range. The story does not define 'comparable starting popularity'. The separate lower-than-expected Gen Z recognition finding is included in facts.json."
+  },
+  {
+    "source": "Song knowledge erodes with each passing year.",
+    "why": "The full Popular Average line in the story is the precomputed row in time_series_90s_d3_13_15_averaged_july_22.csv, which is not in data/ and is weighted. Its later points differ from unweighted means of the provided time series: at generation 0 the published line is 65.0% versus 65.6% unweighted, and at generation 10 it is 41.8% versus 46.0% unweighted over the six songs with data. facts.json includes the reproduced age-13 average (95.8%) and the release-year value (65.6%), but not the later line."
   }
 ]

@@ -39,11 +39,11 @@
   {
     "id": "popular-average-decay",
     "source": "This is a chart of all the songs that were recognized by more than 90% of people who were 13 to 15 years old when the song debuted. We’ve highlighted the average recognition rate, or the Popular Average.",
-    "claim": "The 58 songs recognized by more than 90% of people at age 13 average 95.8% recognition at age 13, 65.6% among people born in the release year, and 4.8% among people born 10 years after release.",
+    "claim": "The 58 songs recognized by more than 90% at age 13 average 95.8% recognition at age 13, falling to 65.6% among people born in the release year.",
     "tables": {
       "ts": "data/time_series_90s_july13.csv"
     },
-    "code": "ts.loc[ts['-13'] > 0.9, [str(i) for i in range(-13, 11)]].agg(['count','mean']).T"
+    "code": "ts.loc[ts['-13'] > 0.9, ['-13','0']].melt(var_name='generation', value_name='recognition').query('recognition > 0').groupby('generation')['recognition'].agg(['mean','count'])"
   },
   {
     "id": "wild-wild-west-genz",

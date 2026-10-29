@@ -1,0 +1,20 @@
+[
+ {
+  "id": "los-angeles-winningest-metro",
+  "source": "And in this case, looking at all sports between 1870 and 2018, Greater Los Angeles, CA is the winningest city in North America.",
+  "claim": "Greater Los Angeles, CA won 74 championships, more than any other metro area.",
+  "tables": {
+   "df": "data/titles.csv"
+  },
+  "code": "df.winner_metro.value_counts().head()"
+ },
+ {
+  "id": "new-haven-best-1870-1920",
+  "source": "Between 1870 and 1920, in all sports, the best teams came from New Haven (the Yale Bulldogs competed in 47 seasons, winning 17 times, or in 36% of their attempts).",
+  "claim": "New Haven, CT won 17 championships between 1870 and 1920, more than any other metro area.",
+  "tables": {
+   "df": "data/titles.csv"
+  },
+  "code": "df[(df.year >= 1870) & (df.year <= 1920)].winner_metro.value_counts().head()"
+ }
+]

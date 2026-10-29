@@ -1,0 +1,30 @@
+[
+  {
+    "source": "#28, #54 - Outkast and E-40",
+    "why": "E-40's exact rank of #28 is not reproduced: with the file's recalculated counts E-40 has 5,004 unique words and ranks 27th of the 160 artists (only the story's separate claim that E-40 is in the top 20% is reproduced). Outkast's #54 and 4,545 words are reproduced as their own fact."
+  },
+  {
+    "source": "#49 and #59 - Busta Rhymes and Twista",
+    "why": "Twista's rank of #59 is not reproduced: the file gives Twista 4,522 recalculated unique words and rank 58. Busta Rhymes' #49 (4,613 words) is reproduced."
+  },
+  {
+    "source": "Add the fact that GZA, Ghostface, Raekwon, and Method Man's solo works are also in the top 20 \u2013 notably, GZA is at #4.",
+    "why": "Method Man does not rank in the top 20 in the file: he has 4,910 recalculated unique words and ranks 31st. The other Wu-Tang ranks (#4 GZA, #5 Wu-Tang Clan, #7 RZA, #10 Ghostface Killah, #15 Killah Priest, #20 Raekwon) are reproduced as one fact."
+  },
+  {
+    "source": "A better benchmark for Lil Uzi Vert\u2019s word count (2,556) might be those of pop artists, such as Beyonce (2,433 words), or even one his major influences: Marilyn Manson (2,466 words).",
+    "why": "Beyonce and Marilyn Manson are not in the file, so their word counts cannot be computed or compared. Lil Uzi Vert's 2,556 is reproduced as its own fact."
+  },
+  {
+    "source": "# of Unique Words Used in 500 Random Samples of 35,000 Lyrics from Country, Rock, Hip Hop",
+    "why": "The rock, country and hip-hop sample data (500 samples of 35,000 words from John W. Miller, with chart labels such as 105 and 211 samples) is not in vocabulary.csv; that chart cannot be reproduced from this file."
+  },
+  {
+    "source": "Wu-Tang Clan at #5 is impressive given that 10 members, with vastly different styles, equally contribute lyrics.",
+    "why": "The rank #5 is reproduced, but the file has no member-level lyric data and no count of Wu-Tang's 10 members, so the ten-member claim cannot be computed."
+  },
+  {
+    "source": "Since both rappers are known for their speed, it\u2019s nice to see that their verses are just as lyrically diverse as their peers\u2019.",
+    "why": "This is a qualitative comparison with unnamed peers; the only computable part is the artists' ranks, of which Busta Rhymes' #49 is reproduced and Twista's stated #59 is not (the file gives 58th)."
+  }
+]

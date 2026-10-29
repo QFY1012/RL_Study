@@ -33,7 +33,7 @@
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "f.nsmallest(5, 'l').model.value_counts().to_frame('count').assign(share=lambda d: d['count'] / d['count'].sum(), total=lambda d: d['count'].sum())"
+    "code": "f.nsmallest(5, 'l').model.value_counts().to_frame('count').assign(share=lambda d: d['count'] / d['count'].sum(), percent=lambda d: 100 * d['count'] / d['count'].sum(), total=lambda d: d['count'].sum())"
   },
   {
     "id": "five-distinct-lightest-models",
@@ -51,7 +51,7 @@
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "(f.model.value_counts() >= 2).agg(['size', 'sum', 'mean'])"
+    "code": "(f.model.value_counts() >= 2).agg(['size', 'sum', 'mean']).to_frame('value').T.assign(percent=lambda d: d['mean'] * 100)"
   },
   {
     "id": "rihanna-lightness-span",
@@ -60,16 +60,16 @@
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "f.groupby('model').l.agg(['count', 'min', 'max']).assign(span=lambda d: d['max'] - d['min'], overall_range=lambda d: f.l.max() - f.l.min(), share=lambda d: (d['max'] - d['min']) / (f.l.max() - f.l.min())).loc[['Rihanna']]"
+    "code": "f.groupby('model').l.agg(['count', 'min', 'max']).assign(span=lambda d: d['max'] - d['min'], overall_range=lambda d: f.l.max() - f.l.min(), share=lambda d: (d['max'] - d['min']) / (f.l.max() - f.l.min()), share_pct=lambda d: 100 * (d['max'] - d['min']) / (f.l.max() - f.l.min())).loc[['Rihanna']].T"
   },
   {
     "id": "lightness-spread-before-and-after-2005",
     "source": "“Between 2000 and 2005, there isn’t a lot of variance in how light the cover models appear.” “After 2005 there’s a bit more spread.”",
-    "claim": "Skin lightness has a standard deviation of 0.076 across the 81 cover appearances from 2000 through 2005, versus 0.115 across the 181 after 2005.",
+    "claim": "Skin lightness has a standard deviation of 0.076 and a range of 0.41 across the 81 cover appearances from 2000 through 2005, versus a standard deviation of 0.115 and a range of 0.67 across the 181 after 2005.",
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "f.assign(period=np.where(pd.to_datetime(f.date).dt.year <= 2005, '2000-2005', '2006-2018')).groupby('period').l.agg(['count', 'std', 'min', 'max'])"
+    "code": "f.assign(period=np.where(pd.to_datetime(f.date).dt.year <= 2005, '2000-2005', '2006-2018')).groupby('period').l.agg(['count', 'std', 'min', 'max']).assign(range=lambda d: d['max'] - d['min'])"
   },
   {
     "id": "lupita-tugs-trend-darker",
@@ -78,7 +78,7 @@
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "f.groupby(f.model == 'Lupita Nyongo').l.agg(['count', 'mean'])"
+    "code": "f.assign(group=lambda d: np.where(d.model == 'Lupita Nyongo', 'Lupita Nyongo', 'Other')).groupby('group').l.agg(['count', 'mean'])"
   },
   {
     "id": "repeat-model-cover-counts",
