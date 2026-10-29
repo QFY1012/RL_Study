@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Stranger Sessions — Conversation Data Report</title>
+  <style>
+    :root {
+      --paper: #f4f1e9;
+      --paper-2: #fbfaf6;
+      --ink: #172c35;
+      --muted: #647178;
+      --line: #d9d9d0;
+      --coral: #ed6a4d;
+      --coral-dark: #bd4934;
+      --coral-soft: #f8d9cd;
+      --teal: #17867d;
+      --teal-soft: #d4ebe5;
+      --navy: #17343e;
+      --gold: #d9a62e;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(23, 44, 53, 0.08);
+      --sans: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .skip-link {
+      position: absolute; left: 16px; top: -60px; padding: 10px 16px;
+      background: var(--ink); color: white; z-index: 20;
+    }
+    .skip-link:focus { top: 12px; }
+    .shell { width: min(1240px, calc(100% - 72px)); margin: 0 auto; }
+    .topbar {
+      height: 90px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(23, 44, 53, 0.15);
+    }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+    .brand-mark { position: relative; width: 40px; height: 32px; }
+    .brand-mark::before, .brand-mark::after {
+      content: ""; position: absolute; width: 24px; height: 24px; border-radius: 50%;
+      top: 2px; border: 2px solid var(--ink);
+    }
+    .brand-mark::before { left: 0; background: var(--coral); }
+    .brand-mark::after { right: 0; background: var(--teal); mix-blend-mode: multiply; }
+    .brand-name { font-size: 13px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .brand-sub { display: block; color: var(--muted); font-size: 10px; letter-spacing: .16em; margin-top: 1px; }
+    .nav { display: flex; align-items: center; gap: 30px; }
+    .nav a {
+      text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: #526168;
+    }
+    .nav a:hover, .nav a:focus { color: var(--coral-dark); }
+    .nav .nav-index { color: var(--coral-dark); margin-right: 5px; font-family: var(--serif); font-style: italic; }
+
+    .hero {
+      display: grid; grid-template-columns: 1.13fr .87fr; gap: 72px; align-items: center;
+      padding: 76px 0 72px; min-height: 640px;
+    }
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; color: var(--coral-dark);
+      font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 2px; background: var(--coral); }
+    h1 {
+      font-family: var(--serif); font-size: clamp(62px, 6vw, 88px); line-height: .98;
+      letter-spacing: -.045em; font-weight: 400; margin: 26px 0 28px; max-width: 700px;
+    }
+    h1 em { color: var(--coral-dark); font-weight: 400; }
+    .hero-deck { font-size: 19px; line-height: 1.62; color: #4f6067; max-width: 610px; margin: 0; }
+    .hero-deck strong { color: var(--ink); font-weight: 700; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .hero-tag {
+      border: 1px solid #cfd2ca; border-radius: 100px; padding: 8px 14px;
+      color: #536269; font-size: 12px; font-weight: 650; background: rgba(255,255,255,.35);
+    }
+    .hero-tag b { color: var(--ink); }
+
+    .hero-card {
+      position: relative; min-height: 480px; border-radius: 3px; overflow: hidden;
+      background: var(--navy); color: white; padding: 34px 36px; box-shadow: var(--shadow);
+    }
+    .hero-card::after {
+      content: ""; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50%; top: -96px; right: -80px; box-shadow: 0 0 0 36px rgba(255,255,255,.025), 0 0 0 72px rgba(255,255,255,.02);
+    }
+    .hero-card-top { display: flex; justify-content: space-between; position: relative; z-index: 1; }
+    .hero-card-label { font-size: 10px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; color: #c8d4d5; }
+    .live-dot { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .12em; color: #b9cccd; text-transform: uppercase; }
+    .live-dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+    .gain { position: relative; z-index: 2; margin-top: 44px; }
+    .gain-number { font-family: var(--serif); font-size: 100px; line-height: .9; letter-spacing: -.05em; color: #fff8f1; }
+    .gain-number sup { font-family: var(--sans); font-size: 34px; color: var(--coral); vertical-align: top; margin-left: 5px; }
+    .gain-title { font-size: 16px; font-weight: 650; margin-top: 18px; }
+    .gain-note { font-size: 12px; color: #adbec2; margin-top: 4px; }
+    .hero-spark { height: 122px; margin: 22px -4px 0; position: relative; z-index: 1; }
+    .hero-spark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .hero-card-bottom {
+      display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.16);
+      padding-top: 18px; color: #c1ced0; font-size: 11px; letter-spacing: .04em;
+    }
+    .hero-card-bottom b { color: white; font-weight: 700; }
+
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); background: var(--paper-2);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .stat-item { padding: 30px 28px 28px; border-right: 1px solid var(--line); }
+    .stat-item:first-child { border-left: 1px solid var(--line); }
+    .stat-value { font-family: var(--serif); font-size: 40px; line-height: 1; letter-spacing: -.025em; }
+    .stat-value small { font-family: var(--sans); font-size: 14px; color: var(--muted); letter-spacing: 0; }
+    .stat-label { font-size: 12px; font-weight: 750; margin-top: 12px; }
+    .stat-note { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .accent-coral { color: var(--coral-dark); }
+    .accent-teal { color: var(--teal); }
+
+    .section { padding: 100px 0 10px; }
+    .section-heading {
+      display: grid; grid-template-columns: 90px 1fr 1fr; gap: 24px; align-items: start;
+      margin-bottom: 38px;
+    }
+    .section-number { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--coral-dark); padding-top: 8px; }
+    .section-kicker { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 10px; }
+    h2 { font-family: var(--serif); font-weight: 400; font-size: 43px; line-height: 1.1; letter-spacing: -.025em; margin: 0; }
+    .section-intro { color: #5d6b70; font-size: 15px; line-height: 1.7; margin: 5px 0 0; max-width: 460px; }
+    .panel { background: var(--paper-2); border: 1px solid var(--line); border-radius: 3px; }
+    .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+    .panel-title { font-size: 16px; line-height: 1.35; font-weight: 750; margin: 0; }
+    .panel-subtitle { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+    .trajectory-panel { padding: 30px 34px 22px; position: relative; overflow: hidden; }
+    .legend { display: flex; gap: 8px; flex-wrap: wrap; }
+    .legend-button {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px;
+      border: 1px solid var(--line); background: transparent; border-radius: 100px;
+      font-size: 11px; font-weight: 700; color: var(--ink); cursor: pointer;
+    }
+    .legend-button[aria-pressed="false"] { opacity: .4; }
+    .legend-button:focus-visible { outline: 3px solid rgba(23,134,125,.3); outline-offset: 2px; }
+    .legend-swatch { width: 18px; height: 3px; border-radius: 3px; background: var(--coral); }
+    .legend-swatch.teal { background: var(--teal); }
+    .chart { width: 100%; }
+    .chart svg { width: 100%; display: block; height: auto; }
+    .chart-note { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #e4e3dc; padding-top: 14px; color: var(--muted); font-size: 10px; }
+    .arc-grid { display: grid; grid-template-columns: 1fr 260px; border-top: 1px solid var(--line); margin-top: 24px; }
+    .arc-grid .trajectory-panel { border: 0; padding-left: 0; padding-right: 28px; }
+    .arc-aside { padding: 32px 0 20px 30px; border-left: 1px solid var(--line); }
+    .aside-quote { font-family: var(--serif); font-size: 26px; line-height: 1.3; letter-spacing: -.015em; margin: 0 0 20px; }
+    .aside-copy { color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .mini-rule { width: 40px; height: 3px; background: var(--coral); margin: 24px 0; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .distribution-panel, .gap-panel, .correlation-panel, .liking-panel, .politics-panel, .match-panel { padding: 30px; }
+    .big-share { display: flex; align-items: flex-end; gap: 14px; margin: 28px 0 22px; }
+    .big-share-number { font-family: var(--serif); font-size: 72px; line-height: .9; letter-spacing: -.045em; color: var(--coral-dark); }
+    .big-share-copy { font-size: 12px; color: var(--muted); line-height: 1.4; padding-bottom: 3px; }
+    .big-share-copy b { display: block; color: var(--ink); font-size: 14px; }
+    .segmented { display: flex; height: 30px; width: 100%; overflow: hidden; border-radius: 2px; background: #ddd; }
+    .segmented span { display: block; height: 100%; }
+    .seg-up { background: var(--coral); }
+    .seg-flat { background: var(--gold); }
+    .seg-down { background: #809098; }
+    .distribution-legend { margin-top: 20px; display: grid; gap: 11px; }
+    .distribution-row { display: grid; grid-template-columns: 12px 1fr auto auto; gap: 10px; align-items: center; font-size: 12px; }
+    .distribution-row .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .distribution-row .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .distribution-row .percent { font-weight: 800; width: 54px; text-align: right; font-variant-numeric: tabular-nums; }
+    .panel-footnote { font-size: 10px; color: var(--muted); border-top: 1px solid #e3e2db; padding-top: 14px; margin-top: 22px; }
+    .gap-summary { font-family: var(--serif); font-size: 25px; line-height: 1.3; margin: 23px 0 4px; max-width: 410px; }
+    .gap-summary em { color: var(--teal); }
+
+    .correlation-panel { padding-bottom: 26px; }
+    .correlation-list { margin-top: 26px; display: grid; gap: 14px; }
+    .correlation-row { display: grid; grid-template-columns: 150px 1fr 42px; align-items: center; gap: 12px; }
+    .correlation-label { font-size: 12px; font-weight: 650; }
+    .correlation-track { height: 12px; background: #e8e7df; position: relative; }
+    .correlation-track::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: rgba(23,44,53,.12); }
+    .correlation-fill { display: block; height: 100%; background: var(--teal); }
+    .correlation-row.social .correlation-fill { background: var(--coral); }
+    .correlation-row.baseline .correlation-fill { background: #95a0a3; }
+    .correlation-value { font-size: 12px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+    .axis-labels { display: grid; grid-template-columns: 150px 1fr 42px; gap: 12px; margin-top: 10px; }
+    .axis-labels .axis-inner { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; }
+    .liking-panel { background: var(--navy); color: white; border-color: var(--navy); }
+    .liking-panel .panel-subtitle, .liking-panel .panel-footnote { color: #b6c5c7; }
+    .liking-panel .panel-footnote { border-color: rgba(255,255,255,.16); }
+    .liking-bars { margin-top: 40px; display: grid; gap: 28px; }
+    .liking-row-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+    .liking-label { font-size: 13px; color: #d9e2e2; }
+    .liking-value { font-family: var(--serif); font-size: 30px; }
+    .liking-track { height: 20px; background: rgba(255,255,255,.1); position: relative; }
+    .liking-track::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(11.111% - 1px), rgba(255,255,255,.12) calc(11.111% - 1px), rgba(255,255,255,.12) 11.111%); }
+    .liking-fill { display: block; height: 100%; background: var(--coral); }
+    .liking-fill.teal { background: #54b9aa; }
+    .liking-gap { display: flex; align-items: center; gap: 16px; margin-top: 34px; padding: 19px 0; border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+    .liking-gap-number { font-family: var(--serif); font-size: 42px; color: #fff5ec; }
+    .liking-gap-copy { color: #b9c9ca; font-size: 11px; line-height: 1.5; }
+    .liking-gap-copy b { display: block; color: white; font-size: 12px; }
+
+    .politics-list { margin-top: 28px; display: grid; gap: 19px; }
+    .politics-row { display: grid; grid-template-columns: 68px 1fr 48px; gap: 12px; align-items: center; }
+    .politics-label { font-size: 12px; font-weight: 750; }
+    .politics-label small { display: block; color: var(--muted); font-weight: 500; font-size: 9px; }
+    .politics-track { height: 20px; background: #e8e7df; }
+    .politics-fill { display: block; height: 100%; background: var(--teal); }
+    .politics-row:last-child .politics-fill { background: #75aaa3; }
+    .politics-value { font-family: var(--serif); font-size: 21px; text-align: right; }
+    .politics-axis { margin: 8px 60px 0 80px; display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); }
+    .match-table { margin-top: 24px; }
+    .match-header, .match-row { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 10px; align-items: center; }
+    .match-header { color: var(--muted); text-transform: uppercase; letter-spacing: .1em; font-size: 9px; font-weight: 800; padding: 0 12px 10px; }
+    .match-row { border-top: 1px solid #e1e1da; padding: 18px 12px; }
+    .match-name { font-size: 13px; font-weight: 750; }
+    .match-cell { font-family: var(--serif); font-size: 27px; line-height: 1; }
+    .match-cell small { display: block; font-family: var(--sans); font-size: 9px; color: var(--muted); margin-top: 6px; }
+    .match-cell.same { color: var(--coral-dark); }
+
+    .method-section { margin-top: 100px; padding: 64px 0 58px; background: #e8e8df; border-top: 1px solid #d5d6cd; }
+    .method-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 80px; }
+    .method-title { font-family: var(--serif); font-size: 34px; font-weight: 400; line-height: 1.15; margin: 0 0 14px; }
+    .method-copy { font-size: 12px; color: #5c6a6e; line-height: 1.75; }
+    .profile-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #cfd2ca; border: 1px solid #cfd2ca; margin: 28px 0 26px; }
+    .profile-stat { background: #f3f2eb; padding: 18px 14px; }
+    .profile-stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 29px; }
+    .profile-stat span { font-size: 9px; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
+    .sex-bar { display: flex; height: 12px; overflow: hidden; margin-top: 12px; }
+    .sex-bar span:nth-child(1) { background: var(--coral); }
+    .sex-bar span:nth-child(2) { background: var(--teal); }
+    .sex-bar span:nth-child(3) { background: var(--gold); }
+    .sex-legend { display: flex; justify-content: space-between; gap: 8px; font-size: 9px; color: var(--muted); margin-top: 9px; }
+    .notes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 28px; margin-top: 26px; }
+    .note { border-top: 2px solid #bfc5bd; padding-top: 13px; }
+    .note b { display: block; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 6px; }
+    .note p { margin: 0; font-size: 11px; color: #5b686c; line-height: 1.65; }
+    .footer { background: var(--navy); color: #c1cdcf; padding: 28px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; font-size: 10px; letter-spacing: .04em; }
+    .footer strong { color: white; }
+    .footer a { text-decoration: none; color: white; border-bottom: 1px solid #769099; }
+
+    @media (max-width: 1000px) {
+      .shell { width: min(100% - 40px, 1240px); }
+      .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 54px; }
+      .hero-card { min-height: 430px; }
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+      .section-heading { grid-template-columns: 50px 1fr; }
+      .section-heading .section-intro { grid-column: 2; }
+      .arc-grid { grid-template-columns: 1fr; }
+      .arc-aside { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+      .two-col, .method-grid { grid-template-columns: 1fr; }
+      .method-grid { gap: 44px; }
+      .nav { gap: 16px; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 28px); }
+      .topbar { height: auto; padding: 20px 0; align-items: flex-start; }
+      .nav a:not(:last-child) { display: none; }
+      h1 { font-size: 54px; }
+      .hero { padding: 46px 0; }
+      .hero-card { padding: 26px; min-height: 420px; }
+      .gain-number { font-size: 80px; }
+      .stat-strip { grid-template-columns: 1fr; }
+      .stat-item { border-left: 1px solid var(--line); }
+      .section { padding-top: 70px; }
+      .section-heading { grid-template-columns: 1fr; gap: 10px; }
+      .section-heading .section-intro { grid-column: 1; }
+      h2 { font-size: 36px; }
+      .trajectory-panel, .distribution-panel, .gap-panel, .correlation-panel, .liking-panel, .politics-panel, .match-panel { padding: 22px 18px; }
+      .panel-head { flex-direction: column; }
+      .correlation-row { grid-template-columns: 112px 1fr 36px; gap: 8px; }
+      .axis-labels { grid-template-columns: 112px 1fr 36px; gap: 8px; }
+      .notes { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#report">Skip to the report</a>
+  <header class="topbar shell">
+    <a class="brand" href="#top" aria-label="The Stranger Sessions, back to top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">The Stranger Sessions<span class="brand-sub">A conversation data report</span></span>
+    </a>
+    <nav class="nav" aria-label="Report sections">
+      <a href="#arc"><span class="nav-index">01</span>The arc</a>
+      <a href="#connection"><span class="nav-index">02</span>Connection</a>
+      <a href="#similarity"><span class="nav-index">03</span>Similarity</a>
+      <a href="#method"><span class="nav-index">04</span>Method</a>
+    </nav>
+  </header>
+
+  <main id="report">
+    <section class="hero shell" id="top">
+      <div>
+        <div class="eyebrow">Thirty minutes, two strangers</div>
+        <h1>Half an hour.<br><em>A warmer goodbye.</em></h1>
+        <p class="hero-deck">Across <strong>1,656 paired video conversations</strong>, affect barely moves at the hello—then climbs. By the end, <strong>69.2% of matched person-records</strong> rate their affect higher than they did before.</p>
+        <div class="hero-tags" aria-label="Study scope">
+          <span class="hero-tag"><b>30 min</b> video calls</span>
+          <span class="hero-tag"><b>1,656</b> conversations</span>
+          <span class="hero-tag"><b>3,312</b> person-records</span>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Headline affect gain">
+        <div class="hero-card-top">
+          <span class="hero-card-label">Headline finding / affect</span>
+          <span class="live-dot">Pre → end</span>
+        </div>
+        <div class="gain">
+          <div class="gain-number">+1.29<sup>↗</sup></div>
+          <div class="gain-title">Mean within-person affect gain</div>
+          <div class="gain-note">Median gain +1.00 · 3,257 matched person-records</div>
+        </div>
+        <div class="hero-spark" aria-hidden="true">
+          <svg viewBox="0 0 430 130" role="img">
+            <defs>
+              <linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ed6a4d" stop-opacity=".35"/>
+                <stop offset="1" stop-color="#ed6a4d" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 110 L12 100 L145 98 L280 51 L418 24 L418 110 Z" fill="url(#heroArea)"/>
+            <path d="M12 100 L145 98 L280 51 L418 24" fill="none" stroke="#ed6a4d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#17343e" stroke="#ed6a4d" stroke-width="3">
+              <circle cx="12" cy="100" r="5"/><circle cx="145" cy="98" r="5"/><circle cx="280" cy="51" r="5"/><circle cx="418" cy="24" r="5"/>
+            </g>
+            <g fill="#9fb3b6" font-family="Arial, sans-serif" font-size="9" letter-spacing="1">
+              <text x="12" y="126">BEFORE</text><text x="145" y="126" text-anchor="middle">HELLO</text><text x="280" y="126" text-anchor="middle">MIDPOINT</text><text x="418" y="126" text-anchor="end">END</text>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-card-bottom"><span>Pair-average affect</span><span><b>6.10</b> before &nbsp;→&nbsp; <b>7.38</b> end</span></div>
+      </aside>
+    </section>
+
+    <section class="stat-strip shell" aria-label="Key findings">
+      <div class="stat-item">
+        <div class="stat-value accent-coral">69.20<small>%</small></div>
+        <div class="stat-label">End affect increased</div>
+        <div class="stat-note">2,254 of 3,257 matched records</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">7.41<small> / 9</small></div>
+        <div class="stat-label">Mean enjoyment</div>
+        <div class="stat-note">Median 8.00 · 3,257 ratings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value accent-teal">77.96<small>%</small></div>
+        <div class="stat-label">Rated enjoyment 7 or higher</div>
+        <div class="stat-note">Observed response range 1–9</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">1.31</div>
+        <div class="stat-label">Final within-pair affect gap</div>
+        <div class="stat-note">Mean absolute gap · 1.67 before</div>
+      </div>
+    </section>
+
+    <section class="section shell" id="arc">
+      <div class="section-heading">
+        <div class="section-number">01</div>
+        <div><div class="section-kicker">The emotional arc</div><h2>The lift begins<br>after the hello.</h2></div>
+        <p class="section-intro">Affect and arousal both climb over the call. The first in-conversation reading looks much like the baseline; the decisive shift appears by the midpoint.</p>
+      </div>
+      <div class="arc-grid">
+        <div class="trajectory-panel">
+          <div class="panel-head">
+            <div><h3 class="panel-title">Pair-average ratings through the conversation</h3><p class="panel-subtitle">Observed scale 1–9 · select a series to show or hide it</p></div>
+            <div class="legend" aria-label="Chart series controls">
+              <button class="legend-button" data-series="affect" aria-pressed="true"><span class="legend-swatch"></span>Affect</button>
+              <button class="legend-button" data-series="arousal" aria-pressed="true"><span class="legend-swatch teal"></span>Arousal</button>
+            </div>
+          </div>
+          <div class="chart" id="trajectory-chart"></div>
+          <div class="chart-note"><span>Source: conversation-level averages in convos.csv</span><span>Post-baseline n = 1,603 pairs · baseline n = 1,656</span></div>
+        </div>
+        <aside class="arc-aside">
+          <p class="aside-quote">“Small talk” ends with a measurable lift.</p>
+          <p class="aside-copy">The average affect rating reaches <strong>7.38</strong> at the end, compared with <strong>6.10</strong> before the call. Arousal follows the same upward shape, ending at <strong>6.70</strong>.</p>
+          <div class="mini-rule"></div>
+          <p class="aside-copy">These are averages, not a promise that every conversation improves. The next section shows the variation.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section shell" id="experience">
+      <div class="section-heading">
+        <div class="section-number">02</div>
+        <div><div class="section-kicker">The lived experience</div><h2>Most rise.<br>Partners draw closer.</h2></div>
+        <p class="section-intro">The aggregate curve hides three individual paths: improvement, no change and decline. It also hides a second shift—the space between partners’ ratings gets smaller.</p>
+      </div>
+      <div class="two-col">
+        <article class="panel distribution-panel">
+          <h3 class="panel-title">How each person’s affect changed</h3>
+          <p class="panel-subtitle">End rating versus pre-conversation rating · matched records only</p>
+          <div class="big-share"><div class="big-share-number">69.20%</div><div class="big-share-copy"><b>ended higher</b>2,254 person-records</div></div>
+          <div class="segmented" role="img" aria-label="Affect increased 69.20 percent, unchanged 20.51 percent, decreased 10.29 percent">
+            <span class="seg-up" style="width:69.20%"></span><span class="seg-flat" style="width:20.51%"></span><span class="seg-down" style="width:10.29%"></span>
+          </div>
+          <div class="distribution-legend">
+            <div class="distribution-row"><span class="dot" style="background:var(--coral)"></span><span>Increased</span><span class="count">n = 2,254</span><span class="percent">69.20%</span></div>
+            <div class="distribution-row"><span class="dot" style="background:var(--gold)"></span><span>Unchanged</span><span class="count">n = 668</span><span class="percent">20.51%</span></div>
+            <div class="distribution-row"><span class="dot" style="background:#809098"></span><span>Decreased</span><span class="count">n = 335</span><span class="percent">10.29%</span></div>
+          </div>
+          <div class="panel-footnote">Mean gain +1.29 points · median gain +1.00 · n = 3,257</div>
+        </article>
+
+        <article class="panel gap-panel">
+          <h3 class="panel-title">The absolute affect gap within each pair</h3>
+          <p class="panel-subtitle">Mean of |person A − person B| at each stage</p>
+          <p class="gap-summary">Two strangers do not start in sync. On average, they end <em>closer together.</em></p>
+          <div class="chart" id="gap-chart"></div>
+          <div class="panel-footnote">Lower means more similar ratings · recomputed from the two person rows in each conversation</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="connection">
+      <div class="section-heading">
+        <div class="section-number">03</div>
+        <div><div class="section-kicker">Connection & perception</div><h2>Enjoyment travels<br>with connection.</h2></div>
+        <p class="section-intro">Enjoyment is most closely associated with liking the other person. Yet one asymmetry persists: people tend to like their partner more than they think their partner likes them.</p>
+      </div>
+      <div class="two-col">
+        <article class="panel correlation-panel">
+          <h3 class="panel-title">What moves with enjoyment?</h3>
+          <p class="panel-subtitle">Pearson correlation with “how enjoyable” · person-record level</p>
+          <div class="correlation-list" aria-label="Correlations with enjoyment">
+            <div class="correlation-row social"><span class="correlation-label">I like you</span><span class="correlation-track"><span class="correlation-fill" style="width:84%"></span></span><span class="correlation-value">0.84</span></div>
+            <div class="correlation-row"><span class="correlation-label">Overall affect</span><span class="correlation-track"><span class="correlation-fill" style="width:78%"></span></span><span class="correlation-value">0.78</span></div>
+            <div class="correlation-row"><span class="correlation-label">End affect</span><span class="correlation-track"><span class="correlation-fill" style="width:78%"></span></span><span class="correlation-value">0.78</span></div>
+            <div class="correlation-row social"><span class="correlation-label">You like me</span><span class="correlation-track"><span class="correlation-fill" style="width:70%"></span></span><span class="correlation-value">0.70</span></div>
+            <div class="correlation-row social"><span class="correlation-label">Shared reality</span><span class="correlation-track"><span class="correlation-fill" style="width:58%"></span></span><span class="correlation-value">0.58</span></div>
+            <div class="correlation-row baseline"><span class="correlation-label">Pre-affect</span><span class="correlation-track"><span class="correlation-fill" style="width:22%"></span></span><span class="correlation-value">0.22</span></div>
+            <div class="correlation-row baseline"><span class="correlation-label">Pre-arousal</span><span class="correlation-track"><span class="correlation-fill" style="width:19%"></span></span><span class="correlation-value">0.19</span></div>
+          </div>
+          <div class="axis-labels"><span></span><span class="axis-inner"><span>0.0</span><span>0.5</span><span>1.0</span></span><span></span></div>
+          <div class="panel-footnote">Positive Pearson r · pairwise complete records · association does not imply causation</div>
+        </article>
+
+        <article class="panel liking-panel">
+          <h3 class="panel-title">The liking perception gap</h3>
+          <p class="panel-subtitle">Two mean ratings on the observed 1–9 response range</p>
+          <div class="liking-bars">
+            <div>
+              <div class="liking-row-head"><span class="liking-label">“I like you”</span><span class="liking-value">6.00</span></div>
+              <div class="liking-track" aria-hidden="true"><span class="liking-fill" style="width:66.6667%"></span></div>
+            </div>
+            <div>
+              <div class="liking-row-head"><span class="liking-label">“You like me”</span><span class="liking-value">5.35</span></div>
+              <div class="liking-track" aria-hidden="true"><span class="liking-fill teal" style="width:59.4444%"></span></div>
+            </div>
+          </div>
+          <div class="liking-gap"><span class="liking-gap-number">+0.64</span><span class="liking-gap-copy"><b>Own liking minus perceived liking</b>People extend more liking than they think they receive.</span></div>
+          <div class="panel-footnote">3,257 nonmissing ratings for each measure · mean values rounded to two decimals</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="similarity">
+      <div class="section-heading">
+        <div class="section-number">04</div>
+        <div><div class="section-kicker">Pair differences</div><h2>Difference is<br>not destiny.</h2></div>
+        <p class="section-intro">Raw pair averages vary only modestly across exact sex, race and education matches. Larger political-score gaps coincide with lower enjoyment, but these descriptive splits do not estimate an effect of similarity.</p>
+      </div>
+      <div class="two-col">
+        <article class="panel politics-panel">
+          <h3 class="panel-title">Enjoyment by politics-score gap</h3>
+          <p class="panel-subtitle">Mean pair enjoyment · bars use the full 0–9 scale</p>
+          <div class="politics-list" aria-label="Mean enjoyment by absolute politics score gap">
+            <div class="politics-row"><span class="politics-label">Match<small>n = 408</small></span><span class="politics-track"><span class="politics-fill" style="width:83.1111%"></span></span><span class="politics-value">7.48</span></div>
+            <div class="politics-row"><span class="politics-label">Gap of 1<small>n = 319</small></span><span class="politics-track"><span class="politics-fill" style="width:82.7778%"></span></span><span class="politics-value">7.45</span></div>
+            <div class="politics-row"><span class="politics-label">Gap of 2<small>n = 494</small></span><span class="politics-track"><span class="politics-fill" style="width:82.3333%"></span></span><span class="politics-value">7.41</span></div>
+            <div class="politics-row"><span class="politics-label">Gap 3–5<small>n = 381</small></span><span class="politics-track"><span class="politics-fill" style="width:81.1111%"></span></span><span class="politics-value">7.30</span></div>
+          </div>
+          <div class="politics-axis"><span>0</span><span>3</span><span>6</span><span>9</span></div>
+          <div class="panel-footnote">Complete outcome pairs with both politics scores recorded · gap = absolute difference</div>
+        </article>
+
+        <article class="panel match-panel">
+          <h3 class="panel-title">Enjoyment by exact category match</h3>
+          <p class="panel-subtitle">Mean pair enjoyment and number of pairs</p>
+          <div class="match-table" role="table" aria-label="Enjoyment by demographic category match">
+            <div class="match-header" role="row"><span role="columnheader">Recorded category</span><span role="columnheader">Different</span><span role="columnheader">Same</span></div>
+            <div class="match-row" role="row"><span class="match-name" role="rowheader">Sex</span><span class="match-cell">7.38<small>n = 835</small></span><span class="match-cell same">7.44<small>n = 767</small></span></div>
+            <div class="match-row" role="row"><span class="match-name" role="rowheader">Race</span><span class="match-cell">7.46<small>n = 881</small></span><span class="match-cell same">7.34<small>n = 721</small></span></div>
+            <div class="match-row" role="row"><span class="match-name" role="rowheader">Education</span><span class="match-cell">7.35<small>n = 1,195</small></span><span class="match-cell same">7.60<small>n = 407</small></span></div>
+          </div>
+          <div class="panel-footnote">Complete outcome pairs with both category values recorded · raw, unadjusted means</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="method-section" id="method">
+      <div class="shell method-grid">
+        <div>
+          <div class="section-kicker">Study profile</div>
+          <h2 class="method-title">Who is behind<br>the numbers?</h2>
+          <p class="method-copy">The unit is a <strong>person–conversation record</strong>, not necessarily a unique individual. The 3,312 rows contain 1,456 unique user IDs, so some IDs contribute to more than one call.</p>
+          <div class="profile-stats" aria-label="Age profile">
+            <div class="profile-stat"><b>32</b><span>Median age</span></div>
+            <div class="profile-stat"><b>25–41</b><span>Middle 50%</span></div>
+            <div class="profile-stat"><b>19–66</b><span>Observed range</span></div>
+          </div>
+          <div class="section-kicker">Recorded sex · % of 3,256 nonmissing</div>
+          <div class="sex-bar" role="img" aria-label="Female 53.4 percent, male 44.9 percent, other or prefer not to answer 1.6 percent"><span style="width:53.4%"></span><span style="width:44.9%"></span><span style="width:1.6%"></span></div>
+          <div class="sex-legend"><span>Female 53.4%</span><span>Male 44.9%</span><span>Other / prefer not 1.6%</span></div>
+        </div>
+        <div>
+          <div class="section-kicker">Reading notes</div>
+          <h2 class="method-title">What the report<br>does—and does not—say.</h2>
+          <div class="notes">
+            <div class="note"><b>Two complementary tables</b><p>The people table supplies person-level ratings and demographics. The conversation table supplies pair averages. Every conversation has exactly two person rows.</p></div>
+            <div class="note"><b>Available-case denominators</b><p>End-affect pair averages are present for 1,603 of 1,656 conversations. Person-level change and enjoyment analyses use 3,257 nonmissing post-conversation records.</p></div>
+            <div class="note"><b>Gaps recomputed transparently</b><p>Within-pair affect gaps are absolute differences between the two raw person rows. Politics gaps are absolute score differences; sex, race and education matches require exact category equality.</p></div>
+            <div class="note"><b>Observed response ranges</b><p>Affect, arousal and enjoyment span 1–9 in these data. Shared reality spans 1–7. Correlations are Pearson’s r and use pairwise complete observations.</p></div>
+            <div class="note"><b>No causal or independence claim</b><p>Similarity splits are unadjusted descriptions. Repeated user IDs also mean person-records should not automatically be treated as independent individuals.</p></div>
+            <div class="note"><b>Reproducible calculations</b><p>Every headline finding is paired with executable pandas code in <strong>facts.json</strong>. All page assets and charts are contained in this offline HTML file.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner"><span><strong>The Stranger Sessions</strong> · 30-minute video conversations</span><span>Source: <strong>data/people.csv</strong> + <strong>data/convos.csv</strong> · <a href="#top">Back to top ↑</a></span></div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+      const NS = "http://www.w3.org/2000/svg";
+      const trajectory = {
+        labels: ["Before", "Beginning", "Midpoint", "End"],
+        affect: [6.10, 6.16, 6.93, 7.38],
+        arousal: [5.32, 5.67, 6.40, 6.70]
+      };
+      const visible = { affect: true, arousal: true };
+      const fmt = n => n.toFixed(2);
+
+      function renderTrajectory() {
+        const host = document.getElementById("trajectory-chart");
+        const W = 1000, H = 410, m = { l: 58, r: 28, t: 40, b: 60 };
+        const iw = W - m.l - m.r, ih = H - m.t - m.b;
+        const x = i => m.l + i * iw / 3;
+        const y = v => m.t + (9 - v) * ih / 8;
+        let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="trajectory-title trajectory-desc">`;
+        s += `<title id="trajectory-title">Affect and arousal through the conversation</title><desc id="trajectory-desc">Affect rises from 6.10 to 7.38. Arousal rises from 5.32 to 6.70.</desc>`;
+        s += `<defs><linearGradient id="affectArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ed6a4d" stop-opacity=".17"/><stop offset="1" stop-color="#ed6a4d" stop-opacity=".015"/></linearGradient></defs>`;
+        [1,3,5,7,9].forEach(v => {
+          s += `<line x1="${m.l}" y1="${y(v)}" x2="${W-m.r}" y2="${y(v)}" stroke="#dddeda" stroke-width="1"/>`;
+          s += `<text x="${m.l-15}" y="${y(v)+4}" text-anchor="end" fill="#7a8588" font-size="11" font-family="Arial, sans-serif">${v}</text>`;
+        });
+        trajectory.labels.forEach((label, i) => {
+          s += `<line x1="${x(i)}" y1="${m.t}" x2="${x(i)}" y2="${H-m.b}" stroke="#eeeeea" stroke-width="1"/>`;
+          s += `<text x="${x(i)}" y="${H-24}" text-anchor="middle" fill="#536269" font-size="12" font-weight="600" font-family="Arial, sans-serif">${label}</text>`;
+        });
+        const configs = [
+          { key: "affect", color: "#ed6a4d", width: 4.5, dash: "", labelOffset: -18, anchor: "middle" },
+          { key: "arousal", color: "#17867d", width: 3, dash: "7 5", labelOffset: 27, anchor: "middle" }
+        ];
+        configs.forEach(cfg => {
+          if (!visible[cfg.key]) return;
+          const vals = trajectory[cfg.key];
+          const pts = vals.map((v,i) => `${x(i)},${y(v)}`).join(" ");
+          if (cfg.key === "affect") {
+            s += `<polygon points="${m.l},${y(1)} ${pts} ${x(3)},${y(1)}" fill="url(#affectArea)"/>`;
+          }
+          s += `<polyline points="${pts}" fill="none" stroke="${cfg.color}" stroke-width="${cfg.width}" stroke-linecap="round" stroke-linejoin="round" ${cfg.dash ? `stroke-dasharray="${cfg.dash}"` : ""}/>`;
+          vals.forEach((v,i) => {
+            s += `<circle cx="${x(i)}" cy="${y(v)}" r="6" fill="#fbfaf6" stroke="${cfg.color}" stroke-width="3"><title>${cfg.key}, ${trajectory.labels[i]}: ${fmt(v)}</title></circle>`;
+            const ly = y(v) + cfg.labelOffset;
+            s += `<rect x="${x(i)-25}" y="${ly-12}" width="50" height="19" rx="9.5" fill="#fbfaf6"/>`;
+            s += `<text x="${x(i)}" y="${ly+2}" text-anchor="${cfg.anchor}" fill="${cfg.color}" font-size="12" font-weight="800" font-family="Arial, sans-serif">${fmt(v)}</text>`;
+          });
+        });
+        s += `<text x="${m.l}" y="18" fill="#7a8588" font-size="9" letter-spacing="1.4" font-family="Arial, sans-serif">RATING</text></svg>`;
+        host.innerHTML = s;
+      }
+
+      function renderGap() {
+        const host = document.getElementById("gap-chart");
+        const vals = [1.67, 1.65, 1.35, 1.31];
+        const labels = ["Before", "Beginning", "Midpoint", "End"];
+        const W = 540, H = 280, m = { l: 34, r: 12, t: 28, b: 44 };
+        const iw = W-m.l-m.r, ih = H-m.t-m.b;
+        const y = v => m.t + (2-v)*ih/2;
+        let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="gap-title gap-desc"><title id="gap-title">Mean absolute within-pair affect gap</title><desc id="gap-desc">The gap is 1.67 before, 1.65 at the beginning, 1.35 at midpoint and 1.31 at end.</desc>`;
+        [0,1,2].forEach(v => {
+          s += `<line x1="${m.l}" y1="${y(v)}" x2="${W-m.r}" y2="${y(v)}" stroke="#dddeda"/><text x="${m.l-10}" y="${y(v)+4}" text-anchor="end" fill="#7a8588" font-size="10" font-family="Arial, sans-serif">${v}</text>`;
+        });
+        vals.forEach((v,i) => {
+          const bw = 64, cx = m.l + (i+.5)*iw/4, bx = cx-bw/2;
+          s += `<rect x="${bx}" y="${y(v)}" width="${bw}" height="${y(0)-y(v)}" rx="2" fill="${i === 3 ? "#ed6a4d" : "#17867d"}" opacity="${i === 3 ? 1 : .88-i*.1}"><title>${labels[i]}: ${fmt(v)}</title></rect>`;
+          s += `<text x="${cx}" y="${y(v)-10}" text-anchor="middle" fill="#17343e" font-size="13" font-weight="800" font-family="Arial, sans-serif">${fmt(v)}</text>`;
+          s += `<text x="${cx}" y="${H-17}" text-anchor="middle" fill="#647178" font-size="10" font-family="Arial, sans-serif">${labels[i]}</text>`;
+        });
+        s += `</svg>`;
+        host.innerHTML = s;
+      }
+
+      document.querySelectorAll(".legend-button").forEach(button => {
+        button.addEventListener("click", function () {
+          const key = this.getAttribute("data-series");
+          visible[key] = !visible[key];
+          this.setAttribute("aria-pressed", String(visible[key]));
+          renderTrajectory();
+        });
+      });
+      renderTrajectory();
+      renderGap();
+    })();
+  </script>
+</body>
+</html>

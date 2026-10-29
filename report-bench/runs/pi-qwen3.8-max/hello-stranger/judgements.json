@@ -1,0 +1,60 @@
+{
+ "tries": {
+  "2.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.7,
+  "where": "第2帧混合量表条形图、第3帧Who took part、第14帧堆叠条",
+  "reason": "多数图清晰可读，但 max 100 的条超出 1–9 横轴、性别与种族混图且无颜色图例、比例轴配百分比标签、they like me more 标签被裁断、分布图纵轴标题被裁，属个别标签挤/小字难认。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.45,
+  "where": "第2帧 vs 第11帧的 i_like_you/you_like_me 配色；第19–21帧四张小图的自我/对方红橙对调；第11帧 vs 第16帧的 enjoyment 配色",
+  "reason": "全篇有大致色调基调，但同一指标跨图换色，同一自我/对方语义在相邻小图里红橙含义相反，读者要重学每图配色。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "第2、3、5、8、10、13、14、16、19、24、28帧各节图形依次更换；shared_reality 第11帧条图/第24帧折线/第25帧柱状",
+  "reason": "视觉包装统一、图形多为条形柱状，但节与节普遍同换图形、坐标轴和分组，没有一条同画法逐步演变的主线，同一指标在不同节换画法看不出承接。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.35,
+  "where": "第8–9帧同一柱状图被三段文字讲；第13–14帧同一 liking gap 图被多段讲；第16–17、19–21帧图重复出现不变",
+  "reason": "滚动记录显示图从不固定、从不变化；图和文字虽同屏，但一张图常被好几段话反复讲，滚到后面几段时图没有跟着变。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.4,
+  "where": "第13帧 liking gap、第19帧 status/traits、第11帧相关性条、第5–6帧折线",
+  "reason": "形态类对照（柱在零线下、两线平行、递减趋势）能一眼对上；但涉及具体数值时都要读柱顶或条尾印的数字、或查颜色图例才能定位，约一半对不上。"
+ }
+}
