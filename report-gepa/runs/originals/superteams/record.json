@@ -1,0 +1,79 @@
+{
+ "id": "superteams",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 9089,
+  "steps": 56,
+  "tools": 56,
+  "nudged": 0,
+  "usage": {
+   "input": 52924,
+   "output": 65288
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "andy-larsen-criteria-seven-teams",
+   "basis": "Output total=7; rows are 2017 GSW, 2011 MIA, 2005 SAS, 1999 SAS, 1987 MIL, 1987 DET, 1983 PHI.",
+   "verdict": "ok"
+  },
+  {
+   "id": "ian-levy-criteria-seventeen-teams",
+   "basis": "Output total=17; rows are 2017 GSW, 2011 ORL, 2011 MIA, 2003 LAC, 1995 ORL, 1994 CHH, 1993 PHO, 1991 POR, 1987 PHI, 1987 MIL, 1986 NJN, 1985 WSB, 1985 BOS, 1983 PHI, 1980 BOS, 1979 NYK, 1978 DEN.",
+   "verdict": "ok"
+  },
+  {
+   "id": "todd-whitehead-criteria-seven-teams",
+   "basis": "Output total=7; rows are 2017 SAS, 2017 GSW, 2011 MIA, 2004 LAL, 2002 SAS, 1987 MIL, 1983 PHI.",
+   "verdict": "ok"
+  },
+  {
+   "id": "nick-sciria-criteria-eight-teams",
+   "basis": "Output total=8; rows are 2017 GSW, 2004 LAL, 1995 ORL, 1994 CHH, 1987 MIL, 1983 PHI, 1979 NYK, 1978 DEN.",
+   "verdict": "ok"
+  },
+  {
+   "id": "default-settings-eleven-teams",
+   "basis": "Output total=11; rows are 2015 CLE, 2011 MIA, 2008 BOS, 2001 ORL, 1989 HOU, 1989 ATL, 1983 PHI, 1981 MIL, 1981 BOS, 1980 PHO, 1979 DEN.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 2,
+ "review": [
+  {
+   "id": "andy-larsen-criteria-seven-teams",
+   "action": "keep",
+   "why": "settings are the expert's own, as the story prints them beside the list (age, metric, rank, seasons, superstar); the team list and count match the story"
+  },
+  {
+   "id": "ian-levy-criteria-seventeen-teams",
+   "action": "keep",
+   "why": "settings are the expert's own, as the story prints them beside the list (age, metric, rank, seasons, superstar); the team list and count match the story"
+  },
+  {
+   "id": "todd-whitehead-criteria-seven-teams",
+   "action": "keep",
+   "why": "settings are the expert's own, as the story prints them beside the list (age, metric, rank, seasons, superstar); the team list and count match the story"
+  },
+  {
+   "id": "nick-sciria-criteria-eight-teams",
+   "action": "keep",
+   "why": "settings are the expert's own, as the story prints them beside the list (age, metric, rank, seasons, superstar); the team list and count match the story"
+  },
+  {
+   "id": "default-settings-eleven-teams",
+   "action": "keep",
+   "why": "the story's interactive defaults (buttons marked is-selected in the page: under 34, PER, top 25, within 1 season, superstar no) give its 11-team list; the agent's grid search found these defaults, it did not invent a cut"
+  }
+ ]
+}

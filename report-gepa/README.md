@@ -181,7 +181,7 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.originals run
 
 给 benchmark 的 Pudding 题写标准答案:原文作者从这份数据得出的发现,写成和页面交的 `facts.json` 一样的结论加代码。pi agent(`agent/gen.mjs`,`WEB_TOOLS=1`)拿到题目的数据和原文网址,用 `web_fetch`、`web_view` 读原文,列出作者从数据得出的每个发现,能用数据重现的写进 `facts.json`(每条带原文的话 `source`),重现不了的写进 `skipped.json`。之后每条代码重新运行,结论和输出按 1.3 的同一个判法对一遍(`trust.claims_hold`),`source` 在 agent 读到的网页文字里查一遍;都过的进 `answer.json`,`--answers` 再拷成 `report-bench/out/answers/<id>/facts.json`。每篇在 `runs/originals/<id>/`:`facts.json`、`answer.json`、`skipped.json`、`record.json`、`session.jsonl`。已有 `answer.json` 的篇跳过。
 
-2026-10-28 用官方端点的 `deepseek-flash` 跑:148 篇里 81 篇写完,其余 67 篇在 key 失效后返回 401,换 key 重跑同一命令即可补上。写完的 81 篇逐条人工复核过,改动和理由记在各篇 `record.json` 的 `review` 里:
+2026-10-28 到 10-29 用官方端点的 `deepseek-flash` 跑完 147 篇(lifeafter 的题目数据和原文对不上,已从题库删掉),共 1115 条;13 篇写不出(数据重现不了原文的发现,比如 karen 的数据里没有 Karen,restaurants 没有坐标),这些题不判 2.1。147 篇逐条人工复核过,交互页面逐页点击核对,改动和理由记在各篇 `record.json` 的 `review` 里:
 
 - 每条代码在题目的数据上重跑,对着输出看结论;再对着原文看结论里的数和口径。只认原文网站读回来的文字(包括代理和存档),对不上的用 `report_bench.capture` 渲染原文页面再找,必要时查网页源码或原文自己的仓库。
 - 引语检查误判的捞回:引语在原文里,只是 `web_view` 读到的文字里图表标签插在句子中间,或引语把卡片上的几个标签连成了一段(countries、campaign-colors、lit-canon、miles、caption-contest 等)。
@@ -189,6 +189,8 @@ PYTHONPATH=src:../report-bench/src .venv/bin/python -m report_gepa.originals run
 - 1.3 看不出的问题:结论和输出一致,但和原文对不上(banknotes 的 Hannibal 1993 年就上了钞票;bears-boys 的猫在数据里偏男性),改结论;同一个词在不同 fact 里换口径凑原文的数(hype 的「熬过新秀合同」),去掉。
 - 实时更新的页面(heat-records、heat-records-map 的计数器、mars-weather)讲的是抓取那天的数,不是稳定的发现,去掉;mars-weather 的引语是 agent 拿数据填进页面空白处的,原文从来没这么写过。
 - 引语出自原文自己仓库里的文件、页面上要滚动到某一步或点开才显示的,保留,在 `review` 里写明出处(census-history 的话题文字、cetaceans 的图表标注、covid-science)。
+- 交互页面(测验、点击翻页、音频导览)agent 读不到的引语,点击走一遍页面核对:在原文里的捞回(sitters-standers、music-dna、songwriters、wiki-death、photo-history 测验后按数据写出的句子),wiki-breakout 的引语是导览字幕(`tracks.json`),保留。
+- superteams 的 agent 用 4800 种定义的网格搜索去凑原文的 11 支球队,跑了两个小时被停掉;它最后用的设定和页面默认选中的按钮、各位专家写明的设定一致,保留。
 
 已知的漏洞:引语检查(`read_on_web`)把 agent 读过的所有网页都算进去,包括 GitHub、搜索结果和第三方页面(boybands 读到过一个第三方生成的博客),应该只认原文网站。
 

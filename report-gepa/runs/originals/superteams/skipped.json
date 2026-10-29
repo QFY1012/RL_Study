@@ -1,0 +1,10 @@
+[
+  {
+    "source": "Of these seven teams, six of them won a championship in that era.",
+    "why": "data/web.csv contains player-season statistics only; it has no team championship or playoff results, so the six-championship count cannot be computed from it."
+  },
+  {
+    "source": "My settings yielded GSW-17, MIA-11, and PHI-83 — three of my five superteams, without any unintended superteams included.",
+    "why": "The expert's five-team target set and the judgment that other teams are unintended are not recorded in data/web.csv; the computed seven-team list (reproduced in the Todd Whitehead fact) does contain 2017 GSW, 2011 MIA and 1983 PHI, but it also contains four other teams, so the full statement is not reproduced."
+  }
+]

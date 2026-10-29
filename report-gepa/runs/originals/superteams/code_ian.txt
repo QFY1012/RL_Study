@@ -1,0 +1,15 @@
+(pd.read_csv("data/web.csv")
+ .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(",").str[-1], d.tm.str.split(",").str[0]))
+ .pipe(lambda d: d[["bbrID","season_year","age","team_change","tm"]]
+        .merge(d.loc[d.rank_vorp < 20, ["bbrID","season_year"]], on="bbrID", suffixes=("","_q"))
+        .query("season_year_q >= season_year - 3 and season_year_q <= season_year - 1 and age < 32")
+        .drop_duplicates(["bbrID","season_year"])
+        .merge(d.loc[d.rank_vorp < 5, ["bbrID","season_year"]].assign(season_year=lambda x: x.season_year + 1, sup=True), on=["bbrID","season_year"], how="left")
+        .assign(sup=lambda x: x.sup.fillna(False))
+        .groupby(["season_year","tm"])
+        .agg(n=("bbrID","nunique"), acquired=("team_change","any"), superstar=("sup","any"))
+        .query("n >= 3 and acquired and superstar")
+        .reset_index()
+        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))
+        .set_index(["year","tm"])[["n","total"]]
+        .sort_index(ascending=False)))

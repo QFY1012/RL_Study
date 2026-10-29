@@ -1,0 +1,47 @@
+[
+  {
+    "id": "andy-larsen-criteria-seven-teams",
+    "source": "7 teams meet this criteria",
+    "claim": "The criteria yield 7 superteams: 2017 GSW, 2011 MIA, 2005 SAS, 1999 SAS, 1987 MIL, 1987 DET and 1983 PHI.",
+    "tables": {
+      "web": "data/web.csv"
+    },
+    "code": "(pd.read_csv(\"data/web.csv\")\n .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(\",\").str[-1], d.tm.str.split(\",\").str[0]))\n .pipe(lambda d: d[[\"bbrID\",\"season_year\",\"age\",\"team_change\",\"tm\"]]\n        .merge(d.loc[d.rank_ws48 < 15, [\"bbrID\",\"season_year\"]], on=\"bbrID\", suffixes=(\"\",\"_q\"))\n        .query(\"season_year_q >= season_year - 3 and season_year_q <= season_year - 1 and age < 34\")\n        .drop_duplicates([\"bbrID\",\"season_year\"])\n        .merge(d.loc[d.rank_ws48 < 5, [\"bbrID\",\"season_year\"]].assign(season_year=lambda x: x.season_year + 1, sup=True), on=[\"bbrID\",\"season_year\"], how=\"left\")\n        .assign(sup=lambda x: x.sup.fillna(False))\n        .groupby([\"season_year\",\"tm\"])\n        .agg(n=(\"bbrID\",\"nunique\"), acquired=(\"team_change\",\"any\"), superstar=(\"sup\",\"any\"))\n        .query(\"n >= 3 and acquired and superstar\")\n        .reset_index()\n        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))\n        .set_index([\"year\",\"tm\"])[[\"n\",\"total\"]]\n        .sort_index(ascending=False)))"
+  },
+  {
+    "id": "ian-levy-criteria-seventeen-teams",
+    "source": "17 teams meet this criteria",
+    "claim": "The criteria yield 17 superteams: 2017 GSW, 2011 ORL, 2011 MIA, 2003 LAC, 1995 ORL, 1994 CHH, 1993 PHO, 1991 POR, 1987 PHI, 1987 MIL, 1986 NJN, 1985 WSB, 1985 BOS, 1983 PHI, 1980 BOS, 1979 NYK and 1978 DEN.",
+    "tables": {
+      "web": "data/web.csv"
+    },
+    "code": "(pd.read_csv(\"data/web.csv\")\n .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(\",\").str[-1], d.tm.str.split(\",\").str[0]))\n .pipe(lambda d: d[[\"bbrID\",\"season_year\",\"age\",\"team_change\",\"tm\"]]\n        .merge(d.loc[d.rank_vorp < 20, [\"bbrID\",\"season_year\"]], on=\"bbrID\", suffixes=(\"\",\"_q\"))\n        .query(\"season_year_q >= season_year - 3 and season_year_q <= season_year - 1 and age < 32\")\n        .drop_duplicates([\"bbrID\",\"season_year\"])\n        .merge(d.loc[d.rank_vorp < 5, [\"bbrID\",\"season_year\"]].assign(season_year=lambda x: x.season_year + 1, sup=True), on=[\"bbrID\",\"season_year\"], how=\"left\")\n        .assign(sup=lambda x: x.sup.fillna(False))\n        .groupby([\"season_year\",\"tm\"])\n        .agg(n=(\"bbrID\",\"nunique\"), acquired=(\"team_change\",\"any\"), superstar=(\"sup\",\"any\"))\n        .query(\"n >= 3 and acquired and superstar\")\n        .reset_index()\n        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))\n        .set_index([\"year\",\"tm\"])[[\"n\",\"total\"]]\n        .sort_index(ascending=False)))"
+  },
+  {
+    "id": "todd-whitehead-criteria-seven-teams",
+    "source": "7 teams meet this criteria",
+    "claim": "The criteria yield 7 superteams: 2017 SAS, 2017 GSW, 2011 MIA, 2004 LAL, 2002 SAS, 1987 MIL and 1983 PHI.",
+    "tables": {
+      "web": "data/web.csv"
+    },
+    "code": "(pd.read_csv(\"data/web.csv\")\n .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(\",\").str[-1], d.tm.str.split(\",\").str[0]))\n .pipe(lambda d: d[[\"bbrID\",\"season_year\",\"age\",\"team_change\",\"tm\"]]\n        .merge(d.loc[d.rank_ws48 < 15, [\"bbrID\",\"season_year\"]], on=\"bbrID\", suffixes=(\"\",\"_q\"))\n        .query(\"season_year_q >= season_year - 2 and season_year_q <= season_year - 1 and age < 40\")\n        .drop_duplicates([\"bbrID\",\"season_year\"])\n        .merge(d.loc[d.rank_ws48 < 5, [\"bbrID\",\"season_year\"]].assign(season_year=lambda x: x.season_year + 1, sup=True), on=[\"bbrID\",\"season_year\"], how=\"left\")\n        .assign(sup=lambda x: x.sup.fillna(False))\n        .groupby([\"season_year\",\"tm\"])\n        .agg(n=(\"bbrID\",\"nunique\"), acquired=(\"team_change\",\"any\"), superstar=(\"sup\",\"any\"))\n        .query(\"n >= 3 and acquired and superstar\")\n        .reset_index()\n        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))\n        .set_index([\"year\",\"tm\"])[[\"n\",\"total\"]]\n        .sort_index(ascending=False)))"
+  },
+  {
+    "id": "nick-sciria-criteria-eight-teams",
+    "source": "8 teams meet this criteria",
+    "claim": "The criteria yield 8 superteams: 2017 GSW, 2004 LAL, 1995 ORL, 1994 CHH, 1987 MIL, 1983 PHI, 1979 NYK and 1978 DEN.",
+    "tables": {
+      "web": "data/web.csv"
+    },
+    "code": "(pd.read_csv(\"data/web.csv\")\n .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(\",\").str[-1], d.tm.str.split(\",\").str[0]))\n .pipe(lambda d: d[[\"bbrID\",\"season_year\",\"age\",\"team_change\",\"tm\"]]\n        .merge(d.loc[d.rank_vorp < 20, [\"bbrID\",\"season_year\"]], on=\"bbrID\", suffixes=(\"\",\"_q\"))\n        .query(\"season_year_q >= season_year - 1 and season_year_q <= season_year - 1 and age < 40\")\n        .drop_duplicates([\"bbrID\",\"season_year\"])\n        .merge(d.loc[d.rank_vorp < 5, [\"bbrID\",\"season_year\"]].assign(season_year=lambda x: x.season_year + 1, sup=True), on=[\"bbrID\",\"season_year\"], how=\"left\")\n        .assign(sup=lambda x: x.sup.fillna(False))\n        .groupby([\"season_year\",\"tm\"])\n        .agg(n=(\"bbrID\",\"nunique\"), acquired=(\"team_change\",\"any\"), superstar=(\"sup\",\"any\"))\n        .query(\"n >= 3 and acquired and superstar\")\n        .reset_index()\n        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))\n        .set_index([\"year\",\"tm\"])[[\"n\",\"total\"]]\n        .sort_index(ascending=False)))"
+  },
+  {
+    "id": "default-settings-eleven-teams",
+    "source": "11 teams meet this criteria",
+    "claim": "The default settings yield 11 superteams: 2015 CLE, 2011 MIA, 2008 BOS, 2001 ORL, 1989 HOU, 1989 ATL, 1983 PHI, 1981 MIL, 1981 BOS, 1980 PHO and 1979 DEN.",
+    "tables": {
+      "web": "data/web.csv"
+    },
+    "code": "(pd.read_csv(\"data/web.csv\")\n .assign(tm=lambda d: np.where(d.team_change, d.tm.str.split(\",\").str[-1], d.tm.str.split(\",\").str[0]))\n .pipe(lambda d: d[[\"bbrID\",\"season_year\",\"age\",\"team_change\",\"tm\"]]\n        .merge(d.loc[d.rank_per < 25, [\"bbrID\",\"season_year\"]], on=\"bbrID\", suffixes=(\"\",\"_q\"))\n        .query(\"season_year_q >= season_year - 1 and season_year_q <= season_year - 1 and age < 34\")\n        .drop_duplicates([\"bbrID\",\"season_year\"])\n        .assign(sup=False)\n        .groupby([\"season_year\",\"tm\"])\n        .agg(n=(\"bbrID\",\"nunique\"), acquired=(\"team_change\",\"any\"), superstar=(\"sup\",\"any\"))\n        .query(\"n >= 3 and acquired\")\n        .reset_index()\n        .assign(year=lambda x: x.season_year + 1, total=lambda x: len(x))\n        .set_index([\"year\",\"tm\"])[[\"n\",\"total\"]]\n        .sort_index(ascending=False)))"
+  }
+]
