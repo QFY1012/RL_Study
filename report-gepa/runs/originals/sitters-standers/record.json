@@ -123,66 +123,97 @@
  ],
  "dropped": [
   {
+   "id": "workers-color-more-standers",
+   "why": "'More workers of color' is not in the story's steps (the race steps label their axes 'More Black' and so on); at most an axis of the free-explore mode, and the gap is 25.9% against 24.7%"
+  }
+ ],
+ "answer": 19,
+ "skipped": 9,
+ "review": [
+  {
    "id": "sitters-higher-income",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "sitters-problem-daily",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "sitters-pause-autonomy",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "sitters-telework",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "telework-overall-share",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-rarely-problem-solve",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-crouch",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-climb",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-wetness",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-heat",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-outdoors",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-hazardous",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "standers-injury",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "hispanic-more-standers",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
   },
   {
    "id": "white-more-sitters",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the story opens on a Start button and asks the reader four questions; clicked through as a reader would, every step's sentence is this quote, word for word"
+  },
+  {
+   "id": "sitters-more-choice",
+   "action": "keep",
+   "why": "'More choice of sit/stand' is the chart's axis label at the step 'Many Sitters have a choice to sit or stand', drawn on a canvas"
+  },
+  {
+   "id": "workers-color-more-standers",
+   "action": "drop",
+   "why": "'More workers of color' is not in the story's steps (the race steps label their axes 'More Black' and so on); at most an axis of the free-explore mode, and the gap is 25.9% against 24.7%"
   }
- ],
- "answer": 5,
- "skipped": 9
+ ]
 }

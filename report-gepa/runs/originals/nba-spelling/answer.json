@@ -7,5 +7,14 @@
    "spellings": "data/spellings.csv"
   },
   "code": "spellings.sort_values(['name', 'count'], ascending=[True, False], kind='mergesort').groupby('name').head(8).to_string()"
+ },
+ {
+  "id": "correct-responses-of-top-eight-per-player",
+  "source": "Correct 669 of 1.3k",
+  "claim": "Each player's chart labels the correctly spelled responses out of that player's top-eight responses, from 76 of 224 for mykhailiuk to 1491 of 1593 for doncic, with antetokounmpo at 669 of 1334 and dwyane at 892 of 1786.",
+  "tables": {
+   "spellings": "data/spellings.csv"
+  },
+  "code": "spellings.assign(correct_count=spellings.spelling.eq(spellings.name) * spellings['count']).sort_values(['name', 'count'], ascending=[True, False], kind='mergesort').groupby('name').head(8).groupby('name')[['correct_count', 'count']].sum()"
  }
 ]

@@ -31,12 +31,17 @@
    "verdict": "ok"
   }
  ],
- "dropped": [
+ "dropped": [],
+ "answer": 2,
+ "skipped": 6,
+ "review": [
   {
    "id": "correct-count-of-top-eight",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "changed": [
+    "claim"
+   ],
+   "why": "the quiz shows each name's results only after 'Skip To Results' and 'Show Me Another'; clicked through, the chart labels read 'Correct 9.7k of 19.6k' and 'Correct 2.0k of 13.5k'; the old claim also gave minaj 24,608 of 27,007, but the page reads 25.0k of 27.0k (the quiz keeps collecting answers), so minaj is left out"
   }
- ],
- "answer": 1,
- "skipped": 6
+ ]
 }

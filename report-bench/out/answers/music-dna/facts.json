@@ -200,6 +200,16 @@
   "code": "e[e.tree=='conclusion'].merge(s.drop_duplicates('id')[['id','primary_artist','release_date']], left_on='start_node_id', right_on='id').merge(s.drop_duplicates('id')[['id','primary_artist','release_date']], left_on='end_node_id', right_on='id', suffixes=('_child','_parent'))[['S_NAME','primary_artist_child','release_date_child','E_NAME','primary_artist_parent','release_date_parent']]"
  },
  {
+  "id": "solar-power-samples-rock-dj",
+  "source": "In 2021, Lorde picked up the line from Robbie Williams— not A Tribe Called Quest—but she takes on both parts.",
+  "claim": "Solar Power (2021) samples Rock DJ (2000), which samples Can I Kick It? (1990).",
+  "tables": {
+   "s": "data/songs.csv",
+   "e": "data/samples.csv"
+  },
+  "code": "e[e.tree=='kick'].merge(s.drop_duplicates('id')[['id','primary_artist','release_date']], left_on='start_node_id', right_on='id').merge(s.drop_duplicates('id')[['id','primary_artist','release_date']], left_on='end_node_id', right_on='id', suffixes=('_child','_parent'))[['S_NAME','primary_artist_child','release_date_child','E_NAME','primary_artist_parent','release_date_parent']]"
+ },
+ {
   "id": "how-low-can-you-go-chain",
   "source": "Ludacris then samples Chuck D’s voice from “Bring the Noise” and alters the tempo and quality to kick off his 2010 song “How Low,” where he’s talking about “booty.”",
   "claim": "How Low Can You Go samples How Low, which samples Bring the Noise, which samples Limbo Rock, three sample links.",

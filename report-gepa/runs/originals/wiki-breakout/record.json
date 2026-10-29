@@ -92,5 +92,52 @@
   }
  ],
  "answer": 10,
- "skipped": 34
+ "skipped": 34,
+ "review": [
+  {
+   "id": "cardi-most-pageviews",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "first-three-are-musicians",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "sophie-turner-top-actor",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "carson-wentz-first-athlete",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "ram-nath-first-non-american-politician",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "riverdale-three-actresses",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "sixnine-late-debut",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "billie-eilish-incremental-levels",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  },
+  {
+   "id": "juice-wrld-maintains-5k",
+   "action": "keep",
+   "why": "quote is the story's audio-tour subtitle word for word (src/js/tracks.json in the story's repo, shown in .graphic__subtitles while the tour plays); the agent's tools never played the tour"
+  }
+ ]
 }

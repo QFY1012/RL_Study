@@ -71,12 +71,14 @@
    "verdict": "ok"
   }
  ],
- "dropped": [
+ "dropped": [],
+ "answer": 10,
+ "skipped": 12,
+ "review": [
   {
    "id": "2022-women-credit-share",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "quote is on the story's screen when clicked through (walked); 14.3% matches the story's 14% (33 of 228)"
   }
- ],
- "answer": 9,
- "skipped": 12
+ ]
 }

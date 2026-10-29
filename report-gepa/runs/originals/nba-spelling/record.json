@@ -31,12 +31,14 @@
    "verdict": "ok"
   }
  ],
- "dropped": [
+ "dropped": [],
+ "answer": 2,
+ "skipped": 4,
+ "review": [
   {
    "id": "correct-responses-of-top-eight-per-player",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the quiz shows each name's results only after 'Skip To Results' and 'Show Me Another'; clicked through, the chart labels read 'Correct 669 of 1.3k', 'Correct 76 of 224', 'Correct 1.5k of 1.6k', 'Correct 892 of 1.8k', matching the claim"
   }
- ],
- "answer": 1,
- "skipped": 4
+ ]
 }

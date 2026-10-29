@@ -13156,3 +13156,9 @@ wine-animals: facts=65 answer=65 dropped=0 skipped=83 problems=0 911s steps=66
   women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat facts.json; echo; echo '--
   women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
   women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+women-in-headlines: facts=7 answer=7 dropped=0 skipped=20 problems=0 1004s steps=63
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd, 
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd d
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd d
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 -c " import pandas as pd d=pd.
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd, 

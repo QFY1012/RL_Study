@@ -7,5 +7,14 @@
    "s": "data/spellings.csv"
   },
   "code": "s.sort_values(['name', 'count'], ascending=[True, False]).assign(rank=lambda d: d.groupby('name').cumcount() + 1).query('rank <= 8').sort_values(['name', 'rank']).to_string(index=False)"
+ },
+ {
+  "id": "correct-count-of-top-eight",
+  "source": "CORRECT\n9.7K OF 19.6K",
+  "claim": "The correct count against the combined count of the eight displayed spellings is 9,666 of 19,648 for kaepernick and 2,044 of 13,515 for mcgwire.",
+  "tables": {
+   "s": "data/spellings.csv"
+  },
+  "code": "(lambda t: t.assign(correct=t['count'].where(t.spelling == t.name, 0)).groupby('name').agg(correct=('correct', 'sum'), top8_total=('count', 'sum')))(s.sort_values(['name', 'count'], ascending=[True, False]).groupby('name').head(8))"
  }
 ]

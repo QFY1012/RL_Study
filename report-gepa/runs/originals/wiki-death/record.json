@@ -61,12 +61,14 @@
    "verdict": "ok"
   }
  ],
- "dropped": [
+ "dropped": [],
+ "answer": 8,
+ "skipped": 7,
+ "review": [
   {
    "id": "oriordan-highest-sustained-increase",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "quote is on the story's screen when clicked through (walked); the agent's tools did not reach that step"
   }
- ],
- "answer": 7,
- "skipped": 7
+ ]
 }

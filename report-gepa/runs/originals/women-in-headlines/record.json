@@ -1,0 +1,62 @@
+{
+ "id": "women-in-headlines",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 1004,
+  "steps": 63,
+  "tools": 74,
+  "nudged": 0,
+  "usage": {
+   "input": 53716,
+   "output": 87669
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "sue-most-in-us",
+   "basis": "Output counts: USA 170, UK 109, India 75, South Africa 21; USA is highest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "muslim-most-in-india",
+   "basis": "Output counts: India 1293, UK 489, USA 340, South Africa 22; India is highest.",
+   "verdict": "ok"
+  },
+  {
+   "id": "gendered-words-fade",
+   "basis": "Output: sexy 2005=1.16, 2021=0.05; fat 2008=0.57, 2021=0.05; housewife 2005=0.58, 2021=0.01; gossip 2009=1.69, 2021=0.20.",
+   "verdict": "ok"
+  },
+  {
+   "id": "empowering-words-rise",
+   "basis": "Output: founder 2010=0.02, 2021=0.12; activist 2010=0.02, 2021=0.28; leader 2010=0.04, 2021=0.26; appoint 2010=0.00, 2021=0.05.",
+   "verdict": "ok"
+  },
+  {
+   "id": "death-hurt-drama-stable",
+   "basis": "Output: death min 1.68 in 2011, max 3.51 in 2007, 2021=2.16; hurt peak 0.18 in 2011; drama peak 0.18 in 2009.",
+   "verdict": "ok"
+  },
+  {
+   "id": "transgender-spike-2015",
+   "basis": "Output: transgender share 2014=0.27, 2015=0.74.",
+   "verdict": "ok"
+  },
+  {
+   "id": "harassment-spike-2017",
+   "basis": "Output: harassment share 2016=0.33, 2017=0.69.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 20
+}

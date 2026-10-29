@@ -154,12 +154,15 @@
   {
    "id": "murder-she-wrote-sources-four-modern-songs",
    "why": "source not in the story as read"
-  },
-  {
-   "id": "solar-power-samples-rock-dj",
-   "why": "source not in the story as read"
   }
  ],
- "answer": 22,
- "skipped": 16
+ "answer": 23,
+ "skipped": 16,
+ "review": [
+  {
+   "id": "solar-power-samples-rock-dj",
+   "action": "restore",
+   "why": "quote is on the story's screen when clicked through (walked); the agent's tools did not reach that step"
+  }
+ ]
 }

@@ -18,6 +18,123 @@
   "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(ba=lambda x: pd.to_numeric(x[\"Percent of workers, minimum education level is a bachelor's degree\"].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['ba'].mean()"
  },
  {
+  "id": "sitters-higher-income",
+  "source": "Despite the physical toll, Standers tend to earn less money.",
+  "claim": "Across sitter occupations, mean annual pay is $87,491, against $55,990 across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(pay=lambda x: pd.to_numeric(x['A_MEAN'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['pay'].mean()"
+ },
+ {
+  "id": "sitters-problem-daily",
+  "source": "Sitters are more likely to have to solve problems every day.",
+  "claim": "Across sitter occupations, the mean share of workers who must solve problems once per day is 16.7%, against 7.2% across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(daily=lambda x: pd.to_numeric(x['Percent of workers, problem solving is required once per day'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['daily'].mean()"
+ },
+ {
+  "id": "sitters-pause-autonomy",
+  "source": "And Sitters get more autonomy. These are workers who say they can pause work when they need to.",
+  "claim": "Across sitter occupations, 82.6% of workers can pause work and 17.4% cannot; across stander occupations, 44.6% can pause work and 55.4% cannot.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(can_pause=lambda x: pd.to_numeric(x['Percent of workers, with the ability to pause work'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce'), cannot_pause=lambda x: pd.to_numeric(x['Percent of workers, without the ability to pause work'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')[['can_pause', 'cannot_pause']].mean()"
+ },
+ {
+  "id": "sitters-telework",
+  "source": "Sitters are also more likely to say they can work remotely.",
+  "claim": "Across sitter occupations, the mean share of workers with telework available is 25.8%, against 1.6% across stander occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(telework=lambda x: pd.to_numeric(x['Percent of workers, with telework available'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['telework'].mean()"
+ },
+ {
+  "id": "telework-overall-share",
+  "source": "Only a tiny portion of Americans have this option.",
+  "claim": "Across all occupations in the data, 12.6% of workers have telework available.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d.assign(v=pd.to_numeric(d['Percent of workers, with telework available'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).pipe(lambda x: np.average(x['v'].dropna(), weights=x.loc[x['v'].notna(), 'TOT_EMP']))"
+ },
+ {
+  "id": "standers-rarely-problem-solve",
+  "source": "Standers are more likely to say they never or rarely have to problem-solve for their job.",
+  "claim": "Across stander occupations, the mean share of workers whose problem solving is required less often than monthly is 70.1%, against 33.8% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(rare=lambda x: pd.to_numeric(x['Percent of workers, problem solving is required less often than monthly, including never'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['rare'].mean()"
+ },
+ {
+  "id": "standers-crouch",
+  "source": "Standers are more likely to say they crouch at work—everyone from nurses to electricians.",
+  "claim": "Across stander occupations, the mean share of workers required to crouch is 13.8%, against 3.4% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(crouch=lambda x: pd.to_numeric(x['Percent of workers, crouching is required'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['crouch'].mean()"
+ },
+ {
+  "id": "standers-climb",
+  "source": "Standers are also more likely to climb ladders, ropes, or scaffolds. This includes firefighters and janitors.",
+  "claim": "Across stander occupations, the mean share of workers required to climb ladders, ropes, or scaffolds is 20.1%, against 5.9% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(climb=lambda x: pd.to_numeric(x['Percent of workers, climbing ladders, ropes, or scaffolds is required'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['climb'].mean()"
+ },
+ {
+  "id": "standers-wetness",
+  "source": "Standers are more likely to be exposed to wetness, like water, sewage, or bodily fluids.",
+  "claim": "Across stander occupations, the mean share of workers exposed to wetness is 44.1%, against 7.9% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(wet=lambda x: pd.to_numeric(x['Percent of workers, exposed to wetness'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['wet'].mean()"
+ },
+ {
+  "id": "standers-heat",
+  "source": "Standers are more likely to be exposed to extreme heat from things like stoves and fires.",
+  "claim": "Across stander occupations, the mean share of workers exposed to extreme heat is 9.2%, against 1.8% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(heat=lambda x: pd.to_numeric(x['Percent of workers, exposed to extreme heat'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['heat'].mean()"
+ },
+ {
+  "id": "standers-outdoors",
+  "source": "Standers are more likely to be exposed to the outdoors—something that will become more and more dangerous as our planet warms.",
+  "claim": "Across stander occupations, the mean share of workers exposed to the outdoors is 39.5%, against 20.2% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(outdoors=lambda x: pd.to_numeric(x['Percent of workers, exposed to outdoors'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['outdoors'].mean()"
+ },
+ {
+  "id": "standers-hazardous",
+  "source": "And Standers are more likely to be exposed to hazardous contaminants.",
+  "claim": "Across stander occupations, the mean share of workers exposed to hazardous contaminants is 15.6%, against 3.4% across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(haz=lambda x: pd.to_numeric(x['Percent of workers, exposed to hazardous contaminants'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['haz'].mean()"
+ },
+ {
+  "id": "standers-injury",
+  "source": "All of this takes a physical toll. This is how common it is for someone doing each job to be injured or ill and require time away from work.",
+  "claim": "Across stander occupations, the mean injury rate is 163.5, against 50.7 across sitter occupations.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).assign(injury=lambda x: pd.to_numeric(x['INJURY_RATE'].astype(str).str.replace(r'^[<>]', '', regex=True), errors='coerce')).groupby('group')['injury'].mean()"
+ },
+ {
   "id": "black-more-standers",
   "source": "Black workers are more likely to be Standers.",
   "claim": "Across stander occupations, the mean Black share of workers is 11.4%, against 10.1% across sitter occupations.",
@@ -36,12 +153,21 @@
   "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['asian_pct']].mean()"
  },
  {
-  "id": "workers-color-more-standers",
-  "source": "More workers of color",
-  "claim": "Across stander occupations, the mean nonwhite share of workers is 25.9%, against 24.7% across sitter occupations.",
+  "id": "hispanic-more-standers",
+  "source": "Hispanic workers are far more likely to be Standers",
+  "claim": "Across stander occupations, the mean Hispanic share of workers is 19.5%, against 12.5% across sitter occupations.",
   "tables": {
    "d": "data/data.csv"
   },
-  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['nonwhite_pct']].mean()"
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['hisp_pct']].mean()"
+ },
+ {
+  "id": "white-more-sitters",
+  "source": "White workers are more likely to be Sitters. But they account for the majority of the workforce, so they're also the largest group of Standers.",
+  "claim": "The mean white share is 75.3% in sitter occupations and 74.1% in stander occupations, and white is the largest racial group among stander occupations, ahead of Hispanic (19.5%), Black (11.4%) and Asian (4.7%).",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "pd.concat([d.loc[(d.PCT_SIT>50) & ~(d.PCT_STAND>50)].assign(group='sitters'), d.loc[d.PCT_STAND>50].assign(group='standers')]).groupby('group')[['white_pct','black_pct','hisp_pct','asian_pct']].mean()"
  }
 ]
