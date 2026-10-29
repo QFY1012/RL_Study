@@ -1,0 +1,175 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.9,
+  "where": "「The two sides are also built differently.」",
+  "reason": "10 节里 1 节不为前面的观点或问题服务:说明男女两边在面料上也不同：女性更多弹力纤维，所有 100% 纯棉硬质牛仔裤都是男性。",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Front and back pocket measurements of men's and women's jeans from popular brands.",
+    "serves": null,
+    "how": "陈述核心发现：男性前袋最大高度均值 23.13 对女性 14.33，比例 1.61；后袋、宽度和价格接近持平，差距深、只在前袋且不随价格缩小。",
+    "holds": false
+   },
+   {
+    "start": "Every one of the 80 jeans, plotted by the maximum height of its front pocket.",
+    "serves": "The gap is deep, front-only, and it does not shrink as the price goes up.",
+    "how": "用全部 80 条牛仔裤的前袋最大高度分布显示几乎完全分离：最浅的男裤口袋为 20.0，仍深于 40 条女裤中的 39 条。",
+    "holds": true
+   },
+   {
+    "start": "Divide each men's mean by the matching women's mean and the pattern is unmistakable: the gap is a front-pocket, vertical phenomenon.",
+    "serves": "The gap is deep, front-only, and it does not shrink as the price goes up.",
+    "how": "用各测量项的男女均值比说明前袋高度差距突出，而宽度和后袋接近持平。",
+    "holds": true
+   },
+   {
+    "start": "Women's back pockets are only slightly smaller — 15.12 vs 16.01 in maximum height.",
+    "serves": "Widths are near parity, and back pockets are near parity.",
+    "how": "给出后袋均值接近的数字，并用前铆钉更高作对比，支持后袋接近持平。",
+    "holds": true
+   },
+   {
+    "start": "The gap is not one brand's habit — it is the industry's.",
+    "serves": "The gap is deep, front-only, and it does not shrink as the price goes up.",
+    "how": "用 20 个品牌中 15 个品牌男女前袋高度比至少 1.5 倍、Levi's 2.09 到 Abercrombie 1.13 的范围，说明差距不是单一品牌现象。",
+    "holds": true
+   },
+   {
+    "start": "Mean price is effectively identical — $81.18 for men's jeans, $80.32 for women's.",
+    "serves": "The gap is deep, front-only, and it does not shrink as the price goes up.",
+    "how": "用男女均价几乎相同且价格与前方口袋高度相关系数为负，说明价格上去并不会缩小前袋高度差距。",
+    "holds": true
+   },
+   {
+    "start": "The means line up almost exactly.",
+    "serves": "Mean price is effectively identical — $81.18 for men's jeans, $80.32 for women's.",
+    "how": "确认价格均值几乎对齐，同时补充中位数反向、由男性预算工装品牌拉低男性中位数。",
+    "holds": true
+   },
+   {
+    "start": "If pockets followed the fit label, a boot-cut or straight jean would carry more room than a skinny one.",
+    "serves": "The gap is deep, front-only, and it does not shrink as the price goes up.",
+    "how": "检查各款式标签下的均值接近平坦，且男女两侧从不重叠，说明差距不由 fit 标签解释。",
+    "holds": true
+   },
+   {
+    "start": "All six are women's jeans; on the men's side, every product with \"boot\" in its name is labelled boot-cut .",
+    "serves": "They don't.",
+    "how": "用六条女性 straight 牛仔裤产品名含 boot、男性含 boot 均为 boot-cut，说明 fit 标签更像营销分类而非测量，支持口袋并不按 fit 标签变化。",
+    "holds": true
+   },
+   {
+    "start": "The two sides are also built differently.",
+    "serves": null,
+    "how": "说明男女两边在面料上也不同：女性更多弹力纤维，所有 100% 纯棉硬质牛仔裤都是男性。",
+    "holds": false
+   },
+   {
+    "start": "Cutout jeans cost far more on average — 133.10 against 74.11 — and they are mostly men's (6 of the 9).",
+    "serves": "The two sides are also built differently.",
+    "how": "指出 cutout 牛仔裤中 6/9 是男性且集中在四个品牌，作为另一边构造/工艺差异；同时提到其均价更高。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\": [{\"start\": \"Front and back pocket measurements of men's and women's jeans from popular brands.\", \"serves\": null, \"how\": \"陈述核心发现：男性前袋最大高度均值 23.13 对女性 14.33，比例 1.61；后袋、宽度和价格接近持平，差距深、只在前袋且不随价格缩小。\"}, {\"start\": \"Every one of the 80 jeans, plotted by the maximum height of its front pocket.\", \"serves\": \"The gap is deep, front-only, and it does not shrink as the price goes up.\", \"how\": \"用全部 80 条牛仔裤的前袋最大高度分布显示几乎完全分离：最浅的男裤口袋为 20.0，仍深于 40 条女裤中的 39 条。\"}, {\"start\": \"Divide each men's mean by the matching women's mean and the pattern is unmistakable: the gap is a front-pocket, vertical phenomenon.\", \"serves\": \"The gap is deep, front-only, and it does not shrink as the price goes up.\", \"how\": \"用各测量项的男女均值比说明前袋高度差距突出，而宽度和后袋接近持平。\"}, {\"start\": \"Women's back pockets are only slightly smaller — 15.12 vs 16.01 in maximum height.\", \"serves\": \"Widths are near parity, and back pockets are near parity.\", \"how\": \"给出后袋均值接近的数字，并用前铆钉更高作对比，支持后袋接近持平。\"}, {\"start\": \"The gap is not one brand's habit — it is the industry's.\", \"serves\": \"The gap is deep, front-only, and it does not shrink as the price goes up.\", \"how\": \"用 20 个品牌中 15 个品牌男女前袋高度比至少 1.5 倍、Levi's 2.09 到 Abercrombie 1.13 的范围，说明差距不是单一品牌现象。\"}, {\"start\": \"Mean price is effectively identical — $81.18 for men's jeans, $80.32 for women's.\", \"serves\": \"The gap is deep, front-only, and it does not shrink as the price goes up.\", \"how\": \"用男女均价几乎相同且价格与前方口袋高度相关系数为负，说明价格上去并不会缩小前袋高度差距。\"}, {\"start\": \"The means line up almost exactly.\", \"serves\": \"Mean price is effectively identical — $81.18 for men's jeans, $80.32 for women's.\", \"how\": \"确认价格均值几乎对齐，同时补充中位数反向、由男性预算工装品牌拉低男性中位数。\"}, {\"start\": \"If pockets followed the fit label, a boot-cut or straight jean would carry more room than a skinny one.\", \"serves\": \"The gap is deep, front-only, and it does not shrink as the price goes up.\", \"how\": \"检查各款式标签下的均值接近平坦，且男女两侧从不重叠，说明差距不由 fit 标签解释。\"}, {\"start\": \"All six are women's jeans; on the men's side, every product with \\\"boot\\\" in its name is labelled boot-cut .\", \"serves\": \"They don't.\", \"how\": \"用六条女性 straight 牛仔裤产品名含 boot、男性含 boot 均为 boot-cut，说明 fit 标签更像营销分类而非测量，支持口袋并不按 fit 标签变化。\"}, {\"start\": \"The two sides are also built differently.\", \"serves\": null, \"how\": \"说明男女两边在面料上也不同：女性更多弹力纤维，所有 100% 纯棉硬质牛仔裤都是男性。\"}, {\"start\": \"Cutout jeans cost far more on average — 133.10 against 74.11 — and they are mostly men's (6 of the 9).\", \"serves\": \"The two sides are also built differently.\", \"how\": \"指出 cutout 牛仔裤中 6/9 是男性且集中在四个品牌，作为另一边构造/工艺差异；同时提到其均价更高。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 3345,
+   "completion_tokens": 17195,
+   "seconds": 105.6
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.1,
+  "where": "H&M's women's Skinny Ankle High Waist (the cheapest pair in the sample)、True Religion's women's Slim Straight (the most expensive pair in the sample)、Levi's Classic Bootcut、Arizona Perfect Boot、Lucky Sweet Boot、7 for All Mankind Bootcut、Guess Tailored Mini Boot、Express Barely Boot Midrise",
+  "reason": "正文主要是汇总统计和图表说明，没有按故事讲述一个有意图的个体：没有写任何具体人物或物件想要什么、面对什么、如何应对以及后来怎样。出现的具体产品名只是极值、数据行或标签错配例子，不算叙事个体。虽有“If pockets followed the fit label... They don't”这类预期落空，但停留在类别与数字层面，未通过个体经历连接到数据整体。",
+  "individuals": [
+   {
+    "who": "H&M's women's Skinny Ankle High Waist (the cheapest pair in the sample)",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为价格/尺寸极值的数据行被点名，未展开个体目标、冲突或后续；没接上叙事。"
+   },
+   {
+    "who": "True Religion's women's Slim Straight (the most expensive pair in the sample)",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为价格/尺寸极值的数据行被点名，未展开个体目标、冲突或后续；没接上叙事。"
+   },
+   {
+    "who": "Levi's Classic Bootcut",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签与产品名不一致的例子被点名，未展开个体经历；没接上叙事。"
+   },
+   {
+    "who": "Arizona Perfect Boot",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签错配例子被点名，属于数据例子；没接上叙事。"
+   },
+   {
+    "who": "Lucky Sweet Boot",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签错配例子被点名，属于数据例子；没接上叙事。"
+   },
+   {
+    "who": "7 for All Mankind Bootcut",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签错配例子被点名，属于数据例子；没接上叙事。"
+   },
+   {
+    "who": "Guess Tailored Mini Boot",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签错配例子被点名，属于数据例子；没接上叙事。"
+   },
+   {
+    "who": "Express Barely Boot Midrise",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "只作为标签错配例子被点名，属于数据例子；没接上叙事。"
+   }
+  ],
+  "answer": {
+   "text": "{\"individuals\":[{\"who\":\"H&M's women's Skinny Ankle High Waist (the cheapest pair in the sample)\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为价格/尺寸极值的数据行被点名，未展开个体目标、冲突或后续；没接上叙事。\"},{\"who\":\"True Religion's women's Slim Straight (the most expensive pair in the sample)\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为价格/尺寸极值的数据行被点名，未展开个体目标、冲突或后续；没接上叙事。\"},{\"who\":\"Levi's Classic Bootcut\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签与产品名不一致的例子被点名，未展开个体经历；没接上叙事。\"},{\"who\":\"Arizona Perfect Boot\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签错配例子被点名，属于数据例子；没接上叙事。\"},{\"who\":\"Lucky Sweet Boot\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签错配例子被点名，属于数据例子；没接上叙事。\"},{\"who\":\"7 for All Mankind Bootcut\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签错配例子被点名，属于数据例子；没接上叙事。\"},{\"who\":\"Guess Tailored Mini Boot\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签错配例子被点名，属于数据例子；没接上叙事。\"},{\"who\":\"Express Barely Boot Midrise\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"只作为标签错配例子被点名，属于数据例子；没接上叙事。\"}],\"score\":0.1,\"reason\":\"正文主要是汇总统计和图表说明，没有按故事讲述一个有意图的个体：没有写任何具体人物或物件想要什么、面对什么、如何应对以及后来怎样。出现的具体产品名只是极值、数据行或标签错配例子，不算叙事个体。虽有“If pockets followed the fit label... They don't”这类预期落空，但停留在类别与数字层面，未通过个体经历连接到数据整体。\"}",
+   "finish": "stop",
+   "prompt_tokens": 3479,
+   "completion_tokens": 3680,
+   "seconds": 26.4
+  }
+ }
+}

@@ -70,7 +70,7 @@ Gynecology            89.0       89.3
 Internal medicine     88.6       89.1
 Pediatrics            88.9       90.4
 
-## derm-all-complaints | All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, from 11.7% vs 6.0% (toe-web peeling) to 13.9% vs 6.9% (red spots on the back).
+## derm-all-complaints | All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, for example 13.9% vs 6.9% for red spots on the back and 11.7% vs 6.0% for toe-web peeling.
 group                  control  treatment  treatment_higher
 chief_complaint                                            
 facial acne                6.9       12.1              True
@@ -78,6 +78,16 @@ itchy red rash on arm      9.7       11.9              True
 recurring hives            9.0       13.5              True
 red spots on the back      6.9       13.9              True
 toe-web peeling            6.0       11.7              True
+
+## derm-weekly | The dermatology gap held in each of the 6 weeks of the test, with treatment losing between 11.0% and 15.9% of users before a doctor against 6.3% to 8.7% in control.
+group                  control  treatment  treatment_higher
+enter_date                                                 
+2024-11-18/2024-11-24      8.7       12.7              True
+2024-11-25/2024-12-01      7.7       15.9              True
+2024-12-02/2024-12-08      7.8       12.2              True
+2024-12-09/2024-12-15      7.6       11.0              True
+2024-12-16/2024-12-22      6.3       12.6              True
+2024-12-23/2024-12-29      8.2       11.9              True
 
 ## derm-z | The dermatology loss gap has a z-score of 4.65, while the overall loss gap across all departments has a z-score of 1.72.
 dermatology        4.65

@@ -1,0 +1,1181 @@
+{
+ "capture_version": "capture-8",
+ "target": "index.html",
+ "data": [],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 806,
+     "left": 297,
+     "w": 846,
+     "h": 216,
+     "sig": "2b788c09"
+    }
+   ]
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 356,
+     "left": 297,
+     "w": 846,
+     "h": 216,
+     "sig": "2b788c09"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 897,
+     "left": 297,
+     "w": 846,
+     "h": 235,
+     "sig": "b909fd2e"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -94,
+     "left": 297,
+     "w": 846,
+     "h": 216,
+     "sig": "2b788c09"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 447,
+     "left": 297,
+     "w": 846,
+     "h": 235,
+     "sig": "b909fd2e"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -3,
+     "left": 297,
+     "w": 846,
+     "h": 235,
+     "sig": "b909fd2e"
+    },
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 528,
+     "left": 297,
+     "w": 846,
+     "h": 602,
+     "sig": "7df7b710"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 78,
+     "left": 297,
+     "w": 846,
+     "h": 602,
+     "sig": "7df7b710"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": -372,
+     "left": 297,
+     "w": 846,
+     "h": 602,
+     "sig": "7df7b710"
+    },
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 554,
+     "left": 297,
+     "w": 846,
+     "h": 320,
+     "sig": "ac157cfd"
+    }
+   ]
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2539,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 265,
+     "left": 297,
+     "w": 846,
+     "h": 320,
+     "sig": "ac157cfd"
+    }
+   ]
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    846,
+    216
+   ],
+   "frames": [
+    0,
+    2
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    846,
+    235
+   ],
+   "frames": [
+    1,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 3,
+   "kind": "svg",
+   "size": [
+    846,
+    602
+   ],
+   "frames": [
+    3,
+    5
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 4,
+   "kind": "svg",
+   "size": [
+    846,
+    320
+   ],
+   "frames": [
+    5,
+    6
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "h1",
+   "y": 64,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women's jeans come with shallower front pockets"
+  },
+  {
+   "tag": "p",
+   "y": 191,
+   "x": 272,
+   "w": 760,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This data has front and back pocket measurements for 80 pairs of jeans, 40 men's and 40 women's , from 20 popular brands. Women's front pockets are much shallower than men's. Back pockets are about the same size for both."
+  },
+  {
+   "tag": "p",
+   "y": 312,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All measurements are in centimetres. Front-pocket depth is the deepest point of the pocket bag, measured from the top of the waistband."
+  },
+  {
+   "tag": "span",
+   "y": 412,
+   "x": 295,
+   "w": 81,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.3"
+  },
+  {
+   "tag": "span",
+   "y": 412,
+   "x": 442,
+   "w": 77,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.1"
+  },
+  {
+   "tag": "b",
+   "y": 415,
+   "x": 295,
+   "w": 239,
+   "in_svg": false,
+   "hidden": false,
+   "text": "vs"
+  },
+  {
+   "tag": "b",
+   "y": 415,
+   "x": 600,
+   "w": 239,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1 of 40"
+  },
+  {
+   "tag": "b",
+   "y": 415,
+   "x": 906,
+   "w": 239,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20 of 20"
+  },
+  {
+   "tag": "span",
+   "y": 465,
+   "x": 295,
+   "w": 184,
+   "in_svg": false,
+   "hidden": false,
+   "text": "average front pocket depth, women's vs men's"
+  },
+  {
+   "tag": "span",
+   "y": 465,
+   "x": 600,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "women's front pockets as deep as the shallowest men's one (20.0)"
+  },
+  {
+   "tag": "span",
+   "y": 465,
+   "x": 906,
+   "w": 206,
+   "in_svg": false,
+   "hidden": false,
+   "text": "brands where the men's front pockets are deeper on average"
+  },
+  {
+   "tag": "h2",
+   "y": 602,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front pockets: two groups that barely overlap"
+  },
+  {
+   "tag": "p",
+   "y": 651,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each dot is one pair of jeans. Men's front pockets run from 20.0 to 28.0 deep; women's run from 11.5 to 21.5. Only one women's pair, Abercrombie's Simone High Rise Slim at 21.5, reaches the shallowest men's pocket. On average women's front pockets are 14.3 deep against 23.1 for men's, and a little narrower too: 15.2 across the opening against 16.4."
+  },
+  {
+   "tag": "div",
+   "y": 783,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's Women's"
+  },
+  {
+   "tag": "text",
+   "y": 819,
+   "x": 852,
+   "w": 48,
+   "in_svg": true,
+   "hidden": false,
+   "text": "avg 23.1"
+  },
+  {
+   "tag": "text",
+   "y": 857,
+   "x": 297,
+   "w": 43,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Men's"
+  },
+  {
+   "tag": "text",
+   "y": 889,
+   "x": 532,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "avg 14.3"
+  },
+  {
+   "tag": "text",
+   "y": 928,
+   "x": 297,
+   "w": 65,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Women's"
+  },
+  {
+   "tag": "text",
+   "y": 993,
+   "x": 394,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1012141618202224262830"
+  },
+  {
+   "tag": "text",
+   "y": 1009,
+   "x": 1078,
+   "w": 47,
+   "in_svg": true,
+   "hidden": false,
+   "text": "cm deep"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1039,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Maximum front pocket depth, cm. The short vertical line marks each group's average. Hover a dot for the brand and model."
+  },
+  {
+   "tag": "h2",
+   "y": 1143,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The gap is in the front, not the back"
+  },
+  {
+   "tag": "p",
+   "y": 1192,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back pockets are close in size: men's average 16.0 high and 13.7 wide, women's 15.1 high and 13.3 wide. The difference is concentrated in front, where it matters for carrying a phone or keys. In 29 of the 40 women's pairs the front pocket is actually shallower than the back pocket. That never happens in the men's jeans."
+  },
+  {
+   "tag": "div",
+   "y": 1324,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's Women's"
+  },
+  {
+   "tag": "text",
+   "y": 1356,
+   "x": 1030,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.1"
+  },
+  {
+   "tag": "text",
+   "y": 1366,
+   "x": 356,
+   "w": 118,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Front pocket depth"
+  },
+  {
+   "tag": "text",
+   "y": 1375,
+   "x": 825,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.3"
+  },
+  {
+   "tag": "text",
+   "y": 1411,
+   "x": 872,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16.4"
+  },
+  {
+   "tag": "text",
+   "y": 1420,
+   "x": 358,
+   "w": 116,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Front pocket width"
+  },
+  {
+   "tag": "text",
+   "y": 1430,
+   "x": 845,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15.2"
+  },
+  {
+   "tag": "text",
+   "y": 1465,
+   "x": 864,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16.0"
+  },
+  {
+   "tag": "text",
+   "y": 1475,
+   "x": 354,
+   "w": 120,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Back pocket height"
+  },
+  {
+   "tag": "text",
+   "y": 1484,
+   "x": 843,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15.1"
+  },
+  {
+   "tag": "text",
+   "y": 1520,
+   "x": 810,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.7"
+  },
+  {
+   "tag": "text",
+   "y": 1529,
+   "x": 359,
+   "w": 115,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Back pocket width"
+  },
+  {
+   "tag": "text",
+   "y": 1539,
+   "x": 802,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.3"
+  },
+  {
+   "tag": "text",
+   "y": 1567,
+   "x": 481,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0510152025"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1598,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average of each measurement across 40 men's and 40 women's jeans, cm."
+  },
+  {
+   "tag": "h2",
+   "y": 1703,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every brand does it"
+  },
+  {
+   "tag": "p",
+   "y": 1752,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each brand in the data sells two men's and two women's pairs. In all 20 brands the men's front pockets are deeper on average. The gap is smallest at Abercrombie (2.5) and largest at Levi's (13.4)."
+  },
+  {
+   "tag": "div",
+   "y": 1855,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's average Women's average"
+  },
+  {
+   "tag": "text",
+   "y": 1878,
+   "x": 1095,
+   "w": 20,
+   "in_svg": true,
+   "hidden": false,
+   "text": "gap"
+  },
+  {
+   "tag": "text",
+   "y": 1898,
+   "x": 364,
+   "w": 80,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "text",
+   "y": 1899,
+   "x": 1095,
+   "w": 20,
+   "in_svg": true,
+   "hidden": false,
+   "text": "2.5"
+  },
+  {
+   "tag": "text",
+   "y": 1925,
+   "x": 346,
+   "w": 98,
+   "in_svg": true,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "text",
+   "y": 1926,
+   "x": 1107,
+   "w": 8,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4"
+  },
+  {
+   "tag": "text",
+   "y": 1953,
+   "x": 414,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "text",
+   "y": 1954,
+   "x": 1107,
+   "w": 8,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4"
+  },
+  {
+   "tag": "text",
+   "y": 1981,
+   "x": 394,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "text",
+   "y": 1982,
+   "x": 1095,
+   "w": 20,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.4"
+  },
+  {
+   "tag": "text",
+   "y": 2009,
+   "x": 364,
+   "w": 80,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "text",
+   "y": 2010,
+   "x": 1088,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.25"
+  },
+  {
+   "tag": "text",
+   "y": 2036,
+   "x": 339,
+   "w": 104,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7 for All Mankind"
+  },
+  {
+   "tag": "text",
+   "y": 2037,
+   "x": 1091,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 2064,
+   "x": 406,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "text",
+   "y": 2065,
+   "x": 1091,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 2092,
+   "x": 404,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "text",
+   "y": 2093,
+   "x": 1091,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 2119,
+   "x": 371,
+   "w": 73,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "text",
+   "y": 2120,
+   "x": 1089,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "8.75"
+  },
+  {
+   "tag": "text",
+   "y": 2147,
+   "x": 418,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "text",
+   "y": 2148,
+   "x": 1107,
+   "w": 8,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9"
+  },
+  {
+   "tag": "text",
+   "y": 2175,
+   "x": 363,
+   "w": 81,
+   "in_svg": true,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "text",
+   "y": 2176,
+   "x": 1088,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9.35"
+  },
+  {
+   "tag": "text",
+   "y": 2203,
+   "x": 350,
+   "w": 94,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "text",
+   "y": 2204,
+   "x": 1101,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10"
+  },
+  {
+   "tag": "text",
+   "y": 2230,
+   "x": 362,
+   "w": 81,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "text",
+   "y": 2231,
+   "x": 1090,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10.5"
+  },
+  {
+   "tag": "text",
+   "y": 2258,
+   "x": 396,
+   "w": 48,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "text",
+   "y": 2259,
+   "x": 1083,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10.75"
+  },
+  {
+   "tag": "text",
+   "y": 2286,
+   "x": 397,
+   "w": 47,
+   "in_svg": true,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "text",
+   "y": 2287,
+   "x": 1104,
+   "w": 11,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11"
+  },
+  {
+   "tag": "text",
+   "y": 2314,
+   "x": 387,
+   "w": 57,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "text",
+   "y": 2315,
+   "x": 1085,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11.25"
+  },
+  {
+   "tag": "text",
+   "y": 2341,
+   "x": 421,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "text",
+   "y": 2342,
+   "x": 1092,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11.4"
+  },
+  {
+   "tag": "text",
+   "y": 2369,
+   "x": 405,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "text",
+   "y": 2370,
+   "x": 1102,
+   "w": 13,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12"
+  },
+  {
+   "tag": "text",
+   "y": 2397,
+   "x": 387,
+   "w": 56,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "text",
+   "y": 2398,
+   "x": 1082,
+   "w": 33,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.25"
+  },
+  {
+   "tag": "text",
+   "y": 2424,
+   "x": 407,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Levi's"
+  },
+  {
+   "tag": "text",
+   "y": 2425,
+   "x": 1090,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.4"
+  },
+  {
+   "tag": "text",
+   "y": 2459,
+   "x": 451,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1015202530"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2496,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average maximum front pocket depth per brand, cm. Brands sorted by size of the gap, smallest first. Gap shown on the right."
+  },
+  {
+   "tag": "h2",
+   "y": 2601,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Neither cut nor price fixes it"
+  },
+  {
+   "tag": "p",
+   "y": 2650,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "For women, cut makes little difference: average front pocket depth is 14.3 for skinny, 14.4 for straight and 14.2 for boot-cut jeans. Paying more does not help either. The correlation between price and front-pocket depth is −0.15 for women's jeans and −0.26 for men's, so pricier jeans, if anything, have slightly shallower pockets."
+  },
+  {
+   "tag": "div",
+   "y": 2781,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men's Women's"
+  },
+  {
+   "tag": "text",
+   "y": 2806,
+   "x": 332,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "30"
+  },
+  {
+   "tag": "text",
+   "y": 2806,
+   "x": 359,
+   "w": 121,
+   "in_svg": true,
+   "hidden": false,
+   "text": "front pocket depth, cm"
+  },
+  {
+   "tag": "text",
+   "y": 2872,
+   "x": 332,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "25"
+  },
+  {
+   "tag": "text",
+   "y": 2938,
+   "x": 332,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "20"
+  },
+  {
+   "tag": "text",
+   "y": 3004,
+   "x": 334,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15"
+  },
+  {
+   "tag": "text",
+   "y": 3070,
+   "x": 334,
+   "w": 12,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 346,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$0"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 491,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$50"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 637,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$100"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 785,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$150"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 932,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$200"
+  },
+  {
+   "tag": "text",
+   "y": 3085,
+   "x": 1081,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "$250"
+  },
+  {
+   "tag": "text",
+   "y": 3103,
+   "x": 1097,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "price"
+  },
+  {
+   "tag": "figcaption",
+   "y": 3141,
+   "x": 297,
+   "w": 846,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Price (US$) against maximum front pocket depth (cm), one dot per pair of jeans."
+  },
+  {
+   "tag": "p",
+   "y": 3245,
+   "x": 272,
+   "w": 896,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data: front and back pocket measurements of 80 pairs of jeans (two men's and two women's styles from each of 20 brands), with list price, cut and fabric. Brand spellings were made consistent (\"7 for all Mankind\" merged with \"7 for All Mankind\"). With only four pairs per brand and one size measured per style, brand averages are rough indications rather than precise figures."
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 806,
+   "x": 297,
+   "w": 846,
+   "h": 216,
+   "marks": 93,
+   "labels": 16
+  },
+  {
+   "kind": "svg",
+   "y": 1347,
+   "x": 297,
+   "w": 846,
+   "h": 235,
+   "marks": 8,
+   "labels": 18
+  },
+  {
+   "kind": "svg",
+   "y": 1878,
+   "x": 297,
+   "w": 846,
+   "h": 602,
+   "marks": 65,
+   "labels": 46
+  },
+  {
+   "kind": "svg",
+   "y": 2804,
+   "x": 297,
+   "w": 846,
+   "h": 320,
+   "marks": 85,
+   "labels": 13
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 3439
+}

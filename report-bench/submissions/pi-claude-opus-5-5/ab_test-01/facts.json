@@ -97,11 +97,19 @@
  },
  {
   "id": "derm-all-complaints",
-  "claim": "All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, from 11.7% vs 6.0% (toe-web peeling) to 13.9% vs 6.9% (red spots on the back).",
+  "claim": "All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, for example 13.9% vs 6.9% for red spots on the back and 11.7% vs 6.0% for toe-web peeling.",
   "tables": {
    "d": "data/data.csv"
   },
   "code": "d[d.department == '皮肤科'].groupby([d.chief_complaint.map({'后背长了不少小红点':'red spots on the back','手臂上起红疹,特别痒':'itchy red rash on arm','脚趾缝脱皮发痒':'toe-web peeling','脸上爆痘,下巴最严重':'facial acne','荨麻疹反反复复两个星期':'recurring hives'}), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).lost_before_doctor.mean().unstack().mul(100).round(1).assign(treatment_higher=lambda t: t.treatment > t.control)"
+ },
+ {
+  "id": "derm-weekly",
+  "claim": "The dermatology gap held in each of the 6 weeks of the test, with treatment losing between 11.0% and 15.9% of users before a doctor against 6.3% to 8.7% in control.",
+  "tables": {
+   "d": "data/data.csv"
+  },
+  "code": "d[d.department == '皮肤科'].groupby([pd.to_datetime(d.enter_date.str.replace('/','-')).dt.to_period('W'), d.group.str.strip().map({'实验组':'treatment','对照组':'control'})]).lost_before_doctor.mean().mul(100).round(1).unstack().assign(treatment_higher=lambda t: t.treatment > t.control)"
  },
  {
   "id": "derm-z",
