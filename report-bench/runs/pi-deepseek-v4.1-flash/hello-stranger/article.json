@@ -1,0 +1,134 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.786,
+  "where": "「The pairs differed in sex, race, age, education and politics」;「That the lows are rated far below the average is its own sig」;「Each conversation produces two independent accounts, and the」",
+  "reason": "14 节里 3 节不为前面的观点或问题服务:Reports that demographic differences correlate only weakly with enjoyment.;Reports worst, best and overall moment ratings.;Reports average partner differences in affect, arousal and shared reality.",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "People who had never met were paired for half an hour of video conversation.",
+    "serves": null,
+    "how": "Describes the setup and states the headline findings about rising mood and underestimated liking.",
+    "holds": false
+   },
+   {
+    "start": "The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.",
+    "serves": "Across 1,656 conversations the mood climbs from the first minute to the last — and people consistently walk away believing they were liked less than they actually were.",
+    "how": "Reports positive affect and arousal both rising at the four time points.",
+    "holds": true
+   },
+   {
+    "start": "The rise is not driven by a few ecstatic outliers.",
+    "serves": "The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.",
+    "how": "Shows most conversations finish higher and gives typical and median gains, so the climb is broad.",
+    "holds": true
+   },
+   {
+    "start": "Split the conversations by how the pair felt before the call and the pattern is sharp.",
+    "serves": "The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.",
+    "how": "Shows lower-starting pairs gain more and both ends converge near 7.",
+    "holds": true
+   },
+   {
+    "start": "After the call each person answered two symmetric questions: how much do you like this person, and how much do you think this person likes you?",
+    "serves": "Across 1,656 conversations the mood climbs from the first minute to the last — and people consistently walk away believing they were liked less than they actually were.",
+    "how": "Compares own liking 5.99, expected liking 5.35, and actual partner liking 5.99.",
+    "holds": true
+   },
+   {
+    "start": "So the room is full of mutual warmth that neither side registers.",
+    "serves": "The expectation was wrong: the partner's own answer, averaged over the same pairs, was also 5.99 .",
+    "how": "Quantifies the person-by-person perceived-liking gap averaging 0.64 points.",
+    "holds": true
+   },
+   {
+    "start": "54.9% of people underestimate how much their partner likes them.",
+    "serves": "So the room is full of mutual warmth that neither side registers.",
+    "how": "Reports that a majority underestimate, while fewer overestimate or are accurate.",
+    "holds": true
+   },
+   {
+    "start": "The asymmetry is systematic rather than random noise: if people were merely guessing badly, underestimates and overestimates would be equally common.",
+    "serves": "54.9% of people underestimate how much their partner likes them.",
+    "how": "Argues the direction of error is skewed toward underestimation, so it is not random.",
+    "holds": true
+   },
+   {
+    "start": "The same caution shows up in how people think they were seen.",
+    "serves": "The asymmetry is systematic rather than random noise: if people were merely guessing badly, underestimates and overestimates would be equally common.",
+    "how": "Shows the same underestimation pattern in intelligence and kindness ratings.",
+    "holds": true
+   },
+   {
+    "start": "The pairs differed in sex, race, age, education and politics, and the study recorded each difference.",
+    "serves": null,
+    "how": "Reports that demographic differences correlate only weakly with enjoyment.",
+    "holds": false
+   },
+   {
+    "start": "What does predict it is whether the two people felt they were experiencing the same thing.",
+    "serves": "None of it predicts much.",
+    "how": "Reports shared reality correlates far more strongly with enjoyment and liking than demographics, and enjoyment ranking tracks affect gains.",
+    "holds": true
+   },
+   {
+    "start": "Partners rated each other on a set of traits on the same 1-to-9 scale, and the profile is lopsided.",
+    "serves": "They rate their partner more intelligent ( 7.68 ) and kinder ( 7.98 ) than they believe the partner rates them ( 7.06 and 7.43 ): they hand out generous judgements and assume a stingier verdict comes back.",
+    "how": "Lists high warmth traits and low humour, supporting generous warmth ratings.",
+    "holds": true
+   },
+   {
+    "start": "That the lows are rated far below the average is its own signal: the worst moment of a conversation averages 5.80 , the best 7.83 , and the overall impression 7.32 .",
+    "serves": null,
+    "how": "Reports worst, best and overall moment ratings.",
+    "holds": false
+   },
+   {
+    "start": "Each conversation produces two independent accounts, and they do not match.",
+    "serves": null,
+    "how": "Reports average partner differences in affect, arousal and shared reality.",
+    "holds": false
+   },
+   {
+    "start": "Who does the perceiving matters as well.",
+    "serves": "Each conversation produces two independent accounts, and they do not match.",
+    "how": "Shows loneliness correlates with expected liking but not liking given, so perceiver traits affect reports.",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"People who had never met were paired for half an hour of video conversation.\",\"serves\":null,\"how\":\"Describes the setup and states the headline findings about rising mood and underestimated liking.\"},{\"start\":\"The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.\",\"serves\":\"Across 1,656 conversations the mood climbs from the first minute to the last — and people consistently walk away believing they were liked less than they actually were.\",\"how\":\"Reports positive affect and arousal both rising at the four time points.\"},{\"start\":\"The rise is not driven by a few ecstatic outliers.\",\"serves\":\"The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.\",\"how\":\"Shows most conversations finish higher and gives typical and median gains, so the climb is broad.\"},{\"start\":\"Split the conversations by how the pair felt before the call and the pattern is sharp.\",\"serves\":\"The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends.\",\"how\":\"Shows lower-starting pairs gain more and both ends converge near 7.\"},{\"start\":\"After the call each person answered two symmetric questions: how much do you like this person, and how much do you think this person likes you?\",\"serves\":\"Across 1,656 conversations the mood climbs from the first minute to the last — and people consistently walk away believing they were liked less than they actually were.\",\"how\":\"Compares own liking 5.99, expected liking 5.35, and actual partner liking 5.99.\"},{\"start\":\"So the room is full of mutual warmth that neither side registers.\",\"serves\":\"The expectation was wrong: the partner's own answer, averaged over the same pairs, was also 5.99 .\",\"how\":\"Quantifies the person-by-person perceived-liking gap averaging 0.64 points.\"},{\"start\":\"54.9% of people underestimate how much their partner likes them.\",\"serves\":\"So the room is full of mutual warmth that neither side registers.\",\"how\":\"Reports that a majority underestimate, while fewer overestimate or are accurate.\"},{\"start\":\"The asymmetry is systematic rather than random noise: if people were merely guessing badly, underestimates and overestimates would be equally common.\",\"serves\":\"54.9% of people underestimate how much their partner likes them.\",\"how\":\"Argues the direction of error is skewed toward underestimation, so it is not random.\"},{\"start\":\"The same caution shows up in how people think they were seen.\",\"serves\":\"The asymmetry is systematic rather than random noise: if people were merely guessing badly, underestimates and overestimates would be equally common.\",\"how\":\"Shows the same underestimation pattern in intelligence and kindness ratings.\"},{\"start\":\"The pairs differed in sex, race, age, education and politics, and the study recorded each difference.\",\"serves\":null,\"how\":\"Reports that demographic differences correlate only weakly with enjoyment.\"},{\"start\":\"What does predict it is whether the two people felt they were experiencing the same thing.\",\"serves\":\"None of it predicts much.\",\"how\":\"Reports shared reality correlates far more strongly with enjoyment and liking than demographics, and enjoyment ranking tracks affect gains.\"},{\"start\":\"Partners rated each other on a set of traits on the same 1-to-9 scale, and the profile is lopsided.\",\"serves\":\"They rate their partner more intelligent ( 7.68 ) and kinder ( 7.98 ) than they believe the partner rates them ( 7.06 and 7.43 ): they hand out generous judgements and assume a stingier verdict comes back.\",\"how\":\"Lists high warmth traits and low humour, supporting generous warmth ratings.\"},{\"start\":\"That the lows are rated far below the average is its own signal: the worst moment of a conversation averages 5.80 , the best 7.83 , and the overall impression 7.32 .\",\"serves\":null,\"how\":\"Reports worst, best and overall moment ratings.\"},{\"start\":\"Each conversation produces two independent accounts, and they do not match.\",\"serves\":null,\"how\":\"Reports average partner differences in affect, arousal and shared reality.\"},{\"start\":\"Who does the perceiving matters as well.\",\"serves\":\"Each conversation produces two independent accounts, and they do not match.\",\"how\":\"Shows loneliness correlates with expected liking but not liking given, so perceiver traits affect reports.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 2447,
+   "completion_tokens": 10849,
+   "seconds": 58.5
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文只有群体、配对和数据统计，没有写出一个有名字或可辨认的具体个体，也没有个体的欲望、面对的情境、被打破的常规及后续经历；因此三样都没有，属于只有类别和数字的数据报道。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"全文只有群体、配对和数据统计，没有写出一个有名字或可辨认的具体个体，也没有个体的欲望、面对的情境、被打破的常规及后续经历；因此三样都没有，属于只有类别和数字的数据报道。\"}",
+   "finish": "stop",
+   "prompt_tokens": 2590,
+   "completion_tokens": 319,
+   "seconds": 3.2
+  }
+ }
+}

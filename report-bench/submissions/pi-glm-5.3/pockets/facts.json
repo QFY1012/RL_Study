@@ -1,0 +1,104 @@
+[
+  {
+    "id": "dataset-shape",
+    "claim": "The data measures 80 pairs of jeans - 40 women's and 40 men's - from 21 brand labels and 5 styles, priced from $9.99 to $249.00.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "pd.Series({'jeans': len(measurements), 'womens_pairs': (measurements.menWomen == 'women').sum(), 'mens_pairs': (measurements.menWomen == 'men').sum(), 'brand_labels': measurements.brand.str.strip().nunique(), 'styles': measurements.style.nunique(), 'cheapest_usd': measurements.price.min(), 'priciest_usd': measurements.price.max()})"
+  },
+  {
+    "id": "front-back-dimensions",
+    "claim": "Men's front pockets average 23.13 cm deep by 16.37 cm wide, women's 14.33 by 15.18 cm - a 8.80 cm gap in depth but only 1.19 cm in width - while back pockets are nearly matched: 16.01 by 13.70 cm for men versus 15.12 by 13.34 cm for women.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack']].mean().round(2)"
+  },
+  {
+    "id": "pocket-areas",
+    "claim": "The average men's front pocket holds 378.4 cm2 (depth x widest width) against 218.0 cm2 for women's - a 160.4 cm2 shortfall - while back pockets are far closer: 219.7 cm2 versus 201.8 cm2.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(front_cm2=measurements.maxHeightFront*measurements.maxWidthFront, back_cm2=measurements.maxHeightBack*measurements.maxWidthBack).groupby('menWomen')[['front_cm2', 'back_cm2']].mean().round(1)"
+  },
+  {
+    "id": "size-ratios",
+    "claim": "Set against men's, women's front pockets are 0.619 as deep and 0.928 as wide, giving 0.576 of the area, but their back pockets are 0.945 as deep, 0.974 as wide and 0.919 of the area.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(front_cm2=measurements.maxHeightFront*measurements.maxWidthFront, back_cm2=measurements.maxHeightBack*measurements.maxWidthBack).groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack', 'front_cm2', 'back_cm2']].mean().pipe(lambda g: (g/g.loc['men']).round(3))"
+  },
+  {
+    "id": "depth-ranges",
+    "claim": "Women's front-pocket depths run from 11.5 to 21.5 cm with a median of 14.0, while men's run from 20.0 to 28.0 cm with a median of 22.5 - the deepest women's pocket in the data is still shallower than the median men's pocket.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').maxHeightFront.agg(['min', 'median', 'max'])"
+  },
+  {
+    "id": "phone-fit-15cm",
+    "claim": "Judged against a large phone (15 cm tall, 7.5 cm wide at the pocket's narrowest point), 40 of 40 men's front pockets fit it but only 12 of 40 women's; all 80 pockets clear the 7.5 cm width test, so depth alone is the barrier.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(fits_phone=(measurements.maxHeightFront >= 15) & (measurements.minWidthFront >= 7.5)).groupby('menWomen').agg(fits_phone=('fits_phone', 'sum'), wide_enough=('minWidthFront', lambda s: (s >= 7.5).sum()), deep_enough=('maxHeightFront', lambda s: (s >= 15).sum()))"
+  },
+  {
+    "id": "phone-fit-16cm",
+    "claim": "Raise the phone to 16 cm and only 5 of 40 women's front pockets still fit (4 of 40 at 17 cm), while all 40 men's pairs clear every one of those bars.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(fit15=measurements.maxHeightFront >= 15, fit16=measurements.maxHeightFront >= 16, fit17=measurements.maxHeightFront >= 17).groupby('menWomen')[['fit15', 'fit16', 'fit17']].sum()"
+  },
+  {
+    "id": "brand-depth-gap",
+    "claim": "In all 19 brands measured in both departments, men's front pockets average deeper than women's; the gap runs from 2.5 cm at Abercrombie (22.25 vs 19.75 cm) to 13.4 cm at Levi's (25.75 vs 12.35 cm).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(brand=measurements.brand.str.strip()).groupby(['brand', 'menWomen']).maxHeightFront.mean().unstack().dropna().assign(gap_cm=lambda g: g.men - g.women).sort_values('gap_cm').round(2)"
+  },
+  {
+    "id": "brand-area-ratio",
+    "claim": "On front-pocket area the gender gap is smallest at Abercrombie (1.10x, 367.0 vs 333.12 cm2) and largest at Gap (2.38x, 393.75 vs 165.25 cm2).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(brand=measurements.brand.str.strip(), front_cm2=measurements.maxHeightFront*measurements.maxWidthFront).groupby(['brand', 'menWomen']).front_cm2.mean().unstack().dropna().assign(mens_over_womens=lambda g: g.men/g.women).sort_values('mens_over_womens').round(2)"
+  },
+  {
+    "id": "style-vs-depth",
+    "claim": "Cut barely matters: women's front pockets average 14.2-14.4 cm deep whether boot-cut, skinny or straight, and men's 21.5-23.9 cm across five cuts, so the tightest men's cut (skinny, 22.7 cm) is still 8.3 cm deeper than the roomiest women's cut (straight, 14.4 cm).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby(['menWomen', 'style']).agg(pairs=('style', 'size'), depth_cm=('maxHeightFront', 'mean'), width_cm=('maxWidthFront', 'mean')).round(1)"
+  },
+  {
+    "id": "price-parity",
+    "claim": "The two halves of the sample cost almost exactly the same - men's pairs average $81.18 (from $39.99 to $209.00) and women's $80.32 (from $9.99 to $249.00) - despite the pocket gap.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').price.agg(['mean', 'min', 'max']).round(2)"
+  },
+  {
+    "id": "price-no-correlation",
+    "claim": "Price buys no pocket room: across all 80 pairs front-pocket area correlates with price at -0.073, and within gender at -0.177 for men's pairs and -0.182 for women's - if anything slightly negative.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(front_cm2=measurements.maxHeightFront*measurements.maxWidthFront).pipe(lambda d: pd.Series({'all_80_pairs': d.price.corr(d.front_cm2), 'mens_40_pairs': d.loc[d.menWomen == 'men', 'price'].corr(d.loc[d.menWomen == 'men', 'front_cm2']), 'womens_40_pairs': d.loc[d.menWomen == 'women', 'price'].corr(d.loc[d.menWomen == 'women', 'front_cm2'])})).round(3)"
+  },
+  {
+    "id": "price-extremes",
+    "claim": "The priciest pair in the data, True Religion's $249.00 women's Slim Straight, has a 203.0 cm2 front pocket, and the cheapest, H&M's $9.99 women's Skinny Ankle High Waist, has 275.5 cm2 - both smaller than the smallest men's front pocket in the data, H&M's $39.99 men's Skinny at 290.0 cm2.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(front_cm2=measurements.maxHeightFront*measurements.maxWidthFront).pipe(lambda d: pd.concat([d.loc[[d.price.idxmin(), d.price.idxmax()], ['brand', 'menWomen', 'name', 'price', 'front_cm2']], d.loc[d.menWomen == 'men'].nsmallest(1, 'front_cm2')[['brand', 'menWomen', 'name', 'price', 'front_cm2']]]))"
+  },
+  {
+    "id": "roomiest-womens",
+    "claim": "The roomiest women's front pockets belong to Abercrombie - the $88.00 Simone High Rise Slim at 21.5 x 15.5 cm (333.25 cm2) and the $78.00 Simone High Rise Ankle Straight at 18.0 x 18.5 cm (333.0 cm2) - with H&M's $9.99 Skinny Ankle High Waist third at 275.5 cm2.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.loc[measurements.menWomen == 'women'].assign(front_cm2=measurements.maxHeightFront*measurements.maxWidthFront).nlargest(3, 'front_cm2')[['brand', 'name', 'price', 'maxHeightFront', 'maxWidthFront', 'front_cm2']]"
+  },
+  {
+    "id": "cutout-counts",
+    "claim": "The cutout flag is set on only 6 of the 40 men's pairs and 3 of the 40 women's pairs.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').cutout.agg(['sum', 'size'])"
+  },
+  {
+    "id": "cutout-brands",
+    "claim": "All nine cutout pockets sit in four brands: True Religion (2 men's, 2 women's), Guess (2 men's), J. Crew (2 men's) and Uniqlo (1 women's).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements[measurements.cutout].assign(brand=measurements.brand.str.strip()).groupby(['brand', 'menWomen']).size()"
+  },
+  {
+    "id": "rivet-height",
+    "claim": "Front-pocket rivet height averages 7.06 cm on men's jeans (ranging 4.5 to 9.2 cm) and 6.25 cm on women's (4.5 to 7.5 cm).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').rivetHeightFront.agg(['mean', 'min', 'max']).round(2)"
+  }
+]
