@@ -57,3 +57,45 @@
   pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 - <<'PY' import
   pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && cat > /tmp/t1.py <<
   pi-qwen3.8-max/pockets pockets: write /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets/facts.json
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash ls -la; ls -la data/; cat data/*.txt 2>/dev/null; head -5 data/*.csv
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash pwd; ls -la; ls -la data/ 2>/dev/null; cat data/*.txt 2>/dev/null | head -50
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash find . -maxdepth 3 -type f | head -50
+  pi-qwen3.8-max/pockets pockets: bash ls -la; echo "---"; ls -la data/; echo "---"; for f in data/*; do echo "== $f"; head -5 "$f"; echo "
+  pi-qwen3.8-max/pockets pockets: bash cat title* 2>/dev/null; ls
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && head -3 people.csv && echo "=====" && head -3 convos.csv
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('people.csv'); c=pd.read_csv('convos.csv')
+  pi-qwen3.8-max/pockets pockets: read data/measurements.csv
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',250); pd.set_
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',250); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',250); pd.set_
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',250); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',250); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && for i in 1 2 3; do pyth
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 << 'EOF' import
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 << 'EOF' import
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd data && python3 -c " import pandas as pd, numpy as np pd.set_option('display.width',300); pd.set_
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 << 'EOF' import

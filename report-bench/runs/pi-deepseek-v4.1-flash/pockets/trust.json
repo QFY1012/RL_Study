@@ -1,0 +1,95 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/index.html",
+ "facts": "submissions/pi-deepseek-v4.1-flash/pockets/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "gender-gap-means",
+     "basis": "Output shows men maxHeightFront 23.13, maxHeightBack 16.01; women maxHeightFront 14.33, maxHeightBack 15.12.",
+     "verdict": "ok"
+    },
+    {
+     "id": "gap-in-inches",
+     "basis": "Output is 8.8.",
+     "verdict": "ok"
+    },
+    {
+     "id": "women-front-shorter-than-back",
+     "basis": "Output shows men pairs 40 with 0 front_shorter_than_back; women pairs 40 with 29.",
+     "verdict": "ok"
+    },
+    {
+     "id": "front-back-ratio",
+     "basis": "Output shows men 1.44 and women 0.95.",
+     "verdict": "ok"
+    },
+    {
+     "id": "height-ranges",
+     "basis": "Output shows men min 20.0, median 22.5, max 28.0; women min 11.5, median 14.0, max 21.5.",
+     "verdict": "ok"
+    },
+    {
+     "id": "style-no-effect-women",
+     "basis": "Output shows boot-cut mean 14.25, skinny 14.27, straight 14.42.",
+     "verdict": "ok"
+    },
+    {
+     "id": "brand-spread-women",
+     "basis": "Output shows Guess 12.00, Levi's 12.35, American Eagle 17.50, Abercrombie 19.75.",
+     "verdict": "ok"
+    },
+    {
+     "id": "price-no-relation",
+     "basis": "Output correlation between price and maxHeightFront is -0.08.",
+     "verdict": "ok"
+    },
+    {
+     "id": "narrower-front-women",
+     "basis": "Output shows women maxWidthFront 15.18, minWidthFront 12.26; men 16.37 and 13.36.",
+     "verdict": "ok"
+    },
+    {
+     "id": "shallowest-pairs",
+     "basis": "Output lists Guess 11.5, J. Crew 11.5, Calvin Klein 12.0, Old Navy 12.0, all women.",
+     "verdict": "ok"
+    },
+    {
+     "id": "deepest-pairs",
+     "basis": "Output lists Wrangler Regular Fit 28.0, Wrangler Slim Fit 27.5, True Religion Geno Slim 26.2, all men.",
+     "verdict": "ok"
+    },
+    {
+     "id": "cutout-counts",
+     "basis": "Output shows men cutout True = 6 and women cutout True = 3.",
+     "verdict": "ok"
+    },
+    {
+     "id": "max-below-min",
+     "basis": "Output is 14.",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"gender-gap-means\", \"basis\": \"Output shows men maxHeightFront 23.13, maxHeightBack 16.01; women maxHeightFront 14.33, maxHeightBack 15.12.\", \"verdict\": \"ok\"}, {\"id\": \"gap-in-inches\", \"basis\": \"Output is 8.8.\", \"verdict\": \"ok\"}, {\"id\": \"women-front-shorter-than-back\", \"basis\": \"Output shows men pairs 40 with 0 front_shorter_than_back; women pairs 40 with 29.\", \"verdict\": \"ok\"}, {\"id\": \"front-back-ratio\", \"basis\": \"Output shows men 1.44 and women 0.95.\", \"verdict\": \"ok\"}, {\"id\": \"height-ranges\", \"basis\": \"Output shows men min 20.0, median 22.5, max 28.0; women min 11.5, median 14.0, max 21.5.\", \"verdict\": \"ok\"}, {\"id\": \"style-no-effect-women\", \"basis\": \"Output shows boot-cut mean 14.25, skinny 14.27, straight 14.42.\", \"verdict\": \"ok\"}, {\"id\": \"brand-spread-women\", \"basis\": \"Output shows Guess 12.00, Levi's 12.35, American Eagle 17.50, Abercrombie 19.75.\", \"verdict\": \"ok\"}, {\"id\": \"price-no-relation\", \"basis\": \"Output correlation between price and maxHeightFront is -0.08.\", \"verdict\": \"ok\"}, {\"id\": \"narrower-front-women\", \"basis\": \"Output shows women maxWidthFront 15.18, minWidthFront 12.26; men 16.37 and 13.36.\", \"verdict\": \"ok\"}, {\"id\": \"shallowest-pairs\", \"basis\": \"Output lists Guess 11.5, J. Crew 11.5, Calvin Klein 12.0, Old Navy 12.0, all women.\", \"verdict\": \"ok\"}, {\"id\": \"deepest-pairs\", \"basis\": \"Output lists Wrangler Regular Fit 28.0, Wrangler Slim Fit 27.5, True Religion Geno Slim 26.2, all men.\", \"verdict\": \"ok\"}, {\"id\": \"cutout-counts\", \"basis\": \"Output shows men cutout True = 6 and women cutout True = 3.\", \"verdict\": \"ok\"}, {\"id\": \"max-below-min\", \"basis\": \"Output is 14.\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 1817,
+    "completion_tokens": 1428,
+    "seconds": 31.7
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

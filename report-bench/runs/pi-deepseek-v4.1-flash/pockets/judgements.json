@@ -1,0 +1,60 @@
+{
+ "tries": {
+  "2.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.85,
+  "where": "第2帧柱状图、第3–4帧单点图、第5帧价格散点、第6–7帧品牌横条图",
+  "reason": "图例、数值标注、轴刻度基本齐全，主要对比一眼能看出；只有价格散点中部点群重叠、轴标题字小偏淡，品牌图字号偏小，属个别小瑕疵。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.75,
+  "where": "第2帧、第3–4帧、第5帧（蓝=男/红=女）与第6–7帧品牌图、第8–9帧小表",
+  "reason": "男蓝女红主线全篇一致，小表也沿用；但品牌横条图把深红改作「高亮被点名品牌」，且同一深红同时标最低（Guess/Levi's）与最高（Abercrombie），红色含义被复用，属细节出入。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.35,
+  "where": "全篇：第2帧柱状图→第3–4帧单点图→第4–5帧横条+散点→第6–7帧品牌横条→第8–9帧表→第11–12帧大表",
+  "reason": "没有滚动原地变化，每节换一种画法（柱/点/散点/条/表），图形、坐标轴、粒度同时改变，读者每节要重新学读法；仅颜色编码和部分图形相近保留了一点连续性。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第0–1帧三段文字配第2帧同一张柱状图；第3–4帧两段文字配同一张单点图；第4–6帧文字配第5帧两张图；第6–8帧文字配品牌图",
+  "reason": "滚动记录显示无图固定、无图变化；文字和其讲的图多数在同一屏或相邻帧，但一张图被多段文字讲、滚动时图始终不变，读者要自己到图上找后面几段说的位置。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.2,
+  "where": "第1帧正文对第2帧柱状图（23.13/14.33等）、第3帧对单点图（median 22.5/14.0）、第5帧对版型横条图、第6帧对品牌图、第9帧对第8–9帧小表",
+  "reason": "绝大多数对子要靠读图上印的同一个数或品牌名才找得到；仅品牌图用深红突出 Guess/Levi's 与 Abercrombie（正文正说这三家是两端）、以及紧贴正文的小表算少数几处一眼对上。"
+ }
+}

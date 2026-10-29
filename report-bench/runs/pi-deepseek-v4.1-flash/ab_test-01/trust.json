@@ -1,0 +1,123 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01/index.html",
+ "facts": "submissions/pi-deepseek-v4.1-flash/ab_test-01/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": true,
+   "verdicts": [
+    {
+     "id": "scale-and-split",
+     "basis": "consultations=18000; first_day=18 Nov 2024; last_day=29 Dec 2024; 实验组=8987; 对照组=9013",
+     "verdict": "ok"
+    },
+    {
+     "id": "weekly-volume",
+     "basis": "first week total=2409 (实验组1245, 对照组1164); last week total=3546 (实验组1772, 对照组1774); six weekly totals increase 2409→2757→2925→3122→3241→3546 and group counts remain comparable",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-time-improved",
+     "basis": "median 实验组=88.0, 对照组=110.0; share_under_2min 实验组=0.685768 (68.6%), 对照组=0.537890 (53.8%)",
+     "verdict": "ok"
+    },
+    {
+     "id": "long-waits-gone",
+     "basis": "over_5min 实验组=90, 对照组=385; longest 实验组=18669, 对照组=71396",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-improved-everywhere",
+     "basis": "五官科 median 实验组82.0 vs 对照组105.0; 皮肤科 实验组86.0 vs 对照组107.0; all departments show experiment median below control",
+     "verdict": "ok"
+    },
+    {
+     "id": "completion-flat-overall",
+     "basis": "实验组 mean=0.879381 (87.94%), sum=7903, size=8987; 对照组 mean=0.880173 (88.02%), sum=7933, size=9013",
+     "verdict": "ok"
+    },
+    {
+     "id": "abandonment-up-slightly",
+     "basis": "实验组 mean=0.052965 (5.30%), sum=476; 对照组 mean=0.047376 (4.74%), sum=427",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-completion-drop",
+     "basis": "皮肤科 实验组 mean=0.805057 (80.51%) vs 对照组0.850433 (85.04%); 儿科 实验组0.903721 (90.37%) vs 对照组0.889352 (88.94%)",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-abandonment-doubles",
+     "basis": "皮肤科 对照组 mean=0.076638 (7.66%, 124/1618); 实验组 mean=0.127079 (12.71%, 191/1503); 12.71% is about 1.66x 7.66%, not doubled",
+     "verdict": "wrong"
+    },
+    {
+     "id": "dermatology-gap-every-week",
+     "basis": "first week 实验组0.836066 (83.6%) vs 对照组0.840183 (84.0%); last week 实验组0.794224 (79.4%) vs 对照组0.836879 (83.7%); experiment lower in all six weeks",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-all-complaints",
+     "basis": "后背长了不少小红点 0.794304 vs 0.868750; 荨麻疹反反复复两个星期 0.787097 vs 0.854671; 脸上爆痘,下巴最严重 0.822148 vs 0.861446; all five complaints lower in experiment",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-all-platforms",
+     "basis": "Android 实验组0.133028 vs 对照组0.072271; iOS 0.120438 vs 0.082372; 微信小程序 0.126667 vs 0.075301",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-mix-balanced",
+     "basis": "皮肤科 share 实验组0.167242 (16.7%), 对照组0.179518 (~17.9%)",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-unchanged",
+     "basis": "实验组 mean=0.121471 (12.15%), count=8891; 对照组 mean=0.123053 (12.31%), count=8923",
+     "verdict": "ok"
+    },
+    {
+     "id": "consults-shorter",
+     "basis": "median 实验组=10.4, 对照组=11.2",
+     "verdict": "ok"
+    },
+    {
+     "id": "missing-is-structural",
+     "basis": "blank_response_times=903, lost_before_doctor=903, response_blank_iff_lost=True; blank_consult_lengths=2164, not_completed=2164, length_blank_iff_incomplete=True",
+     "verdict": "ok"
+    },
+    {
+     "id": "dirty-group-labels",
+     "basis": "raw_label_variants=4; padded_rows=19; padded_experiment=10; padded_control=9",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [
+    {
+     "id": "dermatology-abandonment-doubles",
+     "basis": "皮肤科 对照组 mean=0.076638 (7.66%, 124/1618); 实验组 mean=0.127079 (12.71%, 191/1503); 12.71% is about 1.66x 7.66%, not doubled",
+     "verdict": "wrong"
+    }
+   ],
+   "reply": "{\"facts\":[{\"id\":\"scale-and-split\",\"basis\":\"consultations=18000; first_day=18 Nov 2024; last_day=29 Dec 2024; 实验组=8987; 对照组=9013\",\"verdict\":\"ok\"},{\"id\":\"weekly-volume\",\"basis\":\"first week total=2409 (实验组1245, 对照组1164); last week total=3546 (实验组1772, 对照组1774); six weekly totals increase 2409→2757→2925→3122→3241→3546 and group counts remain comparable\",\"verdict\":\"ok\"},{\"id\":\"wait-time-improved\",\"basis\":\"median 实验组=88.0, 对照组=110.0; share_under_2min 实验组=0.685768 (68.6%), 对照组=0.537890 (53.8%)\",\"verdict\":\"ok\"},{\"id\":\"long-waits-gone\",\"basis\":\"over_5min 实验组=90, 对照组=385; longest 实验组=18669, 对照组=71396\",\"verdict\":\"ok\"},{\"id\":\"wait-improved-everywhere\",\"basis\":\"五官科 median 实验组82.0 vs 对照组105.0; 皮肤科 实验组86.0 vs 对照组107.0; all departments show experiment median below control\",\"verdict\":\"ok\"},{\"id\":\"completion-flat-overall\",\"basis\":\"实验组 mean=0.879381 (87.94%), sum=7903, size=8987; 对照组 mean=0.880173 (88.02%), sum=7933, size=9013\",\"verdict\":\"ok\"},{\"id\":\"abandonment-up-slightly\",\"basis\":\"实验组 mean=0.052965 (5.30%), sum=476; 对照组 mean=0.047376 (4.74%), sum=427\",\"verdict\":\"ok\"},{\"id\":\"dermatology-completion-drop\",\"basis\":\"皮肤科 实验组 mean=0.805057 (80.51%) vs 对照组0.850433 (85.04%); 儿科 实验组0.903721 (90.37%) vs 对照组0.889352 (88.94%)\",\"verdict\":\"ok\"},{\"id\":\"dermatology-abandonment-doubles\",\"basis\":\"皮肤科 对照组 mean=0.076638 (7.66%, 124/1618); 实验组 mean=0.127079 (12.71%, 191/1503); 12.71% is about 1.66x 7.66%, not doubled\",\"verdict\":\"wrong\"},{\"id\":\"dermatology-gap-every-week\",\"basis\":\"first week 实验组0.836066 (83.6%) vs 对照组0.840183 (84.0%); last week 实验组0.794224 (79.4%) vs 对照组0.836879 (83.7%); experiment lower in all six weeks\",\"verdict\":\"ok\"},{\"id\":\"dermatology-all-complaints\",\"basis\":\"后背长了不少小红点 0.794304 vs 0.868750; 荨麻疹反反复复两个星期 0.787097 vs 0.854671; 脸上爆痘,下巴最严重 0.822148 vs 0.861446; all five complaints lower in experiment\",\"verdict\":\"ok\"},{\"id\":\"dermatology-all-platforms\",\"basis\":\"Android 实验组0.133028 vs 对照组0.072271; iOS 0.120438 vs 0.082372; 微信小程序 0.126667 vs 0.075301\",\"verdict\":\"ok\"},{\"id\":\"department-mix-balanced\",\"basis\":\"皮肤科 share 实验组0.167242 (16.7%), 对照组0.179518 (~17.9%)\",\"verdict\":\"ok\"},{\"id\":\"followup-unchanged\",\"basis\":\"实验组 mean=0.121471 (12.15%), count=8891; 对照组 mean=0.123053 (12.31%), count=8923\",\"verdict\":\"ok\"},{\"id\":\"consults-shorter\",\"basis\":\"median 实验组=10.4, 对照组=11.2\",\"verdict\":\"ok\"},{\"id\":\"missing-is-structural\",\"basis\":\"blank_response_times=903, lost_before_doctor=903, response_blank_iff_lost=True; blank_consult_lengths=2164, not_completed=2164, length_blank_iff_incomplete=True\",\"verdict\":\"ok\"},{\"id\":\"dirty-group-labels\",\"basis\":\"raw_label_variants=4; padded_rows=19; padded_experiment=10; padded_control=9\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 3392,
+    "completion_tokens": 9862,
+    "seconds": 59.3
+   }
+  }
+ },
+ "vetoed": [
+  "1.3"
+ ],
+ "tries": 1
+}

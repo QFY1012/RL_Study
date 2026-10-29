@@ -1,0 +1,13 @@
+{
+ "score": 0.0,
+ "vetoed": [
+  "1.3"
+ ],
+ "parts": {},
+ "complete": true,
+ "summary": "vetoed by 1.3",
+ "feedback": [
+  "1.3 结论和数据一致:[dermatology-abandonment-doubles] 皮肤科 对照组 mean=0.076638 (7.66%, 124/1618); 实验组 mean=0.127079 (12.71%, 191/1503); 12.71% is about 1.66x 7.66%, not doubled",
+  "页面高 5733px,滚动截了 12 帧,滚动时固定在屏幕上的图 0 张。"
+ ]
+}

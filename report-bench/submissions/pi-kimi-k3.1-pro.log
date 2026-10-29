@@ -6,3 +6,8 @@
   pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/measurements.csv') p['brandClea
   pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/measurements.csv') # Candidate 
   pi-kimi-k3.1-pro/pockets pockets: write facts.json
+  pi-kimi-k3.1-pro/pockets pockets: bash ls -la && find data -maxdepth 2 -type f -print && for f in data/*.csv; do echo "--- $f"; head -5 "$f
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd p='data/measurements.csv'; d=pd.read_csv(p) pd.set_option('displ
+  pi-kimi-k3.1-pro/pockets pockets: bash cat > /tmp/analyze.py <<'PY' import pandas as pd, numpy as np pd.set_option('display.width',240); pd
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np d=pd.read_csv('data/measurements.csv') h=14.4;w=7.1
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd,numpy as np d=pd.read_csv('data/measurements.csv') d['frontDepth

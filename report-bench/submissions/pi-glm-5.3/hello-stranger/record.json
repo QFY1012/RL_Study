@@ -1,0 +1,24 @@
+{
+ "task": "hello-stranger",
+ "model": "glm-5.3",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "glm-5.3",
+   "effort": "high",
+   "seconds": 1123,
+   "steps": 34,
+   "tools": 32,
+   "nudged": 1,
+   "usage": {
+    "input": 173715,
+    "output": 60167
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 1123
+}

@@ -13162,3 +13162,61 @@ women-in-headlines: facts=7 answer=7 dropped=0 skipped=20 problems=0 1004s steps
   superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd d
   superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 -c " import pandas as pd d=pd.
   superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams; python3 << 'EOF' import pandas as pd, 
+=== restart 2026-10-29T03:47:40Z after container restart: superteams tiktok-story
+  superteams superteams: bash ls -la data/ && head -5 data/web.csv && wc -l data/web.csv
+  superteams superteams: web_fetch https://pudding.cool/2017/10/superteams/
+  tiktok-story tiktok-story: bash ls -la data/ && head -5 data/artists.csv && echo "---" && head -5 data/charting-artists.csv && echo 
+  tiktok-story tiktok-story: web_fetch https://pudding.cool/2022/07/tiktok-story/
+  superteams superteams: web_view https://pudding.cool/2017/10/superteams/
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') c=pd.read_csv('charting-art
+  tiktok-story tiktok-story: web_view https://pudding.cool/2022/07/tiktok-story/
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') print(w.shape) print(w.dtypes) 
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') print(w.groupby('season_year').
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') for y in [2010,2011,2012,2013,2
+  superteams superteams: bash cd /tmp && curl -sL https://pudding.cool/2017/10/superteams/ -o superteams.html && wc -c superteams.
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') d=w[(w.season_year==1990)] prin
+  tiktok-story tiktok-story: bash cd /tmp && curl -s https://pudding.cool/2022/07/tiktok-story/ -o story.html && ls -la story.html && 
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') pd.set_option('display.widt
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') print(a['Post-viral Editori
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd, numpy as np a=pd.read_csv('artists.csv') def ms(df, cha
+  superteams superteams: bash cd data && python3 -c " import pandas as pd, numpy as np w=pd.read_csv('web.csv') print(w[w.season_y
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') print(w[w.season_year==1976][['
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') pd.set_option('display.widt
+  tiktok-story tiktok-story: bash env | grep -i proxy; getent hosts pudding.cool; curl -sI https://pudding.cool/ --max-time 10 | head 
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') print('unique players',w.bbrID.
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') for p in ['jordami01','parisro0
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') m = pd.DataFrame({ 'playlis
+  superteams superteams: bash cd data && python3 -c " import pandas as pd pd.set_option('display.width',250) w=pd.read_csv('web.cs
+  superteams superteams: bash cd data && python3 -c " import pandas as pd w=pd.read_csv('web.csv') for y in [1985,1990,2010,2016]:
+  superteams superteams: bash cd data && python3 -c " import pandas as pd, numpy as np w=pd.read_csv('web.csv') def teams(metric='
+  tiktok-story tiktok-story: web_fetch https://api.github.com/search/repositories?q=tiktok-story+user:the-pudding
+  tiktok-story tiktok-story: web_fetch https://pudding.cool/2022/07/tiktok-story/data/artists.csv
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd c=pd.read_csv('charting-artists.csv') col=c.columns[2] p
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: bash cd data && python3 -c " import pandas as pd a=pd.read_csv('artists.csv') pd.set_option('display.widt
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://r.jina.ai/https://pudding.cool/2022/07/tiktok-story/
+  superteams superteams: bash cd data && python3 -c " import pandas as pd, numpy as np w=pd.read_csv('web.csv') def teams(metric='
+  tiktok-story tiktok-story: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2022%2F07%2Ftiktok-story%2F
+  tiktok-story tiktok-story: web_fetch https://pudding.cool/2022/07/tiktok-story/assets/index.js
+  tiktok-story tiktok-story: web_fetch https://api.codetabs.com/v1/proxy?quest=https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://corsproxy.io/?https://pudding.cool/2022/07/tiktok-story/
+  superteams superteams: bash cd data && cat > /tmp/explore.py <<'EOF' import pandas as pd, numpy as np w=pd.read_csv('data/web.cs
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams && sed -i "s#data/web.csv#data/web.csv#
+  tiktok-story tiktok-story: bash mkdir -p /tmp/work && cat > /tmp/work/labels.py <<'EOF' labels = { 8: ["CJ","24kGoldn","Sleepy Hallo
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams && pwd && ls && cat > explore.py <<'EOF
+  tiktok-story tiktok-story: bash cd /tmp/work && python3 -c " from labels import labels import pandas as pd, itertools, numpy as np a
+  tiktok-story tiktok-story: bash ls /tmp; ls /home/user/RL_Study/report-gepa/runs/originals/tiktok-story; pwd
+  tiktok-story tiktok-story: bash mkdir -p scratch && cat > scratch/labels.py <<'EOF' labels = { 8: ["CJ","24kGoldn","Sleepy Hallow"],
+  tiktok-story tiktok-story: web_fetch https://github.com/the-pudding/tiktok-story
+  tiktok-story tiktok-story: web_fetch https://github.com/search?q=tiktok+story+pudding&type=repositories
+  tiktok-story tiktok-story: web_fetch http://archive.org/wayback/available?url=pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://web.archive.org/web/2022id_/https://pudding.cool/2022/07/tiktok-story/
+  superteams superteams: bash cd /home/user/RL_Study/report-gepa/runs/originals/superteams && python3 -c " from explore import * f
+  tiktok-story tiktok-story: web_fetch http://web.archive.org/web/20260929020948/https://pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: web_fetch https://web.archive.org/web/20220701000000*/pudding.cool/2022/07/tiktok-story/
+  tiktok-story tiktok-story: bash python3 -c " import pandas as pd a=pd.read_csv('data/artists.csv') pd.set_option('display.width',300
+  tiktok-story tiktok-story: web_fetch https://html.duckduckgo.com/html/?q=pudding.cool+tiktok-story+github+data
+  tiktok-story tiktok-story: web_fetch https://www.bing.com/search?q=pudding.cool+tiktok-story+github
+  tiktok-story tiktok-story: bash python3 -c " import pandas as pd from scratch.labels import labels a=pd.read_csv('data/artists.csv')

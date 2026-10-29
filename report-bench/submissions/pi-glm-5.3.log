@@ -94,3 +94,15 @@ pi-glm-5.3/ab_test-01: delivered=True attempts=1 551s
   pi-glm-5.3/pockets pockets: bash cat /tmp/rows_compact.json
   pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
   pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && rm -f rows.json && ls
+  pi-glm-5.3/pockets pockets: bash ls -la data/ && cat data/*.csv | head -50
+  pi-glm-5.3/pockets pockets: bash ls -la
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && tail -45 data/measurements.csv
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python3 -c " import pandas as 

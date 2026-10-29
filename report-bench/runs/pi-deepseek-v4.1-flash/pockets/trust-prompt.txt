@@ -1,0 +1,149 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[gender-gap-means]
+claim: Men's jeans average a 23.13 in front pocket height (maximum measured) against 14.33 in for women's, while back pockets are close: 16.01 in for men and 15.12 in for women.
+tables: d = data/measurements.csv
+code: d.groupby('menWomen')[['maxHeightFront','maxHeightBack']].mean().round(2)
+output:
+          maxHeightFront  maxHeightBack
+menWomen                               
+men                23.13          16.01
+women              14.33          15.12
+
+[gap-in-inches]
+claim: The gender gap in average maximum front pocket height is 8.8 in.
+tables: d = data/measurements.csv
+code: (d[d.menWomen == 'men'].maxHeightFront.mean() - d[d.menWomen == 'women'].maxHeightFront.mean()).round(2)
+output:
+8.8
+
+[women-front-shorter-than-back]
+claim: In 29 of the 40 women's pairs the front pocket's maximum height is smaller than the back pocket's, while that happens in none of the 40 men's pairs.
+tables: d = data/measurements.csv
+code: d.groupby('menWomen').apply(lambda g: pd.Series({'pairs': len(g), 'front_shorter_than_back': (g.maxHeightFront < g.maxHeightBack).sum()}))
+output:
+          pairs  front_shorter_than_back
+menWomen                                
+men          40                        0
+women        40                       29
+
+[front-back-ratio]
+claim: Men's front pockets are on average 1.44 times as tall as their back pockets; women's are 0.95 times as tall, i.e. slightly shorter than their own back pockets.
+tables: d = data/measurements.csv
+code: (d.groupby('menWomen').maxHeightFront.mean() / d.groupby('menWomen').maxHeightBack.mean()).round(2)
+output:
+menWomen
+men      1.44
+women    0.95
+
+[height-ranges]
+claim: Women's front pocket heights run from 11.5 to 21.5 in with a median of 14.0, while men's run from 20.0 to 28.0 with a median of 22.5.
+tables: d = data/measurements.csv
+code: d.groupby('menWomen').maxHeightFront.agg(['min','median','max'])
+output:
+           min  median   max
+menWomen                    
+men       20.0    22.5  28.0
+women     11.5    14.0  21.5
+
+[style-no-effect-women]
+claim: Among women's jeans, boot-cut, skinny and straight styles average 14.25, 14.27 and 14.42 in maximum front pocket height, nearly identical across cuts.
+tables: d = data/measurements.csv
+code: d[d.menWomen == 'women'].groupby('style').maxHeightFront.agg(['size','mean']).round(2)
+output:
+          size   mean
+style                
+boot-cut     4  14.25
+skinny      20  14.27
+straight    16  14.42
+
+[brand-spread-women]
+claim: Among women's jeans the average front pocket height ranges from 12.0 in at Guess and 12.35 in at Levi's to 17.5 in at American Eagle and 19.75 in at Abercrombie.
+tables: d = data/measurements.csv
+code: d[d.menWomen == 'women'].groupby('brand').maxHeightFront.mean().round(2).sort_values()
+output:
+brand
+Guess                12.00
+Levi's               12.35
+J. Crew              12.75
+Calvin Klein         13.00
+Ralph Lauren         13.00
+Old Navy             13.25
+Gap                  13.50
+7 for All Mankind    13.50
+Lee                  13.60
+Tommy Hilfiger       13.75
+Lucky                14.00
+True Religion        14.25
+Uniqlo               14.25
+Wrangler             14.50
+Arizona              14.50
+Buckle Black         14.75
+Express              15.60
+H&M                  16.75
+American Eagle       17.50
+Abercrombie          19.75
+
+[price-no-relation]
+claim: Price is unrelated to front pocket height: the correlation between price and maxHeightFront is -0.08.
+tables: d = data/measurements.csv
+code: d[['price','maxHeightFront']].corr().round(2)
+output:
+                price  maxHeightFront
+price            1.00           -0.08
+maxHeightFront  -0.08            1.00
+
+[narrower-front-women]
+claim: Women's front pockets are also narrower: 15.18 in average maximum width and 12.26 in minimum width, against 16.37 in and 13.36 in for men.
+tables: d = data/measurements.csv
+code: d.groupby('menWomen')[['maxWidthFront','minWidthFront']].mean().round(2)
+output:
+          maxWidthFront  minWidthFront
+menWomen                              
+men               16.37          13.36
+women             15.18          12.26
+
+[shallowest-pairs]
+claim: The four shallowest front pockets are all women's pairs: Guess Power Stretch Skinny and J. Crew 8" Tooth Pick at 11.5 in, then Calvin Klein Midrise Skinny and Old Navy Original Boot Cut at 12.0 in.
+tables: d = data/measurements.csv
+code: d.nsmallest(4, 'maxHeightFront')[['brand','name','menWomen','maxHeightFront']]
+output:
+           brand                  name menWomen  maxHeightFront
+18         Guess  Power Stretch Skinny    women            11.5
+29       J. Crew         8" Tooth Pick    women            11.5
+6   Calvin Klein        Midrise Skinny    women            12.0
+26      Old Navy     Original Boot Cut    women            12.0
+
+[deepest-pairs]
+claim: The three deepest front pockets are men's: Wrangler Regular Fit at 28.0 in, Wrangler Slim Fit at 27.5 in and True Religion Geno Slim at 26.2 in.
+tables: d = data/measurements.csv
+code: d.nlargest(3, 'maxHeightFront')[['brand','name','menWomen','maxHeightFront']]
+output:
+            brand         name menWomen  maxHeightFront
+75       Wrangler  Regular Fit      men            28.0
+74       Wrangler     Slim Fit      men            27.5
+56  True Religion    Geno Slim      men            26.2
+
+[cutout-counts]
+claim: Six men's pairs and three women's pairs are flagged with a pocket cutout in the data.
+tables: d = data/measurements.csv
+code: d.groupby(['menWomen','cutout']).size()
+output:
+menWomen  cutout
+men       False     34
+          True       6
+women     False     37
+          True       3
+
+[max-below-min]
+claim: For 14 pairs the recorded maximum front height is smaller than the recorded minimum front height.
+tables: d = data/measurements.csv
+code: (d.maxHeightFront < d.minHeightFront).sum()
+output:
+14

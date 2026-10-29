@@ -1,0 +1,3225 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/convos.csv",
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/people.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 659,
+     "left": 249,
+     "w": 942,
+     "h": 401,
+     "sig": "480abf14"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 209,
+     "left": 249,
+     "w": 942,
+     "h": 401,
+     "sig": "480abf14"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -241,
+     "left": 249,
+     "w": 942,
+     "h": 401,
+     "sig": "480abf14"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 473,
+     "left": 249,
+     "w": 942,
+     "h": 120,
+     "sig": "421a5259"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 23,
+     "left": 249,
+     "w": 942,
+     "h": 120,
+     "sig": "421a5259"
+    },
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 655,
+     "left": 249,
+     "w": 942,
+     "h": 325,
+     "sig": "1bd7da0c"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 2250,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": 205,
+     "left": 249,
+     "w": 942,
+     "h": 325,
+     "sig": "1bd7da0c"
+    }
+   ]
+  },
+  {
+   "file": "frames/06.jpg",
+   "scroll_y": 2700,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 3,
+     "kind": "svg",
+     "top": -245,
+     "left": 249,
+     "w": 942,
+     "h": 325,
+     "sig": "1bd7da0c"
+    }
+   ]
+  },
+  {
+   "file": "frames/07.jpg",
+   "scroll_y": 3150,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 495,
+     "left": 249,
+     "w": 942,
+     "h": 243,
+     "sig": "4c9ac7ea"
+    },
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": 857,
+     "left": 249,
+     "w": 427,
+     "h": 184,
+     "sig": "c66a1a0"
+    }
+   ]
+  },
+  {
+   "file": "frames/08.jpg",
+   "scroll_y": 3600,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 4,
+     "kind": "svg",
+     "top": 45,
+     "left": 249,
+     "w": 942,
+     "h": 243,
+     "sig": "4c9ac7ea"
+    },
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": 407,
+     "left": 249,
+     "w": 427,
+     "h": 184,
+     "sig": "c66a1a0"
+    }
+   ]
+  },
+  {
+   "file": "frames/09.jpg",
+   "scroll_y": 4050,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 5,
+     "kind": "svg",
+     "top": -43,
+     "left": 249,
+     "w": 427,
+     "h": 184,
+     "sig": "c66a1a0"
+    }
+   ]
+  },
+  {
+   "file": "frames/10.jpg",
+   "scroll_y": 4500,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": 490,
+     "left": 249,
+     "w": 942,
+     "h": 423,
+     "sig": "b5f56604"
+    }
+   ]
+  },
+  {
+   "file": "frames/11.jpg",
+   "scroll_y": 4950,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": 40,
+     "left": 249,
+     "w": 942,
+     "h": 423,
+     "sig": "b5f56604"
+    },
+    {
+     "id": 7,
+     "kind": "svg",
+     "top": 768,
+     "left": 249,
+     "w": 942,
+     "h": 301,
+     "sig": "f32e0d9"
+    }
+   ]
+  },
+  {
+   "file": "frames/12.jpg",
+   "scroll_y": 5400,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 6,
+     "kind": "svg",
+     "top": -410,
+     "left": 249,
+     "w": 942,
+     "h": 423,
+     "sig": "b5f56604"
+    },
+    {
+     "id": 7,
+     "kind": "svg",
+     "top": 318,
+     "left": 249,
+     "w": 942,
+     "h": 301,
+     "sig": "f32e0d9"
+    }
+   ]
+  },
+  {
+   "file": "frames/13.jpg",
+   "scroll_y": 5850,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 7,
+     "kind": "svg",
+     "top": -132,
+     "left": 249,
+     "w": 942,
+     "h": 301,
+     "sig": "f32e0d9"
+    },
+    {
+     "id": 8,
+     "kind": "svg",
+     "top": 646,
+     "left": 249,
+     "w": 427,
+     "h": 218,
+     "sig": "182ddbcf"
+    },
+    {
+     "id": 9,
+     "kind": "svg",
+     "top": 646,
+     "left": 764,
+     "w": 427,
+     "h": 245,
+     "sig": "51655217"
+    }
+   ]
+  },
+  {
+   "file": "frames/14.jpg",
+   "scroll_y": 6300,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 8,
+     "kind": "svg",
+     "top": 196,
+     "left": 249,
+     "w": 427,
+     "h": 218,
+     "sig": "182ddbcf"
+    },
+    {
+     "id": 9,
+     "kind": "svg",
+     "top": 196,
+     "left": 764,
+     "w": 427,
+     "h": 245,
+     "sig": "51655217"
+    }
+   ]
+  },
+  {
+   "file": "frames/15.jpg",
+   "scroll_y": 6750,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 10,
+     "kind": "svg",
+     "top": 709,
+     "left": 249,
+     "w": 942,
+     "h": 232,
+     "sig": "7a9ff9b2"
+    }
+   ]
+  },
+  {
+   "file": "frames/16.jpg",
+   "scroll_y": 7200,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 10,
+     "kind": "svg",
+     "top": 259,
+     "left": 249,
+     "w": 942,
+     "h": 232,
+     "sig": "7a9ff9b2"
+    }
+   ]
+  },
+  {
+   "file": "frames/17.jpg",
+   "scroll_y": 7525,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 10,
+     "kind": "svg",
+     "top": -66,
+     "left": 249,
+     "w": 942,
+     "h": 232,
+     "sig": "7a9ff9b2"
+    }
+   ]
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    942,
+    401
+   ],
+   "frames": [
+    1,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    942,
+    120
+   ],
+   "frames": [
+    3,
+    4
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 3,
+   "kind": "svg",
+   "size": [
+    942,
+    325
+   ],
+   "frames": [
+    4,
+    6
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 4,
+   "kind": "svg",
+   "size": [
+    942,
+    243
+   ],
+   "frames": [
+    7,
+    8
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 5,
+   "kind": "svg",
+   "size": [
+    427,
+    184
+   ],
+   "frames": [
+    7,
+    9
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 6,
+   "kind": "svg",
+   "size": [
+    942,
+    423
+   ],
+   "frames": [
+    10,
+    12
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 7,
+   "kind": "svg",
+   "size": [
+    942,
+    301
+   ],
+   "frames": [
+    11,
+    13
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 8,
+   "kind": "svg",
+   "size": [
+    427,
+    218
+   ],
+   "frames": [
+    13,
+    14
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 9,
+   "kind": "svg",
+   "size": [
+    427,
+    245
+   ],
+   "frames": [
+    13,
+    14
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 10,
+   "kind": "svg",
+   "size": [
+    942,
+    232
+   ],
+   "frames": [
+    15,
+    17
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 64,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A behavioural study · 30-minute video conversations between strangers"
+  },
+  {
+   "tag": "h1",
+   "y": 105,
+   "x": 222,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Thirty Minutes With a Stranger"
+  },
+  {
+   "tag": "p",
+   "y": 256,
+   "x": 222,
+   "w": 782,
+   "in_svg": false,
+   "hidden": false,
+   "text": "People who had never met were paired for half an hour of video conversation. Each of them rated their mood before the call, at the start, in the middle and at the end, then rated the person on the other side of the screen. Across 1,656 conversations the mood climbs from the first minute to the last — and people consistently walk away believing they were liked less than they actually were."
+  },
+  {
+   "tag": "span",
+   "y": 504,
+   "x": 222,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,656"
+  },
+  {
+   "tag": "span",
+   "y": 504,
+   "x": 471,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,456"
+  },
+  {
+   "tag": "span",
+   "y": 504,
+   "x": 720,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,312"
+  },
+  {
+   "tag": "span",
+   "y": 504,
+   "x": 969,
+   "w": 225,
+   "in_svg": false,
+   "hidden": false,
+   "text": "82.6%"
+  },
+  {
+   "tag": "span",
+   "y": 550,
+   "x": 222,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "conversations between two strangers"
+  },
+  {
+   "tag": "span",
+   "y": 550,
+   "x": 471,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people, some in several conversations"
+  },
+  {
+   "tag": "span",
+   "y": 550,
+   "x": 720,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "sets of ratings, one per person per call"
+  },
+  {
+   "tag": "span",
+   "y": 550,
+   "x": 969,
+   "w": 225,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ended in a better mood than they started"
+  },
+  {
+   "tag": "div",
+   "y": 675,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 · The shape of the half hour"
+  },
+  {
+   "tag": "h2",
+   "y": 706,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A conversation that keeps getting better"
+  },
+  {
+   "tag": "p",
+   "y": 808,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady climb that is still going when the call ends. Averaged over every conversation, positive affect sits at 6.10 before the call, edges up to 6.16 as the conversation opens, reaches 6.93 at the halfway mark and 7.38 at the close."
+  },
+  {
+   "tag": "p",
+   "y": 940,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arousal — how energised people feel rather than how positive — follows the same ramp from a lower base: 5.32 beforehand, then 5.67 , 6.40 and 6.70 . People do not merely feel better after talking to a stranger; they wake up during it."
+  },
+  {
+   "tag": "span",
+   "y": 1082,
+   "x": 249,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Positive affect"
+  },
+  {
+   "tag": "span",
+   "y": 1082,
+   "x": 377,
+   "w": 65,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arousal"
+  },
+  {
+   "tag": "span",
+   "y": 1082,
+   "x": 1054,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean rating, 1–9 scale"
+  },
+  {
+   "tag": "text",
+   "y": 1131,
+   "x": 282,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "8"
+  },
+  {
+   "tag": "text",
+   "y": 1174,
+   "x": 1067,
+   "w": 27,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.38"
+  },
+  {
+   "tag": "text",
+   "y": 1220,
+   "x": 807,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.93"
+  },
+  {
+   "tag": "text",
+   "y": 1234,
+   "x": 282,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7"
+  },
+  {
+   "tag": "text",
+   "y": 1281,
+   "x": 1066,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.70"
+  },
+  {
+   "tag": "text",
+   "y": 1282,
+   "x": 236,
+   "w": 62,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Mean rating"
+  },
+  {
+   "tag": "text",
+   "y": 1298,
+   "x": 549,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.16"
+  },
+  {
+   "tag": "text",
+   "y": 1305,
+   "x": 290,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.10"
+  },
+  {
+   "tag": "text",
+   "y": 1312,
+   "x": 806,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.40"
+  },
+  {
+   "tag": "text",
+   "y": 1336,
+   "x": 282,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6"
+  },
+  {
+   "tag": "text",
+   "y": 1387,
+   "x": 548,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.67"
+  },
+  {
+   "tag": "text",
+   "y": 1422,
+   "x": 289,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.32"
+  },
+  {
+   "tag": "text",
+   "y": 1438,
+   "x": 282,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5"
+  },
+  {
+   "tag": "text",
+   "y": 1461,
+   "x": 259,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Before the call"
+  },
+  {
+   "tag": "text",
+   "y": 1461,
+   "x": 548,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Start"
+  },
+  {
+   "tag": "text",
+   "y": 1461,
+   "x": 801,
+   "w": 42,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Middle"
+  },
+  {
+   "tag": "text",
+   "y": 1461,
+   "x": 1069,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "End"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1524,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean of both partners' ratings at four points in the call. Only conversations with complete post-call ratings are averaged (n = 1,603 of 1,656)."
+  },
+  {
+   "tag": "p",
+   "y": 1597,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The rise is not driven by a few ecstatic outliers. Of the conversations with both a before and an after rating, 82.6% finish higher than they started, 9.4% finish lower and 8.0% end exactly where they began. The typical conversation gains 1.29 points of affect, with a median gain of 1.50 . Individual conversations range from a slide of 4.50 points to a leap of 7.00 ."
+  },
+  {
+   "tag": "span",
+   "y": 1796,
+   "x": 249,
+   "w": 141,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Rose during the call"
+  },
+  {
+   "tag": "span",
+   "y": 1796,
+   "x": 412,
+   "w": 90,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Unchanged"
+  },
+  {
+   "tag": "span",
+   "y": 1796,
+   "x": 524,
+   "w": 131,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Fell during the call"
+  },
+  {
+   "tag": "text",
+   "y": 1839,
+   "x": 623,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Rose"
+  },
+  {
+   "tag": "text",
+   "y": 1839,
+   "x": 1031,
+   "w": 68,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Unchanged"
+  },
+  {
+   "tag": "text",
+   "y": 1839,
+   "x": 1137,
+   "w": 20,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Fell"
+  },
+  {
+   "tag": "text",
+   "y": 1878,
+   "x": 614,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "82.6%"
+  },
+  {
+   "tag": "text",
+   "y": 1878,
+   "x": 1045,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "8.0%"
+  },
+  {
+   "tag": "text",
+   "y": 1878,
+   "x": 1127,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9.4%"
+  },
+  {
+   "tag": "figcaption",
+   "y": 1957,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Change in each pair's average affect from before the call to after it."
+  },
+  {
+   "tag": "div",
+   "y": 2096,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 · Who gains the most"
+  },
+  {
+   "tag": "h2",
+   "y": 2126,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The people who arrive low are the ones who move"
+  },
+  {
+   "tag": "p",
+   "y": 2229,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Split the conversations by how the pair felt before the call and the pattern is sharp. Pairs who started below 5 on affect gained 2.32 points, climbing from 4.56 to 6.88 . Pairs who were already above 7 gained only 0.17 , drifting from 7.73 to 7.91 . The two ends of the scale converge: whatever mood you bring into the call, you tend to leave it close to a 7."
+  },
+  {
+   "tag": "span",
+   "y": 2428,
+   "x": 249,
+   "w": 148,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect before the call"
+  },
+  {
+   "tag": "span",
+   "y": 2428,
+   "x": 419,
+   "w": 136,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect after the call"
+  },
+  {
+   "tag": "span",
+   "y": 2428,
+   "x": 1028,
+   "w": 163,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Labels show points gained"
+  },
+  {
+   "tag": "text",
+   "y": 2495,
+   "x": 328,
+   "w": 54,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Below 5"
+  },
+  {
+   "tag": "text",
+   "y": 2495,
+   "x": 821,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+2.32"
+  },
+  {
+   "tag": "text",
+   "y": 2513,
+   "x": 821,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "to 6.88"
+  },
+  {
+   "tag": "text",
+   "y": 2515,
+   "x": 339,
+   "w": 43,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 334"
+  },
+  {
+   "tag": "text",
+   "y": 2557,
+   "x": 343,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5 to 6"
+  },
+  {
+   "tag": "text",
+   "y": 2557,
+   "x": 879,
+   "w": 34,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+1.51"
+  },
+  {
+   "tag": "text",
+   "y": 2575,
+   "x": 879,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "to 7.30"
+  },
+  {
+   "tag": "text",
+   "y": 2577,
+   "x": 339,
+   "w": 42,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 547"
+  },
+  {
+   "tag": "text",
+   "y": 2619,
+   "x": 344,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6 to 7"
+  },
+  {
+   "tag": "text",
+   "y": 2619,
+   "x": 919,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.87"
+  },
+  {
+   "tag": "text",
+   "y": 2637,
+   "x": 919,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "to 7.58"
+  },
+  {
+   "tag": "text",
+   "y": 2639,
+   "x": 339,
+   "w": 42,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 566"
+  },
+  {
+   "tag": "text",
+   "y": 2681,
+   "x": 326,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Above 7"
+  },
+  {
+   "tag": "text",
+   "y": 2681,
+   "x": 965,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.17"
+  },
+  {
+   "tag": "text",
+   "y": 2699,
+   "x": 965,
+   "w": 34,
+   "in_svg": true,
+   "hidden": false,
+   "text": "to 7.91"
+  },
+  {
+   "tag": "text",
+   "y": 2701,
+   "x": 339,
+   "w": 42,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 209"
+  },
+  {
+   "tag": "text",
+   "y": 2733,
+   "x": 395,
+   "w": 8,
+   "in_svg": true,
+   "hidden": false,
+   "text": "45678"
+  },
+  {
+   "tag": "figcaption",
+   "y": 2794,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pairs grouped by their mean pre-call affect. Hollow markers are the group mean before the call, filled markers the mean afterwards."
+  },
+  {
+   "tag": "th",
+   "y": 2867,
+   "x": 222,
+   "w": 355,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pre-call affect"
+  },
+  {
+   "tag": "th",
+   "y": 2867,
+   "x": 577,
+   "w": 147,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pairs"
+  },
+  {
+   "tag": "th",
+   "y": 2867,
+   "x": 724,
+   "w": 179,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Before"
+  },
+  {
+   "tag": "th",
+   "y": 2867,
+   "x": 903,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "After"
+  },
+  {
+   "tag": "th",
+   "y": 2867,
+   "x": 1060,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gain"
+  },
+  {
+   "tag": "td",
+   "y": 2904,
+   "x": 222,
+   "w": 355,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Below 5"
+  },
+  {
+   "tag": "td",
+   "y": 2904,
+   "x": 577,
+   "w": 147,
+   "in_svg": false,
+   "hidden": false,
+   "text": "334"
+  },
+  {
+   "tag": "td",
+   "y": 2904,
+   "x": 724,
+   "w": 179,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.56"
+  },
+  {
+   "tag": "td",
+   "y": 2904,
+   "x": 903,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.88"
+  },
+  {
+   "tag": "td",
+   "y": 2904,
+   "x": 1060,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+2.32"
+  },
+  {
+   "tag": "td",
+   "y": 2947,
+   "x": 222,
+   "w": 355,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5 to 6"
+  },
+  {
+   "tag": "td",
+   "y": 2947,
+   "x": 577,
+   "w": 147,
+   "in_svg": false,
+   "hidden": false,
+   "text": "547"
+  },
+  {
+   "tag": "td",
+   "y": 2947,
+   "x": 724,
+   "w": 179,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.79"
+  },
+  {
+   "tag": "td",
+   "y": 2947,
+   "x": 903,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.30"
+  },
+  {
+   "tag": "td",
+   "y": 2947,
+   "x": 1060,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.51"
+  },
+  {
+   "tag": "td",
+   "y": 2990,
+   "x": 222,
+   "w": 355,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6 to 7"
+  },
+  {
+   "tag": "td",
+   "y": 2990,
+   "x": 577,
+   "w": 147,
+   "in_svg": false,
+   "hidden": false,
+   "text": "566"
+  },
+  {
+   "tag": "td",
+   "y": 2990,
+   "x": 724,
+   "w": 179,
+   "in_svg": false,
+   "hidden": false,
+   "text": "6.71"
+  },
+  {
+   "tag": "td",
+   "y": 2990,
+   "x": 903,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.58"
+  },
+  {
+   "tag": "td",
+   "y": 2990,
+   "x": 1060,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.87"
+  },
+  {
+   "tag": "td",
+   "y": 3034,
+   "x": 222,
+   "w": 355,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Above 7"
+  },
+  {
+   "tag": "td",
+   "y": 3034,
+   "x": 577,
+   "w": 147,
+   "in_svg": false,
+   "hidden": false,
+   "text": "209"
+  },
+  {
+   "tag": "td",
+   "y": 3034,
+   "x": 724,
+   "w": 179,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.73"
+  },
+  {
+   "tag": "td",
+   "y": 3034,
+   "x": 903,
+   "w": 157,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.91"
+  },
+  {
+   "tag": "td",
+   "y": 3034,
+   "x": 1060,
+   "w": 158,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.17"
+  },
+  {
+   "tag": "div",
+   "y": 3168,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 · What each person thought of the other"
+  },
+  {
+   "tag": "h2",
+   "y": 3198,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Everyone likes their partner more than they think they are liked"
+  },
+  {
+   "tag": "p",
+   "y": 3342,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "After the call each person answered two symmetric questions: how much do you like this person, and how much do you think this person likes you? On a 1-to-7 scale, people rated their own liking at 5.99 but expected only 5.35 in return. The expectation was wrong: the partner's own answer, averaged over the same pairs, was also 5.99 ."
+  },
+  {
+   "tag": "p",
+   "y": 3502,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "So the room is full of mutual warmth that neither side registers. Measured person by person against what the partner actually reported, the gap averages 0.64 points, with a median of 1.00 and a range from −6 to +6 across 3,206 people."
+  },
+  {
+   "tag": "text",
+   "y": 3668,
+   "x": 988,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.00"
+  },
+  {
+   "tag": "text",
+   "y": 3669,
+   "x": 453,
+   "w": 109,
+   "in_svg": true,
+   "hidden": false,
+   "text": "I like my partner"
+  },
+  {
+   "tag": "text",
+   "y": 3689,
+   "x": 418,
+   "w": 143,
+   "in_svg": true,
+   "hidden": false,
+   "text": "what people report feeling"
+  },
+  {
+   "tag": "text",
+   "y": 3734,
+   "x": 988,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.00"
+  },
+  {
+   "tag": "text",
+   "y": 3735,
+   "x": 428,
+   "w": 134,
+   "in_svg": true,
+   "hidden": false,
+   "text": "My partner likes me"
+  },
+  {
+   "tag": "text",
+   "y": 3755,
+   "x": 384,
+   "w": 178,
+   "in_svg": true,
+   "hidden": false,
+   "text": "what the partner actually reports"
+  },
+  {
+   "tag": "text",
+   "y": 3800,
+   "x": 937,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.35"
+  },
+  {
+   "tag": "text",
+   "y": 3801,
+   "x": 384,
+   "w": 178,
+   "in_svg": true,
+   "hidden": false,
+   "text": "I think my partner likes me"
+  },
+  {
+   "tag": "text",
+   "y": 3821,
+   "x": 406,
+   "w": 156,
+   "in_svg": true,
+   "hidden": false,
+   "text": "what people expect in return"
+  },
+  {
+   "tag": "text",
+   "y": 3843,
+   "x": 577,
+   "w": 5,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1234567"
+  },
+  {
+   "tag": "figcaption",
+   "y": 3901,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean ratings on the 1–7 liking scale, across all 3,312 person-ratings."
+  },
+  {
+   "tag": "p",
+   "y": 4018,
+   "x": 760,
+   "w": 458,
+   "in_svg": false,
+   "hidden": false,
+   "text": "54.9% of people underestimate how much their partner likes them. Only 18.3% overestimate, and 26.8% get it exactly right."
+  },
+  {
+   "tag": "text",
+   "y": 4040,
+   "x": 287,
+   "w": 79,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Underestimate"
+  },
+  {
+   "tag": "text",
+   "y": 4040,
+   "x": 599,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "54.9%"
+  },
+  {
+   "tag": "text",
+   "y": 4087,
+   "x": 299,
+   "w": 67,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Exactly right"
+  },
+  {
+   "tag": "text",
+   "y": 4087,
+   "x": 490,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "26.8%"
+  },
+  {
+   "tag": "text",
+   "y": 4134,
+   "x": 294,
+   "w": 71,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Overestimate"
+  },
+  {
+   "tag": "text",
+   "y": 4134,
+   "x": 457,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "18.3%"
+  },
+  {
+   "tag": "p",
+   "y": 4170,
+   "x": 737,
+   "w": 481,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The asymmetry is systematic rather than random noise: if people were merely guessing badly, underestimates and overestimates would be equally common. Instead, the error leans heavily towards assuming less affection than was actually there."
+  },
+  {
+   "tag": "figcaption",
+   "y": 4205,
+   "x": 249,
+   "w": 427,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How perceived liking compares with what the partner actually reported."
+  },
+  {
+   "tag": "p",
+   "y": 4331,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The same caution shows up in how people think they were seen. They rate their partner more intelligent ( 7.68 ) and kinder ( 7.98 ) than they believe the partner rates them ( 7.06 and 7.43 ): they hand out generous judgements and assume a stingier verdict comes back."
+  },
+  {
+   "tag": "div",
+   "y": 4527,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "04 · What actually predicts a good conversation"
+  },
+  {
+   "tag": "h2",
+   "y": 4558,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Shared reality, not shared background"
+  },
+  {
+   "tag": "p",
+   "y": 4661,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pairs differed in sex, race, age, education and politics, and the study recorded each difference. None of it predicts much. The strongest correlate of how enjoyable a conversation felt is a demographic difference that reaches only 0.085 in absolute size (education). Politics sits at −0.065 , race at −0.050 , sex at 0.028 ."
+  },
+  {
+   "tag": "p",
+   "y": 4792,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "What does predict it is whether the two people felt they were experiencing the same thing. Shared reality correlates 0.570 with enjoyment and 0.532 with liking the partner — an order of magnitude larger than any background difference. On average pairs rated shared reality 4.11 on a 0-to-6 scale."
+  },
+  {
+   "tag": "span",
+   "y": 4963,
+   "x": 249,
+   "w": 184,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Correlation with enjoyment"
+  },
+  {
+   "tag": "span",
+   "y": 4963,
+   "x": 455,
+   "w": 224,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Correlation with liking the partner"
+  },
+  {
+   "tag": "text",
+   "y": 5027,
+   "x": 1074,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.570"
+  },
+  {
+   "tag": "text",
+   "y": 5033,
+   "x": 334,
+   "w": 186,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Shared reality (pair average)"
+  },
+  {
+   "tag": "text",
+   "y": 5043,
+   "x": 1047,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.532"
+  },
+  {
+   "tag": "text",
+   "y": 5083,
+   "x": 721,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.085"
+  },
+  {
+   "tag": "text",
+   "y": 5089,
+   "x": 411,
+   "w": 108,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Education differs"
+  },
+  {
+   "tag": "text",
+   "y": 5099,
+   "x": 713,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.074"
+  },
+  {
+   "tag": "text",
+   "y": 5139,
+   "x": 689,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.041"
+  },
+  {
+   "tag": "text",
+   "y": 5145,
+   "x": 450,
+   "w": 70,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Age differs"
+  },
+  {
+   "tag": "text",
+   "y": 5155,
+   "x": 685,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.036"
+  },
+  {
+   "tag": "text",
+   "y": 5195,
+   "x": 679,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.028"
+  },
+  {
+   "tag": "text",
+   "y": 5201,
+   "x": 451,
+   "w": 68,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Sex differs"
+  },
+  {
+   "tag": "text",
+   "y": 5211,
+   "x": 692,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.046"
+  },
+  {
+   "tag": "text",
+   "y": 5251,
+   "x": 623,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "-0.050"
+  },
+  {
+   "tag": "text",
+   "y": 5257,
+   "x": 443,
+   "w": 76,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Race differs"
+  },
+  {
+   "tag": "text",
+   "y": 5267,
+   "x": 630,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "-0.040"
+  },
+  {
+   "tag": "text",
+   "y": 5308,
+   "x": 612,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "-0.065"
+  },
+  {
+   "tag": "text",
+   "y": 5314,
+   "x": 429,
+   "w": 90,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Politics differs"
+  },
+  {
+   "tag": "text",
+   "y": 5324,
+   "x": 609,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "-0.069"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 566,
+   "w": 19,
+   "in_svg": true,
+   "hidden": false,
+   "text": "-0.1"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 640,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.0"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 715,
+   "w": 14,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.1"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 786,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.2"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 859,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.3"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 932,
+   "w": 18,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.4"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 1005,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.5"
+  },
+  {
+   "tag": "text",
+   "y": 5360,
+   "x": 1078,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.6"
+  },
+  {
+   "tag": "figcaption",
+   "y": 5427,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pearson correlations across 1,603 conversations. Differences between partners (politics, age, sex, race, education) are shown alongside the pair's average sense of shared reality."
+  },
+  {
+   "tag": "p",
+   "y": 5520,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The same story survives if you rank conversations by how enjoyable people found them. The least enjoyable fifth (mean enjoyment 5.76 ) gained just 0.40 points of affect over the call. The most enjoyable fifth (mean 9.00 ) gained 2.25 . Good conversations are not just pleasant — they are the ones that change how people feel."
+  },
+  {
+   "tag": "span",
+   "y": 5691,
+   "x": 249,
+   "w": 229,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean affect gained during the call"
+  },
+  {
+   "tag": "text",
+   "y": 5741,
+   "x": 284,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "2.5"
+  },
+  {
+   "tag": "text",
+   "y": 5744,
+   "x": 1056,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+2.25"
+  },
+  {
+   "tag": "text",
+   "y": 5774,
+   "x": 888,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+1.89"
+  },
+  {
+   "tag": "text",
+   "y": 5782,
+   "x": 284,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "2.0"
+  },
+  {
+   "tag": "text",
+   "y": 5801,
+   "x": 719,
+   "w": 37,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+1.57"
+  },
+  {
+   "tag": "text",
+   "y": 5823,
+   "x": 286,
+   "w": 15,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.5"
+  },
+  {
+   "tag": "text",
+   "y": 5833,
+   "x": 551,
+   "w": 34,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+1.18"
+  },
+  {
+   "tag": "text",
+   "y": 5840,
+   "x": 234,
+   "w": 70,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Points gained"
+  },
+  {
+   "tag": "text",
+   "y": 5865,
+   "x": 286,
+   "w": 15,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.0"
+  },
+  {
+   "tag": "text",
+   "y": 5897,
+   "x": 377,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "+0.40"
+  },
+  {
+   "tag": "text",
+   "y": 5906,
+   "x": 284,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.5"
+  },
+  {
+   "tag": "text",
+   "y": 5947,
+   "x": 284,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.0"
+  },
+  {
+   "tag": "text",
+   "y": 5963,
+   "x": 356,
+   "w": 83,
+   "in_svg": true,
+   "hidden": false,
+   "text": "enjoyment 5.76"
+  },
+  {
+   "tag": "text",
+   "y": 5963,
+   "x": 526,
+   "w": 83,
+   "in_svg": true,
+   "hidden": false,
+   "text": "enjoyment 7.26"
+  },
+  {
+   "tag": "text",
+   "y": 5963,
+   "x": 695,
+   "w": 85,
+   "in_svg": true,
+   "hidden": false,
+   "text": "enjoyment 8.00"
+  },
+  {
+   "tag": "text",
+   "y": 5963,
+   "x": 864,
+   "w": 84,
+   "in_svg": true,
+   "hidden": false,
+   "text": "enjoyment 8.50"
+  },
+  {
+   "tag": "text",
+   "y": 5963,
+   "x": 1034,
+   "w": 84,
+   "in_svg": true,
+   "hidden": false,
+   "text": "enjoyment 9.00"
+  },
+  {
+   "tag": "text",
+   "y": 5979,
+   "x": 378,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 390"
+  },
+  {
+   "tag": "text",
+   "y": 5979,
+   "x": 547,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 498"
+  },
+  {
+   "tag": "text",
+   "y": 5979,
+   "x": 717,
+   "w": 41,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 290"
+  },
+  {
+   "tag": "text",
+   "y": 5979,
+   "x": 886,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 258"
+  },
+  {
+   "tag": "text",
+   "y": 5979,
+   "x": 1057,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "n = 167"
+  },
+  {
+   "tag": "figcaption",
+   "y": 6032,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Conversations split into fifths by how enjoyable partners rated them."
+  },
+  {
+   "tag": "div",
+   "y": 6171,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "05 · The impression people leave"
+  },
+  {
+   "tag": "h2",
+   "y": 6201,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Kind, polite, trustworthy — and not remotely funny"
+  },
+  {
+   "tag": "p",
+   "y": 6304,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Partners rated each other on a set of traits on the same 1-to-9 scale, and the profile is lopsided. Warmth traits score high: kind 7.98 , polite 7.93 , trustworthy 7.51 . Humour sits far below at 4.72 — the one thing strangers are reliably willing to say their new acquaintance is not."
+  },
+  {
+   "tag": "span",
+   "y": 6469,
+   "x": 249,
+   "w": 141,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Partner's trait rating"
+  },
+  {
+   "tag": "span",
+   "y": 6469,
+   "x": 764,
+   "w": 109,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Worst moment"
+  },
+  {
+   "tag": "span",
+   "y": 6469,
+   "x": 895,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Overall"
+  },
+  {
+   "tag": "span",
+   "y": 6469,
+   "x": 979,
+   "w": 100,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Best moment"
+  },
+  {
+   "tag": "text",
+   "y": 6511,
+   "x": 796,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9"
+  },
+  {
+   "tag": "text",
+   "y": 6513,
+   "x": 596,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.98"
+  },
+  {
+   "tag": "text",
+   "y": 6514,
+   "x": 313,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Kind"
+  },
+  {
+   "tag": "text",
+   "y": 6531,
+   "x": 1095,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.83"
+  },
+  {
+   "tag": "text",
+   "y": 6546,
+   "x": 977,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.32"
+  },
+  {
+   "tag": "text",
+   "y": 6560,
+   "x": 594,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.93"
+  },
+  {
+   "tag": "text",
+   "y": 6561,
+   "x": 307,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Polite"
+  },
+  {
+   "tag": "text",
+   "y": 6570,
+   "x": 796,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7"
+  },
+  {
+   "tag": "text",
+   "y": 6591,
+   "x": 858,
+   "w": 28,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.80"
+  },
+  {
+   "tag": "text",
+   "y": 6607,
+   "x": 580,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.51"
+  },
+  {
+   "tag": "text",
+   "y": 6608,
+   "x": 271,
+   "w": 67,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Trustworthy"
+  },
+  {
+   "tag": "text",
+   "y": 6629,
+   "x": 796,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5"
+  },
+  {
+   "tag": "text",
+   "y": 6655,
+   "x": 485,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4.72"
+  },
+  {
+   "tag": "text",
+   "y": 6656,
+   "x": 304,
+   "w": 34,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Funny"
+  },
+  {
+   "tag": "text",
+   "y": 6687,
+   "x": 796,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "3"
+  },
+  {
+   "tag": "text",
+   "y": 6695,
+   "x": 347,
+   "w": 4,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13579"
+  },
+  {
+   "tag": "text",
+   "y": 6701,
+   "x": 857,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Worst"
+  },
+  {
+   "tag": "text",
+   "y": 6701,
+   "x": 972,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Overall"
+  },
+  {
+   "tag": "text",
+   "y": 6701,
+   "x": 1097,
+   "w": 23,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Best"
+  },
+  {
+   "tag": "figcaption",
+   "y": 6728,
+   "x": 249,
+   "w": 427,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean rating of the partner, 1–9 scale."
+  },
+  {
+   "tag": "figcaption",
+   "y": 6755,
+   "x": 764,
+   "w": 427,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average of the pair's worst, overall and best affect ratings."
+  },
+  {
+   "tag": "p",
+   "y": 6828,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "That the lows are rated far below the average is its own signal: the worst moment of a conversation averages 5.80 , the best 7.83 , and the overall impression 7.32 . Almost everyone has a dip; almost nobody lets it define the half hour."
+  },
+  {
+   "tag": "div",
+   "y": 6997,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "06 · Two people, one conversation"
+  },
+  {
+   "tag": "h2",
+   "y": 7027,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Same half hour, different reports"
+  },
+  {
+   "tag": "p",
+   "y": 7130,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Each conversation produces two independent accounts, and they do not match. On average the two partners' affect ratings differ by 1.36 points, their arousal ratings by 1.31 and their shared-reality ratings by 1.14 . Whatever a conversation is, it is not experienced the same way twice."
+  },
+  {
+   "tag": "p",
+   "y": 7262,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Who does the perceiving matters as well. Lonelier participants expected less liking from their partner — a correlation of −0.141 between loneliness and expected liking — while liking the partner just as much as anyone else ( −0.018 ). The deficit shows up in what they expect to receive, not in what they give."
+  },
+  {
+   "tag": "span",
+   "y": 7432,
+   "x": 249,
+   "w": 353,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average absolute difference between the two partners"
+  },
+  {
+   "tag": "text",
+   "y": 7484,
+   "x": 928,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.36"
+  },
+  {
+   "tag": "text",
+   "y": 7485,
+   "x": 385,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Affect"
+  },
+  {
+   "tag": "text",
+   "y": 7549,
+   "x": 911,
+   "w": 26,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.31"
+  },
+  {
+   "tag": "text",
+   "y": 7550,
+   "x": 375,
+   "w": 48,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Arousal"
+  },
+  {
+   "tag": "text",
+   "y": 7613,
+   "x": 851,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.14"
+  },
+  {
+   "tag": "text",
+   "y": 7614,
+   "x": 335,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Shared reality"
+  },
+  {
+   "tag": "text",
+   "y": 7665,
+   "x": 431,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.0"
+  },
+  {
+   "tag": "text",
+   "y": 7665,
+   "x": 606,
+   "w": 17,
+   "in_svg": true,
+   "hidden": false,
+   "text": "0.5"
+  },
+  {
+   "tag": "text",
+   "y": 7665,
+   "x": 783,
+   "w": 15,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.0"
+  },
+  {
+   "tag": "text",
+   "y": 7665,
+   "x": 958,
+   "w": 15,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1.5"
+  },
+  {
+   "tag": "text",
+   "y": 7677,
+   "x": 253,
+   "w": 32,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Points"
+  },
+  {
+   "tag": "figcaption",
+   "y": 7706,
+   "x": 249,
+   "w": 942,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean absolute gap between the two people's ratings of the same conversation."
+  },
+  {
+   "tag": "div",
+   "y": 7844,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Appendix"
+  },
+  {
+   "tag": "h2",
+   "y": 7875,
+   "x": 222,
+   "w": 432,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How these numbers were computed"
+  },
+  {
+   "tag": "p",
+   "y": 7977,
+   "x": 222,
+   "w": 708,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Two tables: data/convos.csv (one row per conversation, with pair-level averages and differences) and data/people.csv (one row per person per conversation, with that person's own ratings and background). Every figure on this page comes from the pandas expressions below, each evaluated directly against those files."
+  },
+  {
+   "tag": "summary",
+   "y": 8154,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15 findings and their code"
+  },
+  {
+   "tag": "div",
+   "y": 8191,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "affect-rises-across-conversation"
+  },
+  {
+   "tag": "p",
+   "y": 8214,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average positive affect rises steadily through the half hour, from 6.10 before the conversation to 6.16 at its start, 6.93 at the midpoint and 7.38 at its end."
+  },
+  {
+   "tag": "p",
+   "y": 8227,
+   "x": 190,
+   "w": 565,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data: 1,656 conversations among 1,456 participants, with 3,312 person-level rating forms. Post-call ratings are missing for 53 conversations, which are excluded from any comparison that needs them. Ratings of mood, traits and shared reality use 1–9 scales; the liking questions use 1–7. Effects reported here are descriptive associations, not causal claims."
+  },
+  {
+   "tag": "code",
+   "y": 8270,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['pre_affect_avg','begin_affect_avg','middle_affect_avg','end_affect_avg']].mean()"
+  },
+  {
+   "tag": "p",
+   "y": 8317,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 8369,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "arousal-rises-across-conversation"
+  },
+  {
+   "tag": "p",
+   "y": 8392,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Arousal climbs in the same way but from a lower starting point, 5.32 before the conversation, 5.67 at the start, 6.40 at the midpoint and 6.70 at the end."
+  },
+  {
+   "tag": "code",
+   "y": 8448,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['pre_arousal_avg','begin_arousal_avg','middle_arousal_avg','end_arousal_avg']].mean()"
+  },
+  {
+   "tag": "p",
+   "y": 8495,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 8547,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "most-pairs-end-happier"
+  },
+  {
+   "tag": "p",
+   "y": 8570,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Among pairs with both before and after ratings, 82.6% finish the conversation with higher average affect than they started with, 9.4% finish lower and 8.0% are unchanged."
+  },
+  {
+   "tag": "code",
+   "y": 8627,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "np.sign(convos.end_affect_avg - convos.pre_affect_avg).value_counts(normalize=True).round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 8673,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 8726,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "typical-gain-about-1-point-3"
+  },
+  {
+   "tag": "p",
+   "y": 8748,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The average pair gains 1.29 points of affect across the conversation, with a median gain of 1.50; gains run from -4.50 to 7.00."
+  },
+  {
+   "tag": "code",
+   "y": 8781,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "(convos.end_affect_avg - convos.pre_affect_avg).describe().round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 8827,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 8880,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "low-starters-gain-most"
+  },
+  {
+   "tag": "p",
+   "y": 8902,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pairs who started below 5 on affect gained 2.32 points and ended at 6.88, while pairs starting above 7 gained only 0.17 and ended at 7.91: everyone converges near 7."
+  },
+  {
+   "tag": "code",
+   "y": 8959,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos.assign(gain=lambda d: d.end_affect_avg - d.pre_affect_avg).groupby(pd.cut(convos.pre_affect_avg, [0,5,6,7,9]), observed=True).agg(n=('gain','size'), pre=('pre_affect_avg','mean'), end=('end_affect_avg','mean'), gain=('gain','mean')).round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 9024,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 9076,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "liking-gap-on-7-point-scale"
+  },
+  {
+   "tag": "p",
+   "y": 9099,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "On a 1-to-7 scale people rate how much they like their partner at 5.99 on average but think the partner likes them only 5.35."
+  },
+  {
+   "tag": "code",
+   "y": 9131,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people[['i_like_you','you_like_me']].agg(['mean','min','max']).round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 9178,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: people ← data/people.csv"
+  },
+  {
+   "tag": "div",
+   "y": 9230,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people-underestimate-being-liked"
+  },
+  {
+   "tag": "p",
+   "y": 9253,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Comparing each person with their actual partner, the perceived-liking gap averages 0.64 points (median 1.00) over 3,206 people and ranges from -6 to +6."
+  },
+  {
+   "tag": "code",
+   "y": 9310,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people.merge(people[['convo_id','user_id','i_like_you']].rename(columns={'user_id':'partner_id','i_like_you':'partner_likes_me'}), on=['convo_id','partner_id']).assign(gap=lambda d: d.partner_likes_me - d.you_like_me).gap.describe().round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 9375,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: people ← data/people.csv"
+  },
+  {
+   "tag": "div",
+   "y": 9427,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "half-underestimate-being-liked"
+  },
+  {
+   "tag": "p",
+   "y": 9450,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "54.9% of people think their partner likes them less than the partner actually reports, 26.8% get it exactly right and 18.3% think they are liked more than they are."
+  },
+  {
+   "tag": "code",
+   "y": 9506,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people.merge(people[['convo_id','user_id','i_like_you']].rename(columns={'user_id':'partner_id','i_like_you':'partner_likes_me'}), on=['convo_id','partner_id']).assign(gap=lambda d: d.partner_likes_me - d.you_like_me).gap.apply(np.sign).value_counts(normalize=True).round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 9590,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: people ← data/people.csv"
+  },
+  {
+   "tag": "div",
+   "y": 9643,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "shared-reality-beats-demographics"
+  },
+  {
+   "tag": "p",
+   "y": 9665,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Shared reality correlates with how enjoyable the conversation was at 0.570 and with liking the partner at 0.532, while no demographic difference (politics, age, sex, race, education) reaches 0.09 in absolute correlation with either."
+  },
+  {
+   "tag": "code",
+   "y": 9722,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['shared_reality_avg','politics_diff','age_diff','sex_diff','race_diff','edu_diff','how_enjoyable_avg','i_like_you_avg']].corr().loc[['shared_reality_avg','politics_diff','age_diff','sex_diff','race_diff','edu_diff'],['how_enjoyable_avg','i_like_you_avg']].round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 9806,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 9858,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "worst-moment-below-overall"
+  },
+  {
+   "tag": "p",
+   "y": 9881,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Partners' worst moment in the conversation averages 5.80 against a best moment of 7.83 and an overall rating of 7.32."
+  },
+  {
+   "tag": "code",
+   "y": 9913,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['worst_affect_avg','overall_affect_avg','best_affect_avg']].mean().round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 9960,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 10012,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "kind-but-not-funny"
+  },
+  {
+   "tag": "p",
+   "y": 10035,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Strangers come away rated kinder (7.98) and more polite (7.93) than trustworthy (7.51), and far less funny (4.72) than any of these."
+  },
+  {
+   "tag": "code",
+   "y": 10067,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['you_are_kind_avg','you_are_polite_avg','you_are_trustworthy_avg','you_are_funny_avg']].mean().round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 10114,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 10166,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "seen-as-less-than-you-see-them"
+  },
+  {
+   "tag": "p",
+   "y": 10189,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "People rate their partner more intelligent (7.68) and kinder (7.98) than they believe the partner rates them (7.06 and 7.43)."
+  },
+  {
+   "tag": "code",
+   "y": 10221,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['you_are_intelligent_avg','you_think_i_am_intelligent_avg','you_are_kind_avg','you_think_i_am_kind_avg']].mean().round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 10268,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 10320,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "enjoyable-pairs-gain-more"
+  },
+  {
+   "tag": "p",
+   "y": 10343,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The fifth of conversations rated least enjoyable (mean 5.76) gained 0.40 points of affect, while the fifth rated most enjoyable (mean 9.00) gained 2.25."
+  },
+  {
+   "tag": "code",
+   "y": 10399,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos.assign(gain=lambda d: d.end_affect_avg - d.pre_affect_avg).groupby(pd.qcut(convos.how_enjoyable_avg, 5), observed=True).agg(n=('gain','size'), enjoy=('how_enjoyable_avg','mean'), gain=('gain','mean')).round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 10464,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  },
+  {
+   "tag": "div",
+   "y": 10517,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "lonelier-expect-less-liking"
+  },
+  {
+   "tag": "p",
+   "y": 10539,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lonelier participants expect less liking from their partner (r = -0.141) while liking the partner just as much as anyone else (r = -0.018)."
+  },
+  {
+   "tag": "code",
+   "y": 10572,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "people[['my_loneliness','i_like_you','you_like_me']].corr().round(3)"
+  },
+  {
+   "tag": "p",
+   "y": 10618,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: people ← data/people.csv"
+  },
+  {
+   "tag": "div",
+   "y": 10671,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "partners-differ-in-their-reports"
+  },
+  {
+   "tag": "p",
+   "y": 10693,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The two people in a pair report the same conversation differently: their affect ratings differ by 1.36 points on average, their arousal by 1.31 and their shared reality by 1.14."
+  },
+  {
+   "tag": "code",
+   "y": 10750,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "convos[['affect_diff_avg','arousal_diff_avg','shared_reality_diff']].abs().mean().round(2)"
+  },
+  {
+   "tag": "p",
+   "y": 10797,
+   "x": 222,
+   "w": 996,
+   "in_svg": false,
+   "hidden": false,
+   "text": "reads: convos ← data/convos.csv"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 1109,
+   "x": 249,
+   "w": 942,
+   "h": 401,
+   "marks": 14,
+   "labels": 17
+  },
+  {
+   "kind": "svg",
+   "y": 1823,
+   "x": 249,
+   "w": 942,
+   "h": 120,
+   "marks": 3,
+   "labels": 6
+  },
+  {
+   "kind": "svg",
+   "y": 2455,
+   "x": 249,
+   "w": 942,
+   "h": 325,
+   "marks": 17,
+   "labels": 21
+  },
+  {
+   "kind": "svg",
+   "y": 3645,
+   "x": 249,
+   "w": 942,
+   "h": 243,
+   "marks": 10,
+   "labels": 16
+  },
+  {
+   "kind": "svg",
+   "y": 4007,
+   "x": 249,
+   "w": 427,
+   "h": 184,
+   "marks": 3,
+   "labels": 6
+  },
+  {
+   "kind": "svg",
+   "y": 4990,
+   "x": 249,
+   "w": 942,
+   "h": 423,
+   "marks": 32,
+   "labels": 26
+  },
+  {
+   "kind": "svg",
+   "y": 5718,
+   "x": 249,
+   "w": 942,
+   "h": 301,
+   "marks": 11,
+   "labels": 22
+  },
+  {
+   "kind": "svg",
+   "y": 6496,
+   "x": 249,
+   "w": 427,
+   "h": 218,
+   "marks": 9,
+   "labels": 13
+  },
+  {
+   "kind": "svg",
+   "y": 6496,
+   "x": 764,
+   "w": 427,
+   "h": 245,
+   "marks": 7,
+   "labels": 10
+  },
+  {
+   "kind": "svg",
+   "y": 7459,
+   "x": 249,
+   "w": 942,
+   "h": 232,
+   "marks": 7,
+   "labels": 11
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 8425
+}

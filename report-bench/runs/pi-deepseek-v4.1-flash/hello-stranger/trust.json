@@ -1,0 +1,105 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/index.html",
+ "facts": "submissions/pi-deepseek-v4.1-flash/hello-stranger/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "affect-rises-across-conversation",
+     "basis": "means: pre 6.101449, begin 6.157829, middle 6.933874, end 7.384279; rounded values match 6.10, 6.16, 6.93, 7.38 and increase steadily",
+     "verdict": "ok"
+    },
+    {
+     "id": "arousal-rises-across-conversation",
+     "basis": "means: pre 5.322162, begin 5.667810, middle 6.402059, end 6.695883; rounded values match 5.32, 5.67, 6.40, 6.70 and increase",
+     "verdict": "ok"
+    },
+    {
+     "id": "most-pairs-end-happier",
+     "basis": "normalized signs: 1.0=0.826, -1.0=0.094, 0.0=0.080; matches 82.6% higher, 9.4% lower, 8.0% unchanged",
+     "verdict": "ok"
+    },
+    {
+     "id": "typical-gain-about-1-point-3",
+     "basis": "describe: mean 1.29, median 1.50, min -4.50, max 7.00",
+     "verdict": "ok"
+    },
+    {
+     "id": "low-starters-gain-most",
+     "basis": "low bin output: n=334, pre=4.56, end=6.88, gain=2.32; high bin output: pre=7.73, end=7.91, gain=0.17",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-gap-on-7-point-scale",
+     "basis": "means: i_like_you=5.995, you_like_me=5.351; matches about 5.99 vs 5.35 on 1-7 scale",
+     "verdict": "ok"
+    },
+    {
+     "id": "people-underestimate-being-liked",
+     "basis": "gap describe: count=3206, mean=0.643, median=1.000, min=-6, max=6",
+     "verdict": "ok"
+    },
+    {
+     "id": "half-underestimate-being-liked",
+     "basis": "sign proportions: +1=0.549, 0=0.268, -1=0.183; matches 54.9%, 26.8%, 18.3%",
+     "verdict": "ok"
+    },
+    {
+     "id": "shared-reality-beats-demographics",
+     "basis": "correlations: shared_reality with enjoyable=0.570 and like=0.532; max abs demographic correlation is edu_diff 0.085 < 0.09",
+     "verdict": "ok"
+    },
+    {
+     "id": "worst-moment-below-overall",
+     "basis": "means: worst_affect_avg=5.80, overall_affect_avg=7.32, best_affect_avg=7.83",
+     "verdict": "ok"
+    },
+    {
+     "id": "kind-but-not-funny",
+     "basis": "means: kind=7.98, polite=7.93, trustworthy=7.51, funny=4.72",
+     "verdict": "ok"
+    },
+    {
+     "id": "seen-as-less-than-you-see-them",
+     "basis": "means: you_are_intelligent=7.68 vs you_think_i_am_intelligent=7.06; you_are_kind=7.98 vs you_think_i_am_kind=7.43",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyable-pairs-gain-more",
+     "basis": "lowest enjoy bin mean=5.76, gain=0.40; highest enjoy bin mean=9.00, gain=2.25",
+     "verdict": "ok"
+    },
+    {
+     "id": "lonelier-expect-less-liking",
+     "basis": "correlations with my_loneliness: you_like_me=-0.141, i_like_you=-0.018",
+     "verdict": "ok"
+    },
+    {
+     "id": "partners-differ-in-their-reports",
+     "basis": "mean absolute diffs: affect_diff_avg=1.36, arousal_diff_avg=1.31, shared_reality_diff=1.14",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"affect-rises-across-conversation\",\"basis\":\"means: pre 6.101449, begin 6.157829, middle 6.933874, end 7.384279; rounded values match 6.10, 6.16, 6.93, 7.38 and increase steadily\",\"verdict\":\"ok\"},{\"id\":\"arousal-rises-across-conversation\",\"basis\":\"means: pre 5.322162, begin 5.667810, middle 6.402059, end 6.695883; rounded values match 5.32, 5.67, 6.40, 6.70 and increase\",\"verdict\":\"ok\"},{\"id\":\"most-pairs-end-happier\",\"basis\":\"normalized signs: 1.0=0.826, -1.0=0.094, 0.0=0.080; matches 82.6% higher, 9.4% lower, 8.0% unchanged\",\"verdict\":\"ok\"},{\"id\":\"typical-gain-about-1-point-3\",\"basis\":\"describe: mean 1.29, median 1.50, min -4.50, max 7.00\",\"verdict\":\"ok\"},{\"id\":\"low-starters-gain-most\",\"basis\":\"low bin output: n=334, pre=4.56, end=6.88, gain=2.32; high bin output: pre=7.73, end=7.91, gain=0.17\",\"verdict\":\"ok\"},{\"id\":\"liking-gap-on-7-point-scale\",\"basis\":\"means: i_like_you=5.995, you_like_me=5.351; matches about 5.99 vs 5.35 on 1-7 scale\",\"verdict\":\"ok\"},{\"id\":\"people-underestimate-being-liked\",\"basis\":\"gap describe: count=3206, mean=0.643, median=1.000, min=-6, max=6\",\"verdict\":\"ok\"},{\"id\":\"half-underestimate-being-liked\",\"basis\":\"sign proportions: +1=0.549, 0=0.268, -1=0.183; matches 54.9%, 26.8%, 18.3%\",\"verdict\":\"ok\"},{\"id\":\"shared-reality-beats-demographics\",\"basis\":\"correlations: shared_reality with enjoyable=0.570 and like=0.532; max abs demographic correlation is edu_diff 0.085 < 0.09\",\"verdict\":\"ok\"},{\"id\":\"worst-moment-below-overall\",\"basis\":\"means: worst_affect_avg=5.80, overall_affect_avg=7.32, best_affect_avg=7.83\",\"verdict\":\"ok\"},{\"id\":\"kind-but-not-funny\",\"basis\":\"means: kind=7.98, polite=7.93, trustworthy=7.51, funny=4.72\",\"verdict\":\"ok\"},{\"id\":\"seen-as-less-than-you-see-them\",\"basis\":\"means: you_are_intelligent=7.68 vs you_think_i_am_intelligent=7.06; you_are_kind=7.98 vs you_think_i_am_kind=7.43\",\"verdict\":\"ok\"},{\"id\":\"enjoyable-pairs-gain-more\",\"basis\":\"lowest enjoy bin mean=5.76, gain=0.40; highest enjoy bin mean=9.00, gain=2.25\",\"verdict\":\"ok\"},{\"id\":\"lonelier-expect-less-liking\",\"basis\":\"correlations with my_loneliness: you_like_me=-0.141, i_like_you=-0.018\",\"verdict\":\"ok\"},{\"id\":\"partners-differ-in-their-reports\",\"basis\":\"mean absolute diffs: affect_diff_avg=1.36, arousal_diff_avg=1.31, shared_reality_diff=1.14\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 2862,
+    "completion_tokens": 11570,
+    "seconds": 82.4
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}
