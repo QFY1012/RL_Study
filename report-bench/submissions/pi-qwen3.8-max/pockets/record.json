@@ -1,0 +1,24 @@
+{
+ "task": "pockets",
+ "model": "qwen3.8-max",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "qwen3.8-max",
+   "effort": "high",
+   "seconds": 2697,
+   "steps": 53,
+   "tools": 57,
+   "nudged": 0,
+   "usage": {
+    "input": 1734080,
+    "output": 78695
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 2697
+}

@@ -6,15 +6,15 @@ DEPT = "data.department.map({'内科':'Internal medicine','儿科':'Pediatrics',
 facts = [
   {
     "id": "cohort-scope",
-    "claim": "The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.",
+    "claim": "The cleaned cohort contains 18,000 unique users—9,013 Control and 8,987 Treatment—across 5 departments over 42 dates from 2024-11-18 to 2024-12-29; 19 raw group labels need whitespace trimming.",
     "tables": {"data": "data/data.csv"},
-    "code": "(lambda d: pd.Series({'users': d.user_id.size, 'unique_users': d.user_id.nunique(), 'Control_users': d.group.str.strip().eq('对照组').sum(), 'Treatment_users': d.group.str.strip().eq('实验组').sum(), 'dates': pd.to_datetime(d.enter_date, format='mixed').nunique(), 'first_date': str(pd.to_datetime(d.enter_date, format='mixed').min().date()), 'last_date': str(pd.to_datetime(d.enter_date, format='mixed').max().date()), 'group_labels_with_extra_whitespace': d.group.ne(d.group.str.strip()).sum()}))(data)"
+    "code": "(lambda d: pd.Series({'users': d.user_id.size, 'unique_users': d.user_id.nunique(), 'Control_users': d.group.str.strip().eq('对照组').sum(), 'Treatment_users': d.group.str.strip().eq('实验组').sum(), 'departments': d.department.nunique(), 'dates': pd.to_datetime(d.enter_date, format='mixed').nunique(), 'first_date': str(pd.to_datetime(d.enter_date, format='mixed').min().date()), 'last_date': str(pd.to_datetime(d.enter_date, format='mixed').max().date()), 'group_labels_with_extra_whitespace': d.group.ne(d.group.str.strip()).sum()}))(data)"
   },
   {
     "id": "median-response-gain",
-    "claim": "Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively.",
+    "claim": "Treatment's median first response is 88.0 seconds versus 110.0 in Control: 22.0 seconds (20.0%) faster; the 90th percentiles are 177.0 and 234.0 seconds, respectively, a 57.0-second reduction.",
     "tables": {"data": "data/data.csv"},
-    "code": "(lambda x: pd.Series({'Control_median_seconds': x.loc['Control','median'], 'Treatment_median_seconds': x.loc['Treatment','median'], 'seconds_saved': x.loc['Control','median']-x.loc['Treatment','median'], 'reduction_pct': 100*(x.loc['Control','median']-x.loc['Treatment','median'])/x.loc['Control','median'], 'Control_p90_seconds': x.loc['Control','p90'], 'Treatment_p90_seconds': x.loc['Treatment','p90']}))(data.assign(arm=" + ARM + ").groupby('arm').first_response_seconds.agg(median='median', p90=lambda s: s.quantile(.9))).round(1)"
+    "code": "(lambda x: pd.Series({'Control_median_seconds': x.loc['Control','median'], 'Treatment_median_seconds': x.loc['Treatment','median'], 'seconds_saved': x.loc['Control','median']-x.loc['Treatment','median'], 'reduction_pct': 100*(x.loc['Control','median']-x.loc['Treatment','median'])/x.loc['Control','median'], 'Control_p90_seconds': x.loc['Control','p90'], 'Treatment_p90_seconds': x.loc['Treatment','p90'], 'p90_seconds_saved': x.loc['Control','p90']-x.loc['Treatment','p90']}))(data.assign(arm=" + ARM + ").groupby('arm').first_response_seconds.agg(median='median', p90=lambda s: s.quantile(.9))).round(1)"
   },
   {
     "id": "two-minute-response-share",
