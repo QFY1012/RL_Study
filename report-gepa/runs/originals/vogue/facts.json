@@ -1,0 +1,92 @@
+[
+  {
+    "id": "skin-lightness-summary",
+    "source": "The models’ skin tones are generally lighter, with a few outliers on either end.",
+    "claim": "Across 262 cover appearances, measured skin lightness has a mean of 0.66 and a median of 0.67, ranging from 0.21 to 0.88.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.l.agg(['count', 'mean', 'median', 'min', 'max'])"
+  },
+  {
+    "id": "darkest-and-lightest-models",
+    "source": "On the far left you can see Lupita at the darkest end of the spectrum. Actress Anne Hathaway is on the far right at the lightest.",
+    "claim": "Lupita Nyongo's 2018 cover has the lowest measured lightness (0.213) and Anne Hathaway's 2010 cover the highest (0.882).",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.loc[[f.l.idxmin(), f.l.idxmax()], ['date', 'model', 'l']]"
+  },
+  {
+    "id": "five-darkest-and-five-lightest",
+    "source": "Below, you’ll find the five darkest and lightest Vogue cover models of the past 19 years.",
+    "claim": "The five darkest cover appearances are Lupita Nyongo in 2018, 2015 and 2014, Michelle Obama in 2009 and Serena Williams in 2015; the five lightest are Anne Hathaway in 2010, Jessica Chastain in 2013, Claire Foy in 2018, Amy Adams in 2014 and Natalia Vodianova in 2004.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "pd.concat([f.nsmallest(5, 'l'), f.nlargest(5, 'l')]).assign(year=lambda d: pd.to_datetime(d['date']).dt.year)[['year', 'model', 'l']]"
+  },
+  {
+    "id": "lupita-share-of-five-darkest",
+    "source": "You may have noticed something curious about the five darkest models: three of the faces (a full 60%) are Lupita’s.",
+    "claim": "Lupita Nyongo accounts for three of the five darkest cover appearances, a 60% share.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.nsmallest(5, 'l').model.value_counts().to_frame('count').assign(share=lambda d: d['count'] / d['count'].sum(), total=lambda d: d['count'].sum())"
+  },
+  {
+    "id": "five-distinct-lightest-models",
+    "source": "Alternatively, on the light end of the spectrum, we see five distinct faces.",
+    "claim": "The five lightest cover appearances belong to five different models, each with one appearance among them.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.nlargest(5, 'l').groupby('model').size().to_frame('appearances').assign(total_models=lambda d: len(d), total_appearances=lambda d: d['appearances'].sum())"
+  },
+  {
+    "id": "repeat-models-share",
+    "source": "Sixty-two models (50% of our dataset) have been featured at least twice.",
+    "claim": "62 of the 123 distinct models, 50.4%, appear at least twice.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "(f.model.value_counts() >= 2).agg(['size', 'sum', 'mean'])"
+  },
+  {
+    "id": "rihanna-lightness-span",
+    "source": "Perhaps the best example of this is Rihanna. Across her five Vogue covers, her skin tone lightness spanned 40% of the lightness range that we found among cover models.",
+    "claim": "Rihanna's five covers span 0.27 in lightness, which is 40% of the 0.67 range across all cover models.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.groupby('model').l.agg(['count', 'min', 'max']).assign(span=lambda d: d['max'] - d['min'], overall_range=lambda d: f.l.max() - f.l.min(), share=lambda d: (d['max'] - d['min']) / (f.l.max() - f.l.min())).loc[['Rihanna']]"
+  },
+  {
+    "id": "lightness-spread-before-and-after-2005",
+    "source": "Between 2000 and 2005, there isn’t a lot of variance in how light the cover models appear. / After 2005 there’s a bit more spread.",
+    "claim": "Skin lightness has a standard deviation of 0.076 across the 81 cover appearances from 2000 through 2005, versus 0.115 across the 181 after 2005.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.assign(period=np.where(pd.to_datetime(f.date).dt.year <= 2005, '2000-2005', '2006-2018')).groupby('period').l.agg(['count', 'std', 'min', 'max'])"
+  },
+  {
+    "id": "lupita-tugs-trend-darker",
+    "source": "And part of it is just Lupita. Her four recent appearances are responsible for tugging the trend towards the left.",
+    "claim": "Lupita Nyongo's four cover appearances average 0.33 in lightness, against 0.66 for the other 258 appearances.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.groupby(f.model == 'Lupita Nyongo').l.agg(['count', 'mean'])"
+  },
+  {
+    "id": "repeat-model-cover-counts",
+    "source": "Gisele Bündchen (9 covers) Nicole Kidman (7) Sarah Jessica Parker (6)",
+    "claim": "Gisele Bundchen has the most Vogue covers of any model, with 9, followed by Nicole Kidman with 7; Sarah Jessica Parker and Charlize Theron each have 6.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "f.model.value_counts()"
+  }
+]

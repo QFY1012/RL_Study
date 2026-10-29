@@ -1,0 +1,62 @@
+{
+ "id": "spades",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 616,
+  "steps": 48,
+  "tools": 111,
+  "nudged": 0,
+  "usage": {
+   "input": 136618,
+   "output": 80126
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 6,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "joker-deuce-share",
+   "basis": "Yes=76, No=23",
+   "verdict": "ok"
+  },
+  {
+   "id": "joker-deuce-by-age",
+   "basis": ">54 Yes=85.7; 45-54 Yes=81.5; 35-44 Yes=79.2; 25-34 Yes=73.8; 18-24 Yes=68.4",
+   "verdict": "ok"
+  },
+  {
+   "id": "learned-under-18",
+   "basis": "computed percentage=67",
+   "verdict": "ok"
+  },
+  {
+   "id": "age-learned-shares",
+   "basis": "Under 12=29, 12-17=38, 18-24=22",
+   "verdict": "ok"
+  },
+  {
+   "id": "table-talk-outlawed",
+   "basis": "No=69.5",
+   "verdict": "ok"
+  },
+  {
+   "id": "taught-by-family-majority",
+   "basis": "Family=54.1",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "joker-deuce-by-age",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 5,
+ "skipped": 13
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "source": "In 2022, hit songs had 6 songwriters on average: 5 men and 1 woman.",
+    "why": "The 42 songs from 2022 in songs.csv average 5.31 songwriters (4.5 men and 0.76 women); the data does not give 6 songwriters on average, nor 5 men and 1 woman."
+  },
+  {
+    "source": "While half of the songs had a songwriting team of all men…",
+    "why": "Of the 42 songs from 2022, 20 are coded 'only men' (19 if only strictly all-male writer lists are counted), i.e. 48% (45%), not half; the story's count is not reproduced."
+  },
+  {
+    "source": "That one song - Kate Bush’s “Running Up that Hill (A Deal with God)” - was written in 1985",
+    "why": "The data has no original release or writing year; the song appears only with chart year 2022, so the 1985 writing date cannot be checked."
+  },
+  {
+    "source": "2,272 of 3,077 (74%) songs were written entirely by an all-men songwriting team.",
+    "why": "The file has 3,082 songs, of which 2,274 have strictly all-male writer lists (73.8%); only the 74% share is reproduced (see facts.json), not the stated counts of 2,272 of 3,077."
+  },
+  {
+    "source": "In 2022, Top 5 Billboard songs had 228 songwriting credits, but only 33 were women (14% of the total).",
+    "why": "The file has 223 songwriting credits for 2022, 32 of them women (14.3%); only the 14% share is reproduced (see facts.json), not the stated counts of 228 and 33."
+  },
+  {
+    "source": "Men had 192 songwriting credits for top 5 hits in 2022.",
+    "why": "The file has 189 men's songwriting credits for 2022."
+  },
+  {
+    "source": "3 songwriting credits went to non-binary writers in 2022.",
+    "why": "The file has 2 non-binary songwriting credits for 2022."
+  },
+  {
+    "source": "The 8,223 songwriting credits of Top 5 Hits, 1958-2022",
+    "why": "The file sums to 8,048 credits, and the chart's per-year totals and numbers of women differ from the file in 45 of the 64 years it labels (for example 2022: 223 credits and 32 women in the file versus 228 and 33 in the chart)."
+  },
+  {
+    "source": "According to a report by USC’s Annenberg Inclusion Initiative, women represented between 11-14% of songwriters from 2012 to 2022, a range that hasn't changed much in 60 years.",
+    "why": "This is attributed to an external USC study, not to these files; the file's own yearly women's shares of credits for 2012-2022 run from about 9.5% to 17.6%."
+  },
+  {
+    "source": "In the last decade, only 13.9% of Grammy nominees from the biggest categories (Record of the Year, Album of the Year, Song of the Year, Best New Artist, and Producer of the Year) were women.",
+    "why": "External USC study; the files contain no Grammy data."
+  },
+  {
+    "source": "Songwriting Team Breakdown of Songs … Only Women Songwriters … Majority Women … Parity … Majority Men … Only Men Songwriters … 2,272 songs",
+    "why": "The rendered category counts are incomplete, and the file's breakdown is 118 only women, 32 majority women, 225 parity, 396 majority men and 2,311 with no women; the tool's numbers (7, 229, 418, 2,272) are not reproduced as a whole."
+  },
+  {
+    "source": "In 2021, there was one: Taylor Swift’s “All Too Well,” a song originally written by Swift with Liz Rose in 2012.",
+    "why": "The 2021 count of one all-women song is reproduced in facts.json, but the claim that it was originally written in 2012 is not in the data (only the 2021 'Taylor's Version' appears); the file does list Liz Rose and Taylor Swift as its writers."
+  }
+]

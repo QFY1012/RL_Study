@@ -12463,3 +12463,49 @@ this-american-life: facts=5 answer=5 dropped=0 skipped=11 problems=0 456s steps=
   wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
   stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json, re, pan
   wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import pandas as pd s=
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && cat > facts.json <<'JSON' [ { "
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && python3 - <<'PY' import json, pandas as 
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && python3 - <<'EOF' import json, p
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json f=json.l
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -c " import pandas as p
+  wine-model wine-model: web_fetch https://api.allorigins.win/raw?url=https%3A%2F%2Fpudding.cool%2F2021%2F03%2Fwine-model%2F
+  vocabulary vocabulary: web_fetch https://www.bing.com/search?q=site%3Agithub.com+%22vocabulary%22+%22pudding%22+Busdriver
+  titletowns titletowns: bash cd data && python3 -c " import pandas as pd df=pd.read_csv('titles.csv') m='Greater Los Angeles, CA'
+  women-in-congress women-in-congress: bash cd /tmp && rm -rf wic && git clone --depth 1 https://github.com/dldx/women-in-congress.git wic 2>&1 
+  spades spades: bash cd /home/user/RL_Study/report-gepa/runs/originals/spades && rm -f probe.html && ls -la
+  vocabulary vocabulary: web_fetch https://raw.githubusercontent.com/the-pudding/vocabulary/master/index.html
+  vocabulary vocabulary: web_fetch https://raw.githubusercontent.com/pudding/vocabulary/master/index.html
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import json p=
+  wiki-billboard wiki-billboard: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/ | head -50; find /home/user/RL_Study/report-g
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 -c " import json for f in j
+  women-in-congress women-in-congress: web_fetch https://github.com/dldx/women-in-congress
+  women-in-congress women-in-congress: web_fetch https://rawgit.com/dldx/women-in-congress/master/helper_files/violin_plot.html
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && sed -n '1,240p' src/report_gepa/originals.py
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && sed -n '1,240p' src/report_gepa/datagen.py
+  sleep-training sleep-training: bash cd data && python3 - <<'EOF' import pandas as pd r=pd.read_csv('reddit.csv') r['has_link']=r.comment
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_c
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 -m json.tool facts.json > /dev/n
+  wiki-billboard wiki-billboard: bash ls -la /home/user/RL_Study/ && find /home/user/RL_Study/report-bench -maxdepth 3 -type d 2>/dev/null
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import pandas as
+  wiki-death wiki-death: web_fetch http://archive.org/wayback/available?url=pudding.cool/2018/08/wiki-death/
+  wiki-death wiki-death: web_fetch https://web.archive.org/web/2018id_/https://pudding.cool/2018/08/wiki-death/
+  wine-model wine-model: web_fetch https://archive.ph/newest/https://pudding.cool/2021/03/wine-model/
+  wine-model wine-model: web_fetch https://html.duckduckgo.com/html/?q=%22wine+%26+math%22+pudding+model+pairing
+  wiki-billboard wiki-billboard: bash ls -la /home/user/RL_Study/report-bench/src/report_bench/ && sed -n '1,260p' /home/user/RL_Study/rep
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && sed -n '1,260p' src/report_gepa/pudding.py && sed -n '1,200p' 
+  song-decay song-decay: web_fetch https://raw.githubusercontent.com/the-pudding/song-decay-clean/master/src/assets/data/time_series_90
+  song-decay song-decay: web_fetch https://raw.githubusercontent.com/the-pudding/song-decay-clean/master/src/assets/data/time_series_90
+  timeless timeless: write skipped.json
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && cat > skipped.json <<'JSON' [ {
+  wine-model wine-model: web_fetch https://api.github.com/repos/the-pudding/wine-model/git/trees/master?recursive=1
+  wine-model wine-model: web_fetch https://deepwiki.com/the-pudding/wine-model
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && sed -n '1,320p' src/report_gepa/puddingmerge.py
+spades: facts=6 answer=5 dropped=1 skipped=13 problems=0 616s steps=48
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  votes-for-women votes-for-women: write /home/user/RL_Study/report-gepa/runs/originals/votes-for-women/facts.json
+  votes-for-women votes-for-women: write /home/user/RL_Study/report-gepa/runs/originals/votes-for-women/skipped.json

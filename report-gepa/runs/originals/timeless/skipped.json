@@ -1,0 +1,70 @@
+[
+  {
+    "source": "MOST POPULAR 90S SONG ON SPOTIFY IN 2014 NO DIGGITY!",
+    "why": "The data's 1990s ranking puts Smells Like Teen Spirit first with 50,657,282 plays and No Diggity fifth with 30,911,317, so the chart headline is contradicted by both the story's prose and the data."
+  },
+  {
+    "source": "Biggie has three of the Top 10 hip-hop songs between 1986 and 1999.",
+    "why": "all_data.csv has no genre or artist-role field, so the hip-hop subset for 1986-1999 cannot be computed and the three-of-the-top-10 claim cannot be reproduced."
+  },
+  {
+    "source": "And there's No Diggity as the top – perhaps it's that glorious Dr. Dre verse.",
+    "why": "The data has no rap/hip-hop genre field, so the universe of rap hits being ranked here cannot be reconstructed."
+  },
+  {
+    "source": "RUN DMC – MOST REMEMBERED FROM EARLY HIP HOP",
+    "why": "The data has no genre field and no definition of 'early hip hop', so the rap ranking behind this label (and the Push It and Jump labels) cannot be computed."
+  },
+  {
+    "source": "The Notorious B.I.G., Hypnotize 20,680,147 plays 1997",
+    "why": "The count (20,680,147) and year (1997) exist in all_data.csv, but this is a single tooltip from a rap-only chart whose genre filter is not in the data; without that filter it is not a reproducible ranking finding."
+  },
+  {
+    "source": "PEAK BILLBOARD POSITION #6 OF 100 #9 #2 #2 #1",
+    "why": "Four of the five peak positions match, but the data gives Wonderwall a Billboard peak of 8, not the 2 labelled in the top-5 table, so the peak-position finding as a whole does not reproduce."
+  },
+  {
+    "source": "#42 OF 385, 1991 #57 OF 346, 1998 #45 OF 314, 1996 #20 OF 370, 1992 #5 OF 314, 1996",
+    "why": "The rank positions (42, 57, 45, 20, 5) reproduce, but the 1996 and 1998 chart sizes are 312 and 344 in the data, not the 314 and 346 printed in these labels; only the rank positions are kept in facts.json."
+  },
+  {
+    "source": "For example, in 1961, Bobby Lewis’s Tossin’ and Turnin’ spent 7 weeks at #1.",
+    "why": "The data records Tossin' And Turnin' at Billboard peak 1, but it has no weeks-at-number-one field, so the seven-week duration cannot be computed."
+  },
+  {
+    "source": "Meanwhile, Etta James’ debut album dropped the same year, with At Last peaking on Billboard at #68.",
+    "why": "The data gives At Last a Billboard peak of 47, not 68, so the story's number does not reproduce."
+  },
+  {
+    "source": "Music historians will regard Bobby Lewis as a pioneer in rock and roll and R&B, yet whatever led to Tossin’ and Turnin’s popularity in 1961 has faded over time. His music, for countless reasons, didn’t persevere in the same way as Etta James’.",
+    "why": "The present-day playcounts do differ in the direction described (At Last 10,992,022 versus Tossin' And Turnin' 140,605), but the story's stated premise that At Last peaked at #68 is contradicted by the data (peak 47), so the finding as stated is not reproduced."
+  },
+  {
+    "source": "Oasis, Wonderwall 34,342,877 plays 1996",
+    "why": "The data gives Wonderwall 34,352,877 plays, the value used in the story's own top-5 table, so this chart-1 tooltip value differs by 10,000 and does not reproduce."
+  },
+  {
+    "source": "Since 1992, these songs have slowly faded from culture with the incoming generation, whereas Nirvana’s music has not only maintained its popularity, but augmented it.",
+    "why": "all_data.csv contains only one 2014 playcount per track and no time series, so a trajectory since 1992 cannot be computed."
+  },
+  {
+    "source": "Today, one track in particular has the most interesting trajectory: OneRepublic’s Counting Stars. Counting Stars never had breakout success following its release, yet it has managed to stay in the cultural zeitgeist for more than a year after its peak popularity.",
+    "why": "2013_aggregate_counts.csv has only anonymous personal_id series and daily sum(plays); it contains no track names or mapping, so Counting Stars cannot be identified and its peak date and duration cannot be computed."
+  },
+  {
+    "source": "Today in 2015, both tracks are at parity with Royals and Get Lucky, and you’d probably never guess it.",
+    "why": "2013_aggregate_counts.csv contains no track names or track-id mapping, so Young and Beautiful, Do I Wanna Know, Royals and Get Lucky cannot be identified in the anonymous series and their parity cannot be computed for those named tracks."
+  },
+  {
+    "source": "HIGHER PLAYCOUNT PLATEAU, FUTURE TIMELESSNESS ... NOT A HUGE SUCCESS, BUT STEADY GROWTH ... STEEPER DECLINE",
+    "why": "These annotations attach to named 2013 tracks, but the 2013 file has no track names, so the trajectories cannot be assigned to the named songs."
+  },
+  {
+    "source": "This song barely charted on Billboard.",
+    "why": "The data gives Don't Stop Believin' a Billboard peak of 9, but 'barely charted' is a qualitative judgment and the data contains no chart-run or weeks data with which to quantify it."
+  },
+  {
+    "source": "when it was released in 1992",
+    "why": "The data dates Smells Like Teen Spirit to 12/07/1991 and the story's own chart labels it 1991; the 1992 release year does not reproduce, so the top-90s finding is kept without that year."
+  }
+]

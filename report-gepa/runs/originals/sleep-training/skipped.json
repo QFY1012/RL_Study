@@ -1,0 +1,54 @@
+[
+  {
+    "source": "The task force, led by Dr. Jodi Mindell, reported that 49 of the 52 studies produced “significant improvements in bedtime problems and/or night wakings” and 80% of children treated demonstrated significant improvement in sleep, which was maintained for 3 to 6 months.",
+    "why": "The files contain 75 clinical studies but no table of the 52 studies in the 2006 task-force review and no study-by-study improvement rates, so the 49-of-52 count and the 80% improvement figure cannot be computed."
+  },
+  {
+    "source": "Another umbrella review from 2022 analyzed five reviews of 24 studies with over 11,500 participants.",
+    "why": "The files have no umbrella-review table or list of the 24 studies in that review; studies.csv contains 75 trials, not this 24-study subset."
+  },
+  {
+    "source": "If we look at all 75 clinical trials across the aforementioned literature reviews, over 30,000 babies participated between 1980 and 2022.",
+    "why": "The 75 rows of studies.csv sum to 12,059 participants and span 1959 to 2021, not over 30,000 babies between 1980 and 2022; the larger figure comes from summing the literature reviews, which are not in this folder."
+  },
+  {
+    "source": "If we connect each research study to its primary university’s country, about 85% have occurred in Western countries.",
+    "why": "Using the country column in studies.csv and counting the United States, Canada, the United Kingdom, Australia, New Zealand, Iceland, Germany, Sweden and Italy as Western gives 68 of 75 studies (90.7%), not about 85%."
+  },
+  {
+    "source": "Dr Narvaez’s article was referred to 4 times in the Reddit thread alone; among the arguments against sleep training, Narvaez was the only source mentioned.",
+    "why": "reddit.csv contains 3 comments linking to the Narvaez Psychology Today article, and opposing comments also link to other sources, so neither the count of 4 nor the claim that Narvaez was the only source is reproduced."
+  },
+  {
+    "source": "Now if we look at the 20 most popular sleep training profiles* on Instagram and categorize each as advocating, no position or opposing we see that roughly half of the platform’s top influencers lean against sleep training.",
+    "why": "There is no Instagram data file in the data/ folder, so the positions of the top 20 profiles cannot be computed."
+  },
+  {
+    "source": "Bubble chart of medical positions on sleep training literature reviews, almost entirely advocating.",
+    "why": "There is no literature-reviews file in the data/ folder, so the positions of the 9 reviews cannot be computed."
+  },
+  {
+    "source": "Her review shows that none of Drs Narvaez’s and Sears’s references are either sleep or sleep-training specific and almost all are theoretical review papers.",
+    "why": "There is no references file in the data/ folder, so the grounding and relevance of the cited references cannot be computed."
+  },
+  {
+    "source": "This chart visualizes the publication date of sleep training studies on a timeline, all were published between 1980 and 2022.",
+    "why": "studies.csv includes a 1959 study and its latest study is from 2021, so the stated 1980-to-2022 range is not reproduced."
+  },
+  {
+    "source": "The most conclusive long-term study on sleep training to date is a 2012 randomized controlled trial on 326 infants, which found no difference on any measure—negative or positive—between children who were sleep trained and those who weren’t after a 5 year follow up.",
+    "why": "studies.csv records study metadata, not outcome measures; its 326-participant 2012 row is described as a six-year follow-up, while its five-year follow-up rows have 173 and 225 participants, so the 326-infant five-year result is not reproduced."
+  },
+  {
+    "source": "to date, no published research points to sleep training causing harm",
+    "why": "The files record bibliographic metadata and the authors' position labels, not study outcomes or harm findings, so this conclusion cannot be computed from them."
+  },
+  {
+    "source": "Regarding elevated cortisol levels, this was studied as a randomized controlled trial in 2022, measuring no difference in cortisol levels across different methods of sleep training and in comparison to a control group that was not sleep trained.",
+    "why": "studies.csv has no 2022 study and records no cortisol measurements or trial outcomes, so the 2022 randomized trial and its no-difference result cannot be computed from the file."
+  },
+  {
+    "source": "The study analyzed cortisol levels in mothers and children during a sleep training intervention in a clinic. The babies’ and mothers’ cortisol levels increased on arrival at the clinic and remained high. However on the third day babies would fall asleep quickly, so the cortisol levels of mothers dropped whilst the babies’ remained high",
+    "why": "The files contain the Middlemiss study's citation and position but no cortisol measurements or day-by-day results, so this finding cannot be computed."
+  }
+]

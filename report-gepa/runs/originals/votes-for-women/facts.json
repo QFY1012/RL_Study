@@ -1,0 +1,29 @@
+[
+  {
+    "id": "platform-total-words",
+    "source": "539 total words",
+    "claim": "The chart labels every platform with its total word count, which ranges from 215 words for the 1860 Constitutional Union platform to 41,933 words for the 2004 Republican platform (539 for the 1840 Democratic platform).",
+    "tables": {
+      "p": "data/platforms.json.csv"
+    },
+    "code": "p.set_index('key')['wordTotal'].sort_values()"
+  },
+  {
+    "id": "platform-women-words",
+    "source": "258 words about women",
+    "claim": "The chart labels every platform with its number of words about women, which ranges from 0 words for platforms such as the 1840 Democratic platform to 2,361 words for the 1980 Democratic platform (258 for the 1920 Democratic platform).",
+    "tables": {
+      "p": "data/platforms.json.csv"
+    },
+    "code": "p.set_index('key')['wordWomen'].sort_values()"
+  },
+  {
+    "id": "women-word-share",
+    "source": "934,068 total words. 28,854 words related to women.",
+    "claim": "Words about women make up 3.1% of all the words in the platforms.",
+    "tables": {
+      "p": "data/platforms.json.csv"
+    },
+    "code": "round(p['wordWomen'].sum() / p['wordTotal'].sum() * 100, 1)"
+  }
+]

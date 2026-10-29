@@ -1,0 +1,42 @@
+[
+  {
+    "source": "In the past nineteen years, there have been 228 issues of Vogue, with a total of 262 female cover models.",
+    "why": "This is a description of the dataset's size (228 distinct issue dates and 262 cover-appearance rows), not a finding the authors draw from analysis, so it is not included as a fact."
+  },
+  {
+    "source": "Only three of the eighty-one cover models were black, and all of these women had lighter skin",
+    "why": "The file has no race or ethnicity field, so the number of Black cover models cannot be computed from it; identifying Marion Jones, Halle Berry and Liya Kebede as the three Black models relies on outside knowledge, not on these data."
+  },
+  {
+    "source": "the majority of the black women are light-skinned and the majority of dark-skinned women are actually a single person",
+    "why": "The file has no race or ethnicity field, and there is no explicit threshold in the story or methods defining which models count as 'dark-skinned'. The five-darkest 60% finding is reproduced separately, but this race-based majority cannot be computed from the data."
+  },
+  {
+    "source": "Lupita is the only dark-skinned professional model on the cover of Vogue in the past nineteen years.",
+    "why": "The data have no race or occupation field and no defined cutoff for 'dark-skinned', so this cannot be computed from faces.csv."
+  },
+  {
+    "source": "Vogue has had exactly one black photographer in 125 years of publication.",
+    "why": "faces.csv contains only cover date, model name, skin-tone hex and lightness; it has no photographer or photographer-race information."
+  },
+  {
+    "source": "They’ve certainly come a long way since their first black cover model, back in the seventies.",
+    "why": "The data cover only January 2000 through December 2018 and have no race field, so the first Black cover model in the 1970s is both outside the data's period and unidentifiable from it."
+  },
+  {
+    "source": "Ethnic diversity and representation is improving.",
+    "why": "The file has no race or ethnicity field, so a change in ethnic diversity over time cannot be measured from these data."
+  },
+  {
+    "source": "Last September, a black woman (Beyoncé) was shot by Vogue’s first-ever black cover photographer (Tyler Mitchell) for the most important month in the fashion magazine calendar.",
+    "why": "The file records the cover appearance but no photographer or race information, so the photographer link cannot be reproduced."
+  },
+  {
+    "source": "When we look at the faces of these women, rather than just their skin tones, we can see that the covers feature more rich, lush colors and artistic, dramatic lighting.",
+    "why": "This is an interpretive description of the photographs rather than a measured finding; the data contain only a single extracted skin-tone hex and lightness value per appearance, with no lighting or overall-color measures."
+  },
+  {
+    "source": "Certainly, part of this is due to the race of the models that appeared on the cover, but part can also be attributed to changes in photography, lighting and marketing.",
+    "why": "The file has no race, photography, lighting or marketing variables, so this causal attribution cannot be computed."
+  }
+]

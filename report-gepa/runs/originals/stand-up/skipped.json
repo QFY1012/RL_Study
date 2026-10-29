@@ -1,0 +1,22 @@
+[
+  {
+    "source": "In fact, this moment had the most laughter in the entire show. We’ll call it the “laughter climax.”",
+    "why": "The captions file’s longest single laugh is 10.0 seconds at 0:11:48, on the line “Colonize the colonizer”, while the 0:50:11 punchline draws 9.5 seconds, so the 50-minute line is not the show’s largest laugh by the circle-size measure the story describes."
+  },
+  {
+    "source": "She’s telling not just 100 individual jokes, but a story that is deliberately arranged, much like a comedy film or a TV series.",
+    "why": "The only countable unit in the data is 120 distinct topic labels; counting topic categories describes the data and does not measure “jokes” or reproduce the comparison with 100 jokes."
+  },
+  {
+    "source": "It also “calls back” to three other topics from earlier in the routine.",
+    "why": "The topic table has only three callback annotations, but they sit at 2983, 3057, and 3408 seconds; only the first precedes the 50:11 climax, so the data does not mark three callbacks from the climax to earlier topics."
+  },
+  {
+    "source": "Ali Wong’s stand-up is closer to the right of this spectrum, relying less on one-liners and more on form-driven humor.",
+    "why": "This is a comparison with other comedy forms (one-liners, films, TV shows), and the supplied files contain only Ali Wong’s special, so the comparison cannot be computed."
+  },
+  {
+    "source": "For 50 minutes, Ali has built a universe, with each joke expanding the audience’s understanding of her world-view.",
+    "why": "The 50-minute timing of the punchline is reproduced, but the claim about what the audience understands is interpretive rather than a value in the files."
+  }
+]

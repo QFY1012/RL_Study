@@ -1,0 +1,92 @@
+[
+  {
+    "id": "laughter-climax-50-minutes",
+    "source": "We noticed something special about 50 minutes into the show.",
+    "claim": "The “I don’t wanna work anymore” punchline is delivered at 0:50:11 (3011 seconds, 50.2 minutes) and draws 9.5 seconds of laughter.",
+    "tables": {
+      "c": "data/ali-wong--captions.csv"
+    },
+    "code": "c[c.caption.str.contains(\"I don't wanna work anymore\", regex=False)].assign(minutes=lambda d: (d.timeStart/60).round(1)).tail(1)[['start','timeStart','minutes','laugh']]"
+  },
+  {
+    "id": "climax-conception-topic",
+    "source": "The laughter climax is about conception.",
+    "claim": "The climax falls in the 789-conception topic, which runs from 2990 to 3014 seconds.",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group=='789-conception'][['group','timeStart','topicEnd']]"
+  },
+  {
+    "id": "conception-preceded-by-hippies-orgasm",
+    "source": "The punchline about conception was preceded by a reference to being a hippy, which was preceded by a description of a man’s face during orgasm.",
+    "claim": "The 789-conception topic starts at 2990 seconds, after the 787-hippies topic at 2983 seconds, which starts after the 782-orgasm topic at 2956 seconds.",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group.isin(['789-conception','787-hippies','782-orgasm'])][['index','group','timeStart','topicEnd']]"
+  },
+  {
+    "id": "hpv-three-parts",
+    "source": "She has a whole digression about HPV that’s divided into three parts: everyone has it, men don’t get it, and Ali’s experience at the doctor.",
+    "claim": "The HPV digression is annotated as three topics, 32-hpv, 39-men and hpv, and 43-doctor and hpv, spanning 154 to 230 seconds.",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group.str.contains('hpv')].assign(n=lambda d: len(d))[['index','level','group','timeStart','topicEnd','n']]"
+  },
+  {
+    "id": "hpv-reached-through-sleep",
+    "source": "But the reason she got to the topic of HPV was because of her difficulty falling asleep.",
+    "claim": "The 32-hpv topic (154-230 seconds) is nested inside the 23-sleep topic (114-230 seconds): both end at 230 seconds and HPV begins at 154 seconds.",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group.isin(['23-sleep','32-hpv'])][['level','group','timeStart','topicEnd']]"
+  },
+  {
+    "id": "sleep-under-jealousy",
+    "source": "And the reason she is talking about falling asleep: she’s jealous of other women who can fall asleep, as well as their metabolism and inner thigh clearance.",
+    "claim": "The 23-sleep topic (114-230 seconds) sits under 10-jealousy (62-230 seconds), alongside 16-metabolism (85-96 seconds) and 19-inner thigh clearance (96-111 seconds).",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group.isin(['10-jealousy','16-metabolism','19-inner thigh clearance','23-sleep'])][['level','group','timeStart','topicEnd']]"
+  },
+  {
+    "id": "three-main-themes",
+    "source": "But if you take a step back, Ali’s routine is structured around three cohesive ideas: getting older, marriage, and pregnancy.",
+    "claim": "The three longest top-level topics are marriage (1840 seconds, 415-2255 seconds), pregnancy (1160 seconds, 2277-3437 seconds), and getting older (361 seconds, 49-410 seconds).",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.level==1].groupby('group').agg(start=('timeStart','min'), end=('topicEnd','max')).assign(seconds=lambda d: d.end-d.start).sort_values('seconds',ascending=False)"
+  },
+  {
+    "id": "making-babies-three-minutes",
+    "source": "We can tie this punchline to a larger three-minute story about making babies.",
+    "claim": "The 747-making babies topic runs from 2846 to 3014 seconds, 168 seconds or 2.8 minutes.",
+    "tables": {
+      "t": "data/ali-wong--topics.csv"
+    },
+    "code": "t[t.group=='747-making babies'][['group','timeStart','topicEnd']].assign(seconds=lambda d: d.topicEnd-d.timeStart, minutes=lambda d: (d.topicEnd-d.timeStart)/60)"
+  },
+  {
+    "id": "climax-repeats-working-line",
+    "source": "The laughter climax connects the major themes of her routine, from how she met her husband to her philosophy on working.",
+    "claim": "The phrase “I don’t wanna work anymore” recurs at 0:21:14 and 0:21:31 in the 302-dependent topic, at 0:29:04 in the 446-diet topic, and at 0:50:11 in the 789-conception topic.",
+    "tables": {
+      "c": "data/ali-wong--captions.csv"
+    },
+    "code": "c[c.caption.str.contains(\"I don't wanna work anymore\", regex=False)][['start','timeStart','group']]"
+  },
+  {
+    "id": "harvard-links-husband-and-working",
+    "source": "The laughter climax connects the major themes of her routine, from how she met her husband to her philosophy on working.",
+    "claim": "The word “Harvard” appears in the 111-met husband topic at 487 seconds, in the 302-dependent topic at 1271 seconds, and in the 789-conception topic at 3006 seconds.",
+    "tables": {
+      "c": "data/ali-wong--captions.csv"
+    },
+    "code": "c[c.caption.str.contains('Harvard', case=False, na=False)][['start','timeStart','group']]"
+  }
+]

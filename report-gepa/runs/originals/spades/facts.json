@@ -1,0 +1,56 @@
+[
+  {
+    "id": "joker-deuce-share",
+    "source": "76% of people surveyed play\nJoker, Joker Deuce Deuce",
+    "claim": "76% of respondents answered Yes when asked whether they play Big Joker, Little Joker, 2 of diamonds, two of spades.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "a[a.question==1].answer.value_counts(normalize=True).mul(100).astype(int)"
+  },
+  {
+    "id": "joker-deuce-by-age",
+    "source": "When you play Spades, do you play Big Joker, Little Joker, 2 of diamonds, two of spades?\nAge Today\nyes\nno\n>54\n86%\n14%\n45-54\n82%\n18%\n35-44\n21%\n79%\n18-24\n68%\n32%\n25-34\n74%\n26%",
+    "claim": "The share answering Yes was 85.7% among >54, 81.5% among 45-54, 79.2% among 35-44, 73.8% among 25-34 and 68.4% among 18-24 respondents.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "pd.crosstab(a[a.question==1].age, a[a.question==1].answer, normalize='index').mul(100).drop(index='Prefernottosay').round(1)"
+  },
+  {
+    "id": "learned-under-18",
+    "source": "In fact, most survey respondents (67%) learned to play before 18.",
+    "claim": "67% of respondents learned to play before age 18.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "(a[a.question==8].answer.isin(['Under 12','12-17']).sum()/len(a[a.question==8])*100).astype(int)"
+  },
+  {
+    "id": "age-learned-shares",
+    "source": "chart showing 29% learned when under 12 years old. 38% were 12-17 years old. 22% were 18-24 years old.",
+    "claim": "29% learned when under 12, 38% at 12-17 and 22% at 18-24.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "a[a.question==8].answer.value_counts(normalize=True).mul(100).astype(int)"
+  },
+  {
+    "id": "table-talk-outlawed",
+    "source": "Table talk is pretty much outlawed.",
+    "claim": "69.5% of respondents answered No when asked whether talking over the table about the game is allowed.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "a[a.question==2].answer.value_counts(normalize=True).mul(100).round(1)"
+  },
+  {
+    "id": "taught-by-family-majority",
+    "source": "While most people were taught by a family member",
+    "claim": "54.1% of respondents selected Family as the person who taught them to play Spades.",
+    "tables": {
+      "a": "data/answers.csv"
+    },
+    "code": "(a[a.question==7].answer.value_counts()/len(a[a.question==7])*100).round(1)"
+  }
+]

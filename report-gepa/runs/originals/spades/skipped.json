@@ -1,0 +1,54 @@
+[
+  {
+    "source": "75% of the Black people who took my survey play Spades.",
+    "why": "answers.csv contains only people who play Spades; there is no survey question recording whether a respondent plays Spades, so the 75% player/non-player share cannot be computed."
+  },
+  {
+    "source": "chart of breakdown of where Black people play spades. 93% play at family and friend functions. 66% play at college. 58% on holidays. 58% at reunions. 31% in school. 13% at tournament.",
+    "why": "The survey files have no question about where respondents have played Spades."
+  },
+  {
+    "source": "50% were taught by a family member. 20% by friends. 10% watched by learned.",
+    "why": "The chart's visible labels are 55% Family, 20% Friends, 15% Learn by watching and 10% Other. Question 7 gives 54.1% Family, 20.2% Friend, 14.8% Learned by watching and 10.9% no answer of all 331 respondents, so even the rounded chart split is not reproduced exactly; the family-majority statement is reported as a separate fact."
+  },
+  {
+    "source": "chart showing how easy it was to learn spades. 55% thought it was easy. 11% leaned towards no one teaching them. 34% said that it took convincing someone to teach them.",
+    "why": "The survey files have no question about how easy it was to learn Spades."
+  },
+  {
+    "source": "151 people play to 500. 67 play to 300. 33 play to 350. 40 people play to 250.",
+    "why": "The survey files have no question about the score respondents typically play to."
+  },
+  {
+    "source": "image of playing cards. 46% play kings first if have ace. 27% play low cards first. 38% play high or trump cards first.",
+    "why": "The survey files have no question about which card respondents play first."
+  },
+  {
+    "source": "67% have a board of 4, 18% have other or no limit, 15% have 3",
+    "why": "Question 3 gives 68.6% Four, 15.7% Three, 6.3% Five and 4.5% Six of all 331 respondents (72.1%, 16.5%, 6.7% and 4.8% of the 315 who answered); there is no 'other or no limit' category and the 67%/18%/15% split is not reproduced."
+  },
+  {
+    "source": "49% have 10 sand bags, 40% have 5...the remaining that 15 or 20.",
+    "why": "Question 4 gives 47.8% for 10, 44.3% for 5, 5.5% for 15 and 2.4% for 20 among the 255 who answered (36.9%, 34.1%, 4.2% and 1.8% of all 331), not 49%/40%."
+  },
+  {
+    "source": "80% do whole game. 20% do rise and fly.",
+    "why": "Question 5 gives 78.2% Whole Game and 21.8% Rise and Fly among the 325 who answered (76.7% and 21.5% of all 331), not 80%/20%."
+  },
+  {
+    "source": "20% said yes. 10% said in special circumstances, like trash talking or teaching rules.",
+    "why": "Question 2 gives 17.2% Yes and 13.3% in special circumstances when the two case variants are combined, not 20% and 10%; the majority saying table talk is not allowed is reported as a separate fact."
+  },
+  {
+    "source": "10% of survey respondents said that Spades makes them feel Black.",
+    "why": "The survey files contain no question about how Spades makes respondents feel or which words they associate with it."
+  },
+  {
+    "source": "Word cloud of commonly used phrases from the question on the survey of How Does Spades Make You Fee. The common responses include Play, 51x, Good 44x, Fun 43x, Competitive 41x, Feel 41x, Black 36x, Happy 33x, Spade 31x, Game 27x, Excite 25x, Love 23x, Family 20x, Great 17x, Friend 17x, LOL 14x, Win 12x Connect 12x, Relaxed 10x Home 7x, Know 7x, Amaze 6x, Community 6x",
+    "why": "The survey files contain only closed-choice answers, not the free-text responses used for the word cloud."
+  },
+  {
+    "source": "Of course how you play Spades, the language you use while playing, what you know about its history and whether or not you can also play Bid Whist differs by region of the country and generation.",
+    "why": "The files have no questions about language, history or Bid Whist, so this combined regional/generational claim cannot be fully reproduced; the age pattern for the joker/deuce question is reported separately."
+  }
+]

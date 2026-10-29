@@ -1,0 +1,18 @@
+[
+  {
+    "source": "“No Diggity” knowledge peaks among people born in 1983, who were 13 years old when the track debuted in 1996.",
+    "why": "The time series does not peak at 1983: No Diggity is at 85.4% for generation -13 (born 1983) but 86.4% at generation -10 (born 1986). The stated unique peak at 1983 is therefore not reproduced; the 1983 cohort value is used only in the Millennials-vs-Gen-Z fact, not as a peak."
+  },
+  {
+    "source": "“Everybody” is the opposite, known by 97% of Millennials and 86% of Gen Z",
+    "why": "The time series gives Everybody 97.4% at age 13 (which rounds to the stated 97%) but only 80.8% among people born after its release, not 86%. The 86% figure comes from lollipop_chart_data_july_13.csv (weighted cohort means), which is not in data/, so the 97%/86% pair is not reproduced."
+  },
+  {
+    "source": "Here are all the ’90s songs that charted in the top 5 of the Billboard Hot 100, ranked by recognition rate among Gen Z.",
+    "why": "The ranking and every percentage label in this chart come from lollipop_chart_data_july_13.csv, which is not in data/. Unweighted cohort means computed from time_series_90s_july13.csv differ from the chart labels and change the order (for example, My Heart Will Go On 95.4% vs 96.3% in the chart; Everybody 84.7% vs 85.7%; Wannabe ranks 6th unweighted vs 3rd in the chart). The Gen Z and Millennial percentages in this chart are therefore not reproduced."
+  },
+  {
+    "source": "In 1999, “Wild Wild West” was the song of the summer. Yet it is fading far faster than any other ’90s hit with comparable starting popularity.",
+    "why": "No single data-derived comparison reproduces the 'any other' superlative. Among the 58 songs recognized by more than 90% at age 13, Wild Wild West has the largest drop by age 10 but is only third at the release-year cohort (behind You’re Still The One and If You Had My Love) and is not the fastest over its full available age range. The story does not define 'comparable starting popularity'. The separate lower-than-expected Gen Z recognition finding is included in facts.json."
+  }
+]

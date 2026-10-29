@@ -1,0 +1,85 @@
+[
+  {
+    "id": "only-women-hits-by-year",
+    "source": "How often has a top 5 hit been written only by women in the last 10 years? It’s likely rarer than you think. … In 2021, there was one: Taylor Swift’s “All Too Well,” … In 2020, there was another. … But there were none in 2019… … Here are 2…",
+    "claim": "The number of Top 5 hits written exclusively by women was 2 in 2010, 0 in each year from 2011 to 2019, and 1 in each of 2020, 2021 and 2022.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s[s.cut_two=='only women'].groupby('year').size().reindex(range(2010,2023), fill_value=0)"
+  },
+  {
+    "id": "all-women-share",
+    "source": "Only 118 of the 3,077 (3.8%) top 5 hits were written exclusively by women.",
+    "claim": "118 Top 5 hits (3.8%) were written exclusively by women.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s.cut_two.value_counts().to_frame('n').assign(pct=lambda d: (100*d.n/d.n.sum()).round(2))"
+  },
+  {
+    "id": "women-written-performers",
+    "source": "But who performed those 118 songs? In almost all cases, women. Only 13 of those 118 were performed exclusively by men.",
+    "claim": "Of the songs written exclusively by women, 89 were performed exclusively by women, 16 by mixed-gender groups and 13 exclusively by men.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s[s.cut_two=='only women'].artist_gender.value_counts()"
+  },
+  {
+    "id": "women-written-men-or-mixed-performers",
+    "source": "Even if we expand our search to Top 5 hits written exclusively by women and performed by mixed-gender groups, that list of songs only grows to 29.",
+    "claim": "Including mixed-gender performers, 29 songs written exclusively by women were performed by men or mixed-gender groups.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s[s.cut_two=='only women'].artist_gender.ne('f').sum()"
+  },
+  {
+    "id": "women-written-performer-songwriters",
+    "source": "If we look at the 118 songs written exclusively by women again, you’ll notice something else: the women who wrote more than half of these songs were also vocalists in the performing groups.",
+    "claim": "66 of the 118 songs written exclusively by women also credit at least one of their performers as a songwriter.",
+    "tables": {
+      "s": "data/songs.csv",
+      "w": "data/writerKey.csv"
+    },
+    "code": "w.assign(k=w.title_artist_name.str.lower().str.strip()).merge(s[s.cut_two=='only women'].assign(k=lambda d: d.song_key.str.lower().str.strip())[['k']], on='k').groupby('k')['Songwriter is Artist'].apply(lambda x: (x==1).any()).agg(['sum','size'])"
+  },
+  {
+    "id": "2022-only-women-song",
+    "source": "Only one had a songwriting team of all women. That one song - Kate Bush’s “Running Up that Hill (A Deal with God)” - was written in 1985 and only saw a resurgence because it was featured in the popular Netflix show Stranger Things",
+    "claim": "Exactly one 2022 Top 5 song was written exclusively by women: “Running Up that Hill (A Deal with God)” by Kate Bush.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s[(s.year==2022)&(s.cut_two=='only women')].groupby(['year','song_key']).size()"
+  },
+  {
+    "id": "2022-women-credit-share",
+    "source": "In 2022, Top 5 Billboard songs had 228 songwriting credits, but only 33 were women (14% of the total).",
+    "claim": "Women accounted for 14.3% of 2022 Top 5 songwriting credits.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "100*(s.groupby('year')['count of women'].sum()/s.groupby('year')['song writer count'].sum())"
+  },
+  {
+    "id": "all-men-share",
+    "source": "2,272 of 3,077 (74%) songs were written entirely by an all-men songwriting team.",
+    "claim": "73.8% of Top 5 songs were written entirely by an all-men songwriting team.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "100*s.songwriter_gender.str.strip('[]').str.replace(\"'\", '', regex=False).str.split(', ').apply(lambda x: {v.strip() for v in x} == {'m'}).mean()"
+  },
+  {
+    "id": "2010-only-women-taylor-swift",
+    "source": "Here are 2… And both were written and performed by Taylor Swift.",
+    "claim": "Both 2010 Top 5 songs written exclusively by women, “Mine” and “Today Was A Fairytale,” were written and performed by Taylor Swift.",
+    "tables": {
+      "s": "data/songs.csv",
+      "w": "data/writerKey.csv"
+    },
+    "code": "w.assign(k=w.title_artist_name.str.lower().str.strip()).merge(s[(s.cut_two=='only women')&(s.year==2010)].assign(k=lambda d: d.song_key.str.lower().str.strip())[['k']], on='k').groupby(['year','title','writer','artist_name']).size()"
+  }
+]

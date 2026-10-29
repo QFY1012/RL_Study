@@ -1,0 +1,93 @@
+[
+  {
+    "id": "no-diggity-millennials-vs-genz",
+    "source": "Millennials know “No Diggity.” But Gen Z? Maybe half of them, at best.",
+    "claim": "Recognition averages 45.9% among people born after No Diggity’s release, versus 85.4% among people born in 1983, the age-13 cohort at its release.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv",
+      "sy": "data/song_years_july_13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song == 'BLACKstreet|||No Diggity'].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).merge(sy.assign(song=sy.artist_song.str.strip())[['song','year']], on='song').assign(birth_year=lambda d: d.generation + d.year, cohort=lambda d: np.select([d.generation.eq(-13), d.generation.gt(0)], ['age 13 cohort', 'born after release'], default='other')).query(\"cohort != 'other' and recognition > 0\").groupby('cohort').agg(mean=('recognition','mean'), birth_year=('birth_year','first'))"
+  },
+  {
+    "id": "no-diggity-dropoff",
+    "source": "We also see a slow drop off among people who were not fully sentient when “No Diggity” was in its prime, individuals who were 5 years old or younger (or not born yet) in 1996.",
+    "claim": "Recognition is 82.1% among people 5 at release, 60.5% among people born in the release year, and 45.9% among people born after it.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song == 'BLACKstreet|||No Diggity'].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).assign(cohort=lambda d: np.select([d.generation.eq(-5), d.generation.eq(0), d.generation.gt(0)], ['age 5', 'release year', 'born after release'], default='other')).query(\"cohort != 'other' and recognition > 0\").groupby('cohort')['recognition'].agg(['mean','count'])"
+  },
+  {
+    "id": "the-sign-age-five",
+    "source": "Similar to “No Diggity,” notice the decline in knowledge of “The Sign” among people who were 5 years old when it was released in 1993",
+    "claim": "The Sign is recognized by 97.9% of people 13 at release and 90.5% of people 5 at release.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song == 'Ace Of Base|||The Sign'].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).query('generation in [-13, -5]')[['generation','recognition']]"
+  },
+  {
+    "id": "the-sign-half-teens",
+    "source": "Only half of readers currently in their teens recognized “The Sign.”",
+    "claim": "Recognition is 47.2% at generation 6, six years after The Sign’s release—about half.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song == 'Ace Of Base|||The Sign'].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).query('generation == 6')[['generation','recognition']]"
+  },
+  {
+    "id": "popular-average-decay",
+    "source": "This is a chart of all the songs that were recognized by more than 90% of people who were 13 to 15 years old when the song debuted. We’ve highlighted the average recognition rate, or the Popular Average.",
+    "claim": "The 58 songs recognized by more than 90% of people at age 13 average 95.8% recognition at age 13, 65.6% among people born in the release year, and 4.8% among people born 10 years after release.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.loc[ts['-13'] > 0.9, [str(i) for i in range(-13, 11)]].agg(['count','mean']).T"
+  },
+  {
+    "id": "wild-wild-west-genz",
+    "source": "The 1999 hit “Wild Wild West” by Will Smith has lower-than-expected recognition among Gen Z. These songs are fading at an accelerated rate.",
+    "claim": "Among people born two years before its release (generation -2, the first Gen Z cohort in the data), 19.6% recognized Wild Wild West, versus 71.5% on the Popular Average.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "pd.concat([ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song == 'Will Smith|||Wild Wild West'].assign(group='Wild Wild West'), ts.loc[ts['-13'] > 0.9].assign(group='Popular average')]).groupby('group')['-2'].agg(['mean','count'])"
+  },
+  {
+    "id": "backstreet-quit-fastest",
+    "source": "“Quit Playing Games” is the Backstreet Boys’ fastest-decaying hit",
+    "claim": "Quit Playing Games falls from 89.9% at age 13 to 29.9% among people born after its release, while Everybody falls from 97.4% to 80.8%.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song.isin(['Backstreet Boys, The|||Everybody','Backstreet Boys, The|||Quit Playing Games'])].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).assign(cohort=lambda d: np.select([d.generation.eq(-13), d.generation.gt(0)], ['age 13', 'born after release'], default='other')).query(\"cohort != 'other' and recognition > 0\").groupby(['song','cohort'])['recognition'].mean().unstack()"
+  },
+  {
+    "id": "underperforming-songs",
+    "source": "These songs are fading at an accelerated rate.",
+    "claim": "At the release-year cohort, recognition is 24.1% for Wild Wild West, 17.2% for You’re Still The One, 20.0% for Opposites Attract, 17.1% for If You Had My Love, and 29.7% for Quit Playing Games, all below the 65.6% Popular Average.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "pd.concat([ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song.isin(['Will Smith|||Wild Wild West',\"Shania Twain|||You're Still The One\",'Paula Abdul|||Opposites Attract','Jennifer Lopez|||If You Had My Love','Backstreet Boys, The|||Quit Playing Games'])], ts.loc[ts['-13'] > 0.9].assign(song='Popular average')]).groupby('song')[['-13','0']].mean()"
+  },
+  {
+    "id": "millennial-marker-songs",
+    "source": "There’s another fascinating cut of this data: songs that are generational markers, which are approaching zero recognition by Gen Z.",
+    "claim": "The six generational-marker songs fall from 59.5–80.1% at age 13 to 10.1–16.9% among people born after release, including All My Life (75.5% to 13.0%) and You Were Meant For Me (76.0% to 16.9%).",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song.isin(['Next|||Too Close','K-Ci and JoJo|||All My Life','Bone Thugs N Harmony|||Tha Crossroads','Lisa Loeb and Nine Stories|||Stay','Jewel|||You Were Meant For Me','TLC|||Creep'])].melt(id_vars=['artist_song','song'], var_name='generation', value_name='recognition').assign(generation=lambda d: d.generation.astype(int), recognition=lambda d: d.recognition.astype(float)).assign(cohort=lambda d: np.select([d.generation.eq(-13), d.generation.gt(0)], ['age 13', 'born after release'], default='other')).query(\"cohort != 'other' and recognition > 0\").groupby(['song','cohort'])['recognition'].mean().unstack()"
+  },
+  {
+    "id": "resilient-songs",
+    "source": "Other songs, meanwhile, remain unusually resilient and have higher-than-expected universal recognition.",
+    "claim": "In the release-year cohort, I Will Always Love You (86.4%), Wannabe (93.8%), Macarena (92.2%), Jump Around (89.5%), and Gangsta’s Paradise (88.1%) all exceed the 65.6% Popular Average.",
+    "tables": {
+      "ts": "data/time_series_90s_july13.csv"
+    },
+    "code": "pd.concat([ts.assign(song=ts.artist_song.str.strip()).loc[lambda d: d.song.isin(['Whitney Houston|||I Will Always Love You','Spice Girls, The|||Wannabe','Los Del Rio|||Macarena','House Of Pain|||Jump Around',\"Coolio|||Gangsta's Paradise\"])], ts.loc[ts['-13'] > 0.9].assign(song='Popular average')]).groupby('song')['0'].agg(['mean','count']).sort_values('mean', ascending=False)"
+  }
+]

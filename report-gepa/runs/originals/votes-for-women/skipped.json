@@ -1,0 +1,14 @@
+[
+  {
+    "source": "45 documents.",
+    "why": "The data contain 98 platform documents across 45 election years, and the story's own methods section says it analyzed 98 documents; 45 is not reproduced as a document count."
+  },
+  {
+    "source": "934,068 total words.",
+    "why": "Summing wordTotal over the 98 platform records gives 934,609 words, 541 more than the story's figure, so the number is not reproduced beyond rounding."
+  },
+  {
+    "source": "28,854 words related to women.",
+    "why": "Summing wordWomen over the 98 platform records gives 28,859 words, and summing the excerpt lengths in issues.json also gives 28,859, five more than the story's figure."
+  }
+]
