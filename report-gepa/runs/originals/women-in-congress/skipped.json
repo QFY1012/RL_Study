@@ -1,0 +1,90 @@
+[
+  {
+    "source": "bringing the House to 19% women",
+    "why": "The provided file lists only women members, not the total number of representatives, so the 19% share cannot be computed."
+  },
+  {
+    "source": "making up 20% of representatives",
+    "why": "The 89 women are reproducible from women_reps.csv, but the total number of representatives is not in any provided file, so the 20% share cannot be computed."
+  },
+  {
+    "source": "For every woman currently serving in the House, there are nearly 4 men.",
+    "why": "Requires the total number of male or total representatives, which is not in the provided files; only women members are listed."
+  },
+  {
+    "source": "In 2018, 33% of Democratic House members are women.",
+    "why": "Requires the total number of Democratic House members; the provided files contain only women members, so the 33% share cannot be computed."
+  },
+  {
+    "source": "On the other hand, only 10% of current Republicans in the House are women.",
+    "why": "Requires the total number of Republican House members; the provided files contain only women members, so the 10% share cannot be computed."
+  },
+  {
+    "source": "The US, on the other hand, ranks 28th out of 34.",
+    "why": "At the latest date in women_in_govt.csv (2018-01-01) the United States is 29th of 34. The 28th place appears only with the 2017 data point, or when the story's separate US House series (about 20.3%) replaces the World Bank US value; the story does not state a 2017 cutoff, so the ranking is not reproduced under a single story-defined period."
+  },
+  {
+    "source": "Median woman: 16.1% / Median man: 7.7%",
+    "why": "These chart labels are not reproduced from baked_positions.csv: the median shares are 16.3% for women and 7.5% for men. The 'more than twice' part of the finding is reproducible (ratio 2.16), but the exact labelled percentages are not."
+  },
+  {
+    "source": "A difference of +100% (e.g., as is the case with “child welfare”) means that women are twice as likely as men to refer to the topic in a speech.",
+    "why": "In baked_positions.csv the median child-welfare share is 1.43% for women and 0.81% for men, a ratio of 1.77 (+77%), not 2.0 (+100%)."
+  },
+  {
+    "source": "Women representatives focus more of their speeches on healthcare, civil rights, labor rights and the environment.",
+    "why": "The data show women higher on healthcare, african-americans (civil rights) and worker's rights (labor rights), but the environment median is slightly lower for women (1.34% versus 1.36% for men), so the full list is not reproduced."
+  },
+  {
+    "source": "Gender bias of topics",
+    "why": "The chart's per-topic relative gender-bias values are not reproduced from baked_positions.csv; recomputing them gives different values (for example, child welfare is +77% rather than +100%, and environment is slightly male-favored rather than female-favored)."
+  },
+  {
+    "source": "The only two countries in the world to meet or exceed 50% women in governing bodies are Bolivia and Rwanda (not visualized here)",
+    "why": "women_in_govt.csv contains 34 OECD countries only; Bolivia and Rwanda are not in the data."
+  },
+  {
+    "source": "Many of these countries, such as Norway, Sweden, and Mexico have also implemented gender quotas to improve representation, although Iceland, notably, has not.",
+    "why": "The provided files contain no information on gender quotas."
+  },
+  {
+    "source": "She served 12 terms in the House of Representatives.",
+    "why": "women_reps.csv records three multi-year service periods for Patsy Mink (1965-1971, 1971-1977, 1990-2002), not 12 individual terms, so the 12 cannot be computed."
+  },
+  {
+    "source": "Jeanette Rankin was the first woman elected to the House of Representatives on November 7, 1916.",
+    "why": "The data give Rankin's first term_start as 1917-03-04 (the earliest term start), but contain no election dates; the 1916 election date is not reproducible."
+  },
+  {
+    "source": "Patsy Matsu Takemoto Mink (竹本 まつ), a liberal Democrat from Hawaii, was the first woman of color to be elected to Congress.",
+    "why": "The data contain no race or ethnicity information, so 'first woman of color' cannot be verified."
+  },
+  {
+    "source": "Shirley Chisholm became, in 1968, the first black woman elected to Congress",
+    "why": "The data contain no race information and no election dates, so the 1968 first-black-woman claim cannot be verified."
+  },
+  {
+    "source": "after earning 152 delegates at the national convention",
+    "why": "Delegate counts are not in the provided data."
+  },
+  {
+    "source": "The House is still a long way from gender parity.",
+    "why": "This depends on the share of the House that is women, which requires total membership not present in the provided files."
+  },
+  {
+    "source": "While approximately a fifth of the House is women, it’s important to place the imbalance in context of other countries.",
+    "why": "The one-fifth share requires the total number of representatives, which is not in the provided files."
+  },
+  {
+    "source": "In the upcoming 2018 midterm elections, a record number of women have filed to (or are planning to) run for a House seat (as of June 2018)",
+    "why": "The candidate data (house_candidates.csv) is not among the provided files."
+  },
+  {
+    "source": "Democratic women candidates in particular are running in record numbers, but Republican women candidates are also on the rise.",
+    "why": "The candidate data (house_candidates.csv) is not among the provided files, so the party candidate counts cannot be computed."
+  },
+  {
+    "source": "Women House Candidates over Time",
+    "why": "The chart's candidate counts (including the 2018 labels 112 and 102) come from house_candidates.csv, which is not among the provided files."
+  }
+]

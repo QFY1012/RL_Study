@@ -1,0 +1,330 @@
+[
+  {
+    "source": "We were able to identify 1,488 wines with animals on the label.",
+    "why": "This is a count of the records in the dataset, not a finding drawn from the data."
+  },
+  {
+    "source": "omitted categories with fewer than 20 animals, leaving us with these 16 groupings",
+    "why": "This describes how the categories were built and how many categories remain, not a finding drawn from the data."
+  },
+  {
+    "source": "Now let’s explode the chart so we can see all 1,409 animal wines we identified under $150.",
+    "why": "This is a count of records in a price subset, not a finding drawn from the data (the file gives 1,409 wines at or below $150)."
+  },
+  {
+    "source": "Total wines",
+    "why": "The per-group counts (38, 23, 462, 98, 115, 260, 46, 50, 62, 144, 33, 123, 23, 28, 25, 57) describe how many records each category contains, not findings about the wines."
+  },
+  {
+    "source": "Overall, the median price for wines with animals on the label ($26.99) was $3 cheaper than wines without animals ($29.99), but both groups had a median rating of 4 stars.",
+    "why": "The animal-wine side ($26.99, 4 stars) is reported in facts.json, but the wines without animals needed for the $29.99 median and the comparison are not in the file."
+  },
+  {
+    "source": "This means that — above all else — you’re better off buying any animal than no animal at all.",
+    "why": "This conclusion depends on the missing non-animal wines."
+  },
+  {
+    "source": "White wines overall had a lower median price ($25.50) than red wines ($44.95), which really helps tip the good deal scales in favor of fish.",
+    "why": "In the animal-only file the medians are $23.83 for white and $41.92 for red; the $25.50/$44.95 values appear to use the full all-wines data, which is not provided."
+  },
+  {
+    "source": "White wines have a median price that’s nearly $20 lower than red wines ($25.50 compare to $44.95)",
+    "why": "In the animal-only file the medians are $23.83 for white and $41.92 for red; the full all-wines baseline is not provided."
+  },
+  {
+    "source": "Median price $21.74 22.49 22.66 22.67 23.22 24.22 24.99 25.24 25.99 28.99 29.99 30.49 30.97 31.55 34.99 38.43",
+    "why": "The all-item median-price series does not reproduce: the file gives a $29.99 canine median (not $28.99) and a $38.99 cat median (not $38.43); the matching group values are reported in facts.json."
+  },
+  {
+    "source": "Good deals 5.3 6.0 8.7 9.6 10.4 10.7 12.0 13.0 13.9 15.4 16.5 18.2 19.3 21.4 24.2",
+    "why": "The all-item good-deal series does not reproduce: using below $29.99 and at least 4 stars, the file gives bird 17.5%, cat 10.7%, cattle 15.2%, horse 15.3% and sheep 21.1%, not the labeled 16.5%, 9.6%, 13%, 13.9% and 19.3%."
+  },
+  {
+    "source": "Median price $28.99",
+    "why": "The canine group’s median price in the file is $29.99."
+  },
+  {
+    "source": "Median price $38.43",
+    "why": "The cat group’s median price in the file is $38.99."
+  },
+  {
+    "source": "Median price $23.45",
+    "why": "The pachyderm panel says $23.45, but the file (and the story’s own median-price chart label) gives $24.22."
+  },
+  {
+    "source": "Of the 260 cats we saw",
+    "why": "The file has 261 rows assigned to the cat group."
+  },
+  {
+    "source": "Here are the cats. 9.6% are good deals.",
+    "why": "Using below $29.99 and at least 4 stars, 10.7% of the cat group are good deals."
+  },
+  {
+    "source": "Last up, the birds. 16.5% are good deals.",
+    "why": "Using below $29.99 and at least 4 stars, 17.5% of the bird group are good deals."
+  },
+  {
+    "source": "Good deals 13%",
+    "why": "Cattle: using below $29.99 and at least 4 stars, 15.2% of the cattle group are good deals."
+  },
+  {
+    "source": "Good deals 13.9%",
+    "why": "Horse: using below $29.99 and at least 4 stars, 15.3% of the horse group are good deals."
+  },
+  {
+    "source": "Good deals 19.3%",
+    "why": "Sheep: using below $29.99 and at least 4 stars, 21.1% of the sheep group are good deals."
+  },
+  {
+    "source": "Songbirds offered a much better prospect. Not only do they tend to fall below the line, with 22.4% in the sweet spot",
+    "why": "Using below $29.99 and at least 4 stars, 23.5% of songbird wines are good deals."
+  },
+  {
+    "source": "Only 11 shorebirds were recorded, but over half plotted in the golden quadrant, so they may be worth keeping an eye on.",
+    "why": "The file has 11 wines in the shorebird subgroup, but only 36.4% are good deals (4 of 11), not over half."
+  },
+  {
+    "source": "Raptors or birds of prey had the steepest curve and some of the highest prices",
+    "why": "The story does not state a checkable number for the curve or a price ranking; the file cannot reproduce the regression claim directly."
+  },
+  {
+    "source": "Junglefowl (chickens) and game birds are a good bet for this as well, but they lack some of the higher-rating drops.",
+    "why": "This is a qualitative comparison of distributions, not a stated number or ranking."
+  },
+  {
+    "source": "There’s also the duck. Across all entries, ducks had some of the most reliable plotting of any animal, falling very near the average across all prices.",
+    "why": "This is a qualitative regression/distribution claim with no stated statistic."
+  },
+  {
+    "source": "Spook Light, unfortunately, was the worst deal of the lot despite being a white wine from New Zealand, like our eventual champion.",
+    "why": "There is no defined deal score to rank ‘worst deal’; in the file Spook Light is typed as a rosé, not a white wine."
+  },
+  {
+    "source": "Their graph is sort of cinched in the middle, with a concentration in the bad-cheap and good-expensive categories. This makes them a very good indicator of quality: expensive canines are — almost always — very good. But the inverse is also true.",
+    "why": "This is a qualitative description of the canine price-rating distribution without a stated statistic."
+  },
+  {
+    "source": "Of the 260 cats we saw, 197 were heraldic lions",
+    "why": "The file has 196 cat-group wines whose finalAnimal contains ‘lion crest’."
+  },
+  {
+    "source": "a further 40 were lions sans crest",
+    "why": "The file has 41 cat-group wines whose finalAnimal contains ‘lion’ but not ‘lion crest’."
+  },
+  {
+    "source": "a grand total of 24 cats were anything but a lion",
+    "why": "The file has 23 cat-group wines whose finalAnimal does not contain ‘lion’."
+  },
+  {
+    "source": "it's a 12-to-12 split of house cats and literally everything else",
+    "why": "The file has 12 house-cat wines and 11 other non-lion cats."
+  },
+  {
+    "source": "48.7% of lions with crests appeared on red wines",
+    "why": "The file gives 49.0% red among cat-group wines with ‘lion crest’."
+  },
+  {
+    "source": "49.7% were from France",
+    "why": "The file gives 50.0% French among cat-group wines with ‘lion crest’."
+  },
+  {
+    "source": "All cat subgroups had a median rating of 4.1 except for house cats, which landed at a 4.0",
+    "why": "The house-cat median in the file is 4.05, which the story rounds to 4.0; the other cat subgroups do have a 4.1 median."
+  },
+  {
+    "source": "the median price for a heraldic lion was $39.99, $5 more than a plain lion for the same rating ($34)",
+    "why": "The heraldic-lion median ($39.99) matches, but the plain-lion median in the file is $35.99, a $4 difference."
+  },
+  {
+    "source": "But the other big cats — literally anything that isn’t a lion or a house cat — were a great bet, with a median price of $31.49",
+    "why": "The file gives a $27.17 median for non-lion, non-house-cat wines."
+  },
+  {
+    "source": "So if you want a good wine, be prepared to pay.",
+    "why": "This is a qualitative conclusion, not a stated statistic."
+  },
+  {
+    "source": "France produced 33.6% percent of all animal wines in the dataset, but only 6.5% percent of cattle.",
+    "why": "France is 22.2% of the animal wines in the file, not 33.6%. The 6.5% cattle share matches and is reported in facts.json, but the all-animal comparison does not."
+  },
+  {
+    "source": "This same pattern was present in the original dataset collected in New Zealand supermarkets",
+    "why": "The New Zealand supermarket dataset is not included in the file."
+  },
+  {
+    "source": "If you see a bull, bet that it’s a relatively-cheap red wine from a Spanish-speaking country.",
+    "why": "This is a qualitative recommendation; only the 50% red-cattle country share is stated and reproduced separately."
+  },
+  {
+    "source": "Seven of the 8 stags we identified featured the word “stag” in their name",
+    "why": "The file has 6 wines in the stag subgroup, and only 3 have ‘stag’ in the name."
+  },
+  {
+    "source": "Deer are like cattle but more expensive, and instead of being found in Chile, Argentina, and Spain they’re more likely to be from South Africa or Germany compared to all wines.",
+    "why": "The relative-likelihood comparison needs the all-wines baseline, which is not in the animal-only file."
+  },
+  {
+    "source": "One third of them are below $20",
+    "why": "In the file 38.7% of fish wines are below $20, not one third."
+  },
+  {
+    "source": "15% of wines from Australia are fish wines, compared to 3% overall.",
+    "why": "In the file 17.3% of Australian wines are fish wines (9 of 52), and fish are 4.2% of animal wines, not 3%."
+  },
+  {
+    "source": "When looking for a good deal, assuming you like white wines, buy an underwater creature from the antipodes. A full quarter of them are good deals",
+    "why": "Fish plus marine invertebrates from Australia, New Zealand and South Africa are 18.2% good deals in the file (22 wines), not a quarter."
+  },
+  {
+    "source": "Wines from these countries tend to be cheaper than their European counterparts and at lower prices",
+    "why": "This is a qualitative cross-country price comparison with no stated statistic."
+  },
+  {
+    "source": "Italy and Chile were statistically more likely than all other counties to feature horses.",
+    "why": "The statistical ‘more likely than all wines’ claim needs the all-wines z-score baseline, which is not in the file."
+  },
+  {
+    "source": "Horses overall tended to avoid the $20-$30 mark. The graph suggests that a handful of horse labels bucked this price point and migrated to the price bucket just below it, from $10-$20.",
+    "why": "This is a qualitative bucket-distribution description without a stated number."
+  },
+  {
+    "source": "every single invert wine in the top right quadrant is a nautilus, meaning they’re overpriced",
+    "why": "In the file the top-right (above $29.99 and above 4 stars) marine-invertebrate wines include brittle stars, an octopus and nautilus, not only nautilus."
+  },
+  {
+    "source": "Italy had a statistically higher percentage of mythical wines than all wines (30% compared to 21%).",
+    "why": "The 30.1% Italian share of mythical wines matches and is reported in facts.json, but the 21% all-wines baseline is not in the animal-only file (Italy is 21.8% of animal wines)."
+  },
+  {
+    "source": "if you had to guess the price of a unicorn, it’s just as likely to be $100 as it is $40.",
+    "why": "This is a loose statement about the price distribution without defined bins or a stated test."
+  },
+  {
+    "source": "And that might be because the predominant animal is a bull, a cheap animal, while the mythic is hidden in the bottle’s crest.",
+    "why": "This is an interpretive explanation, not a stated statistic."
+  },
+  {
+    "source": "Elephants, rhinos, and hippos were remarkably consistent. They tended to be on the cheaper end, on the lesser side of quality, and overwhelmingly from South Africa.",
+    "why": "The qualitative parts are not a stated statistic; in the file only 26.1% of pachyderm wines are South African."
+  },
+  {
+    "source": "25% of wines from South Africa were pachyderms compared to only 5% of all animal wines.",
+    "why": "In the file 7.5% of South African wines are pachyderms (6 of 80), and pachyderms are 1.5% of animal wines, not 25%/5%."
+  },
+  {
+    "source": "The majority of wines featuring pigs were red wines",
+    "why": "Red is only a 46.4% plurality of pig wines in the file, not a majority."
+  },
+  {
+    "source": "Pig wines were popular in Spain and Portugal, the natural habitat of the Iberian pig.",
+    "why": "This is a qualitative popularity statement; Spain and Portugal together account for 25% of pig wines."
+  },
+  {
+    "source": "If you’re buying a pig, maybe try a rosé. They scored better in this category than other animals",
+    "why": "The story gives no number for rosé pig ratings; the file’s rosé pig median is 3.7, not better than the 3.8 overall pig median."
+  },
+  {
+    "source": "Rabbits didn’t stand out in the data much, but they were favorites in Germany and Austria",
+    "why": "This is a qualitative country-affinity statement without a stated share or test."
+  },
+  {
+    "source": "Austria’s Hasenhaide Rosé is the cheapest, highest rated rabbit bottle you can find at $23 and 4.1 stars.",
+    "why": "The price and 4.1 stars reproduce, but the file has higher-rated rabbit wines (up to 4.5), so the ‘highest rated’ superlative does not."
+  },
+  {
+    "source": "Wines with sheep were statistically more likely to be priced between $10–19.99 (42% compared to 25% of all wines)",
+    "why": "The sheep share (42.1%) matches and is reported in facts.json, but the all-wines share in the file is 29.1%, not 25%."
+  },
+  {
+    "source": "14% of all South African wines featured sheep compared to 3% of all wines.",
+    "why": "In the file 10.0% of South African wines are sheep wines (8 of 80); 14% is instead the share of sheep wines that are South African. The 3% all-wines share does not match either (3.8%)."
+  },
+  {
+    "source": "A $15–$20 sheep wine is a solid bet across all markets",
+    "why": "This is a qualitative recommendation, not a stated statistic."
+  },
+  {
+    "source": "Bears were one of the most country-specific animals, almost always coming from the United States.",
+    "why": "The US share of bear wines in the file is 60.9%, not ‘almost always’."
+  },
+  {
+    "source": "the crest-bearing bears were actually a very good indicator of a good deal. If you see a crest with a bear-like (or at least tailless) animal, it’s more likely to be in the golden quadrant than a classic lion.",
+    "why": "The file has no crest/no-crest flag for bears, so this comparison cannot be reconstructed."
+  },
+  {
+    "source": "only 0.6% of the wines had confidence scores of something other than 0 or 1",
+    "why": "The file has no GPT confidence-score column."
+  },
+  {
+    "source": "birds are the middle of the pack for both price and quality",
+    "why": "‘Middle of the pack’ has no defined rank or cutoff; in the file birds are 8th of 16 on median price and have a 4.0 median rating."
+  },
+  {
+    "source": "amphibian/reptile Wine characteristics & distribution: More likely to be between $60–69.99, $90–99.99, or $100–109.99, less likely to be between $20–29.99 / Less likely to be rated between 3.1–3.5 stars / Less likely to be a rosé wine / More likely to be from the United States, Australia, or Chile, less likely to be from Italy or Portugal",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "bear Wine characteristics & distribution: More likely to be between $30–39.99, $40–49.99, $110–119.99, or $120–129.99, less likely to be between $20–29.99, $70–79.99, $80–89.99, $90–99.99, or $150 and above / More likely to be rated between 4.1–4.5 stars or 4.6 stars and above, less likely to be rated between 3.6–4 stars / Less likely to be a dessert or sparkling wine / More likely to be from the United States, less likely to be from Italy, Portugal, or Australia",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "bird Wine characteristics & distribution: Prices for bird wines follow the overall distribution / Ratings for bird wines follow the overall distribution / Types of wine for bird wines follow the overall distribution / Countries for bird wines follow the overall distribution",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "bug Wine characteristics & distribution: More likely to be between $20–19.99 / More likely to be rated between 3.1–3.5 stars / Less likely to be a red wine / Countries for bug wines follow the overall distribution",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "canine Wine characteristics & distribution: More likely to be between $60–69.99 or $90–99.99 / Ratings for canine wines follow the overall distribution / Types of wines for canine wines follow the overall distribution / Less likely to be from Spain",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "cat Wine characteristics & distribution: More likely to be less than $10, or between $50–59.99 $70–79.99, $80–89.99, $130–139.99, $140–149.99 or $150 and above, less likely to be between $10–19.99 / More likely to be rated between 4.1–4.5 stars, less likely to be rated between 3.6–4 stars / More likely to be a dessert, fortified, or sparkling wine, less likely to be a rosé or white wine / More likely to be from France, less likely to be from Spain",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "cattle Wine characteristics & distribution: More likely to be between $40–49.99 or $90–99.99, significantly less likely to be between $30–39.99 or $80–89.99 / More likely to be rated 4.6 stars and above, less likely to be rated between 4.1–4.5 stars / More likely to be a red wine, less likely to be a rosé wine / More likely to be from Spain, Argentina, and Chile, less likely to be from France or Australia",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "deer Wine characteristics & distribution: More likely to be between $30–39.99, $70–79.99, or $100–109.99, less likely to be between $50–59.99 or $90–99.99 / Less likely to be rated 4.6 stars and above / Less likely to be a dessert wine / More likely to be from South Africa and Germany, significantly less likely to be from Italy or Portugal",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "fish Wine characteristics & distribution: More likely to be between $10–19.99 and $20–29.99, less likely to be between $40–49.99, $60–69.99, $70–79.99, or $90–99.99 / More likely to be rated between 3.6–4 stars, less likely to be rated between 3.1–3.5 or 4.1–4.5 stars / More likely to be a white wine, less likely to be a red wine / More likely to be from Australia, less likely to be from Italy",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "horse Wine characteristics & distribution: More likely to be between $40–49.99, less likely to be under $10 or between $20–29.99 / More likely to be rated between 3.1–3.5 stars / More likely to be a dessert wine / More likely to be from Italy or Chile, less likely to be from Spain",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "marine invertebrate Wine characteristics & distribution: More likely to be below $10, between $10–19.99, $30–39.99, or $40–49.99, less likely to be between $50–59.99, $60–69.99, $70–79.99, $80–89.99, or $150 and above / More likely to be rated between 3.6–4 stars, less likely to be rated between 4.1–4.5 stars or 4.6 stars and above / More likely to be a dessert or white wine, less likely to be a red wine / More likely to be from France, Spain or New Zealand, less likely to be from Portugal or Australia",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "mythical creature Wine characteristics & distribution: More likely to be between $50–59.99, $70–79.99, $80–89.99, $100–109.99, $120–129.99, $130–139.99, or $140–149.99, less likely to be between $10–19.99 / More likely to be rated between 4.1–4.5 stars, less likely to be rated between 3.6–4 stars / More likely to be a fortified wine / More likely to be from Italy",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "pachyderm Wine characteristics & distribution: More likely to be between $20–29.99 and $150 and above, less likely to be between $30–39.99, $70–79.99, $80–89.99, or $90–99.99 / More likely to be rated between 3.1–3.5 stars or 4.6 stars and above, less likely to be rated between 4.1–4.5 stars / Less likely to be a dessert or sparkling wine / More likely to be from South Africa, less likely to be from Spain or Australia",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "pig Wine characteristics & distribution: More likely to be between $30–39.99 or $120–129.99, less likely to be between $40–49.99, $50–59.99, $60–69.99, $80–89.99, or $90–99.99 / More likely to be rated 3 stars and less, less likely to be rated between 4.6 stars and above / More likely to be a fortified or rosé wine, less likely to be a white wine / More likely to be from Spain, Portugal, or New Zealand",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "rabbit Wine characteristics & distribution: More likely to be between $30–39.99, $90–99.99, or $110–119.99, less likely to be between $10–19.99, $50–59.99, $70–79.99, or $80–89.99 / More likely to be rated 4.6 stars and above / More likely to be a dessert wine / More likely to be from Spain, Argentina, Germany, or Austria less likely to be from Portugal",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "sheep Wine characteristics & distribution: More likely to be between $10–19.99 or $130–139.99, less likely to be between $40–49.99, $70–79.99, or $90–99.99 / More likely to be rated between 3.6–4 stars, less likely to be rated between 4.1–4.5 stars / less likely to be a dessert or sparkling wine / More likely to be from South Africa",
+    "why": "These are z-score comparisons of each animal group’s bucket distribution against all wines; the file contains only the animal wines, so the all-wines baseline needed to reproduce the more/less-likely calls is absent."
+  },
+  {
+    "source": "All the animals in this category were statistically more likely to be found on American, Australian, or Chilean wines than all wines",
+    "why": "This statistical more-likely-than-all-wines claim needs the all-wines baseline and z-scores; the file contains only animal wines. The separate raw-count claim about the United States is reported in facts.json."
+  }
+]

@@ -1,0 +1,96 @@
+{
+ "id": "wiki-breakout",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 604,
+  "steps": 60,
+  "tools": 70,
+  "nudged": 0,
+  "usage": {
+   "input": 85707,
+   "output": 82499
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 12,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "cardi-most-pageviews",
+   "basis": "nlargest(1) sum: Cardi_B 20728078",
+   "verdict": "ok"
+  },
+  {
+   "id": "cardi-19-months-to-10k",
+   "basis": "first_month=19, last_month=33, min_views=17575, months=15",
+   "verdict": "ok"
+  },
+  {
+   "id": "first-three-are-musicians",
+   "basis": "top 3: Cardi_B music/rapper; XXXTentacion music/rapper; Dua_Lipa music/singer",
+   "verdict": "ok"
+  },
+  {
+   "id": "sophie-turner-top-actor",
+   "basis": "Sophie_Turner total=7123513; nlargest(1) among category_specific actor",
+   "verdict": "ok"
+  },
+  {
+   "id": "carson-wentz-first-athlete",
+   "basis": "Carson_Wentz total=3672497; nlargest(1) among category_broad sports",
+   "verdict": "ok"
+  },
+  {
+   "id": "ram-nath-first-non-american-politician",
+   "basis": "top 3 politics: Steve_Bannon 7.127145e+06, Betsy_DeVos 6.713215e+06, Ram_Nath_Kovind 3.863585e+06; descriptions American/United States/Indian",
+   "verdict": "ok"
+  },
+  {
+   "id": "riverdale-three-actresses",
+   "basis": "category_specific actor size=3 list=[Camila_Mendes, Lili_Reinhart, Madelaine_Petsch]",
+   "verdict": "ok"
+  },
+  {
+   "id": "sixnine-late-debut",
+   "basis": "2015 people=88 share=63.8; year2017 sixnine=20171129.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "ninja-overnight-jump",
+   "basis": "timestamp=20180416 prev=0.0 level=7 jump=7.0",
+   "verdict": "ok"
+  },
+  {
+   "id": "billie-eilish-incremental-levels",
+   "basis": "level first timestamps: 2:20170415, 3:20170421, 4:20170620, 5:20170918, 6:20171116, 7:20180516",
+   "verdict": "ok"
+  },
+  {
+   "id": "juice-wrld-maintains-5k",
+   "basis": "last three medians: 5711, 5544, 4923 at 20180715,20180814,20180913",
+   "verdict": "ok"
+  },
+  {
+   "id": "risen-vs-rising-counts",
+   "basis": "False=105 share=76.1; True=33 share=23.9",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "cardi-19-months-to-10k",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "ninja-overnight-jump",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 10,
+ "skipped": 34
+}

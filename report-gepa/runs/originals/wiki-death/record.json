@@ -1,0 +1,72 @@
+{
+ "id": "wiki-death",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 848,
+  "steps": 80,
+  "tools": 122,
+  "nudged": 0,
+  "usage": {
+   "input": 138683,
+   "output": 109500
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 8,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "prince-48-hour-pageviews",
+   "basis": "Output sum views_adjusted = 11147180.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "prince-hawking-most-traffic",
+   "basis": "Output top two are Prince (musician) 11147180.0 and Stephen Hawking 8384446.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "largest-percent-increases",
+   "basis": "Output top increases are Kate Spade 161429.097780, Chester Bennington 160920.887647, Roy Halladay 122065.608466, Avicii 112358.037125, Garry Shandling 104340.302491; bottom shown increase is Charles Manson 5995.401259.",
+   "verdict": "ok"
+  },
+  {
+   "id": "prince-seven-weeks-until-normal",
+   "basis": "Output = 7.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bourdain-traffic-remains-high",
+   "basis": "Output death_index size 29.0, normal 0.0, min views_adjusted 21625.0, upper bound 10242.405554.",
+   "verdict": "ok"
+  },
+  {
+   "id": "oriordan-highest-sustained-increase",
+   "basis": "Output top row is Dolores O'Riordan with mean_increase 11.894594.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wes-craven-halloween-spike",
+   "basis": "Output shows 20151030 death_index 61 views_adjusted 20411.0 and 20151031 death_index 62 views_adjusted 55806.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "cornell-bennington-spike",
+   "basis": "Output shows 20170719 views_adjusted 7845.0, 20170720 482258.0, and 20170721 918324.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "oriordan-highest-sustained-increase",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 7,
+ "skipped": 7
+}

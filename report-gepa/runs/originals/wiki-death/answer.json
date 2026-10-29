@@ -1,0 +1,72 @@
+[
+ {
+  "id": "prince-48-hour-pageviews",
+  "source": "In the 48 hours after Prince’s death was reported, he accumulated over 11 million pageviews on Wikipedia.",
+  "claim": "Prince's pageviews in the 48 hours after his death totaled 11,147,180.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "v[(v.pageid == p.loc[p.name=='Prince (musician)','pageid'].iloc[0]) & (v.death_index.isin([0,1]))].views_adjusted.sum()"
+ },
+ {
+  "id": "prince-hawking-most-traffic",
+  "source": "It makes sense that household names like Prince and Stephen Hawking get the most traffic immediately following their death. The bigger the star (or tragedy), the more they are searched.",
+  "claim": "Prince (11,147,180) and Stephen Hawking (8,384,446) had the two highest 48-hour pageview totals after death.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "p.merge(v[v.death_index.isin([0,1])].groupby('pageid',as_index=False).views_adjusted.sum().rename(columns={'views_adjusted':'views48'}), on='pageid').sort_values('views48',ascending=False)[['name','views48']].head(2)"
+ },
+ {
+  "id": "largest-percent-increases",
+  "source": "Name\nAvg. 48 hr. views\nbefore death\nViews 48 hrs.\nafter death\nIncrease (%)",
+  "claim": "Among the people who met the story's pageview filters, the increase in 48-hour pageviews ranged from 5,995% (Charles Manson) to 161,429% (Kate Spade); the largest increases were Kate Spade (161,429%), Chester Bennington (160,921%), Roy Halladay (122,066%), Avicii (112,358%) and Garry Shandling (104,340%).",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "p.merge(v[v.death_index.isin([0,1])].groupby('pageid',as_index=False).views_adjusted.sum().rename(columns={'views_adjusted':'views48'}), on='pageid').query('views48>=500000 and median_views_adjusted_before>=500 and timestamp_of_death>=20150731 and timestamp_of_death<=20180702').assign(increase=lambda d: d.views48/d.median_views_adjusted_before*100).sort_values('increase',ascending=False)[['name','median_views_adjusted_before','views48','increase']]"
+ },
+ {
+  "id": "prince-seven-weeks-until-normal",
+  "source": "While Prince had the highest number of pageviews immediately after death, they returned to near-normal levels with a couple months.",
+  "claim": "Prince's pageviews returned to normal 7 weeks after death.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "v[v.pageid==p.loc[p.name=='Prince (musician)','pageid'].iloc[0]].sort_values('death_index').pipe(lambda d: np.floor((d[(d.death_index>=2) & (d.views_adjusted >= d[d.death_index<0].views_adjusted.median()-2*d[d.death_index<0].views_adjusted.std()) & (d.views_adjusted <= d[d.death_index<0].views_adjusted.median()+2*d[d.death_index<0].views_adjusted.std())].death_index.min()-1)/7))"
+ },
+ {
+  "id": "bourdain-traffic-remains-high",
+  "source": "At the time of publishing, Bourdain’s traffic remains steadily and significantly higher.",
+  "claim": "In the 29 days after death in the data, none of Bourdain's daily pageview counts fell within two standard deviations of his pre-death median; his lowest count (21,625) stayed above the upper bound (10,242), so his traffic had not returned to normal.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "v[(v.pageid==p.loc[p.name=='Anthony Bourdain','pageid'].iloc[0]) & (v.death_index>=2)].assign(lower=lambda d: v[(v.pageid==d.pageid.iloc[0])&(v.death_index<0)].views_adjusted.median()-2*v[(v.pageid==d.pageid.iloc[0])&(v.death_index<0)].views_adjusted.std(), upper=lambda d: v[(v.pageid==d.pageid.iloc[0])&(v.death_index<0)].views_adjusted.median()+2*v[(v.pageid==d.pageid.iloc[0])&(v.death_index<0)].views_adjusted.std(), normal=lambda d: (d.views_adjusted>=d.lower)&(d.views_adjusted<=d.upper)).agg({'death_index':'size','normal':'sum','views_adjusted':'min','upper':'max'})"
+ },
+ {
+  "id": "wes-craven-halloween-spike",
+  "source": "Director Wes Craven—credited for Nightmare on Elm Street, Scream, and other classics—died from brain cancer in August 2015. He saw a spike in pageviews two months later on Halloween.",
+  "claim": "Wes Craven's pageviews jumped from 20,411 on October 30, 2015 to 55,806 on October 31, 2015, day 62 after his death.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "v[(v.pageid==p.loc[p.name=='Wes Craven','pageid'].iloc[0]) & (v.timestamp.isin([20151030,20151031]))][['timestamp','death_index','views_adjusted']]"
+ },
+ {
+  "id": "cornell-bennington-spike",
+  "source": "Cornell's pageviews spiked when Linkin Park frontman Chester Bennington took his life in the same way on what would have been Cornell's 53rd birthday.",
+  "claim": "Chris Cornell's pageviews jumped from 7,845 on July 19, 2017 to 482,258 on July 20 and 918,324 on July 21.",
+  "tables": {
+   "p": "data/people.csv",
+   "v": "data/pageviews.csv"
+  },
+  "code": "v[(v.pageid==p.loc[p.name=='Chris Cornell','pageid'].iloc[0]) & (v.timestamp.isin([20170719,20170720,20170721]))][['timestamp','death_index','views_adjusted']]"
+ }
+]

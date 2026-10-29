@@ -1,0 +1,155 @@
+[
+ {
+  "id": "median-11-junior-size-9",
+  "source": "For now, our typical (or median) 11-year-old wears a size 9 in the junior’s section",
+  "claim": "The median waistline of girls aged 10–11 is 27.27 inches, nearest the 27.48-inch waist of a junior size 9 (0.21 inches away).",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['10','11'] and race=='all'\").assign(percent50=lambda d: d.percent50.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent50, weights=d.w), include_groups=False).to_frame('v').reset_index()[['v']].merge(astm.query(\"sizeRange=='junior'\")[['size','waist']], how='cross').assign(diff=lambda d: (d.waist-d.v).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "median-15-waistline",
+  "source": "Age 15 median 30.4\"",
+  "claim": "The median waistline of girls aged 14–15 is 30.37 inches.",
+  "tables": {
+   "waist": "data/waistlines.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['14','15'] and race=='all'\").assign(percent50=lambda d: d.percent50.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent50, weights=d.w), include_groups=False).to_frame('v').reset_index()"
+ },
+ {
+  "id": "median-15-size-10",
+  "source": "Here, the median 15-year-old’s waistline fits a size 10",
+  "claim": "The median waistline of girls aged 14–15 is 30.37 inches, nearest the 30.5-inch waist of a size 10 (0.13 inches away).",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['14','15'] and race=='all'\").assign(percent50=lambda d: d.percent50.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent50, weights=d.w), include_groups=False).to_frame('v').reset_index()[['v']].merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.v).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "median-15-medium",
+  "source": "The median 15-year-old wears a Medium, as she has throughout most of her childhood.",
+  "claim": "The ASTM size nearest the 30.37-inch median waistline of girls aged 14–15 is a size 10, labeled M.",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['14','15'] and race=='all'\").assign(percent50=lambda d: d.percent50.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent50, weights=d.w), include_groups=False).to_frame('v').reset_index()[['v']].merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.v).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "age-15-tenth-xs",
+  "source": "Girls who fall along the bottom 10th percentile can now wear an Extra Small in women’s clothing",
+  "claim": "The 10th-percentile waistline of girls aged 14–15 is 26.97 inches, nearest the 26.88-inch waist of a size 2, labeled XS.",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['14','15'] and race=='all'\").assign(percent10=lambda d: d.percent10.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent10, weights=d.w), include_groups=False).to_frame('v').reset_index()[['v']].merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.v).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "age-15-ninetieth-xl",
+  "source": "while girls near the 90th percentile will find that an Extra Large generally fits.",
+  "claim": "The 90th-percentile waistline of girls aged 14–15 is 38.18 inches, nearest the 38.25-inch waist of a size 18, labeled XL.",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age in ['14','15'] and race=='all'\").assign(percent90=lambda d: d.percent90.astype(float), w=lambda d: d.participants.str.replace(',','').astype(int)).groupby('yearRange').apply(lambda d: np.average(d.percent90, weights=d.w), include_groups=False).to_frame('v').reset_index()[['v']].merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.v).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "median-adult-size-18",
+  "source": "Altogether, the median adult woman over the age of 20 fits a size 18.",
+  "claim": "The median waistline of women 20 and over is 37.96 inches, nearest the 38.25-inch waist of a size 18 (0.29 inches away).",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age=='20 and over' and race=='all'\")[['percent50']].astype(float).merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.percent50).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "median-30s-size-16",
+  "source": "At this point the median woman is closer to a size 16 or Extra Large.",
+  "claim": "The median waistline of women aged 30–39 is 37.09 inches, nearest the 36.0-inch waist of a size 16, labeled XL (1.09 inches away).",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age=='30–39' and race=='all'\")[['percent50']].astype(float).merge(astm.query(\"year==2021 and sizeRange=='straight'\")[['size','alphaSize','waist']], how='cross').assign(diff=lambda d: (d.waist-d.percent50).abs()).nsmallest(1,'diff')"
+ },
+ {
+  "id": "over-half-beyond-size-16",
+  "source": "That leaves millions of people — over half of all adult women — who are excluded from standard size ranges.",
+  "claim": "The median waistline of women 20 and over, 37.96 inches, is 1.96 inches above the 36.0-inch waist of a size 16, so more than half of adult women are above the top of the standard straight range.",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age=='20 and over' and race=='all'\")[['percent50']].astype(float).merge(astm.query(\"year==2021 and sizeRange=='straight' and size==16\")[['waist']], how='cross').assign(above=lambda d: d.percent50-d.waist)"
+ },
+ {
+  "id": "under-10pct-fit-size-8",
+  "source": "According to U.S. health data, fewer than 10% of adult women have waistlines that fit the standard sample size or smaller.",
+  "claim": "The 10th-percentile waistline of women 20 and over, 30.36 inches, is 0.86 inches above the 29.5-inch waist of a size 8, so fewer than 10% of adult women have waistlines that fit the standard sample size or smaller.",
+  "tables": {
+   "waist": "data/waistlines.csv",
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "waist.query(\"yearRange=='2015-2018' and age=='20 and over' and race=='all'\")[['percent10']].astype(float).merge(astm.query(\"year==2021 and sizeRange=='straight' and size==8\")[['waist']], how='cross').assign(above=lambda d: d.percent10-d.waist)"
+ },
+ {
+  "id": "astm-1995-waist-range",
+  "source": "Roughly 30 years ago, ASTM guidelines covered waistlines between 24 and 36.5 inches, representing a 12.5-inch spread from size 2–20.",
+  "claim": "The 1995 ASTM straight chart runs from size 2 at 24.0 inches to size 20 at 36.5 inches, a 12.5-inch spread.",
+  "tables": {
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "astm.query(\"year==1995 and sizeRange=='straight'\").set_index('size').waist.agg(['idxmin','min','idxmax','max']).to_frame().T.assign(spread=lambda d: d['max']-d['min'])"
+ },
+ {
+  "id": "astm-2021-waist-span",
+  "source": "ASTM guidelines span 15.12 inches from 25.38–40.5 inches for sizes 00–20.",
+  "claim": "The twelve waist measurements in the 2021 ASTM straight chart span 15.12 inches, from 25.38 to 40.5 inches.",
+  "tables": {
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "astm.query(\"year==2021 and sizeRange=='straight'\").waist.agg(['min','max','count']).to_frame().T.assign(spread=lambda d: d['max']-d['min'])"
+ },
+ {
+  "id": "size-8-2-5-inches-larger",
+  "source": "By comparison, today’s size 8 is 2.5 inches larger in the waist than it was 30 years ago.",
+  "claim": "The waist of a size 8 is 29.5 inches in the 2021 ASTM chart against 27.0 inches in 1995, 2.5 inches larger.",
+  "tables": {
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "astm.query(\"sizeRange=='straight' and size==8\").set_index('year').waist.loc[[1995,2021]].to_frame().assign(growth=lambda d: d.waist.diff())"
+ },
+ {
+  "id": "every-astm-size-larger",
+  "source": "Today, because of vanity sizing, we can see an upward shift in all sizes.",
+  "claim": "All ten sizes shared by the 1995 and 2021 ASTM straight charts are larger in 2021: size 2 rises from 24.0 to 26.88 inches and size 20 from 36.5 to 40.5 inches.",
+  "tables": {
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "astm.query(\"sizeRange=='straight' and year in [1995,2021]\").pivot_table(index='size', columns='year', values='waist').dropna().assign(growth=lambda d: d[2021]-d[1995])"
+ },
+ {
+  "id": "astm-added-size-00-0",
+  "source": "In the early 2000s ASTM added size 00 and 0 to pad out the bottom of the range.",
+  "claim": "The 1995 and 2001 ASTM straight charts run from size 2 to 20 with 10 sizes, while the 2011 and 2021 charts run from size 0 (the 00 and 0 sizes) to 20 with 12 sizes.",
+  "tables": {
+   "astm": "data/ASTMsizes.csv"
+  },
+  "code": "astm.query(\"sizeRange=='straight'\").assign(sz=lambda d: d['size'].astype(float)).groupby('year').sz.agg(['min','max','count'])"
+ },
+ {
+  "id": "average-waist-nearly-4-wider",
+  "source": "The average woman’s waistline today is nearly 4 inches wider than it was in the mid-1990s.",
+  "claim": "The mean waistline of women 20 and over is 38.75 inches in 2015–2018 against 34.88 inches in 1988–1994, 3.87 inches wider.",
+  "tables": {
+   "waist": "data/waistlines.csv"
+  },
+  "code": "waist.query(\"yearRange in ['1988-1994','2015-2018'] and age=='20 and over' and race=='all'\").set_index('yearRange')['mean'].to_frame().sort_index().assign(growth=lambda d: d['mean'].diff())"
+ }
+]

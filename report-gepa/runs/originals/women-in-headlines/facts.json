@@ -1,0 +1,65 @@
+[
+  {
+    "id": "sue-most-in-us",
+    "source": "US headlines use the word sue significantly more than those from India, South Africa, or the UK, where suing may be a less common practice.",
+    "claim": "The word 'sue' appears in 170 United States headlines, 109 UK headlines, 75 Indian headlines and 21 South African headlines.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(h=d.headline_no_site.str.lower()).groupby('country').h.apply(lambda s: s.str.contains(r'\\bsue\\b').sum())"
+  },
+  {
+    "id": "muslim-most-in-india",
+    "source": "Muslim appears more frequently in Indian headlines, compared to the UK, the US, and South Africa, as local news in India often reports the religion of the story’s subject.",
+    "claim": "The word 'Muslim' appears in 1,293 Indian headlines, 489 UK headlines, 340 United States headlines and 22 South African headlines.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(h=d.headline_no_site.str.lower()).groupby('country').h.apply(lambda s: s.str.contains(r'\\bmuslim\\b').sum())"
+  },
+  {
+    "id": "gendered-words-fade",
+    "source": "the use of many gendered words (e.g.“sexy,” “fat,” “housewife” or “gossip”) has faded out over time",
+    "claim": "The share of headlines containing 'sexy' falls from 1.16% in 2005 to 0.05% in 2021, 'fat' from a peak of 0.57% in 2008 to 0.05%, 'housewife' from 0.58% in 2005 to 0.01%, and 'gossip' from a peak of 1.69% in 2009 to 0.20%.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(year=d.time.str[:4].astype(int), sexy=d.headline_no_site.str.lower().str.contains(r'\\bsexy\\b'), fat=d.headline_no_site.str.lower().str.contains(r'\\bfat\\b'), housewife=d.headline_no_site.str.lower().str.contains(r'\\bhousewife\\b'), gossip=d.headline_no_site.str.lower().str.contains(r'\\bgossip\\b')).groupby('year')[['sexy', 'fat', 'housewife', 'gossip']].mean().mul(100).round(2)"
+  },
+  {
+    "id": "empowering-words-rise",
+    "source": "the use of empowering words has increased over time (e.g. “founder,” “activist,” “leader” or “appoint”)",
+    "claim": "The share of headlines containing 'founder' rises from 0.02% in 2010 to 0.12% in 2021, 'activist' from 0.02% to 0.28%, 'leader' from 0.04% to 0.26%, and 'appoint' from 0.00% to 0.05%.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(year=d.time.str[:4].astype(int), founder=d.headline_no_site.str.lower().str.contains(r'\\bfounder\\b'), activist=d.headline_no_site.str.lower().str.contains(r'\\bactivist\\b'), leader=d.headline_no_site.str.lower().str.contains(r'\\bleader\\b'), appoint=d.headline_no_site.str.lower().str.contains(r'\\bappoint\\b')).groupby('year')[['founder', 'activist', 'leader', 'appoint']].mean().mul(100).round(2)"
+  },
+  {
+    "id": "death-hurt-drama-stable",
+    "source": "Other words (e.g. “death,” “hurt,” and “drama”) have instead stood the test of time, as their use has remained consistent since 2005.",
+    "claim": "The share of headlines containing 'death' ranges from 1.68% in 2011 to 3.51% in 2007 and is 2.16% in 2021, while 'hurt' and 'drama' stay below 0.2% in every year from 2005 to 2021.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(year=d.time.str[:4].astype(int), death=d.headline_no_site.str.lower().str.contains(r'\\bdeath\\b'), hurt=d.headline_no_site.str.lower().str.contains(r'\\bhurt\\b'), drama=d.headline_no_site.str.lower().str.contains(r'\\bdrama\\b')).groupby('year')[['death', 'hurt', 'drama']].mean().mul(100).round(2)"
+  },
+  {
+    "id": "transgender-spike-2015",
+    "source": "That was part of a wave of increased trans visibility that helps to explain why “transgender” shot up in 2015.",
+    "claim": "The share of headlines containing 'transgender' rises from 0.27% in 2014 to 0.74% in 2015.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(year=d.time.str[:4].astype(int), transgender=d.headline_no_site.str.lower().str.contains(r'\\btransgender\\b')).groupby('year').transgender.mean().mul(100).round(2)"
+  },
+  {
+    "id": "harassment-spike-2017",
+    "source": "That adds context to the sharp rise of “harassment” in 2017",
+    "claim": "The share of headlines containing 'harassment' rises from 0.33% in 2016 to 0.69% in 2017.",
+    "tables": {
+      "d": "data/headlines.csv"
+    },
+    "code": "d.assign(year=d.time.str[:4].astype(int), harassment=d.headline_no_site.str.lower().str.contains(r'\\bharassment\\b')).groupby('year').harassment.mean().mul(100).round(2)"
+  }
+]

@@ -1,0 +1,82 @@
+[
+ {
+  "source": "The median 20-something will eventually move up a letter size to a Large . In U.S. women’s sizing, this translates to a size 14 .",
+  "why": "The 20–29 waistline in waistlines.csv has a median of 35.0 inches, exactly 1.0 inch from both the size 14 (34.0 in) and size 16 (36.0 in) waists of the 2021 ASTM chart, so the data does not single out size 14."
+ },
+ {
+  "source": "Her waistline is 37.68 inches",
+  "why": "The file's latest period is 2015–2018, not the story's 2021–2023, and its median waistline for women 20 and over is 37.96 inches, so the 37.68-inch figure (and the 'Adult 37.7\"' chart label) is not reproduced; the size-18 conclusion is recorded in facts.json from the separate sentence 'Altogether, the median adult woman over the age of 20 fits a size 18.'"
+ },
+ {
+  "source": "Over this 30-year period, the median adult woman has almost always fit the size 18 that was available to her at the time.",
+  "why": "ASTMsizes.csv has charts only for 1995, 2001, 2011 and 2021 while waistlines.csv has six periods from 1988–1994 to 2015–2018; pairing each period with the nearest chart puts the median adult waistline nearest size 18 in only three of the six periods, so 'almost always' is not reproduced."
+ },
+ {
+  "source": "most “Straight” or “Regular” size ranges only go up to a size 16.",
+  "why": "This is about the 15 brands' size charts, which are not in data/; the ASTM straight charts in ASTMsizes.csv run to size 20."
+ },
+ {
+  "source": "For example, here’s every size that is labeled as Large , spanning waistlines from 29 to 34 inches.",
+  "why": "Brand size charts are not in data/; only the ASTM charts are provided."
+ },
+ {
+  "source": "At Reformation, she’s closer to a size 8. At Uniqlo, she’s considered a size 12.",
+  "why": "Reformation and Uniqlo size charts are not in data/."
+ },
+ {
+  "source": "For the average adult woman, there are as many as 10 different ways to describe the garments that she could conceivably wear from these brands alone. At Reformation she’s closer to a size 14. At Shein, she’s a 2XL in their plus size range.",
+  "why": "The 15 brands' size charts and their labels are not in data/."
+ },
+ {
+  "source": "Some Plus sizes start at size 12, others at 18. Others still consider any size from 00 to 30 as part of their Regular line.",
+  "why": "Brand plus-size ranges are not in data/; the only plus chart in ASTMsizes.csv (2004/2016) starts at 14W."
+ },
+ {
+  "source": "The median adult woman may also find herself in what’s informally called the “mid-size gap,” seen here in Anthropologie’s size chart.",
+  "why": "Anthropologie's size chart is not in data/."
+ },
+ {
+  "source": "They use a rigid set of dimensions, where the waist measurement is exactly 10 inches smaller than the hip for all sizes.",
+  "why": "J.Crew's size chart is not in data/."
+ },
+ {
+  "source": "A size 18 pair of pants from J.Crew might fit the median woman’s waist, but they’d likely be too large in the hips by at least 6 inches.",
+  "why": "J.Crew's chart and women's hip measurements are not in data/ (ASTMsizes.csv holds only standardized hip measurements)."
+ },
+ {
+  "source": "Conversely a size 12 would fit her hips best, but it’s unlikely that she’d be able to squeeze into a waistband that’s 6 inches smaller than her own.",
+  "why": "J.Crew's chart and women's hip measurements are not in data/."
+ },
+ {
+  "source": "Out of these 15 brands, only H&M comes close to the median woman’s shape, especially as sizes get bigger.",
+  "why": "The 15 brands' size charts are not in data/."
+ },
+ {
+  "source": "One 2007 study found that half of women (49%) in the U.S. were considered rectangle-shaped. Only 12% of women had a true hourglass figure.",
+  "why": "The percentages come from an external 2007 study; no body-shape data is in data/."
+ },
+ {
+  "source": "Most women do not have an exaggerated hourglass silhouette, instead the median woman is shaped more like a rectangle.",
+  "why": "Body-shape categories are not in data/ (they come from the external 2007 study)."
+ },
+ {
+  "source": "we know that the median woman's waist-to-hip difference is roughly half that of 'ideal' hourglass proportions.",
+  "why": "waistlines.csv has waist measurements only and ASTMsizes.csv gives standardized hips, not women's hips or busts; 'ideal hourglass' proportions are not defined in the data."
+ },
+ {
+  "source": "Median Bust: NA* Median Waist: 37.68\" Median Hip: 42\"",
+  "why": "The files hold no bust or hip measurements for women, and the adult median waistline in the file is 37.96 inches, not 37.68."
+ },
+ {
+  "source": "which is also considered a size Medium",
+  "why": "ASTMsizes.csv gives no alpha-size mapping for junior sizes; its junior rows' alphaSize column repeats the numeric size (0, 1, 3, …, 19)."
+ },
+ {
+  "source": "This means for the first time ever, most girls in their cohort will be able to find a size in the women’s clothing section.",
+  "why": "The files give waistline distributions but not which sizes are stocked or available, so 'most girls ... will be able to find a size' cannot be computed."
+ },
+ {
+  "source": "as she has throughout most of her childhood",
+  "why": "The Medium outcome is reproduced in facts.json, but the claim that she wore Medium throughout childhood cannot be checked: the junior sizes in ASTMsizes.csv carry numeric labels only, with no mapping to letter sizes."
+ }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "women-total-289",
+    "source": "Since then, 289 different women have represented their constituents in the House, bringing the House to 19% women.",
+    "claim": "The data contain 289 distinct women who have served in the House of Representatives.",
+    "tables": {
+      "r": "data/women_reps.csv"
+    },
+    "code": "r.id.nunique()"
+  },
+  {
+    "id": "women-serving-publication",
+    "source": "Presently, 89 women serve in the House, making up 20% of representatives.",
+    "claim": "At the story's publication date, 89 women were serving in the House.",
+    "tables": {
+      "r": "data/women_reps.csv"
+    },
+    "code": "((pd.to_datetime(r.term_start) <= '2018-07-10') & (pd.to_datetime(r.term_end) >= '2018-07-10')).sum()"
+  },
+  {
+    "id": "longest-serving-kaptur",
+    "source": "For example, this line is for the longest-serving woman House Member, Democrat Marcy Kaptur, who represents Ohio's 9th District.",
+    "claim": "Marcy Kaptur has the longest cumulative House service among the women in the data.",
+    "tables": {
+      "r": "data/women_reps.csv"
+    },
+    "code": "r.assign(days=(pd.to_datetime(r.term_end)-pd.to_datetime(r.term_start)).dt.days).groupby('name')['days'].sum().idxmax()"
+  },
+  {
+    "id": "rankin-only-montana-woman",
+    "source": "She is the only woman elected to Congress from Montana.",
+    "claim": "Jeannette Rankin is the only woman in the data whose district is in Montana.",
+    "tables": {
+      "r": "data/women_reps.csv"
+    },
+    "code": "r[r.district.str.contains('Montana')].name.unique()"
+  },
+  {
+    "id": "oecd-no-country-at-parity",
+    "source": "None of these countries have made it to gender parity.",
+    "claim": "No OECD country in the data reached gender parity; the highest share of women in parliament recorded was 47.6%.",
+    "tables": {
+      "g": "data/women_in_govt.csv"
+    },
+    "code": "g.women_parliament.max()"
+  },
+  {
+    "id": "nordic-countries-top-ten",
+    "source": "The Nordic countries lead in equal gender representation, although Mexico has also made great strides.",
+    "claim": "In 2018 all five Nordic countries were in the top ten by share of women in parliament: Sweden 43.6%, Finland 42.0%, Norway 41.4%, Iceland 38.1%, and Denmark 37.4%.",
+    "tables": {
+      "g": "data/women_in_govt.csv"
+    },
+    "code": "g[g.date==g.date.max()].nlargest(10,'women_parliament')[['date','country','women_parliament']]"
+  },
+  {
+    "id": "mexico-share-rise",
+    "source": "The Nordic countries lead in equal gender representation, although Mexico has also made great strides.",
+    "claim": "Mexico's share of women in parliament rose from 12.0% in 1990 to 42.6% in 2018.",
+    "tables": {
+      "g": "data/women_in_govt.csv"
+    },
+    "code": "g[g.country=='Mexico'].sort_values('date').iloc[[0,-1]][['date','women_parliament']]"
+  },
+  {
+    "id": "energy-nearly-identical",
+    "source": "Men and women representatives appear to devote roughly the same amount of their speeches to energy policy.",
+    "claim": "Women's median share of speech time on energy policy is 0.93% and men's is 0.92%, nearly identical.",
+    "tables": {
+      "b": "data/baked_positions.csv"
+    },
+    "code": "b.groupby('gender')['energy policy_y'].median()"
+  },
+  {
+    "id": "healthcare-more-than-twice",
+    "source": "While healthcare is an important topic for all representatives, women spent more than twice the amount of their speeches discussing healthcare and medical issues than men.",
+    "claim": "Women's median share of speech time on healthcare is 2.16 times men's, more than twice as much.",
+    "tables": {
+      "b": "data/baked_positions.csv"
+    },
+    "code": "b[b.gender==1].healthcare_y.median() / b[b.gender==0].healthcare_y.median()"
+  },
+  {
+    "id": "healthcare-gap-by-party",
+    "source": "Even when accounting for party, the result is almost exactly the same: Republican women are just as far apart from Republican men as Democratic women are from Democratic men",
+    "claim": "The median healthcare share roughly doubles in both parties: 16.9% versus 8.2% for Democrats (2.07 times) and 14.4% versus 7.3% for Republicans (1.96 times).",
+    "tables": {
+      "b": "data/baked_positions.csv"
+    },
+    "code": "b[b.party.isin(['Democrat','Republican'])].groupby(['party','gender'])['healthcare_y'].median().unstack().assign(ratio=lambda d: d[1]/d[0])"
+  },
+  {
+    "id": "government-budget-men-more",
+    "source": "With the government budget, men spent a greater portion of their speeches on budget and taxes in comparison to women (although the difference isn't as extreme as with healthcare).",
+    "claim": "The median man devotes 3.8% of his speech time to the government budget, versus 3.1% for the median woman.",
+    "tables": {
+      "b": "data/baked_positions.csv"
+    },
+    "code": "b.groupby('gender')['government budget_y'].median()"
+  },
+  {
+    "id": "men-focus-military-agriculture-budget",
+    "source": "Men focus more of their speeches on the military, agriculture, and the budget.",
+    "claim": "Women's median speech shares are lower than men's for the military (2.8% versus 3.1%), agriculture (0.59% versus 0.66%), and the government budget (3.1% versus 3.8%).",
+    "tables": {
+      "b": "data/baked_positions.csv"
+    },
+    "code": "b.groupby('gender')[['military_y','agriculture_y','government budget_y']].median()"
+  }
+]

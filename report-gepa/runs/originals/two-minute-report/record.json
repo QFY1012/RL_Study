@@ -1,0 +1,62 @@
+{
+ "id": "two-minute-report",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 917,
+  "steps": 61,
+  "tools": 73,
+  "nudged": 0,
+  "usage": {
+   "input": 71551,
+   "output": 133812
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 7,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "incorrect-calls-share",
+   "basis": "sum=2197, count=26822, mean=8.191037% (about 8.2%)",
+   "verdict": "ok"
+  },
+  {
+   "id": "wrong-decisions-per-game",
+   "basis": "sum=2197, mean=1.488482, size=1476",
+   "verdict": "ok"
+  },
+  {
+   "id": "minutes-of-action",
+   "basis": "sum=4297",
+   "verdict": "ok"
+  },
+  {
+   "id": "call-type-correct-rates",
+   "basis": "Foul: Personal Take rate=99.681529%; Foul: Defense 3 Second rate=0.709220%; Foul: Personal rate=88.487585%; Foul: Shooting rate=77.639465%",
+   "verdict": "ok"
+  },
+  {
+   "id": "home-away-incorrect-favors",
+   "basis": "home=1098, away=1068",
+   "verdict": "ok"
+  },
+  {
+   "id": "officials-ic-inc-rates",
+   "basis": "Scott Foster games=94, ic=8.0, rate_ic=0.085106; Jason Phillips ic=7.0; Derrick Stafford ic=7.0; Scott Foster inc=140, rate_inc=1.489362",
+   "verdict": "ok"
+  },
+  {
+   "id": "player-favor-balance",
+   "basis": "Marcin Gortat favor=42, oppose=6, net=36; Kemba Walker favor=13, oppose=23, net=-10; Spencer Dinwiddie favor=3, oppose=13, net=-10",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 7,
+ "skipped": 3
+}

@@ -1,0 +1,96 @@
+[
+ {
+  "id": "cardi-most-pageviews",
+  "source": "Let’s begin our tour with a stop at Cardi B... she has totaled more pageviews than anyone with 21 million.",
+  "claim": "Cardi B has 20,728,078 cumulative pageviews, the highest total of any person in the list.",
+  "tables": {
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "monthly.groupby('article')['pageviews_sum'].sum().nlargest(1).astype(int)"
+ },
+ {
+  "id": "first-three-are-musicians",
+  "source": "You will notice that the first three people are all young musicians, two of them are rappers.",
+  "claim": "The three people with the most cumulative pageviews all belong to the music category: two are rappers and one is a singer.",
+  "tables": {
+   "people": "data/people-info.csv",
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "people.set_index('article').loc[monthly.groupby('article')['pageviews_sum'].sum().nlargest(3).index, ['category_broad','category_specific']]"
+ },
+ {
+  "id": "sophie-turner-top-actor",
+  "source": "Sophie Turner aka Sansa was actually the most viewed actor on the list way higher up.",
+  "claim": "Sophie Turner has the most cumulative pageviews among the actors on the list, 7,123,513.",
+  "tables": {
+   "people": "data/people-info.csv",
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "people.assign(total=people.article.map(monthly.groupby('article')['pageviews_sum'].sum())).query(\"category_specific == 'actor'\").nlargest(1,'total')[['article','total']].astype({'total': int})"
+ },
+ {
+  "id": "carson-wentz-first-athlete",
+  "source": "Sports time! Here we have Carson Wentz, our first athlete",
+  "claim": "Carson Wentz has the most cumulative pageviews among the athletes on the list, 3,672,497.",
+  "tables": {
+   "people": "data/people-info.csv",
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "people.assign(total=people.article.map(monthly.groupby('article')['pageviews_sum'].sum())).query(\"category_broad == 'sports'\").nlargest(1,'total')[['article','total']].astype({'total': int})"
+ },
+ {
+  "id": "ram-nath-first-non-american-politician",
+  "source": "The first non-American politician on the list is Ram Nath Kovind who became President of India in 2017.",
+  "claim": "The three people in the politics category with the most cumulative pageviews are Steve Bannon, Betsy DeVos and Ram Nath Kovind; Bannon and DeVos are described as American/United States, while Kovind is described as Indian.",
+  "tables": {
+   "people": "data/people-info.csv",
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "people.assign(total=people.article.map(monthly.groupby('article')['pageviews_sum'].sum())).query(\"category_broad == 'politics'\").nlargest(3,'total')[['article','description','total']].to_string()"
+ },
+ {
+  "id": "riverdale-three-actresses",
+  "source": "The show has three of its lead actresses—Lili Reinhart, Camila Mendes, and Madelaine Petsch—on our list",
+  "claim": "Three actors on the list—Camila Mendes, Lili Reinhart and Madelaine Petsch—have Wikipedia extracts that name Riverdale.",
+  "tables": {
+   "people": "data/people-info.csv"
+  },
+  "code": "people[people.extract.fillna('').str.contains('Riverdale')].groupby('category_specific')['article'].agg(['size', list])"
+ },
+ {
+  "id": "sixnine-late-debut",
+  "source": "Unlike most people we analyzed, his debut on Wikipedia came well after 2015",
+  "claim": "88 of the people (63.8%) have monthly records beginning in 2015, while 6ix9ine's first record is 20171129.",
+  "tables": {
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "monthly.groupby('article').agg(first=('timestamp','min')).assign(year=lambda d: d['first'].astype(str).str[:4]).groupby('year')['first'].agg(people='size', sixnine=lambda s: s.get('6ix9ine')).assign(share=lambda d: (d.people/d.people.sum()*100).round(1))"
+ },
+ {
+  "id": "billie-eilish-incremental-levels",
+  "source": "Sixteen-year-old Billie Eilish has a bumpy chart towards the left… making her a good example of a celebrity who not only rose quickly, but who also hit each level incrementally.",
+  "claim": "Billie Eilish's level advances through levels 2, 3, 4, 5, 6 and 7 in order, one level at a time.",
+  "tables": {
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "monthly[monthly.article=='Billie_Eilish'].sort_values('bin').groupby('level')['timestamp'].min()"
+ },
+ {
+  "id": "juice-wrld-maintains-5k",
+  "source": "he’s now maintaining around 5K a day",
+  "claim": "Juice WRLD's last three monthly medians are 5,711, 5,544 and 4,923 pageviews/day.",
+  "tables": {
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "monthly[monthly.article=='Juice_Wrld'].sort_values('bin').tail(3)[['timestamp','level','pageviews_median']]"
+ },
+ {
+  "id": "risen-vs-rising-counts",
+  "source": "People above level 6 were considered those who have risen to fame. Anyone who satisfied those parameters but still remained below level 6 was considered rising.",
+  "claim": "33 people (23.9%) reached a level above 6, the story's fame cutoff, while 105 (76.1%) remained at level 6 or below.",
+  "tables": {
+   "monthly": "data/people-monthly.csv"
+  },
+  "code": "monthly.groupby('article')['level'].max().gt(6).value_counts().to_frame('people').assign(share=lambda d: (d.people/d.people.sum()*100).round(1))"
+ }
+]

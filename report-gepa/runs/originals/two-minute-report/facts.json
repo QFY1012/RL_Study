@@ -47,7 +47,7 @@
   {
     "id": "officials-ic-inc-rates",
     "source": "Which officials have a tendency to get more calls right and wrong? Incorrect calls (IC) can be isolated to a specific official, while incorrect non-calls (INC) means the official was part of a trio that missed the call.",
-    "claim": "Among the officials shown, Scott Foster has the most incorrect calls (8 in 94 games, 0.09 per game) and Tre Maddox the highest incorrect non-call rate (1.77 per game).",
+    "claim": "Among the officials shown, Scott Foster has the most incorrect calls (8 in 94 games, 0.09 per game), ahead of Jason Phillips and Derrick Stafford with 7 each; Foster's 140 incorrect non-calls average 1.49 per game.",
     "tables": {
       "d": "data/calls.csv"
     },

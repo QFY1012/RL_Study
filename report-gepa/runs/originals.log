@@ -13017,3 +13017,101 @@ vogue: facts=11 answer=11 dropped=0 skipped=11 problems=0 589s steps=46
   womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import pandas a
   wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json, pand
   two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import json, tex
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd g=pd.read_csv('women_in_govt.csv',parse_dates=['date']) 
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import pandas a
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd r=pd.read_csv('women_reps.csv') print(r[r.district.str.c
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import json ban
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  two-minute-report two-minute-report: edit /home/user/RL_Study/report-gepa/runs/originals/two-minute-report/facts.json
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd r=pd.read_csv('women_reps.csv') cur=r[(pd.to_datetime(r.
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && cat > /tmp/build_skipped.py <<'PYE
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+wiki-breakout: facts=12 answer=10 dropped=2 skipped=34 problems=0 604s steps=60
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import panda
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json facts
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && cat > /tmp/build_facts.py <<'PYEO
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json, pand
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd b=pd.read_csv('baked_positions.csv') print(pd.crosstab(b
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import json, wa
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/total_members_over_time.
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python -m json.tool facts.json > /
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import json f=js
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && echo "--- facts.json ---" && 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json, pand
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd r=pd.read_csv('women_reps.csv') for d in ['2018-07-10','
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && cat > /tmp/build_skipped.py <<'PY
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && cat > /tmp/check_facts.py <<'EOF' im
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import json for f in
+  women-in-congress women-in-congress: write /home/user/RL_Study/report-gepa/runs/originals/women-in-congress/facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json,
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && timeout 20 curl -s -o /tmp/page.h
+two-minute-report: facts=7 answer=7 dropped=0 skipped=3 problems=0 917s steps=61
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && rm -rf /tmp/ws && mkdir -p /tmp/w
+  women-in-congress women-in-congress: write /home/user/RL_Study/report-gepa/runs/originals/women-in-congress/skipped.json
+  wiki-death wiki-death: write /home/user/RL_Study/report-gepa/runs/originals/wiki-death/facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wiki-death wiki-death: write /home/user/RL_Study/report-gepa/runs/originals/wiki-death/skipped.json
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'EOF' import panda
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import json s=json.l
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import json S=j
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json,panda
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import json, nu
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 -c " import json for 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd r=pd.read_csv('women_reps.csv') r['days']=(pd.to_datetim
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 -m json.tool facts.json >/de
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && cat facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json s=jso
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && cat facts.json
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import json facts=
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json,
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+womens-sizing: facts=16 answer=15 dropped=1 skipped=20 problems=0 524s steps=31
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && ls -l facts.json skipped.json data/ 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; cat > build_facts.py <<'PYEOF'
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd g=pd.read_csv('women_in_govt.csv') print(g.women_parliam
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 - <<'PYEOF' import jso
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json f=jso
+wiki-death: facts=8 answer=7 dropped=1 skipped=7 problems=0 848s steps=80
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 - <<'PY' import json,
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' 2>/dev/null impor
+  women-in-congress women-in-congress: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-congress && python3 -c " import json for 

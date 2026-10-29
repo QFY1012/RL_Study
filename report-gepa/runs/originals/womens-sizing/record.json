@@ -1,0 +1,118 @@
+{
+ "id": "womens-sizing",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 524,
+  "steps": 31,
+  "tools": 38,
+  "nudged": 0,
+  "usage": {
+   "input": 45686,
+   "output": 74315
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 16,
+ "problems": [],
+ "wrong": [
+  {
+   "id": "over-half-beyond-size-16",
+   "basis": "percent50=37.96; size16 waist=36.0; above=1.96. Output only supports being above size 16, not more than half above the top of the standard straight range.",
+   "verdict": "wrong"
+  }
+ ],
+ "verdicts": [
+  {
+   "id": "median-11-junior-size-9",
+   "basis": "v=27.273773; size=9; waist=27.48; diff=0.206227",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-15-waistline",
+   "basis": "v=30.373031",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-15-size-10",
+   "basis": "v=30.373031; size=10; waist=30.5; diff=0.126969",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-15-medium",
+   "basis": "v=30.373031; size=10; alphaSize=M; waist=30.5; diff=0.126969",
+   "verdict": "ok"
+  },
+  {
+   "id": "age-15-tenth-xs",
+   "basis": "v=26.968049; size=2; alphaSize=XS; waist=26.88; diff=0.088049",
+   "verdict": "ok"
+  },
+  {
+   "id": "age-15-ninetieth-xl",
+   "basis": "v=38.183171; size=18; alphaSize=XL; waist=38.25; diff=0.066829",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-adult-size-18",
+   "basis": "percent50=37.96; size=18; alphaSize=XL; waist=38.25; diff=0.29",
+   "verdict": "ok"
+  },
+  {
+   "id": "median-30s-size-16",
+   "basis": "percent50=37.09; size=16; alphaSize=XL; waist=36.0; diff=1.09",
+   "verdict": "ok"
+  },
+  {
+   "id": "over-half-beyond-size-16",
+   "basis": "percent50=37.96; size16 waist=36.0; above=1.96. Output only supports being above size 16, not more than half above the top of the standard straight range.",
+   "verdict": "wrong"
+  },
+  {
+   "id": "under-10pct-fit-size-8",
+   "basis": "percent10=30.36; size8 waist=29.5; above=0.86",
+   "verdict": "ok"
+  },
+  {
+   "id": "astm-1995-waist-range",
+   "basis": "idxmin=2, min=24.0; idxmax=20, max=36.5; spread=12.5",
+   "verdict": "ok"
+  },
+  {
+   "id": "astm-2021-waist-span",
+   "basis": "min=25.38; max=40.5; count=12; spread=15.12",
+   "verdict": "ok"
+  },
+  {
+   "id": "size-8-2-5-inches-larger",
+   "basis": "1995 waist=27.0; 2021 waist=29.5; growth=2.5",
+   "verdict": "ok"
+  },
+  {
+   "id": "every-astm-size-larger",
+   "basis": "10 shared sizes; all growth positive; size2 24.0->26.88; size20 36.5->40.5",
+   "verdict": "ok"
+  },
+  {
+   "id": "astm-added-size-00-0",
+   "basis": "1995/2001 min=2.0, max=20.0, count=10; 2011/2021 min=0.0, max=20.0, count=12",
+   "verdict": "ok"
+  },
+  {
+   "id": "average-waist-nearly-4-wider",
+   "basis": "1988-1994 mean=34.88; 2015-2018 mean=38.75; growth=3.87",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "over-half-beyond-size-16",
+   "why": "claim does not agree with its printout"
+  }
+ ],
+ "answer": 15,
+ "skipped": 20
+}

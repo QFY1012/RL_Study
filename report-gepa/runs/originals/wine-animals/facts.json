@@ -1,7 +1,7 @@
 [
   {
     "id": "group-median-ratings",
-    "source": "Median rating 3.8 3.9 3.95 4 4.1",
+    "source": "Then we looked at the rating. 3.8 3.9 3.95 4 4.1",
     "claim": "Median ratings are 4.1 for bear, cat and mythical creature; 4.0 for bird, canine, deer, horse and rabbit; 3.95 for amphibian/reptile; 3.9 for bug, cattle, fish, marine invertebrate, pachyderm and sheep; and 3.8 for pig.",
     "tables": {
       "d": "data/wineData.csv"
@@ -9,9 +9,18 @@
     "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g in ['amphibian/reptile','bear','bird','bug','canine','cat','cattle','deer','fish','horse','marine invertebrate','mythical creature','pachyderm','pig','rabbit','sheep']\").groupby('g').rating.median()"
   },
   {
+    "id": "animal-wines-median-price-rating",
+    "source": "Overall, the median price for wines with animals on the label ($26.99) was $3 cheaper than wines without animals ($29.99), but both groups had a median rating of 4 stars.",
+    "claim": "Animal wines have a median price of $26.99 and a median rating of 4.0 stars.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).agg({'p': 'median', 'rating': 'median'})"
+  },
+  {
     "id": "amphibian-panel",
-    "source": "Median price $30.97 / Good deals 5.3%",
-    "claim": "Amphibian/reptile wines have a median price of $30.97, and 5.3% are good deals (below $29.99 and rated at least 4 stars).",
+    "source": "Median price $30.97 Total wines 38 Median rating 3.95 Good deals 5.3%",
+    "claim": "Amphibian/reptile wines have a median price of $30.965, and 5.3% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -19,7 +28,7 @@
   },
   {
     "id": "bear-panel",
-    "source": "Median price $31.55 / Good deals 13%",
+    "source": "Median price $31.55 Total wines 23 Median rating 4.1 Good deals 13%",
     "claim": "Bear wines have a median price of $31.55, and 13.0% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -28,8 +37,8 @@
   },
   {
     "id": "bug-panel",
-    "source": "Median price $22.66 / Good deals 21.4%",
-    "claim": "Bug wines have a median price of $22.66, and 21.4% are good deals (below $29.99 and rated at least 4 stars).",
+    "source": "Median price $22.66 Total wines 98 Median rating 3.9 Good deals 21.4%",
+    "claim": "Bug wines have a median price of $22.655, and 21.4% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -37,7 +46,7 @@
   },
   {
     "id": "deer-panel",
-    "source": "Median price $30.49 / Good deals 6%",
+    "source": "Median price $30.49 Total wines 50 Median rating 4 Good deals 6%",
     "claim": "Deer wines have a median price of $30.49, and 6.0% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -46,7 +55,7 @@
   },
   {
     "id": "fish-panel",
-    "source": "Median price $24.99 / Good deals 24.2%",
+    "source": "Median price $24.99 Total wines 62 Median rating 3.9 Good deals 24.2%",
     "claim": "Fish wines have a median price of $24.99, and 24.2% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -55,7 +64,7 @@
   },
   {
     "id": "marine-invertebrate-panel",
-    "source": "Median price $22.67 / Good deals 18.2%",
+    "source": "Median price $22.67 Total wines 33 Median rating 3.9 Good deals 18.2%",
     "claim": "Marine invertebrate wines have a median price of $22.67, and 18.2% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -64,7 +73,7 @@
   },
   {
     "id": "mythical-creature-panel",
-    "source": "Median price $34.99 / Good deals 15.4%",
+    "source": "Median price $34.99 Total wines 123 Median rating 4.1 Good deals 15.4%",
     "claim": "Mythical creature wines have a median price of $34.99, and 15.4% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -73,7 +82,7 @@
   },
   {
     "id": "pig-panel",
-    "source": "Median price $23.22 / Good deals 10.7%",
+    "source": "Median price $23.22 Total wines 28 Median rating 3.8 Good deals 10.7%",
     "claim": "Pig wines have a median price of $23.22, and 10.7% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -82,7 +91,7 @@
   },
   {
     "id": "rabbit-panel",
-    "source": "Median price $29.99 / Good deals 12%",
+    "source": "Median price $29.99 Total wines 25 Median rating 4 Good deals 12%",
     "claim": "Rabbit wines have a median price of $29.99, and 12.0% are good deals (below $29.99 and rated at least 4 stars).",
     "tables": {
       "d": "data/wineData.csv"
@@ -101,7 +110,7 @@
   {
     "id": "cattle-median-price",
     "source": "Median price $22.49",
-    "claim": "Cattle wines have a median price of $22.49.",
+    "claim": "Cattle wines have a median price of $22.495 (the story displays $22.49).",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -110,7 +119,7 @@
   {
     "id": "horse-median-price",
     "source": "Median price $25.24",
-    "claim": "Horse wines have a median price of $25.24.",
+    "claim": "Horse wines have a median price of $25.245 (the story displays $25.24).",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -146,7 +155,7 @@
   {
     "id": "farm-animals-cheaper-lower",
     "source": "Among animal wines, farm animals like cattle, pigs, and sheep have both lower ratings and lower prices.",
-    "claim": "Cattle, pig and sheep wines have medians of $22.49/3.9, $23.22/3.8 and $21.74/3.9, below the $26.99 and 4.0 medians across animal wines.",
+    "claim": "Cattle, pig and sheep wines have medians of $22.495/3.9, $23.22/3.8 and $21.74/3.9, below the $26.99 and 4.0 medians across animal wines.",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -164,7 +173,7 @@
   {
     "id": "amphibians-overvalued",
     "source": "amphibians/reptiles are more likely to be overvalued: higher prices for lower quality.",
-    "claim": "Amphibian/reptile wines have a median price of $30.97 and a median rating of 3.95, versus $26.99 and 4.0 across animal wines.",
+    "claim": "Amphibian/reptile wines have a median price of $30.965 and a median rating of 3.95, versus $26.99 and 4.0 across animal wines.",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -222,7 +231,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'amphibian/reptile' and p > 500\")[['name','winery','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'amphibian/reptile' and p > 500\")[['name','winery','p','rating']].to_string()"
   },
   {
     "id": "more-songbirds-than-raptors-high-rated",
@@ -258,7 +267,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'canine' and p < 20 and rating >= 4\")[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'canine' and p < 20 and rating >= 4\")[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "heraldic-lion-median-price",
@@ -272,7 +281,7 @@
   {
     "id": "house-cat-median-price",
     "source": "House cats had a median price of $35.47.",
-    "claim": "House cat wines have a median price of $35.47.",
+    "claim": "House cat wines have a median price of $35.465 (the story displays $35.47).",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -285,7 +294,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cat' and not finalAnimal.str.lower().str.contains('lion') and rating >= 4\").sort_values('p').head(1)[['name','winery','country','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cat' and not finalAnimal.str.lower().str.contains('lion') and rating >= 4\").sort_values('p').head(1)[['name','winery','country','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "cattle-red-spanish-speaking",
@@ -303,12 +312,12 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle' and winery in ['Kukeri','Teso La Monja','Osborne','Egervin']\")[['name','winery','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle' and winery in ['Kukeri','Teso La Monja','Osborne','Egervin']\")[['name','winery','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "deer-pricier-than-cattle",
     "source": "They have a good deal percentage of just 6%, and a median price $8 more than cattle for nearly no increase in quality.",
-    "claim": "Deer wines have a median price $7.995 (about $8) higher than cattle ($30.49 vs $22.49), with median ratings of 4.0 vs 3.9.",
+    "claim": "Deer wines have a median price $7.995 (about $8) higher than cattle ($30.49 vs $22.495), with median ratings of 4.0 vs 3.9.",
     "tables": {
       "d": "data/wineData.csv"
     },
@@ -321,7 +330,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'deer' and rating >= 4\").sort_values('p').head(1)[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'deer' and rating >= 4\").sort_values('p').head(1)[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "fish-nearly-half-4-plus",
@@ -348,7 +357,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Dashe'\")[['name','winery','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Dashe'\")[['name','winery','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "three-under-10-over-4-stars",
@@ -357,7 +366,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 10 and rating > 4\")[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 10 and rating > 4\")[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "pera-manca-second-highest-under-150",
@@ -366,7 +375,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 150\").assign(rk=lambda x: x.rating.rank(ascending=False, method='min')).query(\"rk == 2\")[['name','winery','p','rating','rk']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 150\").assign(rk=lambda x: x.rating.rank(ascending=False, method='min')).query(\"rk <= 2\")[['name','winery','p','rating','rk']].to_string()"
   },
   {
     "id": "marine-invertebrates-70-percent-white",
@@ -393,7 +402,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate' and rating > 4\").sort_values('p').head(1)[['name','winery','country','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate' and rating > 4\").sort_values('p').head(1)[['name','winery','country','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "mythical-only-one-below-3-5",
@@ -402,7 +411,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'mythical creature' and rating < 3.5\")[['name','winery','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'mythical creature' and rating < 3.5\")[['name','winery','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "el-enemigo-two-prices",
@@ -411,7 +420,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'El Enemigo'\")[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'El Enemigo'\")[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "soldera-brunello-2730",
@@ -420,7 +429,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Soldera'\")[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Soldera'\")[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "pig-wines-25-percent-rose",
@@ -447,7 +456,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'pachyderm' and p < 29.99 and rating >= 4\")[['name','winery','country','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'pachyderm' and p < 29.99 and rating >= 4\")[['name','winery','country','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "hasenhaide-rabbit-rose",
@@ -456,7 +465,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'rabbit' and rating >= 4.1\").sort_values('p').head(1)[['name','winery','country','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'rabbit' and rating >= 4.1\").sort_values('p').head(1)[['name','winery','country','p','rating']].to_string()"
   },
   {
     "id": "under-20-highest-are-dessert-sparkling",
@@ -465,7 +474,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 20\").pipe(lambda x: x[x.rating == x.rating.max()])[['name','winery','type','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 20\").pipe(lambda x: x[x.rating == x.rating.max()])[['name','winery','type','p','rating']].to_string()"
   },
   {
     "id": "mount-fishtail-best-dinner-wine",
@@ -474,7 +483,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 20 and type in ['Red','White']\").pipe(lambda x: x[x.rating == x.rating.max()]).sort_values('p')[['name','winery','country','type','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p < 20 and type in ['Red','White']\").pipe(lambda x: x[x.rating == x.rating.max()]).sort_values('p')[['name','winery','country','type','p','rating']].to_string()"
   },
   {
     "id": "brancott-4-1-stars",
@@ -483,7 +492,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Brancott Estate'\")[['name','winery','p','rating','finalAnimal']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"winery == 'Brancott Estate'\")[['name','winery','p','rating','finalAnimal']].to_string()"
   },
   {
     "id": "antelope-all-south-africa",
@@ -492,7 +501,7 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(g=d.topgroup.str.split(', ')).explode('g').query(\"finalAnimal.str.lower().str.contains('antelope')\")[['name','winery','country']].drop_duplicates()"
+    "code": "d.assign(g=d.topgroup.str.split(', ')).explode('g').query(\"finalAnimal.str.lower().str.contains('antelope')\")[['name','winery','country']].drop_duplicates().to_string()"
   },
   {
     "id": "fat-pig-cape-vintage",
@@ -501,6 +510,69 @@
     "tables": {
       "d": "data/wineData.csv"
     },
-    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"name == 'Fat Pig Cape Vintage'\")[['name','winery','p','rating']]"
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"name == 'Fat Pig Cape Vintage'\")[['name','winery','p','rating']].to_string()"
+  },
+  {
+    "id": "amphibian-us-dominates-count",
+    "source": "All the animals in this category were statistically more likely to be found on American, Australian, or Chilean wines than all wines, but by raw bottle counts the United States dominates.",
+    "claim": "The United States accounts for 15 amphibian/reptile wines, more than any other country (Spain and Italy have 5 each).",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'amphibian/reptile'\").country.value_counts().head()"
+  },
+  {
+    "id": "cattle-six-percent-french",
+    "source": "France produced 33.6% percent of all animal wines in the dataset, but only 6.5% percent of cattle.",
+    "claim": "3 of 46 cattle wines (6.5%) are French.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'cattle'\").assign(fr=lambda x: x.country == 'France').fr.agg(['mean','sum','count'])"
+  },
+  {
+    "id": "sheep-42-percent-10-to-20",
+    "source": "Wines with sheep were statistically more likely to be priced between $10–19.99 (42% compared to 25% of all wines)",
+    "claim": "24 of 57 sheep wines (42.1%) are priced between $10 and $19.99.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'sheep'\").assign(bucket=lambda x: x.p.between(10, 19.99)).bucket.agg(['mean','sum','count'])"
+  },
+  {
+    "id": "mythical-30-percent-italian",
+    "source": "Italy had a statistically higher percentage of mythical wines than all wines (30% compared to 21%).",
+    "claim": "37 of 123 mythical-creature wines (30.1%) are Italian.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'mythical creature'\").assign(it=lambda x: x.country == 'Italy').it.agg(['mean','sum','count'])"
+  },
+  {
+    "id": "marine-invertebrates-mediterranean-nz",
+    "source": "The majority of these wines are from the Mediterranean region (France, Italy, and Spain) or from New Zealand.",
+    "claim": "27 of 33 marine-invertebrate wines (81.8%) are from France, Italy, Spain or New Zealand.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float), g=d.topgroup.str.split(', ')).explode('g').query(\"g == 'marine invertebrate'\").assign(region=lambda x: x.country.isin(['France','Italy','Spain','New Zealand'])).region.agg(['mean','sum','count'])"
+  },
+  {
+    "id": "log-price-rating-trend",
+    "source": "The wines follow a logarithmic trend, where rating increases with price, but with diminishing returns.",
+    "claim": "A least-squares fit of rating on log(price) for animal wines priced at or below $150 has a positive slope of 0.293, so rating rises with price at a diminishing rate.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).query(\"p <= 150\").pipe(lambda x: np.polyfit(np.log(x.p), x.rating, 1))"
+  },
+  {
+    "id": "new-zealand-price-flat-with-quality",
+    "source": "Across all categories and variables, the only dataset that maintained its price as the quality increased was New Zealand wines.",
+    "claim": "New Zealand is the only country whose animal wines have a negative least-squares price-on-rating slope (-7.42 dollars per star); every other country has a positive slope.",
+    "tables": {
+      "d": "data/wineData.csv"
+    },
+    "code": "d.assign(p=d.price.str.replace(',','').astype(float)).groupby('country').apply(lambda x: np.polyfit(x.rating, x.p, 1)[0]).sort_values()"
   }
 ]

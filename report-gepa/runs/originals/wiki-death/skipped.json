@@ -1,0 +1,30 @@
+[
+  {
+    "source": "On April 24, Beyoncé dropped Lemonade and the internet went wild. Her pageviews increased tenfold from about 30 thousand to nearly 300 thousand.",
+    "why": "Beyoncé is a living celebrity and is not among the deceased people in people.csv/pageviews.csv, so her pageview series is not in the provided files."
+  },
+  {
+    "source": "Although no one grabbed our attention quite like Prince, the spike in pageviews after a celebrity’s death can often overshadow that of other major events, even a presidential inauguration.",
+    "why": "The comparison requires pageviews for living celebrities and events (LeBron James, the Trump inauguration, Meghan Markle); those pages are not in the provided files."
+  },
+  {
+    "source": "More than 1,300 notable people died in the past three years, according to Wikipedia.",
+    "why": "This is a description of the source population, not a finding drawn from the supplied files; the files contain only the filtered deceased people, not the full list of notable deaths."
+  },
+  {
+    "source": "Here are 84 who got over half a million pageviews in the first 48 hours after their deaths.",
+    "why": "This is a description of the data's population. Applying the story's filters to these files yields 80 people; four of the published 84 (Lil Peep, XXXTentacion, Charles Krauthammer and Richard Harrison) are not in the supplied files."
+  },
+  {
+    "source": "Here are the number of weeks after death until pageviews returned to normal.",
+    "why": "The complete weeks-until-normal chart is not fully reproducible. Four people in it (Lil Peep, XXXTentacion, Charles Krauthammer and Richard Harrison) are absent from the files, and while the computation reproduces the published week category for 79 of the 80 people present, Kate Spade's first normal day (July 9, 2018) is one day beyond the end of pageviews.csv (July 8, 2018), so her published 4 weeks cannot be computed. The specific textual claims about Prince and Bourdain are kept as separate facts."
+  },
+  {
+    "source": "The top four were all musicians who died unexpectedly. Rapper Lil Peep (21 yrs. old) from an accidental drug overdose, singer Christina Grimmie (22) murdered at an event.",
+    "why": "Lil Peep is not in the supplied files, and the top-four ranking under the chart's one-week-moving-average metric is not reproduced: the provided data's highest sustained increases include non-musicians."
+  },
+  {
+    "source": "About four months after Tom Petty died, it was revealed that the cause of death was from an accidental drug overdose.",
+    "why": "This describes a cause-of-death announcement rather than a pageview finding; the files contain no cause-of-death timing data."
+  }
+]
