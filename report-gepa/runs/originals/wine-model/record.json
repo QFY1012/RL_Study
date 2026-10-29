@@ -1,0 +1,77 @@
+{
+ "id": "wine-model",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 297,
+  "steps": 39,
+  "tools": 65,
+  "nudged": 0,
+  "usage": {
+   "input": 49418,
+   "output": 27535
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "alcohol-most-between-9-and-12",
+   "basis": "between 9 and 12: True=1452, False=148",
+   "verdict": "ok"
+  },
+  {
+   "id": "alcohol-peak-at-9-5",
+   "basis": "top counts: 9.5=139, 9.4=104, 9.8=78",
+   "verdict": "ok"
+  },
+  {
+   "id": "quality-range-and-mean",
+   "basis": "min=3, max=8, mean=5.63625, rounds to 5.64",
+   "verdict": "ok"
+  },
+  {
+   "id": "quality-most-common-5-and-6",
+   "basis": "quality counts: 5=681, 6=639, all others lower",
+   "verdict": "ok"
+  },
+  {
+   "id": "quality-low-and-high-class-sizes",
+   "basis": "quality_binary counts: 0=1383, 1=217",
+   "verdict": "ok"
+  },
+  {
+   "id": "volatile-acidity-lower-in-better-wines",
+   "basis": "quality_binary=0 mean=0.547032 max=1.580; quality_binary=1 mean=0.405530 max=0.915",
+   "verdict": "ok"
+  },
+  {
+   "id": "alcohol-higher-in-better-wines",
+   "basis": "quality_binary=0 mean=10.250422; quality_binary=1 mean=11.518049",
+   "verdict": "ok"
+  },
+  {
+   "id": "alcohol-12-13-about-half-good",
+   "basis": "count=139, sum=64, mean=0.460432",
+   "verdict": "ok"
+  },
+  {
+   "id": "alcohol-9-5-few-good",
+   "basis": "at alcohol=9.5: count=139, sum=2",
+   "verdict": "ok"
+  },
+  {
+   "id": "ols-alcohol-12-predicts-just-above-6",
+   "basis": "predicted quality at alcohol=12 is 6.204883073714458, rounds to 6.20",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 4
+}

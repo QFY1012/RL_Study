@@ -1,0 +1,65 @@
+[
+ {
+  "id": "no-diggity-fifth-most-played-90s",
+  "source": "And No Diggity isn’t just anecdotally timeless, it’s the fifth most-played song from the 90s.",
+  "claim": "No Diggity is the fifth most-played song from the 90s, with 30,911,317 Spotify plays.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'date', 'decade', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
+ },
+ {
+  "id": "smells-like-teen-spirit-top-90s",
+  "source": "Smells Like Teen Spirit, a track that never reached the Billboard Top 5 ... is now the most-played song from the 90s.",
+  "claim": "Smells Like Teen Spirit is the most-played song from the 90s, with 50,657,282 Spotify plays and a Billboard peak of 6.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'bill', 'count']]"
+ },
+ {
+  "id": "forty-one-songs-ahead-of-smells-like-teen-spirit",
+  "source": "There were 41 more popular songs in 1991 than Smells Like Teen Spirit",
+  "claim": "Smells Like Teen Spirit was 42nd in Billboard's 1991 year-end chart, with 41 songs ahead of it.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d.loc[d.track.eq('Smells Like Teen Spirit') & d.date.str[-4:].eq('1991'), ['artist', 'track', 'date', 'rank']].assign(ahead=lambda x: pd.to_numeric(x['rank'], errors='coerce').astype(int) - 1)"
+ },
+ {
+  "id": "dont-stop-believin-top-80s",
+  "source": "For the entire 1980s, Don’t Stop Believin’ is the most-played song on Spotify.",
+  "claim": "Don't Stop Believin' is the most-played 80s song, with 50,855,135 Spotify plays.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1980, 1989)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'count']]"
+ },
+ {
+  "id": "bohemian-rhapsody-top-70s",
+  "source": "From the 70’s: Bohemian Rhapsody.",
+  "claim": "Bohemian Rhapsody is the most-played 70s song, with 32,298,690 Spotify plays.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1970, 1979)].nlargest(1, 'count')[['artist', 'track', 'date', 'decade', 'count']]"
+ },
+ {
+  "id": "top-fifty-one-overall-ranking",
+  "source": "Present-day Popularity of Five Decades of Music ... TRACK SPOTIFY PLAYCOUNTS 1. Lose Yourself — Eminem, 2002 59,039,765 2. Mr. Brightside — Killers The, 2005 54,367,533 3. Numb — Linkin Park, 2003 52,969,898 4. Don't Stop Believin' — Journey, 1981 50,855,135 5. Smells Like Teen Spirit — Nirvana, 1991 50,657,282 ... 51. Sultans Of Swing — Dire Straits, 1979 25,138,802",
+  "claim": "The chart's displayed ranking runs from Lose Yourself with 59,039,765 plays first to Sultans Of Swing with 25,138,802 51st, with Mr. Brightside (54,367,533), Numb (52,969,898), Don't Stop Believin' (50,855,135) and Smells Like Teen Spirit (50,657,282) in places two through five.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d.nlargest(51, 'count')[['artist', 'track', 'count']]"
+ },
+ {
+  "id": "lose-yourself-billboard-2002-rank",
+  "source": "Eminem, Lose Yourself Billboard yearly rank: #1 of 295, 2002",
+  "claim": "Lose Yourself was ranked 1st of 295 on Billboard's 2002 year-end chart.",
+  "tables": {
+   "d": "data/all_data.csv"
+  },
+  "code": "d.nlargest(1, 'count').assign(year_total=lambda x: pd.to_numeric(d.loc[d.date.str[-4:].eq(x.date.str[-4:].iloc[0]), 'rank'].str.rstrip('ab'), errors='coerce').max())[['artist', 'track', 'date', 'rank', 'year_total']]"
+ }
+]

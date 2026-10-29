@@ -1,0 +1,138 @@
+[
+  {
+    "source": "As we descend, we’ll encounter 138 people.",
+    "why": "Counts the people in the dataset, a data-size description rather than a finding drawn from the data."
+  },
+  {
+    "source": "We sifted through over three years of Wikipedia pageview data",
+    "why": "Describes the collection period, not a result computed from the files."
+  },
+  {
+    "source": "There were eight levels (like Karate belts): (1) 50, (2) 100, (3) 200, (4) 500, (5) 1,000, (6) 2,000, (7) 5,000, and (8) 10,000, pageviews.",
+    "why": "The thresholds are methodology inputs. The data also contains levels 0 and 9 outside the eight named thresholds, so the exact eight-level scheme is not a computed result."
+  },
+  {
+    "source": "a foundation of over 40,000 people",
+    "why": "Describes the source population used to build the list; the file contains only the 138 selected people."
+  },
+  {
+    "source": "Any person who appeared in the top 1,000 pages for at least one day in that range was considered.",
+    "why": "Describes data collection, not a finding computed from the files."
+  },
+  {
+    "source": "After assigning levels, anyone with 1. a beginning level lower than 4, 2. a level change of more than 4 levels, and 3. less than level 2 in 2015, was included in the final list.",
+    "why": "Inclusion criteria/methodology, not a result; the provided file is already the filtered final list."
+  },
+  {
+    "source": "If someone hit a new level of pageviews and never dipped below that level’s threshold again, they were assigned the level, hence the term “sustained pageviews.”",
+    "why": "Defines the level-assignment method, not a result; the provided level column is already assigned."
+  },
+  {
+    "source": "Higher up means more accumulated pageviews, further down means less.",
+    "why": "Describes the chart's vertical encoding rather than a result; the underlying cumulative ranking is used in other facts."
+  },
+  {
+    "source": "more towards to the left means a faster ascent to popularity.",
+    "why": "Describes the chart's horizontal encoding; the files do not contain the chart's x coordinate."
+  },
+  {
+    "source": "93 of the top 100 most-viewed videos of all-time are music videos.",
+    "why": "External YouTube statistic, not present in the two Wikipedia pageview files."
+  },
+  {
+    "source": "Dua Lipa rose to fame with the song “New Rules,” which has 1.5 billion views on YouTube.",
+    "why": "YouTube view count is external; the files contain Wikipedia pageviews, not video views."
+  },
+  {
+    "source": "According to her Wikipedia page, the 23-year-old English singer started posting covers to her channel at 14.",
+    "why": "Age and YouTube history are not fields in the data; the extract only mentions starting at 14, not being 23."
+  },
+  {
+    "source": "Rapper 6ix9ine is the first overnight success based on Wikipedia traffic.",
+    "why": "The 'first overnight success' ranking is qualitative; no story-defined measure of overnight success is in the files. The verifiable late-debut pattern is included separately."
+  },
+  {
+    "source": "his page was created after he started to become quite popular.",
+    "why": "Wikipedia page-creation dates are not in the files; only monthly pageview records are."
+  },
+  {
+    "source": "They are highly controversial but have a massive presence with over 35 million followers combined.",
+    "why": "Follower counts are external; the files do not contain social-media followers."
+  },
+  {
+    "source": "New Netflix series have definitely contributed to putting a lot of new actors in the spotlight.",
+    "why": "Qualitative claim with no numeric measure in the files."
+  },
+  {
+    "source": "the most of any non-Netflix show",
+    "why": "The files have no show/network field, so the comparison across non-Netflix shows cannot be computed. The three named Riverdale actresses are reproduced separately."
+  },
+  {
+    "source": "since he hasn’t crossed the 2,000 daily pageviews level yet",
+    "why": "The monthly data show Carson Wentz reaching level 6, whose threshold is 2,000 pageviews/day, so the 'hasn't crossed 2,000' wording does not reproduce; only his first-athlete ranking is included."
+  },
+  {
+    "source": "Sixteen-year-old Billie Eilish",
+    "why": "Age is not in the files."
+  },
+  {
+    "source": "The British singer’s hit “lovely” with Khalid was released in April and already has over 105 million views on YouTube.",
+    "why": "YouTube view count is external; not in the files."
+  },
+  {
+    "source": "AJ McLean, from The Backstreet Boys, is an interesting example of a seasoned celebrity who went basically dormant… but jumped back in the spotlight over the last three years.",
+    "why": "Qualitative biography; no defined dormancy measure in the files."
+  },
+  {
+    "source": "Most of these guys are big time NBA prospects that just got drafted (like Trae Young, Mo Bamba, Marvin Bagley).",
+    "why": "External career facts, not pageview findings."
+  },
+  {
+    "source": "although he wasn’t a top 5 pick this year",
+    "why": "External NBA draft fact, not in the files."
+  },
+  {
+    "source": "Juice WRLD is the most popular celebrity with the lowest cumulative pageviews.",
+    "why": "The superlative does not hold under a story-stated definition: among people who reached level 6 or higher, Theodore McCarrick has lower cumulative pageviews (374,586), and several people overall have lower totals. The 5K/day part is reproduced separately."
+  },
+  {
+    "source": "Nicole Maines is a rising celebrity, known as the first transgender person to play a superhero on television.",
+    "why": "Biographical first, external to the pageview data."
+  },
+  {
+    "source": "is the first Somali-American legislator elected in the United States.",
+    "why": "Biographical claim found in the Wikipedia extract, not a pageview-derived result."
+  },
+  {
+    "source": "Named the fastest YouTube personality to reach 10 million subscribers in 2017",
+    "why": "External YouTube/subscriber statistic, not in the files."
+  },
+  {
+    "source": "In the Champions League final against Real Madrid, Liverpool goalkeeper Loris Karius was blamed for his team’s 3–1 loss after helping cause two goals.",
+    "why": "External sports history, not in the files."
+  },
+  {
+    "source": "Cardi B is the obvious winner—and the data backs it up.",
+    "why": "Restates the cumulative-pageviews ranking already reproduced; no additional data finding."
+  },
+  {
+    "source": "Dua is a great example of a singer whose popularity is intertwined with the platform.",
+    "why": "Qualitative interpretation, no numeric measure in the files."
+  },
+  {
+    "source": "The Backstreet Boys released their newest single in May and, according to their Wikipedia page… plan to release a new album later in 2018, their first in five years.",
+    "why": "External biography, not in the files."
+  },
+  {
+    "source": "rapper Sheck Wes recently put out a hit titled Mo Bamba, so he is getting an extra cultural boost in popularity.",
+    "why": "External music fact, not in the files."
+  },
+  {
+    "source": "who became President of India in 2017",
+    "why": "The presidency is biographical context; the ranking as first non-American politician is reproduced separately."
+  },
+  {
+    "source": "recipients of the “Trump-bump” - people involved his campaign or at some point have been part of the White House staff.",
+    "why": "Qualitative interpretation with no numeric measure in the files."
+  }
+]

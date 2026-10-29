@@ -10,7 +10,7 @@
   },
   {
     "id": "smells-like-teen-spirit-top-90s",
-    "source": "Smells Like Teen Spirit, a track that never reached the Billboard Top 5 when it was released in 1992, is now the most-played song from the 90s.",
+    "source": "Smells Like Teen Spirit, a track that never reached the Billboard Top 5 ... is now the most-played song from the 90s.",
     "claim": "Smells Like Teen Spirit is the most-played song from the 90s, with 50,657,282 Spotify plays and a Billboard peak of 6.",
     "tables": {
       "d": "data/all_data.csv"
@@ -19,7 +19,7 @@
   },
   {
     "id": "top-five-90s-playcounts",
-    "source": "1. Smells Like Teen Spirit — Nirvana, 1991 50,657,282 2. Iris — Goo Goo Dolls, 1998 35,669,952 3. Wonderwall — Oasis, 1996 34,352,877 4. Under The Bridge — Red Hot Chili Peppers, 1992 33,625,240 5. No Diggity — BLACKstreet, 1996 30,911,317",
+    "source": "Billboard Performance for the Top 5 Most-played 90s Hits ... 1. Smells Like Teen Spirit — Nirvana, 1991 50,657,282 2. Iris — Goo Goo Dolls, 1998 35,669,952 3. Wonderwall — Oasis, 1996 34,352,877 4. Under The Bridge — Red Hot Chili Peppers, 1992 33,625,240 5. No Diggity — BLACKstreet, 1996 30,911,317",
     "claim": "The five most-played 90s hits are Smells Like Teen Spirit with 50,657,282 plays, Iris with 35,669,952, Wonderwall with 34,352,877, Under The Bridge with 33,625,240 and No Diggity with 30,911,317.",
     "tables": {
       "d": "data/all_data.csv"
@@ -28,7 +28,7 @@
   },
   {
     "id": "top-five-90s-billboard-yearly-ranks",
-    "source": "Billboard Performance for the Top 5 Most-played 90s Hits ... BILLBOARD YEARLY RANK*",
+    "source": "Billboard Performance for the Top 5 Most-played 90s Hits ... BILLBOARD YEARLY RANK* #42 OF 385, 1991 ... #57 OF 346, 1998 ... #45 OF 314, 1996 ... #20 OF 370, 1992 ... #5 OF 314, 1996",
     "claim": "The Billboard yearly ranks of the five most-played 90s hits are 42 for Smells Like Teen Spirit, 57 for Iris, 45 for Wonderwall, 20 for Under The Bridge and 5 for No Diggity.",
     "tables": {
       "d": "data/all_data.csv"
@@ -42,7 +42,7 @@
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d.loc[d.track.eq('Smells Like Teen Spirit'), ['artist', 'track', 'date', 'rank']].assign(ahead=lambda x: pd.to_numeric(x['rank'], errors='coerce').astype(int) - 1)"
+    "code": "d.loc[d.track.eq('Smells Like Teen Spirit') & d.date.str[-4:].eq('1991'), ['artist', 'track', 'date', 'rank']].assign(ahead=lambda x: pd.to_numeric(x['rank'], errors='coerce').astype(int) - 1)"
   },
   {
     "id": "dont-stop-believin-top-80s",

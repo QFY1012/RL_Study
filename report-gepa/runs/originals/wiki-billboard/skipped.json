@@ -1,0 +1,14 @@
+[
+  {
+    "source": "Here are the top 10 each day in 2018, across all industries:",
+    "why": "The data has no daily figures: every row of data/weekly-pageviews.csv has binSize = 7, a seven-day pageview median and sum, and the only 2018 timestamps run to 2018-09-12 (37 weekly bins), not to Dec 31. The Jan 1 ranking the chart shows (Britney Spears, Jenny McCarthy, Mariah Carey, Maria Menounos, Princess Margaret, Elizabeth II, Prince Philip, Shawn Mendes, Nile Rodgers, Dave Chappelle) also cannot be recovered because eight of those ten names have no row in the weekly file, and there are no daily ranks to rank them by."
+  },
+  {
+    "source": "Number of Top 10 Appearances in 2018 ... Living celebrities ... Louis Tomlinson ... Deceased celebrities ... Freddie Mercury",
+    "why": "The chart ranks people by the number of days they were in the daily top 10 during 2018. data/weekly-pageviews.csv holds 7-day pageview bins, not daily ranks, and neither Louis_Tomlinson nor Freddie_Mercury occurs in it or in data/people.csv. data/people.csv also has no living/deceased field, so the living-versus-deceased split and the top of each panel cannot be computed."
+  },
+  {
+    "source": "Number of Top 10 Appearances in 2018 by Occupation ... music ... politics, business, and other ... sports ... film, tv, and theater ... Cristiano Ronaldo ... Jason Momoa",
+    "why": "The occupation panels label the people with the most daily top-10 appearances in each occupation in 2018. The weekly file has only seven-day pageview bins, so it gives no daily top-10 counts; the labelled leaders Cristiano_Ronaldo and Jason_Momoa are absent from both files, and no daily appearance counts exist to rank occupations or their members."
+  }
+]

@@ -19,7 +19,7 @@
   },
   {
     "id": "five-darkest-and-five-lightest",
-    "source": "Below, you’ll find the five darkest and lightest Vogue cover models of the past 19 years.",
+    "source": "Darkest Cover Models\nLupita Nyong’o - 2018\nLupita Nyong’o - 2015\nMichelle Obama - 2009\nSerena Williams - 2015\nLupita Nyong’o - 2014\nLightest Cover Models\nAnne Hathaway - 2010\nJessica Chastain - 2013\nClaire Foy - 2018\nAmy Adams - 2014\nNatalia Vodianova - 2004",
     "claim": "The five darkest cover appearances are Lupita Nyongo in 2018, Lupita Nyongo in 2015, Michelle Obama in 2009, Serena Williams in 2015 and Lupita Nyongo in 2014; the five lightest are Anne Hathaway in 2010, Jessica Chastain in 2013, Claire Foy in 2018, Amy Adams in 2014 and Natalia Vodianova in 2004.",
     "tables": {
       "f": "data/faces.csv"
@@ -64,7 +64,7 @@
   },
   {
     "id": "lightness-spread-before-and-after-2005",
-    "source": "“Between 2000 and 2005, there isn’t a lot of variance in how light the cover models appear.” “After 2005 there’s a bit more spread.”",
+    "source": "Between 2000 and 2005, there isn’t a lot of variance in how light the cover models appear. […] After 2005 there’s a bit more spread.",
     "claim": "Skin lightness has a standard deviation of 0.076 and a range of 0.41 across the 81 cover appearances from 2000 through 2005, versus a standard deviation of 0.115 and a range of 0.67 across the 181 after 2005.",
     "tables": {
       "f": "data/faces.csv"
@@ -81,12 +81,21 @@
     "code": "f.assign(group=lambda d: np.where(d.model == 'Lupita Nyongo', 'Lupita Nyongo', 'Other')).groupby('group').l.agg(['count', 'mean'])"
   },
   {
+    "id": "lupita-darkens-lightness-trend",
+    "source": "And part of it is just Lupita. Her four recent appearances are responsible for tugging the trend towards the left.",
+    "claim": "Across all cover appearances, skin lightness trends 0.00076 lower per year, but excluding Lupita Nyongo's covers it trends 0.00042 higher per year.",
+    "tables": {
+      "f": "data/faces.csv"
+    },
+    "code": "pd.concat([f.assign(trend='all'), f[f.model != 'Lupita Nyongo'].assign(trend='without Lupita Nyongo')]).assign(year=lambda d: pd.to_datetime(d['date']).dt.year).groupby('trend').apply(lambda d: np.polyfit(d['year'], d['l'], 1)[0])"
+  },
+  {
     "id": "repeat-model-cover-counts",
-    "source": "Gisele Bündchen (9 covers) Nicole Kidman (7) Sarah Jessica Parker (6)",
+    "source": "Gisele Bündchen (9 covers) Nicole Kidman (7) Sarah Jessica Parker (6) Charlize Theron",
     "claim": "Gisele Bundchen has the most Vogue covers of any model, with 9, followed by Nicole Kidman with 7; Sarah Jessica Parker and Charlize Theron each have 6.",
     "tables": {
       "f": "data/faces.csv"
     },
-    "code": "f.model.value_counts()"
+    "code": "f.model.value_counts().loc[lambda s: s >= 2]"
   }
 ]

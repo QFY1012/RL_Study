@@ -1,0 +1,72 @@
+[
+  {
+    "id": "alcohol-most-between-9-and-12",
+    "source": "Most wines are between 9 and 12% with quite a few bottles around the 9.5% mark.",
+    "claim": "1,452 of the wines have an alcohol level between 9% and 12%, against 148 outside that range.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.alcohol.between(9, 12).value_counts()"
+  },
+  {
+    "id": "alcohol-peak-at-9-5",
+    "source": "Most wines are between 9 and 12% with quite a few bottles around the 9.5% mark.",
+    "claim": "9.5% alcohol is the most common level, with 139 wines.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.alcohol.value_counts().head(3)"
+  },
+  {
+    "id": "quality-range-and-mean",
+    "source": "no wine got worse than 3 or better than 8 and most wines clustered around the 5 or 6 mark with an average of 5.6.",
+    "claim": "Quality ratings range from 3 to 8, with a mean of 5.64.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.quality.agg(['min', 'max', 'mean'])"
+  },
+  {
+    "id": "quality-most-common-5-and-6",
+    "source": "no wine got worse than 3 or better than 8 and most wines clustered around the 5 or 6 mark with an average of 5.6.",
+    "claim": "Ratings of 5 and 6 are the most common, with 681 and 639 wines.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.quality.value_counts().sort_index()"
+  },
+  {
+    "id": "quality-low-and-high-class-sizes",
+    "source": "\u201chigh-quality\u201d for this dataset really does mean good from the assessors perspective, while \u201clow-quality\u201d includes truly low-quality wines as well as average wines resulting in a proportionally larger class.",
+    "claim": "The low-quality class (0) has 1,383 wines and the high-quality class (1) has 217.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.quality_binary.value_counts()"
+  },
+  {
+    "id": "volatile-acidity-lower-in-better-wines",
+    "source": "The blue, better wines predominantly sport lower levels and \u2014 reversely \u2014 the worse wines have the highest levels of volatile acidity, potentially impacting taste in a negative way.",
+    "claim": "High-quality wines average 0.41 volatile acidity against 0.55 for lower-quality wines, and the maximum of 1.58 occurs in the lower-quality group.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.groupby('quality_binary').volatile_acidity.agg(['mean', 'max'])"
+  },
+  {
+    "id": "alcohol-higher-in-better-wines",
+    "source": "The association is flipped here \u2014 higher quality wines are likely to have more alcohol in this data, as a solid proportion of especially wines around the 12-13% mark was voted good.",
+    "claim": "High-quality wines average 11.52% alcohol against 10.25% for lower-quality wines.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w.groupby('quality_binary').alcohol.mean()"
+  },
+  {
+    "id": "alcohol-12-13-about-half-good",
+    "source": "a solid proportion of especially wines around the 12-13% mark was voted good.",
+    "claim": "Among the 139 wines with 12\u201313% alcohol, 64 (46%) are high quality.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w[w.alcohol.between(12, 13)].quality_binary.agg(['count', 'sum', 'mean'])"
+  },
+  {
+    "id": "alcohol-9-5-few-good",
+    "source": "Look at that 9.5% bar. Considering this is the most populated section, it\u2019s interesting to see how few wines are deemed high quality in here.",
+    "claim": "Of the 139 wines at 9.5% alcohol, only 2 are high quality.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "w[w.alcohol == 9.5].quality_binary.agg(['count', 'sum'])"
+  },
+  {
+    "id": "ols-alcohol-12-predicts-just-above-6",
+    "source": "Plugging in an Alcohol value of x = 12%, for example, will return a Quality (a y value) just above 6.",
+    "claim": "The least-squares line of quality on alcohol predicts a quality of 6.20 at 12% alcohol.",
+    "tables": {"w": "data/winedata.csv"},
+    "code": "np.polyval(np.polyfit(w.alcohol, w.quality, 1), 12)"
+  }
+]

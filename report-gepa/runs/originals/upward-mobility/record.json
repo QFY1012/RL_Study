@@ -1,0 +1,42 @@
+{
+ "id": "upward-mobility",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 552,
+  "steps": 63,
+  "tools": 96,
+  "nudged": 0,
+  "usage": {
+   "input": 100311,
+   "output": 43977
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "map-change-extremes-1910-1940",
+   "basis": "Output shows Huntsville, AL -24.0; Tallahassee, FL -14.6; North Little Rock, AR -13.6; Gary, IN 34.6; Washington, DC 42.8; Newark, NJ 43.6.",
+   "verdict": "ok"
+  },
+  {
+   "id": "map-labeled-cities-1910-1940",
+   "basis": "Output shows Washington, DC 42.8; Detroit, MI 34.5; St. Louis, MO 27.5; Chicago, IL 24.6; Phoenix, AZ -1.7; Tampa, FL -1.8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "map-change-direction-1910-1940",
+   "basis": "Output shows increase 159, decrease 63, no change 18.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 25
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "source": "For example, if a wine has an alcohol level of 12 it has an 86% probability of being good.",
+    "why": "This probability is read off the story's fitted logistic model, whose coefficients are not in data/winedata.csv; refitting a logistic regression of the data's quality_binary on alcohol does not give 86% (it gives about 35%), and a plain pandas computation on the provided file cannot reproduce the story's figure."
+  },
+  {
+    "source": "It's only 5% full \u2014 which means its physiochemical properties indicate only a 5% chance of it being good. This is what you get when taking the average value for each wine property, represented by the vertical line in the distribution chart below.",
+    "why": "The 5% is the story's logistic model evaluated at the mean of every predictor; producing it needs the model weights and intercept (data/model-weights.csv and data/model-intercept.csv in the project repository), which are not among the provided files."
+  },
+  {
+    "source": "In this case, Alcohol appears to have the biggest impact on Quality, followed by Volatile Acidity and the amount of sulphates in the wine.",
+    "why": "This ranking comes from a Random Forest variable-importance table (data/importance.csv in the project repository), which is not among the provided files; data/winedata.csv alone holds the wines, not the model's importance scores."
+  },
+  {
+    "source": "This is low for reds, which tend to be between 12 and 15%.",
+    "why": "A general statement about red wines from an external source, not a quantity measured in data/winedata.csv."
+  }
+]

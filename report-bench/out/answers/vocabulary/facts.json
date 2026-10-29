@@ -1,0 +1,92 @@
+[
+ {
+  "id": "newer-artists-fewer-words",
+  "source": "Since the original release, there’s now a notable trend of fewer unique words among newer artists.",
+  "claim": "Artists whose primary era is the 2010s average 3,722.8 unique words, the lowest of the four eras, against 4,207.5 for the 1980s, 4,544.7 for the 1990s and 4,633.6 for the 2000s.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.loc[df['era'].isin(['1980s','1990s','2000s','2010s'])].groupby('era')['recalc'].mean().sort_values()"
+ },
+ {
+  "id": "lil-uzi-word-count",
+  "source": "A better benchmark for Lil Uzi Vert’s word count (2,556) might be those of pop artists, such as Beyonce (2,433 words), or even one his major influences: Marilyn Manson (2,466 words).",
+  "claim": "Lil Uzi Vert used 2,556 unique words.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.loc[df['rapper_clean']=='Lil Uzi Vert', ['rapper_clean','recalc']]"
+ },
+ {
+  "id": "aesop-rock-first",
+  "source": "Sure enough, Aesop Rock is well above every artist in the dataset, and I was obliged to add him to the chart.",
+  "claim": "Aesop Rock's 7,879 unique words rank first, ahead of Busdriver's 7,324.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).dropna(subset=['recalc']).nsmallest(2, 'rank')[['rapper_clean','recalc','rank']]"
+ },
+ {
+  "id": "busdriver-second",
+  "source": "#2 - Busdriver",
+  "claim": "Busdriver's 7,324 unique words rank second.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).loc[lambda d: d['rapper_clean']=='Busdriver', ['rapper_clean','recalc','rank']]"
+ },
+ {
+  "id": "only-two-over-7000",
+  "source": "He and Aesop Rock are the only rappers with more than 7,000 unique words in their first 35,000 lyrics.",
+  "claim": "Only two artists have more than 7,000 unique words: Aesop Rock (7,879) and Busdriver (7,324).",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.loc[df['recalc'] > 7000, ['rapper_clean','recalc']].sort_values('recalc', ascending=False)"
+ },
+ {
+  "id": "wu-tang-six-ranks",
+  "source": "#4, #5, #7, #10, #15, and #20 - Wu-Tang Clan Ain't Nuthing Ta F' Wit",
+  "claim": "GZA ranks 4th (6,390), Wu-Tang Clan 5th (6,196), RZA 7th (6,018), Ghostface Killah 10th (5,901), Killah Priest 15th (5,704) and Raekwon 20th (5,428).",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).loc[lambda d: d['rapper_clean'].isin(['GZA','Wu-Tang Clan','RZA','Ghostface Killah','Killah Priest','Raekwon']), ['rapper_clean','recalc','rank']].sort_values('rank')"
+ },
+ {
+  "id": "outkast-54th",
+  "source": "#28, #54 - Outkast and E-40",
+  "claim": "Outkast's 4,545 unique words rank 54th.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).loc[lambda d: d['rapper_clean']=='Outkast', ['rapper_clean','recalc','rank']]"
+ },
+ {
+  "id": "e40-top-20-percent",
+  "source": "Of course E-40 is in the top 20%; he’s considered to be the inventor of many slang terms.",
+  "claim": "E-40's 5,004 unique words place him in the top 20% of artists.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).dropna(subset=['recalc']).assign(n=lambda d: len(d), share=lambda d: d['rank']/d['n'], top20=lambda d: d['rank'] <= 0.2*d['n']).loc[lambda d: d['rapper_clean']=='E-40', ['rapper_clean','recalc','rank','n','share','top20']]"
+ },
+ {
+  "id": "busta-rhymes-49th",
+  "source": "#49 and #59 - Busta Rhymes and Twista",
+  "claim": "Busta Rhymes' 4,613 unique words rank 49th.",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).loc[lambda d: d['rapper_clean']=='Busta Rhymes', ['rapper_clean','recalc','rank']]"
+ },
+ {
+  "id": "jay-z-below-common-talib",
+  "source": "(both of whom rank higher than him, when it comes to the diversity of their vocabulary)",
+  "claim": "Common (rank 25, 5,138 words) and Talib Kweli (rank 41, 4,678 words) both rank above Jay-Z (rank 75, 4,275 words).",
+  "tables": {
+   "df": "data/vocabulary.csv"
+  },
+  "code": "df.assign(rank=df['recalc'].rank(ascending=False, method='min')).loc[lambda d: d['rapper_clean'].isin(['Common','Talib Kweli','Jay-Z']), ['rapper_clean','recalc','rank']].sort_values('rank')"
+ }
+]

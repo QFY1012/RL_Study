@@ -1,0 +1,77 @@
+{
+ "id": "vocabulary",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 598,
+  "steps": 44,
+  "tools": 49,
+  "nudged": 0,
+  "usage": {
+   "input": 60338,
+   "output": 76648
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "newer-artists-fewer-words",
+   "basis": "Output means: 2010s=3722.807018 (lowest), 1980s=4207.5, 1990s=4544.704545, 2000s=4633.58.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lil-uzi-word-count",
+   "basis": "Output row: Lil Uzi Vert recalc=2556.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "aesop-rock-first",
+   "basis": "Output rows: Aesop Rock recalc=7879.0 rank=1.0; Busdriver recalc=7324.0 rank=2.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "busdriver-second",
+   "basis": "Output row: Busdriver recalc=7324.0 rank=2.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "only-two-over-7000",
+   "basis": "Output has exactly two rows with recalc>7000: Aesop Rock=7879.0 and Busdriver=7324.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "wu-tang-six-ranks",
+   "basis": "Output: GZA=6390.0 rank 4.0; Wu-Tang Clan=6196.0 rank 5.0; RZA=6018.0 rank 7.0; Ghostface Killah=5901.0 rank 10.0; Killah Priest=5704.0 rank 15.0; Raekwon=5428.0 rank 20.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "outkast-54th",
+   "basis": "Output row: Outkast recalc=4545.0 rank=54.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "e40-top-20-percent",
+   "basis": "Output row: E-40 recalc=5004.0 rank=27.0 n=160 share=0.16875 top20=True.",
+   "verdict": "ok"
+  },
+  {
+   "id": "busta-rhymes-49th",
+   "basis": "Output row: Busta Rhymes recalc=4613.0 rank=49.0.",
+   "verdict": "ok"
+  },
+  {
+   "id": "jay-z-below-common-talib",
+   "basis": "Output: Common recalc=5138.0 rank=25.0; Talib Kweli recalc=4678.0 rank=41.0; Jay-Z recalc=4275.0 rank=75.0.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 7
+}

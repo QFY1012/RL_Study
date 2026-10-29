@@ -1,0 +1,24 @@
+{
+ "id": "wiki-billboard",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 539,
+  "steps": 63,
+  "tools": 97,
+  "nudged": 0,
+  "usage": {
+   "input": 135290,
+   "output": 45535
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 0,
+ "problems": [],
+ "dropped": [],
+ "answer": 0,
+ "skipped": 3
+}

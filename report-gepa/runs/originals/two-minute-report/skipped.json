@@ -1,0 +1,14 @@
+[
+  {
+    "source": "The distribution of how many calls are incorrect with how much time remaining in the game.",
+    "why": "The chart plots incorrect-call counts in five-second bins and labels only its axes (seconds left and number of calls); neither the text nor the chart states a numeric finding or conclusion from the distribution."
+  },
+  {
+    "source": "Select a team to see all of the incorrect calls they were involved in.",
+    "why": "The team-history graphic is an interactive per-team listing of individual calls and states no aggregate number, ranking or share."
+  },
+  {
+    "source": "All calls from the most recently reviewed day of games.",
+    "why": "The recent-reviews table lists individual calls from one day's games and draws no aggregate finding from the data."
+  }
+]

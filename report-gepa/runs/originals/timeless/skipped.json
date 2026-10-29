@@ -70,5 +70,13 @@
   {
     "source": "20 years have passed since No Diggity's release.",
     "why": "The data dates No Diggity to 10/12/1996; the elapsed time depends on the story's publication date rather than on a value in the data files, so it is not a data finding that the files reproduce."
+  },
+  {
+    "source": "LOWER BILLBOARD RANK, BUT HIGH ON SPOTIFY",
+    "why": "The annotation states a direction but names no song and gives no threshold; the data has no story-defined cutoff for 'lower' Billboard rank or 'high' Spotify playcounts, so a specific comparison cannot be reproduced without choosing a cutoff the story does not use."
+  },
+  {
+    "source": "BEST CHART PERFORMANCE IN '91, BUT NOT AS POPULAR TODAY ON SPOTIFY",
+    "why": "The annotation points to an unnamed 1991 track; without a named song or a defined cutoff, the comparison cannot be computed reproducibly from the data."
   }
 ]

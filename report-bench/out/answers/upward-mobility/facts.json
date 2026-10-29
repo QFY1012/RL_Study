@@ -1,0 +1,29 @@
+[
+ {
+  "id": "map-change-extremes-1910-1940",
+  "source": "Percent change in Black population by city from 1910 to 1940",
+  "claim": "Between 1910 and 1940, the percent change in Black population was lowest in Huntsville, AL (-24.0), Tallahassee, FL (-14.6) and North Little Rock, AR (-13.6), and highest in Newark, NJ (43.6), Washington, DC (42.8) and Gary, IN (34.6).",
+  "tables": {
+   "cities": "data/cities.csv"
+  },
+  "code": "cities.dropna(subset=['properties.black_pop_pct_chg_1910_1940']).set_index('properties.city_and_state')['properties.black_pop_pct_chg_1910_1940'].mul(100).sort_values().iloc[[0, 1, 2, -3, -2, -1]]"
+ },
+ {
+  "id": "map-labeled-cities-1910-1940",
+  "source": "Percent change in Black population by city from 1910 to 1940",
+  "claim": "Among the cities labeled on the map, Washington, DC had the highest percent change (42.8), followed by Detroit (34.5), St. Louis (27.5) and Chicago (24.6), while Tampa (-1.8) and Phoenix (-1.7) declined.",
+  "tables": {
+   "cities": "data/cities.csv"
+  },
+  "code": "cities.dropna(subset=['properties.city_and_state']).set_index('properties.city_and_state')['properties.black_pop_pct_chg_1910_1940'].mul(100).reindex(['Anchorage, AK', 'Minneapolis, MN', 'Honolulu, HI', 'Seattle, WA', 'St. Louis, MO', 'Boston, MA', 'Philadelphia, PA', 'Detroit, MI', 'San Francisco, CA', 'Denver, CO', 'Chicago, IL', 'Washington, DC', 'New York, NY', 'Phoenix, AZ', 'San Diego, CA', 'New Orleans, LA', 'Dallas, TX', 'Tampa, FL', 'Houston, TX', 'Miami, FL', 'Atlanta, GA', 'Los Angeles, CA']).sort_values(ascending=False)"
+ },
+ {
+  "id": "map-change-direction-1910-1940",
+  "source": "Percent change in Black population by city from 1910 to 1940",
+  "claim": "From 1910 to 1940 the percent change in Black population was an increase in 159 cities, a decrease in 63 cities and no change in 18 cities.",
+  "tables": {
+   "cities": "data/cities.csv"
+  },
+  "code": "cities['properties.black_pop_pct_chg_1910_1940'].dropna().map(lambda x: 'increase' if x > 0 else ('decrease' if x < 0 else 'no change')).value_counts()"
+ }
+]

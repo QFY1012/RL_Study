@@ -1,0 +1,65 @@
+[
+  {
+    "id": "incorrect-calls-share",
+    "source": "the officials have missed or incorrectly called 2,197 plays, or about 8.2% of all calls reviewed.",
+    "claim": "Of 26,822 reviewed plays, 2,197 (8.2%) were incorrect calls or incorrect non-calls.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d.review_decision.isin(['IC', 'INC']).agg(['sum', 'count', lambda s: s.mean() * 100])"
+  },
+  {
+    "id": "wrong-decisions-per-game",
+    "source": "This amounts to 1.49 wrong decisions in the final minutes of each close game.",
+    "claim": "The 2,197 incorrect calls and non-calls average 1.49 per game across 1,476 games.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d.groupby('game_id').review_decision.apply(lambda s: s.isin(['IC', 'INC']).sum()).agg(['sum', 'mean', 'size'])"
+  },
+  {
+    "id": "minutes-of-action",
+    "source": "In those 4,297 minutes of action",
+    "claim": "The reviewed periods total 4,297 minutes of action.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d.assign(q=d.period.str.replace('Q', '').astype(int)).drop_duplicates(['game_id', 'period']).q.map(lambda q: 2 if q == 4 else 5).sum()"
+  },
+  {
+    "id": "call-type-correct-rates",
+    "source": "Here is a breakdown of which calls occur most often at the end of close games. When an infraction is called (or should have been), how often do the officials get it right?",
+    "claim": "Across the call types shown, the share of correct calls among infractions ranges from 99.7% for Foul: Personal Take to 0.7% for Foul: Defense 3 Second; Foul: Personal is 88.5% and Foul: Shooting 77.6%.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d[d.review_decision.isin(['CC', 'CNC', 'IC', 'INC'])].groupby(['call_type', 'review_decision']).size().unstack(fill_value=0).assign(total_inf=lambda x: x.CC + x.IC + x.INC, rate=lambda x: x.CC / (x.CC + x.IC + x.INC) * 100).query('INC >= 1 and total_inf >= 20').sort_values('rate', ascending=False)"
+  },
+  {
+    "id": "home-away-incorrect-favors",
+    "source": "The number of incorrect calls made in favor of the home or away team.",
+    "claim": "Incorrect calls were in favor of the home team 1,098 times and the away team 1,068 times.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d[d.review_decision.isin(['IC', 'INC'])].assign(favored=lambda x: np.where(x.review_decision == 'INC', x.committing_team, x.disadvantaged_team)).assign(side=lambda x: np.select([x.favored == x.home, x.favored == x.away], ['home', 'away'], default=None)).side.value_counts()"
+  },
+  {
+    "id": "officials-ic-inc-rates",
+    "source": "Which officials have a tendency to get more calls right and wrong? Incorrect calls (IC) can be isolated to a specific official, while incorrect non-calls (INC) means the official was part of a trio that missed the call.",
+    "claim": "Among the officials shown, Scott Foster has the most incorrect calls (8 in 94 games, 0.09 per game) and Tre Maddox the highest incorrect non-call rate (1.77 per game).",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "d.assign(refs=d[['ref_1', 'ref_2', 'ref_3']].values.tolist()).explode('refs').groupby('refs').agg(games=('game_id', 'nunique'), inc=('review_decision', lambda s: (s == 'INC').sum())).join(d[d.review_decision == 'IC'].ref_made_call.dropna().str.split(',').explode().value_counts().rename('ic')).fillna({'ic': 0}).assign(rate_ic=lambda x: x.ic / x.games, rate_inc=lambda x: x.inc / x.games).query('games > 20').sort_values('ic', ascending=False)"
+  },
+  {
+    "id": "player-favor-balance",
+    "source": "Is star treatment a thing in the last two minutes? A call is deemed in favor of a player if it was a missed call on them (committing player + INC) or a wrong call against their opponent (disadvantaged player + IC). The opposite logic applies for calls that oppose a player.",
+    "claim": "Among the players shown, Marcin Gortat has the largest favorable balance (42 calls in favor, 6 against; net 36), while Kemba Walker (13 in favor, 23 against; net -10) and Spencer Dinwiddie (3 in favor, 13 against; net -10) have the smallest.",
+    "tables": {
+      "d": "data/calls.csv"
+    },
+    "code": "pd.concat([d[d.review_decision == 'INC'].groupby('committing_player').size().add(d[d.review_decision == 'IC'].groupby('disadvantaged_player').size(), fill_value=0).rename('favor'), d[d.review_decision == 'INC'].groupby('disadvantaged_player').size().add(d[d.review_decision == 'IC'].groupby('committing_player').size(), fill_value=0).rename('oppose')], axis=1).fillna(0).assign(total=lambda x: x.favor + x.oppose, net=lambda x: x.favor - x.oppose).query('total > 15').sort_values('net', ascending=False)"
+  }
+]

@@ -1,0 +1,81 @@
+{
+ "id": "timeless",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 724,
+  "steps": 49,
+  "tools": 56,
+  "nudged": 0,
+  "usage": {
+   "input": 57506,
+   "output": 103554
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 9,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "no-diggity-fifth-most-played-90s",
+   "basis": "Output row position 5: Blackstreet / No Diggity, count 30,911,317; positions 1-4 have higher counts.",
+   "verdict": "ok"
+  },
+  {
+   "id": "smells-like-teen-spirit-top-90s",
+   "basis": "Output row: Nirvana / Smells Like Teen Spirit, bill 6.0, count 50,657,282; it is the nlargest(1) row.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-five-90s-playcounts",
+   "basis": "Output counts are 50,657,282; 35,669,952; 34,352,877; 33,625,240; 30,911,317 for the five listed tracks.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-five-90s-billboard-yearly-ranks",
+   "basis": "Output rank values are 42, 57, 45, 20, 5 in the same order as the five listed tracks.",
+   "verdict": "ok"
+  },
+  {
+   "id": "forty-one-songs-ahead-of-smells-like-teen-spirit",
+   "basis": "Output rank is 42 and ahead is 41.",
+   "verdict": "ok"
+  },
+  {
+   "id": "dont-stop-believin-top-80s",
+   "basis": "Output row: Journey / Don't Stop Believin', count 50,855,135; it is the nlargest(1) 80s row.",
+   "verdict": "ok"
+  },
+  {
+   "id": "bohemian-rhapsody-top-70s",
+   "basis": "Output row: Queen / Bohemian Rhapsody, count 32,298,690; it is the nlargest(1) 70s row.",
+   "verdict": "ok"
+  },
+  {
+   "id": "top-fifty-one-overall-ranking",
+   "basis": "Output first row Lose Yourself count 59,039,765; rows 2-5 are Mr. Brightside 54,367,533, Numb 52,969,898, Don't Stop Believin' 50,855,135, Smells Like Teen Spirit 50,657,282; row 51 is Sultans Of Swing count 25,138,802.",
+   "verdict": "ok"
+  },
+  {
+   "id": "lose-yourself-billboard-2002-rank",
+   "basis": "Output row: Lose Yourself rank 1, year_total 295.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "top-five-90s-playcounts",
+   "why": "source not in the story as read"
+  },
+  {
+   "id": "top-five-90s-billboard-yearly-ranks",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 7,
+ "skipped": 20
+}

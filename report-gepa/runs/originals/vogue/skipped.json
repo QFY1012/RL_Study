@@ -12,6 +12,10 @@
     "why": "The file has no race or ethnicity field, and there is no explicit threshold in the story or methods defining which models count as 'dark-skinned'. The five-darkest 60% finding is reproduced separately, but this race-based majority cannot be computed from the data."
   },
   {
+    "source": "Although Lupita does account for the majority of dark-skinned models",
+    "why": "There is no explicit cutoff defining the full set of dark-skinned models; the story's concrete five-darkest/60% version is reproduced as a fact, but a general majority across all dark-skinned models cannot be computed unambiguously."
+  },
+  {
     "source": "Lupita is the only dark-skinned professional model on the cover of Vogue in the past nineteen years.",
     "why": "The data have no race or occupation field and no defined cutoff for 'dark-skinned', so this cannot be computed from faces.csv."
   },

@@ -1,0 +1,18 @@
+[
+  {
+    "source": "226 masks as of May 11, 2020",
+    "why": "This is simply the row count of data/wrestlers.csv (226 records), a description of the size of the data rather than a finding; the story draws no comparison, share, ranking or trend from it."
+  },
+  {
+    "source": "we have limited ourselves to around 200 wrestlers",
+    "why": "This describes the scope and selection of the collection, not a finding computed from it. The table has 226 rows, consistent with the approximation, but the statement is a data description."
+  },
+  {
+    "source": "with below-average salary (less than $50,000 in the US)",
+    "why": "An external fact about wrestlers' pay; data/wrestlers.csv contains no salary, earnings or income field."
+  },
+  {
+    "source": "their biggest plans are currently with Saudi Arabia, for 10 years of events",
+    "why": "A business/booking claim about future events; data/wrestlers.csv has no promotion, event or contract information that could reproduce it."
+  }
+]

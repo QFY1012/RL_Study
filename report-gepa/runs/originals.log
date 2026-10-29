@@ -12750,3 +12750,265 @@ titletowns: facts=2 answer=2 dropped=0 skipped=13 problems=0 563s steps=48
   women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/assets/js/main.js
   women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/js/index.js
   women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/scripts/index.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/main/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/weeks.csv
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/data/people.csv
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Modal.svelte
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/utils/stores.js
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Header.svelte
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/App.svelte
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study && grep -rn "original.json" report-gepa/src report-bench/src | head -30; grep
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/package.json
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/Makefile
+  wiki-billboard wiki-billboard: bash sed -n '1,220p' /home/user/RL_Study/report-bench/src/report_bench/build.py
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='skipped
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/scripts/stats.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/scripts/prepare-web.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/scripts/filter-population.js
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && cat > /tmp/test_facts.py <<'EOF' imp
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part6.mustache
+  women-in-headlines women-in-headlines: bash cd /tmp; curl -s https://pudding.cool/2022/02/women-in-headlines/ -o story.html; grep -o 'https\?://
+  wiki-death wiki-death: web_fetch https://r.jina.ai/https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/scripts/prepa
+  wrestling wrestling: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wrestling@master/src/components/App.svelte
+  wrestling wrestling: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wrestling@master/src/components/Filters.svelte
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  women-in-headlines women-in-headlines: bash cd /tmp; which curl wget; curl -sI https://pudding.cool/2022/02/women-in-headlines | head -5
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json for fn i
+  women-in-headlines women-in-headlines: web_fetch https://github.com/the-pudding/data/tree/master/women-in-headlines
+  women-in-headlines women-in-headlines: web_fetch https://pudding.cool/2022/02/women-in-headlines#methods
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import pandas 
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/data/meta.json
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Meta.svelte
+  wrestling wrestling: web_fetch https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Intro.svelte
+  wine-model wine-model: write /home/user/RL_Study/report-gepa/runs/originals/wine-model/facts.json
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/08/wiki-billboard-data/web/2018-tally-appearance--alive.csv
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 /tmp/test_facts.py
+  wrestling wrestling: web_fetch https://r.jina.ai/https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Filt
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import json p=
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/women_reps.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/baked_positions.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/positions.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/women_in_govt.csv
+song-decay: facts=10 answer=10 dropped=0 skipped=5 problems=0 837s steps=62
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && cat > runfacts.py <<'EOF' import jso
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 << 'EOF' import json, pandas as p
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Filters.svelte
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json s=json.l
+  wine-animals wine-animals: web_fetch https://pudding.cool/2025/04/wine-animals/
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-congress women-in-congress: web_fetch https://ungh.cc/repos/dldx/women-in-congress/files/master
+  women-in-congress women-in-congress: web_fetch https://ungh.cc/repos/dldx/women-in-congress/files
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 -m json.tool facts.json
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  women-in-congress women-in-congress: web_view https://raw.githubusercontent.com/dldx/women-in-congress/master/helper_files/violin_plot.html
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Explore.svelte
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/App.svelte
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Modal.svelte
+  wine-model wine-model: write /home/user/RL_Study/report-gepa/runs/originals/wine-model/skipped.json
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && ls -la && echo '--- facts.json 
+  wine-model wine-model: edit /home/user/RL_Study/report-gepa/runs/originals/wine-model/facts.json
+  wiki-billboard wiki-billboard: web_view https://pudding.cool/2018/09/wiki-billboard/#tally
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && cat > runfacts.py <<'EOF' import jso
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/data/care.csv
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/data/impact.csv
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json, pandas 
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/mp_topic_fraction.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/baked_positions.js
+  vocabulary vocabulary: edit facts.json
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  wrestling wrestling: web_view https://pudding.cool/2020/05/wrestling/?explore
+  wrestling wrestling: web_view https://pudding.cool/2020/05/wrestling/?story
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+upward-mobility: facts=3 answer=3 dropped=0 skipped=25 problems=0 552s steps=63
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') y=b['h
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json p='fac
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') def js
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && cat facts.json && echo =============
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import pandas as pd,
+wine-model: facts=10 answer=10 dropped=0 skipped=4 problems=0 297s steps=39
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json, pandas 
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Article.svelte
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Long.svelte
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/Wrestler.svelte
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/components/About.svelte
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  women-in-congress women-in-congress: bash env | grep -i proxy; curl -s -m 10 -o /tmp/test.csv -w '%{http_code} %{size_download}\n' https://raw
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json p='fac
+  wiki-death wiki-death: web_fetch https://api.github.com/repos/the-pudding/wiki-death-data/contents/scripts/prepare-web.js
+  wiki-death wiki-death: web_fetch https://raw.githack.com/the-pudding/wiki-death-data/master/scripts/prepare-web.js
+  wiki-death wiki-death: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wiki-death-data@master/scripts/prepare-web.js
+  two-minute-report two-minute-report: write /home/user/RL_Study/report-gepa/runs/originals/two-minute-report/facts.json
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 << 'EOF' import json, pandas as p
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/mps_over_time.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/index.js
+  two-minute-report two-minute-report: write /home/user/RL_Study/report-gepa/runs/originals/two-minute-report/skipped.json
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json, panda
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/js/index.js
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/js/app.js
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/js/bundle.js
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/js/care.js
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import json
+  wrestling wrestling: bash cd /home/user/RL_Study/report-gepa/runs/originals/wrestling; python - <<'PY' import pandas as pd df=
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/README.md
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/package.json
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/index.js
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json fact
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import pandas as pd
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/graphic.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/entry.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/weeks.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/care.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/topic_medians.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/women_in_govt.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/data/house_candidates.csv
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json p='fac
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json, pandas 
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/graphic-care.js
+  wiki-death wiki-death: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death/master/src/js/clean-data.js
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/topic_medians.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/baked_positions.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/women_in_govt.csv
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/women_reps.csv
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') def lo
+  wiki-billboard wiki-billboard: write /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard/facts.json
+  wiki-billboard wiki-billboard: write /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard/skipped.json
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import pandas as pd,
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-billboard && python3 -c " import json print(j
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && grep -rn "wiki-billboard\|wiki_billboard" . --exclude-dir=.ven
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import pandas as pd,
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json p='fac
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json s=js
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && cat skipped.json
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import json s=js
+  wiki-billboard wiki-billboard: web_fetch https://github.com/the-pudding/wiki-billboard/commits/master.atom
+  wiki-billboard wiki-billboard: web_fetch https://github.com/the-pudding/wiki-billboard-data/commits/master.atom
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json, pandas as
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import json, panda
+  wrestling wrestling: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wrestling@master/public/
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-billboard wiki-billboard: web_fetch http://archive.org/wayback/available?url=pudding.cool/2018/09/wiki-billboard&timestamp=20181001
+  wiki-billboard wiki-billboard: web_fetch http://archive.org/wayback/available?url=pudding.cool/2018/09/wiki-billboard/index.html&timestamp=20
+timeless: facts=9 answer=7 dropped=2 skipped=20 problems=0 724s steps=49
+  wrestling wrestling: web_view https://cdn.jsdelivr.net/gh/the-pudding/wrestling@master/public/index.html
+  women-in-congress women-in-congress: bash python3 -c " import pandas as pd, numpy as np, io repo='''topic,female,male drugs war,-2.713,-2.733 
+  wiki-billboard wiki-billboard: web_fetch http://web.archive.org/web/20180913120440/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-billboard wiki-billboard: web_view http://web.archive.org/web/20180913120440/https://pudding.cool/2018/09/wiki-billboard/
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  wiki-billboard wiki-billboard: web_fetch https://web.archive.org/web/20180913120440/https://pudding.cool/2018/09/wiki-billboard/
+  wiki-billboard wiki-billboard: web_view https://web.archive.org/web/20180913120440/https://pudding.cool/2018/09/wiki-billboard/
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wrestling wrestling: web_view https://raw.githubusercontent.com/the-pudding/wrestling/master/src/data/copy.json
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -m json.tool facts.json >
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+vocabulary: facts=10 answer=10 dropped=0 skipped=7 problems=0 598s steps=44
+  wiki-billboard wiki-billboard: web_fetch https://r.jina.ai/https://web.archive.org/web/20180913120440/https://pudding.cool/2018/09/wiki-billb
+  wiki-billboard wiki-billboard: web_fetch https://web.archive.org/web/20180913120440id_/https://pudding.cool/2018/09/wiki-billboard/
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 << 'EOF' import json, pandas as p
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/js/main.js
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  women-in-headlines women-in-headlines: web_fetch view-source:https://pudding.cool/2022/02/women-in-headlines/
+  women-in-headlines women-in-headlines: web_fetch https://pudding.cool/2022/02/women-in-headlines/index.html
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json fact
+  wrestling wrestling: bash cd /home/user/RL_Study/report-gepa/runs/originals/wrestling; python - <<'PY' import pandas as pd w=p
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && ls -la && python3 -c " import json f=json
+  wrestling wrestling: write /home/user/RL_Study/report-gepa/runs/originals/wrestling/facts.json
+  wrestling wrestling: write /home/user/RL_Study/report-gepa/runs/originals/wrestling/skipped.json
+  wrestling wrestling: bash cd /home/user/RL_Study/report-gepa/runs/originals/wrestling; python - <<'PY' import json for f in ['
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  women-in-headlines women-in-headlines: web_fetch https://pudding.cool/2022/02/women-in-headlines/assets/data/words.json
+  women-in-headlines women-in-headlines: web_fetch https://pudding.cool/2022/02/women-in-headlines/data/words.json
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+wrestling: facts=0 answer=0 dropped=0 skipped=4 problems=0 224s steps=36
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && cat > /tmp/test_facts.py <<'EOF' i
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && cat facts.json
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && ls -la && find . -maxdepth 3 -type f | head -50
+wiki-billboard: facts=0 answer=0 dropped=0 skipped=3 problems=0 539s steps=63
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && find report-bench report-gepa -maxdepth 4 -type f | grep -v '.venv' | head
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json fact
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,200p report-bench/src/report_bench/facts.py
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,200p report-gepa/src/report_gepa/originals.py
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-bench && ls out 2>/dev/null | head; ls out/answers 2>/dev/null | head;
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,250p report-bench/src/report_bench/trust.py
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && grep -rl "womens-sizing" --include=*.py --include=*.json --include=*.md . 
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import json s=json.l
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,220p report-bench/src/report_bench/rubric.py
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && ls rubric 2>/dev/null; find . -name 'judge-dimensions.md' | head; 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-death-data/master/README.md
+  wiki-breakout wiki-breakout: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-breakout/master/src/assets/data/people-info.csv
+vogue: facts=11 answer=11 dropped=0 skipped=11 problems=0 589s steps=46
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,200p report-gepa/src/report_gepa/evalguide.py
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,160p report-bench/src/report_bench/score.py
+  wiki-death wiki-death: web_fetch https://api.allorigins.win/get?url=https%3A%2F%2Fraw.githubusercontent.com%2Fthe-pudding%2Fwiki-deat
+  wiki-death wiki-death: web_fetch https://api.codetabs.com/v1/proxy/?quest=https://raw.githubusercontent.com/the-pudding/wiki-death-da
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && grep -rn "2.1" --include=*.py --include=*.md . 2>/dev/null | grep -v '.ven
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && grep -n "womens\|sizing" -r report-gepa/src/report_gepa/*.py | head -20
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && sed -n 1,120p report-gepa/src/report_gepa/puddingrepo.py
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study && grep -n "sizing\|womens" report-gepa/src/report_gepa/*.py report-bench/src
+  womens-sizing womens-sizing: web_fetch https://github.com/the-pudding/womens-sizing
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -W error::FutureWarni
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/
+  women-in-headlines women-in-headlines: web_fetch https://api.github.com/repos/the-pudding/data/contents/women-in-headlines
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np r=pd.read_csv('women_reps.csv',parse_dates=
+  women-in-headlines women-in-headlines: web_fetch https://data.jsdelivr.com/v1/packages/gh/the-pudding/data@master
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np g=pd.read_csv('women_in_govt.csv',parse_dat
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, pan
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && ls -la && python3 -c " import
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import pandas as pd,
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && ls -la && python3 -c " import jso
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import pandas as pd,
+  women-in-congress women-in-congress: web_fetch https://raw.githubusercontent.com/dldx/women-in-congress/master/public/data/number_women_over_time.c
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  wiki-death wiki-death: web_fetch https://pudding.cool/2018/08/wiki-death/assets/data/care.csv
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_l
+  two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_s
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/words.csv
+  women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/headlines.csv

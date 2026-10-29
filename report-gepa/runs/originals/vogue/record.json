@@ -1,0 +1,82 @@
+{
+ "id": "vogue",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 589,
+  "steps": 46,
+  "tools": 49,
+  "nudged": 0,
+  "usage": {
+   "input": 35717,
+   "output": 83650
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 11,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "skin-lightness-summary",
+   "basis": "count=262; mean=0.659480; median=0.672867; min=0.212745; max=0.882353; mean and median are closer to max than min",
+   "verdict": "ok"
+  },
+  {
+   "id": "darkest-and-lightest-models",
+   "basis": "lowest: 1/1/2018 Lupita Nyongo l=0.212745; highest: 11/1/2010 Anne Hathaway l=0.882353",
+   "verdict": "ok"
+  },
+  {
+   "id": "five-darkest-and-five-lightest",
+   "basis": "darkest: 2018 Lupita Nyongo 0.212745; 2015 Lupita Nyongo 0.257423; 2009 Michelle Obama 0.354118; 2015 Serena Williams 0.375000; 2014 Lupita Nyongo 0.416667. lightest: 2010 Anne Hathaway 0.882353; 2013 Jessica Chastain 0.861275; 2018 Claire Foy 0.858227; 2014 Amy Adams 0.857353; 2004 Natalia Vodianova 0.855556",
+   "verdict": "ok"
+  },
+  {
+   "id": "lupita-share-of-five-darkest",
+   "basis": "Lupita Nyongo count=3; share=0.6; percent=60.0; total=5",
+   "verdict": "ok"
+  },
+  {
+   "id": "five-distinct-lightest-models",
+   "basis": "top five models each have appearances=1; total_models=5; total_appearances=5",
+   "verdict": "ok"
+  },
+  {
+   "id": "repeat-models-share",
+   "basis": "size=123.0; sum=62.0; mean=0.504065; percent=50.406504",
+   "verdict": "ok"
+  },
+  {
+   "id": "rihanna-lightness-span",
+   "basis": "Rihanna count=5.0; min=0.483333; max=0.754441; span=0.271107; overall_range=0.669608; share=0.404875; share_pct=40.487469",
+   "verdict": "ok"
+  },
+  {
+   "id": "lightness-spread-before-and-after-2005",
+   "basis": "2000-2005 count=81 std=0.075777 range=0.413072; 2006-2018 count=181 std=0.114787 range=0.669608",
+   "verdict": "ok"
+  },
+  {
+   "id": "lupita-tugs-trend-darker",
+   "basis": "Lupita Nyongo count=4 mean=0.326856; Other count=258 mean=0.664637",
+   "verdict": "ok"
+  },
+  {
+   "id": "lupita-darkens-lightness-trend",
+   "basis": "all slope=-0.000762; without Lupita Nyongo slope=0.000420",
+   "verdict": "ok"
+  },
+  {
+   "id": "repeat-model-cover-counts",
+   "basis": "Gisele Bundchen=9; Nicole Kidman=7; Sarah Jessica Parker=6; Charlize Theron=6",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 11,
+ "skipped": 11
+}
