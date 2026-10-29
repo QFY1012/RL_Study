@@ -1,0 +1,147 @@
+[
+ {
+  "id": "dataset-size",
+  "claim": "The data covers 1,656 conversations, each with two rows of ratings in the people table (3,312 rows), from 1,456 distinct participants.",
+  "tables": {
+   "people": "data/people.csv",
+   "convos": "data/convos.csv"
+  },
+  "code": "pd.Series({'conversations': convos.convo_id.nunique(), 'people_rows': len(people), 'convos_in_people': people.convo_id.nunique(), 'distinct_participants': people.user_id.nunique()})"
+ },
+ {
+  "id": "repeat-participants",
+  "claim": "754 of the 1,456 participants appear in more than one conversation, and 3 appear in eight.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "pd.Series({'more_than_one': (people.user_id.value_counts() > 1).sum(), 'participants': people.user_id.nunique(), 'in_eight': (people.user_id.value_counts() == 8).sum()})"
+ },
+ {
+  "id": "mood-rises",
+  "claim": "Among the 3,257 people with all four ratings, average mood rose from 6.1 before the call to 6.16 at the beginning, 6.93 in the middle and 7.38 at the end.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people[['pre_affect','begin_affect','middle_affect','end_affect']].dropna().agg(['mean','count']).round(2)"
+ },
+ {
+  "id": "end-vs-pre",
+  "claim": "69.2% of people felt better at the end of the conversation than before it, 20.5% felt the same and 10.3% felt worse.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "np.sign(people.end_affect - people.pre_affect).dropna().map({1.0:'better',0.0:'same',-1.0:'worse'}).value_counts(normalize=True).mul(100).round(1)"
+ },
+ {
+  "id": "arousal-rises",
+  "claim": "Energy (arousal) also rose: from an average of 5.32 before the call to 6.41 after it.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people[['pre_arousal','arousal']].dropna().mean().round(2)"
+ },
+ {
+  "id": "liking-gap-means",
+  "claim": "People said they liked their partner 6.00 on average but guessed their partner liked them only 5.35.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people[['i_like_you','you_like_me']].mean().round(2)"
+ },
+ {
+  "id": "liking-gap-share",
+  "claim": "Compared with what the partner actually reported, 54.9% of people underestimated how much their partner liked them, 26.8% guessed exactly and 18.3% overestimated (3,206 people with both ratings).",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "np.sign(people.merge(people[['user_id','convo_id','i_like_you','how_enjoyable']], left_on=['partner_id','convo_id'], right_on=['user_id','convo_id'], suffixes=('','_partner')).eval('you_like_me - i_like_you_partner')).dropna().map({-1.0:'underestimated',0.0:'exact',1.0:'overestimated'}).value_counts().to_frame('n').assign(pct=lambda d: (d.n / d.n.sum() * 100).round(1))"
+ },
+ {
+  "id": "liking-mode",
+  "claim": "43% of people gave their partner a liking score of 7, but only 17% guessed their partner gave them a 7.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "pd.Series({'gave_7': (people.i_like_you.dropna() == 7).mean(), 'guessed_7': (people.you_like_me.dropna() == 7).mean()}).round(2)"
+ },
+ {
+  "id": "guess-tracks-own",
+  "claim": "A person's guess of how much the partner liked them correlates 0.69 with how much they liked the partner, but only 0.19 with how much the partner actually liked them.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.merge(people[['user_id','convo_id','i_like_you','how_enjoyable']], left_on=['partner_id','convo_id'], right_on=['user_id','convo_id'], suffixes=('','_partner'))[['you_like_me','i_like_you','i_like_you_partner']].corr().you_like_me.round(2)"
+ },
+ {
+  "id": "enjoyment-weak-agreement",
+  "claim": "The two partners' ratings of how enjoyable the conversation was correlate only 0.17.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "round(people.merge(people[['user_id','convo_id','i_like_you','how_enjoyable']], left_on=['partner_id','convo_id'], right_on=['user_id','convo_id'], suffixes=('','_partner'))[['how_enjoyable','how_enjoyable_partner']].corr().iloc[0, 1], 2)"
+ },
+ {
+  "id": "intelligence-kindness-gap",
+  "claim": "The same gap shows for traits: pair averages rate the partner 7.68 for intelligence but guess the partner rated them 7.06; for kindness 7.98 against 7.43.",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "convos[['you_are_intelligent_avg','you_think_i_am_intelligent_avg','you_are_kind_avg','you_think_i_am_kind_avg']].mean().round(2)"
+ },
+ {
+  "id": "gap-share-pairs",
+  "claim": "In pair averages, rated liking of the partner exceeded the guessed liking in 73.4% of conversations and fell below it in 5.3%; for intelligence the figures are 67.6% and 13.4%.",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "(lambda d: pd.DataFrame({'liking': [(d.i_like_you_avg > d.you_like_me_avg).mean(), (d.i_like_you_avg < d.you_like_me_avg).mean()], 'intelligence': [(d.you_are_intelligent_avg > d.you_think_i_am_intelligent_avg).mean(), (d.you_are_intelligent_avg < d.you_think_i_am_intelligent_avg).mean()]}, index=['rated_above_guess','rated_below_guess']).mul(100).round(1))(convos.dropna(subset=['i_like_you_avg','you_like_me_avg','you_are_intelligent_avg','you_think_i_am_intelligent_avg']))"
+ },
+ {
+  "id": "turn-length",
+  "claim": "People rated their own turns as longer than their partner's: 5.40 against 5.03 on average across pairs, with the own-turn rating higher in 51.47% of conversations and lower in 23.89%.",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "pd.Series({'my_turn': convos.my_turn_length_avg.mean(), 'your_turn': convos.your_turn_length_avg.mean(), 'pct_my_higher': (convos.my_turn_length_avg > convos.your_turn_length_avg).sum() / convos.my_turn_length_avg.notna().sum() * 100, 'pct_my_lower': (convos.my_turn_length_avg < convos.your_turn_length_avg).sum() / convos.my_turn_length_avg.notna().sum() * 100}).round(2)"
+ },
+ {
+  "id": "shared-reality-bins",
+  "claim": "Enjoyment climbs steeply with a person's shared-reality score: 5.25 for scores of 3 or below, 6.71 for 3-4, 7.46 for 4-5, 7.98 for 5-6 and 8.55 above 6.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people.groupby(pd.cut(people.shared_reality, [0, 3, 4, 5, 6, 7]), observed=True).how_enjoyable.agg(['mean','count']).round(2)"
+ },
+ {
+  "id": "shared-reality-corr",
+  "claim": "A person's shared-reality score correlates 0.58 with how enjoyable they found the conversation and 0.53 with how much they liked their partner.",
+  "tables": {
+   "people": "data/people.csv"
+  },
+  "code": "people[['shared_reality','how_enjoyable','i_like_you']].corr().shared_reality.round(2)"
+ },
+ {
+  "id": "demographics-flat",
+  "claim": "Demographic mismatch barely moves enjoyment: pairs of different sex average 7.44 against 7.38 for same sex, different race 7.34 against 7.46, and different education 7.5 against 7.3.",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "pd.DataFrame({c: convos.groupby(c).how_enjoyable_avg.mean() for c in ['sex_diff','race_diff','edu_diff']}).round(2)"
+ },
+ {
+  "id": "politics-gap",
+  "claim": "Political distance has a modest effect: pairs with the same political score average 7.48 enjoyment, against 7.15 for a gap of 4 (115 pairs) and 7.07 for a gap of 5 (23 pairs).",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "convos.groupby('politics_diff').how_enjoyable_avg.agg(['mean','count']).round(2)"
+ },
+ {
+  "id": "shared-reality-diff",
+  "claim": "When the two partners' shared-reality scores differ by 4 points, pairs average 6.44 enjoyment against 7.52 when they match (31 and 454 pairs).",
+  "tables": {
+   "convos": "data/convos.csv"
+  },
+  "code": "convos.groupby('shared_reality_diff').how_enjoyable_avg.agg(['mean','count']).round(2)"
+ }
+]

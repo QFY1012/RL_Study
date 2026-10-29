@@ -1050,7 +1050,7 @@ register({id:'outcomeChart',draw:box=>groupedBars(box,{
 register({id:'waitCompChart',draw:waitCompChart});
 register({id:'deptChart',draw:box=>dumbbell(box,{
   xMax:14, xTicks:7, fmtX:v=>v+'%', rowH:56,
-  rows:DATA.departments.map(d=>({zh:d.zh,en:d.en+' · n = '+(d.n_test+d.n_control).toLocaleString('en-US'),test:d.lost_test,control:d.lost_control}))
+  rows:DATA.departments.map(d=>({zh:d.zh,en:(d.zh==='五官科'?'ENT':d.en)+' · n = '+(d.n_test+d.n_control).toLocaleString('en-US'),test:d.lost_test,control:d.lost_control}))
 })});
 register({id:'fuChart',draw:box=>groupedBars(box,{
   labels:DATA.followup_ut.map(u=>[u.zh,u.en]), twoLineLabels:true,

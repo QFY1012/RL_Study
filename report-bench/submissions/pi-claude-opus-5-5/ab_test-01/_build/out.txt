@@ -1,0 +1,122 @@
+## groups-balanced | The 18,000 users split almost evenly: 9,013 in the control group and 8,987 in the treatment group.
+group
+control      9013
+treatment    8987
+Name: count, dtype: int64
+
+## group-label-spaces | 19 rows carry a group label with a trailing space and must be trimmed before grouping.
+19
+
+## date-format-mixed | 3 rows write the entry date with slashes (2024/12/02, 2024/12/19, 2024/12/27) instead of dashes.
+['2024/12/02', '2024/12/19', '2024/12/27']
+
+## funnel | Of 18,000 users, 903 left before reaching a doctor, 1,261 reached a doctor but did not complete, and 15,836 completed the consultation.
+left before doctor                 903
+reached doctor, not completed     1261
+completed                        15836
+dtype: int64
+
+## dept-sizes | Pediatrics (5,246 users) and internal medicine (5,083) are the largest departments, ahead of dermatology (3,121), gynecology (2,490) and ENT & eye (2,060).
+department
+Pediatrics           5246
+Internal medicine    5083
+Dermatology          3121
+Gynecology           2490
+ENT & eye            2060
+Name: count, dtype: int64
+
+## median-response | The treatment group got a first doctor response in a median of 88 seconds, against 110 seconds in the control group.
+group
+control      110.0
+treatment     88.0
+Name: first_response_seconds, dtype: float64
+
+## daily-response | The treatment group had the lower median first-response time on 39 of the 42 days.
+days               42
+treatment lower    39
+dtype: int64
+
+## response-by-period | From 9 December waits rose in both groups: the control median went from 86 to 132 seconds, the treatment median from 77 to 96, so the gap widened from 9 to 36 seconds.
+group            control  treatment
+a: Nov 18-Dec 8     86.0       77.0
+b: Dec 9-29        132.0       96.0
+
+## volume-by-period | Traffic grew: 9,909 users entered in the 21 days from 9 December against 8,091 in the 21 days before.
+                 users  days
+a: Nov 18-Dec 8   8091    21
+b: Dec 9-29       9909    21
+
+## overall-outcomes | Overall the test barely moved outcomes: 5.3% of treatment users left before a doctor versus 4.7% of control, and 87.9% versus 88.0% completed.
+           lost_before_doctor  is_completed
+group                                      
+control                   4.7          88.0
+treatment                 5.3          87.9
+
+## dept-lost | Dermatology is the outlier: 12.7% of treatment users left before reaching a doctor versus 7.7% in control, while in every other department the two groups are within 1 point (e.g. pediatrics 2.5% vs 3.1%).
+group              control  treatment
+department                           
+Dermatology            7.7       12.7
+ENT & eye              4.5        5.4
+Gynecology             5.2        4.8
+Internal medicine      4.4        4.0
+Pediatrics             3.1        2.5
+
+## derm-completion | In dermatology, completion fell to 80.5% in the treatment group from 85.0% in control; in every other department treatment completed at least as often as control.
+group              control  treatment
+department                           
+Dermatology           85.0       80.5
+ENT & eye             87.5       88.1
+Gynecology            89.0       89.3
+Internal medicine     88.6       89.1
+Pediatrics            88.9       90.4
+
+## derm-all-complaints | All 5 dermatology complaints show a higher pre-doctor loss rate in the treatment group than in control, from 11.7% vs 6.0% (toe-web peeling) to 13.9% vs 6.9% (red spots on the back).
+group                  control  treatment  treatment_higher
+chief_complaint                                            
+facial acne                6.9       12.1              True
+itchy red rash on arm      9.7       11.9              True
+recurring hives            9.0       13.5              True
+red spots on the back      6.9       13.9              True
+toe-web peeling            6.0       11.7              True
+
+## derm-z | The dermatology loss gap has a z-score of 4.65, while the overall loss gap across all departments has a z-score of 1.72.
+dermatology        4.65
+all departments    1.72
+dtype: float64
+
+## non-derm-outcomes | Outside dermatology, treatment users did slightly better: 3.8% left before a doctor versus 4.1% in control, and 89.4% completed versus 88.7%.
+                                 lost_before_doctor  is_completed
+                      group                                      
+all other departments control                   4.1          88.7
+                      treatment                 3.8          89.4
+dermatology           control                   7.7          85.0
+                      treatment                12.7          80.5
+
+## consult-length | Completed consultations were slightly shorter in the treatment group, a median of 10.4 minutes against 11.2 in control.
+group
+control      11.2
+treatment    10.4
+Name: consult_minutes, dtype: float64
+
+## followup-by-usertype | The 7-day follow-up rate rose for new users, 9.8% in treatment versus 6.8% in control, but fell for returning users, 13.2% versus 14.9%.
+group      control  treatment
+user_type                    
+new            6.8        9.8
+returning     14.9       13.2
+
+## followup-overall | Across all users, 7-day follow-up was essentially unchanged: 12.1% in treatment versus 12.3% in control.
+group
+control      12.3
+treatment    12.1
+Name: followup_7d, dtype: float64
+
+## consult-640 | 7 consultations record a length of exactly 640 minutes, far above the next-longest value of 76.7 minutes.
+consult_minutes
+640.0    7
+76.7     1
+67.9     1
+Name: count, dtype: int64
+
+## response-outliers | 7 users have a first-response time over one hour, all between 15,543 and 71,396 seconds, while the next-largest value is 922 seconds.
+[71396.0, 40753.0, 26811.0, 21424.0, 18669.0, 15709.0, 15543.0, 922.0]
+

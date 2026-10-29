@@ -294,9 +294,9 @@ def pocket_figure():
         s.line(x, y - 14, x + pw * SC, y - 14, stroke=MUTED, w=1)
         s.line(x, y - 19, x, y - 9, stroke=MUTED, w=1)
         s.line(x + pw * SC, y - 19, x + pw * SC, y - 9, stroke=MUTED, w=1)
-        s.text(cx, y - 24, f'{pw:.2f} cm wide', size=13, fill=INK, anchor='middle',
+        s.text(cx, y - 20, f'{pw:.2f} cm wide', size=13, fill=INK, anchor='middle',
                family='var(--sans)', weight=700)
-        s.text(cx, 30, title, size=15, fill=col, anchor='middle', family='var(--sans)',
+        s.text(cx, 24, title, size=15, fill=col, anchor='middle', family='var(--sans)',
                weight=700)
         s.text(cx, y + ph * SC + 26, sub, size=12.5, fill=MUTED, anchor='middle',
                family='var(--sans)')
@@ -462,12 +462,12 @@ def scatter():
 def phone_fit():
     W, H = 960, 210
     s = SVG(W, H)
-    L, R = 250, 130
+    L, R = 300, 130
     top, gap = 46, 52
     full = 40
     x1 = W - L - R
     cats = [('fit15', '15 cm phone'), ('fit16', '16 cm phone'), ('fit17', '17 cm phone')]
-    s.text(L - 14, 22, 'front pockets deep enough for the phone', size=12, fill=MUTED,
+    s.text(L - 14, 22, 'pockets deep enough for the phone', size=12, fill=MUTED,
            anchor='end', family='var(--sans)')
     for ci, (key, label) in enumerate(cats):
         y = top + ci * gap
@@ -480,11 +480,11 @@ def phone_fit():
             s.rect(L, yy, x1 * n / full, 15, col, rx=3)
             s.text(L + x1 * n / full + 10, yy + 12, f'{n} of 40', size=13, fill=INK,
                    family='var(--sans)', weight=700)
-    s.rect(W - 118, top - 26, 11, 11, WOMEN, rx=2)
-    s.text(W - 118 + 18, top - 17, "women's", size=12.5, fill=INK, family='var(--sans)',
+    s.rect(W - 150, top - 26, 11, 11, WOMEN, rx=2)
+    s.text(W - 150 + 18, top - 17, "women's", size=12.5, fill=INK, family='var(--sans)',
            weight=600)
-    s.rect(W - 44, top - 26, 11, 11, MEN, rx=2)
-    s.text(W - 44 + 18, top - 17, "men's", size=12.5, fill=INK, family='var(--sans)',
+    s.rect(W - 58, top - 26, 11, 11, MEN, rx=2)
+    s.text(W - 58 + 18, top - 17, "men's", size=12.5, fill=INK, family='var(--sans)',
            weight=600)
     return str(s)
 

@@ -1,6 +1,7 @@
 {
  "tries": {
-  "2.x": 1
+  "2.x": 1,
+  "3.x": 1
  },
  "2.4": {
   "item": "2.4",
@@ -56,5 +57,27 @@
   "score": 0.3,
   "where": "第5、6、7、10、14、17帧多为读标签；第13帧最便宜/最贵拉线、第5帧重叠阴影区可直指",
   "reason": "大多数对要靠文字里的数与图上印的数相同才对上，属读标签；只有最便宜/最贵拉线和重叠区等少数几处能一眼指到。"
+ },
+ "3.1": {
+  "item": "3.1",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "第1–2帧「The nine pocket numbers」口袋示意图；第4–5、7–10、12、16帧的全部数据图",
+  "reason": "唯一和话题贴切的形象是说明栏里的口袋测量示意插画，给了测量语境；但所有数据标记都是普通圆点/条形，没有一处做成口袋或牛仔裤本身，属于「插画提供语境、标记仍抽象」的中档。"
+ },
+ "3.2": {
+  "item": "3.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.6,
+  "where": "第0帧页头深藏青底＋米色正文＋衬线标题；全文分节版式",
+  "reason": "深藏青页头有牛仔布（denim indigo）的联想，橙/蓝分组也干净，「Gap」双关有心思；但整体仍是米色底＋衬线＋代码块的通用编辑数据报告模板，只做到配色一样呼应话题，撑不起完整气质。"
  }
 }

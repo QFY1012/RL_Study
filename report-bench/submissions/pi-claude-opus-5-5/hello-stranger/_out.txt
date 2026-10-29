@@ -1,0 +1,131 @@
+== dataset-size 
+ The data covers 1,656 conversations, each with two rows of ratings in the people table (3,312 rows), from 1,456 distinct participants.
+conversations            1656
+people_rows              3312
+convos_in_people         1656
+distinct_participants    1456
+dtype: int64
+
+== repeat-participants 
+ 754 of the 1,456 participants appear in more than one conversation, and 3 appear in eight.
+more_than_one     754
+participants     1456
+in_eight            3
+dtype: int64
+
+== mood-rises 
+ Among the 3,257 people with all four ratings, average mood rose from 6.1 before the call to 6.16 at the beginning, 6.93 in the middle and 7.38 at the end.
+       pre_affect  begin_affect  middle_affect  end_affect
+mean          6.1          6.16           6.93        7.38
+count      3257.0       3257.00        3257.00     3257.00
+
+== end-vs-pre 
+ 69.2% of people felt better at the end of the conversation than before it, 20.5% felt the same and 10.3% felt worse.
+better    69.2
+same      20.5
+worse     10.3
+Name: proportion, dtype: float64
+
+== arousal-rises 
+ Energy (arousal) also rose: from an average of 5.32 before the call to 6.41 after it.
+pre_arousal    5.32
+arousal        6.41
+dtype: float64
+
+== liking-gap-means 
+ People said they liked their partner 6.00 on average but guessed their partner liked them only 5.35.
+i_like_you     6.00
+you_like_me    5.35
+dtype: float64
+
+== liking-gap-share 
+ Compared with what the partner actually reported, 54.9% of people underestimated how much their partner liked them, 26.8% guessed exactly and 18.3% overestimated (3,206 people with both ratings).
+                   n   pct
+underestimated  1761  54.9
+exact            859  26.8
+overestimated    586  18.3
+
+== liking-mode 
+ 43% of people gave their partner a liking score of 7, but only 17% guessed their partner gave them a 7.
+gave_7       0.43
+guessed_7    0.17
+dtype: float64
+
+== guess-tracks-own 
+ A person's guess of how much the partner liked them correlates 0.69 with how much they liked the partner, but only 0.19 with how much the partner actually liked them.
+you_like_me           1.00
+i_like_you            0.69
+i_like_you_partner    0.19
+Name: you_like_me, dtype: float64
+
+== enjoyment-weak-agreement 
+ The two partners' ratings of how enjoyable the conversation was correlate only 0.17.
+0.17
+
+== intelligence-kindness-gap 
+ The same gap shows for traits: pair averages rate the partner 7.68 for intelligence but guess the partner rated them 7.06; for kindness 7.98 against 7.43.
+you_are_intelligent_avg           7.68
+you_think_i_am_intelligent_avg    7.06
+you_are_kind_avg                  7.98
+you_think_i_am_kind_avg           7.43
+dtype: float64
+
+== gap-share-pairs 
+ In pair averages, rated liking of the partner exceeded the guessed liking in 73.4% of conversations and fell below it in 5.3%; for intelligence the figures are 67.6% and 13.4%.
+                   liking  intelligence
+rated_above_guess    73.4          67.6
+rated_below_guess     5.3          13.4
+
+== turn-length 
+ People rated their own turns as longer than their partner's: 5.40 against 5.03 on average across pairs, with the own-turn rating higher in 51.47% of conversations and lower in 23.89%.
+my_turn           5.40
+your_turn         5.03
+pct_my_higher    51.47
+pct_my_lower     23.89
+dtype: float64
+
+== shared-reality-bins 
+ Enjoyment climbs steeply with a person's shared-reality score: 5.25 for scores of 3 or below, 6.71 for 3-4, 7.46 for 4-5, 7.98 for 5-6 and 8.55 above 6.
+                mean  count
+shared_reality             
+(0, 3]          5.25    293
+(3, 4]          6.71    546
+(4, 5]          7.46   1112
+(5, 6]          7.98    929
+(6, 7]          8.55    376
+
+== shared-reality-corr 
+ A person's shared-reality score correlates 0.58 with how enjoyable they found the conversation and 0.53 with how much they liked their partner.
+shared_reality    1.00
+how_enjoyable     0.58
+i_like_you        0.53
+Name: shared_reality, dtype: float64
+
+== demographics-flat 
+ Demographic mismatch barely moves enjoyment: pairs of different sex average 7.44 against 7.38 for same sex, different race 7.34 against 7.46, and different education 7.5 against 7.3.
+   sex_diff  race_diff  edu_diff
+0      7.38       7.46       7.3
+1      7.44       7.34       7.5
+
+== politics-gap 
+ Political distance has a modest effect: pairs with the same political score average 7.48 enjoyment, against 7.15 for a gap of 4 (115 pairs) and 7.07 for a gap of 5 (23 pairs).
+               mean  count
+politics_diff             
+0.0            7.48    408
+1.0            7.45    319
+2.0            7.41    494
+3.0            7.38    243
+4.0            7.15    115
+5.0            7.07     23
+
+== shared-reality-diff 
+ When the two partners' shared-reality scores differ by 4 points, pairs average 6.44 enjoyment against 7.52 when they match (31 and 454 pairs).
+                     mean  count
+shared_reality_diff             
+0.0                  7.52    454
+1.0                  7.54    681
+2.0                  7.25    316
+3.0                  6.96    105
+4.0                  6.44     31
+5.0                  6.70     15
+

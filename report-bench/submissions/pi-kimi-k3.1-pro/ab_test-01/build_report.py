@@ -295,12 +295,12 @@ page = Template(r'''<!DOCTYPE html>
   </section>
 
   <section id="followup" class="section">
-    <div class="section-heading"><span class="section-no">04 / FOLLOW-UP</span><h2>Follow-up tells two different stories.</h2><p>New and returning users move in opposite directions. Report these segments separately rather than treating 7-day follow-up as one uniform win or loss.</p></div>
+    <div class="section-heading"><span class="section-no">04 / 7 DAYS</span><h2>Follow-up tells two different stories.</h2><p>New and returning users move in opposite directions. Report these segments separately rather than treating 7-day follow-up as one uniform win or loss.</p></div>
     <div class="follow-shell"><div class="follow-intro"><div><span class="eyebrow">7-day follow-up</span><h3>Tenure changes the direction.</h3></div><p>Rates use non-missing follow-up values only. Confidence intervals are for Treatment − Control, in percentage points.</p></div><div class="follow-grid">$follow_new$follow_returning</div></div>
   </section>
 
   <section class="readout" aria-labelledby="readout-title">
-    <div class="readout-copy"><span class="eyebrow">Decision readout</span><h2 id="readout-title">Roll forward on speed. Gate the rollout on Dermatology.</h2><p>The response-time improvement is consistent across the observed cuts. A single completion or retention story is not.</p><span class="readout-tag">Speed ≠ completed care</span></div>
+    <div class="readout-copy"><span class="eyebrow">Decision readout</span><h2 id="readout-title">Roll forward on speed. Gate the rollout on Dermatology.</h2><p>The response-time improvement is consistent across observed cuts. Completion and follow-up need a segmented readout.</p><span class="readout-tag">Speed ≠ completed care</span></div>
     <div class="action-list">
       <article class="action"><span class="action-no">01</span><div><h3>Keep measuring the response-time win.</h3><p>Treatment is faster on $daily_faster of 42 days and in all five departments; the within-two-minute share rises $within_120_diff_pp pp.</p></div></article>
       <article class="action"><span class="action-no">02</span><div><h3>Do not call overall completion a win.</h3><p>The observed difference is $completion_diff_pp pp, with a 95% CI from $completion_ci_low to $completion_ci_high pp. Investigate whether shorter consults affect any downstream quality measure.</p></div></article>
