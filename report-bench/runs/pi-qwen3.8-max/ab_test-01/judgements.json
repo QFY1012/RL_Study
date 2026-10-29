@@ -1,0 +1,60 @@
+{
+ "tries": {
+  "2.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.68,
+  "where": "第 22–24 帧周度双轴图、第 15–17 帧科室 line 图、第 25–28 帧主诉横条图",
+  "reason": "多数图清晰可读，但周度图双轴加折线加柱、数值压在柱顶与线旁，轴标题极小极淡；科室图左侧中英文科室名与 n 值字号偏小；主诉图 25 条小字密集，读者需要多看一眼才能对上。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.75,
+  "where": "第 7、10、19、22 帧 vs 第 25–28 帧主诉图",
+  "reason": "实验组=绿、对照组=黄全篇稳定，图例顺序一致；唯一小出入是最后的科室着色图里绿色被用来表示儿科，与全篇绿色=实验组的含义重叠，属细节冲突。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "§2 直方图 → §3 分组柱 → §4 折线 → §5 line 图 → §6 分组柱 → §7 双轴折柱 → §8 横条图",
+  "reason": "每个现象换一种不同画法，没有同一种画法一步步只变一样东西的连续演化，读者每节都要重新学一种读法；好在各画法本身是标准图形，不至於看不懂。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第 7–8 帧直方图、第 15–17 帧科室图、第 25–28 帧主诉图",
+  "reason": "滚动记录显示没有任何图固定或变化；科室图被连续四段文字讲、主诉图被多段话讲，图始终不动，后面几段讲的东西要读者自己去静态图上找；只是图与文字基本同屏或相邻，不是图文分离的最差情况。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第 7 帧 110→88 s 段、第 8 帧 49.7%/35.7% 段、第 10 帧 87.94%/88.02% 段、第 16 帧皮肤科段",
+  "reason": "文字讲到图上内容时，多数要靠读图上印着的同一个数或查绿/黄图例才能定位；第 7、8 帧提到的中位数和桶合计图上甚至没印，需翻到下一屏表格；只有皮肤科那条异常长的线在视觉上略有指认作用，整体属于少数几处能一眼对上。"
+ }
+}

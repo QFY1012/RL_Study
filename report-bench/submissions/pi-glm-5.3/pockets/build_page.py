@@ -671,7 +671,7 @@ sections.append(f'''
   and {num(m.loc[m.menWomen == "women", "rivetHeightFront"].mean(), 2)} cm on women\u2019s
   ({num(m.loc[m.menWomen == "women", "rivetHeightFront"].min(), 1)}\u2013{num(m.loc[m.menWomen == "women", "rivetHeightFront"].max(), 1)}),
   so women\u2019s pockets start marginally higher and stop far sooner. Only 9 of the 80 pairs carry the
-  cutout flag \u2014 6 men\u2019s and 3 women\u2019s, all from True Religion, Guess, J.~Crew and Uniqlo.</p>
+  cutout flag \u2014 6 men\u2019s and 3 women\u2019s, all from True Religion, Guess, J. Crew and Uniqlo.</p>
   {table_html()}
 </section>
 ''')

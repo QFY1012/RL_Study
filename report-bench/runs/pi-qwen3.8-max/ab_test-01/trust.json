@@ -1,0 +1,195 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01/index.html",
+ "facts": "submissions/pi-qwen3.8-max/ab_test-01/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-scope",
+     "basis": "output: users=18000, test_arm=8987, control_arm=9013, departments=5, chief_complaints=25, platforms=3",
+     "verdict": "ok"
+    },
+    {
+     "id": "study-window",
+     "basis": "output: min=2024-11-18, max=2024-12-29, nunique=42",
+     "verdict": "ok"
+    },
+    {
+     "id": "padded-group-labels",
+     "basis": "output: raw_group_labels=4, trimmed_group_labels=2, padded_rows=19",
+     "verdict": "ok"
+    },
+    {
+     "id": "slash-dates",
+     "basis": "output: distinct_date_strings=45, calendar_days=42, slash_rows=3",
+     "verdict": "ok"
+    },
+    {
+     "id": "structural-missingness",
+     "basis": "output: first_response_seconds_nan=903, lost_before_doctor_rows=903, consult_minutes_nan=2164, not_completed_rows=2164, followup_7d_nan=186, chief_complaint_nan=36, platform_nan=6",
+     "verdict": "ok"
+    },
+    {
+     "id": "impossible-values",
+     "basis": "output: consult_minutes_eq_640=7.0, consult_minutes_max=640.0, first_response_over_900s=9.0, first_response_max_seconds=71396.0, first_response_max_hours=19.8",
+     "verdict": "ok"
+    },
+    {
+     "id": "funnel",
+     "basis": "output: users=18000, lost_before_doctor=903, reached_a_doctor=17097, dropped_after_first_reply=1261, completed=15836",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-cut",
+     "basis": "output: 实验组 measured=8511, mean=103.5, median=88.0; 对照组 measured=8586, mean=152.0, median=110.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-tail",
+     "basis": "output: 实验组 share_under_90s=49.7, p90=177.0, p95=213.0; 对照组 share_under_90s=35.7, p90=234.0, p95=290.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "completion-flat",
+     "basis": "output: 实验组 completed=7903, users=8987, completion_pct=87.94; 对照组 completed=7933, users=9013, completion_pct=88.02",
+     "verdict": "ok"
+    },
+    {
+     "id": "abandonment-worse",
+     "basis": "output: 实验组 lost=476, users=8987, lost_pct=5.30; 对照组 lost=427, users=9013, lost_pct=4.74",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-flat",
+     "basis": "output: 实验组 recorded=8891, followup_pct=12.15; 对照组 recorded=8923, followup_pct=12.31",
+     "verdict": "ok"
+    },
+    {
+     "id": "headline-not-significant",
+     "basis": "output: is_completed=-0.16, lost_before_doctor=1.72, followup_7d=-0.32",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-hardly-moves-completion",
+     "basis": "output: (0,60]=3459/92.8; (60,90]=4222/92.8; (90,120]=3330/92.7; (120,180]=3576/93.1; (180,300]=2035/91.4; (300,600]=451/90.5; (600,inf]=24/95.8",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-split",
+     "basis": "output pivot matches completion and lost_before_doctor percentages for 儿科, 妇科, 内科, 五官科, 皮肤科",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-harm",
+     "basis": "output: 实验组 users=1503, lost_pct=12.71, completion_pct=80.51, followup_pct=8.55; 对照组 users=1618, lost_pct=7.66, completion_pct=85.04, followup_pct=8.30",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-loss-significant",
+     "basis": "output: test_lost=191, test_users=1503, control_lost=124, control_users=1618, z_score=4.67",
+     "verdict": "ok"
+    },
+    {
+     "id": "dermatology-all-complaints",
+     "basis": "output matches all five complaints: 13.9/6.9, 11.9/9.7, 11.7/6.0, 12.1/6.9, 13.5/9.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "excl-dermatology-lift",
+     "basis": "output: 实验组 users=7484, completed=6693, completion_pct=89.43; 对照组 users=7395, completed=6557, completion_pct=88.67",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-flips-by-user-type",
+     "basis": "output: 新用户 实验组=9.84, 对照组=6.84; 老用户 实验组=13.22, 对照组=14.93",
+     "verdict": "ok"
+    },
+    {
+     "id": "followup-split-significant",
+     "basis": "output: 新用户=4.1, 老用户=-2.7",
+     "verdict": "ok"
+    },
+    {
+     "id": "user-type-baseline",
+     "basis": "output: 新用户 users=5779, completion_pct=88.32, followup_pct=8.32; 老用户 users=12221, completion_pct=87.82, followup_pct=14.07",
+     "verdict": "ok"
+    },
+    {
+     "id": "consult-shorter",
+     "basis": "output: 实验组 recorded=7903, mean=11.67, median=10.4; 对照组 recorded=7933, mean=13.09, median=11.2",
+     "verdict": "ok"
+    },
+    {
+     "id": "platform-flat",
+     "basis": "output: Android 87.96/88.30; iOS 87.89/87.89; 微信小程序 87.97/87.71",
+     "verdict": "ok"
+    },
+    {
+     "id": "volume-growth",
+     "basis": "output: first_week_users=2409, last_week_users=3546, growth_pct=47.2",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-under-load",
+     "basis": "output: first week 实验组=80.0, 对照组=86.0; last week 实验组=95.0, 对照组=134.0",
+     "verdict": "ok"
+    },
+    {
+     "id": "complaint-spread",
+     "basis": "output: min 手臂上起红疹,特别痒=81.0/612; max 经期量突然变多=91.1/505 and 鼻子不通,黄鼻涕多=91.1/403",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-outliers-in-control",
+     "basis": "output: 实验组 waits_over_900s=1, mean_seconds_trimmed=101.3; 对照组 waits_over_900s=8, mean_seconds_trimmed=129.6",
+     "verdict": "ok"
+    },
+    {
+     "id": "wait-histogram-shift",
+     "basis": "output matches all bucket shares: 3.00/1.57, 21.90/14.03, 27.59/21.83, 19.93/19.03, 18.06/23.75, 8.47/15.30, 1.03/4.23, 0.02/0.26",
+     "verdict": "ok"
+    },
+    {
+     "id": "consult-outliers",
+     "basis": "output: 实验组 consults_at_640=1, mean_minutes_trimmed=11.59; 对照组 consults_at_640=6, mean_minutes_trimmed=12.61",
+     "verdict": "ok"
+    },
+    {
+     "id": "complaint-to-department",
+     "basis": "output: chief_complaints=25, max_departments_per_complaint=1",
+     "verdict": "ok"
+    },
+    {
+     "id": "department-volume",
+     "basis": "output: 儿科=5246, 内科=5083, 皮肤科=3121, 妇科=2490, 五官科=2060",
+     "verdict": "ok"
+    },
+    {
+     "id": "platform-volume",
+     "basis": "output: Android=7514, iOS=6870, 微信小程序=3610, NaN=6",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"sample-scope\", \"basis\": \"output: users=18000, test_arm=8987, control_arm=9013, departments=5, chief_complaints=25, platforms=3\", \"verdict\": \"ok\"}, {\"id\": \"study-window\", \"basis\": \"output: min=2024-11-18, max=2024-12-29, nunique=42\", \"verdict\": \"ok\"}, {\"id\": \"padded-group-labels\", \"basis\": \"output: raw_group_labels=4, trimmed_group_labels=2, padded_rows=19\", \"verdict\": \"ok\"}, {\"id\": \"slash-dates\", \"basis\": \"output: distinct_date_strings=45, calendar_days=42, slash_rows=3\", \"verdict\": \"ok\"}, {\"id\": \"structural-missingness\", \"basis\": \"output: first_response_seconds_nan=903, lost_before_doctor_rows=903, consult_minutes_nan=2164, not_completed_rows=2164, followup_7d_nan=186, chief_complaint_nan=36, platform_nan=6\", \"verdict\": \"ok\"}, {\"id\": \"impossible-values\", \"basis\": \"output: consult_minutes_eq_640=7.0, consult_minutes_max=640.0, first_response_over_900s=9.0, first_response_max_seconds=71396.0, first_response_max_hours=19.8\", \"verdict\": \"ok\"}, {\"id\": \"funnel\", \"basis\": \"output: users=18000, lost_before_doctor=903, reached_a_doctor=17097, dropped_after_first_reply=1261, completed=15836\", \"verdict\": \"ok\"}, {\"id\": \"wait-cut\", \"basis\": \"output: 实验组 measured=8511, mean=103.5, median=88.0; 对照组 measured=8586, mean=152.0, median=110.0\", \"verdict\": \"ok\"}, {\"id\": \"wait-tail\", \"basis\": \"output: 实验组 share_under_90s=49.7, p90=177.0, p95=213.0; 对照组 share_under_90s=35.7, p90=234.0, p95=290.0\", \"verdict\": \"ok\"}, {\"id\": \"completion-flat\", \"basis\": \"output: 实验组 completed=7903, users=8987, completion_pct=87.94; 对照组 completed=7933, users=9013, completion_pct=88.02\", \"verdict\": \"ok\"}, {\"id\": \"abandonment-worse\", \"basis\": \"output: 实验组 lost=476, users=8987, lost_pct=5.30; 对照组 lost=427, users=9013, lost_pct=4.74\", \"verdict\": \"ok\"}, {\"id\": \"followup-flat\", \"basis\": \"output: 实验组 recorded=8891, followup_pct=12.15; 对照组 recorded=8923, followup_pct=12.31\", \"verdict\": \"ok\"}, {\"id\": \"headline-not-significant\", \"basis\": \"output: is_completed=-0.16, lost_before_doctor=1.72, followup_7d=-0.32\", \"verdict\": \"ok\"}, {\"id\": \"wait-hardly-moves-completion\", \"basis\": \"output: (0,60]=3459/92.8; (60,90]=4222/92.8; (90,120]=3330/92.7; (120,180]=3576/93.1; (180,300]=2035/91.4; (300,600]=451/90.5; (600,inf]=24/95.8\", \"verdict\": \"ok\"}, {\"id\": \"department-split\", \"basis\": \"output pivot matches completion and lost_before_doctor percentages for 儿科, 妇科, 内科, 五官科, 皮肤科\", \"verdict\": \"ok\"}, {\"id\": \"dermatology-harm\", \"basis\": \"output: 实验组 users=1503, lost_pct=12.71, completion_pct=80.51, followup_pct=8.55; 对照组 users=1618, lost_pct=7.66, completion_pct=85.04, followup_pct=8.30\", \"verdict\": \"ok\"}, {\"id\": \"dermatology-loss-significant\", \"basis\": \"output: test_lost=191, test_users=1503, control_lost=124, control_users=1618, z_score=4.67\", \"verdict\": \"ok\"}, {\"id\": \"dermatology-all-complaints\", \"basis\": \"output matches all five complaints: 13.9/6.9, 11.9/9.7, 11.7/6.0, 12.1/6.9, 13.5/9.0\", \"verdict\": \"ok\"}, {\"id\": \"excl-dermatology-lift\", \"basis\": \"output: 实验组 users=7484, completed=6693, completion_pct=89.43; 对照组 users=7395, completed=6557, completion_pct=88.67\", \"verdict\": \"ok\"}, {\"id\": \"followup-flips-by-user-type\", \"basis\": \"output: 新用户 实验组=9.84, 对照组=6.84; 老用户 实验组=13.22, 对照组=14.93\", \"verdict\": \"ok\"}, {\"id\": \"followup-split-significant\", \"basis\": \"output: 新用户=4.1, 老用户=-2.7\", \"verdict\": \"ok\"}, {\"id\": \"user-type-baseline\", \"basis\": \"output: 新用户 users=5779, completion_pct=88.32, followup_pct=8.32; 老用户 users=12221, completion_pct=87.82, followup_pct=14.07\", \"verdict\": \"ok\"}, {\"id\": \"consult-shorter\", \"basis\": \"output: 实验组 recorded=7903, mean=11.67, median=10.4; 对照组 recorded=7933, mean=13.09, median=11.2\", \"verdict\": \"ok\"}, {\"id\": \"platform-flat\", \"basis\": \"output: Android 87.96/88.30; iOS 87.89/87.89; 微信小程序 87.97/87.71\", \"verdict\": \"ok\"}, {\"id\": \"volume-growth\", \"basis\": \"output: first_week_users=2409, last_week_users=3546, growth_pct=47.2\", \"verdict\": \"ok\"}, {\"id\": \"wait-under-load\", \"basis\": \"output: first week 实验组=80.0, 对照组=86.0; last week 实验组=95.0, 对照组=134.0\", \"verdict\": \"ok\"}, {\"id\": \"complaint-spread\", \"basis\": \"output: min 手臂上起红疹,特别痒=81.0/612; max 经期量突然变多=91.1/505 and 鼻子不通,黄鼻涕多=91.1/403\", \"verdict\": \"ok\"}, {\"id\": \"wait-outliers-in-control\", \"basis\": \"output: 实验组 waits_over_900s=1, mean_seconds_trimmed=101.3; 对照组 waits_over_900s=8, mean_seconds_trimmed=129.6\", \"verdict\": \"ok\"}, {\"id\": \"wait-histogram-shift\", \"basis\": \"output matches all bucket shares: 3.00/1.57, 21.90/14.03, 27.59/21.83, 19.93/19.03, 18.06/23.75, 8.47/15.30, 1.03/4.23, 0.02/0.26\", \"verdict\": \"ok\"}, {\"id\": \"consult-outliers\", \"basis\": \"output: 实验组 consults_at_640=1, mean_minutes_trimmed=11.59; 对照组 consults_at_640=6, mean_minutes_trimmed=12.61\", \"verdict\": \"ok\"}, {\"id\": \"complaint-to-department\", \"basis\": \"output: chief_complaints=25, max_departments_per_complaint=1\", \"verdict\": \"ok\"}, {\"id\": \"department-volume\", \"basis\": \"output: 儿科=5246, 内科=5083, 皮肤科=3121, 妇科=2490, 五官科=2060\", \"verdict\": \"ok\"}, {\"id\": \"platform-volume\", \"basis\": \"output: Android=7514, iOS=6870, 微信小程序=3610, NaN=6\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 7016,
+    "completion_tokens": 10790,
+    "seconds": 45.7
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}
