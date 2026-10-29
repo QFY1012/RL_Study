@@ -13012,3 +13012,8 @@ vogue: facts=11 answer=11 dropped=0 skipped=11 problems=0 589s steps=46
   two-minute-report two-minute-report: web_fetch https://raw.githubusercontent.com/polygraph-cool/last-two-minute-report/master/analysis/output/web_s
   women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/words.csv
   women-in-headlines women-in-headlines: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/data@master/women-in-headlines/headlines.csv
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import pandas as
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && cat > /tmp/build_facts.py <<'PYEOF
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 - <<'EOF' import pandas a
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import json, pand
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 -c " import json, tex
