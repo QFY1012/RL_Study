@@ -1,0 +1,60 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-gpt-6-astra/pockets/index.html",
+ "facts": "submissions/pi-gpt-6-astra/pockets/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "sample-coverage",
+     "basis": "Total entries 80; Normalized brands 20; Men entries 40; Women entries 40.",
+     "verdict": "ok"
+    },
+    {
+     "id": "average-dimensions",
+     "basis": "Women vs men: maxHeightFront 14.33 vs 23.13; maxWidthFront 15.18 vs 16.37; maxHeightBack 15.12 vs 16.01; maxWidthBack 13.34 vs 13.70.",
+     "verdict": "ok"
+    },
+    {
+     "id": "relative-dimension-gaps",
+     "basis": "Percent lower for women: maxHeightFront 38.1; maxWidthFront 7.2; maxHeightBack 5.5; maxWidthBack 2.6.",
+     "verdict": "ok"
+    },
+    {
+     "id": "brand-means",
+     "basis": "Largest gap: levi's men 25.75, women 12.35, gap 13.40. Smallest gap: abercrombie men 22.25, women 19.75, gap 2.50.",
+     "verdict": "ok"
+    },
+    {
+     "id": "every-brand-gap",
+     "basis": "Brands with men higher 20; Total brands 20; Minimum entries per brand and gender 2; Maximum entries per brand and gender 2.",
+     "verdict": "ok"
+    },
+    {
+     "id": "skinny-comparison",
+     "basis": "Skinny entries: women 20 entries mean front height 14.27; men 12 entries mean front height 22.71.",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\": [{\"id\": \"sample-coverage\", \"basis\": \"Total entries 80; Normalized brands 20; Men entries 40; Women entries 40.\", \"verdict\": \"ok\"}, {\"id\": \"average-dimensions\", \"basis\": \"Women vs men: maxHeightFront 14.33 vs 23.13; maxWidthFront 15.18 vs 16.37; maxHeightBack 15.12 vs 16.01; maxWidthBack 13.34 vs 13.70.\", \"verdict\": \"ok\"}, {\"id\": \"relative-dimension-gaps\", \"basis\": \"Percent lower for women: maxHeightFront 38.1; maxWidthFront 7.2; maxHeightBack 5.5; maxWidthBack 2.6.\", \"verdict\": \"ok\"}, {\"id\": \"brand-means\", \"basis\": \"Largest gap: levi's men 25.75, women 12.35, gap 13.40. Smallest gap: abercrombie men 22.25, women 19.75, gap 2.50.\", \"verdict\": \"ok\"}, {\"id\": \"every-brand-gap\", \"basis\": \"Brands with men higher 20; Total brands 20; Minimum entries per brand and gender 2; Maximum entries per brand and gender 2.\", \"verdict\": \"ok\"}, {\"id\": \"skinny-comparison\", \"basis\": \"Skinny entries: women 20 entries mean front height 14.27; men 12 entries mean front height 22.71.\", \"verdict\": \"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 1466,
+    "completion_tokens": 1084,
+    "seconds": 8.3
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}

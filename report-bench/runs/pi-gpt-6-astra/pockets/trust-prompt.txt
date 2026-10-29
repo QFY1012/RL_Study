@@ -1,0 +1,85 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[sample-coverage]
+claim: The sample contains 80 jeans entries across 20 brands after trimming spaces and ignoring brand-name capitalization, with 40 entries for men and 40 for women.
+tables: jeans = data/measurements.csv
+code: pd.Series({'Total entries': len(jeans), 'Normalized brands': jeans.brand.str.strip().str.lower().nunique(), 'Men entries': jeans.menWomen.eq('men').sum(), 'Women entries': jeans.menWomen.eq('women').sum()})
+output:
+Total entries        80
+Normalized brands    20
+Men entries          40
+Women entries        40
+
+[average-dimensions]
+claim: Mean maximum front height is 14.33 for women versus 23.13 for men, front width is 15.18 versus 16.37, back height is 15.12 versus 16.01, and back width is 13.34 versus 13.70, in recorded units.
+tables: jeans = data/measurements.csv
+code: jeans.groupby('menWomen')[['maxHeightFront','maxWidthFront','maxHeightBack','maxWidthBack']].mean().round(2)
+output:
+          maxHeightFront  maxWidthFront  maxHeightBack  maxWidthBack
+menWomen                                                            
+men                23.13          16.37          16.01         13.70
+women              14.33          15.18          15.12         13.34
+
+[relative-dimension-gaps]
+claim: Compared with men, women have 38.1% lower mean maximum front height, 7.2% lower front width, 5.5% lower back height and 2.6% lower back width.
+tables: jeans = data/measurements.csv
+code: jeans.groupby('menWomen')[['maxHeightFront','maxWidthFront','maxHeightBack','maxWidthBack']].mean().pipe(lambda m: (100 * (1 - m.loc['women'] / m.loc['men'])).round(1))
+output:
+maxHeightFront    38.1
+maxWidthFront      7.2
+maxHeightBack      5.5
+maxWidthBack       2.6
+
+[brand-means]
+claim: The largest brand-level gap in mean maximum front height is at Levi’s, with men at 25.75 and women at 12.35 (a gap of 13.40); the smallest is at Abercrombie, with men at 22.25 and women at 19.75 (a gap of 2.50).
+tables: jeans = data/measurements.csv
+code: jeans.assign(brand=jeans.brand.str.strip().str.lower()).groupby(['brand','menWomen']).maxHeightFront.mean().unstack().assign(gap=lambda d: d['men']-d['women']).sort_values('gap', ascending=False).round(2)
+output:
+menWomen             men  women    gap
+brand                                 
+levi's             25.75  12.35  13.40
+wrangler           27.75  14.50  13.25
+guess              24.00  12.00  12.00
+lee                25.00  13.60  11.40
+old navy           24.50  13.25  11.25
+j. crew            23.75  12.75  11.00
+arizona            25.25  14.50  10.75
+ralph lauren       23.50  13.00  10.50
+tommy hilfiger     23.75  13.75  10.00
+true religion      23.60  14.25   9.35
+gap                22.50  13.50   9.00
+calvin klein       21.75  13.00   8.75
+uniqlo             22.00  14.25   7.75
+lucky              21.75  14.00   7.75
+7 for all mankind  21.25  13.50   7.75
+buckle black       21.00  14.75   6.25
+express            21.00  15.60   5.40
+american eagle     21.50  17.50   4.00
+h&m                20.75  16.75   4.00
+abercrombie        22.25  19.75   2.50
+
+[every-brand-gap]
+claim: All 20 normalized brands have a higher mean maximum front height for men than for women, and every brand has two entries per gender.
+tables: jeans = data/measurements.csv
+code: jeans.assign(brand=jeans.brand.str.strip().str.lower()).groupby(['brand','menWomen']).agg(height=('maxHeightFront','mean'), entries=('brand','size')).unstack().pipe(lambda d: pd.Series({'Brands with men higher': (d['height']['men'] > d['height']['women']).sum(), 'Total brands': len(d), 'Minimum entries per brand and gender': d['entries'].min().min(), 'Maximum entries per brand and gender': d['entries'].max().max()}))
+output:
+Brands with men higher                  20
+Total brands                            20
+Minimum entries per brand and gender     2
+Maximum entries per brand and gender     2
+
+[skinny-comparison]
+claim: Among entries labeled skinny after trimming spaces, mean maximum front height is 14.27 for 20 women’s entries versus 22.71 for 12 men’s entries.
+tables: jeans = data/measurements.csv
+code: jeans[jeans['style'].str.strip().eq('skinny')].groupby('menWomen').agg(entries=('brand','size'),mean_front_height=('maxHeightFront','mean')).round(2)
+output:
+          entries  mean_front_height
+menWomen                            
+men            12              22.71
+women          20              14.27

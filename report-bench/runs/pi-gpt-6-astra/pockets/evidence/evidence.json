@@ -1,0 +1,1823 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-gpt-6-astra/pockets/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/pockets/data/measurements.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 165,
+     "left": 753,
+     "w": 588,
+     "h": 360,
+     "sig": "f91ba2a5"
+    }
+   ]
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -285,
+     "left": 753,
+     "w": 588,
+     "h": 360,
+     "sig": "f91ba2a5"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 597,
+     "left": 100,
+     "w": 850,
+     "h": 757,
+     "sig": "642c47ac"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 147,
+     "left": 100,
+     "w": 850,
+     "h": 757,
+     "sig": "642c47ac"
+    }
+   ]
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1800,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -303,
+     "left": 100,
+     "w": 850,
+     "h": 757,
+     "sig": "642c47ac"
+    }
+   ]
+  },
+  {
+   "file": "frames/05.jpg",
+   "scroll_y": 1835,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": -338,
+     "left": 100,
+     "w": 850,
+     "h": 757,
+     "sig": "642c47ac"
+    }
+   ]
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    588,
+    360
+   ],
+   "frames": [
+    0,
+    1
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    850,
+    757
+   ],
+   "frames": [
+    2,
+    5
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 30,
+   "x": 100,
+   "w": 234,
+   "in_svg": false,
+   "hidden": false,
+   "text": "THE EVERYDAY"
+  },
+  {
+   "tag": "span",
+   "y": 33,
+   "x": 245,
+   "w": 89,
+   "in_svg": false,
+   "hidden": false,
+   "text": "MEASURE"
+  },
+  {
+   "tag": "div",
+   "y": 33,
+   "x": 1067,
+   "w": 273,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Clothing & design / Data report 01"
+  },
+  {
+   "tag": "div",
+   "y": 139,
+   "x": 100,
+   "w": 588,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men’s & women’s jeans · Popular brands"
+  },
+  {
+   "tag": "span",
+   "y": 146,
+   "x": 753,
+   "w": 39,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 146,
+   "x": 814,
+   "w": 57,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 146,
+   "x": 1191,
+   "w": 149,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean maximum dimensions"
+  },
+  {
+   "tag": "h1",
+   "y": 175,
+   "x": 100,
+   "w": 588,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pocket gap."
+  },
+  {
+   "tag": "text",
+   "y": 259,
+   "x": 1136,
+   "w": 85,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.33"
+  },
+  {
+   "tag": "text",
+   "y": 302,
+   "x": 1134,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "maximum height"
+  },
+  {
+   "tag": "text",
+   "y": 304,
+   "x": 879,
+   "w": 85,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.13"
+  },
+  {
+   "tag": "text",
+   "y": 347,
+   "x": 877,
+   "w": 89,
+   "in_svg": true,
+   "hidden": false,
+   "text": "maximum height"
+  },
+  {
+   "tag": "p",
+   "y": 370,
+   "x": 100,
+   "w": 515,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The biggest difference is in the front. Across this sample, women’s jeans have much shorter front pockets on average. At the back, the measurements are closer."
+  },
+  {
+   "tag": "text",
+   "y": 397,
+   "x": 1147,
+   "w": 63,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15.18 wide"
+  },
+  {
+   "tag": "text",
+   "y": 496,
+   "x": 890,
+   "w": 63,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16.37 wide"
+  },
+  {
+   "tag": "p",
+   "y": 540,
+   "x": 265,
+   "w": 235,
+   "in_svg": false,
+   "hidden": false,
+   "text": "lower mean maximum front-pocket height in women’s jeans, relative to men’s."
+  },
+  {
+   "tag": "p",
+   "y": 540,
+   "x": 821,
+   "w": 450,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Schematic shapes scaled to average maximum height and width; outlines do not represent measured pocket shapes. Values are in the CSV’s recorded units."
+  },
+  {
+   "tag": "strong",
+   "y": 542,
+   "x": 100,
+   "w": 143,
+   "in_svg": false,
+   "hidden": false,
+   "text": "38.1%"
+  },
+  {
+   "tag": "span",
+   "y": 661,
+   "x": 100,
+   "w": 109,
+   "in_svg": false,
+   "hidden": false,
+   "text": "jeans entries"
+  },
+  {
+   "tag": "span",
+   "y": 661,
+   "x": 252,
+   "w": 75,
+   "in_svg": false,
+   "hidden": false,
+   "text": "brands"
+  },
+  {
+   "tag": "span",
+   "y": 661,
+   "x": 370,
+   "w": 156,
+   "in_svg": false,
+   "hidden": false,
+   "text": "men / women"
+  },
+  {
+   "tag": "strong",
+   "y": 665,
+   "x": 100,
+   "w": 24,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8020"
+  },
+  {
+   "tag": "strong",
+   "y": 665,
+   "x": 370,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "40 / 40"
+  },
+  {
+   "tag": "span",
+   "y": 669,
+   "x": 1095,
+   "w": 245,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: measurements.csv · Supplied dataset"
+  },
+  {
+   "tag": "div",
+   "y": 761,
+   "x": 100,
+   "w": 485,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 / THE DIMENSIONS"
+  },
+  {
+   "tag": "p",
+   "y": 761,
+   "x": 910,
+   "w": 430,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women’s mean maximum front height is 38.1% lower; front width is only 7.2% lower. The differences at the back are smaller still."
+  },
+  {
+   "tag": "h2",
+   "y": 787,
+   "x": 100,
+   "w": 485,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A height gap, more than a width gap"
+  },
+  {
+   "tag": "h3",
+   "y": 886,
+   "x": 128,
+   "w": 235,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front · maximum height"
+  },
+  {
+   "tag": "h3",
+   "y": 886,
+   "x": 762,
+   "w": 230,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Front · maximum width"
+  },
+  {
+   "tag": "span",
+   "y": 898,
+   "x": 604,
+   "w": 74,
+   "in_svg": false,
+   "hidden": false,
+   "text": "38.1% lower"
+  },
+  {
+   "tag": "span",
+   "y": 898,
+   "x": 1245,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.2% lower"
+  },
+  {
+   "tag": "span",
+   "y": 945,
+   "x": 630,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "14.33"
+  },
+  {
+   "tag": "span",
+   "y": 945,
+   "x": 1264,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.18"
+  },
+  {
+   "tag": "span",
+   "y": 947,
+   "x": 128,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 947,
+   "x": 762,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 979,
+   "x": 630,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "23.13"
+  },
+  {
+   "tag": "span",
+   "y": 979,
+   "x": 1264,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.37"
+  },
+  {
+   "tag": "span",
+   "y": 980,
+   "x": 128,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 980,
+   "x": 762,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "h3",
+   "y": 1079,
+   "x": 128,
+   "w": 233,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back · maximum height"
+  },
+  {
+   "tag": "h3",
+   "y": 1079,
+   "x": 762,
+   "w": 227,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Back · maximum width"
+  },
+  {
+   "tag": "span",
+   "y": 1091,
+   "x": 611,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.5% lower"
+  },
+  {
+   "tag": "span",
+   "y": 1091,
+   "x": 1245,
+   "w": 67,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2.6% lower"
+  },
+  {
+   "tag": "span",
+   "y": 1138,
+   "x": 630,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "15.12"
+  },
+  {
+   "tag": "span",
+   "y": 1138,
+   "x": 1264,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.34"
+  },
+  {
+   "tag": "span",
+   "y": 1139,
+   "x": 128,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 1139,
+   "x": 762,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 1171,
+   "x": 630,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "16.01"
+  },
+  {
+   "tag": "span",
+   "y": 1171,
+   "x": 1264,
+   "w": 48,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.70"
+  },
+  {
+   "tag": "span",
+   "y": 1173,
+   "x": 128,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "span",
+   "y": 1173,
+   "x": 762,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "p",
+   "y": 1233,
+   "x": 100,
+   "w": 1240,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All bars share a zero baseline and a 30-unit scale. Values are group means of maximum measurements. Percentages show how far women’s means fall below men’s."
+  },
+  {
+   "tag": "div",
+   "y": 1349,
+   "x": 100,
+   "w": 556,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 / ACROSS THE BRANDS"
+  },
+  {
+   "tag": "p",
+   "y": 1349,
+   "x": 910,
+   "w": 430,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Every brand in the sample has a higher mean maximum front height for men. The distance between the dots shows how much the averages differ."
+  },
+  {
+   "tag": "h2",
+   "y": 1375,
+   "x": 100,
+   "w": 556,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The front-pocket gap appears everywhere"
+  },
+  {
+   "tag": "label",
+   "y": 1448,
+   "x": 781,
+   "w": 169,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sort by"
+  },
+  {
+   "tag": "span",
+   "y": 1456,
+   "x": 100,
+   "w": 57,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Women"
+  },
+  {
+   "tag": "span",
+   "y": 1456,
+   "x": 179,
+   "w": 39,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Men"
+  },
+  {
+   "tag": "text",
+   "y": 1506,
+   "x": 100,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "BRAND"
+  },
+  {
+   "tag": "text",
+   "y": 1506,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "GAP"
+  },
+  {
+   "tag": "small",
+   "y": 1537,
+   "x": 1005,
+   "w": 154,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consistent direction"
+  },
+  {
+   "tag": "text",
+   "y": 1544,
+   "x": 100,
+   "w": 34,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Levi’s"
+  },
+  {
+   "tag": "text",
+   "y": 1545,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.40"
+  },
+  {
+   "tag": "text",
+   "y": 1546,
+   "x": 477,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12.35"
+  },
+  {
+   "tag": "text",
+   "y": 1546,
+   "x": 778,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "25.75"
+  },
+  {
+   "tag": "div",
+   "y": 1555,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20 of 20"
+  },
+  {
+   "tag": "text",
+   "y": 1578,
+   "x": 100,
+   "w": 55,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Wrangler"
+  },
+  {
+   "tag": "text",
+   "y": 1579,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.25"
+  },
+  {
+   "tag": "text",
+   "y": 1580,
+   "x": 517,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.50"
+  },
+  {
+   "tag": "text",
+   "y": 1580,
+   "x": 816,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "27.75"
+  },
+  {
+   "tag": "text",
+   "y": 1612,
+   "x": 100,
+   "w": 39,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Guess"
+  },
+  {
+   "tag": "text",
+   "y": 1613,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12.00"
+  },
+  {
+   "tag": "text",
+   "y": 1614,
+   "x": 471,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12.00"
+  },
+  {
+   "tag": "text",
+   "y": 1614,
+   "x": 746,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "24.00"
+  },
+  {
+   "tag": "h3",
+   "y": 1617,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "brands show a gap"
+  },
+  {
+   "tag": "text",
+   "y": 1646,
+   "x": 100,
+   "w": 22,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lee"
+  },
+  {
+   "tag": "text",
+   "y": 1647,
+   "x": 893,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11.40"
+  },
+  {
+   "tag": "text",
+   "y": 1648,
+   "x": 500,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.60"
+  },
+  {
+   "tag": "text",
+   "y": 1648,
+   "x": 764,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "25.00"
+  },
+  {
+   "tag": "p",
+   "y": 1669,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The size varies. Levi’s has the largest difference, at 13.40 recorded units; Abercrombie has the smallest, at 2.50."
+  },
+  {
+   "tag": "text",
+   "y": 1680,
+   "x": 100,
+   "w": 56,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Old Navy"
+  },
+  {
+   "tag": "text",
+   "y": 1681,
+   "x": 893,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11.25"
+  },
+  {
+   "tag": "text",
+   "y": 1682,
+   "x": 494,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.25"
+  },
+  {
+   "tag": "text",
+   "y": 1682,
+   "x": 755,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "24.50"
+  },
+  {
+   "tag": "text",
+   "y": 1715,
+   "x": 100,
+   "w": 46,
+   "in_svg": true,
+   "hidden": false,
+   "text": "J. Crew"
+  },
+  {
+   "tag": "text",
+   "y": 1716,
+   "x": 893,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "11.00"
+  },
+  {
+   "tag": "text",
+   "y": 1717,
+   "x": 485,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "12.75"
+  },
+  {
+   "tag": "text",
+   "y": 1717,
+   "x": 741,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.75"
+  },
+  {
+   "tag": "text",
+   "y": 1749,
+   "x": 100,
+   "w": 46,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Arizona"
+  },
+  {
+   "tag": "text",
+   "y": 1750,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10.75"
+  },
+  {
+   "tag": "text",
+   "y": 1751,
+   "x": 517,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.50"
+  },
+  {
+   "tag": "text",
+   "y": 1751,
+   "x": 769,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "25.25"
+  },
+  {
+   "tag": "text",
+   "y": 1783,
+   "x": 100,
+   "w": 81,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Ralph Lauren"
+  },
+  {
+   "tag": "text",
+   "y": 1784,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10.50"
+  },
+  {
+   "tag": "text",
+   "y": 1785,
+   "x": 489,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.00"
+  },
+  {
+   "tag": "text",
+   "y": 1785,
+   "x": 736,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.50"
+  },
+  {
+   "tag": "small",
+   "y": 1797,
+   "x": 1005,
+   "w": 120,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Within one style"
+  },
+  {
+   "tag": "text",
+   "y": 1817,
+   "x": 100,
+   "w": 90,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Tommy Hilfiger"
+  },
+  {
+   "tag": "text",
+   "y": 1818,
+   "x": 892,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "10.00"
+  },
+  {
+   "tag": "text",
+   "y": 1819,
+   "x": 503,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.75"
+  },
+  {
+   "tag": "text",
+   "y": 1819,
+   "x": 741,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.75"
+  },
+  {
+   "tag": "h3",
+   "y": 1822,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Skinny jeans show it too"
+  },
+  {
+   "tag": "option",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Largest gap"
+  },
+  {
+   "tag": "option",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Women’s height"
+  },
+  {
+   "tag": "option",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": false,
+   "hidden": true,
+   "text": "Brand name"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Levi’s: women 12.35, men 25.75, gap 13.40"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Wrangler: women 14.50, men 27.75, gap 13.25"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Guess: women 12.00, men 24.00, gap 12.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lee: women 13.60, men 25.00, gap 11.40"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Old Navy: women 13.25, men 24.50, gap 11.25"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "J. Crew: women 12.75, men 23.75, gap 11.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Arizona: women 14.50, men 25.25, gap 10.75"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Ralph Lauren: women 13.00, men 23.50, gap 10.50"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Tommy Hilfiger: women 13.75, men 23.75, gap 10.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "True Religion: women 14.25, men 23.60, gap 9.35"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Gap: women 13.50, men 22.50, gap 9.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Calvin Klein: women 13.00, men 21.75, gap 8.75"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Uniqlo: women 14.25, men 22.00, gap 7.75"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Lucky: women 14.00, men 21.75, gap 7.75"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "7 for All Mankind: women 13.50, men 21.25, gap 7.75"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Buckle Black: women 14.75, men 21.00, gap 6.25"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Express: women 15.60, men 21.00, gap 5.40"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "American Eagle: women 17.50, men 21.50, gap 4.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "H&M: women 16.75, men 20.75, gap 4.00"
+  },
+  {
+   "tag": "title",
+   "y": 1835,
+   "x": 0,
+   "w": 0,
+   "in_svg": true,
+   "hidden": true,
+   "text": "Abercrombie: women 19.75, men 22.25, gap 2.50"
+  },
+  {
+   "tag": "text",
+   "y": 1851,
+   "x": 100,
+   "w": 80,
+   "in_svg": true,
+   "hidden": false,
+   "text": "True Religion"
+  },
+  {
+   "tag": "text",
+   "y": 1852,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9.35"
+  },
+  {
+   "tag": "text",
+   "y": 1853,
+   "x": 513,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.25"
+  },
+  {
+   "tag": "text",
+   "y": 1853,
+   "x": 738,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "23.60"
+  },
+  {
+   "tag": "p",
+   "y": 1875,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Among jeans labeled skinny, women’s mean maximum front height is 14.27 across 20 entries, compared with 22.71 across 12 men’s entries."
+  },
+  {
+   "tag": "text",
+   "y": 1886,
+   "x": 100,
+   "w": 25,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Gap"
+  },
+  {
+   "tag": "text",
+   "y": 1887,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9.00"
+  },
+  {
+   "tag": "text",
+   "y": 1888,
+   "x": 499,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.50"
+  },
+  {
+   "tag": "text",
+   "y": 1888,
+   "x": 718,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22.50"
+  },
+  {
+   "tag": "text",
+   "y": 1920,
+   "x": 100,
+   "w": 71,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Calvin Klein"
+  },
+  {
+   "tag": "text",
+   "y": 1921,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "8.75"
+  },
+  {
+   "tag": "text",
+   "y": 1922,
+   "x": 489,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.00"
+  },
+  {
+   "tag": "text",
+   "y": 1922,
+   "x": 704,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.75"
+  },
+  {
+   "tag": "p",
+   "y": 1952,
+   "x": 1005,
+   "w": 335,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This narrows the style comparison, but does not match jeans on size, fabric or construction."
+  },
+  {
+   "tag": "text",
+   "y": 1954,
+   "x": 100,
+   "w": 38,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Uniqlo"
+  },
+  {
+   "tag": "text",
+   "y": 1955,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 1956,
+   "x": 513,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.25"
+  },
+  {
+   "tag": "text",
+   "y": 1956,
+   "x": 708,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22.00"
+  },
+  {
+   "tag": "text",
+   "y": 1988,
+   "x": 100,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Lucky"
+  },
+  {
+   "tag": "text",
+   "y": 1989,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 1990,
+   "x": 508,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.00"
+  },
+  {
+   "tag": "text",
+   "y": 1990,
+   "x": 704,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.75"
+  },
+  {
+   "tag": "text",
+   "y": 2022,
+   "x": 100,
+   "w": 100,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7 for All Mankind"
+  },
+  {
+   "tag": "text",
+   "y": 2023,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.75"
+  },
+  {
+   "tag": "text",
+   "y": 2024,
+   "x": 499,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "13.50"
+  },
+  {
+   "tag": "text",
+   "y": 2024,
+   "x": 694,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.25"
+  },
+  {
+   "tag": "text",
+   "y": 2057,
+   "x": 100,
+   "w": 77,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Buckle Black"
+  },
+  {
+   "tag": "text",
+   "y": 2058,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.25"
+  },
+  {
+   "tag": "text",
+   "y": 2059,
+   "x": 522,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "14.75"
+  },
+  {
+   "tag": "text",
+   "y": 2059,
+   "x": 690,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.00"
+  },
+  {
+   "tag": "text",
+   "y": 2091,
+   "x": 100,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Express"
+  },
+  {
+   "tag": "text",
+   "y": 2092,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.40"
+  },
+  {
+   "tag": "text",
+   "y": 2093,
+   "x": 538,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "15.60"
+  },
+  {
+   "tag": "text",
+   "y": 2093,
+   "x": 690,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.00"
+  },
+  {
+   "tag": "text",
+   "y": 2125,
+   "x": 100,
+   "w": 95,
+   "in_svg": true,
+   "hidden": false,
+   "text": "American Eagle"
+  },
+  {
+   "tag": "text",
+   "y": 2126,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4.00"
+  },
+  {
+   "tag": "text",
+   "y": 2127,
+   "x": 573,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "17.50"
+  },
+  {
+   "tag": "text",
+   "y": 2127,
+   "x": 699,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "21.50"
+  },
+  {
+   "tag": "text",
+   "y": 2159,
+   "x": 100,
+   "w": 30,
+   "in_svg": true,
+   "hidden": false,
+   "text": "H&M"
+  },
+  {
+   "tag": "text",
+   "y": 2160,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "4.00"
+  },
+  {
+   "tag": "text",
+   "y": 2161,
+   "x": 559,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "16.75"
+  },
+  {
+   "tag": "text",
+   "y": 2161,
+   "x": 685,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "20.75"
+  },
+  {
+   "tag": "text",
+   "y": 2193,
+   "x": 100,
+   "w": 76,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Abercrombie"
+  },
+  {
+   "tag": "text",
+   "y": 2194,
+   "x": 899,
+   "w": 24,
+   "in_svg": true,
+   "hidden": false,
+   "text": "2.50"
+  },
+  {
+   "tag": "text",
+   "y": 2195,
+   "x": 615,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "19.75"
+  },
+  {
+   "tag": "text",
+   "y": 2195,
+   "x": 713,
+   "w": 29,
+   "in_svg": true,
+   "hidden": false,
+   "text": "22.25"
+  },
+  {
+   "tag": "text",
+   "y": 2230,
+   "x": 283,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "051015202530"
+  },
+  {
+   "tag": "p",
+   "y": 2269,
+   "x": 100,
+   "w": 850,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean maximum front height, recorded units · Two entries per gender per brand. Dot labels show the means; the right column shows men’s mean minus women’s."
+  },
+  {
+   "tag": "div",
+   "y": 2390,
+   "x": 100,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 / HOW TO READ THIS"
+  },
+  {
+   "tag": "div",
+   "y": 2390,
+   "x": 750,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "SOURCE & REPRODUCIBILITY"
+  },
+  {
+   "tag": "h3",
+   "y": 2416,
+   "x": 100,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Measurements, not carrying capacity"
+  },
+  {
+   "tag": "h3",
+   "y": 2416,
+   "x": 750,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A balanced sample, a limited view"
+  },
+  {
+   "tag": "p",
+   "y": 2464,
+   "x": 100,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "This report uses the CSV’s maximum front and back height and width fields. Each jeans entry receives equal weight. “Height” refers to the recorded maximum height, not the opening or rivet height."
+  },
+  {
+   "tag": "p",
+   "y": 2464,
+   "x": 750,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The supplied data/measurements.csv contains 80 entries. Brand names are trimmed and compared without capitalization, combining “7 for All Mankind” and “7 for all Mankind.” Style labels are trimmed for the skinny comparison."
+  },
+  {
+   "tag": "p",
+   "y": 2514,
+   "x": 100,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The CSV does not state measurement units, collection date, garment sizes or sampling method. Values are therefore labeled as recorded units. These dimensions do not establish usable area, volume or whether a particular phone will fit."
+  },
+  {
+   "tag": "p",
+   "y": 2534,
+   "x": 750,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Percent differences use men’s unrounded mean as the denominator. Displayed means are rounded to two decimals. The results describe this sample and should not be read as estimates for all jeans or a brand’s current range."
+  },
+  {
+   "tag": "p",
+   "y": 2605,
+   "x": 750,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All reported findings and their pandas calculations are available in facts.json ↗ ."
+  },
+  {
+   "tag": "span",
+   "y": 2688,
+   "x": 100,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "THE EVERYDAY MEASURE · POCKETS"
+  },
+  {
+   "tag": "span",
+   "y": 2688,
+   "x": 1213,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Data over assumptions."
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 165,
+   "x": 753,
+   "w": 588,
+   "h": 360,
+   "marks": 7,
+   "labels": 6
+  },
+  {
+   "kind": "svg",
+   "y": 1497,
+   "x": 100,
+   "w": 850,
+   "h": 757,
+   "marks": 87,
+   "labels": 89
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 2735
+}

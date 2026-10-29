@@ -1,0 +1,874 @@
+{
+ "capture_version": "capture-8",
+ "target": "/home/user/RL_Study/report-bench/submissions/pi-gpt-6-astra/hello-stranger/index.html",
+ "data": [
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/convos.csv",
+  "/home/user/RL_Study/report-bench/out/tasks/hello-stranger/data/people.csv"
+ ],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 693,
+     "left": 167,
+     "w": 1106,
+     "h": 265,
+     "sig": "755824c2"
+    }
+   ]
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": 243,
+     "left": 167,
+     "w": 1106,
+     "h": 265,
+     "sig": "755824c2"
+    }
+   ]
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 1,
+     "kind": "svg",
+     "top": -207,
+     "left": 167,
+     "w": 1106,
+     "h": 265,
+     "sig": "755824c2"
+    },
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 510,
+     "left": 758,
+     "w": 521,
+     "h": 106,
+     "sig": "c6eae757"
+    }
+   ]
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1120,
+   "settle_ms": 1000,
+   "charts": [
+    {
+     "id": 2,
+     "kind": "svg",
+     "top": 290,
+     "left": 758,
+     "w": 521,
+     "h": 106,
+     "sig": "c6eae757"
+    }
+   ]
+  }
+ ],
+ "scroll_story": [
+  {
+   "chart": 1,
+   "kind": "svg",
+   "size": [
+    1106,
+    265
+   ],
+   "frames": [
+    0,
+    2
+   ],
+   "pinned": [],
+   "states": 1
+  },
+  {
+   "chart": 2,
+   "kind": "svg",
+   "size": [
+    521,
+    106
+   ],
+   "frames": [
+    2,
+    3
+   ],
+   "pinned": [],
+   "states": 1
+  }
+ ],
+ "text": [
+  {
+   "tag": "div",
+   "y": 23,
+   "x": 136,
+   "w": 305,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Social connection / Field notes"
+  },
+  {
+   "tag": "a",
+   "y": 26,
+   "x": 942,
+   "w": 116,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The experience"
+  },
+  {
+   "tag": "a",
+   "y": 26,
+   "x": 1083,
+   "w": 70,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The pairs"
+  },
+  {
+   "tag": "a",
+   "y": 26,
+   "x": 1177,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "About the data ↗"
+  },
+  {
+   "tag": "div",
+   "y": 116,
+   "x": 136,
+   "w": 621,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A study of 30-minute video conversations"
+  },
+  {
+   "tag": "h1",
+   "y": 149,
+   "x": 136,
+   "w": 621,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Hello, stranger."
+  },
+  {
+   "tag": "div",
+   "y": 183,
+   "x": 855,
+   "w": 449,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The central finding"
+  },
+  {
+   "tag": "h2",
+   "y": 215,
+   "x": 855,
+   "w": 449,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A better ending, for most."
+  },
+  {
+   "tag": "p",
+   "y": 247,
+   "x": 136,
+   "w": 580,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Affect ratings rise as conversations unfold. Partners grow closer in how they feel, but don’t always see the encounter the same way."
+  },
+  {
+   "tag": "p",
+   "y": 262,
+   "x": 855,
+   "w": 449,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End-of-conversation affect exceeds pre-conversation affect in 69.2% of complete records. Yet a shared conversation can still produce two different experiences."
+  },
+  {
+   "tag": "strong",
+   "y": 393,
+   "x": 136,
+   "w": 292,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,656"
+  },
+  {
+   "tag": "strong",
+   "y": 393,
+   "x": 454,
+   "w": 266,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1,456"
+  },
+  {
+   "tag": "strong",
+   "y": 393,
+   "x": 746,
+   "w": 266,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,312"
+  },
+  {
+   "tag": "strong",
+   "y": 393,
+   "x": 1038,
+   "w": 266,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.29"
+  },
+  {
+   "tag": "span",
+   "y": 442,
+   "x": 136,
+   "w": 133,
+   "in_svg": false,
+   "hidden": false,
+   "text": "conversations in the data"
+  },
+  {
+   "tag": "span",
+   "y": 442,
+   "x": 454,
+   "w": 117,
+   "in_svg": false,
+   "hidden": false,
+   "text": "distinct participant IDs"
+  },
+  {
+   "tag": "span",
+   "y": 442,
+   "x": 746,
+   "w": 152,
+   "in_svg": false,
+   "hidden": false,
+   "text": "person-conversation records"
+  },
+  {
+   "tag": "span",
+   "y": 442,
+   "x": 1038,
+   "w": 164,
+   "in_svg": false,
+   "hidden": false,
+   "text": "mean pre-to-end affect change"
+  },
+  {
+   "tag": "span",
+   "y": 530,
+   "x": 136,
+   "w": 234,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01 / THROUGH THE CONVERSATION"
+  },
+  {
+   "tag": "p",
+   "y": 551,
+   "x": 914,
+   "w": 390,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Little changes between the pre and beginning ratings. The larger rise comes as the conversation unfolds."
+  },
+  {
+   "tag": "h2",
+   "y": 552,
+   "x": 136,
+   "w": 425,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The average experience improves."
+  },
+  {
+   "tag": "h3",
+   "y": 639,
+   "x": 167,
+   "w": 314,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean affect at each stage"
+  },
+  {
+   "tag": "button",
+   "y": 644,
+   "x": 1020,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Average rating"
+  },
+  {
+   "tag": "button",
+   "y": 644,
+   "x": 1124,
+   "w": 145,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap between partners"
+  },
+  {
+   "tag": "div",
+   "y": 665,
+   "x": 167,
+   "w": 314,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,257 complete person-conversation records · rating points"
+  },
+  {
+   "tag": "text",
+   "y": 725,
+   "x": 233,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "9"
+  },
+  {
+   "tag": "text",
+   "y": 732,
+   "x": 1118,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7.38"
+  },
+  {
+   "tag": "text",
+   "y": 741,
+   "x": 833,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.93"
+  },
+  {
+   "tag": "text",
+   "y": 758,
+   "x": 548,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.16"
+  },
+  {
+   "tag": "text",
+   "y": 759,
+   "x": 263,
+   "w": 35,
+   "in_svg": true,
+   "hidden": false,
+   "text": "6.10"
+  },
+  {
+   "tag": "text",
+   "y": 768,
+   "x": 233,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "7"
+  },
+  {
+   "tag": "text",
+   "y": 811,
+   "x": 233,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5"
+  },
+  {
+   "tag": "text",
+   "y": 854,
+   "x": 233,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "3"
+  },
+  {
+   "tag": "text",
+   "y": 897,
+   "x": 233,
+   "w": 7,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1"
+  },
+  {
+   "tag": "text",
+   "y": 927,
+   "x": 235,
+   "w": 91,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Pre-conversation"
+  },
+  {
+   "tag": "text",
+   "y": 927,
+   "x": 538,
+   "w": 53,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Beginning"
+  },
+  {
+   "tag": "text",
+   "y": 927,
+   "x": 832,
+   "w": 36,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Middle"
+  },
+  {
+   "tag": "text",
+   "y": 927,
+   "x": 1124,
+   "w": 21,
+   "in_svg": true,
+   "hidden": false,
+   "text": "End"
+  },
+  {
+   "tag": "strong",
+   "y": 973,
+   "x": 167,
+   "w": 135,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.29 points"
+  },
+  {
+   "tag": "p",
+   "y": 983,
+   "x": 332,
+   "w": 653,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean change from pre to end. These are averages across complete records, not a trajectory shared by everyone."
+  },
+  {
+   "tag": "b",
+   "y": 1051,
+   "x": 136,
+   "w": 219,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How did individual ratings change?"
+  },
+  {
+   "tag": "span",
+   "y": 1051,
+   "x": 1166,
+   "w": 138,
+   "in_svg": false,
+   "hidden": false,
+   "text": "End minus pre · n = 3,257"
+  },
+  {
+   "tag": "span",
+   "y": 1103,
+   "x": 136,
+   "w": 127,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Higher · 2,254"
+  },
+  {
+   "tag": "span",
+   "y": 1103,
+   "x": 655,
+   "w": 143,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Unchanged · 668"
+  },
+  {
+   "tag": "span",
+   "y": 1103,
+   "x": 1189,
+   "w": 115,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lower · 335"
+  },
+  {
+   "tag": "b",
+   "y": 1105,
+   "x": 189,
+   "w": 34,
+   "in_svg": false,
+   "hidden": false,
+   "text": "69.2%"
+  },
+  {
+   "tag": "b",
+   "y": 1105,
+   "x": 733,
+   "w": 34,
+   "in_svg": false,
+   "hidden": false,
+   "text": "20.5%"
+  },
+  {
+   "tag": "b",
+   "y": 1105,
+   "x": 1239,
+   "w": 34,
+   "in_svg": false,
+   "hidden": false,
+   "text": "10.3%"
+  },
+  {
+   "tag": "span",
+   "y": 1195,
+   "x": 136,
+   "w": 237,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02 / TWO SIDES OF THE SAME CALL"
+  },
+  {
+   "tag": "span",
+   "y": 1195,
+   "x": 733,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03 / THE LIKING GAP"
+  },
+  {
+   "tag": "h2",
+   "y": 1220,
+   "x": 136,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Enjoyment isn’t always mutual to the same degree."
+  },
+  {
+   "tag": "h2",
+   "y": 1220,
+   "x": 733,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "People tend to be liked more than they think."
+  },
+  {
+   "tag": "p",
+   "y": 1306,
+   "x": 136,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Partners report identical enjoyment in 26.5% of complete pairs. In 17.2%, their scores differ by at least three points."
+  },
+  {
+   "tag": "p",
+   "y": 1306,
+   "x": 733,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Matching each person’s estimate to their partner’s actual rating reveals a mean gap of 0.64 points."
+  },
+  {
+   "tag": "div",
+   "y": 1370,
+   "x": 136,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Absolute difference in enjoyment · share of conversations"
+  },
+  {
+   "tag": "div",
+   "y": 1392,
+   "x": 758,
+   "w": 521,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean liking rating · matched person-conversation records"
+  },
+  {
+   "tag": "span",
+   "y": 1406,
+   "x": 136,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "0 points"
+  },
+  {
+   "tag": "b",
+   "y": 1406,
+   "x": 647,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "26.5%"
+  },
+  {
+   "tag": "text",
+   "y": 1418,
+   "x": 1058,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.35"
+  },
+  {
+   "tag": "text",
+   "y": 1418,
+   "x": 1162,
+   "w": 40,
+   "in_svg": true,
+   "hidden": false,
+   "text": "5.99"
+  },
+  {
+   "tag": "span",
+   "y": 1445,
+   "x": 136,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "1 point"
+  },
+  {
+   "tag": "b",
+   "y": 1445,
+   "x": 647,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "34.7%"
+  },
+  {
+   "tag": "text",
+   "y": 1445,
+   "x": 1050,
+   "w": 49,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Perceived"
+  },
+  {
+   "tag": "text",
+   "y": 1445,
+   "x": 1162,
+   "w": 31,
+   "in_svg": true,
+   "hidden": false,
+   "text": "Actual"
+  },
+  {
+   "tag": "span",
+   "y": 1484,
+   "x": 136,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2 points"
+  },
+  {
+   "tag": "b",
+   "y": 1484,
+   "x": 647,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "21.6%"
+  },
+  {
+   "tag": "text",
+   "y": 1489,
+   "x": 815,
+   "w": 6,
+   "in_svg": true,
+   "hidden": false,
+   "text": "1234567"
+  },
+  {
+   "tag": "span",
+   "y": 1523,
+   "x": 136,
+   "w": 80,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3+ points"
+  },
+  {
+   "tag": "b",
+   "y": 1523,
+   "x": 647,
+   "w": 60,
+   "in_svg": false,
+   "hidden": false,
+   "text": "17.2%"
+  },
+  {
+   "tag": "strong",
+   "y": 1558,
+   "x": 733,
+   "w": 96,
+   "in_svg": false,
+   "hidden": false,
+   "text": "54.9%"
+  },
+  {
+   "tag": "p",
+   "y": 1560,
+   "x": 847,
+   "w": 222,
+   "in_svg": false,
+   "hidden": false,
+   "text": "underestimate their partner’s liking. 26.8% match it; 18.3% overestimate it."
+  },
+  {
+   "tag": "div",
+   "y": 1562,
+   "x": 136,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bar tracks run from 0 to 40%. n = 1,603 complete pairs. Counts: 425 identical · 557 one apart · 346 two apart · 275 three or more."
+  },
+  {
+   "tag": "div",
+   "y": 1619,
+   "x": 733,
+   "w": 571,
+   "in_svg": false,
+   "hidden": false,
+   "text": "n = 3,206 matched records with both ratings available."
+  },
+  {
+   "tag": "p",
+   "y": 1710,
+   "x": 505,
+   "w": 799,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Sources. Supplied tables: people.csv and convos.csv. All plotted measures are recomputed from people.csv. A row is a person in a conversation; repeated participant IDs mean these records are not independent people. The conversation table contains pair summaries, but the gaps here are calculated directly from individual ratings."
+  },
+  {
+   "tag": "span",
+   "y": 1716,
+   "x": 136,
+   "w": 154,
+   "in_svg": false,
+   "hidden": false,
+   "text": "READING THIS REPORT"
+  },
+  {
+   "tag": "h2",
+   "y": 1732,
+   "x": 136,
+   "w": 319,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Records, pairs & limits"
+  },
+  {
+   "tag": "p",
+   "y": 1774,
+   "x": 505,
+   "w": 799,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Definitions. “Affect” follows the source fields pre_affect, begin_affect, middle_affect and end_affect. The CSVs do not specify the question wording or when the stage ratings were collected. Stage spacing is schematic, not a timeline of measured minutes. Partner gaps are absolute score differences within a conversation. Perceived liking is you_like_me; actual liking is the partner’s i_like_you, matched by partner ID and conversation ID."
+  },
+  {
+   "tag": "p",
+   "y": 1838,
+   "x": 505,
+   "w": 799,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Missingness and interpretation. The trajectory excludes 55 incomplete records, leaving 3,257. Pair comparisons require both partners’ ratings, leaving 1,603 conversations. The liking comparison uses 3,206 matched records. Results describe this sample, with each eligible record or pair weighted equally. They do not establish that conversation caused the change, and no population uncertainty estimates are presented."
+  },
+  {
+   "tag": "span",
+   "y": 1974,
+   "x": 136,
+   "w": 238,
+   "in_svg": false,
+   "hidden": false,
+   "text": "HELLO, STRANGER / Conversation study report"
+  },
+  {
+   "tag": "span",
+   "y": 1974,
+   "x": 1039,
+   "w": 265,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: supplied CSV data ·"
+  },
+  {
+   "tag": "a",
+   "y": 1976,
+   "x": 1187,
+   "w": 117,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reproducible findings ↗"
+  }
+ ],
+ "charts": [
+  {
+   "kind": "svg",
+   "y": 693,
+   "x": 167,
+   "w": 1106,
+   "h": 265,
+   "marks": 11,
+   "labels": 13
+  },
+  {
+   "kind": "svg",
+   "y": 1410,
+   "x": 758,
+   "w": 521,
+   "h": 106,
+   "marks": 4,
+   "labels": 11
+  }
+ ],
+ "thumb": "thumb.jpg",
+ "page_height": 2020
+}

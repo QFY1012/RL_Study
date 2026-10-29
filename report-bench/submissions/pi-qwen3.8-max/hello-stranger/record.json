@@ -1,0 +1,24 @@
+{
+ "task": "hello-stranger",
+ "model": "qwen3.8-max",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "qwen3.8-max",
+   "effort": "high",
+   "seconds": 1513,
+   "steps": 23,
+   "tools": 27,
+   "nudged": 1,
+   "usage": {
+    "input": 292372,
+    "output": 57156
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 1513
+}

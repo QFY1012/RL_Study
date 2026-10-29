@@ -1,0 +1,60 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-gpt-6-astra/hello-stranger/index.html",
+ "facts": "submissions/pi-gpt-6-astra/hello-stranger/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": false,
+   "verdicts": [
+    {
+     "id": "study-coverage",
+     "basis": "Output shows Person-conversation records 3312, Distinct participant IDs 1456, Conversations 1656, Complete affect trajectories 3257, Incomplete affect trajectories 55.",
+     "verdict": "ok"
+    },
+    {
+     "id": "affect-rises",
+     "basis": "Output shows count 3257 and means 6.1, 6.16, 6.93, 7.38, with pre_to_end mean 1.29.",
+     "verdict": "ok"
+    },
+    {
+     "id": "individual-change",
+     "basis": "Output shows Higher 2254/69.2%, Unchanged 668/20.5%, Lower 335/10.3%.",
+     "verdict": "ok"
+    },
+    {
+     "id": "partners-converge",
+     "basis": "Output shows count 1603 and mean absolute gaps 1.67, 1.65, 1.35, 1.31.",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-gaps",
+     "basis": "Output shows counts 425, 557, 346, 275 with percentages 26.5, 34.7, 21.6, 17.2; these sum to 1603 conversations.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-underestimated",
+     "basis": "Output shows Matched records 3206, Actual liking mean 5.99, Perceived liking mean 5.35, Actual minus perceived mean 0.64, Underestimate 54.93%, Match 26.79%, Overestimate 18.28%.",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [],
+   "reply": "{\"facts\":[{\"id\":\"study-coverage\",\"basis\":\"Output shows Person-conversation records 3312, Distinct participant IDs 1456, Conversations 1656, Complete affect trajectories 3257, Incomplete affect trajectories 55.\",\"verdict\":\"ok\"},{\"id\":\"affect-rises\",\"basis\":\"Output shows count 3257 and means 6.1, 6.16, 6.93, 7.38, with pre_to_end mean 1.29.\",\"verdict\":\"ok\"},{\"id\":\"individual-change\",\"basis\":\"Output shows Higher 2254/69.2%, Unchanged 668/20.5%, Lower 335/10.3%.\",\"verdict\":\"ok\"},{\"id\":\"partners-converge\",\"basis\":\"Output shows count 1603 and mean absolute gaps 1.67, 1.65, 1.35, 1.31.\",\"verdict\":\"ok\"},{\"id\":\"enjoyment-gaps\",\"basis\":\"Output shows counts 425, 557, 346, 275 with percentages 26.5, 34.7, 21.6, 17.2; these sum to 1603 conversations.\",\"verdict\":\"ok\"},{\"id\":\"liking-underestimated\",\"basis\":\"Output shows Matched records 3206, Actual liking mean 5.99, Perceived liking mean 5.35, Actual minus perceived mean 0.64, Underestimate 54.93%, Match 26.79%, Overestimate 18.28%.\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 1727,
+    "completion_tokens": 1952,
+    "seconds": 11.0
+   }
+  }
+ },
+ "vetoed": [],
+ "tries": 1
+}
