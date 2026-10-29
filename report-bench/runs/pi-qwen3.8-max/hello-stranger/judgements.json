@@ -1,6 +1,7 @@
 {
  "tries": {
-  "2.x": 1
+  "2.x": 1,
+  "3.x": 1
  },
  "2.4": {
   "item": "2.4",
@@ -56,5 +57,27 @@
   "score": 0.4,
   "where": "第13帧 liking gap、第19帧 status/traits、第11帧相关性条、第5–6帧折线",
   "reason": "形态类对照（柱在零线下、两线平行、递减趋势）能一眼对上；但涉及具体数值时都要读柱顶或条尾印的数字、或查颜色图例才能定位，约一半对不上。"
+ },
+ "3.1": {
+  "item": "3.1",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.1,
+  "where": "全篇：第6帧折线图、第8–9帧柱状图、第12–13帧三柱图、第16帧相关系数条、第19–25帧各成对柱状图，缩略图亦无任何插画或图标",
+  "reason": "数据标记全是普通柱、点、线，页面没有任何和「两人视频对话／互相误读」相关的形象或语境图；比 gayborhoods 第5帧（0.15）还少一层地图式的语境支撑，属于纯抽象图表。"
+ },
+ "3.2": {
+  "item": "3.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.35,
+  "where": "第0帧标题区、第5帧章节标题、第12帧中心结论、第22帧切换节",
+  "reason": "奶油米底＋衬线大标题＋多色圆角卡片的通用编辑模板，换成任何问卷调查报告都成立，配色与字体没有一处呼应「陌生人对话／隔着屏幕猜对方」这个话题；但气质克制，不与严肃的社会心理话题相悖，故略高于纯模板档。"
  }
 }
