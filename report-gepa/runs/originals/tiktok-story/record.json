@@ -1,0 +1,37 @@
+{
+ "id": "tiktok-story",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 773,
+  "steps": 60,
+  "tools": 81,
+  "nudged": 0,
+  "usage": {
+   "input": 77284,
+   "output": 107601
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 2,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "tiktok-share-new-charting-artists",
+   "basis": "Output shows count=332, sum=84, mean=0.253012, matching 84 of 332 and 25.3%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "milestones-per-viral-artist",
+   "basis": "Output value counts are 0:10, 1:30, 2:27, 3:11, 4:16, 5:12, 6:11, 7:5, 8:3, matching the claim.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 2,
+ "skipped": 7
+}

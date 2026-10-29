@@ -2,16 +2,16 @@
   {
     "id": "tiktok-share-new-charting-artists",
     "source": "Of the artists who charted on Spotify from January 2020 to December 2021, 332 had never charted before. 25% of them came from TikTok.",
-    "claim": "84 of the 332 artists who first charted in 2020-2021 came from TikTok, 25.3%.",
+    "claim": "84 of the 332 artists who first charted in 2020-2021 came from TikTok, counting both those marked as TikTok-related and the TikTok-viral artists, 25.3%.",
     "tables": {
       "a": "data/artists.csv",
       "c": "data/charting-artists.csv"
     },
-    "code": "(c[\"Did TikTok play a role in starting this person's career?\"].eq('Yes') | c['Artist'].isin(a['name'])).agg(['count','sum','mean'])"
+    "code": "(c[\"Did TikTok play a role in starting this person's career?\"].eq('Yes') | c['Artist'].str.lower().isin(a['name'].str.lower())).agg(['count','sum','mean'])"
   },
   {
     "id": "milestones-per-viral-artist",
-    "source": "Let's look at the number of milestones met by each of the 125 musicians who went viral on TikTok.",
+    "source": "Let’s look at the number of milestones met by each of the 125 musicians who went viral on TikTok.",
     "claim": "The musicians met between 0 and 8 of the 8 milestones: 10 met none, 30 met 1, 27 met 2, 11 met 3, 16 met 4, 12 met 5, 11 met 6, 5 met 7 and 3 met all 8.",
     "tables": {
       "a": "data/artists.csv"

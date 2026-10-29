@@ -26,12 +26,14 @@
    "verdict": "ok"
   }
  ],
- "dropped": [
+ "dropped": [],
+ "answer": 1,
+ "skipped": 5,
+ "review": [
   {
    "id": "bw-versions-dated-older",
-   "why": "source not in the story as read"
+   "action": "restore",
+   "why": "the page writes this sentence for each photo after the quiz, from output.csv (the task's data) with the same floor-of-mean years; for the 1969 photo it reads 13 years older. The quiz's photos no longer load, so the agent's tools never reached it"
   }
- ],
- "answer": 0,
- "skipped": 5
+ ]
 }

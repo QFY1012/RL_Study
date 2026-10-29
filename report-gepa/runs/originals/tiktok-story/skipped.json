@@ -1,10 +1,14 @@
 [
   {
+    "source": "In 2020, TikTok exploded in popularity and new artists were being lifted into the spotlight",
+    "why": "The folder has no TikTok usage or artist-discovery data; it starts from the artists already identified as TikTok-viral or newly charting."
+  },
+  {
     "source": "We found about 5,000 songs that were popular on TikTok in 2020.",
     "why": "The folder has artist-level files only; there is no song-level TikTok data to count the roughly 5,000 popular songs."
   },
   {
-    "source": "We needed a threshold for what's bonafide TikTok viral, so we decided on songs with at least 100,000 TikTok posts",
+    "source": "We needed a threshold for what’s bonafide TikTok viral, so we decided on songs with at least 100,000 TikTok posts",
     "why": "The folder has no TikTok post counts or song-level records, so the 100,000-post threshold cannot be applied or checked."
   },
   {
@@ -12,15 +16,15 @@
     "why": "The 1,000-song denominator and the TikTok post counts are absent; artists.csv contains the 125 emerging artists but no count of all songs that passed 100,000 posts, so 12.5% cannot be computed."
   },
   {
-    "source": "Most of the music that went viral on TikTok was from artists who were already popular, well before 2020 and even TikTok's founding.",
+    "source": "Most of the music that went viral on TikTok was from artists who were already popular, well before 2020 and even TikTok’s founding.",
     "why": "This needs the full song-level viral dataset with each song's artist and pre-existing popularity; the folder contains only the 125 emerging artists and the 332 first-time charters."
   },
   {
-    "source": "one of the OVER 1 MILLION videos for \"Just Did a Bad Thing.\"",
+    "source": "one of the OVER 1 MILLION videos for “Just Did a Bad Thing.”",
     "why": "The number of TikTok videos using the sound is not in either file."
   },
   {
-    "source": "This 16-second \"song.\"",
+    "source": "this 16-second “song.”",
     "why": "The song's duration is not recorded in either file."
   }
 ]
