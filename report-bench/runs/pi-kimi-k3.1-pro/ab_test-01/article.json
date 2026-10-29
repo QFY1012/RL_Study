@@ -1,0 +1,155 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.938,
+  "where": "「Follow-up tells two different stories.」",
+  "reason": "16 节里 1 节不为前面的观点或问题服务:It introduces a new follow-up finding that new and returning users move in opposite directions and should be reported separately.",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Treatment cut median first response by 22 seconds .",
+    "serves": null,
+    "how": "It reports the headline result that treatment reduced median first response by 22 seconds while overall completion stayed flat and Dermatology showed an abandonment warning.",
+    "holds": false
+   },
+   {
+    "start": "The speed advantage is persistent.",
+    "serves": "Treatment cut median first response by 22 seconds .",
+    "how": "It supports the speed claim by saying treatment responds faster across days and departments, including the typical wait and the slower tail rather than only the average.",
+    "holds": true
+   },
+   {
+    "start": "The average hides a Dermatology warning.",
+    "serves": "Yet completion stayed flat overall—and Dermatology shows a clear abandonment warning beneath the average.",
+    "how": "It explains that overall completion moves only -0.08 pp while department deltas show skin consultations breaking away.",
+    "holds": true
+   },
+   {
+    "start": "Faster replies, more early exits.",
+    "serves": "The average hides a Dermatology warning.",
+    "how": "It states the Dermatology paradox that faster replies are accompanied by more early exits.",
+    "holds": true
+   },
+   {
+    "start": "The largest department-level reversal appears despite a 21-second faster median response.",
+    "serves": "Faster replies, more early exits.",
+    "how": "It gives the largest department-level reversal as an example of faster response coexisting with worse early exit.",
+    "holds": true
+   },
+   {
+    "start": "The skin signal is broad, not isolated.",
+    "serves": "The average hides a Dermatology warning.",
+    "how": "It shows all five Dermatology complaint groups have higher pre-doctor loss under treatment, so the signal is not isolated to one complaint.",
+    "holds": true
+   },
+   {
+    "start": "Follow-up tells two different stories.",
+    "serves": null,
+    "how": "It introduces a new follow-up finding that new and returning users move in opposite directions and should be reported separately.",
+    "holds": false
+   },
+   {
+    "start": "Keep measuring the response-time win.",
+    "serves": "The speed advantage is persistent.",
+    "how": "It concludes that the persistent speed advantage should remain a measured win.",
+    "holds": true
+   },
+   {
+    "start": "Roll forward on speed.",
+    "serves": "The speed advantage is persistent.",
+    "how": "It concludes rollout should proceed on speed because the speed advantage is persistent.",
+    "holds": true
+   },
+   {
+    "start": "Gate the rollout on Dermatology.",
+    "serves": "The average hides a Dermatology warning.",
+    "how": "It concludes rollout should be gated on Dermatology because of the warning hidden by the average.",
+    "holds": true
+   },
+   {
+    "start": "Treatment is faster on 39 of 42 days and in all five departments; the within-two-minute share rises +15.95 pp.",
+    "serves": "Roll forward on speed.",
+    "how": "It supports rolling forward on speed by showing faster treatment on most days, all departments, and a higher within-two-minute share.",
+    "holds": true
+   },
+   {
+    "start": "Do not call overall completion a win.",
+    "serves": "Yet completion stayed flat overall—and Dermatology shows a clear abandonment warning beneath the average.",
+    "how": "It draws the conclusion that overall completion should not be treated as a win given the flat result and Dermatology warning.",
+    "holds": true
+   },
+   {
+    "start": "The observed difference is -0.08 pp, with a 95% CI from -1.03 to +0.87 pp. Investigate whether shorter consults affect any downstream quality measure.",
+    "serves": "Do not call overall completion a win.",
+    "how": "It gives the small completion difference and wide interval and recommends investigating downstream quality rather than claiming a completion win.",
+    "holds": true
+   },
+   {
+    "start": "The response-time improvement is consistent across observed cuts.",
+    "serves": "Keep measuring the response-time win.",
+    "how": "It confirms the response-time improvement holds across observed cuts, supporting continued measurement of that win.",
+    "holds": true
+   },
+   {
+    "start": "Completion and follow-up need a segmented readout.",
+    "serves": "The average hides a Dermatology warning.",
+    "how": "It concludes from the completion/Dermatology warning and the follow-up split that these outcomes need segmented reporting.",
+    "holds": true
+   },
+   {
+    "start": "Audit Dermatology routing and the pre-doctor queue.",
+    "serves": "The skin signal is broad, not isolated.",
+    "how": "It recommends auditing Dermatology routing and the pre-doctor queue because the skin signal is broad.",
+    "holds": true
+   },
+   {
+    "start": "Early loss rises +5.04 pp, and every Dermatology complaint group moves in the wrong direction. Review this segment before a broad rollout.",
+    "serves": "Gate the rollout on Dermatology.",
+    "how": "It gives the size and breadth of Dermatology early loss and says to review the segment before broad rollout, supporting the gating conclusion.",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"Treatment cut median first response by 22 seconds .\",\"serves\":null,\"how\":\"It reports the headline result that treatment reduced median first response by 22 seconds while overall completion stayed flat and Dermatology showed an abandonment warning.\"},{\"start\":\"The speed advantage is persistent.\",\"serves\":\"Treatment cut median first response by 22 seconds .\",\"how\":\"It supports the speed claim by saying treatment responds faster across days and departments, including the typical wait and the slower tail rather than only the average.\"},{\"start\":\"The average hides a Dermatology warning.\",\"serves\":\"Yet completion stayed flat overall—and Dermatology shows a clear abandonment warning beneath the average.\",\"how\":\"It explains that overall completion moves only -0.08 pp while department deltas show skin consultations breaking away.\"},{\"start\":\"Faster replies, more early exits.\",\"serves\":\"The average hides a Dermatology warning.\",\"how\":\"It states the Dermatology paradox that faster replies are accompanied by more early exits.\"},{\"start\":\"The largest department-level reversal appears despite a 21-second faster median response.\",\"serves\":\"Faster replies, more early exits.\",\"how\":\"It gives the largest department-level reversal as an example of faster response coexisting with worse early exit.\"},{\"start\":\"The skin signal is broad, not isolated.\",\"serves\":\"The average hides a Dermatology warning.\",\"how\":\"It shows all five Dermatology complaint groups have higher pre-doctor loss under treatment, so the signal is not isolated to one complaint.\"},{\"start\":\"Follow-up tells two different stories.\",\"serves\":null,\"how\":\"It introduces a new follow-up finding that new and returning users move in opposite directions and should be reported separately.\"},{\"start\":\"Keep measuring the response-time win.\",\"serves\":\"The speed advantage is persistent.\",\"how\":\"It concludes that the persistent speed advantage should remain a measured win.\"},{\"start\":\"Roll forward on speed.\",\"serves\":\"The speed advantage is persistent.\",\"how\":\"It concludes rollout should proceed on speed because the speed advantage is persistent.\"},{\"start\":\"Gate the rollout on Dermatology.\",\"serves\":\"The average hides a Dermatology warning.\",\"how\":\"It concludes rollout should be gated on Dermatology because of the warning hidden by the average.\"},{\"start\":\"Treatment is faster on 39 of 42 days and in all five departments; the within-two-minute share rises +15.95 pp.\",\"serves\":\"Roll forward on speed.\",\"how\":\"It supports rolling forward on speed by showing faster treatment on most days, all departments, and a higher within-two-minute share.\"},{\"start\":\"Do not call overall completion a win.\",\"serves\":\"Yet completion stayed flat overall—and Dermatology shows a clear abandonment warning beneath the average.\",\"how\":\"It draws the conclusion that overall completion should not be treated as a win given the flat result and Dermatology warning.\"},{\"start\":\"The observed difference is -0.08 pp, with a 95% CI from -1.03 to +0.87 pp. Investigate whether shorter consults affect any downstream quality measure.\",\"serves\":\"Do not call overall completion a win.\",\"how\":\"It gives the small completion difference and wide interval and recommends investigating downstream quality rather than claiming a completion win.\"},{\"start\":\"The response-time improvement is consistent across observed cuts.\",\"serves\":\"Keep measuring the response-time win.\",\"how\":\"It confirms the response-time improvement holds across observed cuts, supporting continued measurement of that win.\"},{\"start\":\"Completion and follow-up need a segmented readout.\",\"serves\":\"The average hides a Dermatology warning.\",\"how\":\"It concludes from the completion/Dermatology warning and the follow-up split that these outcomes need segmented reporting.\"},{\"start\":\"Audit Dermatology routing and the pre-doctor queue.\",\"serves\":\"The skin signal is broad, not isolated.\",\"how\":\"It recommends auditing Dermatology routing and the pre-doctor queue because the skin signal is broad.\"},{\"start\":\"Early loss rises +5.04 pp, and every Dermatology complaint group moves in the wrong direction. Review this segment before a broad rollout.\",\"serves\":\"Gate the rollout on Dermatology.\",\"how\":\"It gives the size and breadth of Dermatology early loss and says to review the segment before broad rollout, supporting the gating conclusion.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 1242,
+   "completion_tokens": 18969,
+   "seconds": 114.3
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.15,
+  "where": "Dermatology（皮肤科，作为科室/数据分组；并非有名字的个人）",
+  "reason": "全文只有 Treatment/Control、科室、投诉组、新老用户等类别和指标，没有有名字或可辨认、且写出欲望与处境的个体。Dermatology 只是数据分组，虽有“平均掩盖皮肤科警告”的反差，但没有个体的经过和后来，未形成透过个体看整体的叙事。",
+  "individuals": [
+   {
+    "who": "Dermatology（皮肤科，作为科室/数据分组；并非有名字的个人）",
+    "wants": null,
+    "expected": "Overall completion moves just -0.08 pp. Department deltas show why a single top-line rate is not enough: most movement is small",
+    "broken": "but skin consultations break away.",
+    "after": null,
+    "tie": "Dermatology 是数据中的科室分组，文中给出样本量：Dermatology sample: 1,618 Control · 1,503 Treatment；但它只是分组，不是个体经历。"
+   }
+  ],
+  "answer": {
+   "text": "{\"individuals\":[{\"who\":\"Dermatology（皮肤科，作为科室/数据分组；并非有名字的个人）\",\"wants\":null,\"expected\":\"Overall completion moves just -0.08 pp. Department deltas show why a single top-line rate is not enough: most movement is small\",\"broken\":\"but skin consultations break away.\",\"after\":null,\"tie\":\"Dermatology 是数据中的科室分组，文中给出样本量：Dermatology sample: 1,618 Control · 1,503 Treatment；但它只是分组，不是个体经历。\"}],\"score\":0.15,\"reason\":\"全文只有 Treatment/Control、科室、投诉组、新老用户等类别和指标，没有有名字或可辨认、且写出欲望与处境的个体。Dermatology 只是数据分组，虽有“平均掩盖皮肤科警告”的反差，但没有个体的经过和后来，未形成透过个体看整体的叙事。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1367,
+   "completion_tokens": 8004,
+   "seconds": 47.3
+  }
+ }
+}
