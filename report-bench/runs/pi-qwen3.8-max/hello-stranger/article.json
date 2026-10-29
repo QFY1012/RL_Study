@@ -1,0 +1,134 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.929,
+  "where": "「Asked how enjoyable the conversation was, 78% of participant」",
+  "reason": "14 节里 1 节不为前面的观点或问题服务:报告享受度评分分布，并指出该指标集中在高分端、存在天花板效应。",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Strangers were paired for half-hour video conversations and asked, at several points, how they felt and what they thought of each other.",
+    "serves": null,
+    "how": "概述研究设计，并给出两个核心发现：多数人通话后情绪变好、却读不准对方且低估自己被喜欢程度。",
+    "holds": false
+   },
+   {
+    "start": "People were asked how they felt before the call, at its beginning, in the middle, at the end, and for the conversation overall.",
+    "serves": "Almost everyone left in a better mood than they arrived.",
+    "how": "用通话前到结束的平均情绪与唤醒度、变化幅度、变差人数和最佳/最差时刻，证明情绪总体上升且对话体验并非平坦无变化。",
+    "holds": true
+   },
+   {
+    "start": "The average of +1.23 hides the structure.",
+    "serves": "The answer moves in one direction: from 6.10 before the call to 7.38 at the end, with arousal rising alongside it from 5.32 to 6.70 .",
+    "how": "按起始情绪分组显示收益随起点升高而缩小甚至转负，说明平均增益掩盖了不同起点的异质性。",
+    "holds": true
+   },
+   {
+    "start": "Asked how enjoyable the conversation was, 78% of participants answered 7 or higher on a 1–9 scale and 28.6% gave the maximum of 9.",
+    "serves": null,
+    "how": "报告享受度评分分布，并指出该指标集中在高分端、存在天花板效应。",
+    "holds": false
+   },
+   {
+    "start": "Each participant answered two questions on a 1–7 scale: how much they like their partner, and how much they think their partner likes them.",
+    "serves": "Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.",
+    "how": "比较实际喜欢、猜测被喜欢及配对对称性，证明人们系统性地低估自己被喜欢的程度。",
+    "holds": true
+   },
+   {
+    "start": "Because every conversation contains two people rating the same event, we can check guesses against ground truth.",
+    "serves": "Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.",
+    "how": "用双方对同一对话的评分相关性和差异，以及猜测被喜欢与真实喜欢的低相关，证明跨人信号很弱。",
+    "holds": true
+   },
+   {
+    "start": "Participants also rated their own loneliness and their partner's, on a 1–3 scale.",
+    "serves": "What you cannot recover, from inside the conversation, is how the other person felt.",
+    "how": "用自评与推测伴侣孤独感的差异及其与享受度的不同相关，说明对他人状态的推断有偏差却仍影响对话体验。",
+    "holds": true
+   },
+   {
+    "start": "Several items come in matched pairs: what you think of yourself, what you think your partner thinks of you, and what you think of your partner.",
+    "serves": "The asymmetry is the story.",
+    "how": "用匹配题项显示自评比伴侣评价低、以为伴侣对自己的评价又低于伴侣实际给出的评价，扩展了悲观偏差。",
+    "holds": true
+   },
+   {
+    "start": "The pair file records how similar or distant the two people were: same sex, same race, years apart in age, points apart in politics.",
+    "serves": "Any summary that averages a pair's ratings — as convos.csv does throughout — is blending two experiences that were only loosely connected.",
+    "how": "比较人口学相似度与共享现实/共同体验对享受度的影响，说明真正相关的是两人是否体验一致而非背景相似。",
+    "holds": true
+   },
+   {
+    "start": "1. Talking to a stranger reliably improves your mood.",
+    "serves": "Almost everyone left in a better mood than they arrived.",
+    "how": "用均值从6.16到7.38、1.23点增益及2,153/3,257人的计数重述情绪改善的结论。",
+    "holds": true
+   },
+   {
+    "start": "5. Partners cannot read each other.",
+    "serves": "The checks are unflattering.",
+    "how": "重述猜测被喜欢、相互喜欢和享受评分的低相关及平均1.43点差异，并补充说话贡献的偏差。",
+    "holds": true
+   },
+   {
+    "start": "2. The gain is largest for people who need it most.",
+    "serves": "The average of +1.23 hides the structure.",
+    "how": "重述起始情绪1和9对应的+4.00与-0.21点变化。",
+    "holds": true
+   },
+   {
+    "start": "6. Demographics are a weak lever; shared experience is a strong one.",
+    "serves": "Almost none of it moves the needle on enjoyment.",
+    "how": "重述同/异性别、同/异种族、政治距离、年龄差与共享现实对享受度的不同影响。",
+    "holds": true
+   },
+   {
+    "start": "3. These conversations are almost universally rated enjoyable — 78% of ratings are 7 or above on a 9-point scale, 28.6% are the maximum.",
+    "serves": "This is a ceiling-heavy measure, which matters for everything that follows.",
+    "how": "重述享受度集中在高分段的事实并说明天花板效应压缩组间差异。",
+    "holds": true
+   },
+   {
+    "start": "4. People systematically under-estimate how much they are liked.",
+    "serves": "Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.",
+    "how": "重述自己喜欢6.00、猜测被喜欢5.35、伴侣实际喜欢6.00，并补充地位/智力/友善度的同类折扣。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"Strangers were paired for half-hour video conversations and asked, at several points, how they felt and what they thought of each other.\",\"serves\":null,\"how\":\"概述研究设计，并给出两个核心发现：多数人通话后情绪变好、却读不准对方且低估自己被喜欢程度。\"},{\"start\":\"People were asked how they felt before the call, at its beginning, in the middle, at the end, and for the conversation overall.\",\"serves\":\"Almost everyone left in a better mood than they arrived.\",\"how\":\"用通话前到结束的平均情绪与唤醒度、变化幅度、变差人数和最佳/最差时刻，证明情绪总体上升且对话体验并非平坦无变化。\"},{\"start\":\"The average of +1.23 hides the structure.\",\"serves\":\"The answer moves in one direction: from 6.10 before the call to 7.38 at the end, with arousal rising alongside it from 5.32 to 6.70 .\",\"how\":\"按起始情绪分组显示收益随起点升高而缩小甚至转负，说明平均增益掩盖了不同起点的异质性。\"},{\"start\":\"Asked how enjoyable the conversation was, 78% of participants answered 7 or higher on a 1–9 scale and 28.6% gave the maximum of 9.\",\"serves\":null,\"how\":\"报告享受度评分分布，并指出该指标集中在高分端、存在天花板效应。\"},{\"start\":\"Each participant answered two questions on a 1–7 scale: how much they like their partner, and how much they think their partner likes them.\",\"serves\":\"Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.\",\"how\":\"比较实际喜欢、猜测被喜欢及配对对称性，证明人们系统性地低估自己被喜欢的程度。\"},{\"start\":\"Because every conversation contains two people rating the same event, we can check guesses against ground truth.\",\"serves\":\"Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.\",\"how\":\"用双方对同一对话的评分相关性和差异，以及猜测被喜欢与真实喜欢的低相关，证明跨人信号很弱。\"},{\"start\":\"Participants also rated their own loneliness and their partner's, on a 1–3 scale.\",\"serves\":\"What you cannot recover, from inside the conversation, is how the other person felt.\",\"how\":\"用自评与推测伴侣孤独感的差异及其与享受度的不同相关，说明对他人状态的推断有偏差却仍影响对话体验。\"},{\"start\":\"Several items come in matched pairs: what you think of yourself, what you think your partner thinks of you, and what you think of your partner.\",\"serves\":\"The asymmetry is the story.\",\"how\":\"用匹配题项显示自评比伴侣评价低、以为伴侣对自己的评价又低于伴侣实际给出的评价，扩展了悲观偏差。\"},{\"start\":\"The pair file records how similar or distant the two people were: same sex, same race, years apart in age, points apart in politics.\",\"serves\":\"Any summary that averages a pair's ratings — as convos.csv does throughout — is blending two experiences that were only loosely connected.\",\"how\":\"比较人口学相似度与共享现实/共同体验对享受度的影响，说明真正相关的是两人是否体验一致而非背景相似。\"},{\"start\":\"1. Talking to a stranger reliably improves your mood.\",\"serves\":\"Almost everyone left in a better mood than they arrived.\",\"how\":\"用均值从6.16到7.38、1.23点增益及2,153/3,257人的计数重述情绪改善的结论。\"},{\"start\":\"5. Partners cannot read each other.\",\"serves\":\"The checks are unflattering.\",\"how\":\"重述猜测被喜欢、相互喜欢和享受评分的低相关及平均1.43点差异，并补充说话贡献的偏差。\"},{\"start\":\"2. The gain is largest for people who need it most.\",\"serves\":\"The average of +1.23 hides the structure.\",\"how\":\"重述起始情绪1和9对应的+4.00与-0.21点变化。\"},{\"start\":\"6. Demographics are a weak lever; shared experience is a strong one.\",\"serves\":\"Almost none of it moves the needle on enjoyment.\",\"how\":\"重述同/异性别、同/异种族、政治距离、年龄差与共享现实对享受度的不同影响。\"},{\"start\":\"3. These conversations are almost universally rated enjoyable — 78% of ratings are 7 or above on a 9-point scale, 28.6% are the maximum.\",\"serves\":\"This is a ceiling-heavy measure, which matters for everything that follows.\",\"how\":\"重述享受度集中在高分段的事实并说明天花板效应压缩组间差异。\"},{\"start\":\"4. People systematically under-estimate how much they are liked.\",\"serves\":\"Almost nobody could say how their partner felt — and nearly everybody under-estimated how much they were liked.\",\"how\":\"重述自己喜欢6.00、猜测被喜欢5.35、伴侣实际喜欢6.00，并补充地位/智力/友善度的同类折扣。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 2557,
+   "completion_tokens": 19926,
+   "seconds": 123.5
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-qwen3.8-max/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文是数据集汇总和统计描述，只有“陌生人”“参与者”“某人”“最极端的一对”等类别、假设点或数据行，没有有名字或可识别、并写出其想要什么/面对什么的个体；也没有个体层面的常规被打破、经过和后来，无法与数据整体形成叙事连接。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"全文是数据集汇总和统计描述，只有“陌生人”“参与者”“某人”“最极端的一对”等类别、假设点或数据行，没有有名字或可识别、并写出其想要什么/面对什么的个体；也没有个体层面的常规被打破、经过和后来，无法与数据整体形成叙事连接。\"}",
+   "finish": "stop",
+   "prompt_tokens": 2691,
+   "completion_tokens": 801,
+   "seconds": 8.7
+  }
+ }
+}
