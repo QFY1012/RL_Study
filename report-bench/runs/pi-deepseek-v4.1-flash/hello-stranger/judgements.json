@@ -1,0 +1,83 @@
+{
+ "tries": {
+  "2.x": 1,
+  "3.x": 1
+ },
+ "2.4": {
+  "item": "2.4",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.62,
+  "where": "第10–11帧 / 04节 / 相关系数点图（Shared reality 与五项人口学差异）",
+  "reason": "负值区四个标签 −0.050/−0.040、−0.065/−0.069 与圆点重叠成一团，读者分不清数值属于哪一行；其余折线、堆叠条、哑铃图、柱状图、水平条的文字与数值都清楚，属于个别图标签挤在一起。"
+ },
+ "2.5": {
+  "item": "2.5",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "全篇：第2帧折线、第10帧点图、第13帧左右两图、第15帧水平条",
+  "reason": "深绿先后表示 Arousal、enjoyment 相关、伙伴特质评分、Best moment；赭红先后表示 Positive affect、Rose、I like my partner、Underestimate、affect gained、Overall；Arousal 由青绿变灰、Shared reality 由深绿变灰，同一变量全篇未沿用同一颜色。各图内部有图例自洽，矛盾发生在图与图之间。"
+ },
+ "2.6": {
+  "item": "2.6",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.45,
+  "where": "01–06各节：第2帧折线图、第4帧哑铃图、第7帧水平条、第10帧点图、第12帧柱状图、第14帧双图",
+  "reason": "每节换一种画法，没有一处是同一张图只改一样东西的连续演化；哑铃图与点图是两套全新读法，读者每节都要重新适应。仅03、05、06节同属水平条形家族略有余地。"
+ },
+ "2.7": {
+  "item": "2.7",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第0–2帧两段共用同一折线图；第2–4帧共用同一堆叠条；第6–7帧共用同一水平条；第9–12帧三段共用两张静态图",
+  "reason": "滚动记录显示没有任何图固定或随滚动改变状态，全篇静态；多段文字讲同一张不变的图，后面几段讲的内容要读者自己在图上找。图与文字同屏相邻，未到最差档。"
+ },
+ "2.8": {
+  "item": "2.8",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.18,
+  "where": "第1帧正文对第2帧折线、第4帧正文对第5帧哑铃、第7帧正文对第8帧水平条、第10帧正文对第11帧点图、第14帧正文对同帧左条形",
+  "reason": "文字与图之间没有叠放、连线或同色对应，全部靠图例（赭红=Positive affect、深绿=enjoyment）或读图上印的同一个数、同一个行标签（Below 5、5.35、0.570、7.98）才能定位，按规则均算没对上；仅因图文紧邻同屏而不至于最低端。"
+ },
+ "3.1": {
+  "item": "3.1",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.1,
+  "where": "全篇：第2帧折线图、第3–4帧堆叠条、第5帧点线图、第7–8帧条形图、第10–11帧相关系数点图、第12帧柱状图、第14帧条形/柱状图、第16帧条形图",
+  "reason": "所有数据标记都是抽象的折线、柱子、圆点，没有任何插画、图标或地图给话题提供语境，也没有一处标记做成「对话/陌生人/被喜欢」这类话题里的东西，比 0.15 的 gayborhoods 堆叠条形图案例更纯抽象"
+ },
+ "3.2": {
+  "item": "3.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/hello-stranger/evidence",
+  "model": "deepseek-v4.1-flash",
+  "mode": "group",
+  "prompt_hash": "47ee8584c630-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.3,
+  "where": "第0帧起全篇：米色底、大号衬线标题、章节编号、砖红/青灰细线图表，第17帧的研究附录与代码块",
+  "reason": "套用的是通用米色衬线编辑模板，配色、字体、版式与「陌生人视频对话、被低估的喜欢」这一有温度的话题看不出联系；不出错但也谈不上贴合，比 0.5 的中性地图案例更模板化"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.833,
+  "where": "「The height columns are not always ordered.」",
+  "reason": "6 节里 1 节不为前面的观点或问题服务:It sets out data caveats: inconsistent height columns, a small non-random sample, one surveyor's protocol, and a rare cutout flag.",
+  "opening": 0,
+  "sections": [
+   {
+    "start": "Measured four ways — maximum and minimum height of the front pocket, and of the back pocket — the two halves of the garment tell different stories.",
+    "serves": "A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.",
+    "how": "It reports average maximum front-pocket heights of 23.13 in for men versus 14.33 in for women, while back height and width differ by less than an inch and front width differs much less.",
+    "holds": true
+   },
+   {
+    "start": "The averages could hide a wide overlap.",
+    "serves": "A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.",
+    "how": "It plots every pair and reports ranges and medians showing almost no overlap, then notes that women's front pockets are often shorter than their back pockets while men's never are.",
+    "holds": true
+   },
+   {
+    "start": "The obvious suspects are the garment's shape and its price.",
+    "serves": "A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.",
+    "how": "It shows women's skinny, straight and boot-cut averages are nearly identical, and price correlates −0.08 with front-pocket height, so neither style nor price explains the gap.",
+    "holds": true
+   },
+   {
+    "start": "Within women's jeans, the brand averages fan out from 12.00 in at Guess and 12.35 in at Levi's to 19.75 in at Abercrombie.",
+    "serves": "The shortfall is industry-wide",
+    "how": "It compares women's brand averages and shows even the highest brand, Abercrombie at 19.75 in, stays below the men's average of 23.13 in, with most brands clustering between 13 and 15 in.",
+    "holds": true
+   },
+   {
+    "start": "At the shallow end sit Guess's Power Stretch Skinny and J. Crew's 8″ Tooth Pick at 11.5 in , followed by Calvin Klein's Midrise Skinny and Old Navy's Original Boot Cut at 12.0 in .",
+    "serves": "The four shallowest pockets are all women's",
+    "how": "It lists the four shallowest pairs, all women's, and the deepest pairs, all men's.",
+    "holds": true
+   },
+   {
+    "start": "The height columns are not always ordered.",
+    "serves": null,
+    "how": "It sets out data caveats: inconsistent height columns, a small non-random sample, one surveyor's protocol, and a rare cutout flag.",
+    "holds": false
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"Measured four ways — maximum and minimum height of the front pocket, and of the back pocket — the two halves of the garment tell different stories.\",\"serves\":\"A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.\",\"how\":\"It reports average maximum front-pocket heights of 23.13 in for men versus 14.33 in for women, while back height and width differ by less than an inch and front width differs much less.\"},{\"start\":\"The averages could hide a wide overlap.\",\"serves\":\"A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.\",\"how\":\"It plots every pair and reports ranges and medians showing almost no overlap, then notes that women's front pockets are often shorter than their back pockets while men's never are.\"},{\"start\":\"The obvious suspects are the garment's shape and its price.\",\"serves\":\"A set of front- and back-pocket measurements taken from jeans sold by 21 popular brands finds a layout that is nearly identical at the back of the garment and strikingly different at the front: men's front pockets run about nine inches deeper than women's.\",\"how\":\"It shows women's skinny, straight and boot-cut averages are nearly identical, and price correlates −0.08 with front-pocket height, so neither style nor price explains the gap.\"},{\"start\":\"Within women's jeans, the brand averages fan out from 12.00 in at Guess and 12.35 in at Levi's to 19.75 in at Abercrombie.\",\"serves\":\"The shortfall is industry-wide\",\"how\":\"It compares women's brand averages and shows even the highest brand, Abercrombie at 19.75 in, stays below the men's average of 23.13 in, with most brands clustering between 13 and 15 in.\"},{\"start\":\"At the shallow end sit Guess's Power Stretch Skinny and J. Crew's 8″ Tooth Pick at 11.5 in , followed by Calvin Klein's Midrise Skinny and Old Navy's Original Boot Cut at 12.0 in .\",\"serves\":\"The four shallowest pockets are all women's\",\"how\":\"It lists the four shallowest pairs, all women's, and the deepest pairs, all men's.\"},{\"start\":\"The height columns are not always ordered.\",\"serves\":null,\"how\":\"It sets out data caveats: inconsistent height columns, a small non-random sample, one surveyor's protocol, and a rare cutout flag.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 1691,
+   "completion_tokens": 5039,
+   "seconds": 31.0
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-deepseek-v4.1-flash/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-863e62b18295",
+  "capture_version": "capture-8",
+  "score": 0.1,
+  "where": "Guess's Power Stretch Skinny、J. Crew's 8″ Tooth Pick、Calvin Klein's Midrise Skinny、Old Navy's Original Boot Cut、Wrangler's Regular Fit、Wrangler's Slim Fit、True Religion's Geno Slim、Lucky's Sweet Boot",
+  "reason": "文章有具体品牌和款式名，但它们只是数据行或极值，没有被写出想要什么、面对什么，也没有被打破的预期和后续发展；全文仍是按测量维度、品牌、极值和方法说明罗列数据，未形成让读者透过个体看整体的叙事。",
+  "individuals": [
+   {
+    "who": "Guess's Power Stretch Skinny",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里最浅前口袋的一对，但文章只把它当极值点名，没有让它引出问题或承接叙事"
+   },
+   {
+    "who": "J. Crew's 8″ Tooth Pick",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里最浅前口袋的一对，只出现在极值列表，没有个体经历"
+   },
+   {
+    "who": "Calvin Klein's Midrise Skinny",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里的一对浅口袋牛仔裤，只被点名，没有想要什么或后来怎样"
+   },
+   {
+    "who": "Old Navy's Original Boot Cut",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里的一对浅口袋牛仔裤，只被点名，没有叙事展开"
+   },
+   {
+    "who": "Wrangler's Regular Fit",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里最深前口袋的一对，只作为极值出现"
+   },
+   {
+    "who": "Wrangler's Slim Fit",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里最深前口袋的一对，只作为极值出现"
+   },
+   {
+    "who": "True Religion's Geno Slim",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它是数据里最深前口袋的一对，只作为极值出现"
+   },
+   {
+    "who": "Lucky's Sweet Boot",
+    "wants": null,
+    "expected": null,
+    "broken": null,
+    "after": null,
+    "tie": "它出现在方法说明的异常例子中，只用来解释数据问题，没有个体故事"
+   }
+  ],
+  "answer": {
+   "text": "{\"individuals\":[{\"who\":\"Guess's Power Stretch Skinny\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里最浅前口袋的一对，但文章只把它当极值点名，没有让它引出问题或承接叙事\"},{\"who\":\"J. Crew's 8″ Tooth Pick\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里最浅前口袋的一对，只出现在极值列表，没有个体经历\"},{\"who\":\"Calvin Klein's Midrise Skinny\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里的一对浅口袋牛仔裤，只被点名，没有想要什么或后来怎样\"},{\"who\":\"Old Navy's Original Boot Cut\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里的一对浅口袋牛仔裤，只被点名，没有叙事展开\"},{\"who\":\"Wrangler's Regular Fit\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里最深前口袋的一对，只作为极值出现\"},{\"who\":\"Wrangler's Slim Fit\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里最深前口袋的一对，只作为极值出现\"},{\"who\":\"True Religion's Geno Slim\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它是数据里最深前口袋的一对，只作为极值出现\"},{\"who\":\"Lucky's Sweet Boot\",\"wants\":null,\"expected\":null,\"broken\":null,\"after\":null,\"tie\":\"它出现在方法说明的异常例子中，只用来解释数据问题，没有个体故事\"}],\"score\":0.1,\"reason\":\"文章有具体品牌和款式名，但它们只是数据行或极值，没有被写出想要什么、面对什么，也没有被打破的预期和后续发展；全文仍是按测量维度、品牌、极值和方法说明罗列数据，未形成让读者透过个体看整体的叙事。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1825,
+   "completion_tokens": 1236,
+   "seconds": 9.0
+  }
+ }
+}
