@@ -1,0 +1,377 @@
+下面是一份数据报告给出的发现。每条发现有结论(claim),一段在数据上运行的 pandas 代码(code),和这段代码的输出(output)。
+
+逐条判断结论和输出是否一致:
+- ok:结论里的数字、比较、多少、趋势都和输出相符。四舍五入造成的出入不算不符。
+- wrong:结论和输出矛盾，或者结论说的东西输出里没有，或者结论里的数和名字不是代码从表里算出来的，而是直接写在代码里的(比如代码就是一个写好的字符串、写好数值的 Series)。筛选条件、阈值、改名写在代码里没关系。
+
+每条先在 basis 里写出输出里对应的数，再给 verdict。只输出 JSON:{"facts": [{"id": "...", "basis": "...", "verdict": "ok 或 wrong"}]}
+
+[sample-scope]
+claim: The data covers 1,656 thirty-minute conversations between strangers, reported by 3,312 person-level rows from 1,456 distinct participants; the conversations table also has one row per conversation (1,656).
+tables: people = data/people.csv, convos = data/convos.csv
+code: pd.Series({'person_rows': len(people), 'conversations': people.convo_id.nunique(), 'distinct_participants': people.user_id.nunique(), 'convo_table_rows': len(convos)})
+output:
+person_rows              3312
+conversations            1656
+distinct_participants    1456
+convo_table_rows         1656
+
+[scales]
+claim: The rating scales differ: every affect item and how_enjoyable run 1-9, i_like_you, you_like_me and shared_reality run 1-7, and the two loneliness items run 1-3.
+tables: people = data/people.csv
+code: people[['pre_affect','begin_affect','middle_affect','end_affect','overall_affect','worst_affect','how_enjoyable','i_like_you','you_like_me','shared_reality','my_loneliness','your_loneliness']].agg(['min','max'])
+output:
+     pre_affect  begin_affect  middle_affect  end_affect  overall_affect  worst_affect  how_enjoyable  i_like_you  you_like_me  shared_reality  my_loneliness  your_loneliness
+min           1           1.0            1.0         1.0             1.0           1.0            1.0         1.0          1.0             1.0            1.0              1.0
+max           9           9.0            9.0         9.0             9.0           9.0            9.0         7.0          7.0             7.0            3.0              3.0
+
+[dropout]
+claim: Pre-conversation affect and arousal are complete for all 3,312 rows, while the mid- and end-of-conversation affect, enjoyment and liking ratings are each missing in exactly 55 rows and shared_reality, sex, race and age in 56.
+tables: people = data/people.csv
+code: people[['pre_affect','pre_arousal','begin_affect','middle_affect','end_affect','how_enjoyable','i_like_you','you_like_me','shared_reality','sex','race','age']].isna().sum()
+output:
+pre_affect         0
+pre_arousal        0
+begin_affect      55
+middle_affect     55
+end_affect        55
+how_enjoyable     55
+i_like_you        55
+you_like_me       55
+shared_reality    56
+sex               56
+race              56
+age               56
+
+[repeat-participants]
+claim: Participation is not one-off: 702 of the participants appear in exactly one conversation, 266 in two, 187 in three, and 3 appear in eight conversations.
+tables: people = data/people.csv
+code: people.user_id.value_counts().value_counts()
+output:
+count
+1    702
+2    266
+3    187
+4    116
+5     91
+6     63
+7     28
+8      3
+
+[who-sex]
+claim: Among participants who reported it, 53.4% identify as female, 44.9% as male and 1.6% as other or prefer not to answer.
+tables: people = data/people.csv
+code: people.sex.value_counts(normalize=True)
+output:
+sex
+female                           0.534398
+male                             0.449324
+other_or_prefer_not_to_answer    0.016278
+
+[who-race]
+claim: The sample is majority white (64.8%), then Asian (14.9%), Black or African American (7.6%), Hispanic or Latino (6.8%) and mixed (3.9%).
+tables: people = data/people.csv
+code: people.race.value_counts(normalize=True).head(5)
+output:
+race
+white                        0.648034
+asian                        0.148956
+black_or_african_american    0.076167
+hispanic_or_latino           0.067568
+mixed                        0.039312
+
+[who-age]
+claim: Participants average 34.3 years old, with a median of 32 and a range from 19 to 66.
+tables: people = data/people.csv
+code: people.age.describe()
+output:
+count    3256.000000
+mean       34.320639
+std        11.423522
+min        19.000000
+25%        25.000000
+50%        32.000000
+75%        41.000000
+max        66.000000
+
+[politics-quirk]
+claim: The politics variable only ever takes the values 1, 2, 3, 4 and 6 - nobody is coded 5 - with 36.7% of participants at 4 and 27.8% at 6.
+tables: people = data/people.csv
+code: people.politics.value_counts(normalize=True).sort_index()
+output:
+politics
+1.0    0.026413
+2.0    0.121314
+3.0    0.207002
+4.0    0.367015
+6.0    0.278256
+
+[mood-arc]
+claim: Average mood climbs through the conversation: 6.10 before it starts, 6.16 at the beginning, 6.93 in the middle, 7.38 at the end, and 7.32 for the conversation overall.
+tables: people = data/people.csv
+code: people[['pre_affect','begin_affect','middle_affect','end_affect','overall_affect']].mean()
+output:
+pre_affect        6.101449
+begin_affect      6.157507
+middle_affect     6.932453
+end_affect        7.383175
+overall_affect    7.323611
+
+[arousal-arc]
+claim: Arousal climbs as well: 5.32 before the call, 5.67 at the beginning, 6.40 in the middle and 6.70 at the end.
+tables: convos = data/convos.csv
+code: convos[['pre_arousal_avg','begin_arousal_avg','middle_arousal_avg','end_arousal_avg']].mean()
+output:
+pre_arousal_avg       5.322162
+begin_arousal_avg     5.667810
+middle_arousal_avg    6.402059
+end_arousal_avg       6.695883
+
+[mood-rises]
+claim: From the beginning to the end of the conversation each participant's mood rises by 1.23 points on average (median 1.0) across 3,257 paired ratings.
+tables: people = data/people.csv
+code: (people.end_affect - people.begin_affect).agg(['mean','median','std','count'])
+output:
+mean         1.225668
+median       1.000000
+std          1.504818
+count     3257.000000
+
+[most-end-happier]
+claim: Of those paired ratings, 2,153 people felt better at the end than at the beginning, 856 felt the same and 248 felt worse - about two thirds went up.
+tables: people = data/people.csv
+code: (people.end_affect - people.begin_affect).dropna().apply(np.sign).value_counts()
+output:
+ 1.0    2153
+ 0.0     856
+-1.0     248
+
+[mood-gain-depends]
+claim: The worse people felt at the start, the more they gained: participants starting at 1 rose 4.00 points on average, those starting at 5 rose 1.93, those starting at 8 rose 0.20 and those starting at 9 fell 0.21.
+tables: people = data/people.csv
+code: people.assign(rise=people.end_affect - people.begin_affect).groupby('begin_affect').rise.mean()
+output:
+begin_affect
+1.0    4.000000
+2.0    3.571429
+3.0    3.322917
+4.0    2.560440
+5.0    1.929972
+6.0    1.245192
+7.0    0.629288
+8.0    0.197133
+9.0   -0.205674
+
+[peak-vs-dip]
+claim: Even in conversations people liked, mood swung: the pair's best moment averaged 7.83 and the pair's worst moment averaged 5.80 on the 1-9 scale.
+tables: convos = data/convos.csv
+code: convos[['worst_affect_avg','best_affect_avg']].agg(['mean','std','min','max'])
+output:
+      worst_affect_avg  best_affect_avg
+mean          5.795696         7.831254
+std           1.266425         0.907076
+min           1.000000         3.500000
+max           9.000000         9.000000
+
+[enjoyment-high]
+claim: Enjoyment ratings pile up at the top of the 1-9 scale: 23.7% are 7, 25.7% are 8 and 28.6% are the maximum 9, so 78% of ratings are 7 or higher and only 2.4% are 3 or below.
+tables: people = data/people.csv
+code: people.how_enjoyable.value_counts(normalize=True).sort_index()
+output:
+how_enjoyable
+1.0    0.005834
+2.0    0.004605
+3.0    0.013509
+4.0    0.026405
+5.0    0.055573
+6.0    0.114523
+7.0    0.237028
+8.0    0.256985
+9.0    0.285539
+
+[enjoyment-drivers]
+claim: At pair level the strongest correlate of enjoyment is how much the two people like each other (r = 0.87), then the conversationalist score (0.78), how much each thinks the other likes them (0.75), how kind they rate each other (0.62), having things in common (0.59) and shared reality (0.57).
+tables: convos = data/convos.csv
+code: convos[['i_like_you_avg','conversationalist_avg','you_like_me_avg','you_are_kind_avg','in_common_avg','shared_reality_avg']].corrwith(convos.how_enjoyable_avg)
+output:
+i_like_you_avg           0.868053
+conversationalist_avg    0.783889
+you_like_me_avg          0.751125
+you_are_kind_avg         0.618624
+in_common_avg            0.585096
+shared_reality_avg       0.570197
+
+[conversationalist-scale]
+claim: The conversationalist score is the one variable not on a 1-9 scale: it runs from 4.5 to 100 with a mean of 73.9 and a median of 76.5.
+tables: convos = data/convos.csv
+code: convos.conversationalist_avg.describe()
+output:
+count    1603.000000
+mean       73.853088
+std        15.169376
+min         4.500000
+25%        65.500000
+50%        76.500000
+75%        85.000000
+max       100.000000
+
+[liking-gap]
+claim: On the 1-7 scale participants say they like their partner by 6.00 on average, but guess their partner likes them by only 5.35.
+tables: people = data/people.csv
+code: people[['i_like_you','you_like_me']].mean()
+output:
+i_like_you     5.995088
+you_like_me    5.350936
+
+[liking-gap-counts]
+claim: The gap is one-sided: 1,691 participants rate their own liking above their guess of the partner's, 1,412 rate the two the same and only 154 rate the partner's liking higher.
+tables: people = data/people.csv
+code: (people.i_like_you - people.you_like_me).dropna().apply(np.sign).value_counts()
+output:
+ 1.0    1691
+ 0.0    1412
+-1.0     154
+
+[liking-gap-is-wrong]
+claim: The gap is a misperception, not a reality: the partner's actual reported liking averages 6.00, well above the 5.35 that people guessed.
+tables: people = data/people.csv
+code: people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['you_like_me','i_like_you_of_partner']].mean()
+output:
+you_like_me              5.350936
+i_like_you_of_partner    5.995088
+
+[meta-perception-weak]
+claim: People cannot read their partner: how much someone guesses their partner likes them correlates only r = 0.19 with how much the partner actually likes them.
+tables: people = data/people.csv
+code: people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['you_like_me','i_like_you_of_partner']].corr().iloc[0,1]
+output:
+0.18941226015952653
+
+[reciprocity-weak]
+claim: Liking barely travels either: how much you like your partner correlates only r = 0.19 with how much they like you back.
+tables: people = data/people.csv
+code: people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['i_like_you','i_like_you_of_partner']].corr().iloc[0,1]
+output:
+0.19114999233813124
+
+[partners-disagree]
+claim: Two people in the same conversation barely agree that it was enjoyable: their ratings correlate at only r = 0.18.
+tables: people = data/people.csv
+code: people.assign(w=people.groupby('convo_id').cumcount()).pivot(index='convo_id', columns='w', values='how_enjoyable').corr().iloc[0,1]
+output:
+0.17684396359580254
+
+[partner-gap-size]
+claim: Partners' enjoyment ratings differ by 1.43 points on average (median 1, and as much as 8 points) on the 9-point scale.
+tables: people = data/people.csv
+code: people.assign(w=people.groupby('convo_id').cumcount()).pivot(index='convo_id', columns='w', values='how_enjoyable').pipe(lambda d: (d[0]-d[1]).abs()).agg(['mean','median','max'])
+output:
+mean      1.428571
+median    1.000000
+max       8.000000
+
+[status-asymmetry]
+claim: People under-claim status: they rate their own status 5.53, guess their partner rates it 5.74, and rate their partner's status highest of all at 5.91.
+tables: convos = data/convos.csv
+code: convos[['i_think_my_status_avg','you_think_my_status_avg','i_think_your_status_avg']].mean()
+output:
+i_think_my_status_avg      5.532772
+you_think_my_status_avg    5.743446
+i_think_your_status_avg    5.909800
+
+[trait-meta-gap]
+claim: The same discount shows up in trait ratings: people rate their partner's intelligence 7.68 but think the partner rates theirs 7.06, and kindness 7.98 versus 7.43.
+tables: convos = data/convos.csv
+code: convos[['you_are_intelligent_avg','you_think_i_am_intelligent_avg','you_are_kind_avg','you_think_i_am_kind_avg']].mean()
+output:
+you_are_intelligent_avg           7.677168
+you_think_i_am_intelligent_avg    7.062695
+you_are_kind_avg                  7.976918
+you_think_i_am_kind_avg           7.426388
+
+[talk-time]
+claim: Both sides of a pair think they are doing more of the talking: own turn length averages 5.40 against 5.03 for the partner's turns.
+tables: convos = data/convos.csv
+code: convos[['my_turn_length_avg','your_turn_length_avg']].mean()
+output:
+my_turn_length_avg      5.399875
+your_turn_length_avg    5.030880
+
+[loneliness-asymmetry]
+claim: Among the 1,143 people who answered both items, own loneliness averages 1.80 on the 1-3 scale while the partner's averages only 1.53.
+tables: people = data/people.csv
+code: people.dropna(subset=['my_loneliness','your_loneliness'])[['my_loneliness','your_loneliness']].agg(['mean','count'])
+output:
+       my_loneliness  your_loneliness
+mean        1.801983          1.53135
+count    1143.000000       1143.00000
+
+[loneliness-and-enjoyment]
+claim: Believing your partner is lonely goes with a worse conversation (r = -0.22 with enjoyment), while your own loneliness barely registers (r = -0.06).
+tables: people = data/people.csv
+code: people[['my_loneliness','your_loneliness','how_enjoyable']].corr()['how_enjoyable']
+output:
+my_loneliness     -0.062781
+your_loneliness   -0.217345
+how_enjoyable      1.000000
+
+[sex-match]
+claim: Matching on sex barely moves enjoyment: the 767 pairs where both partners report the same sex average 7.493, and the 864 pairs where they differ average 7.488.
+tables: people = data/people.csv
+code: people.merge(people, on='convo_id', suffixes=('','_p')).query('user_id < user_id_p').assign(same_sex=lambda d: d.sex==d.sex_p).groupby('same_sex').how_enjoyable.agg(['mean','count'])
+output:
+              mean  count
+same_sex                 
+False     7.488426    864
+True      7.492829    767
+
+[race-match]
+claim: Same-race pairs rate enjoyment 7.42 against 7.55 for the 910 pairs of different races - if anything the opposite of a similarity boost.
+tables: people = data/people.csv
+code: people.merge(people, on='convo_id', suffixes=('','_p')).query('user_id < user_id_p').assign(same_race=lambda d: d.race==d.race_p).groupby('same_race').how_enjoyable.agg(['mean','count'])
+output:
+               mean  count
+same_race                 
+False      7.547253    910
+True       7.418863    721
+
+[politics-distance]
+claim: Enjoyment does slide with political distance: 7.48 for the 408 pairs with no difference in politics, 7.41 for the 494 pairs two points apart, 7.15 for the 115 pairs four points apart and 7.07 for the 23 pairs five points apart.
+tables: convos = data/convos.csv
+code: convos.groupby('politics_diff').how_enjoyable_avg.agg(['mean','count'])
+output:
+                   mean  count
+politics_diff                 
+0.0            7.477941    408
+1.0            7.449843    319
+2.0            7.413968    494
+3.0            7.384774    243
+4.0            7.152174    115
+5.0            7.065217     23
+
+[age-distance]
+claim: A wider age gap costs common ground but not fun: the pair's in_common rating falls from 6.18 at age_diff 0 to 5.27 at age_diff 40, while average enjoyment stays between 7.31 and 7.63 across the buckets.
+tables: convos = data/convos.csv
+code: convos.groupby('age_diff')[['in_common_avg','how_enjoyable_avg']].mean()
+output:
+          in_common_avg  how_enjoyable_avg
+age_diff                                  
+0.0            6.176724           7.426724
+10.0           5.904275           7.313197
+20.0           5.675879           7.428392
+30.0           5.697368           7.572368
+40.0           5.270000           7.630000
+
+[shared-reality-mismatch]
+claim: When partners disagree about how much they share a reality, the conversation suffers: enjoyment averages 7.52 with no disagreement, 7.25 two points apart and 6.44 four points apart.
+tables: convos = data/convos.csv
+code: convos.groupby('shared_reality_diff').how_enjoyable_avg.agg(['mean','count'])
+output:
+                         mean  count
+shared_reality_diff                 
+0.0                  7.518722    454
+1.0                  7.538913    681
+2.0                  7.251582    316
+3.0                  6.957143    105
+4.0                  6.435484     31
+5.0                  6.700000     15

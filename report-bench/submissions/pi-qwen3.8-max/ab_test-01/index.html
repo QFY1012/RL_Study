@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faster first replies, no more finished consultations — A/B test report</title>
+<style>
+:root{
+  --paper:#f7f5f1;
+  --card:#ffffff;
+  --ink:#141a21;
+  --ink-2:#4a5560;
+  --ink-3:#7b8794;
+  --line:#e2ddd4;
+  --line-2:#efebe4;
+  --test:#0f766e;
+  --test-soft:#d7ece9;
+  --control:#8a6d3b;
+  --control-soft:#f0e6d2;
+  --slate:#5b6b7d;
+  --bad:#b3421f;
+  --bad-soft:#fbe6de;
+  --good:#1c6b45;
+  --good-soft:#dcefe3;
+  --amber:#9a6b00;
+  --amber-soft:#fbf0d6;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","Songti SC",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+a{color:inherit}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;background:rgba(247,245,241,.94);
+  border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(6px);
+}
+.topbar .wrap{display:flex;align-items:center;gap:26px;height:56px}
+.brand{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.brand b{color:var(--test);font-weight:700}
+.navlinks{display:flex;gap:2px;margin-left:auto;overflow:hidden}
+.navlinks a{
+  font-size:12.5px;color:var(--ink-3);text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap;
+}
+.navlinks a:hover{color:var(--ink);background:#ece8e0}
+
+/* ---------- hero ---------- */
+header.hero{padding:66px 0 40px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--test);margin-bottom:20px}
+h1{
+  font-family:var(--serif);font-weight:600;font-size:56px;line-height:1.09;letter-spacing:-.015em;
+  margin:0 0 22px;max-width:17ch;
+}
+.standfirst{font-size:19.5px;line-height:1.6;color:var(--ink-2);max-width:74ch;margin:0 0 34px}
+.standfirst b{color:var(--ink);font-weight:600}
+.metarow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);
+  border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 13px;
+}
+.chip b{color:var(--ink);font-weight:700}
+
+/* ---------- verdict ---------- */
+.verdict{padding:44px 0 8px}
+.verdict-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.verdict-head h2{font-family:var(--serif);font-size:26px;font-weight:600;margin:0}
+.verdict-head span{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--slate)}
+.kpi.good:before{background:var(--good)}
+.kpi.bad:before{background:var(--bad)}
+.kpi.flat:before{background:var(--slate)}
+.kpi .lab{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-family:var(--mono);margin-bottom:12px;line-height:1.4}
+.kpi .nums{display:flex;align-items:baseline;gap:8px;font-family:var(--serif);font-size:31px;font-weight:600;letter-spacing:-.01em}
+.kpi .nums .arrow{font-size:19px;color:var(--ink-3);font-family:var(--sans)}
+.kpi .nums .to{color:var(--ink-2);font-size:24px}
+.kpi .delta{margin-top:9px;font-size:13.5px;font-weight:600}
+.kpi .delta.good{color:var(--good)}
+.kpi .delta.bad{color:var(--bad)}
+.kpi .delta.flat{color:var(--slate)}
+.kpi .sub{margin-top:5px;font-size:12.5px;color:var(--ink-3);line-height:1.45}
+.verdict-note{
+  margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--test);
+  border-radius:10px;padding:16px 20px;font-size:15.5px;color:var(--ink-2);
+}
+.verdict-note b{color:var(--ink)}
+
+/* ---------- sections ---------- */
+section{padding:52px 0 8px;border-top:1px solid var(--line);margin-top:44px}
+section:first-of-type{border-top:none}
+.sechead{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.secnum{font-family:var(--mono);font-size:12px;color:var(--test);letter-spacing:.1em;padding-top:6px}
+h2.sectitle{font-family:var(--serif);font-size:33px;font-weight:600;letter-spacing:-.012em;margin:0;line-height:1.2;max-width:24ch}
+.seclede{font-size:17.5px;color:var(--ink-2);max-width:78ch;margin:14px 0 0}
+h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:34px 0 10px;letter-spacing:-.005em}
+p{margin:0 0 15px;max-width:80ch;color:var(--ink-2)}
+p b,li b{color:var(--ink);font-weight:600}
+.lede p{font-size:17px}
+ul{margin:0 0 16px;padding-left:22px;max-width:80ch;color:var(--ink-2)}
+li{margin-bottom:7px}
+code,.mono{font-family:var(--mono);font-size:.88em;background:#efece5;border-radius:4px;padding:1.5px 5px;color:#33404c}
+.zh{font-family:var(--sans)}
+
+/* fact provenance tags */
+.ftag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--ink-3);
+  border:1px solid var(--line);background:#fff;border-radius:5px;padding:1px 6px;vertical-align:2px;white-space:nowrap;
+}
+
+/* figure cards */
+figure{margin:26px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px 16px}
+figcaption{font-size:13px;color:var(--ink-3);margin-top:14px;line-height:1.55;border-top:1px solid var(--line-2);padding-top:11px}
+figcaption b{color:var(--ink-2)}
+.figtitle{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:.01em;margin-bottom:3px}
+.figsub{font-size:12.5px;color:var(--ink-3);margin-bottom:14px}
+.chart{width:100%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid2 figure{margin-top:0}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 4px}
+th{
+  text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;padding:0 12px 9px 0;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;padding-right:0}
+td.numl,th.numl{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+td.zh{color:var(--ink);font-weight:500}
+td .en{display:block;font-size:12.5px;color:var(--ink-3);font-weight:400;line-height:1.4}
+tr.hl td{background:#fdf6ef}
+tbody tr:hover td{background:#faf8f4}
+tbody tr.hl:hover td{background:#fbf1e6}
+
+/* callouts */
+.callout{border-radius:12px;padding:18px 22px;margin:24px 0;border:1px solid var(--line);background:var(--card)}
+.callout.bad{background:var(--bad-soft);border-color:#eed2c5}
+.callout.good{background:var(--good-soft);border-color:#cfe6d7}
+.callout.amber{background:var(--amber-soft);border-color:#eee0bb}
+.callout .ct{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.callout.bad .ct{color:var(--bad)}
+.callout.good .ct{color:var(--good)}
+.callout.amber .ct{color:var(--amber)}
+.callout p{margin:0;font-size:15.5px;color:#33404c;max-width:88ch}
+.callout p + p{margin-top:10px}
+.callout b{color:var(--ink)}
+
+/* legend */
+.legend{display:flex;gap:18px;align-items:center;font-size:12.5px;color:var(--ink-2);margin-bottom:6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* stat strip */
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;margin:24px 0 6px}
+.strip > div{padding:16px 18px;border-right:1px solid var(--line-2)}
+.strip > div:last-child{border-right:none}
+.strip .n{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:-.01em;line-height:1.1}
+.strip .l{font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.45}
+
+/* recommendations */
+.recs{counter-reset:r;margin:20px 0 0;padding:0;list-style:none;max-width:none}
+.recs li{
+  counter-increment:r;position:relative;padding:16px 20px 16px 58px;background:var(--card);
+  border:1px solid var(--line);border-radius:10px;margin-bottom:10px;max-width:none;
+}
+.recs li:before{
+  content:counter(r,decimal-leading-zero);position:absolute;left:20px;top:17px;
+  font-family:var(--mono);font-size:12px;color:var(--test);letter-spacing:.05em;
+}
+.recs .rt{font-weight:600;color:var(--ink);display:block;margin-bottom:4px;font-size:15.5px}
+.recs p{margin:0;font-size:14.5px;max-width:92ch}
+
+footer{border-top:1px solid var(--line);margin-top:52px;padding:34px 0 60px;font-size:13.5px;color:var(--ink-3)}
+footer p{font-size:13.5px;max-width:96ch}
+footer .mono{background:none;border:none;padding:0;color:var(--ink-2)}
+
+svg text{font-family:var(--sans)}
+svg .tick{font-size:11px;fill:#8b95a0;font-family:var(--mono)}
+svg .cat{font-size:12.5px;fill:#4a5560}
+svg .catzh{font-size:12.5px;fill:#141a21;font-weight:500}
+svg .val{font-size:11.5px;fill:#4a5560;font-family:var(--mono)}
+svg .axis{stroke:#dcd6cc;stroke-width:1}
+svg .grid{stroke:#efece5;stroke-width:1}
+svg .alab{font-size:11px;fill:#9aa4ae;font-family:var(--mono);letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">A/B test report · <b>online medical consultation</b></div>
+    <nav class="navlinks">
+      <a href="#design">Design</a>
+      <a href="#wait">Wait time</a>
+      <a href="#outcome">Outcomes</a>
+      <a href="#why">Why</a>
+      <a href="#derm">Dermatology</a>
+      <a href="#users">New users</a>
+      <a href="#load">Load</a>
+      <a href="#complaints">Complaints</a>
+      <a href="#quality">Data quality</a>
+      <a href="#next">Next steps</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">18,000 consultation sessions · 42 days · two arms</div>
+  <h1>Faster first replies, no more finished consultations</h1>
+  <p class="standfirst">
+    The test arm cut the median wait for a doctor's first reply from <b>110 to 88 seconds</b> — a fifth less waiting, across the whole distribution.
+    Yet <b>completion did not move at all</b> (87.94% versus 88.02%), and neither did 7-day follow-up.
+    The flat average hides two opposite effects: <b>new users came back 3.0 points more often</b>, while
+    <b>dermatology patients gave up before a doctor ever replied 5.1 points more often</b>. One is a reason to ship;
+    the other is a reason to fix the rollout first.
+  </p>
+  <div class="metarow">
+    <span class="chip">Window <b>2024-11-18 → 2024-12-29</b></span>
+    <span class="chip">Sessions <b>18,000</b></span>
+    <span class="chip">Test arm 实验组 <b>8,987</b></span>
+    <span class="chip">Control arm 对照组 <b>9,013</b></span>
+    <span class="chip">Departments <b>5</b></span>
+    <span class="chip">Chief complaints <b>25</b></span>
+    <span class="chip">Platforms <b>3</b></span>
+  </div>
+</header>
+
+<div class="verdict">
+  <div class="verdict-head"><span>00</span><h2>The verdict in four numbers</h2></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="verdict-note">
+    <b>Read:</b> the change did what it was built to do — it made doctors answer sooner — but answering sooner did not make
+    patients stay. None of the three headline gaps clears a two-proportion z of ±1.96 (completion <b>−0.16</b>, abandonment
+    <b>+1.72</b>, follow-up <b>−0.32</b>), so on the aggregate metrics this test is a null result. The interesting signal is
+    entirely in the segments below. <span class="ftag">headline-not-significant</span>
+  </div>
+</div>
+
+<!-- ============ 1 DESIGN ============ -->
+<section id="design">
+  <div class="sechead"><div class="secnum">01</div><h2 class="sectitle">What the data is, and how the two arms line up</h2></div>
+  <p class="seclede">
+    One row per user session on an online medical consultation service. Each row carries who the user is
+    (<span class="zh">新用户</span> new / <span class="zh">老用户</span> returning, and Android / iOS / WeChat mini-program),
+    what they came in about (one of 25 chief complaints, each mapping to exactly one of five departments), and what happened:
+    whether they were lost before a doctor replied, whether the consultation completed, how long the first reply took,
+    how long the consultation ran, and whether they came back within seven days.
+    <span class="ftag">sample-scope</span> <span class="ftag">complaint-to-department</span>
+  </p>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="grid2" style="margin-top:26px">
+    <figure>
+      <div class="figtitle">The consultation funnel</div>
+      <div class="figsub">18,000 sessions, all arms combined <span class="ftag">funnel</span></div>
+      <div class="chart" id="funnelChart"></div>
+      <figcaption><b>903 users (5.0%) never reached a doctor.</b> Of the 17,097 who did, a further 1,261 dropped out after the first reply, leaving 15,836 completed consultations — an 88.0% completion rate on all sessions.</figcaption>
+    </figure>
+    <figure>
+      <div class="figtitle">Arm balance</div>
+      <div class="figsub">The randomisation looks clean <span class="ftag">sample-scope</span></div>
+      <table>
+        <thead><tr><th>Segment</th><th class="num">Test 实验组</th><th class="num">Control 对照组</th><th class="num">Test share</th></tr></thead>
+        <tbody id="balanceBody"></tbody>
+      </table>
+      <figcaption>No segment is materially skewed between arms: the split stays within a point of 50/50 for new and returning users, for all three platforms and for four of five departments. Volume is <b>not</b> flat over time, though — see <a href="#load" style="color:var(--test)">§7</a>.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Field glossary</h3>
+  <table>
+    <thead><tr><th style="width:190px">Column</th><th style="width:120px">Type</th><th>Meaning, and how it is used here</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">user_id</td><td>id</td><td>One per session; all 18,000 are unique.</td></tr>
+      <tr><td class="mono">group</td><td>arm</td><td><span class="zh">对照组</span> control, <span class="zh">实验组</span> test. 19 rows carry a padded label and are trimmed before any comparison. <span class="ftag">padded-group-labels</span></td></tr>
+      <tr><td class="mono">enter_date</td><td>date</td><td>Session entry date, 2024-11-18 to 2024-12-29. <span class="ftag">study-window</span></td></tr>
+      <tr><td class="mono">user_type</td><td>segment</td><td><span class="zh">新用户</span> new user (5,779), <span class="zh">老用户</span> returning user (12,221). <span class="ftag">user-type-baseline</span></td></tr>
+      <tr><td class="mono">platform</td><td>segment</td><td>Android 7,514 · iOS 6,870 · <span class="zh">微信小程序</span> WeChat mini-program 3,610 · 6 missing. <span class="ftag">platform-volume</span></td></tr>
+      <tr><td class="mono">department</td><td>segment</td><td><span class="zh">儿科</span> paediatrics, <span class="zh">内科</span> internal medicine, <span class="zh">皮肤科</span> dermatology, <span class="zh">妇科</span> gynaecology, <span class="zh">五官科</span> ENT/eyes-ears-nose-throat. <span class="ftag">department-volume</span></td></tr>
+      <tr><td class="mono">chief_complaint</td><td>text</td><td>Free-text reason for the visit, drawn from 25 recurring complaints; 36 blanks.</td></tr>
+      <tr><td class="mono">lost_before_doctor</td><td>0/1</td><td>User abandoned before any doctor replied. <b>Primary failure mode</b> — 903 rows.</td></tr>
+      <tr><td class="mono">is_completed</td><td>0/1</td><td>Consultation ran to completion — 15,836 rows. <b>Headline conversion metric.</b></td></tr>
+      <tr><td class="mono">first_response_seconds</td><td>seconds</td><td>Wait until the doctor's first reply. Blank exactly when <span class="mono">lost_before_doctor = 1</span>. <b>The metric the experiment targets.</b></td></tr>
+      <tr><td class="mono">consult_minutes</td><td>minutes</td><td>Length of the consultation. Blank exactly when <span class="mono">is_completed = 0</span>.</td></tr>
+      <tr><td class="mono">followup_7d</td><td>0/1</td><td>User came back within 7 days — a retention proxy; 186 blanks. <b>Longest-horizon metric available.</b></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 2 WAIT ============ -->
+<section id="wait">
+  <div class="sechead"><div class="secnum">02</div><h2 class="sectitle">The wait really did fall — everywhere in the distribution</h2></div>
+  <p class="seclede">
+    Whatever the change was, it worked on its own terms. The median first reply drops from <b>110.0 s</b> in control to
+    <b>88.0 s</b> in the test arm, a 20% cut, and it is not a median-only trick: every percentile from the 10th to the 95th moves left
+    by a similar proportion. <span class="ftag">wait-cut</span> <span class="ftag">wait-tail</span>
+  </p>
+
+  <figure>
+    <div class="figtitle">Distribution of first-response time, by arm</div>
+    <div class="figsub">Share of the 17,097 measured waits in each bucket (seconds) <span class="ftag">wait-histogram-shift</span></div>
+    <div class="legend">
+      <span><i style="background:var(--test)"></i>Test arm 实验组 (n = 8,511)</span>
+      <span><i style="background:#c9a227"></i>Control arm 对照组 (n = 8,586)</span>
+    </div>
+    <div class="chart" id="histChart"></div>
+    <figcaption><b>The mass moves from the right half to the left half.</b> 49.7% of test-arm waits end within 90 seconds against 35.7% in control, and the tail thins out: only 1.05% of test waits exceed 300 s versus 4.49% in control.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <figure style="margin-top:0">
+      <div class="figtitle">Wait percentiles, seconds</div>
+      <div class="figsub">Lower is better <span class="ftag">wait-tail</span> <span class="ftag">wait-cut</span></div>
+      <table>
+        <thead><tr><th>Statistic</th><th class="num">Control</th><th class="num">Test</th><th class="num">Change</th></tr></thead>
+        <tbody id="pctBody"></tbody>
+      </table>
+      <figcaption>The gap is remarkably even — roughly <b>−20% at every point of the distribution</b>, which is what a genuine routing or staffing change looks like rather than a threshold hack.</figcaption>
+    </figure>
+    <figure style="margin-top:0">
+      <div class="figtitle">The mean is not the story</div>
+      <div class="figsub">Nine extreme waits sit almost entirely in control <span class="ftag">wait-outliers-in-control</span></div>
+      <div class="chart" id="outlierChart"></div>
+      <figcaption>Raw mean wait is <b>152.0 s</b> in control against <b>103.5 s</b> in test — a 32% gap that overstates the effect, because 8 of the 9 waits over 900 s (the longest, <b>71,396 s ≈ 19.8 hours</b>) are in the control arm. Dropping them gives <b>129.6 s vs 101.3 s</b>, a 22% gap that matches the median.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 3 OUTCOMES ============ -->
+<section id="outcome">
+  <div class="sechead"><div class="secnum">03</div><h2 class="sectitle">And nothing downstream moved</h2></div>
+  <p class="seclede">
+    Twenty-two seconds saved per patient, 17,000 times over, and the three metrics that matter commercially did not budge.
+    Completion is <b>87.94%</b> in the test arm against <b>88.02%</b> in control. Abandonment before a doctor replies is
+    <b>5.30%</b> against <b>4.74%</b> — nominally worse. Seven-day follow-up is <b>12.15%</b> against <b>12.31%</b>.
+    <span class="ftag">completion-flat</span> <span class="ftag">abandonment-worse</span> <span class="ftag">followup-flat</span>
+  </p>
+
+  <figure>
+    <div class="figtitle">Headline outcomes, test versus control</div>
+    <div class="figsub">Percent of sessions in each arm; bars drawn from zero</div>
+    <div class="legend">
+      <span><i style="background:var(--test)"></i>Test arm 实验组</span>
+      <span><i style="background:#c9a227"></i>Control arm 对照组</span>
+    </div>
+    <div class="chart" id="outcomeChart"></div>
+    <figcaption>Completion is 7,903 of 8,987 in the test arm and 7,933 of 9,013 in control. Abandonment is 476 versus 427 users. Follow-up is measured on 8,891 and 8,923 users with a recorded value.</figcaption>
+  </figure>
+
+  <table style="margin-top:22px">
+    <thead><tr><th>Metric</th><th class="num">Control</th><th class="num">Test</th><th class="num">Gap (pp)</th><th class="num">z</th><th>Verdict</th></tr></thead>
+    <tbody id="zBody"></tbody>
+  </table>
+  <p style="font-size:13px;color:var(--ink-3);margin-top:10px">Two-proportion z, pooled variance. <span class="ftag">headline-not-significant</span></p>
+
+  <div class="callout amber">
+    <div class="ct">The one place the test arm is worse is nominally abandonment — but it is not significant</div>
+    <p>
+      The +0.56 point abandonment gap gives z = 1.72, short of 1.96. On the pooled sample you would not call it a real effect.
+      It becomes very real once you split by department: <b>almost all of it comes from dermatology</b> (§5), where the same
+      comparison returns z = 4.67. This is the clearest example in the data of an average concealing a segment effect.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 4 WHY ============ -->
+<section id="why">
+  <div class="sechead"><div class="secnum">04</div><h2 class="sectitle">Why a faster reply could not have moved completion</h2></div>
+  <p class="seclede">
+    Once a doctor has replied, the consultation almost always finishes: completion among the 17,097 users who reached a doctor
+    is between <b>90.5% and 93.1%</b> across every wait bucket from under a minute to ten minutes. Waiting 90 seconds instead of
+    150 simply does not change what happens next. <span class="ftag">wait-hardly-moves-completion</span>
+  </p>
+
+  <figure>
+    <div class="figtitle">Completion rate by length of wait, users who reached a doctor</div>
+    <div class="figsub">n = 17,097 · y-axis truncated to 88–95% to show the flatness</div>
+    <div class="chart" id="waitCompChart"></div>
+    <figcaption>The line is flat within noise. Users waiting <b>300–600 s</b> complete at 90.5% (451 users) versus <b>92.8%</b> for those waiting under 60 s (3,459 users) — a 2.3 point spread across a tenfold difference in wait. The 600 s+ bucket shows 95.8% but holds only 24 users.</figcaption>
+  </figure>
+
+  <div class="callout bad">
+    <div class="ct">The measurement gap that matters</div>
+    <p>
+      <b>first_response_seconds is blank on exactly the 903 rows flagged lost_before_doctor.</b> The users who actually gave up
+      while waiting have no recorded wait at all — the clock stops when they leave. So this dataset can show that the test arm
+      answers faster for people who stayed, and it can show how many people left, but it <b>cannot</b> link the two.
+      <span class="ftag">structural-missingness</span>
+    </p>
+    <p>
+      That is why the abandonment number has to be read as the outcome of interest in its own right, rather than as a
+      consequence of a measured wait. Logging the time-to-abandon for users who leave would make the central question of this
+      experiment answerable.
+    </p>
+  </div>
+
+  <h3>Consultations also got shorter</h3>
+  <p>
+    Median consultation length is <b>10.4 minutes</b> in the test arm against <b>11.2</b> in control, and the mean is
+    <b>11.67 vs 13.09</b> minutes. <span class="ftag">consult-shorter</span> Part of the mean gap is artefact: six of the seven
+    consultations recorded at exactly <b>640 minutes</b> are in the control arm, and excluding them the means are
+    <b>11.59 vs 12.61</b>. <span class="ftag">consult-outliers</span> The residual shortening is consistent with a faster,
+    more transactional exchange — which sits oddly with a retention goal, and matches what §6 finds for returning users.
+  </p>
+</section>
+
+<!-- ============ 5 DERM ============ -->
+<section id="derm">
+  <div class="sechead"><div class="secnum">05</div><h2 class="sectitle">Where it broke: dermatology patients leave before a doctor replies</h2></div>
+  <p class="seclede">
+    Split the arms by department and the null result falls apart. In four of five departments the test arm is
+    <b>better</b> on both completion and abandonment. In <span class="zh">皮肤科</span> dermatology it is sharply worse:
+    <b>12.71%</b> of test users are lost before a doctor replies against <b>7.66%</b> in control, and completion falls from
+    <b>85.04%</b> to <b>80.51%</b>. <span class="ftag">department-split</span> <span class="ftag">dermatology-harm</span>
+  </p>
+
+  <figure>
+    <div class="figtitle">Lost before a doctor replied, by department</div>
+    <div class="figsub">Percent of sessions in each arm · lower is better <span class="ftag">department-split</span></div>
+    <div class="legend">
+      <span><i style="background:var(--test)"></i>Test arm 实验组</span>
+      <span><i style="background:#c9a227"></i>Control arm 对照组</span>
+      <span style="color:var(--ink-3)">— line runs from control to test</span>
+    </div>
+    <div class="chart" id="deptChart"></div>
+    <figcaption>Every arm-to-arm line points left (test better) except dermatology, which points right and is more than twice as long as any other: <b>7.66% → 12.71%</b>, a 5.05 point regression on 1,503 test users.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:20px">It is not one bad complaint</h3>
+      <p>
+        All five dermatology complaints regress, and none of them marginally: the test arm loses
+        <b>11.7%–13.9%</b> of users before a doctor replies against <b>6.0%–9.7%</b> in control.
+        <span class="ftag">dermatology-all-complaints</span>
+      </p>
+      <table>
+        <thead><tr><th>Chief complaint</th><th class="num">Control</th><th class="num">Test</th><th class="num">Δ pp</th></tr></thead>
+        <tbody id="dermBody"></tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:20px">And it is statistically clear</h3>
+      <p>
+        The dermatology gap is not sampling noise: <b>191 of 1,503</b> test users were lost against <b>124 of 1,618</b> control
+        users, a two-proportion <b>z of 4.67</b>. <span class="ftag">dermatology-loss-significant</span>
+      </p>
+      <div class="callout good" style="margin-top:16px">
+        <div class="ct">The rest of the service does benefit</div>
+        <p>
+          Strip dermatology out and the test arm completes <b>89.43%</b> of sessions (6,693 of 7,484) against <b>88.67%</b> in
+          control (6,557 of 7,395) — a <b>+0.76 point</b> lift that the pooled average was cancelling out.
+          <span class="ftag">excl-dermatology-lift</span>
+        </p>
+      </div>
+      <div class="callout amber">
+        <div class="ct">Dermatology was already the weakest department</div>
+        <p>
+          Even in control, <span class="zh">皮肤科</span> has the lowest completion (85.04%), the highest abandonment (7.66%) and
+          the lowest follow-up (8.30%) of the five departments, and its five complaints occupy the bottom five rows of the
+          complaint ladder in §8. It is the department with the least slack, so a routing change that shifts load onto it shows
+          up here first. <span class="ftag">complaint-spread</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <figure>
+    <div class="figtitle">Full department table</div>
+    <div class="figsub">Completion, abandonment and 7-day follow-up by arm <span class="ftag">department-split</span></div>
+    <table>
+      <thead>
+        <tr><th>Department</th><th class="num">Sessions</th><th class="numl">Completion control</th><th class="numl">Completion test</th><th class="numl">Lost control</th><th class="numl">Lost test</th><th class="numl">Follow-up control</th><th class="numl">Follow-up test</th></tr>
+      </thead>
+      <tbody id="deptBody"></tbody>
+    </table>
+    <figcaption>Test-arm completion is higher in <span class="zh">儿科</span> (+1.43 pp), <span class="zh">妇科</span> (+0.24), <span class="zh">内科</span> (+0.48) and <span class="zh">五官科</span> (+0.53) — and 4.53 points lower in <span class="zh">皮肤科</span>. <span class="zh">五官科</span> is the one other department where abandonment regresses (+0.95 pp), on a much smaller sample.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 6 USERS ============ -->
+<section id="users">
+  <div class="sechead"><div class="secnum">06</div><h2 class="sectitle">Where it helped: new users come back, returning users do not</h2></div>
+  <p class="seclede">
+    Follow-up is flat in aggregate — 12.15% versus 12.31% — but that average is two opposite effects cancelling.
+    Among <span class="zh">新用户</span> new users the test arm lifts 7-day follow-up from <b>6.84%</b> to <b>9.84%</b>
+    (+3.00 pp, z = 4.1). Among <span class="zh">老用户</span> returning users it drops from <b>14.93%</b> to <b>13.22%</b>
+    (−1.71 pp, z = −2.7). Both clear ±1.96. <span class="ftag">followup-flips-by-user-type</span> <span class="ftag">followup-split-significant</span>
+  </p>
+
+  <div class="grid2">
+    <figure style="margin-top:20px">
+      <div class="figtitle">7-day follow-up by user type</div>
+      <div class="figsub">Percent of users with a recorded followup_7d</div>
+      <div class="legend">
+        <span><i style="background:var(--test)"></i>Test arm 实验组</span>
+        <span><i style="background:#c9a227"></i>Control arm 对照组</span>
+      </div>
+      <div class="chart" id="fuChart"></div>
+      <figcaption>New users: 2,826 test versus 2,895 control. Returning users: 6,065 versus 6,028. The two lines cross, which is why the pooled figure looks like nothing happened.</figcaption>
+    </figure>
+    <div>
+      <h3 style="margin-top:20px">A plausible reading</h3>
+      <p>
+        New users are the group whose baseline follow-up is lowest — <b>8.32%</b> against <b>14.07%</b> for returning users —
+        so they have the most to gain from a first contact that feels responsive. <span class="ftag">user-type-baseline</span>
+        Returning users, who already have a relationship with the service, instead get a measurably <b>shorter</b> consultation
+        (median 10.4 vs 11.2 minutes overall, §4) and come back slightly less often.
+      </p>
+      <p>
+        Completion does not show this split — new users complete 88.52% in test versus 88.12% in control and returning users
+        87.67% versus 87.97% — so the effect is on <b>return behaviour, not on finishing the visit</b>. That is a retention
+        story, and retention is where the money is.
+      </p>
+      <div class="callout good">
+        <div class="ct">Actionable</div>
+        <p>If the change ships only to <b>new users</b>, it captures the +3.00 pp follow-up gain with no dermatology exposure to speak of in that segment, and it avoids the returning-user regression entirely. That is a smaller, safer rollout than the one tested here.</p>
+      </div>
+    </div>
+  </div>
+
+  <figure>
+    <div class="figtitle">Platform is not a factor</div>
+    <div class="figsub">Completion by platform and arm <span class="ftag">platform-flat</span> <span class="ftag">platform-volume</span></div>
+    <table>
+      <thead><tr><th>Platform</th><th class="num">Sessions</th><th class="num">Completion control</th><th class="num">Completion test</th><th class="num">Gap (pp)</th></tr></thead>
+      <tbody id="platformBody"></tbody>
+    </table>
+    <figcaption>Android, iOS and the WeChat mini-program all sit within 0.34 points of each other between arms. Whatever is happening in dermatology and in the new/returning split is not a client-implementation bug on one platform.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 7 LOAD ============ -->
+<section id="load">
+  <div class="sechead"><div class="secnum">07</div><h2 class="sectitle">Demand grew 47% mid-test, and only control buckled</h2></div>
+  <p class="seclede">
+    Volume was not stable across the six weeks: sessions per week climb from <b>2,409</b> to <b>3,546</b>, a 47.2% increase.
+    <span class="ftag">volume-growth</span> From the week of 9 December the control arm's median wait jumps from roughly 85 s to
+    <b>130–134 s</b> and stays there, while the test arm moves from roughly 77 s to <b>95–96 s</b> and holds.
+    <span class="ftag">wait-under-load</span>
+  </p>
+
+  <figure>
+    <div class="figtitle">Weekly median wait and weekly volume</div>
+    <div class="figsub">Lines: median first-response seconds by arm (left axis) · Bars: sessions per arm (right axis)</div>
+    <div class="legend">
+      <span><i style="background:var(--test)"></i>Test median wait</span>
+      <span><i style="background:#c9a227"></i>Control median wait</span>
+      <span><i style="background:#dcd6cc"></i>Sessions per arm</span>
+    </div>
+    <div class="chart" id="weeklyChart"></div>
+    <figcaption>The step in week 4 is a load step, not a code change: both arms take more traffic, but control absorbs it as a <b>+56% wait</b> (86.0 → 134.0 s) while test absorbs it as <b>+19%</b> (80.0 → 95.0 s). The test arm's routing holds up under pressure — the strongest argument in the data for keeping the change.</figcaption>
+  </figure>
+
+  <div class="callout amber">
+    <div class="ct">Why this matters for the read-out</div>
+    <p>
+      Because the first three weeks and the last three weeks are effectively different experiments (light load vs heavy load),
+      the pooled comparison in §3 mixes two regimes. Control's pooled median of 110.0 s is a blend of ~85 s weeks and ~132 s
+      weeks; the test arm's 88.0 s is a blend of ~78 s and ~95 s. The <b>gap between arms widened over the test</b>, which means
+      the 20% headline understates the benefit under the load the service is actually running at now.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 8 COMPLAINTS ============ -->
+<section id="complaints">
+  <div class="sechead"><div class="secnum">08</div><h2 class="sectitle">The complaint ladder: a 10-point spread the experiment never touched</h2></div>
+  <p class="seclede">
+    Completion varies from <b>81.0%</b> for <span class="zh">手臂上起红疹,特别痒</span> (arm rash, 612 users) to <b>91.1%</b> for
+    <span class="zh">鼻子不通,黄鼻涕多</span> (blocked nose, 403) and <span class="zh">经期量突然变多</span> (heavy periods, 505).
+    <span class="ftag">complaint-spread</span> That 10-point spread is far larger than anything the experiment produced, and it is
+    almost entirely a department effect: the five worst complaints are the five dermatology ones.
+  </p>
+
+  <figure>
+    <div class="figtitle">Completion rate by chief complaint</div>
+    <div class="figsub">All 25 complaints, both arms combined · sorted worst to best · colour = department</div>
+    <div class="legend" id="complaintLegend"></div>
+    <div class="chart" id="complaintChart"></div>
+    <figcaption>Bar length is completion percentage; the number at the end of each bar is the session count. The dermatology block (<span style="color:#b3421f">red</span>) sits at the bottom and the paediatrics block (<span style="color:#1c6b45">green</span>) at the top — the same ordering as abandonment and follow-up, so <b>chief complaint is largely a proxy for department</b> in this data.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 9 QUALITY ============ -->
+<section id="quality">
+  <div class="sechead"><div class="secnum">09</div><h2 class="sectitle">Data quality: nine things to fix before the next read-out</h2></div>
+  <p class="seclede">
+    The file is usable, but it needs cleaning before it can be trusted, and two of its gaps are structural rather than accidental.
+    Every figure on this page is computed after trimming the padded group labels and normalising the three slash-format dates;
+    without that, the arms would split into four groups and the window into 45 days.
+    <span class="ftag">padded-group-labels</span> <span class="ftag">slash-dates</span>
+  </p>
+
+  <table style="margin-top:22px">
+    <thead><tr><th style="width:200px">Field</th><th style="width:190px">Issue</th><th>Detail</th><th class="num" style="width:80px">Rows</th></tr></thead>
+    <tbody id="qualityBody"></tbody>
+  </table>
+
+  <div class="callout bad" style="margin-top:22px">
+    <div class="ct">The one that changes the analysis</div>
+    <p>
+      <b>Wait time is unobservable exactly where it matters.</b> The 903 users who abandoned have no
+      <span class="mono">first_response_seconds</span> value, so the causal question this experiment was designed to answer —
+      "does a longer wait make patients leave?" — cannot be asked of this table. Everything in §2 describes the waits of people
+      who stayed. Logging time-to-abandon would fix it. <span class="ftag">structural-missingness</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 NEXT ============ -->
+<section id="next">
+  <div class="sechead"><div class="secnum">10</div><h2 class="sectitle">What we would do next</h2></div>
+  <ol class="recs">
+    <li>
+      <span class="rt">Do not ship the change as tested.</span>
+      <p>The pooled read is a null on completion (z = −0.16) with a nominal regression in abandonment (z = +1.72) and a clear, significant regression in one department. Shipping as-is trades a real dermatology loss for an unmeasured aggregate gain.</p>
+    </li>
+    <li>
+      <span class="rt">Fix dermatology routing before anything else.</span>
+      <p>Find out why the test arm loses 12.71% of dermatology users before a doctor replies against 7.66% in control. The most likely mechanism is that a faster-answer policy pulls dermatology doctors onto higher-volume queues, leaving that queue thin. All five dermatology complaints regress, so this is a capacity/routing problem, not a specific-symptom one.</p>
+    </li>
+    <li>
+      <span class="rt">Re-run scoped to new users.</span>
+      <p>New users gain +3.00 pp on 7-day follow-up (z = 4.1) — the only unambiguous win in the data — while returning users lose 1.71 pp (z = −2.7). A new-user-only rollout captures the gain and sidesteps the loss. Measure follow-up at 30 days as well; seven days is a short horizon for a retention claim.</p>
+    </li>
+    <li>
+      <span class="rt">Stop reporting raw means for wait time.</span>
+      <p>Control's mean of 152.0 s is inflated by a 19.8-hour outlier; the median (110.0 s) and the trimmed mean (129.6 s) tell the same story and are not hostage to nine rows. Report p50/p90/p95 as the standard set — they are already computed here.</p>
+    </li>
+    <li>
+      <span class="rt">Instrument abandonment.</span>
+      <p>Record time-to-abandon and the queue state at the moment a user leaves. Without it, the experiment's core hypothesis is untestable and the dermatology regression can only be observed, not explained.</p>
+    </li>
+    <li>
+      <span class="rt">Clean the pipeline at the source.</span>
+      <p>Trim <span class="mono">group</span> on write, enforce ISO dates in <span class="mono">enter_date</span>, and investigate the 640-minute cap on <span class="mono">consult_minutes</span> and the nine &gt;900-second waits — the cap in particular suggests a session-timeout being written as a consultation length.</p>
+    </li>
+    <li>
+      <span class="rt">Re-read the test against current load.</span>
+      <p>Traffic grew 47% during the run and the arms diverged after week 4. Analyse the heavy-load weeks separately: the benefit under today's traffic is likely larger than the pooled 20% suggests, and the dermatology harm should be checked for the same interaction.</p>
+    </li>
+  </ol>
+</section>
+
+<footer>
+  <p>
+    <b style="color:var(--ink-2)">Method.</b> Single table, <span class="mono">data/data.csv</span>, 18,000 rows × 12 columns, read with
+    <span class="mono">pandas.read_csv</span>. Group labels are whitespace-trimmed before every comparison; dates are parsed after
+    normalising three slash-format values. Rates are simple means of 0/1 columns, computed on non-missing values
+    (<span class="mono">followup_7d</span> on 17,814 rows, <span class="mono">first_response_seconds</span> on 17,097,
+    <span class="mono">consult_minutes</span> on 15,836). Significance is a two-proportion z-test with pooled variance; no
+    multiplicity correction is applied, so the segment results in §5 and §6 should be treated as hypotheses to confirm in a
+    pre-registered re-run rather than as settled findings. Every figure quoted on this page is reproducible from
+    <span class="mono">facts.json</span>, where each claim carries the pandas expression that computes it.
+  </p>
+  <p style="margin-top:12px">
+    Chinese labels are the source values from the data; English glosses are translations. Report generated offline; all charts
+    are inline SVG rendered from the embedded dataset.
+  </p>
+</footer>
+
+</div>
+
+<script>
+const DATA = __DATA__;
+
+/* ---------------- helpers ---------------- */
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,cls,anchor){const t=el('text',{x:x,y:y,class:cls||'','text-anchor':anchor||'start'},parent);t.textContent=s;return t;}
+function fmt(n,d){d=d===undefined?2:d;return Number(n).toFixed(d);}
+function pct1(n){return fmt(n,1)+'%';}
+const C_TEST='#0f766e', C_CTRL='#c9a227', C_LINE='#dcd6cc';
+const charts=[];
+function register(fn){charts.push(fn);}
+function renderAll(){
+  charts.forEach(f=>{const box=document.getElementById(f.id);if(box){box.innerHTML='';f.draw(box);}});
+}
+
+/* ---------------- grouped bars ---------------- */
+function groupedBars(box,cfg){
+  const W=box.clientWidth||880, H=cfg.height||300;
+  const m={t:18,r:16,b:cfg.bandBottom?64:40,l:cfg.left||52};
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const max=cfg.yMax;
+  const ticks=cfg.ticks||5;
+  for(let i=0;i<=ticks;i++){
+    const v=max*i/ticks, y=m.t+ih-ih*i/ticks;
+    el('line',{x1:m.l,x2:m.l+iw,y1:y,y2:y,class:i===0?'axis':'grid'},svg);
+    txt(svg,m.l-9,y+4,(cfg.fmtY?cfg.fmtY(v):Math.round(v)),'tick','end');
+  }
+  if(cfg.yLabel) txt(svg,m.l-9,m.t-6,cfg.yLabel,'alab','end');
+  const n=cfg.labels.length, gw=iw/n;
+  const series=cfg.series, ns=series.length;
+  const bw=Math.min(cfg.barWidth||34, gw*0.66/ns);
+  cfg.labels.forEach((lab,i)=>{
+    const cx=m.l+gw*i+gw/2;
+    series.forEach((s,j)=>{
+      const v=s.values[i]; if(v==null)return;
+      const h=Math.max(1,ih*v/max);
+      const x=cx-(bw*ns+ (ns-1)*4)/2 + j*(bw+4);
+      const r=el('rect',{x:x,y:m.t+ih-h,width:bw,height:h,fill:s.color,rx:2},svg);
+      const t=el('title',{},r); t.textContent=s.name+' · '+lab+': '+(s.fmt?s.fmt(v):v);
+      if(cfg.valueLabels!==false && gw/ns>30) txt(svg,x+bw/2,m.t+ih-h-6,(s.fmt?s.fmt(v):v),'val','middle');
+    });
+    if(cfg.twoLineLabels){
+      txt(svg,cx,m.t+ih+18,lab[0],'catzh','middle');
+      txt(svg,cx,m.t+ih+34,lab[1],'tick','middle');
+    }else{
+      txt(svg,cx,m.t+ih+19,lab,'cat','middle');
+      if(cfg.subLabels) txt(svg,cx,m.t+ih+34,cfg.subLabels[i],'tick','middle');
+    }
+  });
+}
+
+/* ---------------- dumbbell ---------------- */
+function dumbbell(box,cfg){
+  const W=box.clientWidth||880, rowH=cfg.rowH||46;
+  const m={t:26,r:60,b:30,l:210};
+  const H=m.t+m.b+rowH*cfg.rows.length;
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r, max=cfg.xMax;
+  for(let i=0;i<=cfg.xTicks;i++){
+    const v=max*i/cfg.xTicks, x=m.l+iw*i/cfg.xTicks;
+    el('line',{x1:x,x2:x,y1:m.t-6,y2:m.t+rowH*cfg.rows.length,class:i===0?'axis':'grid'},svg);
+    txt(svg,x,m.t+rowH*cfg.rows.length+18,(cfg.fmtX?cfg.fmtX(v):v),'tick','middle');
+  }
+  cfg.rows.forEach((r,i)=>{
+    const y=m.t+rowH*i+rowH/2;
+    const x1=m.l+iw*r.control/max, x2=m.l+iw*r.test/max;
+    const worse=r.test>r.control;
+    txt(svg,m.l-14,y-2,r.zh,'catzh','end');
+    txt(svg,m.l-14,y+14,r.en,'tick','end');
+    el('line',{x1:Math.min(x1,x2),x2:Math.max(x1,x2),y1:y,y2:y,stroke:worse?'#e2c3b6':'#cfe0d6','stroke-width':7,'stroke-linecap':'round'},svg);
+    [[x1,C_CTRL,r.control,'Control'],[x2,C_TEST,r.test,'Test']].forEach(p=>{
+      const c=el('circle',{cx:p[0],cy:y,r:6.5,fill:p[1],stroke:'#fff','stroke-width':2},svg);
+      const t=el('title',{},c); t.textContent=r.zh+' · '+p[3]+': '+fmt(p[2],2)+'%';
+    });
+    txt(svg,Math.max(x1,x2)+14,y+4,(worse?'+':'−')+fmt(Math.abs(r.test-r.control),2)+' pp',worse?'val':'val',worse?'start':'end');
+    if(worse) txt(svg,Math.min(x1,x2)-14,y+4,'','val','end');
+  });
+}
+
+/* ---------------- horizontal bars ---------------- */
+function hbars(box,cfg){
+  const W=box.clientWidth||880, rowH=cfg.rowH||26;
+  const m={t:14,r:78,b:26,l:cfg.left||300};
+  const H=m.t+m.b+rowH*cfg.rows.length;
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r;
+  cfg.gridVals.forEach(v=>{
+    const x=m.l+iw*(v-cfg.xMin)/(cfg.xMax-cfg.xMin);
+    el('line',{x1:x,x2:x,y1:m.t-4,y2:m.t+rowH*cfg.rows.length,class:v===cfg.gridVals[0]?'axis':'grid'},svg);
+    txt(svg,x,m.t+rowH*cfg.rows.length+16,(cfg.fmtX?cfg.fmtX(v):v),'tick','middle');
+  });
+  cfg.rows.forEach((r,i)=>{
+    const y=m.t+rowH*i+rowH/2;
+    const w=iw*(r.value-cfg.xMin)/(cfg.xMax-cfg.xMin);
+    txt(svg,m.l-12,y-1,r.label,'catzh','end');
+    txt(svg,m.l-12,y+13,r.sub,'tick','end');
+    const rect=el('rect',{x:m.l,y:y-7,width:Math.max(1,w),height:14,fill:r.color,rx:2},svg);
+    const t=el('title',{},rect); t.textContent=r.label+' — '+r.sub+': '+fmt(r.value,1)+'% (n='+r.n+')';
+    txt(svg,m.l+w+8,y+4,fmt(r.value,1)+'%  ·  n='+r.n,'val','start');
+  });
+}
+
+/* ---------------- funnel ---------------- */
+function funnel(box){
+  const W=box.clientWidth||560,H=252;
+  const m={t:12,r:16,b:14,l:8};
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r;
+  const steps=[
+    {k:'Sessions started',v:DATA.funnel.users,c:'#2c3a47'},
+    {k:'Reached a doctor',v:DATA.funnel.reached,c:'#3f6d68'},
+    {k:'Completed',v:DATA.funnel.completed,c:C_TEST}
+  ];
+  const rowH=(H-m.t-m.b)/steps.length;
+  steps.forEach((s,i)=>{
+    const y=m.t+rowH*i+10, h=rowH-26;
+    const w=Math.max(4,iw*s.v/steps[0].v);
+    el('rect',{x:m.l,y:y,width:w,height:h,fill:s.c,rx:3},svg);
+    txt(svg,m.l+12,y+h/2-3,s.k,'','start').setAttribute('fill','#fff');
+    svg.lastChild.setAttribute('font-size','13');
+    svg.lastChild.setAttribute('font-weight','600');
+    txt(svg,m.l+12,y+h/2+15,s.v.toLocaleString('en-US')+'  ·  '+fmt(s.v/steps[0].v*100,1)+'%','','start').setAttribute('fill','rgba(255,255,255,.78)');
+    svg.lastChild.setAttribute('font-size','12');
+    svg.lastChild.setAttribute('font-family','ui-monospace,Menlo,monospace');
+  });
+  const drop=[{y:m.t+rowH,l:'− '+DATA.funnel.lost.toLocaleString('en-US')+' lost before a doctor ('+fmt(DATA.funnel.lost/DATA.funnel.users*100,1)+'%)'},
+              {y:m.t+rowH*2,l:'− '+DATA.funnel.dropped.toLocaleString('en-US')+' dropped after the first reply ('+fmt(DATA.funnel.dropped/DATA.funnel.users*100,1)+'%)'}];
+  drop.forEach(d=>txt(svg,m.l+iw*0.60,d.y+rowH/2+6,d.l,'tick','start'));
+}
+
+/* ---------------- weekly combo ---------------- */
+function weeklyChart(box){
+  const W=box.clientWidth||880,H=330;
+  const m={t:22,r:56,b:44,l:52};
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const wk=DATA.weekly, n=wk.weeks.length;
+  const yMax=160, vMax=2000;
+  for(let i=0;i<=4;i++){
+    const y=m.t+ih-ih*i/4;
+    el('line',{x1:m.l,x2:m.l+iw,y1:y,y2:y,class:i===0?'axis':'grid'},svg);
+    txt(svg,m.l-9,y+4,(yMax*i/4)+'s','tick','end');
+    txt(svg,m.l+iw+9,y+4,Math.round(vMax*i/4).toLocaleString('en-US'),'tick','start');
+  }
+  txt(svg,m.l-9,m.t-8,'median wait','alab','end');
+  txt(svg,m.l+iw+9,m.t-8,'sessions','alab','start');
+  const gw=iw/n;
+  const bw=Math.min(26,gw*0.28);
+  wk.weeks.forEach((w,i)=>{
+    const cx=m.l+gw*i+gw/2;
+    [[wk.vol_test[i],-1],[wk.vol_control[i],1]].forEach((p,j)=>{
+      const h=ih*p[0]/vMax;
+      const x=cx+p[1]*(bw*0.55)-(j===0?bw:0)+(j===0?0:0);
+      const xx=cx+(j===0?-bw-3:3);
+      const r=el('rect',{x:xx,y:m.t+ih-h,width:bw,height:h,fill:'#e6e1d8',rx:2},svg);
+      const t=el('title',{},r); t.textContent=(j===0?'Test':'Control')+' sessions, week of '+w+': '+p[0];
+    });
+    txt(svg,cx,m.t+ih+20,w,'cat','middle');
+    txt(svg,cx,m.t+ih+35,'week','tick','middle');
+  });
+  const X=i=>m.l+gw*i+gw/2, Y=v=>m.t+ih-ih*v/yMax;
+  [['wait_control',C_CTRL],['wait_test',C_TEST]].forEach(s=>{
+    const key=s[0];
+    let dpath='';
+    wk[key].forEach((v,i)=>{dpath+=(i?'L':'M')+X(i)+' '+Y(v)+' ';});
+    el('path',{d:dpath,fill:'none',stroke:s[1],'stroke-width':2.6,'stroke-linejoin':'round','stroke-linecap':'round'},svg);
+    wk[key].forEach((v,i)=>{
+      const c=el('circle',{cx:X(i),cy:Y(v),r:4.2,fill:s[1],stroke:'#fff','stroke-width':1.8},svg);
+      const t=el('title',{},c); t.textContent=(key==='wait_test'?'Test':'Control')+' median wait, week of '+wk.weeks[i]+': '+v+' s';
+      txt(svg,X(i),Y(v)-11,v+'','val','middle');
+    });
+  });
+  el('line',{x1:X(2.5),x2:X(2.5),y1:m.t,y2:m.t+ih,stroke:'#d9b38c','stroke-width':1.4,'stroke-dasharray':'4 4'},svg);
+  txt(svg,X(2.5)+7,m.t+14,'load step: week of 12-09','tick','start').setAttribute('fill','#9a6b00');
+}
+
+/* ---------------- line chart (wait vs completion) ---------------- */
+function waitCompChart(box){
+  const W=box.clientWidth||880,H=300;
+  const m={t:22,r:26,b:56,l:52};
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const d=DATA.wait_completion, n=d.labels.length;
+  const yMin=88,yMax=96;
+  for(let v=yMin;v<=yMax;v+=2){
+    const y=m.t+ih-ih*(v-yMin)/(yMax-yMin);
+    el('line',{x1:m.l,x2:m.l+iw,y1:y,y2:y,class:v===yMin?'axis':'grid'},svg);
+    txt(svg,m.l-9,y+4,v+'%','tick','end');
+  }
+  const gw=iw/n, X=i=>m.l+gw*i+gw/2, Y=v=>m.t+ih-ih*(v-yMin)/(yMax-yMin);
+  let dp='';
+  d.comp.forEach((v,i)=>{dp+=(i?'L':'M')+X(i)+' '+Y(v)+' ';});
+  el('path',{d:dp,fill:'none',stroke:'#5b6b7d','stroke-width':2.4,'stroke-linejoin':'round'},svg);
+  d.comp.forEach((v,i)=>{
+    const c=el('circle',{cx:X(i),cy:Y(v),r:5,fill:'#fff',stroke:'#5b6b7d','stroke-width':2.4},svg);
+    const t=el('title',{},c); t.textContent='Wait '+d.labels[i]+' s · completion '+v+'% · n='+d.n[i].toLocaleString('en-US');
+    txt(svg,X(i),Y(v)-13,v+'%','val','middle');
+    txt(svg,X(i),m.t+ih+20,d.labels[i],'cat','middle');
+    txt(svg,X(i),m.t+ih+36,'n='+d.n[i].toLocaleString('en-US'),'tick','middle');
+  });
+  txt(svg,m.l+iw/2,m.t+ih+54,'seconds waited before the doctor\'s first reply','alab','middle');
+  const y92=Y(92.8);
+  el('line',{x1:m.l,x2:m.l+iw,y1:y92,y2:y92,stroke:C_TEST,'stroke-width':1.2,'stroke-dasharray':'5 4'},svg);
+  txt(svg,m.l+iw-4,y92-7,'flat at ~92.8%','tick','end').setAttribute('fill',C_TEST);
+}
+
+/* ---------------- outlier mini chart ---------------- */
+function outlierChart(box){
+  const W=box.clientWidth||440,H=210;
+  const m={t:16,r:16,b:44,l:52};
+  const svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H},box);
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const rows=[{l:'Raw mean',t:DATA.kpi.wait_mean.test,c:DATA.kpi.wait_mean.control},
+              {l:'Mean, waits ≤900 s',t:101.3,c:129.6},
+              {l:'Median',t:DATA.kpi.wait_median.test,c:DATA.kpi.wait_median.control}];
+  const max=160;
+  for(let i=0;i<=4;i++){
+    const y=m.t+ih-ih*i/4;
+    el('line',{x1:m.l,x2:m.l+iw,y1:y,y2:y,class:i===0?'axis':'grid'},svg);
+    txt(svg,m.l-9,y+4,Math.round(max*i/4)+'s','tick','end');
+  }
+  const gw=iw/rows.length, bw=Math.min(30,gw*0.3);
+  rows.forEach((r,i)=>{
+    const cx=m.l+gw*i+gw/2;
+    [['t',r.t,C_TEST,-1],['c',r.c,C_CTRL,1]].forEach(s=>{
+      const h=ih*s[1]/max, x=cx+s[3]*(bw*0.55)-(s[3]<0?bw:0);
+      const rect=el('rect',{x:x,y:m.t+ih-h,width:bw,height:h,fill:s[2],rx:2},svg);
+      const t=el('title',{},rect); t.textContent=r.l+' · '+(s[0]==='t'?'test':'control')+': '+s[1]+' s';
+      txt(svg,x+bw/2,m.t+ih-h-6,s[1],'val','middle');
+    });
+    txt(svg,cx,m.t+ih+20,r.l,'cat','middle');
+  });
+}
+
+/* ---------------- build static content ---------------- */
+function buildKPIs(){
+  const k=DATA.kpi;
+  const cards=[
+    {lab:'Median first reply',cls:'good',from:k.wait_median.control,to:k.wait_median.test,unit:'s',
+     delta:'−20.0% · −22.0 s',dcls:'good',sub:'p90 234 → 177 s · p95 290 → 213 s',d:2},
+    {lab:'Consultation completed',cls:'flat',from:k.completion.control,to:k.completion.test,unit:'%',
+     delta:'−0.08 pp · z = −0.16',dcls:'flat',sub:'7,933 / 9,013 vs 7,903 / 8,987',d:2},
+    {lab:'Lost before a doctor',cls:'bad',from:k.loss.control,to:k.loss.test,unit:'%',
+     delta:'+0.56 pp · z = +1.72',dcls:'bad',sub:'427 vs 476 users · not significant pooled',d:2},
+    {lab:'7-day follow-up',cls:'flat',from:k.followup.control,to:k.followup.test,unit:'%',
+     delta:'−0.16 pp · z = −0.32',dcls:'flat',sub:'but +3.00 pp for new users, −1.71 pp for returning',d:2}
+  ];
+  document.getElementById('kpis').innerHTML=cards.map(c=>
+    '<div class="kpi '+c.cls+'"><div class="lab">'+c.lab+'</div>'+
+    '<div class="nums"><span>'+fmt(c.from,c.d)+'</span><span class="arrow">→</span><span class="to">'+fmt(c.to,c.d)+'</span><span style="font-size:16px;color:var(--ink-3);font-family:var(--sans)">'+c.unit+'</span></div>'+
+    '<div class="delta '+c.dcls+'">'+c.delta+'</div><div class="sub">'+c.sub+'</div></div>').join('');
+}
+
+function buildStrip(){
+  const s=[
+    {n:'18,000',l:'sessions in the file, one per user'},
+    {n:'42',l:'days, 2024-11-18 to 2024-12-29'},
+    {n:'903',l:'lost before any doctor replied (5.0%)'},
+    {n:'15,836',l:'consultations completed (88.0%)'},
+    {n:'2,178',l:'users back within 7 days (12.2%)'}
+  ];
+  document.getElementById('strip').innerHTML=s.map(x=>'<div><div class="n">'+x.n+'</div><div class="l">'+x.l+'</div></div>').join('');
+}
+
+function buildBalance(){
+  const rows=[
+    ['All sessions 全部','8,987','9,013','49.93%'],
+    ['New users 新用户','2,857','2,922','49.43%'],
+    ['Returning users 老用户','6,130','6,091','50.12%'],
+    ['Android','3,762','3,752','50.07%'],
+    ['iOS','3,412','3,458','49.66%'],
+    ['WeChat mini-program 微信小程序','1,807','1,803','50.06%'],
+    ['Paediatrics 儿科','2,607','2,639','49.70%'],
+    ['Internal medicine 内科','2,582','2,501','50.80%'],
+    ['Gynaecology 妇科','1,222','1,268','49.08%'],
+    ['ENT / eyes-ears-nose-throat 五官科','1,073','987','52.09%'],
+    ['Dermatology 皮肤科','1,503','1,618','48.16%']
+  ];
+  document.getElementById('balanceBody').innerHTML=rows.map(r=>
+    '<tr><td class="zh">'+r[0]+'</td><td class="numl">'+r[1]+'</td><td class="numl">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>').join('');
+}
+
+function buildPct(){
+  const k=DATA.kpi;
+  const rows=[
+    ['Median (p50)',k.wait_median.control,k.wait_median.test,1],
+    ['Mean',k.wait_mean.control,k.wait_mean.test,1],
+    ['p90',k.wait_p90.control,k.wait_p90.test,0],
+    ['p95',k.wait_p95.control,k.wait_p95.test,0],
+    ['Share ≤ 90 s',k.under90.control,k.under90.test,1]
+  ];
+  document.getElementById('pctBody').innerHTML=rows.map(r=>{
+    const isShare=r[0].indexOf('Share')===0;
+    const ch=isShare?(r[2]-r[1]>0?'+':'−')+fmt(Math.abs(r[2]-r[1]),1)+' pp':
+      (r[2]<r[1]?'−':'+')+fmt(Math.abs(r[2]/r[1]-1)*100,1)+'%';
+    const v=s=>isShare?fmt(s,1)+'%':fmt(s,r[3])+' s';
+    return '<tr><td>'+r[0]+'</td><td class="numl">'+v(r[1])+'</td><td class="numl">'+v(r[2])+'</td><td class="num" style="color:'+(isShare?'var(--good)':'var(--good)')+'">'+ch+'</td></tr>';
+  }).join('');
+}
+
+function buildZ(){
+  const k=DATA.kpi;
+  const rows=[
+    ['Consultation completed  <span class="mono" style="font-size:11px">is_completed</span>',k.completion.control,k.completion.test,-0.16,'No effect'],
+    ['Lost before a doctor  <span class="mono" style="font-size:11px">lost_before_doctor</span>',k.loss.control,k.loss.test,1.72,'Nominally worse, not significant'],
+    ['Back within 7 days  <span class="mono" style="font-size:11px">followup_7d</span>',k.followup.control,k.followup.test,-0.32,'No effect']
+  ];
+  document.getElementById('zBody').innerHTML=rows.map(r=>{
+    const gap=r[2]-r[1];
+    return '<tr><td>'+r[0]+'</td><td class="numl">'+fmt(r[1],2)+'%</td><td class="numl">'+fmt(r[2],2)+'%</td>'+
+    '<td class="num">'+(gap>0?'+':'−')+fmt(Math.abs(gap),2)+'</td>'+
+    '<td class="num">'+(r[3]>0?'+':'−')+fmt(Math.abs(r[3]),2)+'</td>'+
+    '<td style="color:'+(Math.abs(r[3])>=1.96?'var(--bad)':'var(--ink-3)')+'">'+r[4]+'</td></tr>';
+  }).join('');
+}
+
+const DEPT_COLOR={'皮肤科':'#b3421f','儿科':'#1c6b45','内科':'#2f6f8f','妇科':'#8a5a9b','五官科':'#9a6b00'};
+
+function buildDept(){
+  document.getElementById('deptBody').innerHTML=DATA.departments.map(d=>{
+    const hl=d.zh==='皮肤科';
+    return '<tr'+(hl?' class="hl"':'')+'><td class="zh">'+d.zh+'<span class="en">'+d.en+'</span></td>'+
+    '<td class="numl">'+(d.n_test+d.n_control).toLocaleString('en-US')+'</td>'+
+    '<td class="numl">'+fmt(d.comp_control,2)+'%</td><td class="numl" style="color:'+(d.comp_test>=d.comp_control?'var(--good)':'var(--bad)')+';font-weight:600">'+fmt(d.comp_test,2)+'%</td>'+
+    '<td class="numl">'+fmt(d.lost_control,2)+'%</td><td class="numl" style="color:'+(d.lost_test<=d.lost_control?'var(--good)':'var(--bad)')+';font-weight:600">'+fmt(d.lost_test,2)+'%</td>'+
+    '<td class="numl">'+fmt(d.fu_control,2)+'%</td><td class="numl">'+fmt(d.fu_test,2)+'%</td></tr>';
+  }).join('');
+}
+
+function buildDerm(){
+  document.getElementById('dermBody').innerHTML=DATA.derm_complaints.map(d=>{
+    const gap=d.test-d.control;
+    return '<tr><td class="zh">'+d.zh+'<span class="en">'+d.en+' · n = '+(d.n_test+d.n_control)+'</span></td>'+
+    '<td class="numl">'+fmt(d.control,1)+'%</td><td class="numl" style="color:var(--bad);font-weight:600">'+fmt(d.test,1)+'%</td>'+
+    '<td class="num" style="color:var(--bad)">+'+fmt(gap,1)+'</td></tr>';
+  }).join('');
+}
+
+function buildPlatform(){
+  const names={'Android':'Android','iOS':'iOS','微信小程序':'WeChat mini-program 微信小程序'};
+  document.getElementById('platformBody').innerHTML=DATA.platform.map(p=>{
+    const gap=p.test-p.control;
+    return '<tr><td class="zh">'+(names[p.name]||p.name)+'</td><td class="numl">'+p.n.toLocaleString('en-US')+'</td>'+
+    '<td class="numl">'+fmt(p.control,2)+'%</td><td class="numl">'+fmt(p.test,2)+'%</td>'+
+    '<td class="num" style="color:'+(gap<0?'var(--bad)':'var(--good)')+'">'+(gap>0?'+':'−')+fmt(Math.abs(gap),2)+'</td></tr>';
+  }).join('');
+}
+
+function buildQuality(){
+  document.getElementById('qualityBody').innerHTML=DATA.quality.map(q=>
+    '<tr><td class="mono" style="font-size:12.5px">'+q.field+'</td><td style="color:var(--ink);font-weight:500">'+q.issue+'</td>'+
+    '<td>'+q.detail+'</td><td class="num">'+q.rows.toLocaleString('en-US')+'</td></tr>').join('');
+}
+
+function buildComplaintLegend(){
+  const seen={};let h='';
+  DATA.complaints.forEach(c=>{if(!seen[c.dept]){seen[c.dept]=1;
+    h+='<span><i style="background:'+DEPT_COLOR[c.dept]+'"></i>'+c.dept+' '+c.dept_en+'</span>';}});
+  document.getElementById('complaintLegend').innerHTML=h;
+}
+
+/* ---------------- chart registrations ---------------- */
+register({id:'funnelChart',draw:funnel});
+register({id:'histChart',draw:box=>groupedBars(box,{
+  labels:DATA.wait_hist.labels, height:300, yMax:30, ticks:6, barWidth:30, left:52,
+  fmtY:v=>v+'%', yLabel:'% of waits',
+  series:[
+    {name:'Test 实验组',color:C_TEST,values:DATA.wait_hist.test,fmt:v=>fmt(v,1)},
+    {name:'Control 对照组',color:C_CTRL,values:DATA.wait_hist.control,fmt:v=>fmt(v,1)}
+  ],
+  subLabels:DATA.wait_hist.labels.map((l,i)=>'n '+DATA.wait_hist.n_test[i].toLocaleString('en-US')+'/'+DATA.wait_hist.n_control[i].toLocaleString('en-US'))
+})});
+register({id:'outlierChart',draw:outlierChart});
+register({id:'outcomeChart',draw:box=>groupedBars(box,{
+  labels:['Completed the consultation','Lost before a doctor replied','Back within 7 days','Median consult (min)'],
+  height:320, yMax:100, ticks:5, barWidth:44, left:52, fmtY:v=>v+'%',
+  series:[
+    {name:'Control 对照组',color:C_CTRL,values:[DATA.kpi.completion.control,DATA.kpi.loss.control,DATA.kpi.followup.control,DATA.kpi.consult_median.control/11.2*100*0+DATA.kpi.consult_median.control],fmt:v=>fmt(v,2)},
+    {name:'Test 实验组',color:C_TEST,values:[DATA.kpi.completion.test,DATA.kpi.loss.test,DATA.kpi.followup.test,DATA.kpi.consult_median.test],fmt:v=>fmt(v,2)}
+  ]
+})});
+register({id:'waitCompChart',draw:waitCompChart});
+register({id:'deptChart',draw:box=>dumbbell(box,{
+  xMax:14, xTicks:7, fmtX:v=>v+'%', rowH:56,
+  rows:DATA.departments.map(d=>({zh:d.zh,en:d.en+' · n = '+(d.n_test+d.n_control).toLocaleString('en-US'),test:d.lost_test,control:d.lost_control}))
+})});
+register({id:'fuChart',draw:box=>groupedBars(box,{
+  labels:DATA.followup_ut.map(u=>[u.zh,u.en]), twoLineLabels:true,
+  height:300, yMax:16, ticks:4, barWidth:56, left:48, fmtY:v=>v+'%',
+  series:[
+    {name:'Control 对照组',color:C_CTRL,values:DATA.followup_ut.map(u=>u.control),fmt:v=>fmt(v,2)+'%'},
+    {name:'Test 实验组',color:C_TEST,values:DATA.followup_ut.map(u=>u.test),fmt:v=>fmt(v,2)+'%'}
+  ]
+})});
+register({id:'weeklyChart',draw:weeklyChart});
+register({id:'complaintChart',draw:box=>hbars(box,{
+  xMin:78,xMax:93,gridVals:[80,82,84,86,88,90,92],fmtX:v=>v+'%',rowH:34,left:320,
+  rows:DATA.complaints.map(c=>({label:c.zh,sub:c.en+' · '+c.dept,value:c.comp,n:c.n,color:DEPT_COLOR[c.dept]}))
+})});
+
+/* ---------------- boot ---------------- */
+function boot(){
+  buildKPIs();buildStrip();buildBalance();buildPct();buildZ();
+  buildDept();buildDerm();buildPlatform();buildQuality();buildComplaintLegend();
+  renderAll();
+}
+boot();
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(renderAll,180);});
+</script>
+</body>
+</html>

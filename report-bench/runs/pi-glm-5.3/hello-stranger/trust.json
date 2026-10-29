@@ -1,0 +1,188 @@
+{
+ "page": "/home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger/index.html",
+ "facts": "submissions/pi-glm-5.3/hello-stranger/facts.json",
+ "model": "deepseek-v4.1-flash",
+ "prompt_hash": "1074a12da540",
+ "items": {
+  "1.1": {
+   "violated": false,
+   "problems": []
+  },
+  "1.2": {
+   "violated": false,
+   "problems": []
+  },
+  "1.3": {
+   "violated": true,
+   "verdicts": [
+    {
+     "id": "dataset-shape",
+     "basis": "output rows=3312, distinct people=1456, conversations=1656; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "conversations-per-person",
+     "basis": "value_counts: 1=702, 2=266, 3=187, 8=3; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "records-with-ratings",
+     "basis": "pre_affect notna=3312; end_affect notna=3257; matches output labels.",
+     "verdict": "ok"
+    },
+    {
+     "id": "mood-and-enjoyment-scale",
+     "basis": "min/max all listed columns: min=1, max=9; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-scale",
+     "basis": "min/max i_like_you, you_like_me, shared_reality: min=1, max=7; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "participants-age",
+     "basis": "age min=19, max=66, mean=34.3, median=32.0; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "participants-sex-race",
+     "basis": "women=1740, men=1463, other=53, missing sex=56; white=2110, asian=485, black=248, hispanic=220, mixed=128; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "mood-climbs",
+     "basis": "means: pre=6.10, begin=6.16, middle=6.93, end=7.38; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "mood-gain",
+     "basis": "gain mean=1.288, median=1.000; >0=.681, =0=.202, <0=.101; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "arousal-climbs",
+     "basis": "arousal means 5.32, 5.67, 6.40, 6.70; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-high",
+     "basis": "mean=7.411, median=8.000; >=7=.767, =9=.281, <=3=.024; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "enjoyment-distribution",
+     "basis": "counts 1..9: 19,15,44,86,181,373,772,837,930; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-means",
+     "basis": "means i_like_you=5.995, you_like_me=5.351; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-gap-spread",
+     "basis": "gap mean=0.64; liked_more=.51, liked_less=.05; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "liking-actual-vs-believed",
+     "basis": "matched count=3257; i_like_you_other mean=5.995, you_like_me_me mean=5.351; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "belief-accuracy",
+     "basis": "corr i_like_you_me with you_like_me_other =0.189; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "partner-agreement",
+     "basis": "correlations: end mood .177, enjoyment .174, liking .191, shared reality .197, mood change .062; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "race-diff-enjoyment",
+     "basis": "race_diff 0: n=935 mean=7.462; 1: n=721 mean=7.345; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "edu-diff-enjoyment",
+     "basis": "edu_diff 0: n=785 mean=7.304; 1: n=871 mean=7.503; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "sex-diff-enjoyment",
+     "basis": "sex_diff 0: n=889 mean=7.378; 1: n=767 mean=7.443; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "politics-diff-enjoyment",
+     "basis": "politics_diff 0: n=408 enjoyment=7.478 mood_gain=1.303; diff 5: n=23 enjoyment=7.065 mood_gain=1.022; matches cited endpoints.",
+     "verdict": "ok"
+    },
+    {
+     "id": "age-diff-enjoyment",
+     "basis": "output has age_diff 0: n=464 mean=7.427; 30: n=152 mean=7.572; 40: n=50 mean=7.630, but age_diff 10: n=538 mean=7.313, lower than same-age, so 'do not reduce enjoyment' contradicts output.",
+     "verdict": "wrong"
+    },
+    {
+     "id": "shared-reality-correlations",
+     "basis": "shared_reality correlations: enjoy=.577, i_like_you=.533, you_like_me=.522, end_affect=.519; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "stranger-traits",
+     "basis": "means kind=7.98, polite=7.93, agreeable=7.75, intelligent=7.68, trustworthy=7.51, funny=4.72; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "status-ratings",
+     "basis": "means own status=5.53, partner status=5.91, assumed partner rating=5.74; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "turn-length-asymmetry",
+     "basis": "my_turn_length_avg=5.40, your_turn_length_avg=5.03; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "worst-best-moments",
+     "basis": "means pre=6.10, worst=5.80, best=7.83, end=7.38; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "low-mood-gains-most",
+     "basis": "corr starting mood with gain=-0.63; gain <=4=3.20; >=8/9=-0.16; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "loneliness-scale",
+     "basis": "min=1 max=3; counts my=1172, your=2952; matches claim.",
+     "verdict": "ok"
+    },
+    {
+     "id": "loneliness-underestimated",
+     "basis": "both-answers count=1146; my_loneliness mean=1.802, your_loneliness_other mean=1.524; matches claim.",
+     "verdict": "ok"
+    }
+   ],
+   "wrong": [
+    {
+     "id": "age-diff-enjoyment",
+     "basis": "output has age_diff 0: n=464 mean=7.427; 30: n=152 mean=7.572; 40: n=50 mean=7.630, but age_diff 10: n=538 mean=7.313, lower than same-age, so 'do not reduce enjoyment' contradicts output.",
+     "verdict": "wrong"
+    }
+   ],
+   "reply": "{\"facts\":[{\"id\":\"dataset-shape\",\"basis\":\"output rows=3312, distinct people=1456, conversations=1656; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"conversations-per-person\",\"basis\":\"value_counts: 1=702, 2=266, 3=187, 8=3; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"records-with-ratings\",\"basis\":\"pre_affect notna=3312; end_affect notna=3257; matches output labels.\",\"verdict\":\"ok\"},{\"id\":\"mood-and-enjoyment-scale\",\"basis\":\"min/max all listed columns: min=1, max=9; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"liking-scale\",\"basis\":\"min/max i_like_you, you_like_me, shared_reality: min=1, max=7; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"participants-age\",\"basis\":\"age min=19, max=66, mean=34.3, median=32.0; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"participants-sex-race\",\"basis\":\"women=1740, men=1463, other=53, missing sex=56; white=2110, asian=485, black=248, hispanic=220, mixed=128; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"mood-climbs\",\"basis\":\"means: pre=6.10, begin=6.16, middle=6.93, end=7.38; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"mood-gain\",\"basis\":\"gain mean=1.288, median=1.000; >0=.681, =0=.202, <0=.101; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"arousal-climbs\",\"basis\":\"arousal means 5.32, 5.67, 6.40, 6.70; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"enjoyment-high\",\"basis\":\"mean=7.411, median=8.000; >=7=.767, =9=.281, <=3=.024; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"enjoyment-distribution\",\"basis\":\"counts 1..9: 19,15,44,86,181,373,772,837,930; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"liking-means\",\"basis\":\"means i_like_you=5.995, you_like_me=5.351; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"liking-gap-spread\",\"basis\":\"gap mean=0.64; liked_more=.51, liked_less=.05; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"liking-actual-vs-believed\",\"basis\":\"matched count=3257; i_like_you_other mean=5.995, you_like_me_me mean=5.351; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"belief-accuracy\",\"basis\":\"corr i_like_you_me with you_like_me_other =0.189; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"partner-agreement\",\"basis\":\"correlations: end mood .177, enjoyment .174, liking .191, shared reality .197, mood change .062; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"race-diff-enjoyment\",\"basis\":\"race_diff 0: n=935 mean=7.462; 1: n=721 mean=7.345; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"edu-diff-enjoyment\",\"basis\":\"edu_diff 0: n=785 mean=7.304; 1: n=871 mean=7.503; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"sex-diff-enjoyment\",\"basis\":\"sex_diff 0: n=889 mean=7.378; 1: n=767 mean=7.443; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"politics-diff-enjoyment\",\"basis\":\"politics_diff 0: n=408 enjoyment=7.478 mood_gain=1.303; diff 5: n=23 enjoyment=7.065 mood_gain=1.022; matches cited endpoints.\",\"verdict\":\"ok\"},{\"id\":\"age-diff-enjoyment\",\"basis\":\"output has age_diff 0: n=464 mean=7.427; 30: n=152 mean=7.572; 40: n=50 mean=7.630, but age_diff 10: n=538 mean=7.313, lower than same-age, so 'do not reduce enjoyment' contradicts output.\",\"verdict\":\"wrong\"},{\"id\":\"shared-reality-correlations\",\"basis\":\"shared_reality correlations: enjoy=.577, i_like_you=.533, you_like_me=.522, end_affect=.519; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"stranger-traits\",\"basis\":\"means kind=7.98, polite=7.93, agreeable=7.75, intelligent=7.68, trustworthy=7.51, funny=4.72; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"status-ratings\",\"basis\":\"means own status=5.53, partner status=5.91, assumed partner rating=5.74; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"turn-length-asymmetry\",\"basis\":\"my_turn_length_avg=5.40, your_turn_length_avg=5.03; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"worst-best-moments\",\"basis\":\"means pre=6.10, worst=5.80, best=7.83, end=7.38; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"low-mood-gains-most\",\"basis\":\"corr starting mood with gain=-0.63; gain <=4=3.20; >=8/9=-0.16; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"loneliness-scale\",\"basis\":\"min=1 max=3; counts my=1172, your=2952; matches claim.\",\"verdict\":\"ok\"},{\"id\":\"loneliness-underestimated\",\"basis\":\"both-answers count=1146; my_loneliness mean=1.802, your_loneliness_other mean=1.524; matches claim.\",\"verdict\":\"ok\"}]}",
+   "usage": {
+    "prompt_tokens": 4834,
+    "completion_tokens": 11281,
+    "seconds": 64.5
+   }
+  }
+ },
+ "vetoed": [
+  "1.3"
+ ],
+ "tries": 1
+}

@@ -812,7 +812,7 @@ const svgOpen = (w,h)=>`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYM
 
 /* ---------------- 14. cotton strip ---------------- */
 (function(){
-  const W=700,H=250,L=64,R=26,T=26,B=48;
+  const W=700,H=250,L=96,R=26,T=26,B=48;
   const x0=25,x1=101, X=v=>L+(v-x0)/(x1-x0)*(W-L-R);
   const lanes=[{k:'women',cy:80},{k:'men',cy:178}];
   let s=svgOpen(W,H);

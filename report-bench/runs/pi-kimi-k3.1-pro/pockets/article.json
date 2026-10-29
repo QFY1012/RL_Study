@@ -1,0 +1,74 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.5,
+  "where": "「Price is not the pocket upgrade.」;「Look up your next pair.」",
+  "reason": "4 节里 2 节不为前面的观点或问题服务:Compares average listed prices and rank correlations to show price is not associated with deeper front pockets.;Offers a search interface over the 80 rows and notes that the listed dimensions are averaged pocket measurements.",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "Across 20 popular brands, men’s front pockets average 6.8 cm deeper than women’s.",
+    "serves": null,
+    "how": "Reports the headline averages across 20 brands and then uses averaged measurements to locate the gap in front depth rather than back width.",
+    "holds": false
+   },
+   {
+    "start": "No brand reverses the pattern.",
+    "serves": "The front is where the gap lives.",
+    "how": "Checks all 20 brand groups and finds men’s average front depth is higher in every one, though the size of the gap varies.",
+    "holds": true
+   },
+   {
+    "start": "One phone height. Four different answers.",
+    "serves": "The front is where the gap lives.",
+    "how": "Uses a 14.4 cm phone-height benchmark and says both tallest-point and shortest-point tests expose a substantial front-height gap.",
+    "holds": true
+   },
+   {
+    "start": "Price is not the pocket upgrade.",
+    "serves": null,
+    "how": "Compares average listed prices and rank correlations to show price is not associated with deeper front pockets.",
+    "holds": false
+   },
+   {
+    "start": "Look up your next pair.",
+    "serves": null,
+    "how": "Offers a search interface over the 80 rows and notes that the listed dimensions are averaged pocket measurements.",
+    "holds": false
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\": [{\"start\": \"Across 20 popular brands, men’s front pockets average 6.8 cm deeper than women’s.\", \"serves\": null, \"how\": \"Reports the headline averages across 20 brands and then uses averaged measurements to locate the gap in front depth rather than back width.\"}, {\"start\": \"No brand reverses the pattern.\", \"serves\": \"The front is where the gap lives.\", \"how\": \"Checks all 20 brand groups and finds men’s average front depth is higher in every one, though the size of the gap varies.\"}, {\"start\": \"One phone height. Four different answers.\", \"serves\": \"The front is where the gap lives.\", \"how\": \"Uses a 14.4 cm phone-height benchmark and says both tallest-point and shortest-point tests expose a substantial front-height gap.\"}, {\"start\": \"Price is not the pocket upgrade.\", \"serves\": null, \"how\": \"Compares average listed prices and rank correlations to show price is not associated with deeper front pockets.\"}, {\"start\": \"Look up your next pair.\", \"serves\": null, \"how\": \"Offers a search interface over the 80 rows and notes that the listed dimensions are averaged pocket measurements.\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 978,
+   "completion_tokens": 14278,
+   "seconds": 83.7
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-kimi-k3.1-pro/pockets/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.05,
+  "where": null,
+  "reason": "全文按数据摘要组织：只有品牌组、性别组、均值、价格相关性和口袋高度阈值等类别与数字。没有出现有名字或可辨认、并写出其想要什么、面对什么的具体个体；“14.4 cm-tall phone”只是测试基准和例子，“your next pair”是泛称，均未构成叙事个体。“Price is not the pocket upgrade”等虽有一点预期反差，但停留在群体数据结论，未通过个体经历展开，也没有经过和后来。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.05, \"reason\": \"全文按数据摘要组织：只有品牌组、性别组、均值、价格相关性和口袋高度阈值等类别与数字。没有出现有名字或可辨认、并写出其想要什么、面对什么的具体个体；“14.4 cm-tall phone”只是测试基准和例子，“your next pair”是泛称，均未构成叙事个体。“Price is not the pocket upgrade”等虽有一点预期反差，但停留在群体数据结论，未通过个体经历展开，也没有经过和后来。\"}",
+   "finish": "stop",
+   "prompt_tokens": 1106,
+   "completion_tokens": 1902,
+   "seconds": 16.2
+  }
+ }
+}

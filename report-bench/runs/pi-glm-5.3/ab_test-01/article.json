@@ -1,0 +1,122 @@
+{
+ "tries": {
+  "2.2": 1,
+  "2.3": 1
+ },
+ "2.2": {
+  "item": "2.2",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "a6279db819db-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 1.0,
+  "where": null,
+  "reason": "12 节都在为前面写出的观点或问题服务",
+  "opening": 1,
+  "sections": [
+   {
+    "start": "A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.",
+    "serves": null,
+    "how": "开头概述试验的主要结果：等待时间下降、完成率总体不变、皮肤科受损。",
+    "holds": false
+   },
+   {
+    "start": "The two arms are close to equal in size and run over the same 42 days, so arm-to-arm differences are not driven by who was routed where or by the calendar.",
+    "serves": "A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.",
+    "how": "说明两组规模和观察期接近，排除分流构成和日历因素作为等待差异来源。",
+    "holds": true
+   },
+   {
+    "start": "Time to a doctor's first reply falls by about 48 seconds on average and by 22 seconds at the median.",
+    "serves": "A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.",
+    "how": "用均值、中位数、高分位数和超过五分钟等待比例证明等待时间确实下降且长尾被压缩。",
+    "holds": true
+   },
+   {
+    "start": "Every department, platform and complaint improves, but by very different amounts.",
+    "serves": "The gain is not concentrated in one place",
+    "how": "列举妇科、微信小程序和不同投诉类型的改善幅度，说明改善广泛但幅度差异大。",
+    "holds": true
+   },
+   {
+    "start": "One complaint goes the other way: diarrhoea with mild fever (腹泻伴低烧一天) is the only one of the 25 that is slower in the test arm, at 141.8 s against 125.3 s.",
+    "serves": "Every department, platform and complaint improves, but by very different amounts.",
+    "how": "指出唯一反向的投诉类型，作为对“每个投诉都改善”的限定和反例。",
+    "holds": true
+   },
+   {
+    "start": "Headline completion is unchanged: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of 9,013 in control (88.0%).",
+    "serves": "It did not move the completion rate overall, but it did reshape who drops out, and it hurt one department badly: dermatology lost 4.5 points of completion .",
+    "how": "给出总体完成率几乎不变，同时展示医生回复前流失比例上升且并非均匀分布。",
+    "holds": true
+   },
+   {
+    "start": "Dermatology is the exception to an otherwise benign read-out.",
+    "serves": "It did not move the completion rate overall, but it did reshape who drops out, and it hurt one department badly: dermatology lost 4.5 points of completion .",
+    "how": "用皮肤科完成率下降4.5个百分点及显著性检验证明该科室受到明显影响。",
+    "holds": true
+   },
+   {
+    "start": "The mechanism is visible one column over: the share of dermatology users who leave the queue before a doctor answers doubles, from 7.7% to 12.7%.",
+    "serves": "Dermatology is the exception to an otherwise benign read-out.",
+    "how": "说明皮肤科完成率下降对应的是医生回复前离开队列比例翻倍，并对比儿科反向变化。",
+    "holds": true
+   },
+   {
+    "start": "The pattern holds across every skin complaint.",
+    "serves": "The mechanism is visible one column over: the share of dermatology users who leave the queue before a doctor answers doubles, from 7.7% to 12.7%.",
+    "how": "列出五个皮肤投诉类别，全部显示试验组更多用户在医生回复前流失。",
+    "holds": true
+   },
+   {
+    "start": "Dermatology was also the slowest department to complete in control (85.0%) and the fastest to improve its response time (153.0 s → 99.9 s), so faster triage did not translate into more finished skin consultations.",
+    "serves": "Dermatology is the exception to an otherwise benign read-out.",
+    "how": "指出皮肤科响应时间改善最快但完成率仍下降，并给出未经验证的可能解释。",
+    "holds": true
+   },
+   {
+    "start": "Completed consultations run about a minute and a half shorter in the test arm — 11.7 minutes against 13.1 on average, 10.4 against 11.2 at the median — so the time saved at the front of the queue is not spent back at the end.",
+    "serves": "After the consultation: shorter visits, and a follow-up shift",
+    "how": "用完成咨询时长的均值和分位数证明前端节省的时间没有在后端被补回来。",
+    "holds": true
+   },
+   {
+    "start": "The swap is the most useful commercial detail in the read-out: the test converts more first-time users into a second visit, and slightly fewer loyal ones.",
+    "serves": "After the consultation: shorter visits, and a follow-up shift",
+    "how": "说明试验组把更多首次用户转化为二次访问、忠实用户略少，并解释获客与终身价值的取舍。",
+    "holds": true
+   },
+   {
+    "start": "What the data supports: the new queue design halves long waits and cuts average response time by about a third without changing overall completion.",
+    "serves": "A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.",
+    "how": "总结支持的主要发现，并补充皮肤科完成率下降和回访用户减少的警示及下一步测试建议。",
+    "holds": true
+   }
+  ],
+  "answer": {
+   "text": "{\"sections\":[{\"start\":\"A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.\",\"serves\":null,\"how\":\"开头概述试验的主要结果：等待时间下降、完成率总体不变、皮肤科受损。\"},{\"start\":\"The two arms are close to equal in size and run over the same 42 days, so arm-to-arm differences are not driven by who was routed where or by the calendar.\",\"serves\":\"A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.\",\"how\":\"说明两组规模和观察期接近，排除分流构成和日历因素作为等待差异来源。\"},{\"start\":\"Time to a doctor's first reply falls by about 48 seconds on average and by 22 seconds at the median.\",\"serves\":\"A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.\",\"how\":\"用均值、中位数、高分位数和超过五分钟等待比例证明等待时间确实下降且长尾被压缩。\"},{\"start\":\"Every department, platform and complaint improves, but by very different amounts.\",\"serves\":\"The gain is not concentrated in one place\",\"how\":\"列举妇科、微信小程序和不同投诉类型的改善幅度，说明改善广泛但幅度差异大。\"},{\"start\":\"One complaint goes the other way: diarrhoea with mild fever (腹泻伴低烧一天) is the only one of the 25 that is slower in the test arm, at 141.8 s against 125.3 s.\",\"serves\":\"Every department, platform and complaint improves, but by very different amounts.\",\"how\":\"指出唯一反向的投诉类型，作为对“每个投诉都改善”的限定和反例。\"},{\"start\":\"Headline completion is unchanged: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of 9,013 in control (88.0%).\",\"serves\":\"It did not move the completion rate overall, but it did reshape who drops out, and it hurt one department badly: dermatology lost 4.5 points of completion .\",\"how\":\"给出总体完成率几乎不变，同时展示医生回复前流失比例上升且并非均匀分布。\"},{\"start\":\"Dermatology is the exception to an otherwise benign read-out.\",\"serves\":\"It did not move the completion rate overall, but it did reshape who drops out, and it hurt one department badly: dermatology lost 4.5 points of completion .\",\"how\":\"用皮肤科完成率下降4.5个百分点及显著性检验证明该科室受到明显影响。\"},{\"start\":\"The mechanism is visible one column over: the share of dermatology users who leave the queue before a doctor answers doubles, from 7.7% to 12.7%.\",\"serves\":\"Dermatology is the exception to an otherwise benign read-out.\",\"how\":\"说明皮肤科完成率下降对应的是医生回复前离开队列比例翻倍，并对比儿科反向变化。\"},{\"start\":\"The pattern holds across every skin complaint.\",\"serves\":\"The mechanism is visible one column over: the share of dermatology users who leave the queue before a doctor answers doubles, from 7.7% to 12.7%.\",\"how\":\"列出五个皮肤投诉类别，全部显示试验组更多用户在医生回复前流失。\"},{\"start\":\"Dermatology was also the slowest department to complete in control (85.0%) and the fastest to improve its response time (153.0 s → 99.9 s), so faster triage did not translate into more finished skin consultations.\",\"serves\":\"Dermatology is the exception to an otherwise benign read-out.\",\"how\":\"指出皮肤科响应时间改善最快但完成率仍下降，并给出未经验证的可能解释。\"},{\"start\":\"Completed consultations run about a minute and a half shorter in the test arm — 11.7 minutes against 13.1 on average, 10.4 against 11.2 at the median — so the time saved at the front of the queue is not spent back at the end.\",\"serves\":\"After the consultation: shorter visits, and a follow-up shift\",\"how\":\"用完成咨询时长的均值和分位数证明前端节省的时间没有在后端被补回来。\"},{\"start\":\"The swap is the most useful commercial detail in the read-out: the test converts more first-time users into a second visit, and slightly fewer loyal ones.\",\"serves\":\"After the consultation: shorter visits, and a follow-up shift\",\"how\":\"说明试验组把更多首次用户转化为二次访问、忠实用户略少，并解释获客与终身价值的取舍。\"},{\"start\":\"What the data supports: the new queue design halves long waits and cuts average response time by about a third without changing overall completion.\",\"serves\":\"A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and almost eliminated long waits.\",\"how\":\"总结支持的主要发现，并补充皮肤科完成率下降和回访用户减少的警示及下一步测试建议。\"}]}",
+   "finish": "stop",
+   "prompt_tokens": 1931,
+   "completion_tokens": 13200,
+   "seconds": 83.6
+  }
+ },
+ "2.3": {
+  "item": "2.3",
+  "page": "/home/user/RL_Study/report-bench/runs/pi-glm-5.3/ab_test-01/evidence",
+  "model": "deepseek-v4.1-flash",
+  "prompt_hash": "3da755532413-e8aa82415b0f",
+  "capture_version": "capture-8",
+  "score": 0.0,
+  "where": null,
+  "reason": "全文只有实验组/对照组、科室、投诉类型、比例和统计量等类别与数字，没有出现有名字或可辨认的具体个体，也没有写出某个个体想要什么、面对什么、常规如何被打破以及后来怎样；因此三样均无，只有类别和数字，落在[0.0,0.2)区间。",
+  "individuals": [],
+  "answer": {
+   "text": "{\"individuals\": [], \"score\": 0.0, \"reason\": \"全文只有实验组/对照组、科室、投诉类型、比例和统计量等类别与数字，没有出现有名字或可辨认的具体个体，也没有写出某个个体想要什么、面对什么、常规如何被打破以及后来怎样；因此三样均无，只有类别和数字，落在[0.0,0.2)区间。\"}",
+   "finish": "stop",
+   "prompt_tokens": 2065,
+   "completion_tokens": 811,
+   "seconds": 8.2
+  }
+ }
+}

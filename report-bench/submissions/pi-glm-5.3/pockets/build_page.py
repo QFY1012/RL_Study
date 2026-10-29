@@ -518,7 +518,7 @@ stat_cards = [
     ('%.2f vs %.2f cm' % (men_m.maxHeightFront, women_m.maxHeightFront),
      'average front-pocket depth, men\u2019s vs women\u2019s',
      'women\u2019s are %.2f\u00d7 as deep' % ratio.maxHeightFront),
-    ('%s vs %s cm\u00b2' % (num(m_front), num(w_front)),
+    ('%s vs %s cm\u00b2' % (f1(m_front), f1(w_front)),
      'average front-pocket area (depth \u00d7 widest width)',
      'women\u2019s get %.0f%% of the room' % (front_share * 100)),
     ('40 of 40 vs 12 of 40', 'front pockets deep enough for a 15 cm phone',
@@ -557,13 +557,13 @@ sections.append(f'''
 sections.append(f'''
 <section class="block">
   <h2><span>02</span> It is depth, not width</h2>
-  <p>Women\u2019s front pockets are almost as <i>wide</i> as men\u2019s \u2014 {num(women_m.maxWidthFront, 2)} cm
-  against {num(men_m.maxWidthFront, 2)} cm, or {ratio.maxWidthFront:.3f} of the men\u2019s width. It is
-  the vertical measurement that collapses: {num(women_m.maxHeightFront, 2)} cm against
-  {num(men_m.maxHeightFront, 2)} cm, only {ratio.maxHeightFront:.3f} of the men\u2019s depth. Multiply
-  depth by width and the average men\u2019s front pocket holds {num(m_front)} cm\u00b2 while the average
-  women\u2019s holds {num(w_front)} cm\u00b2 \u2014 {front_share:.3f} of it, a shortfall of
-  {num(m_front - w_front)} cm\u00b2. Width is never what stops a phone going in: the narrowest point of
+  <p>Women\u2019s front pockets are almost as <i>wide</i> as men\u2019s \u2014 {f2(women_m.maxWidthFront)} cm
+  against {f2(men_m.maxWidthFront)} cm, or {ratio.maxWidthFront:.3f} of the men\u2019s width. It is
+  the vertical measurement that collapses: {f2(women_m.maxHeightFront)} cm against
+  {f2(men_m.maxHeightFront)} cm, only {ratio.maxHeightFront:.3f} of the men\u2019s depth. Multiply
+  depth by width and the average men\u2019s front pocket holds {f1(m_front)} cm\u00b2 while the average
+  women\u2019s holds {f1(w_front)} cm\u00b2 \u2014 {front_share:.3f} of it, a shortfall of
+  {f1(m_front - w_front)} cm\u00b2. Width is never what stops a phone going in: the narrowest point of
   the opening is at least 11.0 cm on all 80 pairs.</p>
   <figure>{pocket_figure()}<figcaption>Both pockets and the phone are drawn to the same scale. The phone is 15 cm tall
   and 7.5 cm wide \u2014 the size of a large modern handset, used here as a fixed yardstick.</figcaption></figure>
@@ -576,11 +576,11 @@ sections.append(f'''
 <section class="block">
   <h2><span>03</span> Back pockets tell a different story</h2>
   <p>The same tape measure on the back pockets finds two departments that are practically even:
-  men\u2019s average {num(men_m.maxHeightBack, 2)} \u00d7 {num(men_m.maxWidthBack, 2)} cm for
-  {num(men_m.back_cm2)} cm\u00b2, women\u2019s {num(women_m.maxHeightBack, 2)} \u00d7
-  {num(women_m.maxWidthBack, 2)} cm for {num(women_m.back_cm2)} cm\u00b2. That is {ratio.back_cm2:.3f}
-  of the men\u2019s area and a depth gap of only {num(men_m.maxHeightBack - women_m.maxHeightBack, 2)} cm,
-  against the {num(men_m.maxHeightFront - women_m.maxHeightFront, 2)} cm chasm in front. Whatever
+  men\u2019s average {f2(men_m.maxHeightBack)} \u00d7 {f2(men_m.maxWidthBack)} cm for
+  {f1(men_m.back_cm2)} cm\u00b2, women\u2019s {f2(women_m.maxHeightBack)} \u00d7
+  {f2(women_m.maxWidthBack)} cm for {f1(women_m.back_cm2)} cm\u00b2. That is {ratio.back_cm2:.3f}
+  of the men\u2019s area and a depth gap of only {f2(men_m.maxHeightBack - women_m.maxHeightBack)} cm,
+  against the {f2(men_m.maxHeightFront - women_m.maxHeightFront)} cm chasm in front. Whatever
   constrains women\u2019s front pockets, it is not the amount of fabric the brand is willing to spend
   on a pocket.</p>
 </section>
@@ -637,12 +637,12 @@ sections.append(f'''
   buys no pocket room: front-pocket area correlates with price at \u22120.073 across all 80 pairs,
   \u22120.177 within the men\u2019s and \u22120.182 within the women\u2019s \u2014 if anything, slightly negative.
   The priciest pair in the data, True Religion\u2019s {money(249)} women\u2019s Slim Straight, has
-  {num(203.0)} cm\u00b2 of front pocket. The cheapest, H&M\u2019s {money(9.99)} women\u2019s Skinny Ankle,
-  has {num(275.5)} cm\u00b2. Both are smaller than the smallest men\u2019s front pocket in the data \u2014
-  H&M\u2019s own men\u2019s Skinny, {money(39.99)} at {num(290.0)} cm\u00b2.</p>
+  {203.0:.1f} cm\u00b2 of front pocket. The cheapest, H&M\u2019s {money(9.99)} women\u2019s Skinny Ankle,
+  has {275.5:.1f} cm\u00b2. Both are smaller than the smallest men\u2019s front pocket in the data \u2014
+  H&M\u2019s own men\u2019s Skinny, {money(39.99)} at {290.0:.1f} cm\u00b2.</p>
   <figure>{scatter()}<figcaption>Front-pocket area against price. The shaded bands show each department\u2019s
-  full range; they overlap only between {num(m.loc[m.menWomen == "men", "front_cm2"].min(), 0)} and
-  {num(m.loc[m.menWomen == "women", "front_cm2"].max(), 1)} cm\u00b2.</figcaption></figure>
+  full range; they overlap only between {m.loc[m.menWomen == "men", "front_cm2"].min():.0f} and
+  {m.loc[m.menWomen == "women", "front_cm2"].max():.2f} cm\u00b2.</figcaption></figure>
 </section>
 ''')
 
@@ -653,8 +653,8 @@ sections.append(f'''
   modern handset \u2014 all 40 men\u2019s front pockets take it and 12 of the 40 women\u2019s do. At 16 cm
   only 5 women\u2019s pockets still fit it, at 17 cm only 4. Every one of the 80 pockets is wide enough
   at its narrowest point; depth is the only barrier. The roomiest women\u2019s front pockets in the data
-  are Abercrombie\u2019s two Simone pairs at {num(333.25)} and {num(333.0)} cm\u00b2, and the third-best is
-  H&M\u2019s {money(9.99)} Skinny Ankle at {num(275.5)} cm\u00b2 \u2014 roomier than plenty of pricier
+  are Abercrombie\u2019s two Simone pairs at {333.25:.2f} and {333.0:.2f} cm\u00b2, and the third-best is
+  H&M\u2019s {money(9.99)} Skinny Ankle at {275.5:.1f} cm\u00b2 \u2014 roomier than plenty of pricier
   pairs, and still smaller than every men\u2019s pair measured.</p>
   <figure>{phone_fit()}<figcaption>How many of each department\u2019s 40 pairs have a front pocket deep enough for a
   phone of the height shown. The grey block is the share that fails.</figcaption></figure>
