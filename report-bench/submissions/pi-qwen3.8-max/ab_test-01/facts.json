@@ -97,7 +97,7 @@
  },
  {
   "id": "headline-not-significant",
-  "claim": "Two-proportion z-scores for the test-versus-control gaps are -0.16 for is_completed, 1.72 for lost_before_doctor and -0.32 for followup_7d, none reaching the usual ±1.96 threshold.",
+  "claim": "Two-proportion z-scores for the test-minus-control gaps are -0.16 for is_completed, 1.72 for lost_before_doctor and -0.32 for followup_7d.",
   "tables": {
    "df": "data/data.csv"
   },
@@ -129,7 +129,7 @@
  },
  {
   "id": "dermatology-loss-significant",
-  "claim": "The dermatology gap is statistically clear: 191 of 1,503 test users were lost before a doctor against 124 of 1,618 control users, a two-proportion z-score of 4.67.",
+  "claim": "In 皮肤科 the test arm lost 191 of 1,503 users before a doctor replied against 124 of 1,618 in control, a two-proportion z-score of 4.67.",
   "tables": {
    "df": "data/data.csv"
   },
@@ -161,7 +161,7 @@
  },
  {
   "id": "followup-split-significant",
-  "claim": "Both halves of that follow-up split clear the ±1.96 bar: the test-versus-control z-score is 4.1 for 新用户 and -2.7 for 老用户.",
+  "claim": "The test-minus-control z-score for seven-day follow-up is 4.1 among 新用户 and -2.7 among 老用户.",
   "tables": {
    "df": "data/data.csv"
   },

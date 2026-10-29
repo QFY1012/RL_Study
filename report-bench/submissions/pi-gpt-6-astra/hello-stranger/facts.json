@@ -1,0 +1,50 @@
+[
+  {
+    "id": "study-coverage",
+    "claim": "The data contain 3,312 person-conversation records from 1,456 distinct participant IDs across 1,656 conversations; 3,257 records have complete pre, beginning, middle and end affect ratings, and 55 do not.",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "pd.Series({'Person-conversation records': len(people), 'Distinct participant IDs': people.user_id.nunique(), 'Conversations': people.convo_id.nunique(), 'Complete affect trajectories': people[['pre_affect','begin_affect','middle_affect','end_affect']].dropna().shape[0], 'Incomplete affect trajectories': people[['pre_affect','begin_affect','middle_affect','end_affect']].isna().any(axis=1).sum()})"
+  },
+  {
+    "id": "affect-rises",
+    "claim": "Across 3,257 complete records, mean affect rises from 6.10 before the conversation to 6.16 at the beginning, 6.93 in the middle and 7.38 at the end, a mean pre-to-end increase of 1.29 points.",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "people.dropna(subset=['pre_affect','begin_affect','middle_affect','end_affect']).assign(pre_to_end=lambda d:d.end_affect-d.pre_affect)[['pre_affect','begin_affect','middle_affect','end_affect','pre_to_end']].agg(['count','mean']).round(2)"
+  },
+  {
+    "id": "individual-change",
+    "claim": "Among 3,257 complete affect trajectories, end ratings are higher than pre ratings in 2,254 records (69.2%), unchanged in 668 (20.5%) and lower in 335 (10.3%).",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "(lambda s: pd.DataFrame({'Records':s.value_counts(),'Percent':s.value_counts(normalize=True).mul(100).round(1)}))(people.dropna(subset=['pre_affect','begin_affect','middle_affect','end_affect']).assign(change=lambda d:d.end_affect-d.pre_affect).change.map(lambda x:'Higher' if x>0 else ('Unchanged' if x==0 else 'Lower')))"
+  },
+  {
+    "id": "partners-converge",
+    "claim": "Across 1,603 conversations with complete affect ratings for both partners, the mean absolute gap between their ratings narrows from 1.67 points before the conversation to 1.65 at the beginning, 1.35 in the middle and 1.31 at the end.",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "people.dropna(subset=['pre_affect','begin_affect','middle_affect','end_affect']).groupby('convo_id').filter(lambda g:len(g)==2).groupby('convo_id')[['pre_affect','begin_affect','middle_affect','end_affect']].agg(lambda s:s.max()-s.min()).agg(['count','mean']).round(2)"
+  },
+  {
+    "id": "enjoyment-gaps",
+    "claim": "Across 1,603 conversations with both enjoyment ratings, partners give the same score in 425 (26.5%), differ by one point in 557 (34.7%), by two points in 346 (21.6%) and by at least three points in 275 (17.2%).",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "(lambda s:pd.DataFrame({'Conversations':s.value_counts().sort_index(),'Percent':s.value_counts(normalize=True).sort_index().mul(100).round(1)}))(people.dropna(subset=['how_enjoyable']).groupby('convo_id').filter(lambda g:len(g)==2).groupby('convo_id').how_enjoyable.agg(lambda s:s.max()-s.min()).map(lambda x:'0 points' if x==0 else ('1 point' if x==1 else ('2 points' if x==2 else '3+ points'))))"
+  },
+  {
+    "id": "liking-underestimated",
+    "claim": "Among 3,206 matched records with both a perceived liking rating and the partner’s actual liking rating, mean actual liking is 6.00 versus perceived liking of 5.36, a gap of 0.64 points; 54.9% underestimate, 26.8% match and 18.3% overestimate the partner’s rating.",
+    "tables": {
+      "people": "data/people.csv"
+    },
+    "code": "(lambda d:pd.Series({'Matched records':len(d),'Actual liking mean':d.i_like_you_partner.mean(),'Perceived liking mean':d.you_like_me.mean(),'Actual minus perceived mean':(d.i_like_you_partner-d.you_like_me).mean(),'Underestimate percent':(d.i_like_you_partner>d.you_like_me).mean()*100,'Match percent':(d.i_like_you_partner==d.you_like_me).mean()*100,'Overestimate percent':(d.i_like_you_partner<d.you_like_me).mean()*100}).round(2))(people.merge(people[['user_id','convo_id','i_like_you']],left_on=['partner_id','convo_id'],right_on=['user_id','convo_id'],suffixes=('','_partner')).dropna(subset=['you_like_me','i_like_you_partner']))"
+  }
+]
