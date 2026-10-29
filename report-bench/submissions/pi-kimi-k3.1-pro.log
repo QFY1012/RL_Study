@@ -11,3 +11,10 @@
   pi-kimi-k3.1-pro/pockets pockets: bash cat > /tmp/analyze.py <<'PY' import pandas as pd, numpy as np pd.set_option('display.width',240); pd
   pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np d=pd.read_csv('data/measurements.csv') h=14.4;w=7.1
   pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd,numpy as np d=pd.read_csv('data/measurements.csv') d['frontDepth
+  pi-kimi-k3.1-pro/hello-stranger hello-stranger: bash find . -maxdepth 3 -type f -print | sort && printf '\n--- data previews ---\n' && for f in data/*; d
+  pi-kimi-k3.1-pro/ab_test-01 ab_test-01: bash pwd && find . -maxdepth 3 -type f -print | sort && printf '\n--- data previews ---\n' && for f in da
+  pi-kimi-k3.1-pro/ab_test-01 ab_test-01: bash python - <<'PY' import pandas as pd, numpy as np p='data/data.csv'; d=pd.read_csv(p) print('shape',d
+  pi-kimi-k3.1-pro/hello-stranger hello-stranger: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/people.csv'); c=pd.read_csv('da
+  pi-kimi-k3.1-pro/ab_test-01 ab_test-01: bash cat > /tmp/explore.py <<'PY' import pandas as pd, numpy as np D=pd.read_csv('data/data.csv') D['arm'
+  pi-kimi-k3.1-pro/ab_test-01 ab_test-01: bash sed -n '200,320p' /tmp/explore.out
+  pi-kimi-k3.1-pro/hello-stranger hello-stranger: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/people.csv'); c=pd.read_csv('da

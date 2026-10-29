@@ -41,7 +41,7 @@
   },
   {
     "id": "liking-underestimated",
-    "claim": "Among 3,206 matched records with both a perceived liking rating and the partner’s actual liking rating, mean actual liking is 6.00 versus perceived liking of 5.36, a gap of 0.64 points; 54.9% underestimate, 26.8% match and 18.3% overestimate the partner’s rating.",
+    "claim": "Among 3,206 matched records with both a perceived liking rating and the partner’s actual liking rating, mean actual liking is 5.99 versus perceived liking of 5.35, a gap of 0.64 points; 54.9% underestimate, 26.8% match and 18.3% overestimate the partner’s rating.",
     "tables": {
       "people": "data/people.csv"
     },

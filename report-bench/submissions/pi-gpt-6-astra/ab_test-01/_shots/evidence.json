@@ -1,0 +1,1167 @@
+{
+ "capture_version": "capture-8",
+ "target": "index.html",
+ "data": [],
+ "viewport": [
+  1440,
+  900
+ ],
+ "verdict": "ok",
+ "page_errors": [],
+ "syntax_errors": [],
+ "hang": false,
+ "frames": [
+  {
+   "file": "frames/00.jpg",
+   "scroll_y": 0,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/01.jpg",
+   "scroll_y": 450,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/02.jpg",
+   "scroll_y": 900,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/03.jpg",
+   "scroll_y": 1350,
+   "settle_ms": 1000,
+   "charts": []
+  },
+  {
+   "file": "frames/04.jpg",
+   "scroll_y": 1368,
+   "settle_ms": 1000,
+   "charts": []
+  }
+ ],
+ "scroll_story": [],
+ "text": [
+  {
+   "tag": "span",
+   "y": 25,
+   "x": 132,
+   "w": 25,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+"
+  },
+  {
+   "tag": "div",
+   "y": 25,
+   "x": 132,
+   "w": 233,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultation analytics"
+  },
+  {
+   "tag": "div",
+   "y": 29,
+   "x": 1104,
+   "w": 204,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Experiment review / 2024"
+  },
+  {
+   "tag": "p",
+   "y": 118,
+   "x": 132,
+   "w": 682,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Online medical consultation · Test vs control"
+  },
+  {
+   "tag": "strong",
+   "y": 130,
+   "x": 925,
+   "w": 122,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18,000"
+  },
+  {
+   "tag": "h1",
+   "y": 150,
+   "x": 132,
+   "w": 682,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Faster responses. Completion holds flat."
+  },
+  {
+   "tag": "p",
+   "y": 180,
+   "x": 925,
+   "w": 383,
+   "in_svg": false,
+   "hidden": false,
+   "text": "users · one record per unique user"
+  },
+  {
+   "tag": "span",
+   "y": 231,
+   "x": 925,
+   "w": 77,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Entry window"
+  },
+  {
+   "tag": "b",
+   "y": 231,
+   "x": 1176,
+   "w": 132,
+   "in_svg": false,
+   "hidden": false,
+   "text": "18 Nov – 29 Dec 2024"
+  },
+  {
+   "tag": "span",
+   "y": 265,
+   "x": 925,
+   "w": 42,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "b",
+   "y": 265,
+   "x": 1237,
+   "w": 71,
+   "in_svg": false,
+   "hidden": false,
+   "text": "9,013 users"
+  },
+  {
+   "tag": "p",
+   "y": 285,
+   "x": 132,
+   "w": 590,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The test group reaches a recorded first response sooner, but overall completion barely changes. Dermatology is the clearest area to investigate."
+  },
+  {
+   "tag": "span",
+   "y": 300,
+   "x": 925,
+   "w": 24,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "b",
+   "y": 300,
+   "x": 1237,
+   "w": 71,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8,987 users"
+  },
+  {
+   "tag": "div",
+   "y": 395,
+   "x": 157,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Consultation completed"
+  },
+  {
+   "tag": "div",
+   "y": 395,
+   "x": 555,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median first response"
+  },
+  {
+   "tag": "div",
+   "y": 395,
+   "x": 953,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Lost before a doctor"
+  },
+  {
+   "tag": "div",
+   "y": 422,
+   "x": 157,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.02%"
+  },
+  {
+   "tag": "div",
+   "y": 422,
+   "x": 555,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "110 s"
+  },
+  {
+   "tag": "div",
+   "y": 422,
+   "x": 953,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "4.74%"
+  },
+  {
+   "tag": "b",
+   "y": 428,
+   "x": 309,
+   "w": 113,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.94%"
+  },
+  {
+   "tag": "b",
+   "y": 428,
+   "x": 672,
+   "w": 62,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88 s"
+  },
+  {
+   "tag": "b",
+   "y": 428,
+   "x": 1086,
+   "w": 94,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5.30%"
+  },
+  {
+   "tag": "span",
+   "y": 438,
+   "x": 270,
+   "w": 39,
+   "in_svg": false,
+   "hidden": false,
+   "text": "→→→"
+  },
+  {
+   "tag": "small",
+   "y": 485,
+   "x": 157,
+   "w": 181,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control → Test · share of all users"
+  },
+  {
+   "tag": "small",
+   "y": 485,
+   "x": 555,
+   "w": 221,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control → Test · recorded responses only"
+  },
+  {
+   "tag": "small",
+   "y": 485,
+   "x": 953,
+   "w": 181,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control → Test · share of all users"
+  },
+  {
+   "tag": "p",
+   "y": 517,
+   "x": 157,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7,933 control completions / 7,903 test completions"
+  },
+  {
+   "tag": "p",
+   "y": 517,
+   "x": 555,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Faster typical response among observed waits"
+  },
+  {
+   "tag": "p",
+   "y": 517,
+   "x": 953,
+   "w": 330,
+   "in_svg": false,
+   "hidden": false,
+   "text": "427 control users / 476 test users lost"
+  },
+  {
+   "tag": "h2",
+   "y": 615,
+   "x": 159,
+   "w": 428,
+   "in_svg": false,
+   "hidden": false,
+   "text": "A shorter wait, with a coverage caveat"
+  },
+  {
+   "tag": "span",
+   "y": 628,
+   "x": 132,
+   "w": 13,
+   "in_svg": false,
+   "hidden": false,
+   "text": "01"
+  },
+  {
+   "tag": "span",
+   "y": 628,
+   "x": 1092,
+   "w": 216,
+   "in_svg": false,
+   "hidden": false,
+   "text": "First response · seconds · lower is faster"
+  },
+  {
+   "tag": "span",
+   "y": 695,
+   "x": 159,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Recorded first-response distribution"
+  },
+  {
+   "tag": "span",
+   "y": 695,
+   "x": 700,
+   "w": 54,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "span",
+   "y": 695,
+   "x": 774,
+   "w": 37,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "span",
+   "y": 695,
+   "x": 878,
+   "w": 116,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Interpretation"
+  },
+  {
+   "tag": "h3",
+   "y": 732,
+   "x": 878,
+   "w": 403,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Response speed is only part of the journey."
+  },
+  {
+   "tag": "span",
+   "y": 733,
+   "x": 503,
+   "w": 28,
+   "in_svg": false,
+   "hidden": false,
+   "text": "110 s"
+  },
+  {
+   "tag": "div",
+   "y": 749,
+   "x": 159,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Median"
+  },
+  {
+   "tag": "span",
+   "y": 762,
+   "x": 461,
+   "w": 23,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88 s"
+  },
+  {
+   "tag": "p",
+   "y": 772,
+   "x": 878,
+   "w": 403,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Both the median and the upper-tail wait are lower in the test group. Yet the share leaving before a doctor is higher."
+  },
+  {
+   "tag": "span",
+   "y": 803,
+   "x": 744,
+   "w": 29,
+   "in_svg": false,
+   "hidden": false,
+   "text": "234 s"
+  },
+  {
+   "tag": "div",
+   "y": 819,
+   "x": 159,
+   "w": 106,
+   "in_svg": false,
+   "hidden": false,
+   "text": "90th percentile"
+  },
+  {
+   "tag": "p",
+   "y": 828,
+   "x": 878,
+   "w": 403,
+   "in_svg": false,
+   "hidden": false,
+   "text": "All 903 missing response times belong to users lost before a doctor. These timing statistics therefore describe users with a response, and cannot measure the waiting experience of those who left."
+  },
+  {
+   "tag": "span",
+   "y": 832,
+   "x": 633,
+   "w": 29,
+   "in_svg": false,
+   "hidden": false,
+   "text": "177 s"
+  },
+  {
+   "tag": "span",
+   "y": 881,
+   "x": 281,
+   "w": 6,
+   "in_svg": false,
+   "hidden": false,
+   "text": "050"
+  },
+  {
+   "tag": "span",
+   "y": 881,
+   "x": 455,
+   "w": 17,
+   "in_svg": false,
+   "hidden": false,
+   "text": "100"
+  },
+  {
+   "tag": "span",
+   "y": 881,
+   "x": 550,
+   "w": 17,
+   "in_svg": false,
+   "hidden": false,
+   "text": "150"
+  },
+  {
+   "tag": "span",
+   "y": 881,
+   "x": 646,
+   "w": 17,
+   "in_svg": false,
+   "hidden": false,
+   "text": "200"
+  },
+  {
+   "tag": "span",
+   "y": 881,
+   "x": 741,
+   "w": 24,
+   "in_svg": false,
+   "hidden": false,
+   "text": "250 s"
+  },
+  {
+   "tag": "p",
+   "y": 916,
+   "x": 159,
+   "w": 652,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Observed responses: 8,586 control / 8,511 test. The 90th percentile is the time at or below which 90% of recorded responses fall."
+  },
+  {
+   "tag": "h2",
+   "y": 1022,
+   "x": 159,
+   "w": 451,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The overall rate hides a department split"
+  },
+  {
+   "tag": "span",
+   "y": 1035,
+   "x": 132,
+   "w": 13,
+   "in_svg": false,
+   "hidden": false,
+   "text": "02"
+  },
+  {
+   "tag": "span",
+   "y": 1035,
+   "x": 960,
+   "w": 348,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion · share of all users within each department and group"
+  },
+  {
+   "tag": "th",
+   "y": 1101,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department"
+  },
+  {
+   "tag": "th",
+   "y": 1101,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control"
+  },
+  {
+   "tag": "th",
+   "y": 1101,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test"
+  },
+  {
+   "tag": "th",
+   "y": 1101,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gap, pp Test − Control"
+  },
+  {
+   "tag": "p",
+   "y": 1101,
+   "x": 937,
+   "w": 344,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Priority for investigation"
+  },
+  {
+   "tag": "h3",
+   "y": 1137,
+   "x": 937,
+   "w": 344,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology loses more users before care."
+  },
+  {
+   "tag": "td",
+   "y": 1146,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "td",
+   "y": 1146,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "85.04%"
+  },
+  {
+   "tag": "td",
+   "y": 1146,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "80.51%"
+  },
+  {
+   "tag": "td",
+   "y": 1146,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "−4.54"
+  },
+  {
+   "tag": "td",
+   "y": 1199,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "td",
+   "y": 1199,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.94%"
+  },
+  {
+   "tag": "td",
+   "y": 1199,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "90.37%"
+  },
+  {
+   "tag": "td",
+   "y": 1199,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+1.44"
+  },
+  {
+   "tag": "p",
+   "y": 1211,
+   "x": 937,
+   "w": 344,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The completion decline coincides with greater loss before a doctor. Review this department’s entry and handoff experience before interpreting faster responses as an overall service improvement."
+  },
+  {
+   "tag": "td",
+   "y": 1252,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT / eye / oral"
+  },
+  {
+   "tag": "td",
+   "y": 1252,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "87.54%"
+  },
+  {
+   "tag": "td",
+   "y": 1252,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.07%"
+  },
+  {
+   "tag": "td",
+   "y": 1252,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.53"
+  },
+  {
+   "tag": "td",
+   "y": 1305,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "td",
+   "y": 1305,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "88.64%"
+  },
+  {
+   "tag": "td",
+   "y": 1305,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.12%"
+  },
+  {
+   "tag": "td",
+   "y": 1305,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.47"
+  },
+  {
+   "tag": "strong",
+   "y": 1337,
+   "x": 937,
+   "w": 85,
+   "in_svg": false,
+   "hidden": false,
+   "text": "7.66%"
+  },
+  {
+   "tag": "strong",
+   "y": 1337,
+   "x": 1073,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.71%"
+  },
+  {
+   "tag": "span",
+   "y": 1351,
+   "x": 1040,
+   "w": 15,
+   "in_svg": false,
+   "hidden": false,
+   "text": "→"
+  },
+  {
+   "tag": "td",
+   "y": 1358,
+   "x": 159,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "td",
+   "y": 1358,
+   "x": 352,
+   "w": 103,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.04%"
+  },
+  {
+   "tag": "td",
+   "y": 1358,
+   "x": 455,
+   "w": 86,
+   "in_svg": false,
+   "hidden": false,
+   "text": "89.28%"
+  },
+  {
+   "tag": "td",
+   "y": 1358,
+   "x": 541,
+   "w": 320,
+   "in_svg": false,
+   "hidden": false,
+   "text": "+0.24"
+  },
+  {
+   "tag": "small",
+   "y": 1376,
+   "x": 937,
+   "w": 85,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Control · 124 lost"
+  },
+  {
+   "tag": "small",
+   "y": 1376,
+   "x": 1073,
+   "w": 102,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Test · 191 lost"
+  },
+  {
+   "tag": "p",
+   "y": 1429,
+   "x": 937,
+   "w": 344,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Department base: 1,618 control users and 1,503 test users."
+  },
+  {
+   "tag": "p",
+   "y": 1430,
+   "x": 159,
+   "w": 702,
+   "in_svg": false,
+   "hidden": false,
+   "text": "pp = percentage points. Gaps use unrounded rates; the vertical rule marks zero. These are descriptive differences, not significance tests."
+  },
+  {
+   "tag": "h2",
+   "y": 1541,
+   "x": 159,
+   "w": 288,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Who is using the service?"
+  },
+  {
+   "tag": "span",
+   "y": 1554,
+   "x": 132,
+   "w": 13,
+   "in_svg": false,
+   "hidden": false,
+   "text": "03"
+  },
+  {
+   "tag": "span",
+   "y": 1554,
+   "x": 1188,
+   "w": 120,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Both groups combined"
+  },
+  {
+   "tag": "h3",
+   "y": 1620,
+   "x": 159,
+   "w": 550,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics and Internal medicine lead volume"
+  },
+  {
+   "tag": "h3",
+   "y": 1620,
+   "x": 785,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Most common recorded complaints"
+  },
+  {
+   "tag": "span",
+   "y": 1661,
+   "x": 159,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Pediatrics"
+  },
+  {
+   "tag": "span",
+   "y": 1661,
+   "x": 605,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5,246 · 29.14%"
+  },
+  {
+   "tag": "li",
+   "y": 1661,
+   "x": 785,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Ear pain with repeated touching 1,082"
+  },
+  {
+   "tag": "span",
+   "y": 1694,
+   "x": 159,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Internal medicine"
+  },
+  {
+   "tag": "span",
+   "y": 1694,
+   "x": 605,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "5,083 · 28.24%"
+  },
+  {
+   "tag": "li",
+   "y": 1705,
+   "x": 785,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Three-day cough, worse at night 1,072"
+  },
+  {
+   "tag": "span",
+   "y": 1727,
+   "x": 159,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Dermatology"
+  },
+  {
+   "tag": "span",
+   "y": 1727,
+   "x": 605,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "3,121 · 17.34%"
+  },
+  {
+   "tag": "li",
+   "y": 1750,
+   "x": 785,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Diarrhea with low fever for one day 1,048"
+  },
+  {
+   "tag": "span",
+   "y": 1760,
+   "x": 159,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Gynecology"
+  },
+  {
+   "tag": "span",
+   "y": 1760,
+   "x": 605,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,490 · 13.83%"
+  },
+  {
+   "tag": "span",
+   "y": 1793,
+   "x": 159,
+   "w": 137,
+   "in_svg": false,
+   "hidden": false,
+   "text": "ENT / eye / oral"
+  },
+  {
+   "tag": "span",
+   "y": 1793,
+   "x": 605,
+   "w": 104,
+   "in_svg": false,
+   "hidden": false,
+   "text": "2,060 · 11.44%"
+  },
+  {
+   "tag": "p",
+   "y": 1814,
+   "x": 785,
+   "w": 496,
+   "in_svg": false,
+   "hidden": false,
+   "text": "English translations of the original complaint labels. Counts exclude 36 missing complaints."
+  },
+  {
+   "tag": "p",
+   "y": 1831,
+   "x": 159,
+   "w": 550,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Bar tracks represent 100% of the 18,000-user population."
+  },
+  {
+   "tag": "p",
+   "y": 1881,
+   "x": 785,
+   "w": 236,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Mean consultation · control → test"
+  },
+  {
+   "tag": "p",
+   "y": 1881,
+   "x": 1045,
+   "w": 236,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Seven-day follow-up · control → test"
+  },
+  {
+   "tag": "strong",
+   "y": 1907,
+   "x": 785,
+   "w": 193,
+   "in_svg": false,
+   "hidden": false,
+   "text": "13.09 → 11.67 min"
+  },
+  {
+   "tag": "strong",
+   "y": 1907,
+   "x": 1045,
+   "w": 192,
+   "in_svg": false,
+   "hidden": false,
+   "text": "12.31% → 12.15%"
+  },
+  {
+   "tag": "p",
+   "y": 1942,
+   "x": 785,
+   "w": 236,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Among completed consultations"
+  },
+  {
+   "tag": "p",
+   "y": 1942,
+   "x": 1045,
+   "w": 236,
+   "in_svg": false,
+   "hidden": false,
+   "text": "8,923 / 8,891 observed users"
+  },
+  {
+   "tag": "h3",
+   "y": 2055,
+   "x": 132,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source & preparation"
+  },
+  {
+   "tag": "h3",
+   "y": 2055,
+   "x": 534,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Denominators & missing data"
+  },
+  {
+   "tag": "h3",
+   "y": 2055,
+   "x": 936,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "How to use these results"
+  },
+  {
+   "tag": "p",
+   "y": 2088,
+   "x": 132,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Source: data/data.csv. Group labels were trimmed, correcting 19 labels with surrounding spaces. Mixed date formats were parsed as dates. Department and complaint labels are translated into English."
+  },
+  {
+   "tag": "p",
+   "y": 2088,
+   "x": 534,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Completion and before-doctor loss use all users in each group. Timing and follow-up summaries exclude missing values. All 2,164 missing durations correspond to incomplete consultations. Follow-up is missing for 186 users; platform is missing for 6."
+  },
+  {
+   "tag": "p",
+   "y": 2088,
+   "x": 936,
+   "w": 372,
+   "in_svg": false,
+   "hidden": false,
+   "text": "The file does not describe the intervention or assignment procedure. Treat group gaps as observed associations, not established causal effects. A follow-up flag does not establish clinical quality. Investigate Dermatology and validate the experiment design before a rollout decision."
+  },
+  {
+   "tag": "span",
+   "y": 2222,
+   "x": 132,
+   "w": 189,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Online consultation / Test group review"
+  },
+  {
+   "tag": "span",
+   "y": 2222,
+   "x": 1033,
+   "w": 275,
+   "in_svg": false,
+   "hidden": false,
+   "text": "Reproducible findings: · Source: data/data.csv"
+  },
+  {
+   "tag": "a",
+   "y": 2224,
+   "x": 1145,
+   "w": 46,
+   "in_svg": false,
+   "hidden": false,
+   "text": "facts.json"
+  }
+ ],
+ "charts": [],
+ "thumb": "thumb.jpg",
+ "page_height": 2268
+}

@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pocket Gap — front and back pocket measurements of men's and women's jeans</title>
+<style>
+:root{
+  --paper:#f6f3ec;
+  --card:#fffdf8;
+  --ink:#1a1d21;
+  --ink-soft:#4b5158;
+  --mut:#7b8189;
+  --line:#e4ded1;
+  --line-soft:#efeade;
+  --men:#2f5191;
+  --men-soft:#b6c6e6;
+  --women:#c2542f;
+  --women-soft:#eec4b3;
+  --gold:#b98a1f;
+  --navy:#141c2e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;font-weight:600}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+a{color:var(--men)}
+
+/* ---------- masthead ---------- */
+.masthead{
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 2px,transparent 2px 5px),
+    linear-gradient(160deg,#1b2740 0%,#141c2e 55%,#0f1626 100%);
+  color:#f2efe7;padding:56px 0 44px;border-bottom:4px solid #0b1120;
+}
+.eyebrow{
+  font:600 12px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  color:#8fa8d8;margin:0 0 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#5f7bb0;display:inline-block}
+.masthead h1{font-size:66px;line-height:1.03;margin:0 0 18px;letter-spacing:-.5px}
+.masthead h1 em{font-style:italic;color:#e0a58a}
+.deck{font-size:19px;line-height:1.55;color:#c9d2e4;max-width:900px;margin:0 0 26px}
+.deck b{color:#fff;font-weight:600}
+.metaline{font-size:13px;color:#7f8db0;border-top:1px solid rgba(255,255,255,.13);padding-top:16px;max-width:1000px}
+.metaline code{color:#c9d2e4;background:rgba(255,255,255,.07);padding:1px 5px;border-radius:3px;font-size:12px}
+
+/* ---------- kpis ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-30px auto 0;position:relative;z-index:3}
+.kpi{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--men);border-radius:8px;padding:16px 18px 14px;box-shadow:0 6px 18px rgba(26,29,33,.07)}
+.kpi.w{border-top-color:var(--women)}
+.kpi.n{border-top-color:var(--gold)}
+.kpi .v{font:600 34px/1.05 "Iowan Old Style",Palatino,Georgia,serif;letter-spacing:-.5px}
+.kpi .v small{font-size:16px;color:var(--mut);font-weight:400}
+.kpi .l{font-size:12.5px;color:var(--ink-soft);margin-top:7px;line-height:1.45}
+.kpi .l b{color:var(--ink)}
+
+/* ---------- nav ---------- */
+nav.toc{position:sticky;top:0;z-index:20;background:rgba(246,243,236,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(140%) blur(6px)}
+nav.toc .wrap{display:flex;gap:4px;align-items:center;height:46px;overflow-x:auto}
+nav.toc a{font:600 12px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;padding:8px 10px;border-radius:5px;white-space:nowrap}
+nav.toc a:hover{background:#eae4d6;color:var(--ink)}
+nav.toc a.active{background:var(--navy);color:#fff}
+
+/* ---------- sections ---------- */
+section{padding:54px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:26px}
+.sec-head .num{font:600 12px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;color:var(--women);text-transform:uppercase}
+.sec-head h2{font-size:31px;margin:0;letter-spacing:-.3px}
+.lede{font-size:18px;line-height:1.6;color:var(--ink-soft);max-width:900px;margin:0 0 24px}
+p{margin:0 0 14px}
+p.body{max-width:880px;color:var(--ink-soft)}
+strong{color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px 16px;box-shadow:0 3px 12px rgba(26,29,33,.05);margin-bottom:22px}
+.card h3{margin:0 0 4px;font-size:19px}
+.card .sub{font-size:13px;color:var(--mut);margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.grid32{display:grid;grid-template-columns:1.55fr 1fr;gap:22px}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--mut);margin-top:10px;line-height:1.5;border-top:1px dotted var(--line);padding-top:9px}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin:2px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:11px;height:11px;border-radius:50%;display:inline-block}
+.swatch.sq{border-radius:2px}
+
+/* callouts */
+.callout{border-left:3px solid var(--women);background:#fbf3ee;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 22px;font-size:15.5px;color:var(--ink-soft)}
+.callout.blue{border-left-color:var(--men);background:#eef2fa}
+.callout b{color:var(--ink)}
+
+/* tables */
+table.spec{width:100%;border-collapse:collapse;font-size:13.5px}
+table.spec th{text-align:left;font:600 11.5px/1.3 ui-sans-serif,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:bottom}
+table.spec td{padding:8px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.spec td.col{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;color:var(--men);white-space:nowrap}
+table.spec tr:hover td{background:#faf7f0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* big data table */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.chip{font:600 12px/1 ui-sans-serif,system-ui,sans-serif;padding:8px 13px;border:1px solid var(--line);background:#fff;border-radius:20px;color:var(--ink-soft);cursor:pointer}
+.chip:hover{border-color:#cfc7b4}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+input.search,select.sel{font:14px/1 ui-sans-serif,system-ui,sans-serif;padding:9px 12px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
+input.search{width:250px}
+.count{font-size:12.5px;color:var(--mut);margin-left:auto}
+.tablewrap{max-height:640px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+table.data{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+table.data th{position:sticky;top:0;background:#f3efe6;text-align:left;font:600 11px/1.25 ui-sans-serif,system-ui,sans-serif;letter-spacing:.04em;color:var(--ink-soft);padding:9px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;z-index:2}
+table.data th:hover{background:#eae4d5}
+table.data th .ar{color:var(--women);font-size:9px}
+table.data td{padding:6px 8px;border-bottom:1px solid #f2eee4;white-space:nowrap}
+table.data td.txt{white-space:normal;min-width:150px}
+table.data tbody tr:hover td{background:#fdf8ee}
+.tag{display:inline-block;font:600 10px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;padding:3px 6px;border-radius:4px}
+.tag.men{background:#e6ecf8;color:var(--men)}
+.tag.women{background:#f8e7df;color:var(--women)}
+.bar-cell{position:relative}
+.bar-cell .b{position:absolute;left:0;top:1px;bottom:1px;background:#eef1f7;z-index:0}
+.bar-cell .t{position:relative;z-index:1}
+
+/* facts appendix */
+.fact{border:1px solid var(--line);border-radius:9px;background:var(--card);padding:15px 18px;margin-bottom:12px}
+.fact .fid{font:600 11px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--women);margin-bottom:8px;display:flex;gap:10px;align-items:center}
+.fact .fid .n{color:var(--mut);font-weight:500}
+.fact p{margin:0 0 11px;font-size:15px;color:var(--ink)}
+.fact pre{margin:0;background:#141c2e;color:#d7e0f2;padding:11px 13px;border-radius:6px;overflow-x:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.fact .file{font-size:11.5px;color:var(--mut);margin-top:8px;font-family:ui-monospace,Menlo,monospace}
+
+footer{margin-top:60px;border-top:1px solid var(--line);background:#efebe1;padding:28px 0 46px;font-size:13px;color:var(--mut)}
+footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--mut);line-height:1.55}
+ul.tight{margin:0 0 14px;padding-left:20px;color:var(--ink-soft);font-size:15px}
+ul.tight li{margin-bottom:7px}
+#tip{position:fixed;display:none;pointer-events:none;z-index:99;max-width:290px;background:#141c2e;color:#eef1f7;font:12.5px/1.5 ui-sans-serif,system-ui,sans-serif;padding:9px 11px;border-radius:6px;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+#tip.on{display:block}
+#tip b{color:#fff}
+#tip .r{color:#e0a58a}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow"><span class="dot"></span> Data report <span class="dot"></span> 80 pairs of jeans <span class="dot"></span> 20 brands <span class="dot"></span> men's &amp; women's</p>
+    <h1>The Pocket <em>Gap</em></h1>
+    <p class="deck">Front and back pocket measurements of men's and women's jeans from popular brands. Across the 80 pairs in this file, men's front pockets average <b>23.13</b> in maximum height against <b>14.33</b> for women's — a ratio of <b>1.61</b>. Back pockets, pocket widths and prices sit close to parity. The gap is deep, front-only, and it does not shrink as the price goes up.</p>
+    <p class="metaline">Source: <code>data/measurements.csv</code> — 80 rows &times; 16 columns, no missing values. Every number on this page is computed from that file in the browser; the pandas expression behind each headline figure is listed in <a href="#method" style="color:#a9bde2">the appendix</a>.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi w">
+      <div class="v">1.61<small>&times;</small></div>
+      <div class="l">men's mean <b>front pocket height</b> &divide; women's — 23.13 vs 14.33</div>
+    </div>
+    <div class="kpi">
+      <div class="v">1.06<small>&times;</small></div>
+      <div class="l">the same ratio for <b>back pocket height</b> — 16.01 vs 15.12</div>
+    </div>
+    <div class="kpi n">
+      <div class="v">39<small> / 40</small></div>
+      <div class="l">women's jeans whose front pocket is shallower than the <b>shallowest men's</b> (20.0)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">$81.18<small> vs $80.32</small></div>
+      <div class="l">mean price, men's vs women's — <b>parity in cost</b>, not in pocket</div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="wrap" id="toc">
+    <a href="#data">The data</a>
+    <a href="#gap">The gap</a>
+    <a href="#where">Where it is</a>
+    <a href="#brands">Brand by brand</a>
+    <a href="#price">Price</a>
+    <a href="#labels">Labels</a>
+    <a href="#fabric">Fabric</a>
+    <a href="#notes">Data notes</a>
+    <a href="#table">All 80 rows</a>
+    <a href="#method">Appendix</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ 1. THE DATA ============ -->
+<section id="data">
+  <div class="sec-head"><span class="num">01</span><h2>What was measured</h2></div>
+  <p class="lede">Each row is one pair of jeans: a brand, a product name, a fit label, a fabric string, a price, and nine pocket measurements — maximum and minimum height and width for the front pocket and the back pocket, plus the height of the front rivet.</p>
+
+  <div class="grid32">
+    <div class="card">
+      <h3>A balanced sample of 20 brands</h3>
+      <p class="sub">80 jeans &middot; 40 men's, 40 women's &middot; exactly two of each per brand</p>
+      <p style="font-size:14.5px;color:var(--ink-soft)">Every one of the 20 brands contributes two men's jeans and two women's jeans, so the comparisons below are never driven by an uneven sample. Fit labels differ by side: women's jeans are labelled <b>skinny</b> (20), <b>straight</b> (16) or <b>boot-cut</b> (4); men's are labelled <b>skinny</b> (12), <b>straight</b> (12), <b>slim</b> (8), <b>boot-cut</b> (7) or <b>regular</b> (1).</p>
+      <div id="chart-counts"></div>
+      <figcaption>Counts of jeans by fit label and side, as recorded in the <b>style</b> and <b>menWomen</b> columns.</figcaption>
+    </div>
+    <div class="card">
+      <h3>The nine pocket numbers</h3>
+      <p class="sub">schematic only — the file does not say where each measurement starts and ends</p>
+      <div id="sketch"></div>
+      <figcaption>Front pockets carry six numbers (<b>maxHeightFront</b>, <b>minHeightFront</b>, <b>rivetHeightFront</b>, <b>maxWidthFront</b>, <b>minWidthFront</b>), back pockets four (<b>maxHeightBack</b>, <b>minHeightBack</b>, <b>maxWidthBack</b>, <b>minWidthBack</b>).</figcaption>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Column by column</h3>
+    <p class="sub">what each field holds, with the range it takes across the 80 rows</p>
+    <table class="spec" id="specTable">
+      <thead><tr><th>Column</th><th>What it is</th><th class="num">Men's mean</th><th class="num">Women's mean</th><th class="num">All: min</th><th class="num">All: max</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="note" style="margin-top:14px">The file records no units. Garment specs of this kind are normally centimetres, and the numbers behave like centimetres (a 23 &times; 16 front pocket on men's jeans, a 14 &times; 15 one on women's), so this page reads them as cm — but every figure quoted is exactly the value in the file.</p>
+  </div>
+
+  <div class="callout blue"><b>No missing values.</b> All 1,280 cells of the table are filled. The only cleaning needed is cosmetic: the brand column holds 22 raw spellings that reduce to 20 brands once case and whitespace are normalised.</div>
+</section>
+
+<!-- ============ 2. THE GAP ============ -->
+<section id="gap">
+  <div class="sec-head"><span class="num">02</span><h2>One picture of the gap</h2></div>
+  <p class="lede">Every one of the 80 jeans, plotted by the maximum height of its front pocket. The two lanes barely touch: the shallowest men's pocket in the file (20.0) is deeper than 39 of the 40 women's jeans.</p>
+
+  <div class="card">
+    <h3>Maximum front pocket height, all 80 jeans</h3>
+    <p class="sub">each dot is one pair of jeans &middot; dashed line = group mean &middot; hover for the product</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--women)"></i>women's jeans (40)</span>
+      <span><i class="swatch" style="background:var(--men)"></i>men's jeans (40)</span>
+      <span><i class="swatch sq" style="background:#e7dcc6"></i>the only overlap, 20.0&ndash;21.5</span>
+    </div>
+    <div id="chart-strip"></div>
+    <figcaption>Men's heights run 20.0&ndash;28.0 (mean 23.13, sd 2.06); women's run 11.5&ndash;21.5 (mean 14.33, sd 2.10). The spread inside each group is almost identical — the whole difference is a shift.</figcaption>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Means, side by side</h3>
+      <p class="sub">all eight pocket measurements</p>
+      <div id="chart-means"></div>
+      <figcaption>Mean of each recorded measurement, men's (blue) against women's (rust).</figcaption>
+    </div>
+    <div class="card">
+      <h3>Front pocket area</h3>
+      <p class="sub">maximum height &times; maximum width, as a rough proxy for pocket room</p>
+      <div id="chart-area"></div>
+      <figcaption>Multiplying the two front-pocket numbers gives 378.41 for the average men's jean against 217.97 for the average women's — a ratio of 1.74.</figcaption>
+      <div class="callout" style="margin-top:6px">On the <b>minimum</b> front height — the shallowest point of the opening — <b>34 of the 40</b> women's jeans fall below 15, against <b>5 of the 40</b> men's.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. WHERE THE GAP IS ============ -->
+<section id="where">
+  <div class="sec-head"><span class="num">03</span><h2>Where the gap is — and where it isn't</h2></div>
+  <p class="lede">Divide each men's mean by the matching women's mean and the pattern is unmistakable: the gap is a front-pocket, vertical phenomenon. Widths are near parity, and back pockets are near parity.</p>
+
+  <div class="grid32">
+    <div class="card">
+      <h3>Men's mean &divide; women's mean, for each measurement</h3>
+      <p class="sub">1.00 = exact parity</p>
+      <div id="chart-ratio"></div>
+      <figcaption>Maximum front pocket height is the outlier at 1.61. Maximum front width is 1.08, maximum back height 1.06, maximum back width 1.03.</figcaption>
+    </div>
+    <div class="card">
+      <h3>Back pockets: close to parity</h3>
+      <p class="sub">means of the four back-pocket numbers</p>
+      <table class="spec">
+        <thead><tr><th>Measurement</th><th class="num">Men's</th><th class="num">Women's</th><th class="num">Ratio</th></tr></thead>
+        <tbody id="backTable"></tbody>
+      </table>
+      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:14px">Women's back pockets are only slightly smaller — 15.12 vs 16.01 in maximum height. The front rivet, by contrast, sits higher on men's jeans on average, <b>7.06 vs 6.25</b>, and the men's rivet range is wider (4.5&ndash;9.2 against 4.5&ndash;7.5).</p>
+      <div class="callout" style="margin-top:12px">Read together: the visible, decorative back pocket is treated much the same on both sides of the gender split. The pocket you actually put things in is not.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. BRANDS ============ -->
+<section id="brands">
+  <div class="sec-head"><span class="num">04</span><h2>Brand by brand</h2></div>
+  <p class="lede">The gap is not one brand's habit — it is the industry's. Fifteen of the 20 brands give men's jeans a mean front pocket height at least 1.5&times; the women's. Levi's is widest at 2.09; Abercrombie is the only brand close to parity.</p>
+
+  <div class="card">
+    <h3>Mean maximum front pocket height per brand</h3>
+    <p class="sub">sorted by the men's-to-women's ratio &middot; each brand = two men's jeans and two women's jeans</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--women)"></i>women's mean</span>
+      <span><i class="swatch" style="background:var(--men)"></i>men's mean</span>
+      <span style="color:var(--mut)">label at right = men's &divide; women's</span>
+    </div>
+    <div id="chart-brands"></div>
+    <figcaption>Levi's (25.75 vs 12.35, ratio 2.09), Guess (24.00 vs 12.00, 2.00) and Wrangler (27.75 vs 14.50, 1.91) sit at the top; Abercrombie (22.25 vs 19.75, 1.13), American Eagle (21.50 vs 17.50, 1.23) and H&amp;M (20.75 vs 16.75, 1.24) at the bottom. Brand spellings are normalised, so Guess and 7 for All Mankind appear once each.</figcaption>
+  </div>
+</section>
+
+<!-- ============ 5. PRICE ============ -->
+<section id="price">
+  <div class="sec-head"><span class="num">05</span><h2>Money does not buy pocket</h2></div>
+  <p class="lede">Mean price is effectively identical — $81.18 for men's jeans, $80.32 for women's. Within each side, the correlation between price and front pocket height is slightly <em>negative</em>: -0.262 for men's, -0.151 for women's.</p>
+
+  <div class="card">
+    <h3>Price against front pocket area</h3>
+    <p class="sub">x = price, y = maxHeightFront &times; maxWidthFront &middot; dashed lines = group means</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--women)"></i>women's jeans</span>
+      <span><i class="swatch" style="background:var(--men)"></i>men's jeans</span>
+    </div>
+    <div id="chart-scatter"></div>
+    <figcaption>The two clouds sit at the same prices but different heights. The cheapest jeans in the file — H&amp;M's women's <b>Skinny Ankle High Waist</b> at <b>$9.99</b> — carry a maximum front pocket height of <b>19.0</b>, the second largest of any women's jean here. The most expensive — True Religion's women's <b>Slim Straight</b> at <b>$249.0</b> — measures <b>14.5</b>.</figcaption>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Price per unit of front pocket area</h3>
+      <p class="sub">price &divide; (maximum front height &times; maximum front width)</p>
+      <div id="chart-cpa"></div>
+      <figcaption>Women's jeans cost <b>0.386</b> per unit of front pocket area on average (median 0.341); men's cost <b>0.219</b> (median 0.185). Same shelf price, less pocket.</figcaption>
+    </div>
+    <div class="card">
+      <h3>Price distribution</h3>
+      <p class="sub">mean, median and range by side</p>
+      <table class="spec">
+        <thead><tr><th>Side</th><th class="num">Mean</th><th class="num">Median</th><th class="num">Cheapest</th><th class="num">Dearest</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag men">men's</span></td><td class="num">81.18</td><td class="num">69.72</td><td class="num">39.99</td><td class="num">209.0</td></tr>
+          <tr><td><span class="tag women">women's</span></td><td class="num">80.32</td><td class="num">78.75</td><td class="num">9.99</td><td class="num">249.0</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:14px">The means line up almost exactly. The medians go the other way — women's jeans in this sample are <em>more</em> expensive in the middle of the range (78.75 vs 69.72), while the men's median is pulled down by budget workwear brands.</p>
+      <div class="callout" style="margin-top:12px">Both extremes of the price range belong to women's jeans, and neither extreme is a deep pocket: the $9.99 H&amp;M pair measures 19.0, the $249.0 True Religion pair 14.5.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. LABELS ============ -->
+<section id="labels">
+  <div class="sec-head"><span class="num">06</span><h2>The fit label tells you nothing</h2></div>
+  <p class="lede">If pockets followed the fit label, a boot-cut or straight jean would carry more room than a skinny one. They don't. Within each side the style means are almost flat, and the two sides never meet.</p>
+
+  <div class="grid32">
+    <div class="card">
+      <h3>Mean maximum front pocket height by style label</h3>
+      <p class="sub">bar length = mean; n = number of jeans with that label</p>
+      <div id="chart-style"></div>
+      <figcaption>Women's means: boot-cut 14.25 (n=4), skinny 14.27 (n=20), straight 14.42 (n=16) — a spread of 0.17. Men's means run from 21.50 (the single "regular" jean) to 23.90 for the 8 slim jeans. Gender explains the height; the label does not.</figcaption>
+    </div>
+    <div class="card">
+      <h3>When names and labels disagree</h3>
+      <p class="sub">six women's jeans labelled <b>straight</b> have "boot" in the product name</p>
+      <table class="spec">
+        <thead><tr><th>Brand</th><th>Product name</th><th>Style label</th></tr></thead>
+        <tbody id="bootTable"></tbody>
+      </table>
+      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:14px">Six of the eight "boot"-named straight jeans come from brands whose men's equivalents are labelled <b>boot-cut</b>. Fit labels in this file are best read as marketing categories, not measurements — which is why every comparison on this page uses the measured numbers instead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. FABRIC ============ -->
+<section id="fabric">
+  <div class="sec-head"><span class="num">07</span><h2>Fabric and finish</h2></div>
+  <p class="lede">The two sides are also built differently. Women's jeans lean on stretch fibre; every rigid, 100%-cotton jean in the file is men's.</p>
+
+  <div class="grid32">
+    <div class="card">
+      <h3>Cotton share of the fabric</h3>
+      <p class="sub">percentage parsed out of the fabric string &middot; each dot is one pair of jeans</p>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--women)"></i>women's (mean 80.8%)</span>
+        <span><i class="swatch" style="background:var(--men)"></i>men's (mean 93.3%)</span>
+      </div>
+      <div id="chart-cotton"></div>
+      <figcaption>Men's jeans average 93.3% cotton (range 53.0&ndash;100.0), women's 80.8% (range 30.0&ndash;99.0). All eight 100%-cotton jeans in the sample are men's: 8 on the men's side, 0 on the women's.</figcaption>
+    </div>
+    <div class="card">
+      <h3>The cutout flag</h3>
+      <p class="sub">9 of the 80 jeans carry <b>cutout = TRUE</b></p>
+      <table class="spec">
+        <thead><tr><th>Group</th><th class="num">Jeans</th><th class="num">Mean price</th><th class="num">Men's</th><th class="num">Women's</th></tr></thead>
+        <tbody>
+          <tr><td>cutout = TRUE</td><td class="num">9</td><td class="num">133.10</td><td class="num">6</td><td class="num">3</td></tr>
+          <tr><td>cutout = FALSE</td><td class="num">71</td><td class="num">74.11</td><td class="num">34</td><td class="num">37</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:14px">Cutout jeans cost far more on average — <b>133.10</b> against <b>74.11</b> — and they are mostly men's (6 of the 9). They come from four brands only: True Religion (4), Guess (2), J. Crew (2) and Uniqlo (1).</p>
+      <div class="callout" style="margin-top:12px">The file does not define what "cutout" means, so this page treats it as a flag rather than a feature. It is the one column that separates strongly on price.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. DATA NOTES ============ -->
+<section id="notes">
+  <div class="sec-head"><span class="num">08</span><h2>Reading this file with care</h2></div>
+  <p class="lede">Four things a reader should know before quoting these numbers.</p>
+  <ul class="tight">
+    <li><b>Brand spellings are inconsistent.</b> The brand column holds 22 distinct raw strings that reduce to 20 brands once case and surrounding whitespace are normalised — "Guess " with a trailing space, and "7 for all Mankind" beside "7 for All Mankind". Everything here uses the normalised form.</li>
+    <li><b>"min" is not always smaller than "max".</b> In 14 rows the recorded <b>minHeightFront</b> is larger than <b>maxHeightFront</b> — 12 of them women's jeans, 2 men's. The two columns are therefore not the two ends of one measurement, and this report quotes them separately rather than averaging or differencing them.</li>
+    <li><b>Fit labels drift from product names.</b> Six women's jeans labelled "straight" have "boot" in the name, including Levi's <i>Classic Bootcut</i>.</li>
+    <li><b>No units, one size, one sample.</b> The file states no unit, records no waist size, and gives one measurement per product rather than a range across sizes — so nothing here speaks to how pockets scale with size, and nothing measures a pocket after wear.</li>
+  </ul>
+</section>
+
+<!-- ============ 9. TABLE ============ -->
+<section id="table">
+  <div class="sec-head"><span class="num">09</span><h2>All 80 pairs</h2></div>
+  <p class="lede">The full file, sortable and filterable. Shaded cells mark the deeper pockets; hover any row for its fabric string.</p>
+
+  <div class="card">
+    <div class="controls">
+      <button class="chip on" data-g="all">All 80</button>
+      <button class="chip" data-g="men">Men's 40</button>
+      <button class="chip" data-g="women">Women's 40</button>
+      <select class="sel" id="styleSel"><option value="all">All fit labels</option></select>
+      <input class="search" id="q" type="search" placeholder="Search brand or product…">
+      <span class="count" id="rowCount"></span>
+    </div>
+    <div class="tablewrap">
+      <table class="data" id="dataTable">
+        <thead><tr id="headRow"></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <figcaption>Columns are the file's own, in order. <b>Fabric</b> is abbreviated to its cotton share; the full string appears on hover. <b>Area</b> is computed on this page as maxHeightFront &times; maxWidthFront.</figcaption>
+  </div>
+</section>
+
+<!-- ============ 10. METHOD ============ -->
+<section id="method">
+  <div class="sec-head"><span class="num">10</span><h2>Appendix: every number, and the code behind it</h2></div>
+  <p class="lede">Each finding below was computed from <code style="font-size:13px;background:#efeade;padding:1px 5px;border-radius:3px">data/measurements.csv</code> with the pandas expression shown, loaded as <code style="font-size:13px;background:#efeade;padding:1px 5px;border-radius:3px">measurements = pd.read_csv("data/measurements.csv")</code> with <b>pd</b> and <b>np</b> in scope. Run any of them to reproduce the figure exactly.</p>
+  <div id="facts"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="max-width:640px">
+      <b style="color:var(--ink)">The Pocket Gap</b> — a report on <span style="font-family:ui-monospace,Menlo,monospace">data/measurements.csv</span>: front and back pocket measurements of men's and women's jeans from 20 popular brands, 80 pairs in total.
+    </div>
+    <div style="max-width:420px">Built as a single offline HTML file. No external libraries, fonts or network calls: the data is embedded, the charts are hand-drawn SVG, and the statistics are recomputed in the browser from those rows.</div>
+  </div>
+</footer>
+
+<div id="tip"></div>
+
+<script>
+const DATA = __DATA__;
+const FACTS = __FACTS__;
+
+/* ---------------- helpers ---------------- */
+const C = {men:'#2f5191', women:'#c2542f', menS:'#93a9d4', womenS:'#e2a68d', ink:'#1a1d21', mut:'#8b9099', grid:'#ece7db'};
+const byG = k => DATA.filter(d => d.menWomen === k);
+const mean = a => a.reduce((s,v)=>s+v,0)/a.length;
+const col = (rows,c) => rows.map(r=>r[c]);
+const avg = (rows,c) => mean(col(rows,c));
+const f2 = v => (+v).toFixed(2);
+const f1 = v => (+v).toFixed(1);
+const money = v => '$' + (+v).toFixed(2);
+const brandKey = b => b.trim().toLowerCase();
+const nice = k => k.split(' ').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ');
+const cotton = d => { const m = d.fabric.toLowerCase().match(/(\d+)%\s*cott+on/); return m ? +m[1] : null; };
+const area = d => d.maxHeightFront * d.maxWidthFront;
+const jit = i => { const x = Math.sin(i*127.1+311.7)*43758.5453; return ((x-Math.floor(x))-0.5)*2; };
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function tt(html){ return 'data-tip="'+esc(html)+'"'; }
+function rowTip(d, extra){
+  return `<b>${esc(d.brand)}</b> — ${esc(d.name)}<br><span class="r">${d.menWomen==='men'?"men's":"women's"} ${esc(d.style)}</span> &middot; ${money(d.price)}<br>${extra}`;
+}
+const tip = document.getElementById('tip');
+function place(e){
+  const pad=16, r=tip.getBoundingClientRect();
+  let x=e.clientX+pad, y=e.clientY+pad;
+  if(x+r.width > innerWidth-10) x = e.clientX-r.width-pad;
+  if(y+r.height > innerHeight-10) y = e.clientY-r.height-pad;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function bind(root){
+  root.querySelectorAll('[data-tip]').forEach(el=>{
+    el.addEventListener('mouseenter', e=>{ tip.innerHTML = el.getAttribute('data-tip'); tip.classList.add('on'); place(e); });
+    el.addEventListener('mousemove', place);
+    el.addEventListener('mouseleave', ()=> tip.classList.remove('on'));
+  });
+}
+function mount(id, svg){ const h=document.getElementById(id); h.innerHTML=svg; bind(h); return h; }
+const svgOpen = (w,h)=>`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif">`;
+
+/* ---------------- 1. counts by style ---------------- */
+(function(){
+  const W=640, rowH=30, groups=[['women',byG('women')],['men',byG('men')]];
+  const rows=[]; groups.forEach(([k,rs])=>{
+    const m={}; rs.forEach(r=>m[r.style]=(m[r.style]||0)+1);
+    Object.keys(m).sort((a,b)=>m[b]-m[a]).forEach(s=>rows.push({k,s,n:m[s]}));
+  });
+  const H=rows.length*rowH+54, L=110, R=54, maxN=Math.max(...rows.map(r=>r.n));
+  const X=n=>L+n/maxN*(W-L-R);
+  let s=svgOpen(W,H);
+  let lastK=null;
+  rows.forEach((r,i)=>{
+    const y=20+i*rowH;
+    if(r.k!==lastK){ if(lastK!==null){ s+=`<line x1="${L}" y1="${y-6}" x2="${W-R}" y2="${y-6}" stroke="${C.grid}" stroke-dasharray="3 3"/>`; } lastK=r.k; }
+    const c = r.k==='men'?C.men:C.women;
+    s+=`<text x="${L-10}" y="${y+13}" text-anchor="end" font-size="12" fill="${C.ink}">${esc(r.s)}</text>`;
+    s+=`<g ${tt(`<b>${esc(r.s)}</b> &middot; ${r.k==='men'?"men's":"women's"}<br>${r.n} of 40 jeans`)}>`;
+    s+=`<rect x="${L}" y="${y+3}" width="${X(r.n)-L}" height="14" rx="3" fill="${c}" opacity=".85"/>`;
+    s+=`<text x="${X(r.n)+7}" y="${y+14}" font-size="11.5" fill="${C.mut}">${r.n}</text></g>`;
+    if(i===0||rows[i-1].k!==r.k) s+=`<text x="6" y="${y+13}" font-size="10.5" letter-spacing=".09em" fill="${c}" font-weight="700">${r.k==='men'?'MEN':'WOMEN'}</text>`;
+  });
+  s+=`</svg>`; mount('chart-counts', s);
+})();
+
+/* ---------------- 2. pocket schematic ---------------- */
+(function(){
+  const W=560,H=340;
+  let s=svgOpen(W,H);
+  s+=`<rect x="0" y="0" width="${W}" height="${H}" fill="#fbf9f4" rx="8"/>`;
+  // waistband
+  s+=`<path d="M60 40 H500" stroke="#c9c2b1" stroke-width="14" stroke-linecap="round"/>`;
+  s+=`<text x="60" y="26" font-size="11" fill="#8b9099" letter-spacing=".08em">WAISTBAND</text>`;
+  // pocket shape
+  s+=`<path d="M120 47 V190 Q120 250 200 250 H300 Q360 250 360 190 V47" fill="#eef2fa" stroke="#2f5191" stroke-width="2.5" stroke-dasharray="7 5"/>`;
+  // max height arrow (outer)
+  const ax=88;
+  s+=arrowV(ax,47,250,'#2f5191'); s+=label(ax-8,150,'max height','#2f5191','end');
+  // min height arrow (inner)
+  const bx=150;
+  s+=arrowV(bx,47,205,'#c2542f'); s+=label(bx+8,130,'min height','#c2542f','start');
+  // max width
+  s+=arrowH(120,360,286,'#2f5191'); s+=label(240,304,'max width','#2f5191','middle');
+  // min width
+  s+=arrowH(150,330,238,'#c2542f'); s+=label(240,226,'min width','#c2542f','middle');
+  // rivet
+  s+=`<circle cx="132" cy="112" r="7" fill="#b98a1f" stroke="#fff" stroke-width="2"/>`;
+  s+=arrowV(420,47,112,'#b98a1f'); s+=label(430,84,'rivet height','#b98a1f','start');
+  s+=`<text x="60" y="322" font-size="11" fill="#8b9099">schematic — the file does not define the measurement points</text>`;
+  s+=`</svg>`; mount('sketch', s);
+  function arrowV(x,y1,y2,c){ return `<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="${c}" stroke-width="1.6"/><path d="M${x-4} ${y1+7} L${x} ${y1} L${x+4} ${y1+7}" fill="none" stroke="${c}" stroke-width="1.6"/><path d="M${x-4} ${y2-7} L${x} ${y2} L${x+4} ${y2-7}" fill="none" stroke="${c}" stroke-width="1.6"/>`; }
+  function arrowH(x1,x2,y,c){ return `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${c}" stroke-width="1.6"/><path d="M${x1+7} ${y-4} L${x1} ${y} L${x1+7} ${y+4}" fill="none" stroke="${c}" stroke-width="1.6"/><path d="M${x2-7} ${y-4} L${x2} ${y} L${x2-7} ${y+4}" fill="none" stroke="${c}" stroke-width="1.6"/>`; }
+  function label(x,y,t,c,a){ return `<text x="${x}" y="${y}" font-size="12.5" fill="${c}" text-anchor="${a}" font-weight="600">${t}</text>`; }
+})();
+
+/* ---------------- 3. spec table ---------------- */
+(function(){
+  const fields=[
+    ['price','List price in US dollars, as recorded',2],
+    ['maxHeightFront','Maximum height of the front pocket',2],
+    ['minHeightFront','Minimum height of the front pocket',2],
+    ['rivetHeightFront','Height of the front pocket rivet',2],
+    ['maxWidthFront','Maximum width of the front pocket',2],
+    ['minWidthFront','Minimum width of the front pocket',2],
+    ['maxHeightBack','Maximum height of the back pocket',2],
+    ['minHeightBack','Minimum height of the back pocket',2],
+    ['maxWidthBack','Maximum width of the back pocket',2],
+    ['minWidthBack','Minimum width of the back pocket',2]
+  ];
+  const tb=document.querySelector('#specTable tbody');
+  tb.innerHTML = fields.map(([c,desc])=>{
+    const v=col(DATA,c);
+    return `<tr><td class="col">${c}</td><td style="color:var(--ink-soft)">${desc}</td>
+      <td class="num">${f2(avg(byG('men'),c))}</td><td class="num">${f2(avg(byG('women'),c))}</td>
+      <td class="num" style="color:var(--mut)">${f2(Math.min(...v))}</td><td class="num" style="color:var(--mut)">${f2(Math.max(...v))}</td></tr>`;
+  }).join('') + `<tr><td class="col">cutout</td><td style="color:var(--ink-soft)">Flag, TRUE on 9 of the 80 jeans</td><td class="num">6 TRUE</td><td class="num">3 TRUE</td><td class="num" style="color:var(--mut)" colspan="2">71 FALSE overall</td></tr>`;
+})();
+
+/* ---------------- 4. strip plot ---------------- */
+(function(){
+  const W=1160,H=340,L=70,R=34,T=34,B=54;
+  const x0=10,x1=29;
+  const X=v=>L+(v-x0)/(x1-x0)*(W-L-R);
+  const lanes=[{k:'women',cy:106},{k:'men',cy:236}];
+  let s=svgOpen(W,H);
+  s+=`<rect x="${X(20)}" y="${T-6}" width="${X(21.5)-X(20)}" height="${H-T-B+6}" fill="#e7dcc6" opacity=".85"/>`;
+  s+=`<text x="${X(20.75)}" y="${T-12}" font-size="10.5" fill="#8a7c5c" text-anchor="middle">only overlap</text>`;
+  for(let v=x0;v<=x1;v++){
+    const maj = v%2===0;
+    s+=`<line x1="${X(v)}" y1="${T-6}" x2="${X(v)}" y2="${H-B}" stroke="${C.grid}" stroke-width="${maj?1:0.6}" ${maj?'':'opacity=".6"'}/>`;
+    if(maj) s+=`<text x="${X(v)}" y="${H-B+20}" font-size="11.5" fill="${C.mut}" text-anchor="middle">${v}</text>`;
+  }
+  s+=`<text x="${(L+W-R)/2}" y="${H-8}" font-size="12" fill="${C.mut}" text-anchor="middle">maximum front pocket height (maxHeightFront)</text>`;
+  lanes.forEach(ln=>{
+    const rs=byG(ln.k).slice().sort((a,b)=>a.maxHeightFront-b.maxHeightFront);
+    const m=avg(rs,'maxHeightFront');
+    s+=`<line x1="${L}" y1="${ln.cy}" x2="${W-R}" y2="${ln.cy}" stroke="#dcd5c6" stroke-width="1"/>`;
+    s+=`<text x="${L-12}" y="${ln.cy-4}" font-size="12" fill="${C.ink}" text-anchor="end" font-weight="600">${ln.k==='men'?"men's":"women's"}</text>`;
+    s+=`<text x="${L-12}" y="${ln.cy+12}" font-size="11" fill="${C.mut}" text-anchor="end">n=40</text>`;
+    rs.forEach((d,i)=>{
+      const y=ln.cy + jit(i)*30 + (i%2?5:-5);
+      const c=ln.k==='men'?C.men:C.women;
+      s+=`<circle cx="${X(d.maxHeightFront).toFixed(1)}" cy="${y.toFixed(1)}" r="5.4" fill="${c}" fill-opacity=".78" stroke="#fffdf8" stroke-width="1.1" ${tt(rowTip(d,`max front height <b>${f1(d.maxHeightFront)}</b> &middot; min ${f1(d.minHeightFront)}<br>max front width ${f1(d.maxWidthFront)}`))} style="cursor:pointer"/>`;
+    });
+    s+=`<line x1="${X(m)}" y1="${ln.cy-44}" x2="${X(m)}" y2="${ln.cy+44}" stroke="${C.ink}" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+    s+=`<text x="${X(m)}" y="${ln.cy-50}" font-size="11.5" fill="${C.ink}" text-anchor="middle" font-weight="700">mean ${f2(m)}</text>`;
+  });
+  s+=`</svg>`; mount('chart-strip', s);
+})();
+
+/* ---------------- 5. means grouped bars ---------------- */
+(function(){
+  const cats=[
+    ['maxHeightFront','Front, max height'],['minHeightFront','Front, min height'],
+    ['maxWidthFront','Front, max width'],['minWidthFront','Front, min width'],
+    ['maxHeightBack','Back, max height'],['minHeightBack','Back, min height'],
+    ['maxWidthBack','Back, max width'],['minWidthBack','Back, min width']
+  ];
+  const W=560,H=360,L=44,R=12,T=18,B=88, maxV=26;
+  const Y=v=>H-B-v/maxV*(H-B-T);
+  const bw=(W-L-R)/cats.length;
+  let s=svgOpen(W,H);
+  for(let v=0;v<=maxV;v+=5){ s+=`<line x1="${L}" y1="${Y(v)}" x2="${W-R}" y2="${Y(v)}" stroke="${C.grid}"/><text x="${L-8}" y="${Y(v)+4}" font-size="10.5" fill="${C.mut}" text-anchor="end">${v}</text>`; }
+  cats.forEach(([c,lab],i)=>{
+    const x=L+i*bw+bw*0.14, w=bw*0.32;
+    [['men',x],['women',x+w+3]].forEach(([k,bx])=>{
+      const v=avg(byG(k),c), col2=k==='men'?C.men:C.women;
+      s+=`<g ${tt(`<b>${lab}</b><br>${k==='men'?"men's":"women's"} mean <b>${f2(v)}</b>`)} style="cursor:pointer">`;
+      s+=`<rect x="${bx.toFixed(1)}" y="${Y(v).toFixed(1)}" width="${w.toFixed(1)}" height="${(H-B-Y(v)).toFixed(1)}" rx="2" fill="${col2}" opacity=".9"/>`;
+      s+=`<text x="${(bx+w/2).toFixed(1)}" y="${(Y(v)-5).toFixed(1)}" font-size="9.5" fill="${col2}" text-anchor="middle" font-weight="700">${f1(v)}</text></g>`;
+    });
+    const words=lab.split(', ');
+    s+=`<text x="${(L+i*bw+bw/2).toFixed(1)}" y="${H-B+18}" font-size="10.5" fill="${C.ink}" text-anchor="middle">${words[0]}</text>`;
+    s+=`<text x="${(L+i*bw+bw/2).toFixed(1)}" y="${H-B+31}" font-size="10" fill="${C.mut}" text-anchor="middle">${words[1]}</text>`;
+  });
+  s+=`</svg>`; mount('chart-means', s);
+})();
+
+/* ---------------- 6. area comparison ---------------- */
+(function(){
+  const W=560,H=200,L=90,R=110,T=26,B=34;
+  const vals=[['men',avg(byG('men'),'maxHeightFront')*0+mean(byG('men').map(area)),C.men],['women',mean(byG('women').map(area)),C.women]];
+  const maxV=Math.max(...vals.map(v=>v[1]))*1.12;
+  const X=v=>L+v/maxV*(W-L-R);
+  let s=svgOpen(W,H);
+  vals.forEach(([k,v,c],i)=>{
+    const y=T+i*62;
+    s+=`<text x="${L-12}" y="${y+26}" font-size="13" fill="${C.ink}" text-anchor="end" font-weight="600">${k==='men'?"men's":"women's"}</text>`;
+    s+=`<g ${tt(`<b>${k==='men'?"men's":"women's"} jeans</b><br>mean front pocket area <b>${f2(v)}</b><br>maxHeightFront &times; maxWidthFront`)} style="cursor:pointer">`;
+    s+=`<rect x="${L}" y="${y}" width="${(X(v)-L).toFixed(1)}" height="40" rx="4" fill="${c}" opacity=".9"/>`;
+    s+=`<text x="${(X(v)+10).toFixed(1)}" y="${y+26}" font-size="15" fill="${c}" font-weight="700">${f2(v)}</text></g>`;
+  });
+  s+=`<text x="${L}" y="${H-8}" font-size="11.5" fill="${C.mut}">ratio men's &divide; women's = <tspan font-weight="700" fill="${C.ink}">1.74</tspan></text>`;
+  s+=`</svg>`; mount('chart-area', s);
+})();
+
+/* ---------------- 7. ratio bars ---------------- */
+(function(){
+  const cats=[['maxHeightFront','Maximum front pocket height'],['maxWidthFront','Maximum front pocket width'],['maxHeightBack','Maximum back pocket height'],['maxWidthBack','Maximum back pocket width']];
+  const ratios=cats.map(([c,lab])=>({lab, r: avg(byG('men'),c)/avg(byG('women'),c), c}));
+  const W=700, rowH=52, H=ratios.length*rowH+40, L=210, R=86;
+  const x0=1.0, x1=1.72;
+  const X=v=>L+(v-x0)/(x1-x0)*(W-L-R);
+  let s=svgOpen(W,H);
+  for(let v=1.0;v<=1.72;v+=0.1){ s+=`<line x1="${X(v).toFixed(1)}" y1="14" x2="${X(v).toFixed(1)}" y2="${H-24}" stroke="${C.grid}" stroke-width="${Math.abs(v-1)<1e-9?0:1}"/><text x="${X(v).toFixed(1)}" y="${H-8}" font-size="10.5" fill="${C.mut}" text-anchor="middle">${v.toFixed(1)}</text>`; }
+  s+=`<line x1="${X(1)}" y1="10" x2="${X(1)}" y2="${H-24}" stroke="${C.ink}" stroke-width="1.6"/>`;
+  s+=`<text x="${X(1)}" y="8" font-size="10.5" fill="${C.ink}" text-anchor="middle" font-weight="700">parity 1.00</text>`;
+  ratios.forEach((r,i)=>{
+    const y=22+i*rowH;
+    const hot = r.r>1.2;
+    s+=`<text x="${L-12}" y="${y+19}" font-size="12.5" fill="${C.ink}" text-anchor="end">${r.lab}</text>`;
+    s+=`<g ${tt(`<b>${r.lab}</b><br>men's mean ${f2(avg(byG('men'),r.c))} &divide; women's mean ${f2(avg(byG('women'),r.c))} = <b>${f2(r.r)}</b>`)} style="cursor:pointer">`;
+    s+=`<rect x="${X(1)}" y="${y}" width="${(X(r.r)-X(1)).toFixed(1)}" height="26" rx="4" fill="${hot?'#c2542f':'#9aa7c4'}" opacity="${hot?0.92:0.8}"/>`;
+    s+=`<text x="${(X(r.r)+9).toFixed(1)}" y="${y+18}" font-size="14" font-weight="700" fill="${hot?'#c2542f':'#5b6party'}">${f2(r.r)}&times;</text></g>`;
+  });
+  s+=`</svg>`; mount('chart-ratio', s);
+})();
+
+/* ---------------- 8. back pocket table ---------------- */
+(function(){
+  const cats=[['maxHeightBack','Maximum height'],['minHeightBack','Minimum height'],['maxWidthBack','Maximum width'],['minWidthBack','Minimum width']];
+  document.getElementById('backTable').innerHTML = cats.map(([c,lab])=>{
+    const m=avg(byG('men'),c), w=avg(byG('women'),c);
+    return `<tr ${tt(`men's ${f2(m)} &divide; women's ${f2(w)} = <b>${f2(m/w)}</b>`)} style="cursor:help"><td style="color:var(--ink-soft)">${lab}<div class="col" style="font-size:11px;color:var(--mut);font-family:ui-monospace,Menlo,monospace">${c}</div></td><td class="num" style="color:var(--men);font-weight:600">${f2(m)}</td><td class="num" style="color:var(--women);font-weight:600">${f2(w)}</td><td class="num">${f2(m/w)}</td></tr>`;
+  }).join('');
+  bind(document.getElementById('backTable'));
+})();
+
+/* ---------------- 9. brand dumbbell ---------------- */
+(function(){
+  const brands={};
+  DATA.forEach(d=>{ const k=brandKey(d.brand); (brands[k]=brands[k]||{k,raw:d.brand,men:[],women:[]})[d.menWomen].push(d); });
+  const rows=Object.values(brands).map(b=>{
+    const m=mean(b.men.map(x=>x.maxHeightFront)), w=mean(b.women.map(x=>x.maxHeightFront));
+    return {b, m, w, r:m/w};
+  }).sort((a,b2)=>b2.r-a.r);
+  const W=1160, rowH=29, L=168, R=112, T=26, B=40;
+  const H=T+rows.length*rowH+B;
+  const x0=11, x1=29;
+  const X=v=>L+(v-x0)/(x1-x0)*(W-L-R);
+  let s=svgOpen(W,H);
+  for(let v=12;v<=28;v+=2){ s+=`<line x1="${X(v)}" y1="${T-8}" x2="${X(v)}" y2="${H-B+6}" stroke="${C.grid}"/><text x="${X(v)}" y="${H-B+24}" font-size="11" fill="${C.mut}" text-anchor="middle">${v}</text>`; }
+  s+=`<text x="${(L+W-R)/2}" y="${H-4}" font-size="12" fill="${C.mut}" text-anchor="middle">mean maximum front pocket height</text>`;
+  rows.forEach((r,i)=>{
+    const y=T+i*rowH+rowH/2;
+    if(i%2===0) s+=`<rect x="${L-6}" y="${y-rowH/2}" width="${W-L-R+6}" height="${rowH}" fill="#faf7f0"/>`;
+    s+=`<text x="${L-16}" y="${y+4}" font-size="12.5" fill="${C.ink}" text-anchor="end">${esc(nice(r.b.k))}</text>`;
+    s+=`<g ${tt(`<b>${esc(nice(r.b.k))}</b><br>men's mean <b>${f2(r.m)}</b> &middot; women's mean <b>${f2(r.w)}</b><br>ratio <b>${f2(r.r)}&times;</b>`)} style="cursor:pointer">`;
+    s+=`<line x1="${X(r.w).toFixed(1)}" y1="${y}" x2="${X(r.m).toFixed(1)}" y2="${y}" stroke="#c9c2b1" stroke-width="2.5"/>`;
+    s+=`<circle cx="${X(r.w).toFixed(1)}" cy="${y}" r="6" fill="${C.women}" stroke="#fffdf8" stroke-width="1.3"/>`;
+    s+=`<circle cx="${X(r.m).toFixed(1)}" cy="${y}" r="6" fill="${C.men}" stroke="#fffdf8" stroke-width="1.3"/>`;
+    s+=`</g>`;
+    const hot=r.r>=1.5;
+    s+=`<text x="${W-R+14}" y="${y+4}" font-size="12" font-weight="700" fill="${hot?C.women:'#8b9099'}" text-anchor="start">${f2(r.r)}&times;</text>`;
+  });
+  s+=`</svg>`; mount('chart-brands', s);
+})();
+
+/* ---------------- 10. price scatter ---------------- */
+(function(){
+  const W=1160,H=430,L=64,R=150,T=24,B=52;
+  const px0=0,px1=260, py0=100,py1=480;
+  const X=v=>L+(v-px0)/(px1-px0)*(W-L-R);
+  const Y=v=>H-B-(v-py0)/(py1-py0)*(H-B-T);
+  let s=svgOpen(W,H);
+  for(let v=100;v<=480;v+=50){ s+=`<line x1="${L}" y1="${Y(v)}" x2="${W-R}" y2="${Y(v)}" stroke="${C.grid}"/><text x="${L-9}" y="${Y(v)+4}" font-size="11" fill="${C.mut}" text-anchor="end">${v}</text>`; }
+  for(let v=0;v<=260;v+=25){ s+=`<line x1="${X(v)}" y1="${T-6}" x2="${X(v)}" y2="${H-B}" stroke="${C.grid}" stroke-width="${v%50===0?1:0.6}"/><text x="${X(v)}" y="${H-B+20}" font-size="11" fill="${C.mut}" text-anchor="middle">${v}</text>`; }
+  s+=`<text x="${(L+W-R)/2}" y="${H-6}" font-size="12" fill="${C.mut}" text-anchor="middle">price ($)</text>`;
+  s+=`<text x="16" y="${(T+H-B)/2}" font-size="12" fill="${C.mut}" text-anchor="middle" transform="rotate(-90 16 ${(T+H-B)/2})">front pocket area (height &times; width)</text>`;
+  [['men',C.men],['women',C.women]].forEach(([k,c])=>{
+    const m=mean(byG(k).map(area));
+    s+=`<line x1="${L}" y1="${Y(m)}" x2="${W-R}" y2="${Y(m)}" stroke="${c}" stroke-width="1.4" stroke-dasharray="6 4" opacity=".65"/>`;
+    s+=`<text x="${W-R+8}" y="${Y(m)+4}" font-size="11.5" fill="${c}" font-weight="700">${k==='men'?"men's":"women's"} mean ${f2(m)}</text>`;
+  });
+  DATA.forEach(d=>{
+    const c=d.menWomen==='men'?C.men:C.women;
+    s+=`<circle cx="${X(d.price).toFixed(1)}" cy="${Y(area(d)).toFixed(1)}" r="5.6" fill="${c}" fill-opacity=".72" stroke="#fffdf8" stroke-width="1.1" ${tt(rowTip(d,`price <b>${money(d.price)}</b><br>front pocket ${f1(d.maxHeightFront)} &times; ${f1(d.maxWidthFront)} = area <b>${f2(area(d))}</b><br>cotton ${cotton(d)}%${d.cutout?' &middot; cutout':''}`))} style="cursor:pointer"/>`;
+  });
+  // annotations
+  const hm=DATA.find(d=>d.price===9.99), tr=DATA.find(d=>d.price===249);
+  s+=annot(hm, 'cheapest in the file', -6, 46, C.women);
+  s+=annot(tr, 'dearest in the file', -118, -34, C.women);
+  s+=`</svg>`; mount('chart-scatter', s);
+  function annot(d,txt,dx,dy,c){
+    const x=X(d.price), y=Y(area(d));
+    return `<g><line x1="${x}" y1="${y}" x2="${(x+dx).toFixed(1)}" y2="${(y+dy).toFixed(1)}" stroke="${c}" stroke-width="1.1"/><text x="${(x+dx+(dx<0?-6:6)).toFixed(1)}" y="${(y+dy+4).toFixed(1)}" font-size="11.5" fill="${c}" text-anchor="${dx<0?'end':'start'}" font-weight="600">${txt}</text><text x="${(x+dx+(dx<0?-6:6)).toFixed(1)}" y="${(y+dy+18).toFixed(1)}" font-size="10.5" fill="${C.mut}" text-anchor="${dx<0?'end':'start'}">${esc(d.brand)} ${esc(d.name)} &middot; ${money(d.price)}</text></g>`;
+  }
+})();
+
+/* ---------------- 11. cost per area ---------------- */
+(function(){
+  const cpa=d=>d.price/area(d);
+  const vals=[['mean',mean(byG('men').map(cpa)),mean(byG('women').map(cpa))],['median',median(byG('men').map(cpa)),median(byG('women').map(cpa))]];
+  const W=560,H=230,L=104,R=88,T=26,B=40, maxV=0.45;
+  const X=v=>L+v/maxV*(W-L-R), rowH=70;
+  let s=svgOpen(W,H);
+  vals.forEach(([lab,m,w],i)=>{
+    const y=T+i*rowH;
+    s+=`<text x="${L-12}" y="${y+32}" font-size="13" fill="${C.ink}" text-anchor="end" font-weight="600">${lab}</text>`;
+    [[m,C.men,0,"men's"],[w,C.women,26,"women's"]].forEach(([v,c,dy,nm])=>{
+      s+=`<g ${tt(`<b>${lab} price per unit of front pocket area</b><br>${nm} <b>${v.toFixed(3)}</b>`)} style="cursor:pointer">`;
+      s+=`<rect x="${L}" y="${y+dy}" width="${(X(v)-L).toFixed(1)}" height="20" rx="3" fill="${c}" opacity=".88"/>`;
+      s+=`<text x="${(X(v)+8).toFixed(1)}" y="${y+dy+15}" font-size="12" fill="${c}" font-weight="700">${v.toFixed(3)}</text></g>`;
+    });
+  });
+  s+=`<line x1="${L}" y1="${T-8}" x2="${L}" y2="${H-B+8}" stroke="${C.grid}"/>`;
+  s+=`<text x="${L}" y="${H-8}" font-size="11.5" fill="${C.mut}">women's jeans cost about 1.8&times; as much per unit of front pocket</text>`;
+  s+=`</svg>`; mount('chart-cpa', s);
+  function median(a){ const b=a.slice().sort((x,y)=>x-y), m=b.length>>1; return b.length%2?b[m]:(b[m-1]+b[m])/2; }
+})();
+
+/* ---------------- 12. style bars ---------------- */
+(function(){
+  const rows=[];
+  [['women',['boot-cut','skinny','straight']],['men',['boot-cut','skinny','slim','straight','regular']]].forEach(([k,order])=>{
+    order.forEach(st=>{
+      const rs=byG(k).filter(d=>d.style===st);
+      if(rs.length) rows.push({k,st,n:rs.length,v:mean(rs.map(r=>r.maxHeightFront))});
+    });
+  });
+  const W=700,rowH=32,L=170,R=96,T=24,B=44;
+  const H=T+rows.length*rowH+B+16;
+  const maxV=26, X=v=>L+v/maxV*(W-L-R);
+  let s=svgOpen(W,H);
+  for(let v=0;v<=maxV;v+=5){ s+=`<line x1="${X(v)}" y1="${T-6}" x2="${X(v)}" y2="${H-B}" stroke="${C.grid}"/><text x="${X(v)}" y="${H-B+20}" font-size="11" fill="${C.mut}" text-anchor="middle">${v}</text>`; }
+  s+=`<text x="${(L+W-R)/2}" y="${H-4}" font-size="12" fill="${C.mut}" text-anchor="middle">mean maximum front pocket height</text>`;
+  let lastK=null;
+  rows.forEach((r,i)=>{
+    const y=T+i*rowH;
+    if(lastK!==null && r.k!==lastK) s+=`<line x1="${L}" y1="${y-4}" x2="${W-R}" y2="${y-4}" stroke="#dcd5c6" stroke-dasharray="4 3"/>`;
+    lastK=r.k;
+    const c=r.k==='men'?C.men:C.women;
+    s+=`<text x="${L-12}" y="${y+16}" font-size="12.5" fill="${C.ink}" text-anchor="end">${esc(r.st)} <tspan fill="${C.mut}" font-size="11">n=${r.n}</tspan></text>`;
+    s+=`<g ${tt(`<b>${esc(r.st)}</b> &middot; ${r.k==='men'?"men's":"women's"}<br>mean max front height <b>${f2(r.v)}</b> over ${r.n} jeans`)} style="cursor:pointer">`;
+    s+=`<rect x="${L}" y="${y+2}" width="${(X(r.v)-L).toFixed(1)}" height="18" rx="3" fill="${c}" opacity=".88"/>`;
+    s+=`<text x="${(X(r.v)+8).toFixed(1)}" y="${y+16}" font-size="12" font-weight="700" fill="${c}">${f2(r.v)}</text></g>`;
+    if(i===0||rows[i-1].k!==r.k){
+      const gm=avg(byG(r.k),'maxHeightFront');
+      s+=`<line x1="${X(gm)}" y1="${y}" x2="${X(gm)}" y2="${y+rowH*(r.k==='women'?3:5)-4}" stroke="${C.ink}" stroke-width="1.3" stroke-dasharray="4 3" opacity=".55"/>`;
+    }
+  });
+  s+=`</svg>`; mount('chart-style', s);
+})();
+
+/* ---------------- 13. boot-named table ---------------- */
+(function(){
+  const rows=DATA.filter(d=>d.style==='straight' && /boot/i.test(d.name));
+  document.getElementById('bootTable').innerHTML = rows.map(d=>
+    `<tr ${tt(rowTip(d,`max front height ${f1(d.maxHeightFront)} &middot; style label <b>${esc(d.style)}</b>`))} style="cursor:help"><td>${esc(d.brand)}</td><td style="color:var(--ink-soft)">${esc(d.name)}</td><td><span class="tag women">${esc(d.style)}</span></td></tr>`).join('');
+  bind(document.getElementById('bootTable'));
+})();
+
+/* ---------------- 14. cotton strip ---------------- */
+(function(){
+  const W=700,H=250,L=64,R=26,T=26,B=48;
+  const x0=25,x1=101, X=v=>L+(v-x0)/(x1-x0)*(W-L-R);
+  const lanes=[{k:'women',cy:80},{k:'men',cy:178}];
+  let s=svgOpen(W,H);
+  for(let v=30;v<=100;v+=10){ s+=`<line x1="${X(v)}" y1="${T-6}" x2="${X(v)}" y2="${H-B}" stroke="${C.grid}"/><text x="${X(v)}" y="${H-B+20}" font-size="11" fill="${C.mut}" text-anchor="middle">${v}%</text>`; }
+  s+=`<text x="${(L+W-R)/2}" y="${H-6}" font-size="12" fill="${C.mut}" text-anchor="middle">cotton share of the fabric string</text>`;
+  lanes.forEach(ln=>{
+    const rs=byG(ln.k).map((d,i)=>({d,i,v:cotton(d)})).filter(r=>r.v!=null).sort((a,b)=>a.v-b.v);
+    const m=mean(rs.map(r=>r.v));
+    s+=`<line x1="${L}" y1="${ln.cy}" x2="${W-R}" y2="${ln.cy}" stroke="#dcd5c6"/>`;
+    s+=`<text x="${L-12}" y="${ln.cy-2}" font-size="12" fill="${C.ink}" text-anchor="end" font-weight="600">${ln.k==='men'?"men's":"women's"}</text>`;
+    s+=`<text x="${L-12}" y="${ln.cy+13}" font-size="10.5" fill="${C.mut}" text-anchor="end">mean ${f1(m)}%</text>`;
+    rs.forEach((r,j)=>{
+      const y=ln.cy + jit(j)*22 + (j%2?4:-4);
+      const c=ln.k==='men'?C.men:C.women;
+      s+=`<circle cx="${X(r.v).toFixed(1)}" cy="${y.toFixed(1)}" r="4.8" fill="${c}" fill-opacity="${r.v===100?0.95:0.66}" stroke="#fffdf8" stroke-width="1" ${tt(rowTip(r.d,`fabric: ${esc(r.d.fabric)}<br>cotton <b>${r.v}%</b>`))} style="cursor:pointer"/>`;
+    });
+    s+=`<line x1="${X(m)}" y1="${ln.cy-32}" x2="${X(m)}" y2="${ln.cy+32}" stroke="${C.ink}" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+  });
+  s+=`</svg>`; mount('chart-cotton', s);
+})();
+
+/* ---------------- 15. data table ---------------- */
+const COLS=[
+  {k:'brand',t:'Brand',txt:true},
+  {k:'menWomen',t:'Side',txt:true},
+  {k:'style',t:'Fit',txt:true},
+  {k:'name',t:'Product',txt:true,wide:true},
+  {k:'price',t:'Price',num:true,money:true},
+  {k:'maxHeightFront',t:'F max h',num:true,bar:true},
+  {k:'minHeightFront',t:'F min h',num:true},
+  {k:'rivetHeightFront',t:'F rivet',num:true},
+  {k:'maxWidthFront',t:'F max w',num:true},
+  {k:'minWidthFront',t:'F min w',num:true},
+  {k:'maxHeightBack',t:'B max h',num:true,bar:true},
+  {k:'minHeightBack',t:'B min h',num:true},
+  {k:'maxWidthBack',t:'B max w',num:true},
+  {k:'minWidthBack',t:'B min w',num:true},
+  {k:'cottonPct',t:'Cotton %',num:true},
+  {k:'frontArea',t:'F area',num:true},
+  {k:'cutout',t:'Cutout',txt:true}
+];
+const ROWS = DATA.map(d=>Object.assign({},d,{cottonPct:cotton(d), frontArea:+area(d).toFixed(1), side:d.menWomen}));
+const maxFH=Math.max(...ROWS.map(r=>r.maxHeightFront)), maxBH=Math.max(...ROWS.map(r=>r.maxHeightBack));
+let state={g:'all', style:'all', q:'', sort:'maxHeightFront', dir:-1};
+
+(function initTable(){
+  const sel=document.getElementById('styleSel');
+  [...new Set(DATA.map(d=>d.style))].sort().forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=s; sel.appendChild(o); });
+  document.getElementById('headRow').innerHTML = COLS.map(c=>`<th data-k="${c.k}" class="${c.num?'num':''}">${c.t}</th>`).join('');
+  document.querySelectorAll('#headRow th').forEach(th=>th.addEventListener('click',()=>{
+    const k=th.dataset.k;
+    if(state.sort===k) state.dir*=-1; else { state.sort=k; state.dir = COLS.find(c=>c.k===k).num? -1 : 1; }
+    render();
+  }));
+  document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); state.g=b.dataset.g; render();
+  }));
+  sel.addEventListener('change',()=>{ state.style=sel.value; render(); });
+  document.getElementById('q').addEventListener('input',e=>{ state.q=e.target.value.toLowerCase().trim(); render(); });
+  render();
+})();
+
+function render(){
+  let rows=ROWS.filter(r=>(state.g==='all'||r.menWomen===state.g) && (state.style==='all'||r.style===state.style) &&
+    (!state.q || (r.brand+' '+r.name).toLowerCase().includes(state.q)));
+  const k=state.sort;
+  rows.sort((a,b)=>{ const x=a[k], y=b[k]; return (typeof x==='string'? x.localeCompare(y) : x-y)*state.dir; });
+  const tb=document.querySelector('#dataTable tbody');
+  tb.innerHTML = rows.map(r=>{
+    return `<tr ${tt(`<b>${esc(r.brand)}</b> ${esc(r.name)}<br>${r.menWomen==='men'?"men's":"women's"} ${esc(r.style)} &middot; ${money(r.price)}<br>${esc(r.fabric)}${r.cutout?'<br><span class="r">cutout = TRUE</span>':''}`)}>
+    ${COLS.map(c=>{
+      let v=r[c.k];
+      if(c.k==='menWomen') return `<td><span class="tag ${v}">${v==='men'?"men's":"women's"}</span></td>`;
+      if(c.k==='cutout') return `<td style="color:${v?'var(--women)':'var(--mut)'};font-weight:${v?700:400}">${v?'TRUE':'—'}</td>`;
+      if(c.money) return `<td class="num">${(+v).toFixed(2)}</td>`;
+      if(c.num) {
+        const t = c.k==='frontArea' ? (+v).toFixed(1) : (+v).toFixed(1);
+        if(c.bar){ const w = (v/(c.k==='maxHeightFront'?maxFH:maxBH))*100; return `<td class="num bar-cell"><span class="b" style="width:${w.toFixed(0)}%;background:${r.menWomen==='men'?'#e8edf8':'#f9eae3'}"></span><span class="t">${t}</span></td>`; }
+        return `<td class="num">${t}</td>`;
+      }
+      return `<td class="txt${c.wide?' wide':''}">${esc(v)}</td>`;
+    }).join('')}</tr>`;
+  }).join('');
+  document.getElementById('rowCount').textContent = `showing ${rows.length} of ${ROWS.length} jeans`;
+  bind(tb);
+}
+
+/* ---------------- 16. facts appendix ---------------- */
+(function(){
+  document.getElementById('facts').innerHTML = FACTS.map((f,i)=>
+    `<div class="fact"><div class="fid"><span>${f.id}</span><span class="n">#${i+1}</span></div>
+     <p>${esc(f.claim)}</p>
+     <pre>${esc(f.code)}</pre>
+     <div class="file">${Object.values(f.tables).join(', ')}</div></div>`).join('');
+})();
+
+/* ---------------- nav scroll spy ---------------- */
+(function(){
+  const links=[...document.querySelectorAll('#toc a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id)); } });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  secs.forEach(s=>s&&obs.observe(s));
+})();
+</script>
+</body>
+</html>

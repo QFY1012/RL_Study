@@ -1,0 +1,24 @@
+{
+ "task": "pockets",
+ "model": "kimi-k3.1-pro",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "kimi-k3.1-pro",
+   "effort": "high",
+   "seconds": 1422,
+   "steps": 14,
+   "tools": 24,
+   "nudged": 0,
+   "usage": {
+    "input": 71971,
+    "output": 34820
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 1422
+}

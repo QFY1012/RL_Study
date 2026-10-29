@@ -1,0 +1,24 @@
+{
+ "task": "ab_test-01",
+ "model": "gpt-6-astra",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "gpt-6-astra",
+   "effort": "high",
+   "seconds": 316,
+   "steps": 16,
+   "tools": 17,
+   "nudged": 0,
+   "usage": {
+    "input": 21298,
+    "output": 9443
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 316
+}

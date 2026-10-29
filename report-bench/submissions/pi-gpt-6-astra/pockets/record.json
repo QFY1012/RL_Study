@@ -1,0 +1,24 @@
+{
+ "task": "pockets",
+ "model": "gpt-6-astra",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "gpt-6-astra",
+   "effort": "high",
+   "seconds": 308,
+   "steps": 17,
+   "tools": 16,
+   "nudged": 0,
+   "usage": {
+    "input": 23761,
+    "output": 8343
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 308
+}

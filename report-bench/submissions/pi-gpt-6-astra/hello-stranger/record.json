@@ -1,0 +1,24 @@
+{
+ "task": "hello-stranger",
+ "model": "gpt-6-astra",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "gpt-6-astra",
+   "effort": "high",
+   "seconds": 273,
+   "steps": 14,
+   "tools": 14,
+   "nudged": 0,
+   "usage": {
+    "input": 22202,
+    "output": 8637
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 273
+}

@@ -77,7 +77,7 @@
   "tables": {
     "d": "data/data.csv"
   },
-  "code": "pd.concat([d.group.ne(d.group.str.strip()).sum().reshape(1) if False else pd.Series({'group_labels_with_whitespace':d.group.ne(d.group.str.strip()).sum()}),d[['first_response_seconds','consult_minutes','followup_7d','chief_complaint','platform']].isna().sum()])"
+  "code": "pd.concat([pd.Series({'group_labels_with_whitespace':d.group.ne(d.group.str.strip()).sum()}),d[['first_response_seconds','consult_minutes','followup_7d','chief_complaint','platform']].isna().sum()])"
 }
 ,{
   "id": "timing-coverage",
