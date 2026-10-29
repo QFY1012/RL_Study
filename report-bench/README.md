@@ -4,7 +4,7 @@
 
 - 开放赛道:模型、agent、整套流程都行,只要按格式交页面;比的是整个系统。不设基线。
 - 每题给 `data/` 下一张或几张原始数据表(csv),和一句说明数据是什么的题目;页面一律用英文。
-- 196 题:The Pudding 的 148 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 51 篇、`pudding-repo` 24 篇、`pudding-js` 15 篇、`pudding-merge` 11 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。127 题是一张表,其余 2 到 8 张。
+- 195 题:The Pudding 的 147 篇(真实数据,`report-gepa/data/pudding` 47 篇、`pudding-web` 50 篇、`pudding-repo` 24 篇、`pudding-js` 15 篇、`pudding-merge` 11 篇)和 48 份 mock 明细数据(24 类业务各 2 份,`report-gepa/data/mock`)。126 题是一张表,其余 2 到 8 张。
 
 ## 题目(`tasks.json`)
 
@@ -131,7 +131,7 @@ deepseek 经中转站时,同一个大的图文请求有时几秒内返回 400「
 
 ## 数据
 
-`out/` 里除了数据表都在仓库里:`tasks.jsonl`、每题的 `task.json`、`answers/`。数据表(`out/tasks/<id>/data/` 下的 csv,共 1.2 GB)在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench-10-28.7z`](https://drive.google.com/file/d/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA/view),只有本人账号能打开。题目是 2026-10-25 从原料重建、修过乱码和空列的 196 题。包里最外层是一个 `report-bench/` 目录,`report-bench/report-bench/out/tasks/<id>/data/` 是数据表;包里的其他文件仓库里都有,而且是更新的版本(包里的 `task.json` 还是旧的 `instruction`),不取。
+`out/` 里除了数据表都在仓库里:`tasks.jsonl`、每题的 `task.json`、`answers/`。数据表(`out/tasks/<id>/data/` 下的 csv,共 1.2 GB)在 Google Drive(qfy2518418912@gmail.com)「我的云端硬盘」根目录的 [`report-bench-10-28.7z`](https://drive.google.com/file/d/1uxr8L_GzOyYAw4HeXxPB_qfnxPVBG-LA/view),只有本人账号能打开。题目是 2026-10-25 从原料重建、修过乱码和空列的 196 题;其中 lifeafter 后来从题库删掉了(页面加载的表是各国平均身高,和讲来世信仰的原文对不上),包里它的数据不取。包里最外层是一个 `report-bench/` 目录,`report-bench/report-bench/out/tasks/<id>/data/` 是数据表;包里的其他文件仓库里都有,而且是更新的版本(包里的 `task.json` 还是旧的 `instruction`),不取。
 
 要 7z(`apt-get install -y p7zip-full`)。只解出 csv(312 个)到一个空的临时目录,再拷进仓库:
 

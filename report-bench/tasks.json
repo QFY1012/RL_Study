@@ -94,7 +94,6 @@
  {"id": "timeless", "source": "pudding-web", "tables": ["all_data.csv", "2013_aggregate_counts.csv"], "title": "Billboard chart songs by decade with their play counts on a streaming service, and daily plays per listener"},
  {"id": "authors", "source": "pudding-web", "title": "Settings of 100 famous books and where each author lived, with coordinates and the distance between the two", "tables": ["top-100.csv"]},
  {"id": "death", "source": "pudding-web", "title": "How countries define brain death: legal status, guidelines, required tests, physicians and observation time", "tables": ["countries_braindeath.csv"]},
- {"id": "lifeafter", "source": "pudding-web", "title": "Average height of 19-year-old boys and girls by country, 2019", "tables": ["height26.csv"]},
  {"id": "nba-top-plays", "source": "pudding-web", "title": "The most-upvoted NBA highlight posts on Reddit in 2017–18, with play type, player, views and clip length", "tables": ["web.csv"]},
  {"id": "votes-for-women", "source": "pudding-web", "title": "Passages of US party platforms since 1840 that mention women, with party, year and issue, and each platform's word counts", "tables": ["issues.json.csv", "platforms.json.csv"]},
  {"id": "essential-words", "source": "pudding-repo", "title": "Words on an English-learner word list that remained, were added or were removed between two versions, with concreteness, part of speech and meaning category", "tables": ["concreteness.csv", "pos.csv", "semantics.csv"]},
