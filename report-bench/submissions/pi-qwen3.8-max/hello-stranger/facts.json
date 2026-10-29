@@ -1,0 +1,206 @@
+[
+ {
+  "id": "sample-scope",
+  "claim": "The data covers 1,656 thirty-minute conversations between strangers, reported by 3,312 person-level rows from 1,456 distinct participants; the conversations table also has one row per conversation (1,656).",
+  "tables": {"people": "data/people.csv", "convos": "data/convos.csv"},
+  "code": "pd.Series({'person_rows': len(people), 'conversations': people.convo_id.nunique(), 'distinct_participants': people.user_id.nunique(), 'convo_table_rows': len(convos)})"
+ },
+ {
+  "id": "scales",
+  "claim": "The rating scales differ: every affect item and how_enjoyable run 1-9, i_like_you, you_like_me and shared_reality run 1-7, and the two loneliness items run 1-3.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people[['pre_affect','begin_affect','middle_affect','end_affect','overall_affect','worst_affect','how_enjoyable','i_like_you','you_like_me','shared_reality','my_loneliness','your_loneliness']].agg(['min','max'])"
+ },
+ {
+  "id": "dropout",
+  "claim": "Pre-conversation affect and arousal are complete for all 3,312 rows, while the mid- and end-of-conversation affect, enjoyment and liking ratings are each missing in exactly 55 rows and shared_reality, sex, race and age in 56.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people[['pre_affect','pre_arousal','begin_affect','middle_affect','end_affect','how_enjoyable','i_like_you','you_like_me','shared_reality','sex','race','age']].isna().sum()"
+ },
+ {
+  "id": "repeat-participants",
+  "claim": "Participation is not one-off: 702 of the participants appear in exactly one conversation, 266 in two, 187 in three, and 3 appear in eight conversations.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.user_id.value_counts().value_counts()"
+ },
+ {
+  "id": "who-sex",
+  "claim": "Among participants who reported it, 53.4% identify as female, 44.9% as male and 1.6% as other or prefer not to answer.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.sex.value_counts(normalize=True)"
+ },
+ {
+  "id": "who-race",
+  "claim": "The sample is majority white (64.8%), then Asian (14.9%), Black or African American (7.6%), Hispanic or Latino (6.8%) and mixed (3.9%).",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.race.value_counts(normalize=True).head(5)"
+ },
+ {
+  "id": "who-age",
+  "claim": "Participants average 34.3 years old, with a median of 32 and a range from 19 to 66.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.age.describe()"
+ },
+ {
+  "id": "politics-quirk",
+  "claim": "The politics variable only ever takes the values 1, 2, 3, 4 and 6 - nobody is coded 5 - with 36.7% of participants at 4 and 27.8% at 6.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.politics.value_counts(normalize=True).sort_index()"
+ },
+ {
+  "id": "mood-arc",
+  "claim": "Average mood climbs through the conversation: 6.10 before it starts, 6.16 at the beginning, 6.93 in the middle, 7.38 at the end, and 7.32 for the conversation overall.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people[['pre_affect','begin_affect','middle_affect','end_affect','overall_affect']].mean()"
+ },
+ {
+  "id": "arousal-arc",
+  "claim": "Arousal climbs as well: 5.32 before the call, 5.67 at the beginning, 6.40 in the middle and 6.70 at the end.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['pre_arousal_avg','begin_arousal_avg','middle_arousal_avg','end_arousal_avg']].mean()"
+ },
+ {
+  "id": "mood-rises",
+  "claim": "From the beginning to the end of the conversation each participant's mood rises by 1.23 points on average (median 1.0) across 3,257 paired ratings.",
+  "tables": {"people": "data/people.csv"},
+  "code": "(people.end_affect - people.begin_affect).agg(['mean','median','std','count'])"
+ },
+ {
+  "id": "most-end-happier",
+  "claim": "Of those paired ratings, 2,153 people felt better at the end than at the beginning, 856 felt the same and 248 felt worse - about two thirds went up.",
+  "tables": {"people": "data/people.csv"},
+  "code": "(people.end_affect - people.begin_affect).dropna().apply(np.sign).value_counts()"
+ },
+ {
+  "id": "mood-gain-depends",
+  "claim": "The worse people felt at the start, the more they gained: participants starting at 1 rose 4.00 points on average, those starting at 5 rose 1.93, those starting at 8 rose 0.20 and those starting at 9 fell 0.21.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.assign(rise=people.end_affect - people.begin_affect).groupby('begin_affect').rise.mean()"
+ },
+ {
+  "id": "peak-vs-dip",
+  "claim": "Even in conversations people liked, mood swung: the pair's best moment averaged 7.83 and the pair's worst moment averaged 5.80 on the 1-9 scale.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['worst_affect_avg','best_affect_avg']].agg(['mean','std','min','max'])"
+ },
+ {
+  "id": "enjoyment-high",
+  "claim": "Enjoyment ratings pile up at the top of the 1-9 scale: 23.7% are 7, 25.7% are 8 and 28.6% are the maximum 9, so 78% of ratings are 7 or higher and only 2.4% are 3 or below.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.how_enjoyable.value_counts(normalize=True).sort_index()"
+ },
+ {
+  "id": "enjoyment-drivers",
+  "claim": "At pair level the strongest correlate of enjoyment is how much the two people like each other (r = 0.87), then the conversationalist score (0.78), how much each thinks the other likes them (0.75), how kind they rate each other (0.62), having things in common (0.59) and shared reality (0.57).",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['i_like_you_avg','conversationalist_avg','you_like_me_avg','you_are_kind_avg','in_common_avg','shared_reality_avg']].corrwith(convos.how_enjoyable_avg)"
+ },
+ {
+  "id": "conversationalist-scale",
+  "claim": "The conversationalist score is the one variable not on a 1-9 scale: it runs from 4.5 to 100 with a mean of 73.9 and a median of 76.5.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos.conversationalist_avg.describe()"
+ },
+ {
+  "id": "liking-gap",
+  "claim": "On the 1-7 scale participants say they like their partner by 6.00 on average, but guess their partner likes them by only 5.35.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people[['i_like_you','you_like_me']].mean()"
+ },
+ {
+  "id": "liking-gap-counts",
+  "claim": "The gap is one-sided: 1,691 participants rate their own liking above their guess of the partner's, 1,412 rate the two the same and only 154 rate the partner's liking higher.",
+  "tables": {"people": "data/people.csv"},
+  "code": "(people.i_like_you - people.you_like_me).dropna().apply(np.sign).value_counts()"
+ },
+ {
+  "id": "liking-gap-is-wrong",
+  "claim": "The gap is a misperception, not a reality: the partner's actual reported liking averages 6.00, well above the 5.35 that people guessed.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['you_like_me','i_like_you_of_partner']].mean()"
+ },
+ {
+  "id": "meta-perception-weak",
+  "claim": "People cannot read their partner: how much someone guesses their partner likes them correlates only r = 0.19 with how much the partner actually likes them.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['you_like_me','i_like_you_of_partner']].corr().iloc[0,1]"
+ },
+ {
+  "id": "reciprocity-weak",
+  "claim": "Liking barely travels either: how much you like your partner correlates only r = 0.19 with how much they like you back.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.merge(people[['convo_id','user_id','i_like_you']], left_on=['convo_id','partner_id'], right_on=['convo_id','user_id'], suffixes=('','_of_partner'))[['i_like_you','i_like_you_of_partner']].corr().iloc[0,1]"
+ },
+ {
+  "id": "partners-disagree",
+  "claim": "Two people in the same conversation barely agree that it was enjoyable: their ratings correlate at only r = 0.18.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.assign(w=people.groupby('convo_id').cumcount()).pivot(index='convo_id', columns='w', values='how_enjoyable').corr().iloc[0,1]"
+ },
+ {
+  "id": "partner-gap-size",
+  "claim": "Partners' enjoyment ratings differ by 1.43 points on average (median 1, and as much as 8 points) on the 9-point scale.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.assign(w=people.groupby('convo_id').cumcount()).pivot(index='convo_id', columns='w', values='how_enjoyable').pipe(lambda d: (d[0]-d[1]).abs()).agg(['mean','median','max'])"
+ },
+ {
+  "id": "status-asymmetry",
+  "claim": "People under-claim status: they rate their own status 5.53, guess their partner rates it 5.74, and rate their partner's status highest of all at 5.91.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['i_think_my_status_avg','you_think_my_status_avg','i_think_your_status_avg']].mean()"
+ },
+ {
+  "id": "trait-meta-gap",
+  "claim": "The same discount shows up in trait ratings: people rate their partner's intelligence 7.68 but think the partner rates theirs 7.06, and kindness 7.98 versus 7.43.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['you_are_intelligent_avg','you_think_i_am_intelligent_avg','you_are_kind_avg','you_think_i_am_kind_avg']].mean()"
+ },
+ {
+  "id": "talk-time",
+  "claim": "Both sides of a pair think they are doing more of the talking: own turn length averages 5.40 against 5.03 for the partner's turns.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos[['my_turn_length_avg','your_turn_length_avg']].mean()"
+ },
+ {
+  "id": "loneliness-asymmetry",
+  "claim": "Among the 1,143 people who answered both items, own loneliness averages 1.80 on the 1-3 scale while the partner's averages only 1.53.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.dropna(subset=['my_loneliness','your_loneliness'])[['my_loneliness','your_loneliness']].agg(['mean','count'])"
+ },
+ {
+  "id": "loneliness-and-enjoyment",
+  "claim": "Believing your partner is lonely goes with a worse conversation (r = -0.22 with enjoyment), while your own loneliness barely registers (r = -0.06).",
+  "tables": {"people": "data/people.csv"},
+  "code": "people[['my_loneliness','your_loneliness','how_enjoyable']].corr()['how_enjoyable']"
+ },
+ {
+  "id": "sex-match",
+  "claim": "Matching on sex barely moves enjoyment: the 767 pairs where both partners report the same sex average 7.493, and the 864 pairs where they differ average 7.488.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.merge(people, on='convo_id', suffixes=('','_p')).query('user_id < user_id_p').assign(same_sex=lambda d: d.sex==d.sex_p).groupby('same_sex').how_enjoyable.agg(['mean','count'])"
+ },
+ {
+  "id": "race-match",
+  "claim": "Same-race pairs rate enjoyment 7.42 against 7.55 for the 910 pairs of different races - if anything the opposite of a similarity boost.",
+  "tables": {"people": "data/people.csv"},
+  "code": "people.merge(people, on='convo_id', suffixes=('','_p')).query('user_id < user_id_p').assign(same_race=lambda d: d.race==d.race_p).groupby('same_race').how_enjoyable.agg(['mean','count'])"
+ },
+ {
+  "id": "politics-distance",
+  "claim": "Enjoyment does slide with political distance: 7.48 for the 408 pairs with no difference in politics, 7.41 for the 494 pairs two points apart, 7.15 for the 115 pairs four points apart and 7.07 for the 23 pairs five points apart.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos.groupby('politics_diff').how_enjoyable_avg.agg(['mean','count'])"
+ },
+ {
+  "id": "age-distance",
+  "claim": "A wider age gap costs common ground but not fun: the pair's in_common rating falls from 6.18 at age_diff 0 to 5.27 at age_diff 40, while average enjoyment stays between 7.31 and 7.63 across the buckets.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos.groupby('age_diff')[['in_common_avg','how_enjoyable_avg']].mean()"
+ },
+ {
+  "id": "shared-reality-mismatch",
+  "claim": "When partners disagree about how much they share a reality, the conversation suffers: enjoyment averages 7.52 with no disagreement, 7.25 two points apart and 6.44 four points apart.",
+  "tables": {"convos": "data/convos.csv"},
+  "code": "convos.groupby('shared_reality_diff').how_enjoyable_avg.agg(['mean','count'])"
+ }
+]

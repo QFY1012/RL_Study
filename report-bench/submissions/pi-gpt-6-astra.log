@@ -1,0 +1,11 @@
+  pi-gpt-6-astra/ab_test-01 ab_test-01: bash pwd && rg --files -g '!_shots/**' -g '!node_modules/**'
+  pi-gpt-6-astra/pockets pockets: bash pwd && rg --files data && ls -la
+  pi-gpt-6-astra/hello-stranger hello-stranger: bash pwd && rg --files -g '!node_modules' -g '!_shots' | head -60
+  pi-gpt-6-astra/pockets pockets: bash python - <<'PY' import pandas as pd x=pd.read_csv('data/measurements.csv') print(x.shape) print(x.dt
+  pi-gpt-6-astra/ab_test-01 ab_test-01: bash python - <<'PY' import pandas as pd x=pd.read_csv('data/data.csv') print(x.shape) print(x.head(12).t
+  pi-gpt-6-astra/hello-stranger hello-stranger: bash python - <<'PY' import pandas as pd for p in ['data/people.csv','data/convos.csv']: d=pd.read_csv(p)
+  pi-gpt-6-astra/ab_test-01 ab_test-01: bash python - <<'PY' import pandas as pd x=pd.read_csv('data/data.csv'); x['group']=x.group.str.strip().m
+  pi-gpt-6-astra/pockets pockets: bash python - <<'PY' import pandas as pd x=pd.read_csv('data/measurements.csv') x['brand']=x.brand.str.st
+  pi-gpt-6-astra/hello-stranger hello-stranger: bash python - <<'PY' import pandas as pd,numpy as np p=pd.read_csv('data/people.csv');c=pd.read_csv('data
+  pi-gpt-6-astra/ab_test-01 ab_test-01: bash python - <<'PY' import pandas as pd x=pd.read_csv('data/data.csv');x['group']=x.group.str.strip().ma
+  pi-gpt-6-astra/hello-stranger hello-stranger: write /tmp/build_facts.py

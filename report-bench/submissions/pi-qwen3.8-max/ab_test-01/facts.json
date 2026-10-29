@@ -1,0 +1,218 @@
+[
+ {
+  "id": "sample-scope",
+  "claim": "The export holds 18,000 users — 8,987 in the test arm (实验组) and 9,013 in the control arm (对照组) once padded group labels are trimmed — spread over 5 departments, 25 chief complaints and 3 platforms.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'users': len(df), 'test_arm': int((df.group.str.strip() == '实验组').sum()), 'control_arm': int((df.group.str.strip() == '对照组').sum()), 'departments': df.department.nunique(), 'chief_complaints': df.chief_complaint.nunique(), 'platforms': df.platform.nunique()})"
+ },
+ {
+  "id": "study-window",
+  "claim": "Sessions run from 2024-11-18 to 2024-12-29, covering 42 distinct calendar days.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.to_datetime(df.enter_date.astype('str').str.replace('/', '-'), format='ISO8601').agg(['min', 'max', 'nunique'])"
+ },
+ {
+  "id": "padded-group-labels",
+  "claim": "The group column holds 4 distinct raw labels but only 2 after trimming whitespace, and 19 rows carry a padded label.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'raw_group_labels': df.group.nunique(), 'trimmed_group_labels': df.group.str.strip().nunique(), 'padded_rows': int((df.group != df.group.str.strip()).sum())})"
+ },
+ {
+  "id": "slash-dates",
+  "claim": "Three enter_date values are written with slashes, so the column's 45 distinct date strings resolve to only 42 calendar days.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'distinct_date_strings': df.enter_date.astype('str').nunique(), 'calendar_days': pd.to_datetime(df.enter_date.astype('str').str.replace('/', '-'), format='ISO8601').dt.strftime('%Y-%m-%d').nunique(), 'slash_rows': int(df.enter_date.astype('str').str.contains('/').sum())})"
+ },
+ {
+  "id": "structural-missingness",
+  "claim": "first_response_seconds is missing 903 times, the same count as rows flagged lost_before_doctor, and consult_minutes is missing 2,164 times, the same count as rows that did not complete; separately followup_7d is missing 186 times, chief_complaint 36 times and platform 6 times.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'first_response_seconds_nan': int(df.first_response_seconds.isna().sum()), 'lost_before_doctor_rows': int(df.lost_before_doctor.sum()), 'consult_minutes_nan': int(df.consult_minutes.isna().sum()), 'not_completed_rows': int((df.is_completed == 0).sum()), 'followup_7d_nan': int(df.followup_7d.isna().sum()), 'chief_complaint_nan': int(df.chief_complaint.isna().sum()), 'platform_nan': int(df.platform.isna().sum())})"
+ },
+ {
+  "id": "impossible-values",
+  "claim": "Seven consultations record exactly the maximum 640.0 minutes, and nine first-response times exceed 900 seconds, the longest being 71,396.0 seconds (19.8 hours).",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'consult_minutes_eq_640': int((df.consult_minutes == 640).sum()), 'consult_minutes_max': df.consult_minutes.max(), 'first_response_over_900s': int((df.first_response_seconds > 900).sum()), 'first_response_max_seconds': df.first_response_seconds.max(), 'first_response_max_hours': round(df.first_response_seconds.max() / 3600, 1)})"
+ },
+ {
+  "id": "funnel",
+  "claim": "Of 18,000 users, 903 left before any doctor replied and a further 1,261 dropped out after the first reply, leaving 15,836 completed consultations out of the 17,097 who reached a doctor.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "pd.Series({'users': len(df), 'lost_before_doctor': int(df.lost_before_doctor.sum()), 'reached_a_doctor': int((df.lost_before_doctor == 0).sum()), 'dropped_after_first_reply': int(((df.lost_before_doctor == 0) & (df.is_completed == 0)).sum()), 'completed': int(df.is_completed.sum())})"
+ },
+ {
+  "id": "wait-cut",
+  "claim": "Median first response falls from 110.0 seconds in the control arm (对照组) to 88.0 seconds in the test arm (实验组), and the mean from 152.0 to 103.5 seconds, over 8,586 and 8,511 measured waits.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').first_response_seconds.agg(measured='count', mean_seconds=lambda s: round(s.mean(), 1), median_seconds='median')"
+ },
+ {
+  "id": "wait-tail",
+  "claim": "49.7% of measured test-arm waits end within 90 seconds against 35.7% in control; the 90th percentile is 177.0 seconds versus 234.0 and the 95th percentile 213.0 versus 290.0.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').first_response_seconds.agg(share_under_90s=lambda s: round((s <= 90).mean() * 100, 1), p90_seconds=lambda s: s.quantile(0.9), p95_seconds=lambda s: s.quantile(0.95))"
+ },
+ {
+  "id": "completion-flat",
+  "claim": "Completion is 87.94% in the test arm (7,903 of 8,987 users) against 88.02% in control (7,933 of 9,013) — the test arm is 0.08 points lower.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').is_completed.agg(completed='sum', users='count', completion_pct=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "abandonment-worse",
+  "claim": "Users lost before a doctor replies: 5.30% in the test arm (476 of 8,987) versus 4.74% in control (427 of 9,013), 0.56 points higher in the test arm.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').lost_before_doctor.agg(lost='sum', users='count', lost_pct=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "followup-flat",
+  "claim": "Seven-day follow-up is 12.15% in the test arm (8,891 users with a recorded value) against 12.31% in control (8,923).",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').followup_7d.agg(recorded='count', followup_pct=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "headline-not-significant",
+  "claim": "Two-proportion z-scores for the test-versus-control gaps are -0.16 for is_completed, 1.72 for lost_before_doctor and -0.32 for followup_7d, none reaching the usual ±1.96 threshold.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pipe(lambda t: pd.Series({c: round((t.loc[t.g == '实验组', c].mean() - t.loc[t.g == '对照组', c].mean()) / np.sqrt(t[c].mean() * (1 - t[c].mean()) * (1 / t.loc[t.g == '实验组', c].count() + 1 / t.loc[t.g == '对照组', c].count())), 2) for c in ['is_completed', 'lost_before_doctor', 'followup_7d']}))"
+ },
+ {
+  "id": "wait-hardly-moves-completion",
+  "claim": "Among users who reached a doctor, completion is 92.8% under 60 s (3,459 users), 92.8% at 60–90 s (4,222), 92.7% at 90–120 s (3,330), 93.1% at 120–180 s (3,576), 91.4% at 180–300 s (2,035), 90.5% at 300–600 s (451) and 95.8% above 600 s (24).",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df[df.lost_before_doctor == 0].assign(bucket=pd.cut(df.first_response_seconds, [0, 60, 90, 120, 180, 300, 600, np.inf])).groupby('bucket', observed=False).is_completed.agg(users='size', completion_pct=lambda s: round(s.mean() * 100, 1))"
+ },
+ {
+  "id": "department-split",
+  "claim": "Completion by department, test versus control: 儿科 90.37 vs 88.94, 妇科 89.28 vs 89.04, 内科 89.12 vs 88.64, 五官科 88.07 vs 87.54 and 皮肤科 80.51 vs 85.04, with pre-doctor loss at 2.45 vs 3.15, 4.83 vs 5.21, 4.03 vs 4.40, 5.41 vs 4.46 and 12.71 vs 7.66.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pivot_table(index='department', columns='g', values=['is_completed', 'lost_before_doctor'], aggfunc=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "dermatology-harm",
+  "claim": "In 皮肤科 the test arm loses 12.71% of its 1,503 users before a doctor replies against 7.66% of control's 1,618, and completes 80.51% versus 85.04%; follow-up is 8.55% versus 8.30%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).query(\"department == '皮肤科'\").groupby('g').agg(users=('user_id', 'size'), lost_before_doctor_pct=('lost_before_doctor', lambda s: round(s.mean() * 100, 2)), completion_pct=('is_completed', lambda s: round(s.mean() * 100, 2)), followup_pct=('followup_7d', lambda s: round(s.mean() * 100, 2)))"
+ },
+ {
+  "id": "dermatology-loss-significant",
+  "claim": "The dermatology gap is statistically clear: 191 of 1,503 test users were lost before a doctor against 124 of 1,618 control users, a two-proportion z-score of 4.67.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).query(\"department == '皮肤科'\").groupby('g').lost_before_doctor.agg(lost='sum', users='count').pipe(lambda t: pd.Series({'test_lost': int(t.loc['实验组', 'lost']), 'test_users': int(t.loc['实验组', 'users']), 'control_lost': int(t.loc['对照组', 'lost']), 'control_users': int(t.loc['对照组', 'users']), 'z_score': round(((t.loc['实验组', 'lost'] / t.loc['实验组', 'users']) - (t.loc['对照组', 'lost'] / t.loc['对照组', 'users'])) / np.sqrt((t.lost.sum() / t.users.sum()) * (1 - t.lost.sum() / t.users.sum()) * (1 / t.users).sum()), 2)}))"
+ },
+ {
+  "id": "dermatology-all-complaints",
+  "claim": "All five dermatology complaints lose more users before a doctor in the test arm: 后背长了不少小红点 13.9% vs 6.9%, 荨麻疹反反复复两个星期 13.5% vs 9.0%, 脸上爆痘,下巴最严重 12.1% vs 6.9%, 手臂上起红疹,特别痒 11.9% vs 9.7% and 脚趾缝脱皮发痒 11.7% vs 6.0%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).query(\"department == '皮肤科'\").pivot_table(index='chief_complaint', columns='g', values='lost_before_doctor', aggfunc=lambda s: round(s.mean() * 100, 1))"
+ },
+ {
+  "id": "excl-dermatology-lift",
+  "claim": "Excluding 皮肤科, the test arm completes 89.43% (6,693 of 7,484 users) against 88.67% in control (6,557 of 7,395), a 0.76-point lift.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).query(\"department != '皮肤科'\").groupby('g').is_completed.agg(users='count', completed='sum', completion_pct=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "followup-flips-by-user-type",
+  "claim": "Seven-day follow-up flips by user type: 新用户 return 9.84% of the time in the test arm against 6.84% in control, while 老用户 fall from 14.93% to 13.22%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pivot_table(index='user_type', columns='g', values='followup_7d', aggfunc=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "followup-split-significant",
+  "claim": "Both halves of that follow-up split clear the ±1.96 bar: the test-versus-control z-score is 4.1 for 新用户 and -2.7 for 老用户.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).dropna(subset=['followup_7d']).pipe(lambda t: pd.Series({u: round((lambda s: (s.loc[s.g == '实验组', 'followup_7d'].mean() - s.loc[s.g == '对照组', 'followup_7d'].mean()) / np.sqrt(s.followup_7d.mean() * (1 - s.followup_7d.mean()) * (1 / (s.g == '实验组').sum() + 1 / (s.g == '对照组').sum())))(t[t.user_type == u]), 2) for u in ['新用户', '老用户']}))"
+ },
+ {
+  "id": "user-type-baseline",
+  "claim": "新用户 are 5,779 users with 88.32% completion and 8.32% seven-day follow-up, while the 12,221 老用户 complete 87.82% and follow up 14.07%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.groupby('user_type').agg(users=('user_id', 'size'), completion_pct=('is_completed', lambda s: round(s.mean() * 100, 2)), followup_pct=('followup_7d', lambda s: round(s.mean() * 100, 2)))"
+ },
+ {
+  "id": "consult-shorter",
+  "claim": "Consultations are shorter in the test arm: median 10.4 minutes versus 11.2 and mean 11.67 versus 13.09, over 7,903 and 7,933 recorded consultations.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).groupby('g').consult_minutes.agg(recorded='count', mean_minutes=lambda s: round(s.mean(), 2), median_minutes='median')"
+ },
+ {
+  "id": "platform-flat",
+  "claim": "Completion by platform is close across arms: Android 87.96% test versus 88.30% control, iOS 87.89% versus 87.89% and 微信小程序 87.97% versus 87.71%.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip()).pivot_table(index='platform', columns='g', values='is_completed', aggfunc=lambda s: round(s.mean() * 100, 2))"
+ },
+ {
+  "id": "volume-growth",
+  "claim": "Weekly volume grows from 2,409 users in the first week to 3,546 in the last, a 47.2% increase.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(wk=pd.to_datetime(df.enter_date.astype('str').str.replace('/', '-'), format='ISO8601').dt.to_period('W').astype(str)).groupby('wk').size().pipe(lambda s: pd.Series({'first_week_users': int(s.iloc[0]), 'last_week_users': int(s.iloc[-1]), 'growth_pct': round((s.iloc[-1] / s.iloc[0] - 1) * 100, 1)}))"
+ },
+ {
+  "id": "wait-under-load",
+  "claim": "Median weekly wait by arm: the control arm rises from 86.0 seconds in week 2024-11-18/2024-11-24 to 134.0 in week 2024-12-23/2024-12-29, while the test arm moves from 80.0 to 95.0 seconds.",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.assign(g=df.group.str.strip(), wk=pd.to_datetime(df.enter_date.astype('str').str.replace('/', '-'), format='ISO8601').dt.to_period('W').astype(str)).pivot_table(index='wk', columns='g', values='first_response_seconds', aggfunc='median')"
+ },
+ {
+  "id": "complaint-spread",
+  "claim": "Completion by chief complaint spans 81.0% for 手臂上起红疹,特别痒 (612 users) to 91.1% for 鼻子不通,黄鼻涕多 (403) and 经期量突然变多 (505).",
+  "tables": {
+   "df": "data/data.csv"
+  },
+  "code": "df.groupby('chief_complaint').is_completed.agg(users='size', completion_pct=lambda s: round(s.mean() * 100, 1)).sort_values('completion_pct')"
+ }
+]
