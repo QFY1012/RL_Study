@@ -1,0 +1,77 @@
+{
+ "id": "stand-up",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 617,
+  "steps": 65,
+  "tools": 93,
+  "nudged": 0,
+  "usage": {
+   "input": 104619,
+   "output": 70617
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "laughter-climax-50-minutes",
+   "basis": "Output row: start 0:50:11, timeStart 3011, minutes 50.2, laugh 9.5.",
+   "verdict": "ok"
+  },
+  {
+   "id": "climax-conception-topic",
+   "basis": "Output row: group 789-conception, timeStart 2990, topicEnd 3014.",
+   "verdict": "ok"
+  },
+  {
+   "id": "conception-preceded-by-hippies-orgasm",
+   "basis": "Output: 782-orgasm starts 2956, 787-hippies starts 2983, 789-conception starts 2990.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hpv-three-parts",
+   "basis": "Output has 3 HPV groups: 32-hpv 154-230, 39-men and hpv 176-190, 43-doctor and hpv 197-230.",
+   "verdict": "ok"
+  },
+  {
+   "id": "hpv-reached-through-sleep",
+   "basis": "Output: 23-sleep level 3 114-230; 32-hpv level 4 154-230.",
+   "verdict": "ok"
+  },
+  {
+   "id": "sleep-under-jealousy",
+   "basis": "Output: 10-jealousy level 2 62-230; 16-metabolism level 3 85-96; 19-inner thigh clearance level 3 96-111; 23-sleep level 3 114-230.",
+   "verdict": "ok"
+  },
+  {
+   "id": "three-main-themes",
+   "basis": "Output top three by seconds: 96-marriage 1840 seconds 415-2255; 601-pregnancy 1160 seconds 2277-3437; 6-getting older 361 seconds 49-410.",
+   "verdict": "ok"
+  },
+  {
+   "id": "making-babies-three-minutes",
+   "basis": "Output row: 747-making babies 2846-3014, seconds 168, minutes 2.8.",
+   "verdict": "ok"
+  },
+  {
+   "id": "climax-repeats-working-line",
+   "basis": "Output rows match: 0:21:14 and 0:21:31 in 302-dependent; 0:29:04 in 446-diet; 0:50:11 in 789-conception.",
+   "verdict": "ok"
+  },
+  {
+   "id": "harvard-links-husband-and-working",
+   "basis": "Output includes claimed rows: 111-met husband at 487, 302-dependent at 1271, 789-conception at 3006; also additional rows at 3453, 3473, 3514.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 10,
+ "skipped": 4
+}

@@ -1,0 +1,42 @@
+{
+ "id": "votes-for-women",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 345,
+  "steps": 40,
+  "tools": 59,
+  "nudged": 0,
+  "usage": {
+   "input": 74436,
+   "output": 38510
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 3,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "platform-total-words",
+   "basis": "Minimum wordTotal is 215 for Constitutional Union Party Platform of 1860; maximum is 41933 for Republican Party Platform of 2004; 1840 Democratic Party Platform is 539.",
+   "verdict": "ok"
+  },
+  {
+   "id": "platform-women-words",
+   "basis": "Minimum wordWomen is 0, including 1840 Democratic Party Platform; maximum is 2361 for 1980 Democratic Party Platform; 1920 Democratic Party Platform is 258.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-word-share",
+   "basis": "Computed rounded value is 3.1, matching the claimed 3.1%.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 3,
+ "skipped": 3
+}

@@ -1,0 +1,82 @@
+{
+ "id": "songwriters",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 704,
+  "steps": 36,
+  "tools": 38,
+  "nudged": 0,
+  "usage": {
+   "input": 33632,
+   "output": 93807
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 10,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "only-women-hits-by-year",
+   "basis": "Output shows 2010=2; 2011 through 2019 all 0; 2020=1, 2021=1, 2022=1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "all-women-share",
+   "basis": "Output row 'only women' has n=118 and pct=3.83, which rounds to 3.8%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-written-performers",
+   "basis": "Output shows artist_gender f=89, m;f=16, m=13.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-written-men-or-mixed-performers",
+   "basis": "Output for artist_gender.ne('f').sum() is 29, matching mixed-gender plus male performers.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-written-women-performers",
+   "basis": "Output shows True=105 and False=13 for artist_gender containing 'f'.",
+   "verdict": "ok"
+  },
+  {
+   "id": "women-written-performer-songwriters",
+   "basis": "Output shows sum=66 and size=118.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2022-only-women-song",
+   "basis": "Output shows exactly one 2022 only-women song: 'running up that hill (a deal with god) by kate bush', count 1.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2022-women-credit-share",
+   "basis": "Output for 2022 is 14.349776%, which rounds to 14.3%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "all-men-share",
+   "basis": "Output is 73.78325762491889, which rounds to 73.8%.",
+   "verdict": "ok"
+  },
+  {
+   "id": "2010-only-women-taylor-swift",
+   "basis": "Output lists 'Mine' and 'Today Was A Fairytale' in 2010 with writer Taylor Swift and artist_name Taylor Swift, each count 1.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "2022-women-credit-share",
+   "why": "source not in the story as read"
+  }
+ ],
+ "answer": 9,
+ "skipped": 12
+}

@@ -1,0 +1,52 @@
+{
+ "id": "sleep-training",
+ "model": "deepseek-flash",
+ "effort": "high",
+ "run": {
+  "model": "deepseek-flash",
+  "effort": "high",
+  "seconds": 834,
+  "steps": 77,
+  "tools": 104,
+  "nudged": 0,
+  "usage": {
+   "input": 112776,
+   "output": 73790
+  },
+  "stop": "stop",
+  "error": null
+ },
+ "facts": 5,
+ "problems": [],
+ "wrong": [],
+ "verdicts": [
+  {
+   "id": "reddit-comments-divided",
+   "basis": "Output shows Advocate 156, Oppose 126, No Position 43.",
+   "verdict": "ok"
+  },
+  {
+   "id": "news-articles-both-sides",
+   "basis": "Output shows Advocate 94, Oppose 27, No Position 19.",
+   "verdict": "ok"
+  },
+  {
+   "id": "books-divided",
+   "basis": "Output shows Advocate 24, Oppose 12.",
+   "verdict": "ok"
+  },
+  {
+   "id": "clinical-studies-advocate",
+   "basis": "Output shows sum 74 and size 75 for Advocate.",
+   "verdict": "ok"
+  },
+  {
+   "id": "studies-most-recent-40-years",
+   "basis": "Output shows sum 71 and size 75 for year >= 1984.",
+   "verdict": "ok"
+  }
+ ],
+ "dropped": [],
+ "answer": 5,
+ "skipped": 13
+}

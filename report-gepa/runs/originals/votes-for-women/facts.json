@@ -6,7 +6,7 @@
     "tables": {
       "p": "data/platforms.json.csv"
     },
-    "code": "p.set_index('key')['wordTotal'].sort_values()"
+    "code": "p.set_index('key')['wordTotal'].sort_values().to_string()"
   },
   {
     "id": "platform-women-words",
@@ -15,7 +15,7 @@
     "tables": {
       "p": "data/platforms.json.csv"
     },
-    "code": "p.set_index('key')['wordWomen'].sort_values()"
+    "code": "p.set_index('key')['wordWomen'].sort_values().to_string()"
   },
   {
     "id": "women-word-share",

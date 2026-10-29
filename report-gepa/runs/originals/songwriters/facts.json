@@ -36,6 +36,15 @@
     "code": "s[s.cut_two=='only women'].artist_gender.ne('f').sum()"
   },
   {
+    "id": "women-written-women-performers",
+    "source": "In almost all cases, women. Only 13 of those 118 were performed exclusively by men.",
+    "claim": "105 of the songs written exclusively by women were performed by at least one woman, and 13 were not.",
+    "tables": {
+      "s": "data/songs.csv"
+    },
+    "code": "s[s.cut_two=='only women'].artist_gender.str.contains('f', na=False).value_counts()"
+  },
+  {
     "id": "women-written-performer-songwriters",
     "source": "If we look at the 118 songs written exclusively by women again, you’ll notice something else: the women who wrote more than half of these songs were also vocalists in the performing groups.",
     "claim": "66 of the 118 songs written exclusively by women also credit at least one of their performers as a songwriter.",

@@ -1,0 +1,54 @@
+[
+  {
+    "source": "Actual Titles",
+    "why": "The table reproduces Los Angeles's 74 titles and the top-four order, but not the charted title count for every listed metro: for example Toronto has 40 titles in the table versus 35 in the story's chart data (31 shown mid-animation), Chicago 32 versus 31 (27 shown), and Philadelphia 26 versus 27 (22 shown), so the chart's per-metro counts as a whole are not reproduced."
+  },
+  {
+    "source": "This makes sense, considering Greater Los Angeles teams have played a combined 2,072 seasons.",
+    "why": "titles.csv lists only championship results; it has no records of team-seasons played, so the 2,072-season total cannot be computed."
+  },
+  {
+    "source": "Expected Titles",
+    "why": "Expected titles (Los Angeles 25.5, and the actual-minus-expected differentials such as +48.5) require each metro's count of team-seasons, which titles.csv does not contain."
+  },
+  {
+    "source": "So Greater Los Angeles is doing better than expected. What other metro areas are overperforming? How about underperforming?",
+    "why": "The overperformer differentials (Tuscaloosa +11.1, Green Bay +11.4, Austin +9.0, Winnipeg +8.5, Ottawa +8.3) are actual titles minus expected titles based on seasons played; the seasons data is absent from titles.csv."
+  },
+  {
+    "source": "the Yale Bulldogs competed in 47 seasons, winning 17 times, or in 36% of their attempts",
+    "why": "The 17 wins can be counted, but titles.csv has no season counts, so the 47 seasons and the 36% conversion rate cannot be computed."
+  },
+  {
+    "source": "Between 1920 and 1970, however, New Haven falls off the map, replaced by New York, whose teams won a title in 35 of 51 combined seasons (a 69% conversion rate!), and Toronto, which won in 23 of 51 for a 45% conversion.",
+    "why": "For the stated 1920-1970 span the table gives New York 36 titles and Toronto 25, not 35 and 23, and it has no season counts from which the 51 combined seasons or the 69%/45% conversion rates could be computed."
+  },
+  {
+    "source": "In the last 48 years though, it’s all Los Angeles. As a city, LA has won 50 championships since 1970 — a conversion rate of 104% — and finished in the final four or better 131 times.",
+    "why": "The table gives Los Angeles 55 titles since 1970 and 140 final-four rows (148 final-four appearances counting every slot), not 50 and 131, and it has no season counts needed for the 104% conversion rate."
+  },
+  {
+    "source": "So where’s the real titletown here? The winningest city in North America has changed over time.",
+    "why": "The era leaders match in name, but the supporting era counts do not: New York has 36 titles in 1920-1970 in the table versus the story's 35, and Los Angeles has 55 titles since 1970 versus the story's 50."
+  },
+  {
+    "source": "If we look at streaks of final four appearances, we can see how long a city has been good. And if we look at dynasties — championships in a row, — we can see how long a metro area has been great. Maybe more importantly though, we can look at dry spells.",
+    "why": "Longest dynasties, longest final-four streaks, and most/fewest dry seasons require season-by-season team results (including seasons with no final-four appearance), which titles.csv does not contain."
+  },
+  {
+    "source": "The biggest cities may win the most titles, but they aren’t necessarily very well. LA, for instance, has won just 1.4x what they should have, while NYC has won 30% fewer titles.",
+    "why": "The location quotient and the 1.4x / 30%-fewer figures require metro-area population, which is not in titles.csv."
+  },
+  {
+    "source": "Actual vs expected title differential, based on number of seasons.",
+    "why": "The Above Expectations top ten (Los Angeles +48.4, Montreal +33.0, Toronto +31.0, and so on) needs each metro's team-season count to compute expected titles; titles.csv has only championship wins."
+  },
+  {
+    "source": "Titles vs attempts over time.",
+    "why": "The Conversion Rates top ten (Los Angeles 67.0%, New York 40.4%, San Francisco Bay Area 35.9%, and so on) needs each metro's attempts/seasons, which titles.csv does not contain."
+  },
+  {
+    "source": "Actual titles vs expectations based on population.",
+    "why": "The Metro Area Size top ten (Princeton 123.03x, West Point 109.76x, and so on) needs metro-area populations, which are absent from titles.csv."
+  }
+]

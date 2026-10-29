@@ -1,0 +1,47 @@
+[
+ {
+  "id": "reddit-comments-divided",
+  "source": "The comments are extremely divided and users on both sides cited articles to defend their positions.",
+  "claim": "156 of the Reddit comments advocate sleep training, 126 oppose it, and 43 take no position.",
+  "tables": {
+   "r": "data/reddit.csv"
+  },
+  "code": "r.position.value_counts()"
+ },
+ {
+  "id": "news-articles-both-sides",
+  "source": "There were articles from reporters pushing their opinion on both sides of the debate, many with incredibly dramatic titles.",
+  "claim": "94 of the articles advocate sleep training, 27 oppose it, and 19 take no position.",
+  "tables": {
+   "a": "data/articles.csv"
+  },
+  "code": "a.position.value_counts()"
+ },
+ {
+  "id": "books-divided",
+  "source": "and again the results were divided.",
+  "claim": "24 of the books advocate sleep training and 12 oppose it.",
+  "tables": {
+   "b": "data/books.csv"
+  },
+  "code": "b.position.value_counts()"
+ },
+ {
+  "id": "clinical-studies-advocate",
+  "source": "the majority of published pediatric sleep researchers advocate sleep training.",
+  "claim": "74 of the 75 clinical studies are categorized as advocating sleep training.",
+  "tables": {
+   "s": "data/studies.csv"
+  },
+  "code": "s.position.eq('Advocate').agg(['sum', 'size'])"
+ },
+ {
+  "id": "studies-most-recent-40-years",
+  "source": "If we plot each clinical study according to year of publication, we see that indeed most occurred within the past 40 years.",
+  "claim": "71 of the 75 clinical studies were published in 1984 or later.",
+  "tables": {
+   "s": "data/studies.csv"
+  },
+  "code": "s.year.ge(1984).agg(['sum', 'size'])"
+ }
+]

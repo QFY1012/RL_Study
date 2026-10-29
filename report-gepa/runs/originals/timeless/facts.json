@@ -24,7 +24,7 @@
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'count']]"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'count']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
   },
   {
     "id": "top-five-90s-billboard-yearly-ranks",
@@ -33,7 +33,7 @@
     "tables": {
       "d": "data/all_data.csv"
     },
-    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'rank']]"
+    "code": "d[pd.to_numeric(d.date.str[-4:], errors='coerce').between(1990, 1999)].nlargest(5, 'count')[['artist', 'track', 'rank']].reset_index(drop=True).assign(position=lambda x: x.index + 1)"
   },
   {
     "id": "forty-one-songs-ahead-of-smells-like-teen-spirit",
@@ -65,7 +65,7 @@
   {
     "id": "top-fifty-one-overall-ranking",
     "source": "Present-day Popularity of Five Decades of Music ... TRACK SPOTIFY PLAYCOUNTS 1. Lose Yourself — Eminem, 2002 59,039,765 2. Mr. Brightside — Killers The, 2005 54,367,533 3. Numb — Linkin Park, 2003 52,969,898 4. Don't Stop Believin' — Journey, 1981 50,855,135 5. Smells Like Teen Spirit — Nirvana, 1991 50,657,282 ... 51. Sultans Of Swing — Dire Straits, 1979 25,138,802",
-    "claim": "The chart ranks the 51 most-played Billboard hits from Lose Yourself with 59,039,765 plays first to Sultans Of Swing with 25,138,802 51st, with Mr. Brightside (54,367,533), Numb (52,969,898), Don't Stop Believin' (50,855,135) and Smells Like Teen Spirit (50,657,282) in places two through five.",
+    "claim": "The chart's displayed ranking runs from Lose Yourself with 59,039,765 plays first to Sultans Of Swing with 25,138,802 51st, with Mr. Brightside (54,367,533), Numb (52,969,898), Don't Stop Believin' (50,855,135) and Smells Like Teen Spirit (50,657,282) in places two through five.",
     "tables": {
       "d": "data/all_data.csv"
     },

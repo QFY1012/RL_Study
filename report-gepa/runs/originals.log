@@ -12509,3 +12509,134 @@ spades: facts=6 answer=5 dropped=1 skipped=13 problems=0 616s steps=48
   women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
   votes-for-women votes-for-women: write /home/user/RL_Study/report-gepa/runs/originals/votes-for-women/facts.json
   votes-for-women votes-for-women: write /home/user/RL_Study/report-gepa/runs/originals/votes-for-women/skipped.json
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd, numpy a
+  wine-model wine-model: web_fetch https://raw.githubusercontent.com/the-pudding/wine-model/master/README.md
+  wine-model wine-model: web_fetch https://html.duckduckgo.com/html/?q=%22wine-model%22+pudding+%22wine-data%22+github+content
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && python3 - <<'EOF' import json, 
+  sleep-training sleep-training: bash cd /home/user/RL_Study/report-gepa/runs/originals/sleep-training && ls -la facts.json skipped.json &
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c "import pandas as pd, numpy as
+  wine-model wine-model: web_fetch https://data.jsdelivr.com/v1/package/gh/the-pudding/wine-model@master/flat
+  wine-model wine-model: web_fetch https://raw.githubusercontent.com/the-pudding/wine-model/main/README.md
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 /tmp/validate.py 2>&1 | hea
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json, pandas 
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json s=json.l
+  women-in-headlines women-in-headlines: bash find /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines -type f | head -50; echo "---
+  women-in-headlines women-in-headlines: web_fetch https://pudding.cool/2022/02/women-in-headlines
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np g=pd.read_csv('women_in_govt.csv') last=g[g
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/input/category.csv
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/README.md
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  wiki-death wiki-death: web_fetch http://web.archive.org/web/20261006231737/https://pudding.cool/2018/08/wiki-death/
+  votes-for-women votes-for-women: edit /home/user/RL_Study/report-gepa/runs/originals/votes-for-women/facts.json
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 - <<'PY' import json, panda
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part0-intro.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part1.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part2.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part3.mustache
+  stand-up stand-up: bash cd /home/user/RL_Study/report-gepa/runs/originals/stand-up; python3 - <<'PYEOF' import json, re, pan
+  upward-mobility upward-mobility: web_fetch https://web.archive.org/web/2021/https://www.census.gov/dataviz/visualizations/020/
+  upward-mobility upward-mobility: web_fetch https://web.archive.org/cdx/search/cdx?url=census.gov/dataviz/visualizations/020/*&output=text&limit
+  sleep-training sleep-training: bash cd data && python3 - <<'EOF' import pandas as pd s=pd.read_csv('studies.csv') for kw in ['Randomised
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && python3 - <<'EOF' import json, 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; head -3 data/headlines.csv; ec
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part4.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part5.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part6.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part7.mustache
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 - <<'PY' import json, url
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  titletowns titletowns: write /home/user/RL_Study/report-gepa/runs/originals/titletowns/facts.json
+  titletowns titletowns: write /home/user/RL_Study/report-gepa/runs/originals/titletowns/skipped.json
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import pandas as p
+  wiki-billboard wiki-billboard: web_fetch https://pudding.cool/2018/08/wiki-billboard-data/web/2018-annotations.csv
+  wiki-billboard wiki-billboard: web_fetch https://raw.githubusercontent.com/the-pudding/wiki-billboard-data/master/input/README.md
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np g=pd.read_csv('women_in_govt.csv') for d,gr
+  titletowns titletowns: bash cd /home/user/RL_Study/report-gepa/runs/originals/titletowns && python3 - <<'EOF' import json, panda
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part8-model.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part9-outro.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part10-footer.mustache
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/text/part8-model.mustache
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  votes-for-women votes-for-women: bash cd /home/user/RL_Study/report-gepa/runs/originals/votes-for-women && cat facts.json && echo && cat s
+  upward-mobility upward-mobility: web_fetch https://www.bing.com/search?q=census.gov+dataviz+020+Black+population+1910+1940+city
+  upward-mobility upward-mobility: web_fetch https://r.jina.ai/https://www.census.gov/dataviz/visualizations/020/
+  women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/index.html
+  women-in-congress women-in-congress: web_fetch https://pudding.cool/2018/07/women-in-congress/
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/model/probability.js
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/model/buildModel.js
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/data/model-weights.csv
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/data/importance.csv
+  wiki-billboard wiki-billboard: bash find / -path '*wiki-billboard*' -not -path '/proc/*' 2>/dev/null | head -100; find / -name 'original
+  votes-for-women votes-for-women: bash cd data && python3 -c " import pandas as pd p=pd.read_csv('platforms.json.csv') y=p.groupby('year').
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  wiki-billboard wiki-billboard: bash sed -n '1,260p' /home/user/RL_Study/report-bench/src/report_bench/facts.py
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && python3 - <<'PY' import json facts 
+  wiki-billboard wiki-billboard: bash sed -n '1,260p' /home/user/RL_Study/report-bench/src/report_bench/rubric.py; sed -n '1,260p' /home/u
+  titletowns titletowns: edit /home/user/RL_Study/report-gepa/runs/originals/titletowns/skipped.json
+  songwriters songwriters: bash cd /home/user/RL_Study/report-gepa/runs/originals/songwriters && echo "=== facts.json ===" && cat fa
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 -c " import pandas as pd, nu
+  song-decay song-decay: web_fetch https://raw.githubusercontent.com/the-pudding/song-decay-clean/master/src/assets/data/time_series_90
+  song-decay song-decay: web_fetch https://raw.githubusercontent.com/the-pudding/song-decay-clean/master/src/assets/data/time_series_90
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 - << 'EOF' import json p='facts.j
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && cat facts.json && echo '=====SKIPPED==
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 << 'EOF' import json, pandas as p
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 -c " import pandas as pd, nu
+  wine-model wine-model: web_fetch https://data.jsdelivr.com/v1/package/gh/the-pudding/wine-model@master/flat
+sleep-training: facts=5 answer=5 dropped=0 skipped=13 problems=0 834s steps=77
+  timeless timeless: bash cd /home/user/RL_Study/report-gepa/runs/originals/timeless && python3 - <<'EOF' import json f=json.l
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/tweens/stats.js
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/src/app/init.js
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && ls -la && ls -la data && head -20
+  womens-sizing womens-sizing: web_fetch https://pudding.cool/2026/02/womens-sizing/
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np, itertools b=pd.read_csv('baked_positions.c
+stand-up: facts=10 answer=10 dropped=0 skipped=4 problems=0 617s steps=65
+  wiki-billboard wiki-billboard: web_view https://pudding.cool/2018/09/wiki-billboard/
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  womens-sizing womens-sizing: web_fetch https://pudding.cool/2026/02/womens-sizing/
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && cat data/ASTMsizes.csv && echo --
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  titletowns titletowns: bash cd /home/user/RL_Study/report-gepa/runs/originals/titletowns && python3 - <<'EOF' import json, os fo
+  vogue vogue: bash cd /home/user/RL_Study/report-gepa/runs/originals/vogue && python3 -c " import pandas as pd f=pd.rea
+  vocabulary vocabulary: bash cd /home/user/RL_Study/report-gepa/runs/originals/vocabulary && python3 - <<'EOF' import pandas as p
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && ls -la agent/bin/pageshot && file agent/bin/pageshot && sed -n
+  wrestling wrestling: bash ls -la /home/user/RL_Study/report-gepa/runs/originals/wrestling; ls -la /home/user/RL_Study/report-g
+  wrestling wrestling: web_fetch https://pudding.cool/2020/05/wrestling/
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import json p=
+  wiki-billboard wiki-billboard: bash env | grep -i proxy; echo ---; cat /etc/resolv.conf; echo ---; getent hosts pudding.cool; echo code=
+  wrestling wrestling: web_view https://pudding.cool/2020/05/wrestling/
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 -c " import pandas as pd, nu
+  wine-model wine-model: web_fetch https://cdn.jsdelivr.net/gh/the-pudding/wine-model@master/data/model-intercept.csv
+votes-for-women: facts=3 answer=3 dropped=0 skipped=3 problems=0 345s steps=40
+  song-decay song-decay: bash cd /home/user/RL_Study/report-gepa/runs/originals/song-decay && python3 - <<'EOF' import pandas as p
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && grep -n "coverage\|answer\|facts" -n src/report_gepa/optimize.
+  timeless timeless: bash cd data; python3 -c " import pandas as pd d=pd.read_csv('all_data.csv') s=d.nlargest(55,'count')[['a
+  wiki-breakout wiki-breakout: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-breakout && python3 -c " import pandas as pd 
+  women-in-headlines women-in-headlines: bash cd /home/user/RL_Study/report-gepa/runs/originals/women-in-headlines; python3 -c " import pandas as 
+  women-in-headlines women-in-headlines: web_view https://pudding.cool/2022/02/women-in-headlines
+  upward-mobility upward-mobility: bash cd /home/user/RL_Study/report-gepa/runs/originals/upward-mobility && python3 - <<'PY' import pandas 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 -c " import pandas as pd, nu
+  wiki-billboard wiki-billboard: bash cd /home/user/RL_Study/report-gepa && sed -n '1,260p' src/report_gepa/evalguide.py
+  two-minute-report two-minute-report: bash cd /home/user/RL_Study/report-gepa/runs/originals/two-minute-report && python3 - <<'EOF' import pand
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+songwriters: facts=10 answer=9 dropped=1 skipped=12 problems=0 704s steps=36
+  women-in-congress women-in-congress: bash cd data && python3 -c " import pandas as pd, numpy as np b=pd.read_csv('baked_positions.csv') yc=[c 
+  wine-animals wine-animals: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-animals && python - <<'EOF' import pandas as 
+  titletowns titletowns: bash cd /home/user/RL_Study/report-gepa/runs/originals/titletowns && cat facts.json && echo && echo '--- 
+  wine-model wine-model: bash cd /home/user/RL_Study/report-gepa/runs/originals/wine-model && python3 -c " import pandas as pd, nu
+  wrestling wrestling: bash cd /home/user/RL_Study/report-gepa/runs/originals/wrestling; curl -sL https://pudding.cool/2020/05/w
+  wiki-death wiki-death: bash cd /home/user/RL_Study/report-gepa/runs/originals/wiki-death && python3 - <<'EOF' import pandas as p
+  womens-sizing womens-sizing: bash cd /home/user/RL_Study/report-gepa/runs/originals/womens-sizing && python3 -c " import pandas as pd 
+  womens-sizing womens-sizing: web_view https://pudding.cool/2026/02/womens-sizing/
