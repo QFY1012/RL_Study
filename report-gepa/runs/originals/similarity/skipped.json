@@ -1,0 +1,50 @@
+[
+  {
+    "source": "1998: 2.9 writers",
+    "why": "The top-5 songs in the supplied data for 1998 average 3.08 credited writers, not 2.9; no story-specified filter (top-5 songs, 1985-2017) brings the 1998 average down to 2.9."
+  },
+  {
+    "source": "In the late 80s, the most-common songwriting team consisted of two people, and only 7 songs had more than 3 writers.",
+    "why": "The two-writer mode reproduces, but for 1985-1989 the data has 19 top-5 song-years with more than three credited writers, not 7."
+  },
+  {
+    "source": "The result is a trend toward similarity, with smaller distances among songs. To date, songs that charted between 2012 and 2016 were the most similar, according to EchoNest data.",
+    "why": "Using the story's normalized EchoNest distance on the supplied songs, 2007-2011 has the smallest average pairwise distance (0.550), below 2012-2016 (0.573); 2012-2016 is therefore not the most similar era in the data."
+  },
+  {
+    "source": "The musical differences among hits on the Hot 100 is trending downward.",
+    "why": "The supplied file contains top-4 hits, not the chart's stated top 500 per era; under the story's distance the era series is not monotonic and 2007-2011 is the minimum, so the chart's trend/superlative is not reproduced."
+  },
+  {
+    "source": "and the range is getting narrower",
+    "why": "Energy's interquartile range is 0.280 in 1967-1971, 0.334 in 1987-1991 and 0.242 in 2012-2016; 1987-1991 is wider, and 2007-2011 has the narrowest IQR (0.228), so the stated narrowing is not monotonic or reproduced."
+  },
+  {
+    "source": "Most Different #1 Hits, (’07-’11)",
+    "why": "The chart's displayed pair (Last Friday Night/Hey There Delilah) is not the maximum-distance #1 pair in the data; the maximum is Someone Like You/Last Friday Night, although the displayed pair's normalized distance is about 1.27."
+  },
+  {
+    "source": "Songs with over 10 songwriters are increasingly more common",
+    "why": "The data contains 13-writer songs in 2005-2007 and only single 11-writer songs after 2009, so the count of songs with more than 10 writers does not increase over the period."
+  },
+  {
+    "source": "The 10 Producers with the Most Hits that peaked on the Billboard Hot 100 #1 through #5.",
+    "why": "The top-ranked producer and the aggregate top-ten shares reproduce, but the exact ranked top-ten membership for 2015-2017 does not: many producers tie at 2 songs, and the data's tie-break selects different names than the chart (e.g. DJ Khaled/Kevin Kadish rather than the chart's Greg Kurstin/Mark Ronson/Charlie Puth choices)."
+  },
+  {
+    "source": "Most Similar #1 Hits For each era, #1 hits with minimal difference among EchoNest variables.",
+    "why": "Only the story's named 2007-2011 pair is reproduced; the chart does not display the other eras' pair values in the fetched text, so the full per-era closest-pair ranking is not claimed."
+  },
+  {
+    "source": "All of these Songs are by Max Martin or Dr. Luke",
+    "why": "This is a large curated catalogue of songs rather than a single number or comparison; the supplied data is not used to reproduce the chart's exact song list."
+  },
+  {
+    "source": "a few record labels still control 80% of the market (and growing)",
+    "why": "No record-label market-share data is in data/; this is external context."
+  },
+  {
+    "source": "The researchers extracted their own features from 17,000 songs that included loudness, pitch, and timbre.",
+    "why": "This describes an external study's dataset, not the supplied files."
+  }
+]

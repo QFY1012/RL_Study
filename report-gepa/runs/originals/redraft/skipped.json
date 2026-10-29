@@ -1,0 +1,58 @@
+[
+  {
+    "source": "Avg. VORP: 7.2",
+    "why": "This chart label/tooltip is not reproduced from data/data.csv. Under the story's 1,000-minute rule the 1999 class averages 11.75 VORP among qualifying players (9.67 over all players), and the label is not tied to a named year in the text; no class average of 7.2 comes out of the published file."
+  },
+  {
+    "source": "Though he ultimately spent 10 years in the league",
+    "why": "The file has games played (G), not seasons or years in the league; no column gives career span."
+  },
+  {
+    "source": "Darko finished with career averages of 6.0 points, 4.2 rebounds, and 0.9 assists per game",
+    "why": "The file has only G, VORP and MP; it has no points, rebounds or assists columns."
+  },
+  {
+    "source": "KG put up huge numbers for 21 seasons",
+    "why": "The file has games played (G), not seasons; 21 seasons cannot be computed."
+  },
+  {
+    "source": "His steal status is further elevated because the 1995 draft class wasn't loaded.",
+    "why": "'Wasn't loaded' has no defined metric in the story or the file; any class-strength measure would use a threshold the story does not specify."
+  },
+  {
+    "source": "Any second rounder who gets minutes can easily move +20 spots, making them appear to be a bigger steal than Kobe.",
+    "why": "'Gets minutes' and 'easily' are not defined, and the story gives no threshold or subset for this claim."
+  },
+  {
+    "source": "However, there is no clear-cut winner, so the debate continues...",
+    "why": "A subjective conclusion about the debate; it has no data test."
+  },
+  {
+    "source": "One thing to keep in mind: VORP is a cumulative stat, so players who are still active will continue to change.",
+    "why": "A methodology note about the statistic, not a finding computed from the file."
+  },
+  {
+    "source": "A look at 20 years of picks since 1989 — the year the NBA began the two-round system.",
+    "why": "A description of the data's period and draft format, not a finding."
+  },
+  {
+    "source": "Note: That big chunk of players in gray played less than 1,000 minutes (or never) in the league.",
+    "why": "A chart note describing the gray data subset; it is the complement of the 'making it' share and is a data description rather than a separate finding."
+  },
+  {
+    "source": "By default, they are redrafted lower than everyone else.",
+    "why": "A description of the redraft rule used to build Pk_redraft_vorp, not a finding."
+  },
+  {
+    "source": "So the GMs do okay for the most part.",
+    "why": "A subjective summary with no defined metric or number."
+  },
+  {
+    "source": "Simply put, the outliers make more waves, and more headlines.",
+    "why": "A journalistic statement, not a data finding."
+  },
+  {
+    "source": "BUST/STEAL VALUE",
+    "why": "The chart labels many individual mid-range values (for example Mookie Blaylock +33.3, Kyle Lowry +27.3, Steve Nash +22.2, Trajan Langdon and Nikoloz Tskitishvili -18.7, Jay Williams -22.2, Jonathan Bender -37.8). These are illustrative bar labels rather than the story's conclusions; the ranked extremes and the players named in the text are included as facts."
+  }
+]

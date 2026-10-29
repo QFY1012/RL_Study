@@ -1,0 +1,218 @@
+[
+  {
+    "id": "darko-drafted-second",
+    "source": "In 2003, Darko was selected 2nd, just after LeBron James. More notably though, he went ahead of Carmelo Anthony, Chris Bosh, and Dwyane Wade...",
+    "claim": "Darko Milicic was picked 2nd in 2003, after LeBron James (1st) and before Carmelo Anthony (3rd), Chris Bosh (4th) and Dwyane Wade (5th).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Year.eq(2003)].set_index('Player').loc[['LeBron James','Darko Milicic','Carmelo Anthony','Chris Bosh','Dwyane Wade'],['Year','Pk']]"
+  },
+  {
+    "id": "darko-redraft-24",
+    "source": "If we rank these five based on their career Value over Replacement Player (VORP), a very solid all-in-one stat, Darko would have dropped to the 24th pick.",
+    "claim": "In the VORP redraft of the 2003 class, Darko Milicic falls to 24th, while LeBron James is 1st, Carmelo Anthony 3rd, Chris Bosh 4th and Dwyane Wade 2nd.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Year.eq(2003)].set_index('Player').loc[['LeBron James','Darko Milicic','Carmelo Anthony','Chris Bosh','Dwyane Wade'],['Year','Pk_redraft_vorp']]"
+  },
+  {
+    "id": "darko-22-better-choices",
+    "source": "This means there were arguably 22 better choices than Darko, including the likes of Luke Walton.",
+    "claim": "22 players taken after Darko Milicic in the same draft had a higher career VORP than he did.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[(d.Year.eq(2003)) & (d.Pk.gt(d.loc[d.Player.eq('Darko Milicic'),'Pk'].iloc[0])) & (d.VORP.gt(d.loc[d.Player.eq('Darko Milicic'),'VORP'].iloc[0]))].shape[0]"
+  },
+  {
+    "id": "darko-vorp-vs-lebron",
+    "source": "resulting in a VORP of just 0.8. To put that number in context, LeBron's current VORP is 108.6, and he isn't even close to retiring.",
+    "claim": "Darko Milicic's career VORP is 0.8; LeBron James's is 108.6.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Player.isin(['Darko Milicic','LeBron James'])].set_index('Player').VORP"
+  },
+  {
+    "id": "luke-walton-better-choice",
+    "source": "This means there were arguably 22 better choices than Darko, including the likes of Luke Walton.",
+    "claim": "Luke Walton, taken 32nd in 2003, had a VORP of 1.9 and a redraft position of 22nd.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Player.eq('Luke Walton')][['Player','Year','Pk','VORP','Pk_redraft_vorp']]"
+  },
+  {
+    "id": "drafted-players-make-it",
+    "source": "One of the more unexpected takeways is that just barely over half the guys drafted end up “making it” in the NBA.",
+    "claim": "730 of the 1,142 drafted players (0.639) played at least 1,000 career minutes.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.MP.ge(1000).agg(['sum','count','mean']).rename('drafted players with MP>=1000')"
+  },
+  {
+    "id": "top20-picks-minutes",
+    "source": "Even getting picked in the top 20 does not guarantee minutes, let alone a successful career.",
+    "claim": "27 of the 400 top-20 picks played fewer than 1,000 career minutes.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "(~d[d.Pk.le(20)].MP.ge(1000)).agg(['sum','count']).rename('top-20 picks with MP<1000')"
+  },
+  {
+    "id": "kobe-move-plus-12",
+    "source": "Relying solely on spots moved diminishes a guy like Kobe Bryant, who was drafted 13th and nets a move of +12.",
+    "claim": "Kobe Bryant was drafted 13th and has a redraft position of 1st, a move of 12 spots.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.loc[d.Player.eq('Kobe Bryant'),['Pk','Pk_redraft_vorp']].assign(move=lambda x: x.Pk-x.Pk_redraft_vorp)"
+  },
+  {
+    "id": "kobe-bust-steal-value",
+    "source": "For Kobe, that means he gets a score of +59.1; Kobe's VORP of 72.1 - 13.0 (Zydrunas Ilgauskas).",
+    "claim": "Kobe Bryant's VORP of 72.1 minus Zydrunas Ilgauskas's 13.0 (the player redrafted 13th in 1996) gives a bust/steal value of 59.1.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Player.isin(['Kobe Bryant','Zydrunas Ilgauskas'])][['Player','Year','Pk','VORP','Pk_redraft_vorp','Bust_steal']]"
+  },
+  {
+    "id": "garnett-smith-biggest-steal-bust",
+    "source": "It just so happens that our biggest steal and bust were from the same draft class.",
+    "claim": "Kevin Garnett has the highest bust/steal value at 77.6 and Joe Smith the lowest at -88.1; both were drafted in 1995.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Bust_steal.isin([d.Bust_steal.max(), d.Bust_steal.min()])][['Player','Year','Pk','VORP','Bust_steal']]"
+  },
+  {
+    "id": "smith-garnett-vorp",
+    "source": "Joe Smith got the double whammy of being an average player (a VORP of 5.9) taken at the number one spot, and being in the same draft as the legendary Kevin Garnett. KG put up huge numbers for 21 seasons, with a VORP of 94.0.",
+    "claim": "Joe Smith, the 1st pick in 1995, had a career VORP of 5.9; Kevin Garnett had 94.0.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Player.isin(['Joe Smith','Kevin Garnett'])][['Player','Year','Pk','VORP']]"
+  },
+  {
+    "id": "darko-fourth-worst-bust",
+    "source": "Our guy - 4th worst",
+    "claim": "Darko Milicic's bust value is -55.6, the fourth-worst, behind Joe Smith (-88.1), Michael Olowokandi (-74.0) and Glenn Robinson (-67.9), and ahead of Kwame Brown (-52.2).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(rank=d.Bust_steal.rank(method='min')).nsmallest(5,'Bust_steal')[['Player','Year','Pk','VORP','Bust_steal','rank']]"
+  },
+  {
+    "id": "manu-ginobili-57th",
+    "source": "Successful careers can come from anywhere in the draft.",
+    "claim": "Manu Ginobili was drafted 57th overall in 1999, has a redraft position of 2nd and a bust/steal value of 48.3.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Player.eq('Manu Ginobili')][['Player','Year','Pk','VORP','Pk_redraft_vorp','Bust_steal']]"
+  },
+  {
+    "id": "best-class-1999",
+    "source": "Picking today, the 1999 draft class appears to have the best case for top draft class.",
+    "claim": "Among players who played at least 1,000 career minutes, the 1999 class has the highest average VORP (11.75), ahead of 1996 (11.34) and 2003 (10.34).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.MP.ge(1000)].groupby('Year').VORP.mean().nlargest(3).rename('mean VORP (MP>=1000)')"
+  },
+  {
+    "id": "1999-no-stars-vs-2003",
+    "source": "It didn't produce any bona fide stars like 2003, but the depth of talent is nearly unmatched.",
+    "claim": "The 2003 class's best player, LeBron James, has a VORP of 108.6, while the 1999 class's best, Shawn Marion, has 52.1.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Year.isin([1999,2003])].sort_values('VORP',ascending=False).groupby('Year').head(1)[['Player','Year','VORP']]"
+  },
+  {
+    "id": "1999-depth-vs-2003",
+    "source": "It didn't produce any bona fide stars like 2003, but the depth of talent is nearly unmatched.",
+    "claim": "The tenth-highest VORP in the 1999 class is 28.2, against 10.3 in 2003.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Year.isin([1999,2003])].groupby('Year').VORP.apply(lambda s: s.nlargest(10).min())"
+  },
+  {
+    "id": "redraft-moves-close",
+    "source": "When we compute the average redraft rank for each pick, notice that most picks end up close to their expected rank.",
+    "claim": "Across all picks, the median absolute redraft move is 7 spots and the mean absolute move is 10.0 spots.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "(d.Pk_redraft_vorp - d.Pk).abs().agg(['median','mean'])"
+  },
+  {
+    "id": "higher-picks-drop-more",
+    "source": "Higher picks tend to drop more often, which makes sense because there is less potential for upward mobility.",
+    "claim": "The correlation between actual pick number and redraft movement is -0.416, so earlier picks tend to fall and later picks tend to rise.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(move=d.Pk_redraft_vorp-d.Pk)[['Pk','move']].corr().loc['Pk','move']"
+  },
+  {
+    "id": "second-round-picks-belong",
+    "source": "The only obvious consistency is that getting picked later in the second round means the player probably belongs there.",
+    "claim": "Second-round picks average an actual slot of 44.1 and a redraft slot of 38.9, a mean move of -5.2 spots.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Pk.gt(30)].assign(move=lambda x: x.Pk_redraft_vorp-x.Pk).agg({'Pk':'mean','Pk_redraft_vorp':'mean','move':'mean'})"
+  },
+  {
+    "id": "players-redrafted-differently",
+    "source": "Successful careers can come from anywhere in the draft. When we use VORP to redraft, there is some significant movement across the board.",
+    "claim": "1,029 of the 1,142 players (0.901) were redrafted at a different position from their actual pick.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "(d.Pk_redraft_vorp.ne(d.Pk)).agg(['sum','count','mean'])"
+  },
+  {
+    "id": "top-five-steal-values",
+    "source": "BUST/STEAL VALUE",
+    "claim": "The five largest bust/steal values are Kevin Garnett +77.6, Kobe Bryant +59.1, Dirk Nowitzki +53.9, Paul Pierce +50.7 and Manu Ginobili +48.3.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.nlargest(5,'Bust_steal')[['Player','Year','Pk','VORP','Bust_steal']]"
+  },
+  {
+    "id": "top-ten-class-1999",
+    "source": "There are two ways to approach calculating the best draft class ever: focus on elite players, since they are what teams are built around, or evaluate the entire class, top to bottom. Take your pick.",
+    "claim": "Averaging each class's ten best VORP values, 1999 ranks first at 37.93, ahead of 1996 (35.05) and 2003 (32.03).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.groupby('Year').VORP.apply(lambda s: s.nlargest(10).mean()).nlargest(3)"
+  },
+  {
+    "id": "top-five-class-2003",
+    "source": "There are two ways to approach calculating the best draft class ever: focus on elite players, since they are what teams are built around, or evaluate the entire class, top to bottom. Take your pick.",
+    "claim": "Averaging each class's five best VORP values, 2003 ranks first at 48.94, ahead of 1996 (48.22) and 1998 (47.18).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.groupby('Year').VORP.apply(lambda s: s.nlargest(5).mean()).nlargest(3)"
+  },
+  {
+    "id": "class-top-ten-vorp-ranges",
+    "source": "There are two ways to approach calculating the best draft class ever: focus on elite players, since they are what teams are built around, or evaluate the entire class, top to bottom.",
+    "claim": "The top ten VORP ranges are 72.1 to 16.9 in 1996, 65.7 to 11.0 in 1998, 52.1 to 28.2 in 1999 and 108.6 to 10.3 in 2003.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d[d.Year.isin([1996,1998,1999,2003])].groupby('Year').VORP.apply(lambda s: s.nlargest(10).agg(['max','min']))"
+  }
+]
