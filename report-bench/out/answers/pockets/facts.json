@@ -6,7 +6,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()",
+  "group": "front-pockets-smaller"
  },
  {
   "id": "women-skinny-front-pockets-smaller",
@@ -15,7 +16,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()",
+  "group": "front-pockets-smaller"
  },
  {
   "id": "women-straight-front-pockets-smaller",
@@ -24,7 +26,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()"
+  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightFront', 'maxWidthFront']].mean()",
+  "group": "front-pockets-smaller"
  },
  {
   "id": "women-skinny-back-pockets-smaller",
@@ -33,7 +36,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'skinny'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()",
+  "group": "back-pockets-close"
  },
  {
   "id": "women-straight-back-pockets-smaller",
@@ -42,7 +46,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  "code": "m.assign(pocketStyle=m.style.replace({'slim': 'skinny', 'boot-cut': 'straight', 'regular': 'straight'})).query(\"pocketStyle == 'straight'\").groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()",
+  "group": "back-pockets-close"
  },
  {
   "id": "back-pocket-gap-less-egregious",
@@ -51,7 +56,8 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack']].mean().T.eval('men - women')"
+  "code": "m.groupby('menWomen')[['maxHeightFront', 'maxWidthFront', 'maxHeightBack', 'maxWidthBack']].mean().T.eval('men - women')",
+  "group": "back-pockets-close"
  },
  {
   "id": "men-back-pockets-deeper-same-width",
@@ -60,6 +66,7 @@
   "tables": {
    "m": "data/measurements.csv"
   },
-  "code": "m.groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()"
+  "code": "m.groupby('menWomen')[['maxHeightBack', 'maxWidthBack']].mean()",
+  "group": "back-pockets-close"
  }
 ]

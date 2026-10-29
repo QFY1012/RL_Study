@@ -108,6 +108,18 @@
     "code": "measurements.assign(b=measurements.brand.str.strip().str.lower()).pivot_table(index='b', columns='menWomen', values='maxHeightFront', aggfunc='mean').assign(ratio=lambda x: x['men'] / x['women']).round(2).sort_values('ratio')"
   },
   {
+    "id": "fifteen-brands-wide-gap",
+    "claim": "15 brands give their men's jeans a mean maximum front pocket height at least 1.5 times that of their women's jeans.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(b=measurements.brand.str.strip().str.lower()).pivot_table(index='b', columns='menWomen', values='maxHeightFront', aggfunc='mean').assign(ratio=lambda x: x['men'] / x['women']).query('ratio >= 1.5').shape[0]"
+  },
+  {
+    "id": "no-missing-values",
+    "claim": "There are no missing values in the file: the total number of NaN cells across the whole table is 0.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.isna().sum().sum()"
+  },
+  {
     "id": "back-pocket-parity",
     "claim": "Back pockets are close to parity: men's jeans average 16.01 maximum height and 13.70 maximum width against 15.12 and 13.34 for women's, with minimums of 13.47 vs 12.58 for height and 12.16 vs 11.74 for width.",
     "tables": {"measurements": "data/measurements.csv"},
