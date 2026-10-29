@@ -5,3 +5,6 @@ __pycache__/
 
 # CSV data stays in Google Drive (see README)
 data/
+
+# a running agent's private folder (agent/gen.mjs removes it when the agent ends)
+runs/originals/.*-pi-*/
