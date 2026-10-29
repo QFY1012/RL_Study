@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B test report — online medical consultation queue</title>
+<style>
+  :root{
+    --paper:#f7f6f2;
+    --card:#fdfcf9;
+    --ink:#1d1d1b;
+    --muted:#6d6b64;
+    --rule:#ddd8cd;
+    --ctrl:#9b9b92;
+    --test:#0f6b60;
+    --warn:#a8412a;
+    --ctrl-soft:#d8d6cf;
+    --test-soft:#cfe3df;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    font-variant-numeric:tabular-nums;
+  }
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-0.01em;margin:0}
+  p{margin:0 0 1em}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+
+  /* ---------- masthead ---------- */
+  header{border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#fffdf8,#f7f6f2);padding:64px 0 0}
+  .kicker{
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin-bottom:22px;
+  }
+  .kicker span.dot{width:6px;height:6px;border-radius:50%;background:var(--test);display:inline-block}
+  h1{font-size:52px;line-height:1.1;max-width:20ch}
+  .standfirst{font-size:20px;line-height:1.55;color:#3c3b37;max-width:62ch;margin-top:22px}
+  .standfirst b{font-weight:600;color:var(--ink)}
+  .byline{
+    display:flex;flex-wrap:wrap;gap:26px;margin:30px 0 0;padding:18px 0 22px;
+    border-top:1px solid var(--rule);font-size:13px;color:var(--muted);
+  }
+  .byline div b{color:var(--ink);font-weight:600}
+
+  /* ---------- key stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+         border:1px solid var(--rule);margin:0 0 4px}
+  .stat{background:var(--card);padding:22px 22px 20px}
+  .stat .num{font-family:Georgia,serif;font-size:34px;line-height:1.1;display:block}
+  .stat .num small{font-size:17px;color:var(--muted)}
+  .stat .lbl{font-size:12.5px;line-height:1.4;color:var(--muted);margin-top:8px;display:block}
+  .stat .delta{font-size:12px;margin-top:6px;display:block}
+  .down{color:var(--test)}
+  .flat{color:var(--warn)}
+
+  /* ---------- sections ---------- */
+  section{padding:56px 0 8px;border-top:1px solid var(--rule);margin-top:44px}
+  section:first-of-type{margin-top:36px}
+  .sechead{display:flex;align-items:baseline;gap:18px;margin-bottom:10px}
+  .sechead .no{font-family:Georgia,serif;font-size:13px;color:var(--muted);letter-spacing:.1em}
+  h2{font-size:32px;line-height:1.2}
+  .lede{font-size:17.5px;line-height:1.6;color:#3c3b37;max-width:70ch}
+  h3{font-size:19px;margin:34px 0 10px}
+
+  .cols{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:start}
+  .cols.reverse{grid-template-columns:1fr 1.05fr}
+
+  figure{margin:26px 0 10px}
+  figcaption{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.5;max-width:66ch}
+  .figtitle{font-size:13px;font-weight:600;letter-spacing:.02em;margin-bottom:14px;display:block}
+
+  /* ---------- bar rows ---------- */
+  .mrow{display:grid;grid-template-columns:104px 1fr 84px;align-items:center;gap:14px;margin:9px 0}
+  .mrow .name{font-size:12.5px;color:var(--muted);line-height:1.25}
+  .mrow .name em{font-style:normal;display:block;font-size:11px;color:#8d8b83}
+  .track{background:#ece9e1;height:13px;border-radius:2px;overflow:hidden}
+  .fill{height:13px;border-radius:2px}
+  .fill.ctrl{background:var(--ctrl)}
+  .fill.test{background:var(--test)}
+  .fill.warn{background:var(--warn)}
+  .mrow .val{font-size:13.5px;text-align:right;font-weight:600}
+  .mrow .val small{font-weight:400;color:var(--muted);font-size:11.5px}
+  .grp{margin-bottom:16px}
+  .grp .gtitle{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+
+  .legend{display:flex;gap:22px;font-size:12.5px;color:var(--muted);margin:6px 0 18px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px;vertical-align:baseline}
+  .legend .c{background:var(--ctrl)}
+  .legend .t{background:var(--test)}
+
+  /* ---------- dumbbell chart ---------- */
+  .dumb{margin:8px 0 0}
+  .dumb .drow{display:grid;grid-template-columns:78px 1fr 118px;align-items:center;gap:16px;height:44px}
+  .dumb .dlab{font-size:13px;color:#3c3b37}
+  .dumb .dlab em{display:block;font-style:normal;font-size:11px;color:var(--muted)}
+  .dumb .dplot{position:relative;height:44px}
+  .dumb .dplot .grid{position:absolute;top:0;bottom:0;width:1px;background:#e8e4da}
+  .dumb .dplot .seg{position:absolute;top:21px;height:2px;background:#c9c5bb}
+  .dumb .dplot .pt{position:absolute;top:16px;width:11px;height:11px;border-radius:50%;transform:translateX(-50%);border:2px solid var(--card)}
+  .dumb .dplot .pt.c{background:var(--ctrl)}
+  .dumb .dplot .pt.t{background:var(--test)}
+  .dumb .dval{font-size:12.5px;text-align:right;color:var(--muted)}
+  .dumb .dval b{color:var(--ink);font-weight:600}
+  .axis{display:grid;grid-template-columns:78px 1fr 118px;gap:16px;margin-top:2px}
+  .axis .scale{position:relative;height:20px;font-size:11px;color:var(--muted)}
+  .axis .scale span{position:absolute;transform:translateX(-50%)}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:18px 0 8px}
+  caption{text-align:left;font-size:13px;font-weight:600;padding-bottom:10px}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid #c8c3b6}
+  tbody tr:hover{background:#f1efe8}
+  td .cn{color:var(--muted);font-size:11.5px;display:block}
+  .neg{color:var(--warn);font-weight:600}
+  .pos{color:var(--test);font-weight:600}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* ---------- callout ---------- */
+  .callout{border-left:3px solid var(--test);background:var(--card);padding:20px 24px;margin:26px 0;font-size:15.5px}
+  .callout.warn{border-left-color:var(--warn)}
+  .callout b{font-weight:600}
+  .callout p:last-child{margin-bottom:0}
+
+  .note{font-size:13px;color:var(--muted);line-height:1.65}
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+  .notes ol{margin:0;padding-left:20px}
+  .notes li{margin-bottom:14px;font-size:13.5px;color:#3c3b37;line-height:1.55}
+  .notes li b{color:var(--ink)}
+
+  footer{margin-top:64px;border-top:1px solid var(--rule);padding:28px 0 60px;font-size:12.5px;color:var(--muted)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+  @media (max-width:900px){
+    .cols,.cols.reverse,.notes{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    h1{font-size:38px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker"><span class="dot"></span>A/B test read-out &nbsp;·&nbsp; online medical consultation &nbsp;·&nbsp; 18,000 sessions</div>
+    <h1>Faster answers, same completions — except in dermatology</h1>
+    <p class="standfirst">
+      A trial of a new consultation-queue design cut the wait for a doctor's first reply by nearly a third and
+      almost eliminated long waits. It did not move the completion rate overall, but it did reshape who
+      drops out, and it hurt one department badly: <b>dermatology lost 4.5 points of completion</b>.
+    </p>
+    <div class="byline">
+      <div><b>18,000</b> consultations</div>
+      <div><b>2024-11-18</b> to <b>2024-12-29</b></div>
+      <div><b>9,013</b> control &nbsp;/&nbsp; <b>8,987</b> test</div>
+      <div>5 departments · 25 complaint types · 3 platforms</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats" style="margin-top:36px">
+    <div class="stat">
+      <span class="num">103.5<small> s</small></span>
+      <span class="lbl">mean time to first doctor reply, test arm</span>
+      <span class="delta down">▼ from 152.0 s in control</span>
+    </div>
+    <div class="stat">
+      <span class="num">1.06<small> %</small></span>
+      <span class="lbl">of test users waited more than 5 minutes</span>
+      <span class="delta down">▼ from 4.48% in control</span>
+    </div>
+    <div class="stat">
+      <span class="num">87.9<small> %</small></span>
+      <span class="lbl">consultations completed, test arm</span>
+      <span class="delta flat">≈ 88.0% in control — no change</span>
+    </div>
+    <div class="stat">
+      <span class="num">80.5<small> %</small></span>
+      <span class="lbl">dermatology completion, test arm</span>
+      <span class="delta flat">▼ from 85.0% in control</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="sechead"><span class="no">01</span><h2>The setup</h2></div>
+    <p class="lede">
+      Users of an online consultation service were split into a control arm and a test arm and followed for
+      six weeks. Each row is one consultation: who the user was, which department and complaint, when they
+      entered the queue, whether they were lost before a doctor answered, whether the consultation completed,
+      how long the doctor took to respond, how long the consultation ran, and whether the user came back
+      within seven days.
+    </p>
+
+    <div class="cols">
+      <div>
+        <h3 style="margin-top:26px">Two arms, evenly split</h3>
+        <div class="grp">
+          <div class="gtitle">Consultations per arm</div>
+          <div class="mrow">
+            <span class="name">Control<em>对照组</em></span>
+            <div class="track"><div class="fill ctrl" style="width:100%"></div></div>
+            <span class="val">9,013</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test<em>实验组</em></span>
+            <div class="track"><div class="fill test" style="width:99.7%"></div></div>
+            <span class="val">8,987</span>
+          </div>
+        </div>
+
+        <h3>Case mix</h3>
+        <div class="grp">
+          <div class="gtitle">Consultations by department</div>
+          <div class="mrow">
+            <span class="name">Pediatrics<em>儿科</em></span>
+            <div class="track"><div class="fill ctrl" style="width:100%"></div></div>
+            <span class="val">5,246</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Internal med.<em>内科</em></span>
+            <div class="track"><div class="fill ctrl" style="width:96.9%"></div></div>
+            <span class="val">5,083</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Dermatology<em>皮肤科</em></span>
+            <div class="track"><div class="fill ctrl" style="width:59.5%"></div></div>
+            <span class="val">3,121</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Gynecology<em>妇科</em></span>
+            <div class="track"><div class="fill ctrl" style="width:47.5%"></div></div>
+            <span class="val">2,490</span>
+          </div>
+          <div class="mrow">
+            <span class="name">ENT<em>五官科</em></span>
+            <div class="track"><div class="fill ctrl" style="width:39.3%"></div></div>
+            <span class="val">2,060</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-top:26px">Who is consulting</h3>
+        <div class="grp">
+          <div class="gtitle">Returning vs new users</div>
+          <div class="mrow">
+            <span class="name">Returning<em>老用户</em></span>
+            <div class="track"><div class="fill ctrl" style="width:100%"></div></div>
+            <span class="val">12,221</span>
+          </div>
+          <div class="mrow">
+            <span class="name">New<em>新用户</em></span>
+            <div class="track"><div class="fill ctrl" style="width:47.3%"></div></div>
+            <span class="val">5,779</span>
+          </div>
+        </div>
+
+        <div class="grp">
+          <div class="gtitle">Platform</div>
+          <div class="mrow">
+            <span class="name">Android</span>
+            <div class="track"><div class="fill ctrl" style="width:100%"></div></div>
+            <span class="val">7,514</span>
+          </div>
+          <div class="mrow">
+            <span class="name">iOS</span>
+            <div class="track"><div class="fill ctrl" style="width:91.4%"></div></div>
+            <span class="val">6,870</span>
+          </div>
+          <div class="mrow">
+            <span class="name">WeChat mini-app<em>微信小程序</em></span>
+            <div class="track"><div class="fill ctrl" style="width:48.0%"></div></div>
+            <span class="val">3,610</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Not recorded</span>
+            <div class="track"><div class="fill ctrl" style="width:0.1%"></div></div>
+            <span class="val">6</span>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:18px">
+          The two arms are close to equal in size and run over the same 42 days, so arm-to-arm
+          differences are not driven by who was routed where or by the calendar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="no">02</span><h2>Speed: the change works, and it works everywhere</h2></div>
+    <p class="lede">
+      Time to a doctor's first reply falls by about 48 seconds on average and by 22 seconds at the median.
+      More importantly, the slow end of the distribution is compressed: the 90th percentile drops from
+      234 s to 177 s and the 95th from 290 s to 213 s. Waits over five minutes — the ones users notice and
+      abandon over — fall from 4.48% of measured sessions to 1.06%.
+    </p>
+
+    <div class="cols">
+      <figure>
+        <span class="figtitle">Time to first doctor reply, seconds</span>
+        <div class="legend"><span><i class="c"></i>Control</span><span><i class="t"></i>Test</span></div>
+
+        <div class="grp">
+          <div class="gtitle">Mean</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:95.0%"></div></div>
+            <span class="val">152.0 s</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:64.7%"></div></div>
+            <span class="val">103.5 s</span>
+          </div>
+        </div>
+
+        <div class="grp">
+          <div class="gtitle">Median</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:68.8%"></div></div>
+            <span class="val">110 s</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:55.0%"></div></div>
+            <span class="val">88 s</span>
+          </div>
+        </div>
+
+        <div class="grp" style="margin-top:22px">
+          <div class="gtitle">Share waiting over 5 minutes</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:89.6%"></div></div>
+            <span class="val">4.48%</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:21.2%"></div></div>
+            <span class="val">1.06%</span>
+          </div>
+        </div>
+        <figcaption>
+          Means over 8,586 (control) and 8,511 (test) sessions with a recorded response; sessions lost
+          before a doctor answered have no response time and are excluded.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <span class="figtitle">Mean seconds to first reply, by week of entry</span>
+        <svg viewBox="0 0 660 250" width="100%" role="img" aria-label="Line chart of mean first response time by week for control and test arms">
+          <title>Mean first response time by week</title>
+          <!-- gridlines -->
+          <g stroke="#e6e2d8" stroke-width="1">
+            <line x1="54" y1="205" x2="614" y2="205"/>
+            <line x1="54" y1="165" x2="614" y2="165"/>
+            <line x1="54" y1="125" x2="614" y2="125"/>
+            <line x1="54" y1="85"  x2="614" y2="85"/>
+            <line x1="54" y1="45"  x2="614" y2="45"/>
+          </g>
+          <g fill="#8d8b83" font-size="11" font-family="-apple-system,Segoe UI,Arial,sans-serif" text-anchor="end">
+            <text x="46" y="209">0</text>
+            <text x="46" y="169">60</text>
+            <text x="46" y="129">120</text>
+            <text x="46" y="89">180</text>
+            <text x="46" y="49">240</text>
+          </g>
+          <!-- control -->
+          <polyline fill="none" stroke="#9b9b92" stroke-width="2.5"
+            points="54,123.7 166,140.4 278,122.8 390,101.9 502,52.8 614,93.4"/>
+          <g fill="#9b9b92">
+            <circle cx="54" cy="123.7" r="4"/><circle cx="166" cy="140.4" r="4"/>
+            <circle cx="278" cy="122.8" r="4"/><circle cx="390" cy="101.9" r="4"/>
+            <circle cx="502" cy="52.8" r="4"/><circle cx="614" cy="93.4" r="4"/>
+          </g>
+          <!-- test -->
+          <polyline fill="none" stroke="#0f6b60" stroke-width="2.5"
+            points="54,142.4 166,144.7 278,144.5 390,131.5 502,132.3 614,125.2"/>
+          <g fill="#0f6b60">
+            <circle cx="54" cy="142.4" r="4"/><circle cx="166" cy="144.7" r="4"/>
+            <circle cx="278" cy="144.5" r="4"/><circle cx="390" cy="131.5" r="4"/>
+            <circle cx="502" cy="132.3" r="4"/><circle cx="614" cy="125.2" r="4"/>
+          </g>
+          <!-- annotations -->
+          <text x="502" y="40" font-size="11" fill="#6d6b64" text-anchor="middle" font-family="-apple-system,Segoe UI,Arial,sans-serif">228 s</text>
+          <text x="614" y="112" font-size="11" fill="#6d6b64" text-anchor="end" font-family="-apple-system,Segoe UI,Arial,sans-serif">167 s</text>
+          <!-- x labels -->
+          <g fill="#8d8b83" font-size="11" font-family="-apple-system,Segoe UI,Arial,sans-serif" text-anchor="middle">
+            <text x="54" y="228">Nov 18</text>
+            <text x="166" y="228">Nov 25</text>
+            <text x="278" y="228">Dec 2</text>
+            <text x="390" y="228">Dec 9</text>
+            <text x="502" y="228">Dec 16</text>
+            <text x="614" y="228">Dec 23</text>
+          </g>
+          <g fill="#8d8b83" font-size="10.5" font-family="-apple-system,Segoe UI,Arial,sans-serif" text-anchor="middle">
+            <text x="54" y="243">1,164 · 1,245</text>
+            <text x="166" y="243">1,407 · 1,350</text>
+            <text x="278" y="243">1,462 · 1,463</text>
+            <text x="390" y="243">1,609 · 1,513</text>
+            <text x="502" y="243">1,597 · 1,644</text>
+            <text x="614" y="243">1,774 · 1,772</text>
+          </g>
+        </svg>
+        <div class="legend" style="margin-top:4px"><span><i class="c"></i>Control</span><span><i class="t"></i>Test</span></div>
+        <figcaption>
+          Grey line is control, teal is test. Numbers under the axis are weekly sessions in each arm
+          (control · test). Volume grows by about half over the run; the control arm's response time
+          drifts up with it, the test arm's does not.
+        </figcaption>
+      </figure>
+    </div>
+
+    <h3>The gain is not concentrated in one place</h3>
+    <p class="lede" style="font-size:16.5px">
+      Every department, platform and complaint improves, but by very different amounts. Gynecology shows the
+      largest fall — from 210.4 s to 97.2 s — because its control-arm queue was the slowest. The WeChat
+      mini-program arm falls from 198.2 s to 104.3 s, and the 25 complaint types go from a 12.6 s gain
+      (chest tightness) up to a 315.6 s gain (heavy periods).
+    </p>
+
+    <table>
+      <caption>Mean seconds to first reply, by department</caption>
+      <thead>
+        <tr><th>Department</th><th>Control</th><th>Test</th><th>Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gynecology <span class="cn">妇科</span></td><td>210.4</td><td>97.2</td><td class="pos">−113.2</td></tr>
+        <tr><td>Dermatology <span class="cn">皮肤科</span></td><td>153.0</td><td>99.9</td><td class="pos">−53.1</td></tr>
+        <tr><td>Pediatrics <span class="cn">儿科</span></td><td>149.2</td><td>103.6</td><td class="pos">−45.6</td></tr>
+        <tr><td>Internal medicine <span class="cn">内科</span></td><td>134.8</td><td>110.2</td><td class="pos">−24.6</td></tr>
+        <tr><td>ENT <span class="cn">五官科</span></td><td>127.1</td><td>98.8</td><td class="pos">−28.3</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      One complaint goes the other way: <b>diarrhoea with mild fever</b> (腹泻伴低烧一天) is the only one of the
+      25 that is slower in the test arm, at 141.8 s against 125.3 s.
+    </p>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="no">03</span><h2>Completion: flat overall, but the mix moved</h2></div>
+    <p class="lede">
+      Headline completion is unchanged: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of
+      9,013 in control (88.0%). Underneath that flat total, users lost before a doctor ever answered rise
+      from 427 (4.74%) to 476 (5.30%) — and that increase is not spread evenly.
+    </p>
+
+    <div class="cols reverse">
+      <figure>
+        <span class="figtitle">Completion rate by department, control vs test</span>
+        <div class="legend"><span><i class="c"></i>Control</span><span><i class="t"></i>Test</span></div>
+        <div class="dumb">
+          <div class="drow">
+            <span class="dlab">ENT <em>五官科</em></span>
+            <div class="dplot">
+              <div class="grid" style="left:0%"></div><div class="grid" style="left:28.6%"></div>
+              <div class="grid" style="left:57.1%"></div><div class="grid" style="left:85.7%"></div>
+              <div class="seg" style="left:68.1%;width:3.8%"></div>
+              <div class="pt c" style="left:68.1%"></div>
+              <div class="pt t" style="left:71.9%"></div>
+            </div>
+            <span class="dval">87.5 → <b>88.1</b></span>
+          </div>
+          <div class="drow">
+            <span class="dlab">Pediatrics <em>儿科</em></span>
+            <div class="dplot">
+              <div class="grid" style="left:0%"></div><div class="grid" style="left:28.6%"></div>
+              <div class="grid" style="left:57.1%"></div><div class="grid" style="left:85.7%"></div>
+              <div class="seg" style="left:78.1%;width:10.3%"></div>
+              <div class="pt c" style="left:78.1%"></div>
+              <div class="pt t" style="left:88.4%"></div>
+            </div>
+            <span class="dval">88.9 → <b>90.4</b></span>
+          </div>
+          <div class="drow">
+            <span class="dlab">Internal med. <em>内科</em></span>
+            <div class="dplot">
+              <div class="grid" style="left:0%"></div><div class="grid" style="left:28.6%"></div>
+              <div class="grid" style="left:57.1%"></div><div class="grid" style="left:85.7%"></div>
+              <div class="seg" style="left:76.0%;width:3.4%"></div>
+              <div class="pt c" style="left:76.0%"></div>
+              <div class="pt t" style="left:79.4%"></div>
+            </div>
+            <span class="dval">88.6 → <b>89.1</b></span>
+          </div>
+          <div class="drow">
+            <span class="dlab">Gynecology <em>妇科</em></span>
+            <div class="dplot">
+              <div class="grid" style="left:0%"></div><div class="grid" style="left:28.6%"></div>
+              <div class="grid" style="left:57.1%"></div><div class="grid" style="left:85.7%"></div>
+              <div class="seg" style="left:78.8%;width:1.8%"></div>
+              <div class="pt c" style="left:78.8%"></div>
+              <div class="pt t" style="left:80.6%"></div>
+            </div>
+            <span class="dval">89.0 → <b>89.3</b></span>
+          </div>
+          <div class="drow">
+            <span class="dlab">Dermatology <em>皮肤科</em></span>
+            <div class="dplot">
+              <div class="grid" style="left:0%"></div><div class="grid" style="left:28.6%"></div>
+              <div class="grid" style="left:57.1%"></div><div class="grid" style="left:85.7%"></div>
+              <div class="seg" style="left:17.9%;width:32.4%;background:#e2b9ad"></div>
+              <div class="pt t" style="left:17.9%"></div>
+              <div class="pt c" style="left:50.3%"></div>
+            </div>
+            <span class="dval">85.0 → <b class="neg">80.5</b></span>
+          </div>
+        </div>
+        <div class="axis">
+          <span></span>
+          <div class="scale">
+            <span style="left:0%">78%</span><span style="left:28.6%">82%</span>
+            <span style="left:57.1%">86%</span><span style="left:85.7%">90%</span>
+          </div>
+          <span></span>
+        </div>
+        <figcaption>
+          Dots are the two arms; the bar joins them. Dermatology moves down while every other
+          department moves up, and it is the only change of more than 1.5 points.
+        </figcaption>
+      </figure>
+
+      <div>
+        <p>
+          Dermatology is the exception to an otherwise benign read-out. Completion there falls from
+          85.0% (1,376 of 1,618) to 80.5% (1,210 of 1,503), a 4.5-point drop with a two-proportion
+          z of −3.35 — far outside what sampling noise would produce at this sample size.
+        </p>
+        <p>
+          The mechanism is visible one column over: the share of dermatology users who leave the queue
+          before a doctor answers doubles, from 7.7% to 12.7%. Pediatrics moves the other way, from 3.1%
+          to 2.5%, and its completion rate rises from 88.9% to 90.4%.
+        </p>
+
+        <div class="callout warn">
+          <p><b>The pattern holds across every skin complaint.</b> All five lose more users before the
+          doctor in the test arm:</p>
+          <p class="mono" style="line-height:1.9;margin-top:10px">
+            back spots (后背长了不少小红点)&nbsp;&nbsp;6.9% → 13.9%<br>
+            hives (荨麻疹反反复复两个星期)&nbsp;&nbsp;9.0% → 13.5%<br>
+            acne (脸上爆痘,下巴最严重)&nbsp;&nbsp;6.9% → 12.1%<br>
+            itchy rash (手臂上起红疹,特别痒)&nbsp;&nbsp;9.7% → 11.9%<br>
+            athlete's foot (脚趾缝脱皮发痒)&nbsp;&nbsp;6.0% → 11.7%
+          </p>
+        </div>
+
+        <p class="note">
+          Dermatology was also the slowest department to complete in control (85.0%) and the fastest to
+          improve its response time (153.0 s → 99.9 s), so faster triage did not translate into more
+          finished skin consultations. Skin complaints are the most visual and the most likely to be
+          ones a user abandons if the first answer feels like a form reply — a plausible but untested
+          explanation, since the data records no reason for the exit.
+        </p>
+      </div>
+    </div>
+
+    <table>
+      <caption>Department scorecard</caption>
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Completion, control</th><th>Completion, test</th><th>Change</th>
+          <th>Lost before doctor, control</th><th>Lost before doctor, test</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ENT <span class="cn">五官科</span></td><td>87.5%</td><td>88.1%</td><td class="pos">+0.5 pp</td><td>4.5%</td><td>5.4%</td></tr>
+        <tr><td>Pediatrics <span class="cn">儿科</span></td><td>88.9%</td><td>90.4%</td><td class="pos">+1.4 pp</td><td>3.1%</td><td>2.5%</td></tr>
+        <tr><td>Internal medicine <span class="cn">内科</span></td><td>88.6%</td><td>89.1%</td><td class="pos">+0.5 pp</td><td>4.4%</td><td>4.0%</td></tr>
+        <tr><td>Gynecology <span class="cn">妇科</span></td><td>89.0%</td><td>89.3%</td><td class="pos">+0.2 pp</td><td>5.2%</td><td>4.8%</td></tr>
+        <tr><td>Dermatology <span class="cn">皮肤科</span></td><td>85.0%</td><td>80.5%</td><td class="neg">−4.5 pp</td><td>7.7%</td><td>12.7%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="no">04</span><h2>After the consultation: shorter visits, and a follow-up shift</h2></div>
+    <p class="lede">
+      Completed consultations run about a minute and a half shorter in the test arm — 11.7 minutes against
+      13.1 on average, 10.4 against 11.2 at the median — so the time saved at the front of the queue is not
+      spent back at the end.
+    </p>
+
+    <div class="cols">
+      <figure>
+        <span class="figtitle">Consultation length, completed cases (minutes)</span>
+        <div class="grp">
+          <div class="gtitle">Mean</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:93.6%"></div></div>
+            <span class="val">13.1</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:83.6%"></div></div>
+            <span class="val">11.7</span>
+          </div>
+        </div>
+        <div class="grp">
+          <div class="gtitle">Median</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:80.0%"></div></div>
+            <span class="val">11.2</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:74.3%"></div></div>
+            <span class="val">10.4</span>
+          </div>
+        </div>
+        <figcaption>7,933 completed control consultations and 7,903 completed test consultations.</figcaption>
+      </figure>
+
+      <figure>
+        <span class="figtitle">Seven-day follow-up rate</span>
+        <div class="legend"><span><i class="c"></i>Control</span><span><i class="t"></i>Test</span></div>
+        <div class="grp">
+          <div class="gtitle">New users</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:42.5%"></div></div>
+            <span class="val">6.8%</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:61.3%"></div></div>
+            <span class="val">9.8%</span>
+          </div>
+        </div>
+        <div class="grp">
+          <div class="gtitle">Returning users</div>
+          <div class="mrow">
+            <span class="name">Control</span>
+            <div class="track"><div class="fill ctrl" style="width:93.1%"></div></div>
+            <span class="val">14.9%</span>
+          </div>
+          <div class="mrow">
+            <span class="name">Test</span>
+            <div class="track"><div class="fill test" style="width:82.5%"></div></div>
+            <span class="val">13.2%</span>
+          </div>
+        </div>
+        <figcaption>
+          Overall follow-up barely moves (12.1% test vs 12.3% control), but it moves in opposite
+          directions for the two user types: 198 → 278 returns among new users, 900 → 802 among
+          returning users.
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="note" style="max-width:70ch">
+      The swap is the most useful commercial detail in the read-out: the test converts more first-time
+      users into a second visit, and slightly fewer loyal ones. If the goal is acquisition, that is a
+      win; if lifetime value sits with returning users, it is a trade rather than a gain.
+    </p>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="no">05</span><h2>Reading the numbers honestly</h2></div>
+    <p class="lede">
+      Five things a reader should know before quoting any figure above.
+    </p>
+    <div class="notes" style="margin-top:22px">
+      <ol>
+        <li><b>Two labels needed cleaning.</b> Ten rows read <span class="mono">'实验组 '</span> and nine read
+          <span class="mono">'对照组 '</span> with a trailing space, so an untrimmed value count returns four
+          groups — 9,004, 8,977, 10 and 9 — instead of the two real arms. Every figure here trims the label first.</li>
+        <li><b>Response time is missing exactly where it should be.</b> All 903 sessions lost before a doctor
+          answered have no response time; all 17,097 others have one. Averages over response time therefore
+          describe people who got an answer, not everyone who arrived.</li>
+        <li><b>Consultation length only exists for completed cases.</b> All 2,164 incomplete consultations are
+          blank, so the length figures describe completed work only.</li>
+      </ol>
+      <ol start="4">
+        <li><b>Effects are reported at face value.</b> The 4.5-point dermatology drop carries a two-proportion
+          z of −3.35 and the schedule-wide completion difference is 0.08 points; only the former is large
+          relative to its standard error. The other department moves are within roughly one point and should
+          be read as directional.</li>
+        <li><b>This is an observational split, not a controlled trial.</b> Groups were assigned at entry with
+          no record of the assignment rule in the data, so a department-level difference could reflect
+          routing, staffing or case mix rather than the new queue alone.</li>
+      </ol>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <p><b>What the data supports:</b> the new queue design halves long waits and cuts average response time by
+      about a third without changing overall completion. <b>What it warns:</b> dermatology loses completions in
+      a way that repeats across all five skin complaints, and returning users come back less often. A
+      dermatology-specific fix — or excluding skin cases from the new routing — is the obvious next test.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0 0 6px">
+      Source: <span class="mono">data/data.csv</span> — 18,000 rows, 12 columns, 2024-11-18 to 2024-12-29.
+      Figures are unweighted arm-level statistics computed with pandas.
+    </p>
+    <p style="margin:0">
+      Control = 对照组, Test = 实验组. Percentages are rounded to one decimal; counts are exact.
+      Two-proportion z-scores use the normal approximation.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

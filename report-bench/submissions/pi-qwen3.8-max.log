@@ -1,0 +1,59 @@
+  pi-qwen3.8-max/pockets pockets: bash ls -la; echo "---"; ls -la data/; echo "---"; for f in data/*; do echo "== $f =="; head -5 "$f"; ech
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash ls -la; echo "---"; ls -la data/; echo "---"; cat data/*.txt 2>/dev/null | head -50
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash find . -maxdepth 2 -type f | head -50
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash ls -la; echo "---"; ls -la data/; echo "---"; cat data/*.txt 2>/dev/null; echo "---"; head -5 data/*
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash find . -type f | head -50; echo "---"; pwd
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && cat data/measurements.csv
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash head -3 data/convos.csv; echo "==="; head -3 data/people.csv; echo "==="; wc -l data/*.csv
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && pip list 2>/dev/null | 
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 -c " import
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c " import pandas
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 -c " import pan
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 - <<'PY' import pa
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 - <<'PY' import pa
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 - <<'PY' import pa
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/ab_test-01 ab_test-01: error upstream stream disconnected: connection reset by peer
+  pi-qwen3.8-max/ab_test-01 ab_test-01: nudge 1
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && python3 << 'EOF' im
+  pi-qwen3.8-max/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets && python3 -c "import pandas,
+  pi-qwen3.8-max/pockets pockets: error upstream stream disconnected: connection reset by peer
+  pi-qwen3.8-max/pockets pockets: nudge 1
+  pi-qwen3.8-max/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/ab_test-01 && python3 - <<'PY' import
+  pi-qwen3.8-max/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/hello-stranger && cat > /tmp/t1.py <<
+  pi-qwen3.8-max/pockets pockets: write /home/user/RL_Study/report-bench/submissions/pi-qwen3.8-max/pockets/facts.json

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "gender-gap-means",
+    "claim": "Men's jeans average a 23.13 in front pocket height (maximum measured) against 14.33 in for women's, while back pockets are close: 16.01 in for men and 15.12 in for women.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.groupby('menWomen')[['maxHeightFront','maxHeightBack']].mean().round(2)"
+  },
+  {
+    "id": "gap-in-inches",
+    "claim": "The gender gap in average maximum front pocket height is 8.8 in.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "(d[d.menWomen == 'men'].maxHeightFront.mean() - d[d.menWomen == 'women'].maxHeightFront.mean()).round(2)"
+  },
+  {
+    "id": "women-front-shorter-than-back",
+    "claim": "In 29 of the 40 women's pairs the front pocket's maximum height is smaller than the back pocket's, while that happens in none of the 40 men's pairs.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.groupby('menWomen').apply(lambda g: pd.Series({'pairs': len(g), 'front_shorter_than_back': (g.maxHeightFront < g.maxHeightBack).sum()}))"
+  },
+  {
+    "id": "front-back-ratio",
+    "claim": "Men's front pockets are on average 1.44 times as tall as their back pockets; women's are 0.95 times as tall, i.e. slightly shorter than their own back pockets.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "(d.groupby('menWomen').maxHeightFront.mean() / d.groupby('menWomen').maxHeightBack.mean()).round(2)"
+  },
+  {
+    "id": "height-ranges",
+    "claim": "Women's front pocket heights run from 11.5 to 21.5 in with a median of 14.0, while men's run from 20.0 to 28.0 with a median of 22.5.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.groupby('menWomen').maxHeightFront.agg(['min','median','max'])"
+  },
+  {
+    "id": "style-no-effect-women",
+    "claim": "Among women's jeans, boot-cut, skinny and straight styles average 14.25, 14.27 and 14.42 in maximum front pocket height, nearly identical across cuts.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d[d.menWomen == 'women'].groupby('style').maxHeightFront.agg(['size','mean']).round(2)"
+  },
+  {
+    "id": "brand-spread-women",
+    "claim": "Among women's jeans the average front pocket height ranges from 12.0 in at Guess and 12.35 in at Levi's to 17.5 in at American Eagle and 19.75 in at Abercrombie.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d[d.menWomen == 'women'].groupby('brand').maxHeightFront.mean().round(2).sort_values()"
+  },
+  {
+    "id": "price-no-relation",
+    "claim": "Price is unrelated to front pocket height: the correlation between price and maxHeightFront is -0.08.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d[['price','maxHeightFront']].corr().round(2)"
+  },
+  {
+    "id": "narrower-front-women",
+    "claim": "Women's front pockets are also narrower: 15.18 in average maximum width and 12.26 in minimum width, against 16.37 in and 13.36 in for men.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.groupby('menWomen')[['maxWidthFront','minWidthFront']].mean().round(2)"
+  },
+  {
+    "id": "shallowest-pairs",
+    "claim": "The four shallowest front pockets are all women's pairs: Guess Power Stretch Skinny and J. Crew 8\" Tooth Pick at 11.5 in, then Calvin Klein Midrise Skinny and Old Navy Original Boot Cut at 12.0 in.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.nsmallest(4, 'maxHeightFront')[['brand','name','menWomen','maxHeightFront']]"
+  },
+  {
+    "id": "deepest-pairs",
+    "claim": "The three deepest front pockets are men's: Wrangler Regular Fit at 28.0 in, Wrangler Slim Fit at 27.5 in and True Religion Geno Slim at 26.2 in.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.nlargest(3, 'maxHeightFront')[['brand','name','menWomen','maxHeightFront']]"
+  },
+  {
+    "id": "cutout-counts",
+    "claim": "Six men's pairs and three women's pairs are flagged with a pocket cutout in the data.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "d.groupby(['menWomen','cutout']).size()"
+  },
+  {
+    "id": "max-below-min",
+    "claim": "For 14 pairs the recorded maximum front height is smaller than the recorded minimum front height.",
+    "tables": {
+      "d": "data/measurements.csv"
+    },
+    "code": "(d.maxHeightFront < d.minHeightFront).sum()"
+  }
+]

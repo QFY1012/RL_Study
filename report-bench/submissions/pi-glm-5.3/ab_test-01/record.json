@@ -1,0 +1,24 @@
+{
+ "task": "ab_test-01",
+ "model": "glm-5.3",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "glm-5.3",
+   "effort": "high",
+   "seconds": 551,
+   "steps": 30,
+   "tools": 28,
+   "nudged": 2,
+   "usage": {
+    "input": 356035,
+    "output": 48587
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 551
+}

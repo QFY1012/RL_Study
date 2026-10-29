@@ -1,0 +1,178 @@
+[
+  {
+    "id": "study-scale",
+    "claim": "The experiment logs 18,000 consultations over 42 distinct days, from 2024-11-18 to 2024-12-29, split into 9,013 control-group and 8,987 test-group users.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).pipe(lambda x: pd.Series({'rows': len(x), 'control': (x.g=='对照组').sum(), 'test': (x.g=='实验组').sum(), 'first_day': str(pd.to_datetime(x.enter_date, format='mixed').min().date()), 'last_day': str(pd.to_datetime(x.enter_date, format='mixed').max().date()), 'distinct_days': pd.to_datetime(x.enter_date, format='mixed').nunique()}))"
+  },
+  {
+    "id": "first-response-faster",
+    "claim": "Mean time to a doctor's first reply falls from 152.0 s in the control arm to 103.5 s in the test arm, and the median from 110 s to 88 s, across 8,586 and 8,511 users with a recorded response.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby('g').first_response_seconds.agg(['count','mean','median'])"
+  },
+  {
+    "id": "long-waits-collapse",
+    "claim": "Waits of more than five minutes become rare in the test arm: 90 of 8,511 measured users (1.06%) versus 385 of 8,586 in control (4.48%).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).dropna(subset=['first_response_seconds']).assign(long=lambda x: x.first_response_seconds > 300).groupby('g').long.agg(['size','sum','mean'])"
+  },
+  {
+    "id": "response-tail-shrinks",
+    "claim": "The slow tail shrinks: the 90th percentile of first response drops from 234 s to 177 s and the 95th from 290 s to 213 s, while the median moves from 110 s to 88 s.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).dropna(subset=['first_response_seconds']).groupby('g').first_response_seconds.quantile([0.5,0.9,0.95]).unstack()"
+  },
+  {
+    "id": "completion-flat",
+    "claim": "Completion is flat overall: 7,903 of 8,987 test consultations finish (87.9%) against 7,933 of 9,013 in control (88.0%).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby('g').is_completed.agg(['size','sum','mean'])"
+  },
+  {
+    "id": "queue-dropout-rises",
+    "claim": "Users who drop out before any doctor answers rise from 427 in control (4.74%) to 476 in test (5.30%), out of 9,013 and 8,987.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby('g').lost_before_doctor.agg(['size','sum','mean'])"
+  },
+  {
+    "id": "dermatology-completion-falls",
+    "claim": "Dermatology (皮肤科) is the only department to lose completions, falling from 85.0% (1,376 of 1,618) to 80.5% (1,210 of 1,503), while pediatrics (儿科) rises from 88.9% (2,347 of 2,639) to 90.4% (2,356 of 2,607).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['department','g']).is_completed.agg(['size','sum','mean']).unstack()"
+  },
+  {
+    "id": "dermatology-drop-significant",
+    "claim": "The dermatology completion drop is 4.5 percentage points, from 0.850 to 0.805, with a two-proportion z of -3.35.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).query(\"department == '皮肤科'\").groupby('g').is_completed.agg(['size','sum','mean']).pipe(lambda t: t.assign(diff=t['mean'].loc['实验组']-t['mean'].loc['对照组'], z=(t['mean'].loc['实验组']-t['mean'].loc['对照组'])/np.sqrt(t['mean'].loc['实验组']*(1-t['mean'].loc['实验组'])/t['size'].loc['实验组'] + t['mean'].loc['对照组']*(1-t['mean'].loc['对照组'])/t['size'].loc['对照组'])))"
+  },
+  {
+    "id": "department-dropout-split",
+    "claim": "Drop-off before the doctor splits by department: dermatology goes from 7.7% of users lost in control to 12.7% in test, while pediatrics goes from 3.1% to 2.5%.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['department','g']).lost_before_doctor.mean().unstack()"
+  },
+  {
+    "id": "dermatology-complaints-all-worse",
+    "claim": "All five dermatology complaints lose more users before the doctor in the test arm, from 手臂上起红疹,特别痒 at 9.7% to 11.9%, up to 后背长了不少小红点 at 6.9% to 13.9%.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).query(\"department == '皮肤科'\").groupby(['chief_complaint','g']).lost_before_doctor.agg(['size','sum','mean']).unstack()"
+  },
+  {
+    "id": "new-users-followup-up",
+    "claim": "Seven-day follow-up rises for new users from 198 of 2,922 (6.8%) to 278 of 2,857 (9.8%), but falls for returning users from 900 of 6,091 (14.9%) to 802 of 6,130 (13.2%).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['user_type','g']).followup_7d.agg(['size','sum','mean'])"
+  },
+  {
+    "id": "consults-shorter",
+    "claim": "Completed consultations are shorter in the test arm: mean 11.7 minutes against 13.1, median 10.4 against 11.2, over 7,903 and 7,933 completed cases.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby('g').consult_minutes.agg(['count','mean','median'])"
+  },
+  {
+    "id": "gynecology-fastest-gain",
+    "claim": "Gynecology gains most from the change: mean first response falls from 210.4 s to 97.2 s, ahead of dermatology (153.0 s to 99.9 s) and pediatrics (149.2 s to 103.6 s).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['department','g']).first_response_seconds.agg(['count','mean']).unstack()"
+  },
+  {
+    "id": "wechat-slowest-control",
+    "claim": "The WeChat mini-program arm is slowest at 198.2 s in control and falls to 104.3 s, while Android goes from 140.7 s to 106.3 s and iOS from 140.0 s to 100.1 s.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['platform','g']).first_response_seconds.mean().unstack()"
+  },
+  {
+    "id": "complaint-extremes",
+    "claim": "Per complaint, 经期量突然变多 (heavy periods) shows the widest gap at 415.2 s in control against 99.6 s in test, and 腹泻伴低烧一天 is the only complaint where the test arm is slower, 141.8 s against 125.3 s.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).groupby(['chief_complaint','g']).first_response_seconds.mean().unstack()"
+  },
+  {
+    "id": "weekly-volume-and-waits",
+    "claim": "Weekly volume per arm grows from 1,164 control and 1,245 test in the first week to 1,774 and 1,772 in the last, while control's weekly mean response time swings from 96.9 s to 228.3 s and the test arm stays between 90.4 s and 119.7 s.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.assign(g=d.group.str.strip()).assign(w=pd.to_datetime(d.enter_date, format='mixed').dt.to_period('W').astype(str)).groupby(['w','g']).agg(n=('user_id','size'), frs=('first_response_seconds','mean'))"
+  },
+  {
+    "id": "dirty-group-labels",
+    "claim": "The group column needs trimming: 10 rows read '实验组 ' and 9 read '对照组 ' with a trailing space, so an untrimmed value count returns four labels (9,004, 8,977, 10, 9) instead of two.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.group.value_counts()"
+  },
+  {
+    "id": "missing-response-time",
+    "claim": "Response time is blank for exactly the 903 users who were lost before a doctor answered, and present for all 17,097 others.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.groupby('lost_before_doctor').first_response_seconds.agg(['size','count'])"
+  },
+  {
+    "id": "missing-consult-length",
+    "claim": "Consultation length is recorded only for the 15,836 completed consultations; all 2,164 incomplete ones are blank.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.groupby('is_completed').consult_minutes.agg(['size','count'])"
+  },
+  {
+    "id": "platform-mix",
+    "claim": "Traffic splits Android 7,514, iOS 6,870 and WeChat mini-program 3,610, with 6 rows missing a platform.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.platform.value_counts(dropna=False)"
+  },
+  {
+    "id": "department-mix",
+    "claim": "Pediatrics (5,246) and internal medicine (5,083) dominate the case mix, ahead of dermatology (3,121), gynecology (2,490) and ENT (五官科, 2,060).",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.department.value_counts()"
+  },
+  {
+    "id": "returning-users-mix",
+    "claim": "Returning users (老用户) outnumber new users more than two to one: 12,221 against 5,779.",
+    "tables": {
+      "d": "data/data.csv"
+    },
+    "code": "d.user_type.value_counts()"
+  }
+]

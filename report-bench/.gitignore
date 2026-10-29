@@ -1,1 +1,4 @@
 __pycache__/
+
+# a running agent's private folder (agent/gen.mjs removes it when the agent ends)
+submissions/*/.*-pi-*/

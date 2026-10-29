@@ -1,0 +1,8 @@
+  pi-kimi-k3.1-pro/pockets pockets: bash find . -maxdepth 3 -type f -printf '%p\n' | sort && printf '\n--- data preview ---\n' && for f in da
+  pi-kimi-k3.1-pro/pockets pockets: bash wc -l data/measurements.csv && cat data/measurements.csv
+  pi-kimi-k3.1-pro/pockets pockets: error 429 Your account org-bda6e506621c4c0786bdd457fe74118a<ak-fdjdorkrk6pi11h8fme1> request reached organization max RPM: 3, please try again after 1 seconds
+  pi-kimi-k3.1-pro/pockets pockets: error 429 Your account org-bda6e506621c4c0786bdd457fe74118a<ak-fdjdorkrk6pi11h8fme1> request reached organization max RPM: 3, please try again after 1 seconds
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/measurements.csv') print(p.shap
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/measurements.csv') p['brandClea
+  pi-kimi-k3.1-pro/pockets pockets: bash python - <<'PY' import pandas as pd, numpy as np p=pd.read_csv('data/measurements.csv') # Candidate 
+  pi-kimi-k3.1-pro/pockets pockets: write facts.json

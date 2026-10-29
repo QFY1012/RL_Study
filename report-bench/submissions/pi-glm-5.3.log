@@ -1,0 +1,96 @@
+  pi-glm-5.3/pockets pockets: bash ls -la /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets/ && ls -la /home/user/RL_Stud
+  pi-glm-5.3/pockets pockets: bash cat /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets/data/*.csv 2>/dev/null | head -5
+  pi-glm-5.3/ab_test-01 ab_test-01: bash ls -la data/ && cat data/*.csv | head -50
+  pi-glm-5.3/ab_test-01 ab_test-01: bash ls -la
+  pi-glm-5.3/hello-stranger hello-stranger: bash ls -la && cat data/*.csv | head -5 && ls data/
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && wc -l data/*.csv && hea
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && wc -l data/measurements.csv &&
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c "import pandas; prin
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 -c " import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: nudge 1
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 - <<'EOF' import pa
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 - <<'EOF' weeks = [
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 - <<'PYEOF' import 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 - <<'PYEOF' import 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && python3 - <<'EOF' # bar wid
+  pi-glm-5.3/ab_test-01 ab_test-01: error upstream stream disconnected: connection reset by peer
+  pi-glm-5.3/ab_test-01 ab_test-01: nudge 2
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+  pi-glm-5.3/ab_test-01 ab_test-01: write index.html
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/ab_test-01 && ls -la && python3 -c "impor
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python -c " import pand
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import json rows =
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import pandas 
+pi-glm-5.3/ab_test-01: delivered=True attempts=1 551s 
+  pi-glm-5.3/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/hello-stranger && python - <<'EOF' import
+  pi-glm-5.3/hello-stranger hello-stranger: error upstream stream disconnected: connection reset by peer
+  pi-glm-5.3/hello-stranger hello-stranger: nudge 1
+  pi-glm-5.3/pockets pockets: write /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets/facts.json
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import json, p
+  pi-glm-5.3/pockets pockets: edit /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets/facts.json
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python << 'EOF' import json, p
+  pi-glm-5.3/pockets pockets: bash cat /tmp/rows_compact.json
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && python -c " import pandas as p
+  pi-glm-5.3/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-glm-5.3/pockets && rm -f rows.json && ls

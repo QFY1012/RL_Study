@@ -1,0 +1,24 @@
+{
+ "task": "hello-stranger",
+ "model": "deepseek-v4.1-flash",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "deepseek-v4.1-flash",
+   "effort": "high",
+   "seconds": 329,
+   "steps": 24,
+   "tools": 26,
+   "nudged": 0,
+   "usage": {
+    "input": 243496,
+    "output": 35679
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 329
+}

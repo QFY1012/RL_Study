@@ -1,0 +1,24 @@
+{
+ "task": "pockets",
+ "model": "deepseek-v4.1-flash",
+ "guide": "guides/seed.md",
+ "attempts": [
+  {
+   "model": "deepseek-v4.1-flash",
+   "effort": "high",
+   "seconds": 518,
+   "steps": 36,
+   "tools": 37,
+   "nudged": 0,
+   "usage": {
+    "input": 249171,
+    "output": 39127
+   },
+   "stop": "stop",
+   "error": null,
+   "problem": null
+  }
+ ],
+ "delivered": true,
+ "seconds": 518
+}

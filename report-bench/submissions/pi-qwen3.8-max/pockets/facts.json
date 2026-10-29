@@ -1,0 +1,128 @@
+[
+  {
+    "id": "dataset-shape",
+    "claim": "The table holds 80 pairs of jeans in total — 40 women's and 40 men's — and each gender is drawn from the same 20 brands.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "pd.DataFrame({'pairs': measurements.groupby('menWomen').size(), 'brands': measurements.assign(b=measurements.brand.str.strip().str.lower()).groupby('menWomen')['b'].nunique()})"
+  },
+  {
+    "id": "price-range",
+    "claim": "Women's jeans run from $9.99 to $249.00 (mean $80.32, median $78.75) and men's from $39.99 to $209.00 (mean $81.18, median $69.72), so the two groups cost about the same on average.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').price.agg(mean='mean', median='median', min='min', max='max').round(2)"
+  },
+  {
+    "id": "front-pocket-gap",
+    "claim": "The average front pocket measures 23.13 inches at its deepest point on men's jeans and 14.33 inches on women's, an 8.8-inch gap that leaves women's pockets at 61.95% of men's.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').maxHeightFront.mean().round(2).to_frame('mean_front_depth_in').assign(gap_in=lambda d: d.loc['men','mean_front_depth_in']-d.loc['women','mean_front_depth_in'], women_pct_of_men=lambda d: 100*d.loc['women','mean_front_depth_in']/d.loc['men','mean_front_depth_in']).round(2)"
+  },
+  {
+    "id": "twenty-inch-threshold",
+    "claim": "All 40 men's pairs have a front pocket at least 20 inches deep, while only 1 of the 40 women's pairs reaches 20 inches.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(deep=measurements.maxHeightFront>=20).groupby('menWomen').deep.agg(at_least_20in='sum', pairs='size')"
+  },
+  {
+    "id": "depth-ladder",
+    "claim": "Counting pairs whose front pocket reaches a given depth, the two groups separate fast: 12 inches deep is reached by 40 men's and 38 women's pairs, 15 inches by 40 men's and 12 women's, 18 inches by 40 men's and 4 women's, and 24 inches by 15 men's pairs and no women's pair.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(t12=measurements.maxHeightFront>=12, t15=measurements.maxHeightFront>=15, t18=measurements.maxHeightFront>=18, t20=measurements.maxHeightFront>=20, t24=measurements.maxHeightFront>=24).groupby('menWomen')[['t12','t15','t18','t20','t24']].sum()"
+  },
+  {
+    "id": "front-depth-range",
+    "claim": "Women's front pockets span 11.5 to 21.5 inches (median 14.0) and men's span 20.0 to 28.0 inches (median 22.5), so even the deepest women's pocket at 21.5 inches is shorter than the men's median of 22.5.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').maxHeightFront.agg(min='min', median='median', mean='mean', max='max').round(2)"
+  },
+  {
+    "id": "deepest-shallowest",
+    "claim": "The deepest front pocket in the data is Wrangler's men's Regular Fit boot-cut at 28.0 inches ($48.00), and the shallowest is Guess's women's Power Stretch Skinny at 11.5 inches ($98.00).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.loc[[measurements.maxHeightFront.idxmax(), measurements.maxHeightFront.idxmin()], ['brand','name','menWomen','style','price','maxHeightFront']]"
+  },
+  {
+    "id": "back-near-parity",
+    "claim": "Back pockets are close to parity: women's average 15.1 inches tall and 13.3 inches wide against 16.0 and 13.7 for men's, which is 94.4% of the height and 97.4% of the width.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen')[['maxHeightBack','maxWidthBack']].mean().round(2).assign(women_pct_height=lambda d: 100*d.loc['women','maxHeightBack']/d.loc['men','maxHeightBack'], women_pct_width=lambda d: 100*d.loc['women','maxWidthBack']/d.loc['men','maxWidthBack']).round(1)"
+  },
+  {
+    "id": "back-taller-than-front",
+    "claim": "On women's jeans the back pocket is on average taller than the front pocket, 15.1 inches against 14.3 inches or 105.5%, while on men's jeans the back pocket is only 69.2% of the front's 23.1 inches.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen')[['maxHeightFront','maxHeightBack']].mean().round(2).assign(back_as_pct_of_front=lambda d: 100*d.maxHeightBack/d.maxHeightFront).round(1)"
+  },
+  {
+    "id": "pocket-area",
+    "claim": "Multiplying maximum height by maximum width, the average front pocket covers 378.4 square inches on men's jeans and 218.0 on women's (57.6%), while back pockets cover 219.7 and 201.8 square inches (91.9%).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(front_area=measurements.maxHeightFront*measurements.maxWidthFront, back_area=measurements.maxHeightBack*measurements.maxWidthBack).groupby('menWomen')[['front_area','back_area']].mean().round(1).assign(women_pct_front=lambda d: 100*d.loc['women','front_area']/d.loc['men','front_area'], women_pct_back=lambda d: 100*d.loc['women','back_area']/d.loc['men','back_area']).round(1)"
+  },
+  {
+    "id": "rivet-height",
+    "claim": "Measured at the rivet, the front pocket averages 7.06 inches tall on men's jeans and 6.25 inches on women's, with ranges of 4.5 to 9.2 inches and 4.5 to 7.5 inches.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').rivetHeightFront.agg(mean='mean', median='median', min='min', max='max').round(2)"
+  },
+  {
+    "id": "price-no-signal",
+    "claim": "Price buys no depth: the correlation between price and front-pocket depth is -0.076 across all pairs, -0.151 within the women's pairs and -0.262 within the men's pairs.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "pd.DataFrame({'overall':[measurements.price.corr(measurements.maxHeightFront)], 'women':[measurements[measurements.menWomen=='women'].price.corr(measurements[measurements.menWomen=='women'].maxHeightFront)], 'men':[measurements[measurements.menWomen=='men'].price.corr(measurements[measurements.menWomen=='men'].maxHeightFront)]}, index=['pearson_r_price_vs_front_depth']).T.round(3)"
+  },
+  {
+    "id": "price-per-inch",
+    "claim": "Per inch of front-pocket depth, women's jeans cost an average of $5.77 against $3.58 for men's.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "(measurements.price/measurements.maxHeightFront).groupby(measurements.menWomen).mean().round(2)"
+  },
+  {
+    "id": "priciest-womens-shallow",
+    "claim": "The three most expensive women's pairs — True Religion's Slim Straight at $249.0, 7 for All Mankind's The Ankle Skinny at $199.0 and True Religion's Stella at $179.0 — have front pockets of only 14.5, 13.0 and 14.0 inches.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements[measurements.menWomen=='women'].nlargest(3,'price')[['brand','name','price','maxHeightFront']]"
+  },
+  {
+    "id": "deepest-womens-cheap",
+    "claim": "The three deepest women's front pockets are Abercrombie's Simone High Rise Slim at 21.5 inches ($88.00), H&M's Skinny Ankle High Waist at 19.0 inches ($9.99) and American Eagle's Ne(x)t Level Stretch Skinny at 19.0 inches ($39.95).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements[measurements.menWomen=='women'].nlargest(3,'maxHeightFront')[['brand','name','price','maxHeightFront']]"
+  },
+  {
+    "id": "cut-irrelevant",
+    "claim": "Cut explains almost nothing: among women's jeans the mean front-pocket depth is 14.42 inches for straight (16 pairs), 14.27 for skinny (20 pairs) and 14.25 for boot-cut (4 pairs).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements[measurements.menWomen=='women'].groupby('style').maxHeightFront.agg(mean_depth='mean', pairs='size').round(2)"
+  },
+  {
+    "id": "brand-gap",
+    "claim": "Levi's shows the widest brand-level gap, men's front pockets averaging 25.75 inches against women's 12.35 (13.40 inches apart), with Wrangler next at 27.75 versus 14.50 (13.25 inches); Abercrombie's is the narrowest at 22.25 versus 19.75 (2.50 inches).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(brand=measurements.brand.str.strip().str.lower()).pivot_table(index='brand', columns='menWomen', values='maxHeightFront', aggfunc='mean').assign(gap_in=lambda d: d['men']-d['women']).sort_values('gap_in', ascending=False).round(2)"
+  },
+  {
+    "id": "women-pay-more",
+    "claim": "Seven brands price their women's jeans at or above their men's — True Religion ($214.00 vs $169.00), J. Crew ($117.50 vs $98.00), Wrangler ($99.00 vs $53.00), Ralph Lauren ($89.50 vs $89.50), Abercrombie ($83.00 vs $78.00), Tommy Hilfiger ($69.50 vs $59.50) and Gap ($69.95 vs $64.95) — and at all seven the women's mean front pocket is the shallower one.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(brand=measurements.brand.str.strip()).groupby(['brand','menWomen'])[['price','maxHeightFront']].mean().round(2).unstack().loc[lambda d: d[('price','women')]>=d[('price','men')]]"
+  },
+  {
+    "id": "cutout-share",
+    "claim": "Six of the 40 men's pairs carry a cutout flag (share 0.150) and three of the 40 women's pairs do (share 0.075).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.groupby('menWomen').cutout.agg(pairs_with_cutout='sum', pairs='size', share='mean').round(3)"
+  },
+  {
+    "id": "cutout-brands",
+    "claim": "The cutout pairs come from just four brands: True Religion (4), Guess (2), J. Crew (2) and Uniqlo (1).",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements[measurements.cutout].assign(brand=measurements.brand.str.strip()).groupby('brand').size().sort_values(ascending=False)"
+  },
+  {
+    "id": "min-above-max",
+    "claim": "In 14 rows the recorded minimum front-pocket height is greater than the recorded maximum — 12 of the 40 women's rows and 2 of the 40 men's rows.",
+    "tables": {"measurements": "data/measurements.csv"},
+    "code": "measurements.assign(min_above_max=measurements.minHeightFront>measurements.maxHeightFront).groupby('menWomen').min_above_max.agg(rows='size', min_above_max='sum').assign(total=lambda d: d.min_above_max.sum())"
+  }
+]

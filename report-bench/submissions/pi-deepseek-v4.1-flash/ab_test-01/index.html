@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faster Answers, One Department Left Behind — Online Consultation A/B Test</title>
+<style>
+  :root{
+    --ink:#13211d;
+    --ink-soft:#3f514b;
+    --muted:#75847f;
+    --paper:#fbfaf6;
+    --card:#ffffff;
+    --line:#e2e0d8;
+    --exp:#1f6f68;
+    --exp-soft:#cfe3e0;
+    --ctl:#9aa5a0;
+    --ctl-soft:#e6e8e5;
+    --alert:#b23a48;
+    --alert-soft:#f6e3e4;
+    --gold:#a8763e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-font-smoothing:antialiased}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  a{color:var(--exp)}
+
+  /* ---------- header ---------- */
+  header.top{
+    background:linear-gradient(160deg,#0d2b28 0%,#143b36 55%,#1a4a43 100%);
+    color:#eef4f2;padding:64px 0 72px;position:relative;overflow:hidden;
+  }
+  header.top::after{
+    content:"";position:absolute;right:-140px;top:-160px;width:520px;height:520px;
+    border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(105,190,178,.28),rgba(105,190,178,0) 70%);
+  }
+  .eyebrow{
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:#8fc4bb;font-weight:600;margin:0 0 20px;
+  }
+  h1{
+    font-family:var(--serif);font-weight:600;font-size:52px;line-height:1.12;
+    margin:0 0 22px;letter-spacing:-.015em;max-width:840px;
+  }
+  .standfirst{font-size:20px;line-height:1.6;color:#c9dcd7;max-width:720px;margin:0 0 30px}
+  .byline{font-size:13px;color:#8fc4bb;letter-spacing:.04em;display:flex;gap:26px;flex-wrap:wrap}
+  .byline span{display:flex;align-items:center;gap:8px}
+
+  /* ---------- kpi strip ---------- */
+  .kpis{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:-46px 0 64px;
+    position:relative;z-index:2;box-shadow:0 18px 40px -28px rgba(19,33,29,.5);
+  }
+  .kpi{background:var(--card);padding:24px 26px 22px}
+  .kpi .k-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+  .kpi .k-value{font-family:var(--serif);font-size:34px;line-height:1.1;letter-spacing:-.02em}
+  .kpi .k-value small{font-size:16px;color:var(--muted);font-family:var(--sans);letter-spacing:0}
+  .kpi .k-note{font-size:13px;color:var(--ink-soft);margin-top:8px}
+  .kpi.bad .k-value{color:var(--alert)}
+  .kpi.good .k-value{color:var(--exp)}
+
+  /* ---------- sections ---------- */
+  section{margin:0 0 76px}
+  .sec-head{display:flex;align-items:baseline;gap:18px;border-top:2px solid var(--ink);padding-top:16px;margin-bottom:26px}
+  .sec-num{font-size:12px;letter-spacing:.18em;color:var(--muted);font-weight:700;text-transform:uppercase;white-space:nowrap}
+  h2{font-family:var(--serif);font-weight:600;font-size:31px;line-height:1.25;margin:0;letter-spacing:-.01em}
+  h3{font-family:var(--sans);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
+  p{margin:0 0 18px;max-width:760px}
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .two-col{display:grid;grid-template-columns:1fr 1.06fr;gap:42px;align-items:start}
+  .chart-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 10px;
+    box-shadow:0 12px 30px -26px rgba(19,33,29,.45);
+  }
+  .chart-card h4{
+    font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+    margin:0 0 4px;font-weight:700;
+  }
+  .chart-card .sub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+  .chart-card svg{display:block;width:100%;height:auto;overflow:visible}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);padding:8px 2px 6px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px;vertical-align:baseline}
+
+  /* ---------- highlight panel ---------- */
+  .panel{
+    background:var(--card);border:1px solid var(--line);border-left:5px solid var(--alert);
+    border-radius:12px;padding:30px 34px;margin:0 0 30px;
+    box-shadow:0 14px 34px -30px rgba(19,33,29,.5);
+  }
+  .panel .tag{
+    display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:700;color:var(--alert);background:var(--alert-soft);
+    padding:5px 10px;border-radius:4px;margin-bottom:14px;
+  }
+  .panel p{max-width:820px}
+  .bigstat{display:flex;gap:44px;flex-wrap:wrap;margin:22px 0 6px}
+  .bigstat div{min-width:150px}
+  .bigstat .v{font-family:var(--serif);font-size:38px;line-height:1.05;letter-spacing:-.02em;color:var(--alert)}
+  .bigstat .l{font-size:12.5px;color:var(--muted);letter-spacing:.03em;margin-top:4px}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+  thead th{
+    text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;padding:0 10px 10px;border-bottom:1.5px solid var(--ink);
+  }
+  thead th:first-child{text-align:left}
+  tbody td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right}
+  tbody td:first-child{text-align:left;font-weight:600}
+  tbody tr.hi td{background:var(--alert-soft)}
+  tbody tr.hi td:first-child{color:var(--alert)}
+  .delta-up{color:var(--alert);font-weight:600}
+  .delta-down{color:var(--exp);font-weight:600}
+  .delta-flat{color:var(--muted)}
+
+  /* ---------- misc ---------- */
+  ul.clean{list-style:none;padding:0;margin:0 0 20px;max-width:760px}
+  ul.clean li{position:relative;padding-left:26px;margin-bottom:14px;color:var(--ink-soft)}
+  ul.clean li::before{
+    content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:50%;
+    background:var(--exp);
+  }
+  ul.clean li.warn::before{background:var(--alert)}
+  .note{font-size:13.5px;color:var(--muted);max-width:760px}
+  .callout{
+    background:#f2f1ea;border-radius:10px;padding:18px 22px;font-size:14.5px;
+    color:var(--ink-soft);max-width:820px;border:1px solid #e6e4da;
+  }
+  footer{border-top:1px solid var(--line);padding:30px 0 60px;font-size:13px;color:var(--muted)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .stat-row{display:flex;gap:40px;flex-wrap:wrap;margin:6px 0 24px}
+  .stat-row div{min-width:120px}
+  .stat-row .v{font-family:var(--serif);font-size:30px;line-height:1.1}
+  .stat-row .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+  @media (max-width:900px){
+    .kpis{grid-template-columns:1fr 1fr}
+    .two-col,.grid2{grid-template-columns:1fr}
+    h1{font-size:38px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">A/B test report &middot; online medical consultation</p>
+    <h1>Faster answers, no more completed visits — and one department left behind</h1>
+    <p class="standfirst">
+      Over six weeks, 18,000 users of an online consultation service were split into an experiment
+      group and a control group. The experiment cut the wait for a doctor's first reply by about a
+      fifth and almost eliminated long waits. Overall completion did not budge. In dermatology,
+      however, it fell sharply.
+    </p>
+    <div class="byline">
+      <span>Data: 18,000 consultations</span>
+      <span>18 Nov – 29 Dec 2024</span>
+      <span>5 departments &middot; 3 platforms</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="kpis">
+    <div class="kpi good">
+      <div class="k-label">Median first reply</div>
+      <div class="k-value">88 <small>s</small></div>
+      <div class="k-note">against 110 s in control</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Completion, overall</div>
+      <div class="k-value">87.94<small>%</small></div>
+      <div class="k-note">against 88.02% in control</div>
+    </div>
+    <div class="kpi bad">
+      <div class="k-label">Completion, dermatology</div>
+      <div class="k-value">80.51<small>%</small></div>
+      <div class="k-note">against 85.04% in control</div>
+    </div>
+    <div class="kpi bad">
+      <div class="k-label">Abandoned, dermatology</div>
+      <div class="k-value">12.71<small>%</small></div>
+      <div class="k-note">against 7.66% in control</div>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">01 — The test</div>
+      <h2>A clean split, run on a growing service</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <p class="lead">
+          The file holds 18,000 consultations entered between 18 November and 29 December 2024.
+          8,987 were assigned to the experiment group and 9,013 to the control group — a 49.9 / 50.1
+          split that is even enough to compare the two directly.
+        </p>
+        <p>
+          Traffic grew steadily through the period, from 2,409 consultations in the first week to
+          3,546 in the last, and the two groups kept pace with each other week by week. That matters:
+          if the experiment had been switched on mid-way, or had taken a disproportionate share of the
+          later weeks, any difference in outcomes could be a difference in timing rather than in treatment.
+        </p>
+        <p>
+          The population is balanced on the dimensions that could otherwise confound the result. The
+          department mix is close — dermatology was 16.7% of experiment traffic against 17.9% of control —
+          and the three platforms (Android, iOS, WeChat mini-program) are within a few points of each other.
+          Roughly two thirds of users are returning patients, again in similar proportion on both sides.
+        </p>
+        <p class="note">
+          The service covers five departments: paediatrics (儿科), internal medicine (内科),
+          dermatology (皮肤科), gynaecology (妇科) and ENT/ophthalmology (五官科).
+        </p>
+      </div>
+      <div class="chart-card">
+        <h4>Weekly consultations by group</h4>
+        <p class="sub">Six full weeks, both arms tracked together &middot; 2,409 in the first week, 3,546 in the last</p>
+        <div id="chart-weekly"></div>
+        <div class="legend">
+          <span><i style="background:var(--exp)"></i>Experiment</span>
+          <span><i style="background:var(--ctl)"></i>Control</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">02 — Speed</div>
+      <h2>The waiting time is where the experiment clearly worked</h2>
+    </div>
+    <div class="two-col">
+      <div class="chart-card">
+        <h4>How long users waited for a doctor's first reply</h4>
+        <p class="sub">Share of answered consultations in each band &middot; labels read experiment / control</p>
+        <div id="chart-wait"></div>
+        <div class="legend">
+          <span><i style="background:var(--exp)"></i>Experiment</span>
+          <span><i style="background:var(--ctl)"></i>Control</span>
+        </div>
+      </div>
+      <div>
+        <p class="lead">
+          The median wait for a first doctor response fell from 110 seconds in control to 88 seconds
+          in the experiment. The share of users answered within two minutes rose from 53.8% to 68.6%.
+        </p>
+        <p>
+          The bigger change is in the tail. In control, 385 consultations waited more than five minutes
+          for a doctor; in the experiment only 90 did. The single longest wait in control ran to 71,396
+          seconds — nearly twenty hours — against 18,669 seconds in the experiment.
+        </p>
+        <p>
+          This is not a gain produced by one busy department. The median wait fell in all five
+          departments, from 105 to 82 seconds in 五官科, from 107 to 86 in 皮肤科, and by a similar
+          margin everywhere else. Whatever the experiment changed in routing or staffing, it changed it
+          across the whole service.
+        </p>
+        <div class="stat-row">
+          <div><div class="v">68.6%</div><div class="l">answered &le; 2 min</div></div>
+          <div><div class="v">90</div><div class="l">waits over 5 min</div></div>
+          <div><div class="v">2</div><div class="l">waits over 10 min</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">03 — Completion</div>
+      <h2>Overall, the faster service completed exactly as many consultations</h2>
+    </div>
+    <p class="lead">
+      87.94% of experiment consultations reached completion, against 88.02% in control — 7,903 of 8,987
+      versus 7,933 of 9,013. A difference of eight hundredths of a percentage point is noise.
+    </p>
+    <p>
+      The same holds for the users who gave up before a doctor ever picked up the case: 5.30% in the
+      experiment against 4.74% in control. Slightly worse, but small enough that on its own it would not
+      justify a decision either way. Seven-day follow-up was likewise unchanged, at 12.15% against 12.31%.
+      Completed consultations did run shorter — a median of 10.4 minutes against 11.2 — consistent with a
+      faster, more tightly triaged flow.
+    </p>
+    <div class="grid2">
+      <div class="chart-card">
+        <h4>Completion by department</h4>
+        <p class="sub">Dots are the two arms; the bar is the gap</p>
+        <div id="chart-dept-comp"></div>
+        <div class="legend">
+          <span><i style="background:var(--exp)"></i>Experiment</span>
+          <span><i style="background:var(--ctl)"></i>Control</span>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h4>Left before reaching a doctor</h4>
+        <p class="sub">Share of users who abandoned the queue</p>
+        <div id="chart-dept-lost"></div>
+        <div class="legend">
+          <span><i style="background:var(--exp)"></i>Experiment</span>
+          <span><i style="background:var(--ctl)"></i>Control</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">04 — The exception</div>
+      <h2>Dermatology lost four and a half points of completion</h2>
+    </div>
+    <div class="panel">
+      <span class="tag">Signal, not noise</span>
+      <p>
+        In 皮肤科 the experiment group completed 80.51% of consultations against 85.04% in control.
+        Abandonment before a doctor rose from 7.66% to 12.71% — 124 of 1,618 users in control, 191 of
+        1,503 in the experiment. Every other department moved by less than a point and a half, and
+        paediatrics moved the other way, up to 90.37% from 88.94%.
+      </p>
+      <div class="bigstat">
+        <div><div class="v">−4.5 pts</div><div class="l">completion, dermatology</div></div>
+        <div><div class="v">+5.1 pts</div><div class="l">abandonment, dermatology</div></div>
+        <div><div class="v">6 of 6</div><div class="l">weeks with the same gap</div></div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Why this is unlikely to be chance</h3>
+        <ul class="clean">
+          <li class="warn">
+            <strong>It repeats every week.</strong> The experiment trails control in all six weeks of the
+            test, from 83.6% against 84.0% in the first week to 79.4% against 83.7% in the last. A fluke
+            would not hold a direction for six consecutive weeks.
+          </li>
+          <li class="warn">
+            <strong>It hits every skin complaint.</strong> Back rash falls from 86.9% to 79.4%, hives from
+            85.5% to 78.7%, acne from 86.1% to 82.2%, and the two remaining complaints lose ground as well.
+            No single complaint carries the result.
+          </li>
+          <li class="warn">
+            <strong>It hits every platform.</strong> Abandonment is higher in the experiment on Android
+            (13.3% against 7.2%), on iOS (12.0% against 8.2%) and on the WeChat mini-program (12.7% against 7.5%).
+          </li>
+          <li>
+            <strong>It is not a waiting-time story.</strong> Dermatology waits improved like everywhere else,
+            from a 107-second median in control to 86 seconds in the experiment. Users left despite being
+            answered sooner, which points at the quality or fit of the reply rather than its speed.
+          </li>
+        </ul>
+      </div>
+      <div class="chart-card">
+        <h4>Dermatology completion, week by week</h4>
+        <p class="sub">The gap opens early and never closes</p>
+        <div id="chart-derm"></div>
+        <div class="legend">
+          <span><i style="background:var(--exp)"></i>Experiment</span>
+          <span><i style="background:var(--ctl)"></i>Control</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">05 — Detail</div>
+      <h2>All five departments side by side</h2>
+    </div>
+    <div class="chart-card" style="padding-bottom:26px">
+      <table>
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Users (exp / ctl)</th>
+            <th>Completion exp</th>
+            <th>Completion ctl</th>
+            <th>Gap</th>
+            <th>Abandoned exp</th>
+            <th>Abandoned ctl</th>
+            <th>Median wait exp / ctl</th>
+          </tr>
+        </thead>
+        <tbody id="dept-table"></tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:16px">
+      Gap is the experiment minus control, in percentage points of completion. Median wait is the
+      first doctor response, in seconds. Users are counts of consultations, not unique patients.
+    </p>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">06 — Reading</div>
+      <h2>What the numbers support</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <p>
+          The experiment achieved the thing it was built for: users reached a doctor faster, and the
+          painful long waits almost disappeared. It did so without costing completion overall, which is
+          the usual worry when a queue is compressed.
+        </p>
+        <p>
+          But the aggregate is doing quiet work here. A flat overall number is the sum of four
+          departments that held steady and one that lost four and a half points. If the roll-out had
+          stopped at the headline metric, dermatology would have shipped broken.
+        </p>
+      </div>
+      <div>
+        <ul class="clean">
+          <li>Keep the faster routing — the wait gains are real, broad and largest in the tail.</li>
+          <li class="warn">
+            Hold dermatology out of the roll-out until the cause of the drop is found. The pattern —
+            answered faster, completed less — is consistent with replies that arrive quickly but do not
+            resolve a visual complaint.
+          </li>
+          <li>Re-run dermatology with the same design and a check on reply content, not just timing.</li>
+          <li>Report department-level completion as a guardrail, not only the overall rate.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">07 — Method</div>
+      <h2>Notes on the data</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Missing values are structural</h3>
+        <p>
+          The 903 blank first-response times are exactly the 903 users who were lost before reaching a
+          doctor; the 2,164 blank consultation lengths are exactly the 2,164 consultations that never
+          completed. Neither gap is a data-entry problem, and neither should be imputed. A further 186
+          users have no seven-day follow-up record, 36 have no complaint text and 6 have no platform.
+        </p>
+        <h3>Two small housekeeping issues</h3>
+        <p>
+          19 rows carry group labels with stray whitespace, 10 spelled 实验组 and 9 spelled 对照组, so the
+          raw column shows four values rather than two; the analysis strips the padding. Three
+          <code>enter_date</code> values use slashes instead of hyphens and were parsed after
+          normalisation. Neither changes any figure above.
+        </p>
+      </div>
+      <div>
+        <h3>How the comparison was made</h3>
+        <p>
+          Every rate is a simple proportion over all consultations in the group, so it is an
+          intention-to-treat view: users who abandoned are counted as not completed, which is why
+          completion and abandonment move in opposite directions. Waits are reported as medians because
+          a handful of very long waits pull the mean far above anything a typical user experiences.
+        </p>
+        <div class="callout">
+          <strong>Caution.</strong> These are observational differences between two assigned groups, not a
+          significance-tested experiment. The dermatology gap is large and consistent enough across weeks,
+          complaints and platforms to be treated as real, but the report cannot say which change in the
+          experiment caused it.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Source: <code>data/data.csv</code> — 18,000 rows, one per consultation, covering 18 Nov – 29 Dec 2024.
+    Groups as assigned (实验组 = experiment, 对照组 = control). All figures computed directly from the file.
+  </div>
+</footer>
+
+<script>
+const D = {
+  weekly: {
+    labels: ["18–24 Nov","25 Nov–1 Dec","2–8 Dec","9–15 Dec","16–22 Dec","23–29 Dec"],
+    exp: [1245,1350,1463,1513,1644,1772],
+    ctl: [1164,1407,1462,1609,1597,1774]
+  },
+  waitbins: {
+    labels: ["< 30 s","30–60 s","60–90 s","90–120 s","2–3 min","3–5 min","5–10 min","10 min +"],
+    exp: [2.6,21.3,27.7,20.3,18.5,8.6,1.1,0.0],
+    ctl: [1.4,13.6,21.9,19.1,24.1,15.5,4.3,0.3]
+  },
+  dept: {
+    labels: ["Paediatrics","Internal medicine","Dermatology","Gynaecology","ENT / eye"],
+    comp_exp: [90.37,89.12,80.51,89.28,88.07],
+    comp_ctl: [88.94,88.64,85.04,89.04,87.54],
+    lost_exp: [2.45,4.03,12.71,4.83,5.41],
+    lost_ctl: [3.15,4.40,7.66,5.21,4.46],
+    n_exp: [2607,2582,1503,1222,1073],
+    n_ctl: [2639,2501,1618,1268,987],
+    wait_exp: [91,87,86,86,82],
+    wait_ctl: [117,107,107,106,105]
+  },
+  derm: {
+    labels: ["18–24 Nov","25 Nov–1 Dec","2–8 Dec","9–15 Dec","16–22 Dec","23–29 Dec"],
+    exp: [83.6,77.1,82.5,80.1,80.3,79.4],
+    ctl: [84.0,86.0,86.3,83.8,86.3,83.7]
+  }
+};
+
+const C = { exp:"#1f6f68", ctl:"#9aa5a0", ink:"#13211d", soft:"#75847f", line:"#e6e4dc", alert:"#b23a48" };
+const FONT = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+
+function svgEl(w,h,body){
+  return '<svg viewBox="0 0 '+w+' '+h+'" role="img" preserveAspectRatio="xMidYMid meet">'+body+'</svg>';
+}
+function txt(x,y,s,o){
+  o = o || {};
+  return '<text x="'+x+'" y="'+y+'" font-family="'+(o.family||FONT)+
+    '" font-size="'+(o.size||11)+'" fill="'+(o.fill||C.soft)+'" text-anchor="'+(o.anchor||'start')+
+    '" font-weight="'+(o.weight||400)+'" letter-spacing="'+(o.ls||0)+'">'+s+'</text>';
+}
+
+/* ---------- weekly grouped bars ---------- */
+(function(){
+  const W=520,H=320,m={t:34,r:14,b:44,l:46};
+  const data=D.weekly, max=2000;
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const y=v=>m.t+ih-(v/max)*ih;
+  let s='';
+  [0,500,1000,1500,2000].forEach(g=>{
+    s+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="'+(g===0?C.ink:C.line)+'" stroke-width="1"/>';
+    s+=txt(m.l-9,y(g)+4,String(g),{anchor:'end',size:10});
+  });
+  const cw=iw/data.labels.length, bw=21, gap=7;
+  data.labels.forEach((lab,i)=>{
+    const cx=m.l+cw*i+cw/2;
+    const e=data.exp[i], c=data.ctl[i];
+    s+='<rect x="'+(cx-bw-gap/2)+'" y="'+y(e)+'" width="'+bw+'" height="'+(m.t+ih-y(e))+'" fill="'+C.exp+'" rx="2"/>';
+    s+='<rect x="'+(cx+gap/2)+'" y="'+y(c)+'" width="'+bw+'" height="'+(m.t+ih-y(c))+'" fill="'+C.ctl+'" rx="2"/>';
+    s+=txt(cx,H-24,lab,{anchor:'middle',size:9.6});
+  });
+  document.getElementById('chart-weekly').innerHTML=svgEl(W,H,s);
+})();
+
+/* ---------- wait distribution horizontal bars ---------- */
+(function(){
+  const W=520,H=380,m={t:6,r:62,b:30,l:80};
+  const data=D.waitbins, max=30;
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const x=v=>m.l+(v/max)*iw;
+  let s='';
+  [0,10,20,30].forEach(g=>{
+    s+='<line x1="'+x(g)+'" x2="'+x(g)+'" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="'+(g===0?C.ink:C.line)+'" stroke-width="1"/>';
+    s+=txt(x(g),H-10,g+'%',{anchor:'middle',size:10});
+  });
+  const rh=ih/data.labels.length, bh=11, gap=3;
+  data.labels.forEach((lab,i)=>{
+    const cy=m.t+rh*i+rh/2;
+    const e=data.exp[i], c=data.ctl[i];
+    s+=txt(m.l-11,cy+4,lab,{anchor:'end',size:10.5});
+    s+='<rect x="'+m.l+'" y="'+(cy-bh-gap/2)+'" width="'+Math.max(0,(e/max)*iw)+'" height="'+bh+'" fill="'+C.exp+'" rx="2"/>';
+    s+='<rect x="'+m.l+'" y="'+(cy+gap/2)+'" width="'+Math.max(0,(c/max)*iw)+'" height="'+bh+'" fill="'+C.ctl+'" rx="2"/>';
+    s+=txt(W-m.r+10,cy+3.5,e.toFixed(1)+' / '+c.toFixed(1),{size:10});
+  });
+  document.getElementById('chart-wait').innerHTML=svgEl(W,H,s);
+})();
+
+/* ---------- dumbbell ---------- */
+function dumbbell(id, expVals, ctlVals, lo, hi, ticks, fmt){
+  const W=520,H=300,m={t:14,r:58,b:32,l:118};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const x=v=>m.l+((v-lo)/(hi-lo))*iw;
+  let s='';
+  ticks.forEach(g=>{
+    s+='<line x1="'+x(g)+'" x2="'+x(g)+'" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="'+C.line+'"/>';
+    s+=txt(x(g),H-12,fmt(g),{anchor:'middle',size:10});
+  });
+  const rh=ih/expVals.length;
+  D.dept.labels.forEach((lab,i)=>{
+    const cy=m.t+rh*i+rh/2;
+    const e=expVals[i], c=ctlVals[i];
+    const isBad = (i===2);
+    s+=txt(m.l-14,cy+4,lab,{anchor:'end',size:11,fill:isBad?C.alert:C.ink,weight:isBad?700:500});
+    s+='<line x1="'+x(Math.min(e,c))+'" x2="'+x(Math.max(e,c))+'" y1="'+cy+'" y2="'+cy+'" stroke="'+(isBad?'#e8b9be':'#cfd6d3')+'" stroke-width="3.5" stroke-linecap="round"/>';
+    s+='<circle cx="'+x(c)+'" cy="'+cy+'" r="6.5" fill="'+C.ctl+'" stroke="#fff" stroke-width="1.6"/>';
+    s+='<circle cx="'+x(e)+'" cy="'+cy+'" r="6.5" fill="'+(isBad?C.alert:C.exp)+'" stroke="#fff" stroke-width="1.6"/>';
+  });
+  document.getElementById(id).innerHTML=svgEl(W,H,s);
+}
+dumbbell('chart-dept-comp', D.dept.comp_exp, D.dept.comp_ctl, 78, 93, [80,84,88,92], v=>v+'%');
+dumbbell('chart-dept-lost', D.dept.lost_exp, D.dept.lost_ctl, 0, 14, [0,4,8,12], v=>v+'%');
+
+/* ---------- derm line ---------- */
+(function(){
+  const W=520,H=310,m={t:18,r:66,b:44,l:46};
+  const data=D.derm, lo=74, hi=90;
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const x=i=>m.l+(iw/(data.labels.length-1))*i;
+  const y=v=>m.t+ih-((v-lo)/(hi-lo))*ih;
+  let s='';
+  [74,78,82,86,90].forEach(g=>{
+    s+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="'+C.line+'"/>';
+    s+=txt(m.l-9,y(g)+4,g+'%',{anchor:'end',size:10});
+  });
+  const line=(arr,col)=>{
+    let d='';
+    arr.forEach((v,i)=>{ d+=(i?'L':'M')+x(i)+' '+y(v); });
+    return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  };
+  s+=line(data.ctl,C.ctl);
+  s+=line(data.exp,C.exp);
+  data.exp.forEach((v,i)=>{ s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="4.6" fill="'+C.exp+'" stroke="#fff" stroke-width="1.6"/>'; });
+  data.ctl.forEach((v,i)=>{ s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="4.6" fill="'+C.ctl+'" stroke="#fff" stroke-width="1.6"/>'; });
+  s+=txt(x(data.labels.length-1)+11,y(data.exp[data.exp.length-1])+4,'79.4%',{size:10.5,fill:C.exp,weight:700});
+  s+=txt(x(data.labels.length-1)+11,y(data.ctl[data.ctl.length-1])+4,'83.7%',{size:10.5,fill:C.soft,weight:700});
+  data.labels.forEach((lab,i)=>{
+    s+=txt(x(i),H-16,lab,{anchor:i===0?'start':(i===data.labels.length-1?'end':'middle'),size:9.2});
+  });
+  document.getElementById('chart-derm').innerHTML=svgEl(W,H,s);
+})();
+
+/* ---------- dept table ---------- */
+(function(){
+  const d=D.dept, rows=[];
+  for(let i=0;i<d.labels.length;i++){
+    const gap=d.comp_exp[i]-d.comp_ctl[i];
+    const cls = gap<=-1 ? 'delta-up' : (gap>=0.3 ? 'delta-down' : 'delta-flat');
+    const sign = gap>0?'+':'';
+    rows.push(
+      '<tr'+(i===2?' class="hi"':'')+'>'+
+      '<td>'+d.labels[i]+'</td>'+
+      '<td>'+d.n_exp[i].toLocaleString()+' / '+d.n_ctl[i].toLocaleString()+'</td>'+
+      '<td>'+d.comp_exp[i].toFixed(2)+'%</td>'+
+      '<td>'+d.comp_ctl[i].toFixed(2)+'%</td>'+
+      '<td class="'+cls+'">'+sign+gap.toFixed(2)+'</td>'+
+      '<td>'+d.lost_exp[i].toFixed(2)+'%</td>'+
+      '<td>'+d.lost_ctl[i].toFixed(2)+'%</td>'+
+      '<td>'+d.wait_exp[i]+' / '+d.wait_ctl[i]+'</td>'+
+      '</tr>'
+    );
+  }
+  document.getElementById('dept-table').innerHTML=rows.join('');
+})();
+</script>
+</body>
+</html>

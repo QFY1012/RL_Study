@@ -1,0 +1,112 @@
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && ls -la && ls -la d
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash find . -type f | head -50; echo "---"; ls -la data/ 2>/dev/null; echo "---"; cat data/*.txt 2>/dev/n
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash find . -type f | head -50; echo "---"; ls -la data/
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cat data/*.txt 2>/dev/null; cat data/*.md 2>/dev/null
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && head -5 data.csv && echo "---" && wc -l data.csv && echo "---" && python -c " import pand
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd data; head -3 convos.csv; echo "==="; head -3 people.csv; echo "==="; wc -l *.csv
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd pd.set_option('display.width',200) df = pd.read_csv('data
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && cat data/measureme
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np from scipy import stats pd.set_option('displ
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np pd.set_option('display.width',250) df = pd.r
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python -c " import pandas as pd, numpy as np, json pd.set_option('display.width',250) df 
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd data && python - <<'EOF' import pandas as pd, numpy as np, json df = pd.read_csv('data.csv') df['
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: write facts.json
+  pi-deepseek-v4.1-flash/pockets pockets: write /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/facts.json
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 - <<'EOF' 
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 - <<'EOF' 
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && cat > /tmp/
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: edit facts.json
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && cat > /tmp/
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c " impor
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 -c 
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && cat > /tmp/
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && cat > /tmp/
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: write index.html
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 - <
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && pageshot index.
+  pi-deepseek-v4.1-flash/pockets pockets: write /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/build.py
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 build.py &
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/00.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/00.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/01.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/01.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/02.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/03.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/05.jpg
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: write /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/index.html
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/06.jpg
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && python3 - <
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger && which pages
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/02.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/03.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: edit /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/build.py
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && grep -n "by brand"
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && sed -n '325,360p' 
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 - <<'PY' i
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/_shots/frames/00.
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/_shots/frames/01.
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/05.jpg
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/_shots/frames/02.
+  pi-deepseek-v4.1-flash/hello-stranger hello-stranger: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/hello-stranger/_shots/frames/03.
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 build.py &
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/06.jpg
+pi-deepseek-v4.1-flash/hello-stranger: delivered=True attempts=1 329s 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/07.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/01.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/08.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/05.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/08.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/09.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 - <<'PY' i
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/09.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/11.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/10.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && grep -n "max-wi
+  pi-deepseek-v4.1-flash/pockets pockets: read /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets/_shots/frames/12.jpg
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && python3 -c "import
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && ls -la && python3 
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && grep -n "white-spa
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && grep -n "white-spa
+  pi-deepseek-v4.1-flash/pockets pockets: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/pockets && grep -n "td.nm" bu
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && grep -n "<scrip
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+pi-deepseek-v4.1-flash/pockets: delivered=True attempts=1 518s 
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/01.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/01.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/02.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python -c " fro
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read /tmp/crop1.png
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python -c " fro
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/crop1.png
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/05.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: bash cd /home/user/RL_Study/report-bench/submissions/pi-deepseek-v4.1-flash/ab_test-01 && python - <<'EOF
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/03.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/04.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/07.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/09.jpg
+  pi-deepseek-v4.1-flash/ab_test-01 ab_test-01: read _shots/frames/10.jpg

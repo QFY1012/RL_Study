@@ -1,0 +1,62 @@
+[
+  {
+    "id": "balanced-brand-sample",
+    "claim": "After trimming and lowercasing brand labels, the sample has 40 men’s jeans across 20 brands and 40 women’s jeans across 20 brands.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.assign(brand=jeans.brand.str.strip().str.lower()).groupby('menWomen').agg(jeans=('name','size'), brands=('brand','nunique'))"
+  },
+  {
+    "id": "front-height-gap",
+    "claim": "Men’s jeans average 23.13 cm in maximum front-pocket height versus 14.33 cm for women’s jeans, an 8.80 cm gap that makes the men’s average 61.44% higher.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.groupby('menWomen').maxHeightFront.mean().pipe(lambda s: pd.DataFrame({'mean_cm': s, 'gap_vs_women_cm': s-s['women'], 'percent_above_women': (s/s['women']-1)*100})).round(2)"
+  },
+  {
+    "id": "vertical-not-uniform-gap",
+    "claim": "The men-minus-women gap is 8.80 cm for maximum front height and 1.18 cm for maximum front width, but only 0.89 cm for maximum back height and 0.36 cm for maximum back width.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.groupby('menWomen')[['maxHeightFront','minHeightFront','maxWidthFront','minWidthFront','maxHeightBack','maxWidthBack']].mean().T.assign(gap_cm=lambda d: d['men']-d['women']).round(2)"
+  },
+  {
+    "id": "front-versus-back",
+    "claim": "Men’s front pockets average 7.12 cm taller than their back pockets, while women’s front pockets average 0.79 cm shorter than their back pockets.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.groupby('menWomen')[['maxHeightFront','maxHeightBack']].mean().assign(front_minus_back_cm=lambda d: d.maxHeightFront-d.maxHeightBack).round(2)"
+  },
+  {
+    "id": "all-twenty-brands",
+    "claim": "Men’s average maximum front-pocket height is higher in all 20 matched brands, with within-brand gaps ranging from 2.50 cm to 13.40 cm.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.assign(brand=jeans.brand.str.strip().str.lower()).groupby(['brand','menWomen']).maxHeightFront.mean().unstack().pipe(lambda d: d['men']-d['women']).pipe(lambda s: pd.Series({'brands_compared': s.size, 'men_higher_count': (s>0).sum(), 'smallest_gap_cm': s.min(), 'largest_gap_cm': s.max()})).round(2)"
+  },
+  {
+    "id": "brand-gap-extremes",
+    "claim": "Abercrombie has the smallest matched-brand front-height gap at 2.50 cm and Levi’s has the largest at 13.40 cm.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.assign(brand=jeans.brand.str.strip().str.lower()).groupby(['brand','menWomen']).maxHeightFront.mean().unstack().pipe(lambda d: d['men']-d['women']).sort_values().iloc[[0,-1]].round(2)"
+  },
+  {
+    "id": "shared-fit-gaps",
+    "claim": "Among fits available for both genders, the men-minus-women maximum front-height gap is 8.44 cm for skinny, 8.50 cm for straight and 9.32 cm for boot-cut jeans.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans[jeans.style.isin(['skinny','straight','boot-cut'])].groupby(['style','menWomen']).maxHeightFront.mean().unstack().assign(gap_cm=lambda d: d.men-d.women).join(jeans[jeans.style.isin(['skinny','straight','boot-cut'])].groupby(['style','menWomen']).size().unstack().add_prefix('n_')).round(2)"
+  },
+  {
+    "id": "twenty-centimetre-divide",
+    "claim": "All 40 men’s jeans have a maximum front-pocket height of at least 20 cm, compared with only 1 of the 40 women’s jeans.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.assign(at_least_20cm=jeans.maxHeightFront>=20).groupby('menWomen').at_least_20cm.agg(['sum','count'])"
+  },
+  {
+    "id": "price-height-correlation",
+    "claim": "Median listed prices are $69.72 for men’s and $78.75 for women’s jeans, while the Pearson correlations between price and maximum front-pocket height are -0.26 and -0.15, respectively.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "jeans.groupby('menWomen').apply(lambda d: pd.Series({'median_price': d.price.median(), 'price_front_height_r': d.price.corr(d.maxHeightFront)})).round(2)"
+  },
+  {
+    "id": "individual-pocket-extremes",
+    "claim": "Guess Power Stretch Skinny and J. Crew 8\" Tooth Pick tie for the shortest women’s maximum front-pocket height at 11.5 cm, while Wrangler Regular Fit has the tallest men’s measurement at 28.0 cm.",
+    "tables": {"jeans": "data/measurements.csv"},
+    "code": "pd.concat([jeans[jeans.menWomen.eq('women')].nsmallest(2,'maxHeightFront'), jeans[jeans.menWomen.eq('men')].nlargest(1,'maxHeightFront')])[['brand','name','menWomen','maxHeightFront']]"
+  }
+]

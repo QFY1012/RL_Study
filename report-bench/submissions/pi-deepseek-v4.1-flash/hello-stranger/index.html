@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirty Minutes With a Stranger — a data report</title>
+<style>
+  :root{
+    --bg:#f7f4ee;
+    --paper:#fffdf9;
+    --ink:#1b1813;
+    --muted:#6d6558;
+    --rule:#ddd5c7;
+    --rust:#b3482a;
+    --teal:#2e6b66;
+    --gold:#c59a3f;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+  h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:400;letter-spacing:-0.01em}
+  p{margin:0 0 1.05em}
+  a{color:var(--rust)}
+
+  /* ---------- masthead ---------- */
+  header.mast{border-bottom:1px solid var(--rule);padding:64px 0 40px}
+  .kicker{
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:22px;font-weight:600;
+  }
+  h1{font-size:62px;line-height:1.04;margin:0 0 22px;max-width:16ch}
+  .lede{font-size:20px;line-height:1.6;color:#3a352c;max-width:62ch}
+  .lede strong{font-weight:600;color:var(--ink)}
+
+  /* ---------- stat strip ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-bottom:1px solid var(--rule);
+  }
+  .stat{padding:26px 24px 26px 0;border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-family:Georgia,serif;font-size:36px;line-height:1.1;color:var(--rust);display:block}
+  .stat .k{font-size:13px;color:var(--muted);letter-spacing:.02em;display:block;margin-top:6px}
+
+  /* ---------- sections ---------- */
+  section{padding:56px 0 8px;border-bottom:1px solid var(--rule)}
+  section:last-of-type{border-bottom:none}
+  .eyebrow{
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);
+    font-weight:700;margin-bottom:12px;
+  }
+  h2{font-size:36px;line-height:1.15;margin:0 0 20px;max-width:24ch}
+  h3{font-size:20px;margin:34px 0 10px}
+  .body{max-width:66ch}
+  .body p{font-size:17.5px}
+  .dropcap::first-letter{
+    float:left;font-family:Georgia,serif;font-size:56px;line-height:.86;
+    padding:6px 10px 0 0;color:var(--rust);
+  }
+
+  figure{margin:30px 0 34px;background:var(--paper);border:1px solid var(--rule);padding:26px 26px 18px}
+  figure svg{display:block;width:100%;height:auto;overflow:visible}
+  figcaption{font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:6px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+  .grid2 figure{margin-top:6px}
+
+  .callout{
+    border-left:3px solid var(--rust);padding:4px 0 4px 20px;margin:26px 0;
+    max-width:64ch;
+  }
+  .callout p{margin:0;font-size:17px}
+  .callout .big{font-family:Georgia,serif;font-size:22px;display:block;margin-bottom:4px}
+
+  table.data{width:100%;border-collapse:collapse;font-size:15px;margin:18px 0 26px}
+  table.data th,table.data td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--rule)}
+  table.data th:first-child,table.data td:first-child{text-align:left}
+  table.data th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  table.data tr:last-child td{border-bottom:none}
+
+  .num{font-variant-numeric:tabular-nums}
+  .accent{color:var(--rust)}
+  .muted{color:var(--muted)}
+
+  /* ---------- appendix ---------- */
+  details.appendix{margin:40px 0 0;border-top:1px solid var(--rule);padding-top:22px}
+  details.appendix summary{cursor:pointer;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  details.appendix summary::marker{color:var(--rust)}
+  .fact{border-bottom:1px solid var(--rule);padding:16px 0}
+  .fact:last-child{border-bottom:none}
+  .fact .fid{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:var(--rust);letter-spacing:.02em}
+  .fact p{margin:4px 0 8px;font-size:15px}
+  .fact code{
+    display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;line-height:1.55;background:#efe9de;border:1px solid var(--rule);
+    padding:10px 12px;white-space:pre-wrap;word-break:break-word;color:#3d372d;
+  }
+
+  footer{padding:44px 0 70px;color:var(--muted);font-size:14px}
+  footer p{max-width:64ch}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">A behavioural study &middot; 30-minute video conversations between strangers</div>
+    <h1>Thirty Minutes With a Stranger</h1>
+    <p class="lede">
+      People who had never met were paired for half an hour of video conversation. Each of them
+      rated their mood before the call, at the start, in the middle and at the end, then rated the
+      person on the other side of the screen. <strong>Across 1,656 conversations the mood climbs from
+      the first minute to the last — and people consistently walk away believing they were liked
+      less than they actually were.</strong>
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><span class="n num">1,656</span><span class="k">conversations between two strangers</span></div>
+    <div class="stat"><span class="n num">1,456</span><span class="k">people, some in several conversations</span></div>
+    <div class="stat"><span class="n num">3,312</span><span class="k">sets of ratings, one per person per call</span></div>
+    <div class="stat"><span class="n num">82.6%</span><span class="k">ended in a better mood than they started</span></div>
+  </div>
+</div>
+
+<!-- ======================= 1. TRAJECTORY ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">01 &nbsp;·&nbsp; The shape of the half hour</div>
+    <h2>A conversation that keeps getting better</h2>
+    <div class="body">
+      <p class="dropcap">
+        The mood ratings trace a very simple shape: a flat, slightly nervous opening, then a steady
+        climb that is still going when the call ends. Averaged over every conversation, positive
+        affect sits at <span class="num">6.10</span> before the call, edges up to <span class="num">6.16</span>
+        as the conversation opens, reaches <span class="num">6.93</span> at the halfway mark and
+        <span class="num">7.38</span> at the close.
+      </p>
+      <p>
+        Arousal — how energised people feel rather than how positive — follows the same ramp from a
+        lower base: <span class="num">5.32</span> beforehand, then <span class="num">5.67</span>,
+        <span class="num">6.40</span> and <span class="num">6.70</span>. People do not merely feel
+        better after talking to a stranger; they wake up during it.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend">
+        <span><i class="swatch" style="background:#b3482a"></i>Positive affect</span>
+        <span><i class="swatch" style="background:#2e6b66"></i>Arousal</span>
+        <span class="muted" style="margin-left:auto">Mean rating, 1&ndash;9 scale</span>
+      </div>
+      <div id="chart-trajectory"></div>
+      <figcaption>
+        Mean of both partners' ratings at four points in the call. Only conversations with complete
+        post-call ratings are averaged (n = 1,603 of 1,656).
+      </figcaption>
+    </figure>
+
+    <div class="body">
+      <p>
+        The rise is not driven by a few ecstatic outliers. Of the conversations with both a before
+        and an after rating, <span class="num">82.6%</span> finish higher than they started,
+        <span class="num">9.4%</span> finish lower and <span class="num">8.0%</span> end exactly where
+        they began. The typical conversation gains <span class="num">1.29</span> points of affect,
+        with a median gain of <span class="num">1.50</span>. Individual conversations range from a
+        slide of <span class="num">4.50</span> points to a leap of <span class="num">7.00</span>.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend">
+        <span><i class="swatch" style="background:#b3482a"></i>Rose during the call</span>
+        <span><i class="swatch" style="background:#c9c1b1"></i>Unchanged</span>
+        <span><i class="swatch" style="background:#5c564a"></i>Fell during the call</span>
+      </div>
+      <div id="chart-sign"></div>
+      <figcaption>Change in each pair's average affect from before the call to after it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= 2. WHO GAINS ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">02 &nbsp;·&nbsp; Who gains the most</div>
+    <h2>The people who arrive low are the ones who move</h2>
+    <div class="body">
+      <p>
+        Split the conversations by how the pair felt <em>before</em> the call and the pattern is
+        sharp. Pairs who started below 5 on affect gained <span class="num">2.32</span> points,
+        climbing from <span class="num">4.56</span> to <span class="num">6.88</span>. Pairs who were
+        already above 7 gained only <span class="num">0.17</span>, drifting from
+        <span class="num">7.73</span> to <span class="num">7.91</span>. The two ends of the scale
+        converge: whatever mood you bring into the call, you tend to leave it close to a 7.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend">
+        <span><i class="swatch" style="background:#ffffff;border:2px solid #b3482a"></i>Affect before the call</span>
+        <span><i class="swatch" style="background:#b3482a"></i>Affect after the call</span>
+        <span class="muted" style="margin-left:auto">Labels show points gained</span>
+      </div>
+      <div id="chart-dumbbell"></div>
+      <figcaption>
+        Pairs grouped by their mean pre-call affect. Hollow markers are the group mean before the
+        call, filled markers the mean afterwards.
+      </figcaption>
+    </figure>
+
+    <table class="data">
+      <thead>
+        <tr><th>Pre-call affect</th><th>Pairs</th><th>Before</th><th>After</th><th>Gain</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Below 5</td><td class="num">334</td><td class="num">4.56</td><td class="num">6.88</td><td class="num accent">+2.32</td></tr>
+        <tr><td>5 to 6</td><td class="num">547</td><td class="num">5.79</td><td class="num">7.30</td><td class="num accent">+1.51</td></tr>
+        <tr><td>6 to 7</td><td class="num">566</td><td class="num">6.71</td><td class="num">7.58</td><td class="num accent">+0.87</td></tr>
+        <tr><td>Above 7</td><td class="num">209</td><td class="num">7.73</td><td class="num">7.91</td><td class="num accent">+0.17</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======================= 3. LIKING GAP ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">03 &nbsp;·&nbsp; What each person thought of the other</div>
+    <h2>Everyone likes their partner more than they think they are liked</h2>
+    <div class="body">
+      <p>
+        After the call each person answered two symmetric questions: how much do you like this
+        person, and how much do you think this person likes you? On a 1-to-7 scale, people rated
+        their own liking at <span class="num">5.99</span> but expected only
+        <span class="num">5.35</span> in return. The expectation was wrong: the partner's own answer,
+        averaged over the same pairs, was also <span class="num">5.99</span>.
+      </p>
+      <p>
+        So the room is full of mutual warmth that neither side registers. Measured person by person
+        against what the partner actually reported, the gap averages <span class="num">0.64</span>
+        points, with a median of <span class="num">1.00</span> and a range from
+        <span class="num">&minus;6</span> to <span class="num">+6</span> across
+        <span class="num">3,206</span> people.
+      </p>
+    </div>
+
+    <figure>
+      <div id="chart-liking"></div>
+      <figcaption>Mean ratings on the 1&ndash;7 liking scale, across all 3,312 person-ratings.</figcaption>
+    </figure>
+
+    <div class="grid2">
+      <figure>
+        <div id="chart-gapshare"></div>
+        <figcaption>How perceived liking compares with what the partner actually reported.</figcaption>
+      </figure>
+      <div class="body" style="padding-top:14px">
+        <div class="callout">
+          <p>
+            <span class="big num">54.9%</span>
+            of people underestimate how much their partner likes them. Only
+            <span class="num">18.3%</span> overestimate, and <span class="num">26.8%</span> get it
+            exactly right.
+          </p>
+        </div>
+        <p>
+          The asymmetry is systematic rather than random noise: if people were merely guessing badly,
+          underestimates and overestimates would be equally common. Instead, the error leans heavily
+          towards assuming less affection than was actually there.
+        </p>
+      </div>
+    </div>
+
+    <div class="body">
+      <p>
+        The same caution shows up in how people think they were seen. They rate their partner more
+        intelligent (<span class="num">7.68</span>) and kinder (<span class="num">7.98</span>) than
+        they believe the partner rates them (<span class="num">7.06</span> and
+        <span class="num">7.43</span>): they hand out generous judgements and assume a stingier
+        verdict comes back.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4. DRIVERS ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">04 &nbsp;·&nbsp; What actually predicts a good conversation</div>
+    <h2>Shared reality, not shared background</h2>
+    <div class="body">
+      <p>
+        The pairs differed in sex, race, age, education and politics, and the study recorded each
+        difference. None of it predicts much. The strongest correlate of how enjoyable a conversation
+        felt is a demographic difference that reaches only <span class="num">0.085</span> in absolute
+        size (education). Politics sits at <span class="num">&minus;0.065</span>, race at
+        <span class="num">&minus;0.050</span>, sex at <span class="num">0.028</span>.
+      </p>
+      <p>
+        What does predict it is whether the two people felt they were experiencing the same thing.
+        Shared reality correlates <span class="num">0.570</span> with enjoyment and
+        <span class="num">0.532</span> with liking the partner — an order of magnitude larger than
+        any background difference. On average pairs rated shared reality
+        <span class="num">4.11</span> on a 0-to-6 scale.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend">
+        <span><i class="swatch" style="background:#2e6b66"></i>Correlation with enjoyment</span>
+        <span><i class="swatch" style="background:#b3482a"></i>Correlation with liking the partner</span>
+      </div>
+      <div id="chart-corr"></div>
+      <figcaption>
+        Pearson correlations across 1,603 conversations. Differences between partners (politics,
+        age, sex, race, education) are shown alongside the pair's average sense of shared reality.
+      </figcaption>
+    </figure>
+
+    <div class="body">
+      <p>
+        The same story survives if you rank conversations by how enjoyable people found them. The
+        least enjoyable fifth (mean enjoyment <span class="num">5.76</span>) gained just
+        <span class="num">0.40</span> points of affect over the call. The most enjoyable fifth
+        (mean <span class="num">9.00</span>) gained <span class="num">2.25</span>. Good
+        conversations are not just pleasant — they are the ones that change how people feel.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend">
+        <span><i class="swatch" style="background:#b3482a"></i>Mean affect gained during the call</span>
+      </div>
+      <div id="chart-quintile"></div>
+      <figcaption>Conversations split into fifths by how enjoyable partners rated them.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= 5. IMPRESSIONS ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">05 &nbsp;·&nbsp; The impression people leave</div>
+    <h2>Kind, polite, trustworthy — and not remotely funny</h2>
+    <div class="body">
+      <p>
+        Partners rated each other on a set of traits on the same 1-to-9 scale, and the profile is
+        lopsided. Warmth traits score high: kind <span class="num">7.98</span>, polite
+        <span class="num">7.93</span>, trustworthy <span class="num">7.51</span>. Humour sits far
+        below at <span class="num">4.72</span> — the one thing strangers are reliably willing to say
+        their new acquaintance is not.
+      </p>
+    </div>
+
+    <div class="grid2">
+      <figure>
+        <div class="legend"><span><i class="swatch" style="background:#2e6b66"></i>Partner's trait rating</span></div>
+        <div id="chart-traits"></div>
+        <figcaption>Mean rating of the partner, 1&ndash;9 scale.</figcaption>
+      </figure>
+      <figure>
+        <div class="legend">
+          <span><i class="swatch" style="background:#c59a3f"></i>Worst moment</span>
+          <span><i class="swatch" style="background:#b3482a"></i>Overall</span>
+          <span><i class="swatch" style="background:#2e6b66"></i>Best moment</span>
+        </div>
+        <div id="chart-moments"></div>
+        <figcaption>Average of the pair's worst, overall and best affect ratings.</figcaption>
+      </figure>
+    </div>
+
+    <div class="body">
+      <p>
+        That the lows are rated far below the average is its own signal: the worst moment of a
+        conversation averages <span class="num">5.80</span>, the best <span class="num">7.83</span>,
+        and the overall impression <span class="num">7.32</span>. Almost everyone has a dip; almost
+        nobody lets it define the half hour.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 6. TWO PEOPLE ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">06 &nbsp;·&nbsp; Two people, one conversation</div>
+    <h2>Same half hour, different reports</h2>
+    <div class="body">
+      <p>
+        Each conversation produces two independent accounts, and they do not match. On average the
+        two partners' affect ratings differ by <span class="num">1.36</span> points, their arousal
+        ratings by <span class="num">1.31</span> and their shared-reality ratings by
+        <span class="num">1.14</span>. Whatever a conversation is, it is not experienced the same way
+        twice.
+      </p>
+      <p>
+        Who does the perceiving matters as well. Lonelier participants expected less liking from
+        their partner — a correlation of <span class="num">&minus;0.141</span> between loneliness and
+        expected liking — while liking the partner just as much as anyone else
+        (<span class="num">&minus;0.018</span>). The deficit shows up in what they expect to receive,
+        not in what they give.
+      </p>
+    </div>
+
+    <figure>
+      <div class="legend"><span><i class="swatch" style="background:#8a8272"></i>Average absolute difference between the two partners</span></div>
+      <div id="chart-diff"></div>
+      <figcaption>Mean absolute gap between the two people's ratings of the same conversation.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= APPENDIX ======================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Appendix</div>
+    <h2>How these numbers were computed</h2>
+    <div class="body">
+      <p class="muted">
+        Two tables: <code>data/convos.csv</code> (one row per conversation, with pair-level averages
+        and differences) and <code>data/people.csv</code> (one row per person per conversation, with
+        that person's own ratings and background). Every figure on this page comes from the pandas
+        expressions below, each evaluated directly against those files.
+      </p>
+    </div>
+    <details class="appendix">
+      <summary>15 findings and their code</summary>
+      <div class="fact"><div class="fid">affect-rises-across-conversation</div><p>Average positive affect rises steadily through the half hour, from 6.10 before the conversation to 6.16 at its start, 6.93 at the midpoint and 7.38 at its end.</p><code>convos[[&#x27;pre_affect_avg&#x27;,&#x27;begin_affect_avg&#x27;,&#x27;middle_affect_avg&#x27;,&#x27;end_affect_avg&#x27;]].mean()</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">arousal-rises-across-conversation</div><p>Arousal climbs in the same way but from a lower starting point, 5.32 before the conversation, 5.67 at the start, 6.40 at the midpoint and 6.70 at the end.</p><code>convos[[&#x27;pre_arousal_avg&#x27;,&#x27;begin_arousal_avg&#x27;,&#x27;middle_arousal_avg&#x27;,&#x27;end_arousal_avg&#x27;]].mean()</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">most-pairs-end-happier</div><p>Among pairs with both before and after ratings, 82.6% finish the conversation with higher average affect than they started with, 9.4% finish lower and 8.0% are unchanged.</p><code>np.sign(convos.end_affect_avg - convos.pre_affect_avg).value_counts(normalize=True).round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">typical-gain-about-1-point-3</div><p>The average pair gains 1.29 points of affect across the conversation, with a median gain of 1.50; gains run from -4.50 to 7.00.</p><code>(convos.end_affect_avg - convos.pre_affect_avg).describe().round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">low-starters-gain-most</div><p>Pairs who started below 5 on affect gained 2.32 points and ended at 6.88, while pairs starting above 7 gained only 0.17 and ended at 7.91: everyone converges near 7.</p><code>convos.assign(gain=lambda d: d.end_affect_avg - d.pre_affect_avg).groupby(pd.cut(convos.pre_affect_avg, [0,5,6,7,9]), observed=True).agg(n=(&#x27;gain&#x27;,&#x27;size&#x27;), pre=(&#x27;pre_affect_avg&#x27;,&#x27;mean&#x27;), end=(&#x27;end_affect_avg&#x27;,&#x27;mean&#x27;), gain=(&#x27;gain&#x27;,&#x27;mean&#x27;)).round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">liking-gap-on-7-point-scale</div><p>On a 1-to-7 scale people rate how much they like their partner at 5.99 on average but think the partner likes them only 5.35.</p><code>people[[&#x27;i_like_you&#x27;,&#x27;you_like_me&#x27;]].agg([&#x27;mean&#x27;,&#x27;min&#x27;,&#x27;max&#x27;]).round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: people &larr; data/people.csv</p></div>
+<div class="fact"><div class="fid">people-underestimate-being-liked</div><p>Comparing each person with their actual partner, the perceived-liking gap averages 0.64 points (median 1.00) over 3,206 people and ranges from -6 to +6.</p><code>people.merge(people[[&#x27;convo_id&#x27;,&#x27;user_id&#x27;,&#x27;i_like_you&#x27;]].rename(columns={&#x27;user_id&#x27;:&#x27;partner_id&#x27;,&#x27;i_like_you&#x27;:&#x27;partner_likes_me&#x27;}), on=[&#x27;convo_id&#x27;,&#x27;partner_id&#x27;]).assign(gap=lambda d: d.partner_likes_me - d.you_like_me).gap.describe().round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: people &larr; data/people.csv</p></div>
+<div class="fact"><div class="fid">half-underestimate-being-liked</div><p>54.9% of people think their partner likes them less than the partner actually reports, 26.8% get it exactly right and 18.3% think they are liked more than they are.</p><code>people.merge(people[[&#x27;convo_id&#x27;,&#x27;user_id&#x27;,&#x27;i_like_you&#x27;]].rename(columns={&#x27;user_id&#x27;:&#x27;partner_id&#x27;,&#x27;i_like_you&#x27;:&#x27;partner_likes_me&#x27;}), on=[&#x27;convo_id&#x27;,&#x27;partner_id&#x27;]).assign(gap=lambda d: d.partner_likes_me - d.you_like_me).gap.apply(np.sign).value_counts(normalize=True).round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: people &larr; data/people.csv</p></div>
+<div class="fact"><div class="fid">shared-reality-beats-demographics</div><p>Shared reality correlates with how enjoyable the conversation was at 0.570 and with liking the partner at 0.532, while no demographic difference (politics, age, sex, race, education) reaches 0.09 in absolute correlation with either.</p><code>convos[[&#x27;shared_reality_avg&#x27;,&#x27;politics_diff&#x27;,&#x27;age_diff&#x27;,&#x27;sex_diff&#x27;,&#x27;race_diff&#x27;,&#x27;edu_diff&#x27;,&#x27;how_enjoyable_avg&#x27;,&#x27;i_like_you_avg&#x27;]].corr().loc[[&#x27;shared_reality_avg&#x27;,&#x27;politics_diff&#x27;,&#x27;age_diff&#x27;,&#x27;sex_diff&#x27;,&#x27;race_diff&#x27;,&#x27;edu_diff&#x27;],[&#x27;how_enjoyable_avg&#x27;,&#x27;i_like_you_avg&#x27;]].round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">worst-moment-below-overall</div><p>Partners&#x27; worst moment in the conversation averages 5.80 against a best moment of 7.83 and an overall rating of 7.32.</p><code>convos[[&#x27;worst_affect_avg&#x27;,&#x27;overall_affect_avg&#x27;,&#x27;best_affect_avg&#x27;]].mean().round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">kind-but-not-funny</div><p>Strangers come away rated kinder (7.98) and more polite (7.93) than trustworthy (7.51), and far less funny (4.72) than any of these.</p><code>convos[[&#x27;you_are_kind_avg&#x27;,&#x27;you_are_polite_avg&#x27;,&#x27;you_are_trustworthy_avg&#x27;,&#x27;you_are_funny_avg&#x27;]].mean().round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">seen-as-less-than-you-see-them</div><p>People rate their partner more intelligent (7.68) and kinder (7.98) than they believe the partner rates them (7.06 and 7.43).</p><code>convos[[&#x27;you_are_intelligent_avg&#x27;,&#x27;you_think_i_am_intelligent_avg&#x27;,&#x27;you_are_kind_avg&#x27;,&#x27;you_think_i_am_kind_avg&#x27;]].mean().round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">enjoyable-pairs-gain-more</div><p>The fifth of conversations rated least enjoyable (mean 5.76) gained 0.40 points of affect, while the fifth rated most enjoyable (mean 9.00) gained 2.25.</p><code>convos.assign(gain=lambda d: d.end_affect_avg - d.pre_affect_avg).groupby(pd.qcut(convos.how_enjoyable_avg, 5), observed=True).agg(n=(&#x27;gain&#x27;,&#x27;size&#x27;), enjoy=(&#x27;how_enjoyable_avg&#x27;,&#x27;mean&#x27;), gain=(&#x27;gain&#x27;,&#x27;mean&#x27;)).round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+<div class="fact"><div class="fid">lonelier-expect-less-liking</div><p>Lonelier participants expect less liking from their partner (r = -0.141) while liking the partner just as much as anyone else (r = -0.018).</p><code>people[[&#x27;my_loneliness&#x27;,&#x27;i_like_you&#x27;,&#x27;you_like_me&#x27;]].corr().round(3)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: people &larr; data/people.csv</p></div>
+<div class="fact"><div class="fid">partners-differ-in-their-reports</div><p>The two people in a pair report the same conversation differently: their affect ratings differ by 1.36 points on average, their arousal by 1.31 and their shared reality by 1.14.</p><code>convos[[&#x27;affect_diff_avg&#x27;,&#x27;arousal_diff_avg&#x27;,&#x27;shared_reality_diff&#x27;]].abs().mean().round(2)</code><p class="muted" style="font-size:12px;margin:6px 0 0">reads: convos &larr; data/convos.csv</p></div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p>
+      Data: 1,656 conversations among 1,456 participants, with 3,312 person-level rating forms.
+      Post-call ratings are missing for 53 conversations, which are excluded from any comparison
+      that needs them. Ratings of mood, traits and shared reality use 1&ndash;9 scales; the liking
+      questions use 1&ndash;7. Effects reported here are descriptive associations, not causal claims.
+    </p>
+  </div>
+</footer>
+
+<script>
+const D = {
+  affect:   {before:6.10, start:6.16, middle:6.93, end:7.38},
+  arousal:  {before:5.32, start:5.67, middle:6.40, end:6.70},
+  sign:     {up:0.826, same:0.080, down:0.094},
+  startgroup: [
+    {label:"Below 5", n:334, pre:4.56, end:6.88, gain:2.32},
+    {label:"5 to 6",  n:547, pre:5.79, end:7.30, gain:1.51},
+    {label:"6 to 7",  n:566, pre:6.71, end:7.58, gain:0.87},
+    {label:"Above 7", n:209, pre:7.73, end:7.91, gain:0.17}
+  ],
+  liking:   {i_like_you:5.995, partner_likes_me:5.995, you_like_me:5.351},
+  gapshare: {under:0.549, exact:0.268, over:0.183},
+  corr: [
+    {name:"Shared reality (pair average)", enjoy:0.570,  like:0.532,  key:true},
+    {name:"Education differs",             enjoy:0.085,  like:0.074,  key:false},
+    {name:"Age differs",                   enjoy:0.041,  like:0.036,  key:false},
+    {name:"Sex differs",                   enjoy:0.028,  like:0.046,  key:false},
+    {name:"Race differs",                  enjoy:-0.050, like:-0.040, key:false},
+    {name:"Politics differs",              enjoy:-0.065, like:-0.069, key:false}
+  ],
+  quintile: [
+    {enjoy:5.76, gain:0.40, n:390},
+    {enjoy:7.26, gain:1.18, n:498},
+    {enjoy:8.00, gain:1.57, n:290},
+    {enjoy:8.50, gain:1.89, n:258},
+    {enjoy:9.00, gain:2.25, n:167}
+  ],
+  traits: [
+    {label:"Kind",        v:7.98},
+    {label:"Polite",      v:7.93},
+    {label:"Trustworthy", v:7.51},
+    {label:"Funny",       v:4.72}
+  ],
+  moments: {worst:5.80, overall:7.32, best:7.83},
+  diff: [
+    {label:"Affect",         v:1.36},
+    {label:"Arousal",        v:1.31},
+    {label:"Shared reality", v:1.14}
+  ]
+};
+
+const C = {rust:"#b3482a", teal:"#2e6b66", gold:"#c59a3f", grid:"#e3dbcc",
+           ink:"#1b1813", muted:"#6d6558", faint:"#c9c1b1", dark:"#5c564a"};
+const SERIF = 'Georgia,"Times New Roman",serif';
+const SANS = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+
+function svg(w,h,inner){
+  return '<svg viewBox="0 0 '+w+' '+h+'" role="img" preserveAspectRatio="xMidYMid meet">'+inner+'</svg>';
+}
+function txt(x,y,s,o){
+  o=o||{};
+  const size=o.size||13, fill=o.fill||C.muted, anchor=o.anchor||"middle";
+  const weight=o.weight||400, fam=o.fam||SANS;
+  return '<text x="'+x+'" y="'+y+'" font-family="'+fam+'" font-size="'+size+'" fill="'+fill+
+         '" text-anchor="'+anchor+'" font-weight="'+weight+'">'+s+'</text>';
+}
+function line(x1,y1,x2,y2,stroke,w,dash){
+  return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+stroke+
+         '" stroke-width="'+(w||1)+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+'/>';
+}
+
+/* ---------- 1. trajectory line chart ---------- */
+(function(){
+  const w=940,h=400,ml=54,mr=110,mt=30,mb=64;
+  const names=["Before the call","Start","Middle","End"];
+  const series=[
+    {name:"Positive affect", vals:[D.affect.before,D.affect.start,D.affect.middle,D.affect.end], c:C.rust},
+    {name:"Arousal",         vals:[D.arousal.before,D.arousal.start,D.arousal.middle,D.arousal.end], c:C.teal}
+  ];
+  const yMin=5, yMax=8;
+  const X = i => ml + i*(w-ml-mr)/3;
+  const Y = v => mt + (yMax-v)/(yMax-yMin)*(h-mt-mb);
+  let s="";
+  for(let t=5;t<=8;t++){
+    s+=line(ml,Y(t),w-mr,Y(t),C.grid,1);
+    s+=txt(ml-14,Y(t)+4,t,{anchor:"end",size:12});
+  }
+  s+=txt(18,(mt+(h-mb))/2,"Mean rating",{anchor:"middle",size:11,fill:C.muted});
+  names.forEach((n,i)=> s+=txt(X(i),h-mb+28,n,{size:13,fill:"#4a4438"}));
+
+  series.forEach((se,si)=>{
+    const pts = se.vals.map((v,i)=>[X(i),Y(v)]);
+    s+='<polyline points="'+pts.map(p=>p[0]+','+p[1]).join(' ')+'" fill="none" stroke="'+se.c+
+       '" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="'+(si===0?1:0.9)+'"/>';
+    pts.forEach((p,i)=>{
+      s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5.5" fill="#fffdf9" stroke="'+se.c+'" stroke-width="2.5"/>';
+      const above = si===0;
+      s+=txt(p[0], p[1]+(above?-16:22), se.vals[i].toFixed(2),
+             {size:13.5,fam:SERIF,fill:se.c,weight:600});
+    });
+  });
+  document.getElementById("chart-trajectory").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 2. sign stacked bar ---------- */
+(function(){
+  const w=940,h=120,ml=0,mr=0,y=42,bh=44;
+  const segs=[
+    {k:"Rose", v:D.sign.up, c:C.rust},
+    {k:"Unchanged", v:D.sign.same, c:C.faint},
+    {k:"Fell", v:D.sign.down, c:C.dark}
+  ];
+  let s="", x=0;
+  segs.forEach(sg=>{
+    const wd = sg.v*w;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+wd+'" height="'+bh+'" fill="'+sg.c+'"/>';
+    const pct=(sg.v*100).toFixed(1)+"%";
+    const dark = sg.k==="Unchanged";
+    s+=txt(x+wd/2, y+bh/2+6, pct, {size:15, fill: dark?"#3d372d":"#fffdf9", weight:700, fam:SERIF});
+    s+=txt(x+wd/2, y-14, sg.k, {size:12.5, fill: dark?C.muted:"#4a4438"});
+    x+=wd;
+  });
+  document.getElementById("chart-sign").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 3. dumbbell ---------- */
+(function(){
+  const w=940, rowH=62, mt=26, ml=150, mr=150, h=mt+D.startgroup.length*rowH+50;
+  const xMin=4, xMax=8.6;
+  const X = v => ml + (v-xMin)/(xMax-xMin)*(w-ml-mr);
+  let s="";
+  [4,5,6,7,8].forEach(t=>{
+    s+=line(X(t),mt-6,X(t),mt+D.startgroup.length*rowH-16,C.grid,1);
+    s+=txt(X(t),mt+D.startgroup.length*rowH+16,t,{size:12});
+  });
+  D.startgroup.forEach((g,i)=>{
+    const y = mt + i*rowH + rowH/2 - 8;
+    s+=line(X(g.pre),y,X(g.end),y,"#e0d6c6",6);
+    s+='<circle cx="'+X(g.pre)+'" cy="'+y+'" r="8" fill="#fffdf9" stroke="'+C.rust+'" stroke-width="2.5"/>';
+    s+='<circle cx="'+X(g.end)+'" cy="'+y+'" r="8" fill="'+C.rust+'"/>';
+    s+=txt(ml-18,y+5,g.label,{anchor:"end",size:14,fill:C.ink,weight:600});
+    s+=txt(ml-18,y+22,"n = "+g.n,{anchor:"end",size:11.5});
+    s+=txt(X(g.end)+20,y+5,"+"+g.gain.toFixed(2),{anchor:"start",size:14,fam:SERIF,fill:C.rust,weight:600});
+    s+=txt(X(g.end)+20,y+20,"to "+g.end.toFixed(2),{anchor:"start",size:11.5});
+  });
+  document.getElementById("chart-dumbbell").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 4. liking bars ---------- */
+(function(){
+  const w=940,rowH=66,mt=18;
+  const rows=[
+    {label:"I like my partner",             v:D.liking.i_like_you,       c:C.rust, note:"what people report feeling"},
+    {label:"My partner likes me",           v:D.liking.partner_likes_me, c:"#d8b3a3", note:"what the partner actually reports"},
+    {label:"I think my partner likes me",   v:D.liking.you_like_me,      c:C.dark, note:"what people expect in return"}
+  ];
+  const ml=330, mr=90, xMin=1, xMax=7.6, h=mt+rows.length*rowH+26;
+  const X = v => ml + (v-xMin)/(xMax-xMin)*(w-ml-mr);
+  let s="";
+  [1,2,3,4,5,6,7].forEach(t=>{
+    s+=line(X(t),mt-4,X(t),mt+rows.length*rowH-26,C.grid,1);
+    s+=txt(X(t),mt+rows.length*rowH-6,t,{size:12});
+  });
+  rows.forEach((r,i)=>{
+    const y=mt+i*rowH, bh=30;
+    s+='<rect x="'+X(1)+'" y="'+y+'" width="'+(X(r.v)-X(1))+'" height="'+bh+'" fill="'+r.c+'" rx="2"/>';
+    s+=txt(ml-18,y+20,r.label,{anchor:"end",size:14,fill:C.ink,weight:600});
+    s+=txt(ml-18,y+37,r.note,{anchor:"end",size:11.5});
+    s+=txt(X(r.v)+14,y+21,r.v.toFixed(2),{anchor:"start",size:16,fam:SERIF,fill:C.ink,weight:600});
+  });
+  document.getElementById("chart-liking").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 5. gap share (small) ---------- */
+(function(){
+  const w=470,h=200,ml=0, mt=30;
+  const rows=[
+    {label:"Underestimate", v:D.gapshare.under, c:C.rust},
+    {label:"Exactly right", v:D.gapshare.exact, c:C.faint},
+    {label:"Overestimate",  v:D.gapshare.over,  c:C.dark}
+  ];
+  const ml2=140, mr=64, xMax=0.62, h2=mt+rows.length*52+16;
+  const X = v => ml2 + v/xMax*(w-ml2-mr);
+  let s="";
+  rows.forEach((r,i)=>{
+    const y=mt+i*52;
+    s+='<rect x="'+ml2+'" y="'+y+'" width="'+(X(r.v)-ml2)+'" height="26" fill="'+r.c+'" rx="2"/>';
+    s+=txt(ml2-12,y+18,r.label,{anchor:"end",size:12.5,fill:C.ink});
+    s+=txt(X(r.v)+10,y+18,(r.v*100).toFixed(1)+"%",{anchor:"start",size:13,fam:SERIF,fill:C.ink,weight:600});
+  });
+  document.getElementById("chart-gapshare").innerHTML = svg(w,h2,s);
+})();
+
+/* ---------- 6. correlation lollipop ---------- */
+(function(){
+  const w=940,rowH=56,mt=34,ml=290,mr=90;
+  const xMin=-0.15,xMax=0.62;
+  const h=mt+D.corr.length*rowH+52;
+  const X = v => ml + (v-xMin)/(xMax-xMin)*(w-ml-mr);
+  let s="";
+  const zero=X(0);
+  [-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6].forEach(t=>{
+    s+=line(X(t),mt-10,X(t),mt+D.corr.length*rowH-18,t===0?"#b9b0a0":C.grid,t===0?1.5:1, t===0?"4 4":null);
+    s+=txt(X(t),mt+D.corr.length*rowH+10,t.toFixed(1),{size:11.5});
+  });
+  D.corr.forEach((r,i)=>{
+    const y=mt+i*rowH+rowH/2-10;
+    s+=txt(ml-20,y+4,r.name,{anchor:"end",size:13.5,fill:r.key?C.ink:"#4a4438",weight:r.key?600:400});
+    [[r.like,C.rust,8],[r.enjoy,C.teal,-8]].forEach(([v,col,off])=>{
+      s+=line(zero,y+off,X(v),y+off,col,2);
+      s+='<circle cx="'+X(v)+'" cy="'+(y+off)+'" r="5" fill="'+col+'"/>';
+      s+=txt(X(v)+(v>=0?10:10), y+off+4, (v>0?"+":"")+v.toFixed(3),
+             {anchor:"start",size:11,fill:col,fam:SERIF});
+    });
+  });
+  document.getElementById("chart-corr").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 7. quintile bars ---------- */
+(function(){
+  const w=940,h=300,ml=64,mr=30,mt=30,mb=64;
+  const xMax=2.5;
+  const Y = v => mt + (1-v/xMax)*(h-mt-mb);
+  const bw = (w-ml-mr)/D.quintile.length - 34;
+  let s="";
+  [0,0.5,1,1.5,2,2.5].forEach(t=>{
+    s+=line(ml,Y(t),w-mr,Y(t),C.grid,1);
+    s+=txt(ml-12,Y(t)+4,t.toFixed(1),{anchor:"end",size:11.5});
+  });
+  s+=txt(20,(mt+h-mb)/2,"Points gained",{anchor:"middle",size:11,fill:C.muted});
+  D.quintile.forEach((q,i)=>{
+    const cx = ml + i*((w-ml-mr)/D.quintile.length) + ((w-ml-mr)/D.quintile.length)/2;
+    const y=Y(q.gain);
+    s+='<rect x="'+(cx-bw/2)+'" y="'+y+'" width="'+bw+'" height="'+(Y(0)-y)+'" fill="'+C.rust+'" rx="2"/>';
+    s+=txt(cx,y-10,"+"+q.gain.toFixed(2),{size:14,fam:SERIF,fill:C.rust,weight:600});
+    s+=txt(cx,Y(0)+20,"enjoyment "+q.enjoy.toFixed(2),{size:11.5,fill:"#4a4438"});
+    s+=txt(cx,Y(0)+36,"n = "+q.n,{size:11,fill:C.muted});
+  });
+  document.getElementById("chart-quintile").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 8. traits ---------- */
+(function(){
+  const w=470,rowH=52,mt=16,ml=110,mr=60;
+  const h=mt+D.traits.length*rowH+16, xMin=1,xMax=9;
+  const X = v => ml + (v-xMin)/(xMax-xMin)*(w-ml-mr);
+  let s="";
+  [1,3,5,7,9].forEach(t=>{
+    s+=line(X(t),mt-4,X(t),mt+D.traits.length*rowH-14,C.grid,1);
+    s+=txt(X(t),mt+D.traits.length*rowH+6,t,{size:11.5});
+  });
+  D.traits.forEach((t,i)=>{
+    const y=mt+i*rowH, bh=22;
+    const c = t.v<5 ? C.dark : C.teal;
+    s+='<rect x="'+X(1)+'" y="'+y+'" width="'+(X(t.v)-X(1))+'" height="'+bh+'" fill="'+c+'" rx="2"/>';
+    s+=txt(ml-12,y+16,t.label,{anchor:"end",size:13,fill:C.ink});
+    s+=txt(X(t.v)+10,y+16,t.v.toFixed(2),{anchor:"start",size:13.5,fam:SERIF,fill:C.ink,weight:600});
+  });
+  document.getElementById("chart-traits").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 9. moments ---------- */
+(function(){
+  const w=470,h=270,ml=54,mr=26,mt=24,mb=52;
+  const items=[
+    {label:"Worst", v:D.moments.worst, c:C.gold},
+    {label:"Overall", v:D.moments.overall, c:C.rust},
+    {label:"Best", v:D.moments.best, c:C.teal}
+  ];
+  const Y = v => mt + (1-(v-3)/(9-3))*(h-mt-mb);
+  const bw=(w-ml-mr)/3-36;
+  let s="";
+  [3,5,7,9].forEach(t=>{
+    s+=line(ml,Y(t),w-mr,Y(t),C.grid,1);
+    s+=txt(ml-12,Y(t)+4,t,{anchor:"end",size:11.5});
+  });
+  items.forEach((it,i)=>{
+    const cx = ml + i*((w-ml-mr)/3) + ((w-ml-mr)/3)/2;
+    s+='<rect x="'+(cx-bw/2)+'" y="'+Y(it.v)+'" width="'+bw+'" height="'+(Y(3)-Y(it.v))+'" fill="'+it.c+'" rx="2"/>';
+    s+=txt(cx,Y(it.v)-10,it.v.toFixed(2),{size:14,fam:SERIF,fill:C.ink,weight:600});
+    s+=txt(cx,Y(3)+20,it.label,{size:12,fill:"#4a4438"});
+  });
+  document.getElementById("chart-moments").innerHTML = svg(w,h,s);
+})();
+
+/* ---------- 10. diffs ---------- */
+(function(){
+  const w=940,rowH=64,mt=20,ml=190,mr=120;
+  const h=mt+D.diff.length*rowH+20, xMax=1.8;
+  const X = v => ml + v/xMax*(w-ml-mr);
+  let s="";
+  [0,0.5,1,1.5].forEach(t=>{
+    s+=line(X(t),mt-4,X(t),mt+D.diff.length*rowH-16,C.grid,1);
+    s+=txt(X(t),mt+D.diff.length*rowH+4,t.toFixed(1),{size:11.5});
+  });
+  D.diff.forEach((d,i)=>{
+    const y=mt+i*rowH, bh=28;
+    s+='<rect x="'+X(0)+'" y="'+y+'" width="'+(X(d.v)-X(0))+'" height="'+bh+'" fill="#8a8272" rx="2"/>';
+    s+=txt(ml-16,y+19,d.label,{anchor:"end",size:13.5,fill:C.ink});
+    s+=txt(X(d.v)+12,y+19,d.v.toFixed(2),{anchor:"start",size:14.5,fam:SERIF,fill:C.ink,weight:600});
+  });
+  s+=txt(20,h-4,"Points",{anchor:"middle",size:11,fill:C.muted});
+  document.getElementById("chart-diff").innerHTML = svg(w,h,s);
+})();
+</script>
+</body>
+</html>
